@@ -5,6 +5,8 @@ date: 2022-10-07
 
 # Transformers
 
+by Subir Varma
+
 ## Introduction
 
 ![](images/trans4.png)
