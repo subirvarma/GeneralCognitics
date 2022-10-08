@@ -100,7 +100,7 @@ Each of the vectors $X_i$ is of dimension $1\times d$, while $W^Q, W^K$ and $W^V
 1. Compute a scalar valued Score $s_{ij},\ j=1,2,...,N$ associated with the $i^{th}$ and $j^{th}$ inputs by taking the inner product
 
 $$
-s_{ij} = Q_i K_j,\ \ j=1,2,...,N
+s_{ij} = {Q_i} {K_j}\ \ j=1,2,...,N
 $$
 
 The Score value is a measure of the similarity between these two vectors.
@@ -108,7 +108,7 @@ The Score value is a measure of the similarity between these two vectors.
 2. Normalize the Score values by dividing by $\sqrt{d}$ to create the sequence $S_{ij}, j=1,2,...,N$. 
 
 $$
-S_{ij} = {{Q_i K_j}\over{\sqrt d}},\ \ j=1,2,...,N
+S_{ij} = {{Q_i K_j}\over{\sqrt d}}\ \ j=1,2,...,N
 $$
 
 
