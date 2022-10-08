@@ -5,7 +5,7 @@ date: 2022-10-07
 
 ## Introduction
 
-![](../images/trans4.png)
+![](subirvarma.github.io/GeneralCognitics/images/trans4.png)
 
 *Figure 1*
 
