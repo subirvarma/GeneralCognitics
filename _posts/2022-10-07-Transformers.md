@@ -43,7 +43,7 @@ Just as NLP models can be improved by allowing better interactions between all t
 
 *Figure 3*
 
-When we introduced the concept of Attention in the previous chapter (see Figure **rnn65** in Chapter **NLP**), it was in the context of the Encoder-Decoder architecture, with Attention being used so that the words in the Encoder can influence the representation of words in the Decoder. This was referred to as **Cross Attention**. We are going to take this idea and modify it in a way such that the Attention mechanism can be used to allow words in the same sentence to modify each others representations, which is called **Self Attention**. 
+When the concept of Attention was introduced into Deep Learning by [Bahdanau, Cho, Bengio](https://arxiv.org/abs/1409.0473), it was in the context of the Encoder-Decoder architecture, with Attention being used so that the words in the Encoder can influence the representation of words in the Decoder. This was referred to as **Cross Attention**. We are going to take this idea and modify it in a way such that the Attention mechanism can be used to allow words in the same sentence to modify each others representations, which is called **Self Attention**. 
 
 A possible way in which this can be done is shown in Figure 3. The figure shows the embedded word sequence in the bottom layer followed by two layers of Self Attention. In each Self Attention layer, the representation of each of the words is modified by every other word in the sequence by using the Self Attention mechanism (an example of the connections from one of the words is shown, but the same connections exist for all the other words as well). This process can be repeated with multiple layers, with the output of layer $i$ serving as the input to layer $i+1$, as shown in the figure. The idea behind this architecture is that after several layers of Self Attention, each word develops a representation that takes into account all the other words that exist in the sentence. The exact calculations used to implement Self Attention are described in detail in the following section. Also note that the calculations for each of the words proceeds independently up the stack, which means that unlike RNNs, the words in the entire input sequence can be processed in parallel.
 
@@ -134,7 +134,7 @@ $$
 These three matrices contain all of the Query, Key and Value vectors. By using them, the calculations in steps 1 to 4 can be reduced to a single step:
 
 $$
-Z = softmax({QK^T\over{\sqrt{d}}}) V
+Z = softmax({{QK^T}\over{\sqrt{d}}}) V
 $$
 
 Note that the output vector $Z_i$ is the $i^{th}$ row of this matrix.
@@ -286,7 +286,7 @@ It turns out that Transformers are structured along similar lines, as we show ne
 
 *Figure 14*
 
-Earlier in this chapter we presented the computation of the representation $Z_1$ of a vector $X_1$ in Transformers, as a result of the Self-Attention operation. However, as shown in Figure **trans27** this computation can also be considered to be a *filtering* operation, as evidenced by the equation:
+Earlier in this chapter we presented the computation of the representation $Z_1$ of a vector $X_1$ in Transformers, as a result of the Self-Attention operation. However, as shown in Figure 14 this computation can also be considered to be a *filtering* operation, as evidenced by the equation:
 
 $$
 Z_{i} = \sum_j w_{ij} X_j
@@ -341,7 +341,7 @@ The main difference between the Transformer used as Language Model, and the Tran
 In order implement this restriction, we make the following change to the Transformer model: Recall that the output of the Self Attention layer is computed using the formula
 
 $$
-Z = softmax({QK^T\over{\sqrt{d}}}) V
+Z = softmax({{QK^T}\over{\sqrt{d}}}) V
 $$
 
 where the matrix $QK^T$ contains the results of the vector dot products. As shown in Figure 17, if the upper half of this matrix is set to -infinity, then row $i$ exhibits the correct dot product for computing the Self Attention for the $i^{th}$ term in the input sequence.
@@ -409,7 +409,7 @@ $$
 The output of the Cross-Attention layer is given by
 
 $$
-Z = softmax({QK^T\over{\sqrt{d}}}) V
+Z = softmax({{QK^T}\over{\sqrt{d}}}) V
 $$
 
 As a result of the Cross-Attention layer, each of the Decoder Blocks has full access to all the ouputs of the Encoder.
