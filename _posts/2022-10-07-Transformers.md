@@ -108,7 +108,7 @@ The Score value is a measure of the similarity between these two vectors.
 2. Normalize the Score values by dividing by $\sqrt{d}$ to create the sequence $S_{ij}, j=1,2,...,N$. 
 
 $$
-S_{ij} = {{Q_i K_j}\over{\sqrt d}}\ \ j=1,2,...,N
+S_{ij} = {{{Q_i} {K_j}}\over{\sqrt d}}\ \ j=1,2,...,N
 $$
 
 
