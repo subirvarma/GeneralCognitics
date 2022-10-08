@@ -1,4 +1,4 @@
 ---
-title: Blog on Topics in Artificial Intelligence and Other Topics I Find Interesting
+title: Blog on Topics that I Find Interesting
 ---
 
