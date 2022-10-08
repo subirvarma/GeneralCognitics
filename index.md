@@ -1,4 +1,4 @@
 ---
-title: Blog on Topics that I Find Interesting
+title: Blog on Topics That I Find Interesting
 ---
 
