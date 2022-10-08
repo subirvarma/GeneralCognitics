@@ -99,9 +99,6 @@ Each of the vectors $X_i$ is of dimension $1\times d$, while $W^Q, W^K$ and $W^V
 
 1. Compute a scalar valued Score $s_{ij},\ j=1,2,...,N$ associated with the $i^{th}$ and $j^{th}$ inputs by taking the inner product
 2. 
-$$
-s_{ij} = {Q_i^T} {K_j},\ \ j=1,2,...,N
-$$
 
 The Score value is a measure of the similarity between these two vectors.
 
