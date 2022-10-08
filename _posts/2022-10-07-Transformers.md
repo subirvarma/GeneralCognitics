@@ -3,13 +3,9 @@ title: "Transformers"
 date: 2022-10-07
 ---
 
-# Transformers
-
-by Subir Varma
-
 ## Introduction
 
-![](./images/trans4.png)
+![](../images/trans4.png)
 
 *Figure 1*
 
