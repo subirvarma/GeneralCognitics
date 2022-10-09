@@ -9,7 +9,7 @@ by Subir Varma
 
 ## Introduction
 
-![](images/trans4.png)
+![](./images/trans4.png)
 
 *Figure 1*
 
