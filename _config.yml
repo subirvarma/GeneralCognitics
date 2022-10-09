@@ -1,4 +1,3 @@
 theme: minima
-
 # Build settings
-  markdown: kramdown
+markdown: kramdown
