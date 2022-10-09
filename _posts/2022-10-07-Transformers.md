@@ -134,7 +134,7 @@ $$
 These three matrices contain all of the Query, Key and Value vectors. By using them, the calculations in steps 1 to 4 can be reduced to a single step:
 
 $$
-Z = softmax({{QK^T}\over{\sqrt{d}}}) V
+Z = softmax({QK^T\over{\sqrt{d}}}) V
 $$
 
 Note that the output vector $Z_i$ is the $i^{th}$ row of this matrix.
