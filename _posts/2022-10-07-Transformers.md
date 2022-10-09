@@ -9,7 +9,7 @@ by Subir Varma
 
 ## Introduction
 
-![](./images/trans4.png)
+![](subirvarma.github.io/GeneralCognitics/images/trans4.png)
 
 *Figure 1*
 
