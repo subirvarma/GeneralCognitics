@@ -100,7 +100,7 @@ Each of the vectors $X_i$ is of dimension $1\times d$, while $W^Q, W^K$ and $W^V
 1. Compute a scalar valued Score $s_{ij},\ j=1,2,...,N$ associated with the $i^{th}$ and $j^{th}$ inputs by taking the inner product
 
 $$
-s_{ij} = {Q_i}^T K_j,\ \ j=1,2,...,N
+s_{ij} = Q_i^T K_j,\ \ j=1,2,...,N
 $$
 
 The Score value is a measure of the similarity between these two vectors.
@@ -108,7 +108,7 @@ The Score value is a measure of the similarity between these two vectors.
 3. Normalize the Score values by dividing by $\sqrt{d}$ to create the sequence $S_{ij}, j=1,2,...,N$. 
 
 $$
-S_{ij} =  {{Q_i}^T K_j\over{\sqrt d}} ,\ \ j=1,2,...,N
+S_{ij} =  {Q_i^T K_j\over{\sqrt d}} ,\ \ j=1,2,...,N
 $$
 
 This can be considered to be a type of Normalization in order to keep the results of the dot product between the Query and Key vector under control. Without this, there is danger that the dot product may become very large (or very small), which in combination with the exponentiation in the softmax (the following step) leads to numerical issues and problems in gradient propagation.
