@@ -409,7 +409,7 @@ $$
 The output of the Cross-Attention layer is given by
 
 $$
-Z = softmax({{QK^T}\over{\sqrt{d}}}) V
+Z = softmax({QK^T\over{\sqrt{d}}}) V
 $$
 
 As a result of the Cross-Attention layer, each of the Decoder Blocks has full access to all the ouputs of the Encoder.
