@@ -1,6 +1,7 @@
 ---
 title: "Transformers"
 date: 2022-10-07
+usemathjax: true
 ---
 
 # Transformers
