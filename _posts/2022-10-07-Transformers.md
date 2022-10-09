@@ -6,8 +6,6 @@ usemathjax: true
 
 # Transformers
 
-by Subir Varma
-
 ## Introduction
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/trans4.png)
