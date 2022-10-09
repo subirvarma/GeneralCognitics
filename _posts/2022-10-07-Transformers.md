@@ -341,7 +341,7 @@ The main difference between the Transformer used as Language Model, and the Tran
 In order implement this restriction, we make the following change to the Transformer model: Recall that the output of the Self Attention layer is computed using the formula
 
 $$
-Z = softmax({{QK^T}\over{\sqrt{d}}}) V
+Z = softmax({QK^T\over{\sqrt{d}}}) V
 $$
 
 where the matrix $QK^T$ contains the results of the vector dot products. As shown in Figure 17, if the upper half of this matrix is set to -infinity, then row $i$ exhibits the correct dot product for computing the Self Attention for the $i^{th}$ term in the input sequence.
