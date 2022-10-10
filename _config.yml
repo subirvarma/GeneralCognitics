@@ -1,6 +1,6 @@
 theme: minima
 # Build settings
-markdown: kramdown
+markdown: maruku
 
 # Site wide configuration
 
