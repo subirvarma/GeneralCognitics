@@ -1,4 +1,5 @@
 theme: minima
+usemathjax: true
 
 # Site wide configuration
 
