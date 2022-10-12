@@ -11,6 +11,7 @@ date: 2022-10-07
 
 *Figure 1*
 
+Test
 Transformers are a new kind of Neural Network Architecture, that were introduced in 2017 by [Vaswani et.al.](https://arxiv.org/abs/1706.03762). They were originally targeted at NLP applications, but since then they have been successfully applied to Image Processing as well. In NLP they overcome some of the difficulties with RNN/LSTMs, and result in much improved performance in applications such as Machine Translation. In addition, they are much better at Transfer Learning for NLP, so that Transformer models trained on huge amounts of data can be fine tuned and used for smaller datasets, just like for ConvNets.
 
 Transformers were originally used to do Machine Translation, whereby the name comes from (they "Transform" a sentence in language 1 to language 2). Since then they have been successfully applied to other NLP applications such as Classification and Language Modeling. Indeed it was soon realized that Transformers are a versatile general purpose tool, which can be used in any Machine Learning application, as long as the input can be formatted in a way that can be ingested by them. Recently Transformers have been used for Image Processing tasks, where they have shown themselves to perform better than the best performing ConvNets.
