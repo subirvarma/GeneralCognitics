@@ -1,5 +1,4 @@
 theme: minima
-usemathjax: true
 markdown: kramdown
 
 # Site wide configuration
