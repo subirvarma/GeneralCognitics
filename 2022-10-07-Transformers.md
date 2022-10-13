@@ -1,7 +1,6 @@
 ---
+layout: page
 title: "Transformers"
-date: 2022-10-07
-use mathjax: true
 ---
 
 # Transformers
