@@ -71,7 +71,7 @@ Lets first examine the Self Attention layer in greater detail:
 
 In Figure 5 we show how to go from the input $X_3$ to the output $Z_3$ of the Self Attention layer. Note that $Z_3$ is a measure of the Self Attention that $X_3$ pays to the other vectors $(X_1, X_2)$ in the input sequence. The simplest way to compute the Self Attention between two vectors is by taking their dot product, and this was the technique used for RNN based Cross Attention in the prior chapter. If we carry out this procedure, then the Self Attention between vectors $X_i$ and $X_j$ is given by $A_{ij} = X_i\cdot X_j$. These numbers can then be converted into weights 
 
-$$w_{ij} = {{e^{A_{ij}}}\over{\sum_j{e^{A_{ij}}}}},\ \ i,j = 1,2,...,N$$
+$$w_{ij} = {e^{A_{ij}}\over{\sum_j{e^{A_{ij}}}}},\ \ i,j = 1,2,...,N$$
 
 The output vector $Z_{i}$ is computed as a weighted sum of the input vectors $X_i$
 
@@ -113,21 +113,15 @@ $$w_{ij} =  {{e^{S_{ij}}}\over{\sum_j e^{S_{ij}}}} ,\ \ j=1,2,...,N$$
 
 5. The Self Attention output vector $Z_{i}$ for the $i^{th}$ input is computed as a weighted sum of the Value vectors
 
-$$
-Z_{i} = \sum_j w_{ij} V_j
-$$
+$$Z_{i} = \sum_j w_{ij} V_j$$
 
 Since each of the outputs $Z_i$ can be computed independently, these calculations can be parallelized by using matrix multiplication, as follows: The vector sequence $(X_1,...,X_N)$ is packed into a matrix $X\in R^{N\times d}$, such that the $i^{th}$ row of $X$ represents the vector $X_i$. We then multiply $X$ by the matrices $W^Q, W^K$ and $W^V$, each of which are of dimension $d\times d$, to produce matrices $Q, K, V$ of dimensions $N\times d$:
 
-$$
-Q = XW^Q, \ \ K = XW^K, \ \ V = XW^V
-$$
+$$Q = XW^Q, \ \ K = XW^K, \ \ V = XW^V$$
 
 These three matrices contain all of the Query, Key and Value vectors. By using them, the calculations in steps 1 to 4 can be reduced to a single step:
 
-$$
-Z = softmax({QK^T\over{\sqrt{d}}}) V
-$$
+$$Z = softmax({QK^T\over{\sqrt{d}}}) V$$
 
 Note that the output vector $Z_i$ is the $i^{th}$ row of this matrix.
 
@@ -141,9 +135,7 @@ The Attention weight $w_{ij}$ for the $i^{th}$ input $X_i$ is a measure of how i
 
 As shown in Figure 6, Multiple Attention Heads are implemented with the help of $H$ versions of the Query, Key and Value matrices: $(W^Q_1,...,W^Q_H),\ (W^K_1,...,W^K_H)$ and $(W^V_1,...,W^V_H)$, each of which are of dimension $N\times{d\over H}$. These are then used to compute $H$ Self Attention matrices, given by $(Z^1,...,Z^H)$, using the same computations as before, each of which are of dimension $N\times{d\over H}$. In order to generate a single output value, these $H$ matrices are first concatenated together to create a $N\times d$ matrix $zeta$, followed by multiplication with another matrix $W^O$ in order to compute the final output $Z$:
 
-$$
-Z = \zeta W^O
-$$
+$$Z = \zeta W^O$$
 
 If the matrix $W^O$ is chosen to be of dimension $d\times d$, then this results in a final Attention vector of the same size as when only one Attention Head was being used. This also means that there is no increase in either the number of parameters or amount computation in implementing additional Heads. In the original Attention paper $d = 768$ and $H = 10$.
 
@@ -163,13 +155,13 @@ As shown in the figure, each Encoder block has two Residual Connections, one aro
 
 Each of the two Residual Connections is followed by Layer Normalization. Batch Normalization works by normalizing one feature at a time, across a batch. Layer Normalization on the other hand, carries out Normalization across features in a single training sample, as opposed to a batch. As shown below, normalization is done by computing the mean and standard deviation for the elements in a single vector.
 
-$$\mu_L =  \frac{1}{d}\sum_{m=1}^{d}a(m)  $$
+$$\mu_L =  \frac{1}{d}\sum_{m=1}^{d}a(m)$$
 
-$$ \sigma_L^2 = \frac{1}{d}\sum_{m=1}^d (a(m)-\mu_L)^2 $$
+$$\sigma_L^2 = \frac{1}{d}\sum_{m=1}^d (a(m)-\mu_L)^2$$
 
- $$ \hat{a}(m) = \frac{a(m)-\mu_L}{\sqrt{\sigma_L^2+\epsilon}} $$
+ $$\hat{a}(m) = \frac{a(m)-\mu_L}{\sqrt{\sigma_L^2+\epsilon}}$$
  
- $$ c(m) = \gamma\hat{a}(m) + \beta $$
+ $$c(m) = \gamma\hat{a}(m) + \beta$$
 
 Layer Normalization was introduced by [Ba, Kiros,Hinton](https://arxiv.org/abs/1607.06450) and works better in Transformers than Batch Normalization.
 
@@ -177,9 +169,7 @@ Layer Normalization was introduced by [Ba, Kiros,Hinton](https://arxiv.org/abs/1
 
 The output of the first Layer Normalization is fed into a Dense Feed Forward Layer. The computation carried out by this layer is as follows:
 
-$$
-R_i = ReLU(Z_iW_1 +b_1)W_2 + b_2,\ \ i =1,...,N
-$$
+$$R_i = ReLU(Z_iW_1 +b_1)W_2 + b_2,\ \ i =1,...,N$$
 
 Hence each of the vectors $Z_1,...,Z_N$ is processed independently by two DFN layers, with ReLU being applied only after the first layer. Note that all of DFNs in a layer share the same parameters, however the DFN parameters differ across layers. In the original paper, the $W_1$ matrix was of dimension $d\times 4d$, while the $W_2$ matrix was of dimension $4d\times d$. Hence the output of the DFN layer is set of vectors $R_1,...,R_N$ each of which are of dimension $1\times d$.
 
@@ -197,13 +187,9 @@ The set of vectors $(R_1,R_2,...,R_N)$ are then passed through another Self Atte
 
 The computations in a single Encoder Block can be summarized as:
 
-$$
-Z = LayerNorm(X + SelfAttn(X))
-$$
+$$Z = LayerNorm(X + SelfAttn(X))$$
 
-$$
-R = LayerNorm(Z + DFN(Z))
-$$
+$$R = LayerNorm(Z + DFN(Z))$$
 
 ## Computing Number of Parameters in a Transformer Model
 
@@ -280,9 +266,7 @@ It turns out that Transformers are structured along similar lines, as we show ne
 
 Earlier in this chapter we presented the computation of the representation $Z_1$ of a vector $X_1$ in Transformers, as a result of the Self-Attention operation. However, as shown in Figure 14 this computation can also be considered to be a *filtering* operation, as evidenced by the equation:
 
-$$
-Z_{i} = \sum_j w_{ij} X_j
-$$
+$$Z_{i} = \sum_j w_{ij} X_j$$
 
 Hence $w_{ij}$ can be considered to be filter coefficents rather than Self Attention weights, with the caveat that these filters are now a function of the data. Since the co-efficents are the same for all the elements in the output $Z_1$, lets call it Filter $F_1$,  it results in the figure shown in Part (a). Similarly the elements in $Z_2$ are generated by using a second Filter $F_2$ and so on.
 
@@ -332,9 +316,7 @@ The main difference between the Transformer used as Language Model, and the Tran
 
 In order implement this restriction, we make the following change to the Transformer model: Recall that the output of the Self Attention layer is computed using the formula
 
-$$
-Z = softmax({QK^T\over{\sqrt{d}}}) V
-$$
+$$Z = softmax({QK^T\over{\sqrt{d}}}) V$$
 
 where the matrix $QK^T$ contains the results of the vector dot products. As shown in Figure 17, if the upper half of this matrix is set to -infinity, then row $i$ exhibits the correct dot product for computing the Self Attention for the $i^{th}$ term in the input sequence.
 
@@ -390,19 +372,15 @@ Figure 22 delves deeper into the Encoder Decoder architecture and shows the foll
 
 - The Encoder output $(h_1,...,h_n)$ is packed into a matrix $H^{enc} = (h_1,...,h_n)$. We then multiply $H^{enc}$ by the Cross-Attention Key and Value matrices $W^K$ and $W^V$, to produce matrices $K, V$ :
 - 
-$$ K = H^{enc}W^K, \ \ V = H^{enc}W^V $$
+$$K = H^{enc}W^K, \ \ V = H^{enc}W^V$$
 
   The Query vector $Q$ on the other hand is computed from the output of the prior decoder Self-Attention layer:
   
-$$
-Q = H^{dec[i-1]}W^Q
-$$
+$$Q = H^{dec[i-1]}W^Q$$
 
 The output of the Cross-Attention layer is given by
 
-$$
-Z = softmax({QK^T\over{\sqrt{d}}}) V
-$$
+$$Z = softmax({QK^T\over{\sqrt{d}}}) V$$
 
 As a result of the Cross-Attention layer, each of the Decoder Blocks has full access to all the ouputs of the Encoder.
 
