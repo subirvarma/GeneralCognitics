@@ -146,51 +146,45 @@ $$L_{ELBO} = E_{q(X_{0:T})}{\log q(X_{1:T}|X_0) \over{p_\theta(X_{0:T})}  }$$
 
 After some algebraic manipulations and making use of the Law of Conditional Probabilities, this expression can be re-written as
 
-$$L_{ELBO} = E_q\left[{\log{{q(X_T|X_0)}\over{p_\theta(X_T)}}} + 
-     \sum_{t=2}^T   \log{q(X_{t-1}|X_t,X_0)\over {p_\theta(X_{t-1}|X_t)}} - \log p_\theta(X_0|X_1)\right]$$
+$$L_{ELBO} = E_q\left[{\log{{q(X_T|X_0)}\over{p_\theta(X_T)}}} + \sum_{t=2}^T   \log{q(X_{t-1}|X_t,X_0)\over {p_\theta(X_{t-1}|X_t)}} - \log p_\theta(X_0|X_1)\right]$$
 
 which is the same as
 
-$$L_{ELBO} = E_q\left[D_{KL}(q(X_T|X_0)||p_\theta(X_T) ) +                      
-          \sum_{t=2}^T D_{KL}(q(X_{t-1}|X_t,X_0)||p_\theta(X_{t-1}|X_t) ) - \log p_\theta(X_0|X_1) \right]$$
+$$L_{ELBO} = E_q\left[D_{KL}(q(X_T|X_0)||p_\theta(X_T) ) + \sum_{t=2}^T D_{KL}(q(X_{t-1}|X_t,X_0)||p_\theta(X_{t-1}|X_t) ) - \log p_\theta(X_0|X_1) \right]$$
 
 
 Defining
-\begin{eqnarray}
- L_T & = & D_{KL}[q(X_T|X_0)||p_\theta(X_T) ]  \\
- L_t & = & D_{KL}\left[q(X_t|X_{t+1},X_0)||p_\theta(X_t|X_{t+1})\right]\quad 1\le t\le T-1  \\
- L_0 & = & - \log p_\theta(X_0|X_1)  
-\end{eqnarray}
+ $$L_T = D_{KL}[q(X_T|X_0)||p_\theta(X_T) ]$$
+ $$L_t = D_{KL}\left[q(X_t|X_{t+1},X_0)||p_\theta(X_t|X_{t+1})\right]\quad 1\le t\le T-1$$
+ $$L_0 = - \log p_\theta(X_0|X_1)$$  
 $L_{ELBO}$ can be written as
-$$L_{ELBO} = L_T + L_{T-1} + ... +\ L_0 $$
+$$L_{ELBO} = L_T + L_{T-1} + ... +\ L_0$$
 
 In this expression the $L_T$ term can be ignored for optimization purposes since $q(X_T|X_0)$ being equal to $N(0,I)$ is not a function of $\theta$ and neither is $p_\theta(X_T)$. 
 Even though $q(X_{t-1}|X_t)$ is an intractable distribution, it can be shown that $q(X_{t-1}|X_t,X_0)$ is actually a Gaussian distribution which makes the loss terms $L_t, 1\le t\le T-1$ computable. After some algebraic manipulations The parameters of this distribution can be computed as follows:
-$$q(X_{t-1}|X_t,X_0) = N(X_{t-1}; {\tilde\mu}(X_t,X_0),{\tilde\beta}_t I)\tag 5$$
+$$q(X_{t-1}|X_t,X_0) = N(X_{t-1}; {\tilde\mu}(X_t,X_0),{\tilde\beta_t} I) \quad\quad\quad (5)$$
 where
-$${\tilde\beta}_t = {{1-\gamma_{t-1}}\over{1-\gamma_t})}\beta_t$$
+$${\tilde\beta_t} = {{1-\gamma_{t-1}}\over{1-\gamma_t})}\beta_t$$
 and 
-$${\tilde\mu}(X_t,X_0) = {{\sqrt{\alpha_t}(1-\gamma_{t-1})}\over{1-\gamma_t }}X_t + {{\sqrt{\gamma_{t-1}}\beta_t}\over{1-\gamma_t }}X_0 \tag 6$$
+$${\tilde\mu}(X_t,X_0) = {{\sqrt{\alpha_t}(1-\gamma_{t-1})}\over{1-\gamma_t }}X_t + {{\sqrt{\gamma_{t-1}}\beta_t}\over{1-\gamma_t }}X_0 \quad\quad\quad (6)$$
 
-Note that we are trying to approximate $q(X_t|X_{t+1},X_0)$ by $p_\theta(X_t|X_{t+1})$ by minimizing $ L_t = D_{KL}[q(X_t|X_{t+1},X_0)||p_\theta(X_t|X_{t+1})], 1\le t\le T-1 $. Using the fact that $q(X_{t-1}|X_t,X_0)$ has a Normal Distribution given by equation (5) and $p_\theta(X_t|X_{t+1})$ also has a Normal Distribution given by equation (4), and plugging them into the formula for $D_{KL}$ (see the Appendix), results in the following:
-$$L_t = E \left[{1\over{2||\Sigma_\theta(X_t,t)||_2^2}} ||\tilde\mu_t(X_t,X_0) - \mu_\theta(X_t,t)||^2 \right]\quad 1\le t\le T-1 \tag 7$$
+Note that we are trying to approximate $q(X_t|X_{t+1},X_0)$ by $p_\theta(X_t|X_{t+1})$ by minimizing $L_t = D_{KL}[q(X_t|X_{t+1},X_0)||p_\theta(X_t|X_{t+1})], 1\le t\le T-1$. Using the fact that $q(X_{t-1}|X_t,X_0)$ has a Normal Distribution given by equation (5) and $p_\theta(X_t|X_{t+1})$ also has a Normal Distribution given by equation (4), and plugging them into the formula for $D_{KL}$ (see [Wikipedia article on Multi-Variate Normal Distributions](https://en.wikipedia.org/wiki/Multivariate_normal_distribution)), results in the following:
+$$L_t = E \left[{1\over{2||\Sigma_\theta(X_t,t)||^2}} ||\tilde\mu_t(X_t,X_0) - \mu_\theta(X_t,t)||^2 \right]\quad 1\le t\le T-1 \quad\quad\quad (7)$$
 According to equation (7), we should design our Neural Network to learn $\mu_\theta$ while using $\tilde\mu_t$ as the ground truth. 
 
 However [Ho et.al.](https://arxiv.org/abs/2006.11239) discovered that the system performance improves if the Neural Network is trained to learn the Noise Level $\epsilon_t$ instead. This can be done by expressing $X_0$ in terms of $X_t$ and $\epsilon$ by using equation (3), so that
-$$X_0 = {1\over\sqrt{\gamma_t}}(X_t - \sqrt{1-\gamma_t}\epsilon_t)\tag 8$$
+$$X_0 = {1\over\sqrt{\gamma_t}}(X_t - \sqrt{1-\gamma_t}\epsilon_t)\quad\quad\quad (8)$$
 Substituting $X_0$ into equation (6), results in
-$${\tilde\mu}(X_t,X_0) = {1\over\sqrt\alpha_t}\left\{X_t - {{\beta_t}\over{\sqrt{1-\gamma_t}}}\epsilon_t\right\}$$
+$${\tilde\mu}(X_t,X_0) = {1\over\sqrt\alpha_t} \left[X_t - {\beta_t\over{\sqrt{1-\gamma_t}}}\epsilon_t\right]$$
 Note that in this equation $\epsilon_t$ is the noise that is added to the image $X_0$ during training in order to get $X_t$. We will get an estimate $\epsilon_\theta(X_t,t)$ of $\epsilon_t$ using a Neural Network, and plugging this back into equation (8) results in an estimate $\mu_\theta(X_t,t)$ given by
-
-$$\mu_\theta(X_t,t) = {1\over\sqrt\alpha_t}\left\{X_t - {{\beta_t}\over{\sqrt{1-\gamma_t}}}\epsilon_\theta(x_t,t)\right\}$$
+$$\mu_\theta(X_t,t) = {1\over\sqrt\alpha_t}\left[X_t - {\beta_t\over{\sqrt{1-\gamma_t}}}\epsilon_\theta(x_t,t)\right]$$
 Substituting these equations back into (7), we get
-\begin{eqnarray}
-L_t & = & E \left[{1\over{2||\Sigma_\theta(X_t,t)||_2^2}} ||{1\over\sqrt\alpha_t}(X_t - {{\beta_t}\over{\sqrt{1-\gamma_t}}}\epsilon_t) - {1\over\sqrt\alpha_t}(X_t - {{\beta_t}\over{\sqrt{1-\gamma_t}}}\epsilon_\theta(X_t,t))   ||^2\right]
- \\
- & = & E \left[{\beta_t^2\over{2\alpha_t(1-\gamma_t)||\Sigma_\theta(X_t,t)||_2^2}} ||\epsilon_t - \epsilon_\theta(X_t,t)||^2 \right] \\
- & = & E \left[{\beta_t^2\over{2\alpha_t(1-\gamma_t)||\Sigma_\theta(X_t,t)||_2^2}} 
- ||\epsilon_t - \epsilon_\theta(\sqrt\gamma_t X_0 + \sqrt{1-\gamma_t}\epsilon_t,t)||^2 \right]
-\end{eqnarray}
+
+$$L_t = E \left[{1\over{2||\Sigma_\theta(X_t,t)||^2}} ||{1\over\sqrt\alpha_t}(X_t - {{\beta_t}\over{\sqrt{1-\gamma_t}}}\epsilon_t) - {1\over\sqrt\alpha_t}(X_t - {{\beta_t}\over{\sqrt{1-\gamma_t}}}{\epsilon_\theta}(X_t,t))||^2\right]$$
+
+ $$= E\left[{\beta_t^2\over{2\alpha_t(1-\gamma_t)||\Sigma_\theta(X_t,t)||^2}} ||\epsilon_t - {\epsilon_\theta}(X_t,t)||^2 \right]$$
+ $$= E \left[{\beta_t^2\over{2\alpha_t(1-\gamma_t)||\Sigma_\theta(X_t,t)||^2}} 
+ ||\epsilon_t - \epsilon_\theta(\sqrt\gamma_t X_0 + \sqrt{1-\gamma_t}\epsilon_t,t)||^2 \right]$$
 
 Ho. et.al. also discovered that training the diffusion model is easier if the weighting term is ignored, so that the optimization problem becomes
 $$L_t^{simple} = E\left[||\epsilon_t - \epsilon_\theta(\sqrt\gamma_t X_0 + \sqrt{1-\gamma_t}\epsilon_t,t)||^2 \right]$$
@@ -214,7 +208,7 @@ The pseudocode for the training procedure is shown on the left in Figure 11, and
 Once we have a trained model, we can use it to generate new images by using the procedure outlined in Algorithm 2. At the first step we start with a Gaussian noise sample $X_T$, and then gradually de-noise it in steps $X_{T-1}, X_{T-2},...,X_1$ until we get to the final image $X_0$. The de-noising is carried out by sampling from the Gaussian Distribution $N(\mu_\theta(X_t,t),\beta_t I)$, so that
 $$X_{t-1} = \mu_\theta(X_t,t) + \sqrt{\beta_t} \epsilon $$
 $\mu_\theta(X_t,t)$ is computed by running the model to estimate $\epsilon_\theta$ and then using the following equation to get $\mu_\theta$
-$$ \mu_\theta(X_t,t) = {1\over\sqrt\alpha_t}\left\{X_t - {{\beta_t}\over{\sqrt{1-\gamma_t}}}\epsilon_\theta(X_t,t)\right\}  $$
+$$\mu_\theta(X_t,t) = {1\over\sqrt\alpha_t}\left[X_t - {{\beta_t}\over{\sqrt{1-\gamma_t}}}\epsilon_\theta(X_t,t)\right]$$
 
 Note that images are generated in a probabilistic manner starting from the initial Gaussian noise $X_T$, so that the same noise sample can generate different images on successive runs (which accounts for the P in DDPM).
 
@@ -248,8 +242,7 @@ $$q(X_t|X_{t-1}) = N(\sqrt{\alpha_t\over\alpha_{t-1}}X_{t-1}, (1-{\alpha_t\over\
 which results in
 $$X_t = \sqrt{\alpha_t}X_0 + \sqrt{(1-\alpha_t)}\epsilon$$
 so that the convergence of $X_T$ to White Gaussian happens if $\alpha_T\rightarrow 0$. The DDPM objective is given by
-$$L_\gamma(\epsilon_\theta) = \sum_{t=1}^T \gamma_t E_q\left[ ||\epsilon_\theta^{(t)}(\sqrt{\alpha_t}X_0 +
-\sqrt{1-\alpha_t}\epsilon_t) - \epsilon_t||^2_2 \right]$$
+$$L_\gamma(\epsilon_\theta) = \sum_{t=1}^T \gamma_t E_q\left[||\epsilon_\theta^{(t)}(\sqrt{\alpha_t}X_0 + \sqrt{1-\alpha_t}\epsilon_t) - \epsilon_t||^2 \right]$$
 
 Song et.al. made the following observations:
 
@@ -261,18 +254,21 @@ Song et.al. came up up with a non Markovian inference process that has the same 
 Consider the family Q of inference distributions indexed by a real vector $\sigma \in R^T_{\ge 0}$:
 $$q_\sigma(X_{1:T}|X_0) = q_\sigma(X_T|X_0)\prod_{t=2}^T q_\sigma(X_{t-1}|X_t, X_0)  $$
 where $q_\sigma(X_t|X_0) = N(\sqrt{\alpha_T}X_0, (1-\alpha_T)\epsilon)$ and for all $t>1$
-$$q_\sigma(X_{t-1}|X_t,X_0) = N(\sqrt{\alpha_{t-1}}X_0 + \sqrt{1-\alpha_{t-1}-\sigma_t^2}.
-                            {{X_t - \sqrt{\alpha_t}X_0}\over{\sqrt{1-\alpha_t}}}, \sigma^2_t \epsilon) \tag 9$$
+
+$$q_\sigma(X_{t-1}|X_t,X_0) = N(\sqrt{\alpha_{t-1}}X_0 + \sqrt{1-\alpha_{t-1}-{\sigma_t}^2}.
+                            {X_t - \sqrt{\alpha_t}X_0\over{\sqrt{1-\alpha_t}}}, {\sigma_t}^2 \epsilon) \quad\quad\quad (9)$$
+                            
 Using this formula, it can be shown that $q_\sigma(X_t|X_0) = N(\sqrt{\alpha_t}X_0, (1-\alpha_t)\epsilon), \forall t$ so the marginals between this inference process and the DDPM forward process match. The forward process itself can be computed by using the formula:
-$$q_\sigma(X_t|X_{t-1},X_0) = {{q_\sigma(X_{t-1}|X_t,X_0)q_\sigma(X_t|X_0)}\over{q_\sigma(X_{t-1}|X_0)}}$$
+$$q_\sigma(X_t|X_{t-1},X_0) = {q_\sigma(X_{t-1}|X_t,X_0)q_\sigma(X_t|X_0)\over{q_\sigma(X_{t-1}|X_0)}}$$
 This is clearly a Gaussian process, however note that $q_\sigma(X_t|X_{t-1},X_0)$ is not a Markov process, since $X_t$ depends on $X_0$ in addition to $X_{t-1}$. 
 
-Let $p_\theta(X_{0:T})$ be the Generative process, where $p^{(t)}_\theta(X_{t-1}|X_t)$ is approximated using $q_\sigma(X_{t-1}|X_t,X_0)$. This is done in a 2-step process: 
+Let $p_\theta(X_{0:T})$ be the Generative process, where ${p_\theta}^{(t)}(X_{t-1}|X_t)$ is approximated using $q_\sigma(X_{t-1}|X_t,X_0)$. This is done in a 2-step process: 
 
-  -  Given $X_t$, use it to predict $X_0$ (referred to as ${\hat X)}_0$) by using the Neural Network model and the equation
-  $${\hat X}_0 = {{({X_t - \sqrt{1-\alpha_t}.\epsilon^{(t)}_\theta(X_t)})}\over\sqrt{\alpha_t}}$$
-  -  Given $X_t$ and ${\hat X}_0$, use $q_\sigma(X_{t-1}|X_t,X_0)$ to  sample $X_{t-1}$ so that
-  $$p^{(t)}_\theta(X_{t-1}|X_t) = q_\sigma(X_{t-1}|X_t,{\hat X}_0)$$ 
+  -  Given $X_t$, use it to predict $X_0$ (referred to as ${\hat X_0)}$) by using the Neural Network model and the equation
+  $${\hat X_0} = {( X_t - \sqrt{1-\alpha_t}.{\epsilon_\theta}^{(t)}(X_t))\over{\sqrt{\alpha_t}}}$$
+  
+  -  Given $X_t$ and ${\hat X_0}$, use $q_\sigma(X_{t-1}|X_t,X_0)$ to  sample $X_{t-1}$ so that
+  $${p_\theta}^{(t)}(X_{t-1}|X_t) = q_\sigma(X_{t-1}|X_t,{\hat X_0})$$ 
   
 Note that changing the parameter $\sigma$ results in different generative processes, while using the same DDPM based training process. Some special choices of $\sigma$ are the following:
 
@@ -292,16 +288,19 @@ Song et.al. made use of the fact that the $X_t$ sequence need not be Markov and 
 
 As Part (a) of the figure shows, we can still use the same training procedure as DDPM, since DDPM and DDIM share the same Loss Function.
 
-The Generative Procedure however is different. As shown in Part (b) of the figure, instead of doing Generation on all T steps, DDIM chooses an increasing sub-sequence $\tau=[\tau_1,\tau2,...,\tau_S]$ of the forward sequence $[1,...,T]$ of length S with $\tau_S = T$, and then does generation only over this sub-sequence (shown using the blue arrows in the figure, assuming that $2$ and $4$ belong to $\tau$. Clearly $X(\tau_1),...,X(\tau_S)$ don't form a Markov Chain, but as long as the forward process $q_\sigma(X_{\tau_{i-1}}|X_{\tau_i},X_0)$ satisfies equation (9), i.e.,
-$$q_{\sigma,\tau}(X_{\tau_{i-1}}|X_{\tau_i},X_0) = N\left[\sqrt{\alpha_{\tau_{i-1}}}X_0 + \sqrt{1-\alpha_{\tau_{i-1}}-\sigma_{\tau_i}^2}.
-                            {{X_{\tau_i} - \sqrt{\alpha_{\tau_i}}X_0}\over{\sqrt{1-\alpha_{\tau_i}}}}, \sigma^2_{\tau_i} Z\right]$$
+The Generative Procedure however is different. As shown in Part (b) of the figure, instead of doing Generation on all T steps, DDIM chooses an increasing sub-sequence $\tau=[\tau_1,\tau_2,...,\tau_S]$ of the forward sequence $[1,...,T]$ of length S with $\tau_S = T$, and then does generation only over this sub-sequence (shown using the blue arrows in the figure, assuming that $2$ and $4$ belong to $\tau$. Clearly $X(\tau_1),...,X(\tau_S)$ don't form a Markov Chain, but as long as the forward process $q_\sigma(X_{\tau_{i-1}}|X_{\tau_i},X_0)$ satisfies equation (9), i.e.,
+
+$$q_\sigma(X_{\tau_{i-1}}|X_{\tau_i},X_0) = N(\sqrt{\alpha_{\tau_{i-1}}}X_0 + \sqrt{1-\alpha_{\tau_{i-1}}-{\sigma_{\tau_i}}^2}.
+                            {X_{\tau_i} - \sqrt{\alpha_{\tau_i}}X_0\over{\sqrt{1-\alpha_{\tau_i}}}}, {\sigma_{\tau_i}}^2 \epsilon)$$
+
 where the coefficients $\sigma$ are chosen so that
-$$q_{\sigma,\tau}(X_{\tau_i}|X_0) = N\left[\sqrt{\alpha_{\tau_i}}X_0, (1 - \alpha_{\tau_i})Z\right],\quad \forall i\in S$$
+$$q_{\sigma,\tau}(X_{\tau_i}|X_0) = N\left[\sqrt{\alpha_{\tau_i}}X_0, (1 - \alpha_{\tau_i})\epsilon\right],\quad \forall i\in S$$
 
 The reverse process conditionals are given by
-$$p_\theta^{(\tau_i)}(X_{\tau_{i-1}}|X_{\tau_i}) = q_{\sigma,\tau}(X_{\tau_{i-1}}|X_{\tau_i},{\hat X}_0)$$
+$${p_\theta}^{(\tau_i)}({X_{\tau_{i-1}}|X_{\tau_i}}) = q_{\sigma,\tau}(X_{\tau_{i-1}}|X_{\tau_i},{\hat X_0})$$
 where
-$${\hat X}_0 = {{({X_{\tau_i} - \sqrt{1-\alpha_{\tau_i}}.\epsilon^{(\tau_i)}_\theta(X_{\tau_i})})}\over\sqrt{\alpha_{\tau_i}}}$$
+$${\hat X_0} = {( X_{\tau_i} - \sqrt{1-\alpha_{\tau_i}}.{\epsilon_\theta}^{(\tau_i)}(X_{\tau_i}))\over{\sqrt{\alpha_{\tau_i}}}}$$
+
 The generative process now samples latent variables according to the reversed $\tau$, which is referred to as the *sampling trajectory*. If the length of the sampling trajectory $S$ is much smaller than $T$, then it leads to significant speed-ups in the computational efficiency. DDIM is able to produce samples with quality comparable to 1000 step models within 20 to 100 steps. Indeed Song et.al. showed that only 20 steps are already very similar to the ones generated with 1000 steps in terms of high level features, with only minor diffferences in details.
 
 ### The Latent Diffusion Model (LDM)
@@ -341,12 +340,6 @@ The LDM Model has been shown to produce images that are comparable in quality to
 
 ## Conditional Diffusion Models
 
-
-```python
-#gen18
-nb_setup.images_hconcat(["DL_images/gen18.png"], width=1000)
-```
-
 ![](https://subirvarma.github.io/GeneralCognitics/images/gen18.png)
 
 *Figure 18*
@@ -355,66 +348,9 @@ The LDM model in Figure 17 also incorporates support for conditional image gener
 
    - As shown in the box on the right, the tokenized input $y$ is first passed through a network $\tau_\theta$ that converts it into a sequence $\zeta^{M\times d_{\tau}}$, where $M$ is the length of the sequence and $d_{\tau}$ is the size of the individual vectors. This conversion is done by means of an unmasked Transformer that is implemented using $N$ Transformer blocks consisting of global self-attention, layer-normalization and position-wise MLP layers.
    
-   - $\zeta$ is mapped on to each stage of the de-noising section of the Diffusion Model using a cross-attention mechanism as shown in Figure **gen17**. In order to do so, the Self Attention modules in the ablated UNet model (see [Dhariwal and Nichol](https://arxiv.org/abs/2105.05233) for a description) are replaced by a full Transformer consisting of T blocks of with alternating layers of self-attention, position-wise MLP and cross-attention. The exact structure is shown in Figure **gen18**, with the shapes of the various layers involved. 
+   - $\zeta$ is mapped on to each stage of the de-noising section of the Diffusion Model using a cross-attention mechanism as shown in Figure 17. In order to do so, the Self Attention modules in the ablated UNet model (see [Dhariwal and Nichol](https://arxiv.org/abs/2105.05233) for a description) are replaced by a full Transformer consisting of T blocks of with alternating layers of self-attention, position-wise MLP and cross-attention. The exact structure is shown in Figure 18, with the shapes of the various layers involved. 
    
 The Cross Attention is implemented by using the flattened "image" tensor of shape $h.w\times d.n_h$ to generate the Query, and using the text tensor of shape $M\times d_\tau$ to generate the Key and Value.
 
-## Appendix: Multivariate Gaussian Distributions
 
-The multivariate normal distribution of a k-dimensional random vector ${\displaystyle \mathbf {X} =(X_{1},\ldots ,X_{k})}$ can be written in the following notation:
-
-$${\displaystyle \mathbf {X} \ \sim \ {\mathcal {N}}({\boldsymbol {\mu }},\,{\boldsymbol {\Sigma }}),}$$
-or to make it explicitly known that **X** is k-dimensional,
-$${\displaystyle \mathbf {X} \ \sim \ {\mathcal {N}}_{k}({\boldsymbol {\mu }},\,{\boldsymbol {\Sigma }}),}$$
-with k-dimensional mean vector
-$${\displaystyle {\boldsymbol {\mu }}=\operatorname {E} [\mathbf {X} ]=(\operatorname {E} [X_{1}],\operatorname {E} [X_{2}],\ldots ,\operatorname {E} [X_{k}])^{\textbf {T}},}$$
-and ${\displaystyle k\times k}$ covariance matrix
-$${\displaystyle \Sigma _{i,j}=\operatorname {E} [(X_{i}-\mu _{i})(X_{j}-\mu _{j})]=\operatorname {Cov} [X_{i},X_{j}]}$$
-such that ${\displaystyle 1\leq i,j\leq k}$. The inverse of the covariance matrix is called the precision matrix, denoted by ${\displaystyle {\boldsymbol {Q}}={\boldsymbol {\Sigma }}^{-1}}$.
-
-**Standard Normal Random Vector**
-
-A real random vector ${\displaystyle \mathbf {X} =(X_{1},\ldots ,X_{k})^{\mathrm {T} }}$ is called a standard normal random vector if all of its components ${\displaystyle X_{k}}$ are independent and each is a zero-mean unit-variance normally distributed random variable, i.e. if ${\displaystyle X_{k}\sim \ {\mathcal {N}}(0,1)}$ for all ${\displaystyle k}$.
-
-**Normal Random Vector**
-
-A real random vector ${\displaystyle \mathbf {X} =(X_{1},\ldots ,X_{k})^{\mathrm {T} }}$ is called a normal random vector if there exists a random ${\displaystyle \ell }$ -vector ${\displaystyle \mathbf {Z}}$ , which is a standard normal random vector, a ${\displaystyle k}$-vector ${\displaystyle \mathbf {\mu } }$ , and a ${\displaystyle k\times \ell }$ matrix ${\displaystyle {\boldsymbol {A}}}$, such that ${\displaystyle \mathbf {X} ={\boldsymbol {A}}\mathbf {Z} +\mathbf {\mu } }$.
-
-Formally:
-$${\displaystyle \mathbf {X} \ \sim \ {\mathcal {N}}(\mathbf {\mu } ,{\boldsymbol {\Sigma }})\quad \iff \quad {\text{there exist }}\mathbf {\mu } \in \mathbb {R} ^{k},{\boldsymbol {A}}\in \mathbb {R} ^{k\times \ell }{\text{ such that }}\mathbf {X} ={\boldsymbol {A}}\mathbf {Z} +\mathbf {\mu } {\text{ and }}\forall n=1,\ldots ,l:Z_{n}\sim \ {\mathcal {N}}(0,1),{\text{i.i.d.}}}$$
-
-Here the covariance matrix is ${\displaystyle {\boldsymbol {\Sigma }}={\boldsymbol {A}}{\boldsymbol {A}}^{\mathrm {T} }}$.
-
-**Density function**
-
-The multivariate normal distribution is said to be "non-degenerate" when the symmetric covariance matrix ${\displaystyle {\boldsymbol {\Sigma }}}$ is positive definite. In this case the distribution has density
-
-$${\displaystyle f_{\mathbf {X} }(x_{1},\ldots ,x_{k})={\frac {\exp \left(-{\frac {1}{2}}({\mathbf {x} }-{\boldsymbol {\mu }})^{\mathrm {T} }{\boldsymbol {\Sigma }}^{-1}({\mathbf {x} }-{\boldsymbol {\mu }})\right)}{\sqrt {(2\pi )^{k}|{\boldsymbol {\Sigma }}|}}}}$$
-
-where ${\displaystyle {\mathbf {x} }}$ is a real k-dimensional column vector and ${\displaystyle |{\boldsymbol {\Sigma }}|\equiv \det {\boldsymbol {\Sigma }}}$ is the determinant of ${\displaystyle {\boldsymbol {\Sigma }}}$, also known as the generalized variance. The equation above reduces to that of the univariate normal distribution if ${\displaystyle {\boldsymbol {\Sigma }}}$ is a ${\displaystyle 1\times 1}$ matrix (i.e. a single real number).
-
-**Kullback–Leibler Divergence**
-
-The Kullback–Leibler divergence from ${\displaystyle {\mathcal {N}}_{1}({\boldsymbol {\mu }}_{1},{\boldsymbol {\Sigma }}_{1})}$ to ${\displaystyle {\mathcal {N}}_{0}({\boldsymbol {\mu }}_{0},{\boldsymbol {\Sigma }}_{0})}$, for non-singular matrices $\Sigma_1$ and $\Sigma_0$, is:
-
-$${\displaystyle D_{\text{KL}}({\mathcal {N}}_{0}\|{\mathcal {N}}_{1})={1 \over 2}\left\{\operatorname {tr} \left({\boldsymbol {\Sigma }}_{1}^{-1}{\boldsymbol {\Sigma }}_{0}\right)+\left({\boldsymbol {\mu }}_{1}-{\boldsymbol {\mu }}_{0}\right)^{\rm {T}}{\boldsymbol {\Sigma }}_{1}^{-1}({\boldsymbol {\mu }}_{1}-{\boldsymbol {\mu }}_{0})-k+\ln {|{\boldsymbol {\Sigma }}_{1}| \over |{\boldsymbol {\Sigma }}_{0}|}\right\},}$$
-where ${\displaystyle k}$ is the dimension of the vector space.
-
-The logarithm must be taken to base *e* since the two terms following the logarithm are themselves base-*e* logarithms of expressions that are either factors of the density function or otherwise arise naturally. The equation therefore gives a result measured in nats. Dividing the entire expression above by $log_e 2$ yields the divergence in bits.
-
-When ${\displaystyle {\boldsymbol {\mu }}_{1}={\boldsymbol {\mu }}_{0}}$,
-
-$${\displaystyle D_{\text{KL}}({\mathcal {N}}_{0}\|{\mathcal {N}}_{1})={1 \over 2}\left\{\operatorname {tr} \left({\boldsymbol {\Sigma }}_{1}^{-1}{\boldsymbol {\Sigma }}_{0}\right)-k+\ln {|{\boldsymbol {\Sigma }}_{1}| \over |{\boldsymbol {\Sigma }}_{0}|}\right\}.}$$
-
-When $\Sigma_1 = \Sigma_0 = \Sigma$
-$${\displaystyle D_{\text{KL}}({\mathcal {N}}_{0}\|{\mathcal {N}}_{1})={1 \over 2}\left\{\left({\boldsymbol {\mu }}_{1}-{\boldsymbol {\mu }}_{0}\right)^{\rm {T}}{\boldsymbol {\Sigma }}^{-1}({\boldsymbol {\mu }}_{1}-{\boldsymbol {\mu }}_{0})\right\}}$$
-
-**Drawing Values from the Gaussian Distribution**
-
-A widely used method for drawing (sampling) a random vector x from the N-dimensional multivariate normal distribution with mean vector μ and covariance matrix Σ works as follows:
-
-Find any real matrix A such that $AA^T = \Sigma$. When $Σ$ is positive-definite, the Cholesky decomposition is typically used, and the extended form of this decomposition can always be used (as the covariance matrix may be only positive semi-definite) in both cases a suitable matrix $A$ is obtained. An alternative is to use the matrix $A = UΛ^{½}$ obtained from a spectral decomposition $Σ = UΛU^{-1}$ of Σ. The former approach is more computationally straightforward but the matrices A change for different orderings of the elements of the random vector, while the latter approach gives matrices that are related by simple re-orderings. In theory both approaches give equally good ways of determining a suitable matrix A, but there are differences in computation time.
-
-Let $z = (z1, …, z^N)^T$ be a vector whose components are $N$ independent standard normal variates (which can be generated, for example, by using the Box–Muller transform).
-Let x be $μ + Az$. This has the desired distribution due to the affine transformation property.
 
