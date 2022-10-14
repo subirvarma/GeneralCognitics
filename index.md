@@ -1,5 +1,5 @@
 ---
-title: Subir's Website
+title: Bio
 ---
 
 Subir is a founder of General Cognitics, an Alternative Investment Management Firm, where he is responsible for Algorithm Design and Trading Strategies development and also manages the company’s strategy on a day-to-day basis. He also serves as an Adjunct Professor at the Leavey School of Business at Santa Clara University, where he teaches graduate level courses on Deep Learning and Reinforcement Learning. He holds more than 50 US Patents, and has authored books on [Deep Learning](https://srdas.github.io/DLBook2/) and [Internet Congestion Control](http://tinyurl.com/qxtl4zs). 
