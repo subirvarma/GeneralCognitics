@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "An Introduction to Transformers"
+title: "Publications"
 ---
 
 
