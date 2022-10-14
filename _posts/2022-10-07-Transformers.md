@@ -49,7 +49,7 @@ The idea of multilayer Self Attention as shown in the figure may remind you of t
 
 - By using regular 2D ConvNets: We can treat the vector sequence as an 'image' and then process it by using a 2D ConvNet in the usual way
 
-- By using 1D ConvNets: This is a more natural way to process vector sequences, and indeed in Chapter **ConvNets Part 1** we saw that their performance is close to that of LSTMs when processing NLP data.
+- By using 1D ConvNets: This is a more natural way to process vector sequences, and indeed their performance is close to that of LSTMs when processing NLP data.
 
 The existence of so many different ways of processing vector sequences shows that the common factor in all these designs, is a way in which the individual elements of a vector can be mixed, in both column-wise and row-wise axes, and there are multiple ways in which this can be done. What sets the Transformer apart from all these other ways of processing vectors is the fact that they have a much higher model capacity with the ability to scale up to models with hundreds of billions of parameters. This allows them to capture and model much more complex patterns. The amount of complexity in language data or image data is such that LSTM or ConvNet models are not able to capture all the interconnected patterns that exist in them and thus are capacity limited. 
 
