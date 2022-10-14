@@ -110,7 +110,7 @@ This can be considered to be a type of Normalization in order to keep the result
 
 4. The normalized Scores are used to generate scalar weights $w_{ij}$ by using the Softmax function
 
-$$w_{ij} =  {{e^{S_{ij}}}\over{\sum_j e^{S_{ij}}}} ,\ \ j=1,2,...,N$$
+$$w_{ij} = {e^{S_{ij}}\over{\sum_j{e^{S_{ij}}}}},\ \ i,j = 1,2,...,N$$
 
 5. The Self Attention output vector $Z_{i}$ for the $i^{th}$ input is computed as a weighted sum of the Value vectors
 
