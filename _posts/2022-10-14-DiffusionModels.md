@@ -62,7 +62,7 @@ Evidence Lower Bound or ELBO is a useful technique from Bayesian Statistics, tha
 Consider the following problem: Given two random variables $X$ and $Z$, the conditional probabilities $q(Z|X)$ and $q(Z)$ are known, and we are asked to invert the conditional probability and thus compute $q(X|Z)$. For example $X$ may be an image so that $Z$ is the Latent Variable representation of the image. In this case the problem can be formulated as: We know how to get the latent representation from the image, but we don't know how to convert a latent representation back into an image. 
 
 The most straightforward way of inverting the conditional probability is by means of Bayes Theorem, which states
-$$q(X|Z) = {{q(Z|X)q(x)}\over{\sum_u q(Z|U)q(U)}}$$
+$$q(X|Z) = {q(Z|X)q(x)\over{\sum_u q(Z|U)q(U)}}$$
 However this formula is very difficult to compute because the sum in the denominator is often intractable. In order to solve this problem using Neural Networks, we have to turn this into an optimization problem. This is done by means of a technique called ELBO (Evidence Lower Bound) also known as VLB (Variational Lower Bound), which works as follows:
 Lets assume that we can approximate $q(X|Z)$ by another (parametrized) distribution $p_\theta(X|Z)$. In order to find the best $p_\theta(X|Z)$, we can try to minimize the "distance" between $p_\theta(X|Z)$ and $q(X|Z)$. A measure of distance between probability distributions is the Kullback-Leibler Divergence or KL Divergence. The KL Divergence between probability distributions $f(X)$ and $g(X)$ is defined as:
 $$D_{KL}(f(X), g(X)) = \sum f(X)\log{f(X)\over g(X)}$$
