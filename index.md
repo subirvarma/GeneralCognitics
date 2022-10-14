@@ -3,7 +3,7 @@ title: About this Blog
 ---
 
 Welcome to my blog! After a lot of dithering I finally figured out how to use github pages for blogging, not only is it free but also allows me to
-write blogs containg math equations. The latter feature is especially useful since I do plan to blog a lot about topics in Science and Technology.
+write blogs containing math equations. The latter feature is especially useful since I do plan to blog a lot about topics in Science and Technology.
 I have a wide range of interests, so expect to see blogs on topics such as:
 
 - Artificial Intelligence and Deep Learning: This is a very exciting area undergoing major changes as we speak. I have been teaching courses on Deep Learning and Reinforcement Learning at Santa Clara for the past few years, and preparing for these lectures keeps me abreast of the latest developments. New discoveries are being made almost on a daily basis and I will blog about research papers that I read and am excited about.
