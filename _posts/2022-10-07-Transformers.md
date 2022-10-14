@@ -71,13 +71,11 @@ Lets first examine the Self Attention layer in greater detail:
 
 In Figure 5 we show how to go from the input $X_3$ to the output $Z_3$ of the Self Attention layer. Note that $Z_3$ is a measure of the Self Attention that $X_3$ pays to the other vectors $(X_1, X_2)$ in the input sequence. The simplest way to compute the Self Attention between two vectors is by taking their dot product, and this was the technique used for RNN based Cross Attention in the prior chapter. If we carry out this procedure, then the Self Attention between vectors $X_i$ and $X_j$ is given by $A_{ij} = X_i\cdot X_j$. These numbers can then be converted into weights 
 
-$$ w_{ij} = {{e^{A_{ij}}}\over{\sum_j{e^{A_{ij}}}}},\ \ i,j = 1,2,...,N $$
+$$w_{ij} = {{e^{A_{ij}}}\over{\sum_j{e^{A_{ij}}}}},\ \ i,j = 1,2,...,N$$
 
 The output vector $Z_{i}$ is computed as a weighted sum of the input vectors $X_i$
 
-$$
-Z_{i} = \sum_j w_{ij} X_j
-$$
+$$Z_{i} = \sum_j w_{ij} X_j$$
 
 This procedure represents the core of Self Attention based approach and it worked well for the RNN Cross Attention design, but note that it has the following drawback: There are no learnable parameters in these computations. We would give the Neural Network more flexibility (and thus greater capacity) if we were to change the procedure in a way that allows the network to modify the weights $w_{ij}$ during the course of the training process. In order to so, we define a new Self Attention procedure, fundamental to which are the following three vector sequences:
 
@@ -99,25 +97,19 @@ Each of the vectors $X_i$ is of dimension $1\times d$, while $W^Q, W^K$ and $W^V
 
 1. Compute a scalar valued Score $s_{ij},\ j=1,2,...,N$ associated with the $i^{th}$ and $j^{th}$ inputs by taking the inner product
 
-$$
-s_{ij} = Q_i^T K_j,\ \ j=1,2,...,N
-$$
+$$s_{ij} = Q_i^T K_j,\ \ j=1,2,...,N$$
 
 The Score value is a measure of the similarity between these two vectors.
 
 3. Normalize the Score values by dividing by $\sqrt{d}$ to create the sequence $S_{ij}, j=1,2,...,N$. 
 
-$$
-S_{ij} = {Q_i^T K_j\over{\sqrt{d}}}  \ \ j=1,2,...,N
-$$
+$$S_{ij} = {Q_i^T K_j\over{\sqrt{d}}}  \ \ j=1,2,...,N$$
 
 This can be considered to be a type of Normalization in order to keep the results of the dot product between the Query and Key vector under control. Without this, there is danger that the dot product may become very large (or very small), which in combination with the exponentiation in the softmax (the following step) leads to numerical issues and problems in gradient propagation.
 
 4. The normalized Scores are used to generate scalar weights $w_{ij}$ by using the Softmax function
 
-$$
-w_{ij} =  {{e^{S_{ij}}}\over{\sum_j e^{S_{ij}}}} ,\ \ j=1,2,...,N
-$$
+$$w_{ij} =  {{e^{S_{ij}}}\over{\sum_j e^{S_{ij}}}} ,\ \ j=1,2,...,N$$
 
 5. The Self Attention output vector $Z_{i}$ for the $i^{th}$ input is computed as a weighted sum of the Value vectors
 
