@@ -146,7 +146,9 @@ $$L_{ELBO} = E_{q(X_{0:T})}{\log q(X_{1:T}|X_0) \over{p_\theta(X_{0:T})}  }$$
 
 After some algebraic manipulations and making use of the Law of Conditional Probabilities, this expression can be re-written as
 
-$$L_{ELBO} = E_q\left[{\log{{q(X_T|X_0)\over{{p_\theta}(X_T)}}} + \sum_{t=2}^T   \log{q(X_{t-1}|X_t,X_0)\over {{p_\theta}(X_{t-1}|X_t)}} - \log {p_\theta}(X_0|X_1)\right]$$
+$$L_{ELBO} = E_q\left[{\log{q(X_T|X_0)\over{p_\theta}(X_T)}}\right]$$
+
+$$L_{ELBO} = E_q\left[{\log{q(X_T|X_0)\over{p_\theta}(X_T)}} + \sum_{t=2}^T   \log{q(X_{t-1}|X_t,X_0)\over {{p_\theta}(X_{t-1}|X_t)}} - \log {p_\theta}(X_0|X_1)\right]$$
 
 which is the same as
 
