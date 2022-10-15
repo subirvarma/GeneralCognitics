@@ -250,8 +250,11 @@ The pseudocode for the training procedure is shown on the left in Figure 11, and
 - The difference between the actual noise sample $\epsilon$ and its estimate $\epsilon_\theta$ is used to generate a gradient descent step.
 
 Once we have a trained model, we can use it to generate new images by using the procedure outlined in Algorithm 2. At the first step we start with a Gaussian noise sample $X_T$, and then gradually de-noise it in steps $X_{T-1}, X_{T-2},...,X_1$ until we get to the final image $X_0$. The de-noising is carried out by sampling from the Gaussian Distribution $N(\mu_\theta(X_t,t),\beta_t I)$, so that
+
 $$X_{t-1} = \mu_\theta(X_t,t) + \sqrt{\beta_t} \epsilon $$
+
 $\mu_\theta(X_t,t)$ is computed by running the model to estimate $\epsilon_\theta$ and then using the following equation to get $\mu_\theta$
+
 $$\mu_\theta(X_t,t) = {1\over\sqrt\alpha_t}\left[X_t - {\beta_t\over{\sqrt{1-\gamma_t}}}\epsilon_\theta(X_t,t)\right]$$
 
 Note that images are generated in a probabilistic manner starting from the initial Gaussian noise $X_T$, so that the same noise sample can generate different images on successive runs (which accounts for the P in DDPM).
@@ -282,42 +285,55 @@ One of the issues with the DDPM algorithm is that the inference (or test) step t
 [Song, Meng,and Ermon](https://arxiv.org/abs/2010.02502) came up with an ingenous way to speed up these models. They made the observation that DDPM did not really make use of the Markovian nature of the forward diffusion process anywhere in the algorithm. So perhaps if the forward diffusion were to be replaced by a non-Markovian process, then the number of steps in the backward process could be reduced, thus speeding up the algorithm. This resulted in an algorithm they called Denoising Diffusion Implicit Model or DDIM, which indeed works much faster.
 
 Song et.al. used a slightly different parametrization of the forward diffusion process, which is described next. The forward recursion in DDPM is written as
+
 $$q(X_t|X_{t-1}) = N(\sqrt{\alpha_t\over\alpha_{t-1}}X_{t-1}, (1-{\alpha_t\over\alpha_{t-1}})\epsilon),\quad \epsilon\in N(0,I)$$
+
 which results in
+
 $$X_t = \sqrt{\alpha_t}X_0 + \sqrt{(1-\alpha_t)}\epsilon$$
+
 so that the convergence of $X_T$ to White Gaussian happens if $\alpha_T\rightarrow 0$. The DDPM objective is given by
+
 $$L_\gamma(\epsilon_\theta) = \sum_{t=1}^T \gamma_t E_q\left[||\epsilon_\theta^{(t)}(\sqrt{\alpha_t}X_0 + \sqrt{1-\alpha_t}\epsilon_t) - \epsilon_t||^2 \right]$$
 
 Song et.al. made the following observations:
 
   - Since the generative model approximates the reverse of the inference process, we need to re-think the inference process to reduce the number of iterations required by the generative model.
-  -  The DDPM objective $L_\gamma$ only depends on the marginals $q(X_t|X_0)$ but not directly on the joint $q(X_{1:T}|X_0)$. Since there are many inference distributions with the same marginals, perhaps a non-Markovian inference distribution will lead to a more efficient generative processes.
+  -  The DDPM objective $L_\gamma$ only depends on the marginals $q(X_t\vert X_0)$ but not directly on the joint $q(X_{1:T}\vert X_0)$. Since there are many inference distributions with the same marginals, perhaps a non-Markovian inference distribution will lead to a more efficient generative processes.
   
 Song et.al. came up up with a non Markovian inference process that has the same marginal, and further demonstrated  that this process has the same surrogate objective function as DDPM. This meant that the trained DDPM models could be re-used by making use of the DDIM algorithm for generation only, with a faster execution time.
 
 Consider the family Q of inference distributions indexed by a real vector $\sigma \in R^T_{\ge 0}$:
+
 $$q_\sigma(X_{1:T}|X_0) = q_\sigma(X_T|X_0)\prod_{t=2}^T q_\sigma(X_{t-1}|X_t, X_0)  $$
-where $q_\sigma(X_t|X_0) = N(\sqrt{\alpha_T}X_0, (1-\alpha_T)\epsilon)$ and for all $t>1$
+
+where $q_\sigma(X_t\vert X_0) = N(\sqrt{\alpha_T}X_0, (1-\alpha_T)\epsilon)$ and for all $t>1$
 
 $$q_\sigma(X_{t-1}|X_t,X_0) = N(\sqrt{\alpha_{t-1}}X_0 + \sqrt{1-\alpha_{t-1}-{\sigma_t}^2}.
                             {X_t - \sqrt{\alpha_t}X_0\over{\sqrt{1-\alpha_t}}}, {\sigma_t}^2 \epsilon) \quad\quad\quad (9)$$
                             
-Using this formula, it can be shown that $q_\sigma(X_t|X_0) = N(\sqrt{\alpha_t}X_0, (1-\alpha_t)\epsilon), \forall t$ so the marginals between this inference process and the DDPM forward process match. The forward process itself can be computed by using the formula:
-$$q_\sigma(X_t|X_{t-1},X_0) = {q_\sigma(X_{t-1}|X_t,X_0)q_\sigma(X_t|X_0)\over{q_\sigma(X_{t-1}|X_0)}}$$
-This is clearly a Gaussian process, however note that $q_\sigma(X_t|X_{t-1},X_0)$ is not a Markov process, since $X_t$ depends on $X_0$ in addition to $X_{t-1}$. 
+Using this formula, it can be shown that $q_\sigma(X_t\vert X_0) = N(\sqrt{\alpha_t}X_0, (1-\alpha_t)\epsilon), \forall t$ so the marginals between this inference process and the DDPM forward process match. The forward process itself can be computed by using the formula:
 
-Let $p_\theta(X_{0:T})$ be the Generative process, where ${p_\theta}^{(t)}(X_{t-1}|X_t)$ is approximated using $q_\sigma(X_{t-1}|X_t,X_0)$. This is done in a 2-step process: 
+$$q_\sigma(X_t|X_{t-1},X_0) = {q_\sigma(X_{t-1}|X_t,X_0)q_\sigma(X_t|X_0)\over{q_\sigma(X_{t-1}|X_0)}}$$
+
+This is clearly a Gaussian process, however note that $q_\sigma(X_t\vert X_{t-1},X_0)$ is not a Markov process, since $X_t$ depends on $X_0$ in addition to $X_{t-1}$. 
+
+Let $p_\theta(X_{0:T})$ be the Generative process, where ${p_\theta}^{(t)}(X_{t-1}|X_t)$ is approximated using $q_\sigma(X_{t-1}\vert X_t,X_0)$. This is done in a 2-step process: 
 
   -  Given $X_t$, use it to predict $X_0$ (referred to as ${\hat X_0)}$) by using the Neural Network model and the equation
+  -  
   $${\hat X_0} = {( X_t - \sqrt{1-\alpha_t}.{\epsilon_\theta}^{(t)}(X_t))\over{\sqrt{\alpha_t}}}$$
   
-  -  Given $X_t$ and ${\hat X_0}$, use $q_\sigma(X_{t-1}|X_t,X_0)$ to  sample $X_{t-1}$ so that
+  -  Given $X_t$ and ${\hat X_0}$, use $q_\sigma(X_{t-1}\vert X_t,X_0)$ to  sample $X_{t-1}$ so that
+  
   $${p_\theta}^{(t)}(X_{t-1}|X_t) = q_\sigma(X_{t-1}|X_t,{\hat X_0})$$ 
   
 Note that changing the parameter $\sigma$ results in different generative processes, while using the same DDPM based training process. Some special choices of $\sigma$ are the following:
 
    - When
+
    $$\sigma_t = \sqrt{{1-\alpha_{t-1}}\over{1-\alpha_t}}\sqrt{1-{\alpha_t\over\alpha_{t-1}}}, \forall t$$
+   
      then the forward process becomes Markovian and the generative process becomes DDPM.
      
    - When $\sigma_t = 0,\forall t$ , the forward process becomes deterministic given $X_{t-1}$ and $X_0$, except for $t=1$. The generative process is now called an implicit probabilistric model where samples are generated from the latent variable $X_T$ with a fixed procedure.
