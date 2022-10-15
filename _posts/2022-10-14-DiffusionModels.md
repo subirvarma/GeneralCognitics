@@ -208,7 +208,7 @@ The pseudocode for the training procedure is shown on the left in Figure 11, and
 Once we have a trained model, we can use it to generate new images by using the procedure outlined in Algorithm 2. At the first step we start with a Gaussian noise sample $X_T$, and then gradually de-noise it in steps $X_{T-1}, X_{T-2},...,X_1$ until we get to the final image $X_0$. The de-noising is carried out by sampling from the Gaussian Distribution $N(\mu_\theta(X_t,t),\beta_t I)$, so that
 $$X_{t-1} = \mu_\theta(X_t,t) + \sqrt{\beta_t} \epsilon $$
 $\mu_\theta(X_t,t)$ is computed by running the model to estimate $\epsilon_\theta$ and then using the following equation to get $\mu_\theta$
-$$\mu_\theta(X_t,t) = {1\over\sqrt\alpha_t}\left[X_t - {{\beta_t}\over{\sqrt{1-\gamma_t}}}\epsilon_\theta(X_t,t)\right]$$
+$$\mu_\theta(X_t,t) = {1\over\sqrt\alpha_t}\left[X_t - {\beta_t\over{\sqrt{1-\gamma_t}}}\epsilon_\theta(X_t,t)\right]$$
 
 Note that images are generated in a probabilistic manner starting from the initial Gaussian noise $X_T$, so that the same noise sample can generate different images on successive runs (which accounts for the P in DDPM).
 
