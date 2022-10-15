@@ -2,7 +2,7 @@
 title: About this Blog
 ---
 
-Welcome to my blog! After a lot of dithering I finally figured out how to use github pages for blogging, not only is it free but also allows me to
+Welcome to my blog! After a lot of procrastination I finally figured out how to use github pages for blogging, not only is it free but also allows me to
 write blogs containing math equations. The latter feature is especially useful since I do plan to blog a lot about topics in Science and Technology.
 I have a wide range of interests, so expect to see blogs on topics such as:
 
