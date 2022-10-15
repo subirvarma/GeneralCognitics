@@ -65,10 +65,15 @@ The most straightforward way of inverting the conditional probability is by mean
 $$q(X|Z) = {q(Z|X)q(x)\over{\sum_u q(Z|U)q(U)}}$$
 However this formula is very difficult to compute because the sum in the denominator is often intractable. In order to solve this problem using Neural Networks, we have to turn this into an optimization problem. This is done by means of a technique called ELBO (Evidence Lower Bound) also known as VLB (Variational Lower Bound), which works as follows:
 Lets assume that we can approximate $q(X|Z)$ by another (parametrized) distribution $p_\theta(X|Z)$. In order to find the best $p_\theta(X|Z)$, we can try to minimize the "distance" between $p_\theta(X|Z)$ and $q(X|Z)$. A measure of distance between probability distributions is the Kullback-Leibler Divergence or KL Divergence. The KL Divergence between probability distributions $f(X)$ and $g(X)$ is defined as:
+
 $$D_{KL}(f(X), g(X)) = \sum f(X)\log{f(X)\over g(X)}$$
+
 Substituting $f(X) = q(X|Z)$ and $g(X) = p_\theta(X|Z)$, and making use of the Law of Conditional Probabilities, it can be shown that
+
 $$D_{KL}(q(X|Z), p_\theta(X|Z)) = \log q(X) - \sum_Z q(Z|X)\log{ p_\theta(X,Z)\over q(Z|X)}$$
+
 Hence in order to minimize $D_{KL}(q(X|Z), p_\theta(X|Z))$, we have to maximize $\sum_Z q(Z|X)\log{ p_\theta(X,Z)\over q(Z|X)}$, or minimize $\sum_Z q(Z|X)\log{q(Z|X)\over p_\theta(X,Z)}$. We will refer to the latter quantity as the ELBO or VLB, i.e.,
+
 $$ELBO = \sum_Z q(Z|X)\log{q(Z|X)\over p_\theta(X,Z)} \quad\quad\quad (1)$$
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/gen13.png)
@@ -79,7 +84,7 @@ Since  by definition $D_{KL}(q(X|Z), p_\theta(X|Z)) \ge 0$, it follows that
 $$\log q(X) \ge ELBO$$
 i.e., the ELBO serves as an approximation to the true distribution $q(X)$, with the difference betwen the two being equal to the KL Divergence $D_{KL}(q(X|Z), p_\theta(X/Z))$ as illustrated in Figure 6. 
 
-**Note:** In Diffusion Approximations the distribution $q(Z|X)$ is known (as explained in the next section), however this is not the case in other Latent Variable models such as VAEs. In that case $q(Z|X)$ is also approximated by a parametrized distribution $q_\phi(Z|X)$, which is assumed to Gaussian as well. Thus building a VAE model requires a joint optimization of the parameters $(\theta,\phi)$.
+**Note:** In Diffusion Approximations the distribution $q(Z/X)$ is known (as explained in the next section), however this is not the case in other Latent Variable models such as VAEs. In that case $q(Z/X)$ is also approximated by a parametrized distribution $q_\phi(Z/X)$, which is assumed to Gaussian as well. Thus building a VAE model requires a joint optimization of the parameters $(\theta,\phi)$.
 
 Hence even though we don't have access to the true distribution $q(X)$, we can approximate it using the ELBO, with the parameters $\theta$ (or $\theta,\phi$) being chosen so as to minimize the difference between the two.
 
