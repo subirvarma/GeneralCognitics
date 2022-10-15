@@ -51,7 +51,7 @@ If $q(X|Z)$ is a simpler function that can be approximated by a Gaussian $p_\the
 $$q(X) \approx \int p_\theta(\mu_\theta,\sigma_\theta) q(Z) dZ$$
 Thus a complex $q(X)$ can be built by using a number of of these Gaussians super-imposed togther and weighted by the distribution $q(Z)$ as shown in Figure 4. This is somewhat analogous to approximating a complex function by its Fourier Transform co-efficients which act as weights for simple sinusoidal functions.
 
-We now show how to obtain the approximations $p_\theta(X|Z)$ by solving an optimization problem.
+We now show how to obtain the approximations $p_\theta(X/Z)$ by solving an optimization problem.
 
 Evidence Lower Bound or ELBO is a useful technique from Bayesian Statistics, that has found use in Neural Network modeling in recent years. It works by converting the problem of estimating an unknown probability distribution into an optimization problem, which can then be solved using Neural Networks.
 
@@ -59,7 +59,7 @@ Evidence Lower Bound or ELBO is a useful technique from Bayesian Statistics, tha
 
 *Figure 5*
 
-Consider the following problem: Given two random variables $X$ and $Z$, the conditional probabilities $q(Z|X)$ and $q(Z)$ are known, and we are asked to invert the conditional probability and thus compute $q(X|Z)$. For example $X$ may be an image so that $Z$ is the Latent Variable representation of the image. In this case the problem can be formulated as: We know how to get the latent representation from the image, but we don't know how to convert a latent representation back into an image. 
+Consider the following problem: Given two random variables $X$ and $Z$, the conditional probabilities $q(Z/X)$ and $q(Z)$ are known, and we are asked to invert the conditional probability and thus compute $q(X/Z)$. For example $X$ may be an image so that $Z$ is the Latent Variable representation of the image. In this case the problem can be formulated as: We know how to get the latent representation from the image, but we don't know how to convert a latent representation back into an image. 
 
 The most straightforward way of inverting the conditional probability is by means of Bayes Theorem, which states
 $$q(X|Z) = {q(Z|X)q(x)\over{\sum_u q(Z|U)q(U)}}$$
@@ -77,7 +77,7 @@ $$ELBO = \sum_Z q(Z|X)\log{q(Z|X)\over p_\theta(X,Z)} \quad\quad\quad (1)$$
 
 Since  by definition $D_{KL}(q(X|Z), p_\theta(X|Z)) \ge 0$, it follows that
 $$\log q(X) \ge ELBO$$
-i.e., the ELBO serves as an approximation to the true distribution $q(X)$, with the difference betwen the two being equal to the KL Divergence $D_{KL}(q(X|Z), p_\theta(X|Z))$ as illustrated in Figure 6. 
+i.e., the ELBO serves as an approximation to the true distribution $q(X)$, with the difference betwen the two being equal to the KL Divergence $D_{KL}(q(X|Z), p_\theta(X/Z))$ as illustrated in Figure 6. 
 
 **Note:** In Diffusion Approximations the distribution $q(Z|X)$ is known (as explained in the next section), however this is not the case in other Latent Variable models such as VAEs. In that case $q(Z|X)$ is also approximated by a parametrized distribution $q_\phi(Z|X)$, which is assumed to Gaussian as well. Thus building a VAE model requires a joint optimization of the parameters $(\theta,\phi)$.
 
