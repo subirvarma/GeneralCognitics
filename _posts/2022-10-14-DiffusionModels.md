@@ -146,8 +146,6 @@ $$L_{ELBO} = E_{q(X_{0:T})}{\log q(X_{1:T}|X_0) \over{p_\theta(X_{0:T})}  }$$
 
 After some algebraic manipulations and making use of the Law of Conditional Probabilities, this expression can be re-written as
 
-$$L_{ELBO} = E_q\left[{\log{q(X_T|X_0)\over{p_\theta}(X_T)}}\right] + \sum_{t=2}^T \log{q(X_{t-1}|X_t,X_0)\over {p_\theta(X_{t-1}|X_t)}}$$
-
 $$L_{ELBO} = E_q\left[{\log{q(X_T|X_0)\over{p_\theta}(X_T)}} + \sum_{t=2}^T \log{q(X_{t-1}|X_t,X_0)\over {p_\theta(X_{t-1}|X_t)}} - \log p_\theta(X_0|X_1)\right]$$
 
 which is the same as
@@ -168,7 +166,7 @@ $$q(X_{t-1}|X_t,X_0) = N(X_{t-1}; {\tilde\mu}(X_t,X_0),{\tilde\beta_t} I) \quad\
 where
 $${\tilde\beta_t} = {{1-\gamma_{t-1}}\over{1-\gamma_t})}\beta_t$$
 and 
-$${\tilde\mu}(X_t,X_0) = {{\sqrt{\alpha_t}(1-\gamma_{t-1})}\over{1-\gamma_t }}X_t + {{\sqrt{\gamma_{t-1}}\beta_t}\over{1-\gamma_t }}X_0 \quad\quad\quad (6)$$
+$${\tilde\mu}(X_t,X_0) = {\sqrt{\alpha_t}(1-\gamma_{t-1})\over{1-\gamma_t }}X_t + {\sqrt{\gamma_{t-1}}\beta_t\over{1-\gamma_t }}X_0 \quad\quad\quad (6)$$
 
 Note that we are trying to approximate $q(X_t|X_{t+1},X_0)$ by $p_\theta(X_t|X_{t+1})$ by minimizing $L_t = D_{KL}[q(X_t|X_{t+1},X_0)||p_\theta(X_t|X_{t+1})], 1\le t\le T-1$. Using the fact that $q(X_{t-1}|X_t,X_0)$ has a Normal Distribution given by equation (5) and $p_\theta(X_t|X_{t+1})$ also has a Normal Distribution given by equation (4), and plugging them into the formula for $D_{KL}$ (see [Wikipedia article on Multi-Variate Normal Distributions](https://en.wikipedia.org/wiki/Multivariate_normal_distribution)), results in the following:
 $$L_t = E \left[{1\over{2||\Sigma_\theta(X_t,t)||^2}} ||\tilde\mu_t(X_t,X_0) - \mu_\theta(X_t,t)||^2 \right]\quad 1\le t\le T-1 \quad\quad\quad (7)$$
