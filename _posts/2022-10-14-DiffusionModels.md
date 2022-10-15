@@ -46,9 +46,13 @@ Given a set of image samples $(X_1,...,X_N)$ we would like to estimate their Pro
 *Figure 4*
 
 For another perspective into the problem, consider Figure 4 which shows the data distribution $q(X)$ which in general can a very complicated function (as a stand-in for an image distribution). However note that by using the Law of Total Probabilities, $q(X)$ can also written as
+
 $$q(X) = \int q(X,Z) dZ = \int q(X|Z) q(Z) dZ$$
+
 If $q(X\vert Z)$ is a simpler function that can be approximated by a Gaussian $p_\theta(X\vert Z) = p_\theta(\mu_\theta(Z),\sigma_\theta(Z))$ then
+
 $$q(X) \approx \int p_\theta(\mu_\theta,\sigma_\theta) q(Z) dZ$$
+
 Thus a complex $q(X)$ can be built by using a number of of these Gaussians super-imposed togther and weighted by the distribution $q(Z)$ as shown in Figure 4. This is somewhat analogous to approximating a complex function by its Fourier Transform co-efficients which act as weights for simple sinusoidal functions.
 
 We now show how to obtain the approximations $p_\theta(X\vert Z)$ by solving an optimization problem.
@@ -173,10 +177,15 @@ $$L_{ELBO} = E_q\left[D_{KL}(q(X_T|X_0)||p_\theta(X_T) ) + \sum_{t=2}^T D_{KL}(q
 
 
 Defining
+
  $$L_T = D_{KL}[q(X_T|X_0)||p_\theta(X_T) ]$$
+ 
  $$L_t = D_{KL}\left[q(X_t|X_{t+1},X_0)||p_\theta(X_t|X_{t+1})\right]\quad 1\le t\le T-1$$
+ 
  $$L_0 = - \log p_\theta(X_0|X_1)$$  
+ 
 $L_{ELBO}$ can be written as
+
 $$L_{ELBO} = L_T + L_{T-1} + ... +\ L_0$$
 
 In this expression the $L_T$ term can be ignored for optimization purposes since $q(X_T\vert X_0)$ being equal to $N(0,I)$ is not a function of $\theta$ and neither is $p_\theta(X_T)$. 
@@ -186,13 +195,13 @@ $$q(X_{t-1}|X_t,X_0) = N(X_{t-1}; {\tilde\mu}(X_t,X_0),{\tilde\beta_t} I) \quad\
 
 where
 
-$${\tilde\beta_t} = {{1-\gamma_{t-1}}\over{1-\gamma_t})}\beta_t$$
+$${\tilde\beta_t} = {1-\gamma_{t-1}\over{1-\gamma_t}}\beta_t$$
 
 and 
 
 $${\tilde\mu}(X_t,X_0) = {\sqrt{\alpha_t}(1-\gamma_{t-1})\over{1-\gamma_t }}X_t + {\sqrt{\gamma_{t-1}}\beta_t\over{1-\gamma_t }}X_0 \quad\quad\quad (6)$$
 
-Note that we are trying to approximate $q(X_t\vert X_{t+1},X_0)$ by $p_\theta(X_t\vert X_{t+1})$ by minimizing $L_t = D_{KL}[q(X_t\vert X_{t+1},X_0)||p_\theta(X_t\vert X_{t+1})], 1\le t\le T-1$. Using the fact that $q(X_{t-1}\vert X_t,X_0)$ has a Normal Distribution given by equation (5) and $p_\theta(X_t\vert X_{t+1})$ also has a Normal Distribution given by equation (4), and plugging them into the formula for $D_{KL}$ (see [Wikipedia article on Multi-Variate Normal Distributions](https://en.wikipedia.org/wiki/Multivariate_normal_distribution)), results in the following:
+Note that we are trying to approximate $q(X_t\vert X_{t+1},X_0)$ by $p_\theta(X_t\vert X_{t+1})$ by minimizing $L_t = D_{KL}[q(X_t\vert {X_{t+1},X_0})||p_\theta(X_t\vert X_{t+1})], 1\le t\le T-1$. Using the fact that $q(X_{t-1}\vert {X_t,X_0})$ has a Normal Distribution given by equation (5) and $p_\theta(X_t\vert X_{t+1})$ also has a Normal Distribution given by equation (4), and plugging them into the formula for $D_{KL}$ (see [Wikipedia article on Multi-Variate Normal Distributions](https://en.wikipedia.org/wiki/Multivariate_normal_distribution)), results in the following:
 
 $$L_t = E \left[{1\over{2||\Sigma_\theta(X_t,t)||^2}} ||\tilde\mu_t(X_t,X_0) - \mu_\theta(X_t,t)||^2 \right]\quad 1\le t\le T-1 \quad\quad\quad (7)$$
 
