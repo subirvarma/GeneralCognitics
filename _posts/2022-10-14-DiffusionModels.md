@@ -3,7 +3,7 @@
 
 ## Introduction
 
-One of the important applications of DLNs has been image generation. Given a set of training samples $\{X_1,...,X_N\}$, the preferred approach to generating a new datapoint $X = (x_1,...,x_n)$ is to first estimate the distribution $p_\theta(X)$ that approximates the actual distribution $p(X)$ that the training samples come from (using Unsupervised Learning) and then sample from $p_\theta(X)$ to generate a new $X$. There are several ways in which this program can be put into practice:
+One of the important applications of Neural Networks has been image generation. Given a set of training samples $\{X_1,...,X_N\}$, the preferred approach to generating a new datapoint $X = (x_1,...,x_n)$ is to first estimate the distribution $p_\theta(X)$ that approximates the actual distribution $p(X)$ that the training samples come from (using Unsupervised Learning) and then sample from $p_\theta(X)$ to generate a new $X$. There are several ways in which this program can be put into practice:
 
  - **Autoregressive Generation:** This technique works by building a model for the parametrized distribution $p_\theta(X)$ that maximizes the log likelihood  of the observed data points $\{X_1,...,X_N\}$, and then generates new datapoint $X=(x_1,...,x_n)$ by making use of the recursion
  $$x_i = argmax_i\ p_\theta(x_i|x_1,...,x_{i-1}) $$
@@ -39,7 +39,7 @@ Diffusion Models are trained by running the process just described in the opposi
 
 *Figure 3*
 
-Given a set of image samples $(X_1,...,X_N)$ we would like to estimate their Probability Density functions $q(X)$, so that we can sample from it and thereby generate new images. However, in general $q(X)$ is a very complex function, and a simpler problem is to define a Latent Variable $Z$ that encodes semantically useful information about $X$ and then estimate $q(X|Z)$ with the hope that this will be a simpler function to estimate. The idea behind Latent Variables is illustrated in Figure 3: The LHS of the figure shows how new images can be generated in a two step process: First sample a Latent Variable $Z$ assuming that we know its distribution $q(Z)$ and then sample from $q(X|Z)$ to generate a new image. The RHS of the figure gives some intuition behind the concept of Latent Variables, it shows how the contents of an image of a human face are controlled by variables such as gender, hair color etc, and if these variables are specified, then the face generation problem becomes simpler.
+Given a set of image samples $(X_1,...,X_N)$ we would like to estimate their Probability Density functions $q(X)$, so that we can sample from it and thereby generate new images. However, in general $q(X)$ is a very complex function, and a simpler problem is to define a Latent Variable $Z$ that encodes semantically useful information about $X$ and then estimate $q(X|Z)$ with the hope that this will be a simpler function to estimate. The idea behind Latent Variables is illustrated in Figure 3, The LHS of the figure shows how new images can be generated in a two step process: First sample a Latent Variable $Z$ assuming that we know its distribution $q(Z)$ and then sample from $q(X|Z)$ to generate a new image. The RHS of the figure gives some intuition behind the concept of Latent Variables, it shows how the contents of an image of a human face are controlled by variables such as gender, hair color etc, and if these variables are specified, then the face generation problem becomes simpler.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/gen12.png)
 
