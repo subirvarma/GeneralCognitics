@@ -25,7 +25,7 @@ In order to motivate the design of ConvNets, consider the case when the input co
 
 $$a_k = \sum_{i=1}^{3072} w_{ki} x_i + b_k,\ \ 1\le k\le 10$$
 
-Note that the sum $\sum_{i=1}^{3072} w_{ki} x_i$ is maximized if $w_{ki} = x_i,\ 1\le i\le 3072$ under the contraint that both of these are unit vectors. Hence this lends itself to the interpretation that for each category $k$, the weights $w_{ki}, 1\le i\le 3072$ are a template or filter for the category $k$ object, which looks for images that resemble the filter itself. Hence the classification operation can be interpreted as template matching with the input image, as shown in Figure 2.
+Note that the sum $$\sum_{i=1}^{3072} w_{ki} x_i$$ is maximized if $w_{ki} = x_i,\ 1\le i\le 3072$ under the contraint that both of these are unit vectors. Hence this lends itself to the interpretation that for each category $k$, the weights $w_{ki}, 1\le i\le 3072$ are a template or filter for the category $k$ object, which looks for images that resemble the filter itself. Hence the classification operation can be interpreted as template matching with the input image, as shown in Figure 2.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/cnn3.png)
 
