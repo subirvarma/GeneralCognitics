@@ -39,7 +39,7 @@ Diffusion Models are trained by running the process just described in the opposi
 
 *Figure 3*
 
-Given a set of image samples $(X_1,...,X_N)$ we would like to estimate their Probability Density functions $q(X)$, so that we can sample from it and thereby generate new images. However, in general $q(X)$ is a very complex function, and a simpler problem is to define a Latent Variable $Z$ that encodes semantically useful information about $X$ and then estimate $q(X/Z)$ with the hope that this will be a simpler function to estimate. The idea behind Latent Variables is illustrated in Figure 3: The LHS of the figure shows how new images can be generated in a two step process: First sample a Latent Variable $Z$ assuming that we know its distribution $q(Z)$ and then sample from $q(X/Z)$ to generate a new image. The RHS of the figure gives some intuition behind the concept of Latent Variables, it shows how the contents of an image of a human face are controlled by variables such as gender, hair color etc, and if these variables are specified, then the face generation problem becomes simpler.
+Given a set of image samples $(X_1,...,X_N)$ we would like to estimate their Probability Density functions $q(X)$, so that we can sample from it and thereby generate new images. However, in general $q(X)$ is a very complex function, and a simpler problem is to define a Latent Variable $Z$ that encodes semantically useful information about $X$ and then estimate $q(X\vert Z)$ with the hope that this will be a simpler function to estimate. The idea behind Latent Variables is illustrated in Figure 3: The LHS of the figure shows how new images can be generated in a two step process: First sample a Latent Variable $Z$ assuming that we know its distribution $q(Z)$ and then sample from $q(X\vert Z)$ to generate a new image. The RHS of the figure gives some intuition behind the concept of Latent Variables, it shows how the contents of an image of a human face are controlled by variables such as gender, hair color etc, and if these variables are specified, then the face generation problem becomes simpler.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/gen12.png)
 
@@ -47,11 +47,11 @@ Given a set of image samples $(X_1,...,X_N)$ we would like to estimate their Pro
 
 For another perspective into the problem, consider Figure 4 which shows the data distribution $q(X)$ which in general can a very complicated function (as a stand-in for an image distribution). However note that by using the Law of Total Probabilities, $q(X)$ can also written as
 $$q(X) = \int q(X,Z) dZ = \int q(X|Z) q(Z) dZ$$
-If $q(X|Z)$ is a simpler function that can be approximated by a Gaussian $p_\theta(X|Z) = p_\theta(\mu_\theta(Z),\sigma_\theta(Z))$ then
+If $q(X\vert Z)$ is a simpler function that can be approximated by a Gaussian $p_\theta(X\vert Z) = p_\theta(\mu_\theta(Z),\sigma_\theta(Z))$ then
 $$q(X) \approx \int p_\theta(\mu_\theta,\sigma_\theta) q(Z) dZ$$
 Thus a complex $q(X)$ can be built by using a number of of these Gaussians super-imposed togther and weighted by the distribution $q(Z)$ as shown in Figure 4. This is somewhat analogous to approximating a complex function by its Fourier Transform co-efficients which act as weights for simple sinusoidal functions.
 
-We now show how to obtain the approximations $p_\theta(X/Z)$ by solving an optimization problem.
+We now show how to obtain the approximations $p_\theta(X\vert Z)$ by solving an optimization problem.
 
 Evidence Lower Bound or ELBO is a useful technique from Bayesian Statistics, that has found use in Neural Network modeling in recent years. It works by converting the problem of estimating an unknown probability distribution into an optimization problem, which can then be solved using Neural Networks.
 
@@ -59,20 +59,22 @@ Evidence Lower Bound or ELBO is a useful technique from Bayesian Statistics, tha
 
 *Figure 5*
 
-Consider the following problem: Given two random variables $X$ and $Z$, the conditional probabilities $q(Z/X)$ and $q(Z)$ are known, and we are asked to invert the conditional probability and thus compute $q(X/Z)$. For example $X$ may be an image so that $Z$ is the Latent Variable representation of the image. In this case the problem can be formulated as: We know how to get the latent representation from the image, but we don't know how to convert a latent representation back into an image. 
+Consider the following problem: Given two random variables $X$ and $Z$, the conditional probabilities $q(Z\vert X)$ and $q(Z)$ are known, and we are asked to invert the conditional probability and thus compute $q(X\vert Z)$. For example $X$ may be an image so that $Z$ is the Latent Variable representation of the image. In this case the problem can be formulated as: We know how to get the latent representation from the image, but we don't know how to convert a latent representation back into an image. 
 
 The most straightforward way of inverting the conditional probability is by means of Bayes Theorem, which states
+
 $$q(X|Z) = {q(Z|X)q(x)\over{\sum_u q(Z|U)q(U)}}$$
+
 However this formula is very difficult to compute because the sum in the denominator is often intractable. In order to solve this problem using Neural Networks, we have to turn this into an optimization problem. This is done by means of a technique called ELBO (Evidence Lower Bound) also known as VLB (Variational Lower Bound), which works as follows:
-Lets assume that we can approximate $q(X|Z)$ by another (parametrized) distribution $p_\theta(X|Z)$. In order to find the best $p_\theta(X|Z)$, we can try to minimize the "distance" between $p_\theta(X|Z)$ and $q(X|Z)$. A measure of distance between probability distributions is the Kullback-Leibler Divergence or KL Divergence. The KL Divergence between probability distributions $f(X)$ and $g(X)$ is defined as:
+Lets assume that we can approximate $q(X\vert Z)$ by another (parametrized) distribution $p_\theta(X\vert Z)$. In order to find the best $p_\theta(X\vert Z)$, we can try to minimize the "distance" between $p_\theta(X\vert Z)$ and $q(X\vert Z)$. A measure of distance between probability distributions is the Kullback-Leibler Divergence or KL Divergence. The KL Divergence between probability distributions $f(X)$ and $g(X)$ is defined as:
 
 $$D_{KL}(f(X), g(X)) = \sum f(X)\log{f(X)\over g(X)}$$
 
-Substituting $f(X) = q(X/Z)$ and $g(X) = p_\theta(X/Z)$, and making use of the Law of Conditional Probabilities, it can be shown that
+Substituting $f(X) = q(X\vert Z)$ and $g(X) = p_\theta(X\vert Z)$, and making use of the Law of Conditional Probabilities, it can be shown that
 
 $$D_{KL}(q(X|Z), p_\theta(X|Z)) = \log q(X) - \sum_Z q(Z|X)\log{ p_\theta(X,Z)\over q(Z|X)}$$
 
-Hence in order to minimize $D_{KL}(q(X/Z), p_\theta(X/Z))$, we have to maximize $\sum_Z q(Z/X)\log{ p_\theta(X,Z)\over q(Z/X)}$, or minimize $\sum_Z q(Z/X)\log{q(Z/X)\over p_\theta(X,Z)}$. We will refer to the latter quantity as the ELBO or VLB, i.e.,
+Hence in order to minimize $D_{KL}(q(X\vert Z), p_\theta(X\vert Z))$, we have to maximize $\sum_Z q(Z\vert X)\log{ p_\theta(X,Z)\over q(Z\vert X)}$, or minimize $\sum_Z q(Z\vert X)\log{q(Z\vert X)\over p_\theta(X,Z)}$. We will refer to the latter quantity as the ELBO or VLB, i.e.,
 
 $$ELBO = \sum_Z q(Z|X)\log{q(Z|X)\over p_\theta(X,Z)} \quad\quad\quad (1)$$
 
@@ -80,11 +82,11 @@ $$ELBO = \sum_Z q(Z|X)\log{q(Z|X)\over p_\theta(X,Z)} \quad\quad\quad (1)$$
 
 *Figure 6*
 
-Since  by definition $D_{KL}(q(X|Z), p_\theta(X|Z)) \ge 0$, it follows that
+Since  by definition $D_{KL}(q(X\vert Z), p_\theta(X\vert Z)) \ge 0$, it follows that
 $$\log q(X) \ge ELBO$$
-i.e., the ELBO serves as an approximation to the true distribution $q(X)$, with the difference betwen the two being equal to the KL Divergence $D_{KL}(q(X|Z), p_\theta(X/Z))$ as illustrated in Figure 6. 
+i.e., the ELBO serves as an approximation to the true distribution $q(X)$, with the difference betwen the two being equal to the KL Divergence $D_{KL}(q(X\vert Z), p_\theta(X\vert Z))$ as illustrated in Figure 6. 
 
-**Note:** In Diffusion Approximations the distribution $q(Z/X)$ is known (as explained in the next section), however this is not the case in other Latent Variable models such as VAEs. In that case $q(Z/X)$ is also approximated by a parametrized distribution $q_\phi(Z/X)$, which is assumed to Gaussian as well. Thus building a VAE model requires a joint optimization of the parameters $(\theta,\phi)$.
+**Note:** In Diffusion Approximations the distribution $q(Z\vert X)$ is known (as explained in the next section), however this is not the case in other Latent Variable models such as VAEs. In that case $q(Z\vert X)$ is also approximated by a parametrized distribution $q_\phi(Z\vert X)$, which is assumed to Gaussian as well. Thus building a VAE model requires a joint optimization of the parameters $(\theta,\phi)$.
 
 Hence even though we don't have access to the true distribution $q(X)$, we can approximate it using the ELBO, with the parameters $\theta$ (or $\theta,\phi$) being chosen so as to minimize the difference between the two.
 
@@ -99,21 +101,29 @@ The ELBO serves as a convenient optimization measure that can be used to train a
 **Note:** We will use the notation $N(X; \mu,\Sigma)$ for a mutivariate Gaussian (or Normal) Distribution $X$ with mean vector $\mu = (\mu_1,...,\mu_N)$ and covariance matrix $\Sigma$ (please see the Appendix at the end of this chapter for a short introduction to multivariate Gaussian Distributions). For the special case when the covariance matrix is a diagonal with a common variance $\sigma^2$, this reduces to $N(X; \mu,\sigma^2 I)$ where $I$ is a $N\times N$ identity matrix.
 
 **Note:** Given a Gaussian Distribution $N(X;\mu,\sigma^2 I)$, it is possible to generate a sample from it by using the **Re-Parametrization Trick**, which states that a sample $X$ can be expressed as
+
 $$X = \mu + \sigma \epsilon$$
+
 where the random vector $\epsilon$ is distributed as per the Unit Gaussian Distribution $N(0,I)$.
 
 The setup used in Diffusion Models is shown in Figure 7. We start with an image $X_0 = (x_{01},...,x_{0N})$, shown on the left. Note that even though $X_0$ is a 3D tensor, for this discussion we will flatten it out into a 1D vector. $X_0$ is distributed according to some unknown distribution $q(X_0)$ to which we don't have access. 
 
 We gradually add small amounts of Gaussian Noise to $X_0$ in $T$ steps (typically T = 1000 in large models), such that at the $t^{th}$ step the resulting conditional distribution is given by the Gaussian
+
 $$q(X_t|X_{t-1}) = N(X_t; \sqrt{1-\beta_t} X_{t-1}, \beta_t I) $$
+
 At this step the 'signal' $X_{t-1}$ in the image is suppressed by the factor $\sqrt{1-\beta_t}$, while an amount of noise $\beta_t$ is added to it, i.e., the image gets more and more blurry as $t$ increases. The sequence $\beta_i$ is chosen such that $\beta_1 < \beta_2 < ... < \beta_T < 1$, i.e., the amount of noise being added increases monotonically, which is known as the Variance Schedule. This can be chosen to be linear, quadratic, cosine etc or even a learnt sequence.
 
-By using the Re-parametrization Trick, we can sample $X_t$ from the distribution $q(X_t|X_{t-1})$
+By using the Re-parametrization Trick, we can sample $X_t$ from the distribution $q(X_t\vert X_{t-1})$
+
 $$X_t = \sqrt{1-\beta_t}X_{t-1} + \sqrt{\beta_t}\epsilon_{t-1} \quad\quad\quad (2)$$
+
 where $\epsilon_{t-1}$ is sampled from the N Dimensional Gaussian distribution $N(0,I)$. From this equation it is clear that the sequence $X_t, 0\le t\le T$ forms a Markov Chain. This is also referred to as a Discrete Time Diffusion, and later we will see that if T is kept fixed while increasing the number of stages in the model, then there is a continuous time limit to Equation (2) as $T\rightarrow\infty$, resulting in $X_t$ converging to a continuous time Diffusion Process (in the index t) driven by a Weiner Process. 
 
 Since Equation (2) is a recursion in the $X_t$ sequence, we can show that the $X_t$ sample can also be expressed in terms of the starting image vector $X_0$ as follows:
+
 $$X_t = \sqrt{{\gamma_t}} X_0 + \sqrt{(1 - {\gamma_t})}\epsilon \quad\quad\quad (3)$$
+
 where $\epsilon$ is sampled from $N(0,I)$, and $$\gamma_t = \prod_{i=1}^t \alpha_i$$ where $\alpha_t = 1 - \beta_t$. This equation allows us to get a sample of $X_t$ at the $t^{th}$ stage directly from original $X_0$ sample. This property is very useful when training the Neural Network since it allows us to optimize random terms of the Loss Function as we will see shortly. 
 
 Note that since the $\gamma_t$ sequence is a product of factors that are less than one, it follows that $\gamma_1 \ge\gamma_2\ge ... \ge\gamma_T$. These sequences are chosen so that $\gamma_t\rightarrow 0$ as $t$ increases, and from equation (3) this implies that the distribution of $X_T$ approaches $N(0,I)$ which is also referred to as "white" noise. This is illustrated in Figure 8 which shows the distribution of a single pixel $x$, starting from the unknown distribution $q(x_0)$ on the left and ending up as the Standard Gaussian on the right.
@@ -128,11 +138,13 @@ Note that since the $\gamma_t$ sequence is a product of factors that are less th
 
 *Figure 9*
 
-In order to generate an image while starting from Gaussian noise, we need to reverse the process shown in Figure 7, i.e., we start with the white noise image $X_T$ sampled from Gaussian Noise $N(0,I)$ and then gradually "de-noise" this image as we move from right to left, as shown in Figure 9. In order to do so we need knowledge of the reverse distribution $q(X_{t-1}|X_t)$ which in general is an intractable problem. However we can try to approximate the reverse distribution with a parametrized distribution $p_\theta$ such that $p_\theta(X_{t-1}|X_t)\approx q(X_{t-1}|X_t)$. We will further assume that $p_\theta(X_{t-1}|X_t)$ has a Gaussian distribution given by
-$$p_\theta(X_{t-1}|X_t) = N(X_{t-1};\mu_\theta(X_t,t),\sigma_\theta (X_t,t)I)\quad\quad\quad (4)$$
-where $\mu_\theta(X_t,t)$ and $\sigma_\theta(X_t,t)$ are complex and unknown functions parametrized by $\theta$. The Gaussian approximation to $q(X_{t-1}|X_t)$ works well for the case when the per stage added noise $\beta_t$ in the forward direction is sufficiently small.
+In order to generate an image while starting from Gaussian noise, we need to reverse the process shown in Figure 7, i.e., we start with the white noise image $X_T$ sampled from Gaussian Noise $N(0,I)$ and then gradually "de-noise" this image as we move from right to left, as shown in Figure 9. In order to do so we need knowledge of the reverse distribution $q(X_{t-1}\vert X_t)$ which in general is an intractable problem. However we can try to approximate the reverse distribution with a parametrized distribution $p_\theta$ such that $p_\theta(X_{t-1}\vert X_t)\approx q(X_{t-1}\vert X_t)$. We will further assume that $p_\theta(X_{t-1}\vert X_t)$ has a Gaussian distribution given by
 
-If the distributions $p_\theta$ were known, then it is possible to recover the distribution of the original image as illustrated in Figure 10. 
+$$p_\theta(X_{t-1}|X_t) = N(X_{t-1};\mu_\theta(X_t,t),\sigma_\theta (X_t,t)I)\quad\quad\quad (4)$$
+
+where $\mu_\theta(X_t,t)$ and $\sigma_\theta(X_t,t)$ are complex and unknown functions parametrized by $\theta$. The Gaussian approximation to $q(X_{t-1}\vert X_t)$ works well for the case when the per stage added noise $\beta_t$ in the forward direction is sufficiently small.
+
+If the distributions $p_\theta$ were known, then it is possible to recover the distribution of the original image as illustrated in Figure 10.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/gen10.png)
 
@@ -140,13 +152,15 @@ If the distributions $p_\theta$ were known, then it is possible to recover the d
 
 ### Optimization Objective
 
-Under the Gaussian asumption, the problem of finding the distributions $p_\theta(X_{t-1}|X_t)$ which best approximate $q(X_{t-1}|X_t)$ reduces to finding the parametrized functions $\mu_\theta$ and $\sigma_\theta$.
+Under the Gaussian asumption, the problem of finding the distributions $p_\theta(X_{t-1}\vert X_t)$ which best approximate $q(X_{t-1}\vert X_t)$ reduces to finding the parametrized functions $\mu_\theta$ and $\sigma_\theta$.
 In order to find the optimum set of parameters, we need to find a Loss Function whose minimization gives us these optimum parameters. Note that for a single stage this problem formulation falls within the purview of the ELBO technique. This can be extended across all the $T$ stages in the model as follows: Define the joint probabilities
+
 $$p_\theta(X_{0:T}) = p(X_T)\prod_{t=1}^T p_\theta(X_{t-1}|X_t)$$
 
 $$q(X_{1:T}|X_0) = \prod_{t=1}^T q(X_t|X_{t-1})$$
 
 The ELBO optimization objective (see equation (1)) can be formulated as minimization of
+
 $$L_{ELBO} = E_{q(X_{0:T})}{\log q(X_{1:T}|X_0) \over{p_\theta(X_{0:T})}  }$$
 
 After some algebraic manipulations and making use of the Law of Conditional Probabilities, this expression can be re-written as
@@ -165,24 +179,37 @@ Defining
 $L_{ELBO}$ can be written as
 $$L_{ELBO} = L_T + L_{T-1} + ... +\ L_0$$
 
-In this expression the $L_T$ term can be ignored for optimization purposes since $q(X_T|X_0)$ being equal to $N(0,I)$ is not a function of $\theta$ and neither is $p_\theta(X_T)$. 
-Even though $q(X_{t-1}|X_t)$ is an intractable distribution, it can be shown that $q(X_{t-1}|X_t,X_0)$ is actually a Gaussian distribution which makes the loss terms $L_t, 1\le t\le T-1$ computable. After some algebraic manipulations The parameters of this distribution can be computed as follows:
+In this expression the $L_T$ term can be ignored for optimization purposes since $q(X_T\vert X_0)$ being equal to $N(0,I)$ is not a function of $\theta$ and neither is $p_\theta(X_T)$. 
+Even though $q(X_{t-1}\vert X_t)$ is an intractable distribution, it can be shown that $q(X_{t-1}\vert X_t,X_0)$ is actually a Gaussian distribution which makes the loss terms $L_t, 1\le t\le T-1$ computable. After some algebraic manipulations The parameters of this distribution can be computed as follows:
+
 $$q(X_{t-1}|X_t,X_0) = N(X_{t-1}; {\tilde\mu}(X_t,X_0),{\tilde\beta_t} I) \quad\quad\quad (5)$$
+
 where
+
 $${\tilde\beta_t} = {{1-\gamma_{t-1}}\over{1-\gamma_t})}\beta_t$$
+
 and 
+
 $${\tilde\mu}(X_t,X_0) = {\sqrt{\alpha_t}(1-\gamma_{t-1})\over{1-\gamma_t }}X_t + {\sqrt{\gamma_{t-1}}\beta_t\over{1-\gamma_t }}X_0 \quad\quad\quad (6)$$
 
-Note that we are trying to approximate $q(X_t|X_{t+1},X_0)$ by $p_\theta(X_t|X_{t+1})$ by minimizing $L_t = D_{KL}[q(X_t|X_{t+1},X_0)||p_\theta(X_t|X_{t+1})], 1\le t\le T-1$. Using the fact that $q(X_{t-1}|X_t,X_0)$ has a Normal Distribution given by equation (5) and $p_\theta(X_t|X_{t+1})$ also has a Normal Distribution given by equation (4), and plugging them into the formula for $D_{KL}$ (see [Wikipedia article on Multi-Variate Normal Distributions](https://en.wikipedia.org/wiki/Multivariate_normal_distribution)), results in the following:
+Note that we are trying to approximate $q(X_t\vert X_{t+1},X_0)$ by $p_\theta(X_t\vert X_{t+1})$ by minimizing $L_t = D_{KL}[q(X_t\vert X_{t+1},X_0)||p_\theta(X_t\vert X_{t+1})], 1\le t\le T-1$. Using the fact that $q(X_{t-1}\vert X_t,X_0)$ has a Normal Distribution given by equation (5) and $p_\theta(X_t\vert X_{t+1})$ also has a Normal Distribution given by equation (4), and plugging them into the formula for $D_{KL}$ (see [Wikipedia article on Multi-Variate Normal Distributions](https://en.wikipedia.org/wiki/Multivariate_normal_distribution)), results in the following:
+
 $$L_t = E \left[{1\over{2||\Sigma_\theta(X_t,t)||^2}} ||\tilde\mu_t(X_t,X_0) - \mu_\theta(X_t,t)||^2 \right]\quad 1\le t\le T-1 \quad\quad\quad (7)$$
+
 According to equation (7), we should design our Neural Network to learn $\mu_\theta$ while using $\tilde\mu_t$ as the ground truth. 
 
 However [Ho et.al.](https://arxiv.org/abs/2006.11239) discovered that the system performance improves if the Neural Network is trained to learn the Noise Level $\epsilon_t$ instead. This can be done by expressing $X_0$ in terms of $X_t$ and $\epsilon$ by using equation (3), so that
+
 $$X_0 = {1\over\sqrt{\gamma_t}}(X_t - \sqrt{1-\gamma_t}\epsilon_t)\quad\quad\quad (8)$$
+
 Substituting $X_0$ into equation (6), results in
+
 $${\tilde\mu}(X_t,X_0) = {1\over\sqrt\alpha_t} \left[X_t - {\beta_t\over{\sqrt{1-\gamma_t}}}\epsilon_t\right]$$
+
 Note that in this equation $\epsilon_t$ is the noise that is added to the image $X_0$ during training in order to get $X_t$. We will get an estimate $\epsilon_\theta(X_t,t)$ of $\epsilon_t$ using a Neural Network, and plugging this back into equation (8) results in an estimate $\mu_\theta(X_t,t)$ given by
+
 $$\mu_\theta(X_t,t) = {1\over\sqrt\alpha_t}\left[X_t - {\beta_t\over{\sqrt{1-\gamma_t}}}\epsilon_\theta(x_t,t)\right]$$
+
 Substituting these equations back into (7), we get
 
 $$L_t = E \left[{1\over{2||\Sigma_\theta(X_t,t)||^2}} ||{1\over\sqrt\alpha_t}(X_t - {\beta_t\over{\sqrt{1-\gamma_t}}}\epsilon_t) - {1\over\sqrt\alpha_t}(X_t - {\beta_t\over{\sqrt{1-\gamma_t}}}{\epsilon_\theta}(X_t,t))||^2\right]$$
@@ -192,6 +219,7 @@ $$L_t = E \left[{1\over{2||\Sigma_\theta(X_t,t)||^2}} ||{1\over\sqrt\alpha_t}(X_
  ||\epsilon_t - \epsilon_\theta(\sqrt\gamma_t X_0 + \sqrt{1-\gamma_t}\epsilon_t,t)||^2 \right]$$
 
 Ho. et.al. also discovered that training the diffusion model is easier if the weighting term is ignored, so that the optimization problem becomes
+
 $$L_t^{simple} = E\left[||\epsilon_t - \epsilon_\theta(\sqrt\gamma_t X_0 + \sqrt{1-\gamma_t}\epsilon_t,t)||^2 \right]$$
 
 ### The DDPM Algorithm
