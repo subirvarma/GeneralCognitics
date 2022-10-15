@@ -19,7 +19,7 @@ Diffusion Models have been coupled with Large Language Models (LLMs) to create i
 
 Our objective in this chapter is to give a rigorous description of Diffusion Models, including the underlying mathematical framework, which makes this chapter more theoretical than the preceding ones. 
 
-### Overview
+## Overview
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/gen1.png)
 
@@ -33,7 +33,7 @@ Diffusion Models are trained by running the process just described in the opposi
 
 *Figure 2*
 
-### Latent Variables and the ELBO Bound
+## Latent Variables and the ELBO Bound
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/gen11.png)
 
@@ -96,7 +96,7 @@ Hence even though we don't have access to the true distribution $q(X)$, we can a
 
 The ELBO serves as a convenient optimization measure that can be used to train a Neural Network. To make the problem more tractable, it is also assumed that the unknown distribution $p_\theta$ belongs to the family of Gaussian distributions $N(\mu_\theta,\sigma_\theta)$, which reduces the problem to that of estimating its mean $\mu_\theta$ and variance $\sigma_\theta$. These quantities can be estimated by using a DLN with parameters $\theta$, with the ELBO serving as a Loss Function to optimize the network. This optimization procedure underlies Diffusion Models.
 
-### Forward Diffusion Process
+## Forward Diffusion Process
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/gen3.png)
 
@@ -136,7 +136,7 @@ Note that since the $\gamma_t$ sequence is a product of factors that are less th
 
 *Figure 8*
 
-### Reverse Diffusion Process
+## Reverse Diffusion Process
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/gen7.png)
 
@@ -154,7 +154,7 @@ If the distributions $p_\theta$ were known, then it is possible to recover the d
 
 *Figure 10*
 
-### Optimization Objective
+## Optimization Objective
 
 Under the Gaussian asumption, the problem of finding the distributions $p_\theta(X_{t-1}\vert X_t)$ which best approximate $q(X_{t-1}\vert X_t)$ reduces to finding the parametrized functions $\mu_\theta$ and $\sigma_\theta$.
 In order to find the optimum set of parameters, we need to find a Loss Function whose minimization gives us these optimum parameters. Note that for a single stage this problem formulation falls within the purview of the ELBO technique. This can be extended across all the $T$ stages in the model as follows: Define the joint probabilities
@@ -233,7 +233,7 @@ Ho. et.al. also discovered that training the diffusion model is easier if the we
 
 $$L_t^{simple} = E\left[||\epsilon_t - \epsilon_\theta(\sqrt\gamma_t X_0 + \sqrt{1-\gamma_t}\epsilon_t,t)||^2 \right]$$
 
-### The DDPM Algorithm
+## The DDPM Algorithm
 
 We collect all the results from the previous sections and put them together in the DDPM algorithm described below.
 
@@ -259,7 +259,7 @@ $$\mu_\theta(X_t,t) = {1\over\sqrt\alpha_t}\left[X_t - {\beta_t\over{\sqrt{1-\ga
 
 Note that images are generated in a probabilistic manner starting from the initial Gaussian noise $X_T$, so that the same noise sample can generate different images on successive runs (which accounts for the P in DDPM).
 
-### The Neural Network
+## The Neural Network
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/gen6.png)
 
@@ -337,7 +337,7 @@ Note that changing the parameter $\sigma$ results in different generative proces
    
    - When $\sigma_t = 0,\forall t$ , the forward process becomes deterministic given $X_{t-1}$ and $X_0$, except for $t=1$. The generative process is now called an implicit probabilistric model where samples are generated from the latent variable $X_T$ with a fixed procedure.
 
-### DDIM Accelerated Sampling Process
+## DDIM Accelerated Sampling Process
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/gen14.png)
 
@@ -374,7 +374,7 @@ The generative process now samples latent variables according to the reversed $\
 
 Ho et.al. made the following interesting observation in their DDPM paper: During the inference process, we can regard the process of generating progressively better images from $X_T$ to $X_0$ in the following two ways:
 
-   - We can measure the image Distortion at stage $t$, which is defined as ${\sqrt{|| X_0 - {\hat X_0}||^2\over D}$, where ${\hat X_0}$ is the prediction that the system makes for $X_0$, given $X_t$. This will give us some idea of how the predicted image quality changes with $t$ as the inference proceeds. This is graphed in the LHS of Figure 15. 
+   - We can measure the image Distortion at stage $t$, which is defined as $${\sqrt{|| X_0 - {\hat X_0}||^2\over D}$$, where ${\hat X_0}$ is the prediction that the system makes for $X_0$, given $X_t$. This will give us some idea of how the predicted image quality changes with $t$ as the inference proceeds. This is graphed in the LHS of Figure 15. 
    
    - We can regard the process of predicting $X_0$ as an Information Theoretic problem, with each $X_t$ providing information on how to generate $X_0$. As we incorporate more and more information into ${\hat X_0}$, it gradually converges to $X_0$. This added information is referred to as the Rate, and is graphed in the middle graph of Figure **gen16**.
    
