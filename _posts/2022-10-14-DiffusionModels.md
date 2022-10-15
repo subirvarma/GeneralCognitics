@@ -376,7 +376,7 @@ Ho et.al. made the following interesting observation in their DDPM paper: During
 
    - We can measure the image Distortion at stage $t$, which is defined as 
    
-   $${ \sqrt{ || X_0 - {\hat X_0}||^2}\over D }$$, 
+   $${ \sqrt{ \left\vert X_0 - {\hat X_0}\right\vert^2}\over D }$$, 
    
      where ${\hat X_0}$ is the prediction that the system makes for $X_0$, given $X_t$. This will give us some idea of how the predicted image quality changes with $t$ as the inference proceeds. This is graphed in the LHS of Figure 15. 
    
