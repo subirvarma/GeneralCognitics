@@ -333,9 +333,8 @@ Note that changing the parameter $\sigma$ results in different generative proces
    - When
 
    $$\sigma_t = \sqrt{ {1-\alpha_{t-1}\over{1-\alpha_t}} }\sqrt{ 1-{\alpha_t\over\alpha_{t-1}} }, \forall t$$
+        then the forward process becomes Markovian and the generative process becomes DDPM.
    
-     then the forward process becomes Markovian and the generative process becomes DDPM.
-     
    - When $\sigma_t = 0,\forall t$ , the forward process becomes deterministic given $X_{t-1}$ and $X_0$, except for $t=1$. The generative process is now called an implicit probabilistric model where samples are generated from the latent variable $X_T$ with a fixed procedure.
 
 ### DDIM Accelerated Sampling Process
@@ -348,17 +347,21 @@ Song et.al. made use of the fact that the $X_t$ sequence need not be Markov and 
 
 As Part (a) of the figure shows, we can still use the same training procedure as DDPM, since DDPM and DDIM share the same Loss Function.
 
-The Generative Procedure however is different. As shown in Part (b) of the figure, instead of doing Generation on all T steps, DDIM chooses an increasing sub-sequence $\tau=[\tau_1,\tau_2,...,\tau_S]$ of the forward sequence $[1,...,T]$ of length S with $\tau_S = T$, and then does generation only over this sub-sequence (shown using the blue arrows in the figure, assuming that $2$ and $4$ belong to $\tau$. Clearly $X(\tau_1),...,X(\tau_S)$ don't form a Markov Chain, but as long as the forward process $q_\sigma(X_{\tau_{i-1}}|X_{\tau_i},X_0)$ satisfies equation (9), i.e.,
+The Generative Procedure however is different. As shown in Part (b) of the figure, instead of doing Generation on all T steps, DDIM chooses an increasing sub-sequence $\tau=[\tau_1,\tau_2,...,\tau_S]$ of the forward sequence $[1,...,T]$ of length S with $\tau_S = T$, and then does generation only over this sub-sequence (shown using the blue arrows in the figure, assuming that $2$ and $4$ belong to $\tau$. Clearly $X(\tau_1),...,X(\tau_S)$ don't form a Markov Chain, but as long as the forward process $q_\sigma(X_{\tau_{i-1}}\vert X_{\tau_i},X_0)$ satisfies equation (9), i.e.,
 
 $$q_\sigma(X_{\tau_{i-1}}|X_{\tau_i},X_0) = N(\sqrt{\alpha_{\tau_{i-1}}}X_0 + \sqrt{1-\alpha_{\tau_{i-1}}-{\sigma_{\tau_i}}^2}.
                             {X_{\tau_i} - \sqrt{\alpha_{\tau_i}}X_0\over{\sqrt{1-\alpha_{\tau_i}}}}, {\sigma_{\tau_i}}^2 \epsilon)$$
 
 where the coefficients $\sigma$ are chosen so that
+
 $$q_{\sigma,\tau}(X_{\tau_i}|X_0) = N\left[\sqrt{\alpha_{\tau_i}}X_0, (1 - \alpha_{\tau_i})\epsilon\right],\quad \forall i\in S$$
 
 The reverse process conditionals are given by
+
 $${p_\theta}^{(\tau_i)}({X_{\tau_{i-1}}|X_{\tau_i}}) = q_{\sigma,\tau}(X_{\tau_{i-1}}|X_{\tau_i},{\hat X_0})$$
+
 where
+
 $${\hat X_0} = {( X_{\tau_i} - \sqrt{1-\alpha_{\tau_i}}.{\epsilon_\theta}^{(\tau_i)}(X_{\tau_i}))\over{\sqrt{\alpha_{\tau_i}}}}$$
 
 The generative process now samples latent variables according to the reversed $\tau$, which is referred to as the *sampling trajectory*. If the length of the sampling trajectory $S$ is much smaller than $T$, then it leads to significant speed-ups in the computational efficiency. DDIM is able to produce samples with quality comparable to 1000 step models within 20 to 100 steps. Indeed Song et.al. showed that only 20 steps are already very similar to the ones generated with 1000 steps in terms of high level features, with only minor diffferences in details.
