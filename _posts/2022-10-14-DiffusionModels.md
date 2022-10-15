@@ -180,7 +180,7 @@ Note that in this equation $\epsilon_t$ is the noise that is added to the image 
 $$\mu_\theta(X_t,t) = {1\over\sqrt\alpha_t}\left[X_t - {\beta_t\over{\sqrt{1-\gamma_t}}}\epsilon_\theta(x_t,t)\right]$$
 Substituting these equations back into (7), we get
 
-$$L_t = E \left[{1\over{2||\Sigma_\theta(X_t,t)||^2}} ||{1\over\sqrt\alpha_t}(X_t - {{\beta_t}\over{\sqrt{1-\gamma_t}}}\epsilon_t) - {1\over\sqrt\alpha_t}(X_t - {{\beta_t}\over{\sqrt{1-\gamma_t}}}{\epsilon_\theta}(X_t,t))||^2\right]$$
+$$L_t = E \left[{1\over{2||\Sigma_\theta(X_t,t)||^2}} ||{1\over\sqrt\alpha_t}(X_t - {\beta_t\over{\sqrt{1-\gamma_t}}}\epsilon_t) - {1\over\sqrt\alpha_t}(X_t - {\beta_t\over{\sqrt{1-\gamma_t}}}{\epsilon_\theta}(X_t,t))||^2\right]$$
 
  $$= E\left[{\beta_t^2\over{2\alpha_t(1-\gamma_t)||\Sigma_\theta(X_t,t)||^2}} ||\epsilon_t - {\epsilon_\theta}(X_t,t)||^2 \right]$$
  $$= E \left[{\beta_t^2\over{2\alpha_t(1-\gamma_t)||\Sigma_\theta(X_t,t)||^2}} 
