@@ -1,5 +1,7 @@
-
-# Image Generation Using Diffusion Models
+---
+layout: default
+title: "Image Generation Using Diffusion Models"
+---
 
 ## Introduction
 
