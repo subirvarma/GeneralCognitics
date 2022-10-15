@@ -21,7 +21,7 @@ Diffusion models were first described by [Sohl-Dickstein et.al.](https://arxiv.o
 
 Diffusion Models have been coupled with Large Language Models (LLMs) to create images from captions, the two most well known models in this category being [DALL-E-2 from OpenAI](https://cdn.openai.com/papers/dall-e-2.pdf) and [Imagen from Google](https://arxiv.org/abs/2205.11487). A recent entry into this field is Solid Diffusion from researchers at the University of Munich [Rombach, Ommer et.al](https://arxiv.org/abs/2112.10752) which has significantly reduces the computational load required to generate images. These systems are able to create images whose quality (and creativity) are superior to those from GANs, and as a result attention in Generative Modeling has shifted to Diffusion Models.
 
-Our objective in this chapter is to give a rigorous description of Diffusion Models, including the underlying mathematical framework, which makes this chapter more theoretical than the preceding ones. 
+Our objective in this blog post is to give a rigorous description of Diffusion Models, including the underlying mathematical framework. 
 
 ## Overview
 
@@ -31,7 +31,7 @@ Our objective in this chapter is to give a rigorous description of Diffusion Mod
 
 A high level view of Diffusion Models is shown in Figure 1. A fully trained model generates images by taking a Latent Variable consisting of random noise data ${\bf z}$ to the right of the figure, and gradually 'de-noises' it in multiple stages as shown by the dotted arrows moving from right to left (typically 1000 stages in large networks such as DALL-E-2). This is done by feeding the output of stage $t$ to stage $t-1$, until we get to the final stage resulting in the image ${\bf x_0}$. This is illustrated in Figure 2, with the middle row illustrating the de-noising process starting from random data in stage $T$, followed by partially re-constructed image at stage ${T\over 2}$ and the final image at stage $0$. 
 
-Diffusion Models are trained by running the process just described in the opposite direction, i.e., from left to right in Figure 1, as shown by the solid arrows. An image ${\bf x_0}$ from the training dataset is fed into stage 1 resulting in image ${\bf x_1}$. This stage as well as the following ones add small amounts of noise to the image, so it becomes progressively more and more blurry, until all that is left at state $T$ is pure noise (this is illustrated in the top row of Figure 2). Since we know precisely how much noise is being added in each stage, the DDPM algorithm works by training a DLN to predict the added noise level given the noisy image data as the input into the model. This optimization problem is posed as that of minimizing a convex regression loss, which is a much simpler problem to solve as compared to the minmax approach in GANs.
+Diffusion Models are trained by running the process just described in the opposite direction, i.e., from left to right in Figure 1, as shown by the solid arrows. An image ${\bf x_0}$ from the training dataset is fed into stage 1 resulting in image ${\bf x_1}$. This stage as well as the following ones add small amounts of noise to the image, so it becomes progressively more and more blurry, until all that is left at state $T$ is pure noise (this is illustrated in the top row of Figure 2). Since we know precisely how much noise is being added in each stage, the DDPM algorithm works by training a Neural Network to predict the added noise level given the noisy image data as the input into the model. This optimization problem is posed as that of minimizing a convex regression loss, which is a much simpler problem to solve as compared to the minmax approach in GANs.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/gen2.png)
 
@@ -106,7 +106,7 @@ The ELBO serves as a convenient optimization measure that can be used to train a
 
 *Figure 7*
 
-**Note:** We will use the notation $N(X; \mu,\Sigma)$ for a mutivariate Gaussian (or Normal) Distribution $X$ with mean vector $\mu = (\mu_1,...,\mu_N)$ and covariance matrix $\Sigma$ (please see the Appendix at the end of this chapter for a short introduction to multivariate Gaussian Distributions). For the special case when the covariance matrix is a diagonal with a common variance $\sigma^2$, this reduces to $N(X; \mu,\sigma^2 I)$ where $I$ is a $N\times N$ identity matrix.
+**Note:** We will use the notation $N(X; \mu,\Sigma)$ for a mutivariate Gaussian (or Normal) Distribution $X$ with mean vector $\mu = (\mu_1,...,\mu_N)$ and covariance matrix $\Sigma$ ([here](https://en.wikipedia.org/wiki/Multivariate_normal_distribution) is a a short introduction to multivariate Normal Distributions). For the special case when the covariance matrix is a diagonal with a common variance $\sigma^2$, this reduces to $N(X; \mu,\sigma^2 I)$ where $I$ is a $N\times N$ identity matrix.
 
 **Note:** Given a Gaussian Distribution $N(X;\mu,\sigma^2 I)$, it is possible to generate a sample from it by using the **Re-Parametrization Trick**, which states that a sample $X$ can be expressed as
 
@@ -130,7 +130,7 @@ where $\epsilon_{t-1}$ is sampled from the N Dimensional Gaussian distribution $
 
 Since Equation (2) is a recursion in the $X_t$ sequence, we can show that the $X_t$ sample can also be expressed in terms of the starting image vector $X_0$ as follows:
 
-$$X_t = \sqrt{{\gamma_t}} X_0 + \sqrt{(1 - {\gamma_t})}\epsilon \quad\quad\quad (3)$$
+$$X_t = \sqrt{\gamma_t} X_0 + \sqrt{1 - \gamma_t}\epsilon \quad\quad\quad (3)$$
 
 where $\epsilon$ is sampled from $N(0,I)$, and $$\gamma_t = \prod_{i=1}^t \alpha_i$$ where $\alpha_t = 1 - \beta_t$. This equation allows us to get a sample of $X_t$ at the $t^{th}$ stage directly from original $X_0$ sample. This property is very useful when training the Neural Network since it allows us to optimize random terms of the Loss Function as we will see shortly. 
 
