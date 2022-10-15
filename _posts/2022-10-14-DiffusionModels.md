@@ -3,6 +3,8 @@ layout: default
 title: "Image Generation Using Diffusion Models"
 ---
 
+# Image Generation Using Diffusion Models
+
 ## Introduction
 
 One of the important applications of Neural Networks has been image generation. Given a set of training samples $\{X_1,...,X_N\}$, the preferred approach to generating a new datapoint $X = (x_1,...,x_n)$ is to first estimate the distribution $p_\theta(X)$ that approximates the actual distribution $p(X)$ that the training samples come from (using Unsupervised Learning) and then sample from $p_\theta(X)$ to generate a new $X$. There are several ways in which this program can be put into practice:
