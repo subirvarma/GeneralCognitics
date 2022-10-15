@@ -84,7 +84,7 @@ $$D_{KL}(q(X|Z), p_\theta(X|Z)) = \log q(X) - \sum_Z q(Z|X)\log{ p_\theta(X,Z)\o
 
 Hence in order to minimize $D_{KL}(q(X\vert Z), p_\theta(X\vert Z))$, we have to maximize $\sum_Z q(Z\vert X)\log{ p_\theta(X,Z)\over q(Z\vert X)}$, or minimize $\sum_Z q(Z\vert X)\log{q(Z\vert X)\over p_\theta(X,Z)}$. We will refer to the latter quantity as the ELBO or VLB, i.e.,
 
-$$ELBO = \sum_Z q(Z|X)\log{q(Z|X)\over p_\theta(X,Z)} \quad\quad\quad (1)$$
+$$ELBO = \sum_Z q(Z|X)\log{q(Z|X)\over p_\theta(X,Z)} \quad\quad\quad\quad (1)$$
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/gen13.png)
 
