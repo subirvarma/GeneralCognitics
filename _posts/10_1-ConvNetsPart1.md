@@ -1,10 +1,9 @@
+---
+layout: default
+title: "Convolutional Neural Networks"
+---
 
-# Convolutional Neural Networks Part 1
-
-
-```python
-from ipypublish import nb_setup
-```
+# Convolutional Neural Networks
 
 ## Introduction
 
@@ -12,141 +11,78 @@ Convolutional Neural Networks or ConvNets were originally invented to do image p
 
 ## Why Dense Feed Forward Networks don't work well for Images
 
-We start by first considering the question: Why do Dense Feed Forward Networks, of the type described in Chapter **NNDeepLearning**, not work well when the input is an image? There are two main reasons:
+We start by first considering the question: Why do Dense Feed Forward Networks, not work well when the input is an image? There are two main reasons:
 
-- Consider a typical image consisting of $200 \times 200 \times 3$ pixels, which corresponds to 3 layers of $200 \times 200$ numbers, one for each of the colors Red, Green and Blue. Since the input consists of $120,000$ numbers, these many weights are needed for each node in the first Hidden Layer of a Dense Feed Forward Network. Given a typical Dense Network with say $100$ nodes in the first layer, this corresponds to 12 million weight parameters needed to describe just this layer. As we explained in Chapter **ImprovingModelGeneralization**, more parameters mean that more training data is required to prevent overfitting, which also leads to more time needed to train the model. On the other hand, when ConvNets are used to process images, it reduces the number of parameters by more than two orders of magnitude, thus improving accuracy and reducing training times. It has also been observed in practice that the accuracy of Dense Feed Forward Networks does not keep improving as more hidden layers are added, usually max-ing out at 4 to 5 layers. ConvNets however improve their accuracy with more hidden layers, indeed the most advanced ConvNet architecture features 150 layers!
+- Consider a typical image consisting of $200 \times 200 \times 3$ pixels, which corresponds to 3 layers of $200 \times 200$ numbers, one for each of the colors Red, Green and Blue. Since the input consists of $120,000$ numbers, these many weights are needed for each node in the first Hidden Layer of a Dense Feed Forward Network. Given a typical Dense Network with say $100$ nodes in the first layer, this corresponds to 12 million weight parameters needed to describe just this layer. More parameters mean that more training data is required to prevent overfitting, which also leads to more time needed to train the model. On the other hand, when ConvNets are used to process images, it reduces the number of parameters by more than two orders of magnitude, thus improving accuracy and reducing training times. It has also been observed in practice that the accuracy of Dense Feed Forward Networks does not keep improving as more hidden layers are added, usually max-ing out at 4 to 5 layers. ConvNets however improve their accuracy with more hidden layers, indeed the most advanced ConvNet architecture features 150 layers!
 
 - Processing by Dense Feed Forward Networks requires that the image data be transformed into a linear 1D vector. This results in a loss of structural information, such as correlation between pixel values that are in proximity of each other in 3D. ConvNets on the other hand are able to process the original 3D image data, which makes it easier for them to recognize shapes using template matching.
 
+![](https://subirvarma.github.io/GeneralCognitics/images/cnn3.png)
 
-```python
-#cnn3
-nb_setup.images_hconcat(["DL_images/cnn3.png"], width=600)
-```
+*Figure 1*
 
+In order to motivate the design of ConvNets, consider the case when the input consists of $32\times 32\times 3$ [CIFAR-10](https://en.wikipedia.org/wiki/CIFAR-10) [images](https://www.cs.toronto.edu/~kriz/cifar.html), which have to be classified into one of ten categories. Also assume that these images are processed by a Linear Neural Network Model of the type shown in Figure 1. The logits $a_k, i\le k\le 10$ in this model are given by
 
+$$a_k = \sum_{i=1}^{3072} w_{ki} x_i + b_k,\ \ 1\le k\le 10$$
 
+Note that the sum $\sum_{i=1}^{3072} w_{ki} x_i$ is maximized if $w_{ki} = x_i,\ 1\le i\le 3072$ under the contraint that both of these are unit vectors. Hence this lends itself to the interpretation that for each category $k$, the weights $w_{ki}, 1\le i\le 3072$ are a template or filter for the category $k$ object, which looks for images that resemble the filter itself. Hence the classification operation can be interpreted as template matching with the input image, as shown in Figure 2.
 
-![png](output_4_0.png)
+![](https://subirvarma.github.io/GeneralCognitics/images/cnn3.png)
 
+*Figure 2*
 
-
-
-In order to motivate the design of ConvNets, consider the case when the input consists of $32\times 32\times 3$ [CIFAR-10](https://en.wikipedia.org/wiki/CIFAR-10) [images](https://www.cs.toronto.edu/~kriz/cifar.html), which have to be classified into one of ten categories. Also assume that these images are processed by a Linear Model of the type discussed in Chapter **LinearLearningModels** (see Figure **cnn3**). The logits $a_k, i\le k\le 10$ in this model are given by
-$$
-a_k = \sum_{i=1}^{3072} w_{ki} x_i + b_k,\ \ 1\le k\le 10
-$$
-Note that the sum $\sum_{i=1}^{3072} w_{ki} x_i$ is maximized if $w_{ki} = x_i,\ 1\le i\le 3072$ under the contraint that both of these are unit vectors. Hence this lends itself to the interpretation that for each category $k$, the weights $w_{ki}, 1\le i\le 3072$ are a template or filter for the category $k$ object, which looks for images that resemble the filter itself. Hence the classification operation can be interpreted as template matching with the input image, as shown in Figure **cnn4**.
-
-
-
-
-```python
-#cnn4
-nb_setup.images_hconcat(["DL_images/cnn4.png"], width=600)
-```
-
-
-
-
-![png](output_6_0.png)
-
-
-
-This template matching interpretation of Linear Filtering naturally leads to the following idea for improving the system: Instead of using a template that tries to match the entire image, why not use smaller templates that try to match objects in smaller local portions of the image. This has the following benefits: (a) Smaller templates need a smaller filter size and thus fewer parameters, and (b) Even if the object being detected moves around the image, the same template or filter can still be used, thus leading to translational invariance. This is the main idea behind ConvNets as illustrated in Figure **cnn1**.
+This template matching interpretation of Linear Filtering naturally leads to the following idea for improving the system: Instead of using a template that tries to match the entire image, why not use smaller templates that try to match objects in smaller local portions of the image. This has the following benefits: (a) Smaller templates need a smaller filter size and thus fewer parameters, and (b) Even if the object being detected moves around the image, the same template or filter can still be used, thus leading to translational invariance. This is the main idea behind ConvNets as illustrated in Figure 3.
 
 
 
 ## Architecture of ConvNets
 
+![](https://subirvarma.github.io/GeneralCognitics/images/cnn3.png)
 
-```python
-#cnn1
-nb_setup.images_hconcat(["DL_images/cnn1.png"], width=600)
-```
+*Figure 3*
 
+The main architectural aspects of ConvNets are illustrated in parts (a) - (d) of Figure 3:
 
-
-
-![png](output_9_0.png)
-
-
-
-The main architectural aspects of ConvNets are illustrated in parts (a) - (d) of Figure **cnn1**:
-
--  Part (a) of Figure **cnn1** illustrates the difference between template matching in ConvNets vs Dense Feed Forward Networks as shown in Figure **cnn4**: ConvNets use a template (or filter) that is smaller than the size of the image in height and width, while the depths match. In the example shown in (a), a filter of size $5\times 5\times 3$ is used for an image of size $32\times 32\times 3$.
+-  Part (a) of Figure 3 illustrates the difference between template matching in ConvNets vs Dense Feed Forward Networks as shown in Figure 2: ConvNets use a template (or filter) that is smaller than the size of the image in height and width, while the depths match. In the example shown in (a), a filter of size $5\times 5\times 3$ is used for an image of size $32\times 32\times 3$.
 
 - Part (b) shows the template matching operation in ConvNets. As shown here, the matching is done locally, for possibly overlapping patches of the image. At each position of the filter, the template matching is done using the following equation to compute the pre-activation $a$ and activation $z$:
 
-\begin{equation}
-a = \sum_{i=1}^{75} w_{i} x_i + b,
-\end{equation}
+$$a = \sum_{i=1}^{75} w_{i} x_i + b,$$
 
-\begin{equation}
-z = f(a) \quad \quad (**tf**)
-\end{equation}
+$$z = f(a) \quad \quad (**tf**)$$
 
-- In this equation the pixel values $(x_1,...,x_{75})$, known as the Local Receptive Field, correspond to the local image patch of size $5\times 5\times 3$ and   changes as the filter is moved around (while the filter values $w_i$ and $b$ remain unchanged). Note that the filter now only has $5\times 5\times 3 + 1 = 76$ parameters, as opposed to the $32\times 32\times 3 + 1 = 3073$ parameters that were needed for the filter in Figure **cnn4**. Both the filter as well as the local image patch are 3-D tensors, though the multiplication in Equation (**tf**) uses a stretched out vectorized versions of the two tensors.
+- In this equation the pixel values $(x_1,...,x_{75})$, known as the Local Receptive Field, correspond to the local image patch of size $5\times 5\times 3$ and   changes as the filter is moved around (while the filter values $w_i$ and $b$ remain unchanged). Note that the filter now only has $5\times 5\times 3 + 1 = 76$ parameters, as opposed to the $32\times 32\times 3 + 1 = 3073$ parameters that were needed for the filter in Figure 2. Both the filter as well as the local image patch are 3-D tensors, though the multiplication in Equation (**tf**) uses a stretched out vectorized versions of the two tensors.
 
 - Part (c) of the figure shows the filter being moved across the image, and at each position Equation (**tf**) is used to compute a new value of $z$, and this generates a matrix of size $28\times 28$. This matrix is known as an Activation Map (also called a Feature Map). This operation of sliding the filter across the image, while computing the dot product (**tf**) at each position, is called a convolution. Using the same Filter for all the nodes in the Activation Map implies that all nodes in the Map are tuned to detect the same feature in the Input Layer, *only at different positions in the image*. This leads to the conclusion that ConvNets possess the property of Translational Invariance, i.e., they are able to detect objects irrespective of their location in the image.
 
-- Note that so far we have used a single filter which is only capable of detecting a single pattern in the input image. If we wish to detect multiple patterns, then we need multiple filters, each of which results in its own Activation Map, as shown in Part (d) of Figure **cnn1**. For example, Activation Map 1 may detect horizonal edges while Activation Map 2 detects vertical edges etc. As shown, a Hidden Layer in ConvNets consists of a stack of Activation Maps.
+- Note that so far we have used a single filter which is only capable of detecting a single pattern in the input image. If we wish to detect multiple patterns, then we need multiple filters, each of which results in its own Activation Map, as shown in Part (d) of Figure 3. For example, Activation Map 1 may detect horizonal edges while Activation Map 2 detects vertical edges etc. As shown, a Hidden Layer in ConvNets consists of a stack of Activation Maps.
 
 The filter in Dense Feed Forward Networks spans the entire input image, which means that it is looking for patterns that also span the entire image. However, real world images are built from smaller patterns that rarely span the entire image plane. Hence, by reducing the size of the filter, Convnets are better positioned to detect smaller shapes, which are then composed hierarchically into larger shapes and objects as we go deeper into the network. Also the Translational Invariance property ensures that the shape is detected irrespective of its location in the image plane.
 
 ## Fully Connected DLNs vs ConvNets
 
+![](https://subirvarma.github.io/GeneralCognitics/images/cnn2.png)
 
-```python
-#cnn2
-nb_setup.images_hconcat(["DL_images/cnn2.png"], width=600)
-```
+*Figure 4*
 
+Figure 4 illustrates another way to contrast ConvNets with Dense Feed Forward networks. The top part of the figure shows a Dense Feed Forward Network with the input image and the nodes in the first Hidden Layer. A node in this Hidden Layer is activated if it detects a particular pattern in the image, with each node looking for a different pattern. As shown in the bottom half of the figure, with ConvNets, each of the Hidden Layer nodes is replaced by an Activation Map with multiple "sub-nodes". The activation value at each sub-node in an Activation Map is computed using a local filter which looks for the same pattern in different parts of the image. Hence in general we need as many Activation Maps in a ConvNet as there are nodes in a Hidden Layer of a Dense Feed Forward Network. This figure also illustrates that ConvNets reduce the number of weights in the model at the expense of increasing the number of nodes. The increase in nodes causes the cost of computation to go up, but this is a worthwhile tradeoff to make since the reduction in the parameters makes the model easier to train with a smaller number of training examples.
 
+![](https://subirvarma.github.io/GeneralCognitics/images/cnn5.png)
 
+*Figure 5*
 
-![png](output_12_0.png)
-
-
-
-Figure (**cnn2**) illustrates another way to contrast ConvNets with Dense Feed Forward networks. The top part of the figure shows a Dense Feed Forward Network with the input image and the nodes in the first Hidden Layer. A node in this Hidden Layer is activated if it detects a particular pattern in the image, with each node looking for a different pattern. As shown in the bottom half of the figure, with ConvNets, each of the Hidden Layer nodes is replaced by an Activation Map with multiple "sub-nodes". The activation value at each sub-node in an Activation Map is computed using a local filter which looks for the same pattern in different parts of the image. Hence in general we need as many Activation Maps in a ConvNet as there are nodes in a Hidden Layer of a Dense Feed Forward Network. This figure also illustrates that ConvNets reduce the number of weights in the model at the expense of increasing the number of nodes. The increase in nodes causes the cost of computation to go up, but this is a worthwhile tradeoff to make since the reduction in the parameters makes the model easier to train with a smaller number of training examples.
-
-
-```python
-#cnn5
-nb_setup.images_hconcat(["DL_images/cnn5.png"], width=600)
-```
-
-
-
-
-![png](output_14_0.png)
-
-
-
-So far we have only described the operation of the Input Layer and the first Hidden Layer of the ConvNet. However it is straightforward to extend this design to multiple Hidden Layers, as shown in Figure **cnn5**. Just as in Fully Connected Deep Feed Forward Networks, Activation Maps in the initial hidden layers detect simple shapes, which are then built upon in an hierarchical way by the later layers to detect more complex shapes. The following hyper-parameters have to be chosen with each additional layer:
+So far we have only described the operation of the Input Layer and the first Hidden Layer of the ConvNet. However it is straightforward to extend this design to multiple Hidden Layers, as shown in Figure 5. Just as in Fully Connected Deep Feed Forward Networks, Activation Maps in the initial hidden layers detect simple shapes, which are then built upon in an hierarchical way by the later layers to detect more complex shapes. The following hyper-parameters have to be chosen with each additional layer:
 
 - The number of Activation Maps to be used in the Hidden Layer
 - The size of the Filter and the Stride size (defined below), to be used to compute the Activations.
 
 In the example in Figure **cnn5**, we added a second Hidden Layer with 10 Activation Maps, that are generated using a filter of size $5\times 5\times 6$. Note that the depth of this filter is not a free variable since it has to equal to the number of Activation Maps in the previous layer.
 
+![](https://subirvarma.github.io/GeneralCognitics/images/cnn22.png)
 
+*Figure 6*
 
-
-```python
-#cnn22
-nb_setup.images_hconcat(["DL_images/cnn22.png"], width=900)
-```
-
-
-
-
-![png](output_16_0.png)
-
-
-
-The computations carried out to generate an Activation Map are shown in greater detail in Parts (a) and (b) of Figure **cnn22**. Part (a) shows a Filter of size $2\times 2$, operating on an input of size $5\times 5$ (without the depth dimension). In order to generate the activations, the filter is moved by one pixel at a time, horizontally and vertically, which results in an Activation Map of size $4\times 4$. As we slide the $2\times 2$ patch across the Input Layer, we compute a dot product of the activations in the Local Receptive Field with the filter weights. An important parameter used in this process is called the **Stride**, denoted by $S$, and is defined as the number of pixels by which the filter is moved after each computation, either horizontally or vertically. Note that the example in Part (a) corresponds to $S = 1$ while Part(b) shows the case $S = 2$. Note that for the case $S=2$, the last column in the input feature map is not accessed (shown in red). In order to remedy this, we add a an extra column of zeroes to the right, which results in an output of size $2\times 3$. This is known as Zero Padding and is discussed further later in this chapter.
+The computations carried out to generate an Activation Map are shown in greater detail in Parts (a) and (b) of Figure 6. Part (a) shows a Filter of size $2\times 2$, operating on an input of size $5\times 5$ (without the depth dimension). In order to generate the activations, the filter is moved by one pixel at a time, horizontally and vertically, which results in an Activation Map of size $4\times 4$. As we slide the $2\times 2$ patch across the Input Layer, we compute a dot product of the activations in the Local Receptive Field with the filter weights. An important parameter used in this process is called the **Stride**, denoted by $S$, and is defined as the number of pixels by which the filter is moved after each computation, either horizontally or vertically. Note that the example in Part (a) corresponds to $S = 1$ while Part(b) shows the case $S = 2$. Note that for the case $S=2$, the last column in the input feature map is not accessed (shown in red). In order to remedy this, we add a an extra column of zeroes to the right, which results in an output of size $2\times 3$. This is known as Zero Padding and is discussed further later in this chapter.
 
 Assuming that the $r^{th}$ Hidden Layer is processed using a filter of size $L\times W\times D$, note that this filter requires $L \times W \times D + 1$ parameters. However, since the same filter is used for *all* the nodes in the Layer $r+1$ Activation Map,  it results in a huge reduction in the number of parameters needed to describe ConvNets. Since each Activation Map in Layer $r+1$ requires its own filter, so that if there are $C$ such Maps (i.e., Layer $r+1$ is of depth $C$), then the total number of parameters needed is given by $C \times (L \times W \times D + 1)$.
 
@@ -154,63 +90,33 @@ In order to appreciate the scale of the reduction in number of parameters due to
 
 ## Pooling
 
+![](https://subirvarma.github.io/GeneralCognitics/images/convnet6.png)
 
-```python
-#convnet6
-nb_setup.images_hconcat(["DL_images/convnet6.jpeg"], width=600)
-```
+*Figure 7*
 
-
-
-
-![png](output_19_0.png)
-
-
-
-In addition to the Convolution operation described above, ConvNets also feature an operation called Pooling (see Figure **convnet6**). Pooling usually occurs after a Convolutional Layer, and can be described as condensing the information from that layer into a smaller number of activations. As shown in the figure, Pooling involves replacing a set of activations within a region of the Activation Map (which is just like a Local Receptive Field), by a single number. Usually the maximum of the activation values in the Local Receptive Field is used for pooling (called max-pooling), but other functions can also be used, such as the $L_1$ or $L_2$ norm. Unlike in Local Receptive Fields used in Convolutions, the corresponding fields used for the Pooling operation do not overlap. Note that the addition of Pooling does not introduce any new parameters to the ConvNet and the total number of parameters in the model are reduced considerably due to this operation.
+In addition to the Convolution operation described above, ConvNets also feature an operation called Pooling (see Figure 7). Pooling usually occurs after a Convolutional Layer, and can be described as condensing the information from that layer into a smaller number of activations. As shown in the figure, Pooling involves replacing a set of activations within a region of the Activation Map (which is just like a Local Receptive Field), by a single number. Usually the maximum of the activation values in the Local Receptive Field is used for pooling (called max-pooling), but other functions can also be used, such as the $L_1$ or $L_2$ norm. Unlike in Local Receptive Fields used in Convolutions, the corresponding fields used for the Pooling operation do not overlap. Note that the addition of Pooling does not introduce any new parameters to the ConvNet and the total number of parameters in the model are reduced considerably due to this operation.
 
 In order to understand the Pooling operation, note that the numbers in an Activation Map that results from the Convolution operation, correspond to the likelihood of whether a particular shape or pattern is present in various locations in the previous layer. By doing Pooling right after Convolution, we throw away some of that information, which is the same as saying that the network does not care about the exact location of a pattern, it only needs to know whether the pattern is present or not. It should also be mentioned that as more processing power becomes available, some modern ConvNets, such as ResNet and the Google Inception Network, no longer incorporate Pooling in their design.
 
-
-```python
 ## Global Max Pooling
-```
 
+![](https://subirvarma.github.io/GeneralCognitics/images/convnet29.png)
 
-```python
-#convnet29
-nb_setup.images_hconcat(["DL_images/convnet29.png"], width=600)
-```
+*Figure 8*
 
+The output of the last convolutional layer in a ConvNet is fed into a Dense Feed Forward network before being sent into the logit layer (see Figure 9 below for an example). The traditional way of doing this is by flattening the ConvNet tensor, which causes a huge increase in the number of parameters. Recall from Chapter **ImprovingModelGeneralization** that more parameters can cause overfitting, unless the size of the training dataset is also increased.
 
-
-
-![png](output_22_0.png)
-
-
-
-The output of the last convolutional layer in a ConvNet is fed into a Dense Feed Forward network before being sent into the logit layer (see Figure **convnet7** below for an example). The traditional way of doing this is by flattening the ConvNet tensor, which causes a huge increase in the number of parameters. Recall from Chapter **ImprovingModelGeneralization** that more parameters can cause overfitting, unless the size of the training dataset is also increased.
-
-In order to reduce the number of parameters, more recently models have started using the Global Max Pooling operation for this interface, which is illustrated in Figure **convnet29**. As shown, each spatial layer of the ConvNet is converted into a single node in the Dense Feed Forward network by using the max operation (or alternatively the average operation). 
+In order to reduce the number of parameters, more recently models have started using the Global Max Pooling operation for this interface, which is illustrated in Figure 8. As shown, each spatial layer of the ConvNet is converted into a single node in the Dense Feed Forward network by using the max operation (or alternatively the average operation). 
 
 This design can be justified as follows: Each plane in the final ConvNet layer contains information about the presence of a pattern, and the nodes within the layer contain information the spatial location of the pattern. Since we are not interested in the spatial part of this information when doing classification, it makes sense to summarize the presence/absence information by using the maximum value of the nodes within the plane.
 
 ## A Complete ConvNet
 
+![](https://subirvarma.github.io/GeneralCognitics/images/convnet7.png)
 
-```python
-#convnet7
-nb_setup.images_hconcat(["DL_images/convnet7.png"], width=800)
-```
+*Figure 9*
 
-
-
-
-![png](output_25_0.png)
-
-
-
-Figure **convnet7** puts all the elements of a ConvNet together to come up with a network for the case when the input consists of $32\times 32\times 3$ pixel CIFAR-10 images. This network consist of the following:
+Figure 9 puts all the elements of a ConvNet together to come up with a network for the case when the input consists of $32\times 32\times 3$ pixel CIFAR-10 images. This network consist of the following:
 
 - Five convolutional layers
 - Two Max Pooling Layers, which occur after the second and fourth convolutional layers respectively.
@@ -218,9 +124,9 @@ Figure **convnet7** puts all the elements of a ConvNet together to come up with 
 - An Output Logit Layer with 10 nodes, corresponding to the 10 categories that the input image can belong to.
 - The Filters are all of spatial size (3x3).
 
-At a high level, the convolution operation changes the representation of an image, starting from raw pixels at one end, to higher level representations using successive layers of filtering. In abstract space, as the system goes through multiple Convolutional Layers, it is basically performing non-linear transformations so that images with similar objects are clustered closer to each other in the higher level transform space. This enables the classification operation to happen using a simple linear classifier in the final layer of the network. The Fully Connected layer that is just prior to the Output Layer contains a 1024-dimensional representation of the input image. It is often used in other Deep Learning architectures that need a high level image representations (such as for image captioning, which is discussed in Chapter **RNNs**. 
+At a high level, the convolution operation changes the representation of an image, starting from raw pixels at one end, to higher level representations using successive layers of filtering. In abstract space, as the system goes through multiple Convolutional Layers, it is basically performing non-linear transformations so that images with similar objects are clustered closer to each other in the higher level transform space. This enables the classification operation to happen using a simple linear classifier in the final layer of the network. The Fully Connected layer that is just prior to the Output Layer contains a 1024-dimensional representation of the input image. It is often used in other Deep Learning architectures that need a high level image representations. 
 
-The following Keras code implements the model from Figure **convnet7**, with the CIFAR-10 dataset as input.
+The following Keras code implements the model from Figure 9, with the CIFAR-10 dataset as input.
 
 
 ```python
@@ -304,210 +210,6 @@ model.compile(optimizer='rmsprop',
 history = model.fit(train_images, train_labels, epochs=100, batch_size=128, validation_split=0.2, shuffle = True)
 ```
 
-    Train on 40000 samples, validate on 10000 samples
-    Epoch 1/100
-    40000/40000 [==============================] - 152s 4ms/step - loss: 1.8604 - acc: 0.3277 - val_loss: 1.6137 - val_acc: 0.4061
-    Epoch 2/100
-    40000/40000 [==============================] - 155s 4ms/step - loss: 1.4362 - acc: 0.4801 - val_loss: 1.3419 - val_acc: 0.5118
-    Epoch 3/100
-    40000/40000 [==============================] - 141s 4ms/step - loss: 1.2359 - acc: 0.5618 - val_loss: 1.2462 - val_acc: 0.5652
-    Epoch 4/100
-    40000/40000 [==============================] - 140s 3ms/step - loss: 1.0892 - acc: 0.6179 - val_loss: 1.1993 - val_acc: 0.5730
-    Epoch 5/100
-    40000/40000 [==============================] - 140s 3ms/step - loss: 0.9701 - acc: 0.6578 - val_loss: 0.9792 - val_acc: 0.6552
-    Epoch 6/100
-    40000/40000 [==============================] - 140s 4ms/step - loss: 0.8652 - acc: 0.6972 - val_loss: 0.9977 - val_acc: 0.6463
-    Epoch 7/100
-    40000/40000 [==============================] - 145s 4ms/step - loss: 0.7669 - acc: 0.7315 - val_loss: 1.0418 - val_acc: 0.6516
-    Epoch 8/100
-    40000/40000 [==============================] - 140s 4ms/step - loss: 0.6840 - acc: 0.7595 - val_loss: 0.8856 - val_acc: 0.6984
-    Epoch 9/100
-    40000/40000 [==============================] - 142s 4ms/step - loss: 0.6034 - acc: 0.7868 - val_loss: 1.0095 - val_acc: 0.6773
-    Epoch 10/100
-    40000/40000 [==============================] - 140s 4ms/step - loss: 0.5267 - acc: 0.8134 - val_loss: 0.9365 - val_acc: 0.6971
-    Epoch 11/100
-    40000/40000 [==============================] - 142s 4ms/step - loss: 0.4546 - acc: 0.8419 - val_loss: 0.9607 - val_acc: 0.7022
-    Epoch 12/100
-    40000/40000 [==============================] - 137s 3ms/step - loss: 0.3907 - acc: 0.8632 - val_loss: 0.9433 - val_acc: 0.7250
-    Epoch 13/100
-    40000/40000 [==============================] - 137s 3ms/step - loss: 0.3222 - acc: 0.8853 - val_loss: 1.0063 - val_acc: 0.7239
-    Epoch 14/100
-    40000/40000 [==============================] - 138s 3ms/step - loss: 0.2699 - acc: 0.9050 - val_loss: 1.1830 - val_acc: 0.6984
-    Epoch 15/100
-    40000/40000 [==============================] - 138s 3ms/step - loss: 0.2272 - acc: 0.9198 - val_loss: 1.2660 - val_acc: 0.7138
-    Epoch 16/100
-    40000/40000 [==============================] - 137s 3ms/step - loss: 0.1912 - acc: 0.9346 - val_loss: 1.2867 - val_acc: 0.7194
-    Epoch 17/100
-    40000/40000 [==============================] - 137s 3ms/step - loss: 0.1624 - acc: 0.9451 - val_loss: 1.3649 - val_acc: 0.7209
-    Epoch 18/100
-    40000/40000 [==============================] - 138s 3ms/step - loss: 0.1421 - acc: 0.9532 - val_loss: 1.6102 - val_acc: 0.7134
-    Epoch 19/100
-    40000/40000 [==============================] - 137s 3ms/step - loss: 0.1250 - acc: 0.9574 - val_loss: 1.9877 - val_acc: 0.6836
-    Epoch 20/100
-    40000/40000 [==============================] - 139s 3ms/step - loss: 0.1209 - acc: 0.9602 - val_loss: 1.6129 - val_acc: 0.7274
-    Epoch 21/100
-    40000/40000 [==============================] - 139s 3ms/step - loss: 0.1085 - acc: 0.9629 - val_loss: 1.6751 - val_acc: 0.7226
-    Epoch 22/100
-    40000/40000 [==============================] - 138s 3ms/step - loss: 0.1056 - acc: 0.9658 - val_loss: 1.7789 - val_acc: 0.7225
-    Epoch 23/100
-    40000/40000 [==============================] - 139s 3ms/step - loss: 0.1067 - acc: 0.9666 - val_loss: 1.8162 - val_acc: 0.7180
-    Epoch 24/100
-    40000/40000 [==============================] - 138s 3ms/step - loss: 0.0988 - acc: 0.9683 - val_loss: 1.8763 - val_acc: 0.7160
-    Epoch 25/100
-    40000/40000 [==============================] - 138s 3ms/step - loss: 0.0950 - acc: 0.9678 - val_loss: 1.8489 - val_acc: 0.7196
-    Epoch 26/100
-    40000/40000 [==============================] - 139s 3ms/step - loss: 0.0934 - acc: 0.9715 - val_loss: 1.9788 - val_acc: 0.7315
-    Epoch 27/100
-    40000/40000 [==============================] - 139s 3ms/step - loss: 0.0994 - acc: 0.9699 - val_loss: 1.9873 - val_acc: 0.7164
-    Epoch 28/100
-    40000/40000 [==============================] - 139s 3ms/step - loss: 0.0963 - acc: 0.9714 - val_loss: 1.9047 - val_acc: 0.7237
-    Epoch 29/100
-    40000/40000 [==============================] - 139s 3ms/step - loss: 0.0965 - acc: 0.9703 - val_loss: 1.9589 - val_acc: 0.7215
-    Epoch 30/100
-    40000/40000 [==============================] - 141s 4ms/step - loss: 0.0920 - acc: 0.9717 - val_loss: 2.1067 - val_acc: 0.7164
-    Epoch 31/100
-    40000/40000 [==============================] - 139s 3ms/step - loss: 0.0986 - acc: 0.9706 - val_loss: 1.9862 - val_acc: 0.7073
-    Epoch 32/100
-    40000/40000 [==============================] - 138s 3ms/step - loss: 0.0934 - acc: 0.9729 - val_loss: 2.1196 - val_acc: 0.7204
-    Epoch 33/100
-    40000/40000 [==============================] - 139s 3ms/step - loss: 0.0909 - acc: 0.9745 - val_loss: 2.0922 - val_acc: 0.7222
-    Epoch 34/100
-    40000/40000 [==============================] - 138s 3ms/step - loss: 0.0880 - acc: 0.9751 - val_loss: 1.9796 - val_acc: 0.7261
-    Epoch 35/100
-    40000/40000 [==============================] - 138s 3ms/step - loss: 0.0882 - acc: 0.9740 - val_loss: 2.3413 - val_acc: 0.7087
-    Epoch 36/100
-    40000/40000 [==============================] - 138s 3ms/step - loss: 0.0886 - acc: 0.9744 - val_loss: 2.4060 - val_acc: 0.7150
-    Epoch 37/100
-    40000/40000 [==============================] - 139s 3ms/step - loss: 0.0902 - acc: 0.9736 - val_loss: 2.2512 - val_acc: 0.7124
-    Epoch 38/100
-    40000/40000 [==============================] - 138s 3ms/step - loss: 0.0956 - acc: 0.9741 - val_loss: 2.0632 - val_acc: 0.7201
-    Epoch 39/100
-    40000/40000 [==============================] - 137s 3ms/step - loss: 0.0920 - acc: 0.9739 - val_loss: 2.2565 - val_acc: 0.7312
-    Epoch 40/100
-    40000/40000 [==============================] - 138s 3ms/step - loss: 0.0969 - acc: 0.9741 - val_loss: 2.2483 - val_acc: 0.7217
-    Epoch 41/100
-    40000/40000 [==============================] - 137s 3ms/step - loss: 0.0960 - acc: 0.9741 - val_loss: 2.1802 - val_acc: 0.7223
-    Epoch 42/100
-    40000/40000 [==============================] - 139s 3ms/step - loss: 0.0923 - acc: 0.9756 - val_loss: 2.2868 - val_acc: 0.7194
-    Epoch 43/100
-    40000/40000 [==============================] - 138s 3ms/step - loss: 0.0926 - acc: 0.9748 - val_loss: 2.3897 - val_acc: 0.7096
-    Epoch 44/100
-    40000/40000 [==============================] - 138s 3ms/step - loss: 0.0971 - acc: 0.9746 - val_loss: 2.2760 - val_acc: 0.7278
-    Epoch 45/100
-    40000/40000 [==============================] - 137s 3ms/step - loss: 0.0915 - acc: 0.9748 - val_loss: 2.4824 - val_acc: 0.7265
-    Epoch 46/100
-    40000/40000 [==============================] - 140s 4ms/step - loss: 0.0895 - acc: 0.9754 - val_loss: 2.4966 - val_acc: 0.6984
-    Epoch 47/100
-    40000/40000 [==============================] - 138s 3ms/step - loss: 0.0932 - acc: 0.9758 - val_loss: 2.5743 - val_acc: 0.7246
-    Epoch 48/100
-    40000/40000 [==============================] - 138s 3ms/step - loss: 0.0961 - acc: 0.9750 - val_loss: 2.3688 - val_acc: 0.7222
-    Epoch 49/100
-    40000/40000 [==============================] - 138s 3ms/step - loss: 0.0889 - acc: 0.9760 - val_loss: 2.8415 - val_acc: 0.7035
-    Epoch 50/100
-    40000/40000 [==============================] - 139s 3ms/step - loss: 0.0926 - acc: 0.9755 - val_loss: 2.5309 - val_acc: 0.7175
-    Epoch 51/100
-    40000/40000 [==============================] - 141s 4ms/step - loss: 0.0931 - acc: 0.9765 - val_loss: 2.7793 - val_acc: 0.7013
-    Epoch 52/100
-    40000/40000 [==============================] - 138s 3ms/step - loss: 0.0932 - acc: 0.9755 - val_loss: 2.7017 - val_acc: 0.7022
-    Epoch 53/100
-    40000/40000 [==============================] - 138s 3ms/step - loss: 0.0961 - acc: 0.9759 - val_loss: 2.5574 - val_acc: 0.7233
-    Epoch 54/100
-    40000/40000 [==============================] - 138s 3ms/step - loss: 0.0961 - acc: 0.9761 - val_loss: 2.5996 - val_acc: 0.7207
-    Epoch 55/100
-    40000/40000 [==============================] - 138s 3ms/step - loss: 0.0970 - acc: 0.9767 - val_loss: 2.7902 - val_acc: 0.7013
-    Epoch 56/100
-    40000/40000 [==============================] - 139s 3ms/step - loss: 0.0877 - acc: 0.9781 - val_loss: 2.6166 - val_acc: 0.6972
-    Epoch 57/100
-    40000/40000 [==============================] - 140s 4ms/step - loss: 0.0941 - acc: 0.9764 - val_loss: 2.6691 - val_acc: 0.7208
-    Epoch 58/100
-    40000/40000 [==============================] - 138s 3ms/step - loss: 0.1006 - acc: 0.9761 - val_loss: 2.5156 - val_acc: 0.7083
-    Epoch 59/100
-    40000/40000 [==============================] - 138s 3ms/step - loss: 0.0953 - acc: 0.9771 - val_loss: 2.5692 - val_acc: 0.7235
-    Epoch 60/100
-    40000/40000 [==============================] - 138s 3ms/step - loss: 0.1028 - acc: 0.9764 - val_loss: 2.6753 - val_acc: 0.7244
-    Epoch 61/100
-    40000/40000 [==============================] - 138s 3ms/step - loss: 0.1017 - acc: 0.9765 - val_loss: 2.7712 - val_acc: 0.7209
-    Epoch 62/100
-    40000/40000 [==============================] - 137s 3ms/step - loss: 0.0928 - acc: 0.9784 - val_loss: 2.6230 - val_acc: 0.7164
-    Epoch 63/100
-    40000/40000 [==============================] - 138s 3ms/step - loss: 0.1025 - acc: 0.9768 - val_loss: 2.9974 - val_acc: 0.6994
-    Epoch 64/100
-    40000/40000 [==============================] - 137s 3ms/step - loss: 0.0988 - acc: 0.9779 - val_loss: 2.7665 - val_acc: 0.7246
-    Epoch 65/100
-    40000/40000 [==============================] - 138s 3ms/step - loss: 0.1051 - acc: 0.9767 - val_loss: 2.9489 - val_acc: 0.6925
-    Epoch 66/100
-    40000/40000 [==============================] - 138s 3ms/step - loss: 0.1083 - acc: 0.9758 - val_loss: 3.0575 - val_acc: 0.6895
-    Epoch 67/100
-    40000/40000 [==============================] - 138s 3ms/step - loss: 0.1029 - acc: 0.9772 - val_loss: 3.0563 - val_acc: 0.7074
-    Epoch 68/100
-    40000/40000 [==============================] - 139s 3ms/step - loss: 0.1074 - acc: 0.9765 - val_loss: 2.8337 - val_acc: 0.7117
-    Epoch 69/100
-    40000/40000 [==============================] - 138s 3ms/step - loss: 0.0989 - acc: 0.9778 - val_loss: 2.8867 - val_acc: 0.6897
-    Epoch 70/100
-    40000/40000 [==============================] - 138s 3ms/step - loss: 0.0998 - acc: 0.9783 - val_loss: 2.7036 - val_acc: 0.7164
-    Epoch 71/100
-    40000/40000 [==============================] - 138s 3ms/step - loss: 0.1020 - acc: 0.9784 - val_loss: 3.1105 - val_acc: 0.7081
-    Epoch 72/100
-    40000/40000 [==============================] - 138s 3ms/step - loss: 0.1032 - acc: 0.9786 - val_loss: 2.8537 - val_acc: 0.7127
-    Epoch 73/100
-    40000/40000 [==============================] - 139s 3ms/step - loss: 0.1064 - acc: 0.9776 - val_loss: 3.1670 - val_acc: 0.6970
-    Epoch 74/100
-    40000/40000 [==============================] - 138s 3ms/step - loss: 0.1069 - acc: 0.9782 - val_loss: 3.1943 - val_acc: 0.7021
-    Epoch 75/100
-    40000/40000 [==============================] - 138s 3ms/step - loss: 0.1063 - acc: 0.9789 - val_loss: 3.1124 - val_acc: 0.7105
-    Epoch 76/100
-    40000/40000 [==============================] - 139s 3ms/step - loss: 0.0988 - acc: 0.9796 - val_loss: 2.9982 - val_acc: 0.6970
-    Epoch 77/100
-    40000/40000 [==============================] - 139s 3ms/step - loss: 0.1019 - acc: 0.9790 - val_loss: 3.0113 - val_acc: 0.7083
-    Epoch 78/100
-    40000/40000 [==============================] - 138s 3ms/step - loss: 0.1004 - acc: 0.9793 - val_loss: 3.0845 - val_acc: 0.7185
-    Epoch 79/100
-    40000/40000 [==============================] - 138s 3ms/step - loss: 0.1019 - acc: 0.9792 - val_loss: 3.1173 - val_acc: 0.7096
-    Epoch 80/100
-    40000/40000 [==============================] - 138s 3ms/step - loss: 0.1065 - acc: 0.9790 - val_loss: 3.0057 - val_acc: 0.7113
-    Epoch 81/100
-    40000/40000 [==============================] - 139s 3ms/step - loss: 0.1088 - acc: 0.9793 - val_loss: 3.2845 - val_acc: 0.7161
-    Epoch 82/100
-    40000/40000 [==============================] - 138s 3ms/step - loss: 0.1093 - acc: 0.9785 - val_loss: 3.2549 - val_acc: 0.7046
-    Epoch 83/100
-    40000/40000 [==============================] - 141s 4ms/step - loss: 0.1025 - acc: 0.9796 - val_loss: 3.0943 - val_acc: 0.7180
-    Epoch 84/100
-    40000/40000 [==============================] - 141s 4ms/step - loss: 0.1119 - acc: 0.9798 - val_loss: 3.1431 - val_acc: 0.7049
-    Epoch 85/100
-    40000/40000 [==============================] - 141s 4ms/step - loss: 0.1013 - acc: 0.9803 - val_loss: 3.5859 - val_acc: 0.7004
-    Epoch 86/100
-    40000/40000 [==============================] - 139s 3ms/step - loss: 0.1028 - acc: 0.9804 - val_loss: 3.1342 - val_acc: 0.7128
-    Epoch 87/100
-    40000/40000 [==============================] - 137s 3ms/step - loss: 0.0939 - acc: 0.9814 - val_loss: 3.3561 - val_acc: 0.7084
-    Epoch 88/100
-    40000/40000 [==============================] - 138s 3ms/step - loss: 0.1096 - acc: 0.9802 - val_loss: 3.1952 - val_acc: 0.7176
-    Epoch 89/100
-    40000/40000 [==============================] - 138s 3ms/step - loss: 0.1067 - acc: 0.9809 - val_loss: 3.1226 - val_acc: 0.7240
-    Epoch 90/100
-    40000/40000 [==============================] - 138s 3ms/step - loss: 0.1100 - acc: 0.9801 - val_loss: 3.2294 - val_acc: 0.7137
-    Epoch 91/100
-    40000/40000 [==============================] - 139s 3ms/step - loss: 0.1074 - acc: 0.9809 - val_loss: 3.5163 - val_acc: 0.7080
-    Epoch 92/100
-    40000/40000 [==============================] - 139s 3ms/step - loss: 0.1079 - acc: 0.9813 - val_loss: 3.2671 - val_acc: 0.7162
-    Epoch 93/100
-    40000/40000 [==============================] - 138s 3ms/step - loss: 0.1113 - acc: 0.9810 - val_loss: 3.2981 - val_acc: 0.7135
-    Epoch 94/100
-    40000/40000 [==============================] - 138s 3ms/step - loss: 0.1152 - acc: 0.9815 - val_loss: 3.2460 - val_acc: 0.7161
-    Epoch 95/100
-    40000/40000 [==============================] - 138s 3ms/step - loss: 0.1061 - acc: 0.9819 - val_loss: 3.3823 - val_acc: 0.7195
-    Epoch 96/100
-    40000/40000 [==============================] - 139s 3ms/step - loss: 0.1151 - acc: 0.9812 - val_loss: 3.4615 - val_acc: 0.7090
-    Epoch 97/100
-    40000/40000 [==============================] - 138s 3ms/step - loss: 0.1228 - acc: 0.9803 - val_loss: 3.4416 - val_acc: 0.7056
-    Epoch 98/100
-    40000/40000 [==============================] - 140s 3ms/step - loss: 0.1240 - acc: 0.9811 - val_loss: 3.6950 - val_acc: 0.7055
-    Epoch 99/100
-    40000/40000 [==============================] - 138s 3ms/step - loss: 0.1307 - acc: 0.9801 - val_loss: 3.5018 - val_acc: 0.7137
-    Epoch 100/100
-    40000/40000 [==============================] - 139s 3ms/step - loss: 0.1192 - acc: 0.9806 - val_loss: 3.4406 - val_acc: 0.7119
-
-
-
 ```python
 scores = model.evaluate(test_images, test_labels)
 print('Loss: %.3f' %scores[0])
@@ -523,14 +225,7 @@ print('Accuracy: %.3f' %scores[1])
 ```python
 history_dict.keys()
 ```
-
-
-
-
     dict_keys(['val_loss', 'val_acc', 'loss', 'acc'])
-
-
-
 
 ```python
 import matplotlib.pyplot as plt
