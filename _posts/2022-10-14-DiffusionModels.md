@@ -68,11 +68,11 @@ Lets assume that we can approximate $q(X|Z)$ by another (parametrized) distribut
 
 $$D_{KL}(f(X), g(X)) = \sum f(X)\log{f(X)\over g(X)}$$
 
-Substituting $f(X) = q(X|Z)$ and $g(X) = p_\theta(X|Z)$, and making use of the Law of Conditional Probabilities, it can be shown that
+Substituting $f(X) = q(X/Z)$ and $g(X) = p_\theta(X/Z)$, and making use of the Law of Conditional Probabilities, it can be shown that
 
 $$D_{KL}(q(X|Z), p_\theta(X|Z)) = \log q(X) - \sum_Z q(Z|X)\log{ p_\theta(X,Z)\over q(Z|X)}$$
 
-Hence in order to minimize $D_{KL}(q(X|Z), p_\theta(X|Z))$, we have to maximize $\sum_Z q(Z|X)\log{ p_\theta(X,Z)\over q(Z|X)}$, or minimize $\sum_Z q(Z|X)\log{q(Z|X)\over p_\theta(X,Z)}$. We will refer to the latter quantity as the ELBO or VLB, i.e.,
+Hence in order to minimize $D_{KL}(q(X/Z), p_\theta(X/Z))$, we have to maximize $\sum_Z q(Z/X)\log{ p_\theta(X,Z)\over q(Z/X)}$, or minimize $\sum_Z q(Z/X)\log{q(Z/X)\over p_\theta(X,Z)}$. We will refer to the latter quantity as the ELBO or VLB, i.e.,
 
 $$ELBO = \sum_Z q(Z|X)\log{q(Z|X)\over p_\theta(X,Z)} \quad\quad\quad (1)$$
 
