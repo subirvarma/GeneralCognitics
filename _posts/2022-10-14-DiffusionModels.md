@@ -374,7 +374,11 @@ The generative process now samples latent variables according to the reversed $\
 
 Ho et.al. made the following interesting observation in their DDPM paper: During the inference process, we can regard the process of generating progressively better images from $X_T$ to $X_0$ in the following two ways:
 
-   - We can measure the image Distortion at stage $t$, which is defined as $${\sqrt{|| X_0 - {\hat X_0}||^2\over D}$$, where ${\hat X_0}$ is the prediction that the system makes for $X_0$, given $X_t$. This will give us some idea of how the predicted image quality changes with $t$ as the inference proceeds. This is graphed in the LHS of Figure 15. 
+   - We can measure the image Distortion at stage $t$, which is defined as 
+   
+   $${ \sqrt{ || X_0 - {\hat X_0}||^2}\over D }$$, 
+   
+     where ${\hat X_0}$ is the prediction that the system makes for $X_0$, given $X_t$. This will give us some idea of how the predicted image quality changes with $t$ as the inference proceeds. This is graphed in the LHS of Figure 15. 
    
    - We can regard the process of predicting $X_0$ as an Information Theoretic problem, with each $X_t$ providing information on how to generate $X_0$. As we incorporate more and more information into ${\hat X_0}$, it gradually converges to $X_0$. This added information is referred to as the Rate, and is graphed in the middle graph of Figure **gen16**.
    
