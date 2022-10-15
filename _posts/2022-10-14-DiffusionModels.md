@@ -318,10 +318,10 @@ $$q_\sigma(X_t|X_{t-1},X_0) = {q_\sigma(X_{t-1}|X_t,X_0)q_\sigma(X_t|X_0)\over{q
 
 This is clearly a Gaussian process, however note that $q_\sigma(X_t\vert X_{t-1},X_0)$ is not a Markov process, since $X_t$ depends on $X_0$ in addition to $X_{t-1}$. 
 
-Let $p_\theta(X_{0:T})$ be the Generative process, where ${p_\theta}^{(t)}(X_{t-1}|X_t)$ is approximated using $q_\sigma(X_{t-1}\vert X_t,X_0)$. This is done in a 2-step process: 
+Let $p_\theta(X_{0:T})$ be the Generative process, where ${p_\theta}^{(t)}(X_{t-1}\vert X_t)$ is approximated using $q_\sigma(X_{t-1}\vert X_t,X_0)$. This is done in a 2-step process: 
 
   -  Given $X_t$, use it to predict $X_0$ (referred to as ${\hat X_0)}$) by using the Neural Network model and the equation
-  -  
+    
   $${\hat X_0} = {( X_t - \sqrt{1-\alpha_t}.{\epsilon_\theta}^{(t)}(X_t))\over{\sqrt{\alpha_t}}}$$
   
   -  Given $X_t$ and ${\hat X_0}$, use $q_\sigma(X_{t-1}\vert X_t,X_0)$ to  sample $X_{t-1}$ so that
@@ -332,7 +332,7 @@ Note that changing the parameter $\sigma$ results in different generative proces
 
    - When
 
-   $$\sigma_t = \sqrt{{1-\alpha_{t-1}}\over{1-\alpha_t}}\sqrt{1-{\alpha_t\over\alpha_{t-1}}}, \forall t$$
+   $$\sigma_t = \sqrt{ {1-\alpha_{t-1}\over{1-\alpha_t}} }\sqrt{ 1-{\alpha_t\over\alpha_{t-1}} }, \forall t$$
    
      then the forward process becomes Markovian and the generative process becomes DDPM.
      
