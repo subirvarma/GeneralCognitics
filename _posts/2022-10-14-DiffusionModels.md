@@ -224,8 +224,9 @@ Substituting these equations back into (7), we get
 
 $$L_t = E \left[{1\over{2||\Sigma_\theta(X_t,t)||^2}} ||{1\over\sqrt\alpha_t}(X_t - {\beta_t\over{\sqrt{1-\gamma_t}}}\epsilon_t) - {1\over\sqrt\alpha_t}(X_t - {\beta_t\over{\sqrt{1-\gamma_t}}}{\epsilon_\theta}(X_t,t))||^2\right]$$
 
- $$= E\left[{\beta_t^2\over{2\alpha_t(1-\gamma_t)||\Sigma_\theta(X_t,t)||^2}} ||\epsilon_t - {\epsilon_\theta}(X_t,t)||^2 \right]$$
- $$= E \left[{\beta_t^2\over{2\alpha_t(1-\gamma_t)||\Sigma_\theta(X_t,t)||^2}} 
+ $$= E\left[{\beta_t^2\over{2\alpha_t(1-\gamma_t) ||\Sigma_\theta(X_t,t)||^2}} || \epsilon_t - {\epsilon_\theta}(X_t,t)||^2 \right]$$
+ 
+ $$= E \left[{\beta_t^2\over{2\alpha_t(1-\gamma_t) ||\Sigma_\theta(X_t,t)||^2}} 
  ||\epsilon_t - \epsilon_\theta(\sqrt\gamma_t X_0 + \sqrt{1-\gamma_t}\epsilon_t,t)||^2 \right]$$
 
 Ho. et.al. also discovered that training the diffusion model is easier if the weighting term is ignored, so that the optimization problem becomes
