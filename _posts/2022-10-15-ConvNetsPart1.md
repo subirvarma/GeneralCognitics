@@ -17,7 +17,7 @@ We start by first considering the question: Why do Dense Feed Forward Networks, 
 
 - Processing by Dense Feed Forward Networks requires that the image data be transformed into a linear 1D vector. This results in a loss of structural information, such as correlation between pixel values that are in proximity of each other in 3D. ConvNets on the other hand are able to process the original 3D image data, which makes it easier for them to recognize shapes using template matching.
 
-![](https://subirvarma.github.io/GeneralCognitics/images/cnn3.png)
+![](https://subirvarma.github.io/GeneralCognitics/images/CNN3.png)
 
 *Figure 1*
 
@@ -27,7 +27,7 @@ $$a_k = \sum_{i=1}^{3072} w_{ki} x_i + b_k,\ \ 1\le k\le 10$$
 
 Note that the sum $$\sum_{i=1}^{3072} w_{ki} x_i$$ is maximized if $w_{ki} = x_i,\ 1\le i\le 3072$ under the contraint that both of these are unit vectors. Hence this lends itself to the interpretation that for each category $k$, the weights $w_{ki}, 1\le i\le 3072$ are a template or filter for the category $k$ object, which looks for images that resemble the filter itself. Hence the classification operation can be interpreted as template matching with the input image, as shown in Figure 2.
 
-![](https://subirvarma.github.io/GeneralCognitics/images/cnn3.png)
+![](https://subirvarma.github.io/GeneralCognitics/images/cnn4.png)
 
 *Figure 2*
 
@@ -37,7 +37,7 @@ This template matching interpretation of Linear Filtering naturally leads to the
 
 ## Architecture of ConvNets
 
-![](https://subirvarma.github.io/GeneralCognitics/images/cnn3.png)
+![](https://subirvarma.github.io/GeneralCognitics/images/CNN1.png)
 
 *Figure 3*
 
@@ -61,7 +61,7 @@ The filter in Dense Feed Forward Networks spans the entire input image, which me
 
 ## Fully Connected DLNs vs ConvNets
 
-![](https://subirvarma.github.io/GeneralCognitics/images/cnn2.png)
+![](https://subirvarma.github.io/GeneralCognitics/images/CNN2.png)
 
 *Figure 4*
 
@@ -90,7 +90,7 @@ In order to appreciate the scale of the reduction in number of parameters due to
 
 ## Pooling
 
-![](https://subirvarma.github.io/GeneralCognitics/images/convnet6.png)
+![](https://subirvarma.github.io/GeneralCognitics/images/convnet6.jpeg)
 
 *Figure 7*
 
@@ -126,32 +126,6 @@ Figure 9 puts all the elements of a ConvNet together to come up with a network f
 
 At a high level, the convolution operation changes the representation of an image, starting from raw pixels at one end, to higher level representations using successive layers of filtering. In abstract space, as the system goes through multiple Convolutional Layers, it is basically performing non-linear transformations so that images with similar objects are clustered closer to each other in the higher level transform space. This enables the classification operation to happen using a simple linear classifier in the final layer of the network. The Fully Connected layer that is just prior to the Output Layer contains a 1024-dimensional representation of the input image. It is often used in other Deep Learning architectures that need a high level image representations. 
 
-The following Keras code implements the model from Figure 9, with the CIFAR-10 dataset as input.
-
-
-```python
-import keras
-keras.__version__
-from keras import models
-from keras import layers
-
-from keras.datasets import cifar10
-
-(train_images, train_labels), (test_images, test_labels) = cifar10.load_data()
-
-train_images = train_images.astype('float32') / 255
-
-test_images = test_images.astype('float32') / 255
-
-from tensorflow.keras.utils import to_categorical
-
-train_labels = to_categorical(train_labels)
-test_labels = to_categorical(test_labels)
-```
-
-The first convolutional layer is invoked using *Conv2D(32,(3,3),activation='relu', input_shape=(32,32,3))*. Hence it accepts as input a 3D tensor of shape (32,32,3) and filters the input using 32 filters, each of which is of shape (3,3,3). Note that only the spatial dimensions (3,3) of the filters need be specified, since the depth dimension is automatically set to the depth of the incoming tensor. This layer transforms the input tensor shape (32,32,3) into an output tensor of shape (30,30,32), and these are also the dimensions of this layer. In the next section we will show how to compute the dimensions of the tensor output from a convolutional layer, given an input tensor. As expected the 2x2 MaxPooling layer halves the spatial dimensions of the incoming tensor, but leaves its depth unchanged. Note that there is no need to re-shape the 3D CIFAR-10 images into 1D vectors, since the convolutional network is able to process the 3D tensors in their native format.
-
-
 ```python
 model = models.Sequential()
 model.add(layers.Conv2D(32, (3, 3), activation='relu', input_shape=(32, 32, 3)))
@@ -167,10 +141,8 @@ model.add(layers.Dense(1024, activation='relu'))
 model.add(layers.Dense(10, activation='softmax'))
 ```
 
+The first convolutional layer is invoked using *Conv2D(32,(3,3),activation='relu', input_shape=(32,32,3))*. Hence it accepts as input a 3D tensor of shape (32,32,3) and filters the input using 32 filters, each of which is of shape (3,3,3). Note that only the spatial dimensions (3,3) of the filters need be specified, since the depth dimension is automatically set to the depth of the incoming tensor. This layer transforms the input tensor shape (32,32,3) into an output tensor of shape (30,30,32), and these are also the dimensions of this layer. In the next section we will show how to compute the dimensions of the tensor output from a convolutional layer, given an input tensor. As expected the 2x2 MaxPooling layer halves the spatial dimensions of the incoming tensor, but leaves its depth unchanged. Note that there is no need to re-shape the 3D CIFAR-10 images into 1D vectors, since the convolutional network is able to process the 3D tensors in their native format.
 
-```python
-model.summary()
-```
 
     Model: "sequential"
     _________________________________________________________________
@@ -201,102 +173,11 @@ model.summary()
     Non-trainable params: 0
     _________________________________________________________________
 
+The model.summary() command shows that the model has 703,594 parameters, of which 590,848 or 84%, occur at the Dense Feed Forward layer. Hence Flattening the last convolutional layer and feeding it to a Fully Connected layer leads to an enormous increase in the number of parameters. If we replace Flatten by the "Global Max Pooling" operation, then the parameter count goes down to 179,306 shown below. The corresponding network is illustrated in Figure 10. If the model is executed then it can be shown that there is no appreciable decrease in the performance of the model. 
 
+![](https://subirvarma.github.io/GeneralCognitics/images/convnet31.png)
 
-```python
-model.compile(optimizer='rmsprop',
-              loss='categorical_crossentropy',
-              metrics=['accuracy'])
-history = model.fit(train_images, train_labels, epochs=100, batch_size=128, validation_split=0.2, shuffle = True)
-```
-
-```python
-scores = model.evaluate(test_images, test_labels)
-print('Loss: %.3f' %scores[0])
-print('Accuracy: %.3f' %scores[1])
-```
-
-    10000/10000 [==============================] - 11s 1ms/step
-    Loss: 0.909
-    Accuracy: 0.725
-
-
-
-```python
-history_dict.keys()
-```
-    dict_keys(['val_loss', 'val_acc', 'loss', 'acc'])
-
-```python
-import matplotlib.pyplot as plt
-
-acc = history.history['acc']
-val_acc = history.history['val_acc']
-loss = history.history['loss']
-val_loss = history.history['val_loss']
-
-epochs = range(1, len(acc) + 1)
-#epochs = range(1, len(loss) + 1)
-
-# "bo" is for "blue dot"
-plt.plot(epochs, loss, 'bo', label='Training loss')
-# b is for "solid blue line"
-plt.plot(epochs, val_loss, 'b', label='Validation loss')
-plt.title('Training and validation loss')
-plt.xlabel('Epochs')
-plt.ylabel('Loss')
-plt.legend()
-
-plt.show()
-```
-
-
-![png](output_35_0.png)
-
-
-
-```python
-plt.clf()   # clear figure
-acc_values = history_dict['acc']
-val_acc_values = history_dict['val_acc']
-
-plt.plot(epochs, acc, 'bo', label='Training acc')
-plt.plot(epochs, val_acc, 'b', label='Validation acc')
-plt.title('Training and validation accuracy')
-plt.xlabel('Epochs')
-plt.ylabel('Loss')
-plt.legend()
-
-plt.show()
-```
-
-
-![png](output_36_0.png)
-
-
-Recall that in Chapter **NNDeepLearing** we classified the CIFAR-10 dataset using a Dense Feed Forward model and achieved a test  accuracy of about 45%. The above example shows a big jump in performance with the use of ConvNets.
-
-Note that the execution time of the ConvNet model is about 4 ms/step (a step being the time to complete a forward pass followed by a backward pass for a single batch of data). In comparison the execution time for a two layer Dense Feed Forward model from Chapter **NNDeepLearning** was about 40 microsec/step. Hence the execution time for the ConvNet model has increased by almost 2 orders of magnitude, which means that these models will not run very well without specialized hardware. The following options can be used:
-
-- Use a computer with GPUs specialized to run Deep Learning models
-- Use cloud based services such as Google Cloud or Amazon AWS that provide GPU support. In addition there is a service called Google Colab that allows free use of GPUs for running Python notebooks
-- The preferred option is to use a technique called Transfer Learning, which is discussed later in this chapter. This allows the use of large pre-trained ConvNet models, such that only the last few layers of the model need to be trained from scratch, thus reducing model training time
-
-The model.summary() command shows that the model has 703,594 parameters, of which 590,848 or 84%, occur at the Dense Feed Forward layer. Hence Flattening the last convolutional layer and feeding it to a Fully Connected layer leads to an enormous increase in the number of parameters. If we replace Flatten by the "Global Max Pooling" operation, then the parameter count goes down to 179,306 shown below. The corresponding network is illustrated in Figure **convnet31**. If the model is executed then it can be shown that there is no appreciable decrease in the performance of the model. 
-
-
-```python
-#convnet31
-nb_setup.images_hconcat(["DL_images/convnet31.png"], width=800)
-```
-
-
-
-
-![png](output_39_0.png)
-
-
-
+*Figure 10*
 
 ```python
 model = models.Sequential()
@@ -311,11 +192,6 @@ model.add(layers.Conv2D(64, (3, 3), activation='relu'))
 model.add(layers.GlobalMaxPooling2D())
 model.add(layers.Dense(1024, activation='relu'))
 model.add(layers.Dense(10, activation='softmax'))
-```
-
-
-```python
-model.summary()
 ```
 
     Model: "sequential_1"
@@ -350,20 +226,11 @@ model.summary()
 
 ## Sizing ConvNets
 
+![](https://subirvarma.github.io/GeneralCognitics/images/convnet14.png)
 
-```python
-#convnet14
-nb_setup.images_hconcat(["DL_images/convnet14.png"], width=600)
-```
+*Figure 11*
 
-
-
-
-![png](output_43_0.png)
-
-
-
-The size (or volume) of a Convolutional Layer in a ConvNet is related to the volume of the prior Convolutional Layer, as well as the size of the Filter used in the convolution operation, and in this section we give some simple expressions that can be used to connect the two. Before we launch into this topic, we introduce another important parameter used in ConvNet design, namely the **Zero-Padding** used during convolution, which we denote as $P$. Zero-Padding does the following: Instead of processing an input of size $L \times W$, we add one or more layers of zeroes around it, in both the dimensions. Hence if $P=1$ then only a single Zero-Padding layer is added, while two layers are added for the case $P=2$ (see Figure **convnet14** for an illustration of the case $P=2$).
+The size (or volume) of a Convolutional Layer in a ConvNet is related to the volume of the prior Convolutional Layer, as well as the size of the Filter used in the convolution operation, and in this section we give some simple expressions that can be used to connect the two. Before we launch into this topic, we introduce another important parameter used in ConvNet design, namely the **Zero-Padding** used during convolution, which we denote as $P$. Zero-Padding does the following: Instead of processing an input of size $L \times W$, we add one or more layers of zeroes around it, in both the dimensions. Hence if $P=1$ then only a single Zero-Padding layer is added, while two layers are added for the case $P=2$ (see Figure 11 for an illustration of the case $P=2$).
 
 
 ### Sizing the Convolutional Layer
@@ -374,12 +241,9 @@ The size (or volume) of a Convolutional Layer in a ConvNet is related to the vol
 nb_setup.images_hconcat(["DL_images/convnet20.png"], width=600)
 ```
 
+![](https://subirvarma.github.io/GeneralCognitics/images/convnet20.png)
 
-
-
-![png](output_46_0.png)
-
-
+*Figure 12*
 
 We will use the following notation:
 
@@ -397,7 +261,7 @@ $$
 L_{r+1} = \frac{L_r-F_r+2P_r}{S_r}+1
 $$
 
-In order to gain insight into this formula, consider Figure **convnet20**:
+In order to gain insight into this formula, consider Figure 12:
 
 - First consider the case $S_r = 1, P_r=0$: As shown in Part (a) of the figure, $W_r - F_r$ is the number of spaces by which the filter can be slid from left to right with a stride of 1. With the addition of $1$ to account for the final position of the filter, we get $W_{r+1} = W_r - F_r +1$. The presence of zero padding of size $P_r$ results in an increase of the size of the feature map by $2P_r$, so that $W_{r+1} = W_r - F_r + 2P_r + 1$
 - If the stride $S_r > 0$, then the number of spaces by which the filter can be moved becomes $W_{r+1} = {{W_r - F_r + 2P_r}\over{S_r}} + 1$
@@ -464,96 +328,30 @@ Earlier in this chapter we observed that a ConvNet Layer with $D$ Activation Map
 nb_setup.images_hconcat(["DL_images/convnet21.png"], width=600)
 ```
 
+![](https://subirvarma.github.io/GeneralCognitics/images/convnet21.png)
 
-
-
-![png](output_52_0.png)
-
-
+*Figure 13*
 
 2D Convolutional Networks are ideal to do Image Processing, since they are able to process 3D image tensors in their native format. But there are important datasets that are either 1D or 2D tensors, examples include:
 
-- Natural Language Processing: Sentences can be represented as a 2D tensor, with a row for each word and the columns with the feature representations for the corresponding word. We came across an example of this dataset in Chapter **NNDeepLearning**.
+- Natural Language Processing: Sentences can be represented as a 2D tensor, with a row for each word and the columns with the feature representations for the corresponding word. 
 - Structured Tabular Datasets: These are the most common type of datasets, and can be either a 1D vector or a 2D matrix.
 
-The idea of doing local filtering using convolutions can be extended to these types of datasets by used 1D Convolutions, as shown in Figure **convnet21**. The bottom part of the figure shows a 1D Convolution using a 2x1 filter with a depth of 4 (in blue). An Activation Map in this case is no longer a 2D matrix, but instead is a 1D vector. The 1D Convolutions acts on the 1D Input Activation Map, and converts into an output 1D Activation Map, as shown. If there are D such 1D filters, then each of them will generate its own output Activation Map, resulting an output of tensor shape (4,4) as shown.
+The idea of doing local filtering using convolutions can be extended to these types of datasets by used 1D Convolutions, as shown in Figure 13. The bottom part of the figure shows a 1D Convolution using a 2x1 filter with a depth of 4 (in blue). An Activation Map in this case is no longer a 2D matrix, but instead is a 1D vector. The 1D Convolutions acts on the 1D Input Activation Map, and converts into an output 1D Activation Map, as shown. If there are D such 1D filters, then each of them will generate its own output Activation Map, resulting an output of tensor shape (4,4) as shown.
 
-The process of sliding (or convolving) the 2x1 filter across the input is illustrated in Figure **convnet22**. It is easy to see that the formula $ W_{r+1} = \frac{W_r-F_r+2P_r}{S_r}+1 $ that was derived for the size of the output Activation Map in 2D Convolutions continues to hold for this case as well.
+The process of sliding (or convolving) the 2x1 filter across the input is illustrated in Figure 14. It is easy to see that the formula $ W_{r+1} = \frac{W_r-F_r+2P_r}{S_r}+1 $ that was derived for the size of the output Activation Map in 2D Convolutions continues to hold for this case as well.
 
+![](https://subirvarma.github.io/GeneralCognitics/images/convnet22.png)
 
-```python
-#convnet22
-nb_setup.images_hconcat(["DL_images/convnet22.png"], width=600)
-```
+*Figure 14*
 
-
-
-
-![png](output_54_0.png)
-
-
-
-The following example, that is taken from Chollet Section 6.4, illustrates the application of 1D Convolutions to the IMDB Movie Review dataset. In Chapter **NNDeepLearning** we showed how to generate the input tensors when starting from raw text data. However this dataset is also available in tensorized form called *imdb*, and this is used for this example.
-
-We start by loading the dataset, and restricting ourselves to the most frequently used 10,000 words in the vocabulary.
-
-
-```python
-from keras.datasets import imdb
-from keras.preprocessing import sequence
-
-max_features = 10000  # number of words to consider as features
-max_len = 500  # cut texts after this number of words (among top max_features most common words)
-
-print('Loading data...')
-(x_train, y_train), (x_test, y_test) = imdb.load_data(num_words=max_features)
-print(len(x_train), 'train sequences')
-print(len(x_test), 'test sequences')
-```
-
-    Loading data...
-    25000 train sequences
-    25000 test sequences
-
-
-We create the training and test tensors by cutting off all reviews to 500 words or less, and padding reviews that are smaller with zeroes.
-
-
-```python
-print('Pad sequences (samples x time)')
-x_train = sequence.pad_sequences(x_train, maxlen=max_len)
-x_test = sequence.pad_sequences(x_test, maxlen=max_len)
-print('x_train shape:', x_train.shape)
-print('x_test shape:', x_test.shape)
-```
-
-    Pad sequences (samples x time)
-    x_train shape: (25000, 500)
-    x_test shape: (25000, 500)
-
-
-
-```python
-#convnet24
-nb_setup.images_hconcat(["DL_images/convnet24.png"], width=900)
-```
-
-
-
-
-![png](output_59_0.png)
-
-
-
-The 1D Convolutional model to process the IMDB dataset is illustrated in Figure **convnet24**. The Embedding Layer converts each review from a 1D vector of integers of size 500, into a 2D matrix of shape (500,128), with rows representing words from the review in vector format. The 128 size vector representation for the words is learnt as part of the training.
+The 1D Convolutional model to process the IMDB dataset is illustrated in Figure 14. The Embedding Layer converts each review from a 1D vector of integers of size 500, into a 2D matrix of shape (500,128), with rows representing words from the review in vector format. The 128 size vector representation for the words is learnt as part of the training.
 
 Note that a Flatten Layer is no longer needed unlike for the case of Dense Feed Forward Networks, since the 1D ConvNet model is capable of processing the text input in its native 2D format.
 
+![](https://subirvarma.github.io/GeneralCognitics/images/convnet24.png)
 
-```python
-from keras.models import Sequential
-from keras import layers
-from tensorflow.keras.optimizers import RMSprop
+*Figure 14*
 
 model = Sequential()
 model.add(layers.Embedding(max_features, 128, input_length=max_len))
@@ -564,15 +362,6 @@ model.add(layers.GlobalMaxPooling1D())
 model.add(layers.Dense(1))
 
 model.summary()
-
-model.compile(optimizer=RMSprop(learning_rate=1e-4),
-              loss='binary_crossentropy',
-              metrics=['acc'])
-history = model.fit(x_train, y_train,
-                    epochs=10,
-                    batch_size=128,
-                    validation_split=0.2)
-```
 
     Model: "sequential_4"
     _________________________________________________________________
@@ -594,127 +383,8 @@ history = model.fit(x_train, y_train,
     Trainable params: 1,315,937
     Non-trainable params: 0
     _________________________________________________________________
-    Epoch 1/10
-    157/157 [==============================] - 42s 259ms/step - loss: 0.7143 - acc: 0.5302 - val_loss: 0.6858 - val_acc: 0.5294
-    Epoch 2/10
-    157/157 [==============================] - 42s 265ms/step - loss: 0.6628 - acc: 0.6660 - val_loss: 0.6660 - val_acc: 0.5990
-    Epoch 3/10
-    157/157 [==============================] - 43s 274ms/step - loss: 0.6200 - acc: 0.7490 - val_loss: 0.6127 - val_acc: 0.7344
-    Epoch 4/10
-    157/157 [==============================] - 41s 263ms/step - loss: 0.5378 - acc: 0.7998 - val_loss: 0.5049 - val_acc: 0.7934
-    Epoch 5/10
-    157/157 [==============================] - 41s 261ms/step - loss: 0.4306 - acc: 0.8356 - val_loss: 0.4293 - val_acc: 0.8320
-    Epoch 6/10
-    157/157 [==============================] - 40s 253ms/step - loss: 0.3514 - acc: 0.8681 - val_loss: 0.4139 - val_acc: 0.8488
-    Epoch 7/10
-    157/157 [==============================] - 41s 260ms/step - loss: 0.3011 - acc: 0.8896 - val_loss: 0.4147 - val_acc: 0.8614
-    Epoch 8/10
-    157/157 [==============================] - 39s 251ms/step - loss: 0.2673 - acc: 0.9049 - val_loss: 0.4277 - val_acc: 0.8658
-    Epoch 9/10
-    157/157 [==============================] - 41s 260ms/step - loss: 0.2420 - acc: 0.9155 - val_loss: 0.4291 - val_acc: 0.8690
-    Epoch 10/10
-    157/157 [==============================] - 41s 258ms/step - loss: 0.2206 - acc: 0.9254 - val_loss: 0.4453 - val_acc: 0.8730
+    
 
-
-
-```python
-history_dict = history.history
-history_dict.keys()
-```
-
-
-
-
-    dict_keys(['loss', 'acc', 'val_loss', 'val_acc'])
-
-
-
-
-```python
-import matplotlib.pyplot as plt
-
-acc = history.history['acc']
-val_acc = history.history['val_acc']
-loss = history.history['loss']
-val_loss = history.history['val_loss']
-
-epochs = range(1, len(acc) + 1)
-#epochs = range(1, len(loss) + 1)
-
-# "bo" is for "blue dot"
-plt.plot(epochs, loss, 'bo', label='Training loss')
-# b is for "solid blue line"
-plt.plot(epochs, val_loss, 'b', label='Validation loss')
-plt.title('Training and validation loss')
-plt.xlabel('Epochs')
-plt.ylabel('Loss')
-plt.legend()
-
-plt.show()
-```
-
-
-![png](output_63_0.png)
-
-
-
-```python
-plt.clf()   # clear figure
-acc_values = history_dict['acc']
-val_acc_values = history_dict['val_acc']
-
-plt.plot(epochs, acc, 'bo', label='Training acc')
-plt.plot(epochs, val_acc, 'b', label='Validation acc')
-plt.title('Training and validation accuracy')
-plt.xlabel('Epochs')
-plt.ylabel('Loss')
-plt.legend()
-
-plt.show()
-```
-
-
-![png](output_64_0.png)
-
-
-The model starts to overfit after about 6 epochs. It achieces a maximum accuracy of about 80% which is much better than the Dense Feed Forward model, and is comparable to that obtained by using Recurrent Neural Networks.
-
-## Backprop for ConvNets
-
-ConvNets can be trained using a modified version of the Backprop algorithm that was described in Chapter **TrainingNNsBackprop**. The modification, which is necessary due to the fact that multiple nodes now share the same weight parameters, is as follows:
-
-- The forward pass of the Backprop algorithm is as before, during which we compute all the node activations.
-
-- During the backward pass we compute the gradients $\delta_{jk}^{q}(r)$ for each node as before.
-
-- The final computation of the gradient of the Loss Function with respect to the weight parameters is modified as follows: The gradient with respect to a weight parameter is computed as the sum of the gradients of all the connections that share the same weight.
-
-
-```python
-#convnet8
-nb_setup.images_hconcat(["DL_images/convnet8.png"], width=600)
-```
-
-
-
-
-![png](output_67_0.png)
-
-
-
-In order to justify the last rule, consider 1D Convnet in Figure **convnet8**: Focusing on the weight $w_1$, note that the gradient $\frac{\partial L}{\partial w_1}$ depends on $w_1$ through the pre-activations $a_1, a_2, a_3$ due to the parameter sharing property (this is in contrast to Fully Connected Networks where the dependence was only on $a_1$). As a result, using the chain rule we obtain:
-
-$$
-\frac{\partial L}{\partial w_1} = \frac{\partial L}{\partial a_1}\frac{\partial a_1}{\partial w_1} + \frac{\partial L}{\partial a_2}\frac{\partial a_2}{\partial w_1} + \frac{\partial L}{\partial a_3}\frac{\partial a_3}{\partial w_1}
-$$
-
-Noting that $\frac{\partial a_i}{\partial w_1}=z_i,i=1,2,3$ and $\frac{\partial L}{\partial a_i}=\delta_i$, we obtain
-
-$$
-\frac{\partial L}{\partial w_1} = z_1\delta_1 + z_2\delta_2 + z_3\delta_3
-$$
-
-The process of generating the gradients $\delta^{(r)}$ at layer $r$, from the gradients $\delta^{(r+1)}$ at layer $r+1$ was fairly straightforward in Fully Connected networks, and corresponded to a multiplication by the transpose $W^T$ of the weight matrix. In the case of ConvNets, the corresponding operation is a little more involved, and proceeds by multiplication by the transpose of the filter matrix. In order to do this efficiently using matrix multiplication, we have to pad the Activation Map (made up of gradients) by zeroes. The reader can verify this by running the operations in Figure **convnet8** backwards.
 
 ## Transfer Learning with ConvNets
 
@@ -723,250 +393,27 @@ When ConvNets are trained on image data, such as ImageNet, we have the luxury of
 Practitioners often run into problems when there are not enough training examples to train such large networks, or if they don't have access to the necessary computing resources for the particular problem that they are trying to solve. 
 Fortunately there is a technique called Transfer Learning that enables us to develop accurate models even without a lot of training data or computing resources. Transfer Learning enables us to transfer the parameters learnt from training a model for Problem 1, to be re-used in the model for another Problem 2, provided the training dataset for Problem 2 is similar to that used for Problem 1.
 
+![](https://subirvarma.github.io/GeneralCognitics/images/convnet9.png)
 
-```python
-#convnet9
-nb_setup.images_hconcat(["DL_images/convnet9.png"], width=700)
-```
+*Figure 15*
 
+In order to understand how Transfer Learning works, consider Figure 15. Part (a) of the figure shows a traditional ConvNet, say ConvNet 1, which has been trained on a large dataset such as ImageNet. It has a mixture of Convolutional and Maxpool layers, which is followed by Dense Feed Forward layers at the end of the network. In order to reuse the parameters learnt from this network, to another network, say Convnet 2, with a similar dataset which is much smaller in size, we do the following:
 
+- As shown in Part (b) of Figure 15, we freeze the parameters of ALL the layers of ConvNet 1, except for the Logit Layer (called FC-1000), and then use these parameters as a Feature Extractor in ConvNet 2. Note that ConvNet 2 (shown in Part(c)) corresponds to a simple Logistic Regression model with a Feature Extractor used in the Input Layer.
 
-
-![png](output_70_0.png)
-
-
-
-
-In order to understand how Transfer Learning works, consider Figure **convnet9**. Part (a) of the figure shows a traditional ConvNet, say ConvNet 1, which has been trained on a large dataset such as ImageNet. It has a mixture of Convolutional and Maxpool layers, which is followed by Dense Feed Forward layers at the end of the network. In order to reuse the parameters learnt from this network, to another network, say Convnet 2, with a similar dataset which is much smaller in size, we do the following:
-
-- As shown in Part (b) of Figure **convnet9**, we freeze the parameters of ALL the layers of ConvNet 1, except for the Logit Layer (called FC-1000), and then use these parameters as a Feature Extractor in ConvNet 2. The reader may recall from Chapter **LinearLearningModels** that ConvNet 2 (shown in Part(c)) corresponds to a simple Logistic Regression model with a Feature Extractor used in the Input Layer.
-
-- In order to complete ConvNet 2, we only need to find the weights of the connections between the Feature Extractor outputs ${z_i}$ and the Output Layer ${y_i}$, as shown in Part (c) of Figure **convnet9**. Since the number of trainable weights are now much smaller, they can be estimated using the smaller dataset available for ConvNet 2 with smaller compute resources.
+- In order to complete ConvNet 2, we only need to find the weights of the connections between the Feature Extractor outputs ${z_i}$ and the Output Layer ${y_i}$, as shown in Part (c) of Figure 15. Since the number of trainable weights are now much smaller, they can be estimated using the smaller dataset available for ConvNet 2 with smaller compute resources.
 
 The Transfer Learning technique described above has been shown to be very effective in solving Image Processing problems, and has enabled the use of sophisticated ConvNet Models for a wider modeling community.
 
+![](https://subirvarma.github.io/GeneralCognitics/images/convnet10.png)
 
-```python
-#convnet10
-nb_setup.images_hconcat(["DL_images/convnet10.png"], width=600)
-```
+*Figure 16*
 
+If larger datasets are available for Problem 2 (but which are still smaller than ImageNet in size), then the technique that was explained above, can be extended to networks with additional layers, as shown in Figure 16). In this case we reduce the number of frozen layers from ConvNet 1, so that ConvNet 2 now has additional layers that need to be trained. Once again the frozen layers in ConvNet 1 act as a Feature Extractor whose outputs are fed into the rest of the convolutional network.
 
+Why does Transfer Learning work so well? A ConvNet trained on a large dataset such as ImageNet, learns to recognize generic patterns and shapes that also occur in non-ImageNet data. In addition, even non-image data, such as audiowave signals, can be classified well with the patterns that are learnt with ImageNet. A general rule of thumb is that the earlier Hidden Layers in the ConvNet contain the more generic portion that can be re-used in other contexts, and the model becomes more and more specific to the particular dataset, as we go deeper into the network. In practice, researchers can save a large amount of time (and money), by not starting from scratch, but instead use an appropriate pre-trained model, when they start working on a new model. 
 
-
-![png](output_72_0.png)
-
-
-
-If larger datasets are available for Problem 2 (but which are still smaller than ImageNet in size), then the technique that was explained above, can be extended to networks with additional layers, as shown in Figure **convnet10**). In this case we reduce the number of frozen layers from ConvNet 1, so that ConvNet 2 now has additional layers that need to be trained. Once again the frozen layers in ConvNet 1 act as a Feature Extractor whose outputs are fed into the rest of the convolutional network.
-
-Why does Transfer Learning work so well? A ConvNet trained on a large dataset such as ImageNet, learns to recognize generic patterns and shapes that also occur in non-ImageNet data. In addition, even non-image data, such as audiowave signals, can be classified well with the patterns that are learnt with ImageNet. A general rule of thumb is that the earlier Hidden Layers in the ConvNet contain the more generic portion that can be re-used in other contexts, and the model becomes more and more specific to the particular dataset, as we go deeper into the network.
-
-In practice, researchers can save a large amount of time (and money), by not starting from scratch, but instead use an appropriate pre-trained model, when they start working on a new model. A large number of ConvNet models pre-trained on ImageNet, including all the models discussed in this chapter, are available as part of the Model Library in Keras (https://keras.io/applications/#models-for-image-classification-with-weights-trained-on-imagenet).
-
-The following example of Transfer Learning is taken from Chollet Section 5.3. It uses the Cats and Dogs dataset that we first encountered in Chapter **NNDeepLearning**. In that chapter we used a Dense Feed Forward Network to do the classification and obtained an accuracy of about 60%. We now solve this problem using Transfer Learning with ConvNets and obtain more than 97% accuracy.
-
-We start by downloading a MobileNet model, whose parameters have been pre-trained on ImageNet (the design of MobileNet is discussed in Chapter **ConvNetsPart2**). Only the convolutional part of the network is downloaded into the tensor *conv_base*. The flag *include_top = false* ensures that the logit layer from MobileNet is not included in *conv_base*.
-
-
-```python
-from tensorflow.keras.applications import MobileNet
-
-conv_base = MobileNet(weights='imagenet',
-                  include_top=False,
-                  input_shape=(160, 160, 3))
-```
-
-The summary of the downloaded model shows that it has a total of 3,206,976 trainable parameters. Also the final tensor in the model has shape (5,5,1024). 
-
-
-```python
-conv_base.summary()
-```
-
-    Model: "mobilenet_1.00_160"
-    _________________________________________________________________
-    Layer (type)                 Output Shape              Param #   
-    =================================================================
-    input_2 (InputLayer)         [(None, 160, 160, 3)]     0         
-    _________________________________________________________________
-    conv1 (Conv2D)               (None, 80, 80, 32)        864       
-    _________________________________________________________________
-    conv1_bn (BatchNormalization (None, 80, 80, 32)        128       
-    _________________________________________________________________
-    conv1_relu (ReLU)            (None, 80, 80, 32)        0         
-    _________________________________________________________________
-    conv_dw_1 (DepthwiseConv2D)  (None, 80, 80, 32)        288       
-    _________________________________________________________________
-    conv_dw_1_bn (BatchNormaliza (None, 80, 80, 32)        128       
-    _________________________________________________________________
-    conv_dw_1_relu (ReLU)        (None, 80, 80, 32)        0         
-    _________________________________________________________________
-    conv_pw_1 (Conv2D)           (None, 80, 80, 64)        2048      
-    _________________________________________________________________
-    conv_pw_1_bn (BatchNormaliza (None, 80, 80, 64)        256       
-    _________________________________________________________________
-    conv_pw_1_relu (ReLU)        (None, 80, 80, 64)        0         
-    _________________________________________________________________
-    conv_pad_2 (ZeroPadding2D)   (None, 81, 81, 64)        0         
-    _________________________________________________________________
-    conv_dw_2 (DepthwiseConv2D)  (None, 40, 40, 64)        576       
-    _________________________________________________________________
-    conv_dw_2_bn (BatchNormaliza (None, 40, 40, 64)        256       
-    _________________________________________________________________
-    conv_dw_2_relu (ReLU)        (None, 40, 40, 64)        0         
-    _________________________________________________________________
-    conv_pw_2 (Conv2D)           (None, 40, 40, 128)       8192      
-    _________________________________________________________________
-    conv_pw_2_bn (BatchNormaliza (None, 40, 40, 128)       512       
-    _________________________________________________________________
-    conv_pw_2_relu (ReLU)        (None, 40, 40, 128)       0         
-    _________________________________________________________________
-    conv_dw_3 (DepthwiseConv2D)  (None, 40, 40, 128)       1152      
-    _________________________________________________________________
-    conv_dw_3_bn (BatchNormaliza (None, 40, 40, 128)       512       
-    _________________________________________________________________
-    conv_dw_3_relu (ReLU)        (None, 40, 40, 128)       0         
-    _________________________________________________________________
-    conv_pw_3 (Conv2D)           (None, 40, 40, 128)       16384     
-    _________________________________________________________________
-    conv_pw_3_bn (BatchNormaliza (None, 40, 40, 128)       512       
-    _________________________________________________________________
-    conv_pw_3_relu (ReLU)        (None, 40, 40, 128)       0         
-    _________________________________________________________________
-    conv_pad_4 (ZeroPadding2D)   (None, 41, 41, 128)       0         
-    _________________________________________________________________
-    conv_dw_4 (DepthwiseConv2D)  (None, 20, 20, 128)       1152      
-    _________________________________________________________________
-    conv_dw_4_bn (BatchNormaliza (None, 20, 20, 128)       512       
-    _________________________________________________________________
-    conv_dw_4_relu (ReLU)        (None, 20, 20, 128)       0         
-    _________________________________________________________________
-    conv_pw_4 (Conv2D)           (None, 20, 20, 256)       32768     
-    _________________________________________________________________
-    conv_pw_4_bn (BatchNormaliza (None, 20, 20, 256)       1024      
-    _________________________________________________________________
-    conv_pw_4_relu (ReLU)        (None, 20, 20, 256)       0         
-    _________________________________________________________________
-    conv_dw_5 (DepthwiseConv2D)  (None, 20, 20, 256)       2304      
-    _________________________________________________________________
-    conv_dw_5_bn (BatchNormaliza (None, 20, 20, 256)       1024      
-    _________________________________________________________________
-    conv_dw_5_relu (ReLU)        (None, 20, 20, 256)       0         
-    _________________________________________________________________
-    conv_pw_5 (Conv2D)           (None, 20, 20, 256)       65536     
-    _________________________________________________________________
-    conv_pw_5_bn (BatchNormaliza (None, 20, 20, 256)       1024      
-    _________________________________________________________________
-    conv_pw_5_relu (ReLU)        (None, 20, 20, 256)       0         
-    _________________________________________________________________
-    conv_pad_6 (ZeroPadding2D)   (None, 21, 21, 256)       0         
-    _________________________________________________________________
-    conv_dw_6 (DepthwiseConv2D)  (None, 10, 10, 256)       2304      
-    _________________________________________________________________
-    conv_dw_6_bn (BatchNormaliza (None, 10, 10, 256)       1024      
-    _________________________________________________________________
-    conv_dw_6_relu (ReLU)        (None, 10, 10, 256)       0         
-    _________________________________________________________________
-    conv_pw_6 (Conv2D)           (None, 10, 10, 512)       131072    
-    _________________________________________________________________
-    conv_pw_6_bn (BatchNormaliza (None, 10, 10, 512)       2048      
-    _________________________________________________________________
-    conv_pw_6_relu (ReLU)        (None, 10, 10, 512)       0         
-    _________________________________________________________________
-    conv_dw_7 (DepthwiseConv2D)  (None, 10, 10, 512)       4608      
-    _________________________________________________________________
-    conv_dw_7_bn (BatchNormaliza (None, 10, 10, 512)       2048      
-    _________________________________________________________________
-    conv_dw_7_relu (ReLU)        (None, 10, 10, 512)       0         
-    _________________________________________________________________
-    conv_pw_7 (Conv2D)           (None, 10, 10, 512)       262144    
-    _________________________________________________________________
-    conv_pw_7_bn (BatchNormaliza (None, 10, 10, 512)       2048      
-    _________________________________________________________________
-    conv_pw_7_relu (ReLU)        (None, 10, 10, 512)       0         
-    _________________________________________________________________
-    conv_dw_8 (DepthwiseConv2D)  (None, 10, 10, 512)       4608      
-    _________________________________________________________________
-    conv_dw_8_bn (BatchNormaliza (None, 10, 10, 512)       2048      
-    _________________________________________________________________
-    conv_dw_8_relu (ReLU)        (None, 10, 10, 512)       0         
-    _________________________________________________________________
-    conv_pw_8 (Conv2D)           (None, 10, 10, 512)       262144    
-    _________________________________________________________________
-    conv_pw_8_bn (BatchNormaliza (None, 10, 10, 512)       2048      
-    _________________________________________________________________
-    conv_pw_8_relu (ReLU)        (None, 10, 10, 512)       0         
-    _________________________________________________________________
-    conv_dw_9 (DepthwiseConv2D)  (None, 10, 10, 512)       4608      
-    _________________________________________________________________
-    conv_dw_9_bn (BatchNormaliza (None, 10, 10, 512)       2048      
-    _________________________________________________________________
-    conv_dw_9_relu (ReLU)        (None, 10, 10, 512)       0         
-    _________________________________________________________________
-    conv_pw_9 (Conv2D)           (None, 10, 10, 512)       262144    
-    _________________________________________________________________
-    conv_pw_9_bn (BatchNormaliza (None, 10, 10, 512)       2048      
-    _________________________________________________________________
-    conv_pw_9_relu (ReLU)        (None, 10, 10, 512)       0         
-    _________________________________________________________________
-    conv_dw_10 (DepthwiseConv2D) (None, 10, 10, 512)       4608      
-    _________________________________________________________________
-    conv_dw_10_bn (BatchNormaliz (None, 10, 10, 512)       2048      
-    _________________________________________________________________
-    conv_dw_10_relu (ReLU)       (None, 10, 10, 512)       0         
-    _________________________________________________________________
-    conv_pw_10 (Conv2D)          (None, 10, 10, 512)       262144    
-    _________________________________________________________________
-    conv_pw_10_bn (BatchNormaliz (None, 10, 10, 512)       2048      
-    _________________________________________________________________
-    conv_pw_10_relu (ReLU)       (None, 10, 10, 512)       0         
-    _________________________________________________________________
-    conv_dw_11 (DepthwiseConv2D) (None, 10, 10, 512)       4608      
-    _________________________________________________________________
-    conv_dw_11_bn (BatchNormaliz (None, 10, 10, 512)       2048      
-    _________________________________________________________________
-    conv_dw_11_relu (ReLU)       (None, 10, 10, 512)       0         
-    _________________________________________________________________
-    conv_pw_11 (Conv2D)          (None, 10, 10, 512)       262144    
-    _________________________________________________________________
-    conv_pw_11_bn (BatchNormaliz (None, 10, 10, 512)       2048      
-    _________________________________________________________________
-    conv_pw_11_relu (ReLU)       (None, 10, 10, 512)       0         
-    _________________________________________________________________
-    conv_pad_12 (ZeroPadding2D)  (None, 11, 11, 512)       0         
-    _________________________________________________________________
-    conv_dw_12 (DepthwiseConv2D) (None, 5, 5, 512)         4608      
-    _________________________________________________________________
-    conv_dw_12_bn (BatchNormaliz (None, 5, 5, 512)         2048      
-    _________________________________________________________________
-    conv_dw_12_relu (ReLU)       (None, 5, 5, 512)         0         
-    _________________________________________________________________
-    conv_pw_12 (Conv2D)          (None, 5, 5, 1024)        524288    
-    _________________________________________________________________
-    conv_pw_12_bn (BatchNormaliz (None, 5, 5, 1024)        4096      
-    _________________________________________________________________
-    conv_pw_12_relu (ReLU)       (None, 5, 5, 1024)        0         
-    _________________________________________________________________
-    conv_dw_13 (DepthwiseConv2D) (None, 5, 5, 1024)        9216      
-    _________________________________________________________________
-    conv_dw_13_bn (BatchNormaliz (None, 5, 5, 1024)        4096      
-    _________________________________________________________________
-    conv_dw_13_relu (ReLU)       (None, 5, 5, 1024)        0         
-    _________________________________________________________________
-    conv_pw_13 (Conv2D)          (None, 5, 5, 1024)        1048576   
-    _________________________________________________________________
-    conv_pw_13_bn (BatchNormaliz (None, 5, 5, 1024)        4096      
-    _________________________________________________________________
-    conv_pw_13_relu (ReLU)       (None, 5, 5, 1024)        0         
-    =================================================================
-    Total params: 3,228,864
-    Trainable params: 3,206,976
-    Non-trainable params: 21,888
-    _________________________________________________________________
-
-
-There are two ways in which image features from the cats and dogs dataset can be extracted using the MobileNet *conv_base*:
+There are two ways in which features from image datasets can be extracted:
     
 1. All the images in the dataset (training, validation and test) are fed into *conv_base*, and the final tensors (of shape (5,5,1024)) is used as the new image representation. Note that the original images are no longer used in the rest of the model training and validation.
 2. The model incorporates both the pre-trained *conv_base* as well as the trainable portion. Training is done using the image dataset, during which the weghts in the pre-trained portion are frozen.
@@ -975,293 +422,11 @@ Method 1 leads to faster training, since the images don't have to be processed b
 
 In this example we will use Method 1, please see Chollet Section 8.3 for an example of Method 2 as well as additional examples of Transfer Learning.
 
+![](https://subirvarma.github.io/GeneralCognitics/images/convnet32.png)
 
-```python
-import keras
-import tensorflow
-import numpy as np
-import os, shutil, pathlib
-from tensorflow.keras.utils import image_dataset_from_directory
+*Figure 17*
 
-train_dir = '/Users/subirvarma/handson-ml/datasets/cats_and_dogs_small/train'
-validation_dir = '/Users/subirvarma/handson-ml/datasets/cats_and_dogs_small/validation'
-
-train_cats_dir = '/Users/subirvarma/handson-ml/datasets/cats_and_dogs_small/train/cats'
-train_dogs_dir = '/Users/subirvarma/handson-ml/datasets/cats_and_dogs_small/train/dogs'
-
-validation_cats_dir = '/Users/subirvarma/handson-ml/datasets/cats_and_dogs_small/validation/cats'
-validation_dogs_dir = '/Users/subirvarma/handson-ml/datasets/cats_and_dogs_small/validation/dogs'
-
-new_base_dir = pathlib.Path("/Users/subirvarma/handson-ml/datasets/cats_and_dogs_small")
-
-train_dataset = image_dataset_from_directory(
-    new_base_dir / "train",
-    image_size=(160, 160),
-    batch_size=20)
-validation_dataset = image_dataset_from_directory(
-    new_base_dir / "validation",
-    image_size=(160, 160),
-    batch_size=20)
-
-def get_features_and_labels(dataset):
-    all_features = []
-    all_labels = []
-    for images, labels in dataset:
-        preprocessed_images = tensorflow.keras.applications.mobilenet.preprocess_input(images)
-        features = conv_base.predict(preprocessed_images)
-        all_features.append(features)
-        all_labels.append(labels)
-    return np.concatenate(all_features), np.concatenate(all_labels)
-
-train_features, train_labels =  get_features_and_labels(train_dataset)
-val_features, val_labels =  get_features_and_labels(validation_dataset)
-```
-
-    Found 2000 files belonging to 2 classes.
-    Found 1000 files belonging to 2 classes.
-
-
-
-```python
-#convnet32
-nb_setup.images_hconcat(["DL_images/convnet32.png"], width=800)
-```
-
-
-
-
-![png](output_80_0.png)
-
-
-
-The complete model is shown in Figure **convnet32**. During the pre-training phase, each image is passed through the MobileNet model, and its final output stored as the new training dataset. These extracted features are then converted into a vector using the Global Max Pooling operation and then sent through a simple Dense Feed Forward model with a single hidden layer with 256 nodes.
-
-
-```python
-inputs = keras.Input(shape=(5, 5, 1024))
-x = layers.Flatten()(inputs)
-x = layers.Dense(256)(x)
-x = layers.Dropout(0.5)(x)
-outputs = layers.Dense(1, activation="sigmoid")(x)
-model = keras.Model(inputs, outputs)
-
-model.compile(loss="binary_crossentropy",
-              optimizer="rmsprop",
-              metrics=["accuracy"])
-
-history = model.fit(
-    train_features, train_labels,
-    epochs=100,
-    validation_data=(val_features, val_labels)
-    )
-```
-
-    Epoch 1/100
-    63/63 [==============================] - 5s 71ms/step - loss: 6.4526 - accuracy: 0.9260 - val_loss: 1.1723 - val_accuracy: 0.9830
-    Epoch 2/100
-    63/63 [==============================] - 4s 67ms/step - loss: 1.1029 - accuracy: 0.9775 - val_loss: 2.1722 - val_accuracy: 0.9620
-    Epoch 3/100
-    63/63 [==============================] - 4s 69ms/step - loss: 0.7706 - accuracy: 0.9855 - val_loss: 1.7282 - val_accuracy: 0.9750
-    Epoch 4/100
-    63/63 [==============================] - 4s 70ms/step - loss: 0.4023 - accuracy: 0.9905 - val_loss: 1.4568 - val_accuracy: 0.9780
-    Epoch 5/100
-    63/63 [==============================] - 4s 69ms/step - loss: 0.3113 - accuracy: 0.9945 - val_loss: 3.8405 - val_accuracy: 0.9620
-    Epoch 6/100
-    63/63 [==============================] - 5s 74ms/step - loss: 0.1275 - accuracy: 0.9950 - val_loss: 2.8110 - val_accuracy: 0.9690
-    Epoch 7/100
-    63/63 [==============================] - 5s 78ms/step - loss: 0.1624 - accuracy: 0.9965 - val_loss: 4.2771 - val_accuracy: 0.9520
-    Epoch 8/100
-    63/63 [==============================] - 5s 72ms/step - loss: 0.0687 - accuracy: 0.9965 - val_loss: 1.5030 - val_accuracy: 0.9780
-    Epoch 9/100
-    63/63 [==============================] - 4s 68ms/step - loss: 0.1062 - accuracy: 0.9975 - val_loss: 2.4101 - val_accuracy: 0.9670
-    Epoch 10/100
-    63/63 [==============================] - 4s 68ms/step - loss: 0.1269 - accuracy: 0.9965 - val_loss: 1.5850 - val_accuracy: 0.9770
-    Epoch 11/100
-    63/63 [==============================] - 4s 69ms/step - loss: 2.5142e-05 - accuracy: 1.0000 - val_loss: 2.0085 - val_accuracy: 0.9740
-    Epoch 12/100
-    63/63 [==============================] - 4s 68ms/step - loss: 0.0226 - accuracy: 0.9985 - val_loss: 1.7252 - val_accuracy: 0.9790
-    Epoch 13/100
-    63/63 [==============================] - 4s 69ms/step - loss: 0.0062 - accuracy: 0.9995 - val_loss: 3.4487 - val_accuracy: 0.9600
-    Epoch 14/100
-    63/63 [==============================] - 4s 68ms/step - loss: 0.1212 - accuracy: 0.9985 - val_loss: 1.6142 - val_accuracy: 0.9780
-    Epoch 15/100
-    63/63 [==============================] - 4s 68ms/step - loss: 3.4656e-11 - accuracy: 1.0000 - val_loss: 1.6149 - val_accuracy: 0.9780
-    Epoch 16/100
-    63/63 [==============================] - 4s 68ms/step - loss: 0.0719 - accuracy: 0.9990 - val_loss: 1.6085 - val_accuracy: 0.9770
-    Epoch 17/100
-    63/63 [==============================] - 4s 69ms/step - loss: 0.0257 - accuracy: 0.9990 - val_loss: 1.8507 - val_accuracy: 0.9750
-    Epoch 18/100
-    63/63 [==============================] - 4s 69ms/step - loss: 5.9659e-07 - accuracy: 1.0000 - val_loss: 2.0008 - val_accuracy: 0.9730
-    Epoch 19/100
-    63/63 [==============================] - 4s 69ms/step - loss: 3.2507e-08 - accuracy: 1.0000 - val_loss: 1.7860 - val_accuracy: 0.9760
-    Epoch 20/100
-    63/63 [==============================] - 4s 69ms/step - loss: 0.0067 - accuracy: 0.9990 - val_loss: 2.2937 - val_accuracy: 0.9750
-    Epoch 21/100
-    63/63 [==============================] - 4s 67ms/step - loss: 0.0193 - accuracy: 0.9990 - val_loss: 2.4777 - val_accuracy: 0.9720
-    Epoch 22/100
-    63/63 [==============================] - 4s 68ms/step - loss: 0.0597 - accuracy: 0.9985 - val_loss: 2.4879 - val_accuracy: 0.9730
-    Epoch 23/100
-    63/63 [==============================] - 4s 68ms/step - loss: 5.8182e-16 - accuracy: 1.0000 - val_loss: 2.4879 - val_accuracy: 0.9730
-    Epoch 24/100
-    63/63 [==============================] - 4s 68ms/step - loss: 0.0132 - accuracy: 0.9990 - val_loss: 2.2678 - val_accuracy: 0.9720
-    Epoch 25/100
-    63/63 [==============================] - 4s 69ms/step - loss: 0.0043 - accuracy: 0.9995 - val_loss: 2.4345 - val_accuracy: 0.9720
-    Epoch 26/100
-    63/63 [==============================] - 4s 70ms/step - loss: 0.0163 - accuracy: 0.9990 - val_loss: 2.2456 - val_accuracy: 0.9730
-    Epoch 27/100
-    63/63 [==============================] - 4s 69ms/step - loss: 0.0231 - accuracy: 0.9990 - val_loss: 2.3544 - val_accuracy: 0.9720
-    Epoch 28/100
-    63/63 [==============================] - 4s 68ms/step - loss: 9.0298e-21 - accuracy: 1.0000 - val_loss: 2.3544 - val_accuracy: 0.9720
-    Epoch 29/100
-    63/63 [==============================] - 4s 69ms/step - loss: 3.3810e-20 - accuracy: 1.0000 - val_loss: 2.3544 - val_accuracy: 0.9720
-    Epoch 30/100
-    63/63 [==============================] - 4s 67ms/step - loss: 4.7015e-09 - accuracy: 1.0000 - val_loss: 2.7421 - val_accuracy: 0.9710
-    Epoch 31/100
-    63/63 [==============================] - 4s 68ms/step - loss: 2.0973e-11 - accuracy: 1.0000 - val_loss: 2.7532 - val_accuracy: 0.9710
-    Epoch 32/100
-    63/63 [==============================] - 4s 69ms/step - loss: 0.0107 - accuracy: 0.9985 - val_loss: 3.2638 - val_accuracy: 0.9690
-    Epoch 33/100
-    63/63 [==============================] - 4s 70ms/step - loss: 8.5600e-04 - accuracy: 0.9995 - val_loss: 2.6681 - val_accuracy: 0.9710
-    Epoch 34/100
-    63/63 [==============================] - 4s 69ms/step - loss: 0.0072 - accuracy: 0.9990 - val_loss: 2.4223 - val_accuracy: 0.9730
-    Epoch 35/100
-    63/63 [==============================] - 4s 69ms/step - loss: 1.0289e-22 - accuracy: 1.0000 - val_loss: 2.4223 - val_accuracy: 0.9730
-    Epoch 36/100
-    63/63 [==============================] - 4s 69ms/step - loss: 1.0772e-08 - accuracy: 1.0000 - val_loss: 2.5136 - val_accuracy: 0.9730
-    Epoch 37/100
-    63/63 [==============================] - 4s 68ms/step - loss: 1.4933e-33 - accuracy: 1.0000 - val_loss: 2.5136 - val_accuracy: 0.9730
-    Epoch 38/100
-    63/63 [==============================] - 4s 68ms/step - loss: 1.4144e-32 - accuracy: 1.0000 - val_loss: 2.5136 - val_accuracy: 0.9730
-    Epoch 39/100
-    63/63 [==============================] - 4s 68ms/step - loss: 5.3352e-12 - accuracy: 1.0000 - val_loss: 2.5136 - val_accuracy: 0.9730
-    Epoch 40/100
-    63/63 [==============================] - 4s 68ms/step - loss: 1.3947e-34 - accuracy: 1.0000 - val_loss: 2.5136 - val_accuracy: 0.9730
-    Epoch 41/100
-    63/63 [==============================] - 4s 68ms/step - loss: 0.0177 - accuracy: 0.9990 - val_loss: 2.8212 - val_accuracy: 0.9690
-    Epoch 42/100
-    63/63 [==============================] - 4s 69ms/step - loss: 8.4908e-14 - accuracy: 1.0000 - val_loss: 2.8212 - val_accuracy: 0.9690
-    Epoch 43/100
-    63/63 [==============================] - 4s 68ms/step - loss: 7.3022e-20 - accuracy: 1.0000 - val_loss: 2.8212 - val_accuracy: 0.9690
-    Epoch 44/100
-    63/63 [==============================] - 4s 68ms/step - loss: 1.1595e-12 - accuracy: 1.0000 - val_loss: 2.8218 - val_accuracy: 0.9690
-    Epoch 45/100
-    63/63 [==============================] - 4s 69ms/step - loss: 6.2568e-29 - accuracy: 1.0000 - val_loss: 2.8218 - val_accuracy: 0.9690
-    Epoch 46/100
-    63/63 [==============================] - 4s 68ms/step - loss: 0.0118 - accuracy: 0.9995 - val_loss: 2.6565 - val_accuracy: 0.9730
-    Epoch 47/100
-    63/63 [==============================] - 4s 68ms/step - loss: 9.1422e-11 - accuracy: 1.0000 - val_loss: 2.6847 - val_accuracy: 0.9720
-    Epoch 48/100
-    63/63 [==============================] - 4s 70ms/step - loss: 1.3599e-28 - accuracy: 1.0000 - val_loss: 2.6847 - val_accuracy: 0.9720
-    Epoch 49/100
-    63/63 [==============================] - 4s 69ms/step - loss: 1.9489e-18 - accuracy: 1.0000 - val_loss: 2.6847 - val_accuracy: 0.9720
-    Epoch 50/100
-    63/63 [==============================] - 4s 68ms/step - loss: 1.4235e-11 - accuracy: 1.0000 - val_loss: 2.6847 - val_accuracy: 0.9720
-    Epoch 51/100
-    63/63 [==============================] - 4s 69ms/step - loss: 0.0206 - accuracy: 0.9990 - val_loss: 2.4981 - val_accuracy: 0.9740
-    Epoch 52/100
-    63/63 [==============================] - 4s 67ms/step - loss: 0.0302 - accuracy: 0.9990 - val_loss: 3.5384 - val_accuracy: 0.9670
-    Epoch 53/100
-    63/63 [==============================] - 4s 67ms/step - loss: 0.0092 - accuracy: 0.9995 - val_loss: 2.2027 - val_accuracy: 0.9760
-    Epoch 54/100
-    63/63 [==============================] - 4s 67ms/step - loss: 1.2153e-20 - accuracy: 1.0000 - val_loss: 2.2027 - val_accuracy: 0.9760
-    Epoch 55/100
-    63/63 [==============================] - 4s 68ms/step - loss: 3.7367e-28 - accuracy: 1.0000 - val_loss: 2.2027 - val_accuracy: 0.9760
-    Epoch 56/100
-    63/63 [==============================] - 4s 67ms/step - loss: 8.1907e-29 - accuracy: 1.0000 - val_loss: 2.2027 - val_accuracy: 0.9760
-    Epoch 57/100
-    63/63 [==============================] - 4s 66ms/step - loss: 1.1880e-35 - accuracy: 1.0000 - val_loss: 2.2027 - val_accuracy: 0.9760
-    Epoch 58/100
-    63/63 [==============================] - 4s 66ms/step - loss: 1.1479e-23 - accuracy: 1.0000 - val_loss: 2.2027 - val_accuracy: 0.9760
-    Epoch 59/100
-    63/63 [==============================] - 4s 65ms/step - loss: 4.9519e-17 - accuracy: 1.0000 - val_loss: 2.2027 - val_accuracy: 0.9760
-    Epoch 60/100
-    63/63 [==============================] - 4s 66ms/step - loss: 2.9267e-28 - accuracy: 1.0000 - val_loss: 2.2027 - val_accuracy: 0.9760
-    Epoch 61/100
-    63/63 [==============================] - 4s 67ms/step - loss: 1.5136e-25 - accuracy: 1.0000 - val_loss: 2.2027 - val_accuracy: 0.9760
-    Epoch 62/100
-    63/63 [==============================] - 4s 67ms/step - loss: 1.8424e-15 - accuracy: 1.0000 - val_loss: 2.2027 - val_accuracy: 0.9760
-    Epoch 63/100
-    63/63 [==============================] - 4s 66ms/step - loss: 2.8300e-22 - accuracy: 1.0000 - val_loss: 2.2027 - val_accuracy: 0.9760
-    Epoch 64/100
-    63/63 [==============================] - 4s 66ms/step - loss: 1.8954e-13 - accuracy: 1.0000 - val_loss: 2.2028 - val_accuracy: 0.9760
-    Epoch 65/100
-    63/63 [==============================] - 4s 66ms/step - loss: 1.0088e-27 - accuracy: 1.0000 - val_loss: 2.2028 - val_accuracy: 0.9760
-    Epoch 66/100
-    63/63 [==============================] - 4s 66ms/step - loss: 1.9437e-15 - accuracy: 1.0000 - val_loss: 2.2028 - val_accuracy: 0.9760
-    Epoch 67/100
-    63/63 [==============================] - 4s 67ms/step - loss: 7.9112e-27 - accuracy: 1.0000 - val_loss: 2.2028 - val_accuracy: 0.9760
-    Epoch 68/100
-    63/63 [==============================] - 4s 67ms/step - loss: 6.2750e-24 - accuracy: 1.0000 - val_loss: 2.2028 - val_accuracy: 0.9760
-    Epoch 69/100
-    63/63 [==============================] - 4s 66ms/step - loss: 0.0299 - accuracy: 0.9990 - val_loss: 1.9472 - val_accuracy: 0.9800
-    Epoch 70/100
-    63/63 [==============================] - 4s 66ms/step - loss: 3.0759e-14 - accuracy: 1.0000 - val_loss: 1.9472 - val_accuracy: 0.9800
-    Epoch 71/100
-    63/63 [==============================] - 4s 67ms/step - loss: 1.9022e-21 - accuracy: 1.0000 - val_loss: 1.9472 - val_accuracy: 0.9800
-    Epoch 72/100
-    63/63 [==============================] - 4s 66ms/step - loss: 0.0110 - accuracy: 0.9990 - val_loss: 2.3311 - val_accuracy: 0.9780
-    Epoch 73/100
-    63/63 [==============================] - 4s 66ms/step - loss: 8.6561e-24 - accuracy: 1.0000 - val_loss: 2.3311 - val_accuracy: 0.9780
-    Epoch 74/100
-    63/63 [==============================] - 4s 67ms/step - loss: 2.6064e-12 - accuracy: 1.0000 - val_loss: 2.3311 - val_accuracy: 0.9780
-    Epoch 75/100
-    63/63 [==============================] - 4s 67ms/step - loss: 1.5843e-38 - accuracy: 1.0000 - val_loss: 2.3311 - val_accuracy: 0.9780
-    Epoch 76/100
-    63/63 [==============================] - 4s 67ms/step - loss: 1.2560e-25 - accuracy: 1.0000 - val_loss: 2.3311 - val_accuracy: 0.9780
-    Epoch 77/100
-    63/63 [==============================] - 4s 66ms/step - loss: 2.4363e-14 - accuracy: 1.0000 - val_loss: 2.3311 - val_accuracy: 0.9780
-    Epoch 78/100
-    63/63 [==============================] - 4s 66ms/step - loss: 8.9476e-24 - accuracy: 1.0000 - val_loss: 2.3311 - val_accuracy: 0.9780
-    Epoch 79/100
-    63/63 [==============================] - 4s 66ms/step - loss: 0.0017 - accuracy: 0.9995 - val_loss: 2.9306 - val_accuracy: 0.9690
-    Epoch 80/100
-    63/63 [==============================] - 4s 66ms/step - loss: 0.0049 - accuracy: 0.9995 - val_loss: 2.3392 - val_accuracy: 0.9770
-    Epoch 81/100
-    63/63 [==============================] - 4s 67ms/step - loss: 7.7401e-09 - accuracy: 1.0000 - val_loss: 2.1660 - val_accuracy: 0.9770
-    Epoch 82/100
-    63/63 [==============================] - 4s 67ms/step - loss: 7.2243e-04 - accuracy: 0.9995 - val_loss: 2.3938 - val_accuracy: 0.9710
-    Epoch 83/100
-    63/63 [==============================] - 4s 68ms/step - loss: 0.0023 - accuracy: 0.9995 - val_loss: 2.7895 - val_accuracy: 0.9790
-    Epoch 84/100
-    63/63 [==============================] - 4s 68ms/step - loss: 1.1190e-11 - accuracy: 1.0000 - val_loss: 2.7895 - val_accuracy: 0.9790
-    Epoch 85/100
-    63/63 [==============================] - 4s 68ms/step - loss: 0.0123 - accuracy: 0.9995 - val_loss: 2.7567 - val_accuracy: 0.9750
-    Epoch 86/100
-    63/63 [==============================] - 4s 67ms/step - loss: 4.4465e-19 - accuracy: 1.0000 - val_loss: 2.7567 - val_accuracy: 0.9750
-    Epoch 87/100
-    63/63 [==============================] - 4s 68ms/step - loss: 5.3448e-17 - accuracy: 1.0000 - val_loss: 2.7567 - val_accuracy: 0.9750
-    Epoch 88/100
-    63/63 [==============================] - 4s 67ms/step - loss: 2.8541e-21 - accuracy: 1.0000 - val_loss: 2.7567 - val_accuracy: 0.9750
-    Epoch 89/100
-    63/63 [==============================] - 4s 66ms/step - loss: 1.1498e-04 - accuracy: 1.0000 - val_loss: 2.2622 - val_accuracy: 0.9710
-    Epoch 90/100
-    63/63 [==============================] - 4s 67ms/step - loss: 0.0021 - accuracy: 0.9995 - val_loss: 2.7563 - val_accuracy: 0.9770
-    Epoch 91/100
-    63/63 [==============================] - 4s 67ms/step - loss: 4.7979e-19 - accuracy: 1.0000 - val_loss: 2.7563 - val_accuracy: 0.9770
-    Epoch 92/100
-    63/63 [==============================] - 4s 67ms/step - loss: 1.1258e-25 - accuracy: 1.0000 - val_loss: 2.7563 - val_accuracy: 0.9770
-    Epoch 93/100
-    63/63 [==============================] - 4s 67ms/step - loss: 3.9783e-19 - accuracy: 1.0000 - val_loss: 2.7563 - val_accuracy: 0.9770
-    Epoch 94/100
-    63/63 [==============================] - 4s 67ms/step - loss: 8.4523e-27 - accuracy: 1.0000 - val_loss: 2.7563 - val_accuracy: 0.9770
-    Epoch 95/100
-    63/63 [==============================] - 4s 67ms/step - loss: 2.1673e-18 - accuracy: 1.0000 - val_loss: 2.7563 - val_accuracy: 0.9770
-    Epoch 96/100
-    63/63 [==============================] - 4s 66ms/step - loss: 1.0001e-23 - accuracy: 1.0000 - val_loss: 2.7563 - val_accuracy: 0.9770
-    Epoch 97/100
-    63/63 [==============================] - 4s 67ms/step - loss: 1.4477e-17 - accuracy: 1.0000 - val_loss: 2.7563 - val_accuracy: 0.9770
-    Epoch 98/100
-    63/63 [==============================] - 4s 67ms/step - loss: 4.4268e-09 - accuracy: 1.0000 - val_loss: 2.3248 - val_accuracy: 0.9760
-    Epoch 99/100
-    63/63 [==============================] - 4s 67ms/step - loss: 0.0000e+00 - accuracy: 1.0000 - val_loss: 2.3248 - val_accuracy: 0.9760
-    Epoch 100/100
-    63/63 [==============================] - 4s 67ms/step - loss: 2.5102e-23 - accuracy: 1.0000 - val_loss: 2.3248 - val_accuracy: 0.9760
-
-
-
-```python
-model.summary()
-```
+The complete model is shown in Figure 17. During the pre-training phase, each image is passed through the MobileNet model, and its final output stored as the new training dataset. These extracted features are then converted into a vector using the Global Max Pooling operation and then sent through a simple Dense Feed Forward model with a single hidden layer with 256 nodes.
 
     Model: "model_2"
     _________________________________________________________________
@@ -1283,70 +448,817 @@ model.summary()
     _________________________________________________________________
 
 
+The Transfer Learning  model results in validation accuracy of about 97%, which is a big improvement on the 60% accuracy in the Dense Feed Forward model without feature extraction.
+
+In the next few sections we will go over the following topics:
+
+- Improvements made to the base ConvNet design in the last few years
+- Brief descriptions of some important ConvNets, with particular emphasis on those whose pre-trained models are made available in Keras
+- Visualization of filters and Activation Maps in ConvNets and techniques to run a ConvNet backwards to generate images. These are used probe the responses of individual neurons and thus gain some understanding of how these systems work and arrive at their decisions.
+- Using ConvNets in other Image Processing tasks such as Object Localization and Detection, Semantic Categorization etc.
+
+## Trends in ConvNet Design
+
+The performance of ConvNets has improved in recent years due to several architectural changes, which include the following:
+
+- Residual Connections
+- Use of Small Filters
+- Bottlenecking Layers
+- Grouped Convolutions (also called Split-Transform-Merge)
+- Depthwise Separable Convolutions
+- Dispensing with the Pooling Layer
+- Dispensing with Fully Connected Layers
+
+Residual Connections are arguably the most important architectural enhancement made to ConvNets since their inception, and are covered in some detail in the following section. Even though proposed in the context of ConvNets, they are critical part of other Neural Network architectures, in particular Transformers.
+
+### Residual Connections
+
+![](https://subirvarma.github.io/GeneralCognitics/images/convnet34.png)
+
+*Figure 18*
+
+Residual connections are illustrated in Part (b) of Figure 18. They were introduced as part of the ResNet model in 2015 and were shown to lead to large improvement in model performance by making possible trainable models with hundreds of layers. Prior to the discovery of Residual Connections, models with more 20-30 layers ran into the Vanishing Gradient problem during training, due to the gradient dying out as it was subject to multiple matrix multiplication during Backprop. 
+
+Part (a) of the figure shows a set of regular conolutional layers, Residual Connections feature a bypass connection from the input to the output such that the input signal is added to the output signal as shown in Part(b). This design clearly helps with gradient propagation, since the addition operation has the effect of taking the gradient at the output of the sub-network and propagating it without change to the input. The idea of Residual Connections is now widely used in DLN architectures, state of the art networks such DenseNet and Transformers include it as part of their design. We provide a deeper discussion of the benefits of Residual Connections in the section on ResNets later in this chapter.
+
+### Small Filters in ConvNets
+
+![](https://subirvarma.github.io/GeneralCognitics/images/convnet11.png)
+
+*Figure 19*
+
+As ConvNet architectures have matured, one of the features that has changed over time is the filter design. Early ConvNets such as AlexNet used large $7 \times 7$ Filters in the first convolutional layer. However, a stack of $3 \times 3$ Filters is a superior design to the single $7 \times 7$ Filter for the following reasons (see Figure 19)):
+
+* The stacked $3 \times 3$ design uses a smaller number of parameters: Using the formula for number of parameters in a ConvNet developed in Section **SizingConvnets**, it follows that the $7 \times 7$ Filter uses $C \times (7 \times 7 \times C + 1)=49 C^2 + C$ parameters (since each Filter uses $7 \times 7 \times C + 1$ parameters, and there are C such Filters). In comparison the stacked $3 \times 3$ design uses a total of $3 \times C \times (3 \times 3 \times C + 1)=27 C^2 + 3C$ parameters, i.e., a 45% decrease.
+
+* The stacked $3 \times 3$ design incorporates more non-linearity, it has 4 ReLU Layers vs the 2 ReLU Layers in the $7 \times 7$ case, which increases the system's modeling capacity.
+
+* The stacked $3 \times 3$ design results in less computation.
+
+The better performance with smaller filters can be explained as follows: The job of a filter is to capture patterns within the Local Receptive Field and patterns at a finer level of granularity can be captured with smaller filters. Also as we stack up the layers, filters at the deeper levels progressively capture patterns within larger areas of the image. For example consider the case of the stacked $3 \times 3$ Filters in Figure 19: While the first $3 \times 3$ Filter scans patches of size $3 \times 3$ in the input image, it can be easily seen that the second $3 \times 3$ filter effectively scans patches of size $5 \times 5$, and the third $3 \times 3$ Filter scans patches of size $7 \times 7$ in the input image. Hence even though the filter size is unchanged as we move deeper into the network, they are able to capture patterns in progressively larger sections of the input image. This is illustrated in Figure 20 for the case of two layers of $3\times 3$ filters.
+
+![](https://subirvarma.github.io/GeneralCognitics/images/convnet33.png)
+
+*Figure 20*
+
+### Bottlenecking using 1x1 Filters
+
+![](https://subirvarma.github.io/GeneralCognitics/images/cnn21.png)
+
+*Figure 21*
+
+Several modern ConvNets use Filters of size $1\times 1$. At first glance these may not make sense, but note that because of the depth dimension, a $1\times 1$ Filter still involves a dot product with weights associated with the depth dimension and the corresponding activations across them. As shown in Figure 21, this can be used to compress the number of layers in a ConvNet. This operation called 'bottlenecking', is very useful and is frequently used in modern ConvNets to reduce the number of parameters or the number of operations required.
+
+![](https://subirvarma.github.io/GeneralCognitics/images/convnet12.png)
+
+*Figure 22*
+
+Bottlenecking with $1 \times 1$ and $1 \times n$ filters, as illustrated in Figure 22: As shown, the first $1 \times 1$ filter is used in conjuction with a reduction in depth to $C/2$. The $3 \times 3$ filter then acts on this reduced depth layer, which gives us the reduction in parameters, and this is followed by another $1 \times 1$ filter that expands the depth back to $C$. It can the shown that this filter architecture reduces the number of parameters from $9 C^2$ to $3.25 C^2$ (ignoring the bias parameters). It can be easily shown that the number of computations also decreases from $9C^2 HW$ to $3.25C^2 HW$, where $H,W$ are the spatial dimensions of the ConvNet.
+
+### Grouped Convolutions
+
+![](https://subirvarma.github.io/GeneralCognitics/images/convnet27.png)
+
+*Figure 23*
+
+Grouped Convolutions are illustrated in Figure 23. As shown, the regular $3\times 3$ convolution is replaced by the following:
+
+- Step 1: Compress the input layers using a $1\times 1$ convolution from 256 layers to 128.
+- Step 2: Split the output of Step 1 into 32 separate convolution layers, such that each layer 4 Activation Maps.
+- Step 3: Use regular $3\times 3$ convolution on each of the 32 layers
+- Step 4: Marge or Concatenate all 32 convolution layers to form a structure with 128 Activation Maps
+- Step 5: Expand the output of step 4 to 256 Activation Maps with a $1\times 1$ convolution
+
+Grouped Convolutions have been shown to improve the performance of ConvNets. It is not completely clear how they are able to do so, but it has been observed that the 4 Activation Maps in the smaller Convolutional Layers learn features that have a high degree of correlation. For example AlexNet, which was one of the earliest ConvNets, featured 2 groups due to memory constraints, and it was shown that Group 1 learnt black and white shapes while Group 2 learnt colored shapes. This functions as akind of regularizer and helps the network learn better features.
+
+It can also be shown that the number of computations for the Grouped case decreases in inverse proportion to the number of groups and the size of the filter. This calculation is carried out detail in the next section.
+
+### Depthwise Separable Convolutions
+
+![](https://subirvarma.github.io/GeneralCognitics/images/convnet28.png)
+
+*Figure 24*
+
+A standard convolution both filters and combines inputs into a new set of outputs in one step. The depthwise separable convolution splits this into two layers, a separate layer for filtering and a separate layer for combining. This factorization has the effect of drastically reducing computation and model size. Hence they take the idea behind Grouped Convolutions to the limit by splitting up the M Activation Maps in the input layer into M separate single layer Activation Maps as shown in Figure 24. Each of these Activation Maps is then processed using a separate convolutional filter, and then combined together at the output. A simple $1\times 1$ convolution, is then used to create a linear combination of the output of the depthwise layer . Hence this design serializes the spatial and depthwise filtering operations of a regular convolution. An immediate benefit of doing this is a reduction in the number of computations (and the number of parameters), as shown next:
+
+- The number of computations in a regular convolution shown in Part (a) is given by $D_K D_K\times MN\times D_F D_F$ where $D_K$ is the size of the filter, M is the depth of the input layer, N is the depth of the output layer and $D_F$ is the size of the Activation Map.
+- The number of computations in the Depthwise Separable Convolution is given by $D_K D_K\times M\times D_F D_F + MN\times D_F D_F$
+
+It follows that the ratio $R$ between the number of computations in the Depthwise Separable network and the Regular COnvNet is given by
+
+$$R = {1\over N} + {1\over D_K^2}$$
+
+For a typical filter size of $D_K= 3$, it follows that the number of computations in the Depthwise Separable network reduces by a factor of 9, which can be a significant reduction for training times that sometimes run into days. The idea of separating out the filtering into two parts, spatial and depthwise, has subsequently proven to be very influential, and underlies the type of filtering in a new model called Transformers, which we will study in a later chapter.
+
+Depthwise Separable Convolutions are supported in Keras usong the *SeparableConv2D* command that implements all the operations shown in Part (b) of the figure.
+
+## ConvNet Architectures
+
 
 ```python
-history_dict = history.history
-history_dict.keys()
+#convnet15
+nb_setup.images_hconcat(["DL_images/convnet15.png"], width=600)
+```
+
+![](https://subirvarma.github.io/GeneralCognitics/images/convnet15.png)
+
+*Figure 25*
+
+We briefly survey ConvNet architectures starting with the first ConvNet, LeNet5, whose details were published in 1998. Starting with AlexNet in 2012, ConvNets have won the ImageNet Large Scale Visual Recognition Challenge (ILSVRC) image classification competition run by the Artificial Vision group at Stanford University. ILSVRC is based on a subset of the ImageNet database that has more than 1+ million hand labeled images, classified into 1,000 object categories with roughly 1,000 images in each category. In all there are 1.2 million training images, 50K validation images and 150K testing images. If an image has multiple objects, then the system is allowed to output upto 5 of the most probably object categories, and as long as the the "ground-truth" is one of the 5 regardless of rank, the classification is deemed successful (this is referred to as the top-5 error rate).
+
+Figure 25 plots the top-5 error rate and (post-2010) the number of hidden layers in DLN architectures for the past seven years. Prior to 2012, the winning designs were based on traditional ML techniques using SVMs and Feature Extractors. In 2012 AlexNet won the competition, while bringing down the error rate signficantly, and inaugurated the modern era of Deep Learning. Since then, error rates have come down rapidly with each passing year, and currently stand at 3.57%, which is better than human-level classification performance. At the same time, the number of Hidden Layers has increased from the 8 layers used in AlexNet, to 152 layers in ResNet which was the winner in 2015. This is when the machines outpaced humans in accuracy and the competetion was stopped.
+
+In this section our objective is to briefly describe the architecture of the winners from the last few years, namely: AlexNet (2012), ZFNet (2013), VGGNet (2014), Google InceptionNet (2014) and ResNet (2015). Note that VGGNet, InceptionNet and VGGNet are available as pre-trained models (on ImageNet) in Keras, for use in Transfer Learning. In addition we will go over a few other architectures whose pre-trained models are also included in Keras, namely XceptionNet, MobileNet, DenseNet and NASNet. The first three are "classical" ConvNet designs with multiple Convolutional, Pooling, and Dense layers arranged in a linear stack. The Google Inception Network and ResNet have diverged from some of the basic tenets of the first ConvNets, by adopting the Split/Transform/Merge and the Residual Connection designs respectively. In more recent years the focus has shifted towards coming up with ConvNets that have a much lower number of parameters, without sacrificing performance. The InceptionNet actually began this trend, and MobileNet also belongs to this category of models.
+
+These following architectures are described in greater detail next:
+
+- LeNet (1998)
+- AlexNet (2012)
+- ZFNet (2013)
+- VGGNet (2014)
+- InceptionNet (2014)
+- ResNet (2015)
+- Xception (2016)
+- DenseNet (2017)
+- MobileNet (2017)
+- NasNet (2018)
+
+The table below which is taken from Keras Documentation summarizes the size, performance, number of parameters and depth of these models. The performance is with respect to the ImageNet dataset, with the Top-1 Accuracy being the performance for the best predition and the Top-5 Accuracy being the performance for the case when the Ground Truth is among the top 5 predictions.
+
+![](https://subirvarma.github.io/GeneralCognitics/images/convnet35.png)
+
+*Figure 26*
+
+### LeNet5 (1998)
+
+LeNet5 was the first ConvNet, it was designed by Yann LeCun and his team at Bell Labs, see [Lecun, Bottou, Bengio, Haffner (1998)](https://ieeexplore.ieee.org/document/726791). It had all the elements that one finds in a modern ConvNet, including Convolutional and Pooling Layers, along with the Backprop algorithm for training (Figure **LeNet5**)).  It only had two Convolutional layers, which was a reflection of the smaller training datsets and processing capabilities available at that time. LeCun et.al. used the system for handwritten signature detection in checks, and it was successfully deployed commercially for this purpose.
+
+![](https://subirvarma.github.io/GeneralCognitics/images/LeNet5.png)
+
+*Figure 27*
+
+As shown in Figure 27, the system uses two Convolution layers with $5 \times 5$ Filters and Stride $S=1$, and two Pooling layers with $2 \times 2$ Filters and $S=2$. The system reduces the input $32 \times 32$ images into 16 Activation Maps of size $5 \times 5$ at the end of the second pooling operation, before flattening this tensor and outputting the result into the Fully Connected part of the design.
+
+
+```python
+#AlexNet
+nb_setup.images_hconcat(["DL_images/AlexNet.png"], width=900)
+```
+
+![](https://subirvarma.github.io/GeneralCognitics/images/AlexNet.png)
+
+*Figure 28*
+
+### AlexNet (2012)
+
+After the pioneering work done in LeNet5, progress in ConvNets lay dormant for more than a decade. It was held back by the following issue: In order to train larger ConvNets with millions of parameters, it was necessary to have a large training dataset with correspondingly millions of images (this is required in order to prevent overfitting). Image datasets of this size did not exist until about 2010, when the ImageNet dataset was released.
+
+AlexNet is responsible for the explosion in interest in DLNs in the last few years.This network won the ILSVRC competition in 2012 by a wide margin compared to its nearest rival which was based on SVMs (it had a 15.4% top-5 error rate vs 26.2% for the next lowest network), and this opened up the eyes of the ML community to the potential of DLNs. The architecture of AlexNet [Krizhevsky, Sutskever, Hinton (2012)](https://dl.acm.org/citation.cfm?id=2999134.2999257) was very similar to that of LeNet5, with the following exceptions (see Figure 28)):
+
+- AlexNet replaced the *tanh()* activation function used in LeNet5, with the ReLU function and also the MSE loss function with the Cross Entropy loss.
+
+- AlexNet used a much bigger training set. Whereas LeNet5 was trained on the MNIST dataset with 50,000 images and 10 categories, AlexNet used a subset of the ImageNet dataset with a training set containing 1+ million images, from 1000 categories.
+
+- AlexNet used Dropout regularization (= 0.5) to combat overfitting (but only in the Fully Connected Layers). It also used a Normalization Layer, that is no longer used in ConvNets since it does not improve the performance significantly.
+
+AlexNet was able to use a training set which was larger by two orders of magnitude, without a corresponding increase in training time, by exploiting the power of GPUs. It used two GTX 580 GPUs for 5-6 days to complete the training phase. This was enabled by using a Grouped Convolution design (not shown in the above figure) with two groups, each running on its own GPU.
+
+AlexNet used 5 Convolutional layers (vs 2 used in LeNet5), and it used a similar combination of Convolutional and Pooling Layers followed by 3 Dense Layers. The input into the system consisted of $224 \times 224 \times 3$ images, which are then processed by the first convolutional layer with 96 Activation Maps using $11 \times 11$ filters with $S=4, P=0$. The system has $4$ more Convolutional layers, consisting of a $5 \times 5$ Filter followed by three $3 \times 3$ Filters. The number of Activation Maps in the last Convolutional layer is increased to 256 before the activations are flattened and fed into the Fully Connected Layers.
+
+AlexNet had a total of 60 million parameters, which was still much more than the number of training images available. In order to prevent overfitting, the system used Data Augmentation techniques to produce additional test images, thus boosting the Test dataset to 15 million images.
+
+### ZFNet (2013)
+
+![](https://subirvarma.github.io/GeneralCognitics/images/zfnet.png)
+
+*Figure 29*
+
+ZFNet, which was designed by [Zeiler and Fergus (2013)](https://arxiv.org/abs/1311.2901), won the ILSVRC competition in 2013 by achieving a 11.2% top-5 error rate. The architecture was essentially a tuning modification to AlexNet, with the following changes (Figure 29)):
+
+- Use of $7\times 7$ instead of $11 \times 11$ Filters in the first Convolutional layer, 
+
+- Use of a stride of $S=2$ instead of $S=4$.
+
+The reduction in filter size and stride helped to pick image features at a finer level of resolution.
+
+### VGGNet (2014)
+
+![](https://subirvarma.github.io/GeneralCognitics/images/VGGNet.png)
+
+*Figure 30*
+
+[Simonyan and Zisserman (2014)](http://arxiv.org/abs/1409.1556) created a network which reduced the top-5 ILSVRC error rate to 7.3% (Figure 30)). The main innovations in the network, called VGGNet, are the following:
+
+- VGGNet increased the number of layers to 19 layers (16 Convolutional + 3 Fully Connected), as opposed to the previous designs that were limited to 8 such layers.
+
+- VGGNet considerably simplified the ConvNet design, by repeating the same smaller convolution filter configuration 16 times: All the filters in VGGNet were limited to $3 \times 3$, with stride and padding of 1, along with $2 \times 2$ maxpooling filters with stride of 2. Since these smaller filters are used in a series of 2 or 3 consecutive convolutional layers, the net effect is that of using a single $5 \times 5$ or $7 \times 7$ filter, but with the advantage of a smaller number of parameters and increased model non-linearity, as explained in Section **SmallFilters**.
+
+An interesting fact about about VGGNet is that it has a total of 144 million parameters, *of which about 124 million parameters are used in the final 3 Dense layers*. This was a result of the Flatten operation on the last 3D tensor of which when connected to the dense layer with 4096 nodes resulted in $7 \times 7 \times 512 \times 4096=102,760,448$ parameters. Global Max Pooling was used in subsequent designs to reduce this parameter count.
+
+Even though VGGNet did not win the ILSVRC competition in 2014, it came close to doing so, and its simple and elegant design has been influential in subsequent ConvNet architectures. The main lesson from VGGNet was the classical ConvNet design of the LeNet5/AlexNet type can be substantially improved by increasing the number of Convolutional Layers and by using smaller filters.
+
+### Google Inception Network (2014)
+
+
+```python
+#Inception1
+nb_setup.images_hconcat(["DL_images/Inception1.jpg"], width=1000)
+```
+
+![](https://subirvarma.github.io/GeneralCognitics/images/Inception1.jpg)
+
+*Figure 31*
+
+Along with VGGNet, the Google Inception Network (Figure 31)) competed in the 2014 ILSVRC competition, see [Szegedy, Ioffe, Vanhoucke (2016)](http://arxiv.org/abs/1602.07261). It did slightly better than VGGNet (6.7% top 5 error rate as compared to 7.3% for VGGNet), but at the cost of a more complex architecture. The Inception Network was the first design that moved away from the linear stacking of convolutional and pooling layers and introduced the Split/Transform/Merge architecture to ConvNets. It was able to reduce the number of parameters to about 5 million by using this and also by eliminating all fully connected layers with the use of Global Max Pooling.
+
+![](https://subirvarma.github.io/GeneralCognitics/images/cnn6.png)
+
+*Figure 32*
+
+The InceptionNet design was based on the stacking of a base module callled the Inception Module (see Figure 32).
+As the LHS of the figure shows, the basic idea of the Inception module is to process the input data using multiple filters in parallel, before concatenating all their Activation Maps together and forming the input to the next stage (which we called Split/Transform/Merge earlier in this chapter). The Inception module uses four different types of convolutional engines: $1 \times 1$, $3 \times 3$, $5 \times 5$, and $3 \times 3$ with max-pooling. The smaller convolutions extract features at a finer level of detail, while the larger convolutions deal with features at a coarser level. However there is a problem associated with the architecture on the LHS: After the Activation Maps on all the four branches are concatenated, it results in 672 Activation Maps at the output of the module! As we add more modules, this will clearly result in an explosion in the number of Activation Maps, thus making the architecture infeasible. Another problem with the architecture is the extremely large number of numerical operations required to compute the activations.
+
+The solution to these problems is shown on the RHS of Figure 32 and uses the concept of Bottlenecking with $1\times 1$ convolutions: We add three Activation Maps to the design that are generated using $1\times 1$ convolutions. The $1\times 1$ convolution in series with the Pooling layer reduces the number of Activation Maps in that branch from 256 to 64, which reduces the total number of Activation Maps at the output to 480. In addition two more $1\times 1$ convolutions are added to the $3\times 3$ and $5\times 5$ filter branches to compress the number of input Activation Maps to 64, before they are processed by the larger filters. This helps to reduce the number of numerical computations required from 854 million to 358 million.
+
+The InceptionNet design aligns with the intuition that visual information should be processed at different scales and then aggregated so that the next stage can abstract features from different scales at the same time. The designers of the system also included a couple of extra output modules in the middle of the network (see Figure 31)), in order to amplify the error signal propagating towards the initial portion of the network, since they were concerned that the large number of layers in the network will cause the error signal to fade by the time it gets to the initial portion.
+
+### ResNet (2015)
+
+![](https://subirvarma.github.io/GeneralCognitics/images/cnn7.png)
+
+*Figure 33*
+
+ResNets (short for Residual Neural Networks) were introduced by [He, Zhang, Ren, Sun (2015)](https://arxiv.org/abs/1512.03385), and this design won the ILSVRC 2015 competition by a wide margin, achieving a top 5 error error rate of 3.57%. ResNets have innaugurated the era of *ultra-deep* ConvNets, indeed the winning ResNet network came with 152 layers, an order of magnitude jump from the 22 layers in the previous year's winner. The main architectural innovation in ResNets made such deep networks possible, and is based on the following insight: The number of layers in a ConvNet is constrained due to the fact that the error information propagating back during the backward phase of the Backprop algorithm, tends to get more and more diffused by the time it gets to the initial layers, due to multiplications with the weights and activations in the intervening layers. As a result the weights  in the initial few layers are not modified in an optimal fashion during Gradient Descent. This effect is shown in Figure 33, which shows that both the Training and Test Error for a 56-layer network is higher when compared to that of a 20-layer network (which implies that the increase cannot be attributed to overfiting).
+
+![](https://subirvarma.github.io/GeneralCognitics/images/cnn8.png)
+
+*Figure 34*
+
+In order to overcome this problem,  [He, Zhang, Ren, Sun (2015)](https://arxiv.org/abs/1512.03385) introduced a bypass link, as shown in LHS of Figure 34.
+
+- In the forward pass of Backprop, the bypass link enables the input signal to skip a few stacked Convolutional Layers, and then it is added to the output of these layers as shown. Note that the very first Convolutional Layer in the system is not bypassed. Hence one way to interpret this design is the following: The bypass enables the activation after the first convolutional layer to propagate all the way to the front of the network, while being modified by some delta (or residue) from each of the intervening bypassed layers. This design is based on the hypothesis that it is easier to optimize the residual mapping than to optimize the original, unreferenced mapping.
+
+- In the backward pass of Backprop, the bypass enables the error gradient information from the Output Layer of the network to propagate all the way to the first Convolutional Layer (with some modification from the gradients from the intervening layers). Hence all the layers in the network are able to access a strong signal from the error gradient information from the Output Layer, irrespective of the total number of layers in the network. This property enables ResNets to go Ultra-Deep without sacrificing performance.
+
+Other interesting aspects of ResNets include the following:
+
+- The system makes extensive use of Batch Normalization, see Section **BatchNormalization**, which is implemented at the end of every layer.
+
+- It uses a relatively large Learning Rate of 0.1 (Section **LearningRateSelection**), which is divided by 10 whenever the validation error plateaus during training. Such a large rate is made possible due to the use of Batch Normalization.
+
+- The system does not make use of Dropout normalization (Section **DropoutRegularization**). It is theorized that Dropout is not needed in the presence of Batch Normalization.
+
+- The system does not make use of Dense layers at the end of the network.
+
+ResNets are still among the best performing ConvNets and are used by default in practical cases.
+
+![](https://subirvarma.github.io/GeneralCognitics/images/convnet44.png)
+
+*Figure 35*
+
+There has been some recent work by [Li, Xu et.al.] (https://arxiv.org/pdf/1712.09913.pdf) which beautifully shows the beneficial effect of adding Residual Connections. They achieved this by coming up with a new way to visualize Loss Surfaces for a Neural Network, examples of which are shown in Figures 35 and 36. Part (a) of Figure 35 shows the Loss Surface for a 56 layer ResNet without any Residual Connections, while Part (b) shows the Loss Surface for the same network after the addition of Residual Connections. As cen be seen, the Loss Surface has become much more smooth and convex in shape, which makes it easier to run the SGD algorithm on it. In contrast, the chaotic shape of the Loss Surface without residual connections makes it very easy for the SGD algorithm to get caught in local minimums. There is a single large minima in the Loss Surface without Residual Connections, however for the SGD to get to it, it needs to initialized properly. This also implies, that without Residual Connections, the effectiveness of SGD is highly dependent on the initialization values.
+
+![](https://subirvarma.github.io/GeneralCognitics/images/convnet45.png)
+
+*Figure 36*
+
+The contour plots in Figure 36 shows the effect of the network depth on the Loss Surface, both with and without Residual Connections. We observe the following:
+
+- Networks with a smaller number of layers, such as the 20 layer ResNet on the LHS, exhibit fairly well behaved Loss Surfaces, even in the absence of Residual Connections. Hence Residual Connections are not essential for smaller networks.
+- Networks with a larger number of layers on the other hand, start to exhibit chaotic non-convex behavior in their Loss Surface in the absence of Residual Connections.
+
+![](https://subirvarma.github.io/GeneralCognitics/images/convnet48.png)
+
+*Figure 37*
+
+Another very interesting perspective on why Residual Connections are so effective was provided by [Veit, Wilbur, Belongie] (https://arxiv.org/pdf/1605.06431.pdf). Instead of looking at the backward flow of gradients, the focused on the forward path of ResNet, and noted the following:
+
+- In a network with no Residual Connections, there exists only a single forward path and all data flows along it. However in a network with n Residual Connections, there exist $2^n$ forward paths. This is illustrated in Figure 37 for the case $n=3$. The 8 separate forward paths that exist in this network are shown in Part (b) of this figure. As a result, the network decisions are effectively made by all of these 8 forward paths, that are operating parallel. This is very much like what is done in the Ensemble method, in which multiple models operate in parallel to improve model accuracy.
+
+-  They furthermore showed that gradient flow in the backwards direction is dominated by a few shorter paths. This is illustrated in Figure 38 which has results for a network with 54 Residual Connections. Part (a) of this figure shows the distribution of the path lengths in this network, while Part (b) plots the gradient magnitudes. They further multiplied the gradient magnitudes with the number of pathlengths for a particular path, and and obtained the graph in Part (c). As can be seen the majority of the gradients are contributed by path lengths of 5 to 17, while the higher path lengths contribute no gradient at all. Fom this they concluded that in very deep networks with hundredsof layers, Residual Connections avoid the vanishing gradient problem by introducing short paths which can carry the gradient throughout the extent of these networks.
+
+![](https://subirvarma.github.io/GeneralCognitics/images/convnet49.png)
+
+*Figure 38*
+
+### Beyond ResNets: ResNext and DenseNet
+
+![](https://subirvarma.github.io/GeneralCognitics/images/ResNext.png)
+
+*Figure 39*
+
+The base ResNet design can be improved by applying the techniques discussed earlier in this chapter, two of which are shown in Figure 39:
+
+- The Left Hand Side of the figure shows the application of Bottlenecing using $1\times 1$ filter, which reduces the number of parameters and computation by almost a factor of 3
+- The Right Hand Side of the figure shows the application of Split/Transform/Merge to ResNet, which results in a network called ResNext.
+
+A 101-layer ResNeXt was able to achieve better accuracy than a 200-later ResNet even though it has only 50% of the parameters. ResNeXt was submitted to the ILSVRC 2016 classification task, in which it secured second place.
+
+![](https://subirvarma.github.io/GeneralCognitics/images/DenseNet.png)
+
+*Figure 40*
+
+DenseNets are built from modules called Dense Blocks as shown in the lower part of Figure 40. Within each Dense Block, the Activation Maps of all preceding layers are used as inputs into the next convolutional layer, and its own Activation Maps are used as inputs into all subsequent layers. In contrast to ResNets, DenseNets don't combine features through summation before they are passed into a layer; instead, they combine features by concatenating them. DenseNets use smaller number of Activations Maps per layer (only 12) compared to ResNets, which results in a decrease in the number of parameters. It is likely that the concatenation of layers makes up for this reduction. The Table **ConvNetPerformance** shows that DenseNets are able to outperform ResNets with a smaller model size.
+
+![](https://subirvarma.github.io/GeneralCognitics/images/convnet47.png)
+
+*Figure 41*
+
+
+The DenseNet architecture is quite effective in making the shape of the Loss Function surface more convex and hence easier to optimize, as shown in Part(b) of the above figure (taken from [Li, Xu et. al]  https://arxiv.org/pdf/1712.09913.pdf). 
+
+### Xception
+
+![](https://subirvarma.github.io/GeneralCognitics/images/Xception.png)
+
+*Figure 42*
+
+The Xception architecture replaces the regular Convolution operation by Depthwise Separable convolutiion in all its layers except for the first two. It has 36 convolutional layers forming the feature extraction base of the network. These convolutional layers are structured into 14 modules, all of which have linear residual connections around them, except for the first and last modules. 
+
+The Xception network has performance that is comparable with the Google InceptionNet, but with a smaller parameter count.
+
+### MobileNet
+
+![](https://subirvarma.github.io/GeneralCognitics/images/MobileNet.png)
+
+*Figure 43*
+
+MobileNet belongs to the same category of architectures as Xception, since it uses Depthwise Separable Convolutions to bring down the parameter count. The motivation behind MobileNet was to come up with a design that could be deployed in real world applications such as robotics, self-driving car and augmented reality. These involve tasks need to be carried out in a timely fashion on a computationally limited platform with small low latency models.
+
+The MobileNet architecture is defined in Table 1 (note that a filter shape of $1\times\times 1\times 128\times 256$ denotes a $1\times 1$ filter with 128 Activation Maps in the input layer and 256 Activation Maps in the output layer). All layers are followed by a batchnorm and ReLU nonlinearity with the exception of the final fully connected layer which has no nonlinearity and feeds into a softmax layer for classification. A final average pooling reduces the spatial resolution to 1 before the fully connected layer. Counting depthwise and pointwise convolutions as separate layers, MobileNet has 28 layers. As Table **ConvNetPerformance** shows, this results in a model with the smallest number of parameters, with some decrease in accuracy.
+
+## Visualizing ConvNets
+
+ConvNets seem to work very well and constitute a significant advance in neural network architecture. However their decision making process proceeds through complex non-linear computations that are opaque to humans. In order to gain more confidence in the output of these networks, it would be nice if we can get some insights into how they go about doing their job. The field of ConvNet Visualization attemtps to do this in various ways that are described in this section. In particular we will describe the following techniques:
+
+- Visualizing the last layer in the Feature Space: The Last Layer before the classification step represents the results of all the transformations on the original image, and hence visualizing its co-ordinates gives insights into the ConvNets's operation.
+- Visualizing Local Filters: Using the template matching interpretation of image recognition, the shape of local filters can tell us the kind of objects the network is looking for.
+- Identifying Maximally Activating Patches in Images: This technique solves the following problem: Given a neuron that gets activated by an image, identify the portion of the image that it is reacting to.
+- Generating Images that Maximize Neuron Activations: This is the process of running the ConvNet backwards to generate images that maximize the activation at a chosen neuron.
+- Generating Images from Feature Vectors: This also involves running the ConvNet backwards, to generate images whose Feature Vectors match those from a sample image.
+
+### Visualizing the Proximity Property of Feature Space Representations
+
+
+```python
+#cnn10
+nb_setup.images_hconcat(["DL_images/cnn10.png"], width=900)
 ```
 
 
 
 
-    dict_keys(['loss', 'accuracy', 'val_loss', 'val_accuracy'])
+![png](output_71_0.png)
+
+
+
+We have emphasized the fact that DLNs transform the representation of images from RGB pixels to a feature space representation that also carries semantic information, such that images that are in the same category tend to have representations that cluster together in feature space. This property can be verified by examining the L2 nearest neighbors for an image, as shown in the RHS of Figure **cnn10**. This figure shows the sample image in the first column on the left side of the figure, while the images in each row correspond to images whose feature space L2 distance is closest to the sample image in that row. The feature space representation is obtained as the activations of the FC2 Fully Connected layer in AlexNet (see Figure **convnet7**). We note the following:
+
+- Images whose pixel values are very different are nevertheless close to each other in feature space, thus verifying the semantic clustering property of DLNs.
+- On the other hand, relying on L2 nearest neighbors in pixel space is not a reliable way of clustering images, since it can result in images that are in different categories, as shown on the LHS of Figure **cnn10**.
+
+### Visualizing Local Filters
+
+
+```python
+#cnn9
+nb_setup.images_hconcat(["DL_images/cnn9.png"], width=900)
+```
+
+
+
+
+![png](output_74_0.png)
+
+
+
+Consider a ConvNet, such as AlexNet, with 64 Activation Maps in the first Convolutional Layer which are generated using 64 local filters of size $11\times 11$. Each of these filters can be visualized by using the filter values to generate a $3\times 11\times 11$ color image, and this is shown in Figure **cnn9** for AlexNet as well as for a few other types of ConvNets. Using the template matching interpretation of local filtering, it follows that first Hidden Layer filters in all these networks are mostly looking for simple patterns such as straight edges in various orientations. Hubel and Wiesel had discovered that the visual system in animals has a similar property, in that the first layer of neurons in the visual cortex is sensitive to the presence of edges in the image falling on the retina.
+
+Unfortunately it is not possible to as readily visualize filters in the deeper layers of the network, due to the fact that they possess a depth of more than 3 and hence cannot be converted into a color image. Hence in order to understand what is happening in the deeper layers of the network, we rely on techniques described in the following sub-sections.
+
+### Visualizing Activation Maps
+
+Unlike Convolutional Filters, Activation Maps can be visualized for all layers of a network, since each of them can be considered to be a grayscale image. This exercise was carried out in Chollet Section 5.4.1 and the results are summarized for the cat image shown below.
+
+
+```python
+#convnet36
+nb_setup.images_hconcat(["DL_images/convnet36.png"], width=900)
+```
+
+
+
+
+![png](output_78_0.png)
+
+
+
+Figure **convnet37** graphs some of the Activation Maps in Convolutional Layer 1 and Layer 8 of an 8 layer ConvNet. We note tha following:
+
+- Recall that the Activations Maps in Layer1 act as detectors of simple shapes such as edges of various types. The Activation Maps figures in Layer 1 bear this out, since most of them outline the shape of the cat which is where the edges occur.
+- An examination of the Layer 8 Activation Maps on the other hand shows that they have very little resemblance to the original image. In most Activation Maps a few of the neurons show higher activation than the others (these are coded in yellow). These are responding to some higher level aspect of the input image, but we can't tell what that is from the Activation Maps figures alone. Thus higher level activations carry more and more information about the presence or absence of certain complex patterns in the input image, rather than the shape of the image itself. If a neuron has zero activation then it menas that the pattern it is looking for is not present in the input image.
+
+
+```python
+#convnet37
+nb_setup.images_hconcat(["DL_images/convnet37.png"], width=1200)
+```
+
+
+
+
+![png](output_80_0.png)
+
+
+
+### Identifying Maximally Activating Patches in Images
+
+In the previous section we surmised that the neurons in the higher convolutional layers are activated by more complex patterns in the input iamge while the lower layers are activated by simpler paterns. This intuition can be verified  by using the concept of Maximally Activating Patches, which are defined as follows: Pick any neuron in a ConvNet, it can be one of the logit nodes whose activation is equal to the class-score of the corresponding category, or it can  be a neuron in one of the Activation Maps within a convolutional layer. Assuming that the input image is such that it results in a high activation value at the chosen node, i.e., the neuron reponds positively to some pattern that it detects in the image. Then the Maximally Activating Patch is defined to be the localized portion of the image that the neuron is responding to.
+
+Maximally Activating Patches are identified by running the ConvNet backwards, which is actually a very important notion. Though originally proposed as a way to identify Maximally Activating Patches, the backwards operation has since been extended to tasks that involve **generating** new images from a trained ConvNet.
+
+There are two main techniques that are used to run a ConvNet backwards:
+
+- DeConvNet
+- Guided Backpropagation
+
+
+```python
+#cnn_13_Backwards_Propagation_through_MaxPooling
+nb_setup.images_hconcat(["DL_images/cnn13.png"], width=600)
+```
+
+
+
+
+![png](output_82_0.png)
 
 
 
 
 ```python
-import matplotlib.pyplot as plt
-
-acc = history.history['accuracy']
-val_acc = history.history['val_accuracy']
-loss = history.history['loss']
-val_loss = history.history['val_loss']
-
-epochs = range(1, len(acc) + 1)
-#epochs = range(1, len(loss) + 1)
-
-# "bo" is for "blue dot"
-plt.plot(epochs, loss, 'bo', label='Training loss')
-# b is for "solid blue line"
-plt.plot(epochs, val_loss, 'b', label='Validation loss')
-plt.title('Training and validation loss')
-plt.xlabel('Epochs')
-plt.ylabel('Loss')
-plt.legend()
-
-plt.show()
+#cnn15_Backwards_Propagation_through_ReLU
+nb_setup.images_hconcat(["DL_images/cnn15.png"], width=600)
 ```
+
+
+
+
+![png](output_83_0.png)
+
+
+
+Both these techniques use the same computations for going backwards through Convolutional and Pooling layers, but differ in the way they pass through ReLU non-linearities. These operations are described next:
+
+- Backwards through Convolutional Layers: This operation is the same as that carried out by backpropagating gradients in the Backprop algorithm, and involves multiplication by the transpose of the Convolutional Filter. 
+
+- Backwards through Pooling Layers: This operation is referred to as "switching" and proceeds as follows: Carry out a forward pass through the network, and keep record of the positions at which the maximum activation in max-pooling occurs (see Figure **cnn13**). In the backward pass, the incoming activation is placed in the "maximum activation" spot, while all the activations are set to zero. The reader may recall that this rule was derived in Chapter **TrainingNNsBackprop** in the section on Gradient Flow Calculus.
+
+- Backwards through ReLU Non-Linearities: As shown in Figure **cnn15**, there are multiple ways in which a ConvNet can be run backwards through ReLU non-linearities:
+
+    - The top row of the figure shows a Forward Pass through a ReLU non-linearity. It shows the negative pre-activations on the LHS being reset to zero in order to generate activation numbers on the RHS of the figure.
+    - The second row in the figure shows a backward pass through a ReLU for gradients using traditional Backprop: Recall that the ReLU non-linearity acts as a switch for the gradients during Backprop, so that the negative pre-activations (in the LHS of the top row) cause the gradients in the corresponding positions to go to zero.
+    - The third row in the figure shows the ReLU backward pass used in DeConvNets. When going backwards through a ReLU non-linearity, all negative values are set to zero, as shown. In contrast to Backprop and Guided Backprop (see below), the numbers flowing back during the DeConvNet operation should not be thought of as gradients, they should be regarded as "activations"" that are propagating backwards.
+    - The fourth row in the figure shows a backward pass for gradients used in Guided Backpropagation. When passing backwards through ReLU non-linearity, the negative gradients are set to zero, in addition to the gradients for whom the corresponding input activation is negative. Hence the Guided Backpropagation ReLU backpropagation rule combines the rules for Regular Backpropagation + DeConvNet Backpropagation.
+
+
+
+
+
+```python
+#cnn11
+nb_setup.images_hconcat(["DL_images/cnn11.png"], width=1200)
+```
+
+
 
 
 ![png](output_85_0.png)
 
 
 
+We now describe the application of DeConvNets to the problem of finding out the portion of an image that an individual neuron is responding to (also called the Maximally Activating Patch):
+
+- Start with a fully trained ConvNet model (such as on ImageNet) and present it with an input image. Do a forward pass through the model and compute all the activations.
+- To examine a given activation, say $a$, (which has been activated by the image), set all the other activations in its Activation Map to zero (as well as the activations of the other Activation Maps in its layer) and pass this as input to the DeConvNet network.
+- Propagate the signal backwards using the DeConvNet propagation rules described above, until the pixel space is reached. This results in the computation of ${\partial a}\over{\partial x_{ijk}}$ for all the pixels $x_{ijk}$ in the image.
+
+The reconstructed image obtained by plotting ${\partial a}\over{\partial x_{ijk}}$ for AlexNet (trained on ImageNet) is shown for activations in Layers 1 to 5 in Figure **cnn11**. For each layer, the images on the LHS show the actual reconstruction, while the corresponding images on the RHS are portions of the input image that were identified by the reconstruction. Note that the nine largest activations were chosen in each of the Activation Maps. We can draw the following conclusions from these images:
+
+- The reconstructed image resembles a small piece of the original input image, with the shapes in the input weighted according to their contribution to the neuron whose activation was propagated back.
+- All the neurons in a single Activation Map seem to get activated by similar shapes, and this shape varies with the Activation Map. This property is stronger in the higher layers.
+- As we go up the layers, the activations get triggered by more and more complex shapes and objects.
+
+
 ```python
-plt.clf()   # clear figure
-acc_values = history_dict['accuracy']
-val_acc_values = history_dict['val_accuracy']
-
-plt.plot(epochs, acc, 'bo', label='Training acc')
-plt.plot(epochs, val_acc, 'b', label='Validation acc')
-plt.title('Training and validation accuracy')
-plt.xlabel('Epochs')
-plt.ylabel('Loss')
-plt.legend()
-
-plt.show()
+#cnn12
+nb_setup.images_hconcat(["DL_images/cnn12.png"], width=1200)
 ```
 
 
-![png](output_86_0.png)
 
 
-The Transfer Learning  model results in validation accuracy of about 97%, which is a big improvement on the 60% accuracy in the Dense Feed Forward model without feature extraction.
+![png](output_87_0.png)
+
+
+
+A similar procedure can be carried out using the Guided Backpropagation procedure, and the results for Convolutional Layers 6 and 9 for AlexNet are shown in Figure **cnn12** (with the recosnstructed image on the LHS and the corresponding patch from the actual image on the RHS). This figure shows that the reconstructed image quality is better with Guided Backpropagation.
+
+### Generating Images
+
+Generating images using ConvNets is one of the most exciting areas in Deep Learning, and as a field is still undergoing rapid development. There are several ways in which ConvNets are being used to generate images, and in this section we explore a few of them:
+
+- Generating images that maximally activate a neuron
+- Images generated using Google's Deep Dream algorithm
+- Generating images by Feature Inversion
+
+One of the realizations that we have to come based the image generation work, is that a trained Neural Network contains a lot of detailed information about the objects as well as other parts of the image in its training dataset, which is enough to actually generate images of these objects. Previously it was thought that Supervised Learning models incorporated only very basic high level information about objects, which was just sufficient to be able to recognize them. It is also possible to generate images using ConvNets with the help of Unsupervised Learning techniques such as Generative Adversarial Networks (GANs) and PixelCNN, but these are not covered in this chapter.
+
+### Generating Images that Maximally Activate a Neuron
+
+
+```python
+#cnn16
+nb_setup.images_hconcat(["DL_images/cnn16.png"], width=800)
+```
+
+
+
+
+![png](output_91_0.png)
+
+
+
+
+Start with a fully trained ConvNet, and keep its weights fixed during this procedure. Solve the following maximization problem: 
+
+Find an image $I$ that maximizes the following Loss Function
+$$
+\mathcal L = S_c(I) - \lambda ||I||^2_2
+$$
+In this equation, the $S_c(I)$ is the Score Function for the $c^{th}$ class, and is computed by doing a forward pass through the ConvNet. The second term is added for doing Regularization, with $\lambda$ as the Regularization Parameter. It had been experimentally observed that without the Regularization Term, the optimization procedure results in an image that looks like white noise.
+
+The following algorithm is used to do the optimization:
+
+1. Start with a trained ConvNet (trained on zero centered image data) and fix the value of its weights. Initialize the image pixel values $x_{ijk}$ to zero.
+2. Repeat Steps 3 to 5 until a Stopping Condition is satisfied
+3. Do a forward pass through the network and compute the Score Function $S_c(I)$ and Loss Function $\mathcal L$.
+4. Starting with the gradient $\frac{\partial\mathcal L}{\partial S_c}$, use the Backprop algorithm to compute the gradients $\frac{\partial\mathcal L}{\partial x_{ijk}}$ of the Loss Function with respect to each of the image pixel values
+5. Change the pixel values using the following iteration:
+$$
+x_{ijk} \leftarrow x_{ijk} - \eta\frac{\partial\mathcal L}{\partial x_{ijk}}
+$$
+6. Add the training set mean image to the final pixel values to obtain the final image.
+
+
+
+Figure **cnn16** shows the results of applying this algorithm to a ConvNet trained on the ImageNet dataset. The reader will notice the objects belonging to the category whose Score Function is being maximized, emerging at multiple places in each image, but with colors that are different than the natural coloration of the object. The reason for this is that the neurons in the later layers of the network, and especially the classification neurons, incorporate more invariance in their object recognition. Hence they recognize an object irrespective of its color or location in the image and this invariance property gets reflected in the generate images. It is possible to generate images that are more pleasing to the eye, and some of these are shown in Figure **cnn19**. These images were generated by making the following changes to the algorithm described above:
+
+- Incorporation of the Total Variation (TV), Gaussian Blur and Jitter regularizers into the Loss Function
+- Initialize the image by using the average of the images in that category from the test dataset (if an image has multiple facets, then averaging is done over one of the facets)
+- Use of Gaussian Blur regularization results in a blurry, but single and centered object. The optimization then proceeds by updating the center pixels more than the edge pixels to produce a final image that is sharp and is centrally located.
+
+Chollet Section 5.4.2 has a Keras implementation of a very similar algorithm for generating images that maximally active the average activation of a chosen Activation Map.
+
+
+```python
+#cnn19
+nb_setup.images_hconcat(["DL_images/cnn19.png"], width=600)
+```
+
+
+
+
+![png](output_94_0.png)
+
+
+
+### Adversarial Images
+
+
+```python
+#cnn20
+nb_setup.images_hconcat(["DL_images/cnn20.png"], width=600)
+```
+
+
+
+
+![png](output_96_0.png)
+
+
+
+It has been shown that ConvNets can be fooled into mis-classifying images. A couple of examples of this are shown in Figure **cnn20**: In the top row the first image is classified correctly as an elephant. Then this image is modified by changing some the pixels (which are shown in the last two columns), which results in the second image. These changes are not perceptible to the human eye since the second image also looks like an elephant, however when sent through a ConvNet, the system classifies it as a koala. A similar process applied to the boat in the bottom row, results in its mis-classification as an iPod. These images, which fool the ConvNet into mis-classifying them, are known as Adversarial Images.
+
+Adversarial images can be easily created by making a slight modification to the algorithm that was presented in the prior section for generate images that maximally activate neurons. The only changes needed are the following:
+
+1. Instead of initializing the input image with zeroes, we initialize it with the image whose adversarial example we wish to generate.
+2. Choose the neuron whose activation is to be maximized, as the classification node for the adversarial image class.
+
+We then run the maximization algorithm, and after a few iterations, the system will mis-classify the input image even though it does not appear to have changed.
+
+Adversarial Images are an active research topic, since they constitute a significant security loophole that can perhaps be exploited.
+
+### Generating Images Using Google Deap Dream
+
+
+```python
+#cnn17
+nb_setup.images_hconcat(["DL_images/cnn17.png"], width=600)
+```
+
+
+
+
+![png](output_99_0.png)
+
+
+
+Google Deep Dream uses the following algorithm to generate images:
+
+1. Start with a trained ConvNet (trained on zero centered image data) and fix the value of its weights. Initialize the image pixel values $x_{ijk}$ to some random image from the test dataset. In the example in Figure **cnn17**, the initial image was chosen to be that of clouds, shown on top part of the figure.
+2. Repeat Steps 3 to 6 until a Stopping Condition is satisfied
+3. Do a forward pass through the network and compute the activations at all the nodes, up until a chosen layer.
+4. Set the gradients at each node of the chosen layer equal to the activation at that node, i.e.,
+$$
+\frac{\partial\mathcal L}{\partial z_i} = z_i
+$$
+5. Using the Backprop algorithm compute the gradients $\frac{\partial\mathcal L}{\partial x_{ijk}}$ of the Loss Function with respect to each of the image pixel values
+6. Change the pixel values using the following iteration:
+$$
+x_{ijk} \leftarrow x_{ijk} - \eta\frac{\partial\mathcal L}{\partial x_{ijk}}
+$$
+7. Add the training set mean image to the final pixel values to obtain the final image.
+
+In the example in Figure **cnn17**, the ConvNet was trained using ImageNet. The top part of the figure show the input image, and after a number of iterations, the original image changes to the one shown in the bottom of figure. The Deep Dream algorithm tends to amplify random features in the original image, until they start to resemble objects that were part of the network's original training set. Note that setting the gradient equal to the activation is equivalent to using the following Loss Function:
+$$
+\mathcal L = {1\over 2}\sum_i z_i^2
+$$
+where the sum is over all the activations in a given layer.
+
+Chollet Section 8.2 has a Keras implementation of Google Deep Dream.
+
+### Generating Images Using Feature Inversion
+
+
+```python
+#cnn18
+nb_setup.images_hconcat(["DL_images/cnn18.png"], width=600)
+```
+
+
+
+
+![png](output_102_0.png)
+
+
+
+The image generation techniques that we have described so far, do their work by iteratively creating images that maximally activate a neuron. There is another technique, which instead of trying to maximize neuron activations, instead works by generating images whose Feature Vector is specified in advance. In order to do so, the following Loss Function is used:
+$$
+\mathcal L = ||\Phi(X) - \Phi_0||^2 + \lambda_\alpha \mathcal R_\alpha(X) + \lambda_{V^\beta}\mathcal R_{V^\beta}(X)
+$$
+where the Regularisers $\mathcal R_{\alpha}$ and $\mathcal R_{V^\beta}$ are set to
+$$
+\mathcal R_\alpha(X) = ||X||^\alpha_\alpha,\ \ {\mbox and}\ \ \mathcal R_{V^\beta}(X) = \sum_{i,j} ((x_{i,j+1} - x_{ij})^2 + (x_{i+1,j} - x_{ij})^2)^{\beta\over 2}
+$$
+In these equations $\Phi_0$ is the Feature Vector from the test image that the algorithm is trying to match, while $\Phi(X)$ is the Feature Vector from the current iteration of the generated image. Note that the addition of the Regularisers $\mathcal R_{\alpha}$ and $\mathcal R_{V^\beta}$ is critical to generating "good" images. In their absence, the algorithm will generate images whose Feature Vector minimizes the Loss Function, but which look like noise to the human eye.
+
+The algorithm is as follows:
+
+1. Start with a trained ConvNet (trained on zero centered image data) and fix the value of its weights. Initialize the image pixel  $x_{ijk}$ to some random values. The example in Figure **cnn18** shows two different test images in the leftmost image in each row.
+2. Repeat Steps 3 to 5 until a Stopping Condition is satisfied
+3. Do a forward pass through the network and compute the activations at all the nodes, up until a chosen layer.
+4. Compute the gradients $\frac{\partial\mathcal L}{\partial\Phi}$ at each node of the chosen layer and use the Backprop algorithm compute the gradients $\frac{\partial\mathcal L}{\partial x_{ijk}}$ of the Loss Function with respect to each of the image pixel values
+5. Change the pixel values using the following iteration:
+$$
+x_{ijk} \leftarrow x_{ijk} - \eta\frac{\partial\mathcal L}{\partial x_{ijk}}
+$$
+6. Add the training set mean image to the final pixel values to obtain the final image.
+
+The images generated by running this algorithm are shown in Figure **cnn18**. The notation relu2_2 is used to denote the images generated by matching feature vectors in the second layer and so on. As the figure shows, the generated images in the first few layers closely match the original test image, which implies that the ConvNet is able to store fine level details regarding the test image with a high level of fidelity. As we go to the higher layers, the image content and the overall spatial structure are preserved, but the color, texture and exact shape are not.
+
+This procedure shows that the activations at a particular layer can be used to 'encode' an image. Hence instead of transmitting the original image, we instead send the activations from one of the layers. At the receiving end, we use these activations plus our knowledge of the pre-trained model which generated the activations to 'de-code' the image back.
+
+## Other Image Processing Tasks
+
+
+```python
+#convnet38
+nb_setup.images_hconcat(["DL_images/convnet38.png"], width=1200)
+```
+
+
+
+
+![png](output_105_0.png)
+
+
+
+In addition to Classification, ConvNets are also used to solve several important Image Processing tasks. We discuss the following in this section:
+
+- Object Localization: This involves having the model put a box around the object, in addition to classifying it.
+- Semantic Segmentation: This is defined as the process of classifying each and every pixel in an image, into a fixed number of categories.
+- Object Detection: Object Localization is restricted to boxing a single object (or a fixed number of them). If the number of objects to be boxed and identified is variable and not known in advance, then the problem becomes that of Detection.
+
+Examples of thesee three types of image processing are shown in Figure **convnet38**.
+
+### Object Localization
+
+
+```python
+#Localization
+nb_setup.images_hconcat(["DL_images/convnet39.png"], width=1200)
+```
+
+
+
+
+![png](output_108_0.png)
+
+
+
+The Classification + Localization problem can be solved by training a model to predict the co-ordinates of the 4 corners of the bounding box, in addition to classifying the object. In order to do so, the modeler has to create a training dataset in which the label identifies the co-ordinates of the box. Once this done, the training can proceed using the type of model shown in Figure **Localization**. It shows a so-called 'two-headed' Convnet, with the body consisting of the convolutional base. The output from the base is routed to Dense Networks, with Network One connected to the logits for classifying the object (using the Softmax Loss) and Network Two connected to a Regression Layer that predicts the box co-ordinates (using the Mean Square Error or L2 Loss). The Backprop algorithm is then run on the combined loss. As the figure shows, Transfer Learning can be used for this problem with a pre-trained Convolutional Base, as long as the objects to be classified are not too different than the ImageNet dataset.
+
+### Semantic Segmentation
+
+
+```python
+#Labeling
+nb_setup.images_hconcat(["DL_images/convnet40.png"], width=1200)
+```
+
+
+
+
+![png](output_111_0.png)
+
+
+
+Semantic Segmentation is the problem of classifying each and every pixel in an image into a fixed number of categories. It has a number of important application, for example it can be used by the vision system in a self-driving car to differentiate the road, pedestrians, trees etc. In order to train a model to do Semantic Segmentation we need an appropriate training dataset in which every pixel is labeled, an example of which is shown in Figure **Labeling**. In this example all the pixels are given one of 5 labels, and this information is captured using multiple Label Maps as shown.
+
+
+```python
+#SemanticSegmentation
+nb_setup.images_hconcat(["DL_images/convnet41.png"], width=1200)
+```
+
+
+
+
+![png](output_113_0.png)
+
+
+
+The objective of the Semantic Segmentation model is to predict a Label Map for the input image, and this can be done using ConvNets as shown in Figure **SementicSegmentation**. The input image is sent through multiple convolutional layers, and the final prediction is in the form of a 3D tensor with C layers (corresponding to C pixel categories). For the $c^{th}$ layer, the model predicts a total of $H\times W$ binary valued probabilities of the pixels belonging to the $c^{th}$ category. The final prediction for a pixel location is the category that has the maximum probability value.
+
+### Object Detection
+
+Object Detection is a challenging problem since the number of objects in the image is not known in advance. An initial attack on this problem led to an algorithm called R-CNN (stands for Region based CNN) in which a ConvNet model was used to detect images over several region candidates in the image (these region candidates were generated seprately by a non-ML algorithm). This did work but was very expensive, since each image required several forward passes through the model. An algorithm called YOLO (for 'You only Look Once') was proposed subsequently, which is much more efficient since it can do its job with just a single forward pass. This makes it suitable for real time detection tasks, such as detecting objects in a video clip.
+
+The YOLO algorithm takes the following steps to do detection (see Figure **YOLO**):
+
+- The image is divided into a grid of size $S\times S$ as shown in the LHS of the figure
+- For each grid cell, the model predicts $B$ Bounding Boxes as potential candidates for object detection, for a total of $BS^2$ Bounding Boxes. This is shown in the top half of the figure.
+- The model predicts a confidence score for each bounding box, which is defined as $P(Object)*IOU^{truth}_{predict}$. These confidence scores reflect how confident the model is that the box contains an object and also how accurate it thinks the box is that it predicts.
+- Lastly, for each grid cell, the model predicts the softmax probability vector of it containing one of the $C$ objects $P(Class_i|Object), 1\le i\le C$, i.e. the conditional probability of class $i$ given that the grid cell contains an object. This is illustrated in the bottom part of the figure.
+
+The model's final prediction is obtained by doing the following computation:
+
+$$
+Pr(Class_i|Object) ∗ Pr(Object) ∗ IOU^{truth}_{pred} = Pr(Class_i) ∗ IOU^{truth}_{pred}
+$$
+
+This computation gives us class-specific confidence scores for each box. These scores encode both the probability of that class appearing in the box and how well the predicted box fits the object.
+
+
+```python
+#YOLO
+nb_setup.images_hconcat(["DL_images/convnet42.png"], width=1200)
+```
+
+
+
+
+![png](output_117_0.png)
+
+
+
+The YOLO Model is shown in Figure **YOLO_Model**, for the case $S = 7, B = 2$ and $C = 20$. This system models detection as a Regression problem. Note that the final predictions are encoded as a $S\times S\times (5B+C)$ tensor since the model predicts $5B+C$ numbers for each grid cell: $x,y,w,h$ and $confidence$, where the $(x, y)$ coordinates represent the center of the box relative to the bounds of the grid cell. The width and height are predicted relative to the whole image and the confidence prediction represents the IOU between the predicted box and any ground truth box.
+
+
+```python
+#YOLO_Model
+nb_setup.images_hconcat(["DL_images/convnet43.png"], width=1200)
+```
+
+
+
+
+![png](output_119_0.png)
+
+
 
 ## References and Slides
 
-- [Slides CNN1](https://drive.google.com/file/d/1uD01-lbUGGoPkR9ibbKyE7VzlZDu3h4W/view?usp=sharing)
-- [Slides CNN2](https://drive.google.com/file/d/1pY_lAd3YiF3dwyIqjXfkO7-GuuMQF_Z-/view?usp=sharing)
+- [Slides CNN3](https://drive.google.com/file/d/1JSYMO2BwblfMIFTCfQhgmRevm9FtazJq/view?usp=sharing)
+- [Slides CNN4](https://drive.google.com/file/d/1Zy0ZmTNu4u086cUjcO0dbGS6Y8K1GXU5/view?usp=sharing)
