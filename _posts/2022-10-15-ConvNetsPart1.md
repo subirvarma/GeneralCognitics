@@ -244,6 +244,7 @@ We will use the following notation:
 
 $$W_{r+1} = {W_r - F_r + 2P_r\over S_r} + 1$$
 
+$$L_{r+1} = {L_r - F_r + 2P_r\over S_r} + 1$$
 
 - $L_r$, $W_r$, $D_r$: Length, Width and Depth dimensions of the volume in layer $r$
 - $F_r$:    Size of the Filter used when going from layer $r$ to $r+1$.
