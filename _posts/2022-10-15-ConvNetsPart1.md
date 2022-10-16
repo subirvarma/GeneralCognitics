@@ -254,13 +254,9 @@ We will use the following notation:
 - $S_r$: The Stride size used in the layer $r$ to layer $r+1$ filter.
 
 It can then be shown that
-$$
-W_{r+1} = \frac{W_r-F_r+2P_r}{S_r}+1
-$$
+$$W_{r+1} = \frac{W_r-F_r+2P_r}{S_r}+1$$
 and
-$$
-L_{r+1} = \frac{L_r-F_r+2P_r}{S_r}+1
-$$
+$$L_{r+1} = \frac{L_r-F_r+2P_r}{S_r}+1$$
 
 In order to gain insight into this formula, consider Figure 12:
 
@@ -273,9 +269,7 @@ As an example of the application of this formula, consider the following example
 
 In modern ConvNet design, zero padding is used most often to ensure that the volume sizes remain unchanged as we move deeper into the network, in other words we would like that $W_{r+1}=W_r, L_{r+1}=L_r, D_{r+1}=D_r$. From the above equation, this can be ensured if the stride $S_r=1$ and the zero padding $P_r$ is chosen to be:
 
-$$
-P_r = \frac{F_r - 1}{2}
-$$
+$$P_r = \frac{F_r - 1}{2}$$
 
 The most common ConvNet filter sizes are $F_r = 3$ and $F_r = 5$, which results in $P_r = 1$ and $P_r = 2$ respectively. As we will see later in this chapter, some of the advanced ConvNet designs such as VGGNet and ResNet keep the size of the volumes fixed in their Convolutional Layers, which helps in producing networks with hundreds of layers. In the absence of this feature, the volume sizes progressively decrease as we move deeper in the network, thus limiting the number of Hidden Layers to much smaller values. Zero Padding is implemented in Keras using the command: *conv = model.add.layers.Conv2D(6, (3,3), strides=2, padding='same')*.
 
@@ -285,17 +279,11 @@ As we will see later, early ConvNet designs featured bigger Filters, such as $11
 
 If Layer $r+1$ is a Pooling Layer, then the following formulae hold (using the same notation as in the prior section):
 
-$$
-W_{r+1} = \frac{W_r-F_r}{S_r} + 1
-$$
+$$W_{r+1} = \frac{W_r-F_r}{S_r} + 1$$
 
-$$
-H_{r+1} = \frac{H_r-F_r}{S_r} + 1
-$$
+$$H_{r+1} = \frac{H_r-F_r}{S_r} + 1$$
 
-$$
-D_{r+1} = D_r
-$$
+$$D_{r+1} = D_r$$
 
 Note the following:
 
@@ -309,9 +297,7 @@ Note the following:
 
 Using the same notation as above, the number of multiplications needed to generate all the activations in Layer $r+1$ is given by:
 
-$$
-Mult = F_r F_r D_r\times W_{r+1} H_{r+1}\times D_{r+1}
-$$
+$$Mult = F_r F_r D_r\times W_{r+1} H_{r+1}\times D_{r+1}$$
 
 This can be understood as the product of the following factors:
 
@@ -450,13 +436,6 @@ The complete model is shown in Figure 17. During the pre-training phase, each im
 
 
 The Transfer Learning  model results in validation accuracy of about 97%, which is a big improvement on the 60% accuracy in the Dense Feed Forward model without feature extraction.
-
-In the next few sections we will go over the following topics:
-
-- Improvements made to the base ConvNet design in the last few years
-- Brief descriptions of some important ConvNets, with particular emphasis on those whose pre-trained models are made available in Keras
-- Visualization of filters and Activation Maps in ConvNets and techniques to run a ConvNet backwards to generate images. These are used probe the responses of individual neurons and thus gain some understanding of how these systems work and arrive at their decisions.
-- Using ConvNets in other Image Processing tasks such as Object Localization and Detection, Semantic Categorization etc.
 
 ## Trends in ConvNet Design
 
@@ -606,7 +585,7 @@ As shown in Figure 27, the system uses two Convolution layers with $5 \times 5$ 
 nb_setup.images_hconcat(["DL_images/AlexNet.png"], width=900)
 ```
 
-![](https://subirvarma.github.io/GeneralCognitics/images/AlexNet.png)
+![](https://subirvarma.github.io/GeneralCognitics/images/AlexNet.jpg)
 
 *Figure 28*
 
@@ -644,7 +623,7 @@ The reduction in filter size and stride helped to pick image features at a finer
 
 ### VGGNet (2014)
 
-![](https://subirvarma.github.io/GeneralCognitics/images/VGGNet.png)
+![](https://subirvarma.github.io/GeneralCognitics/images/VGGNet.jpg)
 
 *Figure 30*
 
@@ -659,12 +638,6 @@ An interesting fact about about VGGNet is that it has a total of 144 million par
 Even though VGGNet did not win the ILSVRC competition in 2014, it came close to doing so, and its simple and elegant design has been influential in subsequent ConvNet architectures. The main lesson from VGGNet was the classical ConvNet design of the LeNet5/AlexNet type can be substantially improved by increasing the number of Convolutional Layers and by using smaller filters.
 
 ### Google Inception Network (2014)
-
-
-```python
-#Inception1
-nb_setup.images_hconcat(["DL_images/Inception1.jpg"], width=1000)
-```
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/Inception1.jpg)
 
