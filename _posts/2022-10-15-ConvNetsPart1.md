@@ -254,9 +254,9 @@ We will use the following notation:
 - $S_r$: The Stride size used in the layer $r$ to layer $r+1$ filter.
 
 It can then be shown that
-$$W_{r+1} = \frac{W_r-F_r+2P_r}{S_r}+1$$
+$$W_{r+1} = {W_r-F_r+2P_r\over S_r}+1$$
 and
-$$L_{r+1} = \frac{L_r-F_r+2P_r}{S_r}+1$$
+$$L_{r+1} = {L_r-F_r+2P_r\over S_r}+1$$
 
 In order to gain insight into this formula, consider Figure 12:
 
@@ -585,7 +585,7 @@ As shown in Figure 27, the system uses two Convolution layers with $5 \times 5$ 
 nb_setup.images_hconcat(["DL_images/AlexNet.png"], width=900)
 ```
 
-![](https://subirvarma.github.io/GeneralCognitics/images/AlexNet.jpg)
+![](https://subirvarma.github.io/GeneralCognitics/images/AlexNet.png)
 
 *Figure 28*
 
@@ -623,7 +623,7 @@ The reduction in filter size and stride helped to pick image features at a finer
 
 ### VGGNet (2014)
 
-![](https://subirvarma.github.io/GeneralCognitics/images/VGGNet.jpg)
+![](https://subirvarma.github.io/GeneralCognitics/images/VGGNet.png)
 
 *Figure 30*
 
