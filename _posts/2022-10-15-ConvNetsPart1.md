@@ -236,17 +236,14 @@ The size (or volume) of a Convolutional Layer in a ConvNet is related to the vol
 
 ### Sizing the Convolutional Layer
 
-
-```python
-#convnet20
-nb_setup.images_hconcat(["DL_images/convnet20.png"], width=600)
-```
-
 ![](https://subirvarma.github.io/GeneralCognitics/images/convnet20.png)
 
 *Figure 12*
 
 We will use the following notation:
+
+$$W_{r+1} = {W_r\over S_r} + 1$$
+
 
 - $L_r$, $W_r$, $D_r$: Length, Width and Depth dimensions of the volume in layer $r$
 - $F_r$:    Size of the Filter used when going from layer $r$ to $r+1$.
@@ -255,11 +252,11 @@ We will use the following notation:
 
 It can then be shown that
 
-$$W_{r+1} = {W_r - F_r + 2P_r\over S_r}+1$$
+$$W_{r+1} = {W_r - F_r + 2P_r\over S_r} + 1$$
 
 and
 
-$$L_{r+1} = {L_r - F_r + 2P_r\over S_r}+1$$
+$$L_{r+1} = {L_r - F_r + 2P_r\over S_r} + 1$$
 
 In order to gain insight into this formula, consider Figure 12:
 
@@ -568,19 +565,13 @@ The table below which is taken from Keras Documentation summarizes the size, per
 
 ### LeNet5 (1998)
 
-LeNet5 was the first ConvNet, it was designed by Yann LeCun and his team at Bell Labs, see [Lecun, Bottou, Bengio, Haffner (1998)](https://ieeexplore.ieee.org/document/726791). It had all the elements that one finds in a modern ConvNet, including Convolutional and Pooling Layers, along with the Backprop algorithm for training (Figure **LeNet5**)).  It only had two Convolutional layers, which was a reflection of the smaller training datsets and processing capabilities available at that time. LeCun et.al. used the system for handwritten signature detection in checks, and it was successfully deployed commercially for this purpose.
+LeNet5 was the first ConvNet, it was designed by Yann LeCun and his team at Bell Labs, see [Lecun, Bottou, Bengio, Haffner (1998)](https://ieeexplore.ieee.org/document/726791). It had all the elements that one finds in a modern ConvNet, including Convolutional and Pooling Layers, along with the Backprop algorithm for training (Figure 27).  It only had two Convolutional layers, which was a reflection of the smaller training datsets and processing capabilities available at that time. LeCun et.al. used the system for handwritten signature detection in checks, and it was successfully deployed commercially for this purpose.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/LeNet5.png)
 
 *Figure 27*
 
 As shown in Figure 27, the system uses two Convolution layers with $5 \times 5$ Filters and Stride $S=1$, and two Pooling layers with $2 \times 2$ Filters and $S=2$. The system reduces the input $32 \times 32$ images into 16 Activation Maps of size $5 \times 5$ at the end of the second pooling operation, before flattening this tensor and outputting the result into the Fully Connected part of the design.
-
-
-```python
-#AlexNet
-nb_setup.images_hconcat(["DL_images/AlexNet.png"], width=900)
-```
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/AlexNet.png)
 
