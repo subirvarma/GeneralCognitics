@@ -234,7 +234,7 @@ model.add(layers.Dense(10, activation='softmax'))
 The size (or volume) of a Convolutional Layer in a ConvNet is related to the volume of the prior Convolutional Layer, as well as the size of the Filter used in the convolution operation, and in this section we give some simple expressions that can be used to connect the two. Before we launch into this topic, we introduce another important parameter used in ConvNet design, namely the **Zero-Padding** used during convolution, which we denote as $P$. Zero-Padding does the following: Instead of processing an input of size $L \times W$, we add one or more layers of zeroes around it, in both the dimensions. Hence if $P=1$ then only a single Zero-Padding layer is added, while two layers are added for the case $P=2$ (see Figure 11 for an illustration of the case $P=2$).
 
 
-### Sizing the Convolutional Layer
+## Sizing the Convolutional Layer
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/convnet20.png)
 
@@ -271,7 +271,7 @@ The most common ConvNet filter sizes are $F_r = 3$ and $F_r = 5$, which results 
 
 As we will see later, early ConvNet designs featured bigger Filters, such as $11\times 11$ or $7\times 7$, in their first few layers. However in more recent designs, it has been discovered that using smaller $3\times 3$ filters, even in the first layer, leads to better performance, as well as a reduction in the number of parameters. This aspect of ConvNet design is explored more fully in Section **SmallFilters**. The depth $D_r$ is usually chosen to be a power of $2$ for computational reasons: Numerical routines used in the calculations work more efficiently in this case.
 
-### Sizing the Pooling Layer
+## Sizing the Pooling Layer
 
 If Layer $r+1$ is a Pooling Layer, then the following formulae hold (using the same notation as in the prior section):
 
@@ -289,7 +289,7 @@ Note the following:
 
 * Common numbers used for Pooling are $F_r = 2, S_r = 2$ or $F_r = 3, S_r = 2$.
 
-### Computations during Convolutions
+## Computations during Convolutions
 
 Using the same notation as above, the number of multiplications needed to generate all the activations in Layer $r+1$ is given by:
 
@@ -441,7 +441,7 @@ The performance of ConvNets has improved in recent years due to several architec
 
 Residual Connections are arguably the most important architectural enhancement made to ConvNets since their inception, and are covered in some detail in the following section. Even though proposed in the context of ConvNets, they are critical part of other Neural Network architectures, in particular Transformers.
 
-### Residual Connections
+## Residual Connections
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/convnet34.png)
 
@@ -451,7 +451,7 @@ Residual connections are illustrated in Part (b) of Figure 18. They were introdu
 
 Part (a) of the figure shows a set of regular conolutional layers, Residual Connections feature a bypass connection from the input to the output such that the input signal is added to the output signal as shown in Part(b). This design clearly helps with gradient propagation, since the addition operation has the effect of taking the gradient at the output of the sub-network and propagating it without change to the input. The idea of Residual Connections is now widely used in DLN architectures, state of the art networks such DenseNet and Transformers include it as part of their design. We provide a deeper discussion of the benefits of Residual Connections in the section on ResNets later in this chapter.
 
-### Small Filters in ConvNets
+## Small Filters in ConvNets
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/convnet11.png)
 
@@ -471,7 +471,7 @@ The better performance with smaller filters can be explained as follows: The job
 
 *Figure 20*
 
-### Bottlenecking using 1x1 Filters
+## Bottlenecking using 1x1 Filters
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/cnn21.png)
 
@@ -485,7 +485,7 @@ Several modern ConvNets use Filters of size $1\times 1$. At first glance these m
 
 Bottlenecking with $1 \times 1$ and $1 \times n$ filters, as illustrated in Figure 22: As shown, the first $1 \times 1$ filter is used in conjuction with a reduction in depth to $C/2$. The $3 \times 3$ filter then acts on this reduced depth layer, which gives us the reduction in parameters, and this is followed by another $1 \times 1$ filter that expands the depth back to $C$. It can the shown that this filter architecture reduces the number of parameters from $9 C^2$ to $3.25 C^2$ (ignoring the bias parameters). It can be easily shown that the number of computations also decreases from $9C^2 HW$ to $3.25C^2 HW$, where $H,W$ are the spatial dimensions of the ConvNet.
 
-### Grouped Convolutions
+## Grouped Convolutions
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/convnet27.png)
 
@@ -503,7 +503,7 @@ Grouped Convolutions have been shown to improve the performance of ConvNets. It 
 
 It can also be shown that the number of computations for the Grouped case decreases in inverse proportion to the number of groups and the size of the filter. This calculation is carried out detail in the next section.
 
-### Depthwise Separable Convolutions
+## Depthwise Separable Convolutions
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/convnet28.png)
 
@@ -523,12 +523,6 @@ For a typical filter size of $D_K= 3$, it follows that the number of computation
 Depthwise Separable Convolutions are supported in Keras usong the *SeparableConv2D* command that implements all the operations shown in Part (b) of the figure.
 
 ## ConvNet Architectures
-
-
-```python
-#convnet15
-nb_setup.images_hconcat(["DL_images/convnet15.png"], width=600)
-```
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/convnet15.png)
 
@@ -559,7 +553,7 @@ The table below which is taken from Keras Documentation summarizes the size, per
 
 *Figure 26*
 
-### LeNet5 (1998)
+## LeNet5 (1998)
 
 LeNet5 was the first ConvNet, it was designed by Yann LeCun and his team at Bell Labs, see [Lecun, Bottou, Bengio, Haffner (1998)](https://ieeexplore.ieee.org/document/726791). It had all the elements that one finds in a modern ConvNet, including Convolutional and Pooling Layers, along with the Backprop algorithm for training (Figure 27).  It only had two Convolutional layers, which was a reflection of the smaller training datsets and processing capabilities available at that time. LeCun et.al. used the system for handwritten signature detection in checks, and it was successfully deployed commercially for this purpose.
 
@@ -573,7 +567,7 @@ As shown in Figure 27, the system uses two Convolution layers with $5 \times 5$ 
 
 *Figure 28*
 
-### AlexNet (2012)
+## AlexNet (2012)
 
 After the pioneering work done in LeNet5, progress in ConvNets lay dormant for more than a decade. It was held back by the following issue: In order to train larger ConvNets with millions of parameters, it was necessary to have a large training dataset with correspondingly millions of images (this is required in order to prevent overfitting). Image datasets of this size did not exist until about 2010, when the ImageNet dataset was released.
 
@@ -591,7 +585,7 @@ AlexNet used 5 Convolutional layers (vs 2 used in LeNet5), and it used a similar
 
 AlexNet had a total of 60 million parameters, which was still much more than the number of training images available. In order to prevent overfitting, the system used Data Augmentation techniques to produce additional test images, thus boosting the Test dataset to 15 million images.
 
-### ZFNet (2013)
+## ZFNet (2013)
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/zfnet.png)
 
@@ -605,7 +599,7 @@ ZFNet, which was designed by [Zeiler and Fergus (2013)](https://arxiv.org/abs/13
 
 The reduction in filter size and stride helped to pick image features at a finer level of resolution.
 
-### VGGNet (2014)
+## VGGNet (2014)
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/VGGNet.png)
 
@@ -621,7 +615,7 @@ An interesting fact about about VGGNet is that it has a total of 144 million par
 
 Even though VGGNet did not win the ILSVRC competition in 2014, it came close to doing so, and its simple and elegant design has been influential in subsequent ConvNet architectures. The main lesson from VGGNet was the classical ConvNet design of the LeNet5/AlexNet type can be substantially improved by increasing the number of Convolutional Layers and by using smaller filters.
 
-### Google Inception Network (2014)
+## Google Inception Network (2014)
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/Inception1.jpg)
 
@@ -640,7 +634,7 @@ The solution to these problems is shown on the RHS of Figure 32 and uses the con
 
 The InceptionNet design aligns with the intuition that visual information should be processed at different scales and then aggregated so that the next stage can abstract features from different scales at the same time. The designers of the system also included a couple of extra output modules in the middle of the network (see Figure 31)), in order to amplify the error signal propagating towards the initial portion of the network, since they were concerned that the large number of layers in the network will cause the error signal to fade by the time it gets to the initial portion.
 
-### ResNet (2015)
+## ResNet (2015)
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/cnn7.png)
 
@@ -699,7 +693,7 @@ Another very interesting perspective on why Residual Connections are so effectiv
 
 *Figure 38*
 
-### Beyond ResNets: ResNext and DenseNet
+## Beyond ResNets: ResNext and DenseNet
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/ResNext.png)
 
@@ -725,7 +719,7 @@ DenseNets are built from modules called Dense Blocks as shown in the lower part 
 
 The DenseNet architecture is quite effective in making the shape of the Loss Function surface more convex and hence easier to optimize, as shown in Part(b) of the above figure (taken from [Li, Xu et. al]  https://arxiv.org/pdf/1712.09913.pdf). 
 
-### Xception
+## Xception
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/Xception.png)
 
@@ -735,7 +729,7 @@ The Xception architecture replaces the regular Convolution operation by Depthwis
 
 The Xception network has performance that is comparable with the Google InceptionNet, but with a smaller parameter count.
 
-### MobileNet
+## MobileNet
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/MobileNet.png)
 
@@ -755,7 +749,7 @@ ConvNets seem to work very well and constitute a significant advance in neural n
 - Generating Images that Maximize Neuron Activations: This is the process of running the ConvNet backwards to generate images that maximize the activation at a chosen neuron.
 - Generating Images from Feature Vectors: This also involves running the ConvNet backwards, to generate images whose Feature Vectors match those from a sample image.
 
-### Visualizing the Proximity Property of Feature Space Representations
+## Visualizing the Proximity Property of Feature Space Representations
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/cnn10.png)
 
@@ -766,7 +760,7 @@ We have emphasized the fact that DLNs transform the representation of images fro
 - Images whose pixel values are very different are nevertheless close to each other in feature space, thus verifying the semantic clustering property of DLNs.
 - On the other hand, relying on L2 nearest neighbors in pixel space is not a reliable way of clustering images, since it can result in images that are in different categories, as shown on the LHS of Figure 44.
 
-### Visualizing Local Filters
+## Visualizing Local Filters
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/cnn9.png)
 
@@ -776,7 +770,7 @@ Consider a ConvNet, such as AlexNet, with 64 Activation Maps in the first Convol
 
 Unfortunately it is not possible to as readily visualize filters in the deeper layers of the network, due to the fact that they possess a depth of more than 3 and hence cannot be converted into a color image. Hence in order to understand what is happening in the deeper layers of the network, we rely on techniques described in the following sub-sections.
 
-### Visualizing Activation Maps
+## Visualizing Activation Maps
 
 Unlike Convolutional Filters, Activation Maps can be visualized for all layers of a network, since each of them can be considered to be a grayscale image. This exercise was carried out in Chollet Section 5.4.1 and the results are summarized for the cat image shown below.
 
@@ -793,7 +787,7 @@ Figure 47 graphs some of the Activation Maps in Convolutional Layer 1 and Layer 
 
 *Figure 47*
 
-### Identifying Maximally Activating Patches in Images
+## Identifying Maximally Activating Patches in Images
 
 In the previous section we surmised that the neurons in the higher convolutional layers are activated by more complex patterns in the input image while the lower layers are activated by simpler paterns. This intuition can be verified  by using the concept of Maximally Activating Patches, which are defined as follows: Pick any neuron in a ConvNet, it can be one of the logit nodes whose activation is equal to the class-score of the corresponding category, or it can  be a neuron in one of the Activation Maps within a convolutional layer. Assuming that the input image is such that it results in a high activation value at the chosen node, i.e., the neuron reponds positively to some pattern that it detects in the image. Then the Maximally Activating Patch is defined to be the localized portion of the image that the neuron is responding to.
 
@@ -848,7 +842,7 @@ The reconstructed image obtained by plotting ${\partial a\over{\partial x_{ijk}}
 
 A similar procedure can be carried out using the Guided Backpropagation procedure, and the results for Convolutional Layers 6 and 9 for AlexNet are shown in Figure 51 (with the recosnstructed image on the LHS and the corresponding patch from the actual image on the RHS). This figure shows that the reconstructed image quality is better with Guided Backpropagation.
 
-### Generating Images
+## Generating Images
 
 Generating images using ConvNets is one of the most exciting areas in Deep Learning, and as a field is still undergoing rapid development. There are several ways in which ConvNets are being used to generate images, and in this section we explore a few of them:
 
@@ -858,7 +852,7 @@ Generating images using ConvNets is one of the most exciting areas in Deep Learn
 
 One of the realizations that we have to come based the image generation work, is that a trained Neural Network contains a lot of detailed information about the objects as well as other parts of the image in its training dataset, which is enough to actually generate images of these objects. Previously it was thought that Supervised Learning models incorporated only very basic high level information about objects, which was just sufficient to be able to recognize them. It is also possible to generate images using ConvNets with the help of Unsupervised Learning techniques such as Generative Adversarial Networks (GANs) and PixelCNN, but these are not covered in this chapter.
 
-### Generating Images that Maximally Activate a Neuron
+## Generating Images that Maximally Activate a Neuron
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/cnn16.png)
 
@@ -896,7 +890,7 @@ Figure 52 shows the results of applying this algorithm to a ConvNet trained on t
 
 *Figure 53*
 
-### Adversarial Images
+## Adversarial Images
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/cnn20.png)
 
@@ -913,7 +907,7 @@ We then run the maximization algorithm, and after a few iterations, the system w
 
 Adversarial Images are an active research topic, since they constitute a significant security loophole that can perhaps be exploited.
 
-### Generating Images Using Google Deap Dream
+## Generating Images Using Google Deap Dream
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/cnn17.png)
 
@@ -941,7 +935,7 @@ $$\mathcal L = {1\over 2}\sum_i z_i^2$$
 
 where the sum is over all the activations in a given layer.
 
-### Generating Images Using Feature Inversion
+## Generating Images Using Feature Inversion
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/cnn18.png)
 
@@ -987,7 +981,7 @@ In addition to Classification, ConvNets are also used to solve several important
 
 Examples of thesee three types of image processing are shown in Figure 57.
 
-### Object Localization
+## Object Localization
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/convnet39.png)
 
@@ -995,7 +989,7 @@ Examples of thesee three types of image processing are shown in Figure 57.
 
 The Classification + Localization problem can be solved by training a model to predict the co-ordinates of the 4 corners of the bounding box, in addition to classifying the object. In order to do so, the modeler has to create a training dataset in which the label identifies the co-ordinates of the box. Once this done, the training can proceed using the type of model shown in Figure 58. It shows a so-called 'two-headed' Convnet, with the body consisting of the convolutional base. The output from the base is routed to Dense Networks, with Network One connected to the logits for classifying the object (using the Softmax Loss) and Network Two connected to a Regression Layer that predicts the box co-ordinates (using the Mean Square Error or L2 Loss). The Backprop algorithm is then run on the combined loss. As the figure shows, Transfer Learning can be used for this problem with a pre-trained Convolutional Base, as long as the objects to be classified are not too different than the ImageNet dataset.
 
-### Semantic Segmentation
+## Semantic Segmentation
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/convnet40.png)
 
@@ -1009,7 +1003,7 @@ Semantic Segmentation is the problem of classifying each and every pixel in an i
 
 The objective of the Semantic Segmentation model is to predict a Label Map for the input image, and this can be done using ConvNets as shown in Figure 60. The input image is sent through multiple convolutional layers, and the final prediction is in the form of a 3D tensor with C layers (corresponding to C pixel categories). For the $c^{th}$ layer, the model predicts a total of $H\times W$ binary valued probabilities of the pixels belonging to the $c^{th}$ category. The final prediction for a pixel location is the category that has the maximum probability value.
 
-### Object Detection
+## Object Detection
 
 Object Detection is a challenging problem since the number of objects in the image is not known in advance. An initial attack on this problem led to an algorithm called R-CNN (stands for Region based CNN) in which a ConvNet model was used to detect images over several region candidates in the image (these region candidates were generated seprately by a non-ML algorithm). This did work but was very expensive, since each image required several forward passes through the model. An algorithm called YOLO (for 'You only Look Once') was proposed subsequently, which is much more efficient since it can do its job with just a single forward pass. This makes it suitable for real time detection tasks, such as detecting objects in a video clip.
 
