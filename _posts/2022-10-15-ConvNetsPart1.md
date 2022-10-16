@@ -255,8 +255,6 @@ It can then be shown that
 
 $$W_{r+1} = {W_r - F_r + 2P_r\over S_r} + 1$$
 
-and
-
 $$L_{r+1} = {L_r - F_r + 2P_r\over S_r} + 1$$
 
 In order to gain insight into this formula, consider Figure 12:
