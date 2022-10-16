@@ -176,11 +176,6 @@ The first convolutional layer is invoked using *Conv2D(32,(3,3),activation='relu
 
 The model.summary() command shows that the model has 703,594 parameters, of which 590,848 or 84%, occur at the Dense Feed Forward layer. Hence Flattening the last convolutional layer and feeding it to a Fully Connected layer leads to an enormous increase in the number of parameters. If we replace Flatten by the "Global Max Pooling" operation, then the parameter count goes down to 179,306 shown below. The corresponding network is illustrated in Figure 10. If the model is executed then it can be shown that there is no appreciable decrease in the performance of the model. 
 
-$$W_{r+1} = {W_r - F_r + 2P_r\over S_r} + 1$$
-
-$$L_{r+1} = {L_r - F_r + 2P_r\over S_r} + 1$$
-
-
 ![](https://subirvarma.github.io/GeneralCognitics/images/convnet31.png)
 
 *Figure 10*
