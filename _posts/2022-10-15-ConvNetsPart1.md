@@ -48,13 +48,13 @@ The main architectural aspects of ConvNets are illustrated in parts (a) - (d) of
 
 - Part (b) shows the template matching operation in ConvNets. As shown here, the matching is done locally, for possibly overlapping patches of the image. At each position of the filter, the template matching is done using the following equation to compute the pre-activation $a$ and activation $z$:
 
-$$a = \sum_{i=1}^{75} w_{i} x_i + b,$$
+$$a = \sum_{i=1}^{75} w_{i} x_i + b$$
 
-$$z = f(a) \quad \quad (**tf**)$$
+$$z = f(a) \quad \quad (1)$$
 
-- In this equation the pixel values $(x_1,...,x_{75})$, known as the Local Receptive Field, correspond to the local image patch of size $5\times 5\times 3$ and   changes as the filter is moved around (while the filter values $w_i$ and $b$ remain unchanged). Note that the filter now only has $5\times 5\times 3 + 1 = 76$ parameters, as opposed to the $32\times 32\times 3 + 1 = 3073$ parameters that were needed for the filter in Figure 2. Both the filter as well as the local image patch are 3-D tensors, though the multiplication in Equation (**tf**) uses a stretched out vectorized versions of the two tensors.
+- In this equation the pixel values $(x_1,...,x_{75})$, known as the Local Receptive Field, correspond to the local image patch of size $5\times 5\times 3$ and   changes as the filter is moved around (while the filter values $w_i$ and $b$ remain unchanged). Note that the filter now only has $5\times 5\times 3 + 1 = 76$ parameters, as opposed to the $32\times 32\times 3 + 1 = 3073$ parameters that were needed for the filter in Figure 2. Both the filter as well as the local image patch are 3-D tensors, though the multiplication in Equation (1) uses a stretched out vectorized versions of the two tensors.
 
-- Part (c) of the figure shows the filter being moved across the image, and at each position Equation (**tf**) is used to compute a new value of $z$, and this generates a matrix of size $28\times 28$. This matrix is known as an Activation Map (also called a Feature Map). This operation of sliding the filter across the image, while computing the dot product (**tf**) at each position, is called a convolution. Using the same Filter for all the nodes in the Activation Map implies that all nodes in the Map are tuned to detect the same feature in the Input Layer, *only at different positions in the image*. This leads to the conclusion that ConvNets possess the property of Translational Invariance, i.e., they are able to detect objects irrespective of their location in the image.
+- Part (c) of the figure shows the filter being moved across the image, and at each position Equation (1) is used to compute a new value of $z$, and this generates a matrix of size $28\times 28$. This matrix is known as an Activation Map (also called a Feature Map). This operation of sliding the filter across the image, while computing the dot product (1) at each position, is called a convolution. Using the same Filter for all the nodes in the Activation Map implies that all nodes in the Map are tuned to detect the same feature in the Input Layer, *only at different positions in the image*. This leads to the conclusion that ConvNets possess the property of Translational Invariance, i.e., they are able to detect objects irrespective of their location in the image.
 
 - Note that so far we have used a single filter which is only capable of detecting a single pattern in the input image. If we wish to detect multiple patterns, then we need multiple filters, each of which results in its own Activation Map, as shown in Part (d) of Figure 3. For example, Activation Map 1 may detect horizonal edges while Activation Map 2 detects vertical edges etc. As shown, a Hidden Layer in ConvNets consists of a stack of Activation Maps.
 
@@ -77,7 +77,7 @@ So far we have only described the operation of the Input Layer and the first Hid
 - The number of Activation Maps to be used in the Hidden Layer
 - The size of the Filter and the Stride size (defined below), to be used to compute the Activations.
 
-In the example in Figure **cnn5**, we added a second Hidden Layer with 10 Activation Maps, that are generated using a filter of size $5\times 5\times 6$. Note that the depth of this filter is not a free variable since it has to equal to the number of Activation Maps in the previous layer.
+In the example in Figure 5, we added a second Hidden Layer with 10 Activation Maps, that are generated using a filter of size $5\times 5\times 6$. Note that the depth of this filter is not a free variable since it has to equal to the number of Activation Maps in the previous layer.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/cnn22.png)
 
@@ -105,7 +105,7 @@ In order to understand the Pooling operation, note that the numbers in an Activa
 
 *Figure 8*
 
-The output of the last convolutional layer in a ConvNet is fed into a Dense Feed Forward network before being sent into the logit layer (see Figure 9 below for an example). The traditional way of doing this is by flattening the ConvNet tensor, which causes a huge increase in the number of parameters. Recall from Chapter **ImprovingModelGeneralization** that more parameters can cause overfitting, unless the size of the training dataset is also increased.
+The output of the last convolutional layer in a ConvNet is fed into a Dense Feed Forward network before being sent into the logit layer (see Figure 9 below for an example). The traditional way of doing this is by flattening the ConvNet tensor, which causes a huge increase in the number of parameters. It is well known that more parameters can cause overfitting, unless the size of the training dataset is also increased.
 
 In order to reduce the number of parameters, more recently models have started using the Global Max Pooling operation for this interface, which is illustrated in Figure 8. As shown, each spatial layer of the ConvNet is converted into a single node in the Dense Feed Forward network by using the max operation (or alternatively the average operation). 
 
@@ -126,6 +126,8 @@ Figure 9 puts all the elements of a ConvNet together to come up with a network f
 - The Filters are all of spatial size (3x3).
 
 At a high level, the convolution operation changes the representation of an image, starting from raw pixels at one end, to higher level representations using successive layers of filtering. In abstract space, as the system goes through multiple Convolutional Layers, it is basically performing non-linear transformations so that images with similar objects are clustered closer to each other in the higher level transform space. This enables the classification operation to happen using a simple linear classifier in the final layer of the network. The Fully Connected layer that is just prior to the Output Layer contains a 1024-dimensional representation of the input image. It is often used in other Deep Learning architectures that need a high level image representations. 
+
+The following code module in Keras has an implementation of the network from Figure 9.
 
 ```python
 model = models.Sequential()
@@ -307,22 +309,22 @@ Earlier in this chapter we observed that a ConvNet Layer with $D$ Activation Map
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/convnet21.png)
 
-*Figure 13*
+*Figure 13(a)*
 
 2D Convolutional Networks are ideal to do Image Processing, since they are able to process 3D image tensors in their native format. But there are important datasets that are either 1D or 2D tensors, examples include:
 
 - Natural Language Processing: Sentences can be represented as a 2D tensor, with a row for each word and the columns with the feature representations for the corresponding word. 
 - Structured Tabular Datasets: These are the most common type of datasets, and can be either a 1D vector or a 2D matrix.
 
-The idea of doing local filtering using convolutions can be extended to these types of datasets by used 1D Convolutions, as shown in Figure 13. The bottom part of the figure shows a 1D Convolution using a 2x1 filter with a depth of 4 (in blue). An Activation Map in this case is no longer a 2D matrix, but instead is a 1D vector. The 1D Convolutions acts on the 1D Input Activation Map, and converts into an output 1D Activation Map, as shown. If there are D such 1D filters, then each of them will generate its own output Activation Map, resulting an output of tensor shape (4,4) as shown.
+The idea of doing local filtering using convolutions can be extended to these types of datasets by used 1D Convolutions, as shown in Figure 13(a). The bottom part of the figure shows a 1D Convolution using a 2x1 filter with a depth of 4 (in blue). An Activation Map in this case is no longer a 2D matrix, but instead is a 1D vector. The 1D Convolutions acts on the 1D Input Activation Map, and converts into an output 1D Activation Map, as shown. If there are 4 such 1D filters, then each of them will generate its own output Activation Map, resulting an output of tensor shape (4,4) as shown.
 
-The process of sliding (or convolving) the 2x1 filter across the input is illustrated in Figure 14. It is easy to see that the formula $ W_{r+1} = \frac{W_r-F_r+2P_r}{S_r}+1 $ that was derived for the size of the output Activation Map in 2D Convolutions continues to hold for this case as well.
+The process of sliding (or convolving) the 2x1 filter across the input is illustrated in Figure 13(b). It is easy to see that the formula $ W_{r+1} = \frac{W_r-F_r+2P_r}{S_r}+1 $ that was derived for the size of the output Activation Map in 2D Convolutions continues to hold for this case as well.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/convnet22.png)
 
-*Figure 14*
+*Figure 13(b)*
 
-The 1D Convolutional model to process the IMDB dataset is illustrated in Figure 14. The Embedding Layer converts each review from a 1D vector of integers of size 500, into a 2D matrix of shape (500,128), with rows representing words from the review in vector format. The 128 size vector representation for the words is learnt as part of the training.
+The 1D Convolutional model to process the IMDB Moview Review dataset is illustrated in Figure 14. The Embedding Layer converts each review from a 1D vector of integers of size 500, into a 2D matrix of shape (500,128), with rows representing words from the review in vector format. The 128 size embedded vector representation for the words is learnt as part of the training.
 
 Note that a Flatten Layer is no longer needed unlike for the case of Dense Feed Forward Networks, since the 1D ConvNet model is capable of processing the text input in its native 2D format.
 
@@ -330,6 +332,9 @@ Note that a Flatten Layer is no longer needed unlike for the case of Dense Feed 
 
 *Figure 14*
 
+The Keras code for this model is given next.
+
+```python
 model = Sequential()
 model.add(layers.Embedding(max_features, 128, input_length=max_len))
 model.add(layers.Conv1D(32, 7, activation='relu'))
@@ -337,6 +342,7 @@ model.add(layers.MaxPooling1D(5))
 model.add(layers.Conv1D(32, 7, activation='relu'))
 model.add(layers.GlobalMaxPooling1D())
 model.add(layers.Dense(1))
+```
 
 model.summary()
 
@@ -365,7 +371,7 @@ model.summary()
 
 ## Transfer Learning with ConvNets
 
-When ConvNets are trained on image data, such as ImageNet, we have the luxury of having a database of millions of labeled images, which enables us to train fairly large networks with hundreds of layers to a high degree of accuracy. These networks, examples of which include ResNet, VGGNet, or Google InceptionNet, take multiple weeks to train, and involve huge amounts of advanced computing resources such as GPUs, to do so (the architecture of these networks is discussed in Chapter **ConvNetsPart2**)).
+When ConvNets are trained on image data, such as ImageNet, we have the luxury of having a database of millions of labeled images, which enables us to train fairly large networks with hundreds of layers to a high degree of accuracy. These networks, examples of which include ResNet, VGGNet, or Google InceptionNet, take multiple weeks to train, and involve huge amounts of advanced computing resources such as GPUs, to do so (the architecture of these networks is discussed later in this blog).
 
 Practitioners often run into problems when there are not enough training examples to train such large networks, or if they don't have access to the necessary computing resources for the particular problem that they are trying to solve. 
 Fortunately there is a technique called Transfer Learning that enables us to develop accurate models even without a lot of training data or computing resources. Transfer Learning enables us to transfer the parameters learnt from training a model for Problem 1, to be re-used in the model for another Problem 2, provided the training dataset for Problem 2 is similar to that used for Problem 1.
@@ -392,18 +398,18 @@ Why does Transfer Learning work so well? A ConvNet trained on a large dataset su
 
 There are two ways in which features from image datasets can be extracted:
     
-1. All the images in the dataset (training, validation and test) are fed into *conv_base*, and the final tensors (of shape (5,5,1024)) is used as the new image representation. Note that the original images are no longer used in the rest of the model training and validation.
-2. The model incorporates both the pre-trained *conv_base* as well as the trainable portion. Training is done using the image dataset, during which the weghts in the pre-trained portion are frozen.
+1. All the images in the dataset (training, validation and test) are fed into base model, and the final tensors are used as the new image representation. Note that the original images are no longer used in the rest of the model training and validation.
+2. The model incorporates both the pre-trained base model as well as the trainable portion. Training is done using the image dataset, during which the weghts in the pre-trained portion are frozen.
 
 Method 1 leads to faster training, since the images don't have to be processed by the large MobileNet model. However it precludes the use of data augmentation. Method 2 on the other hand is slower since each image passes through the *conv-base* in the forward pass, however it allows the user to create new images on the fly during training using data augmentation.
 
-In this example we will use Method 1, please see Chollet Section 8.3 for an example of Method 2 as well as additional examples of Transfer Learning.
+In the following example we will use Method 1.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/convnet32.png)
 
 *Figure 17*
 
-The complete model is shown in Figure 17. During the pre-training phase, each image is passed through the MobileNet model, and its final output stored as the new training dataset. These extracted features are then converted into a vector using the Global Max Pooling operation and then sent through a simple Dense Feed Forward model with a single hidden layer with 256 nodes.
+The complete model is shown in Figure 17. During the pre-training phase, each image is passed through the MobileNet model, and its final output of shape $5\times 5\times 1024$ is stored as the new training dataset. These extracted features are then converted into a vector using the Global Max Pooling operation and then sent through a simple Dense Feed Forward model with a single hidden layer with 256 nodes.
 
     Model: "model_2"
     _________________________________________________________________
@@ -439,7 +445,7 @@ The performance of ConvNets has improved in recent years due to several architec
 - Dispensing with the Pooling Layer
 - Dispensing with Fully Connected Layers
 
-Residual Connections are arguably the most important architectural enhancement made to ConvNets since their inception, and are covered in some detail in the following section. Even though proposed in the context of ConvNets, they are critical part of other Neural Network architectures, in particular Transformers.
+Residual Connections are arguably the most important architectural enhancement made to ConvNets since their inception, and are covered in some detail when we discuss ResNets. Even though proposed in the context of ConvNets, they are a critical part of other Neural Network architectures, in particular Transformers.
 
 ## Residual Connections
 
@@ -494,7 +500,7 @@ Bottlenecking with $1 \times 1$ and $1 \times n$ filters, as illustrated in Figu
 Grouped Convolutions are illustrated in Figure 23. As shown, the regular $3\times 3$ convolution is replaced by the following:
 
 - Step 1: Compress the input layers using a $1\times 1$ convolution from 256 layers to 128.
-- Step 2: Split the output of Step 1 into 32 separate convolution layers, such that each layer 4 Activation Maps.
+- Step 2: Split the output of Step 1 into 32 separate convolution layers, such that each layer has 4 Activation Maps.
 - Step 3: Use regular $3\times 3$ convolution on each of the 32 layers
 - Step 4: Marge or Concatenate all 32 convolution layers to form a structure with 128 Activation Maps
 - Step 5: Expand the output of step 4 to 256 Activation Maps with a $1\times 1$ convolution
@@ -511,7 +517,7 @@ It can also be shown that the number of computations for the Grouped case decrea
 
 A standard convolution both filters and combines inputs into a new set of outputs in one step. The depthwise separable convolution splits this into two layers, a separate layer for filtering and a separate layer for combining. This factorization has the effect of drastically reducing computation and model size. Hence they take the idea behind Grouped Convolutions to the limit by splitting up the M Activation Maps in the input layer into M separate single layer Activation Maps as shown in Figure 24. Each of these Activation Maps is then processed using a separate convolutional filter, and then combined together at the output. A simple $1\times 1$ convolution, is then used to create a linear combination of the output of the depthwise layer . Hence this design serializes the spatial and depthwise filtering operations of a regular convolution. An immediate benefit of doing this is a reduction in the number of computations (and the number of parameters), as shown next:
 
-- The number of computations in a regular convolution shown in Part (a) is given by $D_K D_K\times MN\times D_F D_F$ where $D_K$ is the size of the filter, M is the depth of the input layer, N is the depth of the output layer and $D_F$ is the size of the Activation Map.
+- The number of computations in a regular convolution shown in Part (a) is given by $D_K D_K\times MN\times D_F D_F$ where $D_K$ is the size of the filter, M is the depth of the input layer, N is the depth of the output layer and $D_F$ is the size of the output Activation Map.
 - The number of computations in the Depthwise Separable Convolution is given by $D_K D_K\times M\times D_F D_F + MN\times D_F D_F$
 
 It follows that the ratio $R$ between the number of computations in the Depthwise Separable network and the Regular COnvNet is given by
@@ -519,8 +525,6 @@ It follows that the ratio $R$ between the number of computations in the Depthwis
 $$R = {1\over N} + {1\over D_K^2}$$
 
 For a typical filter size of $D_K= 3$, it follows that the number of computations in the Depthwise Separable network reduces by a factor of 9, which can be a significant reduction for training times that sometimes run into days. The idea of separating out the filtering into two parts, spatial and depthwise, has subsequently proven to be very influential, and underlies the type of filtering in a new model called Transformers, which we will study in a later chapter.
-
-Depthwise Separable Convolutions are supported in Keras usong the *SeparableConv2D* command that implements all the operations shown in Part (b) of the figure.
 
 ## ConvNet Architectures
 
@@ -530,9 +534,9 @@ Depthwise Separable Convolutions are supported in Keras usong the *SeparableConv
 
 We briefly survey ConvNet architectures starting with the first ConvNet, LeNet5, whose details were published in 1998. Starting with AlexNet in 2012, ConvNets have won the ImageNet Large Scale Visual Recognition Challenge (ILSVRC) image classification competition run by the Artificial Vision group at Stanford University. ILSVRC is based on a subset of the ImageNet database that has more than 1+ million hand labeled images, classified into 1,000 object categories with roughly 1,000 images in each category. In all there are 1.2 million training images, 50K validation images and 150K testing images. If an image has multiple objects, then the system is allowed to output upto 5 of the most probably object categories, and as long as the the "ground-truth" is one of the 5 regardless of rank, the classification is deemed successful (this is referred to as the top-5 error rate).
 
-Figure 25 plots the top-5 error rate and (post-2010) the number of hidden layers in DLN architectures for the past seven years. Prior to 2012, the winning designs were based on traditional ML techniques using SVMs and Feature Extractors. In 2012 AlexNet won the competition, while bringing down the error rate signficantly, and inaugurated the modern era of Deep Learning. Since then, error rates have come down rapidly with each passing year, and currently stand at 3.57%, which is better than human-level classification performance. At the same time, the number of Hidden Layers has increased from the 8 layers used in AlexNet, to 152 layers in ResNet which was the winner in 2015. This is when the machines outpaced humans in accuracy and the competetion was stopped.
+Figure 25 plots the top-5 error rate and (post-2010) the number of hidden layers in Neural Network architectures for the past seven years. Prior to 2012, the winning designs were based on traditional ML techniques using SVMs and Feature Extractors. In 2012 AlexNet won the competition, while bringing down the error rate signficantly, and inaugurated the modern era of Deep Learning. Since then, error rates have come down rapidly with each passing year, and currently stand at 3.57%, which is better than human-level classification performance. At the same time, the number of Hidden Layers has increased from the 8 layers used in AlexNet, to 152 layers in ResNet which was the winner in 2015. This is when the machines outpaced humans in accuracy and the competetion was stopped.
 
-In this section our objective is to briefly describe the architecture of the winners from the last few years, namely: AlexNet (2012), ZFNet (2013), VGGNet (2014), Google InceptionNet (2014) and ResNet (2015). Note that VGGNet, InceptionNet and VGGNet are available as pre-trained models (on ImageNet) in Keras, for use in Transfer Learning. In addition we will go over a few other architectures whose pre-trained models are also included in Keras, namely XceptionNet, MobileNet, DenseNet and NASNet. The first three are "classical" ConvNet designs with multiple Convolutional, Pooling, and Dense layers arranged in a linear stack. The Google Inception Network and ResNet have diverged from some of the basic tenets of the first ConvNets, by adopting the Split/Transform/Merge and the Residual Connection designs respectively. In more recent years the focus has shifted towards coming up with ConvNets that have a much lower number of parameters, without sacrificing performance. The InceptionNet actually began this trend, and MobileNet also belongs to this category of models.
+In this section our objective is to briefly describe the architecture of the winners from the last few years, namely: AlexNet (2012), ZFNet (2013), VGGNet (2014), Google InceptionNet (2014) and ResNet (2015). The first three are "classical" ConvNet designs with multiple Convolutional, Pooling, and Dense layers arranged in a linear stack. The Google Inception Network and ResNet have diverged from some of the basic tenets of the first ConvNets, by adopting the Split/Transform/Merge and the Residual Connection designs respectively. In more recent years the focus has shifted towards coming up with ConvNets that have a much lower number of parameters, without sacrificing performance. The InceptionNet actually began this trend, and MobileNet also belongs to this category of models.
 
 These following architectures are described in greater detail next:
 
@@ -545,7 +549,6 @@ These following architectures are described in greater detail next:
 - Xception (2016)
 - DenseNet (2017)
 - MobileNet (2017)
-- NasNet (2018)
 
 The table below which is taken from Keras Documentation summarizes the size, performance, number of parameters and depth of these models. The performance is with respect to the ImageNet dataset, with the Top-1 Accuracy being the performance for the best predition and the Top-5 Accuracy being the performance for the case when the Ground Truth is among the top 5 predictions.
 
@@ -563,15 +566,15 @@ LeNet5 was the first ConvNet, it was designed by Yann LeCun and his team at Bell
 
 As shown in Figure 27, the system uses two Convolution layers with $5 \times 5$ Filters and Stride $S=1$, and two Pooling layers with $2 \times 2$ Filters and $S=2$. The system reduces the input $32 \times 32$ images into 16 Activation Maps of size $5 \times 5$ at the end of the second pooling operation, before flattening this tensor and outputting the result into the Fully Connected part of the design.
 
+## AlexNet (2012)
+
 ![](https://subirvarma.github.io/GeneralCognitics/images/AlexNet.png)
 
 *Figure 28*
 
-## AlexNet (2012)
-
 After the pioneering work done in LeNet5, progress in ConvNets lay dormant for more than a decade. It was held back by the following issue: In order to train larger ConvNets with millions of parameters, it was necessary to have a large training dataset with correspondingly millions of images (this is required in order to prevent overfitting). Image datasets of this size did not exist until about 2010, when the ImageNet dataset was released.
 
-AlexNet is responsible for the explosion in interest in DLNs in the last few years.This network won the ILSVRC competition in 2012 by a wide margin compared to its nearest rival which was based on SVMs (it had a 15.4% top-5 error rate vs 26.2% for the next lowest network), and this opened up the eyes of the ML community to the potential of DLNs. The architecture of AlexNet [Krizhevsky, Sutskever, Hinton (2012)](https://dl.acm.org/citation.cfm?id=2999134.2999257) was very similar to that of LeNet5, with the following exceptions (see Figure 28)):
+AlexNet is responsible for the explosion in interest in DLNs in the last few years.This network won the ILSVRC competition in 2012 by a wide margin compared to its nearest rival which was based on SVMs (it had a 15.4% top-5 error rate vs 26.2% for the next lowest network), and this opened up the eyes of the ML community to the potential of Deep Learning. The architecture of AlexNet [Krizhevsky, Sutskever, Hinton (2012)](https://dl.acm.org/citation.cfm?id=2999134.2999257) was very similar to that of LeNet5, with the following exceptions (see Figure 28)):
 
 - AlexNet replaced the *tanh()* activation function used in LeNet5, with the ReLU function and also the MSE loss function with the Cross Entropy loss.
 
@@ -668,7 +671,7 @@ ResNets are still among the best performing ConvNets and are used by default in 
 
 *Figure 35*
 
-There has been some recent work by [Li, Xu et.al.] (https://arxiv.org/pdf/1712.09913.pdf) which beautifully shows the beneficial effect of adding Residual Connections. They achieved this by coming up with a new way to visualize Loss Surfaces for a Neural Network, examples of which are shown in Figures 35 and 36. Part (a) of Figure 35 shows the Loss Surface for a 56 layer ResNet without any Residual Connections, while Part (b) shows the Loss Surface for the same network after the addition of Residual Connections. As cen be seen, the Loss Surface has become much more smooth and convex in shape, which makes it easier to run the SGD algorithm on it. In contrast, the chaotic shape of the Loss Surface without residual connections makes it very easy for the SGD algorithm to get caught in local minimums. There is a single large minima in the Loss Surface without Residual Connections, however for the SGD to get to it, it needs to initialized properly. This also implies, that without Residual Connections, the effectiveness of SGD is highly dependent on the initialization values.
+There has been some recent work by [Li, Xu et.al.](https://arxiv.org/pdf/1712.09913.pdf) which beautifully shows the beneficial effect of adding Residual Connections. They achieved this by coming up with a new way to visualize Loss Surfaces for a Neural Network, examples of which are shown in Figures 35 and 36. Part (a) of Figure 35 shows the Loss Surface for a 56 layer ResNet without any Residual Connections, while Part (b) shows the Loss Surface for the same network after the addition of Residual Connections. As can be seen, the Loss Surface has become much more smooth and convex in shape, which makes it easier to run the SGD algorithm on it. In contrast, the chaotic shape of the Loss Surface without residual connections makes it very easy for the SGD algorithm to get caught in local minimums. There is a single large minima in the Loss Surface without Residual Connections, however for the SGD to get to it, it needs to initialized properly. This also implies, that without Residual Connections, the effectiveness of SGD is highly dependent on the initialization values.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/convnet45.png)
 
@@ -683,11 +686,11 @@ The contour plots in Figure 36 shows the effect of the network depth on the Loss
 
 *Figure 37*
 
-Another very interesting perspective on why Residual Connections are so effective was provided by [Veit, Wilbur, Belongie] (https://arxiv.org/pdf/1605.06431.pdf). Instead of looking at the backward flow of gradients, the focused on the forward path of ResNet, and noted the following:
+Another very interesting perspective on why Residual Connections are so effective was provided by [Veit, Wilbur, Belongie](https://arxiv.org/pdf/1605.06431.pdf). Instead of looking at the backward flow of gradients, the focused on the forward path of ResNet, and noted the following:
 
 - In a network with no Residual Connections, there exists only a single forward path and all data flows along it. However in a network with n Residual Connections, there exist $2^n$ forward paths. This is illustrated in Figure 37 for the case $n=3$. The 8 separate forward paths that exist in this network are shown in Part (b) of this figure. As a result, the network decisions are effectively made by all of these 8 forward paths, that are operating parallel. This is very much like what is done in the Ensemble method, in which multiple models operate in parallel to improve model accuracy.
 
--  They furthermore showed that gradient flow in the backwards direction is dominated by a few shorter paths. This is illustrated in Figure 38 which has results for a network with 54 Residual Connections. Part (a) of this figure shows the distribution of the path lengths in this network, while Part (b) plots the gradient magnitudes. They further multiplied the gradient magnitudes with the number of pathlengths for a particular path, and and obtained the graph in Part (c). As can be seen the majority of the gradients are contributed by path lengths of 5 to 17, while the higher path lengths contribute no gradient at all. Fom this they concluded that in very deep networks with hundredsof layers, Residual Connections avoid the vanishing gradient problem by introducing short paths which can carry the gradient throughout the extent of these networks.
+-  They furthermore showed that gradient flow in the backwards direction is dominated by a few shorter paths. This is illustrated in Figure 38 which has results for a network with 54 Residual Connections. Part (a) of this figure shows the distribution of the path lengths in this network, while Part (b) plots the gradient magnitudes. They further multiplied the gradient magnitudes with the number of pathlengths for a particular path, and and obtained the graph in Part (c). As can be seen the majority of the gradients are contributed by path lengths of 5 to 17, while the higher path lengths contribute no gradient at all. Fom this they concluded that in very deep networks with hundreds of layers, Residual Connections avoid the vanishing gradient problem by introducing short paths which can carry the gradient throughout the extent of these networks.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/convnet49.png)
 
@@ -717,7 +720,7 @@ DenseNets are built from modules called Dense Blocks as shown in the lower part 
 *Figure 41*
 
 
-The DenseNet architecture is quite effective in making the shape of the Loss Function surface more convex and hence easier to optimize, as shown in Part(b) of the above figure (taken from [Li, Xu et. al]  https://arxiv.org/pdf/1712.09913.pdf). 
+The DenseNet architecture is quite effective in making the shape of the Loss Function surface more convex and hence easier to optimize, as shown in Part(b) of the above figure (taken from [Li, Xu et. al](https://arxiv.org/pdf/1712.09913.pdf). 
 
 ## Xception
 
@@ -737,7 +740,7 @@ The Xception network has performance that is comparable with the Google Inceptio
 
 MobileNet belongs to the same category of architectures as Xception, since it uses Depthwise Separable Convolutions to bring down the parameter count. The motivation behind MobileNet was to come up with a design that could be deployed in real world applications such as robotics, self-driving car and augmented reality. These involve tasks need to be carried out in a timely fashion on a computationally limited platform with small low latency models.
 
-The MobileNet architecture is defined in Table 1 (note that a filter shape of $1\times\times 1\times 128\times 256$ denotes a $1\times 1$ filter with 128 Activation Maps in the input layer and 256 Activation Maps in the output layer). All layers are followed by a batchnorm and ReLU nonlinearity with the exception of the final fully connected layer which has no nonlinearity and feeds into a softmax layer for classification. A final average pooling reduces the spatial resolution to 1 before the fully connected layer. Counting depthwise and pointwise convolutions as separate layers, MobileNet has 28 layers. As Table **ConvNetPerformance** shows, this results in a model with the smallest number of parameters, with some decrease in accuracy.
+The MobileNet architecture is defined in Figure 43 (note that a filter shape of $1\times\times 1\times 128\times 256$ denotes a $1\times 1$ filter with 128 Activation Maps in the input layer and 256 Activation Maps in the output layer). All layers are followed by a batchnorm and ReLU nonlinearity with the exception of the final fully connected layer which has no nonlinearity and feeds into a softmax layer for classification. A final average pooling reduces the spatial resolution to 1 before the fully connected layer. Counting depthwise and pointwise convolutions as separate layers, MobileNet has 28 layers. As the Table in Figure 26 shows, this results in a model with the smallest number of parameters, with some decrease in accuracy.
 
 ## Visualizing ConvNets
 
@@ -755,7 +758,7 @@ ConvNets seem to work very well and constitute a significant advance in neural n
 
 *Figure 44*
 
-We have emphasized the fact that DLNs transform the representation of images from RGB pixels to a feature space representation that also carries semantic information, such that images that are in the same category tend to have representations that cluster together in feature space. This property can be verified by examining the L2 nearest neighbors for an image, as shown in the RHS of Figure 44. This figure shows the sample image in the first column on the left side of the figure, while the images in each row correspond to images whose feature space L2 distance is closest to the sample image in that row. The feature space representation is obtained as the activations of the FC2 Fully Connected layer in AlexNet. We note the following:
+We have emphasized the fact that Deep Learning Networks transform the representation of images from RGB pixels to a feature space representation that also carries semantic information, such that images that are in the same category tend to have representations that cluster together in feature space. This property can be verified by examining the L2 nearest neighbors for an image, as shown in the RHS of Figure 44. This figure shows the sample image in the first column on the left side of the figure, while the images in each row correspond to images whose feature space L2 distance is closest to the sample image in that row. The feature space representation is obtained as the activations of the FC2 Fully Connected layer in AlexNet. We note the following:
 
 - Images whose pixel values are very different are nevertheless close to each other in feature space, thus verifying the semantic clustering property of DLNs.
 - On the other hand, relying on L2 nearest neighbors in pixel space is not a reliable way of clustering images, since it can result in images that are in different categories, as shown on the LHS of Figure 44.
@@ -772,16 +775,16 @@ Unfortunately it is not possible to as readily visualize filters in the deeper l
 
 ## Visualizing Activation Maps
 
-Unlike Convolutional Filters, Activation Maps can be visualized for all layers of a network, since each of them can be considered to be a grayscale image. This exercise was carried out in Chollet Section 5.4.1 and the results are summarized for the cat image shown below.
+Unlike Convolutional Filters, Activation Maps can be visualized for all layers of a network, since each of them can be considered to be a grayscale image. This exercise was carried out in Section 5.4.1 of the book [Deep Learning with Python](https://www.manning.com/books/deep-learning-with-python) and the results are summarized for the cat image shown below.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/convnet36.png)
 
 *Figure 46*
 
-Figure 47 graphs some of the Activation Maps in Convolutional Layer 1 and Layer 8 of an 8 layer ConvNet, for the input image in Figure 46, . We note tha following:
+Figure 47 graphs some of the Activation Maps in Convolutional Layer 1 and Layer 8 of an 8 layer ConvNet, for the input image in Figure 46. We note tha following:
 
-- Recall that the Activations Maps in Layer1 act as detectors of simple shapes such as edges of various types. The Activation Maps figures in Layer 1 bear this out, since most of them outline the shape of the cat which is where the edges occur.
-- An examination of the Layer 8 Activation Maps on the other hand shows that they have very little resemblance to the original image. In most Activation Maps a few of the neurons show higher activation than the others (these are coded in yellow). These are responding to some higher level aspect of the input image, but we can't tell what that is from the Activation Maps figures alone. Thus higher level activations carry more and more information about the presence or absence of certain complex patterns in the input image, rather than the shape of the image itself. If a neuron has zero activation then it menas that the pattern it is looking for is not present in the input image.
+- Recall that the Activations Maps in Layer 1 act as detectors of simple shapes such as edges of various types. The Activation Maps figures in Layer 1 bear this out, since most of them outline the shape of the cat which is where the edges occur.
+- An examination of the Layer 8 Activation Maps on the other hand shows that they have very little resemblance to the original image. In most Activation Maps a few of the neurons show higher activation than the others (these are coded in yellow). These are responding to some higher level aspect of the input image, but we can't tell what that is from the Activation Maps figures alone. Thus higher level activations carry more and more information about the presence or absence of certain complex patterns in the input image, rather than the shape of the image itself. If a neuron has zero activation then it means that the pattern it is looking for is not present in the input image.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/convnet37.png)
 
@@ -840,7 +843,7 @@ The reconstructed image obtained by plotting ${\partial a\over{\partial x_{ijk}}
 
 *Figure 51*
 
-A similar procedure can be carried out using the Guided Backpropagation procedure, and the results for Convolutional Layers 6 and 9 for AlexNet are shown in Figure 51 (with the recosnstructed image on the LHS and the corresponding patch from the actual image on the RHS). This figure shows that the reconstructed image quality is better with Guided Backpropagation.
+A similar procedure can be carried out using the Guided Backpropagation procedure, and the results for Convolutional Layers 6 and 9 for AlexNet are shown in Figure 51 (with the reconstructed image on the LHS and the corresponding patch from the actual image on the RHS). This figure shows that the reconstructed image quality is better with Guided Backpropagation.
 
 ## Generating Images
 
@@ -1012,7 +1015,7 @@ The YOLO algorithm takes the following steps to do detection (see Figure 61):
 - The image is divided into a grid of size $S\times S$ as shown in the LHS of the figure
 - For each grid cell, the model predicts $B$ Bounding Boxes as potential candidates for object detection, for a total of $BS^2$ Bounding Boxes. This is shown in the top half of the figure.
 - The model predicts a confidence score for each bounding box, which is defined as $P(Object)*IOU^{truth}_{predict}$. These confidence scores reflect how confident the model is that the box contains an object and also how accurate it thinks the box is that it predicts.
-- Lastly, for each grid cell, the model predicts the softmax probability vector of it containing one of the $C$ objects $P(Class_i|Object), 1\le i\le C$, i.e. the conditional probability of class $i$ given that the grid cell contains an object. This is illustrated in the bottom part of the figure.
+- Lastly, for each grid cell, the model predicts the softmax probability vector of it containing one of the $C$ objects $P(Class_i\vert Object), 1\le i\le C$, i.e. the conditional probability of class $i$ given that the grid cell contains an object. This is illustrated in the bottom part of the figure.
 
 The model's final prediction is obtained by doing the following computation:
 
