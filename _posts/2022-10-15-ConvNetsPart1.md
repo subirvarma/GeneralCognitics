@@ -757,40 +757,22 @@ ConvNets seem to work very well and constitute a significant advance in neural n
 
 ### Visualizing the Proximity Property of Feature Space Representations
 
+![](https://subirvarma.github.io/GeneralCognitics/images/cnn10.png)
 
-```python
-#cnn10
-nb_setup.images_hconcat(["DL_images/cnn10.png"], width=900)
-```
+*Figure 44*
 
-
-
-
-![png](output_71_0.png)
-
-
-
-We have emphasized the fact that DLNs transform the representation of images from RGB pixels to a feature space representation that also carries semantic information, such that images that are in the same category tend to have representations that cluster together in feature space. This property can be verified by examining the L2 nearest neighbors for an image, as shown in the RHS of Figure **cnn10**. This figure shows the sample image in the first column on the left side of the figure, while the images in each row correspond to images whose feature space L2 distance is closest to the sample image in that row. The feature space representation is obtained as the activations of the FC2 Fully Connected layer in AlexNet (see Figure **convnet7**). We note the following:
+We have emphasized the fact that DLNs transform the representation of images from RGB pixels to a feature space representation that also carries semantic information, such that images that are in the same category tend to have representations that cluster together in feature space. This property can be verified by examining the L2 nearest neighbors for an image, as shown in the RHS of Figure 44. This figure shows the sample image in the first column on the left side of the figure, while the images in each row correspond to images whose feature space L2 distance is closest to the sample image in that row. The feature space representation is obtained as the activations of the FC2 Fully Connected layer in AlexNet. We note the following:
 
 - Images whose pixel values are very different are nevertheless close to each other in feature space, thus verifying the semantic clustering property of DLNs.
-- On the other hand, relying on L2 nearest neighbors in pixel space is not a reliable way of clustering images, since it can result in images that are in different categories, as shown on the LHS of Figure **cnn10**.
+- On the other hand, relying on L2 nearest neighbors in pixel space is not a reliable way of clustering images, since it can result in images that are in different categories, as shown on the LHS of Figure 44.
 
 ### Visualizing Local Filters
 
+![](https://subirvarma.github.io/GeneralCognitics/images/cnn9.png)
 
-```python
-#cnn9
-nb_setup.images_hconcat(["DL_images/cnn9.png"], width=900)
-```
+*Figure 45*
 
-
-
-
-![png](output_74_0.png)
-
-
-
-Consider a ConvNet, such as AlexNet, with 64 Activation Maps in the first Convolutional Layer which are generated using 64 local filters of size $11\times 11$. Each of these filters can be visualized by using the filter values to generate a $3\times 11\times 11$ color image, and this is shown in Figure **cnn9** for AlexNet as well as for a few other types of ConvNets. Using the template matching interpretation of local filtering, it follows that first Hidden Layer filters in all these networks are mostly looking for simple patterns such as straight edges in various orientations. Hubel and Wiesel had discovered that the visual system in animals has a similar property, in that the first layer of neurons in the visual cortex is sensitive to the presence of edges in the image falling on the retina.
+Consider a ConvNet, such as AlexNet, with 64 Activation Maps in the first Convolutional Layer which are generated using 64 local filters of size $11\times 11$. Each of these filters can be visualized by using the filter values to generate a $3\times 11\times 11$ color image, and this is shown in Figure 45 for AlexNet as well as for a few other types of ConvNets. Using the template matching interpretation of local filtering, it follows that first Hidden Layer filters in all these networks are mostly looking for simple patterns such as straight edges in various orientations. Hubel and Wiesel had discovered that the visual system in animals has a similar property, in that the first layer of neurons in the visual cortex is sensitive to the presence of edges in the image falling on the retina.
 
 Unfortunately it is not possible to as readily visualize filters in the deeper layers of the network, due to the fact that they possess a depth of more than 3 and hence cannot be converted into a color image. Hence in order to understand what is happening in the deeper layers of the network, we rely on techniques described in the following sub-sections.
 
@@ -798,40 +780,22 @@ Unfortunately it is not possible to as readily visualize filters in the deeper l
 
 Unlike Convolutional Filters, Activation Maps can be visualized for all layers of a network, since each of them can be considered to be a grayscale image. This exercise was carried out in Chollet Section 5.4.1 and the results are summarized for the cat image shown below.
 
+![](https://subirvarma.github.io/GeneralCognitics/images/convnet36.png)
 
-```python
-#convnet36
-nb_setup.images_hconcat(["DL_images/convnet36.png"], width=900)
-```
+*Figure 46*
 
-
-
-
-![png](output_78_0.png)
-
-
-
-Figure **convnet37** graphs some of the Activation Maps in Convolutional Layer 1 and Layer 8 of an 8 layer ConvNet. We note tha following:
+Figure 47 graphs some of the Activation Maps in Convolutional Layer 1 and Layer 8 of an 8 layer ConvNet, for the input image in Figure 46, . We note tha following:
 
 - Recall that the Activations Maps in Layer1 act as detectors of simple shapes such as edges of various types. The Activation Maps figures in Layer 1 bear this out, since most of them outline the shape of the cat which is where the edges occur.
 - An examination of the Layer 8 Activation Maps on the other hand shows that they have very little resemblance to the original image. In most Activation Maps a few of the neurons show higher activation than the others (these are coded in yellow). These are responding to some higher level aspect of the input image, but we can't tell what that is from the Activation Maps figures alone. Thus higher level activations carry more and more information about the presence or absence of certain complex patterns in the input image, rather than the shape of the image itself. If a neuron has zero activation then it menas that the pattern it is looking for is not present in the input image.
 
+![](https://subirvarma.github.io/GeneralCognitics/images/convnet37.png)
 
-```python
-#convnet37
-nb_setup.images_hconcat(["DL_images/convnet37.png"], width=1200)
-```
-
-
-
-
-![png](output_80_0.png)
-
-
+*Figure 47*
 
 ### Identifying Maximally Activating Patches in Images
 
-In the previous section we surmised that the neurons in the higher convolutional layers are activated by more complex patterns in the input iamge while the lower layers are activated by simpler paterns. This intuition can be verified  by using the concept of Maximally Activating Patches, which are defined as follows: Pick any neuron in a ConvNet, it can be one of the logit nodes whose activation is equal to the class-score of the corresponding category, or it can  be a neuron in one of the Activation Maps within a convolutional layer. Assuming that the input image is such that it results in a high activation value at the chosen node, i.e., the neuron reponds positively to some pattern that it detects in the image. Then the Maximally Activating Patch is defined to be the localized portion of the image that the neuron is responding to.
+In the previous section we surmised that the neurons in the higher convolutional layers are activated by more complex patterns in the input image while the lower layers are activated by simpler paterns. This intuition can be verified  by using the concept of Maximally Activating Patches, which are defined as follows: Pick any neuron in a ConvNet, it can be one of the logit nodes whose activation is equal to the class-score of the corresponding category, or it can  be a neuron in one of the Activation Maps within a convolutional layer. Assuming that the input image is such that it results in a high activation value at the chosen node, i.e., the neuron reponds positively to some pattern that it detects in the image. Then the Maximally Activating Patch is defined to be the localized portion of the image that the neuron is responding to.
 
 Maximally Activating Patches are identified by running the ConvNet backwards, which is actually a very important notion. Though originally proposed as a way to identify Maximally Activating Patches, the backwards operation has since been extended to tasks that involve **generating** new images from a trained ConvNet.
 
@@ -840,87 +804,49 @@ There are two main techniques that are used to run a ConvNet backwards:
 - DeConvNet
 - Guided Backpropagation
 
+![](https://subirvarma.github.io/GeneralCognitics/images/cnn13.png)
 
-```python
-#cnn_13_Backwards_Propagation_through_MaxPooling
-nb_setup.images_hconcat(["DL_images/cnn13.png"], width=600)
-```
+*Figure 48: Backwards_Propagation_through_MaxPooling*
 
+![](https://subirvarma.github.io/GeneralCognitics/images/cnn15.png)
 
-
-
-![png](output_82_0.png)
-
-
-
-
-```python
-#cnn15_Backwards_Propagation_through_ReLU
-nb_setup.images_hconcat(["DL_images/cnn15.png"], width=600)
-```
-
-
-
-
-![png](output_83_0.png)
-
+*Figure 49: Backwards_Propagation_through_ReLU*
 
 
 Both these techniques use the same computations for going backwards through Convolutional and Pooling layers, but differ in the way they pass through ReLU non-linearities. These operations are described next:
 
 - Backwards through Convolutional Layers: This operation is the same as that carried out by backpropagating gradients in the Backprop algorithm, and involves multiplication by the transpose of the Convolutional Filter. 
 
-- Backwards through Pooling Layers: This operation is referred to as "switching" and proceeds as follows: Carry out a forward pass through the network, and keep record of the positions at which the maximum activation in max-pooling occurs (see Figure **cnn13**). In the backward pass, the incoming activation is placed in the "maximum activation" spot, while all the activations are set to zero. The reader may recall that this rule was derived in Chapter **TrainingNNsBackprop** in the section on Gradient Flow Calculus.
+- Backwards through Pooling Layers: This operation is referred to as "switching" and proceeds as follows: Carry out a forward pass through the network, and keep record of the positions at which the maximum activation in max-pooling occurs (see Figure 48). In the backward pass, the incoming activation is placed in the "maximum activation" spot, while all the activations are set to zero. 
 
-- Backwards through ReLU Non-Linearities: As shown in Figure **cnn15**, there are multiple ways in which a ConvNet can be run backwards through ReLU non-linearities:
+- Backwards through ReLU Non-Linearities: As shown in Figure 49, there are multiple ways in which a ConvNet can be run backwards through ReLU non-linearities:
 
     - The top row of the figure shows a Forward Pass through a ReLU non-linearity. It shows the negative pre-activations on the LHS being reset to zero in order to generate activation numbers on the RHS of the figure.
     - The second row in the figure shows a backward pass through a ReLU for gradients using traditional Backprop: Recall that the ReLU non-linearity acts as a switch for the gradients during Backprop, so that the negative pre-activations (in the LHS of the top row) cause the gradients in the corresponding positions to go to zero.
     - The third row in the figure shows the ReLU backward pass used in DeConvNets. When going backwards through a ReLU non-linearity, all negative values are set to zero, as shown. In contrast to Backprop and Guided Backprop (see below), the numbers flowing back during the DeConvNet operation should not be thought of as gradients, they should be regarded as "activations"" that are propagating backwards.
     - The fourth row in the figure shows a backward pass for gradients used in Guided Backpropagation. When passing backwards through ReLU non-linearity, the negative gradients are set to zero, in addition to the gradients for whom the corresponding input activation is negative. Hence the Guided Backpropagation ReLU backpropagation rule combines the rules for Regular Backpropagation + DeConvNet Backpropagation.
 
+![](https://subirvarma.github.io/GeneralCognitics/images/cnn11.png)
 
-
-
-
-```python
-#cnn11
-nb_setup.images_hconcat(["DL_images/cnn11.png"], width=1200)
-```
-
-
-
-
-![png](output_85_0.png)
-
-
+*Figure 50*
 
 We now describe the application of DeConvNets to the problem of finding out the portion of an image that an individual neuron is responding to (also called the Maximally Activating Patch):
 
 - Start with a fully trained ConvNet model (such as on ImageNet) and present it with an input image. Do a forward pass through the model and compute all the activations.
 - To examine a given activation, say $a$, (which has been activated by the image), set all the other activations in its Activation Map to zero (as well as the activations of the other Activation Maps in its layer) and pass this as input to the DeConvNet network.
-- Propagate the signal backwards using the DeConvNet propagation rules described above, until the pixel space is reached. This results in the computation of ${\partial a}\over{\partial x_{ijk}}$ for all the pixels $x_{ijk}$ in the image.
+- Propagate the signal backwards using the DeConvNet propagation rules described above, until the pixel space is reached. This results in the computation of ${\partial a\over{\partial x_{ijk}}}$ for all the pixels $x_{ijk}$ in the image.
 
-The reconstructed image obtained by plotting ${\partial a}\over{\partial x_{ijk}}$ for AlexNet (trained on ImageNet) is shown for activations in Layers 1 to 5 in Figure **cnn11**. For each layer, the images on the LHS show the actual reconstruction, while the corresponding images on the RHS are portions of the input image that were identified by the reconstruction. Note that the nine largest activations were chosen in each of the Activation Maps. We can draw the following conclusions from these images:
+The reconstructed image obtained by plotting ${\partial a\over{\partial x_{ijk}}}$ for AlexNet (trained on ImageNet) is shown for activations in Layers 1 to 5 in Figure 50. For each layer, the images on the LHS show the actual reconstruction, while the corresponding images on the RHS are portions of the input image that were identified by the reconstruction. Note that the nine largest activations were chosen in each of the Activation Maps. We can draw the following conclusions from these images:
 
 - The reconstructed image resembles a small piece of the original input image, with the shapes in the input weighted according to their contribution to the neuron whose activation was propagated back.
 - All the neurons in a single Activation Map seem to get activated by similar shapes, and this shape varies with the Activation Map. This property is stronger in the higher layers.
 - As we go up the layers, the activations get triggered by more and more complex shapes and objects.
 
+![](https://subirvarma.github.io/GeneralCognitics/images/cnn12.png)
 
-```python
-#cnn12
-nb_setup.images_hconcat(["DL_images/cnn12.png"], width=1200)
-```
+*Figure 51*
 
-
-
-
-![png](output_87_0.png)
-
-
-
-A similar procedure can be carried out using the Guided Backpropagation procedure, and the results for Convolutional Layers 6 and 9 for AlexNet are shown in Figure **cnn12** (with the recosnstructed image on the LHS and the corresponding patch from the actual image on the RHS). This figure shows that the reconstructed image quality is better with Guided Backpropagation.
+A similar procedure can be carried out using the Guided Backpropagation procedure, and the results for Convolutional Layers 6 and 9 for AlexNet are shown in Figure 51 (with the recosnstructed image on the LHS and the corresponding patch from the actual image on the RHS). This figure shows that the reconstructed image quality is better with Guided Backpropagation.
 
 ### Generating Images
 
@@ -934,26 +860,16 @@ One of the realizations that we have to come based the image generation work, is
 
 ### Generating Images that Maximally Activate a Neuron
 
+![](https://subirvarma.github.io/GeneralCognitics/images/cnn16.png)
 
-```python
-#cnn16
-nb_setup.images_hconcat(["DL_images/cnn16.png"], width=800)
-```
-
-
-
-
-![png](output_91_0.png)
-
-
-
+*Figure 52*
 
 Start with a fully trained ConvNet, and keep its weights fixed during this procedure. Solve the following maximization problem: 
 
 Find an image $I$ that maximizes the following Loss Function
-$$
-\mathcal L = S_c(I) - \lambda ||I||^2_2
-$$
+
+$$\mathcal L = S_c(I) - \lambda ||I||^2_2$$
+
 In this equation, the $S_c(I)$ is the Score Function for the $c^{th}$ class, and is computed by doing a forward pass through the ConvNet. The second term is added for doing Regularization, with $\lambda$ as the Regularization Parameter. It had been experimentally observed that without the Regularization Term, the optimization procedure results in an image that looks like white noise.
 
 The following algorithm is used to do the optimization:
@@ -963,50 +879,30 @@ The following algorithm is used to do the optimization:
 3. Do a forward pass through the network and compute the Score Function $S_c(I)$ and Loss Function $\mathcal L$.
 4. Starting with the gradient $\frac{\partial\mathcal L}{\partial S_c}$, use the Backprop algorithm to compute the gradients $\frac{\partial\mathcal L}{\partial x_{ijk}}$ of the Loss Function with respect to each of the image pixel values
 5. Change the pixel values using the following iteration:
-$$
-x_{ijk} \leftarrow x_{ijk} - \eta\frac{\partial\mathcal L}{\partial x_{ijk}}
-$$
+
+$$x_{ijk} \leftarrow x_{ijk} - \eta\frac{\partial\mathcal L}{\partial x_{ijk}}$$
+
 6. Add the training set mean image to the final pixel values to obtain the final image.
 
 
 
-Figure **cnn16** shows the results of applying this algorithm to a ConvNet trained on the ImageNet dataset. The reader will notice the objects belonging to the category whose Score Function is being maximized, emerging at multiple places in each image, but with colors that are different than the natural coloration of the object. The reason for this is that the neurons in the later layers of the network, and especially the classification neurons, incorporate more invariance in their object recognition. Hence they recognize an object irrespective of its color or location in the image and this invariance property gets reflected in the generate images. It is possible to generate images that are more pleasing to the eye, and some of these are shown in Figure **cnn19**. These images were generated by making the following changes to the algorithm described above:
+Figure 52 shows the results of applying this algorithm to a ConvNet trained on the ImageNet dataset. The reader will notice the objects belonging to the category whose Score Function is being maximized, emerging at multiple places in each image, but with colors that are different than the natural coloration of the object. The reason for this is that the neurons in the later layers of the network, and especially the classification neurons, incorporate more invariance in their object recognition. Hence they recognize an object irrespective of its color or location in the image and this invariance property gets reflected in the generate images. It is possible to generate images that are more pleasing to the eye, and some of these are shown in Figure 53. These images were generated by making the following changes to the algorithm described above:
 
 - Incorporation of the Total Variation (TV), Gaussian Blur and Jitter regularizers into the Loss Function
 - Initialize the image by using the average of the images in that category from the test dataset (if an image has multiple facets, then averaging is done over one of the facets)
 - Use of Gaussian Blur regularization results in a blurry, but single and centered object. The optimization then proceeds by updating the center pixels more than the edge pixels to produce a final image that is sharp and is centrally located.
 
-Chollet Section 5.4.2 has a Keras implementation of a very similar algorithm for generating images that maximally active the average activation of a chosen Activation Map.
+![](https://subirvarma.github.io/GeneralCognitics/images/cnn19.png)
 
-
-```python
-#cnn19
-nb_setup.images_hconcat(["DL_images/cnn19.png"], width=600)
-```
-
-
-
-
-![png](output_94_0.png)
-
-
+*Figure 53*
 
 ### Adversarial Images
 
+![](https://subirvarma.github.io/GeneralCognitics/images/cnn20.png)
 
-```python
-#cnn20
-nb_setup.images_hconcat(["DL_images/cnn20.png"], width=600)
-```
+*Figure 54*
 
-
-
-
-![png](output_96_0.png)
-
-
-
-It has been shown that ConvNets can be fooled into mis-classifying images. A couple of examples of this are shown in Figure **cnn20**: In the top row the first image is classified correctly as an elephant. Then this image is modified by changing some the pixels (which are shown in the last two columns), which results in the second image. These changes are not perceptible to the human eye since the second image also looks like an elephant, however when sent through a ConvNet, the system classifies it as a koala. A similar process applied to the boat in the bottom row, results in its mis-classification as an iPod. These images, which fool the ConvNet into mis-classifying them, are known as Adversarial Images.
+It has been shown that ConvNets can be fooled into mis-classifying images. A couple of examples of this are shown in Figure 54: In the top row the first image is classified correctly as an elephant. Then this image is modified by changing some the pixels (which are shown in the last two columns), which results in the second image. These changes are not perceptible to the human eye since the second image also looks like an elephant, however when sent through a ConvNet, the system classifies it as a koala. A similar process applied to the boat in the bottom row, results in its mis-classification as an iPod. These images, which fool the ConvNet into mis-classifying them, are known as Adversarial Images.
 
 Adversarial images can be easily created by making a slight modification to the algorithm that was presented in the prior section for generate images that maximally activate neurons. The only changes needed are the following:
 
@@ -1019,98 +915,69 @@ Adversarial Images are an active research topic, since they constitute a signifi
 
 ### Generating Images Using Google Deap Dream
 
+![](https://subirvarma.github.io/GeneralCognitics/images/cnn17.png)
 
-```python
-#cnn17
-nb_setup.images_hconcat(["DL_images/cnn17.png"], width=600)
-```
-
-
-
-
-![png](output_99_0.png)
-
-
+*Figure 55*
 
 Google Deep Dream uses the following algorithm to generate images:
 
-1. Start with a trained ConvNet (trained on zero centered image data) and fix the value of its weights. Initialize the image pixel values $x_{ijk}$ to some random image from the test dataset. In the example in Figure **cnn17**, the initial image was chosen to be that of clouds, shown on top part of the figure.
+1. Start with a trained ConvNet (trained on zero centered image data) and fix the value of its weights. Initialize the image pixel values $x_{ijk}$ to some random image from the test dataset. In the example in Figure 55, the initial image was chosen to be that of clouds, shown on top part of the figure.
 2. Repeat Steps 3 to 6 until a Stopping Condition is satisfied
 3. Do a forward pass through the network and compute the activations at all the nodes, up until a chosen layer.
 4. Set the gradients at each node of the chosen layer equal to the activation at that node, i.e.,
-$$
-\frac{\partial\mathcal L}{\partial z_i} = z_i
-$$
+
+$$\frac{\partial\mathcal L}{\partial z_i} = z_i$$
+
 5. Using the Backprop algorithm compute the gradients $\frac{\partial\mathcal L}{\partial x_{ijk}}$ of the Loss Function with respect to each of the image pixel values
 6. Change the pixel values using the following iteration:
-$$
-x_{ijk} \leftarrow x_{ijk} - \eta\frac{\partial\mathcal L}{\partial x_{ijk}}
-$$
+
+$$x_{ijk} \leftarrow x_{ijk} - \eta\frac{\partial\mathcal L}{\partial x_{ijk}}$$
+
 7. Add the training set mean image to the final pixel values to obtain the final image.
 
-In the example in Figure **cnn17**, the ConvNet was trained using ImageNet. The top part of the figure show the input image, and after a number of iterations, the original image changes to the one shown in the bottom of figure. The Deep Dream algorithm tends to amplify random features in the original image, until they start to resemble objects that were part of the network's original training set. Note that setting the gradient equal to the activation is equivalent to using the following Loss Function:
-$$
-\mathcal L = {1\over 2}\sum_i z_i^2
-$$
-where the sum is over all the activations in a given layer.
+In the example in Figure 55, the ConvNet was trained using ImageNet. The top part of the figure show the input image, and after a number of iterations, the original image changes to the one shown in the bottom of figure. The Deep Dream algorithm tends to amplify random features in the original image, until they start to resemble objects that were part of the network's original training set. Note that setting the gradient equal to the activation is equivalent to using the following Loss Function:
 
-Chollet Section 8.2 has a Keras implementation of Google Deep Dream.
+$$\mathcal L = {1\over 2}\sum_i z_i^2$$
+
+where the sum is over all the activations in a given layer.
 
 ### Generating Images Using Feature Inversion
 
+![](https://subirvarma.github.io/GeneralCognitics/images/cnn18.png)
 
-```python
-#cnn18
-nb_setup.images_hconcat(["DL_images/cnn18.png"], width=600)
-```
-
-
-
-
-![png](output_102_0.png)
-
-
+*Figure 56*
 
 The image generation techniques that we have described so far, do their work by iteratively creating images that maximally activate a neuron. There is another technique, which instead of trying to maximize neuron activations, instead works by generating images whose Feature Vector is specified in advance. In order to do so, the following Loss Function is used:
-$$
-\mathcal L = ||\Phi(X) - \Phi_0||^2 + \lambda_\alpha \mathcal R_\alpha(X) + \lambda_{V^\beta}\mathcal R_{V^\beta}(X)
-$$
+
+$$\mathcal L = ||\Phi(X) - \Phi_0||^2 + \lambda_\alpha \mathcal R_\alpha(X) + \lambda_{V^\beta}\mathcal R_{V^\beta}(X)$$
+
 where the Regularisers $\mathcal R_{\alpha}$ and $\mathcal R_{V^\beta}$ are set to
-$$
-\mathcal R_\alpha(X) = ||X||^\alpha_\alpha,\ \ {\mbox and}\ \ \mathcal R_{V^\beta}(X) = \sum_{i,j} ((x_{i,j+1} - x_{ij})^2 + (x_{i+1,j} - x_{ij})^2)^{\beta\over 2}
-$$
+
+$$\mathcal R_\alpha(X) = ||X||^\alpha_\alpha,\ \ {\mbox and}\ \ \mathcal R_{V^\beta}(X) = \sum_{i,j} ((x_{i,j+1} - x_{ij})^2 + (x_{i+1,j} - x_{ij})^2)^{\beta\over 2}$$
+
 In these equations $\Phi_0$ is the Feature Vector from the test image that the algorithm is trying to match, while $\Phi(X)$ is the Feature Vector from the current iteration of the generated image. Note that the addition of the Regularisers $\mathcal R_{\alpha}$ and $\mathcal R_{V^\beta}$ is critical to generating "good" images. In their absence, the algorithm will generate images whose Feature Vector minimizes the Loss Function, but which look like noise to the human eye.
 
 The algorithm is as follows:
 
-1. Start with a trained ConvNet (trained on zero centered image data) and fix the value of its weights. Initialize the image pixel  $x_{ijk}$ to some random values. The example in Figure **cnn18** shows two different test images in the leftmost image in each row.
+1. Start with a trained ConvNet (trained on zero centered image data) and fix the value of its weights. Initialize the image pixel  $x_{ijk}$ to some random values. The example in Figure 56 shows two different test images in the leftmost image in each row.
 2. Repeat Steps 3 to 5 until a Stopping Condition is satisfied
 3. Do a forward pass through the network and compute the activations at all the nodes, up until a chosen layer.
 4. Compute the gradients $\frac{\partial\mathcal L}{\partial\Phi}$ at each node of the chosen layer and use the Backprop algorithm compute the gradients $\frac{\partial\mathcal L}{\partial x_{ijk}}$ of the Loss Function with respect to each of the image pixel values
 5. Change the pixel values using the following iteration:
-$$
-x_{ijk} \leftarrow x_{ijk} - \eta\frac{\partial\mathcal L}{\partial x_{ijk}}
-$$
+
+$$x_{ijk} \leftarrow x_{ijk} - \eta\frac{\partial\mathcal L}{\partial x_{ijk}}$$
+
 6. Add the training set mean image to the final pixel values to obtain the final image.
 
-The images generated by running this algorithm are shown in Figure **cnn18**. The notation relu2_2 is used to denote the images generated by matching feature vectors in the second layer and so on. As the figure shows, the generated images in the first few layers closely match the original test image, which implies that the ConvNet is able to store fine level details regarding the test image with a high level of fidelity. As we go to the higher layers, the image content and the overall spatial structure are preserved, but the color, texture and exact shape are not.
+The images generated by running this algorithm are shown in Figure 56. The notation relu2_2 is used to denote the images generated by matching feature vectors in the second layer and so on. As the figure shows, the generated images in the first few layers closely match the original test image, which implies that the ConvNet is able to store fine level details regarding the test image with a high level of fidelity. As we go to the higher layers, the image content and the overall spatial structure are preserved, but the color, texture and exact shape are not.
 
 This procedure shows that the activations at a particular layer can be used to 'encode' an image. Hence instead of transmitting the original image, we instead send the activations from one of the layers. At the receiving end, we use these activations plus our knowledge of the pre-trained model which generated the activations to 'de-code' the image back.
 
 ## Other Image Processing Tasks
 
+![](https://subirvarma.github.io/GeneralCognitics/images/convnet38.png)
 
-```python
-#convnet38
-nb_setup.images_hconcat(["DL_images/convnet38.png"], width=1200)
-```
-
-
-
-
-![png](output_105_0.png)
-
-
+*Figure 57*
 
 In addition to Classification, ConvNets are also used to solve several important Image Processing tasks. We discuss the following in this section:
 
@@ -1118,62 +985,35 @@ In addition to Classification, ConvNets are also used to solve several important
 - Semantic Segmentation: This is defined as the process of classifying each and every pixel in an image, into a fixed number of categories.
 - Object Detection: Object Localization is restricted to boxing a single object (or a fixed number of them). If the number of objects to be boxed and identified is variable and not known in advance, then the problem becomes that of Detection.
 
-Examples of thesee three types of image processing are shown in Figure **convnet38**.
+Examples of thesee three types of image processing are shown in Figure 57.
 
 ### Object Localization
 
+![](https://subirvarma.github.io/GeneralCognitics/images/convnet39.png)
 
-```python
-#Localization
-nb_setup.images_hconcat(["DL_images/convnet39.png"], width=1200)
-```
+*Figure 58*
 
-
-
-
-![png](output_108_0.png)
-
-
-
-The Classification + Localization problem can be solved by training a model to predict the co-ordinates of the 4 corners of the bounding box, in addition to classifying the object. In order to do so, the modeler has to create a training dataset in which the label identifies the co-ordinates of the box. Once this done, the training can proceed using the type of model shown in Figure **Localization**. It shows a so-called 'two-headed' Convnet, with the body consisting of the convolutional base. The output from the base is routed to Dense Networks, with Network One connected to the logits for classifying the object (using the Softmax Loss) and Network Two connected to a Regression Layer that predicts the box co-ordinates (using the Mean Square Error or L2 Loss). The Backprop algorithm is then run on the combined loss. As the figure shows, Transfer Learning can be used for this problem with a pre-trained Convolutional Base, as long as the objects to be classified are not too different than the ImageNet dataset.
+The Classification + Localization problem can be solved by training a model to predict the co-ordinates of the 4 corners of the bounding box, in addition to classifying the object. In order to do so, the modeler has to create a training dataset in which the label identifies the co-ordinates of the box. Once this done, the training can proceed using the type of model shown in Figure 58. It shows a so-called 'two-headed' Convnet, with the body consisting of the convolutional base. The output from the base is routed to Dense Networks, with Network One connected to the logits for classifying the object (using the Softmax Loss) and Network Two connected to a Regression Layer that predicts the box co-ordinates (using the Mean Square Error or L2 Loss). The Backprop algorithm is then run on the combined loss. As the figure shows, Transfer Learning can be used for this problem with a pre-trained Convolutional Base, as long as the objects to be classified are not too different than the ImageNet dataset.
 
 ### Semantic Segmentation
 
+![](https://subirvarma.github.io/GeneralCognitics/images/convnet40.png)
 
-```python
-#Labeling
-nb_setup.images_hconcat(["DL_images/convnet40.png"], width=1200)
-```
+*Figure 59*
 
+Semantic Segmentation is the problem of classifying each and every pixel in an image into a fixed number of categories. It has a number of important application, for example it can be used by the vision system in a self-driving car to differentiate the road, pedestrians, trees etc. In order to train a model to do Semantic Segmentation we need an appropriate training dataset in which every pixel is labeled, an example of which is shown in Figure 59. In this example all the pixels are given one of 5 labels, and this information is captured using multiple Label Maps as shown.
 
+![](https://subirvarma.github.io/GeneralCognitics/images/convnet41.png)
 
+*Figure 60*
 
-![png](output_111_0.png)
-
-
-
-Semantic Segmentation is the problem of classifying each and every pixel in an image into a fixed number of categories. It has a number of important application, for example it can be used by the vision system in a self-driving car to differentiate the road, pedestrians, trees etc. In order to train a model to do Semantic Segmentation we need an appropriate training dataset in which every pixel is labeled, an example of which is shown in Figure **Labeling**. In this example all the pixels are given one of 5 labels, and this information is captured using multiple Label Maps as shown.
-
-
-```python
-#SemanticSegmentation
-nb_setup.images_hconcat(["DL_images/convnet41.png"], width=1200)
-```
-
-
-
-
-![png](output_113_0.png)
-
-
-
-The objective of the Semantic Segmentation model is to predict a Label Map for the input image, and this can be done using ConvNets as shown in Figure **SementicSegmentation**. The input image is sent through multiple convolutional layers, and the final prediction is in the form of a 3D tensor with C layers (corresponding to C pixel categories). For the $c^{th}$ layer, the model predicts a total of $H\times W$ binary valued probabilities of the pixels belonging to the $c^{th}$ category. The final prediction for a pixel location is the category that has the maximum probability value.
+The objective of the Semantic Segmentation model is to predict a Label Map for the input image, and this can be done using ConvNets as shown in Figure 60. The input image is sent through multiple convolutional layers, and the final prediction is in the form of a 3D tensor with C layers (corresponding to C pixel categories). For the $c^{th}$ layer, the model predicts a total of $H\times W$ binary valued probabilities of the pixels belonging to the $c^{th}$ category. The final prediction for a pixel location is the category that has the maximum probability value.
 
 ### Object Detection
 
 Object Detection is a challenging problem since the number of objects in the image is not known in advance. An initial attack on this problem led to an algorithm called R-CNN (stands for Region based CNN) in which a ConvNet model was used to detect images over several region candidates in the image (these region candidates were generated seprately by a non-ML algorithm). This did work but was very expensive, since each image required several forward passes through the model. An algorithm called YOLO (for 'You only Look Once') was proposed subsequently, which is much more efficient since it can do its job with just a single forward pass. This makes it suitable for real time detection tasks, such as detecting objects in a video clip.
 
-The YOLO algorithm takes the following steps to do detection (see Figure **YOLO**):
+The YOLO algorithm takes the following steps to do detection (see Figure 61):
 
 - The image is divided into a grid of size $S\times S$ as shown in the LHS of the figure
 - For each grid cell, the model predicts $B$ Bounding Boxes as potential candidates for object detection, for a total of $BS^2$ Bounding Boxes. This is shown in the top half of the figure.
@@ -1182,41 +1022,17 @@ The YOLO algorithm takes the following steps to do detection (see Figure **YOLO*
 
 The model's final prediction is obtained by doing the following computation:
 
-$$
-Pr(Class_i|Object) ∗ Pr(Object) ∗ IOU^{truth}_{pred} = Pr(Class_i) ∗ IOU^{truth}_{pred}
-$$
+$$Pr(Class_i|Object) ∗ Pr(Object) ∗ IOU^{truth}_{pred} = Pr(Class_i) ∗ IOU^{truth}_{pred}$$
 
 This computation gives us class-specific confidence scores for each box. These scores encode both the probability of that class appearing in the box and how well the predicted box fits the object.
 
+![](https://subirvarma.github.io/GeneralCognitics/images/convnet42.png)
 
-```python
-#YOLO
-nb_setup.images_hconcat(["DL_images/convnet42.png"], width=1200)
-```
+*Figure 61*
 
-
+The YOLO Model is shown in Figure 62, for the case $S = 7, B = 2$ and $C = 20$. This system models detection as a Regression problem. Note that the final predictions are encoded as a $S\times S\times (5B+C)$ tensor since the model predicts $5B+C$ numbers for each grid cell: $x,y,w,h$ and $confidence$, where the $(x, y)$ coordinates represent the center of the box relative to the bounds of the grid cell. The width and height are predicted relative to the whole image and the confidence prediction represents the IOU between the predicted box and any ground truth box.
 
 
-![png](output_117_0.png)
+![](https://subirvarma.github.io/GeneralCognitics/images/convnet43.png)
 
-
-
-The YOLO Model is shown in Figure **YOLO_Model**, for the case $S = 7, B = 2$ and $C = 20$. This system models detection as a Regression problem. Note that the final predictions are encoded as a $S\times S\times (5B+C)$ tensor since the model predicts $5B+C$ numbers for each grid cell: $x,y,w,h$ and $confidence$, where the $(x, y)$ coordinates represent the center of the box relative to the bounds of the grid cell. The width and height are predicted relative to the whole image and the confidence prediction represents the IOU between the predicted box and any ground truth box.
-
-
-```python
-#YOLO_Model
-nb_setup.images_hconcat(["DL_images/convnet43.png"], width=1200)
-```
-
-
-
-
-![png](output_119_0.png)
-
-
-
-## References and Slides
-
-- [Slides CNN3](https://drive.google.com/file/d/1JSYMO2BwblfMIFTCfQhgmRevm9FtazJq/view?usp=sharing)
-- [Slides CNN4](https://drive.google.com/file/d/1Zy0ZmTNu4u086cUjcO0dbGS6Y8K1GXU5/view?usp=sharing)
+*Figure 62*
