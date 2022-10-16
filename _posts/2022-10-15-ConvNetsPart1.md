@@ -253,7 +253,7 @@ It can then be shown that
 In order to gain insight into this formula, consider Figure 12:
 
 - First consider the case $S_r = 1, P_r=0$: As shown in Part (a) of the figure, $W_r - F_r$ is the number of spaces by which the filter can be slid from left to right with a stride of 1. With the addition of $1$ to account for the final position of the filter, we get $W_{r+1} = W_r - F_r +1$. The presence of zero padding of size $P_r$ results in an increase of the size of the feature map by $2P_r$, so that $W_{r+1} = W_r - F_r + 2P_r + 1$
-- If the stride $S_r > 0$, then the number of spaces by which the filter can be moved becomes $W_{r+1} = {{W_r - F_r + 2P_r}\over{S_r}} + 1$
+- If the stride $S_r > 0$, then the number of spaces by which the filter can be moved becomes $W_{r+1} = {W_r - F_r + 2P_r\over{S_r}} + 1$
 
 In the presence of parameter sharing,  $F_r\times  F_r\times  D_r + 1$ filter weights are required per Activation Map in layer $r+1$, for a total of $D_{r+1}\times (F_r \times  F_r \times  D_r +1)$ weights and $D_{r+1}$ biases.
 
