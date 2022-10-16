@@ -248,10 +248,10 @@ The size (or volume) of a Convolutional Layer in a ConvNet is related to the vol
 We will use the following notation:
 
 
-- $L_r$, $W_r$, $D_r$: Length, Width and Depth dimensions of the volume in layer r
-- $F_r$:    Size of the Filter used when going from layer r to r+1
-- $P_r$: Amount of Zero Padding used for layer r
-- $S_r$: The Stride size used in the layer r to layer r+1 filter.
+- L_r, W_r, D_r: Length, Width and Depth dimensions of the volume in layer r
+- F_r:    Size of the Filter used when going from layer r to r+1
+- P_r: Amount of Zero Padding used for layer r
+- S_r: The Stride size used in the layer r to layer r+1 filter.
 
 It can then be shown that
 
