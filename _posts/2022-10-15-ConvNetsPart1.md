@@ -254,9 +254,9 @@ We will use the following notation:
 - $S_r$: The Stride size used in the layer $r$ to layer $r+1$ filter.
 
 It can then be shown that
-$$W_{r+1} = {W_r-F_r+2P_r\over S_r}+1$$
+$$W_{r+1} = {W_r - F_r + 2P_r\over S_r}+1$$
 and
-$$L_{r+1} = {L_r-F_r+2P_r\over S_r}+1$$
+$$L_{r+1} = {L_r - F_r + 2P_r\over S_r}+1$$
 
 In order to gain insight into this formula, consider Figure 12:
 
