@@ -796,11 +796,6 @@ In the previous section we surmised that the neurons in the higher convolutional
 
 Maximally Activating Patches are identified by running the ConvNet backwards, which is actually a very important notion. Though originally proposed as a way to identify Maximally Activating Patches, the backwards operation has since been extended to tasks that involve **generating** new images from a trained ConvNet.
 
-There are two main techniques that are used to run a ConvNet backwards:
-
-- DeConvNet
-- Guided Backpropagation
-
 ![](https://subirvarma.github.io/GeneralCognitics/images/cnn13.png)
 
 *Figure 48: Backwards_Propagation_through_MaxPooling*
@@ -809,6 +804,10 @@ There are two main techniques that are used to run a ConvNet backwards:
 
 *Figure 49: Backwards_Propagation_through_ReLU*
 
+There are two main techniques that are used to run a ConvNet backwards:
+
+- DeConvNet
+- Guided Backpropagation
 
 Both these techniques use the same computations for going backwards through Convolutional and Pooling layers, but differ in the way they pass through ReLU non-linearities. These operations are described next:
 
