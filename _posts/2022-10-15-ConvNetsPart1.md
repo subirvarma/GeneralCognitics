@@ -254,8 +254,11 @@ We will use the following notation:
 - $S_r$: The Stride size used in the layer $r$ to layer $r+1$ filter.
 
 It can then be shown that
+
 $$W_{r+1} = {W_r - F_r + 2P_r\over S_r}+1$$
+
 and
+
 $$L_{r+1} = {L_r - F_r + 2P_r\over S_r}+1$$
 
 In order to gain insight into this formula, consider Figure 12:
@@ -269,7 +272,7 @@ As an example of the application of this formula, consider the following example
 
 In modern ConvNet design, zero padding is used most often to ensure that the volume sizes remain unchanged as we move deeper into the network, in other words we would like that $W_{r+1}=W_r, L_{r+1}=L_r, D_{r+1}=D_r$. From the above equation, this can be ensured if the stride $S_r=1$ and the zero padding $P_r$ is chosen to be:
 
-$$P_r = \frac{F_r - 1}{2}$$
+$$P_r = {F_r - 1\over 2}$$
 
 The most common ConvNet filter sizes are $F_r = 3$ and $F_r = 5$, which results in $P_r = 1$ and $P_r = 2$ respectively. As we will see later in this chapter, some of the advanced ConvNet designs such as VGGNet and ResNet keep the size of the volumes fixed in their Convolutional Layers, which helps in producing networks with hundreds of layers. In the absence of this feature, the volume sizes progressively decrease as we move deeper in the network, thus limiting the number of Hidden Layers to much smaller values. Zero Padding is implemented in Keras using the command: *conv = model.add.layers.Conv2D(6, (3,3), strides=2, padding='same')*.
 
@@ -308,12 +311,6 @@ This can be understood as the product of the following factors:
 Earlier in this chapter we observed that a ConvNet Layer with $D$ Activation Maps is roughly equivalent to a Dense Feed Forward Network Layer with $D$ nodes. Given two Dense Feed Forward Layers with $D_r$ and $D_{r+1}$ nodes respectively, the number of computations required to generate the $D_{r+1}$ activations in layer $r+1$ is given by $D_r D_{r+1}$. It follows that the number of computations required to generate Layer $r+1$ in a ConvNet is greater than the corresponding number in a Dense Feed Forward Network by a multiplicative factor equal to $F_r F_r \times W_{r+1} H_{r+1}$, i.e., the size of the ConvNet Filter times the size of the Activation Map. This accounts for the large increase in computation time that we observed in the ConvNet model earlier in the chapter.
 
 ## One Dimensional ConvNets
-
-
-```python
-#convnet21
-nb_setup.images_hconcat(["DL_images/convnet21.png"], width=600)
-```
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/convnet21.png)
 
