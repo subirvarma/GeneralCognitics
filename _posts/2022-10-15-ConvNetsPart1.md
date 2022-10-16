@@ -242,7 +242,7 @@ The size (or volume) of a Convolutional Layer in a ConvNet is related to the vol
 
 We will use the following notation:
 
-$$W_{r+1} = {W_r - F_r\over S_r} + 1$$
+$$W_{r+1} = {W_r - F_r + 2P_r\over S_r} + 1$$
 
 
 - $L_r$, $W_r$, $D_r$: Length, Width and Depth dimensions of the volume in layer $r$
