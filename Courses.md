@@ -27,6 +27,6 @@ Here are the slides from my lectures for the Deep Learning course
 15. [Lecture 15](https://subirvarma.github.io/GeneralCognitics/Course1/Lecture15_NLP1.pdf): Natural Language Processing Part 1
 16. [Lecture 16](https://subirvarma.github.io/GeneralCognitics/Course1/Lecture16_NLP1.pdf): Natural Language Processing Part 2
 17. [Lecture 17](https://subirvarma.github.io/GeneralCognitics/Course1/Lecture17_Transformers1.pdf): Transformers Part 1
-18. [Lecture 18](https://subirvarma.github.io/GeneralCognitics/Course1/Lecture18_Transformers2.pdf): Transformers Part 2
+18. [Lecture 18](https://subirvarma.github.io/GeneralCognitics/Course1/Lecture18_Transformers2.pdf): Transformers Part2
 19. [Lecture 19](https://subirvarma.github.io/GeneralCognitics/Course1/Lecture19_DiffusionModels.pdf): Diffusion Models
 20. [Lecture 20](https://subirvarma.github.io/GeneralCognitics/Course1/Lecture20_ReinforcementLearning.pdf): Reinforcement Learning
