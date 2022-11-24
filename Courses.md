@@ -52,4 +52,4 @@ Here are the slides from my lectures for the Deep Learning course
 
 ## Exercises
 
-I put together a list of problems in the Deep Learning area, it can be found [here](https://subirvarma.github.io/GeneralCognitics/Course1/PracticeProblems.pdf)
+I put together a list of problems in the Deep Learning area that I use for this course, it can be found [here](https://subirvarma.github.io/GeneralCognitics/Course1/PracticeProblems.pdf)
