@@ -10,4 +10,4 @@ Business at Santa Clara University
 
 Here are the slides from my lectures for the Deep Learning course
 
-1. [Lecture 1](https://github.com/subirvarma/GeneralCognitics/blob/main/DeepLearningCourseFiles/Lecture%201DL%20(Introduction).pdf): Introduction
+1. [Lecture 1](https://subirvarma.github.io/GeneralCognitics/DeepLearningCourseFiles/Introduction.pdf): Introduction
