@@ -11,6 +11,8 @@ Business at Santa Clara University.
 Here are the slides from my lectures for the Deep Learning course
 
 1. [Lecture 1](https://subirvarma.github.io/GeneralCognitics/Course1/Lecture1_Introduction.pdf): Introduction
+Introduction to Deep Learning and discussion of important applications, Introduction to Types of Deep Learning Systems: Supervised Learning, Reinforcement Learning, Unsupervised Learning, Self-Supervised Learning, An historical overview of Deep Learning
+
 2. [Lecture 2](https://subirvarma.github.io/GeneralCognitics/Course1/Lecture2_MathematicalPreliminaries.pdf): Mathematical Preliminaries
 3. [Lecture 3](https://subirvarma.github.io/GeneralCognitics/Course1/Lecture3_LinearNetworks.pdf): Linear Networks
 4. [Lecture 4](https://subirvarma.github.io/GeneralCognitics/Course1/Lecture4_DFN.pdf): Dense Feed Forward Networks
