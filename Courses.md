@@ -1,7 +1,13 @@
 ---
 layout: default
-title: "Publications"
+title: "Courses"
 ---
 
+I teach courses on Deep Learning and Reinforcement Learning in the Information Systems and Analytics Department, at the Levey School of
+Business at Santa Clara University
 
-**List of Publications**
+**Deep Learning Course**
+
+Here are the slides from my lectures for the Deep Learning course
+
+1. Lecture 1: Introduction
