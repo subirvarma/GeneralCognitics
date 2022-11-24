@@ -56,6 +56,8 @@ I put together a list of problems in the Deep Learning area that I use for this 
 
 # Reinforcement Learning Course
 
+Slides from my lectures for the Reinforcement Learning course
+
 1. [Lecture 1](https://subirvarma.github.io/GeneralCognitics/Course2/Lecture1_Introduction.pdf) - **Introduction:** Introduction to Reinforcement
 Learning and discussion of important applications, An historical overview of the development of this topic.
 
