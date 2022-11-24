@@ -6,7 +6,7 @@ title: "Courses"
 I teach courses on Deep Learning and Reinforcement Learning in the Information Systems and Analytics Department, at the Leavey School of
 Business at Santa Clara University.
 
-**Deep Learning Course**
+# Deep Learning Course
 
 Here are the slides from my lectures for the Deep Learning course
 
@@ -50,3 +50,6 @@ Here are the slides from my lectures for the Deep Learning course
 
 22. [Lecture 20](https://subirvarma.github.io/GeneralCognitics/Course1/Lecture20_ReinforcementLearning.pdf) - **Reinforcement Learning** Introduction, Components of a RL System: Agents, Rewards, Actions, Deep RL, Playing Pong with Policy Gradients, Playing Go with Supervised Learning and Policy Gradients, Imitation Learning
 
+## Exercises
+
+I put together a list of problems in the Deep Learning area, it can be found [here](https://subirvarma.github.io/GeneralCognitics/Course1/PracticeProblems.pdf)
