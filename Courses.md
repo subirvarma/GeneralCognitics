@@ -56,20 +56,22 @@ I put together a list of problems in the Deep Learning area that I use for this 
 
 # Reinforcement Learning Course
 
-1. [Lecture 1](https://subirvarma.github.io/GeneralCognitics/Course2/Lecture1_Introduction.pdf) - **Introduction:**
+1. [Lecture 1](https://subirvarma.github.io/GeneralCognitics/Course2/Lecture1_Introduction.pdf) - **Introduction:** Introduction to Reinforcement
+Learning and discussion of important applications, An historical overview of the development of this topic.
 
-2. [Lecture 2](https://subirvarma.github.io/GeneralCognitics/Course2/Lecture2_MDPs.pdf) - **Markov Decision Processes:**
+2. [Lecture 2](https://subirvarma.github.io/GeneralCognitics/Course2/Lecture2_MDPs.pdf) - **Markov Decision Processes:** Markov Processes, Markov Reward Process, Value Function, Markov Decision Processes, Policies, Bellman Expectation Equation, Optimal Value Function, Optimal Policies, Bellman Optimality Equation.
 
-3. [Lecture 3](https://subirvarma.github.io/GeneralCognitics/Course2/Lecture3_ModelBasedControl.pdf) - **Model Based Control:**
+3. [Lecture 3](https://subirvarma.github.io/GeneralCognitics/Course2/Lecture3_ModelBasedControl.pdf) - **Model Based Control:** Estimating the Value Function of a known MDP by Dynamic Programming, Policy Evaluation, Policy Iteration, Value Iteration.
 
-4. [Lecture 4](https://subirvarma.github.io/GeneralCognitics/Course2/Lecture4_ModelFreePrediction.pdf) - **Model Free Prediction:**
+4. [Lecture 4](https://subirvarma.github.io/GeneralCognitics/Course2/Lecture4_ModelFreePrediction.pdf) - **Model Free Prediction:** Estimating the Value Function of an unknown MDP, Monte Carlo (MC) based Policy Evaluation, Temporal Difference (TD) Learning, Comparison of MC and TD Methods.
 
-5. [Lecture 5](https://subirvarma.github.io/GeneralCognitics/Course2/Lecture5_ModelFreeControl.pdf) - **Model Free Control:**
+5. [Lecture 5](https://subirvarma.github.io/GeneralCognitics/Course2/Lecture5_ModelFreeControl.pdf) - **Model Free Control:** Optimizing the Value Function of an Unknown MDP, Epsilon Greedy Policies, On Policy Monte Carlo Control, On Policy Temporal Difference Control, SARSA Control, Off Policy Learning, Q-Learning.
 
-6. [Lecture 6](https://subirvarma.github.io/GeneralCognitics/Course2/Lecture6_FunctionApproximations.pdf) - **Deep Reinforcement Learning:**
+6. [Lecture 6](https://subirvarma.github.io/GeneralCognitics/Course2/Lecture6_FunctionApproximations.pdf) - **Deep Reinforcement Learning:** Supervised Learning, Function Approximations using Deep Learning, Training Algorithms, Convolutional and Recurrent Neural Networks
 
-7. [Lecture 7](https://subirvarma.github.io/GeneralCognitics/Course2/Lecture7_ValueFunctionApproximations.pdf) - **Deep Reinforcement Learning with Value Function Approximations:**
+7. [Lecture 7](https://subirvarma.github.io/GeneralCognitics/Course2/Lecture7_ValueFunctionApproximations.pdf) - **Deep Reinforcement Learning with Value Function Approximations:** Large Scale Reinforcement Learning, Types of Value Function Approximations (VFA), VFA using Deep Learning Networks, Monte Carlo based VFA, Temporal Difference based VFA, Deep Q Networks (DQN), Advanced DQN Algorithms.
 
-8. [Lecture 8](https://subirvarma.github.io/GeneralCognitics/Course2/Lecture8_PolicyGradientMethods.pdf) - **Policy Gradient Methods:**
+8. [Lecture 8](https://subirvarma.github.io/GeneralCognitics/Course2/Lecture8_PolicyGradientMethods.pdf) - **Policy Gradient Methods:** Policy based Reinforcement Learning, Policy Optimization, Policy Gradient, Monte Carlo based Policy Gradient (REINFORCE), Actor- Critic Algorithms.
 
-9. [Lecture 9](https://subirvarma.github.io/GeneralCognitics/Course2/Lecture9_ModelBasedPlanning.pdf) - **Model Based Control:**
+9. [Lecture 9](https://subirvarma.github.io/GeneralCognitics/Course2/Lecture9_ModelBasedPlanning.pdf) - **Monte Carlo Tree Search and other Model Based Control Methods:** Model based Reinforcement Learning, Learning Models from experience, Planning with a Model, Integrated Learning and
+Planning, Dyna-Q Algorithm, Monte Carlo Tree Search (MCTS) Algorithm, Playing Go using Monte Carlo Tree Search, Imitation Learning, DAgger Algorithm, Portfolio Management, Trading.
