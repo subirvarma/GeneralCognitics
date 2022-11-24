@@ -57,3 +57,19 @@ I put together a list of problems in the Deep Learning area that I use for this 
 # Reinforcement Learning Course
 
 1. [Lecture 1](https://subirvarma.github.io/GeneralCognitics/Course2/Lecture1_Introduction.pdf) - **Introduction:**
+
+2. [Lecture 2](https://subirvarma.github.io/GeneralCognitics/Course2/Lecture2_MDPs.pdf) - **Markov Decision Processes:**
+
+3. [Lecture 3](https://subirvarma.github.io/GeneralCognitics/Course2/Lecture3_ModelBasedControl.pdf) - **Model Based Control:**
+
+4. [Lecture 4](https://subirvarma.github.io/GeneralCognitics/Course2/Lecture4_ModelFreePrediction.pdf) - **Model Free Prediction:**
+
+5. [Lecture 5](https://subirvarma.github.io/GeneralCognitics/Course2/Lecture5_ModelFreeControl.pdf) - **Model Free Control:**
+
+6. [Lecture 6](https://subirvarma.github.io/GeneralCognitics/Course2/Lecture6_FunctionApproximations.pdf) - **Deep Reinforcement Learning:**
+
+7. [Lecture 7](https://subirvarma.github.io/GeneralCognitics/Course2/Lecture7_ValueFunctionApproximations.pdf) - **Deep Reinforcement Learning with Value Function Approximations:**
+
+8. [Lecture 8](https://subirvarma.github.io/GeneralCognitics/Course2/Lecture8_PolicyGradientMethods.pdf) - **Policy Gradient Methods:**
+
+9. [Lecture 9](https://subirvarma.github.io/GeneralCognitics/Course2/Lecture9_ModelBasedPlanning.pdf) - **Model Based Control:**
