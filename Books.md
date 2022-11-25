@@ -43,3 +43,4 @@ This chapter discusses three different topics that are at the frontiers of resea
 
 This is joint work with Professor Sanjiv Das at Santa Clara University. I use this book as the main text book for my course on Deep Learning at SCU. This is a work in progress, and I have been adding new material as needed in order to incorporate new developments in this rapidly changing field. 
 
+[Chapter 1](https://subirvarma.github.io/GeneralCognitics/Course2/01-Introduction.html)
