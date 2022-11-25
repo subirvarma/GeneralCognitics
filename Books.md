@@ -7,7 +7,7 @@ title: "Books"
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/CongestionControl.png)
 
-**Internet Congestion Control** ws published by Morgan Kaufmann in 2015. It can be purchased at Amazon using the following [link](https://www.amazon.com/Internet-Congestion-Control-Subir-Varma-ebook/dp/B0148FPPO8/ref=sr_1_3?crid=1VVYTVTIB8XOS&keywords=internet+congestion+control&qid=1669339227&sprefix=internet+congestion+control%2Caps%2C131&sr=8-3). A short summary of each of the chapters in the book is provided below.
+**Internet Congestion Control** was published by Morgan Kaufmann in 2015. It can be purchased at Amazon using the following [link](https://www.amazon.com/Internet-Congestion-Control-Subir-Varma-ebook/dp/B0148FPPO8/ref=sr_1_3?crid=1VVYTVTIB8XOS&keywords=internet+congestion+control&qid=1669339227&sprefix=internet+congestion+control%2Caps%2C131&sr=8-3). A short summary of each of the chapters in the book is provided below.
 
 **Chapter 1: Introduction** 
 This chapter is an introduction to the subject of congestion control, and covers some basic results in this area, such as the Chiu-Jain result on the optimality of AIMD control, descriptions of fundamental congestion control algorithms such TCP Reno, TCP Vegas and RED based Active Queue Management. A detailed description of TCP Reno is provided including algorithms such as: Congestion avoidance, Fast Re-transmit and Fast Recovery, Slow Start, TCP Timer operation etc. Active Queue Management or AQM techniques are introduced and the Random Early Detection or RED algorithm is  described. 
@@ -69,5 +69,5 @@ Project Remy; Remy Congestion Control Algorithm; Machine Learning and Congestion
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/DeepLearning.png)
 
-This is joint work with Professor Sanjiv Das at Santa Clara University. I use this book as the main text book for my course on Deep Learning at SCU. This is a work in progress, and I have been adding new material as needed in order to incorporate new developments in this rapidly changing field. test
+This is joint work with Professor Sanjiv Das at Santa Clara University. I use this book as the main text book for my course on Deep Learning at SCU. This is a work in progress, and I have been adding new material as needed in order to incorporate new developments in this rapidly changing field. 
 
