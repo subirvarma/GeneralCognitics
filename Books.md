@@ -5,7 +5,7 @@ title: "Books"
 
 # Internet Congestion Control
 
-<img src="https://subirvarma.github.io/GeneralCognitics/images/CongestionControl.png" width=25% height=25%>
+![](https://subirvarma.github.io/GeneralCognitics/images/CongestionControl.png)
 
 **Internet Congestion Control** ws published by Morgan Kaufmann in 2015. It can be purchased at Amazon using the following [link](https://www.amazon.com/Internet-Congestion-Control-Subir-Varma-ebook/dp/B0148FPPO8/ref=sr_1_3?crid=1VVYTVTIB8XOS&keywords=internet+congestion+control&qid=1669339227&sprefix=internet+congestion+control%2Caps%2C131&sr=8-3). A short summary of each of the chapters in the book is provided below.
 
@@ -67,7 +67,7 @@ Project Remy; Remy Congestion Control Algorithm; Machine Learning and Congestion
 
 # Deep Learning
 
-<img src="https://subirvarma.github.io/GeneralCognitics/images/DeepLearning.png" width=25% height=25%>
+![](https://subirvarma.github.io/GeneralCognitics/images/DeepLearning.png)
 
 This is joint work with Professor Sanjiv Das at Santa Clara University. I use this book as the main text book for my course on Deep Learning at SCU. This is a work in progress, and I have been adding new material as needed in order to incorporate new developments in this rapidly changing field.
 
