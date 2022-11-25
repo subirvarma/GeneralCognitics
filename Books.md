@@ -5,6 +5,8 @@ title: "Books"
 
 # Internet Congestion Control
 
+![](https://subirvarma.github.io/GeneralCognitics/images/CNN3.png)
+
 **Chapter 1: Introduction** 
 This chapter is an introduction to the subject of congestion control, and covers some basic results in this area, such as the Chiu-Jain result on the optimality of AIMD control, descriptions of fundamental congestion control algorithms such TCP Reno, TCP Vegas and RED based Active Queue Management. A detailed description of TCP Reno is provided including algorithms such as: Congestion avoidance, Fast Re-transmit and Fast Recovery, Slow Start, TCP Timer operation etc. Active Queue Management or AQM techniques are introduced and the Random Early Detection or RED algorithm is  described. 
 
