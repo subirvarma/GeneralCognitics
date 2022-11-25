@@ -69,5 +69,5 @@ Project Remy; Remy Congestion Control Algorithm; Machine Learning and Congestion
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/DeepLearning.png)
 
-This is joint work with Professor Sanjiv Das at Santa Clara University. I use this book as the main text book for my course on Deep Learning at SCU. This is a work in progress, and I have been adding new material as needed in order to incorporate new developments in this rapidly changing field.
+This is joint work with Professor Sanjiv Das at Santa Clara University. I use this book as the main text book for my course on Deep Learning at SCU. This is a work in progress, and I have been adding new material as needed in order to incorporate new developments in this rapidly changing field. test
 
