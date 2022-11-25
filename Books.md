@@ -3,6 +3,42 @@ layout: default
 title: "Books"
 ---
 
+# Deep Learning
+
+![](https://subirvarma.github.io/GeneralCognitics/images/DeepLearning.png)
+
+This is joint work with Professor Sanjiv Das at Santa Clara University. I use this book as the main text book for my course on Deep Learning at SCU. This is a work in progress, and I have been adding new material as needed in order to incorporate new developments in this rapidly changing field. 
+
+[Chapter 1](https://subirvarma.github.io/GeneralCognitics/Course2/01-Introduction.html)
+
+[Chapter 2](https://subirvarma.github.io/GeneralCognitics/Course2/02-PatternRecognition.html)
+
+[Chapter 3](https://subirvarma.github.io/GeneralCognitics/Course2/03-SupervisedLearning.html)
+
+[Chapter 4](https://subirvarma.github.io/GeneralCognitics/Course2/04-LinearLearningModels.html)
+
+[Chapter 5](https://subirvarma.github.io/GeneralCognitics/Course2/05-NNDeepLearning.html)
+
+[Chapter 6](https://subirvarma.github.io/GeneralCognitics/Course2/06-TrainingNNsBackprop.html)
+
+[Chapter 7](https://subirvarma.github.io/GeneralCognitics/Course2/07-GradientDescentTechniques.html)
+
+[Chapter 8](https://subirvarma.github.io/GeneralCognitics/Course2/08-ImprovingModelGeneralization.html)
+
+[Chapter 9](https://subirvarma.github.io/GeneralCognitics/Course2/09-HyperParameterSelection.html)
+
+[Chapter 10](https://subirvarma.github.io/GeneralCognitics/Course2/10-ConvNetsPart1.html)
+
+[Chapter 11](https://subirvarma.github.io/GeneralCognitics/Course2/11-ConvnetsPart2.html)
+
+[Chapter 12](https://subirvarma.github.io/GeneralCognitics/Course2/12-RNNs.html)
+
+[Chapter 13](https://subirvarma.github.io/GeneralCognitics/Course2/13-NLP.html)
+
+[Chapter 14](https://subirvarma.github.io/GeneralCognitics/Course2/14-Transformers.html)
+
+[Chapter 15](https://subirvarma.github.io/GeneralCognitics/Course2/15-GenerativeModels.html)
+
 # Internet Congestion Control
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/CongestionControl.png)
@@ -37,10 +73,3 @@ This chapter is on the topic of congestion control in Ethernet networks. Traditi
 This chapter discusses three different topics that are at the frontiers of research into congestion control: (1) We describe a project from MIT called Remy, that applies techniques from Machine Learning to congestion control. It discovers the optimal congestion control rules for a specific (but partially observed) state of the network, by doing an extensive simulation based optimization of network wide utility functions. 
 (2) Software Defined Networks or SDNs have been one of the most exciting developments in networking in recent years. Most of their applications have been in the area of algorithms and rules that are used to control the route that a packet takes through the network. However we describe a couple of instances in which ideas from SDNs can also be used to improve network congestion control. (3) Lastly we describe an algorithm called Google Congestion Control (GCC), that is part of the WebRTC project in the IETF, and is used for controlling real time in-browser communications. This algorithm has some interesting features such as a unique use of Kalman Filtering at the receiver, to estimate whether the congestion state at the bottleneck queue in the face of a channel capacity that is widely varying.
 
-# Deep Learning
-
-![](https://subirvarma.github.io/GeneralCognitics/images/DeepLearning.png)
-
-This is joint work with Professor Sanjiv Das at Santa Clara University. I use this book as the main text book for my course on Deep Learning at SCU. This is a work in progress, and I have been adding new material as needed in order to incorporate new developments in this rapidly changing field. 
-
-[Chapter 1](https://subirvarma.github.io/GeneralCognitics/Course2/01-Introduction.html)
