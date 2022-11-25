@@ -29,7 +29,7 @@ This is joint work with Professor Sanjiv Das at Santa Clara University. I use th
 
 [Chapter 10](https://subirvarma.github.io/GeneralCognitics/Course2/10-ConvNetsPart1.html)
 
-[Chapter 11](https://subirvarma.github.io/GeneralCognitics/Course2/11-ConvnetsPart2.html)
+[Chapter 11](https://subirvarma.github.io/GeneralCognitics/Course2/11-ConvNetsPart2.html)
 
 [Chapter 12](https://subirvarma.github.io/GeneralCognitics/Course2/12-RNNs.html)
 
