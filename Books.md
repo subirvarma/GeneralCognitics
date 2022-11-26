@@ -9,35 +9,35 @@ title: "Books"
 
 This is joint work with Professor Sanjiv Das at Santa Clara University. I use this book as the main text book for my course on Deep Learning at SCU. This is a work in progress, and I have been adding new material as needed in order to incorporate new developments in this rapidly changing field. 
 
-[Chapter 1](https://subirvarma.github.io/GeneralCognitics/Course2/01-Introduction.html)
+[Chapter 1](https://subirvarma.github.io/GeneralCognitics/Course2/01-Introduction.html) - **Introduction:** Deep Learning Applications, What is Deep Learning, Why are DLNs so Effective, Classification of Deep Learning Systems: Supervised Learning, Self Supervised and Un-Supervised Learning, Reinforcement Learning, Historical Perspective
 
-[Chapter 2](https://subirvarma.github.io/GeneralCognitics/Course2/02-PatternRecognition.html)
+[Chapter 2](https://subirvarma.github.io/GeneralCognitics/Course2/02-PatternRecognition.html) - **Pattern Recognition:** MNIST and ILSVRC Datasets, MNIST Classifier in Keras
 
-[Chapter 3](https://subirvarma.github.io/GeneralCognitics/Course2/03-SupervisedLearning.html)
+[Chapter 3](https://subirvarma.github.io/GeneralCognitics/Course2/03-SupervisedLearning.html) - **Supervised Learning:** Classification Problem, Cross Entropy Loss, Regression Problem
 
-[Chapter 4](https://subirvarma.github.io/GeneralCognitics/Course2/04-LinearLearningModels.html)
+[Chapter 4](https://subirvarma.github.io/GeneralCognitics/Course2/04-LinearLearningModels.html) - **Linear Neural Networks:** Logistic Regression, Sigmoid Function, Gradient Descent, Stochastic Gradient Descent, Multiclass Logistic Regression, Image Classification
 
-[Chapter 5](https://subirvarma.github.io/GeneralCognitics/Course2/05-NNDeepLearning.html)
+[Chapter 5](https://subirvarma.github.io/GeneralCognitics/Course2/05-NNDeepLearning.html) - **Dense Feedforward Networks:** Non-Linear Filters, Dense Feed Forward Networks, Width vs Depth, DFN Model in Keras, Keras Functional API, Ingesting Data into Keras, Tabular Data, Time Series Prediction, Image Data, Text Data
 
-[Chapter 6](https://subirvarma.github.io/GeneralCognitics/Course2/06-TrainingNNsBackprop.html)
+[Chapter 6](https://subirvarma.github.io/GeneralCognitics/Course2/06-TrainingNNsBackprop.html) - **The Backpropagation Algorithm:** Chain Rule of Derivatives, Gradient Flow Calculus, Backprop Forward Pass, Backprop Backward Pass, Issues with Backprop
 
-[Chapter 7](https://subirvarma.github.io/GeneralCognitics/Course2/07-GradientDescentTechniques.html)
+[Chapter 7](https://subirvarma.github.io/GeneralCognitics/Course2/07-GradientDescentTechniques.html) - **Techniques to Improve Training:** Issues with Gradient Descent, Learning Rate Annealing, Momentum, Nesterov Momentum, ADAGRAD, RMSProp, ADAM, Activation Functions, Tanh Activation, ReLU Activation, Leaky ReLU and PreLU, Parameter Initialization, Data Preprocessing, Batch Normalization
 
-[Chapter 8](https://subirvarma.github.io/GeneralCognitics/Course2/08-ImprovingModelGeneralization.html)
+[Chapter 8](https://subirvarma.github.io/GeneralCognitics/Course2/08-ImprovingModelGeneralization.html) - **Improved Model Generalization:** Underfitting and Overfitting, Model Capacity, Validation Dataset, Detecting Underfitting, Detecting Overfitting, Regularization, Early Stopping, L2 Regularization, L1 Regularization, Dropout Regularization, Data Augmentation, Model Averaging
 
-[Chapter 9](https://subirvarma.github.io/GeneralCognitics/Course2/09-HyperParameterSelection.html)
+[Chapter 9](https://subirvarma.github.io/GeneralCognitics/Course2/09-HyperParameterSelection.html) - **End to End Training Process:** Model Selection, Algorithm Selection, Hyper-Parameter Selection, Manual Tuning, Automated Tuning, Verifying Correctness
 
-[Chapter 10](https://subirvarma.github.io/GeneralCognitics/Course2/10-ConvNetsPart1.html)
+[Chapter 10](https://subirvarma.github.io/GeneralCognitics/Course2/10-ConvNetsPart1.html) - **Convolutional Neural Networks, Part 1:** Issues with DFNs, ConvNet Architecture, DFNs vs ConvNets, Pooling, ConvNet in Keras, Sizing ConvNets, One Dimensional ConvNets, Transfer Learning
 
-[Chapter 11](https://subirvarma.github.io/GeneralCognitics/Course2/11-ConvNetsPart2.html)
+[Chapter 11](https://subirvarma.github.io/GeneralCognitics/Course2/11-ConvNetsPart2.html) - **Convolutional Neural Networks< Part 2:** Trends in ConvNets, Residual Connections, Small Filters, Bottlenecking with 1x1 Filters, Grouped Convolutions, Depthwise Separable Convolutions, ConvNet Evolution: LeNet, AlexNet, ZFNet, VGGNet, InceptionNet, ResNet, ResNext, DenseNet, XceptionNet, MobileNet, Visualizing ConvNets, Local Filter Visualization, Activation Map Visualization, Maximally Activating Patches, Inverse Convolution, Image Generation, Adversarial Images, Deep Dream, Advanced Image Processing: Localization, Semantic Segmentation, Object Detection
 
-[Chapter 12](https://subirvarma.github.io/GeneralCognitics/Course2/12-RNNs.html)
+[Chapter 12](https://subirvarma.github.io/GeneralCognitics/Course2/12-RNNs.html) - **Recurrent Neural Networks:** Recurrence Definition, IMDB Classification with RNNs, Stacked Layer RNN, BiDirectional RNN, Dropout in RNNs, Backpropagation Through Time (BPTT) Algorithm, Truncated BPTT, Problems with BPTT, Vanishing and Exploding Gradients in BPTT, LSTMs, GRUs, LSTMs in Keras
 
-[Chapter 13](https://subirvarma.github.io/GeneralCognitics/Course2/13-NLP.html)
+[Chapter 13](https://subirvarma.github.io/GeneralCognitics/Course2/13-NLP.html) - **Natural Language Processing:** Word Embeddings, Text Classification, Language Models, Next Word Generation, Character based Language Mode, Conditional Language Models, Neural Machine Translation, Image Captioning, Attention, Image Captioning with Attention, Speech Transcription
 
-[Chapter 14](https://subirvarma.github.io/GeneralCognitics/Course2/14-Transformers.html)
+[Chapter 14](https://subirvarma.github.io/GeneralCognitics/Course2/14-Transformers.html) - **Transformers:** Issues with RNNs, Self Attention, Transformer Architecture, Multiple Attention Heads, Transformer Encoder, Transformers in Keras, Positional Encoding, Visualizing Attention, Transformers 1D Depthwise Separable Convolutions, Language Models using Transformers, Text Completion, Summarization, Encoder-Decoder Transformers, BERT B-Directional Language Models, ViT Image Processing with Transformers
 
-[Chapter 15](https://subirvarma.github.io/GeneralCognitics/Course2/15-GenerativeModels.html)
+[Chapter 15](https://subirvarma.github.io/GeneralCognitics/Course2/15-GenerativeModels.html) - **Image Generation with Diffusion Models:** Latent Variables and the ELBO Bound, Forward Diffusion Process, Reverse Diffusion Process, Optimization Objective, DDPM Algorthm, Neural Network Implementation, Accelerated Sampling with DDIM Algorithm, Latent Diffusion Model, Conditional Diffusion Model, Appendix: Multivariate Gaussian  Distribution
 
 # Internet Congestion Control
 
