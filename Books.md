@@ -7,7 +7,7 @@ title: "Books"
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/DeepLearning.png)
 
-This is joint work with Professor Sanjiv Das at Santa Clara University. I use this book as the main text book for my course on Deep Learning at SCU. This is a work in progress, and I have been adding new material as needed in order to incorporate new developments in this rapidly changing field. 
+This is joint work with Professor Sanjiv Das at Santa Clara University. I use this book as the main text book for my course on Deep Learning at SCU. This is a work in progress, and I have been adding new material as needed in order to incorporate new developments in this rapidly changing field. Lecture slides that closely follow the contents of this book can be found [here](https://subirvarma.github.io/GeneralCognitics/Courses.html).
 
 [Chapter 1](https://subirvarma.github.io/GeneralCognitics/Course2/01-Introduction.html) - **Introduction:** Deep Learning Applications, What is Deep Learning, Why are DLNs so Effective, Classification of Deep Learning Systems: Supervised Learning, Self Supervised and Un-Supervised Learning, Reinforcement Learning, Historical Perspective
 
@@ -29,7 +29,7 @@ This is joint work with Professor Sanjiv Das at Santa Clara University. I use th
 
 [Chapter 10](https://subirvarma.github.io/GeneralCognitics/Course2/10-ConvNetsPart1.html) - **Convolutional Neural Networks, Part 1:** Issues with DFNs, ConvNet Architecture, DFNs vs ConvNets, Pooling, ConvNet in Keras, Sizing ConvNets, One Dimensional ConvNets, Transfer Learning
 
-[Chapter 11](https://subirvarma.github.io/GeneralCognitics/Course2/11-ConvNetsPart2.html) - **Convolutional Neural Networks< Part 2:** Trends in ConvNets, Residual Connections, Small Filters, Bottlenecking with 1x1 Filters, Grouped Convolutions, Depthwise Separable Convolutions, ConvNet Evolution: LeNet, AlexNet, ZFNet, VGGNet, InceptionNet, ResNet, ResNext, DenseNet, XceptionNet, MobileNet, Visualizing ConvNets, Local Filter Visualization, Activation Map Visualization, Maximally Activating Patches, Inverse Convolution, Image Generation, Adversarial Images, Deep Dream, Advanced Image Processing: Localization, Semantic Segmentation, Object Detection
+[Chapter 11](https://subirvarma.github.io/GeneralCognitics/Course2/11-ConvNetsPart2.html) - **Convolutional Neural Networks, Part 2:** Trends in ConvNets, Residual Connections, Small Filters, Bottlenecking with 1x1 Filters, Grouped Convolutions, Depthwise Separable Convolutions, ConvNet Evolution: LeNet, AlexNet, ZFNet, VGGNet, InceptionNet, ResNet, ResNext, DenseNet, XceptionNet, MobileNet, Visualizing ConvNets, Local Filter Visualization, Activation Map Visualization, Maximally Activating Patches, Inverse Convolution, Image Generation, Adversarial Images, Deep Dream, Advanced Image Processing: Localization, Semantic Segmentation, Object Detection
 
 [Chapter 12](https://subirvarma.github.io/GeneralCognitics/Course2/12-RNNs.html) - **Recurrent Neural Networks:** Recurrence Definition, IMDB Classification with RNNs, Stacked Layer RNN, BiDirectional RNN, Dropout in RNNs, Backpropagation Through Time (BPTT) Algorithm, Truncated BPTT, Problems with BPTT, Vanishing and Exploding Gradients in BPTT, LSTMs, GRUs, LSTMs in Keras
 
