@@ -37,6 +37,6 @@ Thesis Advisor: Armand Makowski
 
 
 ### 2015 - Present
-1.[*Internet Congestion Control,*](https://www.amazon.com/Internet-Congestion-Control-Subir-Varma/dp/0128035838/ref=tmm_pap_swatch_0?_encoding=UTF8&qid=1669339227&sr=8-3) S Varma, Morgan Kaufmann/Elsevier, 2015.
-2.[*Deep Learning*](https://subirvarma.github.io/GeneralCognitics/Books.html)
-2.[*Dynamic Goals Based Wealth Management Using Reinforcement Learning*](https://subirvarma.github.io/GeneralCognitics/Pubs/WM.pdf)
+1. [*Internet Congestion Control,*](https://www.amazon.com/Internet-Congestion-Control-Subir-Varma/dp/0128035838/ref=tmm_pap_swatch_0?_encoding=UTF8&qid=1669339227&sr=8-3) S Varma, Morgan Kaufmann/Elsevier, 2015.
+2. [*Deep Learning*](https://subirvarma.github.io/GeneralCognitics/Books.html)
+3. [*Dynamic Goals Based Wealth Management Using Reinforcement Learning*](https://subirvarma.github.io/GeneralCognitics/Pubs/WM.pdf)
