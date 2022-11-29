@@ -19,7 +19,7 @@ Thesis Advisor: Armand Makowski
 ### 1985-1994
 
 The publications during the period 1985-1994 were dominated by the papers that arose out of my MS and PhD Thesis work at the University of Maryland. This work was of a heavily theoretical nature, and had to do with Queueing Theory analysis of types of queues called Fork-Join queues and Resequencing queues.
-I joined the IBM Networking Systems Division towards the end of 1990, and my subsequent work was in the area of Computer Networking. I initially worked for a software product called VTAM during which my main concern was making this system run faster. Subsequently I transferred to the Advanced Technologies group in which I worked on Advanced Traffic Managemernt and QoS issues.
+I joined the IBM Networking Systems Division towards the end of 1990, and my subsequent work was in the area of Computer Networking. I initially worked for a software product called VTAM during which my main concern was making this system run faster. Subsequently I transferred to the Advanced Technologies group in which I worked on Advanced Traffic Managemernt and QoS issues. This expertise came in very handy for the next stage of my career, when I applied my knowledge of QoS Scheduling Algorithms and Rate Based Traffic Control to the Broadband Access area.
 
 1. [*Queues with Resequencing, Part 1: Structural Properties*](https://subirvarma.github.io/GeneralCognitics/Pubs/RSQ1.pdf)
 2. [*Queues with Resequencing, Part 2: Heavy Traffic Limits*](https://subirvarma.github.io/GeneralCognitics/Pubs/rsq2.pdf)
@@ -33,6 +33,9 @@ I joined the IBM Networking Systems Division towards the end of 1990, and my sub
 10. [*Comparison of Scheduling Strategies in Multi-Processor Systems*](https://subirvarma.github.io/GeneralCognitics/Pubs/fj3.pdf)
 
 ### 1995 - 2004
+
+I became interested in Broadband Access in 1995, and made the move to Silicon Valley where most of the action was happening. This was the era of 28.8 kbps modems, and with the Web exploding in popularity, there was an urgent need to increase the speed to bring Internet Access to the home. I initially worked on Cable Modems at one of the early companies in this field called Hybrid Networks. I also become heavily involved in the IEEE802.14 Cable Modem Standards Group during this period. My work at Hybrid culimnated in the HAS2000 System for which I designed the upstream Medium Access Control protocol. 
+I left Hybrid in 1999 and co-founded a start-up called Aperto Networks which aimed to bring high speed Internet Access to the home using wireless broadband. Wireless at this time was used mainly for voice, with very poor support for data. Aperto successfully brought a product called [PacketMax](https://www.apertonet.com/) to market which was successful in providing a high speed wireless pipe to homes and businesses. This company still exists as part of a Canadian company called Tranzeo Wireless.
 
 1. [*Efficient Algorithms for the Exact Computation of the Loss Curve for Video Sources*](https://subirvarma.github.io/GeneralCognitics/Pubs/lc.pdf)
 
