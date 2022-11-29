@@ -18,6 +18,9 @@ Thesis Advisor: Armand Makowski
 
 ### 1985-1994
 
+The publications during the period 1985-1994 were dominated by the papers that arose out of my MS and PhD Thesis work at the University of Maryland. This work was of a heavily theoretical nature, and had to do with Queueing Theory analysis of types of queues called Fork-Join queues and Resequencing queues.
+I joined the IBM Networking Systems Division towards the end of 1990, and my subsequent work was in the area of Computer Networking. I initially worked for a software product called VTAM during which my main concern was making this system run faster. Subsequently I transferred to the Advanced Technologies group in which I worked on Advanced Traffic Managemernt and QoS issues.
+
 1. [*Queues with Resequencing, Part 1: Structural Properties*](https://subirvarma.github.io/GeneralCognitics/Pubs/RSQ1.pdf)
 2. [*Queues with Resequencing, Part 2: Heavy Traffic Limits*](https://subirvarma.github.io/GeneralCognitics/Pubs/rsq2.pdf)
 3. [*Queues with Resequencing, Part 3: Light Traffic Limits and Interpolation Approximations*](https://subirvarma.github.io/GeneralCognitics/Pubs/rsq3.pdf)
