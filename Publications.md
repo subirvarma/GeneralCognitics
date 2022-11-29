@@ -31,6 +31,8 @@ Thesis Advisor: Armand Makowski
 
 ### 1995 - 2004
 
+1. [*Efficient Algorithms for the Exact Computation of the Loss Curve for Video Sources*](https://subirvarma.github.io/GeneralCognitics/Pubs/lc.pdf)
+
 
 
 ### 2005 - 2014
