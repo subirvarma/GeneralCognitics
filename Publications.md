@@ -18,3 +18,4 @@ Thesis Advisor: Armand Makowski
 
 1. [*Interpolation approximations for symmetric fork-join queues,*](https://drum.lib.umd.edu/bitstream/handle/1903/5303/TR_92-122.pdf?sequence=1) S Varma, AM Makowski, Performance Evaluation 20 (1-3), 245-265, 1994.
 2. [*Internet Congestion Control,*](https://www.amazon.com/Internet-Congestion-Control-Subir-Varma/dp/0128035838/ref=tmm_pap_swatch_0?_encoding=UTF8&qid=1669339227&sr=8-3) S Varma, Morgan Kaufmann/Elsevier, 2015.
+3. [*Queues with Resequencing, Part 1: Structural Properties*](https://subirvarma.github.io/GeneralCognitics/Pubs/RSQ1.pdf)
