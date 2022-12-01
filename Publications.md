@@ -45,7 +45,7 @@ I left Hybrid in 1999 and co-founded a start-up called Aperto Networks which aim
 
 ### 2005 - 2014
 
-The Broadband Wireless industry matured and conolidated after 2005, when the focus shifted to Standrads based Products. This spelled the end of the era of startups in this industry. I had a played a role in the IEEE 802.16 Standards Committee while at Aperto. The work of this group was folded into the WiMAX Consortium from 2004 onwards, and WiMAX itself was subsumed into the LTE (or 4G) Cellular Standard by the end of that decade. After Aperto I worked at Sprint for a year, where my focus was on Wireless Broadband deployment issues. After Sprint, I spent most of the following years working on WiMAX and LTE Gateways at a startup called Wichorus.
+The Broadband Wireless industry matured and consolidated after 2005, when the focus shifted to Standrads based Products. This spelled the end of the era of startups in this industry. I had a played a role in the IEEE 802.16 Standards Committee while at Aperto. The work of this group was folded into the WiMAX Consortium from 2004 onwards, and WiMAX itself was subsumed into the LTE (or 4G) Cellular Standard by the end of that decade. After Aperto I worked at Sprint for a year, where my focus was on Wireless Broadband deployment issues. After Sprint, I spent most of the following years working on WiMAX and LTE Gateways at a startup called Wichorus.
 
 
 ### 2015 - Present
