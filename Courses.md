@@ -76,4 +76,4 @@ Learning and discussion of important applications, An historical overview of the
 8. [Lecture 8](https://subirvarma.github.io/GeneralCognitics/Course2/Lecture8_PolicyGradientMethods.pdf) - **Policy Gradient Methods:** Policy based Reinforcement Learning, Policy Optimization, Policy Gradient, Monte Carlo based Policy Gradient (REINFORCE), Actor- Critic Algorithms.
 
 9. [Lecture 9](https://subirvarma.github.io/GeneralCognitics/Course2/Lecture9_ModelBasedPlanning.pdf) - **Monte Carlo Tree Search and other Model Based Control Methods:** Model based Reinforcement Learning, Learning Models from experience, Planning with a Model, Integrated Learning and
-Planning, Dyna-Q Algorithm, Monte Carlo Tree Search (MCTS) Algorithm, Playing Go using Monte Carlo Tree Search, Imitation Learning, DAgger Algorithm, Portfolio Management, Trading.
+Planning, Dyna-Q Algorithm, Monte Carlo Tree Search (MCTS) Algorithm, Playing Go using Monte Carlo Tree Search, Imitation Learning, Dagger Algorithm, Portfolio Management, Trading.
