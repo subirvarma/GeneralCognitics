@@ -8,7 +8,7 @@ Business at Santa Clara University.
 
 # Deep Learning Course
 
-Here are the slides from my lectures for the Deep Learning course
+Here are the slides from my lectures for the Deep Learning course. My book on Deep Learning closely follows the contents of these lectures and can be found [here](https://subirvarma.github.io/GeneralCognitics/Books.html).
 
 1. [Lecture 1](https://subirvarma.github.io/GeneralCognitics/Course1/Lecture1_Introduction.pdf) - **Introduction:** Introduction to Deep Learning and discussion of important applications, Introduction to Types of Deep Learning Systems: Supervised Learning, Reinforcement Learning, Unsupervised Learning, Self-Supervised Learning, An historical overview of Deep Learning
 
