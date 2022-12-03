@@ -70,6 +70,13 @@ My focus on career lessened as this decade went on, and I spent more time shephe
 
 
 ## 2015 - Present
+
+![](https://subirvarma.github.io/GeneralCognitics/images/CongestionControl.png)
+
+This has been a decade of Reading, Writing and Teaching. I took leave of the Networking Industry at the start of the decade, my book on *Internet Congestion Control* was a fond farewell to this phase of my life. In this book I wrote about a part of Networking technology that I loved and had ocassion to often use in the preceding twenty years.
+
+It turned out that this was a good time to change fields, since the area of Neural Networks was in the process of being raised out of the dead by a new technology called Deep Learning. There were enough connections between Deep Learning and my legacy knowledge of probability and statistics, to decide that this was the right field to start learning about. After spending about a year educating myself (online courses came in very handy), I wrote a book on the topic and also started teaching the subject at Santa Clara University. A slight twist in this story came during pandemic year of 2020, when I launched a Quant Hedge Fund using the knowledge I had gained. It is tiny for now and is slowly proving itself out.
+
 1. [*Internet Congestion Control,*](https://www.amazon.com/Internet-Congestion-Control-Subir-Varma/dp/0128035838/ref=tmm_pap_swatch_0?_encoding=UTF8&qid=1669339227&sr=8-3) S Varma, Morgan Kaufmann/Elsevier, 2015.
 2. [*Deep Learning*](https://subirvarma.github.io/GeneralCognitics/Books.html)
 3. [*Dynamic Goals Based Wealth Management Using Reinforcement Learning*](https://subirvarma.github.io/GeneralCognitics/Pubs/WM.pdf)
