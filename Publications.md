@@ -53,8 +53,7 @@ I left Hybrid in 1999 and co-founded a start-up called Aperto Networks which aim
 2. [*MPEG-2 over ATM: System Design Issues*](https://subirvarma.github.io/GeneralCognitics/Pubs/lsi1.pdf)
 3. [*Support for ATM Traffic Classes in HFC Networks*](https://subirvarma.github.io/GeneralCognitics/Pubs/lsi2.pdf)
 4. [*Shared Memory Fabric Architecture for Very High Speed ATM Switches*](https://patentimages.storage.googleapis.com/40/79/e2/45015dc95c395c/US5831980.pdf)
-5. [*Design for an ATM Segmentation and Re-Assembly Processing Unit*]([
-](https://patentimages.storage.googleapis.com/cc/b3/23/9ffba61a5e6cbe/US5982749.pdf)
+5. [*Design for an ATM Segmentation and Re-Assembly Processing Unit*](https://patentimages.storage.googleapis.com/cc/b3/23/9ffba61a5e6cbe/US5982749.pdf)
 
 
 ## 2005 - 2014
