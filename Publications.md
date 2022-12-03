@@ -34,6 +34,10 @@ I joined the IBM Networking Systems Division towards the end of 1990, and my sub
 8. [*Approximations for Acyclic Fork-Join Networks*](https://subirvarma.github.io/GeneralCognitics/Pubs/fj1.pdf)
 9. [*Heavy Traffic Limits for Fork-Join Queues*](https://subirvarma.github.io/GeneralCognitics/Pubs/fj2.pdf)
 10. [*Comparison of Scheduling Strategies in Multi-Processor Systems*](https://subirvarma.github.io/GeneralCognitics/Pubs/fj3.pdf)
+11. [*Performance Evaluation of Spin Locks in Multi-Processors*](https://subirvarma.github.io/GeneralCognitics/Pubs/ibm1.pdf)
+12. [*A Survey of Performance Issues in Communication Protocol Design and Implementation*](https://subirvarma.github.io/GeneralCognitics/Pubs/ibm3.pdf)
+13. [*An Efficient Timer Implementation for HPR*](https://subirvarma.github.io/GeneralCognitics/Pubs/ibm4.pdf)
+14. [*Providing Enhanced QoS Capabilities in BBNS Networks*]((https://subirvarma.github.io/GeneralCognitics/Pubs/ibm2.pdf)
 
 ### 1995 - 2004
 
