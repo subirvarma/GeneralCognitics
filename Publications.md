@@ -56,14 +56,15 @@ I left Hybrid in 1999 and co-founded a start-up called Aperto Networks which aim
 5. [*Design for an ATM Segmentation and Re-Assembly Processing Unit*](https://patentimages.storage.googleapis.com/cc/b3/23/9ffba61a5e6cbe/US5982749.pdf)
 6. [*Performance and Buffering Requirements of TCP Applications in Asymmetric Networks*](https://subirvarma.github.io/GeneralCognitics/Pubs/hybrid1.pdf)
 7. [*A Scheduler for Controlling Multiple Upstream Channels Using a Mixture of Contention and Polling*](https://patentimages.storage.googleapis.com/31/28/e7/f3f6d041dafa52/US6275497.pdf)
-8. [*Scheduling on Links with Changing Parameters*](https://subirvarma.github.io/GeneralCognitics/Pubs/SP.pdf)
-9. [*An Automatic Re-Transmission (ARQ) Scheme for High Speed Point to Multipoint Links*](https://subirvarma.github.io/GeneralCognitics/Pubs/ARQ.pdf)
-10. [*An Efficient Technique for Controlling Link Parameters*](https://subirvarma.github.io/GeneralCognitics/Pubs/LA.pdf)
-11. [*An Algorithm for Dynamic Link Adaptation*](https://subirvarma.github.io/GeneralCognitics/Pubs/DLA.pdf)
-12. [*Efficient Contention Resolution in the Upstream MAC*](https://subirvarma.github.io/GeneralCognitics/Pubs/Contention.pdf)
-13. [*Support for Multiple Synchronized Channels Under a Single MAC Layer*](https://subirvarma.github.io/GeneralCognitics/Pubs/MPHY.pdf)
-14. [*Co-Channel Interference Management in Next Generation Broadband Wireless Networks*](https://subirvarma.github.io/GeneralCognitics/Pubs/WCA2001.pdf)
-15. [*Early Results from Next Generation Broadband Wireless Systems*](https://subirvarma.github.io/GeneralCognitics/Pubs/WCA2002.pdf)
+8. [*Aperto MAC Layer Enhancements*](https://subirvarma.github.io/GeneralCognitics/Pubs/Overview.pdf)
+9. [*Scheduling on Links with Changing Parameters*](https://subirvarma.github.io/GeneralCognitics/Pubs/SP.pdf)
+10. [*An Automatic Re-Transmission (ARQ) Scheme for High Speed Point to Multipoint Links*](https://subirvarma.github.io/GeneralCognitics/Pubs/ARQ .pdf)
+11. [*An Efficient Technique for Controlling Link Parameters*](https://subirvarma.github.io/GeneralCognitics/Pubs/LA .pdf)
+12. [*An Algorithm for Dynamic Link Adaptation*](https://subirvarma.github.io/GeneralCognitics/Pubs/DLA.pdf)
+13. [*Efficient Contention Resolution in the Upstream MAC*](https://subirvarma.github.io/GeneralCognitics/Pubs/Contention.pdf)
+14. [*Support for Multiple Synchronized Channels Under a Single MAC Layer*](https://subirvarma.github.io/GeneralCognitics/Pubs/MPHY.pdf)
+15. [*Co-Channel Interference Management in Next Generation Broadband Wireless Networks*](https://subirvarma.github.io/GeneralCognitics/Pubs/WCA2001.pdf)
+16. [*Early Results from Next Generation Broadband Wireless Systems*](https://subirvarma.github.io/GeneralCognitics/Pubs/WCA2002.pdf)
 
 
 ## 2005 - 2014
