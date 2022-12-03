@@ -57,14 +57,15 @@ I left Hybrid in 1999 and co-founded a start-up called Aperto Networks which aim
 6. [*Performance and Buffering Requirements of TCP Applications in Asymmetric Networks*](https://subirvarma.github.io/GeneralCognitics/Pubs/hybrid1.pdf)
 7. [*A Scheduler for Controlling Multiple Upstream Channels Using a Mixture of Contention and Polling*](https://patentimages.storage.googleapis.com/31/28/e7/f3f6d041dafa52/US6275497.pdf)
 8. [*Aperto MAC Layer Enhancements*](https://subirvarma.github.io/GeneralCognitics/Pubs/Overview.pdf)
-9. [*Scheduling on Links with Changing Parameters*](https://subirvarma.github.io/GeneralCognitics/Pubs/SP.pdf)
-10. [*An Automatic Re-Transmission (ARQ) Scheme for High Speed Point to Multipoint Links*](https://subirvarma.github.io/GeneralCognitics/Pubs/ARQ .pdf)
-11. [*An Efficient Technique for Controlling Link Parameters*](https://subirvarma.github.io/GeneralCognitics/Pubs/LA .pdf)
-12. [*An Algorithm for Dynamic Link Adaptation*](https://subirvarma.github.io/GeneralCognitics/Pubs/DLA.pdf)
-13. [*Efficient Contention Resolution in the Upstream MAC*](https://subirvarma.github.io/GeneralCognitics/Pubs/Contention.pdf)
-14. [*Support for Multiple Synchronized Channels Under a Single MAC Layer*](https://subirvarma.github.io/GeneralCognitics/Pubs/MPHY.pdf)
-15. [*Co-Channel Interference Management in Next Generation Broadband Wireless Networks*](https://subirvarma.github.io/GeneralCognitics/Pubs/WCA2001.pdf)
-16. [*Early Results from Next Generation Broadband Wireless Systems*](https://subirvarma.github.io/GeneralCognitics/Pubs/WCA2002.pdf)
+9. [*The Aperto Networks Link Scheduler*](https://subirvarma.github.io/GeneralCognitics/Pubs/ApertoSched.pdf)
+10. [*Scheduling on Links with Changing Parameters*](https://subirvarma.github.io/GeneralCognitics/Pubs/SP.pdf)
+11. [*An Automatic Re-Transmission (ARQ) Scheme for High Speed Point to Multipoint Links*](https://subirvarma.github.io/GeneralCognitics/Pubs/ARQ .pdf)
+12. [*An Efficient Technique for Controlling Link Parameters*](https://subirvarma.github.io/GeneralCognitics/Pubs/LA .pdf)
+13. [*An Algorithm for Dynamic Link Adaptation*](https://subirvarma.github.io/GeneralCognitics/Pubs/DLA.pdf)
+14. [*Efficient Contention Resolution in the Upstream MAC*](https://subirvarma.github.io/GeneralCognitics/Pubs/Contention.pdf)
+15. [*Support for Multiple Synchronized Channels Under a Single MAC Layer*](https://subirvarma.github.io/GeneralCognitics/Pubs/MPHY.pdf)
+16. [*Co-Channel Interference Management in Next Generation Broadband Wireless Networks*](https://subirvarma.github.io/GeneralCognitics/Pubs/WCA2001.pdf)
+17. [*Early Results from Next Generation Broadband Wireless Systems*](https://subirvarma.github.io/GeneralCognitics/Pubs/WCA2002.pdf)
 
 
 ## 2005 - 2014
@@ -74,6 +75,8 @@ I left Hybrid in 1999 and co-founded a start-up called Aperto Networks which aim
 The Broadband Wireless industry matured and consolidated after 2005, when the focus shifted to Standards based Products. This spelled the end of the era of startups in this industry. I had a played a role in the IEEE 802.16 Standards Committee while at Aperto. The work of this group was folded into the WiMAX Consortium from 2004 onwards, and WiMAX itself was subsumed into the LTE (or 4G) Cellular Standard by the end of that decade. After Aperto I worked at Sprint for a year, where my focus was on Wireless Broadband deployment issues. After Sprint, I spent most of the following years working on WiMAX and LTE Gateways at a startup called Wichorus.
 
 My focus on career lessened as this decade went on, and I spent more time shepherding our four kids through high school and into college. Three of them were in good colleges by 2016, and I consider this to be time well spent.
+
+1. [*Technologies for Wireless Gateways*](https://subirvarma.github.io/GeneralCognitics/Pubs/WirelessGW.pdf)
 
 
 ## 2015 - Present
