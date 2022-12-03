@@ -37,8 +37,8 @@ I joined the IBM Networking Systems Division towards the end of 1990, and my sub
 11. [*Performance Evaluation of Spin Locks in Multi-Processors*](https://subirvarma.github.io/GeneralCognitics/Pubs/ibm1.pdf)
 12. [*A Survey of Performance Issues in Communication Protocol Design and Implementation*](https://subirvarma.github.io/GeneralCognitics/Pubs/ibm3.pdf)
 13. [*An Efficient Timer Implementation for HPR*](https://subirvarma.github.io/GeneralCognitics/Pubs/ibm4.pdf)
-14. [*Providing Enhanced QoS Capabilities in BBNS Networks*]((https://subirvarma.github.io/GeneralCognitics/Pubs/ibm2.pdf)
-
+14. [*Providing Enhanced QoS Capabilities in BBNS Networks*](https://subirvarma.github.io/GeneralCognitics/Pubs/ibm2.pdf)
+15. [*Traffic Flow Regulation to Gaurantee End to End Delay in Packet Swiched Networks*](https://patentimages.storage.googleapis.com/e8/e1/da/75fee35007f7c1/US5796719.pdf)
 ### 1995 - 2004
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/Aperto.jpeg)
