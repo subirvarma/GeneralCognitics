@@ -56,6 +56,8 @@ I left Hybrid in 1999 and co-founded a start-up called Aperto Networks which aim
 5. [*Design for an ATM Segmentation and Re-Assembly Processing Unit*](https://patentimages.storage.googleapis.com/cc/b3/23/9ffba61a5e6cbe/US5982749.pdf)
 6. [*Performance and Buffering Requirements of TCP Applications in Asymmetric Networks*](https://subirvarma.github.io/GeneralCognitics/Pubs/hybrid1.pdf)
 7. [*A Scheduler for Controlling Multiple Upstream Channels Using a Mixture of Contention and Polling*](https://patentimages.storage.googleapis.com/31/28/e7/f3f6d041dafa52/US6275497.pdf)
+8. [*Co-Channel Interference Management in Next Generation Broadband Wireless Networks*](https://subirvarma.github.io/GeneralCognitics/Pubs/WCA2001.pdf)
+9. [*Early Results from Next Generation Broadband Wireless Systems*](https://subirvarma.github.io/GeneralCognitics/Pubs/WCA2002.pdf)
 
 
 ## 2005 - 2014
