@@ -50,7 +50,11 @@ I became interested in Broadband Access in 1995, and made the move to Silicon Va
 I left Hybrid in 1999 and co-founded a start-up called Aperto Networks which aimed to bring high speed Internet Access to Home and Business users with wireless broadband. Wireless at this time was used mainly for voice, with very poor support for data. The system I designed for Aperto, called [PacketWave](https://www.apertonet.com/) was successfull in bringing to market a high speed wireless pipe that could compete with wired alternatives such as DSL or Cable Modems. This company still exists as part of a Canadian company called Tranzeo Wireless.
 
 1. [*Efficient Algorithms for the Exact Computation of the Loss Curve for Video Sources*](https://subirvarma.github.io/GeneralCognitics/Pubs/lc.pdf)
-
+2. [*MPEG-2 over ATM: System Design Issues*](https://subirvarma.github.io/GeneralCognitics/Pubs/lsi1.pdf)
+3. [*Support for ATM Traffic Classes in HFC Networks*](https://subirvarma.github.io/GeneralCognitics/Pubs/lsi2.pdf)
+4. [*Shared Memory Fabric Architecture for Very High Speed ATM Switches*](https://patentimages.storage.googleapis.com/40/79/e2/45015dc95c395c/US5831980.pdf)
+5. [*Design for an ATM Segmentation and Re-Assembly Processing Unit*]([
+](https://patentimages.storage.googleapis.com/cc/b3/23/9ffba61a5e6cbe/US5982749.pdf)
 
 
 ## 2005 - 2014
