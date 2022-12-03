@@ -45,7 +45,7 @@ I joined the IBM Networking Systems Division towards the end of 1990, and my sub
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/Aperto.jpeg)
 
-I became interested in Broadband Access in 1995, and made the move to Silicon Valley where most of the action was happening. This was the era of 28.8 kbps modems, and with the Web exploding in popularity, there was an urgent need to increase the speed to bring Internet Access to the home. I initially worked on Cable Modems at one of the early companies in this field called Hybrid Networks. I also become heavily involved in the IEEE802.14 Cable Modem Standards Group during this period. My work at Hybrid culimnated in the HAS2000 System for which I designed the upstream Medium Access Control protocol. 
+I became interested in Broadband Access in 1995, and made the move to Silicon Valley where most of the action was happening. This was the era of 28.8 kbps modems, and with the Web exploding in popularity, there was an urgent need to increase the speed to bring Internet Access to the home. I initially worked on Cable Modems at one of the early companies in this field called Hybrid Networks. I also become heavily involved in the IEEE802.14 Cable Modem Standards Group during this period. My work at Hybrid culminated in the HAS2000 System for which I designed the upstream Medium Access Control protocol. This was one of the first systems in the Market that enabled both Cable as well as Wireless access at high speeds.
 
 I left Hybrid in 1999 and co-founded a start-up called Aperto Networks which aimed to bring high speed Internet Access to Home and Business users with wireless broadband. Wireless at this time was used mainly for voice, with very poor support for data. The system I designed for Aperto, called [PacketWave](https://www.apertonet.com/) was successfull in bringing to market a high speed wireless pipe that could compete with wired alternatives such as DSL or Cable Modems. This company still exists as part of a Canadian company called Tranzeo Wireless.
 
@@ -66,7 +66,7 @@ I left Hybrid in 1999 and co-founded a start-up called Aperto Networks which aim
 
 The Broadband Wireless industry matured and consolidated after 2005, when the focus shifted to Standards based Products. This spelled the end of the era of startups in this industry. I had a played a role in the IEEE 802.16 Standards Committee while at Aperto. The work of this group was folded into the WiMAX Consortium from 2004 onwards, and WiMAX itself was subsumed into the LTE (or 4G) Cellular Standard by the end of that decade. After Aperto I worked at Sprint for a year, where my focus was on Wireless Broadband deployment issues. After Sprint, I spent most of the following years working on WiMAX and LTE Gateways at a startup called Wichorus.
 
-My focus on career lessened as this decade went on, and I spent more time shpeherding our four kids through high school and into college. Three of them were in good colleges by 2016, and I consider this to be time well spent.
+My focus on career lessened as this decade went on, and I spent more time shepherding our four kids through high school and into college. Three of them were in good colleges by 2016, and I consider this to be time well spent.
 
 
 ## 2015 - Present
