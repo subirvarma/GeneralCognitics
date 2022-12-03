@@ -16,7 +16,7 @@ Thesis Advisor: Armand Makowski
 
 ## Publications
 
-### 1985-1994
+## 1985-1994
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/PhD.jpeg)                      ![](https://subirvarma.github.io/GeneralCognitics/images/IBM.jpeg)
 
@@ -39,7 +39,9 @@ I joined the IBM Networking Systems Division towards the end of 1990, and my sub
 13. [*An Efficient Timer Implementation for HPR*](https://subirvarma.github.io/GeneralCognitics/Pubs/ibm4.pdf)
 14. [*Providing Enhanced QoS Capabilities in BBNS Networks*](https://subirvarma.github.io/GeneralCognitics/Pubs/ibm2.pdf)
 15. [*Traffic Flow Regulation to Gaurantee End to End Delay in Packet Swiched Networks*](https://patentimages.storage.googleapis.com/e8/e1/da/75fee35007f7c1/US5796719.pdf)
-### 1995 - 2004
+
+
+## 1995 - 2004
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/Aperto.jpeg)
 
@@ -51,12 +53,12 @@ I left Hybrid in 1999 and co-founded a start-up called Aperto Networks which aim
 
 
 
-### 2005 - 2014
+## 2005 - 2014
 
 The Broadband Wireless industry matured and consolidated after 2005, when the focus shifted to Standrads based Products. This spelled the end of the era of startups in this industry. I had a played a role in the IEEE 802.16 Standards Committee while at Aperto. The work of this group was folded into the WiMAX Consortium from 2004 onwards, and WiMAX itself was subsumed into the LTE (or 4G) Cellular Standard by the end of that decade. After Aperto I worked at Sprint for a year, where my focus was on Wireless Broadband deployment issues. After Sprint, I spent most of the following years working on WiMAX and LTE Gateways at a startup called Wichorus.
 
 
-### 2015 - Present
+## 2015 - Present
 1. [*Internet Congestion Control,*](https://www.amazon.com/Internet-Congestion-Control-Subir-Varma/dp/0128035838/ref=tmm_pap_swatch_0?_encoding=UTF8&qid=1669339227&sr=8-3) S Varma, Morgan Kaufmann/Elsevier, 2015.
 2. [*Deep Learning*](https://subirvarma.github.io/GeneralCognitics/Books.html)
 3. [*Dynamic Goals Based Wealth Management Using Reinforcement Learning*](https://subirvarma.github.io/GeneralCognitics/Pubs/WM.pdf)
