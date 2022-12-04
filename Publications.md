@@ -5,7 +5,7 @@ title: "Publications"
 
 # This page is under construction
 
-## Publications
+# Publications
 
 ## 1985-1994
 
