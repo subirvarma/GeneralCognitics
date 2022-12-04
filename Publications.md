@@ -70,7 +70,7 @@ I left Hybrid in 1999 and co-founded a start-up called Aperto Networks which aim
 17. [*Co-Channel Interference Management in Next Generation Broadband Wireless Networks*](https://subirvarma.github.io/GeneralCognitics/Pubs/WCA2001.pdf)
 18. [*Early Results from Next Generation Broadband Wireless Systems*](https://subirvarma.github.io/GeneralCognitics/Pubs/WCA2002.pdf)
 19. [*WiMAX Rolls Interop Guidelines for 802.16a*](https://www.eetimes.com/wimax-rolls-interop-guidelines-for-802-16a/), S Varma and D Chang, EE Times, (May, 2003).
-20. [*50 Installations in 22 Countries*](https://subirvarma.github.io/GeneralCognitics/Pubs/Article.pdf)
+20. [*50 Installations in 22 Countries*](https://subirvarma.github.io/GeneralCognitics/Pubs/Article.pdf), Broadband Wireless Business Magazine, (April, 2003).
 
 
 ## 2005 - 2014
