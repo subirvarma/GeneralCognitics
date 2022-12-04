@@ -84,6 +84,8 @@ My focus on career lessened as this decade went on, and I spent more time shephe
 1. [*Technologies for Wireless Gateways*](https://subirvarma.github.io/GeneralCognitics/Pubs/WirelessGW.pdf)
 2. [*Analysis of Architectural Alternatives for Low Cost Infrastructure*](https://subirvarma.github.io/GeneralCognitics/Pubs/spr1.pdf)
 3. [*Performance and Capacity Considerations for Mobile VoIP over WiMAX*](https://subirvarma.github.io/GeneralCognitics/Pubs/spr2.pdf)
+4. [*Comparison of Approaches to Software Defined Networking*](https://subirvarma.github.io/GeneralCognitics/Pubs/SDN.pdf)
+5. [*Am LTE Enhanced Packet Core Architecture based on SDN and OpenFlow*](https://subirvarma.github.io/GeneralCognitics/Pubs/TL1.pdf)
 
 ## 2015 - Present
 
@@ -96,4 +98,4 @@ It turned out that this was a good time to change fields, since the area of Neur
 1. [*Internet Congestion Control,*](https://www.amazon.com/Internet-Congestion-Control-Subir-Varma/dp/0128035838/ref=tmm_pap_swatch_0?_encoding=UTF8&qid=1669339227&sr=8-3) S Varma, Morgan Kaufmann/Elsevier, 2015.
 2. [*Deep Learning*](https://subirvarma.github.io/GeneralCognitics/Books.html)
 3. [*Dynamic Goals Based Wealth Management Using Reinforcement Learning*](https://subirvarma.github.io/GeneralCognitics/Pubs/WM.pdf)
-4. [*Comparison of Approaches to Software Defined Networking*](https://subirvarma.github.io/GeneralCognitics/Pubs/SDN.pdf)
+
