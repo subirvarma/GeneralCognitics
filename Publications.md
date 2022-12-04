@@ -82,7 +82,8 @@ The Broadband Wireless industry matured and consolidated after 2005, when the fo
 My focus on career lessened as this decade went on, and I spent more time shepherding our four kids through high school and into college. Three of them were in good colleges by 2016, and I consider this to be time well spent.
 
 1. [*Technologies for Wireless Gateways*](https://subirvarma.github.io/GeneralCognitics/Pubs/WirelessGW.pdf)
-
+2. [*Analysis of Architectural Alternatives for Low Cost Infrastructure*](https://subirvarma.github.io/GeneralCognitics/Pubs/spr1.pdf)
+3. [*Performance and Capacity Considerations for Mobile VoIP over WiMAX*](https://subirvarma.github.io/GeneralCognitics/Pubs/spr2.pdf)
 
 ## 2015 - Present
 
