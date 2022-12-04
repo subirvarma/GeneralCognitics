@@ -5,6 +5,16 @@ title: "Publications"
 
 # This page is under construction
 
+## Publications
+
+## 1985-1994
+
+![](https://subirvarma.github.io/GeneralCognitics/images/PhD.jpeg) 
+
+The publications during the period 1985-1994 were dominated by the papers that arose out of my MS and PhD Thesis work at the University of Maryland. This work was of a heavily theoretical nature, and had to do with Queueing Theory analysis of types of queues called Fork-Join queues and Resequencing queues.
+
+I joined the IBM Networking Systems Division towards the end of 1990, and my subsequent work was in the area of Computer Networking. I initially worked for a software product called VTAM during which my main concern was making this system more efficient and run faster. Subsequently I transferred to the Advanced Technologies group within IBM in which I worked on Traffic Managemernt and QoS issues. This expertise came in very handy for the next stage of my career, when I applied my knowledge of QoS Scheduling Algorithms and Rate Based Traffic Control to the Broadband Access area.
+
 ## MS Thesis
 
 [*Some Problems in Queueing Systems with Resequencing,*](https://drum.lib.umd.edu/bitstream/handle/1903/4731/MS_87-9.pdf?sequence=1&isAllowed=y)
@@ -13,16 +23,6 @@ Thesis Advisor: Armand Makowski
 
 ## PhD Thesis
 [*Heavy and Light Traffic Approximations for Queues with Synchronization Constraints,*](https://drum.lib.umd.edu/bitstream/handle/1903/5028/PhD_90-2.pdf?sequence=1) University of Maryland, College Park (1990). Thesis Advisor: Armand Makowski
-
-## Publications
-
-## 1985-1994
-
-![](https://subirvarma.github.io/GeneralCognitics/images/PhD.jpeg)                      
-
-The publications during the period 1985-1994 were dominated by the papers that arose out of my MS and PhD Thesis work at the University of Maryland. This work was of a heavily theoretical nature, and had to do with Queueing Theory analysis of types of queues called Fork-Join queues and Resequencing queues.
-
-I joined the IBM Networking Systems Division towards the end of 1990, and my subsequent work was in the area of Computer Networking. I initially worked for a software product called VTAM during which my main concern was making this system more efficient and run faster. Subsequently I transferred to the Advanced Technologies group within IBM in which I worked on Traffic Managemernt and QoS issues. This expertise came in very handy for the next stage of my career, when I applied my knowledge of QoS Scheduling Algorithms and Rate Based Traffic Control to the Broadband Access area.
 
 1. [*Queues with Resequencing, Part 1: Structural Properties*](https://subirvarma.github.io/GeneralCognitics/Pubs/RSQ1.pdf)
 2. [*Queues with Resequencing, Part 2: Heavy Traffic Limits*](https://subirvarma.github.io/GeneralCognitics/Pubs/rsq2.pdf)
