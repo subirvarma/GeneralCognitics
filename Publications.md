@@ -39,8 +39,8 @@ I joined the IBM Networking Systems Division towards the end of 1990, and my sub
 13. [*An Efficient Timer Implementation for HPR*](https://subirvarma.github.io/GeneralCognitics/Pubs/ibm4.pdf)
 14. [*Providing Enhanced QoS Capabilities in BBNS Networks*](https://subirvarma.github.io/GeneralCognitics/Pubs/ibm2.pdf)
 15. [*Traffic Flow Regulation to Gaurantee End to End Delay in Packet Swiched Networks*](https://patentimages.storage.googleapis.com/e8/e1/da/75fee35007f7c1/US5796719.pdf)
-16. [*An Algorithm for Computing the Burstiness Curve for VBR MPEG-2 Video Sources*](https://patentimages.storage.googleapis.com/e8/e1/da/75fee35007f7c1/lc2.pdf)
-17. [*Computation of the Characteristic Curves for Video Sources*](https://patentimages.storage.googleapis.com/e8/e1/da/75fee35007f7c1/lc3.pdf)
+16. [*An Algorithm for Computing the Burstiness Curve for VBR MPEG-2 Video Sources*](https://subirvarma.github.io/GeneralCognitics/Pubs/lc2.pdf)
+17. [*Computation of the Characteristic Curves for Video Sources*](https://subirvarma.github.io/GeneralCognitics/Pubs/lc3.pdf)
 
 
 ## 1995 - 2004
