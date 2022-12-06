@@ -3,6 +3,8 @@ layout: default
 title: "Courses"
 ---
 
+![](https://subirvarma.github.io/GeneralCognitics/images/scu.jpeg) 
+
 I teach courses on Deep Learning and Reinforcement Learning in the Information Systems and Analytics Department, at the Leavey School of
 Business at Santa Clara University.
 
