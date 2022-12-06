@@ -3,7 +3,7 @@ layout: default
 title: "Publications"
 ---
 
-# This page is under construction
+# Publications
 
 ## PhD Thesis
 [*Heavy and Light Traffic Approximations for Queues with Synchronization Constraints,*](https://drum.lib.umd.edu/bitstream/handle/1903/5028/PhD_90-2.pdf?sequence=1) University of Maryland, College Park (1990). Thesis Advisor: Armand Makowski
@@ -14,9 +14,7 @@ title: "Publications"
 University of Maryland, College Park (1987). 
 Thesis Advisor: Armand Makowski
 
-# Publications
-
-## 1985-1994
+# 1985-1994
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/PhD.jpeg) 
 
@@ -43,7 +41,7 @@ I joined the IBM Networking Systems Division towards the end of 1990, and my sub
 17. [*Computation of the Characteristic Curves for Video Sources*](https://subirvarma.github.io/GeneralCognitics/Pubs/lc3.pdf), S Varma, IBM Technical Report, (1994).
 
 
-## 1995 - 2004
+# 1995 - 2004
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/Aperto.jpeg)
 
@@ -73,7 +71,7 @@ I left Hybrid in 1999 and co-founded a start-up called Aperto Networks which aim
 20. [*50 Installations in 22 Countries*](https://subirvarma.github.io/GeneralCognitics/Pubs/Article.pdf), Cover Story, Broadband Wireless Business Magazine, (2003).
 
 
-## 2005 - 2014
+# 2005 - 2014
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/family.JPG)
 
@@ -87,7 +85,7 @@ The Broadband Wireless industry matured and consolidated after 2005, when the fo
 6. [*An LTE Enhanced Packet Core Architecture based on SDN and OpenFlow*](https://subirvarma.github.io/GeneralCognitics/Pubs/TL1.pdf), S Varma, Technical Report, Also see [US Patent 9,173,158](https://patentimages.storage.googleapis.com/3b/3d/3c/9b6053d2c45915/US9173158.pdf), (2012).
 7. [*An OpenFlow Based Cellular Backhaul Network*](https://subirvarma.github.io/GeneralCognitics/Pubs/MobileBH.pdf), S Varma, Technical Report, (2013).
 
-## 2015 - Present
+# 2015 - Present
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/CongestionControl.png)
 
