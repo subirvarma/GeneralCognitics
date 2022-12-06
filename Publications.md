@@ -66,11 +66,11 @@ I left Hybrid in 1999 and co-founded a start-up called Aperto Networks which aim
 13. [*Integrated Self-Optimizing, Multi-Parameter and Multi-Variable, Point to Multipoint Communication System*](https://patentimages.storage.googleapis.com/4e/9c/78/eb511bec192bdf/US6654384.pdf), R Majidi-Ahy, J Hakim, S Varma, US Patent 6,654,384, (2003).
 14. [*An Algorithm for Dynamic Link Adaptation*](https://subirvarma.github.io/GeneralCognitics/Pubs/DLA.pdf), S Varma, R Majidi-Ahy, J Hakim, W Wong, Aperto Networks Technical Report, Also see [US Patent 6,643,322](https://patentimages.storage.googleapis.com/9e/64/b7/55d8ed722c13c4/US6643322.pdf), (2002).
 15. [*Contention State Machine for High Speed Point to Multipoint Networks*](https://subirvarma.github.io/GeneralCognitics/Pubs/Contention.pdf), S Varma, Aperto Networks Technical Report, (2001).
-16. [*Support for Multiple Synchronized Channels Under a Single MAC Layer*](https://subirvarma.github.io/GeneralCognitics/Pubs/MPHY.pdf), S Varma, J Hakim, Aperto Networks Technical Report, Also see [US Patent 7,068,639](https://patentimages.storage.googleapis.com/ac/0f/03/b472e9f9d2b509/US7068639.pdf), (2003)
+16. [*Support for Multiple Synchronized Channels Under a Single MAC Layer*](https://subirvarma.github.io/GeneralCognitics/Pubs/MPHY.pdf), S Varma, J Hakim, Aperto Networks Technical Report, Also see [US Patent 7,068,639](https://patentimages.storage.googleapis.com/ac/0f/03/b472e9f9d2b509/US7068639.pdf), (2003).
 17. [*Co-Channel Interference Management in Next Generation Broadband Wireless Networks*](https://subirvarma.github.io/GeneralCognitics/Pubs/WCA2001.pdf), S Varma Proceedings of the WCA, (2001).
 18. [*Early Results from Next Generation Broadband Wireless Systems*](https://subirvarma.github.io/GeneralCognitics/Pubs/WCA2002.pdf), S Varma, M Tassos, Proceedings of the WCA, (2002).
-19. [*WiMAX Rolls Interop Guidelines for 802.16a*](https://www.eetimes.com/wimax-rolls-interop-guidelines-for-802-16a/), S Varma and D Chang, EE Times, (2003).
-20. [*50 Installations in 22 Countries*](https://subirvarma.github.io/GeneralCognitics/Pubs/Article.pdf), Broadband Wireless Business Magazine, (2003).
+19. [*WiMAX Rolls Interop Guidelines for 802.16a*](https://www.eetimes.com/wimax-rolls-interop-guidelines-for-802-16a/), S Varma, D Chang, EE Times, (2003).
+20. [*50 Installations in 22 Countries*](https://subirvarma.github.io/GeneralCognitics/Pubs/Article.pdf), Cover Story, Broadband Wireless Business Magazine, (2003).
 
 
 ## 2005 - 2014
@@ -79,13 +79,13 @@ I left Hybrid in 1999 and co-founded a start-up called Aperto Networks which aim
 
 The Broadband Wireless industry matured and consolidated after 2005, when the focus shifted to Standards based Products. This spelled the end of the era of startups in this industry. I had a played a role in the IEEE 802.16 Standards Committee while at Aperto, where I helped incorporate parts of the Aperto protocol in the standard.. The work of this group was folded into the WiMAX Consortium from 2004 onwards, and WiMAX itself was subsumed into the LTE (or 4G) Cellular Standard by the end of that decade. After Aperto I worked at Sprint for a year, where my focus was on Wireless Broadband deployment issues. After Sprint, I spent most of the following years working on WiMAX and LTE Gateways at a startup called Wichorus.
 
-1. [*Technologies for Wireless Gateways*](https://subirvarma.github.io/GeneralCognitics/Pubs/WirelessGW.pdf)
-2. [*Analysis of Architectural Alternatives for Low Cost Infrastructure*](https://subirvarma.github.io/GeneralCognitics/Pubs/spr1.pdf)
-3. [*Performance and Capacity Considerations for Mobile VoIP over WiMAX*](https://subirvarma.github.io/GeneralCognitics/Pubs/spr2.pdf)
-4. [*An Introduction to OpenFlow*](https://subirvarma.github.io/GeneralCognitics/Pubs/OpenFlow.pdf)
-5. [*Comparison of Approaches to Software Defined Networking*](https://subirvarma.github.io/GeneralCognitics/Pubs/SDN.pdf)
-6. [*An LTE Enhanced Packet Core Architecture based on SDN and OpenFlow*](https://subirvarma.github.io/GeneralCognitics/Pubs/TL1.pdf)
-7. [*An OpenFlow Based Cellular Backhaul Network*](https://subirvarma.github.io/GeneralCognitics/Pubs/MobileBH.pdf)
+1. [*Proposal for Technologies to be Used in Wireless Gateways*](https://subirvarma.github.io/GeneralCognitics/Pubs/WirelessGW.pdf), S Varma, Technical Report, (1997).
+2. [*Analysis of Architectural Alternatives for Low Cost Infrastructure*](https://subirvarma.github.io/GeneralCognitics/Pubs/spr1.pdf), S Varma, Technical Report, (1998).
+3. [*Performance and Capacity Considerations for Mobile VoIP over WiMAX*](https://subirvarma.github.io/GeneralCognitics/Pubs/spr2.pdf), S Varma, Technical Report, (1998).
+4. [*An Introduction to OpenFlow*](https://subirvarma.github.io/GeneralCognitics/Pubs/OpenFlow.pdf), S Varma, Technical Report, (2011).
+5. [*Comparison of Approaches to Software Defined Networking*](https://subirvarma.github.io/GeneralCognitics/Pubs/SDN.pdf), S Varma, Technical Report, (2011).
+6. [*An LTE Enhanced Packet Core Architecture based on SDN and OpenFlow*](https://subirvarma.github.io/GeneralCognitics/Pubs/TL1.pdf), S Varma, Technical Report, Also see [US Patent 9,173,158](https://patentimages.storage.googleapis.com/3b/3d/3c/9b6053d2c45915/US9173158.pdf), (2012).
+7. [*An OpenFlow Based Cellular Backhaul Network*](https://subirvarma.github.io/GeneralCognitics/Pubs/MobileBH.pdf), S Varma, Technical Report, (2013).
 
 ## 2015 - Present
 
@@ -96,6 +96,6 @@ This has been a decade of Reading, Writing and Teaching. I took leave of the Net
 It turned out that this was a good time to change fields, since the area of Neural Networks was in the process of being raised out of the dead by a new technology called Deep Learning. There were enough connections between Deep Learning and my legacy knowledge of probability and statistics, to decide that this was the right field to start learning about. After spending about a year educating myself (online courses came in very handy), I wrote a book on the topic and also started teaching the subject at Santa Clara University. A slight twist in this story came during pandemic year of 2020, when I launched a Quant Hedge Fund using the knowledge I had gained
 
 1. [*Internet Congestion Control,*](https://www.amazon.com/Internet-Congestion-Control-Subir-Varma/dp/0128035838/ref=tmm_pap_swatch_0?_encoding=UTF8&qid=1669339227&sr=8-3) S Varma, Morgan Kaufmann/Elsevier, 2015.
-2. [*Deep Learning*](https://subirvarma.github.io/GeneralCognitics/Books.html)
-3. [*Dynamic Goals Based Wealth Management Using Reinforcement Learning*](https://subirvarma.github.io/GeneralCognitics/Pubs/WM.pdf)
+2. [*Deep Learning*](https://subirvarma.github.io/GeneralCognitics/Books.html), S Varma, SR Das, Online Book, (2022).
+3. [*Dynamic Goals Based Wealth Management Using Reinforcement Learning*](https://subirvarma.github.io/GeneralCognitics/Pubs/WM.pdf), SR Das, S Varma, Journal of Investement Management, Vol. 18, No. 2, (2020).
 
