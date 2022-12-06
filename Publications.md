@@ -77,9 +77,9 @@ I left Hybrid in 1999 and co-founded a start-up called Aperto Networks which aim
 
 The Broadband Wireless industry matured and consolidated after 2005, when the focus shifted to Standards based Products. This spelled the end of the era of startups in this industry. I had a played a role in the IEEE 802.16 Standards Committee while at Aperto, where I helped incorporate parts of the Aperto protocol in the standard.. The work of this group was folded into the WiMAX Consortium from 2004 onwards, and WiMAX itself was subsumed into the LTE (or 4G) Cellular Standard by the end of that decade. After Aperto I worked at Sprint for a year, where my focus was on Wireless Broadband deployment issues. After Sprint, I spent most of the following years working on WiMAX and LTE Gateways at a startup called Wichorus.
 
-1. [*Proposal for Technologies to be Used in Wireless Gateways*](https://subirvarma.github.io/GeneralCognitics/Pubs/WirelessGW.pdf), S Varma, Technical Report, (1997).
-2. [*Analysis of Architectural Alternatives for Low Cost Infrastructure*](https://subirvarma.github.io/GeneralCognitics/Pubs/spr1.pdf), S Varma, Technical Report, (1998).
-3. [*Performance and Capacity Considerations for Mobile VoIP over WiMAX*](https://subirvarma.github.io/GeneralCognitics/Pubs/spr2.pdf), S Varma, Technical Report, (1998).
+1. [*Proposal for Technologies to be Used in Wireless Gateways*](https://subirvarma.github.io/GeneralCognitics/Pubs/WirelessGW.pdf), S Varma, Technical Report, (2007).
+2. [*Analysis of Architectural Alternatives for Low Cost Infrastructure*](https://subirvarma.github.io/GeneralCognitics/Pubs/spr1.pdf), S Varma, Technical Report, (2008).
+3. [*Performance and Capacity Considerations for Mobile VoIP over WiMAX*](https://subirvarma.github.io/GeneralCognitics/Pubs/spr2.pdf), S Varma, Technical Report, (2008).
 4. [*An Introduction to OpenFlow*](https://subirvarma.github.io/GeneralCognitics/Pubs/OpenFlow.pdf), S Varma, Technical Report, (2011).
 5. [*Comparison of Approaches to Software Defined Networking*](https://subirvarma.github.io/GeneralCognitics/Pubs/SDN.pdf), S Varma, Technical Report, (2011).
 6. [*An LTE Enhanced Packet Core Architecture based on SDN and OpenFlow*](https://subirvarma.github.io/GeneralCognitics/Pubs/TL1.pdf), S Varma, Technical Report, Also see [US Patent 9,173,158](https://patentimages.storage.googleapis.com/3b/3d/3c/9b6053d2c45915/US9173158.pdf), (2012).
