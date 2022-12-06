@@ -36,7 +36,7 @@ I joined the IBM Networking Systems Division towards the end of 1990, and my sub
 10. [*Comparison of Scheduling Strategies in Multi-Processor Systems*](https://subirvarma.github.io/GeneralCognitics/Pubs/fj3.pdf), AM Makowski, TK Phillips, S Varma, Technical Report, University of Maryland, College Park, (1991)
 11. [*Performance Evaluation of Spin Locks in Multi-Processors*](https://subirvarma.github.io/GeneralCognitics/Pubs/ibm1.pdf), S Varma, IBM Technical Report, (1992).
 12. [*A Survey of Performance Issues in Communication Protocol Design and Implementation*](https://subirvarma.github.io/GeneralCognitics/Pubs/ibm3.pdf), S Varma, IBM Technical Report, (1993).
-13. [*An Efficient Timer Implementation for HPR*](https://subirvarma.github.io/GeneralCognitics/Pubs/ibm4.pdf), S Varma, B Rajaraman, IBM Technical Report, (1994).
+13. [*An Efficient Timer Implementation for HPR*](https://subirvarma.github.io/GeneralCognitics/Pubs/ibm4.pdf), S Varma, B Rajaraman, IBM Technical Report, Also see [US Patent 5,838,957](https://scholar.google.com/citations?view_op=view_citation&hl=en&user=BB5KNdsAAAAJ&citation_for_view=BB5KNdsAAAAJ:RYcK_YlVTxYC), (1994).
 14. [*Providing Enhanced QoS Capabilities in BBNS Networks*](https://subirvarma.github.io/GeneralCognitics/Pubs/ibm2.pdf), S Varma, IBM Technical Report, (1994).
 15. [*Traffic Flow Regulation to Gaurantee End to End Delay in Packet Swiched Networks*](https://patentimages.storage.googleapis.com/e8/e1/da/75fee35007f7c1/US5796719.pdf), S Varma, IBM Technical Report, (1994), V Peris, L Georgiadis, R Guerin, S Varma, US Patent 5,796,719, (1998).
 16. [*An Algorithm for Computing the Burstiness Curve for VBR MPEG-2 Video Sources*](https://subirvarma.github.io/GeneralCognitics/Pubs/lc2.pdf), S Varma, IBM Technical Report, (1994).
@@ -51,26 +51,26 @@ I became interested in Broadband Access in 1995, and made the move to Silicon Va
 
 I left Hybrid in 1999 and co-founded a start-up called Aperto Networks which aimed to bring high speed Internet Access to Home and Business users with wireless broadband. Wireless at this time was used mainly for voice, with very poor support for data. The system I designed for Aperto, called [PacketWave](https://www.apertonet.com/) was successfull in bringing to market a high speed wireless pipe that could compete with wired alternatives such as DSL or Cable Modems. This company still exists as part of a Canadian company called Tranzeo Wireless.
 
-1. [*Efficient Algorithms for the Exact Computation of the Loss Curve for Video Sources*](https://subirvarma.github.io/GeneralCognitics/Pubs/lc.pdf)
-2. [*MPEG-2 over ATM: System Design Issues*](https://subirvarma.github.io/GeneralCognitics/Pubs/lsi1.pdf)
-3. [*Support for ATM Traffic Classes in HFC Networks*](https://subirvarma.github.io/GeneralCognitics/Pubs/lsi2.pdf)
-4. [*Shared Memory Fabric Architecture for Very High Speed ATM Switches*](https://patentimages.storage.googleapis.com/40/79/e2/45015dc95c395c/US5831980.pdf)
-5. [*Design for an ATM Segmentation and Re-Assembly Processing Unit*](https://patentimages.storage.googleapis.com/cc/b3/23/9ffba61a5e6cbe/US5982749.pdf)
-6. [*Performance and Buffering Requirements of TCP Applications in Asymmetric Networks*](https://subirvarma.github.io/GeneralCognitics/Pubs/hybrid1.pdf)
-7. [*A Scheduler for Controlling Multiple Upstream Channels Using a Mixture of Contention and Polling*](https://patentimages.storage.googleapis.com/31/28/e7/f3f6d041dafa52/US6275497.pdf)
-8. [*Aperto MAC Layer Enhancements*](https://subirvarma.github.io/GeneralCognitics/Pubs/Overview.pdf)
-9. [*MAC Layer Design Proposal to IEEE802.16*](https://subirvarma.github.io/GeneralCognitics/Pubs/TLC.pdf)
-10. [*The Aperto Networks Link Scheduler*](https://subirvarma.github.io/GeneralCognitics/Pubs/ApertoSched.pdf)
-11. [*Scheduling on Links with Changing Parameters*](https://subirvarma.github.io/GeneralCognitics/Pubs/SP.pdf)
-12. [*An Automatic Re-Transmission (ARQ) Scheme for High Speed Point to Multipoint Links*](https://subirvarma.github.io/GeneralCognitics/Pubs/ARQ .pdf)
-13. [*An Efficient Technique for Controlling Link Parameters*](https://subirvarma.github.io/GeneralCognitics/Pubs/LA .pdf)
-14. [*An Algorithm for Dynamic Link Adaptation*](https://subirvarma.github.io/GeneralCognitics/Pubs/DLA.pdf)
-15. [*Efficient Contention Resolution in the Upstream MAC*](https://subirvarma.github.io/GeneralCognitics/Pubs/Contention.pdf)
-16. [*Support for Multiple Synchronized Channels Under a Single MAC Layer*](https://subirvarma.github.io/GeneralCognitics/Pubs/MPHY.pdf)
-17. [*Co-Channel Interference Management in Next Generation Broadband Wireless Networks*](https://subirvarma.github.io/GeneralCognitics/Pubs/WCA2001.pdf)
-18. [*Early Results from Next Generation Broadband Wireless Systems*](https://subirvarma.github.io/GeneralCognitics/Pubs/WCA2002.pdf)
-19. [*WiMAX Rolls Interop Guidelines for 802.16a*](https://www.eetimes.com/wimax-rolls-interop-guidelines-for-802-16a/), S Varma and D Chang, EE Times, (May, 2003).
-20. [*50 Installations in 22 Countries*](https://subirvarma.github.io/GeneralCognitics/Pubs/Article.pdf), Broadband Wireless Business Magazine, (April, 2003).
+1. [*Efficient Algorithms for the Exact Computation of the Loss Curve for Video Sources*](https://subirvarma.github.io/GeneralCognitics/Pubs/lc.pdf), C Tryfonas, A Varma, S Varma, Proceedings of the International Teletraffic Congress, Vol. 4, Issue 6, (1999).
+2. [*MPEG-2 over ATM: System Design Issues*](https://subirvarma.github.io/GeneralCognitics/Pubs/lsi1.pdf), S Varma, Proceedings of the IEEE COMPCON 96, (1996)
+3. [*Support for ATM Traffic Classes in HFC Networks*](https://subirvarma.github.io/GeneralCognitics/Pubs/lsi2.pdf), S Varma, Proceedings of the IEEE ICC/SUPERCOMM '96, (1996).
+4. [*Shared Memory Fabric Architecture for Very High Speed ATM Switches*](https://patentimages.storage.googleapis.com/40/79/e2/45015dc95c395c/US5831980.pdf), S Varma, T Daniel, US Patent 5,831,980, (1998).
+5. [*Design for an ATM Segmentation and Re-Assembly Processing Unit*](https://patentimages.storage.googleapis.com/cc/b3/23/9ffba61a5e6cbe/US5982749.pdf), T Daniel, D Nattkemper, S Varma, US Patent 5,982,749, (1999).
+6. [*Performance and Buffering Requirements of TCP Applications in Asymmetric Networks*](https://subirvarma.github.io/GeneralCognitics/Pubs/hybrid1.pdf), S Varma, Proceedings of the IEEE INFOCOM '99, (1999).
+7. [*A Scheduler for Controlling Multiple Upstream Channels Using a Mixture of Contention and Polling*](https://patentimages.storage.googleapis.com/31/28/e7/f3f6d041dafa52/US6275497.pdf), S Varma, F Enns, US Patent 6,275,497, (2001).
+8. [*Aperto MAC Layer Enhancements*](https://subirvarma.github.io/GeneralCognitics/Pubs/Overview.pdf), S Varma, Aperto Networks Technical Report, (2002).
+9. [*MAC Layer Design Proposal to IEEE802.16*](https://subirvarma.github.io/GeneralCognitics/Pubs/TLC.pdf), S Varma, Proceedings of the IEEE 802.16 Broadband Wireless Working Group, (2001).
+10. [*The Aperto Networks Link Scheduler*](https://subirvarma.github.io/GeneralCognitics/Pubs/ApertoSched.pdf), S Varma, Aperto Networks Technical Report, Also see [US Patent App. 0038325](https://patentimages.storage.googleapis.com/aa/81/2a/4770e43df89230/US20110038325A1.pdf), (2002).
+11. [*Scheduling on Links with Changing Parameters*](https://subirvarma.github.io/GeneralCognitics/Pubs/SP.pdf), S Varma, Aperto Networks Technical Report, Also see [US Patent 7,139,251](https://patentimages.storage.googleapis.com/38/ba/00/01be9ae44bbb68/US7139251.pdf), (2000).
+12. [*An Automatic Re-Transmission (ARQ) Scheme for High Speed Point to Multipoint Links*](https://subirvarma.github.io/GeneralCognitics/Pubs/ARQ .pdf), S Varma, Aperto Networks Technical Report, Also see [US Patent 7,099,289](https://patentimages.storage.googleapis.com/7a/f7/e1/d3e733660abdc1/US7099289.pdf), (2000).
+13. 
+14. [*An Algorithm for Dynamic Link Adaptation*](https://subirvarma.github.io/GeneralCognitics/Pubs/DLA.pdf), S Varma, Aperto Networks Technical Report, Also see [US Patent 6,643,322](https://patentimages.storage.googleapis.com/9e/64/b7/55d8ed722c13c4/US6643322.pdf), (2002).
+15. [*Contention State Machine for High Speed Point to Multipoint Networks*](https://subirvarma.github.io/GeneralCognitics/Pubs/Contention.pdf), S Varma, Aperto Networks Technical Report, (2001).
+16. [*Support for Multiple Synchronized Channels Under a Single MAC Layer*](https://subirvarma.github.io/GeneralCognitics/Pubs/MPHY.pdf), S Varma, J Hakim, Aperto Networks Technical Report, Also see [US Patent 7,068,639](https://patentimages.storage.googleapis.com/ac/0f/03/b472e9f9d2b509/US7068639.pdf), (2003)
+17. [*Co-Channel Interference Management in Next Generation Broadband Wireless Networks*](https://subirvarma.github.io/GeneralCognitics/Pubs/WCA2001.pdf), Svar,a Proceedings of the WCA, (2001).
+18. [*Early Results from Next Generation Broadband Wireless Systems*](https://subirvarma.github.io/GeneralCognitics/Pubs/WCA2002.pdf), S Varma, M Tassos, Proceedings of the WCA, (2002).
+19. [*WiMAX Rolls Interop Guidelines for 802.16a*](https://www.eetimes.com/wimax-rolls-interop-guidelines-for-802-16a/), S Varma and D Chang, EE Times, (2003).
+20. [*50 Installations in 22 Countries*](https://subirvarma.github.io/GeneralCognitics/Pubs/Article.pdf), Broadband Wireless Business Magazine, (2003).
 
 
 ## 2005 - 2014
