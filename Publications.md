@@ -24,23 +24,23 @@ The publications during the period 1985-1994 were dominated by the papers that a
 
 I joined the IBM Networking Systems Division towards the end of 1990, and my subsequent work was in the area of Computer Networking. I initially worked for a software product called VTAM during which my main concern was making this system more efficient and run faster. Subsequently I transferred to the Advanced Technologies group within IBM in which I worked on Traffic Managemernt and QoS issues. This expertise came in very handy for the next stage of my career, when I applied my knowledge of QoS Scheduling Algorithms and Rate Based Traffic Control to the Broadband Access area.
 
-1. [*Queues with Resequencing, Part 1: Structural Properties*](https://subirvarma.github.io/GeneralCognitics/Pubs/RSQ1.pdf)
-2. [*Queues with Resequencing, Part 2: Heavy Traffic Limits*](https://subirvarma.github.io/GeneralCognitics/Pubs/rsq2.pdf)
-3. [*Queues with Resequencing, Part 3: Light Traffic Limits and Interpolation Approximations*](https://subirvarma.github.io/GeneralCognitics/Pubs/rsq3.pdf)
-4. [*A Matrix Geometric Solution to a Resequencing Problem*](https://subirvarma.github.io/GeneralCognitics/Pubs/rsq4.pdf)
-5. [*Optimal Allocation of Customers in a Two Server Queue with Resequencing*](https://subirvarma.github.io/GeneralCognitics/Pubs/rsq5.pdf)
-6. [*Performance Evaluation of the TIme Stamp Ordering Algorithm in a Distributed Database*](https://subirvarma.github.io/GeneralCognitics/Pubs/tso.pdf)
-7. [*Interpolation approximations for symmetric fork-join queues,*](https://drum.lib.umd.edu/bitstream/handle/1903/5303/TR_92-122.pdf?sequence=1) S Varma, AM Makowski, Performance Evaluation 20 (1-3), 245-265, 1994.
-8. [*Approximations for Acyclic Fork-Join Networks*](https://subirvarma.github.io/GeneralCognitics/Pubs/fj1.pdf)
-9. [*Heavy Traffic Limits for Fork-Join Queues*](https://subirvarma.github.io/GeneralCognitics/Pubs/fj2.pdf)
-10. [*Comparison of Scheduling Strategies in Multi-Processor Systems*](https://subirvarma.github.io/GeneralCognitics/Pubs/fj3.pdf)
-11. [*Performance Evaluation of Spin Locks in Multi-Processors*](https://subirvarma.github.io/GeneralCognitics/Pubs/ibm1.pdf)
-12. [*A Survey of Performance Issues in Communication Protocol Design and Implementation*](https://subirvarma.github.io/GeneralCognitics/Pubs/ibm3.pdf)
-13. [*An Efficient Timer Implementation for HPR*](https://subirvarma.github.io/GeneralCognitics/Pubs/ibm4.pdf)
-14. [*Providing Enhanced QoS Capabilities in BBNS Networks*](https://subirvarma.github.io/GeneralCognitics/Pubs/ibm2.pdf)
-15. [*Traffic Flow Regulation to Gaurantee End to End Delay in Packet Swiched Networks*](https://patentimages.storage.googleapis.com/e8/e1/da/75fee35007f7c1/US5796719.pdf)
-16. [*An Algorithm for Computing the Burstiness Curve for VBR MPEG-2 Video Sources*](https://subirvarma.github.io/GeneralCognitics/Pubs/lc2.pdf)
-17. [*Computation of the Characteristic Curves for Video Sources*](https://subirvarma.github.io/GeneralCognitics/Pubs/lc3.pdf)
+1. [*Queues with Resequencing, Part 1: Structural Properties*](https://subirvarma.github.io/GeneralCognitics/Pubs/RSQ1.pdf), S Varma, AM Makowski, Technical Report, University of Maryland, College Park, (1987).
+2. [*Queues with Resequencing, Part 2: Heavy Traffic Limits*](https://subirvarma.github.io/GeneralCognitics/Pubs/rsq2.pdf), S Varma, AM Makowski, Technical Report, University of Maryland, College Park, (1990).
+3. [*Queues with Resequencing, Part 3: Light Traffic Limits and Interpolation Approximations*](https://subirvarma.github.io/GeneralCognitics/Pubs/rsq3.pdf), S Varma, AM Makowski, Technical Report, University of Maryland, College Park, (1990).
+4. [*A Matrix Geometric Solution to a Resequencing Problem*](https://subirvarma.github.io/GeneralCognitics/Pubs/rsq4.pdf), S Varma, Performance Evaluation, Vol 12,Issue 2, (1991).
+5. [*Optimal Allocation of Customers in a Two Server Queue with Resequencing*](https://subirvarma.github.io/GeneralCognitics/Pubs/rsq5.pdf), S Varma, IEEE Transactions on Automatic Control, Vol 36, Issue 11, (1991)
+6. [*Performance Evaluation of the TIme Stamp Ordering Algorithm in a Distributed Database*](https://subirvarma.github.io/GeneralCognitics/Pubs/tso.pdf), S Varma, IEEE Transactions on Parallel and Distributed Systems, Vol. 4, Issue 6, (1993).
+7. [*Interpolation approximations for symmetric fork-join queues,*](https://drum.lib.umd.edu/bitstream/handle/1903/5303/TR_92-122.pdf?sequence=1) S Varma, AM Makowski, Performance Evaluation Vol. 20 (1-3), 245-265, (1994).
+8. [*Approximations for Acyclic Fork-Join Networks*](https://subirvarma.github.io/GeneralCognitics/Pubs/fj1.pdf), S Varma, AM Makowski, Technical Report, University of Maryland, College Park, (1990).
+9. [*Heavy Traffic Limits for Fork-Join Queues*](https://subirvarma.github.io/GeneralCognitics/Pubs/fj2.pdf), S Varma, AM Makowski, Technical Report, University of Maryland, College Park, (1990).
+10. [*Comparison of Scheduling Strategies in Multi-Processor Systems*](https://subirvarma.github.io/GeneralCognitics/Pubs/fj3.pdf), AM Makowski, TK Phillips, S Varma, Technical Report, University of Maryland, College Park, (1991)
+11. [*Performance Evaluation of Spin Locks in Multi-Processors*](https://subirvarma.github.io/GeneralCognitics/Pubs/ibm1.pdf), S Varma, IBM Technical Report, (1992).
+12. [*A Survey of Performance Issues in Communication Protocol Design and Implementation*](https://subirvarma.github.io/GeneralCognitics/Pubs/ibm3.pdf), S Varma, IBM Technical Report, (1993).
+13. [*An Efficient Timer Implementation for HPR*](https://subirvarma.github.io/GeneralCognitics/Pubs/ibm4.pdf), S Varma, B Rajaraman, IBM Technical Report, (1994).
+14. [*Providing Enhanced QoS Capabilities in BBNS Networks*](https://subirvarma.github.io/GeneralCognitics/Pubs/ibm2.pdf), S Varma, IBM Technical Report, (1994).
+15. [*Traffic Flow Regulation to Gaurantee End to End Delay in Packet Swiched Networks*](https://patentimages.storage.googleapis.com/e8/e1/da/75fee35007f7c1/US5796719.pdf), S Varma, IBM Technical Report, (1994), V Peris, L Georgiadis, R Guerin, S Varma, US Patent 5,796,719, (1998).
+16. [*An Algorithm for Computing the Burstiness Curve for VBR MPEG-2 Video Sources*](https://subirvarma.github.io/GeneralCognitics/Pubs/lc2.pdf), S Varma, IBM Technical Report, (1994).
+17. [*Computation of the Characteristic Curves for Video Sources*](https://subirvarma.github.io/GeneralCognitics/Pubs/lc3.pdf), S Varma, IBM Technical Report, (1994).
 
 
 ## 1995 - 2004
