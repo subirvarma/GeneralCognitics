@@ -67,7 +67,7 @@ I left Hybrid in 1999 and co-founded a start-up called Aperto Networks which aim
 14. [*An Algorithm for Dynamic Link Adaptation*](https://subirvarma.github.io/GeneralCognitics/Pubs/DLA.pdf), S Varma, Aperto Networks Technical Report, Also see [US Patent 6,643,322](https://patentimages.storage.googleapis.com/9e/64/b7/55d8ed722c13c4/US6643322.pdf), (2002).
 15. [*Contention State Machine for High Speed Point to Multipoint Networks*](https://subirvarma.github.io/GeneralCognitics/Pubs/Contention.pdf), S Varma, Aperto Networks Technical Report, (2001).
 16. [*Support for Multiple Synchronized Channels Under a Single MAC Layer*](https://subirvarma.github.io/GeneralCognitics/Pubs/MPHY.pdf), S Varma, J Hakim, Aperto Networks Technical Report, Also see [US Patent 7,068,639](https://patentimages.storage.googleapis.com/ac/0f/03/b472e9f9d2b509/US7068639.pdf), (2003)
-17. [*Co-Channel Interference Management in Next Generation Broadband Wireless Networks*](https://subirvarma.github.io/GeneralCognitics/Pubs/WCA2001.pdf), Svar,a Proceedings of the WCA, (2001).
+17. [*Co-Channel Interference Management in Next Generation Broadband Wireless Networks*](https://subirvarma.github.io/GeneralCognitics/Pubs/WCA2001.pdf), S Varma Proceedings of the WCA, (2001).
 18. [*Early Results from Next Generation Broadband Wireless Systems*](https://subirvarma.github.io/GeneralCognitics/Pubs/WCA2002.pdf), S Varma, M Tassos, Proceedings of the WCA, (2002).
 19. [*WiMAX Rolls Interop Guidelines for 802.16a*](https://www.eetimes.com/wimax-rolls-interop-guidelines-for-802-16a/), S Varma and D Chang, EE Times, (2003).
 20. [*50 Installations in 22 Countries*](https://subirvarma.github.io/GeneralCognitics/Pubs/Article.pdf), Broadband Wireless Business Magazine, (2003).
