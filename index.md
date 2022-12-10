@@ -1,6 +1,25 @@
 ---
-title: About this Blog
+title: Blog
 ---
+
+![](https://subirvarma.github.io/GeneralCognitics/images/zion.png)
+
+# Welcome to my Home Page!
+
+You will find the following here:
+
+[Books](https://subirvarma.github.io/GeneralCognitics/Books.html) that I have written
+
+[Lecture Material](https://subirvarma.github.io/GeneralCognitics/Courses.html) from Courses that I teach
+
+A compilation of my [Publications](https://subirvarma.github.io/GeneralCognitics/Publications.html)
+
+A Blog [here](https://subirvarma.github.io/GeneralCognitics/) (and also down below)
+
+Happy Reading!
+
+
+# Blog
 
 Welcome to my blog! After a lot of procrastination I finally figured out how to use github pages for blogging, not only is it free but also allows me to
 write blogs containing math equations. The latter feature is especially useful since I do plan to blog a lot about topics in Science and Technology.
