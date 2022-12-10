@@ -1,5 +1,5 @@
 ---
-title: Welcom To My Home Page
+title: Welcome To My Home Page
 ---
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/zion.jpeg)
