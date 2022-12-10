@@ -2,7 +2,7 @@
 title: Blog
 ---
 
-![](https://subirvarma.github.io/GeneralCognitics/images/zion.png)
+![](https://subirvarma.github.io/GeneralCognitics/images/zion.jpeg)
 
 # Welcome to my Home Page!
 
