@@ -1,10 +1,8 @@
 ---
-title: Blog
+title: Welcom To My Home Page
 ---
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/zion.jpeg)
-
-# Welcome to my Home Page!
 
 You will find the following here:
 
