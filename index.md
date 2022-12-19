@@ -12,7 +12,7 @@ You will find the following here:
 
 A compilation of my [Publications](https://subirvarma.github.io/GeneralCognitics/Publications.html)
 
-Books I have [read](https://subirvarma.github.io/GeneralCognitics/Publications.html)
+Books I have [read](https://subirvarma.github.io/GeneralCognitics/Reading.html)
 (This part is still under construction, I will be adding more books and also short descriptions)
 
 A Blog ([here](https://subirvarma.github.io/GeneralCognitics/) and also down below)
