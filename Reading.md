@@ -18,3 +18,8 @@ title: "Readings"
 ![](https://subirvarma.github.io/GeneralCognitics/images/IMG_8797.jpg) 
 ![](https://subirvarma.github.io/GeneralCognitics/images/IMG_8798.jpg) 
 ![](https://subirvarma.github.io/GeneralCognitics/images/IMG_8799.jpg) 
+![](https://subirvarma.github.io/GeneralCognitics/images/book1.png) 
+![](https://subirvarma.github.io/GeneralCognitics/images/book2.png) 
+![](https://subirvarma.github.io/GeneralCognitics/images/book3.png) 
+![](https://subirvarma.github.io/GeneralCognitics/images/book4.png) 
+![](https://subirvarma.github.io/GeneralCognitics/images/book5.png) 
