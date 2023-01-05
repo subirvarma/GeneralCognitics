@@ -39,7 +39,7 @@ Just as NLP models can be improved by allowing better interactions between all t
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/trans1.png)
 
-*Figure 3*
+*Figure 3*: From [Stanford CS224N Lectures](https://www.youtube.com/playlist?list=PLoROMvodv4rOSH4v6133s9LFPRHjEmbmJ)
 
 When the concept of Attention was introduced into Deep Learning by [Bahdanau, Cho, Bengio](https://arxiv.org/abs/1409.0473), it was in the context of the Encoder-Decoder architecture, with Attention being used so that the words in the Encoder can influence the representation of words in the Decoder. This was referred to as **Cross Attention**. We are going to take this idea and modify it in a way such that the Attention mechanism can be used to allow words in the same sentence to modify each others representations, which is called **Self Attention**. 
 
@@ -57,7 +57,7 @@ The existence of so many different ways of processing vector sequences shows tha
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/rnn87.png)
 
-*Figure 4*
+*Figure 4*: From [The Illustrated Transformer](http://jalammar.github.io/illustrated-transformer/)
 
 A Transformer consists of a set of identical modules that are stacked in a serial fashion. Note that each module has its own set of parameters. The block level structure of each module, as shown in Figure 4(a), consists of a Self-Attention layer followed by a Feed Forward layer. Part (b) of Figure 4 show the progress of an input sequence (of vectors) as it traverses a module. The input $(x_1,x_2)$ is first processed by the Self Attention layer and results in the sequence $(z_1,z_2)$. This is further processed by the Dense Feed Forward Layer and the sequence $(r_1,r_2)$ is the final output for this layer. Note that each member of the sequence is propagated separately through the Self Attention and Dense layers and weight parameters are shared across all of them (each Encoder Layer has its own set of parameters though). The calculations for $x_1$ as it goes up the stack are independent from those for $x_2$, so both can proceed in parallel.
 
@@ -65,7 +65,7 @@ Lets first examine the Self Attention layer in greater detail:
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/trans2.png)
 
-*Figure 5*
+*Figure 5*: From [Speech and Language Processing](https://web.stanford.edu/~jurafsky/slp3/)
 
 In Figure 5 we show how to go from the input $X_3$ to the output $Z_3$ of the Self Attention layer. Note that $Z_3$ is a measure of the Self Attention that $X_3$ pays to the other vectors $(X_1, X_2)$ in the input sequence. The simplest way to compute the Self Attention between two vectors is by taking their dot product, and this was the technique used for RNN based Cross Attention in the prior chapter. If we carry out this procedure, then the Self Attention between vectors $X_i$ and $X_j$ is given by $A_{ij} = X_i\cdot X_j$. These numbers can then be converted into weights 
 
@@ -127,7 +127,7 @@ Note that the output vector $Z_i$ is the $i^{th}$ row of this matrix.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/trans3.png)
 
-*Figure 6*
+*Figure 6*: From [Speech and Language Processing](https://web.stanford.edu/~jurafsky/slp3/)
 
 The Attention weight $w_{ij}$ for the $i^{th}$ input $X_i$ is a measure of how important the $j^{th}$ input $X_j$ is in the calculation of the Self-Attention $Z_i$, which is the new representation for $X_i$. Note that this captures only one set of dependencies between the $i^{th}$ input and all the other inputs. Just as an image has multiple patterns whose capture requires multiple ConvNet filters, the Transformer model uses multiple Attention weights (and thus multiple Self-Attention values) in order to capture other dependencies between the $i^{th}$ and the other inputs. 
 
@@ -143,7 +143,7 @@ If the matrix $W^O$ is chosen to be of dimension $d\times d$, then this results 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/rnn101.png)
 
-*Figure 7*
+*Figure 7*: From [The Illustrated Transformer](http://jalammar.github.io/illustrated-transformer/)
 
 Figure 7 shows a complete Encoder Layer. In addition to the Self-Attention Layer, it includes the following:
 
@@ -179,7 +179,7 @@ The output of this layer is subjected to another round of Residual connection + 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/trans23.png)
 
-*Figure 8*
+*Figure 8*: From [The Illustrated Transformer](http://jalammar.github.io/illustrated-transformer/)
 
 The set of vectors $(R_1,R_2,...,R_N)$ are then passed through another Self Attention + Dense layer, as shown in Figure 8, and this process is repeated $P$ times to finally generate the output of the Encoder Block.
 
@@ -199,7 +199,7 @@ $$R = LayerNorm(Z + DFN(Z))$$
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/trans6.png)
 
-*Figure 10*
+*Figure 10*: From [Speech and Language Processing](https://web.stanford.edu/~jurafsky/slp3/)
 
 The Transformer architecture was originally designed to process sequences, however note that the desciption provided so far works the same regardless of the order of the input data (you can see this for yourself by shuffling the input sequence and running it through the model). This is unlike RNN/LSTMs or even 1D ConvNets, where the order of the input changes the corresponding output. Hence we need to make some changes to the Transformer design in order to make it sensitive to the order of the input sequence. The original Transformer paper had a scheme whereby another pre-computed sequence was added to each input sequence, such that the second sequence was sensitive to the order. This was done by making the vector elements of the second sequence a function of sines and cosines with varying frequencies. 
 
@@ -219,7 +219,7 @@ Note that the Transformer model used had multiple layers, with multiple heads in
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/rnn99.png)
 
-*Figure 11*
+*Figure 11*: From [De-Constructing BERT Distilling Patterns](https://towardsdatascience.com/deconstructing-bert-distilling-6-patterns-from-100-million-parameters-b49113672f77)
 
 There are some interesting patterns that emerge in the self-attention patterns of this Transformer:
 
@@ -235,7 +235,7 @@ Hence the usual backward and forward recurrent connections emerge naturally in a
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/trans25.png)
 
-*Figure 12*
+*Figure 12*: From [De-Constructing BERT Distilling Patterns](https://towardsdatascience.com/deconstructing-bert-distilling-6-patterns-from-100-million-parameters-b49113672f77)
 
 Figure 12 shows all the different attention patterns that exist in a trained Transformer Encoder with 6 layers, with 12 heads in each layer. We can see that the model is able to capture a wide variety of Attention patterns, with some of the patterns repeating from layer to layer (analogous to a multi-layer RNN). There is also a "Null" pattern that exists especially in the higher layers, with attention focused on the SEP or CLS tokens. This pattern seems to indicate that the model has not found a meaningful pattern for a Attention Head, so is defaulting to the Null pattern.
 
@@ -304,13 +304,13 @@ Language Models using Transformers have made a big impact on NLP in the last few
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/trans7.png)
 
-*Figure 16*
+*Figure 16*: From [Speech and Language Processing](https://web.stanford.edu/~jurafsky/slp3/)
 
 The main difference between the Transformer used as Language Model, and the Transformer described earlier in this chapter, is that when a sentence is fed into a Language Model Transformer during training, then the Attention calculations for word $x_i$ cannot take into account words that occur after $x_i$. This is illustrated in Figure 16: For example the Attention calculations for $x_3$ can take into account $x_3$ itself as well as $x_1$ and $x_2$, but not $x_4$ and $x_5$. 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/trans8.png)
 
-*Figure 17*
+*Figure 17*: From [Speech and Language Processing](https://web.stanford.edu/~jurafsky/slp3/)
 
 In order implement this restriction, we make the following change to the Transformer model: Recall that the output of the Self Attention layer is computed using the formula
 
@@ -322,7 +322,7 @@ The mathematical operation described above is called masking, and is implemented
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/trans9.png)
 
-*Figure 18*
+*Figure 18*: From [Speech and Language Processing](https://web.stanford.edu/~jurafsky/slp3/)
 
 Figure 18 shows a Transformer based Language Model during the Training phase. Note that the entire training sentence can be fed into the model in one shot once we have the masking in place. This is in contrast to RNN/LSTMs in which words had to fed in sequence, one at a time. Ths figure also shows that the labels used for each word, is simply the following word in the sequence.
 
@@ -330,7 +330,7 @@ Figure 18 shows a Transformer based Language Model during the Training phase. No
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/trans10.png)
 
-*Figure 19*
+*Figure 19*: From [Speech and Language Processing](https://web.stanford.edu/~jurafsky/slp3/)
 
 While Figure 18 showed a Transformer based Language Model during training, Figure 19 shows the model being used to generate new text, once it has been trained. The model is prepped using a sentence starter <*so long and thanks for*>, and is reponsible generating the words that follow. Note that the model operates in an auto-regressive manner, with each generated word fed back into the model in order to generate the next word.
 
@@ -338,7 +338,7 @@ While Figure 18 showed a Transformer based Language Model during training, Figur
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/trans11.png)
 
-*Figure 20*
+*Figure 20*: From [Speech and Language Processing](https://web.stanford.edu/~jurafsky/slp3/)
 
 Figure 20 shows how a Transformer based Language Model can be used to do Text Summarization:
 
@@ -354,13 +354,13 @@ So far we have described Encoder only Transformers, and showed that they can be 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/trans12.png)
 
-*Figure 21*
+*Figure 21*: From [Speech and Language Processing](https://web.stanford.edu/~jurafsky/slp3/)
 
 Figure 21 shows the Encoder Decoder Transformer being used to do Machine Translation. It shows that whereas the Input sentence is fed into the Encoder in one shot, the output translation is generated by the Decoder one word at a time (same as in a Language Model). Hence the first vector fed into the Decoder is the token for Start of Sentence "S", and in response it generate the first word "llego". In stage 2, the the tokens for "S" and "llego" are fed into the decoder which in turn leads to the generation of the word "la", and so on until the End of Sentence token is generated. The figure shows the test phase of the model in which the words generated by the Decoder are fed back into it as input in an Auto Regressive fashion. During the test phase the translated phrase is fed into the decoder after passing it through a Mask in order to hide future words.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/trans13.png)
 
-*Figure 22*
+*Figure 22*: From [Speech and Language Processing](https://web.stanford.edu/~jurafsky/slp3/)
 
 Figure 22 delves deeper into the Encoder Decoder architecture and shows the following:
 
@@ -394,13 +394,13 @@ Hence it should be possible to get better word representations by taking into ac
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/trans14.png)
 
-*Figure 23*
+*Figure 23*: From [Speech and Language Processing](https://web.stanford.edu/~jurafsky/slp3/)
 
 The novelty in the BERT model was the technique used for training the system, which is illustrated in Figure 24. Instead of trying to predict the next word in the sequence, BERT tries to predict missing words, which can occur anywhere in the sequence. The actual scheme used is a little more sophisticated, and works as follows: Up to 15% of the words in a sequence are randomly selected for prediction. Out of these, 80% of the words are replaced by a special MASK token, 10% of the words are left unchanged and the remaining 10% are replaced by a randomly selected word. For example in the figure below, the words 'long' and 'thanks' are replaced by the MASK token, while the word 'apricot' is replaced by 'the'. This scheme was designed to mitigate the mismatch between training sequences and the sequences used during fine-tuning, since the latter do not use the MASK token. The usual Cross Entropy Loss is used to do the prediction for the selected words.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/trans15.png)
 
-*Figure 24*
+*Figure 24*: From [Speech and Language Processing](https://web.stanford.edu/~jurafsky/slp3/)
 
 In addition to the masked word prediction method, there was another technique that was proposed in a model called SpanBERT, which tries to predict words located within a span of missing words, as shown in Figure 25. Since several Language Modeling tasks involve identification or classification of parts of a sentence, this training technique has been shown to improve their performance. The span based training works as follows: The length of the span is chosen randomly by sampling from a geometric distribution, and is limited to 10 words or less. The start of the span is randomly selected using a uniform distribution. The Loss Function used to predict a word occuring within the span is the sum of two loss functions:
 
@@ -411,14 +411,14 @@ Once again up to 15% of the words are selected for prediction within a sequence,
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/trans16.png)
 
-*Figure 25*
+*Figure 25*: From [Speech and Language Processing](https://web.stanford.edu/~jurafsky/slp3/)
 
 BERT's training so far has focused on obtaining the best representation for a word as a function of the other words in the sequence. However there are certain NLP tasks that have to do with finding relationships between pairs of sentences. In order to improve BERT's performance for these tasks, the following additional training scheme was added: The model is fed with two sentences, and it is tasked to determine whether the second sentence follows the first (see Fig 26). The training dataset consists of 50% samples in which two successive sentences are fed into the model, while the remaining 50% consist of pairs of un-related sentences. In order to facilitate this training, the following changes are made: Two additional tokens CLS and SEP are added to the input, with CLS pre-pended to the first sentence and SEP inserted after the first sentence and also after the end of the second sentence. In addition to the Word Token and Positional Embeddings, another embedding called the Segment embedding is added which indicates whether a word is part of the first or second sentence.
 The output vector corresponding to the CLS token is used for doing the sentence classification. This vector is passed through a dense layer W_NSP followed by a binary softmax based classifier.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/trans29.png)
 
-*Figure 26*
+*Figure 26*: From [Speech and Language Processing](https://web.stanford.edu/~jurafsky/slp3/)
 
 One of the important benefits of Transformer based models such as BERT is that after being trained using self-supervised learning methods, they can be tuned to individual tasks using supervised learning. These tasks typically have much smaller training datasets. In order to train the model, the model is initialized with the parameters of a fully trained self supervised system, and then further fine-tuned in a supervised manner using the smaller dataset. This is an example of **Transfer Learning** which we encountered earlier with ConvNet based Image Processing systems. Until the advent of Transformers, earlier sequence processing models such as RNN/LSTMs were not very good at Transfer Learning, so this has been an important advance in the state of the art.
 
@@ -426,7 +426,7 @@ Figure 27 shows how BERT can be used to do sentiment classification using a pre-
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/trans17.png)
 
-*Figure 27*
+*Figure 27*: From [Speech and Language Processing](https://web.stanford.edu/~jurafsky/slp3/)
 
 ## Image Processing using Transformers
 
@@ -438,13 +438,13 @@ The finding that Transformers are good at Image Processing opens up the possibil
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/trans18.png)
 
-*Figure 28*
+*Figure 28*: From [Vision Transformers](https://arxiv.org/abs/2010.11929)
 
 The main idea behind ViT is quite simple and illustrated in Figure 28. Given an input image X of shape $R^{H\times W\times C}$, where $C$ is the number of channels and $H$ and $W$ are the dimensions of the image in pixels, sub-divide it into a sequence of flattened 2D patch vectors, which is of shape $R^{N\times P^2 C}$. Each of the patch vectors is obtained by dividing the original image into image patches of size $P\times P\times C$ as shown in the figure, so that there are $N = {HW\over P^2}$ image patches in all. Each image patch is then flattened to create $N$ patch vectors of size $P^2 C$. These patch vectors are then sent through a learnable embedding layer, and a position embedding is added to them, to create the input into the model. The Transformer model itself is exactly the same as was used for NLP.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/trans19.png)
 
-*Figure 29*
+*Figure 29*: From [Vision Transformers](https://arxiv.org/abs/2010.11929)
 
 In order to test this new model, the researchers created three versions of ViT, as shown in Figure 29, with increasing size. We use the notation ViT-L/16 to refer to the "Large" variant, with  16×16  input patch size. Note that decreasing the patch size increases the sequence length into the model, thus making it more computationally intensive.
 
@@ -452,7 +452,7 @@ For comparisons to ConvNets, the researchers used slightly modified versions of 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/trans20.png)
 
-*Figure 30*
+*Figure 30*: From [Vision Transformers](https://arxiv.org/abs/2010.11929)
 
 Figure 30 has a comparison of the Transformer models (the colored circles) as well a range of ConvNet models of varying size (in the shaded area). The performance numbers were generated by pre-training the models using the ImageNet dataset (1.3M images with 1K classes), the ImageNet-21 k dataset (14M images with 21K classes) and the JFT-300M dataset (303M images with 18K classes), and then fine tuning it on ImageNet.
 
@@ -462,12 +462,12 @@ The researchers also showed that the compute resources required for training ViT
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/trans21.png)
 
-*Figure 31*
+*Figure 31*: From [Vision Transformers](https://arxiv.org/abs/2010.11929)
 
 Figure 32 illustrates another very important aspect of ViT models: It is a plot of the Attention weights $w_{ij}$ in the ViT model, as a function of the Network Depth (or layer index). It shows the extent to which the patch vector at any particular position, is influenced by other patch vectors in the sequence. The plot illustrates that in the early layers, the query patch is already paying attention to patches that are far it, indeed it seems to be paying attention across a broad spectrum of all the patches in the sequence. In later layers on the other hand, the Attention seems to focused more on patches that are further away. This behavior is in contrast to that in ConvNets, in which the convulation in the early layers is influnced solely by pixels that are in the immediate neighborhood. As a result of this, the ViT is able to take into account aspects of the input image that are located further away from the query patch, thus allowing it to detect global patterns in the image that are invisible to the ConvNet. This is especially useful in applications such as object detection, where a global view can be very useful.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/trans22.png)
 
-*Figure 32*
+*Figure 32*: From [Vision Transformers](https://arxiv.org/abs/2010.11929)
 
 
