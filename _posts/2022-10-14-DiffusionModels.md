@@ -27,7 +27,7 @@ Our objective in this blog post is to give a rigorous description of Diffusion M
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/gen1.png)
 
-*Figure 1*
+*Figure 1* From [CVPR 2022 Tutorial on Diffusion Models](https://cvpr2022-tutorial-diffusion-models.github.io/)
 
 A high level view of Diffusion Models is shown in Figure 1. A fully trained model generates images by taking a Latent Variable consisting of random noise data ${\bf z}$ to the right of the figure, and gradually 'de-noises' it in multiple stages as shown by the dotted arrows moving from right to left (typically 1000 stages in large networks such as DALL-E-2). This is done by feeding the output of stage $t$ to stage $t-1$, until we get to the final stage resulting in the image ${\bf x_0}$. This is illustrated in Figure 2, with the middle row illustrating the de-noising process starting from random data in stage $T$, followed by partially re-constructed image at stage ${T\over 2}$ and the final image at stage $0$. 
 
@@ -35,19 +35,19 @@ Diffusion Models are trained by running the process just described in the opposi
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/gen2.png)
 
-*Figure 2*
+*Figure 2* From [Sohl-Dickstein](https://arxiv.org/pdf/1503.03585.pdf)
 
 ## Latent Variables and the ELBO Bound
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/gen11.png)
 
-*Figure 3*
+*Figure 3* From [Stanford CS236](https://deepgenerativemodels.github.io/syllabus.html)
 
 Given a set of image samples $(X_1,...,X_N)$ we would like to estimate their Probability Density functions $q(X)$, so that we can sample from it and thereby generate new images. However, in general $q(X)$ is a very complex function, and a simpler problem is to define a Latent Variable $Z$ that encodes semantically useful information about $X$ and then estimate $q(X\vert Z)$ with the hope that this will be a simpler function to estimate. The idea behind Latent Variables is illustrated in Figure 3: The LHS of the figure shows how new images can be generated in a two step process: First sample a Latent Variable $Z$ assuming that we know its distribution $q(Z)$ and then sample from $q(X\vert Z)$ to generate a new image. The RHS of the figure gives some intuition behind the concept of Latent Variables, it shows how the contents of an image of a human face are controlled by variables such as gender, hair color etc, and if these variables are specified, then the face generation problem becomes simpler.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/gen12.png)
 
-*Figure 4*
+*Figure 4* From [Stanford CS236](https://deepgenerativemodels.github.io/syllabus.html)
 
 For another perspective into the problem, consider Figure 4 which shows the data distribution $q(X)$ which in general can a very complicated function (as a stand-in for an image distribution). However note that by using the Law of Total Probabilities, $q(X)$ can also written as
 
@@ -88,7 +88,7 @@ $$ELBO = \sum_Z q(Z|X)\log{q(Z|X)\over p_\theta(X,Z)} \quad\quad\quad\quad (1)$$
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/gen13.png)
 
-*Figure 6*
+*Figure 6* From [Stanford CS236](https://deepgenerativemodels.github.io/syllabus.html)
 
 Since  by definition $D_{KL}(q(X\vert Z), p_\theta(X\vert Z)) \ge 0$, it follows that
 $$\log q(X) \ge ELBO$$
@@ -104,7 +104,7 @@ The ELBO serves as a convenient optimization measure that can be used to train a
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/gen3.png)
 
-*Figure 7*
+*Figure 7* From [CVPR 2022 Tutorial on Diffusion Models](https://cvpr2022-tutorial-diffusion-models.github.io/)
 
 **Note:** We will use the notation $N(X; \mu,\Sigma)$ for a mutivariate Gaussian (or Normal) Distribution $X$ with mean vector $\mu = (\mu_1,...,\mu_N)$ and covariance matrix $\Sigma$ ([here](https://en.wikipedia.org/wiki/Multivariate_normal_distribution) is a a short introduction to multivariate Normal Distributions). For the special case when the covariance matrix is a diagonal with a common variance $\sigma^2$, this reduces to $N(X; \mu,\sigma^2 I)$ where $I$ is a $N\times N$ identity matrix.
 
@@ -138,13 +138,13 @@ Note that since the $\gamma_t$ sequence is a product of factors that are less th
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/gen9.png)
 
-*Figure 8*
+*Figure 8* From [CVPR 2022 Tutorial on Diffusion Models](https://cvpr2022-tutorial-diffusion-models.github.io/)
 
 ## Reverse Diffusion Process
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/gen7.png)
 
-*Figure 9*
+*Figure 9* From [CVPR 2022 Tutorial on Diffusion Models](https://cvpr2022-tutorial-diffusion-models.github.io/)
 
 In order to generate an image while starting from Gaussian noise, we need to reverse the process shown in Figure 7, i.e., we start with the white noise image $X_T$ sampled from Gaussian Noise $N(0,I)$ and then gradually "de-noise" this image as we move from right to left, as shown in Figure 9. In order to do so we need knowledge of the reverse distribution $q(X_{t-1}\vert X_t)$ which in general is an intractable problem. However we can try to approximate the reverse distribution with a parametrized distribution $p_\theta$ such that $p_\theta(X_{t-1}\vert X_t)\approx q(X_{t-1}\vert X_t)$. We will further assume that $p_\theta(X_{t-1}\vert X_t)$ has a Gaussian distribution given by
 
@@ -156,7 +156,7 @@ If the distributions $p_\theta$ were known, then it is possible to recover the d
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/gen10.png)
 
-*Figure 10*
+*Figure 10* From [CVPR 2022 Tutorial on Diffusion Models](https://cvpr2022-tutorial-diffusion-models.github.io/)
 
 ## Optimization Objective
 
@@ -243,7 +243,7 @@ We collect all the results from the previous sections and put them together in t
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/gen5.png)
 
-*Figure 11*
+*Figure 11* From [Ho, Jain, Abbeel](https://arxiv.org/abs/2006.11239)
 
 The pseudocode for the training procedure is shown on the left in Figure 11, and proceeds as follows:
 
@@ -267,7 +267,7 @@ Note that images are generated in a probabilistic manner starting from the initi
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/gen6.png)
 
-*Figure 12*
+*Figure 12* From [Ronneberger et.al.](https://arxiv.org/abs/1505.04597)
 
 A Neural Network which would be appropriate for this application would be one that takes an input image and converts it another image of the same dimensions at the output. The class of networks that do this are called Auto-Encoders, and the one that was chosen for the job is called U-net ([Ronneberger et.al](https://arxiv.org/abs/1505.04597), see Figure 12). A short description of this network follows:
 
@@ -280,7 +280,7 @@ Another implementation decision is the schedule to be used for adding noise to t
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/gen8.png)
 
-*Figure 13*
+*Figure 13* From [CVPR 2022 Tutorial on Diffusion Models](https://cvpr2022-tutorial-diffusion-models.github.io/)
 
 ## Speeding Up Diffusion Models: The DDIM Algorithm
 
@@ -345,7 +345,7 @@ Note that changing the parameter $\sigma$ results in different generative proces
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/gen14.png)
 
-*Figure 14*
+*Figure 14* From [CVPR 2022 Tutorial on Diffusion Models](https://cvpr2022-tutorial-diffusion-models.github.io/)
 
 Song et.al. made use of the fact that the $X_t$ sequence need not be Markov and proposed the following **Accelerated Sampling Process:**, which is illustrated in Figure 14:
 
@@ -374,7 +374,7 @@ The generative process now samples latent variables according to the reversed $\
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/gen16.png)
 
-*Figure 15*
+*Figure 15* From [Ho, Jain, Abbeel](https://arxiv.org/abs/2006.11239)
 
 Ho et.al. made the following interesting observation in their DDPM paper: During the inference process, we can regard the process of generating progressively better images from $X_T$ to $X_0$ in the following two ways:
 
@@ -392,7 +392,7 @@ Rate on the other hand is a measure of semantic content, i.e., the specific obje
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/gen15.png)
 
-*Figure 16*
+*Figure 16* From [Rombach, Emmer et.al.](https://arxiv.org/pdf/2112.10752.pdf)
 
 This is further illustrated in Figure 16 that plots Distortion vs Rate, which shows that the inference process can be divided into two parts: Part 1 is referred to as Semantic Compression and leads to steep decrease in Distortion, while Part 2 is referred to as Perceptual Compression, and leads to increase in the semantic content of the re-constructed image. [Rombach, Ommer et.al.](https://arxiv.org/pdf/2112.10752.pdf) made the observation that Diffusion Models excel at generating the semantic content of an image, but spend a lot of their processing in the generation of the perceptual content. This leads to the idea of breaking up the image generation process into two parts resulting in a model called the Latent Diffusion Model or LDM (see Figure 17).
 
@@ -406,13 +406,13 @@ The LDM Model has been shown to produce images that are comparable in quality to
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/gen17.png)
 
-*Figure 17*
+*Figure 17* From [Rombach, Emmer et.al.](https://arxiv.org/pdf/2112.10752.pdf)
 
 ## Conditional Diffusion Models
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/gen18.png)
 
-*Figure 18*
+*Figure 18* From [Rombach, Emmer et.al.](https://arxiv.org/pdf/2112.10752.pdf)
 
 The LDM model in Figure 17 also incorporates support for conditional image generatiom, where the condition could be a piece of text, images etc. Considering the case when text is used as the input, then the system works as follows:
 
