@@ -3,7 +3,10 @@ layout: default
 title: "Readings"
 ---
 
-# Books Read Earlier This Year
+# Books Read in 2023
+![](https://subirvarma.github.io/GeneralCognitics/images/EAM.png) 
+
+# Books Read in 2022
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/IMG_8787.jpg) 
 ![](https://subirvarma.github.io/GeneralCognitics/images/IMG_8788.jpg) 
@@ -24,4 +27,3 @@ title: "Readings"
 ![](https://subirvarma.github.io/GeneralCognitics/images/book5.png) 
 ![](https://subirvarma.github.io/GeneralCognitics/images/NI.png) 
 ![](https://subirvarma.github.io/GeneralCognitics/images/dc.png) 
-![](https://subirvarma.github.io/GeneralCognitics/images/EAM.png) 
