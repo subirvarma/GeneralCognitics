@@ -22,3 +22,6 @@ title: "Readings"
 ![](https://subirvarma.github.io/GeneralCognitics/images/book2.png) 
 ![](https://subirvarma.github.io/GeneralCognitics/images/book3.png) 
 ![](https://subirvarma.github.io/GeneralCognitics/images/book5.png) 
+![](https://subirvarma.github.io/GeneralCognitics/images/NI.png) 
+![](https://subirvarma.github.io/GeneralCognitics/images/dc.png) 
+![](https://subirvarma.github.io/GeneralCognitics/images/EAM.png) 
