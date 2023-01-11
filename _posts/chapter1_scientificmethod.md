@@ -27,6 +27,25 @@ In both cases we have limited understanding of why the equations are working
 
 Fundamental new discovery: Gradient descent as a way to find new theories
 
-## Doing Physics with Neural Networks
+# Doing Physics with Neural Networks
+
+Finding simple equations for natural phenomena
+
+
+
+# Doing Engineering with Neural Networks
+
+
+## Controlling a System Without Understanding It
+
+
+Connections with Model Free Reinforcement Learning
+
+
+# Doing Economics and Finance with Neural Networks
+
+Trading using Neural Networks
+
+# Doing Biology with Neural Networks
 
 
