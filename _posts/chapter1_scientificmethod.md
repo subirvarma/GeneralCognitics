@@ -38,14 +38,32 @@ Finding simple equations for natural phenomena
 
 ## Controlling a System Without Understanding It
 
-
 Connections with Model Free Reinforcement Learning
 
+## Software Engineering
+
+Code Generation
 
 # Doing Economics and Finance with Neural Networks
+
+Economic Models
 
 Trading using Neural Networks
 
 # Doing Biology with Neural Networks
+
+Protein folding
+
+# Doing the Creative Arts with Neural Networks
+
+
+## Drawing and Painting
+
+
+## Film Making
+
+
+# Running a Business with Neural Networks
+
 
 
