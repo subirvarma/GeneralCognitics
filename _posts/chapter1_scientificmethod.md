@@ -28,6 +28,10 @@ Examples of this abounded in the centuries after Newton, for example Maxwell use
 
 A very good example of more modern theory that sounds completely irrational, but nevertheless has excellent agreement with experiments, is Quantum Mechanics. Even after a 100 years, scientists still don't understand light could both be a partcle as well as a wave depending on the experiment. Not only that the particle-wave dulaity extents to pievces of matter such as the elementary particles that make up the atom! There is no understanble physical picture that explains this phenomena just as 400 years ago there was no good explanation for Newton's idea of Gravity propagating through empty space. But the equations of Quantum Mechanics are the most precise descriptions that we have of the reality that we live in, even though we don't understand why they work.
 
+![](https://subirvarma.github.io/GeneralCognitics/images/fig6.png) 
+
+A summary of how the Scientific Method works for the case of Physical Sciences is shown in the figure above. As poiinted out by Kuhn in *he Structure of Scientific Revolutions},
+
 The success of physics in explaining natural phenomena post Newton has had an un-intended consequence. Since all Physics theories can be codified in a few 'simple' equations that can be used to explain a huge amount of natural phenomena, we expect this to hold in other areas of knowledge as well. Hence scientists of the more theoretical bent are always searching for a some simple underlying principle that can be used to explain complex phenomena. But this program has run into problems in recent decades, where there doesn't seem to be simple theories in fields such as economics that can explain a wide range of phenomena. The same is true for Biology in general, and especially for the emerging field of neuroscience. Hence it could be that Physics is more of an exception than the rule in being able to work with simple all encompassing theories that can be specified using just a few equations. 
 
 # Are Artificial Neural Networks Science?
