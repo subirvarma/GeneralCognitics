@@ -26,69 +26,49 @@ Newton was using the newly proposed Baconian Principle which stated that the onl
 As Strevens points out, this was a highly irrational idea to grasp for people living in that age, who favored theological explanations for natural phenomena. A very important aspect of this way of doing science was that the scientist's explanations for how he arrived at his theory did not matter. It could very well be that one could arrive at the right theory by using the wrong reasoning for it, as long there was experimental agreement, all was forgiven. 
 Examples of this abounded in the centuries after Newton, for example Maxwell used Faraday's ides of elastic lines of force in a space filled with a substance called ether to arrive his theory of electro-magnetism. Later Einstein showed that neither assumption was necessary for the theory to hold.
 
-A very good example of more modern theory that sounds completely irrational, but nevertheless has excellent agreement with experiments, is Quantum Mechanics. Even after a 100 years, scientists still don't understand light could both be a partcle as well as a wave depending on the experiment. Not only that the particle-wave dulaity extents to pievces of matter such as the elementary particles that make up the atom! There is no understanble physical picture that explains this phenomena just as 400 years ago there was no good explanation for Newton's idea of Gravity propagating through empty space. But the equations of Quantum Mechanics are the most precise descriptions that we have of the reality that we live in, even though we don't understand why they work.
+A very good example of more modern theory that sounds completely irrational, but nevertheless has excellent agreement with experiments, is Quantum Mechanics. Even after a 100 years, scientists still don't understand light could both be a particle as well as a wave depending on the experiment. Not only that the particle-wave dulaity extents to pievces of matter such as the elementary particles that make up the atom! There is no understanble physical picture that explains this phenomena just as 400 years ago there was no good explanation for Newton's idea of Gravity propagating through empty space. But the equations of Quantum Mechanics are the most precise descriptions that we have of the reality that we live in, even though we don't understand why they work.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/fig6.png) 
 
-A summary of how the Scientific Method works for the case of Physical Sciences is shown in the figure above. As poiinted out by Kuhn in *he Structure of Scientific Revolutions},
+Figure 4
 
-The success of physics in explaining natural phenomena post Newton has had an un-intended consequence. Since all Physics theories can be codified in a few 'simple' equations that can be used to explain a huge amount of natural phenomena, we expect this to hold in other areas of knowledge as well. Hence scientists of the more theoretical bent are always searching for a some simple underlying principle that can be used to explain complex phenomena. But this program has run into problems in recent decades, where there doesn't seem to be simple theories in fields such as economics that can explain a wide range of phenomena. The same is true for Biology in general, and especially for the emerging field of neuroscience. Hence it could be that Physics is more of an exception than the rule in being able to work with simple all encompassing theories that can be specified using just a few equations. 
+A summary of how the Scientific Method works for the case of Physical Sciences is shown in the Figure 4. As pointed out by Thomas Kuhn in *The Structure of Scientific Revolutions*, Science progresses when a new theory is proposed, examples of which are listed on the right hand side. This requires a creative leap which Kuhn referred to as Paradigm Shifts. Once a new theory becomes accepted, then the majority of Scientists carry out what he called Normal Science, which is work out the consequences of the theory for various problems. Paradigm shifts happen rarely, and are caused by the existing theory not being being able to make good predictions for some particular experiments. The base equations for the theory cannot be derived in the mathematical sense. In the Baconian spirit they are used since they make good predictions in the process of doing Normal Science.
+
+A new Scientific Theory is usually proposed at a time crisis when the old theory starts to develop significant gaps with experiments. At these times scientists usuaslly come up with more than one new theory that is able to overcome the problems, and there follows a period of uncertainity. The process by which one of these theories wins out and becomes the established orthodoxy is called *Baconian Convergence*. As prescribed by him, the alternative theories battle it out with the only criteria of success being agreement with experiments, until one of them wins out. The current crisis in Physics with multiple competing theories for Quantum Gravity falls in this class.
+
+The success of Physics in explaining natural phenomena post Newton has had an un-intended consequence. Since all Physical theories can be codified in a few 'simple' equations that can be used to explain a huge amount of natural phenomena, we expect this to hold in other areas of knowledge as well. Hence scientists of the more theoretical bent are always searching for a some simple underlying principle that can be used to explain complex phenomena. But this program has run into problems in recent decades, where there doesn't seem to be simple theories in fields such as Economics that can explain a wide range of phenomena. The same is true for Biology in general, and especially for the emerging field of neuroscience. Hence it could be that Physics is more of an exception than the rule in being able to work with simple all encompassing theories that can be specified using just a few equations. 
 
 # Are Artificial Neural Networks Science?
 
 I am going to argue that the functioning of ANNs hew pretty closely to the original Baconian definition of what constitutes Science, but with an important exception: The equations in ANNs are no longer simple and elegant equations that we see in Physics, but are highly complex with hundreds of millions of parameters. But just as in Baconian Science, an ANN model lives or dies by how well its results agree with 'experiment'. 
 
-Why are Physics equations simple and ANN equations complex?
+![](https://subirvarma.github.io/GeneralCognitics/images/fig7.png) 
 
-Baconian Convergence in ANNS.
+Figure 5
+
+In analogy to the outline of the Scientific Method in the Figure 4, I have tried to sketch out the way the field of ANN operatesd in the Figure 5. Just as for the case of the classical Scientific Method, it progresses in two steps. 
+
+- In the first step an ANN model is chosen and then trained using some data. Coming up with the structure of the model itself requires creative leap, and and these models have become more sophisticated over time. Some examples of of models are MLPs (Multi-Layer Perceptrons), CNNs (Convolutional Neural Networks), RNNs (Recurrent Neural Networks) and Transformers. The chosen model is trained in step 1 using the training data, which is the process of estimating the parameters of the model. The algorithm that is used for this purpose is called Backprop and it is based on the Chain Rule of Differential Calculus.
+- In the second step the trained ANN is used to make predictions on data that is separate (but similar to) to the training data using in Step 1. The trained model is is judged to be good if its predictions agree with human provided labels (if it is a classification problem). These predictions are statistical in nature, so the model provides probabilities of various outcomes, rather than a single prediction.
+
+A comparison of Figure 4 with Figure 5 shows that they are somewhat similar. Both Scientific Theories as well as ANN models are trying explian some regularities, whether in Nature (for Science), or in human created systems such as language (for ANNs). Moreover both couch their findings in the form of mathematical equations.
+However contrast to the Scientific Theory, the ANN model cannot be neatly summarized in a few basic equations, indeed the equations describing the complete ANN are too complex to even explicity write down. Another difference is that a Scientific Theory only has a few parameters, the number of parameters needed to describe all of Physics is less than 50. An ANN on the other hand can have hundreds of billions of parameters. Indeed the whole point of training an ANN is to estimate these parameters.
+
+Inspite of these differences, there are both mathematical systems, and both prescribe to the same Baconian directive i.e., they are only as good as the predictions they make, and will be discarded otherwise. The multiplicity of ANN models also shows that just like Scientific Theories, these models are also subject to the process of Baconian Convergence. For example Natural Language can be modeled using any of the ANN models listed in Figure 5, but the models have gotten better as we progressed from MLPs to RNNs to Transformers (Baconian Convergence seen in the process by which ANNs out competed other models of Artificial Intelligence such as Bayesian Models). ANN models have not been subject to Kuhnian Paradigm Shifts so far, but probably will be if they are to get to Human Level intelligence in the future.
+
+A rap against ANN models is that they are Black Boxes, i.e., we don't have any information about how they work or arrive at their predictions. But this state of affairs is not that different from Physics models, since the base equations for these models were conjured 'out of thin air' by scientists such as Newton, Einstein or Schrodinger. I would argute that the main difference between Physics models and ANNs, is that the former are much simpler since they can be written down in afew equations with only a handful of parameters. Hence in both cases we have limited to no understanding of why the equations work.
+
+So perhaps the simplicity of Physics models reflects some deep structure found in Nature and is more of an exception to the rule. Man made systems such as language or recorded images, that we model using ANNs, also have structure, but it cannot be reduced to a few elegant equations. However we have discovered in the last 20-25 years that the regularity in these structures can still be captured by ANNs. This could be due to the fact that the human brain is a Neural Network as well, which has some similarities to ANNs, so that both Natural NNs and ANNs are able to discover these structures through training.
+
+The question of why the equations of Physics are simple was addressed by Daniel Roberts in his paper [Why is AI hard and Physics simple?](https://arxiv.org/abs/2104.00008). His conclusion was that the equations of Physics get considerably simplified due to two reasons: (1) Physical theories obey Spatial Locality, i.e., particles in the natural world only interact with other particles that are in their immediate vicinity, which limits the number of possible interactions each one of them can have, and (2) Physical theories are also translationally invariant, i.e., they work exactly the same whether you are on Earth or on Mars.
 
 
 
-Fundamental difference: Number of parameters needed to describe model
-
-Both are inductive
+Is it Possible to Model Physical Lays Using ANNs?
 
 In both cases we have limited understanding of why the equations are working
 
 Fundamental new discovery: Gradient descent as a way to find new theories
-
-# Doing Physics with Neural Networks
-
-Finding simple equations for natural phenomena
-
-
-
-# Doing Engineering with Neural Networks
-
-
-## Controlling a System Without Understanding It
-
-Connections with Model Free Reinforcement Learning
-
-## Software Engineering
-
-Code Generation
-
-# Doing Economics and Finance with Neural Networks
-
-Economic Models
-
-Trading using Neural Networks
-
-# Doing Biology with Neural Networks
-
-Protein folding
-
-# Doing the Creative Arts with Neural Networks
-
-
-## Drawing and Painting
-
-
-## Film Making
-
-
-# Running a Business with Neural Networks
 
 
 
