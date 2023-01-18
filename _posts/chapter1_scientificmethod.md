@@ -3,9 +3,13 @@
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/fig4.png) 
 
+Figure 1
+
 Something wonderful happened to the human race in the 1600s. After being essentially flat for almost 2000 years (since the peak of the Roman Empire), the economic rate of growth sudenly took off in an exponential fashion, leading to the current world that we live in. The question is: What Happened? A leading candidate for the answer is, the Scientific Revolution. But science has been practiced since the time of the Greeks. What was so different about the way science was done post 1600 compared to the past? 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/fig2.png) 
+
+Figure 2
 
 This question was posed by Michael Strevens in his book "The Knowledge Machine". In this post I will begin with a summary of his findings, and then try to connect this with the rise of Artificial Neural Networks or ANNs. After a long period of gestation, ANNs have suddenly started making progress in leaps and bounds and a big open question is whether they represent a fundamentally different way of doing science. And if so, what will it lead to? Is this a new exponential boost to our civilization? 
 
@@ -13,9 +17,11 @@ This question was posed by Noah Smith in [this blog post](https://noahpinion.sub
 
 # Why Did Science Take Off After Newton?
 
-So, what happened in the 1600s? The answer in one word is: Newton. Before Newton, scientists (or Natural Philosphers as they were then called), tried to find explanations for natural phenomena, but these explanations involved factors such as theological, aesthetic or philosophical considerations. According to Strevens, post Newton all these extraneous factors where thrown out, and the only thing that mattered was the agreement between predictions from the theory and empirical measurements. This idea was actually proposed by Sir Francis Bacon in the early 1600s, but was first rigorously put into practice by Newton. 
+So, what happened in the 1600s? The answer in one word is: Newton. Before Newton, scientists (or Natural Philosphers as they were then called), tried to find explanations for natural phenomena, but these explanations involved factors such as theological, aesthetic or philosophical considerations. According to Strevens, post Newton all these extraneous factors where thrown out, and the only thing that mattered was the agreement between predictions from the theory and empirical measurements. This new wsy of doing science was actually proposed by Sir Francis Bacon in the early 1600s, but was first rigorously put into practice by Newton. 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/fig5.jpeg) 
+
+Figure 3: The Universe according to Descartes
 
 As an example of a theory from before Newton, consider Rene Descartes theory of planetary motion. Aristotle back in the 3rd century B.C. tried to explain all motion, as an innate desire for objects to seek out their natural state, so in a sense he was ascribing a biological function to in-animate objects. Descartes, who lived just before Newton, started from the principle that nothing moves unless it is pushed, which is actually quite reasonable, and concluded that empty space between the planets is not really empty but is filled with particles that are pushing the planets along. Note that both these theories were based on philosophical beliefs of their originators and were scientific dead-ends, since they could not be used to make reliable predictions.
 
@@ -62,11 +68,11 @@ So perhaps the simplicity of Physics models reflects some deep structure found i
 
 The question of why the equations of Physics are simple was addressed by Daniel Roberts in his paper [Why is AI hard and Physics simple?](https://arxiv.org/abs/2104.00008). His conclusion was that the equations of Physics get considerably simplified due to two reasons: (1) Physical theories obey Spatial Locality, i.e., particles in the natural world only interact with other particles that are in their immediate vicinity, which limits the number of possible interactions each one of them can have, and (2) Physical theories are also translationally invariant, i.e., they work exactly the same whether you are on Earth or on Mars.
 
+# Is it Possible to Model Physical Laws Using ANNs?
 
+If you see some regularity in nature, then in the usual way of doing Physics, you would try to derive the equations that explain your observations using one of the established theories. However, is it possible to arrive at these equations by using ANNs instead? This would entail feeding the experimental data into an appropriate model that would then spit out the equations (without any fundamental understanding of the underlying phenomena). If such a model were available to Kepler for example, he would have fed it Tycho Brahe's observations and the model would give out his laws of planetary motion. This program of coverting observations to physical laws has actually been implemented by [Cranmer et.al.](https://arxiv.org/abs/2006.11287). They used a type of ANN called Graph Neural Network to capture ihe inductive biases in the problem, followed by symbolic regression to fit the resulting model into an algebraic equation.
 
-Is it Possible to Model Physical Lays Using ANNs?
-
-In both cases we have limited understanding of why the equations are working
+If you are curious about the converse question, i.e., Can Physical Laws be used to Model ANNs? was tackled by Roberts, Haida and Hanin in their book [The Principles of Deep Learning Theory](https://arxiv.org/abs/2106.10165), in which they showed that simpler ANNs can be modeled using methods from Statistical Physics and the Renormalization Group Theory (te latter is one of the cornerstones of Modern Physics).
 
 Fundamental new discovery: Gradient descent as a way to find new theories
 
