@@ -23,6 +23,33 @@ IVC Mysteries
 
 ### Who were the people of the IVC and where did they come from?
 
-During Kosambi's time, one of the biggest mysteries about the IVC was their origin and their subsequent dissapearance after their civilization collapsed. 
+The IVC was defined by their cities which featured advanced urban planning not to be seen anywhere else in the world at that time, and matched only last few hundred years. These featured wide boulevards laid down in a grid pattern with channels for supplying water to the housed and carrying away sanitation. Moreover their larger cities such as Mohenjo-Daro and Harappa had similar urban layouts, so it seems they applied the same master-plan in several places.
+
+The people of the IVC practices agriculture and grew several cereal crops. Their diet would be familiar to the people of modern India and even features spices such as turmeric. Their fields were watered by the waters of the rivers in the area, and they took advantage of the silt that was deposited in the annual flooding to fertilize the soil. However unlike the Sumerians they did not have a canal system.
+
+They had extensive trade link swith other civilizations from that time, especially with the Sumerians. Seals from the IVC have been found in Ur and on the island of Bahrain.
+
+Their script has not been deciphered
+
+In contrast to the Sumerians and the Egyptians, What they did not have: No prominent palaces or temples
+
+During Kosambi's time, one of the biggest mysteries about the IVC was their origin and their subsequent dissapearance after their civilization collapsed. Based on the information available at the time, it seemed as though the sophisticated IVC cities appeared suddenly towards the end of the 3rd millenium BCE and as mysteriosly dissapeared around 1700 BCE.  They left no trace in the records of the subsequent history of India, such as in the Vedas that were compiled around 1000 BCE.
+
+Kosambi speculated that the unformity of the city designs showed that they were setup according to an existing designs that were developed elsewhere, perhaps in a mountaneous area that was less hospitable to farming. This conjecture may have been borne with the discovery of the ruins of Mehrgarh in Balochistan.
+
+Speculation that the society was ruled by religous leaders, no weapons found, they may have controlled the food system
+
+Why IVC did not incorporate more advanced ideas from Sumer? Beacuse the religous authorities did not allow it, and the merchants did not find it profitable.
+
+Who were the people? Genetic evidence shows that the polulation was not related to any other population that existed in the ancient world at that time, and may have lived in that area of North Western India since 10,000 BCE or even earlier.
+
+What happened to them? Their descendents constitute the major part of the genetic make-up of modern day Indians, with most Indians having 50% of their gened from the IVC. 
+
+How did the civilization end? Historians speculate that climate change may have been responsible with two of the seven rivers drying up. There are signs of a sudden end in Mohenjo-Daro. Genetic evidence points to conquest by the invading Indo-Europeans (Y chromosome vs Mitochondrial DNA data). 
+
+Continuation of the IVC in later history of India:
+- Temple design with sacred pools
+- Gods who may have originated in the IVC: Shiva, Krishna
+- 
 
 
