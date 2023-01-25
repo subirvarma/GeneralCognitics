@@ -47,9 +47,11 @@ What happened to them? Their descendents constitute the major part of the geneti
 
 How did the civilization end? Historians speculate that climate change may have been responsible with two of the seven rivers drying up. There are signs of a sudden end in Mohenjo-Daro. Genetic evidence points to conquest by the invading Indo-Europeans (Y chromosome vs Mitochondrial DNA data). 
 
-Continuation of the IVC in later history of India:
+Continuation of the IVC culture in later history of India:
 - Temple design with sacred pools
 - Gods who may have originated in the IVC: Shiva, Krishna
-- 
+- Systems of weights and measures
+- Fondness for jewelwry, bead making, bangles
+- Brick sizes
 
 
