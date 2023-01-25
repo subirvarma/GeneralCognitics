@@ -31,9 +31,10 @@ IVC was a merchant civilization and they had extensive trade link swith other ci
 
 ### Origins of the IVC
 
-During Kosambi's time, one of the biggest mysteries about the IVC was their origin and their subsequent dissapearance after their civilization collapsed. Based on the information available at the time, it seemed as though the sophisticated IVC cities appeared suddenly towards the end of the 3rd millenium BCE and as mysteriosly abandoned around 1700 BCE.  The IVC left no trace in the written or oral records of the subsequent history of India, such as in the Vedas that were compiled around 1000 BCE.
+One of the biggest mysteries about the IVC is their origin and their subsequent dissapearance after their civilization collapsed. Based on the information available during Kosambi's time, it seemed as though the sophisticated IVC cities appeared suddenly towards the end of the 3rd millenium BCE and were as mysteriosly abandoned around 1700 BCE.  The IVC left no trace in the written or oral records of the subsequent history of India, such as in the Vedas that were compiled around 1000 BCE.
 
-Kosambi speculated that the unformity of the city designs showed that they were setup according to an existing designs that were developed elsewhere, perhaps in a mountaneous area that was less hospitable to farming. This conjecture may have been borne with the discovery of the ruins of Mehrgarh in Balochistan.
+Kosambi speculated that the unformity of the city designs showed that they were setup according to existing plans that were developed elsewhere and then bought to the Indus Plains. He also made the very astute observation that perhaps the progenitors of the IVC lived in a rocky and hilly area when they were hunter-gatherers. Once they developed agriculture and the basics of their urban civilization, they moved to flat the river plane that was more amenable to large scale farming.
+ This conjecture may have been borne with the discovery of the ruins of Mehrgarh in Balochistan.
 
 Speculation that the society was ruled by religous leaders, no weapons found, they may have controlled the food system
 
