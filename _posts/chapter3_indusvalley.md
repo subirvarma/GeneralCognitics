@@ -38,25 +38,23 @@ Kosambi speculated that the unformity of the city designs showed that they were 
 ![](https://subirvarma.github.io/GeneralCognitics/images/fig10.png) 
 
 The other clue the origins of the IVC came from genetic sequencing data and is shown in the figure. The figure shows that people of the IVC had genes from two sources:   (1) Ancient hunter-gatherers who were related to the hunter-gatherers living on the Iranian plateau. As the figure shows the ancestors of the IVC split from the Iranian branch sometime before 10,000 BCE, well before the development of agriculture.
-  (2) Andamanese hunter-gatherers who represent the gene flow from the tribals of the Indian peninsula. These people came to India in one of the early human waves out of Africa around 50,000 BCE.
+(2) Andamanese hunter-gatherers who represent the gene flow from the tribals of the Indian peninsula. These people came to India in one of the early human waves out of Africa around 50,000 BCE.
 
-These results show that IVC were indigenous to the sub-continent, in the sense that their ancestors had been residing in the area for over 10,000 years.
+Thus the genetic evidence shows that the IVC population was not related to any other population that existed in the ancient world at that time, and may have lived in that area of North Western India since 10,000 BCE or even earlier.
+
 
 ### How Were the Cities Governed?
-
-
 
 Speculation that the society was ruled by religous leaders, no weapons found, they may have controlled the food system
 
 Why IVC did not incorporate more advanced ideas from Sumer? Beacuse the religous authorities did not allow it, and the merchants did not find it profitable.
 
-Who were the people? Genetic evidence shows that the population was not related to any other population that existed in the ancient world at that time, and may have lived in that area of North Western India since 10,000 BCE or even earlier.
+### How did the IVC come to an end
 
+ Historians speculate that climate change may have been responsible with two of the seven rivers drying up. There are signs of a sudden end in Mohenjo-Daro. Genetic evidence points to conquest by the invading Indo-Europeans (Y chromosome vs Mitochondrial DNA data). 
 
+### Continuation of the IVC culture in later history of India
 
-How did the civilization end? Historians speculate that climate change may have been responsible with two of the seven rivers drying up. There are signs of a sudden end in Mohenjo-Daro. Genetic evidence points to conquest by the invading Indo-Europeans (Y chromosome vs Mitochondrial DNA data). 
-
-Continuation of the IVC culture in later history of India:
 - Temple design with sacred pools
 - Gods who may have originated in the IVC: Shiva, Krishna
 - Systems of weights and measures
