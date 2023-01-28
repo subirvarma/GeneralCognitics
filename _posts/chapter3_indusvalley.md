@@ -91,8 +91,9 @@ I think there is alot of truth to what Kosambi says, since this pattern occurs l
  Historians speculate that climate change may have been responsible with two of the seven rivers drying up. There are signs of a sudden end in Mohenjo-Daro. Genetic evidence points to conquest by the invading Indo-Europeans (Y chromosome vs Mitochondrial DNA data). 
  
  There are two theories among the experts about how the IVC ended, and we will talk about both. The facts that we know about this event from archaeology are the following: The end was sudden, the major cities were slowly degraded over the course of a century or two and abandoned around 1750 BCE. All trade connections with Mesopotamia came to an end. The dams that were used by the IVC for irrigation purposes were also destroyed and the land reverted back to desert. Kosambi makes the point that other civilizations have often made a major transition, after being conquered for example, without completely collapsing. However what kept them going was the fact that their agricultural infrastructure kept functioning, so that the farmers kwpt working on their fields irrespective of who the rulers were. However if the food supply stops due to an interruption in agriculture, then that can cause a complete collapse of the type we see for the IVC. 
+ There is a black hole in Indian History from the end of the IVC until about 1000 BCE when pottery re-appeared in archaelogical finds of urban settlements in the region of the Ganges River. This was of the type known as *Painted Grey Ware* (PGW) pottery, which is distinct from what was produced in the IVC. PGW pottery is associated with the Vedic Age, inded the oldest veda, namely the the *Rigveda* was composed around this time. 
  
- There was a black hole in Indian History until about 1000 BCE when new archaelogical finds were discovered in the region of the Ganges River from that era. This was mostly what is known as *Painted Grey Ware* pottery, that is distinct from what was done in the IVC. 
+ 
  
  
 
