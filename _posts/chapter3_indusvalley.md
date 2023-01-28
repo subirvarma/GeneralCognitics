@@ -90,8 +90,26 @@ I think there is alot of truth to what Kosambi says, since this pattern occurs l
 
  Historians speculate that climate change may have been responsible with two of the seven rivers drying up. There are signs of a sudden end in Mohenjo-Daro. Genetic evidence points to conquest by the invading Indo-Europeans (Y chromosome vs Mitochondrial DNA data). 
  
- There are two theories among the experts about how the IVC ended, and we will talk about both. The facts that we know about this event from archaeology are the following: The end was sudden, the major cities were slowly degraded over the course of a century or two and abandoned around 1750 BCE. All trade connections with Mesopotamia came to an end. The dams that were used by the IVC for irrigation purposes were also destroyed and the land reverted back to desert. Kosambi makes the point that other civilizations have often made a major transition, after being conquered for example, without completely collapsing. However what kept them going was the fact that their agricultural infrastructure kept functioning, so that the farmers kwpt working on their fields irrespective of who the rulers were. However if the food supply stops due to an interruption in agriculture, then that can cause a complete collapse of the type we see for the IVC. 
+ There are two theories among the experts about how the IVC ended, and we will talk about both. The facts that we know about this event from archaeology are the following: Even though the major cities were were showing signs of degradation over the course of a century or two before 1750 BCE, the end was sudden. The cities were abandoned around 1750 BCE and all trade connections with Mesopotamia came to an end. The dams that were used by the IVC for irrigation purposes were also destroyed and the land reverted back to desert. Kosambi makes the point that other civilizations have often made a major transition, after being conquered for example, without completely collapsing. However what kept them going was the fact that their agricultural infrastructure kept functioning, so that the farmers kwpt working on their fields irrespective of who the rulers were. However if the food supply stops due to an interruption in agriculture, then that can cause a complete collapse of the type we see for the IVC. 
  There is a black hole in Indian History from the end of the IVC until about 1000 BCE when pottery re-appeared in archaelogical finds of urban settlements in the region of the Ganges River. This was of the type known as *Painted Grey Ware* (PGW) pottery, which is distinct from what was produced in the IVC. PGW pottery is associated with the Vedic Age, inded the oldest veda, namely the the *Rigveda* was composed around this time. 
+ 
+ Kosambi was of the opinion that the IVC ended due to the invasion of the Indo-European people. He says:
+ 
+ *They shattered the dams by which flood irrigation was made to deposit silt on a wider expannse of land. This signalled the end of the cereal production, and so of the cities which had already begun to decay from long stagnation. The really viable society had to grow again, as a combination of new and old*.
+ 
+ Kosambi found evidence for the ruin of the Indus cities in the *Rigveda*, in the exploits of the Indo Aryan God Indra. Among other places, Indra destroyes a city called *Hariyupia* which may have been Harappa. The *Rigveda* says:
+ 
+ *The tribe destroyes was that of the Vricivats, whose frontline of 130 panoplied warriors was shattered like an eartne pot by Indra on the Yavyavati (Ravi) river, the whole army being ripped apart 'like old clothes'; the rest fled in terror.*
+ 
+ The *Rigveda* identifies the enemy as dark and short nosed. Interestingly enough, Indra is also credited with 'freeing of the rivers', which Kosambi interprets as the destruction of the dams used by the IVC people for agriculture.
+ 
+ An analysis of the genes of the people of who lived during that era has shed new light into might have happened during this period of Indian History:
+ 
+ - 
+ 
+ 
+ 
+ 
  
  
  
