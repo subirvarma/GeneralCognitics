@@ -80,7 +80,8 @@ I think there is a lot of truth to what Kosambi says, since this pattern occurs 
 
 ### How did the IVC come to an end?
  
- There are two theories among the experts about how the IVC ended, and we will discuss both. The facts that we know about this event from archaeology are the following: Even though the major cities were were showing signs of degradation over the course of a century or two before 1750 BCE, the end was sudden. The cities were abandoned around 1750 BCE and all trade connections with Mesopotamia came to an end. The dams that were used by the IVC for irrigation purposes were also destroyed and the land reverted back to desert. Kosambi makes the point that other civilizations have often made a major transition, after being conquered for example, without completely collapsing. However what kept them going was the fact that their agricultural infrastructure kept functioning, so that the farmers kept working on their fields irrespective of who the rulers were. However if the food supply stops due to an interruption in agriculture, then this can cause a complete collapse of the type we see for the IVC. 
+ There are two theories among the experts about how the IVC ended, and we will discuss both. The facts that we know about this event from archaeology are the following: Even though the major cities were were showing signs of degradation over the course of a century or two before 1750 BCE, the end was sudden. The cities were abandoned around 1750 BCE and all trade connections with Mesopotamia came to an end. The dams that were used by the IVC for irrigation purposes were also destroyed and the land reverted back to desert. The Indus script and inscribed seals fell into  disuse and writing disappeared along with cubical stone weights.
+ Kosambi makes the point that other civilizations have often made a major transition, after being conquered for example, without completely collapsing. However what kept them going was the fact that their agricultural infrastructure kept functioning, so that the farmers kept working on their fields irrespective of who the rulers were. However if the food supply stops due to an interruption in agriculture, then this can cause a complete collapse of the type we see for the IVC. 
  There is a black hole in Indian History from the end of the IVC until about 1000 BCE when well made pottery re-appeared in archaeological finds of urban settlements in the region of the northern Ganges plain. This was of the type known as *Painted Grey Ware* (PGW) pottery, which is distinct from what was produced in the IVC. PGW pottery is associated with the Vedic Age, indeed the oldest veda, namely the the *Rigveda* was composed around this time. 
  
  Kosambi was of the opinion that the IVC ended due to the invasion of the Indo-European people. He says:
@@ -112,25 +113,29 @@ I think there is a lot of truth to what Kosambi says, since this pattern occurs 
  
  The other theory about the end of the IVC says that it was due to the effects of climate change in the Indus Valley. The amount of rainfall decreased which led to two of the seven rivers drying up, which disrupted the agriculture in that region. So by the time the Yamnaya arrived on the scene, the cities had already been abandoned, so there was no showdown between the two groups. As evidence they point to the scant signs of major battle in the remains of the IVC, or Yamnaya remains or artifacts within the cities. 
  
- Whatever the final cause of the demise of the IVC, it is clear that the governing structure of the cities broke down, which disrupted the trade networks and large scale organized agricultural actvities. The end of the IVC set back civilization in the Indian sub-continent by at least a thousand years, with a reversion back to the tribal phase of development. All memory of the IVC was lost and urban civilization once again rose in India in the period 1000-500 BCE, but in a different river valley, and under a very different set of circumstances.
+ Whatever the final cause of the demise of the IVC, it is clear that the governing structure of the cities broke down after 2000 BCE, which disrupted the trade networks and large scale organized agricultural actvities. The end of the IVC set back civilization in the Indian sub-continent by at least a thousand years, with a reversion back to the tribal phase of development. All memory of the IVC was lost and urban civilization once again rose in India in the period 1000-500 BCE, but in a different river valley, and under a very different set of circumstances.
 
 ### Echoes of the IVC in the later history of India
 
-- Temple design with sacred pools
-- Dravidian languages
 - Gods who may have originated in the IVC: Shiva, Krishna
-- Systems of weights and measures
-- Fondness for jewelwry, bead making, bangles
-- Brick sizes
 - The Bullock Cart
 
+The IVC people used a highly standardized systems of weights and measures, which seems to hace survived the end of their civilization. Cubical stone weights have been found in the IVC cities with measures that are identical to those mentioned in the *Arthashastra* almost 2000 years after the end of the IVC, and these continue to be used in India. The size of bricks used for construction were standardized to 7cm X 14cm X 28 m, and this is also something that survived into modern times. Indeed before the discovery of the IVC civilization in the 1920s the bricks from the IVC sites were often scavenged for use in modern structures by rural folk, not knowing their ancient origin. I mentioned the IVC fondness for jewelery and their expertise in its manufacture, which coninued in latter day India. One of the statuettes discovered in Harappa had a red coloring on its forehead area, which connects the tradition of *sindur* in married Hindu women with the IVC.
 
+Even though the IVC script did not survive, and we have no direct knowledge of the language they spoke, we can make an educated guess that it was probably a Dravidian tongue. This is based on the fact that Dravidian languages have no connection to the Indo-European languages that arrived with the Yamnaya, and they are spoken almost exclusively in South India. Presumably as the remnants of the IVC people moved to Southern India to form the ASI, they must have bought their language along. The only other palce ouside of South India where a Dravidian language is spoken is some tribes in present day Baluchistan in Pakistan, which is within the geographical area occupied by the IVC. 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/fig14.png) 
 
+There is a structure known as the Great Bath of Mohenjo-Daro, shown on the right image above. It is thought that it was used for public rituals connected with the IVC religion. An interesting feature of this structure is the presence of a water tank, with steps leading down to the water. This is identical to the holy tanks built in Hindu Temples, called a *pushkara* in Sanskrit, and example of which is shown in the left hand side image. The steps are also characteristic of pilgrimage spots in latter day India.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/fig15.png) 
 
+Wooden wheeled carts drawn by bullocks were in use in the IVC. Even though an actual cart has not been discovered, no doudt because the wood has rotetd away, but terracota toys showing the vehiclae have been found, an example of which is shown in the image on the right hand side. A modren bullock cart, which is in common use in Indian villages to this day, is shown on the right hand side. 
+Jonathan Kenoyer, in his [article](https://www.harappa.com/sites/default/files/pdf/Kenoyer2004_Wheeled%20Vehicles%20of%20the%20Indus%20Valley%20Civilizatio.pdf) on this subject remarks that:
+
+*The long continuity in cart designs of the Indus Valley and the fact that many different types of bullock cart continue to be used even today in Pakistan and India
+indicate that the original styles of cart were quite effective and that the early designers were able to produce a form that came to be improved upon only with
+the introduction of ball-bearing axles and rubber tires.*
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/fig16.jpg) 
 
