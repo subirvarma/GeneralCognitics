@@ -121,15 +121,18 @@ I think there is a lot of truth to what Kosambi says, since this pattern occurs 
  
  The other theory about the end of the IVC says that it was due to the effects of climate change in the Indus Valley. The amount of rainfall decreased which led to two of the seven rivers drying up, which disrupted the agriculture in that region. So by the time the Yamnaya arrived on the scene, the cities had already been abandoned, so there was no showdown between the two groups. As evidence they point to the scant signs of major battle in the remains of the IVC, or Yamnaya remains or artifacts within the cities. 
  
- Whatever the final cause of the demise of the IVC, its end set back civilization in the Indian sub-continent by at least a thousand years, with a reversion back to the tribal phase of development. Urban civilization once again rose in India around 500 BCE, but in a very different place, and under a very different set of circumstances.
- 
+ Whatever the final cause of the demise of the IVC, its end set back civilization in the Indian sub-continent by at least a thousand years, with a reversion back to the tribal phase of development. All memory of the IVC was lost and Urban civilization once again rose in India around 500 BCE, but in a very different place, and under a very different set of circumstances.
 
-### Continuation of the IVC culture in later history of India
+### Echoes of the IVC in the later history of India
 
 - Temple design with sacred pools
+- Dravidian languages
 - Gods who may have originated in the IVC: Shiva, Krishna
 - Systems of weights and measures
 - Fondness for jewelwry, bead making, bangles
 - Brick sizes
+
+![](https://subirvarma.github.io/GeneralCognitics/images/fig14.png) 
+
 
 
