@@ -139,7 +139,11 @@ the introduction of ball-bearing axles and rubber tires.*
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/fig16.jpg) 
 
+The period the 2000 to 500 BCE is when it is beleived that the foundations of Hinduism were laid, and according to genetic data this is also the period when there was intense mixing going between the population of the IVC and the Yamnaya tribes. Hence it is quite concievable that Hinduism is a religion that emerged as a synthesis of Yamnaya and IVC beliefs. Most experts on this topic believe that this is indeed the case, the Finnish Indologist Asko Parpola wrote a book called *The Roots of Hinduism: The Early Aryans and the Indus Civilization* on this topic and there is a nice [review](https://inference-review.com/article/another-great-story) of it by Wendy Doniger. The *Rigveda* was clearly written by the Yamnaya, given its story of conquests, and empahsis on the Vedic Gods Indra, Agni and Yama that the Yamnaya believed in before they came to the Indus Valley. Hoever the later Vedic culture and the epics *Ramayana* and the *Mahabharatha* show the influence of the IVC. Parpola sites the following evidence in support of his thesis: 
 
+*Crocodiles, buffaloes, fig-trees, peacocks, and fish are “important motifs of Early and Mature Harappan painted pottery, which are also among the principal religious symbols of ‘village Hinduism. Parpola also notes that Vedic gods were not worshipped as images; they were heard, not seen. Hindu gods, by contrast, were worshipped as images, a practice that may well have been inherited from the IVC.
+
+The fact that the later Vedic Gods such Vishnu and Krishna were depicted with dark skin points to IVC infuence.
 
 
 
