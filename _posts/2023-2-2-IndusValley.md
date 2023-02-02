@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "D D Kosambi and his History of History Ancient India: The Mysteries of the IVC"
+title: "D D Kosambi and his History of Ancient India: The Mysteries of the IVC"
 ---
 
 # D D Kosambi and His History of Ancient India: The Mysteries of the IVC
