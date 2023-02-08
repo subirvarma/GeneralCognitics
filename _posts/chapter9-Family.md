@@ -9,7 +9,7 @@ During the early 1800s, when our family first appears in the record, farming was
 
 We belong to the Kayastha caste, who first occurs in historical records about 1000 years ago. Kayasthas were known as scribes initially and later gained fame (and some notoriety) as administrators and bureaucrats under Muslim rulers. In recent times the community has made considerable contributions to Modern India in a variety of different fields (check out the Wikipedia page on Kayasthas for a good description).
 
-![](https://subirvarma.github.io/GeneralCognitics/images/fig17.png) 
+![](https://subirvarma.github.io/GeneralCognitics/images/fig23.png) 
 
 *Our ancestors have lived in this village since the 1700s. The village is on the northern banks on the Saryu River, which forms the border between the states of Bihar and Uttar Pradesh. The river has moved away from the village now, but at the time when Phuldeo was growing up there in the 1890s, the river ran a few hundred feet from his home. He recalls taking a bath in the river almost daily.*
 
