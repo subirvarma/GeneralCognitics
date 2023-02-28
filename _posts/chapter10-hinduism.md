@@ -1,0 +1,15 @@
+# Greater Magadha and the Origins of Hinduism
+
+![](https://subirvarma.github.io/GeneralCognitics/images/fig25.png) 
+
+While I was doing the research for my post on the Indus Valley Civilization (IVC), I acame across the works of the Finnish Indologist Ask Parpola, and further digging led me to the Dutch Indologist Johannes Bronkhorst. I ordered copies of their books, *The Roots of Hinduism* and *Greater Magadha*, and I am going to summarize some of their theories in this post. Bronkhorst's Greater Magadha was of particular interest, since it delved into the history of the Eastern Gangetic Plain, which is part of the country where my ancestors come from. These two works also had interesting connections with the IVC and my family history, that I have written about in previous posts.
+
+![](https://subirvarma.github.io/GeneralCognitics/images/fig26.png) 
+
+According to Bronkhorst, two distinct cultures existed in Northern India until the period close to start of the current era. Both of these cultures were influenced by  the Indo-Europeans who had come into the sub-continent in the period 2000 BCE to 1000 BCE. The culture to the West was that of the Kuru-Pancala kingdoms and was located in the area called Doab, betwen the Ganga and the Yamnuna rivers. The culture to the East  was found in the Kingdoms of Magadha, Videhla and Kosala and comprises the regions of present day Eastern Uttar Pradesh and Western Bihar. The confluence of the two cultures took place in the period between the second century BCE and the second or third century CE. 
+
+The big difference between the two cultures was due to the fact the Western culture was Brahmanical based on the Rigveda, while the Greater Magadha culture rejected Vedic philosophy. It developed religious practices of its own that were distinct from Vedic Brahamanism, and served as the birthing ground for the religions of Jainism and Buddhism. Bronkhorst points out the following differences between the two cultures:
+
+- Brahmins lived on both sides of the cultural divide, but a different social order existed in Greater Magadha in which the Kashatriyas were accorded greater status.
+- The Greater Magadhans constructed burial mounds that were round, in contrast to the four-cornered versions that existed in the West. These round mounds later gave birth to the Stupas that we find in Buddhist sites in later times and this practice was shared by Jainism as well. An early Brahmanical texts called the *Satapatha Brahmana* which was probably composed in pre-Buddhist times,  talks about this distinction. They looked down at the practice of constructing round mounds and associated it with godlessness and social disorder. 
+- The speech patterns (or accent) of the people to the East was different than their Western counterparts, and was also looked down upon. It is interesting that this cultural divide has continued on to the present time, with the speech accent of of people from Bihar or Eastern Uttar Pradesh being instantly recognizable (and usually derided by other Northerners). 
