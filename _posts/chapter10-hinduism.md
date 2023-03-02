@@ -1,10 +1,10 @@
 # Greater Magadha and the Origins of Hinduism
 
-![](https://subirvarma.github.io/GeneralCognitics/images/fig25.png) 
+![](https://subirvarma.github.io/GeneralCognitics/images/fig.png) 
 
 While I was doing the research for my post on the Indus Valley Civilization (IVC), I acame across the works of the Finnish Indologist Ask Parpola, and further digging led me to the Dutch Indologist Johannes Bronkhorst. I ordered copies of their books, *The Roots of Hinduism* and *Greater Magadha*, and I am going to summarize some of their theories in this post. Bronkhorst's Greater Magadha was of particular interest, since it delved into the history of the Eastern Gangetic Plain, which is part of the country where my ancestors come from. These two works also had interesting connections with the IVC and my family history, that I have written about in previous posts.
 
-![](https://subirvarma.github.io/GeneralCognitics/images/fig26.png) 
+![](https://subirvarma.github.io/GeneralCognitics/images/fig.png) 
 
 According to Bronkhorst, two distinct cultures existed in Northern India until the period close to start of the current era. Both of these cultures were influenced by  the Indo-Europeans who had come into the sub-continent in the period 2000 BCE to 1000 BCE. The culture to the West was found in the kingdoms of Kuru-Pancala kingdoms and was located in the area called Doab, betwen the Ganga and the Yamnuna rivers. The culture to the East  was associated with the Kingdoms of Magadha, Videhla and Kosala and comprises the regions of present day Eastern Uttar Pradesh and Western Bihar. The confluence of the two cultures took place in the period between the second century BCE and the second or third century CE and resulted in the Classical Indian Culture that we are familiar with.
 
