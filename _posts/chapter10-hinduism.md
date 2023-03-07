@@ -54,6 +54,16 @@ Bronkhorst points out the following differences between the Western and Eastern 
 
 # Why Were There Two Cultures?
 
-Brankhorst's book raises an interesting question: If indeed his thesis is correct, then what was the historical reason that two distinct cultures existed in the region of the Ganges Plain in the first millenium BCE? They continued next to each other for at least five or six centuries, if not longer, before their merger happened.   Parpola's *The Roots of Hinduism*.    
+Brankhorst's book raises an interesting question: If indeed his thesis is correct, then what was the historical reason that two distinct cultures existed in the region of the Ganges Plain in the first millenium BCE? They continued next to each other for at least five or six centuries, if not longer, before their merger happened.
+He speculated that perhaps the Indo-Europeans (mixed with IVC people) arrived in the North Indian Plains, in two separate waves.
+This theory has received support in Asko Parpola's *The Roots of Hinduism*. Parpola proposes the following scenario:
+
+-  Indo_europeans arrived in the Indus Valley in two separate waves. The first wave happened in the period 1900-1700 BCE, while the second wave was in the period 1400-1200 BCE. The first
+-  The first wave was settled in the Indus Valley and the integration with the IVC inhabitants was well underway when the second wave arrived. During the interval between the two waves, the original Vedic religion of this wave was influenced by the religion of the IVC, and had drifted from the Vedic religion that was associated with the second wave.
+-  The inhabitants of the first wave were mostly reponsible for the *Atharvaveda* and after the two waves merged, which happened in the period around 1000 BCE, the *Atharvaveda* was re-written to conform to the beliefs of the new wave. Also the *Rigveda* has two distinct portions: Books 2-7 were composed by the second wave, while Books 1 and 7-10 were composed by the first wave people. Parpola came to this conclusion by analysing the language of the *Rigveda*. He found that the Books1, 7-10 contained a form of Sanskrit that was older than the Sanskrit that was used for Books 7-10. As he puts in this interview
+
+*My conclusion is that the Vedic literature and religion results from the fusion of two major waves of Indo-Aryan speakers coming from Central Asia to South Asia. The old core of the Rigveda, the hymns of the "family books" II-VII, represent the tradition of the later wave, which arrived around 1400-1200 BCE, and brought with them the cult of God Indra, worshipped with Soma sacrifice. The tradition of the earlier wave, coming to South Asia already around 1900-1700 BCE, infiltrated into the Rigveda in its late books I and VIII-X, but is best represented in the Atharvaveda.*
+
+-  The people of the second wave moved into the Eastern Gangetic Plain earlier than the first wave, and constituted the kingdoms in the Greater Magadha region. They were not part of the Vedic Realm of the second wave, and had distinct religious and cultural practices, perhaps with greater influence from the IVC religion. Perhaps the original *Atharvaveda* reflected the beliefs of their religion more accurately than the later version which had been *Arianized*, and constituted the core religious beliefs of Greater Magadha. The heterodox religions of Jainism, Ajivikism and Buddhism arose within this culture. Also later Brahmanical texts such as the *Upanishads* were composed at time when the cultures had begun to influence each other.
 
 
