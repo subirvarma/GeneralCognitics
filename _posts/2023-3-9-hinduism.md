@@ -46,7 +46,7 @@ Liberation from the effect of one's actions is possible, since in reality no act
  
 The *Mahabharata* has other passages that show familiarity with ideas from Jainism and Ajivikism (Buddhism is ignored for some reason), but not in a refined form and in one place refers to them as being non-Vedic in origin. There must have been some amount of internal opposition within the Western Vedic tradition to these ideas from Greater Magadha and there are some Vedic texts that reflect this. For example there are some important Vedic schools such as the *Mimamsa* that have no mention of karmic retribution at all. Bronkhorst also mentions several Vedic schools such that of the *Carvakas* that outright rejected this idea. 
    
- # Other Differences Between the Two Regions
+# Other Differences Between the Two Regions
 
 Bronkhorst points out the following other differences between the Western and Eastern cultures:
 
