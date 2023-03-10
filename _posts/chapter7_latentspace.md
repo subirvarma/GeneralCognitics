@@ -1,4 +1,4 @@
-# Introduction
+# Latent Spaces: A New Paradigm
 
 
 
