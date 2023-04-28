@@ -1,9 +1,9 @@
 # Introduction
 
-# Autonomous Systems using Reinforcement Learning
+## Autonomous Systems using Reinforcement Learning
 
-# Autonomous Systems Using LLMs
+## Autonomous Systems Using LLMs
 
-# The SayCAN System
+## The SayCAN System
 
-# The AutoGPT System
+## The AutoGPT System
