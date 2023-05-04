@@ -1,9 +1,15 @@
-# Introduction
+# The Evolution of Agents: From Reinforcement Learning Agents to LLM Agents
 
-## Autonomous Systems using Reinforcement Learning
+## Introduction
 
-## Autonomous Systems Using LLMs
+## Reinforcement Learning Agents
 
-## The SayCAN System
+### Agents of Type 1: Neural Network Based
 
-## The AutoGPT System
+### Agents of Type 2: Algorithmic + Neural Networks
+
+## LLMs Based Agents
+
+### The SayCAN System with Inner Monologue
+
+### Generative Agents
