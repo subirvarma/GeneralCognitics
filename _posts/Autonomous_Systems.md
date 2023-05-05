@@ -27,8 +27,6 @@ In general System 2 operation in Agents seems to connected to the idea of runnin
 
 ## Deep Reinforcement Learning Agents
 
-- Training a dog
-
 ![](https://subirvarma.github.io/GeneralCognitics/images/agent1.png) 
 
 The easiest way to understand the discipline of RL is to think about how animals, such as a dog, get trained. Since they don't uinderstand human language, the only way to make them do what we want is by rewarding them if they indeed do it. Usually this messsage does not get to the dog with only a single instance of the reward, but has to be repeated multiple times before the animal gets it. Hence the Agent in this case is the dog, and a more general picture of the framework used in RL is shown in Figure 1. There is an Agent that is capable of taking one or more Actions, and an Action results in some change in the environment the Agent is operating in. The results of the environment change are communicated back to the Agent, in addition to a scalar number called the **Reward**. In order to make the Agent acheive some objective, which usually takes several Actions and thus several traversals though the loop, the Agent is **trained**. During the training, if the Agent's Actions are such that they lead to acheiving the objective, then those Actions result in higher reward, and if not then the reward is witheld. Hence the Agent gets trained by means of the reward signal, and carries out Actions that result in the maximization of the sum of the rewards from each step.
