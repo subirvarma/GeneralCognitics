@@ -16,18 +16,24 @@ The rest of this blog is organized as follows: We start with a discussion of DRL
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/agent1.png) 
 
-The easiest way to understand the discipline of RL is to think about how animals, such as a dog, get trained. Since they don't understand human language, the only way to make them do what we want is by rewarding them if they indeed do it. Usually this messsage does not get to the dog with only a single instance of the reward, but has to be repeated multiple times before the animal gets it. Hence the Agent in this case is the dog, and a more general picture of the framework used in RL is shown in Figure 1. There is an Agent that is capable of taking one or more Actions, and an Action results in some change in the environment the Agent is operating in. The results of the environment change are communicated back to the Agent, in addition to a scalar number called the **Reward**. In order to make the Agent acheive some objective, which usually takes several Actions and thus several traversals though the loop, the Agent is **trained**. During the training, if the Agent's Actions are such that they lead to acheiving the objective, then those Actions result in higher reward, and if not then the reward is witheld. Hence the Agent gets trained by means of the reward signal, and carries out Actions that result in the maximization of the sum of the rewards from each step.
+The easiest way to understand the discipline of RL is to think about how animals, such as a dog, get trained. Since they don't understand human language, the only way to make them do what we want is by rewarding them. Usually this messsage does not get to the dog with only a single instance of the reward, but has to be repeated multiple times before the animal gets it (hence the 'reinforcement' in the name). The Agent in this case is the dog, and a more general picture of the framework used in RL is shown in Figure 1. There is an Agent that is capable of taking one or more Actions, and an Action results in some change in the environment the Agent is operating in. The results of the environment change are communicated back to the Agent, in addition to a scalar number called the **Reward**. In order to make the Agent acheive some objective, which usually takes several Actions and thus several traversals though the loop, the Agent is **trained**. During the training, if the Agent's Actions are such that they make progress towards the objective, then those Actions result in higher reward, and if not then the reward is witheld. Hence the Agent gets trained by means of the reward signal, and carries out Actions that result in the maximization of the sum of the rewards from each step.
 
 This technique of using the reward signal as means to make the RL Agent do what we want it to do, works as long as the objective is somewhat simple and of limited scope. However to build Agents that are capable to doing more human-like tasks RL runs into problems. For example if we want to design an robot (controlled by a RL Agent) that is capable of doing our dishes, what reward signal should we use? The basic issue is that the RL Agent does not have a mental model of the world we live in, and also cannot understand language. If you ask a human to do something, how does he (or she) go about the job? We can modify Figure 1 slightly to show this, as in Figure 2.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/agent2.png) 
 
-Usually the human takes the time to think through how to acheive the objective as opposed to immediately starting Actions. During this time, the human uses a model of the world, that exists in brains, to figure out the sequence of Actions to take, and result of these actions on the Environment. Once this process is complete, then the task is actually started. The human does not need to be reinforced after each step with a reward, but is able to able to figure out what is required since he understands language also has a model of the world.
+Usually the human takes the time to think through how to acheive the objective as opposed to immediately starting Actions. During this time, the human uses a model of the world, to figure out the sequence of Actions to take, and result of these actions on the Environment. Once this process is complete, then the task is actually started. The human does not need to be reinforced after each step with a reward, but is able to able to figure out what is required since he understands language and also has a model of the world.
 
-Thus lack of a World Model and lack of language are the two critical shortcomings that have held back RL Agents. Until a few years ago these seemed to be unsurmountable problems. Reserachers had little to no understanding of how world models are built in human brains, which is a very complex process that takes place all throughout our childhood and beyond. 
+Thus lack of a World Model and lack of language understanding are the two critical shortcomings that have held back RL Agents. Until a few years ago these seemed to be unsurmountable problems. Reserachers had little to no understanding of how world models are built in human brains, which is a very complex process that takes place all throughout our childhood and beyond. 
 
 
 ### Agents of Type 1: Neural Network Based
+
+![](https://subirvarma.github.io/GeneralCognitics/images/agent3.png) 
+
+
+![](https://subirvarma.github.io/GeneralCognitics/images/agent4.png) 
+
 
 ### Agents of Type 2: Algorithmic + Neural Networks
 
