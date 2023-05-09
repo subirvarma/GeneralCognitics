@@ -37,6 +37,9 @@ Thus lack of a World Model and lack of language understanding are the two critic
 
 ### Agents of Type 2: Algorithmic + Neural Networks
 
+![](https://subirvarma.github.io/GeneralCognitics/images/agent5.png) 
+
+
 ## LLM Based Agents
 
 ### The SayCAN Robot System with Inner Monologue
