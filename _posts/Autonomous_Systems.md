@@ -23,26 +23,40 @@ This technique of using the reward signal as means to make the RL Agent do what 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/agent2.png) 
 
-Usually the human takes the time to think through, or plan, how to acheive the objective as opposed to immediately starting Actions. During this time, the human uses a model of the world, to figure out the sequence of Actions to take, and result of these actions on the Environment. Once the planning is complete, then the task is actually started. The human does not need to be reinforced after each step with a reward, but is able to able to figure out what is required since he understands language and also has a model of the world.
+Usually the human takes the time to think through, or plan, how to acheive the objective as opposed to immediately starting Actions. During this time, the human uses a model of the world, to figure out the sequence of Actions to take, and result of these actions on the Environment. Once the planning is complete, then the task is actually started. The human does not need to be reinforced after each step with a reward, but is able to able to figure out what is required since he understands language and also has a model of the world. Thus lack of a World Model and lack of language understanding are the two critical shortcomings that have held back RL Agents. Until a few years ago these seemed to be unsurmountable problems. Reserachers had little to no understanding of how world models are built in human brains, which is a very complex process that takes place all throughout our childhood and beyond.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/agent9.png) 
 
-The process of decision making is captured in the graph shown above. The white circles represent the state of the world, while the black circles represent Actions that the Agent may take. Note that there is more than one Action (black circle) associated with each State (white circle), which models the fact that the Agent has a choice of multiple Actions that he can perform in each State, and has to decide on the right Action. Also once an Action is taken, there are multiple possible States that the sysem may transition to. This captures the uncertainity in the World Model: For example if the Agent is playing a video game, then the game may spring an unexpected surprise after the player takes an Action. The Agent starts the decision making from the top of the Graph, and as he performs Actions, he proceeds on a path down the Graph, until the task is complete (this is shown a terminal state marked T). Once such path is marked in red in the figure. Some of these paths result in a successful completion of the task, while others result in failure. While planning  how to do the task, the decision maker has to choose a sequence of Actions that result in success. A critical factor in order to do this is the ability to visualize
-
-Thus lack of a World Model and lack of language understanding are the two critical shortcomings that have held back RL Agents. Until a few years ago these seemed to be unsurmountable problems. Reserachers had little to no understanding of how world models are built in human brains, which is a very complex process that takes place all throughout our childhood and beyond. 
+The process of decision making is captured in the graph shown above. The white circles represent the state of the world, while the black circles represent Actions that the Agent may take. Note that there is more than one Action (black circle) associated with each State (white circle), which models the fact that the Agent has a choice of multiple Actions that he can perform in each State, and has to decide on the right Action. Also once an Action is taken, there are multiple possible States that the sysem may transition to. This captures the uncertainity in the World Model: For example if the Agent is playing a video game, then the game may spring an unexpected surprise after the player takes an Action. The Agent starts the decision making from the top of the Graph, and as he performs Actions, he proceeds on a path down the Graph, until the task is complete (this is shown a terminal state marked T). Once such path is marked in red in the figure. Some of these paths result in a successful completion of the task, while others result in failure. While planning  how to do the task, the decision maker has to choose a sequence of Actions that result in success. A critical factor in order to do this is the ability for the Agent to visualize the effects of its Actions on the World. The lack of a such a World Model that could do this was a critical factor that hobbled Intelligent Agents until now. LLMs remove this constraint, and enable the Agent to plan its Actions just as human would. 
 
 
 ### Agents of Type 1: Neural Network Based
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/agent3.png) 
 
+The Figure above shown a RL Agent that is being trained to play Atari games. The Actions in this case are the movements of the game controller, while the environment or world that the Agent operates in, are the successive screens of the game. every time the Agent takes an Action, the screen changes and the Agent receives a reward from the game. The Agent, which is a Neural Network, is trained by playing the game hundreds of thousands of times, and observing the effects of its Actions on the reward and the next screen (the algorithm used is called DQN which stands for Deep Q-Networks).
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/agent4.png) 
+
+Once the Agent is trained, it can be used to play the game, and this is shown above. The last 4 screen shots are fed into the Agent, which then figures out what the next Action should be. This in turn leads to the next screen in the game, which is in turn fed into the Agent, and the cycle continues. 
+
+We are calling this type of RL Agent, that is implemented using a Neural Network, as an Agent of Type 1. These Agents are characterised by:
+
+-   They are Model Free, i.e., they don't incorporate a World Model. Hence the only way to train them is by using Model Free RL, which is a very time consuming process, requiring hundreds and thousands of iterations. This is also means that these Agents are incapable of planning in advance. The only way to train them is by dropping them in the environment and proceeding by trial and error.
+-   The policy which they use to take their Actions is purely a function of the input state (which in this case is the game screen). This policy is 'hardwired' into the Neural Network, so for example, the same Agent cannot be used to play other games.
+
+Hence training Agents of Type 1 is very much like training a dog, and the trained Neural Network is like the trained dog's brain, which instinctively knows how to perform the task it was trained for, but not any new task (without further training).
 
 
 ### Agents of Type 2: Algorithmic + Neural Networks
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/agent5.png) 
+
+There is another type of RL Agent, the most famous example of which the Alpha Zero game plating system from Deep Mind. The initial version of these Agents required a model of the game being played, hence its use was limited to board games such as Go or Chess (for these games, a model of the game is the same as the rules of the game). The Alha Zero system also incorporated a Neural Network, whose input is the current board configuration and its output is the next move, this is shown in Part (b) of the figure. However in the addition to the next move, the Neural Network has another output: This is shown as the letter 'V' in the figure, and it stands for the probability that the current board position will in fact lead to a winning game.
+
+The critical difference between the way Alpha Zero plays, vs Type 1 Agents, is shown in Part (a) of the figure. For every move, Alpha Zero runs a quick simulation of the game, starting from the current position (shown in the tree graph), known as a Monte Carlo Tree Search or MCTS. In order to run this simulation, it uses the rules of the game (or model), and also the Neural Network from Part (b). It builds as much of the tree graph as it in the finite allocated between moves, and from that it figures out the best move to make.  Since there is usually not enough time to complete an entire game during the simulation, the winning probability number V used to make an educated guess whether in fact the last board position in the tree is in fact a winning one. 
+
+
 
 
 ## LLM Based Agents
