@@ -72,7 +72,21 @@ The way in which a Type 2 Agent makes it decisions is much closer to the way hum
 
 ## LLM Based Agents
 
-Large Language Models or LLMs appeared in 2017 with the system called GPT1 from OpenAI, this was soon after the invention of Transformers, which the base technology which they use. Since OpenAI has released progressively larger models, and the current model is called GPT4. OpenAI also released a version of LLMs called ChatGPT in 2022, which combined LLM technology with two other techniques: (1) Fine tuning of the LLM using SUpervised Learning with human teachers, (2) Training of the LLM to avoid toxic and dangerous content as well as hallicunations using a technique called Reinforcement Learning based on Human Feedback (RLHF). The resulting model was released by OpenAI as a service (and also incorporated into the Microsoft Bing search engine), and quickly racked up more than 100 million subscribers within a month of release, faster than any previous technology. This model seems to exhibit an understanding of the world, which it uses to answer questions, its capabilities far exceed any other LLM that has been released. An especially exciting find is that the model has what are known as Emergent Properties. These are capabilities that have not been programmed or trained into the model, but the model nevertheless acquires these skills when its size exceeds certain thresholds. 
+Large Language Models or LLMs appeared in 2017 with the system called GPT1 from OpenAI, this was soon after the invention of Transformers, which the base technology which they use. Since then OpenAI has released progressively larger models, and the current model is called GPT4. OpenAI also released a version of its LLMs called ChatGPT in 2022, which combined LLM technology with two other techniques: (1) Fine tuning of the LLM using Supervised Learning with human teachers, (2) Training of the LLM to avoid toxic and dangerous content as well as hallicunations using a technique called Reinforcement Learning based on Human Feedback (RLHF). The resulting model was released by OpenAI as a service (and also incorporated into the Microsoft Bing search engine), and quickly racked up more than 100 million subscribers within a month of release, faster than any previous technology. This model seems to exhibit an understanding of the world, which it uses to answer questions in ahuman like manner, and its capabilities far exceed any other LLM that has been released. An especially exciting find is that the model has what are known as Emergent Properties. These are capabilities that have not been programmed or trained into the model, but the model nevertheless acquires these skills when its size exceeds certain thresholds. Trying to explain how this happens is an active area of research. Important Emergent Properties include:
+
+-   Ability to synthesize Code
+-   Chain of Thought Prompting or CoT: This is the ability of the LLM to better solve Arithmetic or Symbolic Reasoning tasks by adding an example of solution of a similar problem, but with an explanantion provided, as part of the prompt.
+
+Shortly after the appearance of ChatGPT, researchers began to embed it within the framework of a larger system which they called Autonomous Agents. The motivation behind this was to design more powerful systems that take advantage of the capabilities of the LLM, and also give it additional skills that ChatGPT lacks. These include skills such as: Surfing the Web, using tools such as calculators and WolframAlpha, invoking other Neural Networks for Image Processing or Auditory Processing tasks, synthesis of Python code (which is then executed) etc. Another important addition was that of a memory module, to store the results of intermediate computations.
+This has resulted in systems that resemble the Decision Tree shown in Figure 3, in which the sequence of Actions needed to get to the goal are now driven by the LLM. Eacg Action itself can be another invocation of the LLM or one of the additional skills that the system can access.
+
+### BabyAGI
+
+
+
+### AutoGPT
+
+
 
 
 
