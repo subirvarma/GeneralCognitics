@@ -68,12 +68,11 @@ There is another type of RL Agent, the most famous example of which the Alpha Ze
 
 The critical difference between the way Alpha Zero plays, vs Type 1 Agents, is shown in Part (a) of the figure. For every move, Alpha Zero runs a quick simulation of the game, starting from the current position (shown in the tree graph), known as a Monte Carlo Tree Search or MCTS. In order to run this simulation, it uses the rules of the game (or model), and also the Neural Network from Part (b). It builds as much of the tree graph as it in the finite time allocated between moves, and from that it figures out the best move to make.  Since there is usually not enough time to complete an entire game during the simulation, the winning probability number V used to make an educated guess whether in fact the last board position in the tree is in fact a winning one. 
 
-The way in which a Type 2 Agent makes it decisions is much closer to the way humans operate. In our daily life, the majority of our decisions are of Type 1 and take place 'automatically' or 'intuitively' as we go about our day. From the models above, this corresponds to single pass through our neural network, which has already been pre-trained to do routine tasks through thousands of iterations of training from our childhood onwards. On the other hand, when we perform a task that is not routine, such as planning for a vacation or playing a board game, then it requires planning. This is accomplished by a tree type decision structure where various alternatives are fleshed out and weighed for their chances of success. This takes up more of our mental capacity, since it requires multiple passes through our neural network. 
-
-
-
+The way in which a Type 2 Agent makes it decisions is much closer to the way humans operate. In our daily life, the majority of our decisions are of Type 1 and take place 'automatically' or 'intuitively' as we go about our day. From the models above, this corresponds to single pass through our neural network, which has already been pre-trained to do routine tasks through thousands of iterations of training from our childhood onwards. On the other hand, when we perform a task that is not routine, such as planning for a vacation or playing a board game, then it requires planning. This is accomplished by a tree type decision structure where various alternatives are fleshed out and weighed for their chances of success. This takes up more of our mental energy, since it requires multiple passes through our neural network. 
 
 ## LLM Based Agents
+
+
 
 ### The SayCAN Robot System with Inner Monologue
 
