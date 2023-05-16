@@ -78,7 +78,20 @@ Large Language Models or LLMs appeared in 2017 with the system called GPT1 from 
 -   Chain of Thought Prompting or CoT: This is the ability of the LLM to better solve Arithmetic or Symbolic Reasoning tasks by adding an example of solution of a similar problem, but with an explanantion provided, as part of the prompt.
 
 Shortly after the appearance of ChatGPT, researchers began to embed it within the framework of a larger system which they called Autonomous Agents. The motivation behind this was to design more powerful systems that take advantage of the capabilities of the LLM, and also give it additional skills that ChatGPT lacks. These include skills such as: Surfing the Web, using tools such as calculators and WolframAlpha, invoking other Neural Networks for Image Processing or Auditory Processing tasks, synthesis of Python code (which is then executed) etc. Another important addition was that of a memory module, to store the results of intermediate computations.
-This has resulted in systems that resemble the Decision Tree shown in Figure 3, in which the sequence of Actions needed to get to the goal are now driven by the LLM. Eacg Action itself can be another invocation of the LLM or one of the additional skills that the system can access.
+This has resulted in systems that resemble the Decision Tree shown in Figure 3, in which the sequence of Actions needed to get to the goal are now driven by the LLM. Each Action itself can be another invocation of the LLM or one of the additional skills that the system can access. 
+
+The common feature of these systems is use of the LLM not so much for generating text, but as a planner. Given a task, the LLM is able to decompose the work into a series of simpler tasks that it then farms out to itself or to other tools available to it. In order to do this, the LLM needs an understanding of the world in which the task is to be performed, i.e., it needs a World Model. Evidence has piled in the last year or two that LLMs do indeed form World Models as a result of their training, and this is reviewed in the next section.
+
+### LLMs and World Models
+
+- Chess
+- Othello
+- Color and Spatial Semantics
+- Language Semantics
+
+
+
+
 
 ### BabyAGI
 
