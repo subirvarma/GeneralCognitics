@@ -90,6 +90,21 @@ The common feature of these systems is use of the LLM not so much for generating
 
 LLMs are trained using using Self Supervised Learning on huge corpora of text, by using the next word prediction method. As a result, an LLM in the inference pahse works by sucecssively predicting the next word, after it has been give a few words to start off with (called the context). The prediction is done in a probabilistic fashion, with the LLM generating a probability distribution over all the words in the vocabulary, from which a particulad word is chosen based on some criteria, such as the word with the highest probability. When LLMs were first invented, over ten years ago, it was thought that the word generation process is purely probabilistic and words are generated on the basis of how frequently the same word occurs in a similar context in the training dadaset. However LLMs were first implemented using less powerful Neural Networks such as RNNs or LSTMs and they were not able to scale up to very large sizes. With the invention of Transformers, it became possible to scale up LLMs to hundreds of billions of parameters, and at the same time train them on massive text datasets. The resulting LLMs, such the GPT3 or the GPT 4 seem to have new emergent properties that were not seen in smaller models, and one of these properties is the presence of a World Model based on the input data. The evidence that is indeed the case has been accumulating, but is not yet universally accepted. For example Yann LeCun has maintained LLMs are incapable of forming World Models, and he has made the suggestion that visual prediction is necessary for this to happen, which is apparantly the way the human brain forms models.
 
+In this section we review the evidence for World Models in LLMs. The first two examples are from the space of Board Games, with Transformers trained not on language, but on sequences of moves. World Models for Board Games are much simpler than those in the real world, but they are also more tractable due to their simplicity. However they are still complicated enough to enable us to investigate their properties. In the following two Sections we first look at the game of Othello followed by Chess.
+
+
+**Transformer based World Models for the Game of Othello**
+
+
+
+**Transformer based World Models in Chess**
+
+
+
+**LLM based World Models**
+
+
+
 ## Planning Using LLMs
 
 
