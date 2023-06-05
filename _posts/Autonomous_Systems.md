@@ -38,8 +38,6 @@ The process of human decision making is captured in the graph shown above. The w
 
 ### Agents of Type 1: Solely Neural Network Based
 
-![](https://subirvarma.github.io/GeneralCognitics/images/agent3.png) 
-
 Figure 4
 
 The Figure above shown an RL Agent that is being trained to play Atari games. The Actions in this case are the movements of the game controller, while the environment or world that the Agent operates in, are the successive screens of the game. Every time the Agent takes an Action, the screen changes and the Agent receives a reward from the game. The Agent, which is a Neural Network, is trained by playing the game hundreds of thousands of times, and observing the effects of its Actions on the reward and the next screen that is displayed (the algorithm used is called DQN which stands for Deep Q-Networks).
