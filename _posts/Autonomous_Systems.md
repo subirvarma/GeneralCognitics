@@ -109,10 +109,21 @@ In this section we review the evidence for World Models in LLMs. The first two e
 
 **Transformer based World Models in Chess**
 
+![](https://subirvarma.github.io/GeneralCognitics/images/agent13.png)
 
 
-**LLM based World Models**
+**Map Building from Text Prompts**
 
+![](https://subirvarma.github.io/GeneralCognitics/images/agent14.png)
+
+
+
+**Isomorphism between the LLM World Model and the Real World**
+
+Patel and Pavlick
+
+
+**Implicit Representations of Meaning in LLMs**
 
 
 ## Planning Using LLMs
