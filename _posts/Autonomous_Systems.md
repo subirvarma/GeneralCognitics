@@ -110,10 +110,9 @@ The probing of the trained LLM was carried out in two ways:
 
 **Starting Square Probing Tasks**: In these probes, once again the model is given a game prefix, but prompted with just the piece type for the next move, such as **B** for bishop. The model's next token prediction tests its ability to predict where the prompted piece type is located on the board, and thus its ability to track pieces.
 
-Toshniwal et.al. showed that the probes are indeed able to predict the the starting squares and the ending squared with a good accuracies (see Tables 5 and 6 in their paper). They also showed that in order to so, the entire game history had to be fed into the model, the performance decreased when only the most recent 50 tokens were fed into the model.
+Toshniwal et.al. showed that the probes are indeed able to predict the the starting squares and the ending squared with a good accuracies (see Tables 5 and 6 in their paper). They also showed that in order to so, the entire game history had to be fed into the model, the performance decreased when only the most recent 50 tokens were fed into the model. 
 
-
-
+We can conclude from this work that the LLM is able to create an internal model of the game state, in which it knows the precise locations of each piece on the board in addition to the allowed legal moves for each of these pieces. It acquires this knowledge entirely from the linear sequence of game positions were fed into it during the training process. It then uses this information to figure out the identity and position of the piece involved in the next move, as well as the ending position of a piece (given its starting position). This paper shows that the LLM is able to do these things by making use of its internal world model, as opposed to auto regressive statistical prediction of the next move from sequence data being fed into it.
 
 ### Transformer based World Models for the Game of Othello
 
