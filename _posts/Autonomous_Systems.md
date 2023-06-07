@@ -116,6 +116,8 @@ We can conclude from this work that the LLM is able to create an internal model 
 
 ### Transformer based World Models for the Game of Othello
 
+[Kenneth Li et.al.](https://arxiv.org/abs/2210.13382) were inspired by Toshniwal et.al.'s work. They observed that the modeling of LLMs using chess moves proved the existence of a world model, however the probes used by Toshniwal et.al. did not precisely locate where this world model was stored within the LLM. Li et.al's work was undertaken with the objective of addressing this issue, and they did it in the context of the board game called Othello. Othello is actually a simpler game than chess, but still complex enough so that its moves cannot be predicted by memorization.
+
 ![](https://subirvarma.github.io/GeneralCognitics/images/agent10.png) 
 
 
