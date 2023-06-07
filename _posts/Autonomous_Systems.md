@@ -85,17 +85,37 @@ The common feature of these systems is use of the LLM not so much for generating
 
 ## LLMs and World Models
 
-- Chess
-- Othello
-- Color and Spatial Semantics
-- Language Semantics
+LLMs are trained using using Self Supervised Learning on huge corpora of text, by using the next word prediction method. As a result, an LLM in the inference phase works by sucecssively predicting the next word, after it has been give a few words to start off with (called the context). The prediction is done in a probabilistic fashion, with the LLM generating a probability distribution over all the words in the vocabulary, from which a particular word is chosen based on some criteria, such as the word with the highest probability. When LLMs were first invented, over ten years ago, it was thought that the word generation process is purely probabilistic and words are generated on the basis of how frequently the same word occurs in a similar context in the training dadaset. However LLMs were first implemented using less powerful Neural Networks such as RNNs or LSTMs and they were not able to scale up to very large sizes. With the invention of Transformers, it became possible to scale up LLMs to hundreds of billions of parameters, and at the same time train them on massive text datasets. The resulting LLMs, such the GPT3 or the GPT4 seem to have new emergent properties that were not seen in smaller models, and one of these properties may be the existence of a World Model based on the input data. The evidence that is indeed the case has been accumulating, but is not yet universally accepted. For example Yann LeCun has maintained LLMs are incapable of forming World Models, and he has made the suggestion that visual prediction is necessary for this to happen, which is apparantly the way the human brain forms models.
 
-LLMs are trained using using Self Supervised Learning on huge corpora of text, by using the next word prediction method. As a result, an LLM in the inference phase works by sucecssively predicting the next word, after it has been give a few words to start off with (called the context). The prediction is done in a probabilistic fashion, with the LLM generating a probability distribution over all the words in the vocabulary, from which a particular word is chosen based on some criteria, such as the word with the highest probability. When LLMs were first invented, over ten years ago, it was thought that the word generation process is purely probabilistic and words are generated on the basis of how frequently the same word occurs in a similar context in the training dadaset. However LLMs were first implemented using less powerful Neural Networks such as RNNs or LSTMs and they were not able to scale up to very large sizes. With the invention of Transformers, it became possible to scale up LLMs to hundreds of billions of parameters, and at the same time train them on massive text datasets. The resulting LLMs, such the GPT 3 or the GPT 4 seem to have new emergent properties that were not seen in smaller models, and one of these properties may be the existence of a World Model based on the input data. The evidence that is indeed the case has been accumulating, but is not yet universally accepted. For example Yann LeCun has maintained LLMs are incapable of forming World Models, and he has made the suggestion that visual prediction is necessary for this to happen, which is apparantly the way the human brain forms models.
+In this section we review the evidence for World Models in LLMs. The first two examples are from the space of Board Games, with Transformers trained not on language, but on sequences of game moves. World Models for Board Games are much simpler than those in the real world, but they are also more tractable due to their simplicity. However they are still complicated enough to enable us to investigate their properties. In the following two Sections we first look at the game of Chess followed by Othello.
 
-In this section we review the evidence for World Models in LLMs. The first two examples are from the space of Board Games, with Transformers trained not on language, but on sequences of game moves. World Models for Board Games are much simpler than those in the real world, but they are also more tractable due to their simplicity. However they are still complicated enough to enable us to investigate their properties. In the following two Sections we first look at the game of Othello followed by Chess.
+### LLM based World Models in Chess
+
+![](https://subirvarma.github.io/GeneralCognitics/images/agent13.png)
+
+Figure 7
+
+Traditional LLMs are built using large Transformer models traned of billions of language tokens. Progress is being made in extracting evidence that they indeed incorporate World Models, however another line of research is to look for World Models in simpler systems, susch as those encountered in games. Board games for example have world models that corresponding to the configuration of the board itself and knowledge of legal moves that can be made. It is much easier to look for evidence of world models within their simpler confines, as opposed to a full scale language model. We review the work by [Toshniwal et. al](https://arxiv.org/abs/2102.13249) in the context of the game of chess. Transformers can be trained on chess moves instead of word tokens, but otherwise the resulting systems are quite similar.
+
+Tohniwal et.al point out that even though chess represents a controlled domain, predicting the next move is not a trivial proposition. Consider the board shown on the LHS of Fig. 1(b), where it is white's turn to move: 
+In order to generate a valid move, the model needs to do the following: (1) Infer that it is white's turn, (2) Represent the locations all the pieces on the board, (3) Select one of the white pieces which can be legally moved, and (4) Make a legal move of the selected piece. Thus the Transformer model has to learn to track the board state, learn to generate moves according to the rules of chess and also learn chess strategies to predict the actual move.
+
+In order to program the chess based LLM, Toshniwal labeled all the positions on the board using a 2D co-ordinate system and then converted chess moves into a linear sequence which the called the Universal Chess Notation (UCI). FOr example the move shown in Figure 1(b) is represented as **f1b5** in UCI, where **f1** is the starting position and **b5** is the ending position. They concerted chess games into a sequence of these kind of moves (for example **e2, e4, e7, e5, g1, f3**), such that each position corresponds to a single token. They also used a slightly modified version of this system for representing sequences in which only the chess piece to be moved is specified, as opposed to its location.
+
+These tokens were then fed into the usual autoregressive language model, using the standard maximum likelihood objective. The training dataset consisted of 200K games, while the validation and test datasets consisted of 15K games each. Another 50K games were set aside for probing the LLM to detect the presence or absence of a world model. The actual Transformer model used was the GPT2-Small architecture from OpenAI.
+
+The probing of the trained LLM was carried out in two ways:
+
+**Ending Square Probing Tasks**: The model is given a game prefix and prompted with the starting square of the next move (**fe** in the sample in Fig. 1(b)). The model's next token prediction represents its prediction for the ending square of this move. This probe tests the model's ability to track the board state (thus deducing the type of piece that is being moved) and follow the rules of chess for that piece, as well as ability to follow strategy.
+
+**Starting Square Probing Tasks**: In these probes, once again the model is given a game prefix, but prompted with just the piece type for the next move, such as **B** for bishop. The model's next token prediction tests its ability to predict where the prompted piece type is located on the board, and thus its ability to track pieces.
+
+Toshniwal et.al. showed that the probes are indeed able to predict the the starting squares and the ending squared with a good accuracies (see Tables 5 and 6 in their paper). They also showed that in order to so, the entire game history had to be fed into the model, the performance decreased when only the most recent 50 tokens were fed into the model.
 
 
-**Transformer based World Models for the Game of Othello**
+
+
+### Transformer based World Models for the Game of Othello
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/agent10.png) 
 
@@ -106,24 +126,18 @@ In this section we review the evidence for World Models in LLMs. The first two e
 ![](https://subirvarma.github.io/GeneralCognitics/images/agent11.png) 
 
 
-
-**Transformer based World Models in Chess**
-
-![](https://subirvarma.github.io/GeneralCognitics/images/agent13.png)
-
-
-**Map Building from Text Prompts**
+### Map Building from Text Prompts
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/agent14.png)
 
 
 
-**Isomorphism between the LLM World Model and the Real World**
+### Isomorphism between the LLM World Model and the Real World
 
 Patel and Pavlick
 
 
-**Implicit Representations of Meaning in LLMs**
+### Implicit Representations of Meaning in LLMs
 
 
 ## Planning Using LLMs
