@@ -127,11 +127,11 @@ Li et.al trained an 8-layer GPT model with an 8-head attention mechanism and a 5
 ${x_t^0}_{t=0}^{T-1}$, 
 where $T$ is the length of the sequence fed so far. The intermediate features for $t^{th}$ token after the $l^{th}$ later is given by $x_t^l$. Note that $x_t^8$ goes into a linear classifier to predict the logits for the next move. 
 
-Li et.al. showed that OthelloGPT was very good at predicting the next legal move, conditioned on the partial games before the move, and this could not be attributed to memorization. Assuming that the model had built in internal representation of the game board, they used a standard tool called a "probe" (see [Tenney et.l.](https://arxiv.org/abs/1905.05950), to look for it. A probe is a classifier or regressor whose input consistes of internal activations of a network, and out is the feature of interest. If the probe is indeed able to do prediction accurately, then this implies that a representation of the feature is encoded in the network's activations.
-
-
+Li et.al. showed that OthelloGPT was very good at predicting the next legal move, conditioned on the partial games before the move, and this could not be attributed to memorization. Assuming that the model had built in internal representation of the game board, they used a standard tool called a "probe" (see [Tenney et.l.](https://arxiv.org/abs/1905.05950), to look for it. A probe is a classifier or regressor whose input consistes of internal activations of a network, and out is the feature of interest. If the probe is indeed able to do prediction accurately, then this implies that a representation of the feature is encoded in the network's activations. For OthelloGPT, the input to the probe was the featutes $x_t^l$ for different layers l. The out $p_\theta(x_t^l)$ of the probe is a 3-way categorical probability distribution, where the classification is into the states Empty, Black or White. They trained a total of 60 different probes, one for each of the 60 postions on the board. They discovered that linear probes did not work very well, however probes with a single hidden layer were able to predict the board state with approximately 98.3% accuracy. The accuracy was highest for the seventh layer $x_t^7$ and decreased to abour 95.4% for $x_t^8$. This implies that the model expends its energy in estimating an accurate pricture of the board state in the initial 7 layers, and then uses this information in the final layers to do the next move prediction.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/agent11.png) 
+
+
 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/agent12.png) 
