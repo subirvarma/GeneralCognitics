@@ -116,15 +116,23 @@ We can conclude from this work that the LLM is able to create an internal model 
 
 ### Transformer based World Models for the Game of Othello
 
-Inspired by Toshniwal et.al.'s work, [Kenneth Li et.al.](https://arxiv.org/abs/2210.13382) observed that the LLMs modeled using chess moves proved the existence of a world model, however the probes used by Toshniwal et.al. did not precisely locate how or where this world model was located within the LLM. Li et.al's work was undertaken with the objective of addressing this issue, and they did it in the context of the board game called Othello. Othello is actually a simpler game than chess, but still complex enough so that its moves cannot be predicted by memorization.
+Inspired by Toshniwal et.al.'s work, [Kenneth Li et.al.](https://arxiv.org/abs/2210.13382) observed that the LLMs modeled using chess moves showed the presence of a world model, however the probes used by Toshniwal et.al. did not precisely locate how or where this world model was located within the LLM. Li et.al's work was undertaken with the objective of addressing this issue, and they did it in the context of the board game called Othello. Othello is actually a simpler game than chess, but still complex enough so that its moves cannot be predicted by memorization.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/agent10.png) 
 
+Figure 8
 
-![](https://subirvarma.github.io/GeneralCognitics/images/agent12.png) 
+The rules of Othello are quite simple and summarized in Fig. 8. There are 64 positions on the board, where the 4 positions in the middle are always occupied to start of the game, so that there 60 possible positions that are occupied during the courese of the game. 
+Li et.al trained an 8-layer GPT model with an 8-head attention mechanism and a 512 dimensional hidden space, in an autoregressive fashion. This is fed with a word embedding consisting of 60 vectors, one for each possible board position to get the sequence 
+${x_t^0}_{t=0}^{T-1}$, 
+where $T$ is the length of the sequence fed so far. The intermediate features for $t^{th}$ token after the $l^{th}$ later is given by $x_t^l$. Note that $x_t^8$ goes into a linear classifier to predict the logits for the next move. 
+
 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/agent11.png) 
+
+
+![](https://subirvarma.github.io/GeneralCognitics/images/agent12.png) 
 
 
 ### Map Building from Text Prompts
