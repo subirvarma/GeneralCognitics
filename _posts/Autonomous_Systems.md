@@ -130,8 +130,9 @@ Li et.al. showed that OthelloGPT was very good at predicting the next legal move
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/agent12.png) 
 
+Figure 9
 
-
+So far we have seen that the board state is captured in the activations $x_t^l$ of OthelloGPT. But how can we show that the model is in fact using the information in the board states to actually make its next move. One way of doing this is by changing the value of $x_t^l$ so that it corresponds to a **different** board state, and then observing the effect of this change on the next move prediction. This procedure was actually carried out by Li et.al., and the results on one of the board configurations is shown in Fig. 9. The bottom left figure shows the board state before the intervention, while the bottom right shows the board state after the intervention, the E7 position has been flipped from black to white. The top left figure has the predicted probabilities before the intervention while the top right shows the probabilities after the intervention. As can be seen, the model modifies its predictions to take the post intervention board position into account, which shows a causal connection between OthelloGPT's board state and its move predictions. The intervention itself is carried out by running the classifier for the position being modified in the backwards direction, and using the error gradients to modify the input $x_t^l$ rather than the classifier parameters.
 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/agent11.png) 
