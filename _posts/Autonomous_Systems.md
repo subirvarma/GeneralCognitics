@@ -141,9 +141,9 @@ So far we have seen that the board state is captured in the activations X(t,l) o
 
 Figure 10
 
-We humans build up a mental image of the environment by means of our visual sense. Since the current generation of LLMs don't have the vision capability, it would be an interesting experiment to find out an LLM can buils a 'mental map' of its environment by text prompts alone. Such a map would correspond to a World Model, and can be used by the LLM to do planning. This experiment was carried out by Bubeck et.al. at Microsoft Research, who used text based games to interact with the LLM. One such experiment is summarized in Fig. 10, in which the LLM is given an objective to navigate through an  get to a Goal.
-consists of two parts: In the first part
-
+We humans build up a mental image of the environment we are in by means of our visual sense. Since the current generation of LLMs don't have the vision capability, it would be an interesting experiment to find out an LLM can build a 'mental map' of its environment by text prompts alone. Such a map would correspond to a World Model, and can be used by the LLM to do planning. This experiment was carried out by Bubeck et.al. at Microsoft Research, who used text based games to interact with the LLM. One such experiment is summarized in Fig. 10, in which the LLM is given an objective to navigate through an environment get to a Goal. The environment consists of a set of interconnected rooms with doors between them, as shown in the map in the bottom left of the figure.
+The experiment consists of two parts: In the first part the LLM is prompted with its objective and this followed by a dialogue in which the LLM issues commande to move left, right, up or down and the human responds with a short description of the effect of the carrying out the command (as shown in the upper RHS of Fig. 10. This continues until the LLM reaches it goal room.
+In the second part of the experiment the experimenters test the ability of the LLM to form a model of all the rooms, by prompting it to describe their locations. The LLMs response is shown in the RHS of Fig. 10, and is also diagrammed on the bottom RHS of the figure. As we can see the LLMs map of the rooms correponds to the true map, and the LLM is able to paint an accurate picture of the rooms that it has been in. The response also includes descriptions of the rooms based on what LLM 'imagines' them to be, based on their names.
 
 
 ### Isomorphism between the LLM World Model and the Real World
