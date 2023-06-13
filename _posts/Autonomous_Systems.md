@@ -134,6 +134,7 @@ Figure 9
 
 So far we have seen that the board state is captured in the activations X(t,l) of OthelloGPT. But how can we show that the model is in fact using the information in the board states to actually make its next move. One way of doing this is by changing the value of X(t,l) so that it corresponds to a **different** board state, and then observing the effect of this change on the next move prediction. This procedure was actually carried out by Li et.al., and the results on one of the board configurations is shown in Fig. 9. The bottom left figure shows the board state before the intervention, while the bottom right shows the board state after the intervention, the E7 position has been flipped from black to white. The top left figure has the predicted probabilities before the intervention while the top right shows the probabilities after the intervention. As can be seen, the model modifies its predictions to take the post intervention board position into account, which shows a causal connection between OthelloGPT's board state and its move predictions. The intervention itself is carried out by running the classifier for the position being modified in the backwards direction, and using the error gradients to modify the input X(t,l) rather than the classifier parameters.
 
+The examples of World Models that we have presented so far are from the world of games, with the LLM tarined on the linear sequence of board positions. The next few examples involve LLMs trained on language. These presumably learn a much more complex World Model, and it is interesting to find out their capabilities in this area.
 
 ### Map Building from Text Prompts
 
@@ -141,14 +142,34 @@ So far we have seen that the board state is captured in the activations X(t,l) o
 
 Figure 10
 
-We humans build up a mental image of the environment we are in by means of our visual sense. Since the current generation of LLMs don't have the vision capability, it would be an interesting experiment to find out an LLM can build a 'mental map' of its environment by text prompts alone. Such a map would correspond to a World Model, and can be used by the LLM to do planning. This experiment was carried out by Bubeck et.al. at Microsoft Research, who used text based games to interact with the LLM. One such experiment is summarized in Fig. 10, in which the LLM is given an objective to navigate through an environment get to a Goal. The environment consists of a set of interconnected rooms with doors between them, as shown in the map in the bottom left of the figure.
+We humans build up a mental image of the environment we are in by means of our visual sense. Since the current generation of LLMs don't have the vision capability, it would be an interesting experiment to find out an LLM can build a 'mental map' of its environment by text prompts alone. Such a map would correspond to a World Model, and can be used by the LLM to do planning. This experiment was carried out by [Bubeck et.al.](https://arxiv.org/abs/2303.12712) at Microsoft Research, who used text based games to interact with the LLM GPT4. One such experiment is summarized in Fig. 10, in which the LLM is given an objective to navigate through an environment get to a Goal. The environment consists of a set of interconnected rooms with doors between them, as shown in the map in the bottom left of the figure.
 The experiment consists of two parts: In the first part the LLM is prompted with its objective and this followed by a dialogue in which the LLM issues commande to move left, right, up or down and the human responds with a short description of the effect of the carrying out the command (as shown in the upper RHS of Fig. 10. This continues until the LLM reaches it goal room.
-In the second part of the experiment the experimenters test the ability of the LLM to form a model of all the rooms, by prompting it to describe their locations. The LLMs response is shown in the RHS of Fig. 10, and is also diagrammed on the bottom RHS of the figure. As we can see the LLMs map of the rooms correponds to the true map, and the LLM is able to paint an accurate picture of the rooms that it has been in. The response also includes descriptions of the rooms based on what LLM 'imagines' them to be, based on their names.
+In the second part of the experiment the experimenters test the ability of the LLM to form a model of all the rooms, by prompting it to describe their locations. GPT4's response is shown in the RHS of Fig. 10, and is also diagrammed on the bottom RHS of the figure. As we can see the LLMs map of the rooms correponds to the true map, and the LLM is able to paint an accurate picture of the rooms that it has been in. The response also includes descriptions of the rooms based on what LLM 'imagines' them to be, based on their names.
+
+This paper shows that LLMS build an internal map of the world based on the information that is being fed into them. They presumably use this internal map or world model to formulate their output, as opposed to purely statistical next word prediction. This allows them to handle the 'covariate shift' problem i.e., be able to give effective responses to inputs that are not seen as part of their training data.
 
 
 ### Isomorphism between the LLM World Model and the Real World
 
-Patel and Pavlick
+The World Model that LLMs build is obviously of a different nature, than the one that exists in our brains. The latter is based on our sense of vision, sound, touch etc and is grounded in the real world. The World Model in LLMs on the other hand is built entirely on the basis of text sequences, and since LLMs are not embodied and have no sense organs, it is not grounded in the real world. If so, what is the relationship between the LLM's World Model, and the real world? This question was explored by [Patel and Pavlick](https://openreview.net/forum?id=gJcEM8sxHK), who showed that in certain cases the LLM's World Model was isomorphic to a grounded World Model of the type that exists in our brains. This means that the structure of relations between concepts that is learnt by the LLM in text form, is identical to what a grounded model would learn. They carried out their investigation in the areas of Spatial Terms (for example left and right), Cardinal Directions (for example East and West) and RGB Colors. 
+
+![](https://subirvarma.github.io/GeneralCognitics/images/agent15.png)
+
+Figure 11
+
+Figure 11 shows examples of how the concepts for Sptial Terms, Cardinal Directions and RGB Colors are grounded. In each case the LHS figure shows the grounded concepts, while the RHS has textual representations of the groundings that can serve as prompts for LLMs. In the first two cases the groundings are done using grid world representations, while in the last case it uses RGB codes associated with the various colors.
+
+![](https://subirvarma.github.io/GeneralCognitics/images/agent16.png)
+
+Figure 12
+
+Figure 12 shows an example of a 
+
+
+
+
+
+
 
 
 ### Implicit Representations of Meaning in LLMs
