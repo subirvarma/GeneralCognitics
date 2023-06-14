@@ -1,4 +1,7 @@
-# The Evolution of Agents: From Reinforcement Learning to LLM Agents
+---
+layout: default
+title: "The Evolution of Agents: From Reinforcement Learning to LLM Agents"
+---
 
 ## Introduction
 
@@ -25,6 +28,8 @@ Figure 1
 The easiest way to understand the discipline of RL is to think about how animals, such as a dog, get trained. Since they don't understand human language, the only way to make them do what we want is by rewarding them when they perform the correct Action. Usually this messsage does not get to the dog with only a single instance of the reward, but has to be repeated multiple times before the animal 'gets it' (hence the word 'reinforcement' in the name). The Agent in this case is the dog, and a more general picture of the framework used in RL is shown in Figure 1. There is an Agent that is capable of taking one or more Actions, and an Action results in some change in the environment the Agent is operating in. The results of the environment change are communicated back to the Agent, in addition to a scalar number called the **Reward**. In order to make the Agent acheive some objective, which usually takes several Actions and thus several traversals though the loop, the Agent is **trained**. During the training, if the Agent's Actions are such that they make progress towards the objective, then those Actions result in higher reward, and if not then the reward is witheld. Hence the Agent gets trained by means of the reward signal, and carries out Actions that result in the maximization of the sum of the rewards it receives over the course of the task.
 
 This technique of using the reward signal as means to make the RL Agent do what we want it to do, works as long as the objective is somewhat simple and of limited scope. However to build Agents that are capable to doing more human-like tasks RL runs into problems. For example if we want to design an robot (controlled by a RL Agent) that is capable of doing our dishes, what reward signal should we use? The basic issue is that the RL Agent does not have a mental model of the world we live in, and also cannot understand language. If you ask a human to do something, how does he (or she) go about the job? We can modify Figure 1 slightly to show this, as in Figure 2.
+
+$a_t^i$
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/agent2.png) 
 
