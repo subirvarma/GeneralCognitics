@@ -114,7 +114,7 @@ Toshniwal et.al. showed that the probes are indeed able to predict the the start
 
 We can conclude from this work that the LLM is able to create an internal model of the game state, so that it knows the precise locations of each piece on the board in addition to the allowed legal moves for each of these pieces. It acquires this knowledge entirely from the linear sequence of game moves were fed into it during the training process. It then uses this information to figure out the identity and position of the piece involved in the next move, as well as the ending position of a piece (given its starting position). This paper makes the case that the LLM is able to do these things by making use of its internal world model, as opposed to auto regressive statistical prediction of the next move from sequence data being fed into it.
 
-### Transformer based World Models for the Game of Othello
+### LLM based World Models for the Game of Othello
 
 Inspired by Toshniwal et.al.'s work, [Kenneth Li et.al.](https://arxiv.org/abs/2210.13382) observed that the LLMs modeled using chess moves showed the presence of a world model, however the probes used by Toshniwal et.al. did not precisely locate how or where this world model was located within the LLM. Li et.al's work was undertaken with the objective of addressing this issue, and they did it in the context of the board game called Othello. Othello is actually a simpler game than chess, but still complex enough so that its moves cannot be predicted by memorization.
 
@@ -149,7 +149,7 @@ In the second part of the experiment the experimenters test the ability of the L
 This paper shows that LLMs build an internal map of the world based on the information that is being fed into them. They presumably use this internal map or World Model to formulate their output, as opposed to purely statistical next word prediction. This allows them to handle the 'covariate shift' problem i.e., be able to give effective responses to inputs that are not part of their training data.
 
 
-### Isomorphism between the LLM World Model and the Real World
+### Isomorphism between the LLM World Models and the Real World
 
 The World Model that LLMs build is obviously of a different nature, than the one that exists in our brains. The latter is based on our sense of vision, sound, touch etc and is grounded in the real world. The World Model in LLMs on the other hand is built entirely on the basis of text sequences, and since LLMs are not embodied and have no sense organs, it is not grounded in the real world. If so, what is the relationship between the LLM's World Model, and the real world? This question was explored by [Patel and Pavlick](https://openreview.net/forum?id=gJcEM8sxHK), who showed that in certain cases the LLM's World Model is isomorphic to a grounded World Model built by interacting with the real world. This means that the structure of relations between concepts that is learnt by the LLM in text form, is identical to what a grounded model would learn. They carried out their investigation in the areas of Spatial Terms (for example left and right), Cardinal Directions (for example East and West) and RGB Colors. 
 
@@ -175,15 +175,6 @@ Patel and Pavlick also showed the following:
 -    *Generalization to Unseen Concepts*: Instead of grounding the entire conceptual structure to a grounded world, what if we ground only a small subset of points in the domain. Will the model still be able to ground the entire conceptual domain? Patel and Pavlick tested this hypothesis for the Cardinal Directions case, and showed that even if the model was grounded with a subspace consisting of the directions *north* and *east* for example, it was still able to identify the directions *south* and *west*, even though they didn't occur in the in-context training examples. They repeated this experiment for the case of Color Grounding as shown in Fig. 13. The grounding was done by using 60 in-context examples of colors which are mostly shades of red, with only a single example of a shade of blue. Inspite of this, the GPT3 model was able to correctly  identify the shade of blue that it was tested with.
 
 These examples suggest that the GPT3 model has built an internal World Model based on its training examples, so that even if it is grounded on a subset of the world, it is able to use its world model to map to the entire space. In other words it already the concepts of Spatial Orientations, Cardinal Directions and Colors and has mapped them to an internal representation that it has built. Once a subset of these concepts are mapped in the Grounded World, the other points in the space also get automatically mapped. In other words the model's internal World Model is Isomorpic to the Grounded World Model (i.e., they have one-to-one correspondence with each other).
-
-
-
-
-
-
-
-
-### Implicit Representations of Meaning in LLMs
 
 
 ## Planning Using LLMs
