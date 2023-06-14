@@ -26,6 +26,8 @@ The easiest way to understand the discipline of RL is to think about how animals
 
 This technique of using the reward signal as means to make the RL Agent do what we want it to do, works as long as the objective is somewhat simple and of limited scope. However to build Agents that are capable to doing more human-like tasks RL runs into problems. For example if we want to design an robot (controlled by a RL Agent) that is capable of doing our dishes, what reward signal should we use? The basic issue is that the RL Agent does not have a mental model of the world we live in, and also cannot understand language. If you ask a human to do something, how does he (or she) go about the job? We can modify Figure 1 slightly to show this, as in Figure 2.
 
+$a_t^i$
+
 ![](https://subirvarma.github.io/GeneralCognitics/images/agent2.png) 
 
 Figure 2
