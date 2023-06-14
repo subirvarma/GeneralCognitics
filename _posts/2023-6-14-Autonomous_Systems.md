@@ -155,17 +155,31 @@ This paper shows that LLMs build an internal map of the world based on the infor
 
 ### Isomorphism between the LLM World Model and the Real World
 
-The World Model that LLMs build is obviously of a different nature, than the one that exists in our brains. The latter is based on our sense of vision, sound, touch etc and is grounded in the real world. The World Model in LLMs on the other hand is built entirely on the basis of text sequences, and since LLMs are not embodied and have no sense organs, it is not grounded in the real world. If so, what is the relationship between the LLM's World Model, and the real world? This question was explored by [Patel and Pavlick](https://openreview.net/forum?id=gJcEM8sxHK), who showed that in certain cases the LLM's World Model was isomorphic to a grounded World Model of the type that exists in our brains. This means that the structure of relations between concepts that is learnt by the LLM in text form, is identical to what a grounded model would learn. They carried out their investigation in the areas of Spatial Terms (for example left and right), Cardinal Directions (for example East and West) and RGB Colors. 
+The World Model that LLMs build is obviously of a different nature, than the one that exists in our brains. The latter is based on our sense of vision, sound, touch etc and is grounded in the real world. The World Model in LLMs on the other hand is built entirely on the basis of text sequences, and since LLMs are not embodied and have no sense organs, it is not grounded in the real world. If so, what is the relationship between the LLM's World Model, and the real world? This question was explored by [Patel and Pavlick](https://openreview.net/forum?id=gJcEM8sxHK), who showed that in certain cases the LLM's World Model is isomorphic to a grounded World Model built by interacting with the real world. This means that the structure of relations between concepts that is learnt by the LLM in text form, is identical to what a grounded model would learn. They carried out their investigation in the areas of Spatial Terms (for example left and right), Cardinal Directions (for example East and West) and RGB Colors. 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/agent15.png)
 
 Figure 11
 
-Figure 11 shows examples of how the concepts for Sptial Terms, Cardinal Directions and RGB Colors are grounded. In each case the LHS figure shows the grounded concepts, while the RHS has textual representations of the groundings that can serve as prompts for LLMs. In the first two cases the groundings are done using grid world representations, while in the last case it uses RGB codes associated with the various colors.
+Figure 11 shows examples of how the concepts for Sptial Terms, Cardinal Directions and RGB Colors are grounded. In each case the LHS figure shows the grounded concepts, while the RHS has textual representations of the groundings that can serve as prompts for LLMs. In the first two cases the groundings are done using grid world representations, while in the last case it uses 3 dimensional RGB codes associated with the various colors.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/agent16.png)
 
 Figure 12
+
+Figure 12 shows an example of the grounding process for the Spatial Terms case. As shown in the box on the LHS, a prompt uses the Few-Shot technique and consists of sequence of twenty in-context examples of a grid in which the location of the '1' corresponds to the grounding, followed by the text instantiation of the concept. The last element in the prompt is the question to the model and the two boxes on the right are examples of responses. The top box is for a smaller model called GPT2 with 124M parameters, while the bottom box is for GPT3 with 175B parameters.  As we can the larger model correctly predicts the spatial orientation as 'left', while the smaller model is not able to do so. This shows that the model's ability to form a World Model from its training data is an Emergent Property, i.e., it forms only after the model size exceeds a threshold. This example also shows that the GPT3 model is able to generalize the concept of 'left' to "unseen worlds'. For example the grid in the final question prompt is different from all the other 20 grids used for in-context learning.
+
+![](https://subirvarma.github.io/GeneralCognitics/images/agent17.png)
+
+Figure 13
+
+Patel and Pavlick also showed the following:
+
+-    *Generalization to Rotated Worlds*: Patel and Pavlick also showed that the concepts of Spatial Orientation and Cardinal Directions also continue to hold in Rotated Worlds. In other words the GPT3 model understands that these are relative concepts, and if the grounding prompt shows a rotated 'left' for example, then the 'right' is also rotated by the same amount. This also shows that the models are not simply memorizing these concepts.
+-    *Generalization to Unseen Concepts*: Instead of grounding the entire conceptual structure to a grounded world, what if we ground only a small subset of points in the domain. Will the model still be able to ground the entire conceptual domain? Patel and Pavlick tested this hypothesis for the Cardinal Directions case, and showed that even if the model was grounded with a subspace consisting of the directions *north* and *east* for example, it was still able to identify the directions *south* and *west*, even though they didn't occur in the in-context training examples. They repeated this experiment for the case of Color Grounding as shown in Fig. 13. The grounding was done by using 60 in-context examples of colors which are mostly shades of red, with only a single example of a shade of blue. Inspite of this, the GPT3 model was able to correctly  identify the shade of blue that it was tested with.
+
+These examples suggest that the GPT3 model has built an internal World Model based on its training examples, so that even if it is grounded on a subset of the world, it is able to use its world model to map to the entire space. In other words it already the concepts of Spatial Orientations, Cardinal Directions and Colors and has mapped them to an internal representation that it has built. Once a subset of these concepts are mapped in the Grounded World, the other points in the space also get automatically mapped. In other words the model's internal World Model is Isomorpic to the Grounded World Model (i.e., they have one-to-one correspondence with each other).
+
 
 
 
