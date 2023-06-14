@@ -1,4 +1,4 @@
-# The Evolution of Agents: From Reinforcement Learning to LLM Agents
+# LLM Based Autonomous Agents
 
 ## Introduction
 
