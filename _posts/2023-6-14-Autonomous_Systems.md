@@ -3,6 +3,8 @@ layout: default
 title: "The Evolution of Agents: From Reinforcement Learning to LLM Agents"
 ---
 
+# LLM Based Autonomous Agents
+
 ## Introduction
 
 An Intelligent Agent is defined as a system that is capable of doing tasks that are usually associated with a human worker. These tasks involve taking multiple actions to achieve an objective and in some cases also be able to react to feedback received during the course of the task. The most obvious example of one would be a robot or a game playing Agent. Industrial Robots have also been around for some time, but their behavior is hardwired and they are not capable of showing the adaptibility and flexibility one associated with a human. 
