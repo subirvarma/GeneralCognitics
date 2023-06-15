@@ -31,8 +31,6 @@ The easiest way to understand the discipline of RL is to think about how animals
 
 This technique of using the reward signal as means to make the RL Agent do what we want it to do, works as long as the objective is somewhat simple and of limited scope. However to build Agents that are capable to doing more human-like tasks RL runs into problems. For example if we want to design an robot (controlled by a RL Agent) that is capable of doing our dishes, what reward signal should we use? The basic issue is that the RL Agent does not have a mental model of the world we live in, and also cannot understand language. If you ask a human to do something, how does he (or she) go about the job? We can modify Figure 1 slightly to show this, as in Figure 2.
 
-$a_t^i$
-
 ![](https://subirvarma.github.io/GeneralCognitics/images/agent2.png) 
 
 Figure 2
@@ -193,6 +191,11 @@ These examples suggest that the GPT3 model has built an internal World Model bas
 
 [Wei et.al.](https://arxiv.org/abs/2201.11903)
 
+![](https://subirvarma.github.io/GeneralCognitics/images/agent24.png)
+
+
+[Wang et.al](https://arxiv.org/pdf/2203.11171.pdf)
+
 
 
 
@@ -219,6 +222,19 @@ These examples suggest that the GPT3 model has built an internal World Model bas
 
 [Yao et.al.](https://arxiv.org/abs/2305.10601)
 
+![](https://subirvarma.github.io/GeneralCognitics/images/agent25.png)
+
+![](https://subirvarma.github.io/GeneralCognitics/images/agent26.png)
+
+
+[Hao et.al.](https://arxiv.org/abs/2305.14992): MCTS with ToT
+
+
+
+### Human Feedback to Improve Multi-Step Reasoning
+
+[Lightman et.al.](https://arxiv.org/abs/2305.20050)
+
 
 
 ### Generative Agents with Memory and Planning Abilities
@@ -236,6 +252,7 @@ These examples suggest that the GPT3 model has built an internal World Model bas
 
 
 ## The Langchain Framework
+
 
 ## Connections with Kahnemann-Tversky Theory of Human Decision Making
 
