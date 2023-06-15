@@ -185,6 +185,11 @@ These examples suggest that the GPT3 model has built an internal World Model bas
 
 [Wei et.al.](https://arxiv.org/abs/2201.11903)
 
+![](https://subirvarma.github.io/GeneralCognitics/images/agent24.png)
+
+
+[Wang et.al](https://arxiv.org/pdf/2203.11171.pdf)
+
 
 
 
@@ -210,6 +215,19 @@ These examples suggest that the GPT3 model has built an internal World Model bas
 ![](https://subirvarma.github.io/GeneralCognitics/images/agent23.png)
 
 [Yao et.al.](https://arxiv.org/abs/2305.10601)
+
+![](https://subirvarma.github.io/GeneralCognitics/images/agent25.png)
+
+![](https://subirvarma.github.io/GeneralCognitics/images/agent26.png)
+
+
+[Hao et.al.](https://arxiv.org/abs/2305.14992): MCTS with ToT
+
+
+
+### Human Feedback to Improve Multi-Step Reasoning
+
+[Lightman et.al.](https://arxiv.org/abs/2305.20050)
 
 
 
