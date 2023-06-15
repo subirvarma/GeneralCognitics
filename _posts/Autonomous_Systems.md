@@ -179,8 +179,45 @@ These examples suggest that the GPT3 model has built an internal World Model bas
 
 ## Planning Using LLMs
 
+### Chain of Thought (CoT) Prompting and Self Consistency with CoT
+
+![](https://subirvarma.github.io/GeneralCognitics/images/agent18.png)
+
+[Wei et.al.](https://arxiv.org/abs/2201.11903)
 
 
+
+
+### Inner Monologue in Embodied Agents
+
+![](https://subirvarma.github.io/GeneralCognitics/images/agent19.png)
+
+[Huang, Xia et.al](https://arxiv.org/abs/2207.05608)
+
+![](https://subirvarma.github.io/GeneralCognitics/images/agent20.png)
+
+[Huang, Abbeel et.al.](https://arxiv.org/abs/2201.07207)
+
+
+### Tree of Thought Prompting
+
+![](https://subirvarma.github.io/GeneralCognitics/images/agent21.png)
+
+[Long](https://arxiv.org/abs/2305.08291)
+
+![](https://subirvarma.github.io/GeneralCognitics/images/agent22.png)
+
+![](https://subirvarma.github.io/GeneralCognitics/images/agent23.png)
+
+[Yao et.al.](https://arxiv.org/abs/2305.10601)
+
+
+
+### Generative Agents with Memory and Planning Abilities
+
+![](https://subirvarma.github.io/GeneralCognitics/images/agent7.png) 
+
+![](https://subirvarma.github.io/GeneralCognitics/images/agent8.png) 
 
 
 ### BabyAGI
@@ -190,19 +227,7 @@ These examples suggest that the GPT3 model has built an internal World Model bas
 ### AutoGPT
 
 
-
-
-
-### The SayCAN Robot System with Inner Monologue
-
-![](https://subirvarma.github.io/GeneralCognitics/images/agent6.png) 
-
-
-### Generative Agents with Memory and Planning Abilities
-
-![](https://subirvarma.github.io/GeneralCognitics/images/agent7.png) 
-
-![](https://subirvarma.github.io/GeneralCognitics/images/agent8.png) 
+## The Langchain Framework
 
 
 ## Connections with Kahnemann-Tversky Theory of Human Decision Making
