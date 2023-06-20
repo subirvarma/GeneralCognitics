@@ -146,7 +146,7 @@ We humans build up a mental image of the environment we are in by means of our v
 The experiment consists of two parts: In the first part the LLM is prompted with its objective and this followed by a dialogue in which the LLM issues commands to move left, right, up or down and the human responds with a short description of the effect of the carrying out the command (as shown in the upper RHS of Fig. 10). This continues until the LLM reaches it goal room.
 In the second part of the experiment the experimenters test the ability of the LLM to form a model of all the rooms, by prompting it to describe their locations. GPT4's response is shown in the RHS of Fig. 10, and is also diagrammed on the bottom RHS of the figure. As we can see the LLM's map of the rooms corresponds to the true map, and the LLM is able to paint an accurate picture of the rooms that it has been in. The response also includes descriptions of the rooms based on what LLM 'imagines' them to be, based on their names.
 
-This paper shows that LLMs build an internal map of the world based on the information that is being fed into them. They presumably use this internal map or World Model to formulate their output, as opposed to purely statistical next word prediction. This allows them to handle the 'covariate shift' problem i.e., be able to give effective responses to inputs that are not part of their training data.
+This paper shows that LLMs build an internal map of the world based on the information that is being fed into them. They presumably use this internal map or World Model to formulate their output, as opposed to purely statistical next word prediction. This allows them to handle the 'covariate shift' problem i.e., be able to give effective responses to inputs that are not part of their training data. This example of World Model building differs from the prior two, since by using GPT4 we are starting with an LLM that has already been trained. Based on this training, the GPT4 has presumably formed a model for the world, which is why it is able to understand concepts such as 'left', 'right' or 'up', and 'down'. During the course of the chat session which takes place in the inference mode, GPT4 forms a more specialized World Model that is specific to the information it is being fed during the chat.
 
 
 ### Isomorphism between the LLM World Models and the Real World
@@ -179,13 +179,27 @@ These examples suggest that the GPT3 model has built an internal World Model bas
 
 ## Planning Using LLMs
 
+Forming a World Model is only one aspect of how an Intelligent Agent works. The other critical function is to be able to formulate an Action plan, which ultimately result in successful completion of the task assigned to the Agent. The Decision Tree diagram shown in Figure 3 is a useful reference to keep in mind, since we will see that most planning techniques fit within this framework. 
+
 ### Chain of Thought (CoT) Prompting and Self Consistency with CoT
+
+LLMs were originally prompted by asking them to respond or solve a problem by posing the question, with the expectation being that the LLM with respond with the appropriate answer. This technique worked well for simpler problems, but researchers dicovered that if the solution to the problem involved multistep reasoning, then the simple prompt did not work very well. [Wei et.al.](https://arxiv.org/abs/2201.11903) showed that the results could be considerably improved if the LLM was prompted using a prompting technique that they called 'Chain of Thought' or CoT prompting. 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/agent18.png)
 
-[Wei et.al.](https://arxiv.org/abs/2201.11903)
+Figure 14
+
+Examples of CoT prompts are shown in Figure 14 with the CoT in colored highlight, using the format <input, chain of thought, output>, for arithemetic, commonsense and symbolic reasoning benchmarks. As can be seen, the CoT prompt is essentially decomposing the solution to the problem into multiple steps. For example, the CoT for the arithmetic problem in the top left can be decomposed into:
+
+-  Initial state $S_0$: Roger has 5 tennis balls
+-  Action 1: He buys 2 more cans of tennis balls, with 3 balls per can.
+-  State $S_1$: Since 2 cans hold 6 balls, Roger now has 11 tennis balls.
+
+This decomposition into multiple actions is more explicit in the SayCan robot example in the lower left. Going back to the decision tree shown in Fig. 3, the CoT prompt can be considered to be an example of a succesful tarversal of the tree, starting from some initial state. By giving the LLM one or more examples of successful traversals. it is able to better replicate the multistep reasoning process involved. Wei et.al. also discovered that the CoT prompting method only works well for the larger models with at least 100B parameters, hence it an emergent property.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/agent24.png)
+
+
 
 
 [Wang et.al](https://arxiv.org/pdf/2203.11171.pdf)
