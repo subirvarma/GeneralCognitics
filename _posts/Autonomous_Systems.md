@@ -89,7 +89,7 @@ LLMs are trained using using Self Supervised Learning on huge corpora of text, b
 
 In this section we review the evidence for World Models in LLMs. The first two examples are from the space of Board Games, with Transformers trained not on language, but on sequences of game moves. World Models for Board Games are much simpler than those in the real world, but they are also more tractable due to their simplicity. However they are still complicated enough to enable us to investigate their properties. In the following two Sections we first look at the game of Chess followed by Othello. It is shown that even though the model is trained to predict just the next move, it actually learns to compute the full board state at each move, i.e. the World Model. Hence rather than predicting the next move based on statistical correlations about the distribution of moves, the LLM actually learns to model the underlying process that generated that data.
 
-### LLM based World Models in Chess
+## LLM based World Models in Chess
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/agent13.png)
 
@@ -114,7 +114,7 @@ Toshniwal et.al. showed that the probes are indeed able to predict the the start
 
 We can conclude from this work that the LLM is able to create an internal model of the game state, so that it knows the precise locations of each piece on the board in addition to the allowed legal moves for each of these pieces. It acquires this knowledge entirely from the linear sequence of game moves were fed into it during the training process. It then uses this information to figure out the identity and position of the piece involved in the next move, as well as the ending position of a piece (given its starting position). This paper makes the case that the LLM is able to do these things by making use of its internal world model, as opposed to auto regressive statistical prediction of the next move from sequence data being fed into it.
 
-### LLM based World Models for the Game of Othello
+## LLM based World Models for the Game of Othello
 
 Inspired by Toshniwal et.al.'s work, [Kenneth Li et.al.](https://arxiv.org/abs/2210.13382) observed that the LLMs modeled using chess moves showed the presence of a world model, however the probes used by Toshniwal et.al. did not precisely locate how or where this world model was located within the LLM. Li et.al's work was undertaken with the objective of addressing this issue, and they did it in the context of the board game called Othello. Othello is actually a simpler game than chess, but still complex enough so that its moves cannot be predicted by memorization.
 
@@ -136,7 +136,7 @@ So far we have seen that the board state is captured in the activations $X_t^l$ 
 
 The examples of World Models that we have presented so far are from the world of games, with the LLM tarined on the linear sequence of board positions. The next few examples involve LLMs trained on language. These presumably learn a much more complex World Model, and it is interesting to find out their capabilities in this area.
 
-### Map Building from Text Prompts
+## Map Building from Text Prompts
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/agent14.png)
 
@@ -149,7 +149,7 @@ In the second part of the experiment the experimenters test the ability of the L
 This paper shows that LLMs build an internal map of the world based on the information that is being fed into them. They presumably use this internal map or World Model to formulate their output, as opposed to purely statistical next word prediction. This allows them to handle the 'covariate shift' problem i.e., be able to give effective responses to inputs that are not part of their training data. This example of World Model building differs from the prior two, since by using GPT4 we are starting with an LLM that has already been trained. Based on this training, the GPT4 has presumably formed a model for the world, which is why it is able to understand concepts such as 'left', 'right' or 'up', and 'down'. During the course of the chat session which takes place in the inference mode, GPT4 forms a more specialized World Model that is specific to the information it is being fed during the chat.
 
 
-### Isomorphism between the LLM World Models and the Real World
+## Isomorphism between the LLM World Models and the Real World
 
 The World Model that LLMs build is obviously of a different nature, than the one that exists in our brains. The latter is based on our sense of vision, sound, touch etc and is grounded in the real world. The World Model in LLMs on the other hand is built entirely on the basis of text sequences, and since LLMs are not embodied and have no sense organs, it is not grounded in the real world. If so, what is the relationship between the LLM's World Model, and the real world? This question was explored by [Patel and Pavlick](https://openreview.net/forum?id=gJcEM8sxHK), who showed that in certain cases the LLM's World Model is isomorphic to a grounded World Model built by interacting with the real world. This means that the structure of relations between concepts that is learnt by the LLM in text form, is identical to what a grounded model would learn. They carried out their investigation in the areas of Spatial Terms (for example left and right), Cardinal Directions (for example East and West) and RGB Colors. 
 
@@ -174,16 +174,16 @@ Patel and Pavlick also showed the following:
 -    *Generalization to Rotated Worlds*: Patel and Pavlick also showed that the concepts of Spatial Orientation and Cardinal Directions also continue to hold in Rotated Worlds. In other words the GPT3 model understands that these are relative concepts, and if the grounding prompt shows a rotated 'left' for example, then the 'right' is also rotated by the same amount. This also shows that the models are not simply memorizing these concepts.
 -    *Generalization to Unseen Concepts*: Instead of grounding the entire conceptual structure to a grounded world, what if we ground only a small subset of points in the domain. Will the model still be able to ground the entire conceptual domain? Patel and Pavlick tested this hypothesis for the Cardinal Directions case, and showed that even if the model was grounded with a subspace consisting of the directions *north* and *east* for example, it was still able to identify the directions *south* and *west*, even though they didn't occur in the in-context training examples. They repeated this experiment for the case of Color Grounding as shown in Fig. 13. The grounding was done by using 60 in-context examples of colors which are mostly shades of red, with only a single example of a shade of blue. Inspite of this, the GPT3 model was able to correctly  identify the shade of blue that it was tested with.
 
-These examples suggest that the GPT3 model has built an internal World Model based on its training examples, so that even if it is grounded on a subset of the world, it is able to use its world model to map to the entire space. In other words it already the concepts of Spatial Orientations, Cardinal Directions and Colors and has mapped them to an internal representation that it has built. Once a subset of these concepts are mapped in the Grounded World, the other points in the space also get automatically mapped. In other words the model's internal World Model is Isomorpic to the Grounded World Model (i.e., they have one-to-one correspondence with each other).
+These examples suggest that the GPT3 model has built an internal World Model based on its training examples, so that even if it is grounded on a subset of the world, it is able to use its world model to map to the entire space. In other words it already has the concepts of Spatial Orientations, Cardinal Directions and Colors and has mapped them to an internal representation that it has built. Once a subset of these concepts are mapped in the Grounded World, the other points in its internal space also get automatically mapped. In other words the model's internal World Model is Isomorpic to the Grounded World Model (i.e., they have one-to-one correspondence with each other).
 
 
 ## Planning Using LLMs
 
 Forming a World Model is only one aspect of how an Intelligent Agent works. The other critical function is to be able to formulate an Action plan, which ultimately result in successful completion of the task assigned to the Agent. The Decision Tree diagram shown in Figure 3 is a useful reference to keep in mind, since we will see that most planning techniques fit within this framework. 
 
-### Chain of Thought (CoT) Prompting and Self Consistency with CoT
+## Chain of Thought (CoT) Prompting and Self Consistency with CoT
 
-LLMs were originally prompted by asking them to respond or solve a problem by posing the question, with the expectation being that the LLM with respond with the appropriate answer. This technique worked well for simpler problems, but researchers dicovered that if the solution to the problem involved multistep reasoning, then the simple prompt did not work very well. [Wei et.al.](https://arxiv.org/abs/2201.11903) showed that the results could be considerably improved if the LLM was prompted using a prompting technique that they called 'Chain of Thought' or CoT prompting. 
+LLMs were originally prompted by asking them to respond or solve a problem by posing a question as a prompt, with the expectation being that the LLM will complete the prompt with the appropriate answer. This technique worked well for simpler problems, but researchers dicovered that if the solution to the problem involved multistep reasoning, then simple prompting did not work very well. [Wei et.al.](https://arxiv.org/abs/2201.11903) showed that the results could be considerably improved if the LLM was prompted using a prompting technique that they called 'Chain of Thought' or CoT prompting. 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/agent18.png)
 
@@ -195,30 +195,27 @@ Examples of CoT prompts are shown in Figure 14 with the CoT in colored highlight
 -  Action 1: He buys 2 more cans of tennis balls, with 3 balls per can.
 -  State $S_1$: Since 2 cans hold 6 balls, Roger now has 11 tennis balls.
 
-This decomposition into multiple actions is more explicit in the SayCan robot example in the lower left. Going back to the decision tree shown in Fig. 3, the CoT prompt can be considered to be an example of a succesful tarversal of the tree, starting from some initial state. By giving the LLM one or more examples of successful traversals. it is able to better replicate the multistep reasoning process involved. Wei et.al. also discovered that the CoT prompting method only works well for the larger models with at least 100B parameters, hence it an emergent property.
+This decomposition into multiple actions is more explicit in the SayCan robot example in the lower left. Going back to the decision tree shown in Fig. 3, the CoT prompt can be considered to be an example of a succesful traversal of the tree, starting from some initial state. By giving the LLM one or more examples of successful traversals, it is able to better replicate the multistep reasoning process involved. Wei et.al. also discovered that the CoT prompting method only works well for the larger models with at least 100B parameters, hence it an emergent property of LLMs.
+
+![](https://subirvarma.github.io/GeneralCognitics/images/agent27.png)
+
+Figure 15
+
+The CoT prompting technique can be considered to be a 'greedy' method in the sense that it takes a single path through the decision tree to get to its goal, as shown in part (a) of Fig. 15. [Wang et.al](https://arxiv.org/pdf/2203.11171.pdf) came up with another prompting technique, which they called CoT with Self Consistency or SC-CoT. The main idea behind this is illustrated in the Decision Tree shown in Part (b) of Fig. 15. Wang et.al. pointed out there are often multiple reasoning paths through the Decision Tree that lead to the same final answer, and one way to make sure that the answer is correct, is by choosing one the one that is predicted the majority of times.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/agent24.png)
 
+Figure 16
+
+Figure 16 illustrates the SC-CoT technique. As shown, the prompt is similar to what one would use for CoT prompting. The CoT greedy decoding is shown on the top part of the figure, which results in a wrong answer in this case. The SC-CoT method on the other hand samples multiple times from the LLM, resulting in a different reasoning path each time. Since the $18 occurs as the final answer on a couple of those paths, it is chosen as the correct result by SC-CoT. Wang et.al. showed that SC-CoT results in a significant improvement in the correctness for complex reasoning tasks compares to CoT, and furthermore has the advantage that it is simple to implement.
+
+Both the CoT and the SC-CoT techniques are dependent on humans generating good example prompts that can lead to correct reasoning steps by the LLM. [Xu et.al.](https://arxiv.org/abs/2305.09993) proposed a technique by which the LLM itself can be use to generate the CoT prompt, which they called Reprompting. This requires the use of two LLMs, such that LLM1 is used to generate the example CoT prompts, while LLM2 is used to solve the actual problem. The method works in two steps:
+
+- In Step 1 a number of example CoT prompts are generated by LLM1 bu using simple K-shot promting (this can be done by prompting the LLM to think 'step-by-step').
+- In Step 2, these prompts are in turn fed back into LLM1 as CoT prompts to further refine them. This results in the final set of CoT prompts that are then used in LLM2 to answer the actual problem (which may be un-related)
 
 
-
-[Wang et.al](https://arxiv.org/pdf/2203.11171.pdf)
-
-
-
-
-### Inner Monologue in Embodied Agents
-
-![](https://subirvarma.github.io/GeneralCognitics/images/agent19.png)
-
-[Huang, Xia et.al](https://arxiv.org/abs/2207.05608)
-
-![](https://subirvarma.github.io/GeneralCognitics/images/agent20.png)
-
-[Huang, Abbeel et.al.](https://arxiv.org/abs/2201.07207)
-
-
-### Tree of Thought Prompting
+## Tree of Thought Prompting
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/agent21.png)
 
@@ -238,14 +235,27 @@ This decomposition into multiple actions is more explicit in the SayCan robot ex
 [Hao et.al.](https://arxiv.org/abs/2305.14992): MCTS with ToT
 
 
+## Inner Monologue in Embodied Agents
 
-### Human Feedback to Improve Multi-Step Reasoning
+![](https://subirvarma.github.io/GeneralCognitics/images/agent19.png)
+
+[Huang, Xia et.al](https://arxiv.org/abs/2207.05608)
+
+![](https://subirvarma.github.io/GeneralCognitics/images/agent20.png)
+
+[Huang, Abbeel et.al.](https://arxiv.org/abs/2201.07207)
+
+
+
+
+
+## Human Feedback to Improve Multi-Step Reasoning
 
 [Lightman et.al.](https://arxiv.org/abs/2305.20050)
 
 
 
-### Generative Agents with Memory and Planning Abilities
+## Generative Agents with Memory and Planning Abilities
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/agent7.png) 
 
@@ -256,7 +266,7 @@ This decomposition into multiple actions is more explicit in the SayCan robot ex
 
 
 
-### AutoGPT
+## AutoGPT
 
 
 ## The Langchain Framework
