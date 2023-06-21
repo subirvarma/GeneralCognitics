@@ -94,7 +94,7 @@ LLMs are trained using using Self Supervised Learning on huge corpora of text, b
 
 In this section we review the evidence for World Models in LLMs. The first two examples are from the space of Board Games, with Transformers trained not on language, but on sequences of game moves. World Models for Board Games are much simpler than those in the real world, but they are also more tractable due to their simplicity. However they are still complicated enough to enable us to investigate their properties. In the following two Sections we first look at the game of Chess followed by Othello. It is shown that even though the model is trained to predict just the next move, it actually learns to compute the full board state at each move, i.e. the World Model. Hence rather than predicting the next move based on statistical correlations about the distribution of moves, the LLM actually learns to model the underlying process that generated that data.
 
-### LLM based World Models in Chess
+## LLM based World Models in Chess
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/agent13.png)
 
@@ -119,7 +119,7 @@ Toshniwal et.al. showed that the probes are indeed able to predict the the start
 
 We can conclude from this work that the LLM is able to create an internal model of the game state, so that it knows the precise locations of each piece on the board in addition to the allowed legal moves for each of these pieces. It acquires this knowledge entirely from the linear sequence of game moves were fed into it during the training process. It then uses this information to figure out the identity and position of the piece involved in the next move, as well as the ending position of a piece (given its starting position). This paper makes the case that the LLM is able to do these things by making use of its internal world model, as opposed to auto regressive statistical prediction of the next move from sequence data being fed into it.
 
-### Transformer based World Models for the Game of Othello
+## LLM based World Models for the Game of Othello
 
 Inspired by Toshniwal et.al.'s work, [Kenneth Li et.al.](https://arxiv.org/abs/2210.13382) observed that the LLMs modeled using chess moves showed the presence of a world model, however the probes used by Toshniwal et.al. did not precisely locate how or where this world model was located within the LLM. Li et.al's work was undertaken with the objective of addressing this issue, and they did it in the context of the board game called Othello. Othello is actually a simpler game than chess, but still complex enough so that its moves cannot be predicted by memorization.
 
@@ -128,7 +128,7 @@ Inspired by Toshniwal et.al.'s work, [Kenneth Li et.al.](https://arxiv.org/abs/2
 Figure 8
 
 The rules of Othello are quite simple and summarized in Fig. 8. There are 64 positions on the board, where the 4 positions in the middle are always occupied to start of the game, so that there 60 possible positions that are occupied during the course of the game. 
-Li et.al. trained an 8-layer GPT model with an 8-head attention mechanism and a 512 dimensional hidden space, in an autoregressive fashion, which they called OthelloGPT. This is fed with a word embedding consisting of 60 vectors, one for each possible board position to get the sequence $(X_1,...,X_{T-1})$,
+Li et.al. trained an 8-layer GPT model with an 8-head attention mechanism and a 512 dimensional hidden space, in an autoregressive fashion, which they called OthelloGPT. This is fed with a word embedding consisting of 60 vectors, one for each possible board position to get the sequence (X_1,...,X_{T-1}),
 where T is the length of the sequence fed so far. The intermediate features for the $t^{th}$ token after the $l^{th}$ layer is given by $X_t^l$. Note that $X_t^8$ goes into a linear classifier to predict the logits for the next move.
 
 Li et.al. showed that OthelloGPT was very good at predicting the next legal move, conditioned on the partial games before the move, and this could not be attributed to memorization. Assuming that the model had built in internal representation of the game board, they used a standard tool called a "probe" (see [Tenney et.al.](https://arxiv.org/abs/1905.05950)), to look for it. A probe is a classifier or regressor whose input consists of internal activations of a network, and out is the feature of interest. If the probe is indeed able to do prediction accurately, then this implies that a representation of the feature is encoded in the network's activations. For OthelloGPT, the input to the probe was the features $X_t^l$ for different layers $l$. The output $p_\theta(X_t^l)$ of the probe is a 3-way categorical probability distribution, where the classification is into the states Empty, Black or White. They trained a total of 60 different probes, one for each of the 60 positions on the board. They discovered that linear probes did not work very well, however probes with a single hidden layer were able to predict the board state with approximately 98.3% accuracy. The accuracy was highest for the seventh layer $X_t^7$ and decreased to about 95.4% for $X_t^8$. This implies that the model expends its energy in estimating an accurate picture of the board state in the initial 7 layers, and then uses this information in the final layers to do the next move prediction.
@@ -141,7 +141,7 @@ So far we have seen that the board state is captured in the activations $X_t^l$ 
 
 The examples of World Models that we have presented so far are from the world of games, with the LLM tarined on the linear sequence of board positions. The next few examples involve LLMs trained on language. These presumably learn a much more complex World Model, and it is interesting to find out their capabilities in this area.
 
-### Map Building from Text Prompts
+## Map Building from Text Prompts
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/agent14.png)
 
@@ -151,9 +151,10 @@ We humans build up a mental image of the environment we are in by means of our v
 The experiment consists of two parts: In the first part the LLM is prompted with its objective and this followed by a dialogue in which the LLM issues commands to move left, right, up or down and the human responds with a short description of the effect of the carrying out the command (as shown in the upper RHS of Fig. 10). This continues until the LLM reaches it goal room.
 In the second part of the experiment the experimenters test the ability of the LLM to form a model of all the rooms, by prompting it to describe their locations. GPT4's response is shown in the RHS of Fig. 10, and is also diagrammed on the bottom RHS of the figure. As we can see the LLM's map of the rooms corresponds to the true map, and the LLM is able to paint an accurate picture of the rooms that it has been in. The response also includes descriptions of the rooms based on what LLM 'imagines' them to be, based on their names.
 
-This paper shows that LLMs build an internal map of the world based on the information that is being fed into them. They presumably use this internal map or World Model to formulate their output, as opposed to purely statistical next word prediction. This allows them to handle the 'covariate shift' problem i.e., be able to give effective responses to inputs that are not part of their training data.
+This paper shows that LLMs build an internal map of the world based on the information that is being fed into them. They presumably use this internal map or World Model to formulate their output, as opposed to purely statistical next word prediction. This allows them to handle the 'covariate shift' problem i.e., be able to give effective responses to inputs that are not part of their training data. This example of World Model building differs from the prior two, since by using GPT4 we are starting with an LLM that has already been trained. Based on this training, the GPT4 has presumably formed a model for the world, which is why it is able to understand concepts such as 'left', 'right' or 'up', and 'down'. During the course of the chat session which takes place in the inference mode, GPT4 forms a more specialized World Model that is specific to the information it is being fed during the chat.
 
-### Isomorphism between the LLM World Model and the Real World
+
+## Isomorphism between the LLM World Models and the Real World
 
 The World Model that LLMs build is obviously of a different nature, than the one that exists in our brains. The latter is based on our sense of vision, sound, touch etc and is grounded in the real world. The World Model in LLMs on the other hand is built entirely on the basis of text sequences, and since LLMs are not embodied and have no sense organs, it is not grounded in the real world. If so, what is the relationship between the LLM's World Model, and the real world? This question was explored by [Patel and Pavlick](https://openreview.net/forum?id=gJcEM8sxHK), who showed that in certain cases the LLM's World Model is isomorphic to a grounded World Model built by interacting with the real world. This means that the structure of relations between concepts that is learnt by the LLM in text form, is identical to what a grounded model would learn. They carried out their investigation in the areas of Spatial Terms (for example left and right), Cardinal Directions (for example East and West) and RGB Colors. 
 
@@ -181,36 +182,36 @@ Patel and Pavlick also showed the following:
 These examples suggest that the GPT3 model has built an internal World Model based on its training examples, so that even if it is grounded on a subset of the world, it is able to use its world model to map to the entire space. In other words it already the concepts of Spatial Orientations, Cardinal Directions and Colors and has mapped them to an internal representation that it has built. Once a subset of these concepts are mapped in the Grounded World, the other points in the space also get automatically mapped. In other words the model's internal World Model is Isomorpic to the Grounded World Model (i.e., they have one-to-one correspondence with each other).
 
 
-
-
 ## Planning Using LLMs
 
-### Chain of Thought (CoT) Prompting and Self Consistency with CoT
+Forming a World Model is only one aspect of how an Intelligent Agent works. The other critical function is to be able to formulate an Action plan, which ultimately result in successful completion of the task assigned to the Agent. The Decision Tree diagram shown in Figure 3 is a useful reference to keep in mind, since we will see that most planning techniques fit within this framework. 
+
+## Chain of Thought (CoT) Prompting and Self Consistency with CoT
+
+LLMs were originally prompted by asking them to respond or solve a problem by posing the question, with the expectation being that the LLM with respond with the appropriate answer. This technique worked well for simpler problems, but researchers dicovered that if the solution to the problem involved multistep reasoning, then the simple prompt did not work very well. [Wei et.al.](https://arxiv.org/abs/2201.11903) showed that the results could be considerably improved if the LLM was prompted using a prompting technique that they called 'Chain of Thought' or CoT prompting. 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/agent18.png)
 
-[Wei et.al.](https://arxiv.org/abs/2201.11903)
+Figure 14
+
+Examples of CoT prompts are shown in Figure 14 with the CoT in colored highlight, using the format <input, chain of thought, output>, for arithemetic, commonsense and symbolic reasoning benchmarks. As can be seen, the CoT prompt is essentially decomposing the solution to the problem into multiple steps. For example, the CoT for the arithmetic problem in the top left can be decomposed into:
+
+-  Initial state $S_0$: Roger has 5 tennis balls
+-  Action 1: He buys 2 more cans of tennis balls, with 3 balls per can.
+-  State $S_1$: Since 2 cans hold 6 balls, Roger now has 11 tennis balls.
+
+This decomposition into multiple actions is more explicit in the SayCan robot example in the lower left. Going back to the decision tree shown in Fig. 3, the CoT prompt can be considered to be an example of a succesful traversal of the tree, starting from some initial state. By giving the LLM one or more examples of successful traversals, it is able to better replicate the multistep reasoning process involved. Wei et.al. also discovered that the CoT prompting method only works well for the larger models with at least 100B parameters, hence it an emergent property.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/agent24.png)
+
+
+![](https://subirvarma.github.io/GeneralCognitics/images/agent27.png)
 
 
 [Wang et.al](https://arxiv.org/pdf/2203.11171.pdf)
 
 
-
-
-### Inner Monologue in Embodied Agents
-
-![](https://subirvarma.github.io/GeneralCognitics/images/agent19.png)
-
-[Huang, Xia et.al](https://arxiv.org/abs/2207.05608)
-
-![](https://subirvarma.github.io/GeneralCognitics/images/agent20.png)
-
-[Huang, Abbeel et.al.](https://arxiv.org/abs/2201.07207)
-
-
-### Tree of Thought Prompting
+## Tree of Thought Prompting
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/agent21.png)
 
@@ -230,14 +231,27 @@ These examples suggest that the GPT3 model has built an internal World Model bas
 [Hao et.al.](https://arxiv.org/abs/2305.14992): MCTS with ToT
 
 
+## Inner Monologue in Embodied Agents
 
-### Human Feedback to Improve Multi-Step Reasoning
+![](https://subirvarma.github.io/GeneralCognitics/images/agent19.png)
+
+[Huang, Xia et.al](https://arxiv.org/abs/2207.05608)
+
+![](https://subirvarma.github.io/GeneralCognitics/images/agent20.png)
+
+[Huang, Abbeel et.al.](https://arxiv.org/abs/2201.07207)
+
+
+
+
+
+## Human Feedback to Improve Multi-Step Reasoning
 
 [Lightman et.al.](https://arxiv.org/abs/2305.20050)
 
 
 
-### Generative Agents with Memory and Planning Abilities
+## Generative Agents with Memory and Planning Abilities
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/agent7.png) 
 
@@ -248,7 +262,7 @@ These examples suggest that the GPT3 model has built an internal World Model bas
 
 
 
-### AutoGPT
+## AutoGPT
 
 
 ## The Langchain Framework
