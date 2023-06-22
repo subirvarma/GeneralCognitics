@@ -186,9 +186,10 @@ These examples suggest that the GPT3 model has built an internal World Model bas
 
 Forming a World Model is only one aspect of how an Intelligent Agent works. The other critical function is to be able to formulate an Action plan, which ultimately result in successful completion of the task assigned to the Agent. The Decision Tree diagram shown in Figure 3 is a useful reference to keep in mind, since we will see that most planning techniques fit within this framework. 
 
+
 ## Chain of Thought (CoT) Prompting and Self Consistency with CoT
 
-LLMs were originally prompted by asking them to respond or solve a problem by posing the question, with the expectation being that the LLM with respond with the appropriate answer. This technique worked well for simpler problems, but researchers dicovered that if the solution to the problem involved multistep reasoning, then the simple prompt did not work very well. [Wei et.al.](https://arxiv.org/abs/2201.11903) showed that the results could be considerably improved if the LLM was prompted using a prompting technique that they called 'Chain of Thought' or CoT prompting. 
+LLMs were originally prompted by asking them to respond or solve a problem by posing a question as a prompt, with the expectation being that the LLM will complete the prompt with the appropriate answer. This technique worked well for simpler problems, but researchers dicovered that if the solution to the problem involved multistep reasoning, then simple prompting did not work very well. [Wei et.al.](https://arxiv.org/abs/2201.11903) showed that the results could be considerably improved if the LLM was prompted using a prompting technique that they called 'Chain of Thought' or CoT prompting. 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/agent18.png)
 
@@ -200,15 +201,24 @@ Examples of CoT prompts are shown in Figure 14 with the CoT in colored highlight
 -  Action 1: He buys 2 more cans of tennis balls, with 3 balls per can.
 -  State $S_1$: Since 2 cans hold 6 balls, Roger now has 11 tennis balls.
 
-This decomposition into multiple actions is more explicit in the SayCan robot example in the lower left. Going back to the decision tree shown in Fig. 3, the CoT prompt can be considered to be an example of a succesful traversal of the tree, starting from some initial state. By giving the LLM one or more examples of successful traversals, it is able to better replicate the multistep reasoning process involved. Wei et.al. also discovered that the CoT prompting method only works well for the larger models with at least 100B parameters, hence it an emergent property.
-
-![](https://subirvarma.github.io/GeneralCognitics/images/agent24.png)
-
+This decomposition into multiple actions is more explicit in the SayCan robot example in the lower left. Going back to the decision tree shown in Fig. 3, the CoT prompt can be considered to be an example of a succesful traversal of the tree, starting from some initial state. By giving the LLM one or more examples of successful traversals, it is able to better replicate the multistep reasoning process involved. Wei et.al. also discovered that the CoT prompting method only works well for the larger models with at least 100B parameters, hence it an emergent property of LLMs.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/agent27.png)
 
+Figure 15
 
-[Wang et.al](https://arxiv.org/pdf/2203.11171.pdf)
+The CoT prompting technique can be considered to be a 'greedy' method in the sense that it takes a single path through the decision tree to get to its goal, as shown in part (a) of Fig. 15. [Wang et.al](https://arxiv.org/pdf/2203.11171.pdf) came up with another prompting technique, which they called CoT with Self Consistency or SC-CoT. The main idea behind this is illustrated in the Decision Tree shown in Part (b) of Fig. 15. Wang et.al. pointed out there are often multiple reasoning paths through the Decision Tree that lead to the same final answer, and one way to make sure that the answer is correct, is by choosing one the one that is predicted the majority of times.
+
+![](https://subirvarma.github.io/GeneralCognitics/images/agent24.png)
+
+Figure 16
+
+Figure 16 illustrates the SC-CoT technique. As shown, the prompt is similar to what one would use for CoT prompting. The CoT greedy decoding is shown on the top part of the figure, which results in a wrong answer in this case. The SC-CoT method on the other hand samples multiple times from the LLM, resulting in a different reasoning path each time. Since the $18 occurs as the final answer on a couple of those paths, it is chosen as the correct result by SC-CoT. Wang et.al. showed that SC-CoT results in a significant improvement in the correctness for complex reasoning tasks compares to CoT, and furthermore has the advantage that it is simple to implement.
+
+Both the CoT and the SC-CoT techniques are dependent on humans generating good example prompts that can lead to correct reasoning steps by the LLM. [Xu et.al.](https://arxiv.org/abs/2305.09993) proposed a technique by which the LLM itself can be use to generate the CoT prompt, which they called Reprompting. This requires the use of two LLMs, such that LLM1 is used to generate the example CoT prompts, while LLM2 is used to solve the actual problem. The method works in two steps:
+
+- In Step 1 a number of example CoT prompts are generated by LLM1 bu using simple K-shot promting (this can be done by prompting the LLM to think 'step-by-step').
+- In Step 2, these prompts are in turn fed back into LLM1 as CoT prompts to further refine them. This results in the final set of CoT prompts that are then used in LLM2 to answer the actual problem (which may be un-related)
 
 
 ## Tree of Thought Prompting
