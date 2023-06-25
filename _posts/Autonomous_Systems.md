@@ -217,6 +217,24 @@ Both the CoT and the SC-CoT techniques are dependent on humans generating good e
 
 ## Tree of Thought Prompting
 
+![](https://subirvarma.github.io/GeneralCognitics/images/agent25.png)
+
+![](https://subirvarma.github.io/GeneralCognitics/images/agent28.png)
+
+**The MCTS Algorithm**
+
+![](https://subirvarma.github.io/GeneralCognitics/images/agent26.png)
+
+
+[Hao et.al.](https://arxiv.org/abs/2305.14992): MCTS with ToT
+
+
+
+
+
+
+
+
 ![](https://subirvarma.github.io/GeneralCognitics/images/agent22.png)
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/agent23.png)
@@ -227,12 +245,7 @@ Both the CoT and the SC-CoT techniques are dependent on humans generating good e
 
 [Long](https://arxiv.org/abs/2305.08291)
 
-![](https://subirvarma.github.io/GeneralCognitics/images/agent25.png)
 
-![](https://subirvarma.github.io/GeneralCognitics/images/agent26.png)
-
-
-[Hao et.al.](https://arxiv.org/abs/2305.14992): MCTS with ToT
 
 
 ## Inner Monologue in Embodied Agents
