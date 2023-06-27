@@ -253,8 +253,6 @@ Figure 19
 
 Fig. 19 has two examples of how Reinforcement Learning State and Actions can be chosen to solve problams using LLMs. The example on the left consists of set of colored blocks arranged in a starting configuration, with the Goal of the problem being to re-arrange the blocks in a particular fashion. In this case th system State corresponds to the current block configuration, while an Action is Picking up and Placing blocks. The example on the right shows how RAP can be used to solve Math problems. In this case the State corresponds to the current state of the calculation, while ctions correspond to Questions posed by the LLM to move the solution along.
 
-**The MCTS Algorithm**
-
 ![](https://subirvarma.github.io/GeneralCognitics/images/agent26.png)
 
 
