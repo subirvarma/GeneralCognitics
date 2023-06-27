@@ -239,19 +239,25 @@ Typically the MCTS tree building continues until a pre-determined number of iter
 -  Choose the path that yields the highest reward, or
 -  Choose the leaf node that has been visited the most
 
-MCTS can be considered to be a more sophistictaed version of SC-CoT. It is similar to SC-CoT since it involves multiple traversals of the decision tree starting from the Root State. However unlike SC-CoT, the decision making is more sophisticated with the tree being allowed to branch from any state in MCTS. Moreover the path through the decision tree in MCTS is governed by rewards, rather than a simple majority vote.
+MCTS can be considered to be a more sophistictaed version of SC-CoT. It is similar to SC-CoT since it involves multiple traversals of the decision tree starting from the Root State. However unlike SC-CoT, the decision making is more sophisticated with the tree being allowed to branch from any state in MCTS. Moreover the path through the decision tree in MCTS is governed by rewards, rather than a simple majority vote. 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/agent25.png)
 
 Figure 18
 
-[Hao et.al.](https://arxiv.org/abs/2305.14992) adapted MCTS to work with LLMs and came up with an algorithm they called Reasoning via Planning (RAP). A high level view of RAP is shown in Fig. 18. As shown, it adopts the usual Reinforcement Learning framework for decision making, with the caveat that LLMs are used to come  up with appropriate Actions, as well as for keeping track of the current State.
+[Hao et.al.](https://arxiv.org/abs/2305.14992) adapted MCTS to work with LLMs and came up with an algorithm they called Reasoning via Planning (RAP). A high level view of RAP is shown in Fig. 18. As shown, it adopts the usual Reinforcement Learning framework for decision making, with the caveat that LLMs are used to come  up with appropriate Actions, as well as for keeping track of the current State. The graph shown on the RHS of the figure is referred to as a Markov Decision Process or MDP in Reinforcement Learning nomenclature. It consistes of the tuple $(S_t, A_t, R_t, p), t = 0, 1, ..., T$, such that the Action $A_t$ at time step $t$ is distributed according to $A_t ~ p(A|A_t,c)$ where $c$ is a prompt used to steer the LLM for Action generation, the state $S_{t+1}$ is distributed according to $S_{t+1} ~ p(s|S_t, A_t, c')$ where $c'$ is another prompt used to guide the LLM to generate the next state. 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/agent28.png)
 
 Figure 19
 
-Fig. 19 has two examples of how Reinforcement Learning State and Actions can be chosen to solve problams using LLMs. The example on the left consists of set of colored blocks arranged in a starting configuration, with the Goal of the problem being to re-arrange the blocks in a particular fashion. In this case th system State corresponds to the current block configuration, while an Action is Picking up and Placing blocks. The example on the right shows how RAP can be used to solve Math problems. In this case the State corresponds to the current state of the calculation, while ctions correspond to Questions posed by the LLM to move the solution along.
+Fig. 19 has two examples of how Reinforcement Learning State and Actions can be chosen to solve problams using LLMs. The example on the left consists of set of colored blocks arranged in a starting configuration, with the Goal of the problem being to re-arrange the blocks in a particular fashion. In this case th system State corresponds to the current block configuration, while an Action is Picking up and Placing blocks. The example on the right shows how RAP can be used to solve Math problems. In this case the State corresponds to the current state of the calculation, while actions correspond to Questions posed by the LLM to move the solution along.
+
+For the Block World example, the State, Actions and Rewards were generated as follows:
+
+-   How to generate and update the World Models used to generate the state of the MDP.
+-   How to generate the Actions for the Agent, and also how to assign probabilities for the Actions
+-   How to assign Rewards for States and Actions
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/agent26.png)
 
