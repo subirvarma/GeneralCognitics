@@ -217,16 +217,48 @@ Both the CoT and the SC-CoT techniques are dependent on humans generating good e
 
 ## Tree of Thought Prompting
 
+Tree of Thought or ToT prompting methods are a frther generalization of CoT and SC-CoT such that they are closer approximation to human decision making. As was mentioned earlier, human decision making is a mixture of mental planning followed by actual actions, and during the planning process various alternatives are evaluated on how to solve the problem. A technique that closely resembles this process is an algorithm from Reinforcement Learning called Monte Carlo Tree Search or MCTS. We start by delving deeper into MCTS, and then examine how it can be applied to LLM based decision making.
+
+![](https://subirvarma.github.io/GeneralCognitics/images/agent29.png)
+
+Figure 17
+
+MCTS is a way in which the decision tree of possibilities for solving a problem can be built out, along with some information about which path through the tree is the best. MCTS proceeds in four steps, as shown in Fig. 17, which are as follows:
+
+- **Selection**: Assume that the MCTS tree has already been built up to the extent shown on the LHS figure. As before the white circles correspond to States while the black circles represent Actions (at the start of the tree building, only the Root State at the top exists). The tree consists of two kinds of states: (1) States in which all Actions have been explored, for example the Root State and the child state to the left after the Root State, (2) States in which some or all of the Actions still need to be explored. The Agent plots a course through this partially built tree, until it comes to a state in which not all Actions have been evaluated, as shown the blue arrows. At each State, an Action is chosen based on the following criteria:
+$$A^* = arg\max_{A\in A(S)} [Q(S,A) + w\sqrt{{\ln N(S)}\over{N(c(S,A))}}]$$
+  
+-  **Expansion**: The Selection step ends when the Agent comes to a State with partially explored Actions. At this point, the Agent expands the tree by adding (one or more) States to tree, as shown in the figure. The new State in turn will have one or more unexplored Actions of its own. The Agent chosses ones of these States and then goes to the Simulation step.
+-  **Simulation**: This step of the MCTS algorithm consists to building out the rest of the tree starting from the State that was chosen in the Expansion step. The build consists of taking successive Actions, until the system enters a Terminal State. The Actions are chosen using a **Rollout** Policy, which is usually a simple rule such as chose an Action at random (since none of these Actions have been evaluated yet).
+-  **Back-Propagation**: The Backpropagation step consists of updating the $Q(S,A)$ values of all the State-Action pairs that were encountered in the path from the Root State all the way down to the Terminal State. These updates proceed backwards, starting from the Terminal State, using the following update equation:
+-  $$Q(S,A) \leftarrow Q(S,A) + \alpha(R + \gamma Q(S',A') - Q(S,A))$$
+
+Typically the MCTS tree building continues until a pre-determined number of iterations is reached. Once this threshold is reached, the final trace through the tree is constructed. This can be done using one of several methods, such as:
+
+-  Choose the Action with the highest Q value
+-  Choose the path that yields the highest reward, or
+-  Choose the leaf node that has been visited the most
+
+MCTS can be considered to be a more sophistictaed version of SC-CoT. It is similar to SC-CoT since it involves multiple traversals of the decision tree starting from the Root State. However unlike SC-CoT, the decision making is more sophisticated with the tree being allowed to branch from any state in MCTS. Moreover the path through the decision tree in MCTS is governed by rewards, rather than a simple majority vote.
+
 ![](https://subirvarma.github.io/GeneralCognitics/images/agent25.png)
 
+Figure 18
+
+[Hao et.al.](https://arxiv.org/abs/2305.14992) adapted MCTS to work with LLMs and came up with an algorithm they called Reasoning via Planning (RAP). A high level view of RAP is shown in Fig. 18. As shown, it adopts the usual Reinforcement Learning framework for decision making, with the caveat that LLMs are used to come  up with appropriate Actions, as well as for keeping track of the current State.
+
 ![](https://subirvarma.github.io/GeneralCognitics/images/agent28.png)
+
+Figure 19
+
+Fig. 19 has two examples of how Reinforcement Learning State and Actions can be chosen to solve problams using LLMs. The example on the left consists of set of colored blocks arranged in a starting configuration, with the Goal of the problem being to re-arrange the blocks in a particular fashion. In this case th system State corresponds to the current block configuration, while an Action is Picking up and Placing blocks. The example on the right shows how RAP can be used to solve Math problems. In this case the State corresponds to the current state of the calculation, while ctions correspond to Questions posed by the LLM to move the solution along.
 
 **The MCTS Algorithm**
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/agent26.png)
 
 
-[Hao et.al.](https://arxiv.org/abs/2305.14992): MCTS with ToT
+
 
 
 
@@ -266,7 +298,7 @@ Both the CoT and the SC-CoT techniques are dependent on humans generating good e
 
 [Lightman et.al.](https://arxiv.org/abs/2305.20050)
 
-
+A point of weakness with the SC-CoT method is that there is no gaurantee that the final result that occurs in the majority of cases is in fact the correct response. For the special case of Math problems, it is possible to train a model to predict whether the anser is correct, by fine tuning it on the Math dataset. Hence instead of relying on a simple majority rule, the model can be used to figure out which of the responses have the highest probability of being correct.
 
 ## Generative Agents with Memory and Planning Abilities
 
