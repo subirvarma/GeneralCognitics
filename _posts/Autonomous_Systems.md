@@ -264,6 +264,9 @@ For the Block World example, the State, Actions and Rewards were generated as fo
 -   How to generate and update the World Models used to generate the state of the MDP.
 -   How to generate the Actions for the Agent, and also how to assign probabilities for the Actions
 -   How to assign Rewards for States and Actions
+-   
+
+The assignment of reqrds for the
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/agent26.png)
 
