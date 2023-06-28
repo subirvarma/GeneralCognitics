@@ -266,7 +266,9 @@ For the Block World example, the State, Actions and Rewards were generated as fo
 -   How to assign Rewards for States and Actions
 -   
 
-The assignment of reqrds for the
+The assignment of rewards for the MDP in the RAP algorithm is an important design decision. [Hao et.al] made the following proposals for reward assignment:
+
+- 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/agent26.png)
 
