@@ -179,7 +179,24 @@ These examples suggest that the GPT3 model has built an internal World Model bas
 
 ## Planning Using LLMs
 
-Forming a World Model is only one aspect of how an Intelligent Agent works. The other critical function is to be able to formulate an Action plan, which ultimately result in successful completion of the task assigned to the Agent. The Decision Tree diagram shown in Figure 3 is a useful reference to keep in mind, since we will see that most planning techniques fit within this framework. 
+Forming a World Model is only one aspect of how an Intelligent Agent works. The other critical function is to be able to formulate an Action plan or a Policy, which ultimately result in successful completion of the task assigned to the Agent. Using LLMs to formulate a Policy is fast evolving area, with new discoveries and proposals coming almost on a daily basis. In this section we will attempt to survey the current work in this exciting area.
+
+Planning proposals come in two flavors:
+
+-	**Decision making with no interaction with the outside world**: In this case the planning happens entirely within the ‘mind’ of the LLM. This can be further divided into single step planning and multistep planning.
+
+(1)   **Single Step Planners**: Algorithms such as Chain of Thought (CoT) and Self Consistency COT (SC-CoT) fall into the category of **Single Step Planners**. These algorithms typically propose a sequence of Actions, without any mechanism to check whether these Actions are in fact useful in accomplishing the goal. Algorithms that are specialized for solving Math problems such as the GSM8K Solver and the MATH solver from OpenAI also fall in this class.
+SC-COT proposes and evaluates multiples chains of Actions, and then uses a simple majority vote to decide which answer is correct. The GSM8K solver uses a separate LLM fine tuned on the detecting the correct solution, to propose a score, and then uses the solution with the highest score. The more powerful MATH solver on the other hand also uses a separate LLM, but now this LLM is used to propose a score for the correctness of each individual step in the solution.
+
+(2)  **Multistep Planners**: Algorithms such as Tree of Thought (ToT) and Reasoning vis Planning (RAP) are in the category of **Multistep Planners**. These algorithms propose multiple Actions at each step, and then use a mechanism for deciding which of these Actions is the best. This decision can be made by using the LLM (with a different prompt). If the algorithm ends up in a ‘dead’ spot, then it can also backtrack to a previous state.
+
+-	**Systems in which Decision Making and Outside World Interaction are Interleaved**:  The outside world interaction in these systems can come in a number of forms: For example, Consulting a Website or the Wikipedia, robotic manipulation, using a calculator or Mathematica  etc. Some of the early work in this area, such as the Zero Shot Planner, was of the Single Step type, in the sense that the LLM was used to propose a sequence of Actions which were then implemented by a Robot. However, all recent work uses Multistep planning in which feedback from the outside world is used to inform the next Action. Examples of this include the successor to the Zero Shot Planner called the Inner Monologue system as well the ReAct algorithm.
+
+![image](https://github.com/subirvarma/GeneralCognitics/assets/32683500/ed7ffa7b-6017-4d30-8a7f-6c5236715075)
+
+
+
+The Decision Tree diagram shown in Figure 3 is a useful reference to keep in mind, since we will see that most planning techniques fit within this framework. 
 
 ## Chain of Thought (CoT) Prompting and Self Consistency with CoT
 
