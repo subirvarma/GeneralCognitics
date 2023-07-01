@@ -3,6 +3,7 @@ layout: default
 title: "The Evolution of Agents: From Reinforcement Learning to LLM Agents"
 ---
 
+
 # LLM Based Autonomous Agents
 
 ## Introduction
@@ -128,7 +129,7 @@ Inspired by Toshniwal et.al.'s work, [Kenneth Li et.al.](https://arxiv.org/abs/2
 Figure 8
 
 The rules of Othello are quite simple and summarized in Fig. 8. There are 64 positions on the board, where the 4 positions in the middle are always occupied to start of the game, so that there 60 possible positions that are occupied during the course of the game. 
-Li et.al. trained an 8-layer GPT model with an 8-head attention mechanism and a 512 dimensional hidden space, in an autoregressive fashion, which they called OthelloGPT. This is fed with a word embedding consisting of 60 vectors, one for each possible board position to get the sequence $(X_1,...,X_{T-1})$,
+Li et.al. trained an 8-layer GPT model with an 8-head attention mechanism and a 512 dimensional hidden space, in an autoregressive fashion, which they called OthelloGPT. This is fed with a word embedding consisting of 60 vectors, one for each possible board position to get the sequence (X_1,...,X_{T-1}),
 where T is the length of the sequence fed so far. The intermediate features for the $t^{th}$ token after the $l^{th}$ layer is given by $X_t^l$. Note that $X_t^8$ goes into a linear classifier to predict the logits for the next move.
 
 Li et.al. showed that OthelloGPT was very good at predicting the next legal move, conditioned on the partial games before the move, and this could not be attributed to memorization. Assuming that the model had built in internal representation of the game board, they used a standard tool called a "probe" (see [Tenney et.al.](https://arxiv.org/abs/1905.05950)), to look for it. A probe is a classifier or regressor whose input consists of internal activations of a network, and out is the feature of interest. If the probe is indeed able to do prediction accurately, then this implies that a representation of the feature is encoded in the network's activations. For OthelloGPT, the input to the probe was the features $X_t^l$ for different layers $l$. The output $p_\theta(X_t^l)$ of the probe is a 3-way categorical probability distribution, where the classification is into the states Empty, Black or White. They trained a total of 60 different probes, one for each of the 60 positions on the board. They discovered that linear probes did not work very well, however probes with a single hidden layer were able to predict the board state with approximately 98.3% accuracy. The accuracy was highest for the seventh layer $X_t^7$ and decreased to about 95.4% for $X_t^8$. This implies that the model expends its energy in estimating an accurate picture of the board state in the initial 7 layers, and then uses this information in the final layers to do the next move prediction.
@@ -179,7 +180,7 @@ Patel and Pavlick also showed the following:
 -    *Generalization to Rotated Worlds*: Patel and Pavlick also showed that the concepts of Spatial Orientation and Cardinal Directions also continue to hold in Rotated Worlds. In other words the GPT3 model understands that these are relative concepts, and if the grounding prompt shows a rotated 'left' for example, then the 'right' is also rotated by the same amount. This also shows that the models are not simply memorizing these concepts.
 -    *Generalization to Unseen Concepts*: Instead of grounding the entire conceptual structure to a grounded world, what if we ground only a small subset of points in the domain. Will the model still be able to ground the entire conceptual domain? Patel and Pavlick tested this hypothesis for the Cardinal Directions case, and showed that even if the model was grounded with a subspace consisting of the directions *north* and *east* for example, it was still able to identify the directions *south* and *west*, even though they didn't occur in the in-context training examples. They repeated this experiment for the case of Color Grounding as shown in Fig. 13. The grounding was done by using 60 in-context examples of colors which are mostly shades of red, with only a single example of a shade of blue. Inspite of this, the GPT3 model was able to correctly  identify the shade of blue that it was tested with.
 
-These examples suggest that the GPT3 model has built an internal World Model based on its training examples, so that even if it is grounded on a subset of the world, it is able to use its world model to map to the entire space. In other words it already the concepts of Spatial Orientations, Cardinal Directions and Colors and has mapped them to an internal representation that it has built. Once a subset of these concepts are mapped in the Grounded World, the other points in the space also get automatically mapped. In other words the model's internal World Model is Isomorpic to the Grounded World Model (i.e., they have one-to-one correspondence with each other).
+These examples suggest that the GPT3 model has built an internal World Model based on its training examples, so that even if it is grounded on a subset of the world, it is able to use its world model to map to the entire space. In other words it already has the concepts of Spatial Orientations, Cardinal Directions and Colors and has mapped them to an internal representation that it has built. Once a subset of these concepts are mapped in the Grounded World, the other points in its internal space also get automatically mapped. In other words the model's internal World Model is Isomorpic to the Grounded World Model (i.e., they have one-to-one correspondence with each other).
 
 
 ## Planning Using LLMs
@@ -197,8 +198,9 @@ SC-COT proposes and evaluates multiples chains of Actions, and then uses a simpl
 
 -	**Systems in which Decision Making and Outside World Interaction are Interleaved**:  The outside world interaction in these systems can come in a number of forms: For example, Consulting a Website or the Wikipedia, robotic manipulation, using a calculator or Mathematica  etc. Some of the early work in this area, such as the [Zero Shot Planner](https://arxiv.org/abs/2201.07207), was of the Single Step type, in the sense that the LLM was used to propose a sequence of Actions which were then implemented by a Robot. However, all recent work uses Multistep planning in which feedback from the outside world is used to inform the next Action. Examples of this include the successor to the Zero Shot Planner called the [Inner Monologue system](https://arxiv.org/abs/2207.05608) as well the [ReAct algorithm](https://arxiv.org/abs/2210.03629).
 
-
 The Decision Tree diagram shown in Figure 3 is a useful reference to keep in mind, since we will see that most planning techniques fit within this framework. 
+
+## Single Step Planners with no Outside World Feedback
 
 ## Chain of Thought (CoT) Prompting and Self Consistency with CoT
 
@@ -226,15 +228,27 @@ The CoT prompting technique can be considered to be a 'greedy' method in the sen
 
 Figure 16
 
-Figure 16 illustrates the SC-CoT technique. As shown, the prompt is similar to what one would use for CoT prompting. The CoT greedy decoding is shown on the top part of the figure, which results in a wrong answer in this case. The SC-CoT method on the other hand samples multiple times from the LLM, resulting in a different reasoning path each time. Since the $18 occurs as the final answer on a couple of those paths, it is chosen as the correct result by SC-CoT. Wang et.al. showed that SC-CoT results in a significant improvement in the correctness for complex reasoning tasks compares to CoT, and furthermore has the advantage that it is simple to implement.
+Figure 16 illustrates the SC-CoT technique. As shown, the prompt is similar to what one would use for CoT prompting. The CoT greedy decoding is shown on the top part of the figure, which results in a wrong answer in this case. The SC-CoT method on the other hand samples multiple times from the LLM, resulting in a different reasoning path each time. Since the $18 occurs as the final answer on a couple of those paths, it is chosen as the correct result by SC-CoT. Wang et.al. showed that SC-CoT results in a significant improvement in the correctness for complex reasoning tasks compares to CoT, and furthermore has the advantage that it is simple to implement. 
 
+The example in Fig. 16 does not cleanly break up the SC-COT flow into States and Actions of the type shown in Fig. 15. For example the top branch in the figure can be decomposed into States and Actions as follows:
+
+-  Initial State and Statement of Problem: As shown in the box on the LHS
+-  Action1: How many eggs does Janet Have?
+-  State1: She has 16 – 3 – 4 = 9 eggs
+-  Action2: How much money does she make?
+-  State 2 (Final): She makes $2*9 = $18 per day
+
+Hence the State in this example corresponds to the current state of the calculation, while the Action is the question that triggers the calculation.
+![image](https://github.com/subirvarma/GeneralCognitics/assets/32683500/0b06af7e-c0b9-497c-acd7-21131d745975)
+ 
 Both the CoT and the SC-CoT techniques are dependent on humans generating good example prompts that can lead to correct reasoning steps by the LLM. [Xu et.al.](https://arxiv.org/abs/2305.09993) proposed a technique by which the LLM itself can be use to generate the CoT prompt, which they called Reprompting. This requires the use of two LLMs, such that LLM1 is used to generate the example CoT prompts, while LLM2 is used to solve the actual problem. The method works in two steps:
 
 - In Step 1 a number of example CoT prompts are generated by LLM1 by using simple K-shot prompting (this can be done by prompting the LLM to think 'step-by-step').
 - In Step 2, these prompts are in turn fed back into LLM1 as CoT prompts to further refine them. This results in the final set of CoT prompts that are then used in LLM2 to solve the actual problem (which may be un-related)
 
+## Multistep Planners with no Outside World Feedback
 
-## Tree of Thought Prompting
+## The Monte Carlo Tree Search (MCTS) Algorithm
 
 Tree of Thought or ToT prompting methods are a further generalization of CoT and SC-CoT such that they are closer approximation to human decision making. As was mentioned earlier, human decision making is a mixture of mental planning followed by actual actions, and during the planning process various alternatives are evaluated on how to solve the problem. A technique that closely resembles this process is an algorithm from Reinforcement Learning called Monte Carlo Tree Search or MCTS. We start by delving deeper into MCTS, and then examine how it can be applied to LLM based decision making.
 
@@ -251,7 +265,8 @@ $$A^* = arg\max_{A\in A(S)} [Q(S,A) + w\sqrt{\ln N(S)\over{N(c(S,A))}}]$$
 -  **Expansion**: The Selection step ends when the Agent comes to a State with partially explored Actions. At this point, the Agent expands the tree by adding (one or more) States to the tree, as shown in the figure. The new State in turn will have one or more unexplored Actions of its own. The Agent chooses ones of these States and then goes to the Simulation step.
 -  **Simulation**: This step of the MCTS algorithm consists of building out the rest of the tree starting from the State that was chosen in the Expansion step. The build consists of taking successive Actions, until the system enters a Terminal State. The Actions are chosen using a **Rollout** Policy, which is usually a simple rule such as chose an Action at random (since none of these Actions have been evaluated yet).
 -  **Back-Propagation**: The Backpropagation step consists of updating the $Q(S,A)$ values of all the State-Action pairs that were encountered in the path from the Root State all the way down to the Terminal State. These updates proceed backwards, starting from the Terminal State, using the following update equation:
--  $$Q(S,A) \leftarrow Q(S,A) + \alpha(R + \gamma Q(S',A') - Q(S,A))$$
+
+  $$Q(S,A) \leftarrow Q(S,A) + \alpha(R + \gamma Q(S',A') - Q(S,A))$$
 
 Typically the MCTS tree building continues until a pre-determined number of iterations is reached. Once this threshold is reached, the final trace through the tree is constructed. This can be done using one of several methods, such as:
 
@@ -265,15 +280,39 @@ MCTS can be considered to be a more sophistictaed version of SC-CoT. It is simil
 
 Figure 18
 
-[Hao et.al.](https://arxiv.org/abs/2305.14992) adapted MCTS to work with LLMs and came up with an algorithm they called Reasoning via Planning (RAP). A high level view of RAP is shown in Fig. 18. As shown, it adopts the usual Reinforcement Learning framework for decision making, with the caveat that LLMs are used to propose appropriate Actions, as well as for keeping track of the current State. This framework adopts two LLMs for its functioning, with LLM1 used to propose Actions while LLM2 is used to keep track of the current State. This is a point of differentiation from CoT or SC-CoT, since in those systems a single LLM keeps track of both the Action and State.
+## The Reasoning via Planning (RAP) Algorithm
 
-The graph shown on the RHS of the figure is referred to as a Markov Decision Process or MDP in Reinforcement Learning nomenclature. It consistes of the tuple $(S_t, A_t, R_t, p), t = 0, 1, ..., T$, such that the Action $A_t$ at time step $t$ is distributed according to $p(A|A_t,c)$ where $c$ is a prompt used to steer the LLM for Action generation, the state $S_{t+1}$ is distributed according to $p(s|S_t, A_t, c')$ where $c'$ is another prompt used to guide the LLM to generate the next state. The Markov in the name refers to the fact that both the Action $A_t$ and State $S_{t+1}$ are entirely determined by the prior State $S_t$, and are independent of what happened before.
+[Hao et.al.](https://arxiv.org/abs/2305.14992) adapted MCTS to work with LLMs and came up with an algorithm they called Reasoning via Planning (RAP). A high level view of RAP is shown in Fig. 18. As shown, it adopts the usual Reinforcement Learning framework for decision making, with the caveat that LLMs are used to propose appropriate Actions, as well as for keeping track of the current State. Thus this framework adopts two LLMs for its functioning, with LLM1 (called the Action LLM)used to propose Actions  while LLM2 (called the State LLM) is used to keep track of the current State. This is a point of differentiation from CoT or SC-CoT, since in those systems a single LLM keeps track of both the Action and State. Note that there are now multiple Actions associated with each State. The Action LLM is sampled multiple times in order to generate these multiple Actions.
+
+The graph shown on the RHS of the figure is referred to as a Markov Decision Process or MDP in Reinforcement Learning nomenclature. It consistes of the tuple $(S_t, A_t, R_t, p), t = 0, 1, ..., T$, such that the Action $A_t$ at time step $t$ is distributed according to $A_t ~ p(A|A_t,c)$ where $c$ is a prompt used to steer the LLM for Action generation, the state $S_{t+1}$ is distributed according to $S_{t+1} ~ p(s|S_t, A_t, c')$ where $c'$ is another prompt used to guide the LLM to generate the next state. The Markov in the name refers to the fact that both the Action $A_t$ and State $S_{t+1}$ are entirely determined by the prior State $S_t$, and are independent of what happened before.
+
+An important decision point in applying the MCTS algorithm to LLM based Decision Trees is the allocation of Rewards. Hao et.al. proposed the following ways in which the Reward could be allocated:
+
+-	By using the Likelihood of the Action: This can be computed as the log probability of the Action, where the probability of the Action can be computed using the Action LLM output.
+-	Confidence in the State that results from taking the Action: This can be done by drawing multiple answers from the State LLM and using proportion of the most frequent answer as the confidence.
+-	Self-Evaluation by the LLM: This can be done by appropriately prompting the Action LLM.
+
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/agent28.png)
 
 Figure 19
 
-Fig. 19 has two examples of how Reinforcement Learning State and Actions can be chosen to solve problams using LLMs. The example on the left consists of a set of colored blocks arranged in a starting configuration, with the Goal of the problem being to re-arrange the blocks in a particular fashion. In this case th system State corresponds to the current block configuration, while an Action is Picking up and Placing blocks. The example on the right shows how RAP can be used to solve Math problems. In this case the State corresponds to the current state of the calculation, while Actions correspond to Questions posed by the LLM to move the solution along. Note that in both these examples the Decision Tree is generated without interacting with the real world, i.e. it corresponds to a human contemplating how to do a task. There are two ways in which the Decison Tree can be translated to actual actions:
+Fig. 19 has two examples of how Reinforcement Learning State and Actions can be chosen to solve problams using LLMs. The example on the left consists of a set of colored blocks arranged in a starting configuration, with the Goal of the problem being to re-arrange the blocks in a particular fashion. In this case th system State corresponds to the current block configuration, while an Action is Picking up and Placing blocks. The example on the right shows how RAP can be used to solve Math problems. In this case the State corresponds to the current state of the calculation, while Actions correspond to Questions posed by the LLM to move the solution along. Note that in both these examples the Decision Tree is generated without interacting with the real world, i.e. it corresponds to a human contemplating how to do a task. In contrast to CoT, States and Actions are explicitly separated out into their own states. This allows multiple Actions to be associated with the State (or multipe States to be associated with the same Action), thus ceating the tree structure. This is made possible by the fact that two seprate LLM instances are used to generate the Actions and the States respectively.
+
+![](https://subirvarma.github.io/GeneralCognitics/images/agent26.png)
+
+Figure 20
+
+Fig. 20 shows how RAP uses MCTS to solve the BlockWorld problem. It shows the four stages of MCTS, i.e., Selection, Expansion, Simulation and Back Propagation, and it closely follows the general MCTS description given earlier. During the Selection phase the UCT algorithm is used to choose the child nodes. During the Expansion phase, $d$ Action nodes are added by LLM1, followed by the addition of $d$ corresponding State nodes by LLM2. From these $d$ nodes, the node with the largest local reward is picked for the next phase. During the Roll Out phase, once again $d$ Action and State nodes are generated at each step, with the node with the largest local reward chosen to continue the expansion until the Terminal State is reached.
+
+![](https://subirvarma.github.io/GeneralCognitics/images/agent30.png)
+
+[Yao et.al.](https://arxiv.org/abs/2305.10601) presented another tree based Planning Algorithm that they called Tree of Thoughts or ToT. The main idea behind this algorithm is illustrated in Fig. 30, and is also contrasted with the CoT and the SC-CoT algorithms. 
+
+
+## Systems with Interleaving of Decision Making and Outside World Interaction
+
+There are two ways in which the Decison Tree can be translated to actual actions:
 
 - Generate the entire Decision Tree and then carry out the Actions prescribed. This is appropriate for tasks that of the cerebral kind such as solving a Math problem.
 - Use the Decision Tree to decide on the next Action, and then go ahead and take this Action in the real world. Use the new State of the World to create a new Decision Tree, which then is used to decide on the next Action etc. This corresponds to the AlphaGo algorithm, and is appropriate for applications such as robotics in which the feedback from the real world is needed before deciding on the next action.
@@ -369,4 +408,5 @@ We survey the current State of the Art for both DRL and LLM Agents, and point ou
 
 In LLM Agents, System 2 operation is connected to the concept of Chain of Though (CoT) reasoning. There are some very interesting similarities between the way CoT works and what we know about System 2 in the human brain. DRL Agents have been built using a combination of Neural Networks and an algorithm called Monte Carlo Tree Search or MCTS. Even though the analogy with System 2 is not perfect for this case, there are some interesting similarities here as well.
 
-In general System 2 operation in Agents seems to connected to the idea of running Neural Networks multiple times during a computation, so that later stages are able to make use of results of the prior stages. In the context of an LLM, from this we can surmise that more powerful Agents can be created by increasing the context length of the data that is fed into it. This enables the LLM to make use of more results from the intermediate steps of
+In general System 2 operation in Agents seems to connected to the idea of running Neural Networks multiple times during a computation, so that later stages are able to make use of results of the prior stages. In the context of an LLM, from this we can surmise that more powerful Agents can be created by increasing the context length of the data that is fed into it. This enables the LLM to make use of more results from the intermediate steps of the System 2 type operation.
+
