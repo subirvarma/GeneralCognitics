@@ -228,7 +228,7 @@ The CoT prompting technique can be considered to be a 'greedy' method in the sen
 
 Figure 16
 
-Figure 16 illustrates the SC-CoT technique. As shown, the prompt is similar to what one would use for CoT prompting. The CoT greedy decoding is shown on the top part of the figure, which results in a wrong answer in this case. The SC-CoT method on the other hand samples multiple times from the LLM, resulting in a different reasoning path each time. Since the $18 occurs as the final answer on a couple of those paths, it is chosen as the correct result by SC-CoT. Wang et.al. showed that SC-CoT results in a significant improvement in the correctness for complex reasoning tasks compares to CoT, and furthermore has the advantage that it is simple to implement. 
+Figure 16 illustrates the SC-CoT technique. As shown, the prompt is similar to what one would use for CoT prompting. The CoT greedy decoding is shown on the top part of the figure, which results in a wrong answer in this case. The SC-CoT method on the other hand samples multiple times from the LLM, resulting in a different reasoning path each time. Since the $18$ occurs as the final answer on a couple of those paths, it is chosen as the correct result by SC-CoT. Wang et.al. showed that SC-CoT results in a significant improvement in the correctness for complex reasoning tasks compares to CoT, and furthermore has the advantage that it is simple to implement. 
 
 The example in Fig. 16 does not cleanly break up the SC-COT flow into States and Actions of the type shown in Fig. 15. For example the top branch in the figure can be decomposed into States and Actions as follows:
 
@@ -239,7 +239,6 @@ The example in Fig. 16 does not cleanly break up the SC-COT flow into States and
 -  State 2 (Final): She makes $2*9 = $18 per day
 
 Hence the State in this example corresponds to the current state of the calculation, while the Action is the question that triggers the calculation.
-![image](https://github.com/subirvarma/GeneralCognitics/assets/32683500/0b06af7e-c0b9-497c-acd7-21131d745975)
  
 Both the CoT and the SC-CoT techniques are dependent on humans generating good example prompts that can lead to correct reasoning steps by the LLM. [Xu et.al.](https://arxiv.org/abs/2305.09993) proposed a technique by which the LLM itself can be use to generate the CoT prompt, which they called Reprompting. This requires the use of two LLMs, such that LLM1 is used to generate the example CoT prompts, while LLM2 is used to solve the actual problem. The method works in two steps:
 
@@ -284,7 +283,7 @@ Figure 18
 
 [Hao et.al.](https://arxiv.org/abs/2305.14992) adapted MCTS to work with LLMs and came up with an algorithm they called Reasoning via Planning (RAP). A high level view of RAP is shown in Fig. 18. As shown, it adopts the usual Reinforcement Learning framework for decision making, with the caveat that LLMs are used to propose appropriate Actions, as well as for keeping track of the current State. Thus this framework adopts two LLMs for its functioning, with LLM1 (called the Action LLM)used to propose Actions  while LLM2 (called the State LLM) is used to keep track of the current State. This is a point of differentiation from CoT or SC-CoT, since in those systems a single LLM keeps track of both the Action and State. Note that there are now multiple Actions associated with each State. The Action LLM is sampled multiple times in order to generate these multiple Actions.
 
-The graph shown on the RHS of the figure is referred to as a Markov Decision Process or MDP in Reinforcement Learning nomenclature. It consistes of the tuple $(S_t, A_t, R_t, p), t = 0, 1, ..., T$, such that the Action $A_t$ at time step $t$ is distributed according to $A_t ~ p(A|A_t,c)$ where $c$ is a prompt used to steer the LLM for Action generation, the state $S_{t+1}$ is distributed according to $S_{t+1} ~ p(s|S_t, A_t, c')$ where $c'$ is another prompt used to guide the LLM to generate the next state. The Markov in the name refers to the fact that both the Action $A_t$ and State $S_{t+1}$ are entirely determined by the prior State $S_t$, and are independent of what happened before.
+The graph shown on the RHS of the figure is referred to as a Markov Decision Process or MDP in Reinforcement Learning nomenclature. It consistes of the tuple $(S_t, A_t, R_t, p), t = 0, 1, ..., T$, such that the Action $A_t$ at time step $t$ is distributed according to $p(A|A_t,c)$ where $c$ is a prompt used to steer the LLM for Action generation, the state $S_{t+1}$ is distributed according to $p(s|S_t, A_t, c')$ where $c'$ is another prompt used to guide the LLM to generate the next state. The Markov in the name refers to the fact that both the Action $A_t$ and State $S_{t+1}$ are entirely determined by the prior State $S_t$, and are independent of what happened before.
 
 An important decision point in applying the MCTS algorithm to LLM based Decision Trees is the allocation of Rewards. Hao et.al. proposed the following ways in which the Reward could be allocated:
 
