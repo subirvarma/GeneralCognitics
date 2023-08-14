@@ -285,13 +285,13 @@ The CoT method suffers from the following problem: If the solution to the task i
 
 ## 4.2.1 Least-to-Most Prompting and REFINER Algorithms
 
-![](https://subirvarma.github.io/GeneralCognitics/images2/Agent40.png)
+![](https://subirvarma.github.io/GeneralCognitics/images/Agent40.png)
 
 Figure 17: Illustration of the Least-to-Most prompting algorithm, from [Zhou et.al.](https://arxiv.org/abs/2205.10625)
 
 The [Least-to-Most](https://arxiv.org/abs/2205.10625) prompting algorithm is illustrated in the Fig. 17. In Step 1 The LLM is prompted with examples of how to decompose a problem and solve it in stages (this prompt is not shown in the figure). In Step 2 the LLM is prompted to solve the problem, by using the decomposition in Step 1. As shown in the example in the figure, the LLM decomposes the problem into the sub-problem "How long does each trip take?" in Step 1. In Step 2 the LLM solves this sub-problem and the solution is fed back along with the original problem into the LLM, which then generates the final answer. This technique can be combined with SC-CoT to further improve performance.
 
-![](https://subirvarma.github.io/GeneralCognitics/images2/Agent41.png)
+![](https://subirvarma.github.io/GeneralCognitics/images/Agent41.png)
 
 Figure 19: Illustrating the Critic and Generator LLMs in the REFINER algorithm, from Paul et.al.](https://arxiv.org/pdf/2304.01904.pdf)
 
