@@ -1,21 +1,59 @@
-# Latent Spaces: A New Paradigm
+# Latent Spaces: Capturing Structure in Complex Systems
+
+## Introduction
 
 
 
-# What is a Latent Space
-
-
-# Latent Space for Images
-
-
-# Latent Space for Text
-
-
-# Latent Space in Biological Cells
-
-
-# Latent Spaces in Brains
 
 
 
-# Latent Spaces in Physics
+
+
+
+
+## Latent Space for Images
+
+
+
+
+
+
+
+
+
+## Latent Space for Language
+
+
+
+
+
+
+
+
+
+## Latent Space in Biological Systems
+
+
+
+
+
+
+
+
+
+## Latent Spaces in Brains
+
+
+
+
+
+
+
+
+
+## Latent Spaces in Physics
+
+
+
+
+
