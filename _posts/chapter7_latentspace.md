@@ -8,7 +8,16 @@ Dyson further observed that Quantum Mechanics, whose equations were discovered a
 
 For both Electro-Magnetics and Quantum Mechanics, the fundamental physical processes happen in their respective first layers and are hidden from us. Scientists have tried to create a understandable model of the first layer in terms of processes and objects that are familiar to us. For example Electro-Magnetic Fields were initially modeled using a mechanical model consisting of springs while attempts have been made to model Quantum Mechanics using familiar objects such as particles and waves. However, in both cases the attempts have been unsuccessful. Dyson makes the point that the first layer is an entirely mathematical construction, and it doesn't make sense to try to reduce it to descriptions that make sense in the macro world that we live in since our language was not designed to describe the layer one processes. The main utility of the first layer is to provide a mathematically tractable model from which predictions about events in the real world can be made with a high degree of accuracy. The process by which the real world in the second layer manifests itself from the processes happening in the first layer remains laregly mysterious, and in the context of Quantum Mechanics goes by names such as  Quantum Wave Collpase or Quantum Decoherence. 
 
-My objective in this essay to explore the existence of the two layer structure as a common organizing principle that is used to structure other complex systems as well. In Biology, the genetic code can be considered to the first layer structure, which by itself is fairly simple to describe, but when expressed in the language of proteins and cells, results in the complex second layer structure and multiplicity of living things that we find around us. In the main part of the essay I will argue that modern Deep Learning systems also obey the two layer design principle. In this case first layer typically goes by the name of Latent Variables. Once again these live in multi-dimensional spaces consisting of hundreds of dimensions and are not comprehensible to our senses, but they capture the structure present in objects in the real world, such as images and languages, that form the second layer of the structure. The Neural Network serves as a system to convert the abstract first layer latent variables into concrete objects such as images and language.
+My objective in this essay to explore the existence of the two layer structure as a common organizing principle that is used to structure other complex systems as well, in particular we will look at two broad domains, namely Biology and Deep Learning systems. In Biology, the genetic code can be considered to the first layer structure, which by itself is fairly simple to describe, but when expressed in the language of proteins and cells, results in the complex second layer structure and multiplicity of living things that we find around us. The cellular machinery used to translate the layer one structures in the DNA into layer 2 structures of animals and plants is largely understood thanks to the progress in Biology over the last 70 years.
+
+In the main part of the essay I will argue that modern Deep Learning systems also obey the two layer design principle for complex systems. In this case first layer typically goes by the name of Latent Variables. Once again these live in multi-dimensional spaces consisting of hundreds of dimensions and are not comprehensible to our senses, but they capture the structure present in objects in the real world, such as images and languages, that form the second layer of the structure. The Neural Network serves as a system to convert the abstract first layer latent variables into concrete objects such as images and language.
+
+
+## Latent Spaces in Physics
+
+
+
+
 
 
 ## Latent Space for Images
@@ -51,7 +60,7 @@ My objective in this essay to explore the existence of the two layer structure a
 
 
 
-## Latent Spaces in Physics
+
 
 
 
