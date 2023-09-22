@@ -12,15 +12,7 @@ My objective in this essay to explore the existence of the two layer structure a
 
 In the main part of the essay I will argue that modern Deep Learning systems also obey the two layer design principle for complex systems. In this case first layer typically goes by the name of Latent Variables. Once again these live in multi-dimensional spaces consisting of hundreds of dimensions and are not comprehensible to our senses, but they capture the structure present in objects in the real world, such as images and languages, that form the second layer of the structure. The Neural Network serves as a system to convert the abstract first layer latent variables into concrete objects such as images and language that we can comprehend. These Neural Network, that go by names such as Convolutional Neural Networks and Transformers, were originally inspired by models of how the human brain functions, even though the underlying mechanisms are very different in the two cases. This also raises the interesting question of whether the barin itself is orgaized according to the two layer design principle. It could be that information is organized in the brain in multi-dimensional layer one structures, which are then converted into the three dimensional space that we perceive using the brain's Neural Network. 
 
-The rest of this essay is organized as follows: In Section 2.0 I am going to talk about what we know about Latent Variables in the context of images, the Neural Network Architectures used to generate them, and how they are utilized in practice. Section 3.0 is on the topic of Latent Variables in Natural Language Processing (NLP), and also the connection between Image and NLP Latent Variables. In Section 4.0 we cast the DNA and Genes in Biological Cells into the language of Latent Variables, and describe how these get expressed into the living structures that we see around us. In Section 5.0 we discuss Latent Variables in the contexts of Physics, and finally in Section 6.0 we end the essay with some remarks on the role Latent Variables play in the operation of the brain.
-
-
-## Latent Spaces in Physics
-
-
-
-
-
+The rest of this essay is organized as follows: In Section 2.0 I am going to discuss what we know about Latent Variables in the context of images, the Neural Network Architectures used to generate them, and how they are utilized in practice. Section 3.0 is on the topic of Latent Variables in Natural Language Processing (NLP), and also the connection between Image and NLP Latent Variables. In Section 4.0 we cast the DNA and Genes in Biological Cells into the language of Latent Variables, and describe how these get expressed into the living structures that we see around us. In Section 5.0 we discuss Latent Variables in the contexts of Physics, and finally in Section 6.0 we end the essay with some remarks on the role Latent Variables play in the operation of the brain.
 
 ## Latent Space for Images
 
@@ -48,14 +40,13 @@ The rest of this essay is organized as follows: In Section 2.0 I am going to tal
 
 
 
-
-
-
-
 ## Latent Spaces in Brains
 
 
 
+
+
+## Latent Spaces in Physics
 
 
 
