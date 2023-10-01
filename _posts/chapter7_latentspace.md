@@ -19,13 +19,15 @@ The rest of this essay is organized as follows: In Section 2.0 I discuss what we
 
 ## Latent Space for Images
 
+Due to the advances in Deep Learning in the last decade, we now have the technology to be able to conjure up images by simply describing them in words, or manipulate an image by using simple numerical rules. But how did we get to this point? Not so long ago, the only way to operate on images was by modifying the hundreds of thousands of color pixels that make up an image, which is an extremely difficult undertaking. Clearly images have a lot of underlying structure, which should help in manipulating them, but we had no way to discover this structure. Examples of such structures would be: A car image is made up of a chassis, which is turn has components such as doors, windows, seats etc or a human image is made up limbs, head, face, etc the face in turn has eyes, lips, nodse etc and limbs have joints, toes and fingers. Thus what was missing was a semantic level understaing of images, which would allow us to find similar images or manipulate the objects of an image in a simple way.
 
-
-
-
-
-
-
+- Use example of MNIST images
+- How latent spaces were discovered by solving the classification problem
+- Latent spaces to reproduce images, Auto-Encoders
+- Engineering latent spaces by using VAE, well behaved latent spaces, image manipulation
+- latent spaces for language
+- Isomorphism between language and image latent spaces
+- Generating images by describing them in words
 
 ## Latent Space for Language
 
