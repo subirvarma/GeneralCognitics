@@ -29,6 +29,34 @@ Due to the advances in Deep Learning in the last decade, we now have the technol
 - Isomorphism between language and image latent spaces
 - Generating images by describing them in words
 
+![](https://subirvarma.github.io/GeneralCognitics/images/lat1.png) 
+
+
+![](https://subirvarma.github.io/GeneralCognitics/images/lat2.png) 
+
+
+![](https://subirvarma.github.io/GeneralCognitics/images/lat3.png) 
+
+
+![](https://subirvarma.github.io/GeneralCognitics/images/lat4.png) 
+
+
+![](https://subirvarma.github.io/GeneralCognitics/images/lat5.png) 
+
+
+![](https://subirvarma.github.io/GeneralCognitics/images/lat6.png) 
+
+
+![](https://subirvarma.github.io/GeneralCognitics/images/lat7.png) 
+
+
+![](https://subirvarma.github.io/GeneralCognitics/images/lat8.png) 
+
+
+![](https://subirvarma.github.io/GeneralCognitics/images/lat9.png) 
+
+
+![](https://subirvarma.github.io/GeneralCognitics/images/lat10.png) 
 
 
 ## Latent Space for Language
