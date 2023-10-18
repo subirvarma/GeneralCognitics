@@ -74,6 +74,15 @@ Due to the advances in Deep Learning in the last decade, we now have the technol
 
 ## Latent Space in Biological Systems
 
+![](https://subirvarma.github.io/GeneralCognitics/images/lat13.png) 
+
+
+
+![](https://subirvarma.github.io/GeneralCognitics/images/lat14.png) 
+
+
+
+![](https://subirvarma.github.io/GeneralCognitics/images/lat15.png) 
 
 
 
