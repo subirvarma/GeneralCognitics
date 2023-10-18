@@ -59,11 +59,14 @@ Due to the advances in Deep Learning in the last decade, we now have the technol
 ![](https://subirvarma.github.io/GeneralCognitics/images/lat10.png) 
 
 
-## Latent Space for Language
+
+## Latent Spaces in Physics
+
+![](https://subirvarma.github.io/GeneralCognitics/images/lat11.png) 
 
 
 
-
+![](https://subirvarma.github.io/GeneralCognitics/images/lat12.png) 
 
 
 
@@ -78,10 +81,6 @@ Due to the advances in Deep Learning in the last decade, we now have the technol
 ## Latent Spaces in Brains
 
 
-
-
-
-## Latent Spaces in Physics
 
 
 
