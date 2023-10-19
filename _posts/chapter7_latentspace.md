@@ -33,14 +33,15 @@ Due to the advances in Deep Learning in the last decade, we now have the technol
 
 Figure 1: Mapping between images and their latent vectors
 
-Fig. 1 shows a mapping between images and their latent representations. The image itself is described by a tensor of rank 3, consisting of 2D planes of red, green abd blue pixels, each of which can values from 0 to 255. The latent representation on the other is just a n dimensional vector. The magic lies in the neural networks that convert an image to its corresponding latent vector, and more importantly, are also able to convert a latent vector back into an image. By changing the individual co-ordinates of the latent vector, it is possible to modify the image in various ways.
-
+Fig. 1 shows a mapping between images and their latent representations. The image itself is described by a tensor of rank 3, consisting of 2D planes of red, green abd blue pixels, each of which can values from 0 to 255. The latent representation on the other is just a n dimensional vector. The magic lies in the neural networks that convert an image to its corresponding latent vector, and more importantly, are also able to convert a latent vector back into an image. The latent vector is the layer 1 representation or images, using the terminology we used in the Introduction. 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/lat2.png) 
 
 
+
 ![](https://subirvarma.github.io/GeneralCognitics/images/lat3.png) 
 
+Are there any benefits to this representation? 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/lat4.png) 
 
