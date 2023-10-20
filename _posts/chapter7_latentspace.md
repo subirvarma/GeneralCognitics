@@ -33,17 +33,41 @@ Due to the advances in Deep Learning in the last decade, we now have the technol
 
 Figure 1: Mapping between images and their latent vectors
 
-Fig. 1 shows a mapping between images and their latent representations. The image itself is described by a tensor of rank 3, consisting of 2D planes of red, green abd blue pixels, each of which can values from 0 to 255. The latent representation on the other is just a n dimensional vector. The magic lies in the neural networks that convert an image to its corresponding latent vector, and more importantly, are also able to convert a latent vector back into an image. The latent vector is the layer 1 representation or images, using the terminology we used in the Introduction. 
+Fig. 1 shows a mapping between images and their latent vector representations. The image itself is described by three 2D planes of red, green abd blue pixels, each picel can take values from 0 to 255. The latent representation on the other is just a N dimensional vector. The magic lies in the neural networks that convert an image to its corresponding latent vector, and more importantly, are also able to convert a latent vector back into an image. The latent vector is the layer 1 representation of images, using the terminology we used in the Introduction. As we show later is this section, this representation can be used to carry out several image manipulation tasks that were impossible to accomplish before the advent of Deep Learning. 
+
+What is the theoretical basis for believing that an invertible latent vector representation for images is even possible?
+
+![](https://subirvarma.github.io/GeneralCognitics/images/lat17.png) 
+
+Figure 2: Theory underlying generation of images using Latent Vector representations 
+
+The theory behind these representations is summarized in Fig. 2. Assuming we have a collection of images, and we would like to generate new images that look they also belong to this group. One way of doing this is by estimating the distribution q(X) for the image data, and then sampling from q(X). However in general q(X) is an extremely complicated function, and so far it is difficult to estimate it directly. However it is easier to estimate the conditional probability q(X|Z) where Z is the Latent Variable. Indeed q(X|Z) can be approximated by a Gaussian Distribution whose mean can be estimated using a Neural Network.
+Finally using the fact that q(X,Z) = q(X|Z) q(Z), we can use Ancestral Sampling to sample from q(X,Z) (and thereby generating an image) by first sampling from q(Z) and then using the sampled value of Z to sample from q(X|Z). The theory I have just described underlies popular image generation models such as DALLE 2 and Stable Diffusion.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/lat2.png) 
 
+Figure 3: Visualization of a Latent Space manifold
 
+The Latent Space forms a complicated manifold in N dimensional space which doesn't leand itself to visualization. Fig. 3 show a Latent Space manifold for N = 3.
+A manifold is defined as a surface in N dimensional space that can be locally approximated by Euclidean space. Moreover, given two points on a manifold, they can be connected by a linear segment all of whose points also lie on the manifold.
+
+There is a technque that sometimes helps in visualizing Latent Space manifolds, and this is discussed next.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/lat3.png) 
 
-Are there any benefits to this representation? 
+Figure 4: Projection of the MNIST Latent Variable manifold on to 2D space
+
+The MNIST image dataset consists of handwritten digits from 0 to 9 and has been extensively used from the earliest days of Deep Learning. Latent Variables for this dataset was obtained using a technique called VAE (Variational Auto Encoders), and then these were projected onto 2 dimensions using a technique called T-SNE. 
+
+This figure also shows why Latent Space representaions are useful: Note that the Latent Variables occur in ten distinct clusters, and indeed images from each distinct digit gets mapped to its own cluster. This is a very useful property since it is now much easier to classify digits by separating out each cluster using simple hiper-plane separators.
+
+## Latent Space for Text
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/lat4.png) 
+
+Figure 5: Latent Space representations for text
+
+
 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/lat5.png) 
