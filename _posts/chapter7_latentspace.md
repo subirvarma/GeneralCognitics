@@ -80,11 +80,11 @@ The Latent Space for words and sentences
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/lat19.png) 
 
-
+Figure 7: An Encoder tor Text
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/lat20.png) 
 
-
+Figure 8: An Encoder and Decoder for Text
 
 ## Latent Spaces for Images and Text
 
@@ -119,7 +119,7 @@ The Latent Space for words and sentences
 
 
 
-## Latent Space in Biological Systems
+## DNA: Latent Space for Life?
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/lat13.png) 
 
