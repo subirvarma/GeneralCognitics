@@ -17,7 +17,7 @@ This also raises the interesting question of whether the brain itself is organiz
 
 The rest of this essay is organized as follows: In Section 2.0 I discuss what we know about Latent Variables in the context of images, the Neural Network Architectures used to generate them, and how they are utilized in practice. Section 3.0 is on the topic of Latent Variables in Natural Language Processing (NLP), and also the connection between Image and NLP Latent Variables. In Section 4.0 we cast the DNA and Genes in Biological Cells into the language of Latent Variables, and describe how these get expressed into the living structures that we see around us. In Section 5.0 we discuss Latent Variables in the contexts of Physics, and finally in Section 6.0 we end the essay with some remarks on the role Latent Variables play in the operation of the brain.
 
-## Latent Space for Images and Text
+## Latent Space for Images 
 
 Due to the advances in Deep Learning in the last decade, we now have the technology to be able to conjure up images by simply describing them in words, or manipulate an image by using simple numerical rules. But how did we get to this point? Not so long ago, the only way to manipulate images was by modifying the hundreds of thousands of color pixels that make up an image, which is an extremely difficult undertaking. Clearly images have a lot of underlying structure, which should help in manipulating them, but we had no way to discover this structure. Examples of such structures would be: A car image is made up of a chassis, which is turn has components such as doors, windows, seats etc or a human image is made up limbs, head, face, etc the face in turn has eyes, lips, nodse etc and limbs have joints, toes and fingers. Thus what was missing was a semantic level understaing of images, which would allow us to find similar images or manipulate the objects of an image in a simple way.
 
@@ -31,7 +31,7 @@ Due to the advances in Deep Learning in the last decade, we now have the technol
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/lat1.png) 
 
-Figure 1: Mapping between images and their latent vectors
+Figure 1: Mapping between images and their Latent Vectors
 
 Fig. 1 shows a mapping between images and their latent vector representations. The image itself is described by three 2D planes of red, green abd blue pixels, each picel can take values from 0 to 255. The latent representation on the other is just a N dimensional vector. The magic lies in the neural networks that convert an image to its corresponding latent vector, and more importantly, are also able to convert a latent vector back into an image. The latent vector is the layer 1 representation of images, using the terminology we used in the Introduction. As we show later is this section, this representation can be used to carry out several image manipulation tasks that were impossible to accomplish before the advent of Deep Learning. 
 
@@ -39,7 +39,7 @@ What is the theoretical basis for believing that an invertible latent vector rep
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/lat17.png) 
 
-Figure 2: Theory underlying generation of images using Latent Vector representations 
+Figure 2: Theory underlying generation of images using their Latent Vector representations 
 
 The theory behind these representations is summarized in Fig. 2. Assuming we have a collection of images, and we would like to generate new images that look they also belong to this group. One way of doing this is by estimating the distribution q(X) for the image data, and then sampling from q(X). However in general q(X) is an extremely complicated function, and so far it is difficult to estimate it directly. However it is easier to estimate the conditional probability q(X|Z) where Z is the Latent Variable. Indeed q(X|Z) can be approximated by a Gaussian Distribution whose mean can be estimated using a Neural Network.
 Finally using the fact that q(X,Z) = q(X|Z) q(Z), we can use Ancestral Sampling to sample from q(X,Z) (and thereby generating an image) by first sampling from q(Z) and then using the sampled value of Z to sample from q(X|Z). The theory I have just described underlies popular image generation models such as DALLE 2 and Stable Diffusion.
@@ -61,14 +61,21 @@ The MNIST image dataset consists of handwritten digits from 0 to 9 and has been 
 
 This figure also shows why Latent Space representaions are useful: Note that the Latent Variables occur in ten distinct clusters, and indeed images from each distinct digit gets mapped to its own cluster. This is a very useful property since it is now much easier to classify digits by separating out each cluster using simple hiper-plane separators.
 
+Insert: Manipulation of images by direct vector operations
+
 ## Latent Space for Text
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/lat4.png) 
 
-Figure 5: Latent Space representations for text
+Figure 5: Latent Vector representations for text
 
 
+![](https://subirvarma.github.io/GeneralCognitics/images/lat18.png) 
 
+Figure 6: T-SNE projections for word Latent Vectors
+
+
+## Latent Spaces for Images and Text
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/lat5.png) 
 
