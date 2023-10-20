@@ -69,10 +69,21 @@ Insert: Manipulation of images by direct vector operations
 
 Figure 5: Latent Vector representations for text
 
+Just as for images, textual data can also be transformed into its Latent Vector representation as shown in Fig. 5, and in the other direction, Latent Vector representations can be transformed back into text.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/lat18.png) 
 
 Figure 6: T-SNE projections for word Latent Vectors
+
+The Latent Space for words and sentences
+
+
+![](https://subirvarma.github.io/GeneralCognitics/images/lat19.png) 
+
+
+
+![](https://subirvarma.github.io/GeneralCognitics/images/lat20.png) 
+
 
 
 ## Latent Spaces for Images and Text
