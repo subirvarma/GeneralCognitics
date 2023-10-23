@@ -21,14 +21,6 @@ The rest of this essay is organized as follows: In Section 2.0 I discuss what we
 
 Due to the advances in Deep Learning in the last decade, we now have the technology to be able to conjure up images by simply describing them in words, or manipulate an image by using simple numerical rules. But how did we get to this point? Not so long ago, the only way to manipulate images was by modifying the hundreds of thousands of color pixels that make up an image, which is an extremely difficult undertaking. Clearly images have a lot of underlying structure, which should help in manipulating them, but we had no way to discover this structure. Examples of such structures would be: A car image is made up of a chassis, which is turn has components such as doors, windows, seats etc or a human image is made up limbs, head, face, etc the face in turn has eyes, lips, nodse etc and limbs have joints, toes and fingers. Thus what was missing was a semantic level understaing of images, which would allow us to find similar images or manipulate the objects of an image in a simple way.
 
-- Use example of MNIST images
-- How latent spaces were discovered by solving the classification problem
-- Latent spaces to reproduce images, Auto-Encoders
-- Engineering latent spaces by using VAE, well behaved latent spaces, image manipulation
-- latent spaces for language
-- Isomorphism between language and image latent spaces
-- Generating images by describing them in words
-
 ![](https://subirvarma.github.io/GeneralCognitics/images/lat1.png) 
 
 Figure 1: Mapping between images and their Latent Vectors
@@ -75,51 +67,72 @@ Just as for images, textual data can also be transformed into its Latent Vector 
 
 Figure 6: T-SNE projections for word Latent Vectors
 
-The Latent Space for words and sentences
+Latent Vectors for text are mapped as a function of their semantic content. This is illustrated in Fig 6, which shows latent space representations for single words. We can see that words which are close in meaning have latent vectors that are close to each other.
 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/lat19.png) 
 
 Figure 7: An Encoder tor Text
 
+The best encoders for text are based on the Transformer architecture (see Fig. 7). The sentence to be encoded is fed into the model, after being initially encoded using an word based text encoder such as Word2Vector. Word based text encoders are not able to encode based on the context of the sentence under consideration. Transformers on the other hand create encodings that take the context in the sentence into account.
+
 ![](https://subirvarma.github.io/GeneralCognitics/images/lat20.png) 
 
 Figure 8: An Encoder and Decoder for Text
 
-## Latent Spaces for Images and Text
+The decoder is also based on the Transformer model, and it generates its output on a word by word basis, which is known as auto-regressive generation. In order to generate the output, the decoder is usually suppled with a context, which in this case is another sentence that has been encoded using a Transformer. This enables this system to perform a number of useful tasks such as Translation, Summarization, Quastion Answering etc.
+
+## Connecting Multiple Latent Spaces: Images and Text
+
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/lat5.png) 
 
+Fig 9: Mapping between image and text Latent Spaces to enable text to image models
 
-![](https://subirvarma.github.io/GeneralCognitics/images/lat6.png) 
+Text to image models such as DALLE 2 and Stable Diffusion were released towrds the end of 2022. In order to function, these models have to connect the Latent Spaces for text and images so that the semantic content in the text gets transmitted to the corresponding image. 
 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/lat7.png) 
 
+Fig. 10: Operation of the CLIP model for joint image and text Latent Variable generation
+
+It is possible to establish a correspondence between the image and text Latent Spaces. The main idea for this is illustrated in Fig. 10 (for 2D projections). This can be accomplished using a model called CLIP. At the start of the training, the corresponding Latent Vectors are not near each other, but as the training progresses they move loser as shown in the RHS of the figure.
+
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/lat8.png) 
+
+Fig 11: Generation of images from text in DALLE 2
 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/lat9.png) 
 
+Fig 12: Generation of multiple images with similar semantic content
+
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/lat10.png) 
 
+Fig 13: Interpolation between two images
 
 
-## Latent Spaces in Physics
-
-![](https://subirvarma.github.io/GeneralCognitics/images/lat11.png) 
+## Optimization in Latent Space
 
 
+## Is the Wave Function a Latent Variable?
 
-![](https://subirvarma.github.io/GeneralCognitics/images/lat12.png) 
-
-
+![](https://subirvarma.github.io/GeneralCognitics/images/lat21.png) 
 
 
 
-## DNA: Latent Space for Life?
+![](https://subirvarma.github.io/GeneralCognitics/images/lat22.png) 
+
+
+
+![](https://subirvarma.github.io/GeneralCognitics/images/lat23.png) 
+
+
+
+
+## DNA: Latent Variable for Life?
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/lat13.png) 
 
