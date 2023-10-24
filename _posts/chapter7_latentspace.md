@@ -87,47 +87,53 @@ The decoder is also based on the Transformer model, and it generates its output 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/lat5.png) 
 
-Fig 9: Mapping between image and text Latent Spaces to enable text to image models
+Figure 9: Mapping between image and text Latent Spaces to enable text to image models
 
 Text to image models such as DALLE 2 and Stable Diffusion were released towrds the end of 2022. In order to function, these models have to connect the Latent Spaces for text and images so that the semantic content in the text gets transmitted to the corresponding image. 
 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/lat7.png) 
 
-Fig. 10: Operation of the CLIP model for joint image and text Latent Variable generation
+Figure 10: Operation of the CLIP model for joint image and text Latent Variable generation
 
 It is possible to establish a correspondence between the image and text Latent Spaces. The main idea for this is illustrated in Fig. 10 (for 2D projections). This can be accomplished using a model called CLIP. At the start of the training, the corresponding Latent Vectors are not near each other, but as the training progresses they move loser as shown in the RHS of the figure.
 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/lat8.png) 
 
-Fig 11: Generation of images from text in DALLE 2
+Figure 11: Generation of images from text in DALLE 2
 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/lat9.png) 
 
-Fig 12: Generation of multiple images with similar semantic content
+Figure 12: Generation of multiple images with similar semantic content
 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/lat10.png) 
 
-Fig 13: Interpolation between two images
+Figure 13: Interpolation between two images
 
 
 ## Optimization in Latent Space
 
 
-## Is the Wave Function a Latent Variable?
+## Is the Quantum Wave Function a Latent Variable?
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/lat21.png) 
+
+Figure 14: Possible locations for an electron in the crystal lattice
 
 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/lat22.png) 
 
+Figure 15: Interpretation of the Quantum State as a Latent Vector
+
 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/lat23.png) 
+
+Figure 16: Decoding real world information from the Quantum State
 
 
 
