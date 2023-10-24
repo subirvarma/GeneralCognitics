@@ -74,13 +74,13 @@ Latent Vectors for text are mapped as a function of their semantic content. This
 
 Figure 7: An Encoder tor Text
 
-The best encoders for text are based on the Transformer architecture (see Fig. 7). The sentence to be encoded is fed into the model, after being initially encoded using an word based text encoder such as Word2Vector. Word based text encoders are not able to encode based on the context of the sentence under consideration. Transformers on the other hand create encodings that take the context in the sentence into account.
+The best encoders for text are based on the Transformer architecture (see Fig. 7). After being initially encoded using an word based text encoder such as Word2Vector, the text to be encoded is fed into the Transformer model. The Transformers's architecture enables the vector representation of each word to be modified as a function of the other words in the text to which it is connected semantically (there can be more than one such connection per word to multiple other words). This process is repeated multiple times in order to get the final representation. Unlike the Word2Vector representation that we started out with, the final representation of each word takes the context of the surrounding text into account.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/lat20.png) 
 
 Figure 8: An Encoder and Decoder for Text
 
-The decoder is also based on the Transformer model, and it generates its output on a word by word basis, which is known as auto-regressive generation. In order to generate the output, the decoder is usually suppled with a context, which in this case is another sentence that has been encoded using a Transformer. This enables this system to perform a number of useful tasks such as Translation, Summarization, Quastion Answering etc.
+The decoder is also based on the Transformer model, and it generates its output on a word by word basis, which is known as auto-regressive generation. In order to generate the output, the decoder is usually suppled with a context, which in this case is another sentence that has also been encoded using a Transformer. This enables this system to perform a number of useful tasks such as Translation, Summarization, Quastion Answering etc.
 
 ## Connecting Multiple Latent Spaces: Images and Text
 
