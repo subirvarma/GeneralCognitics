@@ -90,13 +90,23 @@ Figure 8: An Encoder and Decoder for Text
 
 The decoder is also based on the Transformer model, and it generates its output on a word by word basis, which is known as auto-regressive generation. In order to generate the output, the decoder is usually suppled with a context, which in this case is another sentence that has also been encoded using a Transformer. This enables this system to perform a number of useful tasks such as Translation, Summarization, Question-Answering etc.
 
-## Conversion between Latent Spaces
+## Translation between Datasets
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/lat24.png) 
 
-Figire 9a: Mapping between Latent Spaces
+Figire 9a: Mapping between two Datasets
 
-The power of the latent space formulation is evident when we try to solve the problem of translating between two pieces of information. This can be image to image, text to text, or text to image (or vice versa). These problems have been very difficult to solve using older methods. Fig. 9a summarizes the main idea behind this technique: There are two datasets each of which has its own Latent Space. During the training process, we establish a correspondence between points of the two Latent Spaces. Once this is done, translation from a sample from one of the datasets to a sample in the other can be done by generating the Latent Vector 1 for the Dataset 1 sample, and then using this to generate the corresponding Latent Vector 2 for Dataset 2 that is closest to it (in practice this is done automatically by the generating Neural Network). Latent Vector 2 can then be used to generate the sample we are looking for in Dataset 2.
+The power of the latent space formulation is most evident when we try to solve the problem of translating between two datasets that are very different from each other at the surface level. However it turns out that if they share a similar structure at the deeper Latent Space level, then it is possible to 'translate' an object in dataset 1 to a corresponding object in dataset 2 in a way that makes sense to us. The most common example of this translating a piece of text to an image that is described by the text. Other examples include:
+
+- Translating from image to text, also known as captioning
+- Translating text from Language 1 to Language 2
+- Translating from Image Class 1 to Image Class 2: For example converting satellite photos into road maps
+- Converting a piece of text to its summary
+- Answering a question (tranlating between the question and the answer)
+
+These problems, which also go under the name of Generative AI, have been very difficult to solve using older methods. Fig. 9a summarizes the main idea behind this technique: There are two datasets each of which has its own Latent Space. During the training process, we establish a correspondence between points of the two Latent Spaces. Once this is done, translation from a sample from one of the datasets to a sample in the other can be done by generating the Latent Vector 1 for the Dataset 1 sample, and then using this to generate the corresponding Latent Vector 2 for Dataset 2 that is closest to it (in practice this is done automatically by the generating Neural Network). Latent Vector 2 can then be used to generate the sample we are looking for in Dataset 2. Before the advent of modern Neural Networks, it was not thought possible to translate from a Latent Vector representation to full fledged image or a piece of text that is semantically coherent dur to the complexity of the mathematical transformation required. Deep Learning has s hown us a way of learning these fantastically complex functions, and as result we are able to generate samples from datasets which was previously the domain of human level intelligence.
+
+
 If the two Datasets have the same modality (for example image to image or text to text), then this procedure establishes a correspondence between two versions of the same Latent Vector space.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/lat5.png) 
