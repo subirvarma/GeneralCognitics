@@ -55,6 +55,14 @@ This figure also shows why Latent Space representaions are useful: Note that the
 
 Insert: Manipulation of images by direct vector operations
 
+![](https://subirvarma.github.io/GeneralCognitics/images/lat9.png) 
+
+Figure: Generation of multiple images with similar semantic content
+
+![](https://subirvarma.github.io/GeneralCognitics/images/lat10.png) 
+
+Figure: Interpolation between two images
+
 ## Latent Space for Text
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/lat4.png) 
@@ -80,44 +88,55 @@ The best encoders for text are based on the Transformer architecture (see Fig. 7
 
 Figure 8: An Encoder and Decoder for Text
 
-The decoder is also based on the Transformer model, and it generates its output on a word by word basis, which is known as auto-regressive generation. In order to generate the output, the decoder is usually suppled with a context, which in this case is another sentence that has also been encoded using a Transformer. This enables this system to perform a number of useful tasks such as Translation, Summarization, Quastion Answering etc.
+The decoder is also based on the Transformer model, and it generates its output on a word by word basis, which is known as auto-regressive generation. In order to generate the output, the decoder is usually suppled with a context, which in this case is another sentence that has also been encoded using a Transformer. This enables this system to perform a number of useful tasks such as Translation, Summarization, Question-Answering etc.
 
-## Connecting Multiple Latent Spaces: Images and Text
+## Conversion between Latent Spaces
 
+![](https://subirvarma.github.io/GeneralCognitics/images/lat24.png) 
+
+Figire 9a: Mapping between Latent Spaces
+
+The power of the latent space formulation is evident when we try to solve the problem of translating between two pieces of information. This can be image to image, text to text, or text to image (or vice versa). These problems have been very difficult to solve using older methods. Fig. 9a summarizes the main idea behind this technique: There are two datasets each of which has its own Latent Space. During the training process, we establish a correspondence between points of the two Latent Spaces. Once this is done, translation from a sample from one of the datasets to a sample in the other can be done by generating the Latent Vector 1 for the Dataset 1 sample, and then using this to generate the corresponding Latent Vector 2 for Dataset 2 that is closest to it (in practice this is done automatically by the generating Neural Network). Latent Vector 2 can then be used to generate the sample we are looking for in Dataset 2.
+If the two Datasets have the same modality (for example image to image or text to text), then this procedure establishes a correspondence between two versions of the same Latent Vector space.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/lat5.png) 
 
-Figure 9: Mapping between image and text Latent Spaces to enable text to image models
+Figure 9b: Mapping between image and text Latent Spaces to enable text to image models
 
-Text to image models such as DALLE 2 and Stable Diffusion were released towrds the end of 2022. In order to function, these models have to connect the Latent Spaces for text and images so that the semantic content in the text gets transmitted to the corresponding image. 
-
+Text to image models such as DALLE 2 and Stable Diffusion were released towards the end of 2022. In order to function, these models have to connect the Latent Spaces for text and images so that the semantic content in the text is reflected in the corresponding image. 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/lat7.png) 
 
 Figure 10: Operation of the CLIP model for joint image and text Latent Variable generation
 
-It is possible to establish a correspondence between the image and text Latent Spaces. The main idea for this is illustrated in Fig. 10 (for 2D projections). This can be accomplished using a model called CLIP. At the start of the training, the corresponding Latent Vectors are not near each other, but as the training progresses they move loser as shown in the RHS of the figure.
-
+It is possible to establish a correspondence between the image and text Latent Spaces. The main idea for this is illustrated in Fig. 10 (for 2D projections). This can be accomplished using a model called CLIP. At the start of the training, the corresponding Latent Vectors are not near each other, but as the training progresses they move loser as shown in the RHS of the figure. As a result of this procedure images and text are embedded on to the same latent space, whic is very convenient is we want to convert from one space to another. 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/lat8.png) 
 
 Figure 11: Generation of images from text in DALLE 2
 
-
-![](https://subirvarma.github.io/GeneralCognitics/images/lat9.png) 
-
-Figure 12: Generation of multiple images with similar semantic content
+Fig. 11 shows how images are generated from text in DALLE 2. The text is first converted into its latent vector representation using the CLIP encoder. Another model is used to find the corresponding CLIP atent vector representation for the image such that the two latent vectors are close to each other. Finally the image latent vector is fed into a Diffusion model that converts it into a full scale image.
+Sme of the other text to image models such as Imagen and Stable Diffusion feed the text latent vector directly into the Diffusion model that produces the image. this avoiding the extra step of estimating the image Latent Vector. However the model used to generate the text latent vector is not the CLIP model, but much larger models such as BERT that have been trained on much text training datasets. 
 
 
-![](https://subirvarma.github.io/GeneralCognitics/images/lat10.png) 
+##  Control in Latent Space
 
-Figure 13: Interpolation between two images
+In the previous section we showed how we can solve the difficult problem of translating between dissimilar datasets by establishing a correspondence between their Latent Spaces. There are other intractable problems whose solution is simplified by operating in their Latent Spaces, and in this section we will look the problem of Optimal Control.
+
+![](https://subirvarma.github.io/GeneralCognitics/images/lat25.png) 
+
+Figure: The Latent Space for Screens Shots for the Atari game of Space Invadors
 
 
 ## Optimization in Latent Space
 
+![](https://subirvarma.github.io/GeneralCognitics/images/lat26.png) 
 
-## Is the Quantum Wave Function a Latent Variable?
+Figure: Optimization in Latent Space
+
+
+
+## Is the Quantum Wave Vector a Latent Variable?
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/lat21.png) 
 
