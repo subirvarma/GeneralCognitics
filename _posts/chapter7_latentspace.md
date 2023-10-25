@@ -121,11 +121,13 @@ Sme of the other text to image models such as Imagen and Stable Diffusion feed t
 
 ##  Control in Latent Space
 
-In the previous section we showed how we can solve the difficult problem of translating between dissimilar datasets by establishing a correspondence between their Latent Spaces. There are other intractable problems whose solution is simplified by operating in their Latent Spaces, and in this section we will look the problem of Optimal Control.
+In the previous section we showed how we can solve the difficult problem of translating between dissimilar datasets by establishing a correspondence between their Latent Spaces. There are other intractable problems whose solution is simplified by operating in their Latent Spaces, and in this section we will look at the problem of Optimal Control.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/lat25.png) 
 
 Figure: The Latent Space for Screens Shots for the Atari game of Space Invadors
+
+
 
 
 ## Optimization in Latent Space
