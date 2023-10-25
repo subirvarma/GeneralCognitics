@@ -131,14 +131,15 @@ Sme of the other text to image models such as Imagen and Stable Diffusion feed t
 
 ##  Control in Latent Space
 
-In the previous section we showed how we can solve the difficult problem of translating between dissimilar datasets by establishing a correspondence between their Latent Spaces. There are other intractable problems whose solution is simplified by operating in their Latent Spaces, and in this section we will look at the problem of Optimal Control.
+In the previous section we showed how we can solve the difficult problem of translating between dissimilar datasets by establishing a correspondence between their Latent Spaces. There are other intractable problems whose solution is simplified by operating in their Latent Spaces, and in this section we will consider the problem of Optimal Control.
+
+One way of formulating the problem of Optimal Control is as a multistep problem, where an Ageent tries to maximize an objective, usually called a Reward. At each step the Agent has access to the state S of the world in which it operating, and has to decide to take one of several Actions A that are available to it. Furthermore the Agent's Action causes the state S of the world to change in an unpredictable way. The Agent's Action A can be formulated as a function f of its current state S, so that $A = f(S)$, for a class of problems called Markov Decision Processes.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/lat25.png) 
 
 Figure: The Latent Space for Screens Shots for the Atari game of Space Invadors
 
-
-
+Consider the problem owhere the Agent is tasked with playing a video game. The State S that it has access to consists of current and perhaps the past few screens of the game, while the Actions correspond to manipulations of the game controller. Given that the number of possible States is some uncountably large number, before that advent of Deep Learning the solution to this problem was intractable. A few years ago the company Deep Mind came up with a system they called DQN (for Deep Q Networks) that actually solved this problem for case of Atari games. Their solution involved training a Neural Network to implement the control function f. The input into the Neural Network was the last 4 screens of the game, while its output was a prediction of the Game Controller A. Once again this network processed the input image and converted its hundreds of thousands of pixels into a vector in Latent Space, which was then mapped onto one of the control Actions. An example of this Latent Space for the game of Space Invadors in shown in Fig. (after being mapped into 2D space using the T-SNE method). 
 
 ## Optimization in Latent Space
 
