@@ -27,6 +27,12 @@ Figure 1: Mapping between images and their Latent Vectors
 
 Fig. 1 shows a mapping between images and their latent vector representations. The image itself is described by three 2D planes of red, green abd blue pixels, each picel can take values from 0 to 255. The latent representation on the other is just a N dimensional vector. The magic lies in the neural networks that convert an image to its corresponding latent vector, and more importantly, are also able to convert a latent vector back into an image. The latent vector is the layer 1 representation of images, using the terminology we used in the Introduction. As we show later is this section, this representation can be used to carry out several image manipulation tasks that were impossible to accomplish before the advent of Deep Learning. 
 
+<An important property of the Latent Vectors is that it is able to capture the semantic content of the data, such that images that are similar to each other have Vactors that are closer together in Latent Space>
+
+<Compression and Latent Vectors>
+
+<Auto encoders as a way to obtain Latent Vectors>
+
 What is the theoretical basis for believing that an invertible latent vector representation for images is even possible?
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/lat17.png) 
@@ -146,6 +152,8 @@ Consider the problem owhere the Agent is tasked with playing a video game. The S
 ![](https://subirvarma.github.io/GeneralCognitics/images/lat26.png) 
 
 Figure: Optimization in Latent Space
+
+
 
 
 
