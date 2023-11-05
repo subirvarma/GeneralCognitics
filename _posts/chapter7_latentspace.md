@@ -61,13 +61,9 @@ This figure also shows why Latent Space representaions are useful: Note that the
 
 Insert: Manipulation of images by direct vector operations
 
-![](https://subirvarma.github.io/GeneralCognitics/images/lat9.png) 
+Figure: Generation of multiple images with similar semantic content (lat9)
 
-Figure: Generation of multiple images with similar semantic content
-
-![](https://subirvarma.github.io/GeneralCognitics/images/lat10.png) 
-
-Figure: Interpolation between two images
+Figure: Interpolation between two images (lat10)
 
 ## Latent Space for Text
 
