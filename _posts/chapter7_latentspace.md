@@ -35,21 +35,22 @@ Fig. 1 shows a mapping between images and their latent vector representations. T
 
 What is the theoretical basis for believing that an invertible latent vector representation for images is even possible?
 
-![](https://subirvarma.github.io/GeneralCognitics/images/lat17.png) 
+![](https://subirvarma.github.io/GeneralCognitics/images/lat27.png) 
 
-Figure 2: Theory underlying generation of images using their Latent Vector representations 
+Figure 2: Generating Latent Vectors for images 
 
-The theory behind these representations is summarized in Fig. 2. Assuming we have a collection of images, and we would like to generate new images that look they also belong to this group. One way of doing this is by estimating the distribution q(X) for the image data, and then sampling from q(X). However in general q(X) is an extremely complicated function, and so far it is difficult to estimate it directly. However it is easier to estimate the conditional probability q(X|Z) where Z is the Latent Variable. Indeed q(X|Z) can be approximated by a Gaussian Distribution whose mean can be estimated using a Neural Network.
-Finally using the fact that q(X,Z) = q(X|Z) q(Z), we can use Ancestral Sampling to sample from q(X,Z) (and thereby generating an image) by first sampling from q(Z) and then using the sampled value of Z to sample from q(X|Z). The theory I have just described underlies popular image generation models such as DALLE 2 and Stable Diffusion.
+Figure 2 shows a block diagram of how a Neural Network is trained to generate Latent Vectors. Part (a) of the figure shows the training process. In general there are two Neural Networks involved, the Encoder network takes an image and converts in into a vector, while the Decoder network does the reverse operation in a such a way such that the original image is recovered. Once the Encoder and Decoder have been fully trained (using a training dataset with millions of images), the Decoder by itself can be used to generate new images, as shown in Part (b) of the diagram. From this description it is clear fundamental to the operation of this system is the idea of compression, since the Encoder is taking an image consisting of hundreds of thousands of pixels and converting it into a vector with a few hundred dimensions. In order to do so the Encoder has to capture the essence of the image, both the semantics (the various shapes of the objects in the image) and the texture (colors etc), and do it in such a way that all extranuous information is filtered out. 
+
+Over the course of the last decade, the Encoder and Decoder networks have become more sophisticated resulting in better images. Initially they were just Dense Feed Forward Networks, the use of Convolutional Networks (CNNS) led to big jump in performance. The latest systems employ a technique called Diffusion Models for the Decoder which has led to the creation of State of the Art systems like DALLE 2. 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/lat2.png) 
 
 Figure 3: Visualization of a Latent Space manifold
 
-The Latent Space forms a complicated manifold in N dimensional space which doesn't leand itself to visualization. Fig. 3 show a Latent Space manifold for N = 3.
 A manifold is defined as a surface in N dimensional space that can be locally approximated by Euclidean space. Moreover, given two points on a manifold, they can be connected by a linear segment all of whose points also lie on the manifold.
+The Latent Space forms a complicated manifold in N dimensional space which doesn't lend itself to easy visualization. If the Latent Vector has only three dimensions, the the manifold can be visualized, and once such manifold is shown in Fig. 3.
 
-There is a technque that sometimes helps in visualizing Latent Space manifolds, and this is discussed next.
+There is a technque that sometimes helps in visualizing Latent Space manifolds in higher dimensions, and this is discussed next.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/lat3.png) 
 
