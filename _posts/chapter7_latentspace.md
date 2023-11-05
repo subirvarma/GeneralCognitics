@@ -27,14 +27,6 @@ Figure 1: Mapping between images and their Latent Vectors
 
 Fig. 1 shows a mapping between images and their latent vector representations. The image itself is described by three 2D planes of red, green abd blue pixels, each picel can take values from 0 to 255. The latent representation on the other is just a N dimensional vector. The magic lies in the neural networks that convert an image to its corresponding latent vector, and more importantly, are also able to convert a latent vector back into an image. Using the terminology from the Introduction, the latent vector is the Layer 1 representation of images. As we show later is this section, this representation can be used to carry out several image manipulation tasks that were impossible to accomplish before the advent of Deep Learning. 
 
-<An important property of the Latent Vectors is that it is able to capture the semantic content of the data, such that images that are similar to each other have Vactors that are closer together in Latent Space>
-
-<Compression and Latent Vectors>
-
-<Auto encoders as a way to obtain Latent Vectors>
-
-What is the theoretical basis for believing that an invertible latent vector representation for images is even possible?
-
 ![](https://subirvarma.github.io/GeneralCognitics/images/lat27.png) 
 
 Figure 2: Generating Latent Vectors for images 
@@ -42,6 +34,8 @@ Figure 2: Generating Latent Vectors for images
 Figure 2 shows a block diagram of how a Neural Network is trained to generate Latent Vectors. Part (a) of the figure shows the training process. In general there are two Neural Networks involved, the Encoder network takes an image and converts in into a vector, while the Decoder network does the reverse operation in a such a way such that the original image is recovered. Once the Encoder and Decoder have been fully trained (using a training dataset with millions of images), the Decoder by itself can be used to generate new images, as shown in Part (b) of the diagram. From this description it is clear fundamental to the operation of this system is the idea of compression, since the Encoder is taking an image consisting of hundreds of thousands of pixels and converting it into a vector with a few hundred dimensions. In order to do so the Encoder has to capture the essence of the image, both the semantics (the various shapes of the objects in the image) and the texture (colors etc), and do it in such a way that all extranuous information is filtered out. 
 
 Over the course of the last decade, the Encoder and Decoder networks have become more sophisticated resulting in better images. Initially they were just Dense Feed Forward Networks, the use of Convolutional Networks (CNNS) led to big jump in performance. The latest systems employ a technique called Diffusion Models for the Decoder which has led to the creation of State of the Art systems like DALLE 2. 
+
+What is the theoretical basis for believing that an invertible Latent Vector representation for images is even possible? The crux of the matter is that the system is able to capture the probability distribution of the pixels in the images. This is an extremely complex function, which we were unable to capture before the advent of Neural Networks, and even now its parameters are stored in the hundreds of millions of weights in the Neural Network, i.e. the Network itself is the representation for the Distribution Function. The Decoder then inverts this Distribution Function in order to sample from it, which results in the generation of new images.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/lat2.png) 
 
@@ -52,19 +46,21 @@ The Latent Space forms a complicated manifold in N dimensional space which doesn
 
 There is a technque that sometimes helps in visualizing Latent Space manifolds in higher dimensions, and this is discussed next.
 
-![](https://subirvarma.github.io/GeneralCognitics/images/lat3.png) 
+![](https://subirvarma.github.io/GeneralCognitics/images/lat28.png) 
 
 Figure 4: Projection of the MNIST Latent Variable manifold on to 2D space
 
-The MNIST image dataset consists of handwritten digits from 0 to 9 and has been extensively used from the earliest days of Deep Learning. Latent Variables for this dataset was obtained using a technique called VAE (Variational Auto Encoders), and then these were projected onto 2 dimensions using a technique called T-SNE. 
+The MNIST image dataset consists of handwritten digits from 0 to 9 and has been extensively used from the earliest days of Deep Learning. Some samples from this dataset are shown in the LHS of Fig. 4. Latent Variables for this dataset were obtained using a technique called VAE (Variational Auto Encoders), and then these were projected onto 2 dimensions using a technique called T-SNE as shown on the RHS of Fig. 4. 
+The figure shows why Latent Space representaions are useful: Note that the Latent Variables occur in ten distinct clusters, and indeed images from each distinct digit gets mapped to its own cluster. This shows that the system has managed to figure out that there are ten distinct types of shapes in the dataset.
+This representation makes it much easier to classify digits by separating out each cluster using simple hiper-plane separators.
 
-This figure also shows why Latent Space representaions are useful: Note that the Latent Variables occur in ten distinct clusters, and indeed images from each distinct digit gets mapped to its own cluster. This is a very useful property since it is now much easier to classify digits by separating out each cluster using simple hiper-plane separators.
+![](https://subirvarma.github.io/GeneralCognitics/images/lat29.png) 
 
-Insert: Manipulation of images by direct vector operations
+Figure: Interpolation between two images 
 
 Figure: Generation of multiple images with similar semantic content (lat9)
 
-Figure: Interpolation between two images (lat10)
+
 
 ## Latent Space for Text
 
