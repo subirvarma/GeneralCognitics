@@ -35,7 +35,7 @@ Figure 2 shows a block diagram of how a Neural Network is trained to generate La
 
 Over the course of the last decade, the Encoder and Decoder networks have become more sophisticated resulting in better images. Initially they were just Dense Feed Forward Networks, the use of Convolutional Networks (CNNS) led to big jump in performance. The latest systems employ a technique called Diffusion Models for the Decoder which has led to the creation of State of the Art systems like DALLE 2. 
 
-What is the theoretical basis for believing that an invertible Latent Vector representation for images is even possible? The crux of the matter is that the system is able to capture the probability distribution of the pixels in the images. This is an extremely complex function, which we were unable to capture before the advent of Neural Networks, and even now its parameters are stored in the hundreds of millions of weights in the Neural Network, i.e. the Network itself is the representation for the Distribution Function. The Decoder then inverts this Distribution Function in order to sample from it, which results in the generation of new images.
+What is the theoretical basis for believing that an invertible Latent Vector representation for images is even possible? The crux of the matter is that the system is able to capture the probability distribution of the pixels in the images. This is an extremely complex function, which we were unable to capture before the advent of Neural Networks, and even now its parameters are stored in the hundreds of millions of weights in the Neural Network, i.e. the network itself is the representation for the Distribution Function. The Decoder then inverts this Distribution Function in order to sample from it, which results in the generation of new images. An Neural Networks have improved and become more sophisticated, they have been able to capture more complex Functions and as a result the quality of images that they are able to generate has become better.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/lat2.png) 
 
@@ -44,7 +44,7 @@ Figure 3: Visualization of a Latent Space manifold
 A manifold is defined as a surface in N dimensional space that can be locally approximated by Euclidean space. Moreover, given two points on a manifold, they can be connected by a linear segment all of whose points also lie on the manifold.
 The Latent Space forms a complicated manifold in N dimensional space which doesn't lend itself to easy visualization. If the Latent Vector has only three dimensions, the the manifold can be visualized, and once such manifold is shown in Fig. 3.
 
-There is a technque that sometimes helps in visualizing Latent Space manifolds in higher dimensions, and this is discussed next.
+There is a technique that sometimes helps in visualizing Latent Space manifolds in higher dimensions, and this is discussed next.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/lat28.png) 
 
