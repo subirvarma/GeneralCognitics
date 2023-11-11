@@ -27,7 +27,10 @@ As we will see in the next section, Neural Networks map images or text into a n-
 - Latent Vectors can be used to do optimization
 
 These are just some of the uses that have been found so far, and I am sure there are many more that will be unearthed in the coming years. Latent Vectors by themselves are just points in n-dimensional space, and require Neural Networks to generate them, and also to translated them back into the world of images or text. Hence one can argue that the real intelligence to do these tasks resides in the Neural Network, which is true. The real power of the Latent Space lies in the fact that it is able to capture structure in the input datasets. This structure is hidden from our comprehension, whether in images or in language, but becomes apparant when the data is translated into Latent Vectors. This structure is often tied to the semantic content in the datasets, which is something that was not possible to do before.
+
 For example one of the early observations in Deep Learning is that images that are similar to each other or text that has similar meaning result in Latent Vectors that lie close to each other, which makes is easier to do classification. Moreover by establishing a correspondence between Latent Spaces from two different datasets, for example images and text, it is possible to translate from one dataset to another. This property drives models such as DALLE 2 that generate images from text descriptions. The use of Latent Vectors for control also relies on the property that input states with similar control signals cluster together.
+
+The most fascinating aspect of Latent Spaces that has been discovered, is that Latent Spaces for Images and Text are the same in a very fundamental way. In other words one can start from a Latent Vector and translate it into an image or piece of text which are semantiacelly equivalent. The trainig process process can be considered to be taking two Latent Spaces and superimposing them on each other until they match. This would not possible unless they are topologically similar (or isomorphis).
 
 ## Latent Space for Images 
 
