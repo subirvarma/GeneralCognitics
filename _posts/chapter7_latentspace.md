@@ -98,11 +98,38 @@ Latent Vectors for text are mapped as a function of their semantic content. This
 
 ## Translation between Datasets
 
+![](https://subirvarma.github.io/GeneralCognitics/images/lat33.png) 
+
+Figure: Converting a piece of text to an image
+
+
+
+![](https://subirvarma.github.io/GeneralCognitics/images/lat34.png) 
+
+Figure: Translating between two languages
+
+
+
+![](https://subirvarma.github.io/GeneralCognitics/images/lat35.png) 
+
+Figure: Establishing a 1-1 mapping between two latent spaces
+
+
+![](https://subirvarma.github.io/GeneralCognitics/images/lat36.png) 
+
+Figure: Converting a piece of text to an image
+
+
+![](https://subirvarma.github.io/GeneralCognitics/images/lat37.png) 
+
+Figure: Translating between languages
+
+
 ![](https://subirvarma.github.io/GeneralCognitics/images/lat24.png) 
 
-Figire 9a: Mapping between two Datasets
+Figure 9a: Mapping between two Datasets
 
-One of the most fascinating discoveries in the Deep Learning era is the realization that we can connect two very dissimilar datasets by connecting their Latent Spaces together. Indeed the training process works such that literally the datasets share a common Latent Space, i.e., it is possible to generate a sample from either Dataset 1 or Dataset 2, depending upon the Neural Network deployed as the decoder. In translation applications a sample from dataset 1 is converted into its Latent Vector, which is then directly used to generate a sample from Dataset 2. 
+One of the most fascinating discoveries in the Deep Learning era is the realization that we can map between very dissimilar datasets by connecting their Latent Spaces together. Indeed the training process works such that literally the datasets share a common Latent Space, i.e., it is possible to generate a sample from either Dataset 1 or Dataset 2, depending upon the Neural Network deployed as the decoder. In translation applications a sample from dataset 1 is converted into its Latent Vector, which is then directly used to generate a sample from Dataset 2. 
 
 The power of the latent space formulation is most evident when we try to solve the problem of translating between two datasets that are very different from each other at the surface level. However it turns out that if they share a similar structure at the deeper Latent Space level, then it is possible to 'translate' an object in dataset 1 to a corresponding object in dataset 2 in a way that makes sense to us. The most common example of this translating a piece of text to an image that is described by the text. Other examples include:
 
