@@ -108,37 +108,33 @@ The power of the latent space formulation is most evident when we try to solve t
 - Converting a piece of text to its summary
 - Answering a question (tranlating between the question and the answer)
 
+These problems, which also go under the name of Generative AI, have been very difficult to solve using older methods. 
+
 ![](https://subirvarma.github.io/GeneralCognitics/images/lat35.png) 
 
 Figure: Establishing a 1-1 mapping between two Latent Spaces
 
-These problems, which also go under the name of Generative AI, have been very difficult to solve using older methods. Fig. 9a summarizes the main idea behind this technique: There are two datasets each of which has its own Latent Space. During the training process, we establish a correspondence between points of the two Latent Spaces. 
+Fig. 9a summarizes the main idea behind this technique as applied to text and image datasets: Each of these datasets has its own Latent Space. During the training process, we establish a correspondence between points of the two Latent Spaces. This is done explicitly using algorithmd such as CLIP, or implicitly as part of the training process that is used to convert from text to images. The Latent Spaces themselves have some complex topological structure about which we know very little, but the fact that the two of them can be put into one-to-one correspondence seems to imply that at the very deep level they are identical. This is plausible when two datasets are from two different languages, and this fact is used to do lnaguage translation. However the fact that images and text are also deeply connected at the Latent Space level is, in my opinion, one of the important discoveries that we have made thanks to Deep Learning, and it has implications in the study of how information is stored in the brain. 
+
+This technique of establishing congruences between datasets, and thus converting between them, is juest getting started, and can be extended in a number of exciting directions. One possible extension is translating between a digital dataset and objects in the real world. In a later section I will argure that living things are an example of such a translation, between the Latent Space of DNA and our bodies and organs.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/lat38.png) 
 
-Sigure: A Latent Vector used to generate either text or an image
+Figure: A Latent Vector used to generate either text or an image
+
+
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/lat36.png) 
 
 Figure: Converting a piece of text to an image
 
-Once this is done, translation from a sample from one of the datasets to a sample in the other can be done by generating the Latent Vector 1 for the Dataset 1 sample, and then using this to generate the corresponding Latent Vector 2 for Dataset 2 that is closest to it (in practice this is done automatically by the generating Neural Network). Latent Vector 2 can then be used to generate the sample we are looking for in Dataset 2. Before the advent of modern Neural Networks, it was not thought possible to translate from a Latent Vector representation to full fledged image or a piece of text that is semantically coherent dur to the complexity of the mathematical transformation required. Deep Learning has s hown us a way of learning these fantastically complex functions, and as result we are able to generate samples from datasets which was previously the domain of human level intelligence.
+Once this is done, translation from a sample from one of the datasets to a sample in the other can be done by generating the Latent Vector 1 for the Dataset 1 sample, and then using this to generate the corresponding Latent Vector 2 for Dataset 2 that is closest to it (in practice this is done automatically by the generating Neural Network). Latent Vector 2 can then be used to generate the sample we are looking for in Dataset 2. Before the advent of modern Neural Networks, it was not thought possible to translate from a Latent Vector representation to full fledged image or a piece of text that is semantically coherent due to the complexity of the mathematical transformation required. Deep Learning has s hown us a way of learning these fantastically complex functions, and as result we are able to generate samples from datasets which was previously the domain of human level intelligence.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/lat37.png) 
 
 Figure: Translating between languages
 
 If the two Datasets have the same modality (for example image to image or text to text), then this procedure establishes a correspondence between two versions of the same Latent Vector space.
-
-Text to image models such as DALLE 2 and Stable Diffusion were released towards the end of 2022. In order to function, these models have to connect the Latent Spaces for text and images so that the semantic content in the text is reflected in the corresponding image. 
-
-![](https://subirvarma.github.io/GeneralCognitics/images/lat8.png) 
-
-Figure 11: Generation of images from text in DALLE 2
-
-Fig. 11 shows how images are generated from text in DALLE 2. The text is first converted into its latent vector representation using the CLIP encoder. Another model is used to find the corresponding CLIP atent vector representation for the image such that the two latent vectors are close to each other. Finally the image latent vector is fed into a Diffusion model that converts it into a full scale image.
-Sme of the other text to image models such as Imagen and Stable Diffusion feed the text latent vector directly into the Diffusion model that produces the image. this avoiding the extra step of estimating the image Latent Vector. However the model used to generate the text latent vector is not the CLIP model, but much larger models such as BERT that have been trained on much text training datasets. 
-
 
 ##  Control in Latent Space
 
