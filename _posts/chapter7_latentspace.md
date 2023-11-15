@@ -138,19 +138,21 @@ If the two Datasets have the same modality (for example image to image or text t
 
 ##  Control in Latent Space
 
-In the previous section we showed how we can solve the difficult problem of translating between dissimilar datasets by establishing a correspondence between their Latent Spaces. There are other intractable problems whose solution is simplified by operating in their Latent Spaces, and in this section we will consider the problem of Optimal Control.
+In the previous section we showed how we can solve the difficult problem of translating between dissimilar datasets by establishing a correspondence between their Latent Spaces. There are other intractable problems whose solution is simplified by operating in their Latent Spaces, and in this section we will consider the problem of Control. 
 
-One way of formulating the problem of Optimal Control is as a multistep problem, where an Ageent tries to maximize an objective, usually called a Reward. At each step the Agent has access to the state S of the world in which it operating, and has to decide to take one of several Actions A that are available to it. Furthermore the Agent's Action causes the state S of the world to change in an unpredictable way. The Agent's Action A can be formulated as a function f of its current state S, so that $A = f(S)$, for a class of problems called Markov Decision Processes.
+One way of formulating the problem of Optimal Control is as a multistep problem, where an Agent tries to maximize an objective, usually called a Reward. At each step the Agent has access to the state S of the world in which it operating, and has to decide to take one of several Actions A that are available to it. Furthermore the Agent's Action causes the state S of the world to change in an unpredictable way. The Agent's Action A can be formulated as a function f of its current state S, so that $A = f(S)$, for a class of problems called Markov Decision Processes.
+
+![](https://subirvarma.github.io/GeneralCognitics/images/lat40.png) 
+
+Figure: Using Latent Variables for Control
+
+For the case when the control actions are based on visual information from the real world, the state S can be simply considered to be the images being fed to the controller from a camera, susch a setup is appropriate for robotic control for exampele. Before the advent of Deep Learning it was not possible to feed such a complex state into the controller, usually the information in the image was condensed into a few numbers that the controller could handle. Deep Learning systems on the other hand are able to process the hundreds of thousands of pixels in images, and derive control information from them. This is shown in the figure above. Once again the Latent Space plays a critical role by serving as the condensed representation of the structure present in the images, as specialized to the task of control. the control actions can be directly mapped to the Latent Space, such that images that have the same control action are clustered together.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/lat25.png) 
 
 Figure: The Latent Space for Screens Shots for the Atari game of Space Invaders
 
-Consider the problem owhere the Agent is tasked with playing a video game. The State S that it has access to consists of current and perhaps the past few screens of the game, while the Actions correspond to manipulations of the game controller. Given that the number of possible States is some uncountably large number, before that advent of Deep Learning the solution to this problem was intractable. A few years ago the company Deep Mind came up with a system they called DQN (for Deep Q Networks) that actually solved this problem for case of Atari games. Their solution involved training a Neural Network to implement the control function f. The input into the Neural Network was the last 4 screens of the game, while its output was a prediction of the Game Controller A. Once again this network processed the input image and converted its hundreds of thousands of pixels into a vector in Latent Space, which was then mapped onto one of the control Actions. An example of this Latent Space for the game of Space Invaders in shown in Fig. (after being mapped into 2D space using the T-SNE method). Each point in the graph corresponds to a Latent Variable representation of one of the Game Screens, while the its color corresponds to something called a Value Function, which is the system's estimate of the Reward that it may get during the game. This graph clearly shows that the Neural Network has been able to find a structure in the game screens as a function of the 'Reward that the screen generates', which has enabled it to map them such that screens that have similar Rewards cluster together in the Latent Space. This is clearly a very property of the Latent Space, and enables the Neural Network to generate control Actions for complex State Spaces.
-
-![](https://subirvarma.github.io/GeneralCognitics/images/lat40.png) 
-
-Figure: Using Latent Variables for Control
+An example of this Latent Space for the Atari game of Space Invaders in shown in Fig. (after being mapped into 2D space using the T-SNE method). Each point in the graph corresponds to a Latent Variable representation of one of the Game Screens, while the its color corresponds to something called a Value Function, which is the system's estimate of the Reward that it may get during the game. This graph clearly shows that the Neural Network has been able to find a structure in the game screens as a function of the 'Reward that the screen generates', which has enabled it to map them such that screens that have similar Rewards cluster together in the Latent Space. 
 
 ## Optimization in Latent Space
 
