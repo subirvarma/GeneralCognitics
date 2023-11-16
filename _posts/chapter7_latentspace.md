@@ -156,12 +156,13 @@ An example of this Latent Space for the Atari game of Space Invaders in shown in
 
 ## Optimization in Latent Space
 
+In this section I am going to summarize some interesting research that was recently published by [Qi et.al](https://arxiv.org/pdf/2310.10056.pdf), where they utilized Neural Networks to find the crystal structure that has minimum formation energy, given a particular chemical formula. This is an important problem with applications to problems such as drug or protein design. In this application, the input into the model consists of the chemical formula for the compound and the output is a three dimensional crystal structure for that compund that has the minimum formation energy. 
+
 ![](https://subirvarma.github.io/GeneralCognitics/images/lat26.png) 
 
 Figure: Optimization in Latent Space
 
-
-
+The most straightforard way of approaching this problem is to compute a formula for the formation energy based on candidate crystal structures for the compund and then choose the structure with the lowest energy. However this procedure requires optimizing over complex sets and non-Eucledian manifolds so that naively applying gardient based methods to do optimization does not usually result in improvements. Qi et.al proposed an alternative optimization approach which overcomes these challenges. As shown in the above figure, their idea is to do optimization on the Latent Space of the crystal structures, as opposed to the structures themselves. The crystal structures are converted into Latent Vectors using a Crystal Diffusion Variational Autoencoder (CD-VAE), which are then optimized using a simple. gradient based algorithm. The Neural Network systems that they used were borrowed from those used to encode and decode images, and was described in the section on Latent Spaces for images. Once the Ltaent Vector with the lowest formation energy is identified, then it is converted back into the #D srystal structure using a Diffusion Model (similar to those for used DALLE 2 or Stable Diffusion for image generation). 
 
 
 ## Is the Quantum Wave Vector a Latent Variable?
