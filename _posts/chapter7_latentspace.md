@@ -169,6 +169,19 @@ The most straightforard way of approaching this problem is to compute a formula 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/lat15.png) 
 
+Bullet points in support of contention that the DNA is like a Latent Vector:
+
+- DNA is a compression of all the information required to create a living organism
+- Genetic Code is common across all living organisms
+- Hox Genes: Control development of the animal's body
+- Hox genes are common across different kinds of animals. It is like decoding a piece of text, or an image, starting from the same LV, what makes them different the Neural Network used to do the translation.
+- Decoding a Hox Gene is similar to decoding a Latent Vector. The role of the Neural Network is now played by Gene Regulation Network.
+- Just like aspects of an image can be controlled by changing its Latent Vector representaion, aspects of an animal's bode can be changed by changing its control network.
+- There are a few hundred regulatory genes out of the approx 13K in the fruitfly. Each has a amino acid sequence called the homedomain that latched on to specific parts of the DNA and acts like n On-Off switch for protein production. These are called transcription factors. Another set of genes that control signalling pathways between cells. All of these  together are called the toolkit genes.
+- Different Latent Spaces for each animal species, thay all share the same regulatory network. Different LVs from this LS result in different individuals. Sexual reproduction is combining two LVs from the same LS, children on the space of the linear segment connecting the two LVs.
+- Tweaking of the regulatory nw results in differnt species
+- 
+
 
 
 ## Is the Quantum Wave Vector a Latent Variable?
