@@ -159,10 +159,6 @@ The most straightforard way of approaching this problem is to compute a formula 
 
 ## DNA: Latent Variable for Life?
 
-![](https://subirvarma.github.io/GeneralCognitics/images/lat13.png) 
-
-
-
 ![](https://subirvarma.github.io/GeneralCognitics/images/lat14.png) 
 
 
@@ -180,7 +176,20 @@ Bullet points in support of contention that the DNA is like a Latent Vector:
 - There are a few hundred regulatory genes out of the approx 13K in the fruitfly. Each has a amino acid sequence called the homedomain that latched on to specific parts of the DNA and acts like n On-Off switch for protein production. These are called transcription factors. Another set of genes that control signalling pathways between cells. All of these  together are called the toolkit genes.
 - Different Latent Spaces for each animal species, thay all share the same regulatory network. Different LVs from this LS result in different individuals. Sexual reproduction is combining two LVs from the same LS, children on the space of the linear segment connecting the two LVs.
 - Tweaking of the regulatory nw results in differnt species
+
+In this section we step away from the field of Machine Learning and look for evidence for the presence of Latent Vector like structures in other fields, starting with Molecular Biology. It was not that long ago that scientists discovered that the incredible variety of plants and animals on earth all shared a common molecular dtructure in the nucleas of each of their cells which they called DNA. Since thena lot has been discoeverd about how DNA helps our cells function so that we stay alive, and also how it helps build our bodies. We now know the following:
+
+- DNA is made up of an alphabet consisting of 4 bases, referred to in short as A, G, C and T. Each DNA strand consists of a linear sequence of hundreds of thousands of these four bases.
+- There are discrete portions of the DNA called Genes, and living organisms typically tens of thousands of Genes in their DNA. The coded sequence in a gene gets translated into a protein, using the Genetic Code, which is a mapping of four consecutive bases in the gene to one of twenty Amino Acids. This process is accomplished by means of translation of the information in a gene to Messanger RNA, which in turn is processed by Ribosomes in the cell to make proteins. Proteins are the fundamental driver of all chemical processes in the cell.
+
+Since the 1980s we have also learnt a lot about how Genes control the development of our bodies, from the time we are embryos, and this is the part that is of interest to us in this section. Most of the content described on this topic is from the excellent book "Endless Forms Most Beautiful" by Sean B. Carroll, which is summarized next.
+
+It was clear that Genes somehow were responsible for this, but it was a mystery how they went about the job. It was known that humans and chimpanzees share 98% of their genes, even humans and rats share around 80%. Hence there was sone unkown factor that took a common set of genes, and was able to fashion them into different species of mammals in this case. The missing factor was discovered thanks to experiments carried out on the fruit fly Drosophila, and is referred to as the Gene Regulatory Network, and it functions as follows:
+
 - 
+
+
+  
 
 
 
