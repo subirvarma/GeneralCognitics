@@ -207,6 +207,12 @@ Figure: Difference between species are mostly due to differences in the Decoder
 Figure: Interpolation between Latent Variables in DNA Space
 
 
+![](https://subirvarma.github.io/GeneralCognitics/images/lat47.png) 
+
+Figure: Technology of the Future: Generation of Physical Objects from Latent Variables
+
+
+
 ## Is the Quantum Wave Vector a Latent Variable?
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/lat21.png) 
