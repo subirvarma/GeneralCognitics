@@ -184,9 +184,9 @@ In this section we step away from the field of Machine Learning and look for evi
 
 Since the 1980s we have also learnt a lot about how Genes control the development of our bodies, from the time we are embryos, and this is the part that is of interest to us in this section. Most of the content described on this topic is from the excellent book "Endless Forms Most Beautiful" by Sean B. Carroll, which is summarized next.
 
-It was clear that Genes somehow were responsible for this, but it was a mystery how they went about the job. It was known that humans and chimpanzees share 98% of their genes, even humans and rats share around 80%. Hence there was sone unkown factor that took a common set of genes, and was able to fashion them into different species of mammals in this case. The missing factor was discovered thanks to experiments carried out on the fruit fly Drosophila, and is referred to as the Gene Regulatory Network, and it functions as follows:
+It was clear that Genes somehow were responsible for this, but it was a mystery how they went about the job. It was known that humans and chimpanzees share 98% of their genes, even humans and rats share around 80%. Hence there was sone unkown factor that took a common set of genes, and was able to fashion them into different species of mammals in this case. The missing factor was discovered thanks to experiments carried out on the fruit fly Drosophila, and is referred to as the Gene Regulatory Network, it functions as follows:
 
-- 
+- Each of the Genes in the DNA can be turned on or off, such that it is transcripted to make proteins only when it is in the On state. This control is exercised by means of a stretch of DNA in front of a Gene
 
 
   
