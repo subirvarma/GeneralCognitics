@@ -159,12 +159,6 @@ The most straightforard way of approaching this problem is to compute a formula 
 
 ## DNA: Latent Variable for Life?
 
-![](https://subirvarma.github.io/GeneralCognitics/images/lat14.png) 
-
-
-
-![](https://subirvarma.github.io/GeneralCognitics/images/lat15.png) 
-
 Bullet points in support of contention that the DNA is like a Latent Vector:
 
 - DNA is a compression of all the information required to create a living organism
@@ -198,8 +192,19 @@ It was clear that Genes somehow were responsible for this, but it was a mystery 
 - Each of the Genes in the DNA can be turned on or off, such that it is transcripted to make proteins only when it is in the On state. This control is exercised by means of a stretch of DNA in front of a Gene
 
 
-  
+  ![](https://subirvarma.github.io/GeneralCognitics/images/lat44.png)
 
+  Figure: Generating an image of an Elephant vs Generating an actual Elephant!
+
+
+![](https://subirvarma.github.io/GeneralCognitics/images/lat45.png) 
+
+Figure: Difference between species are mostly due to differences in the Decoder
+
+
+![](https://subirvarma.github.io/GeneralCognitics/images/lat46.png) 
+
+Figure: Interpolation between Latent Variables in DNA Space
 
 
 ## Is the Quantum Wave Vector a Latent Variable?
