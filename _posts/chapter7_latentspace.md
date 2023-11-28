@@ -174,22 +174,28 @@ Bullet points in support of contention that the DNA is like a Latent Vector:
 In this section we step away from the field of Machine Learning and look for evidence for the presence of Latent Vector like structures in other fields, starting with Molecular Biology. It was not that long ago that scientists discovered that the incredible variety of plants and animals on earth all shared a common molecular dtructure in the nucleas of each of their cells which they called DNA. Since thena lot has been discoeverd about how DNA helps our cells function so that we stay alive, and also how it helps build our bodies. We now know the following:
 
 - DNA is made up of an alphabet consisting of 4 bases, referred to in short as A, G, C and T. Each DNA strand consists of a linear sequence of hundreds of thousands of these four bases.
-- There are discrete portions of the DNA called Genes, and living organisms typically tens of thousands of Genes in their DNA. The coded sequence in a gene gets translated into a protein, using the Genetic Code, which is a mapping of four consecutive bases in the gene to one of twenty Amino Acids. This process is accomplished by means of translation of the information in a gene to Messanger RNA, which in turn is processed by Ribosomes in the cell to make proteins. Proteins are the fundamental driver of all chemical processes in the cell.
+- There are discrete portions of the DNA called Genes, and living organisms typically tens of thousands of Genes in their DNA. The coded sequence in a gene gets translated into a protein, using the Genetic Code, which is a mapping of four consecutive bases in the gene to one of twenty Amino Acids. This process is accomplished by means of translation of the information in a gene to Messanger RNA, which in turn is processed by Ribosomes in the cell to make proteins. Proteins are the fundamental building blocks of life and driver of all chemical processes in the cell that keep the cell alive.
 
 Since the 1980s we have also learnt a lot about how Genes control the development of our bodies, from the time we are embryos, and this is the part that is of interest to us in this section. Most of the content described on this topic is from the excellent book "Endless Forms Most Beautiful" by Sean B. Carroll, which is summarized next.
 
+It was clear that Genes somehow were responsible for this, but it was a mystery how they went about the job. It was known that humans and chimpanzees share 98% of their genes, even humans and rats share around 80%. Hence there was sone unkown factor that took a common set of genes, and was able to fashion them into different species of mammals in this case. The missing factor was discovered thanks to experiments carried out on the fruit fly Drosophila, and is referred to as the Gene Regulatory Network, it functions as follows:
+
 ![](https://subirvarma.github.io/GeneralCognitics/images/lat42.png) 
 
-Figure: How Gene Transcription is Controlled using Switches
+Figure: How Gene Transcription is Controlled using Gene Switches
+
+Each of the Genes in the DNA can be turned on or off, such that it is transcripted to make proteins only when it is in the On state. This control is exercised by means of a stretch of DNA in front of a gene called the Gene Switch. There can be multiple switches controlling a single gene, one of which is shown in the above figure. Each switch in turn contains a number of gene sequences called Signature Sequences, and these act as attractors for specific set of proteins called Transcription Factor proteins. These proteins have an Amino Acid sequence that latches on to the Signature Sequence of the switch, and this can result in either turning ON the expression (an Activator Switch) of that gene or turning it OFF (a Repressor switch). These Transcriptior Factor proteins come in 4 or 5 different families: The Hox family of Transcriptors is used to layout the broad oulines of the animals body, as shown in figure (). There are other Transcription Fav=ctor genes that are used to trigger the formation of the organs, while still others are used to control the signalling between cells.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/lat43.png) 
 
-Figure: A Gene Control Network
+Figure: A Gene Regulation Network
 
+The Transcription Factor proteins in turn can be controlled by other Transcription Factor proteins, and this enables this system of proteins and switches to form a sophisticated logic network that can be used to control the operation of genes very precisely, as a function of time and space. An example of such a Gene Regulatory Network is shown in the above figure. Carroll estimates that a 100 pages sre probably sufficient to write down the regulatory network for the fruitfly, while for a human it would be closer ot 10,000 pages.
 
-It was clear that Genes somehow were responsible for this, but it was a mystery how they went about the job. It was known that humans and chimpanzees share 98% of their genes, even humans and rats share around 80%. Hence there was sone unkown factor that took a common set of genes, and was able to fashion them into different species of mammals in this case. The missing factor was discovered thanks to experiments carried out on the fruit fly Drosophila, and is referred to as the Gene Regulatory Network, it functions as follows:
+![](https://subirvarma.github.io/GeneralCognitics/images/lat16.png) 
 
-- Each of the Genes in the DNA can be turned on or off, such that it is transcripted to make proteins only when it is in the On state. This control is exercised by means of a stretch of DNA in front of a Gene
+Figure: Hox Gene Control of Fruitfly Development
+
 
 
   ![](https://subirvarma.github.io/GeneralCognitics/images/lat44.png)
