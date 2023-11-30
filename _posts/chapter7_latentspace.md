@@ -184,28 +184,30 @@ It was clear that Genes somehow were responsible for this, but it was a mystery 
 
 Figure: How Gene Transcription is Controlled using Gene Switches
 
-Each of the Genes in the DNA can be turned on or off, such that it is transcripted to make proteins only when it is in the On state. This control is exercised by means of a stretch of DNA in front of a gene called the Gene Switch. There can be multiple switches controlling a single gene, one of which is shown in the above figure. Each switch in turn contains a number of gene sequences called Signature Sequences, and these act as attractors for specific set of proteins called Transcription Factor proteins. These proteins have an Amino Acid sequence that latches on to the Signature Sequence of the switch, and this can result in either turning ON the expression (an Activator Switch) of that gene or turning it OFF (a Repressor switch). These Transcriptior Factor proteins come in 4 or 5 different families: The Hox family of Transcriptors is used to layout the broad oulines of the animals body, as shown in figure (). There are other Transcription Fav=ctor genes that are used to trigger the formation of the organs, while still others are used to control the signalling between cells.
+Each of the Genes in the DNA can be turned on or off, such that it is transcripted to make proteins only when it is in the On state. This control is exercised by means of a stretch of DNA in front of a gene called the Gene Switch. There can be multiple switches controlling a single gene, one of which is shown in the above figure. Each switch in turn contains a number of gene sequences called Signature Sequences, and these act as attractors for specific set of proteins called Hometoic proteins. These proteins have an Amino Acid sequence that latches on to the Signature Sequence of the switch, called the Homeodomain, and this can result in either turning ON the expression (an Activator Switch) of that gene or turning it OFF (a Repressor switch). These Homeotic proteins come in 4 or 5 different families, and as group are referred to as the Toolkit proteins: The Hox family of Toolkit Proteins is used to layout the broad oulines of the animals body, as shown in figure (). There are other Toolkit proteins that are used to trigger the formation of the organs, while still others are used to control the signalling between cells. Among the Toolkit proteins, the ones that work by turning other genes ON or OFF are referred to as Transcription Factors.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/lat43.png) 
 
 Figure: A Gene Regulation Network
 
-The Transcription Factor proteins in turn can be controlled by other Transcription Factor proteins, and this enables this system of proteins and switches to form a sophisticated logic network that can be used to control the operation of genes very precisely, as a function of time and space. An example of such a Gene Regulatory Network is shown in the above figure. Carroll estimates that a 100 pages sre probably sufficient to write down the regulatory network for the fruitfly, while for a human it would be closer ot 10,000 pages.
+These Transcription Factor proteins in turn can be controlled by other Transcription Factor proteins, and this enables this system of proteins and switches to form a sophisticated logic network that can be used to control the operation of genes very precisely, as a function of time and space. An example of such a Gene Regulatory Network is shown in the above figure. Carroll estimates that a 100 pages are probably sufficient to write down the regulatory network for the fruitfly, while for a human it would be closer ot 10,000 pages.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/lat16.png) 
 
 Figure: Hox Gene Control of Fruitfly Development
 
-
+An example of how Hox genes control fruitfly body development is shown in the above figure. Its body, with a lot of insects, is arranged in segments, and it has been shown that the development of each segment is controlled by a different Hox gene. Interestingly enough, these Hox genes are arranged on the fruitfly's DNA in the same order as the segments in the insect's body! Each segment in turn has its own set of appendages and organs whose development in turn is controlled by other Toolkit proteins. The exact location of an organ, for example the eyes, is controlled by by activation the 'eye' gene in a place whose locations has been pinpointed by the Hox genes.
 
   ![](https://subirvarma.github.io/GeneralCognitics/images/lat44.png)
 
   Figure: Generating an image of an Elephant vs Generating an actual Elephant!
 
+  
+
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/lat45.png) 
 
-Figure: Difference between species are mostly due to differences in the Decoder
+Figure: Difference between species are mostly due to differences in the Gene Regulatory Network
 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/lat46.png) 
