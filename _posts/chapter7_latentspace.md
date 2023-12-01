@@ -58,26 +58,30 @@ The Decoder inverts this distribution function in order to sample from it, which
 
 Figure 3: Visualization of a Latent Space manifold
 
-A manifold is defined as a surface in N dimensional space that can be locally approximated by Euclidean space. Moreover, given two points on a manifold, they can be connected by a linear segment all of whose points also lie on the manifold.
-The Latent Space forms a complicated manifold in N dimensional space which doesn't lend itself to easy visualization. If the Latent Vector has only three dimensions, the the manifold can be visualized, and once such manifold is shown in Fig. 3.
+If we take the set of Latent Vectors from the image dataset, they lie on a structure in N dimensional space called a manifold.
+A manifold is defined as a surface in N dimensional space that can be locally approximated by Euclidean space. Moreover, given two Latent Vectors on a manifold, they can be connected by a linear segment all of whose points also lie on the manifold.
+The Latent Space forms a complicated manifold in N dimensional space which doesn't lend itself to easy visualization. If the Latent Vector has only three dimensions, the the manifold can be visualized, and one such manifold is shown in Fig. 3.
 
 There is a technique that sometimes helps in visualizing Latent Space manifolds in higher dimensions, and this is discussed next.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/lat28.png) 
 
-Figure 4: Projection of the MNIST Latent Variable manifold on to 2D space
+Figure 4: Projection of the MNIST Latent Space manifold on to 2D space
 
-The MNIST image dataset consists of handwritten digits from 0 to 9 and has been extensively used from the earliest days of Deep Learning. Some samples from this dataset are shown in the LHS of Fig. 4. Latent Variables for this dataset were obtained using a technique called VAE (Variational Auto Encoders), and then these were projected onto 2 dimensions using a technique called T-SNE as shown on the RHS of Fig. 4. 
-The figure shows why Latent Space representaions are useful: Note that the Latent Variables occur in ten distinct clusters, and indeed images from each distinct digit gets mapped to its own cluster. This shows that the system has managed to figure out that there are ten distinct types of shapes in the dataset.
-This representation makes it much easier to classify digits by separating out each cluster using simple hiper-plane separators.
+The MNIST image dataset consists of handwritten digits from 0 to 9 and has been extensively used from the earliest days of Deep Learning. Some samples from this dataset are shown in the LHS of Fig. 4. Latent Variables for this dataset were obtained using a type of Neural Network called Variational Auto Encoders, and then these were projected onto 2 dimensions using a technique called T-SNE (see RHS of figure) and this is makes the structure of the Larent Space much more comprehensible to us. 
+The figure shows why Latent Space representions are useful: Note that the Latent Variables occur in ten distinct clusters, and indeed images from each distinct digit get mapped to its own cluster. This shows that the Neural Network has managed to figure out that there are ten distinct types of shapes in the dataset.
+This Latent Variable representation makes it much easier to classify digits which we can do by simply noting the cluster within which its Latent Variable is located.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/lat29.png) 
 
-Figure: Interpolation between two images 
+Figure: Interpolation between images 
+
+Now that we have a Latent Variable representation for an image, teher are several interesting things that can be done with it. The above figure shows how we can interpolate between images, once again using the MNIST dataset as an example. The numbers 6, 2, 7 and 1 form the four corners of the grid, and if these are converted into their Latent Variables, we can interpolate between images by interpolating betwen their Latent Variable representations, and then converting the interpolated number vector back into an image.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/lat30.png) 
 
 Figure: Manipulation of images by doing vector arithemetic in Latent Space
+
 
 
 ## Latent Space for Text
