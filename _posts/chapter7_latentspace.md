@@ -166,10 +166,10 @@ Bullet points in support of contention that the DNA is like a Latent Vector:
 - Hox Genes: Control development of the animal's body
 - Hox genes are common across different kinds of animals. It is like decoding a piece of text, or an image, starting from the same LV, what makes them different the Neural Network used to do the translation.
 - Decoding a Hox Gene is similar to decoding a Latent Vector. The role of the Neural Network is now played by Gene Regulation Network.
-- Just like aspects of an image can be controlled by changing its Latent Vector representaion, aspects of an animal's bode can be changed by changing its control network.
-- There are a few hundred regulatory genes out of the approx 13K in the fruitfly. Each has a amino acid sequence called the homedomain that latched on to specific parts of the DNA and acts like n On-Off switch for protein production. These are called transcription factors. Another set of genes that control signalling pathways between cells. All of these  together are called the toolkit genes.
+- Just like aspects of an image can be controlled by changing its Latent Vector representaion, aspects of an animal's body can be changed by changing its control network.
+- There are a few hundred regulatory genes out of the approx 13K in the fruitfly. Each produces proteins with an amino acid sequence called the homeodomain that latched on to specific parts of other genes and these act like On-Off switch for protein production from that gene. These proteins with the homeodomain are called transcription factors. Another set of genes control signalling pathways between cells. All of these  together are called the toolkit genes.
 - Different Latent Spaces for each animal species, thay all share the same regulatory network. Different LVs from this LS result in different individuals. Sexual reproduction is combining two LVs from the same LS, children on the space of the linear segment connecting the two LVs.
-- Tweaking of the regulatory nw results in differnt species
+- Tweaking of the regulatory network results in different species
 
 In this section we step away from the field of Machine Learning and look for evidence for the presence of Latent Vector like structures in other fields, starting with Molecular Biology. It was not that long ago that scientists discovered that the incredible variety of plants and animals on earth all shared a common molecular dtructure in the nucleas of each of their cells which they called DNA. Since thena lot has been discoeverd about how DNA helps our cells function so that we stay alive, and also how it helps build our bodies. We now know the following:
 
