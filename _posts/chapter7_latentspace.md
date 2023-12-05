@@ -159,50 +159,50 @@ The most straightforard way of approaching this problem is to compute a formula 
 
 ## DNA: Latent Variable for Living Things?
 
-Bullet points in support of contention that the DNA is like a Latent Vector:
+In this section we step away from the field of Machine Learning and look for evidence for the presence of Latent Vector like structures in other fields, starting with living things. It was not that long ago that scientists discovered that the incredible variety of plants and animals on earth all shared a common molecular structure in the nucleus of each of their cells which they called DNA. Since then a lot has been discovered about how DNA helps our cells function so that we stay alive, and also how it helps build our bodies. It is the latter function that we will focus on in this section. We will argue that the process of building an animal body using the DNA can be likened to the way in which the decoder in a Machine Learning system converts a Latent Vector into text or an image.
 
-- DNA is a compression of all the information required to create a living organism
-- Genetic Code is common across all living organisms
-- Hox Genes: Control development of the animal's body
-- Hox genes are common across different kinds of animals. It is like decoding a piece of text, or an image, starting from the same LV, what makes them different the Neural Network used to do the translation.
-- Decoding a Hox Gene is similar to decoding a Latent Vector. The role of the Neural Network is now played by Gene Regulation Network.
-- Just like aspects of an image can be controlled by changing its Latent Vector representaion, aspects of an animal's body can be changed by changing its control network.
-- There are a few hundred regulatory genes out of the approx 13K in the fruitfly. Each produces proteins with an amino acid sequence called the homeodomain that latched on to specific parts of other genes and these act like On-Off switch for protein production from that gene. These proteins with the homeodomain are called transcription factors. Another set of genes control signalling pathways between cells. All of these  together are called the toolkit genes.
-- Different Latent Spaces for each animal species, thay all share the same regulatory network. Different LVs from this LS result in different individuals. Sexual reproduction is combining two LVs from the same LS, children on the space of the linear segment connecting the two LVs.
-- Tweaking of the regulatory network results in different species
+We now know the following about how DNA works:
 
-In this section we step away from the field of Machine Learning and look for evidence for the presence of Latent Vector like structures in other fields, starting with Molecular Biology. It was not that long ago that scientists discovered that the incredible variety of plants and animals on earth all shared a common molecular dtructure in the nucleas of each of their cells which they called DNA. Since thena lot has been discoeverd about how DNA helps our cells function so that we stay alive, and also how it helps build our bodies. We now know the following:
+- DNA is made up of an alphabet consisting of 4 chemical bases, referred to in short as A, G, C and T. Each DNA strand consists of a linear sequence of hundreds of thousands of these four bases.
+- There are discrete portions of the DNA called genes, and living organisms typically typically have tens of thousands of genes in their DNA. The coded sequence in a gene gets translated into a protein, using the Genetic Code, which is a mapping of four consecutive bases in the gene to one of twenty Amino Acids. This process is accomplished by means of translation (also called transcription) of the information in a gene to Messanger RNA, which in turn is processed by Ribosomes in the cell to make proteins. Proteins are the fundamental building blocks of life and driver of all chemical processes in the cell that build the animals body and also keep the cell alive.
 
-- DNA is made up of an alphabet consisting of 4 bases, referred to in short as A, G, C and T. Each DNA strand consists of a linear sequence of hundreds of thousands of these four bases.
-- There are discrete portions of the DNA called Genes, and living organisms typically tens of thousands of Genes in their DNA. The coded sequence in a gene gets translated into a protein, using the Genetic Code, which is a mapping of four consecutive bases in the gene to one of twenty Amino Acids. This process is accomplished by means of translation of the information in a gene to Messanger RNA, which in turn is processed by Ribosomes in the cell to make proteins. Proteins are the fundamental building blocks of life and driver of all chemical processes in the cell that keep the cell alive.
+Since the 1980s we have learnt a lot about how genes control the development of our bodies from the time we are embryos, and this is the part that is of interest to us in this section. Most of the content described on this topic is from the excellent book "Endless Forms Most Beautiful" by Sean B. Carroll, which is summarized next.
 
-Since the 1980s we have also learnt a lot about how Genes control the development of our bodies, from the time we are embryos, and this is the part that is of interest to us in this section. Most of the content described on this topic is from the excellent book "Endless Forms Most Beautiful" by Sean B. Carroll, which is summarized next.
+Before the 1980s it was clear that genes somehow were responsible for influencing the shape and structure of our bodies, but it was a mystery how they went about the job. It was known that humans and chimpanzees share 98% of their genes, even humans and rats share around 80%. Hence it was perhaps not the genes themselves but some other unknown factor that took a common set of genes fashioned them into different species of mammals in this case. The missing factor was discovered thanks to experiments carried out on the fruit fly Drosophila, and is referred to as the Gene Regulatory Network, and it functions as follows:
 
-It was clear that Genes somehow were responsible for this, but it was a mystery how they went about the job. It was known that humans and chimpanzees share 98% of their genes, even humans and rats share around 80%. Hence there was sone unkown factor that took a common set of genes, and was able to fashion them into different species of mammals in this case. The missing factor was discovered thanks to experiments carried out on the fruit fly Drosophila, and is referred to as the Gene Regulatory Network, it functions as follows:
+There is a set of genes in an animal's body, called the Hox genes, that are responsible for the development of the animal's body. Amazingly enough these genes are common across animals as diverse as fruit fly's and humans separated by hundreds of millions of years of evolution. There are a few hundred of these genes out of the approx 13,000 in the fruitfly. Each produces proteins with an amino acid sequence called the homeodomain that latches on to specific parts of other genes and these act like on-off switch for protein production from that gene. These proteins with the homeodomain are called transcription factors. 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/lat42.png) 
 
 Figure: How Gene Transcription is Controlled using Gene Switches
 
-Each of the Genes in the DNA can be turned on or off, such that it is transcripted to make proteins only when it is in the On state. This control is exercised by means of a stretch of DNA in front of a gene called the Gene Switch. There can be multiple switches controlling a single gene, one of which is shown in the above figure. Each switch in turn contains a number of gene sequences called Signature Sequences, and these act as attractors for specific set of proteins called Hometoic proteins. These proteins have an Amino Acid sequence that latches on to the Signature Sequence of the switch, called the Homeodomain, and this can result in either turning ON the expression (an Activator Switch) of that gene or turning it OFF (a Repressor switch). These Homeotic proteins come in 4 or 5 different families, and as group are referred to as the Toolkit proteins: The Hox family of Toolkit Proteins is used to layout the broad oulines of the animals body, as shown in figure (). There are other Toolkit proteins that are used to trigger the formation of the organs, while still others are used to control the signalling between cells. Among the Toolkit proteins, the ones that work by turning other genes ON or OFF are referred to as Transcription Factors.
+The above figure shows in more detail how genes can be turned on or off. This control is exercised by means of a stretch of DNA in front of a gene called the Gene Switch. There can be multiple switches controlling a single gene, one of which is shown in the lower part of the above figure. Each switch in turn contains a number of gene sequences called Signature Sequences, and these act as attractors for the Transcription Factor proteins produced by the Hox genes. The Homeodomain in these proteins latches on to the Signature Sequence of the switch and this can result in either turning on the expression of that gene or turning it off. 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/lat43.png) 
 
 Figure: A Gene Regulation Network
 
-These Transcription Factor proteins in turn can be controlled by other Transcription Factor proteins, and this enables this system of proteins and switches to form a sophisticated logic network that can be used to control the operation of genes very precisely, as a function of time and space. An example of such a Gene Regulatory Network is shown in the above figure. Carroll estimates that a 100 pages are probably sufficient to write down the regulatory network for the fruitfly, while for a human it would be closer ot 10,000 pages.
+These Transcription Factor proteins in turn can be controlled by other Transcription Factor proteins, and this enables this system of proteins and switches to form a sophisticated logic network that can be used to control the operation of genes very precisely, as a function of time and space, which is referred to as the Gene Regulatory Network. An example of such a network is shown in the above figure. Carroll estimates that about 100 pages are probably sufficient to write down the Gene Regulatory Network for the fruitfly, while for a human it would be closer ot 10,000 pages.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/lat16.png) 
 
 Figure: Hox Gene Control of Fruitfly Development
 
-An example of how Hox genes control fruitfly body development is shown in the above figure. Its body, with a lot of insects, is arranged in segments, and it has been shown that the development of each segment is controlled by a different Hox gene. Interestingly enough, these Hox genes are arranged on the fruitfly's DNA in the same order as the segments in the insect's body! Each segment in turn has its own set of appendages and organs whose development in turn is controlled by other Toolkit proteins. The exact location of an organ, for example the eyes, is controlled by by activation the 'eye' gene in a place whose locations has been pinpointed by the Hox genes.
+An example of how Hox genes control fruitfly body development is shown in the above figure. Its body, as with a lot of insects, is arranged in segments, and it has been shown that the development of each segment is controlled by a different Hox gene. Interestingly enough, these Hox genes are arranged on the fruitfly's DNA in the same order as the segments in the insect's body! Each segment in turn has its own set of appendages and organs whose development in turn is controlled by other Toolkit proteins. The exact location of an organ, for example the eyes, is controlled by by activation the 'eye' gene in a place whose locations has been pinpointed by one of the Hox genes.
+
+- Hox genes are common across different kinds of animals. It is like decoding a piece of text, or an image, starting from the same LV, what makes them different the Neural Network used to do the translation.
+- Different Latent Spaces for each animal species, thay all share the same regulatory network. Different LVs from this LS result in different individuals. Sexual reproduction is combining two LVs from the same LS, children on the space of the linear segment connecting the two LVs.
+- Tweaking of the regulatory network results in different species
 
   ![](https://subirvarma.github.io/GeneralCognitics/images/lat44.png)
 
   Figure: Generating an image of an Elephant vs Generating an actual Elephant!
 
-  
+  The generation of images using Neural Network decoders and the generation of animal bodies using Hox genes shares some interesting similarities:
+
+- Decoding a Hox Gene can be likened to decoding a Latent Vector with the role of the Neural Network played by Gene Regulatory Network.
+- Just like aspects of an image can be controlled by changing its Latent Vector representaion, aspects of an animal's body can be modified by changing its Hox genes.
+- 
 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/lat45.png) 
