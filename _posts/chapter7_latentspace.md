@@ -183,50 +183,42 @@ The combination of the Toolkit Genes and Genetic Switches are responsible for bu
 
 Figure: How Gene Transcription is Controlled using Gene Switches
 
-The above figure shows in more detail how genes can be turned on or off by means of a Gene Switch which is a stretch of DNA in front of a gene. There can be multiple switches controlling a single gene, one of which is shown in the lower part of the figure. Each switch in turn contains a number of gene sequences called Signature Sequences, and these act as attractors for the proteins produced by the Toolkit Genes (called Transcription Factors). These proteins latche on to the Signature Sequence of the switch and this can result in either turning on the expression of that gene or turning it off. In general there can be multiple Signature Sequences in each switch, each associated with a different Transcription Factor.
+The above figure shows in more detail how genes can be turned on or off by means of a Gene Switch which is a stretch of DNA in front of a gene. There can be multiple switches controlling a single gene, one of which is shown in the lower part of the figure. Each switch in turn contains a number of gene sequences called Signature Sequences, and these act as attractors for the proteins produced by the Toolkit Genes (called Transcription Factors). These proteins latch on to the Signature Sequence of the switch and this can result in either turning on the expression of that gene or turning it off. In general there can be multiple Signature Sequences in each switch, each associated with a different Transcription Factor.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/lat43.png) 
 
 Figure: A Gene Regulation Network
 
-These Transcription Factor proteins in turn can be controlled by other Transcription Factor proteins, and this enables this system of proteins and switches to form a sophisticated logic network that can be used to control the operation of genes very precisely, as a function of time and space, which is referred to as the Gene Regulatory Network. An example of such a network is shown in the above figure. Carroll estimates that about 100 pages are probably sufficient to write down the Gene Regulatory Network for the fruitfly, while for a human it would be closer ot 10,000 pages.
+These Transcription Factor proteins in turn can be controlled by other Transcription Factor proteins, and this enables this system of proteins and switches to form a sophisticated logic network that can be used to control the operation of genes very precisely, as a function of time and space and this forms the Gene Regulatory Network. An example of such a network is shown in the above figure. Carroll estimates that about 100 pages are probably sufficient to write down the Gene Regulatory Network for the fruitfly, while for a human it would be closer to 10,000 pages.
 
-![](https://subirvarma.github.io/GeneralCognitics/images/lat16.png) 
+![](https://subirvarma.github.io/GeneralCognitics/images/lat44.png)
 
-Figure: Hox Gene Control of Fruitfly Development
+Figure: Generating an image of an Elephant vs Generating an actual Elephant!
 
-An example of how Hox genes control fruitfly body development is shown in the above figure. Its body, as with a lot of insects, is arranged in segments, and it has been shown that the development of each segment is controlled by a different Hox gene. Interestingly enough, these Hox genes are arranged on the fruitfly's DNA in the same order as the segments in the insect's body! Each segment in turn has its own set of appendages and organs whose development in turn is controlled by other Toolkit proteins. The exact location of an organ, for example the eyes, is controlled by by activation the 'eye' gene in a place whose locations has been pinpointed by one of the Hox genes.
-
-- Hox genes are common across different kinds of animals. It is like decoding a piece of text, or an image, starting from the same LV, what makes them different the Neural Network used to do the translation.
-- Different Latent Spaces for each animal species, thay all share the same regulatory network. Different LVs from this LS result in different individuals. Sexual reproduction is combining two LVs from the same LS, children on the space of the linear segment connecting the two LVs.
-- Tweaking of the regulatory network results in different species
-
-  ![](https://subirvarma.github.io/GeneralCognitics/images/lat44.png)
-
-  Figure: Generating an image of an Elephant vs Generating an actual Elephant!
-
-  The generation of images using Neural Network decoders and the generation of animal bodies using Hox genes shares some interesting similarities:
-
-- Decoding a Hox Gene can be likened to decoding a Latent Vector with the role of the Neural Network played by Gene Regulatory Network.
-- Just like aspects of an image can be controlled by changing its Latent Vector representaion, aspects of an animal's body can be modified by changing its Hox genes.
-- 
-
+To summarize: There is a direct analogy between Neural Network Decoders and the Gene Regulatory Network, as well as between a Latent Variable representation and the DNA. The space of all possible DNA sequences for a particular species, for example humans, forms a Latent Space, and one can consider all possible humans
+who have ever lived, as well as those that might live in the future to be samples from this Latent Space. 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/lat45.png) 
 
 Figure: Difference between species are mostly due to differences in the Gene Regulatory Network
 
+There is an interesting difference between the Decoders for two cases: Machine Learning decoders are designed by us, and have gradually become more sophisticated over time as we have become better at designing Neural Networks. Biological Decoders on the other hand are made by the same basic substrate, i.e. the animal's DNA, and also changes over time leading to new animal species. But now there is no designer other than the laws of Natural Selection as shown in the above figure.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/lat46.png) 
 
 Figure: Interpolation between Latent Variables in DNA Space
+
+Just as we can interpolate between Latent Variables in Machine Learning to produce images for example, that are intermediate between the two end points, one can consider the process of animals sexual reproduction to be a type of interpolation in the DNA space!
 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/lat47.png) 
 
 Figure: Technology of the Future: Generation of Physical Objects from Latent Variables
 
+If we consider the Gene Regulatory Network in animals to be a type of very advanced technology (invented $600 million years ago!), then are there any lessons that we can draw to apply to our current generation of Neural Networks. Here are some ideas:
 
+-  Invention of Decoders that can generate not just text or images, but also physical objects (see figure). Perhaps very intricate machinery or micro-machinery in the future can be manufactured using such a technique.
+- Use Latent Variables to generate the Decoder itself. The Latent Space of Decoders can be explored separately  from that of text or images, and some kind of optimization procedure, analogous to Natural Selection, can be used in this space to generate better Decoders.
 
 ## Is the Quantum Wave Vector a Latent Variable?
 
