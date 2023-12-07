@@ -220,6 +220,11 @@ If we consider the Gene Regulatory Network in animals to be a type of very advan
 -  Invention of Decoders that can generate not just text or images, but also physical objects (see figure). Perhaps very intricate machinery or micro-machinery in the future can be manufactured using such a technique.
 - Use Latent Variables to generate the Decoder itself. The Latent Space of Decoders can be explored separately  from that of text or images, and some kind of optimization procedure, analogous to Natural Selection, can be used in this space to generate better Decoders.
 
+There is also an interesting analogy between how animal bodies develop and how images are gradually produced from noise in a decoder based on Diffusion Models:
+
+- The development of an embryo follows a process whereby the animals over body plan is first mapped out using Toolkit Genes, such that the cells in every part of the growing body know exactly their location with respect to the overall plan. Once this is done then the cells in the various locations differentiate themselves based on their location, and result in the development of body parts or organs that are specific to that Location.
+- The development of an image using Diffusion Models also follows a two stage process where the overall semantic content of the image is first laid out, this includes the shapes of the opjects in the image and their relative locations. This is followed by the filling in of details in the image, such as colors and textures.
+
 ## Is the Quantum Wave Vector a Latent Variable?
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/lat21.png) 
