@@ -225,7 +225,25 @@ There is also an interesting analogy between how animal bodies develop and how i
 - The development of an embryo follows a process whereby the animals over body plan is first mapped out using Toolkit Genes, such that the cells in every part of the growing body know exactly their location with respect to the overall plan. Once this is done then the cells in the various locations differentiate themselves based on their location, and result in the development of body parts or organs that are specific to that Location.
 - The development of an image using Diffusion Models also follows a two stage process where the overall semantic content of the image is first laid out, this includes the shapes of the opjects in the image and their relative locations. This is followed by the filling in of details in the image, such as colors and textures.
 
-## Is the Quantum Wave Vector a Latent Variable?
+## Latent Variables in Physics
+
+In this section we return back to the topic with which I started the essay: The presence of Latent Variables in Physics. Freeman Dyson in his essay argued that most modern Physics is built on a two layer structure, with Layer 1 serving as a hidden mathematical real that is not accessible to our senses (or our instruments), and quantities in Layer 2 being the one that we can physically interact with and measure. In this essay we looked at other examples of this two layer structure in Machine Learning and Biology. In Machine Learning we saw how Latent Variables can be regarded as a highly compressed representation of Layer 2 which live in high dimensional spaces called manifolds. The transformatio between Layer 1 and Layer 2 in Machine Learning was accomplished using mathematical models called Neural Networks. Working in the spave of Latent Variables simplfied a number of problems, such as optimization, prediction, control etc. Similarly in Physics Layer 1 enables us to do prediction and optimization, in particular equations of the system's dynamics such as Maxwell's Equations or the Schrodinger Equation are impossible to derive at the System 2 level. 
+
+In physics on the other hand this transformation is done using simpler mathematical models involving just a few parameters. 
+
+Gievn the similarities between Latent Variables in ML and System 1in Physics, in particular:
+
+-   In both cases the Layer 1 variables are simplaer to analyze and optimize
+-   In both cases transformations between the two layers are done using well understood mathematical operations, Neural Networks for ML and PDEs for Physics
+
+Does this imply that there is a Neural Network like structure that translates between Layer 1 and Layer 2 operating in Physics as well? 
+
+It turns out that there actually an exact analogy between Neural Networks and a fundamental theory in Physics called Renormanlization Group (RG) theory. Physicists use RG to analyze emrergent behavior in multilayer systems, a good example being the emergence of ferro-magnetism at the macro scale due to the interaction of millions of Iron atome each acting like a tine magnet (due to their spin). RG predicts that systems operating at a higher scale exhibit properties that emerge due to interactions at the micro scale, and moreover the micro interactions can be ignored while analysing the system at the macro level. This is exactly equivalent to how a multilayer Neural Network operates, with the neurons in a higher layer discovering structure that is not obvious in the lower layer. 
+
+Since Physics illuminates the theory of Neural Networks, can Neural Networks in turn be used to throw a light on Physics? Is there a deep structure in our universe based on Neural Networks. Are Layer 1 quantiities in Physics actually Latent Variables in such a system? This would imply that the Laws of Physics are not fixed but learnt over time.
+
+The deepest theory in modern Physics is Quantum Field Theory that theorizes every elementary particle is associated with it own field, for example photone come with Electromagnetic fields, electrons come with the Dirac Field etc This fiels pervades all of space, and elementary particles are discrete bundles of energy that exist in this field (they emerge automatically from the equations once the field is quantized). 
+
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/lat21.png) 
 
