@@ -227,55 +227,27 @@ There is also an interesting analogy between how animal bodies develop and how i
 
 ## Latent Variables in Physics
 
-In this section we return back to the topic with which I started the essay: The presence of Latent Variables in Physics. Freeman Dyson in his essay argued that most modern Physics is built on a two layer structure, with Layer 1 serving as a hidden mathematical real that is not accessible to our senses (or our instruments), and quantities in Layer 2 being the one that we can physically interact with and measure. In this essay we looked at other examples of this two layer structure in Machine Learning and Biology. In Machine Learning we saw how Latent Variables can be regarded as a highly compressed representation of Layer 2 which live in high dimensional spaces called manifolds. The transformatio between Layer 1 and Layer 2 in Machine Learning was accomplished using mathematical models called Neural Networks. Working in the spave of Latent Variables simplfied a number of problems, such as optimization, prediction, control etc. Similarly in Physics Layer 1 enables us to do prediction and optimization, in particular equations of the system's dynamics such as Maxwell's Equations or the Schrodinger Equation are impossible to derive at the System 2 level. 
+In this section we return back to the topic with which I started the essay: The presence of a two layer structure in Modern Physics. Freeman Dyson in his essay argued that Layer 1 serves as a hidden mathematical model that is not accessible to our senses (or our instruments), and while quantities in Layer 2 are the ones that we can physically interact with and measure. In this essay we looked at other examples of this two layer structure in the fields of Machine Learning and Biology. In Machine Learning we saw how Latent Variables can be regarded as a highly compressed representation which live in high dimensional mathematical spaces called manifolds, and this is analogous to Layer 1 in Physics. The transformation between Layer 1 and Layer 2 in Machine Learning was accomplished using mathematical models called Neural Networks. Working in the space of Latent Variables simplfied a number of problems, such as optimization, prediction, control, generation etc. Similarly in Physics Layer 1 enables us to do prediction and optimization, in particular simple linear equations of the system's dynamics such as Maxwell's Equations or the Schrodinger Equation are impossible to derive at the System 2 level. 
 
 In physics on the other hand this transformation is done using simpler mathematical models involving just a few parameters. 
 
-Gievn the similarities between Latent Variables in ML and System 1in Physics, in particular:
+Givn the similarities between Latent Variables in Machine Learning and System 1 in Physics, in particular:
 
--   In both cases the Layer 1 variables are simplaer to analyze and optimize
--   In both cases transformations between the two layers are done using well understood mathematical operations, Neural Networks for ML and PDEs for Physics
+-   In both cases they are simpler to analyze and work with compared to the corresponding Layer 2 quantities in Physics or image/text in Machine Learning
+-   In both cases they cannot be interpreted by our senses, and exist as purely mathematical structures
+-   In both cases transformations between the two layers are done using well understood mathematical operations, Neural Networks for Machine Learning and Partial Differential Equations for Physics.
 
-Does this imply that there is a Neural Network like structure that translates between Layer 1 and Layer 2 operating in Physics as well? 
+From this can we conclude that Layer 1 quantities in Physics are an example of a Latent Variable like structure operating in Nature? 
+If so can we find a Neural Network type model that translates between Layer 1 and Layer 2 in Physics? 
 
-It turns out that there actually an exact analogy between Neural Networks and a fundamental theory in Physics called Renormanlization Group (RG) theory. Physicists use RG to analyze emrergent behavior in multilayer systems, a good example being the emergence of ferro-magnetism at the macro scale due to the interaction of millions of Iron atome each acting like a tine magnet (due to their spin). RG predicts that systems operating at a higher scale exhibit properties that emerge due to interactions at the micro scale, and moreover the micro interactions can be ignored while analysing the system at the macro level. This is exactly equivalent to how a multilayer Neural Network operates, with the neurons in a higher layer discovering structure that is not obvious in the lower layer. 
+It turns out that there is actually an exact correspondence between Neural Networks and a fundamental theory in Physics called Renormanlization Group (RG) theory. Physicists use RG to analyze emergent behavior in multilayer systems, a good example being the emergence of ferro-magnetism at the macro scale due to the interaction of millions of Iron atoms each acting like a tiny magnet (due to their spin). RG predicts that systems operating at a higher scale exhibit properties that emerge due to interactions at the micro scale, and moreover the micro interactions can be ignored when analysing  how the system behaves at the macro level. This is exactly equivalent to how a multilayer Neural Network works, with the neurons in higher layers discovering higher level structure which then serves as a summary for the following layers (give references).  
 
-Since Physics illuminates the theory of Neural Networks, can Neural Networks in turn be used to throw a light on Physics? Is there a deep structure in our universe based on Neural Networks. Are Layer 1 quantiities in Physics actually Latent Variables in such a system? This would imply that the Laws of Physics are not fixed but learnt over time.
+Since Physics can be used to illuminate the operation of Neural Networks, can Neural Networks in turn be used to throw a light on Physics? Is there a deep structure in our universe based on Neural Networks. Are Layer 1 quantiities in Physics actually Latent Variables in such a system? This would imply that the Laws of Physics are not fixed but learnt over time.
 
-The deepest theory in modern Physics is Quantum Field Theory that theorizes every elementary particle is associated with it own field, for example photone come with Electromagnetic fields, electrons come with the Dirac Field etc This fiels pervades all of space, and elementary particles are discrete bundles of energy that exist in this field (they emerge automatically from the equations once the field is quantized). 
+![](https://subirvarma.github.io/GeneralCognitics/images/lat49.png) 
 
+Figure: 
 
-![](https://subirvarma.github.io/GeneralCognitics/images/lat21.png) 
-
-Figure 14: Possible locations for an electron in the crystal lattice
-
-
-
-![](https://subirvarma.github.io/GeneralCognitics/images/lat22.png) 
-
-Figure 15: Interpretation of the Quantum State as a Latent Vector
-
-
-
-![](https://subirvarma.github.io/GeneralCognitics/images/lat23.png) 
-
-Figure 16: Decoding real world information from the Quantum State
-
-
-
-
-## Latent Spaces in Brains
-
-
-
-
-
-
-
-
-
-
-
-
+The deepest theory in modern Physics is Quantum Field Theory (QFT) that theorizes every that elementary particle is associated with it own field, for example photons come from Electromagnetic fields, electrons come from the Dirac Field etc. These fields pervade all of space-time, and elementary particles are discrete bundles of energy that exist in their respective fields (they emerge automatically from the equations once the field is quantized). There is a famous result called AdS/CFT correspondence that connects a class of QFTs called Conformal Field Theories (CFT) with theories of Gravitation based on String Theory. Recently [Hashimoto et.al.](https://arxiv.org/abs/1802.08313) showed that it is possible to derive the scalar field metric of the Gravity field by using a Neural Network Model.  This is illustrated in Fig. 49. Part (a) of the figure shows the normal AdS/CFT Correspondence, while Part (b) shows the Neural Network version. The metric of the Anti DeSitter Space can be xtracted from the parameters of the Neural Network once it is fully trained. During training the input into the network is the CFT derived Boundary Condition, while the output is the Black Hole Horizon Condition. This result is not very well understood, but it may point to deep connections between the two fields.
 
 
