@@ -212,51 +212,46 @@ who have ever lived, as well as those that might live in the future, to be sampl
 
 Figure 18: Difference between species are mostly due to differences in the Gene Regulatory Network
 
-There is an interesting difference between the Decoders for two cases: Machine Learning decoders are designed by us, and have gradually become more sophisticated over time as we have become better at designing Neural Networks. Biological Decoders on the other hand are made by the same basic substrate, i.e. the animal's DNA, and also changes over time leading to new animal species. But now there is no designer other than the laws of Natural Selection as shown in the above figure.
+There is an interesting difference between the Decoders for two cases: ANN decoders are designed by us, and have gradually become more sophisticated over time as we have become better at designing Neural Networks. Biological Decoders on the other hand are made by the same basic substrate, i.e. the animal's DNA, and also changes over time leading to new animal species. But now there is no designer other than the laws of Natural Selection as shown in the Fig. 18.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/lat46.png) 
 
-Figure: Interpolation between Latent Variables in DNA Space
+Figure 19: Interpolation between Latent Variables in DNA Space
 
-Just as we can interpolate between Latent Variables in Machine Learning to produce images for example, that are intermediate between the two end points, one can consider the process of animal sexual reproduction to be a type of interpolation in the DNA space!
-
+Just as we can interpolate between Latent Variables in Machine Learning to produce images that are intermediate between the two end points, one can consider the process of animal sexual reproduction to be a type of interpolation in the DNA space (see Fig. 19)!
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/lat47.png) 
 
-Figure: Technology of the Future: Generation of Physical Objects from Latent Variables
+Figure 20: Technology of the Future: Generation of Physical Objects from Latent Variables
 
-If we consider the Gene Regulatory Network in animals to be a type of very advanced technology (invented $600 million years ago!), then are there any lessons that we can draw to apply to our current generation of Neural Networks. Here are some ideas:
+If we consider the Gene Regulatory Network in animals to be a type of very advanced technology (invented 600 million years ago!), then there are lessons that we can draw to apply to our current generation of Neural Networks. Here are some ideas:
 
 -  Invention of Decoders that can generate not just text or images, but also physical objects (see figure). Perhaps very intricate machinery or micro-machinery in the future can be manufactured using such a technique.
 - Use Latent Variables to generate the Decoder itself. The Latent Space of Decoders can be explored separately  from that of text or images, and some kind of optimization procedure, analogous to Natural Selection, can be used in this space to generate better Decoders.
 
 There is also an interesting analogy between how animal bodies develop and how images are gradually produced from noise in a decoder based on Diffusion Models:
 
-- The development of an embryo follows a process whereby the animals over body plan is first mapped out using Toolkit Genes, such that the cells in every part of the growing body know exactly their location with respect to the overall plan. Once this is done then the cells in the various locations differentiate themselves based on their location, and result in the development of body parts or organs that are specific to that Location.
-- The development of an image using Diffusion Models also follows a two-stage process where the overall semantic content of the image is first laid out, this includes the shapes of the ojects in the image and their relative locations. This is followed by the filling in of details in the image, such as colors and textures.
+- The development of an embryo follows a process whereby the animal's body plan is first mapped out using Toolkit Genes, such that the cells in every part of the growing body know exactly their location with respect to the overall plan. Once this is done then the cells in the various locations differentiate themselves based on their location, and result in the development of body parts or organs that are specific to that Location.
+- The development of an image using Diffusion Models also follows a two-stage process where the overall semantic content of the image is first laid out, this includes the shapes of the objects in the image and their relative locations. This is followed by the filling in of details in the image, such as colors and textures.
 
 ## Latent Variables in Physics
 
-In this section we return back to the topic with which I started the essay: The presence of a two-layer structure in Modern Physics. Freeman Dyson in his essay argued that Layer 1 serves as a hidden mathematical model that is not accessible to our senses (or our instruments), and while quantities in Layer 2 are the ones that we can physically interact with and measure. In this essay we looked at other examples of this two-layer structure in the fields of Machine Learning and Biology. In Machine Learning we saw how Latent Variables can be regarded as a highly compressed representation which live in high dimensional mathematical spaces called manifolds, and this is analogous to Layer 1 in Physics. The transformation between Layer 1 and Layer 2 in Machine Learning was accomplished using mathematical models called Neural Networks. Working in the space of Latent Variables simplified a number of problems, such as optimization, prediction, control, generation etc. Similarly in Physics, Layer 1 enables us to do prediction and optimization, in particular simple linear equations of the system's dynamics such as Maxwell's Equations or the Schrodinger Equation are impossible to derive at the System 2 level. 
+In this section we return back to the topic raised at the start of the essay: The presence of a two-layer structure in the theories of Modern Physics. Freeman Dyson in his essay argued that layer 1 serves as a hidden mathematical model that is not accessible to our senses (or our instruments), while quantities in layer 2 are the ones that we can physically interact with and measure. In this essay we looked at other examples of this two-layer structure in the fields of Machine Learning and Biology. There are some similarities between layer 1 quantities in Physics, and Latent Variables in Machine Learning, in particular:
 
-In physics on the other hand this transformation is done using simpler mathematical models involving just a few parameters. 
+-  Both Latent Variables and layer 1 quantities exist in abstract mathematical spaces that are not acessible to our senses
+-  Working at the Latent Variable or layer 1 level simplifies problems such as prediction for the corresponding layer 2 quantities.
+-  Transformation between layer 1 and layer 2 in both cases is accomplished using mathematical models, ANNs in one case and Partial Differential Equations in the other.
 
-Given the similarities between Latent Variables in Machine Learning and System 1 in Physics, in particular:
-
--   In both cases they are simpler to analyze and work with compared to the corresponding Layer 2 quantities in Physics or image/text in Machine Learning
--   In both cases they cannot be interpreted by our senses, and exist as purely mathematical structures
--   In both cases transformations between the two layers are done using well understood mathematical operations, Neural Networks for Machine Learning and Partial Differential Equations for Physics.
-
-From this can we conclude that Layer 1 quantities in Physics are an example of a Latent Variable like structure operating in Nature? 
+Given the similarities, can we conclude that layer 1 quantities in Physics are an example of a Latent Variable like structure operating in Nature? 
 If so can we find a Neural Network type model that translates between Layer 1 and Layer 2 in Physics? 
 
-It turns out that there is an exact correspondence between Neural Networks and a fundamental theory in Physics called Renormalization Group (RG) theory. Physicists use RG to analyze emergent behavior in multilayer systems, a good example being the emergence of ferro-magnetism at the macro scale due to the interaction of millions of Iron atoms each acting like a tiny magnet (due to their spin). RG predicts that systems operating at a higher scale exhibit properties that emerge due to interactions at the micro scale, and moreover the micro interactions can be ignored when analyzing  how the system behaves at the macro level. This is exactly equivalent to how a multilayer Neural Network works, with the neurons in higher layers discovering higher level structure which then serves as a summary for the following layers (give references).  
+It turns out that there is an exact correspondence between Neural Networks and a fundamental theory in Physics called Renormalization Group (RG) theory (see [Mehta and Schwab](https://arxiv.org/pdf/1410.3831.pdf) and [Lin, Tegmark and Rolnick](https://arxiv.org/pdf/1608.08225.pdf)). Physicists use RG to analyze emergent behavior in multilayer systems, a good example being the emergence of ferro-magnetism at the macro scale due to the interaction of millions of Iron atoms each acting like a tiny magnet (due to their spin). RG predicts that systems operating at a higher scale exhibit new properties that emerge due to interactions at the micro scale, and moreover the micro interactions can be ignored when analyzing  how the system behaves at the macro level. This is exactly equivalent to how a multilayer Neural Network works, with the neurons in higher layers discovering higher level structure which then serves as a summary of the input for the following layers.  
 
-Since Physics can be used to illuminate the operation of Neural Networks, can Neural Networks in turn be used to throw a light on Physics? Is there a deep structure in our universe based on Neural Networks. Are Layer 1 quantities in Physics Latent Variables in such a system? This would imply that the Laws of Physics are not fixed but learnt over time.
+Since Physics can be used to illuminate the operation of Neural Networks, can Neural Networks in turn be used to throw a light on Physics? Is there a deep structure in our universe based on Neural Networks? Are Layer 1 quantities in Physics Latent Variables in such a system? This would imply that the Laws of Physics are not fixed but learnt over time.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/lat49.png) 
 
-Figure: 
+Figure 21: 
 
 The deepest theory in modern Physics is Quantum Field Theory (QFT) that theorizes every that elementary particle is associated with its own field, for example photons come from Electromagnetic fields, electrons come from the Dirac Field etc. These fields pervade all of space-time, and elementary particles are discrete bundles of energy that exist in their respective fields (they emerge automatically from the equations once the field is quantized). There is a famous result called AdS/CFT correspondence that connects a class of QFTs called Conformal Field Theories (CFT) with theories of Gravitation based on String Theory. Recently [Hashimoto et.al.](https://arxiv.org/abs/1802.08313) showed that it is possible to derive the scalar field metric of the Gravity field by using a Neural Network Model.  This is illustrated in Fig. 49. Part (a) of the figure shows the normal AdS/CFT Correspondence, while Part (b) shows the Neural Network version. The metric of the Anti DeSitter Space can be extracted from the parameters of the Neural Network once it is fully trained. During training the input into the network is the CFT derived Boundary Condition, while the output is the Black Hole Horizon Condition. This result is not very well understood, but it may point to deep connections between the two fields.
 
