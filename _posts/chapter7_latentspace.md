@@ -84,7 +84,7 @@ Now that we have a Latent Variable representation for an image, there are severa
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/lat30.png) 
 
-Figure 6: Manipulation of images by doing vector arithmetic in Latent Space
+Figure 6: Manipulation of images by doing vector arithmetic in Latent Space (from [Radford et.al](https://youtu.be/wXsxwIJnUJk))
 
 Another interesting way of manipulating images is shown in the Fig. 6: If the Latent Vector for an image of a smiling woman is subtracted from the Latent Vector of an image for a neutral woman, and the result is added to the Latent Vector for an image of a neutral man, then the resulting Latent Vector can be decoded into an image of a smiling man (to be more precise, the Latent Vectors on the LHS were created by averaging the Latent Vectors of several similar images). This shows that encoded within their array of numbers, Latent Vectors carry semantic information about images, .
 
@@ -92,7 +92,7 @@ Another interesting way of manipulating images is shown in the Fig. 6: If the La
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/lat41.png) 
 
-Figure 7: Text generation using a Language Model
+Figure 7: Text generation using a Language Model (from [Jurafsky and Martin](https://web.stanford.edu/~jurafsky/slp3/))
 
 Latent Vectors for text are computed using Language Models such as GPT. The generation of new text is done on a word by word basis with word $n$ and prior words being used to predict the following word $n+1$ (the analogous procedure for images would have generated them on a pixel by pixel basis, which is indeed possible, but time consuming). Fig. 7 shows a trained Transformer model which is tasked with completing the phrase "So long and thanks for". This phrase is fed into the model, which then starts to generate the following words to complete the phrase, one at a time. In order to do so, the model computes a Latent Vector representation for all of the prior text, which is then decoded by a Logit Layer to predict the next word. 
 
@@ -149,19 +149,19 @@ For the case when the control actions are based on visual information from the r
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/lat25.png) 
 
-Figure 12: The Latent Space for Screens Shots for the Atari game of Space Invaders
+Figure 12: The Latent Space for Screens Shots for the Atari game of Space Invaders (from [Mnih et.al.](https://www.nature.com/articles/nature14236))
 
 An example of this Latent Space for the Atari game of Space Invaders in shown in Fig. 12 (after being mapped into 2D space using the T-SNE method). Each point in the graph corresponds to a Latent Variable representation of one of the Game Screens, while its color corresponds to something called a Value Function, which is the system's estimate of the Reward that it may get during the game. This graph clearly shows that the ANN has been able to find a structure in the game screens as a function of the 'Reward that the screen generates'. This enables it to classify the game screens such that screens that have similar Rewards cluster together in the Latent Space. 
 
 ## Optimization in Latent Space
 
-In this section I am going to summarize some interesting research that was recently published by [Qi et.al](https://arxiv.org/pdf/2310.10056.pdf), where they utilized ANNs to find the crystal structure for a chemical formula that has minimum formation energy, and thus corresponds to a stable material. This is an important problem with applications to problems such as drug or protein design and also serves as an example of an optimization problem that becomes simpler to solve in Latent Space.
+In this section I am going to summarize some interesting research that was recently published by [Qi et.al.](https://arxiv.org/pdf/2310.10056.pdf), where they utilized ANNs to find the crystal structure for a chemical formula that has minimum formation energy, and thus corresponds to a stable material. This is an important problem with applications to problems such as drug or protein design and also serves as an example of an optimization problem that becomes simpler to solve in Latent Space.
 
 In this application, the input into the model consists of the chemical formula for the compound and the output is a three dimensional crystal structure for that compound that has the minimum formation energy. Finding the optimum crystal structure is a difficult problem in the 3D space of full molecular structure, but becomes simpler when carried out in Latent Space. This is also an example of using the concept of Latent Space in fields other than text or images.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/lat26.png) 
 
-Figure 13: Optimization in Latent Space
+Figure 13: Optimization in Latent Space (from [Qi et.al.](https://www.nature.com/articles/nature14236))
 
 The most straightforward way of approaching this problem is by computing a formula for the formation energy based on candidate crystal structures for the compound and then choose the structure with the lowest energy. However this procedure requires optimizing over complex sets and non-Eucledian manifolds so that naively applying gradient based methods to do optimization does not usually result in improvements. Qi et.al. proposed an alternative optimization approach which overcomes these challenges. As shown in the Fig. 13, their idea is to do optimization in the Latent Space of crystal structures, as opposed to the structures themselves. The crystal structures are converted into Latent Vectors using a Crystal Diffusion Variational Autoencoder (CD-VAE), which are then optimized using a simple. gradient based algorithm. The ANN that they used was borrowed from those used to encode and decode images, such as Convolutional Neural Networks. Once the Latent Vector with the lowest formation energy is identified, it is converted back into the 3D crystal structure using a Diffusion Model (similar to those for used DALLE 2 or Stable Diffusion for image generation). 
 
@@ -236,23 +236,13 @@ There is also an interesting analogy between how animal bodies develop and how i
 
 ## Latent Variables in Physics
 
-In this section we return back to the topic raised at the start of the essay: The presence of a two-layer structure in the theories of Modern Physics. Freeman Dyson in his essay argued that layer 1 serves as a hidden mathematical model that is not accessible to our senses (or our instruments), while quantities in layer 2 are the ones that we can physically interact with and measure. In this essay we looked at other examples of this two-layer structure in the fields of Machine Learning and Biology. There are some similarities between layer 1 quantities in Physics, and Latent Variables in Machine Learning, in particular:
+In this section we return back to the topic with which we started this essay: The presence of a two-layer structure in the theories of Modern Physics. Freeman Dyson in his essay argued that layer 1 serves as a hidden mathematical model that is not accessible to our senses (or our instruments), while quantities in layer 2 are the ones that we can physically interact with and measure. In this essay we discussed other examples of this two-layer structure in the fields of Machine Learning and Biology. In Machine Learning layer 1 is associated with Latent Variables and we saw how these served as a highly compressed summary of the information present at layer 2, such the the layer 2 structures can be recovered from them with the use of ANNs. The same goes for Biology, with Latent Variables replaced by DNA and ANNs replaced by the Gene Regulatory Network. Coming back to Physics, can we consider layer 1 quantities such the electromagnetic field, or quantum fields as examples of Latent Variables? There are some similarities between layer 1 quantities in Physics, and Latent Variables, in particular:
 
 -  Both Latent Variables and layer 1 quantities exist in abstract mathematical spaces that are not acessible to our senses
--  Working at the Latent Variable or layer 1 level simplifies problems such as prediction for the corresponding layer 2 quantities.
--  Transformation between layer 1 and layer 2 in both cases is accomplished using mathematical models, ANNs in one case and Partial Differential Equations in the other.
+-  Working at the Latent Variable or layer 1 level simplifies a number of problems such as prediction for the corresponding layer 2 quantities. In general layer 1 quantities and Latent Variables can be manipulated using 'simple' Linear Equations, which is not the case at layer 2.
+-  Translation between layer 1 and layer 2 in both cases is accomplished using mathematical models, ANNs in one case and Partial Differential Equations in the other.
 
-Given the similarities, can we conclude that layer 1 quantities in Physics are an example of a Latent Variable like structure operating in Nature? 
-If so can we find a Neural Network type model that translates between Layer 1 and Layer 2 in Physics? 
+If indeed layer 1 quantities in Physics can be regarded as Latent Variables, then it implies that they may have no connection to 'reality' as we experience it. They are merely mathematical models that scientists use to solve problems that they are confronted with. This Philosophy of Science was put forward by the Physicist Ernst Mach more than a century ago (see the [blog post](https://superbowl.substack.com/p/church-of-reality-ernst-mach-on-mind)). He argued that the only reality is what we experience through our senses, and all explanations for what is 'actually out there' are merely models and have no connection with reality. These models are chosen on the basis of the one that is most efficient in capturing the physical phenomena, and is best in doing whatever we want from the model, which in most cases is making predictions.
 
-It turns out that there is an exact correspondence between Neural Networks and a fundamental theory in Physics called Renormalization Group (RG) theory (see [Mehta and Schwab](https://arxiv.org/pdf/1410.3831.pdf) and [Lin, Tegmark and Rolnick](https://arxiv.org/pdf/1608.08225.pdf)). Physicists use RG to analyze emergent behavior in multilayer systems, a good example being the emergence of ferro-magnetism at the macro scale due to the interaction of millions of Iron atoms each acting like a tiny magnet (due to their spin). RG predicts that systems operating at a higher scale exhibit new properties that emerge due to interactions at the micro scale, and moreover the micro interactions can be ignored when analyzing  how the system behaves at the macro level. This is exactly equivalent to how a multilayer Neural Network works, with the neurons in higher layers discovering higher level structure which then serves as a summary of the input for the following layers.  
-
-Since Physics can be used to illuminate the operation of Neural Networks, can Neural Networks in turn be used to throw a light on Physics? Is there a deep structure in our universe based on Neural Networks? Are Layer 1 quantities in Physics Latent Variables in such a system? This would imply that the Laws of Physics are not fixed but learnt over time.
-
-![](https://subirvarma.github.io/GeneralCognitics/images/lat49.png) 
-
-Figure 21: 
-
-The deepest theory in modern Physics is Quantum Field Theory (QFT) that theorizes every that elementary particle is associated with its own field, for example photons come from Electromagnetic fields, electrons come from the Dirac Field etc. These fields pervade all of space-time, and elementary particles are discrete bundles of energy that exist in their respective fields (they emerge automatically from the equations once the field is quantized). There is a famous result called AdS/CFT correspondence that connects a class of QFTs called Conformal Field Theories (CFT) with theories of Gravitation based on String Theory. Recently [Hashimoto et.al.](https://arxiv.org/abs/1802.08313) showed that it is possible to derive the scalar field metric of the Gravity field by using a Neural Network Model.  This is illustrated in Fig. 49. Part (a) of the figure shows the normal AdS/CFT Correspondence, while Part (b) shows the Neural Network version. The metric of the Anti DeSitter Space can be extracted from the parameters of the Neural Network once it is fully trained. During training the input into the network is the CFT derived Boundary Condition, while the output is the Black Hole Horizon Condition. This result is not very well understood, but it may point to deep connections between the two fields.
-
+If layer 1 quantities are like Latent Variables, then what is the mechanism that creates our world of sensations and objects from them. This is a hotly debated problem to which there is no solution yet. Perhaps there is a Neural Network like structure operating Nature that does the translation, it could be very well the Neural Network that we carry around in our heads!
 
