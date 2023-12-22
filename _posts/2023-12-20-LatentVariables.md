@@ -5,7 +5,7 @@ title: "Latent Variables and Latent Spaces"
 
 # Latent Spaces: Capturing Structure in Complex Systems
 
-## 1.0 Introduction
+## Introduction
 
 A few years ago, the late physicist Freeman Dyson wrote an essay titled ["Why is Maxwell's theory so difficult to understand?"](https://www.damtp.cam.ac.uk/user/tong/em/dyson.pdf), in which he made the interesting observation that Electromagnetic theory presents a picture of the world with two layers. The first layer, which consists of the Electric and Magnetic fields that make up the theory, is entirely described using mathematical equations that govern these fields, how they interact with each other and how they evolve over time. The quantities in this layer, namely the aforementioned fields, are abstract in nature and not accessible to our senses. The second layer on the other hand, consists of quantities such as charges, current, energy and forces that we can directly measure, and are a part of our world. 
 This two-layer structure is useful since it turns out that a mathematical description of the second layer in itself is intractable, but the second layer quantities can be computed from the abstract first layer quantities. Furthermore, the first layer lends itself to a mathematical description (the Maxwell's Equations of Electromagnetism), which though complex, is still tractable. 
