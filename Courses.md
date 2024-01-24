@@ -8,6 +8,33 @@ title: "Courses"
 I teach courses on Deep Learning and Reinforcement Learning in the Information Systems and Analytics Department, at the Leavey School of
 Business at Santa Clara University.
 
+
+# Reinforcement Learning Course
+
+Slides from my lectures for the Reinforcement Learning course. Professor Sanjiv Das was kind enough to compile class notes from these lectures, and they can be found [here](https://srdas.github.io/RLBook2/). 
+
+1. [Lecture 1](https://subirvarma.github.io/GeneralCognitics/Course2/Lecture1_Introduction.pdf) - **Introduction:** Introduction to Reinforcement
+Learning and discussion of important applications, An historical overview of the development of this topic.
+
+2. [Lecture 2](https://subirvarma.github.io/GeneralCognitics/Course2/Lecture2_MDPs.pdf) - **Markov Decision Processes:** Markov Processes, Markov Reward Process, Value Function, Markov Decision Processes, Policies, Bellman Expectation Equation, Optimal Value Function, Optimal Policies, Bellman Optimality Equation.
+
+3. [Lecture 3](https://subirvarma.github.io/GeneralCognitics/Course2/Lecture3_ModelBasedControl.pdf) - **Model Based Control:** Estimating the Value Function of a known MDP by Dynamic Programming, Policy Evaluation, Policy Iteration, Value Iteration.
+
+4. [Lecture 4](https://subirvarma.github.io/GeneralCognitics/Course2/Lecture4_ModelFreePrediction.pdf) - **Model Free Prediction:** Estimating the Value Function of an unknown MDP, Monte Carlo (MC) based Policy Evaluation, Temporal Difference (TD) Learning, Comparison of MC and TD Methods.
+
+5. [Lecture 5](https://subirvarma.github.io/GeneralCognitics/Course2/Lecture5_ModelFreeControl.pdf) - **Model Free Control:** Optimizing the Value Function of an Unknown MDP, Epsilon Greedy Policies, On Policy Monte Carlo Control, On Policy Temporal Difference Control, SARSA Control, Off Policy Learning, Q-Learning.
+
+6. [Lecture 6](https://subirvarma.github.io/GeneralCognitics/Course2/Lecture6_FunctionApproximations.pdf) - **Deep Reinforcement Learning:** Supervised Learning, Function Approximations using Deep Learning, Training Algorithms, Convolutional and Recurrent Neural Networks
+
+7. [Lecture 7](https://subirvarma.github.io/GeneralCognitics/Course2/Lecture7_ValueFunctionApproximations.pdf) - **Deep Reinforcement Learning with Value Function Approximations:** Large Scale Reinforcement Learning, Types of Value Function Approximations (VFA), VFA using Deep Learning Networks, Monte Carlo based VFA, Temporal Difference based VFA, Deep Q Networks (DQN), Advanced DQN Algorithms.
+
+8. [Lecture 8](https://subirvarma.github.io/GeneralCognitics/Course2/Lecture8_PolicyGradientMethods.pdf) - **Policy Gradient Methods:** Policy based Reinforcement Learning, Policy Optimization, Policy Gradient, Monte Carlo based Policy Gradient (REINFORCE), Actor- Critic Algorithms.
+
+9. [Lecture 9](https://subirvarma.github.io/GeneralCognitics/Course2/Lecture9_ModelBasedPlanning.pdf) - **Monte Carlo Tree Search and The AlphaGo Zero Algorithm:** Model based Reinforcement Learning, Learning Models from experience, Planning with a Model, Integrated Learning and
+Planning, Dyna-Q Algorithm, Monte Carlo Tree Search (MCTS) Algorithm, Playing Go using Monte Carlo Tree Search.
+
+10. [Lecture 10](https://subirvarma.github.io/GeneralCognitics/Course2/Lecture10_RLHF.pdf) - **Reinforcement Learning Based on Human Feedback:** Large Language Models, Reward Models, Proximal Policy Optimization (PPO) Algorithm
+
 # Deep Learning Course
 
 Here are the slides from my lectures for the Deep Learning course. My book on Deep Learning closely follows the contents of these lectures and can be found [here](https://subirvarma.github.io/GeneralCognitics/Books.html).
@@ -56,28 +83,3 @@ Here are the slides from my lectures for the Deep Learning course. My book on De
 
 I put together a list of problems in the Deep Learning area that I use for this course, it can be found [here](https://subirvarma.github.io/GeneralCognitics/Course1/PracticeProblems.pdf)
 
-# Reinforcement Learning Course
-
-Slides from my lectures for the Reinforcement Learning course. Professor Sanjiv Das was kind enough to compile class notes from these lectures, and they can be found [here](https://srdas.github.io/RLBook2/). 
-
-1. [Lecture 1](https://subirvarma.github.io/GeneralCognitics/Course2/Lecture1_Introduction.pdf) - **Introduction:** Introduction to Reinforcement
-Learning and discussion of important applications, An historical overview of the development of this topic.
-
-2. [Lecture 2](https://subirvarma.github.io/GeneralCognitics/Course2/Lecture2_MDPs.pdf) - **Markov Decision Processes:** Markov Processes, Markov Reward Process, Value Function, Markov Decision Processes, Policies, Bellman Expectation Equation, Optimal Value Function, Optimal Policies, Bellman Optimality Equation.
-
-3. [Lecture 3](https://subirvarma.github.io/GeneralCognitics/Course2/Lecture3_ModelBasedControl.pdf) - **Model Based Control:** Estimating the Value Function of a known MDP by Dynamic Programming, Policy Evaluation, Policy Iteration, Value Iteration.
-
-4. [Lecture 4](https://subirvarma.github.io/GeneralCognitics/Course2/Lecture4_ModelFreePrediction.pdf) - **Model Free Prediction:** Estimating the Value Function of an unknown MDP, Monte Carlo (MC) based Policy Evaluation, Temporal Difference (TD) Learning, Comparison of MC and TD Methods.
-
-5. [Lecture 5](https://subirvarma.github.io/GeneralCognitics/Course2/Lecture5_ModelFreeControl.pdf) - **Model Free Control:** Optimizing the Value Function of an Unknown MDP, Epsilon Greedy Policies, On Policy Monte Carlo Control, On Policy Temporal Difference Control, SARSA Control, Off Policy Learning, Q-Learning.
-
-6. [Lecture 6](https://subirvarma.github.io/GeneralCognitics/Course2/Lecture6_FunctionApproximations.pdf) - **Deep Reinforcement Learning:** Supervised Learning, Function Approximations using Deep Learning, Training Algorithms, Convolutional and Recurrent Neural Networks
-
-7. [Lecture 7](https://subirvarma.github.io/GeneralCognitics/Course2/Lecture7_ValueFunctionApproximations.pdf) - **Deep Reinforcement Learning with Value Function Approximations:** Large Scale Reinforcement Learning, Types of Value Function Approximations (VFA), VFA using Deep Learning Networks, Monte Carlo based VFA, Temporal Difference based VFA, Deep Q Networks (DQN), Advanced DQN Algorithms.
-
-8. [Lecture 8](https://subirvarma.github.io/GeneralCognitics/Course2/Lecture8_PolicyGradientMethods.pdf) - **Policy Gradient Methods:** Policy based Reinforcement Learning, Policy Optimization, Policy Gradient, Monte Carlo based Policy Gradient (REINFORCE), Actor- Critic Algorithms.
-
-9. [Lecture 9](https://subirvarma.github.io/GeneralCognitics/Course2/Lecture9_ModelBasedPlanning.pdf) - **Monte Carlo Tree Search and The AlphaGo Zero Algorithm:** Model based Reinforcement Learning, Learning Models from experience, Planning with a Model, Integrated Learning and
-Planning, Dyna-Q Algorithm, Monte Carlo Tree Search (MCTS) Algorithm, Playing Go using Monte Carlo Tree Search.
-
-10. [Lecture 10](https://subirvarma.github.io/GeneralCognitics/Course2/Lecture10_RLHF.pdf) - **Reinforcement Learning Based on Human Feedback:** Large Language Models, Reward Models, Proximal Policy Optimization (PPO) Algorithm
