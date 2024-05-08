@@ -1,6 +1,9 @@
 # What is the Blind Spot?
 
-- Mathemarical models of nature cannot be substituted for reality. Doing so leads to contradictions.
+- Mathematical models of nature cannot be substituted for reality. Doing so leads to contradictions.
+
+  Outline of main argument in blog:
+  - 
 
 
 # The Blind Spot in Physics
