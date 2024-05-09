@@ -1,41 +1,58 @@
-# What is the Blind Spot?
+# What Would Kant Think of LLMs?
 
-- Mathematical models of nature cannot be substituted for reality. Doing so leads to contradictions.
+## Introduction
 
-  Outline of main argument in blog:
-  - 
-
-
-# The Blind Spot in Physics
-
-
-
-# The Blind Spot in Biology
+- Kant's Theory of Knowledge and Kant's Antinomies
+- Physical Models of the World
+- LLMs and a Model for Language
+- How would LLMs fit within Kant's framework
+- Implications for AGI
 
 
+## Kant's Theory of Knowledge
 
-# The Blind spot in Cognition
+- Base reality (Neumenon)  is not the same as perceived reality (Phenomenon)
+- Certain problems in perceived reality have no solution (cannot be resolved as either true or false), since they use concepts of space and time that do not exist in base reality (Kant’s antinomies)
+- Base reality is not accessible through our senses
 
+## Kant and Modern Physics
 
+- Mathematical models of perceived reality (Physics) are not the same as perceived reality
+- The deepest level of reality that physics posits is the quantum wave function.
+- Is the wave function real? It is clearly not part of perceived reality, is it part of base reality, ie part of Kant’s Neumenon. 
+- The QBism framework for quantum mechanics resolves the wave particle duality problem by stating that the wave function is not part of either perceived or base reality. It is a subjective measure of how likely an event might happen, and is tied to our perception.
+- Cosmology: Are we justified in extrapolating our models of physics to speculate about the beginnings of the universe? No, these models only work so far as they model our perceived reality. There is no way to verify that they work at the beginnings of the universe since our perception does not extend that far. The extrapolation is just a mathematical exercise, not tied to perceived reality. 
+- Are we accessing base reality through the mathematical models? No, since that cannot be accessed even using advanced instruments such as electron microscopes and powerful telescopes 
+- In biology, the chemical model of the cell is not same as the actual cell. The chemical models do not capture what makes a cell living, they are extrinsic rather than intrinsic. 
+- No danger that one day science will exhaust all that there is to know, since we can only get closer to the base reality, but never reach it. 
+- There is some unknown factor that makes a cell alive, chemical models are nowhere close to discovering this.
 
-# Implications for Artificial Neural Networks
+## Artificial Neural Networks and LLMs
 
+- The ANN is a model for human cognition
+- Extending Kant’s thinking: The ANN can never be the same as cognition
+- Mistaking ANNs for cognition can lead to antinomies
+- But ANNs can approximate cognition
+- Perceived Reality —> Language model of Perceived Reality —> LLM model of language 
+- There is some unknown factor that makes the biological brain conscious, ANN models are not close to discovering this
+- Can Integrated Information Theory ( IIT) be used as a measure of how close an ANN is to human cognition 
 
+## LLMs within a Kantian Framework
 
-## Integrated Information Theory
+Three latent spaces
+1. latent space of perception of reality, either images or language or both together 
+2. Latent space of reality is physics
+3. Latent spaces of mathematics 
+4. Our brain
 
+- latent space of models of reality (physics) can be mapped on to a subset of the latent space of mathematics
+- Our brain creates a mapping from perceptions to the latent space of perceptions . The points of this latent space are stored in the brain. 
+- Mathematical latent  space is a creation of our brain
 
-
-## Non Newtonian Machines
-
-
-
-# The Blind Spot and Kant
-
-We don't have access to the ultimate reality. Our picture of the world is limited by our perceptual limitations.
-
-
-
-## Kantian Antimonies
-
-If we mistake our perceptions for reality, it leads to contradictions.
+There are two latent spaces of reality
+- Space 1 is a mapping in the brain to individual points of our perception of reality 
+- Space 2 is a mathematical mapping, that is useful for doing predictions (physics). This is a mapping from our perception of reality to latent spaces of physics. 
+- The mathematical space used in 2 is also a creation of the brain
+- Hence physics does the following: 1) identify mathematical objects that can map to our perceptions of reality, such as fields, groups etc 2) Come up with mathematical equations that work on the mathematical objects and can be used for doing predictions (involving time and space)
+- Are the regularities that we observe in nature a creation of the human brain? Then it makes sense that another human creation, ie mathematics, can be used to describe those regularities
+- These regularities exist in time and space, and according to Kant, the these are a creation of the brain 
