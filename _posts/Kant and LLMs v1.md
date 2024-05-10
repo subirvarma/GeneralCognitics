@@ -3,10 +3,53 @@
 ## Introduction
 
 - Introduce the main actors: Reality, Perception of Reality, Mathematical Spaces, Mathematical Models of Reality, Consciousness
+- Penrose's Framework
 - Confusion between Mathematical Models of Reality and Perception of Reality, as explained in the "The Blind Spot" and "Putting Ourselves Back in the Equation"
 - Confusion between Reality and Perception of Reality, as explained in "The Rigor of Angels"
 - Modification of the Penrose's framework
 - How do LLMs fit within the framework
+
+In the past few hundred years, our civilization has achieved enormous progress in Science and Technology. Part of this progress can be attributed to our ability to build sophisticated mathematical models for the natural world, which is part of the Science of Physics. In order to build these models, Scientists have to work within a framework that describes fundamental entities such as Time and Space. One such framework was introduced by Newton, and goes by the name of Absolute Time and Absolute Space, and subsequent theories such Einstein's Theory of Relativity, have replaced it with newer frameworks. In parallel with Scientists, Philosophers have been theorizing about the nature of reality, and the reason for the effectiveness of our theoretical models in describing reality. This path leads from Descartes to David Hume and Immanuel Kant, and to more modern philosophers. The importance of the philosophical considerations behind the ideas of Modern Science assumed particular urgence with the discovery of Quantum Mechanics about hundred years ago. This new science completely upended our ideas about reality, even more than Relativity, and Scientists and Philosophers are still arguing about what the equations of Quantum Mechanics even mean.
+
+My objective in this essay 
+
+## The Penrose Framework
+
+![](https://subirvarma.github.io/GeneralCognitics/images/Kant5.jpeg) 
+
+
+
+
+## Perception of Reality vs Reality
+
+![](https://subirvarma.github.io/GeneralCognitics/images/Kant3.jpg) 
+
+
+
+## Mathematical Models of Reality vs Perception of Reality
+
+![](https://subirvarma.github.io/GeneralCognitics/images/Kant1.jpg) 
+
+
+
+## A Proposed Framework
+
+
+
+
+## How to LLMs Fit Within the Framework?
+
+- LLMs as a Mathematical Model for Human Cognition
+
+
+
+
+
+
+
+
+-------------------------------------------------------------------------------------------------------------------------------
+
 
 - Kant's Theory of Knowledge and Kant's Antinomies
 - Physical Models of the World
