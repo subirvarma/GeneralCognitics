@@ -2,6 +2,12 @@
 
 ## Introduction
 
+- Introduce the main actors: Reality, Perception of Reality, Mathematical Spaces, Mathematical Models of Reality, Consciousness
+- Confusion between Mathematical Models of Reality and Perception of Reality, as explained in the "The Blind Spot" and "Putting Ourselves Back in the Equation"
+- Confusion between Reality and Perception of Reality, as explained in "The Rigor of Angels"
+- Modification of the Penrose's framework
+- How do LLMs fit within the framework
+
 - Kant's Theory of Knowledge and Kant's Antinomies
 - Physical Models of the World
 - LLMs and a Model for Language
