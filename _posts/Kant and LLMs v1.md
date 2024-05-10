@@ -13,7 +13,7 @@ In the past few hundred years, our civilization has achieved enormous progress i
 
 My objective in this essay is to summarize the current thinking in these areas, and what it means for our understanding of reality. A deeper understanding of the framework for Science has become even more urgent with Artificial Intelligence and the discovery of Large Language Models (LLMs). These serve as models for Human Cognition and there are open questions whether these models are actually conscious. Getting a better understanding of how Mathematical Models such as LLMs relate to reality and our perceptions of reality is critical in resolving these questions. The main actors in this drama are the following:
 
-- Reality
+- Reality: 
 - Our Perceived Reality
 - Mathematical Models
 - Human Cognition
