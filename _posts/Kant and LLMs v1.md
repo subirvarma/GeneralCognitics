@@ -11,17 +11,21 @@
 
 In the past few hundred years, our civilization has achieved enormous progress in Science and Technology. Part of this progress can be attributed to our ability to build sophisticated mathematical models for the natural world, which is part of the Science of Physics. In order to build these models, Scientists have to work within a framework that describes fundamental entities such as Time and Space. One such framework was introduced by Newton, and goes by the name of Absolute Time and Absolute Space, and subsequent theories such Einstein's Theory of Relativity, have replaced it with newer frameworks. In parallel with Scientists, Philosophers have been theorizing about the nature of reality, and the reason for the effectiveness of our theoretical models in describing reality. This path leads from Descartes to David Hume and Immanuel Kant, and to more modern philosophers. The importance of the philosophical considerations behind the ideas of Modern Science assumed particular urgence with the discovery of Quantum Mechanics about hundred years ago. This new science completely upended our ideas about reality, even more than Relativity, and Scientists and Philosophers are still arguing about what the equations of Quantum Mechanics even mean.
 
-My objective in this essay is to summarize the current thinking in these areas, and what it means for our understanding of reality. A deeper understanding of the framework for Science has become even more urgent with Artificial Intelligence and the discovery of Large Language Models (LLMs). These serve as models for Human Cognition and there are open questions whether these models are actually conscious. Getting a better understanding of how Mathematical Models such as LLMs relate to reality and our perceptions of reality is critical in resolving these questions. The main actors in this drama are the following:
+My objective in this essay is to summarize the current thinking in these areas, and what it means for our understanding of reality. A deeper understanding of the framework for Science has become even more urgent with Artificial Intelligence and the discovery of Large Language Models (LLMs). These serve as models for Human Cognition and there are open questions whether these models are actually conscious. Getting a better understanding of how Mathematical Models such as LLMs relate to reality and our perceptions of reality is critical in resolving these questions. 
 
-- Reality: 
-- Our Perceived Reality
-- Mathematical Models
-- Human Cognition
-- Large Language Models
+Here is a brief definition of the main actors in this drama:
+
+- Base Reality: This is sum total of what exists in the Universe. 
+- Our Perceived Reality: Information from Base Reality impinges on our senses, and our brain puts it all together (using a process that is largely mysterious), to create the world as we see, hear and feel it.
+- Mathematics and Mathematical Models: Mathematics can be defined as a self-consistent system of thought we have built, operating using the rules of logic. It can be used to create models of our Perceived Reality, as was discovered by Galileo and Newton more than 300 years ago.
+- Human Cognition: Our brain consists of a large number of interconnected neurons, which are somehow able to create our Perceived Reality, and enables us to exist in it.
+- Large Language Models: These are also Mathematical models, but of a special kind. Instead of modeling our Perceived Reality, they model human generated language, and they seem to have emergent ability to model cognition itself.
 
 ## The Penrose Framework
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/Kant5.jpeg) 
+
+Figure 1
 
 
 
