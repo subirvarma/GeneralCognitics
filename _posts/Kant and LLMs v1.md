@@ -33,8 +33,8 @@ The eminent physicst Roger Penrose proposed a framework for Scientific Knowledge
 
 Penrose states the following:
 
-- Our Mental World creates the world of Mathematical Objects (arrow 3). Some believe that Mathematical Objects have an existence of theor own, independent of human cognition, and Mathematicians are merely discovering them.
-- A subset of the World of Mathematical Objects can be used to model the Physical World (arrow 1).
+- Our Mental World creates the world of Mathematical Objects (arrow 3). Some believe that Mathematical Objects have an existence of theor own, independent of human cognition, and Mathematicians are merely discovering them. 
+- A subset of the World of Mathematical Objects serves as a model the Physical World (arrow 1). Everything in the Physical World can be modeled using these models.
 - A subset of the Physical World serves as our Mental World, i.e., our brain is part of the Physical World (arrow 2).
 
 
