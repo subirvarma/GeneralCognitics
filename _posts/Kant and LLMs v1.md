@@ -9,9 +9,9 @@
 - Modification of the Penrose's framework
 - How do LLMs fit within the framework
 
-In the past few hundred years, our civilization has achieved enormous progress in Science and Technology. Part of this progress can be attributed to our ability to build sophisticated mathematical models for the natural world, which is part of the Science of Physics. In order to build these models, Scientists have to work within a framework that describes fundamental entities such as Time and Space. One such framework was introduced by Newton, and goes by the name of Absolute Time and Absolute Space, and subsequent theories such Einstein's Theory of Relativity, have replaced it with newer frameworks. In parallel with Scientists, Philosophers have been theorizing about the nature of reality, and the reason for the effectiveness of our theoretical models in describing reality. This path leads from Descartes to David Hume and Immanuel Kant, and to more modern philosophers. The importance of the philosophical considerations behind the ideas of Modern Science assumed particular urgence with the discovery of Quantum Mechanics about hundred years ago. This new science completely upended our ideas about reality, even more than Relativity, and Scientists and Philosophers are still arguing about what the equations of Quantum Mechanics even mean.
+In the past few hundred years, our civilization has achieved enormous progress in Science and Technology. Part of this progress can be attributed to our ability to build sophisticated mathematical models for the natural world. In order to build these models, Scientists have to work within a framework that describes fundamental entities such as Time and Space. One such framework was introduced by Newton, and goes by the name of Absolute Time and Absolute Space, and subsequent theories such Einstein's Theory of Relativity, have replaced it with newer frameworks. In parallel with Scientists, Philosophers have been theorizing about the nature of reality, and the reason for the effectiveness of our theoretical models in describing reality. This path leads from Descartes to David Hume and Immanuel Kant, and to more modern philosophers. The importance of the philosophical considerations behind the ideas of Modern Science assumed particular urgence with the discovery of Quantum Mechanics about hundred years ago. This new science completely upended our ideas about reality, even more than Relativity, and Scientists and Philosophers are still arguing about what the equations of Quantum Mechanics even mean.
 
-My objective in this essay is to summarize the current thinking in these areas, and what it means for our understanding of reality. A deeper understanding of the framework for Science has become even more urgent with Artificial Intelligence and the discovery of Large Language Models (LLMs). These serve as models for Human Cognition and there are open questions whether these models are actually conscious. Getting a better understanding of how Mathematical Models such as LLMs relate to reality and our perceptions of reality is critical in resolving these questions. 
+My objective in this essay is to summarize the current thinking in these areas, and what it means for our understanding of reality. A deeper understanding of the framework for Science has become even more urgent with Artificial Intelligence and the discovery of Large Language Models (LLMs). These serve as models for Human Language and there are open questions whether these models are actually modeling Human Cognition. Getting a better understanding of how Mathematical Models such as LLMs relate to reality and our perceptions of reality is critical in resolving these questions. 
 
 Here is a brief definition of the main actors in this drama:
 
@@ -21,16 +21,26 @@ Here is a brief definition of the main actors in this drama:
 - Human Cognition: Our brain consists of a large number of interconnected neurons, which are somehow able to create our Perceived Reality, and enables us to exist in it.
 - Large Language Models: These are also Mathematical models, but of a special kind. Instead of modeling our Perceived Reality, they model human generated language, and they seem to have emergent ability to model cognition itself.
 
+  The rest of this essay is organized as follows: In Section 2 we discuss the Penrose framework for Scientific Knowledge, Section 3 is on the relationship between Base Reality and Perceived Reality as discussed by Kant and others, Section 4 is on Mathematical Models of Reality and our current understanding of these models are in describing it. We propose a modification to Penrose's framework in Section 5, and in Section 6 we add LLMs to the mix and discuss how it might fit within this modified framework.
+
 ## The Penrose Framework
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/Kant5.jpeg) 
 
 Figure 1
 
+The eminent physicst Roger Penrose proposed a framework for Scientific Knowledge in his book "The Road to Reality", and this is shown in Fig. 1. In order to map the objects in this framework to our earlier definitions, The Mental World corresponds to what we called Human Cognition, the Platonic Mathematical World is the same as our definition of Mathematics and Mathematical Models, while the Physical World corresponds to what we called Perceived Reality. LLLMs didn't exist at the time this book was written, so un-surprisingly they are missing. The other missing object in Penrose's diagram is what we called Base Reality. Penrose beleives that Base Reality and Perceived Reality are one and the same, which explains this. We will discuss the implications of this beleif in the following section. 
+
+Penrose states the following:
+
+- Our Mental World creates the world of Mathematical Objects (arrow 3). Some believe that Mathematical Objects have an existence of theor own, independent of human cognition, and Mathematicians are merely discovering them.
+- A subset of the World of Mathematical Objects can be used to model the Physical World (arrow 1).
+- A subset of the Physical World serves as our Mental World, i.e., our brain is part of the Physical World (arrow 2).
 
 
 
-## Perception of Reality vs Reality
+
+## Perception of Reality vs Base Reality
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/Kant3.jpg) 
 
