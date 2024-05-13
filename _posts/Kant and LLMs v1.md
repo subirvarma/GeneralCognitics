@@ -47,11 +47,9 @@ Since the time that Kant came up with these ideas, there has been a lot of philo
 
 The other domain of science that might shed light on the existence of the Noumenon is Cognitive Science, which is the study of how the neurons in our brain process information. There are numerous experiments that show that our color perception changes as a function of the type of lighting in the environment, also our perception of movement can be fooled by specially designed patterns. The study of perception in other animals also shows that there are creatures whose perception of the world is very different than ours. In general Cognitive Science does not present us with any irrefutable evidence for the existence of the Noumenon, but it does make it plausible to see how an interconnected network of billions of neurons might be able to create the world that we perceive.
 
-Kant himself did not argue for the existence of the Noumenon using empirical experiments, but instead relied on rhetoric and phiolosopical arguments. His main arguments are known as Kant's Antinomies which are logical contradictions that arise when we confuse the phenomenal world and the noumenal world. Since the time of Kant the idea of the Noumenon has been much debated. It actually agrees with a lot of Eastern Phiolosophy, particularly the main ideas of Buddhism and Hinduism. Philosophers such as Hegel and Nietzsche have objected to the way Kant separated the world in two layers, and since the Noumenon layer is effectively unknowable, it is irrelevan to practical philosophy.
+Kant himself did not argue for the existence of the Noumenon using empirical experiments, but instead relied on rhetoric and phiolosopical arguments. His main arguments are known as Kant's Antinomies which are logical contradictions that arise when we confuse the phenomenal world and the noumenal world. Since the time of Kant the idea of the Noumenon has been much debated. It actually agrees with a lot of Eastern Phiolosophy, particularly the main ideas of Buddhism and Hinduism. Philosophers such as Hegel and Nietzsche have objected to the way Kant separated the world in two layers, and since the Noumenon layer is effectively unknowable, it is irrelevant to practical philosophy.
 
 <Add a para on the book "Rigor of Angels">
-
-
 
 ## Mathematical Models of Reality vs Perception of Reality
 
