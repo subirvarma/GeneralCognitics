@@ -21,7 +21,7 @@ Here is a brief definition of the main actors in this drama:
 - Human Cognition: Our brain consists of a large number of interconnected neurons, which are somehow able to create our Perceived Reality, and enables us to exist in it.
 - Large Language Models: These are also Mathematical models, but of a special kind. Instead of modeling our Perceived Reality, they model human generated language, and they seem to have emergent ability to model cognition itself.
 
-  The rest of this essay is organized as follows: In Section 2 we discuss the Penrose framework for Scientific Knowledge, Section 3 is on the relationship between Base Reality and Perceived Reality as discussed by Kant and others, Section 4 is on Mathematical Models of Reality and our current understanding of these models are in describing it. We propose a modification to Penrose's framework in Section 5, and in Section 6 we add LLMs to the mix and discuss how it might fit within this modified framework.
+  The rest of this essay is organized as follows: In Section 2 we discuss the Penrose framework for Scientific Knowledge, which proposes a relationship between Perceived Reality, Human Conition and Mathematical Models. Section 3 is on the relationship between Base Reality and Perceived Reality as discussed by Kant and others, Section 4 is on Mathematical Models of Reality and our current understanding of good these models are in describing it. We propose a modification to Penrose's framework in Section 5, and in Section 6 we add LLMs to the mix and discuss how it might fit within this modified framework.
 
 ## The Penrose Framework
 
@@ -29,20 +29,23 @@ Here is a brief definition of the main actors in this drama:
 
 Figure 1
 
-The eminent physicst Roger Penrose proposed a framework for Scientific Knowledge in his book "The Road to Reality", and this is shown in Fig. 1. In order to map the objects in this framework to our earlier definitions, The Mental World corresponds to what we called Human Cognition, the Platonic Mathematical World is the same as our definition of Mathematics and Mathematical Models, while the Physical World corresponds to what we called Perceived Reality. LLLMs didn't exist at the time this book was written, so un-surprisingly they are missing. The other missing object in Penrose's diagram is what we called Base Reality. Penrose beleives that Base Reality and Perceived Reality are one and the same, which explains this. We will discuss the implications of this beleif in the following section. 
+The eminent physicst Roger Penrose proposed a framework for Scientific Knowledge in his book "The Road to Reality", and this is shown in Fig. 1. In order to map the objects in this framework to our earlier definitions, The Mental World corresponds to what we called Human Cognition, the Platonic Mathematical World is the same as our definition of Mathematics and Mathematical Models, while the Physical World corresponds to what we called Perceived Reality. LLMs didn't exist at the time this book was written, so un-surprisingly they are missing. The other missing object in Penrose's diagram is what we called Base Reality. Penrose beleives that Base Reality and Perceived Reality are one and the same, which explains this. We will discuss the implications of this belief in the following section. 
 
-Penrose states the following:
+The Penrose Framework posits that:
 
 - Our Mental World creates the world of Mathematical Objects (arrow 3). Some believe that Mathematical Objects have an existence of theor own, independent of human cognition, and Mathematicians are merely discovering them. 
 - A subset of the World of Mathematical Objects serves as a model the Physical World (arrow 1). Everything in the Physical World can be modeled using these models.
-- A subset of the Physical World serves as our Mental World, i.e., our brain is part of the Physical World (arrow 2).
-
-
-
+- A subset of the Physical World serves as our Mental World since our brain is part of the Physical World (arrow 2).
 
 ## Perception of Reality vs Base Reality
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/Kant3.jpg) 
+
+Immanuel Kant set out for himself the task to discovering the limits of human knowledge and the result was his book "Critique of Pure Reason", that was published almost 250 years ago. In this he theorized that our perception of reality, which he called Phenomenon, is not the same as Base Reality, which he called Noumenon. Morever, it is not possible for us to gain access to the Noumenon, since all interactions with are mediated through our perceptual senses. Hence what we perceive is the world that our brain creates. Fundamental to this, are the concepts of Space (or the fact that objects have an extension in space) and Time (or the fact that events have a duration in time). Kant claimed that Space and Time are purely comcepts created by our brain, and do not exist in the Noumenon. 
+
+Since the time that Kant came up with these ideas, there has been a lot of philosophical debate about them. The fact that the Noumemnon cannot be directly accesses using our senses means that we cannot perform any experiment that confirms its existence. Since the time of Kant there have been developments in Physics and Cognitive Science that seem to point in this direction. In Physics the discoveries of Quantum Mechanics seem to paint a picture of the world at the atomic level that is very different than our perceptual world. It is not clear whether this is indeed confirmation of the Noumenon, since even in Quantum Mechanics the theory has to be confirmed by experiments which we access through our senses. Hence it can be argued that instruments such as the Elctron Microscope do not give us acces to the Noumenon, but just expand the reach of our senses. In the next section we present work that argue that it is a mistake to assume that the equations of Quantum Mechanics (or other modern theories such as General Relativity) present a picture of the Noumenon, they are merely mathematical constructs or models.
+
+The other domain of science that might shed light on the existence of the Noumenon is Cognitive Science, which is the study of how the neurons in our brain process information. There are numerous experiments that show that our color perception changes as a function of the type of lighting in the environment, also our perception of movement can be fooled by specially designed patterns. The study of perception in other animals also shows that there are creatures whose perception of the world is very different than ours. In general Cognitive Science does not present us with any irrefutable evidence for the existence of the Noumenon, but it does make it plausible to see how an interconnected network of billions of neurons might be able to create the world that we perceive.
 
 
 
