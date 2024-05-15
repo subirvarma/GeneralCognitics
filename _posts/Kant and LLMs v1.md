@@ -88,6 +88,9 @@ Kant's ideas came before the discovery of Quantum Mechanics and Relativity, and 
 
 (https://subirvarma.github.io/GeneralCognitics/images/Kant1.jpg) 
 
+Galileo and Newton made a monumental discovery more than 400 years ago, which is that Laws of Nature lend themselves to a mathematical description. Taking Kant's lessons into account, this statement should be modified to state that the Laws of or Perception of Nature lend themselves to a mathematical description. This adds another actor to our drama, namely the space of Mathematical Systems. 
+What is a Mathematical System? These are systems that contain objects, that are defined soley by the way they interact with other objects. The interaction is in terms of mathematical operations (that differ from system to system). Mathematicians work consists of deriving interesting properties of the system using rules of logic. 
+At one time it was thougt that Mathematical Systems are connected with our Perceived Reality, in the sense that the objects and rules in the system were abstractions of objects and rules in the the real world. However this prejudice  was exploded in the 19th century when mathematicians came up with geometries and number systems that has nothing to do with what we see around us, but were studied purely because they resulted in interesting mathematical results. Some of these systems later found applications in modeling Nature, much to the surprise of scientists. In this section we explore this aspect of our scientific knowledge which results in questions such as: Why does Nature seem to obey mathematical laws? What is the connection between the objects used in mathematical systems used to model nature, and the actual objects found in nature? Do mathematical models of nature represent reality, and if so is it the Phenomenon or the Noumenon?
 
 
 ## A Proposed Framework
