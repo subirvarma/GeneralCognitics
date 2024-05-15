@@ -39,7 +39,7 @@ The Penrose Framework posits that:
 
 ## Perception of Reality vs Base Reality
 
-![](https://subirvarma.github.io/GeneralCognitics/images/Kant3.jpg) 
+https://subirvarma.github.io/GeneralCognitics/images/Kant3.jpg) 
 
 Immanuel Kant set out for himself the task to discovering the limits of human knowledge and the result was his book "Critique of Pure Reason", that was published almost 250 years ago. In this he theorized that our perception of reality, which he called Phenomenon, is not the same as Base Reality, which he called Noumenon. Morever, it is not possible for us to gain access to the Noumenon, since all interactions with are mediated through our perceptual senses. Hence what we perceive is the world that our brain creates. Fundamental to this, are the concepts of Space (or the fact that objects have an extension in space) and Time (or the fact that events have a duration in time). Kant claimed that Space and Time are purely comcepts created by our brain, and do not exist in the Noumenon. 
 
@@ -70,7 +70,7 @@ These two mistakes taken together lead to Zeno's paradoxes.
 
 ## Mathematical Models of Reality vs Perception of Reality
 
-![](https://subirvarma.github.io/GeneralCognitics/images/Kant1.jpg) 
+(https://subirvarma.github.io/GeneralCognitics/images/Kant1.jpg) 
 
 
 
