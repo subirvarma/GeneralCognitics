@@ -51,6 +51,23 @@ Kant himself did not argue for the existence of the Noumenon using empirical exp
 
 <Add a para on the book "Rigor of Angels">
 
+- An assumption that we make when we perceive something: Our image of reality is the same as reality. Kant says that our perceptions are not things in the world, they are versions of those things that we construct in our minds by shaping them in space and time. What we are reying to understand is our picture of the world.
+- When we imagine reality to be identical to our perception of it, specifically when we assume that space and time are fundamentally real, our reason becomes faulty and science responds with a paradox.
+- Any observation enatails connecting two disparate moments in time and space. If one is exclusively saturated in the present moment, then he wouldn't be able to observe anything at all. This connection needs to be registered by some trace or conenctor. Since an observation is always an observation in time and space, the Laws of Physics are all about operations in time and space. We may speculate about the world outside the conditions of time and space, but nontemporal and nonspatial perspectives obliterate the very idea of an observation, and hence are incompatible with any knowledge we can have of the world.
+- For sensory input to become knowledge of the world requires that objects be located in respect to other things and that events be sequenced as coming before, afer or simultaneous to other events. But locating objects with respect to one another in space, or sequencing events in time, is something that pure sense perception on its own cannot accomplish. This exposure needs to be organized in order to experience it.
+   (1) In order to experience the spatial relations between objects we implicitly assume that they exist together in a shared space. However space itself is not an object of experience, but the very condition for experiencing objects. It is like a representation that our brain creates so that we can experience reality.
+  (2) Consciousness is another entity creates by our minds in order to create a timeline that unifies our experiences and order our perceptions.
+- The Laws of Physics are really the laws of our observations of how things behave. Heisenberg quote: "We have to remember that what we observe is not nature in itself but nature exposed to our method of questioning".
+- Zeno's paradoxes arise by us assuming the solidity and continuity of spatial and temporal reality, i.e., for space time to be something real, the stuff in which change happens (it is infinitely divisible). But it is not, it is a tool that our brain creates to to relate our observations into a coherent whole.
+- Difference between world of senses vs world of ideas: If we consider space time as an idea, any distance or moment can be further divided. But that is not the case when we experience space time through our senses. Kant realized the following: 
+  (1) We made the mistake of treating time (then and now) and space (here and there) as part of the Noumenon
+  (2) We also made the mistake of treating mathematical facts such as infinite divisibility as if though it were part of the Phenomenon.
+These two mistakes taken together lead to Zeno's paradoxes.
+- What would knowledge of the Noumenon, outside the constraints of time and space look like?
+  (1) All of our knowledge comes from operating within the limitations of time and space. Operating outside it would mean seeing everything simultaneously or knowing all time in an instant, which would obliterate the very connection between objects and instances that constitutes knowledge.
+  (2) Kant believed that we could presume the existence of an object in the Noumenon, operating in unified space-time whole, even if we cannot grasp it as an object using or senses. This will allow us to derive universal, necessary and true statements in areas such as Religion and Ethics. In Science though we are limited to studying representations that come to us through our sense of space and time, not the underlying reality.
+- The atomic world is not part of the Noumenon, it is still part of the Phenomemon, but the entities that it describes are so outside the realm of our daily experience that our language does not have the words to describe them.
+
 ## Mathematical Models of Reality vs Perception of Reality
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/Kant1.jpg) 
