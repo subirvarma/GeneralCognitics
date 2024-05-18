@@ -83,6 +83,11 @@ Kant also believed that we could presume the existence of an object in the Noume
 
 Kant's ideas came before the discovery of Quantum Mechanics and Relativity, and so a natural question id how well they have held up in light of these theories. The short answer is that that they have held up quite well.  Einstein himslf never reconciled to the idea that the models in Physics were not describing Base Reality, hence is oft quoted remark that "God does not play dice with the universe" when he was confronted by the indeterminism at the base of Quantum Theory. However Heisenberg was inspired by the idead of Kant in creating his Matrix Mechanics, which he did by coming up with equations that purely explain our oberservations of microscopic pehenomena, and did not to try to visualize what lies behind those equations. Indeed he later come up with the idea of the Uncertainity Principle that showed that our ideas of position and momentum do not extend to the microscopic world. Hence electrons and their ilk are not objects in the sense that we see around us, and it is impossible for us to visualize what they are, since they don't fal;l into any of the categories of objacts that we are familar with. This sounds a little bit like Kant's ideas of the Noumenon, since that too contains things that we can't visualize. However this is differene between the two, namely that the microscopic objects still exist within the framework of space-time and hence cannot be part of the Noumenon. But the very fact that Physics has come up with objects that exist in our Perceived Reality, but we are not able to visualize what they are or look like, lends credibility to Kant's ideas that there exist things that are beyond the reach of our perceptual senses.
 
+![](https://subirvarma.github.io/GeneralCognitics/images/Kant6.png) 
+
+Figure 2
+
+Fig. 2 summarizes the discussion so far: It shows signals such as ligh and sound waves coming from the Noumenon which impinge on our senses. These are then processed by the brain, which abstracts the deluge of data, and presents a picture of reality to us which is tailored so as to help us survive in the environment. Since all data coming from the Noumenon is filtered through the brain, we cannot get direct access to the Noumenon.
 
 ## Mathematical Models of Reality vs Perception of Reality
 
@@ -91,6 +96,11 @@ Kant's ideas came before the discovery of Quantum Mechanics and Relativity, and 
 Galileo and Newton made a monumental discovery more than 400 years ago, which is that Laws of Nature lend themselves to a mathematical description. Taking Kant's lessons into account, this statement should be modified to state that the Laws of or Perception of Nature lend themselves to a mathematical description. This adds another actor to our drama, namely the space of Mathematical Systems. 
 What is a Mathematical System? These are systems that contain objects, that are defined soley by the way they interact with other objects. The interaction is in terms of mathematical operations (that differ from system to system). Mathematicians work consists of deriving interesting properties of the system using rules of logic. 
 At one time it was thougt that Mathematical Systems are connected with our Perceived Reality, in the sense that the objects and rules in the system were abstractions of objects and rules in the the real world. However this prejudice  was exploded in the 19th century when mathematicians came up with geometries and number systems that has nothing to do with what we see around us, but were studied purely because they resulted in interesting mathematical results. Some of these systems later found applications in modeling Nature, much to the surprise of scientists. In this section we explore this aspect of our scientific knowledge which results in questions such as: Why does Nature seem to obey mathematical laws? What is the connection between the objects used in mathematical systems used to model nature, and the actual objects found in nature? Do mathematical models of nature represent reality, and if so is it the Phenomenon or the Noumenon?
+
+![](https://subirvarma.github.io/GeneralCognitics/images/Kant7.png) 
+
+
+
 
 
 ## A Proposed Framework
