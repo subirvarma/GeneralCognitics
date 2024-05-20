@@ -77,6 +77,8 @@ Fig. 1 summarizes the discussion so far: It shows signals such as ligh and sound
 
 ## Mathematical Models of Reality vs Perception of Reality
 
+Kant's ideas were developed about a hundred years after the start of modern science with Newton and Galileo. We describe in section that the science developed and made progress using a different framework than the one proposed by Kant, called Cartsian Dualism. This framework acheived great success and gave us the modern world. However as described later in the section, it has run into problems in recent times, which have led people to re-examine the basic ideas behind the framework.
+
 (https://subirvarma.github.io/GeneralCognitics/images/Kant1.jpg) 
 
 Galileo and Newton made a monumental discovery more than 400 years ago, which is that Laws of Nature lend themselves to a mathematical description. Taking Kant's lessons into account, this statement should be modified to state that the Laws of or Perception of Nature lend themselves to a mathematical description. This adds another actor to our drama, namely the space of Mathematical Systems. 
@@ -93,7 +95,7 @@ Our tale begind with Rene Descartes, the founder of co-ordinate gemetry and Cart
 - Another aspect of the framework was the proposition that Nature can be modeled using Mathematics. 
 
 (Once can see why the model is somewhat self contradictory, since by positing that our sense perception gives a true picture of the world it reaching across the Cartesian divide).
-Descartes idea of duality was accepted by the Scientific Community, and for the next 300 years led to the massive progress in Science and Technology. But it also created several deep mysteries:
+Descartes idea of duality was accepted by the Scientific Community, and for the next 300 years led to the massive progress in Science and Technology. Scientists thought that by discovering the Mathematical Laws of Nature they were in fact "reading the mind of God" and indeed that "God is the greatest Mathematician". But it also created several deep mysteries:
 
 - Why did Nature obey the Laws of Mathematics? The fact that Nature at the most fundamental level seems to obey the equations of Mathematics, which is entitely a creation of the human brain.
 - How does the physical world create the mental world (across the Cartesian divide)?
@@ -109,6 +111,8 @@ Even today the Cartesian Framwork is accepted by leading scientists such as Roge
 - A subset of the Physical World serves as our Mental World since our brain is part of the Physical World (arrow 2).
 
 Penrose's arrow 2 proposes that the subjective sensations in our minds are part of the Physical World (unlike Descartes). But therein lies the great mystery. The mechanism by which the brain creates our reality and its subjective sensations has no explantion within traditional Science. Hence arrow 2 is more of a hypothesis than established science. In any case, before getting into this area, lets look at other issues that arose with the original Cartesian Framework.
+
+The first crack in the Cartesian Framework happened in the beginning years of the 20th century, with the discovery of energy uanta by Max Plack. Within a few years of that, Einstein proposed that light exhibits both wave and particle properties, and indeed within a couple of decades experiments were conducted that showed that material particles like electrons also have wavelike properties such wavelength. This raised a conundrum since for the first time the fundamental constituents of nature had a form that could not be visualized by us humans. Soon after this Heisenberg followed by Schrodinger proposed a mathematical description of quantum phenomena that was unlike any theory that had come before. Schrodinger's version of the theory was based on a fundamental quantity called the Wave Function (or $\psi$) whose nature was completely mysterious. Predictioins from the theory to experimental data was created by using Max Born's idea that nature was fundamentally random, and the square of the wave function gave the probability of the quantim system being in particular state. 
 
 
 
