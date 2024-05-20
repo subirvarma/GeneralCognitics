@@ -23,20 +23,6 @@ Here is a brief definition of the main actors in this drama:
 
   The rest of this essay is organized as follows: In Section 2 we discuss the Penrose framework for Scientific Knowledge, which proposes a relationship between Perceived Reality, Human Conition and Mathematical Models. Section 3 is on the relationship between Base Reality and Perceived Reality as discussed by Kant and others, Section 4 is on Mathematical Models of Reality and our current understanding of good these models are in describing it. We propose a modification to Penrose's framework in Section 5, and in Section 6 we add LLMs to the mix and discuss how it might fit within this modified framework.
 
-## The Penrose Framework
-
-![](https://subirvarma.github.io/GeneralCognitics/images/Kant5.jpeg) 
-
-Figure 1
-
-The eminent physicst Roger Penrose proposed a framework for Scientific Knowledge in his book "The Road to Reality", and this is shown in Fig. 1. In order to map the objects in this framework to our earlier definitions, The Mental World corresponds to what we called Human Cognition, the Platonic Mathematical World is the same as our definition of Mathematics and Mathematical Models, while the Physical World corresponds to what we called Perceived Reality. LLMs didn't exist at the time this book was written, so un-surprisingly they are missing. The other missing object in Penrose's diagram is what we called Base Reality. Penrose beleives that Base Reality and Perceived Reality are one and the same, which explains this. We will discuss the implications of this belief in the following section. 
-
-The Penrose Framework posits that:
-
-- Our Mental World creates the world of Mathematical Objects (arrow 3). Some believe that Mathematical Objects have an existence of theor own, independent of human cognition, and Mathematicians are merely discovering them. 
-- A subset of the World of Mathematical Objects serves as a model the Physical World (arrow 1). Everything in the Physical World can be modeled using these models.
-- A subset of the Physical World serves as our Mental World since our brain is part of the Physical World (arrow 2).
-
 ## Perception of Reality vs Base Reality
 
 Immanuel Kant set out for himself the task to discovering the limits of human knowledge and the result was his book "Critique of Pure Reason", that was published almost 250 years ago. In this he theorized that our perception of reality, which he called Phenomenon, is not the same as Base Reality, which he called Noumenon. Morever, it is not possible for us to gain access to the Noumenon, since all interactions with are mediated through our perceptual senses. Hence what we perceive is the world that our brain creates. Fundamental to this, are the concepts of Space (or the fact that objects have an extension in space) and Time (or the fact that events have a duration in time). Kant claimed that Space and Time are purely comcepts created by our brain, and do not exist in the Noumenon. 
@@ -85,9 +71,9 @@ Kant's ideas came before the discovery of Quantum Mechanics and Relativity, and 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/Kant6.png) 
 
-Figure 2
+Figure 1
 
-Fig. 2 summarizes the discussion so far: It shows signals such as ligh and sound waves coming from the Noumenon which impinge on our senses. These are then processed by the brain, which abstracts the deluge of data, and presents a picture of reality to us which is tailored so as to help us survive in the environment. Since all data coming from the Noumenon is filtered through the brain, we cannot get direct access to the Noumenon.
+Fig. 1 summarizes the discussion so far: It shows signals such as ligh and sound waves coming from the Noumenon which impinge on our senses. These are then processed by the brain, which abstracts the deluge of data, and presents a picture of reality to us which is tailored so as to help us survive in the environment. Since all data coming from the Noumenon is filtered through the brain, we cannot get direct access to the Noumenon.
 
 ## Mathematical Models of Reality vs Perception of Reality
 
@@ -96,6 +82,38 @@ Fig. 2 summarizes the discussion so far: It shows signals such as ligh and sound
 Galileo and Newton made a monumental discovery more than 400 years ago, which is that Laws of Nature lend themselves to a mathematical description. Taking Kant's lessons into account, this statement should be modified to state that the Laws of or Perception of Nature lend themselves to a mathematical description. This adds another actor to our drama, namely the space of Mathematical Systems. 
 What is a Mathematical System? These are systems that contain objects, that are defined soley by the way they interact with other objects. The interaction is in terms of mathematical operations (that differ from system to system). Mathematicians work consists of deriving interesting properties of the system using rules of logic. 
 At one time it was thougt that Mathematical Systems are connected with our Perceived Reality, in the sense that the objects and rules in the system were abstractions of objects and rules in the the real world. However this prejudice  was exploded in the 19th century when mathematicians came up with geometries and number systems that has nothing to do with what we see around us, but were studied purely because they resulted in interesting mathematical results. Some of these systems later found applications in modeling Nature, much to the surprise of scientists. In this section we explore this aspect of our scientific knowledge which results in questions such as: Why does Nature seem to obey mathematical laws? What is the connection between the objects used in mathematical systems used to model nature, and the actual objects found in nature? Do mathematical models of nature represent reality, and if so is it the Phenomenon or the Noumenon?
+
+![](https://subirvarma.github.io/GeneralCognitics/images/Kant8.png) 
+
+Figure 2
+
+Our tale begind with Rene Descartes, the founder of co-ordinate gemetry and Cartesian co-ordinates, which was one of his many achievements. Descartes also came up with the idea of Cartesian Dualism, which is illustrated in the above figure. His big idea was to banish the brain (and consciousness) from within the domain of Science. Hence explantion for subjective sensations such as color and mell was outside the scope of Science. Instead Science was to limit itself to modeling the objective parts of Nature, such as mass, length or time, which could be measured in a precise manner using instruments. Descartes ws mnotivated by several objectives in making thios proposal. One big motivation was probably to keep the mind outside the Scientific purview and make it part of the religous world, which was probably wise given what had appened to Bruno and Galileo aroiund the same time that Descartes lived. Another motivation was to accelerate the progress of Science by limiting it objects which could be measured. Other aspects of this framework include:
+
+- Nature is what we perceive using our senses. Hence what we see is the true picture of the world. 
+- Another aspect of the framework was the proposition that Nature can be modeled using Mathematics. 
+
+(Once can see why the model is somewhat self contradictory, since by positing that our sense perception gives a true picture of the world it reaching across the Cartesian divide).
+Descartes idea of duality was accepted by the Scientific Community, and for the next 300 years led to the massive progress in Science and Technology. But it also created several deep mysteries:
+
+- Why did Nature obey the Laws of Mathematics? The fact that Nature at the most fundamental level seems to obey the equations of Mathematics, which is entitely a creation of the human brain.
+- How does the physical world create the mental world (across the Cartesian divide)?
+
+![](https://subirvarma.github.io/GeneralCognitics/images/Kant5.jpeg) 
+
+Figure 3
+
+Even today the Cartesian Framwork is accepted by leading scientists such as Roger Penrose. He proposed a framework for Scientific Knowledge in his book "The Road to Reality", and this is shown in Fig. 3. The Penrose Framework posits that:
+
+- Our Mental World creates the world of Mathematical Objects (arrow 3). Some believe that Mathematical Objects have an existence of theor own, independent of human cognition, and Mathematicians are merely discovering them. 
+- A subset of the World of Mathematical Objects serves as a model the Physical World (arrow 1). Everything in the Physical World can be modeled using these models.
+- A subset of the Physical World serves as our Mental World since our brain is part of the Physical World (arrow 2).
+
+Penrose's arrow 2 proposes that the subjective sensations in our minds are part of the Physical World (unlike Descartes). But therein lies the great mystery. The mechanism by which the brain creates our reality and its subjective sensations has no explantion within traditional Science. Hence arrow 2 is more of a hypothesis than established science. In any case, before getting into this area, lets look at other issues that arose with the original Cartesian Framework.
+
+
+
+
+
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/Kant7.png) 
 
