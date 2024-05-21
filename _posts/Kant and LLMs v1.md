@@ -149,6 +149,16 @@ In the previous section we described a Kantian Framework for Science that takes 
 
 Figure 5
 
+Fig. 5 is a modification to Fig. 4 in which I have added the Mind as another object in our Perceived Reality. The picture posits that Mathematical Models that have proven so successful in modeling the physical world, can also be extended to model the Mind. The Mathematical Models that we have come up with for the Physical World take the form of Partial Differential Equations (PDEs). But what kind of models can we use for the Mind?
+
+![](https://subirvarma.github.io/GeneralCognitics/images/Kant11.png) 
+
+Figure 6
+
+Fig. 6 proposes that Mathematical Models for the Mind take the form of Artificial Neural Networks (ANNS). These models are fundamentally different than the PDEs and point to a radically different way for building models. Even though the PDE models for physical reality make use of advanced mathematics, at their root they are simple, in the sense that they are able to model complex physical phenomena using only a few equations with tens of parameters. It can be argued that the reason why this is even possible is because of the a priori structure that our minds create in order to organize the cahos of data coming from the Noumenon. According to Kant these structures include our perceptions of Space and Time which simplifies physical models quite a bit, since these imply that all intercation between entities in the model is limited to those entities that are in the neigborhood of each other. Without this assumnption building mathematical models of physical reality would be impossible.
+However we cannot make any such assumption in the case of models for the mind, and indeed Atrificial Neural Networks incorporate models for nodes that are able to interact with all other nodes in the model, which makes these models complex. We also need billions of parameters to model all these interactions, so these models are very different than the PDE models. Our minds come with some pre-existing structure when we are born (including the concepts of Space and Time), which ahs been built up over hundreds of years of evolution. But this is not the case for ANNs, when we start the training for these, all their neuronal connections are set to random values. WHich is why it takes so much a data to train ANN, in some sense we are trying to reproduce the gradual process of evolution within a space of a dew days.
+
+The way that the Neural Network models are specified is through training using a large Training Data Set as shown in Fig. 6, which again differentiuates them from PDE models. In some sense the Training Data can be considered the be the equivalent of the Nuomenon for ANNs. Just as our mind organizes the chaos of the Noumenon using structures as Space and Time, similarly ANNs must use some organizing principle to structure the chaos of data from their Training Data Sets. What are these organizing principles? Are they similar to the concept of Space and Time that emerge in our minds? This requires an update to [Nagle's question "What is it like to be a bat?"](https://www.sas.upenn.edu/~cavitch/pdf-library/Nagel_Bat.pdf) to "What is it like to be an Artificial Neural Network?"
 
 
 
