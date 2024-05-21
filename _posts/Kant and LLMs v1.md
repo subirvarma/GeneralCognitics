@@ -145,6 +145,13 @@ The Kantian Framework allows for creating mathematical models of the Mind, since
 
 In the previous section we described a Kantian Framework for Science that takes into account the fact the Mind is one of the objects that exists in our perceived reality, and hence we should try to model it using the tools of Mathematical Modeling, just as we have done for the other objects that exists in Perceived Reality. The Mind is special case, since we are using the Mind itself is responsible for creating perceived reality, and hence in a sense it is trying to model itself within the confines of the perceptual boundaries that it has created.
 
+(https://subirvarma.github.io/GeneralCognitics/images/Kant10.jpg) 
+
+Figure 5
+
+
+
+
 
 
 
