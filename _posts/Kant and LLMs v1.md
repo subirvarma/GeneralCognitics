@@ -116,27 +116,24 @@ The Kantian Framework allows for creating mathematical models of the mind, since
 
 ## Incorporating Models of the Mind into the Kantian Framework
 
-In the previous section we described a Kantian Framework for Science that takes into account the fact the Mind is one of the objects that exists in our perceived reality, and hence we should try to model it using the tools of Mathematical Modeling, just as we have done for the other objects that exists in Perceived Reality. The Mind is special case, since we are using the Mind itself is responsible for creating perceived reality, and hence in a sense it is trying to model itself within the confines of the perceptual boundaries that it has created.
+In the previous section we described a Kantian Framework for science that takes into account the fact the mind is one of the objects that exists in our perceived reality, and hence we can try to model it using the tools of Mathematical Modeling, just as we have done for the other objects that exists in Perceived Reality. The mind is special case, since we use the mind  for creating perceived reality, and hence in a sense the mind is trying to model itself within the confines of the perceptual boundaries that it has created.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/Kant10.png) 
 
 Figure 5
 
-Fig. 5 is a modification to Fig. 4 in which I have added the Mind as another object in our Perceived Reality. The picture posits that Mathematical Models that have proven so successful in modeling the physical world, can also be extended to model the Mind. The Mathematical Models that we have come up with for the Physical World take the form of Partial Differential Equations (PDEs). But what kind of models can we use for the Mind?
+Fig. 5 is a modification to Fig. 4 in which I have separated out the mind from other objects in Perceived Reality in the interests of clarity. The assumption behind this figure is that mathematical models that have proven so successful in modeling the physical world, can also be used to model the mind. The mathematical models for the former take the form of Partial Differential Equations (PDEs). But what kind of models can we use for the mind?
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/Kant11.png) 
 
 Figure 6
 
-Fig. 6 proposes that Mathematical Models for the Mind take the form of Artificial Neural Networks (ANNS). These models are fundamentally different than the PDEs and point to a radically different way for building models. Even though the PDE models for physical reality make use of advanced mathematics, at their root they are simple, in the sense that they are able to model complex physical phenomena using only a few equations with tens of parameters. It can be argued that the reason why this is even possible is because of the a priori structure that our minds create in order to organize the cahos of data coming from the Noumenon. According to Kant these structures include our perceptions of Space and Time which simplifies physical models quite a bit, since these imply that all intercation between entities in the model is limited to those entities that are in the neigborhood of each other. Without this assumnption building mathematical models of physical reality would be impossible.
-However we cannot make any such assumption in the case of models for the mind, and indeed Atrificial Neural Networks incorporate models for nodes that are able to interact with all other nodes in the model, which makes these models complex. We also need billions of parameters to model all these interactions, so these models are very different than the PDE models. Our minds come with some pre-existing structure when we are born (including the concepts of Space and Time), which ahs been built up over hundreds of years of evolution. But this is not the case for ANNs, when we start the training for these, all their neuronal connections are set to random values. WHich is why it takes so much a data to train ANN, in some sense we are trying to reproduce the gradual process of evolution within a space of a dew days.
+Fig. 6 proposes that mathematical models for the mind take the form of Artificial Neural Networks (ANNS). These models are fundamentally different than PDEs and point to a radically different way for building models. Even though the PDE models for physical reality make use of advanced mathematics, at their root they are simple, in the sense that they are able to model complex physical phenomena using only a few equations with tens of parameters. It can be argued that the reason why this is even possible is because of the a priori structure that our minds create in order to organize the chaos of data coming from the Noumenon. According to Kant these structures include our perceptions of Space and Time, and these simplify models of (perceived) Physical Reality quite a bit, since these imply that all intercation between entities in the model is limited to those entities that are in the neigborhood of each other. Without this assumnption building mathematical models of Physical Reality would be impossible.
+However we cannot make any such assumption in the case of models for the mind, and indeed Atrificial Neural Networks incorporate models for individual neurons that can potentially interact with all other neurons in the model, which makes these models extremely complex. We also need billions of parameters to model all these interactions, so these models are very different than the PDE models. 
 
-The way that the Neural Network models are specified is through training using a large Training Data Set as shown in Fig. 6, which again differentiuates them from PDE models. In some sense the Training Data can be considered the be the equivalent of the Nuomenon for ANNs. Just as our mind organizes the chaos of the Noumenon using structures as Space and Time, similarly ANNs must use some organizing principle to structure the chaos of data from their Training Data Sets. What are these organizing principles? Are they similar to the concept of Space and Time that emerge in our minds? This requires an update to [Nagle's question "What is it like to be a bat?"](https://www.sas.upenn.edu/~cavitch/pdf-library/Nagel_Bat.pdf) to "What is it like to be an Artificial Neural Network?"
+Our minds come with some pre-existing (or a priori) structure when we are born (including the concepts of space and time according to Kant), which have been built up over hundreds of millions of years of evolution. But this is not the case for ANNs. Before training starts, the "mind" of the ANN can be considered to be a *Tabula Rasa" since all their neuronal connections are set to random values (strictly speaking we do endow the ANN with an pre-existing connection topology, so it is not entirely a *Tabula Rasa*). Which is why it takes so much a data to train the ANN, in some sense we are trying to reproduce the gradual process of natural evolution within a space of a dew days of training. During this time the ANN has to discover the structure of the world through the images and text that we feed into it.
 
-
-
-
-
+In some sense the images and text in the Training Data can be considered the be the equivalent of the Nuomenon for ANNs. Just as our mind organizes the chaos of the actual Noumenon using structures as Space and Time, similarly ANNs must use some organizing principle to structure the chaos of data from their Training Sets. What are these organizing principles? Are they similar to the concept of Space and Time that emerge in our minds? We will discuss this question further in the following sections.
 
 ## How to LLMs Fit Within the Framework?
 
@@ -150,32 +147,6 @@ The way that the Neural Network models are specified is through training using a
 
 
 -------------------------------------------------------------------------------------------------------------------------------
-
-
-- Kant's Theory of Knowledge and Kant's Antinomies
-- Physical Models of the World
-- LLMs and a Model for Language
-- How would LLMs fit within Kant's framework
-- Implications for AGI
-
-
-## Kant's Theory of Knowledge
-
-- Base reality (Neumenon)  is not the same as perceived reality (Phenomenon)
-- Certain problems in perceived reality have no solution (cannot be resolved as either true or false), since they use concepts of space and time that do not exist in base reality (Kant’s antinomies)
-- Base reality is not accessible through our senses
-
-## Kant and Modern Physics
-
-- Mathematical models of perceived reality (Physics) are not the same as perceived reality
-- The deepest level of reality that physics posits is the quantum wave function.
-- Is the wave function real? It is clearly not part of perceived reality, is it part of base reality, ie part of Kant’s Neumenon. 
-- The QBism framework for quantum mechanics resolves the wave particle duality problem by stating that the wave function is not part of either perceived or base reality. It is a subjective measure of how likely an event might happen, and is tied to our perception.
-- Cosmology: Are we justified in extrapolating our models of physics to speculate about the beginnings of the universe? No, these models only work so far as they model our perceived reality. There is no way to verify that they work at the beginnings of the universe since our perception does not extend that far. The extrapolation is just a mathematical exercise, not tied to perceived reality. 
-- Are we accessing base reality through the mathematical models? No, since that cannot be accessed even using advanced instruments such as electron microscopes and powerful telescopes 
-- In biology, the chemical model of the cell is not same as the actual cell. The chemical models do not capture what makes a cell living, they are extrinsic rather than intrinsic. 
-- No danger that one day science will exhaust all that there is to know, since we can only get closer to the base reality, but never reach it. 
-- There is some unknown factor that makes a cell alive, chemical models are nowhere close to discovering this.
 
 ## Artificial Neural Networks and LLMs
 
