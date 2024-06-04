@@ -133,9 +133,18 @@ However we cannot make any such assumption in the case of models for the mind, a
 
 Our minds come with some pre-existing (or a priori) structure when we are born (including the concepts of space and time according to Kant), which have been built up over hundreds of millions of years of evolution. But this is not the case for ANNs. Before training starts, the "mind" of the ANN can be considered to be a *Tabula Rasa" since all their neuronal connections are set to random values (strictly speaking we do endow the ANN with an pre-existing connection topology, so it is not entirely a *Tabula Rasa*). Which is why it takes so much a data to train the ANN, in some sense we are trying to reproduce the gradual process of natural evolution within a space of a dew days of training. During this time the ANN has to discover the structure of the world through the images and text that we feed into it.
 
-In some sense the images and text in the Training Data can be considered the be the equivalent of the Nuomenon for ANNs. Just as our mind organizes the chaos of the actual Noumenon using structures as Space and Time, similarly ANNs must use some organizing principle to structure the chaos of data from their Training Sets. What are these organizing principles? Are they similar to the concept of Space and Time that emerge in our minds? We will discuss this question further in the following sections.
+In some sense the images and text in the Training Data can be considered the be the equivalent of the Nuomenon for ANNs. Just as our mind organizes the chaos of the actual Noumenon using structures as Space and Time, similarly ANNs must use some organizing principle to structure the chaos of data from their Training Sets. As a result of the training, the ANN connection weights are no longer random, but assume values that enable it to recognize patterns that present in the data.
+When a pre-trained ANN is subject to new data that is not part of the Training Set, then this is analogous to sensory data coming into our brain. Due to its training the ANN is able to extract meaning from the data and carry out tasks that are useful to us.
 
-## How to LLMs Fit Within the Framework?
+
+
+What are these organizing principles? Are they similar to the concept of Space and Time that emerge in our minds? We will discuss this question further in the following sections.
+
+
+
+## ANN Models for Visual Perception
+
+## ANN Models for Language
 
 - LLMs as a Mathematical Model for Human Cognition
 
