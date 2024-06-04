@@ -53,7 +53,7 @@ Figure 1
 
 Fig. 1 summarizes Kant's views: It shows signals such as light and sound waves coming from the Noumenon which impinge on our senses. These are then processed by the brain, which abstracts the deluge of data, and presents a picture of reality to us which is tailored so as to help us survive in our environment. Since all data coming from the Noumenon is filtered through the brain, we cannot get direct access to the Noumenon.
 
-## Modern Science and Philosophy
+## Frameworks for Science
 
 Kant's ideas were developed about a hundred years after the start of modern science with Newton and Galileo. Science initially developed and made progress using a different framework than the one proposed by Kant, called Cartesian Dualism. This framework achieved great success and gave us the modern world. However as described later in the section, it has run into problems in recent times, which have led people to re-examine the basic ideas behind the framework.
 
@@ -111,9 +111,16 @@ This Kantian view of Science is illustrated in Figure 4. There is no longer a sp
 There is indeed an Objective Reality, Kant's Noumenon, that exists beyond our perception, and the world that we see is derived from that. However the Mathematical Theories of Nature that we come up with are not describing the Noumenon, but are instead modeling the subjective perceptions created by our minds. This might also explain why mathematics is so effective in modeling Nature, this is because both mathematics and Nature (as we experience it) are creations of our minds. 
 The Kantian framework saya the (perceived) reality is a creation of mind, and at the same time the mind is one of the objects that exists in reality. This circular path is ofen referred to as a "Strange Loop" in Cognitive Science.
 
-How can we build a scientific theory of the mind within the Kantian Framework? 
+There have been theories of the mind works which operate within the Kantian framework. The German scientist Herman von Helmholtz proposed one such theory in the late nineteenth century according to which the contents of perception are not given by sensory signals themselves but have to be inferred by combining these signals with the brain's expectations or beliefs about their causes. More recently the British neuroscientist Anil Seth has extended Helmholtz's ideas by making use what we have learnt about the brain's operation since then, 
+which is nicely summarized in his book "Being You". His ideas are best captured by the notion of perception as a *controlled hallicunation* and are summarized as follows:
 
-Another as pect of the Kantian Framework is that Mathematical Models are always approximations and not a true picture of reality at the fundamental level. This is due to the fact these models are two levels removed from the Base Reality or the Noumenon. At the top level our minds create an abstraction of the Base Reality, and the Mathematical Models create a second level of abstraction since they are modeling the Perceived Reality which is itself an abstraction. This also means that Mathematical Models are only as good as the predictions that they make and we should not mistake the model for reality.
+- The brain is constantly making predictions about the causes of its sensory signals, and these cascade in a top-down manner through the brain's perceptual hierarchies.
+- Sensory signals that stream into the brain bottom-up (or from the outside) keep these perceptual predictions tied  to the objects from which they originated. These signals serve as prediction errors registering the difference between what the brain expects and what it gets at every level of processing. By adjusting the top-down predictions so as to suppress the bottom-up prediction errors, the brain's perceptual best guesses maintain the connection with what is happening in the world. Thus perception happens through a continual process of prediction error minimization.
+- Perceptual experience is determined by the content of the top-down predictions and not by the bottom-up sensory signals. Thus we never experience the sensory signals themselves, but only the interpretations of them.
+- The brain does its predictions using the well known Baye's Rule from probability theory, with the current prediction serving as the prior, the likelihoods encode mappings from potential candidtates that maight have generated the sensory signals. The resulting posterior serves as what actually gets perceived, and also serves as the prior for the next round of predictions.
+- There is a 
+
+Another aspect of the Kantian Framework is that Mathematical Models are always approximations and not a true picture of reality at the fundamental level. This is due to the fact these models are two levels removed from the Base Reality or the Noumenon. At the top level our minds create an abstraction of the Base Reality, and the Mathematical Models create a second level of abstraction since they are modeling the Perceived Reality which is itself an abstraction. This also means that Mathematical Models are only as good as the predictions that they make and we should not mistake the model for reality.
 
 The Kantian Framework allows for creating mathematical models of the mind, since the mind is one of the objects that exists in our Perceived Reality. What will such a Model look like? In the next Section we take a stab at answering this question by looking at the emerging science of Artificial Neural Networks.
 
