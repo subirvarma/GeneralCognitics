@@ -136,7 +136,7 @@ Fig. 5 is a modification to Fig. 4 in which I have separated out the mind from o
 
 Figure 6
 
-Fig. 6 proposes that mathematical models for the mind take the form of Artificial Neural Networks (ANNs). These models are fundamentally different than Partial Differential Equations (PDEs) that are used in Physics, and point to a radically different way for building mathematical models. 
+Fig. 6 proposes that mathematical models for the mind take the form of Artificial Neural Networks (ANNs). These models are different than Partial Differential Equations (PDEs) that are used in Physics, and point to a fundamentally different way for building mathematical models. 
 Models of physical reality (on the LHS of Fig. 6) which take the form of PDEs are usually created through the minds of scientists. The process by which they are able to "guess" the right equations remains a mystery of human creativity, but some of the things they rely on includes prior work by other scientists, experimental results, mathematical theories and lastly and most importantly their own intuition.
 Even though the PDE models for physical reality make use of advanced mathematics, at their root they are simple, in the sense that they are able to model complex physical phenomena using only a few equations with tens of parameters. It can be argued that the reason why this is even possible is because of the a priori structure that our minds create in order to organize the chaos of data coming from the Noumenon. According to Kant these structures include our perceptions of Space and Time, and these simplify models of (perceived) Physical Reality quite a bit, since these imply that all intercation between entities in the model is limited to those entities that are in the neigborhood of each other. Without this simplifying assumption building mathematical models of Physical Reality would be impossible.
 However we cannot make any such assumption in the case of models for the mind, and indeed ANNs incorporate models for individual neurons that can potentially interact with all other neurons in the model, which makes these models extremely complex. Consequently we also need billions of parameters to model all these interactions, so these models are very different than the parameter sparse PDE models. 
@@ -145,10 +145,17 @@ Our minds come with some pre-existing (or a priori) structure when we are born (
 
 In some sense the images and text in the Training Data can be considered the be the equivalent of the Nuomenon for ANNs. Just as our mind organizes the chaos of the actual Noumenon using structures as Space and Time, similarly ANNs must use some organizing principle to structure the chaos of data from their Training Sets. As a result of the training, the ANN connection weights are no longer random, but assume values that enable it to recognize patterns that present in the data.
 When a pre-trained ANN is subject to new data that is not part of the Training Set, then this is analogous to sensory data coming into our brain. Due to its training the ANN is able to extract meaning from the data and carry out tasks that are useful to us.
-
 What are these organizing principles? Are they similar to the concept of Space and Time that emerge in our minds? We will discuss this question further in the following sections.
 
 ## ANN Models for Visual Perception
+
+Anil Seth's work provides an example of a theory to explain the task of visual perception in our minds. The reader may recall that his theory involves two different sources of data, namely:
+
+- The sensory data coming from outside
+- The brain's internal generation, or prediction, of what we perceive next
+
+The internally generated image is modified based on the external sensory data, using the process of Bayesian estimation, in order to internally generate the next image. There are a number of different things going on in this model, we will focus on the process of image generation which is critical part of the process. We will show how ANNs are able to generate images when stimulated. The simplest case is when the stimulation is when there only a finite number of objects whose images can be generated, and the network is simulated by activating a neuron that corresponds to that object. A more complex case is when image generation is tied to lannguage, so that we give the ANN a description in words, and the ANN then generates the corresponding image. This case requires us to uinderstand how ANNs process labgauge, so it will have to wait after learn about language generation in the next section.
+
 
 ## ANN Models for Language
 
