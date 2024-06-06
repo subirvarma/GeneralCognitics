@@ -170,7 +170,15 @@ Figure 8
 How does an ANN generate images? 
 The process of converting pixels into a Latent Vector described above is called Encoding, and the reverse process is called Decoding (see lower part of Fig. 8), which is how the ANN generates images. Hence the decoding process involves turning a Latent Vector back into pixels, as shown in Fig. 8. The brain is a much more complex system than ANN, given that each neuron can have 1000s of dendrites connecting it to other neurons, and it is not understood how it is able to perform the encoding and decoding operations. It is quite likely that the ability to this is one of the *a priori* capabilities that has been built in our brains over 100s of millions of years of biological evolution. The ANN of course hasn't gone through this, so it relies on the trainig process to develop the internal circuits to do this. An example of ANN training is shown in the top part of Fig. 8. As shown, the encoder and decoder are connected back to back, so that the error signal generated if the decoder is not able to generate the image back is used to modify its circuits until it starts to work better. The neurons in our brains probably do a much better job of modeling the external world, given that we re able to learn from just a few examples if new objects come into our field of vision, whereas much more data is required for an ANN.
 
-Image Generation using ANNs is one of the capabilities that emerged about 10 years ago, when researchers took an ANN that is used to classification of objects, and simly ran it in the rverese direction. I found it quite fascinating that ven this relatively un-sophisticated system was able to generate a readily comprehensible image based on the particular neuron that was stimulated. Since then, image generation has become much more sophisticated and the latest models are able to generate highly realistic images. How can we tell an ANN what kind of image to generate? This is usually done by describing the image in words, but understanding how this is done requires us to understand LLMs, which is done in the next Section.
+Image Generation using ANNs is one of the capabilities that emerged about 10 years ago, when researchers took an ANN that is used to classification of objects, and simly ran it in the rverese direction. I found it quite fascinating that ven this relatively un-sophisticated system was able to generate a readily comprehensible image based on the particular neuron that was stimulated. Since then, image generation has become much more sophisticated and the latest models are able to generate highly realistic images. 
+
+How can we tell an ANN what kind of image to generate? This is usually done by describing the image in words, but understanding how this is done requires us to understand LLMs, which is done in the next Section. In our owb brains imnages are generated in the following ways:
+
+- The picture of the world that we see in front of us is internally generated, as Kant and Seth have told us, and uses the data coming into our eyes to modify the genration so that it corresponds to what is actually in front of us. There is no analog of this system in ANNs yet.
+- When we think of some object than usually an image pops up in our "mind's eye. This image is entirely internally generated and is closer to the process by which ANNs generate iamges.
+- When we are asleep and dreaming the images that we see are also entirely internally generated.
+
+When we represent an image using pixels it is already at a higher level of abstraction than the data falling onto our retina. Pixels come in colors, while the photons fallling on our retina have no such thing. Hence color is an abstraction that our minds create which help us identify objects in various lighting conditions.
 
 ## ANN Models for Language
 
@@ -179,6 +187,8 @@ Image Generation using ANNs is one of the capabilities that emerged about 10 yea
 ![](https://subirvarma.github.io/GeneralCognitics/images/lat32.png) 
 
 Figure 9
+
+
 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/lat35.png) 
