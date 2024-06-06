@@ -157,9 +157,31 @@ Anil Seth's work provides an example of a theory to explain the task of visual p
 The internally generated image is modified based on the external sensory data, using the process of Bayesian estimation, in order to internally generate the next image. There are a number of different things going on in this model, we will focus on the process of image generation which is critical part of the process. We will show how ANNs are able to generate images when stimulated. The simplest case is when the stimulation is when there only a finite number of objects whose images can be generated, and the network is simulated by activating a neuron that corresponds to that object. A more complex case is when image generation is tied to lannguage, so that we give the ANN a description in words, and the ANN then generates the corresponding image. This case requires us to uinderstand how ANNs process labgauge, so it will have to wait after learn about language generation in the next section.
 
 
+![](https://subirvarma.github.io/GeneralCognitics/images/lat51.png) 
+
+
+![](https://subirvarma.github.io/GeneralCognitics/images/lat27.png) 
+
+
+
+
 ## ANN Models for Language
 
 - LLMs as a Mathematical Model for Human Cognition
+
+![](https://subirvarma.github.io/GeneralCognitics/images/lat32.png) 
+
+
+![](https://subirvarma.github.io/GeneralCognitics/images/lat35.png) 
+
+
+
+![](https://subirvarma.github.io/GeneralCognitics/images/lat33.png) 
+
+
+
+
+
 
 
 
