@@ -147,23 +147,30 @@ In some sense the images and text in the Training Data can be considered the be 
 When a pre-trained ANN is subject to new data that is not part of the Training Set, then this is analogous to sensory data coming into our brain. Due to its training the ANN is able to extract meaning from the data and carry out tasks that are useful to us.
 What are these organizing principles? Are they similar to the concept of Space and Time that emerge in our minds? We will discuss this question further in the following sections.
 
-## ANN Models for Visual Perception
+## ANN Models for Visual Generation
 
 Anil Seth's work provides an example of a theory to explain the task of visual perception in our minds. The reader may recall that his theory involves two different sources of data, namely:
 
 - The sensory data coming from outside
 - The brain's internal generation, or prediction, of what we perceive next
 
-The internally generated image is modified based on the external sensory data, using the process of Bayesian estimation, in order to internally generate the next image. There are a number of different things going on in this model, we will focus on the process of image generation which is critical part of the process. We will show how ANNs are able to generate images when stimulated. The simplest case is when the stimulation is when there only a finite number of objects whose images can be generated, and the network is simulated by activating a neuron that corresponds to that object. A more complex case is when image generation is tied to lannguage, so that we give the ANN a description in words, and the ANN then generates the corresponding image. This case requires us to uinderstand how ANNs process labgauge, so it will have to wait after learn about language generation in the next section.
-
+The internally generated image is modified based on the external sensory data, using the process of Bayesian estimation, in order to internally generate the next image. There are a number of different things going on in this model, we will focus on the process of image generation which is critical part of the process. We will show how ANNs are able to generate images when stimulated. The simplest case is when the stimulation is when there only a finite number of objects whose images can be generated, and the network is simulated by activating a neuron that corresponds to that object. A more complex case is when image generation is tied to language, so that we give the ANN a description in words, and the ANN then generates the corresponding image. This case requires us to uinderstand how ANNs process langauge, so it will have to wait after learn about language generation in the next section.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/lat51.png) 
 
+Figure 7
+
+The simplest way to understand how ANNs generate images, is to think of it as a mapping from the space of image pixels, to a Latent Vector. A Latent Vector captures the information in the image, but in a highly compressed form. Images have a lot structure in them, which leads to redundancies in the way they are expressed using pixels. The ANN strips away all redundancies from the image and is able to capture the patterns that are hidden to us, which is then summarized in the form of a Latent Vector. These vectors live together live in an N dimensional space called a Latent Space, and all images map to one of the vectors in this space.
+The latter is an N dimensional space to which all images map. It is a fantastically complex mathematical object, to which we had no access before the advent of ANNs. The Latent Space has the property that if we interpolate between the Latent Vectors for two images, then all the Latent Vactors lying on the line connecting the two also correspond to images. Hence the operation of the ANN can be likened to gathering the chaotic information coming in the form of pixels, and then processing it so that it can be stored in a compressed form within its neurons.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/lat27.png) 
 
+Figure 8
 
+How does an ANN generate images? 
+The process of converting pixels into a Latent Vector described above is called Encoding, and the reverse process is called Decoding, which is how the ANN generataes images. Hence the decoding process involves turning a Latent Vector back into pixels, as shown in Fig. 8. The brain is a much more complex system than ANN, given that each neuron can have 1000s of dendrites connecting it to other neurons, and it is not understood how it is able to perform the encoding and decoding operations. It is quite likely that the ability to this is one of the *a priori* capabilities that has been built in our brains over 100s of millions of years of biological evolution. The ANN of course hasn't gone through this, so it relies on the trainig process to develop the internal circuits to do this. An example of ANN training is shown in the top part of Fig. 8. As shown, the encoder and decoder are connected back to back, so that the error signal generated if the decoder is not able to generate the image back is used to modify its circuits until it starts to work better. The neurons in our brains probably do a much better job of modeling the external world, given that we re able to learn from just a few examples if new objects come into our field of vision, whereas much more data is required for an ANN.
 
+How can we tell an ANN what kind of image to generate? This is usually done by describing the image in words, but understanding how this is done requires us to understand LLMs, which is done in the next Section.
 
 ## ANN Models for Language
 
