@@ -120,6 +120,9 @@ which is nicely summarized in his book "Being You". His ideas are best captured 
 
 In his book Seth also talks about how other aspects of the mind, such the perception of change, time, moods, emotions and even the perception of the self can also be explained by his predictive + generative model. These are all aspects of the mind, and his general *modus operandi* is to break up the hard problem of modeling the mind, into smaller problems of individual aspects of the mind, which can be tied to particular patterns of brain activity. 
 
+An interesting aspect of this framework is that mathematical models of nature are no longer considered to be a reflection of some deep seated objective reality that exists independent of our perception. If so, what are they? Why do they seem to reflect the operations of the world?
+Al alternative way to interpret these models is by using a framework called Instrumentalism, which basically says that mathematical models are a way to capture the regularities in our observations, nothing more than that. In the process of deriving the equations the scientist may hypothize some underlying mechanism, such as Fields to explain electromagnetism. But these fields are a mathematical convenience and do not reflect any underlying reality. In the next section we will see that mathematical models for the mind carry this way of thinking further, such that the models are essentially a black box connecting inputs to desired outputs.
+
 Seth's work looks at mechanisms in the brain that can be used to generate aspects of the mind. Is it possible to come up with a mathematical model for the brain that is also capable of generating similar mechanisms? In the next Section we take a stab at answering this question by looking at the emerging science of Artificial Neural Networks.
 
 ## Mathematical Models for the Mind
