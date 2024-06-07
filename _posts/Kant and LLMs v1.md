@@ -184,6 +184,13 @@ When we represent an image using pixels it is already at a higher level of abstr
 
 - LLMs as a Mathematical Model for Human Cognition
 
+Wittgenstein's Philosophy of Language
+- Both language and the world have structure
+- Language consists of propositions, which are compounds of 'elementary propositions', which in turn are combinations of 'names. Names are the ultimate constituents of language.
+- The world consists of the totality of facts, which are compounded out of 'states of affairs', which in turn are combinations of 'objects'.
+- Each level of structure in the world is matched by a level of structure in language: Names denote objects, combinations of names constitute elementary propositions that correspond to state of affairs, and each of these in their turn combine to form, respectively propositions and facts.
+- The arrangement of names at the most fundamental level of language structure 'mirrors' or 'pictures' the arrangement of objects at the most fundamental level of the world's structure. This called the 'picture theory of meaning' and is central to the philosophy.
+
 ![](https://subirvarma.github.io/GeneralCognitics/images/lat32.png) 
 
 Figure 9
