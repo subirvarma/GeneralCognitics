@@ -119,7 +119,9 @@ There have been proposals for theories of the mind works which operate within th
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/Kant16.png) 
 
-More recently the British neuroscientist Anil Seth has extended Helmholtz's ideas by making use what we have learnt about the brain's operation since then, which is nicely summarized in his book "Being You". His ideas are best captured by the notion of perception as a *controlled hallicunation* and are summarized as follows:
+Figure 5
+
+More recently the British neuroscientist Anil Seth has extended Helmholtz's ideas by making use what we have learnt about the brain's operation since then, which is nicely summarized in his book "Being You". His ideas are best captured by the notion of perception as a *controlled hallicunation* (see Fig. 5) and are summarized as follows:
 
 - The brain's circuitry incorporates generic models for objects that we encounter in our lives. When the circuit is activated, the brain projects an image of the object onto our visual field.
 - The brain is also constantly making predictions about the causes of its sensory signals, and these cascade in a top-down manner through the brain's perceptual hierarchies. These signals stream into the brain bottom-up (or from the outside) and keep these perceptual predictions tied  to the objects from which they originated. These signals serve as prediction errors registering the difference between what the brain expects and what it gets at every level of processing. By adjusting the top-down predictions so as to suppress the bottom-up prediction errors, the brain's perceptual best guesses maintain the connection with what is happening in the world. Thus perception happens through a continual process of prediction error minimization.
@@ -127,6 +129,7 @@ More recently the British neuroscientist Anil Seth has extended Helmholtz's idea
 - The brain does its predictions using the well known Baye's Rule from probability theory, with the current prediction serving as the prior, the likelihoods encode mappings from potential candidate objects that might have generated the sensory signals. The resulting posterior serves as what actually gets perceived, and also serves as the prior for the next round of predictions.
 - If the perceptual priors are very strong, then it results in an actual hallicunation. On the other hand when we are paying closer attention to the external world, then the sensory signals dominate, and this results in a picture that is closer to reality.
 
+Anil Seth's model for visual perception can be considered to be a realization of the idea that Kant originally proposed in the "Critique of Pure Reason": A way in which the chaoes of the Noumenal World are organized by the mind and projected into a picture of reality that we see round us.
 In his book Seth also talks about how other aspects of the mind, such the perception of change, time, moods, emotions and even the perception of the self can also be explained by his predictive + generative model. He breaks up the hard problem of modeling the mind, into smaller problems of individual aspects of the mind, which can be tied to particular patterns of brain activity. 
 
 Seth's work proposes mechanisms in the brain that can be used to generate aspects of the mind. Is it possible to come up with a mathematical model for the brain that is also capable of generating similar mechanisms? In the next Section we take a stab at answering this question by looking at the emerging science of Artificial Neural Networks.
@@ -137,16 +140,16 @@ In the previous section we described a Kantian Framework for science that propos
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/Kant10.png) 
 
-Figure 5
+Figure 6
 
-Fig. 5 is a modification to Fig. 4 in which I have separated out the mind from other objects in Perceived Reality in the interests of clarity. The assumption behind this figure is that mathematical models that have proven so successful in modeling the physical world, can also be used to model the mind. The mathematical models for the former take the form of Partial Differential Equations (PDEs). But what kind of models can we use for the mind?
+Fig. 6 is a modification to Fig. 4 in which I have separated out the mind from other objects in Perceived Reality in the interests of clarity. The assumption behind this figure is that mathematical models that have proven so successful in modeling the physical world, can also be used to model the mind. The mathematical models for the former take the form of Partial Differential Equations (PDEs). But what kind of models can we use for the mind?
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/Kant11.png) 
 
-Figure 6
+Figure 7
 
-Fig. 6 proposes that mathematical models for the mind take the form of Artificial Neural Networks (ANNs). These models are different than Partial Differential Equations (PDEs) that are used in Physics, and point to a fundamentally different way for building mathematical models. 
-Models of physical reality (on the LHS of Fig. 6) which take the form of PDEs are usually created by the minds of scientists. The process by which they are able to "guess" the right equations remains a mystery of human creativity, but some of the things they rely on includes prior work by other scientists, experimental results, mathematical theories and lastly and most importantly their own intuition.
+Fig. 7 proposes that mathematical models for the mind take the form of Artificial Neural Networks (ANNs). These models are different than Partial Differential Equations (PDEs) that are used in Physics, and point to a fundamentally different way for building mathematical models. 
+Models of physical reality (on the LHS of Fig. 7) which take the form of PDEs are usually created by the minds of scientists. The process by which they are able to "guess" the right equations remains a mystery of human creativity, but some of the things they rely on includes prior work by other scientists, experimental results, mathematical theories and lastly and most importantly their own intuition.
 
 Even though PDE models for physical reality make use of advanced mathematics, at their root they are simple, in the sense that they are able to model complex physical phenomena using only a few equations with tens of parameters. It can be argued that the reason why this is even possible is because of the *a priori* structure that our minds create in order to organize the chaos of data coming from the Noumenon. According to Kant these structures include our perceptions of space and time, and these simplify these models of quite a bit, since these imply that all interaction between entities in the model is limited to entities that are in the (space-time) neigborhood of each other. Without this simplifying assumption building mathematical models of physical reality would be impossible.
 However we cannot make any such assumption in the case of models for the mind, and indeed ANNs incorporate models for individual neurons that can potentially interact with all other neurons in the model, which makes these models extremely complex. Consequently we also need billions of parameters to model all these interactions, so these models are very different than the parameter sparse PDE models. 
@@ -160,38 +163,28 @@ What are these organizing principles that an ANN uses? Are they similar to the c
 
 ## ANN Models for Vision
 
-Anil Seth's work provides an example of a theory to explain the task of visual perception in our minds. The reader may recall that his theory involves two different sources of data, namely:
+Anil Seth's work provides an example of a theory that explains visual perception in our minds. His model involves a number of different mechanisms. In this section we will focus on one of them, and see how ANNs can be used to mimic the mind's ability to generate images.
+This property of ANNs was discovered in the early days of Deep Learning, when ANN models were mostly used for image classification, which involved inputting image pixels into a model, with the output of the model corresponding to the probability distribution over the various categories. Researchers found out that when this model was run backwards, i.e., the output was stimulated with the category corresponding to a particuler image category, then the pixels coming out at the other end actually looked like the object coresponding to that category. It didn't look exactly like the images that were fed into the ANN during the training process, but one could see that they were derived from them.
+When I was first learning about Neural Networks, I remember being fascinated by this property, and it fed my subsequent in these systems. The fact that ANN was able to reproduce images meant that it was not merely learning enough information from the training data to classify images, but it was learning the ins and outs of what was being fed into it, sufficient for it to be able to reproduce them.
 
-- The sensory data coming from an object
-- The brain's internal representation of that object that results in a prediction, and this is what we perceive
-
-We will see that a simolar process takes place in ANNs whereby they process the pixels coming in from the image of an object that we feed them, the object is then stored as a higher level representation (called a Latent Vector) in the ANN, and when the ANN is stimulated in the right way then the Latent Vector is translated by the ANN back into an image of an object. A more complex case is when image generation is tied to language, so that we give the ANN a description in words, and the ANN then generates the corresponding image. This case requires us to understand how ANNs process langauge, so it will have to wait after learn about language generation in the next section.
+Since those very early examples of image generation, the State of the Art has progressed quite a bit, with the latest models such as DALLE-3 or Stable Diffusion being able to generate photo realistic images.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/lat51.png) 
 
-Figure 7
+Figure 8
 
-The simplest way to understand how ANNs generate images, is to think of it as a mapping from the space of image pixels, to a higher level representation called a Latent Vector. A Latent Vector captures the information in the image, but in a highly compressed form. Images have a lot structure in them, which leads to redundancies in the way they are expressed using pixels. The ANN strips away all these redundancies and is able to capture the patterns in the image that are hidden to us, and these are captured in the form of a Latent Vector. These vectors exist in an N dimensional space called a Latent Space, and all images map to one of the vectors in this space. This is a fantastically complex mathematical object, to which we had no access before the advent of ANNs. The Latent Space has the property that if we interpolate between the Latent Vectors for two images, then all the vectors lying on the linear segment connecting the two also correspond to images. Hence the operation of the ANN can be likened to processing the chaotic information coming in the form of pixels in an hierarchical fashion, which results in a Latent Vector. This process is also called Encoding and is illustrated on the path shown on the RHS of Fig. 8. The best image Encoders we have are called Diffusion Models, and they Encode an image by gradually adding white noise to it.
+The simplest way to understand how ANNs generate images, is to think of it as a mapping from the space of image pixels, to a higher level representation called a Latent Vector (which is just a bunch of numbers organized in one or two dimensions). A Latent Vector captures the information in the image, but in a highly compressed form. Images have a lot structure in them, which leads to redundancies in the way they are expressed using pixels. The ANN strips away all these redundancies and is able to capture the patterns in the image using just a few numbers, and these are captured in the form of a Latent Vector. These vectors exist in an N dimensional space called a Latent Space, and all images map to one of the vectors in this space. The Latent Space is a fantastically complex mathematical object that exists in a space with hundreds of dimensions, to which we had no access before the advent of ANNs. It has the nice property that if we interpolate between the Latent Vectors for two images, then all the vectors lying on the linear segment connecting the two also correspond to valid images (such an object is called a manifold in Differential Geometry). Hence the ANN maps image pixels to points in the image manifold, and it generates images by reversing this operation, as explained next.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/Kant17.png) 
 
-Figure 8
+Figure 9
 
-How does an ANN generate images? 
-The decoding process involves turning a Latent Vector back into pixels, as shown in the path on the LHS of Fig. 8. This involves reversing the process that was used to Encode the image, and for Diffusion Models it corresponds to gradually removing noise from, the Latent Vector representation.
-
-How does the ANN figure out how to generate the right image pixels from the Latent Vector? In the case of Diffusion Models, the Decoder is trained so that it is able to recover the original image from a noisy version, by estimating the amount of noise that was added.
-The brain is a much more complex system than ANN, given that each neuron can have 1000s of dendrites connecting it to other neurons, and it is not understood how it is able to perform the encoding and decoding operations. It is quite likely that the ability to this is one of the *a priori* capabilities that has been built in our brains over 100s of millions of years of biological evolution. The neurons in our brains do a much better job of modeling the external world, given that we re able to learn from just a few examples if new objects come into our field of vision, whereas much more data is required for an ANN.
-
-Image Generation was one of the capabilities that emerged about 10 years ago, when researchers took an ANN that was used to do classification of objects, and simply ran it in the reverse direction. I find it quite fascinating that even this relatively un-sophisticated system was able to generate comprehensible images. Since then, image generation has become much more sophisticated and with Diffusion Models being the latest iteration with the best performance. 
-
-How can we tell an ANN what kind of image to generate? This is usually done by describing the image in words, but understanding how this is done requires us to understand LLMs, which is done in the next Section. In our brains images are generated in the following ways:
-
-- The picture of the world that we see in front of us is internally generated, as Kant and Seth have told us, and uses the data coming into our eyes to modify the genration so that it corresponds to what is actually in front of us. There is no analog of this system in ANNs yet.
-- When we think of some object than usually an image pops up in our "mind's eye. This image is entirely internally generated and is closer to the process by which ANNs generate iamges.
-- When we are asleep and dreaming the images that we see are also entirely internally generated.
-
-When we represent an image using pixels it is already at a higher level of abstraction than the data falling onto our retina. Pixels come in colors, while the photons fallling on our retina have no such thing. Hence color is an abstraction that our minds create which help us identify objects in various lighting conditions.
+The general principle for training an ANN to generate images is shown in Fig. 9, and you may notice that it is quite similar to the Anil Seth's model for visual perception. There are two operations Encoding and Decoding.
+The Encoding operation (shown in the RHS path in Fig. 9) can be likened to processing the chaotic information coming in the form of pixels, and this is done in an hierarchical fashion, which ultimately results in the creation of a Latent Vector corresponding to the image. 
+The Decoding process involves turning a Latent Vector back into pixels, as is shown in the path on the LHS of Fig. 9. 
+This involves taking the bare bones representation of the image in the Latent Vector form and gradually adding the shapes and textures into it until it becomes a fully formed image. Different ANN models use different architectures to implement the Encoding and Decoding pipelines, and currently the best system that we have are called Diffusion Models.
+The brain is a much more complex system than ANNs, given that each neuron can have 1000s of dendrites connecting it to other neurons, and it is not fully understood how it is able to perform the encoding and decoding operations. We do have some idea of how the brain does encoding, and this was discovered in the 1960s in a series of famous experiments carried by by David Hubel and Torsten Wiesel. In fact the ANN called Convolutional Neural Network was subsequently designed to mimic what we had learnt about the brain from these experiments. The generation process in the brain is much more complex than simply inverting a Latent Vector, and involves inputs from a large number of brain regions.
+The neurons in our brains do a much better job of modeling the external world, given that we are able to learn from just a few examples if new objects come into our field of vision, whereas much more data is required for training an ANN. It is quite likely that the ability to this is one of the *a priori* capabilities that has been built in our brains over 100s of millions of years of biological evolution. 
 
 ## ANN Models for Language
 
@@ -206,26 +199,31 @@ Wittgenstein's Philosophy of Language
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/lat32.png) 
 
-Figure 9
+Figure 10
 
 
 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/lat35.png) 
 
-Figure 10
+Figure 11
 
 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/lat33.png) 
 
-Figure 11
+Figure 12
 
 
 
 
 
 
+How can we tell an ANN what kind of image to generate? This is usually done by describing the image in words, but understanding how this is done requires us to understand LLMs, which is done in the next Section. In our brains images are generated in the following ways:
+
+- The picture of the world that we see in front of us is internally generated, as Kant and Seth have told us, and uses the data coming into our eyes to modify the genration so that it corresponds to what is actually in front of us. There is no analog of this system in ANNs yet.
+- When we think of some object than usually an image pops up in our "mind's eye. This image is entirely internally generated and is closer to the process by which ANNs generate iamges.
+- When we are asleep and dreaming the images that we see are also entirely internally generated.
 
 
 
