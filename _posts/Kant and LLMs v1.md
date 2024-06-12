@@ -161,7 +161,7 @@ When a pre-trained ANN is subject to new data that is not part of the Training S
 
 What are these organizing principles that an ANN uses? Are they similar to the concept of Space and Time that emerge in our minds? We will discuss this question in the following sections.
 
-## ANN Models for Vision
+## ANN Models for Visual Perception
 
 Anil Seth's work provides an example of a theory that explains visual perception in our minds. His model involves a number of different mechanisms. In this section we will focus on one of them, and see how ANNs can be used to mimic the mind's ability to generate images.
 This property of ANNs was discovered in the early days of Deep Learning, when ANN models were mostly used for image classification which involved inputting image pixels into a model, with the output of the model corresponding to the probability distribution over the various categories. Researchers found out that when this model was run backwards, i.e., the output was stimulated with the category corresponding to a particuler image category, then the pixels coming out at the other end actually looked like the object coresponding to that category. It didn't look exactly like the images that were fed into the ANN during the training process, but one could see that they were derived from them.
@@ -200,18 +200,27 @@ The bottom part of Fig. 10 shows the process by which LLMs are trained. The text
 
 Figure 11
 
-Fig. 11 shows how models for language and visual perception fit within the Kantian Framework (I have left out the models for the Phenomenon or the Natural World that is shown in Fig. 7 in the interests of clarity). 
+Fig. 11 shows how models for language and visual perception fit within the Kantian Framework (I have left out the models for the Phenomenon or the Natural World that is shown in Fig. 7 in the interests of clarity). Just as the brain organizes the light and sound data coming from the Noumenon into images and language, ANN models for vision and language are able to organize the pixel and individual words data that are fed into them into model generated images and language. Both the brain and the ANN have the ability to information from their respective models, that take the form of billions of interconnected nodes.
 
+## Connection between the World and Language: Wittgenstein's Theory 
 
+In this section we proceed to further explore the connection between visual perception and language as revealed by ANNs. But doing so, I want to talk about the work of another great philosopher, namely Ludwig Wittegenstein, who came up with a theory of language in his work *Tractatus Logico-Philosophicus* which was published in 1918.
 
-- LLMs as a Mathematical Model for Human Cognition
+![](https://subirvarma.github.io/GeneralCognitics/images/Kant20.png) 
 
-Wittgenstein's Philosophy of Language
+Figure 12
+
+The main aspects of Wittgenstein's theory of language are summarized below (and also shown in Fig. 12): 
 - Both language and the world have structure
 - Language consists of propositions, which are compounds of 'elementary propositions', which in turn are combinations of 'names. Names are the ultimate constituents of language.
 - The world consists of the totality of facts, which are compounded out of 'states of affairs', which in turn are combinations of 'objects'.
 - Each level of structure in the world is matched by a level of structure in language: Names denote objects, combinations of names constitute elementary propositions that correspond to state of affairs, and each of these in their turn combine to form, respectively propositions and facts.
 - The arrangement of names at the most fundamental level of language structure 'mirrors' or 'pictures' the arrangement of objects at the most fundamental level of the world's structure. This called the 'picture theory of meaning' and is central to the philosophy.
+
+- 
+
+## Connection Between Visual Perception and Language
+
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/lat32.png) 
 
@@ -233,7 +242,7 @@ Figure 12
 
 
 
-
+- LLMs as a Mathematical Model for Human Cognition
 
 How can we tell an ANN what kind of image to generate? This is usually done by describing the image in words, but understanding how this is done requires us to understand LLMs, which is done in the next Section. In our brains images are generated in the following ways:
 
