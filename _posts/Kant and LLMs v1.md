@@ -217,7 +217,9 @@ The main aspects of Wittgenstein's theory of language are summarized below (and 
 - Each level of structure in the world is matched by a level of structure in language: Names denote objects, combinations of names constitute elementary propositions that correspond to state of affairs, and each of these in their turn combine to form, respectively propositions and facts.
 - The arrangement of names at the most fundamental level of language structure 'mirrors' or 'pictures' the arrangement of objects at the most fundamental level of the world's structure. This called the 'picture theory of meaning' and is central to the philosophy.
 
-- 
+- Thoughts are what can be expressed using language and a proposition in a language only makes sense if it can translated into a picture.
+- Only propositions in Science satisfy this requirement.
+- For propositions in religion, philosophy, ethics, aesthetics etc, they cannot be expressed in words (that satisfy the criterea), 'showing'rather than 'saying' is all that is possible. They are not pictures of of actual or possible facts, and therefore are meaningless.
 
 ## Connection Between Visual Perception and Language
 
