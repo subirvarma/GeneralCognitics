@@ -164,8 +164,8 @@ What are these organizing principles that an ANN uses? Are they similar to the c
 ## ANN Models for Vision
 
 Anil Seth's work provides an example of a theory that explains visual perception in our minds. His model involves a number of different mechanisms. In this section we will focus on one of them, and see how ANNs can be used to mimic the mind's ability to generate images.
-This property of ANNs was discovered in the early days of Deep Learning, when ANN models were mostly used for image classification, which involved inputting image pixels into a model, with the output of the model corresponding to the probability distribution over the various categories. Researchers found out that when this model was run backwards, i.e., the output was stimulated with the category corresponding to a particuler image category, then the pixels coming out at the other end actually looked like the object coresponding to that category. It didn't look exactly like the images that were fed into the ANN during the training process, but one could see that they were derived from them.
-When I was first learning about Neural Networks, I remember being fascinated by this property, and it fed my subsequent in these systems. The fact that ANN was able to reproduce images meant that it was not merely learning enough information from the training data to classify images, but it was learning the ins and outs of what was being fed into it, sufficient for it to be able to reproduce them.
+This property of ANNs was discovered in the early days of Deep Learning, when ANN models were mostly used for image classification which involved inputting image pixels into a model, with the output of the model corresponding to the probability distribution over the various categories. Researchers found out that when this model was run backwards, i.e., the output was stimulated with the category corresponding to a particuler image category, then the pixels coming out at the other end actually looked like the object coresponding to that category. It didn't look exactly like the images that were fed into the ANN during the training process, but one could see that they were derived from them.
+When I was first learning about Neural Networks, I remember being fascinated by this property, and it fed my subsequent interest in these systems. The fact that ANN was able to reproduce images meant that it was not merely learning enough information from the training data to classify images, but it was learning the ins and outs of what was being fed into it, sufficient for it to be able to reproduce them.
 
 Since those very early examples of image generation, the State of the Art has progressed quite a bit, with the latest models such as DALLE-3 or Stable Diffusion being able to generate photo realistic images.
 
@@ -187,6 +187,17 @@ The brain is a much more complex system than ANNs, given that each neuron can ha
 The neurons in our brains do a much better job of modeling the external world, given that we are able to learn from just a few examples if new objects come into our field of vision, whereas much more data is required for training an ANN. It is quite likely that the ability to this is one of the *a priori* capabilities that has been built in our brains over 100s of millions of years of biological evolution. 
 
 ## ANN Models for Language
+
+![](https://subirvarma.github.io/GeneralCognitics/images/Kant18.png) 
+
+Figure 10
+
+ANN models for language proceed along the same lines as those for vision, with the main difference being that image pixels are now replaced by individual words (there are LLMs that can be built by using individual characters instead, and those work quite well too). As shown in the top part of Fig. 10, LLMs map pieces of text to points in the language Latent Space. Just as for images, language has a lot of structure in the relationship between words, and the ANN is able to capture this structure and therby reduce the representation of the piece of text into a highly compressed form with just a few numbers. As in images, these Latent Vectors live in a high dimensional space called Latent Space, such that each point in the Latent Space corresponds to a piece of text. The discovery of this language Latent Space seems to have settled a long standing open problem in Linguistics of how language is produced. There are two aspects of langauge, namely syntax and semantics. Syntax ae the rules by which capture the grammer in language while semantics captures the meaning. There have been graphical models for syntax before the advent of ANNs, but nobody had been able to find a mathematical model that catptures the semantics. The Latent Space for language seems to be one such model, and given the complexity of the mathematical structure in which it exists, explains why it hadn't been descovered before. Interestingly enough the same ANN model, namely Transformers, has been used to build models for both images and language, which points to an underlying similarity in the structure that underlies them. We explore this further in the following section.
+
+The bottom part of Fig. 10 shows the process by which LLMs are trained. The text from the training dataset is fed into the LLM, which then converts it into a vector in Latent Space. This vector is then decoded to regnerate the original text, and the difference between the reproduced text and the original text is used as an erro signal to train the model. In practice the text is input into the model on a word by word basis, and theoutput text is also produced likewise word by word.
+
+
+
 
 - LLMs as a Mathematical Model for Human Cognition
 
