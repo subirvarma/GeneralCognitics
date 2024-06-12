@@ -196,6 +196,11 @@ ANN models for language proceed along the same lines as those for vision, with t
 
 The bottom part of Fig. 10 shows the process by which LLMs are trained. The text from the training dataset is fed into the LLM, which then converts it into a vector in Latent Space. This vector is then decoded to regnerate the original text, and the difference between the reproduced text and the original text is used as an erro signal to train the model. In practice the text is input into the model on a word by word basis, and theoutput text is also produced likewise word by word.
 
+![](https://subirvarma.github.io/GeneralCognitics/images/Kant19.png) 
+
+Figure 11
+
+Fig. 11 shows how models for language and visual perception fit within the Kantian Framework (I have left out the models for the Phenomenon or the Natural World that is shown in Fig. 7 in the interests of clarity). 
 
 
 
