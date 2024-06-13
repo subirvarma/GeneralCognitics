@@ -162,6 +162,8 @@ Before training starts, the "mind" of the ANN can be considered to be a *Tabula 
 In some sense the images used in the Training Data can be considered the be the equivalent of the Nuomenon for ANNs. Just as our mind organizes the chaos of the actual Noumenon using structures as space and time, similarly ANNs must use some organizing principle to structure the chaos of data from their Training Sets. As a result of the training, the ANN connection weights are no longer random, but assume values that enable it to recognize patterns that are present in the data.
 When a pre-trained ANN is subject to new data that is not part of the Training Set, then this is analogous to sensory data coming into our brain. Due to its training the ANN is now able to extract meaning from the data and carry out tasks that are useful to us.
 
+The main pupose for the PDE models of reality that we find in Physics, is to make predictions about the future state of the system that is being modeled. Interestingly, Anil Seth's theory of visual perception is based on the principle that the brain generates our reality by also making predictions. The predictions made by Physics are long term in nature, while the ones that our brain makes are short term since it is only predicting the next state of the visual reality that it is going to present to us. 
+
 What are these organizing principles that an ANN uses? Are they similar to the concept of Space and Time that emerge in our minds? We will discuss this question in the following sections.
 
 ## ANN Models for Visual Perception
