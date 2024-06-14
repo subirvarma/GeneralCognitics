@@ -193,6 +193,29 @@ The neurons in our brains do a much better job of modeling the external world, g
 
 ## ANN Models for Language
 
+So now we finally come to the topic that was advertised in the title of the essay, namely human language. Just like visual perception, mathematics, science and ANNs, language is a creation of the brain. It is a very old creation, it is estimated that human language arose about 50,000 years ago, and it also co-incided with a leap in human cognition that also happened around the same time. Scientists and philosophers did not turn their attention towards language until the 20th century, and the name that stnds out the most is that Ludwig Wittgenstein. He came up with a theory of language in his work *Tractatus Logico-Philosophicus* which was published in 1918.
+
+![](https://subirvarma.github.io/GeneralCognitics/images/Kant20.png) 
+
+Figure 10
+
+The main aspects of Wittgenstein's theory of language are summarized below (and also shown in Fig. 10): 
+- Both language and the world have structure
+- Language consists of propositions, which are compounds of 'elementary propositions', which in turn are combinations of 'names,. Names are the ultimate constituents of language.
+- The world consists of the totality of facts, which are compounded out of 'states of affairs', which in turn are combinations of 'objects'.
+- Each level of structure in the world is matched by a level of structure in language: Names denote objects, combinations of names constitute elementary propositions that correspond to state of affairs, and each of these in their turn combine to form, respectively propositions and facts.
+- The arrangement of names at the most fundamental level of language structure 'mirrors' or 'pictures' the arrangement of objects at the most fundamental level of the world's structure. This called the 'picture theory of meaning' and is central to the philosophy.
+- Thoughts are what can be expressed using language and a proposition in a language only makes sense if it can translated into a picture. Only propositions in Science satisfy this requirement.
+- For propositions in religion, philosophy, ethics, aesthetics etc, they cannot be expressed in words (that satisfy the criterea). For these 'showing'rather than 'saying' is all that is possible. They are not pictures of of actual or possible facts, and therefore are meaningless. This however does not mean that they are un-important, Wittgenstein though that they are are the truly important parts of human knowledge, its jest that we cannot talk about them to figure out whether they are true or false.
+
+Wittgenstein's stated that the propositions of Science are part of language that are true since they corresponded to facts in the world. If we consider the symbols in mathematics to be another type of language, then its propositions are tautologies, i.e., they are always true regardless of the state of the world.
+
+![](https://subirvarma.github.io/GeneralCognitics/images/Kant22.png) 
+
+Figure 11
+
+Fig. 11 shows how models for language and visual perception fit within the Kantian Framework (I have left out the models for the Phenomenon or the Natural World that is shown in Fig. 7 in the interests of clarity). Just as the brain organizes the light and sound data coming from the Noumenon into images and language, ANN models for vision and language are able to organize the pixel and individual words data that are fed into them into model generated images and language. Both the brain and the ANN have the ability to information from their respective models, that take the form of billions of interconnected nodes.
+
 ![](https://subirvarma.github.io/GeneralCognitics/images/Kant18.png) 
 
 Figure 10
@@ -201,11 +224,7 @@ ANN models for language proceed along the same lines as those for vision, with t
 
 The bottom part of Fig. 10 shows the process by which LLMs are trained. The text from the training dataset is fed into the LLM, which then converts it into a vector in Latent Space. This vector is then decoded to regnerate the original text, and the difference between the reproduced text and the original text is used as an erro signal to train the model. In practice the text is input into the model on a word by word basis, and theoutput text is also produced likewise word by word.
 
-![](https://subirvarma.github.io/GeneralCognitics/images/Kant19.png) 
 
-Figure 11
-
-Fig. 11 shows how models for language and visual perception fit within the Kantian Framework (I have left out the models for the Phenomenon or the Natural World that is shown in Fig. 7 in the interests of clarity). Just as the brain organizes the light and sound data coming from the Noumenon into images and language, ANN models for vision and language are able to organize the pixel and individual words data that are fed into them into model generated images and language. Both the brain and the ANN have the ability to information from their respective models, that take the form of billions of interconnected nodes.
 
 ## Connection between the World and Language: Wittgenstein's Theory 
 
