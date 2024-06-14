@@ -191,9 +191,9 @@ This involves taking the bare bones representation of the image in the Latent Ve
 The brain is a much more complex system than ANNs, given that each neuron can have 1000s of dendrites connecting it to other neurons, and it is not fully understood how it is able to perform the encoding and decoding operations. We do have some idea of how the brain does encoding, and this was discovered in the 1960s in a series of famous experiments carried by by David Hubel and Torsten Wiesel. In fact the ANN called Convolutional Neural Network was subsequently designed to mimic what we had learnt about the brain from these experiments. The generation process in the brain is much more complex than simply inverting a Latent Vector, and involves inputs from a large number of brain regions.
 The neurons in our brains do a much better job of modeling the external world, given that we are able to learn from just a few examples if new objects come into our field of vision, whereas much more data is required for training an ANN. It is quite likely that the ability to this is one of the *a priori* capabilities that has been built in our brains over 100s of millions of years of biological evolution. 
 
-## ANN Models for Language
+## Language within the Kantian Framework
 
-So now we finally come to the topic that was advertised in the title of the essay, namely human language. Just like visual perception, mathematics, science and ANNs, language is a creation of the brain. It is a very old creation, it is estimated that human language arose about 50,000 years ago, and it also co-incided with a leap in human cognition that also happened around the same time. Scientists and philosophers did not turn their attention towards language until the 20th century, and the name that stnds out the most is that Ludwig Wittgenstein. He came up with a theory of language in his work *Tractatus Logico-Philosophicus* which was published in 1918.
+So now we finally come to the topic that was advertised in the title of the essay, namely human language. Just like visual perception, mathematics, science and ANNs, language is a creation of the human mind. It is a very old creation, it is estimated that human language arose about 50,000 years ago, and it also co-incided with a leap in human cognition that also happened around the same time. Scientists and philosophers did not turn their attention towards language until the 20th century, and the name that stnds out the most is that Ludwig Wittgenstein. He came up with a theory of language in his work *Tractatus Logico-Philosophicus* which was published in 1918.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/Kant20.png) 
 
@@ -210,40 +210,26 @@ The main aspects of Wittgenstein's theory of language are summarized below (and 
 
 Wittgenstein's stated that the propositions of Science are part of language that are true since they corresponded to facts in the world. If we consider the symbols in mathematics to be another type of language, then its propositions are tautologies, i.e., they are always true regardless of the state of the world.
 
-![](https://subirvarma.github.io/GeneralCognitics/images/Kant22.png) 
+![](https://subirvarma.github.io/GeneralCognitics/images/Kant23.png) 
 
 Figure 11
 
-Fig. 11 shows how models for language and visual perception fit within the Kantian Framework (I have left out the models for the Phenomenon or the Natural World that is shown in Fig. 7 in the interests of clarity). Just as the brain organizes the light and sound data coming from the Noumenon into images and language, ANN models for vision and language are able to organize the pixel and individual words data that are fed into them into model generated images and language. Both the brain and the ANN have the ability to information from their respective models, that take the form of billions of interconnected nodes.
+Fig. 11 shows how language fits within the Kantian Framework. It captures the fact that language is another creation of the brain, and also Wittgenstein's ideas of the relationship between language and visual perception, as well as the idea that language also captures the propositions of science. Hence in some sense language is the most powerful creation of the mind, since other aspects of human generated worlds can be described within it. 
+
+## ANN Models for Language
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/Kant18.png) 
 
-Figure 10
-
-ANN models for language proceed along the same lines as those for vision, with the main difference being that image pixels are now replaced by individual words (there are LLMs that can be built by using individual characters instead, and those work quite well too). As shown in the top part of Fig. 10, LLMs map pieces of text to points in the language Latent Space. Just as for images, language has a lot of structure in the relationship between words, and the ANN is able to capture this structure and therby reduce the representation of the piece of text into a highly compressed form with just a few numbers. As in images, these Latent Vectors live in a high dimensional space called Latent Space, such that each point in the Latent Space corresponds to a piece of text. The discovery of this language Latent Space seems to have settled a long standing open problem in Linguistics of how language is produced. There are two aspects of langauge, namely syntax and semantics. Syntax ae the rules by which capture the grammer in language while semantics captures the meaning. There have been graphical models for syntax before the advent of ANNs, but nobody had been able to find a mathematical model that catptures the semantics. The Latent Space for language seems to be one such model, and given the complexity of the mathematical structure in which it exists, explains why it hadn't been descovered before. Interestingly enough the same ANN model, namely Transformers, has been used to build models for both images and language, which points to an underlying similarity in the structure that underlies them. We explore this further in the following section.
-
-The bottom part of Fig. 10 shows the process by which LLMs are trained. The text from the training dataset is fed into the LLM, which then converts it into a vector in Latent Space. This vector is then decoded to regnerate the original text, and the difference between the reproduced text and the original text is used as an erro signal to train the model. In practice the text is input into the model on a word by word basis, and theoutput text is also produced likewise word by word.
-
-
-
-## Connection between the World and Language: Wittgenstein's Theory 
-
-In this section we proceed to further explore the connection between visual perception and language as revealed by ANNs. But doing so, I want to talk about the work of another great philosopher, namely Ludwig Wittegenstein, who came up with a theory of language in his work *Tractatus Logico-Philosophicus* which was published in 1918.
-
-![](https://subirvarma.github.io/GeneralCognitics/images/Kant20.png) 
-
 Figure 12
 
-The main aspects of Wittgenstein's theory of language are summarized below (and also shown in Fig. 12): 
-- Both language and the world have structure
-- Language consists of propositions, which are compounds of 'elementary propositions', which in turn are combinations of 'names. Names are the ultimate constituents of language.
-- The world consists of the totality of facts, which are compounded out of 'states of affairs', which in turn are combinations of 'objects'.
-- Each level of structure in the world is matched by a level of structure in language: Names denote objects, combinations of names constitute elementary propositions that correspond to state of affairs, and each of these in their turn combine to form, respectively propositions and facts.
-- The arrangement of names at the most fundamental level of language structure 'mirrors' or 'pictures' the arrangement of objects at the most fundamental level of the world's structure. This called the 'picture theory of meaning' and is central to the philosophy.
+ANN models for language proceed along the same lines as those for vision, with the main difference being that image pixels are now replaced by individual words (there are LLMs that can be built by directly using characters instead, and those work quite well too). As shown in the top part of Fig. 12, LLMs map pieces of text to points in the language Latent Space. 
+Just as for images, language has a lot of structure in the relationship between words, and the ANN is able to capture this structure and therby reduce the representation of the piece of text into a highly compressed form with just a few numbers. As in images, these Latent Vectors live in a high dimensional Latent Space, such that each point in this Latent Space corresponds to a piece of text. The discovery of the language Latent Space seems to have settled a long standing open problem in Artificial Intelligence of how to generate language which sounds like it came from a human (also known as the Turing Test). There are two aspects of langauge, namely syntax and semantics. Syntax ae the rules by which capture the grammer in language while semantics captures the meaning. There have been graphical models for syntax before the advent of ANNs, but nobody had been able to find a mathematical model that catptures the semantics. The Latent Space for language seems to be one such model, and given the complexity of the mathematical structure within in which it exists, it explains why it hadn't been discovered before the advent of ANNs. Interestingly enough the same ANN model, namely Transformers, has been used to build models for both images and language, which points to an underlying similarity in the structure that underlies them. We explore this further in the following section.
 
-- Thoughts are what can be expressed using language and a proposition in a language only makes sense if it can translated into a picture.
-- Only propositions in Science satisfy this requirement.
-- For propositions in religion, philosophy, ethics, aesthetics etc, they cannot be expressed in words (that satisfy the criterea), 'showing'rather than 'saying' is all that is possible. They are not pictures of of actual or possible facts, and therefore are meaningless.
+The bottom part of Fig. 12 shows the process by which LLMs are trained. The text from the training dataset is fed into the LLM, which then converts it into a vector in Latent Space. This vector is then decoded to regnerate the original text, and the difference between the reproduced text and the original text is used as an erro signal to train the model. In practice the text is input into the model on a word by word basis, and theoutput text is also produced likewise word by word.
+
+
+Just as the brain organizes the light and sound data coming from the Noumenon into images and language, ANN models for vision and language are able to organize the pixel and individual words data that are fed into them into model generated images and language. Both the brain and the ANN have the ability to information from their respective models, that take the form of billions of interconnected nodes.
+
 
 ## Connection Between Visual Perception and Language
 
