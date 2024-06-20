@@ -286,9 +286,16 @@ System 2 thinking can be accompanied either by going out and taking Actions in t
 
 - Solving a problem in mathematics: Solving a math problem does not involve any interaction with the world, and is entirely an abstract exercise. Wittgenstein pointed out that the Propositions of mathematics are tautologies, i.e., they are always True irrespective of the state of the world. Mathematics does not have anything to do with reality, mathematical systems are are built using logic, and as long as there are no errors in the logical process, the resulting propositions should be correct.
 
-- Solving a problem that involves knowledge of the world: Consider the example of trying to assemble a piece of furniture using instructions that came with it. When we actually assemble the piece then of course that corresponds to taking Actions in the real world, but assume that before the assembly starts we are mentally figuring out te various steps involved. The latter is an example of Planning, and in order to carry it out we need a to create mental pictures of how the furniture would look if carried out an assembly step. This would correspond to the Srare
+- Solving a problem that involves knowledge of the world: Consider the example of trying to assemble a piece of furniture using instructions that came with it. When we actually assemble the piece then of course that corresponds to taking Actions in the real world, but assume that before the assembly starts we are mentally figuring out te various steps involved. The latter is an example of Planning, and in order to carry it out we need a to create a mental picture of how the furniture would look if we carried out an assembly step which would then correspond to the State.
 
+From the last example we can see that in order to plan out the task successfully, our mind needs to give us an accurate picture of the reality that would result if we were to carry out a particular Action. This is precisely the problem in using ANNs to do the Planning, since with the current state of the art, the ANN has no means of knowing whether the image it is generating corresponds to reality or not.
 
+From this discussion we can reach the following conclusons:
+
+- ANNs can be used to solve mathematical problems since it does not involve any interaction with the world. They can also be used to solve problems in which they are controlling Agents who are constantly receiving feedback about their Actions from the real world, as in the case of a robot or a self driving car.
+- ANNs cannot be used to solve Planning problems that involve the generation of accurate models of the real world. 
+
+Problems in physics or even the solution of Planning problems we encounter in our daily lives belong to the latter class of problems. 
 
 
 
