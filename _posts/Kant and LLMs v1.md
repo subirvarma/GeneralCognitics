@@ -220,7 +220,7 @@ The main aspects of Wittgenstein's theory of language are summarized below (and 
 
 Figure 11
 
-Fig. 11 shows a way in which we can fit language within the Kantian Framework. It captures the fact that language is another creation of the brain, and also Wittgenstein's ideas of the relationship between language and visual perception, as well as the idea that language also captures the propositions of science. Hence in some sense language is the more powerful creation of the mind, since other aspects of human generated reality can be described using it. 
+Fig. 11 shows a way in which we can fit language within the Kantian Framework. It captures the fact that language is another creation of the brain, and also Wittgenstein's ideas of the relationship between language and visual perception, as well as the idea that language captures the propositions of science. Hence in some sense language is the more powerful creation of the mind, since it encompasses other aspects of generated reality. 
 
 ## ANN Models for Language
 
@@ -229,9 +229,9 @@ Fig. 11 shows a way in which we can fit language within the Kantian Framework. I
 Figure 12
 
 ANN models for language proceed along the same lines as those for vision, with the main difference being that image pixels are now replaced by individual words (there are LLMs that can be built by directly using characters instead, and those work quite well too). As shown in the top part of Fig. 12, LLMs map pieces of text to points in the language Latent Space. 
-Just as for images, language has a lot of structure in the relationship between words, and the ANN is able to capture this structure and therby reduce the representation of the piece of text into a highly compressed form with just a few numbers. As in images, these Latent Vectors live in a high dimensional Latent Space, such that each point in this Latent Space corresponds to a piece of text. The discovery of the language Latent Space seems to have settled a long standing open problem in Artificial Intelligence of how to generate language which sounds like it came from a human (also known as the Turing Test). 
+Just as for images, language has a lot of structure in the relationship between words, and ANNs are able to capture this structure and therby reduce the representation of a piece of text into a highly compressed form involving just a few numbers. As for images, these Latent Vectors live in a high dimensional Latent Space, such that each point in this Latent Space corresponds to a piece of text. The discovery of the language Latent Space, along with the means to decode from it, seems to have settled a long standing open problem in Artificial Intelligence of how to generate language which sounds like it came from a human (also known as the Turing Test). 
 
-There are two aspects of langauge, namely syntax and semantics. Syntax denotes the rules which capture the grammer in language while semantics captures the meaning. There were logical models for syntax before the advent of ANNs, but nobody had been able to find a mathematical model that captures the semantics. The Latent Space for language seems to be one such model, and given the complexity of the mathematical structure within which it exists, it explains why it hadn't been discovered before the advent of ANNs. Interestingly enough the same ANN model, namely Transformers, has been used to build models for both image and language, which points to an underlying similarity in the structure that underlies them. We explore this further in the following section.
+There are two aspects of langauge, namely syntax and semantics. Syntax denotes the rules which capture the grammer in language while semantics captures the meaning. There were logical models for syntax before the advent of ANNs, but nobody had been able to find a mathematical model that captures semantics. The Latent Space for language seems to be one such model, and given the complexity of the mathematical structure within which it exists, it explains why it hadn't been discovered before the advent of ANNs. Interestingly enough the same ANN model, namely Transformers, has been used to build models for both image and language, which points to an underlying similarity in the structure that underlies them. We explore this further in the following section.
 
 The bottom part of Fig. 12 shows the process by which LLMs are trained. The text from the training dataset is fed into the LLM, which then converts it into a vector in Latent Space. This vector is then decoded to regenerate the original text, and the difference between the reproduced text and the original text is used as an error signal to train the model. In practice the text is input into the model on a word by word basis, and the output text is also produced likewise word by word. LLMs are trained using huge datasets that encompasses most of the language that can be found in books and online.
 
@@ -239,7 +239,7 @@ The bottom part of Fig. 12 shows the process by which LLMs are trained. The text
 
 Figure 13
 
-Fig. 13 shows the LLM as integrated within the Kantian framework. It shows that both LLMs and Image ANNs serve as mathematical mappings from the language and image Latent Spaces to actual language and images respectively.
+Fig. 13 shows the LLM as integrated within the Kantian framework. It shows that both LLMs and Image ANNs serve as mathematical mappings from the language and image Latent Spaces to text and images respectively.
 
 Language is an all purpose technology that we humans have invented that enable us to communicate and as Wittgenstein pointed, it also serves as a model for the world. Moreover the language of science (and mathematics) is encompassed within this. This raises the interesting question: Since LLMs serve as a mathematical model for language, do LLMs inherit language's ability to generate all of human perception and scientific knowledge. We will get back to this question later in this essay, but before that lets examine the connection between language and images as revealed to us by ANNs.
 
@@ -250,27 +250,27 @@ Language is an all purpose technology that we humans have invented that enable u
 
 Figure 14
 
-Wittgenstein hypothized that there is a one-to-one or isometric mapping between propositions in language and images. It turns out there is a similar isometry between text and images generated by LLMs, and this exists at the Latent Space level (see Fig. 14). 
+Wittgenstein hypothized that there is a one-to-one or isomorphic mapping between propositions in language and images. It turns out there is a similar isomorphism between text and images generated by LLMs, and this exists at the Latent Space level (see Fig. 14). 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/Kant25.png) 
 
 Figure 15
 
-One can start with a Latent Vector in the text Latent Space, and convert it into a piece of text using an LLM. We can also take the Latent Vector in the image Latent Space that corresponds to the text Latent Vector and also convert it into image. We will find that the semantic content of both the generated text and the image are the same. Hence the isometry between text and images is lade bare once we look at their Latent Spaces.
+We can start with a Latent Vector in the language Latent Space, and convert it into a piece of text using an LLM. We can also take the Latent Vector in the image Latent Space that corresponds to the text Latent Vector and also convert it into image. We will find that the semantic content of both the generated text and the image are the same. Hence the isomorphism between language and images is laid bare at the level of their their Latent Spaces.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/lat33.png) 
 
 Figure 16
 
-Fig. 16 shows the process by which a piece of text is converted into an image: We start with a piece of text, and use the LLM to convert it into its Latent Vector. We then take the Latent Vector and fed into an image generating ANN to get the corresponding image.
+Fig. 16 shows the process by which a piece of text is converted into an image: We start with the text, and use an LLM to convert it into its Latent Vector. We then feed the Latent Vector into an image generating ANN to get the corresponding image.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/Kant26.png) 
 
 Figure 17
 
-Not all text that is generated by an LLM corresponds to the real world, the subset that does are called True Propositions by Wittgenstein. The subset of True Propositions maps one to one to the subset of images that correspond to our shared reality. Similarly there are subsets of the language Latent Space and the Image Latentr Space that correspond to True Propositions and they also map one to one to each other (this is shown in Fig. 17).. 
+Not all text that is generated by an LLM corresponds facts in the real world, the subset that does were called True Propositions by Wittgenstein. True Propositions map isomorphically to the subset of images that correspond to reality. Similarly there are subsets of the language Latent Space and the Image Latent Space that correspond to True Propositions and they also map one to one to each other (this is shown in Fig. 17). 
 
-How can a LLM tell whether a vector in its text Latent Space translates into a True Proposition? It cannot, this is something only a human can do since only humans are in direct contact with reality (this is the well known problem of hallucinations in LLMs). The world that is described to the LLM during its training consists of text taken from the open Internet and from books, and some of these may not be true. If an LLM cannot differentiate between True and False Propositions, then how can it be used to do science? We will investigate this question a the following section.
+How can a LLM tell whether a vector in its text Latent Space translates into a True Proposition? It cannot, this is something only a human can do since only humans are in direct contact with reality (this is the well known problem of hallucinations in LLMs). The world that is described to the LLM during its training consists of text taken from the open Internet and from books, and some of these may not be true. If an LLM cannot differentiate between True and False Propositions, then how can it be used to do science? We will investigate this question in the following section.
 
 ## Can LLMs Do Mathematics or Science?
 
@@ -278,9 +278,11 @@ How can a LLM tell whether a vector in its text Latent Space translates into a T
 
 Figure 18
 
-There is a big difference between the kind of thinking our brain engages in when it is doing mathematics or science (which is the process shown on the LHS of Fig. 13), vs the kind of thinking involved in generating images or language. This is the same distinction that was made by the psychologists Kahnemann and Twersky, who referred to the latter as System 1 thinking and to the formar as System 2 thinking. System 1 thinking is intuitive, we are not even aware the work that the brain does to generate the reality we see, or come up with a grammatically and syntactically correct statement. System 2 thinking on the other hand involves conscious effort on our part, and is probably unique to humans. This is the kind of thinking we do when we are doing mathematics or science, or even doing planning in our daily lives (such as how to organize a vacation). 
+There is a difference between the kind of thinking our brain engages in when it is doing mathematics or science (which is the process shown on the LHS of Fig. 13), vs the kind of thinking involved in generating images or language. This is the same distinction that was made by the psychologists Kahnemann and Twersky, who referred to the latter as System 1 thinking and to the formar as System 2 thinking. System 1 thinking is intuitive, we are not even aware the work that the brain does to generate the reality we see, or come up with a grammatically and syntactically correct statement. System 2 thinking on the other hand involves conscious effort on our part, and is probably unique to humans. This is the kind of thinking we do when we are doing mathematics or science, or even doing planning in our daily lives (such as how to organize a vacation). 
 
-System 2 thinking can be captured in the tree graph shown in Fig. 18, which is of the type used in a subfield of Artificial Intelligence called Reinforcement Learning (RL). There are two kinds of nodes in the graph: The white nodes correpond to States of the world, while the black nodes correspond to Actions that an Agent might take. Hence fundamental to RL is the idea of an Agent, which in this case is either or brain or another ANN. The States in the graph can be images, for example when we are driving a car, the Actions correspond to movements of the steering wheel or the brakes, while State corresponds to the changing view of the world that we see. Alternatively when we are trying to solve a math problem, the State is the current state of our calculation (assuming it involves several steps), while the Action corresponds to mathematical operations that act upon the State.
+System 2 thinking can be captured in the decision tree graph shown in Fig. 18, which is of the type used in a subfield of Artificial Intelligence called Reinforcement Learning (RL). Fundamental to RL is the idea of an Agent, which in this case is our brain..
+There are two kinds of nodes in the graph: The white nodes correpond to States of the world, while the black nodes correspond to Actions that an Agent might take.  The States in the graph can be images, for example when we are driving a car, the Actions correspond to movements of the steering wheel or the brakes, while State corresponds to the changing view of the world that we see. Alternatively when we are trying to solve a math problem, the State is the current state of our calculation (assuming it involves several steps), while the Action corresponds to mathematical operations that act upon the State.
+The tree graph captures the fact that the solution of a System 2 type problem involves choosing among several alternative Actions at each step, and the Agent has to navigate the decision tree in a way so as to successfully complete the task.
 
 System 2 thinking can be accompanied either by going out and taking Actions in the real world to acheive some objective (for example drive to work), or alternatively it can be carried out entirely in our head. The latter mode of thinking is called Planning, and it can be done in two contexts:
 
