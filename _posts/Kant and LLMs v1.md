@@ -328,8 +328,6 @@ The ability to prune the decision tree is key to intelligent behavior, and in th
 
 The best scientists among us have an extreme ability in th decision tree pruning area. Indeed Einstein was able to deduce the Theory Special Relativity from the single fact that the speed of light is an universal constant and the General Theory from the Equivalence Principle. It is unlikely that ANNs will get to this level anytime soon, however ANNs do have another scientific ability that will turn out to be as useful: This is the ability to recognize patterns in a mass of data, which are not visible to humans. The ability to form a model for language is a good example of this. There are problems in physics, and even more so in 'less pure" sciences such as Economics, where there is a lot of input-output data, but no simple formula that connects the two (for a deepr dive on this subject see my blog [Artificial Neural Networks and the Scientific Method](https://subirvarma.github.io/GeneralCognitics/2023/01/18/ScientificMethod.html)). However ANNs are capable of coming up with a mathematical mode for these cases too, the only diffrence is that now the model is not in the form of a few elegant equations, but is captured in the hundreds of millions of parameters on the ANN.
 
-- How to do Physics with ANNs
-
 ## What Would Kant Think of LLMs?
 
 
