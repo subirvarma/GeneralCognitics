@@ -204,20 +204,21 @@ Why is it important for the ANN to be able to make good predictions of reality? 
 
 ## Language within the Kantian Framework
 
-So now we finally come to the topic that was advertised in the title of the essay, namely human language. Just like visual perception, mathematics, science and ANNs, language is a creation of the human mind. It is a very old creation, it is estimated that human language arose about 50,000 years ago, and it also co-incided with a leap in human cognition that also happened around the same time. Philosophers did not turn their attention towards language until the 20th century, and the name that stands out is that of Ludwig Wittgenstein. He came up with a theory of language in his work *Tractatus Logico-Philosophicus* which was published in 1918.
+So now we finally come to the topic that was advertised in the title of the essay, namely LLMs and human language. Just like visual perception, mathematics, science and ANNs, language is a creation of the human mind. It is a very old creation, it is estimated that human language arose about 50,000 years ago, and it also co-incided with a leap in human cognition that happened around the same time. Philosophers did not turn their attention towards language until the 20th century, and the name that stands out is that of Ludwig Wittgenstein. He came up with a theory of language in his work *Tractatus Logico-Philosophicus* which was published in 1918.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/Kant20.png) 
 
 Figure 10
 
-The main aspects of Wittgenstein's theory of language are summarized below (and also shown in Fig. 10): 
-- Both language and the world have structure
+The main aspects of Wittgenstein's theory of language are summarized below (and also shown in Fig. 10). This description is taken from the excellent book [The History of Philosophy](https://www.amazon.com/History-Philosophy-C-Grayling/dp/198487876X/ref=sr_1_2?crid=226Q6JJU5G561&dib=eyJ2IjoiMSJ9.3wGArNSV2X_VLKAMd8x2gZeivXrbFTAkVE30y75FwpXmeZsB85hAOGn878mwjmMCrCemFwc3FhNMEnik_szgROykg-gYswFhc0N3Sq3RY1AlVw2KKAvag24bbZupuj1nZ7579_Yg4KozwKVmPGtzYFVWMyCv9P_ndVyaBBfyEoq2Ng2i3LawHyh6g-Jpl5UKO8nNg2-sAWG87Bg7t4YLM023sa_5J0iKoMauHNc6rCxdEDD6W0UejUOQBMP_1HpaJ6mLXBrPicXYixL13e2LE4vFmXT8OAQSHEzOLvgYOyc.OK_1HuhW6Dds5ExPss21cFoXLXuKy-cAzjPpt6JZR6w&dib_tag=se&keywords=history+of+philosophy&qid=1719439634&s=books&sprefix=history+of+philosophy%2Cstripbooks%2C175&sr=1-2) by A.C. Grayling.
+
+- Both language and the world have structure.
 - Language consists of propositions, which are compounds of 'elementary propositions', which in turn are combinations of 'names. Names are the ultimate constituents of language.
 - The world consists of the totality of facts, which are compounded out of 'states of affairs', which in turn are combinations of 'objects'.
 - Each level of structure in the world is matched by a level of structure in language: Names denote objects, combinations of names constitute elementary propositions that correspond to state of affairs, and each of these in their turn combine to form, respectively propositions and facts.
 - The arrangement of names at the most fundamental level of language structure 'mirrors' or 'pictures' the arrangement of objects at the most fundamental level of the world's structure. This called the 'picture theory of meaning' and is central to the philosophy.
-- Thoughts are what can be expressed using language and a proposition in a language, and are only true if they can translated into a picture. Only propositions in science satisfy this requirement. The propositions in mathematics (which is also a type of language) are tautologies, i.e., they are always true regardless of the state of the world.
-- Propositions in religion, philosophy, ethics, aesthetics etc, cannot be expressed in words (that satisfy the criterea for a true proposition). For these 'showing' rather than 'saying' is all that is possible. They are not pictures of of actual or possible facts, and therefore are meaningless. This however does not mean that they are un-important, Wittgenstein though that they are are the truly important parts of human knowledge, its just that we cannot talk about them to figure out whether they are true or false.
+- Thoughts are what can be expressed using language and are proposition in that language. They are only true if they can translated into a picture. Only propositions in science satisfy this requirement. The propositions in mathematics (which is also a type of language) are tautologies, i.e., they are always true regardless of the state of the world.
+- Propositions in religion, philosophy, ethics, aesthetics etc, cannot be expressed in words (that satisfy the criterea for a true proposition). For these, 'showing' rather than 'saying' is all that is possible. They are not pictures of of actual or possible facts, and therefore are meaningless. This however does not mean that they are un-important, Wittgenstein though that they are are the truly important parts of human knowledge, its just that we cannot talk about them to figure out whether they are true or false (he put his own work into this category).
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/Kant23.png) 
 
@@ -234,7 +235,7 @@ Figure 12
 ANN models for language, called LLMs, proceed along the same lines as those for vision, with the main difference being that image pixels are now replaced by individual words (there are LLMs that can be built by directly using characters instead, and those work almost as well). As shown in the top part of Fig. 12, LLMs map pieces of text to points in the language Latent Space. 
 Just as for images, language has a lot of structure in the relationship between words, and ANNs are able to capture this structure and therby reduce the representation of a piece of text into a highly compressed form involving just a few numbers. As for images, these Latent Vectors live in a high dimensional Latent Space, such that each point in this Latent Space corresponds to a piece of text. The discovery of the language Latent Space, along with the means to decode from it, seems to have settled a long standing open problem in Artificial Intelligence of how to generate language which sounds like it came from a human (also known as the Turing Test). 
 
-There are two aspects of the science langauge (called Linguistics), namely syntax and semantics. Syntax denotes the rules which capture the grammer in language while semantics captures the meaning. There were logical models for syntax before the advent of ANNs, but nobody had been able to find a mathematical model that captures semantics. The Latent Space for language seems to be one such model, and given the complexity of the mathematical structure within which it exists, it explains why it hadn't been discovered before the advent of LLMs. Interestingly enough the same ANN model, namely Transformers, has been used to build models for both image and language, which points to an underlying similarity in the structure that underlies them. We explore this further in the following section.
+There are two aspects of the science of angauge (called Linguistics), namely syntax and semantics. Syntax denotes the rules which capture the grammer in language while semantics captures the meaning. There were logical models for syntax before the advent of ANNs, but nobody had been able to find a mathematical model that captures semantics. The Latent Space for language seems to be one such model, and given the complexity of the mathematical structure within which it exists, it explains why it hadn't been discovered before the advent of LLMs. Interestingly enough the same ANN model, namely Transformers, has been used to build models for both image and language, which points to an underlying similarity in the structure that underlies them. We explore this relationship in the following section.
 
 The bottom part of Fig. 12 shows the process by which LLMs are trained. The text from the training dataset is fed into the LLM, which then converts it into a vector in Latent Space. This vector is then decoded to regenerate the original text, and the difference between the reproduced text and the original text is used as an error signal to train the model. In practice the text is input into the model on a word by word basis, and the output text is also produced likewise word by word. LLMs are trained using huge datasets that encompasses most of the language that can be found in books and online.
 
@@ -242,9 +243,9 @@ The bottom part of Fig. 12 shows the process by which LLMs are trained. The text
 
 Figure 13
 
-Fig. 13 shows the LLM as integrated within the Kantian framework. It shows that both LLMs and Image ANNs serve as mathematical mappings from the language and image Latent Spaces to text and images respectively. 
+Fig. 13 shows the LLM as integrated within the Kantian framework. It shows that both LLMs and Image ANNs serve as mathematical mappings from the language and image Latent Spaces respectively, to actual text and images. 
 
-Language is an all purpose technology that we humans have invented that enable us to communicate and as Wittgenstein pointed, it also serves as a model for the world. Moreover the language of science (and mathematics) is encompassed within this. This raises the interesting question: Since LLMs serve as a mathematical model for language, do LLMs inherit language's ability to generate all of human perception and scientific knowledge. We will get back to this question later in this essay, but before that lets examine the connection between language and images as revealed to us by ANNs.
+Language is an all purpose technology that we humans have invented that enable us to communicate and as Wittgenstein pointed, it also serves as a model for the world. Moreover the language of science (and mathematics) is encompassed within this. This raises the interesting question: Since LLMs serve as a mathematical model for language, do LLMs inherit language's ability to generate scientific knowledge? We will come back to this question later in this essay, but before that lets examine the connection between language and images as revealed to us by ANNs.
 
 
 ## A Wittgenstinian Connection Between Images and Text Generated by ANNs
@@ -253,7 +254,7 @@ Language is an all purpose technology that we humans have invented that enable u
 
 Figure 14
 
-Wittgenstein hypothized that there is a one-to-one or isomorphic mapping between propositions in language and images. It turns out there is a similar isomorphism between text and images generated by LLMs, and this exists at the Latent Space level (see Fig. 14). 
+Wittgenstein hypothized that there is a one-to-one or isomorphic mapping between propositions in language and the world. It turns out there is a similar isomorphism between text and images generated by LLMs, and this exists at the Latent Space level (see Fig. 14). 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/Kant25.png) 
 
