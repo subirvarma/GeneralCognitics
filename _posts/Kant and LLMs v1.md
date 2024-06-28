@@ -363,52 +363,14 @@ As I pointed out earlier, the big difference between current ANNs and the brain 
 
 How about other aspects of Kant's system that are also reflected in ANNs?
 
-- The Concept of Time: Kant said hat Time is an *a priori* concept that we are born with. Do LLMs develop the concept of time as a result of their training? Information is fed into LLMs in a sequential manner, so one can possibly surmise that this should enable the LLM to develop the concept. However the Transformer model is permutation invariant with respect to its inputs, i.e., we can change the order of the inputs and we wiill end up with the same output. The inventor's of the Transformer realized this, and added an additional mechanism on top of the base model which modifies the input vectors in an unique way as a function of their position in the sequence. Without this addition Transformers still work, which means that they develop a sense of time internally, but the performance improves considerably with the addition.
+- **The Concept of Time:** Kant said that time is an *a priori* concept that we are born with. Do LLMs develop the concept of time as a result of their architecture or training? I think that LLMs are able to develop this concept and part of the reason of this is ties to the architecture of Transformers. If you look at the top part of Fig. 19, it shows a sequence of text being fed into a Transformer. The Transformer architecture consists of a series of columns whose number is equal to the size of the word sequence being fed into it plus the size of the word sequance that it generating. Each of these columns is a repitition of the same architecture which consists of a series of Self-Attention and Dense modules (which is also repeated in the vertical dimension). I think the concept of time arises as a combination of the fact that data is fed into the Transformer in a sequential fashion combined with the fact that it proceses this data using a structure that sequentially repeats. In actuality the Transformer design has an additional mechanism on top of the base model which modifies the input vectors in an unique way as a function of their position in the sequence. This improves the performance of the system, but even without it the Transformer is able to work. 
 
-- The Concept of Space: Space is another *a priori* concept that we are born with in Kant's model. 
+- **The Concept of Space:** Space is another *a priori* concept that we are born with in Kant's model and there are several aspects to our perception of space, such as: We are able to organize the mass of photone arriving at our retina into an orderly world with localized objects. Each of these objects is such that if it were to move from one location to another, or where to rotate around or placed in a different lighting, we would still recognize it is the same object. Can ANNs do this? It so happens that even the first generation of ANNs, called Multi-Layer Perceptrons or MLPs, were capable of organzing the pixel data in their inputs into higher level representations for the various objects in their input. As a result when the networks were run on the reverse direction so that now they were acting as image generators, then a rough approximation to the objects was regurtitated back. Convolutional Neural Networks or CNNs which came later, where much better at image processing, and they were able to do the same. Also the concept that an object does not change if it moves around the image is baked into the architecture of CNNs. However rotational invariance is not, as a result CNNs and other types of ANNs require a much larger number of training data before they form a good model for an object. Our brain is much more efficient at the task and is able to do the same based on juct a few examples.
 
-
-
-- Both language and image generation can be considered to be examples of filling in the rest of the pattern starting from incomplete data.
-- The prompt in LLMs is like noumenon data, the LLM takes it and combines it with the information stored in it to generate the rest of the text.
-- ANNs can also take in a partial image, or even a hint of an image like a cartoon and convert it into a full multicolor image
-- Difference between the brain and the current generation of ANNs is that the brain is going constant retraining, while the ANN is trained infrequently. In order to be like the brain we need personalized ANNs.
-- The concept of time in LLMs
-- The concept of space in VITs
+The concept of space and time are probably sufficient to enable ANNs to be able to perform tasks that are useful to us. But what about other aspects of our consciousness, such the perception of emotions, hunger, thirst, anger, joy etc.? These are more closely related to the aspect of consciousness, and clearly ANNs are not capable of any of these. Anil Seth in his book remarks that there is a difference between being intelligent and being conscious, and one can one of these properties and not the other. Full consciousness is tied to living beings, with its main objective to take all steps necessary to keep us alive. Clearly we don't want ANNs to have this property for obvious reasons, and even if we did, we currently have no idea how to go about doing this. Hence humanity can make wonderful use of ANNs that are intelligent and make our lives better, without making them fully conscious.
 
 
 
 
--------------------------------------------------------------------------------------------------------------------------------
 
-## Artificial Neural Networks and LLMs
 
-- The ANN is a model for human cognition
-- Extending Kant’s thinking: The ANN can never be the same as cognition
-- Mistaking ANNs for cognition can lead to antinomies
-- But ANNs can approximate cognition
-- Perceived Reality —> Language model of Perceived Reality —> LLM model of language 
-- There is some unknown factor that makes the biological brain conscious, ANN models are not close to discovering this
-- Can Integrated Information Theory ( IIT) be used as a measure of how close an ANN is to human cognition 
-
-## LLMs within a Kantian Framework
-
-Three latent spaces
-1. latent space of perception of reality, either images or language or both together 
-2. Latent space of reality is physics
-3. Latent spaces of mathematics 
-4. Our brain
-
-- latent space of models of reality (physics) can be mapped on to a subset of the latent space of mathematics
-- Our brain creates a mapping from perceptions to the latent space of perceptions . The points of this latent space are stored in the brain. 
-- Mathematical latent  space is a creation of our brain
-
-There are two latent spaces of reality
-- Space 1 is a mapping in the brain to individual points of our perception of reality 
-- Space 2 is a mathematical mapping, that is useful for doing predictions (physics). This is a mapping from our perception of reality to latent spaces of physics. 
-- The mathematical space used in 2 is also a creation of the brain
-- Hence physics does the following: 1) identify mathematical objects that can map to our perceptions of reality, such as fields, groups etc 2) Come up with mathematical equations that work on the mathematical objects and can be used for doing predictions (involving time and space)
-- Are the regularities that we observe in nature a creation of the human brain? Then it makes sense that another human creation, ie mathematics, can be used to describe those regularities
-- These regularities exist in time and space, and according to Kant, the these are a creation of the brain
-
-Another aspect of the Kantian Framework is that Mathematical Models are always approximations and not a true picture of reality at the fundamental level. This is due to the fact these models are two levels removed from the Base Reality or the Noumenon. At the top level our minds create an abstraction of the Base Reality, and the Mathematical Models create a second level of abstraction since they are modeling the Perceived Reality which is itself an abstraction. This also means that Mathematical Models are only as good as the predictions that they make and we should not mistake the model for reality.
