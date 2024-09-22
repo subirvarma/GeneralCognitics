@@ -9,7 +9,7 @@ I have taught courses on Deep Learning, Reinforcement Learning and Congestion Co
 
 # Internet Congestion Control Course
 
-Slides from my lectures for the Congestion Control course. Most of the material is taken from my "Internet Congestion Control", though I have added new material based on recent developments in this field in Lectures 7, 9, and 10.
+Slides from my lectures for the Congestion Control course. Most of the material is taken from my book "Internet Congestion Control", though I have added new material based on recent developments in this field in Lectures 7, 9, and 10.
 
 1. [Lecture 1](https://subirvarma.github.io/GeneralCognitics/Course3/Lecture1.pdf) - **Introduction:** Objectives of Congestion Control algorithms, Types of Congestion Control Algorithms, TCP Reno, Network Feedback, TCP Vegas.
 
