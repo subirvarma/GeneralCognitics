@@ -5,15 +5,33 @@ title: "Courses"
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/scu.jpeg) 
 
-I teach courses on Deep Learning and Reinforcement Learning in the Information Systems and Analytics Department, at the Leavey School of
-Business at Santa Clara University.
+I have taught courses on Deep Learning, Reinforcement Learning and Congestion Control Algorithms at Santa Clara University and at the Indian Institute of Technology, Gandhinagar. 
 
 # Internet Congestion Control Course
 
-Slides from my lectures for the Congestion Control course.
+Slides from my lectures for the Congestion Control course. Most of the material is taken from my "Internet Congestion Control", though I have added new material based on recent developments in this field in Lectures 7, 9, and 10.
 
 1. [Lecture 1](https://subirvarma.github.io/GeneralCognitics/Course3/Lecture1.pdf) - **Introduction:** Objectives of Congestion Control algorithms, Types of Congestion Control Algorithms, TCP Reno, Network Feedback, TCP Vegas.
 
+2. [Lecture 2](https://subirvarma.github.io/GeneralCognitics/Course3/Lecture2.pdf) - **Congestion Control Models Part 1:** TCP Throughput Analysis, Effect of Buffer Size, Window Size and Link Error Rate on throughput, Fluid Flow Model for Congestion Control, Throughput analysis for more general models.
+  
+3. [Lecture 3](https://subirvarma.github.io/GeneralCognitics/Course3/Lecture3.pdf) - **Congestion Control Models Part 2:** Network wide models of Congestion Control using Optimization Theory, Stability Analysis of TCP using Classical Control Theory, The Proportional and Proportional + Integral Controllers, The Averaging Principle.
+
+4. [Lecture 4](https://subirvarma.github.io/GeneralCognitics/Course3/Lecture4.pdf) - **Congestion Control in Broadband Wireless:** Split Connection TCP, Congestion Control over Lossy Links, Link Level Error Correction, the Bufferbloat Problem, CoDel Active Queue Management.
+
+5. [Lecture 5](https://subirvarma.github.io/GeneralCognitics/Course3/Lecture5.pdf) - **Congestion Control in High Speed Networks Part 1:** Design Issues in High Speed Networks, Analysis using Response Functions, RTT Fairness, High Speed TCP (HSTCP), TCP BIC.
+
+6. [Lecture 6](https://subirvarma.github.io/GeneralCognitics/Course3/Lecture6.pdf) - **Congestion Control in High Speed Networks Part 2:** TCP Cubic, Compound TCP, Yeah TCP, Compatibility with TCP Reno, Throughput analysis.
+
+7. [Lecture 7](https://subirvarma.github.io/GeneralCognitics/Course3/Lecture7.pdf) - **Congestion Control in High Speed Networks Part 3:** TCP BBR (Bottleneck BW and Rate Control), BDP Estimates, RTT Probing, Multiple flows case, Interaction with loss based protocols, XCP (Express Control Protocol), RCP (Rate Control Protocol)
+
+8. [Lecture 8](https://subirvarma.github.io/GeneralCognitics/Course3/Lecture8.pdf) - **Congestion Control in Data Center Networks:** Data Center Network Architecture and Traffic Patterns, Data Center TCP (DCTCP), D2TCP, Deadline Aware Congestion Control, Multipath TCP, the Incast Problem.
+
+9. [Lecture 9](https://subirvarma.github.io/GeneralCognitics/Course3/Lecture9.pdf) - **Delay Bounding Congestion Control Algorithms** TCP Vegas, TCP FAST, TCP COPA, TIMELY, Bounds on performance of delay bounding algorithms.
+
+10. [Lecture 10](https://subirvarma.github.io/GeneralCognitics/Course3/Lecture10.pdf) - **Optimization based Congestion Algorithms:** Global Optimization based algorithms, Remy and Indigo Congestion Control, Local Optimization based algorithms, Performance Oriented Congestion Control (PCC), PCC Allegro, PCC Vivace, Deep Reinforcement Learning based algorithms.
+
+11. [Lecture 11](https://subirvarma.github.io/GeneralCognitics/Course3/Lecture11.pdf) - **Video Delivery over TCP:** Video traffic characteristics, Adaptive Streaming, Video Rate Control, The DASH framework, Adaptive Bit Rate (ABR) Algorithms, Rate based and Buffer size based algorithms, ABR/TCP interaction.
 
 
 # Reinforcement Learning Course
