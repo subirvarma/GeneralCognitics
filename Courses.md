@@ -12,7 +12,7 @@ Business at Santa Clara University.
 
 Slides from my lectures for the Congestion Control course.
 
-1. [Lecture 1](https://subirvarma.github.io/GeneralCognitics/Course3/Lecture1.pdf) - **Introduction:** Objectives of Congestion Control algorithms, Types of Congestion Control Algorithms, TCP Reno, Network Feedback, TCP Vegas.
+1. [Lecture 1](https://subirvarma.github.io/GeneralCognitics/Course3/Lecture1 Introduction.pdf) - **Introduction:** Objectives of Congestion Control algorithms, Types of Congestion Control Algorithms, TCP Reno, Network Feedback, TCP Vegas.
 
 
 
