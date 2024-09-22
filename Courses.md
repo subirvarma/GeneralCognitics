@@ -8,6 +8,13 @@ title: "Courses"
 I teach courses on Deep Learning and Reinforcement Learning in the Information Systems and Analytics Department, at the Leavey School of
 Business at Santa Clara University.
 
+# Internet Congestion Control Course
+
+Slides from my lectures for the Congestion Control course.
+
+1. [Lecture 1](https://subirvarma.github.io/GeneralCognitics/Course3/Lecture1.pdf) - **Introduction:** Objectives of Congestion Control algorithms, Types of Congestion Control Algorithms, TCP Reno, Network Feedback, TCP Vegas.
+
+
 
 # Reinforcement Learning Course
 
