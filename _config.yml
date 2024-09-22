@@ -9,7 +9,7 @@ locale: en_US
 # Enter the following platform usernames if you would like for them to appear on your site.
 owner:
   name: Subir Varma
-  avatar: ![](https://subirvarma.github.io/GeneralCognitics/images/bio-photo.png)
+# avatar: ![](https://subirvarma.github.io/GeneralCognitics/images/bio-photo.png)
   bio: "This is a sample Jekyll academic website."
   email: varma.subir@gmail.com
   # Do not include the @ symbol in your Twitter username
