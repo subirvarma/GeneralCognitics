@@ -17,7 +17,7 @@ Slides from my lectures for the Congestion Control course. Most of the material 
   
 3. [Lecture 3](https://subirvarma.github.io/GeneralCognitics/Course3/Lecture3.pdf) - **Congestion Control Models Part 2:** Network wide models of Congestion Control using Optimization Theory, Stability Analysis of TCP using Classical Control Theory, The Proportional and Proportional + Integral Controllers, The Averaging Principle.
 
-4. [Lecture 4](https://subirvarma.github.io/GeneralCognitics/Course3/Lecture4.pdf) - **Congestion Control in Broadband Wireless:** Split Connection TCP, Congestion Control over Lossy Links, Link Level Error Correction, the Bufferbloat Problem, CoDel Active Queue Management.
+4. [Lecture 4](https://subirvarma.github.io/GeneralCognitics/Course3/Lecture4.pdf) - **Congestion Control in Broadband Wireless Systems:** Split Connection TCP, TCP Westwood, Congestion Control over Lossy Links, Link Level Error Correction, the Bufferbloat Problem, CoDel Active Queue Management.
 
 5. [Lecture 5](https://subirvarma.github.io/GeneralCognitics/Course3/Lecture5.pdf) - **Congestion Control in High Speed Networks Part 1:** Design Issues in High Speed Networks, Analysis using Response Functions, RTT Fairness, High Speed TCP (HSTCP), TCP BIC.
 
