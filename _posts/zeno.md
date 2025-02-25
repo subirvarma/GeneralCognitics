@@ -54,15 +54,7 @@ The $\lim$ operation is defined as follows: For every $\epsilon >0$, there exist
 
 Once the ides of differentiation was put on a firm theoretical basis, Zeno's paradox of the arrow had the following resolution: Zeno was right in stating that arrow was stationary at any one time instant, however he was wrong in concluding from this that the arrow does not move at al. In fact the arrow posesses a finite velocity, which can also be defined at atomic instants of time by using the concept of limit. 
 
-
-
-
-
-
-
-
-
-### Differential Calculus or How to Divide an Infinitely Small Quanity by Another
+### How Can Finite Intervals arise from Point Quantities?
 
 
 
