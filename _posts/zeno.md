@@ -38,6 +38,21 @@ More fundamentally, what is the true nature of reality and what is its relation 
 
 ## How Can an Object be in Motion?
 
+The discovery of differential calculus gave scientists a tool that they could use to probe into the problem of motion. The attack on this problem happened in two phases: Phase 1 was in the 17th century when calculus was discovered by Newton and Leibnitz. However as we explainn below, their solution to the problem was not entirely satisfactory, and a fuller resolution had to wait for Phse 2 which happened in the 19th century, when subject of calculus was placed on a firmer theoretical foundations with the work of several mathematicians.
+
+Galileo, Newton and others introduced the concept of the average velocity of an object, which was defined as follows:
+
+$$ v_{avg} = {\delta y\over{\delta t}} $$
+
+where $\delta y$ is the distance covered by an object over a time duration $\delta t$. If this calculation is carried out for time intervals that infintesmally small, then $v_{avg}# becomes the instantaneous velocity at some time instant t. Hence the introduced the critical idea that the velocity of an object can be non-zero, even though the interval during which it is being measured is indistuisbale from zero, which was in direct contradiction to Zeno. Hence when the arrow travels between points A and B, then at every time instant between t_A and t_B, it has a well defined velocity, even though at any particular time instant it is seen to be completely stationary.
+
+This resolution to the arrow paradox worked well in practice, it enabled scientists to compute velocities and higher order quatities such as acceleration using differential calculus. However it side stepped the problem of whether time progresses in instants or in intervals. The calculation of the derivative involves very small, but finite, time intervals, which are set to zero in order to get the final answer. However this loeads to the mathematical problem of dividing by zero. Indeed in part of the calculation $\delta t]$ is treated like a very small but finite quantity, while in other parts of the calculation its value is to set to zero. Newton or Liebnitz didn't have an answer to this problem, and it had to wait for Cauchy in the early 1800s, when he introduced the concepts of limits and convergence of a series into calculus. Weirstrass fully developed these ideas and gave the definition of the derivative which is still in use today.
+
+$$ v = \lim_{t_2\rightarrow t_1}{{y(t_2) - y(t_1)}\over{t_2 - t_1}}  $$
+
+The $\lim$ operation is defined as follows: For every $\epsilon >0$, there exists a $\delta >0$, such that if $t_2 - t_1 < \delta$, then $y(t_2) - y(t_1) < \epsilon$. Hence the velocity $v(t_1)$ at time $t_1$ is defined as the limit to the sequence of average velocities ${{y(t_2) - y(t_1)}\over{t_2 - t_1}}$, as the time instants $t_2$ gets closer and closer to $t_1$. Hence this definition ofvelocity goes back to the idea of time existing at atomic instances (rather than as a interval as in the Newton-Leibniz definition), with the caveat that two such instants can be made arbitrarily close to each other. 
+
+Once the ides of differentiation was put on a firm theoretical basis, Zeno's paradox of the arrow had the following resolution: Zeno was right in stating that arrow was stationary at any one time instant, however he was wrong in concluding from this that the arrow does not move at al. In fact the arrow posesses a finite velocity, which can also be defined at atomic instants of time by using the concept of limit. 
 
 
 
