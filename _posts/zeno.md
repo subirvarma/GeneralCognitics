@@ -52,7 +52,13 @@ $$ v = \lim_{t_2\rightarrow t_1}{{y(t_2) - y(t_1)}\over{t_2 - t_1}}  $$
 
 The $\lim$ operation is defined as follows: For every $\epsilon >0$, there exists a $\delta >0$, such that if $t_2 - t_1 < \delta$, then $y(t_2) - y(t_1) < \epsilon$. Hence the velocity $v(t_1)$ at time $t_1$ is defined as the limit to the sequence of average velocities ${{y(t_2) - y(t_1)}\over{t_2 - t_1}}$, as the time instants $t_2$ gets closer and closer to $t_1$. Hence this definition ofvelocity goes back to the idea of time existing at atomic instances (rather than as a interval as in the Newton-Leibniz definition), with the caveat that two such instants can be made arbitrarily close to each other. 
 
-Once the ides of differentiation was put on a firm theoretical basis, Zeno's paradox of the arrow had the following resolution: Zeno was right in stating that arrow was stationary at any one time instant, however he was wrong in concluding from this that the arrow does not move at al. In fact the arrow posesses a finite velocity, which can also be defined at atomic instants of time by using the concept of limit. 
+Once the idaes of differentiation was put on a firm theoretical basis, Zeno's paradox of the arrow had the following resolution: Zeno was right in stating that arrow was stationary at any one time instant, however he was wrong in concluding from this that the arrow does not move at al. In fact the arrow posesses a finite velocity, which can also be defined at atomic instants of time by using the concept of limit. 
+
+The arrow traverses a continuum of points, in a continuum of time, not a series of discrete points at discrete times. The latter is impossible, since it is not possible to decribe the real line as a series of discrete points, since there always another point between any two discrete points ad infinitum. The human mind has difficulty grasping the continuum, we are more comfortable with discrete points. Time and space are continuums. Later Cantor put the concept of a continuum on a more rigorous basis by defining the notion of cardinality, and differentiating it from length of a segment. Cardinality is the number of points in a segment of a continuum, and Cantor proved that this number which he called c, is greater than the number of integers. 
+
+### How can the Arrow Reach its Destination
+
+
 
 ### How Can Finite Intervals arise from Point Quantities?
 
