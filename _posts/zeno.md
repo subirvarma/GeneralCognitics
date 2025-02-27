@@ -59,13 +59,30 @@ $$ x = {1\over 2} gt^2 $$
 
 for the location of the arrow. These formulae enable us to compute the location of the arrow at all instants of time.
 
-We saw earlier that the calculation of the derivative involves very small, but finite, time intervals, which are set to zero in order to get the final answer. However this leads to the mathematical problem of dividing by zero. Indeed in part of the calculation $\delta_t$ is treated like a very small but finite quantity, while in other parts of the calculation its value is to set to zero. Newton or Liebnitz didn't have an answer to this problem, and it had to wait for Cauchy in the early 1800s, when he introduced the concepts of limits and convergence of a series into calculus. Weirstrass fully developed these ideas and gave the definition of the derivative which is still in use today.
+We saw earlier that the calculation of the derivative involves very small, but finite, time intervals, which are set to zero in order to get the final answer. However this leads to the mathematical problem of dividing by zero. Indeed in part of the calculation $\delta_t$ is treated like a very small but finite quantity, while in other parts of the calculation its value is to set to zero. For example consider the case when motion is defined by the equation$ x(t) = t^ 2$, as a function of time. Then
+
+$$ \delta x = x(t+\delta) - x(t) = (t+\delta t)^2 - t^2 = 2t\delta + \delta^2  $$
+
+so that
+
+$$ v_{avg} = {\delta x\over{\delta t}} = {2t\delta + \delta^2\over\delta} $$
+
+If we trear $\delta$ as a finite quantity such that $\delta > 0$, then we can divide the numerator and denominator by this quantity to get
+
+$$ v_{avg} = {2t + \delta} $$
+
+We now set $\delta = 0$, to get the final answer
+
+$$ v = 2t $$
+
+Notice how $\delta$ was simultaneously treated as a quantity that is non-zero in the first step (in order to avoid dividing by zero), AND equal to zero in the second step.
+Newton or Liebnitz didn't have a solution to the problem of obtaining a more rigorous definition of the derivative, and the first steps in this direction had to wait for Cauchy in the early 1800s, when he introduced the concepts of limits and convergence of a series into calculus. Weirstrass fully developed these ideas and gave the definition of the derivative which is still in use today.
 
 $$ v = \lim_{t_2\rightarrow t_1}{{x(t_2) - x(t_1)}\over{t_2 - t_1}}  $$
 
-The $\lim$ operation is defined as follows: For every $\epsilon >0$, there exists a $\delta >0$, such that if $t_2 - t_1 < \delta$, then $y(t_2) - y(t_1) < \epsilon$. Hence the velocity $v(t_1)$ at time $t_1$ is defined as the limit to the sequence of average velocities ${{y(t_2) - y(t_1)}\over{t_2 - t_1}}$, as the time instants $t_2$ gets closer and closer to $t_1$. In this definition we are no longer dividing by zero, and instead using the idea of the derivative as the limit of a convergent sequence, which always exist if the function $x(t)$ is continuous.
+The $\lim$ operation is defined as follows: For every $\epsilon >0$, there exists a $\delta >0$, such that if $t_2 - t_1 < \delta$, then $y(t_2) - y(t_1) < \epsilon$. Hence the velocity $v(t_1)$ at time $t_1$ is defined as the limit to the sequence of average velocities ${{y(t_2) - y(t_1)}\over{t_2 - t_1}}$, as the time instants $t_2$ gets closer and closer to $t_1$. In this definition we are no longer dividing by zero, and instead using the idea of the derivative as the limit of a convergent sequence, which always exists if the function $x(t)$ is continuous.
 
-Once the ideas of differentiation was put on a firm theoretical basis, Zeno's paradox of the arrow had the following (partial) resolution: Zeno was right in stating that arrow was stationary at any one time instant, however he was wrong in concluding from this that the arrow does not move at al. In fact the arrow posesses a finite velocity, which can also be defined at atomic instants of time by using the concept of limit. 
+Once the ideas of differentiation was put on a firm theoretical basis, Zeno's paradox of the arrow had the following (partial) resolution: Zeno was right in stating that arrow was stationary at any one time instant, however he was wrong in concluding from this that the arrow does not move at al. In fact the arrow posesses a finite velocity, which can also be defined at atomic instants of time by using the concept of derivative of a function. Was there all thhat there is to it in resolving the paradox? Not quite, since we still haven't clarified about what happens to the arrow as it moves through space.
 
 *The arrow traverses a continuum of points, in a continuum of time, not a series of discrete points at discrete times. The latter is impossible, since it is not possible to decribe the real line as a series of discrete points, since there always another point between any two discrete points ad infinitum. The human mind has difficulty grasping the continuum, we are more comfortable with discrete points. Time and space are continuums. Later Cantor put the concept of a continuum on a more rigorous basis by defining the notion of cardinality, and differentiating it from length of a segment. Cardinality is the number of points in a segment of a continuum, and Cantor proved that this number which he called c, is greater than the number of integers.*
 
