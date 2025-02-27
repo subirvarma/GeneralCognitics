@@ -54,20 +54,25 @@ The $\lim$ operation is defined as follows: For every $\epsilon >0$, there exist
 
 Once the idaes of differentiation was put on a firm theoretical basis, Zeno's paradox of the arrow had the following resolution: Zeno was right in stating that arrow was stationary at any one time instant, however he was wrong in concluding from this that the arrow does not move at al. In fact the arrow posesses a finite velocity, which can also be defined at atomic instants of time by using the concept of limit. 
 
-The arrow traverses a continuum of points, in a continuum of time, not a series of discrete points at discrete times. The latter is impossible, since it is not possible to decribe the real line as a series of discrete points, since there always another point between any two discrete points ad infinitum. The human mind has difficulty grasping the continuum, we are more comfortable with discrete points. Time and space are continuums. Later Cantor put the concept of a continuum on a more rigorous basis by defining the notion of cardinality, and differentiating it from length of a segment. Cardinality is the number of points in a segment of a continuum, and Cantor proved that this number which he called c, is greater than the number of integers. 
+*The arrow traverses a continuum of points, in a continuum of time, not a series of discrete points at discrete times. The latter is impossible, since it is not possible to decribe the real line as a series of discrete points, since there always another point between any two discrete points ad infinitum. The human mind has difficulty grasping the continuum, we are more comfortable with discrete points. Time and space are continuums. Later Cantor put the concept of a continuum on a more rigorous basis by defining the notion of cardinality, and differentiating it from length of a segment. Cardinality is the number of points in a segment of a continuum, and Cantor proved that this number which he called c, is greater than the number of integers.*
 
-### How can the Arrow Reach its Destination
+## How Does the Arrow Move from One Point to Another
+
+It turns that this is the wrong question, since there is no such thing as a sequence of points that make up an interval. So the arrow is not moving from point to point, but instead it is moving a, a long a continuum of points. In order to understand what a continuum is, mathematicians had more fully understand what infinity is. Is there a difference between the number of points in a continuum vs an infinite set of discrete points. It turned out that there was.
+
+After Weirstrass has settled the issue that the arrow actually had a non zero velocity at any instant of time, even though it was not actually moving at the instant, the next next problem was: How does the arrow actually get from point A to point B? Clearly the arrow is at A at time t_A and at B at time t_B, and since there is always a point C in-between A and B, it will be at C at time t_C. But how is it actually getting from one point to another? 
+This question imoplicitly assumes that space is made up of discrete points, and so is time made up of discrete instants, so that the arrow is moving from one discrete point to another as time progresses. This is clearly not a satisfactory picture, since given a point, clearly there is no 'next' point that the arrow can go to next (since if there was any such point, one can always find anothet point that is closer). 
+The problem here whether we can look at space (and time) as a set of discrete points, or as a continuum of points. The idea of a continuum was poorly understood, until it was clarified in a brilliant series of papers by Cantor in the latter half of the 19th century. He showed that the continuum has a fundamentally different structure then the set of discrete points, indeed the number of points or cardinality of the the continuum, that he called c, is greater than the cardinality of intgeres or the rationals. The continuum is characterized not just by points that it contains, but also measure of its length (or duration). Both space and time are continuums. Hence in either case we cannot talk of the number of discrete points in space or discrete instants of time, but instead the length of segment of space or the duration of time. 
+Given a length L, an arrow moving with velocity V will traverse the space in time T = L/V.
+But note that the arrow is now moving in a continuum, hence the question of defining the set of points that it traverses during the journey does not arise.
 
 
+### Quantum Mechanics and the Paradox
 
-### How Can Finite Intervals arise from Point Quantities?
-
-
-
-### Integral Calculus or How to Add Up Infinitely Many Infinitely Small Quanitities
+- Differential calculus gives us a procedure for computing the velocity of a particle, based on positions where the particle is to be found at points in the future.
+- 
 
 
-## Quantum Mechanics and the Paradox
 
 ### The Uncertainity Principle
 
