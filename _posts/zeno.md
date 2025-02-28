@@ -107,7 +107,7 @@ If the number of points in an interval of the continuum cannot be used to charac
 
 Going back to Zeno's paradox, note that both space and time are continuums. Hence in either case we cannot talk of the number of discrete points in space or discrete instants of time, but instead the length of segment of space or the duration of time. 
 Given a segment of length L, an arrow moving with velocity v will traverse the space in time t = L/v.
-But note that the arrow is now moving in a continuum, hence the question of defining the set of points that it traverses during the journey does not arise.
+But note that the arrow is now moving in a continuum, hence the question of defining the set of points that it traverses during the journey does not arise. Hence the length of an interval cannot be expressed as a function of the number of points that it contains, which is something that Zeno was trying to do.
 
 Admittedly it is difficult to visualize motion in a continuum, our brains are wired to recognize motion as a discrete set of positions at discrete points in time. IF the arrow were replaced by a fundamental particle, say the electron, can we carry out an experiment using a very powerful micrscope, in which we try to see how it behaves while its moving over the continuum? Such an experiment was indeed carried out about a hundred years ago, and the results only deepened the mystery. This topic is discussed in the next section.
 
