@@ -124,33 +124,39 @@ The problem here whether we can look at space (and time) as a set of discrete po
 
 ## Quantum Mechanics and the Paradox
 
-![](https://subirvarma.github.io/GeneralCognitics/images/zeno1.png) 
+![](https://subirvarma.github.io/GeneralCognitics/images/zeno1) 
 
-The above photograph shows the path several elementary particles as captured in a device called a Bubble Chamber. If we focus on the path of any one of these particles, we can see that it consists of a series of white dots. These are points where the particle is interacting with the contents of the Bubble Chamber, and so these dots can be regarded as a series of observations that fix the position the particle at successive time instants. What is the particle doing at times that are in-between two of the white dots? If we go by Newton's Laws of Motion, the particle will be located at a position whose value can be determined exactly since the particle's velocy is also known.
+Figure 1
+
+The photograph in Fig. 1 shows the path several elementary particles as captured in a device called a Bubble Chamber. If we focus on the path of any one of these particles, we can see that it consists of a series of white dots. These are points where the particle is interacting with the contents of the Bubble Chamber, and so these dots can be regarded as a series of observations that fix the position the particle at successive time instants. What is the particle doing at times that are in-between two of the white dots? If we go by Newton's Laws of Motion, the particle will be located at a position whose value can be determined exactly since the particle's velocy is also known.
 On the other hand, Quantum Mechanics has a very surprising answer to this question: We cannot have a precise determination of the particle's position while it is in the in-between area. The only way to do would be take another measurement at the precise time, which will result in another white dot along the particle's trajectory.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/zeno2.png) 
 
-In order to get a better understanding of the situation, consider what happens when elementary particles such as electrons behave when passing through a screen with a single slit. When an electron passes through the slit, it's position becomes known with an uncertainity that is equal to the width of the slit, so this is like making a measurtment to determine position. The electron then strikes a detector placed after the screen, at which its position once again becomes known. But what happens in-between the slit and the detector? This is analogous to the question we asked about the arrow's behavior between two successive measurements. 
-Quantum Mechanics tells us that in between two measurements, a particle no longer follows Newton's Laws, but instead follows an equation that is similar to the wave equation (but with amplitudes that are complex numbers). The absolute value of the amplitude of this wave gives the probability that the particle is located at a particuler place.
-This means one can no longer talk of the particles as something that is localized in space, but is diffused like the electromagnetic field. Quantum Field Theory sheds further light by hypothesizing that fundamental reality consists of fields. Hence electrons are associated with a type of field whose equation was first given by Dirac. The energy in these field exists in discrete quanta, and the properties of these quanta are indistinguishable from those of elementary particles.
+Figure 2
 
-Going back to Zeno's paradox, QM and QFT that a particle exists as a particle only at the times at which it is being observed. In between successive observations particle exists in a state that we are incapable of visualizing, the closest analogy being waves.
+In order to get a better understanding of the situation, consider what happens when elementary particles such as electrons behave when passing through a screen with a single slit. When an electron passes through the slit, it's position becomes known with an uncertainity that is equal to the width of the slit, so this is like making a measurement to determine position. The electron then strikes a detector placed after the screen, at which its position once again becomes known. But what happens in-between the slit and the detector, where is the particle located at those times? 
 
+This is analogous to the question we asked about the arrow's behavior between two successive measurements or the question about the location of the elementary particle between two successive white dots in Fig. 1.
+Quantum Mechanics tells us that in between two measurements, the particle essentially does not exist 'in the form of what we normally think of as a particle'. Then what does it look like? The short answer to this question is: We don't know. The only way to talk about the particle in between two successive measurements is by using the language of mathematics, and here is what the math is telling us: 
+All of space is permeated by a 'particle' field, which you can think of as similar to the electromagnetic field but for matter. This matter field contains energy, and this energy is not diffused througout space, but is concentrated in energy quanta. These quanta of energy is what we call particles.
+It is possible to extract information about the location and momemntum of these energy quanta, and if the uncertainity in its location is $\Delta x$ and the uncertainity in its position is given by $\Delta p$, then these two connected by the following equation
 
+$$  \Delta x \Delta p \ge {h\over 2\pi} $$
 
+Hence if a particle's position is completely known, then we can have absolutely no information about its momentum and conversly if its momentum is known exactly, then it can be located anywhere in space.
 
-### The Uncertainity Principle
+Going back to the single slit experiment in Fig. 2, when the particle goes through the slit, the uncertainity in its verticle location is $\Delta y = \plusminus B$ where $B$ is the length of the slit. Hence the Uncertainity Principle tells us that there is also an uncertainity in the component of its momentum in the vertical direction given by 
 
+$$ \Delta p \ge {h\over 2{\pi B}}   $$
 
+This uncertanity in the y momentum causes the trajectory of the particle of spread out after the screen Moreover the the existence of the null points in the diffraction pattern on the screen are exactly what we would observe if this experiment where to be carried out with light waves. From this we can conclude that in-between the two measurements, the particle no onger exisHow can this be so?ts as a particle, but has acquired wave like properties. How can this be so? We don't know. All that we can say is that the mathematical equations that this mysterious entity obeys, is precisely the same as that of a wave propagating through space.
 
-
-### Quantum Field Equations for a Particle
-
-
-
+Going back to Zeno's paradox, QM and QFT tell us that a particle exists as what we understand to be a particle, only at the times at which it is being observed. Hence Zeno was not wrong to ask how does the particle move between successive instants, though his conclusion that particle cannot actually move was the wrong one. The truth is even stranger. The partcle does move, since differential calculus tells us that it has a non-zero velocity as atll time instants, however QM tells us that it is impossible to visulaize its movement, since it no longer exists as a partcle.
 
 ## So Where Does That Leave us? Kant's take on the Paradox
+
+
 
 ### Do Infinitely Small Quanitities Actually Exist?
 
