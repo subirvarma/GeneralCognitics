@@ -7,17 +7,6 @@ title: "Zeno's Paradox"
 
  [online book on this subject](https://srdas.github.io/DLBook2/)
 
-
-- Zeno’s paradox of the arrow 1) paradox of velocity 2) paradox of movement 
-- Why it’s a paradox, if the arrow is not moving at any point in time, how does it get from point A to point B?
-- Differential calculus view of the paradox 
-- Integral calculus view
-- Kant’s view of the paradox 
-- Quantum Mechanics and the paradox, the Heisenberg uncertainty principle 
-- The quantum field representation for a particle 
-- We have replaced one paradox by another: how can an object be in motion and not in motion at the same time to, how can an object exhibit both particle and wave like properties?
-
-
 ## Introduction
 
 Zeno of Elea was an ancient Greek philosopher who lived around 500 BC. He was a disciple of the philosopher Parmenides, who believed that all of reality consisted of an un-differentiated, unchanging motionless whole, which did not consist of any parts. Hence  aspects such as motion, change and plurality were illusions according to him. In support of this point of view, Zeno came up with several paradoxes, which have continued to puzzle philosophers and scientists, even to the present day. 
@@ -164,3 +153,5 @@ Kant also though that the idea of infinite divisability of space and time is a m
 We can see that Zeno's Paradox has inspired some of the deepest ideas that we have about the nature of space, time and the concept of infinity. I find it amazing that the speculations of Ancient Philosopher who lived at the very dawn of our civilization, have led to so much progress in human knowledge. To compete with this kind of immortality, can you think of a question or paradox that people will still be talking about 2500 years from now? That is a very difficult undertaking.
 
 We still don't know about the ultimate nature space. Does it exist as discrete atoms, like matter? If so, when a particle is moving in space, is it hopping from one atom of space to another? These are questions that Zeno though about, and to which we still don't have an answer. 
+- We have replaced one paradox by another: how can an object be in motion and not in motion at the same time to, how can an object exhibit both particle and wave like properties?
+
