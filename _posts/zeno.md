@@ -82,7 +82,7 @@ Once the idea of differentiation was put on a firm theoretical basis, Zeno's par
 The definiton assumes that the next point $t_2$ can be made as close as we wish to $t_1$, without ever actually 'touching' it. This points to another important concept that was introduced into mathematics by Cauchy, which is that of continuity. An interval of time (or space) is continuous, if between any two points, one can always define an infinity of points, no matter how small the interval between them. This corresponds to the intuitive idea of there being 'no jumps' as the arrow moves smoothly in space.
 
 Is the rigorous definition of the derivative all that there is to resolving the paradox?
-Not quite, since if time is indeed made up of discrete points and the arrow is at $x(t_1)$ at time $t_1$ and at $x(t_2)$ at time time $t_2$, and at both these times it is stationary, then when is it actually moving? The resolution of this question required greater understanding of the concept of infinity.
+Not quite, since if time is indeed made up of discrete points and the arrow is at $x(t_1)$ at time $t_1$ and at $x(t_2)$ at time time $t_2$, and at both these times it is stationary, then when is it actually moving?  The resolution of this question required a greater understanding of the concept of infinity.
 
 ## When does the Arrow Actually Move?
 
