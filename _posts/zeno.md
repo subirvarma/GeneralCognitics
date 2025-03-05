@@ -95,6 +95,8 @@ The answer to this question required a greater understanding of the concept of i
 
 There is another one of Zeno's paradoxes that is relevant to the motion of the arrow over the continuum, and it goes as follows: 
 If the arrow moves from point A to point B, then how can we compute the distance over which it travelled? This is another way of asking how to compute the length of an interval.
+
+
 If we consider the motion of the arrow from point to point in the interval, then clearly the distance travelled over each of those points is zero. Since the interval is dense, we can keep on sub-divding the interval into smaller and smaller parts, and in the limit we will have an infinite number of points that the arrow occupies on its travel. However the sum of the lengths over all these points is still zero. Perhaps the contribution to the length is coming from the length of the interval between these points. But if the length of any one of these intervals is non-zero, then the sum of an infinite number of them is also infinity.
 Clearly the arrow is traversing a finite distance from A to B, but which parts of the continuum are contributing to the it?
 
