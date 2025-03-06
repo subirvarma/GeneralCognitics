@@ -110,20 +110,24 @@ The nature of infinity and that of the the continuum was further clarified in a 
 
 Cantor's discoveries pointed to the fact that number of points in an interval is not a good indication of the length of the interval, since intervals of different sizes can have the same number of points (and whose cardinality is equal to c). 
 If the number of points in an interval of the continuum cannot be used to characterize it, what is a good indicator of the length of an interval in space or the duration of time? 
-This problem was solved a few decades later, around the turn of the century, and the main contributors to it were the French mathematicians Emile Borel and Henri Lebesgue.
+This problem was solved a few decades later, around the turn of the century, and the main contributors to it were the French mathematicians Emile Borel and Henri Lebesgue. They generalized the notion of the length of an interval, into a quantity that they called measure, so that their work is called Measure Theory. The measure of simple open segment $[a,b]$ is simply $a-b$, however they were able to extend this concept to more complex sets. In particular they showed that the measure of a de-numberably collection of segments, is the sum of their individual measures, so that
 
+$$ m(\sum_{i=1}^{\infty} X_i) = \sum_{i=1}^{\infty} m(X_i)  $$
 
+Going back to the line segment [0,1], clearly $m[0,1] = 1$. What about the measure for the set of all the Rational Numbers in [0,1]? Since the measure of any individual number is zero, it follows that
 
-It turns out that in order to do so, one has to assign a number to each point in the continuum and then define something called a metric over the continuum. The length of an interval is then defined as the metric value between the two points. Note that this definition is completely independent of the constituents of the continuum itself. Hence the length of an interval cannot be expressed as a function of the number of points that it contains.
+$$ m(\sum_{i=1}^{\infty} Q_i = 0)  $$
 
-Going back to Zeno's paradox, note that both space and time are continuums. Hence the concepts of the length of a segment of space or the duration of time are well defined using the idea of metrics. 
-Given a segment of length L, an arrow moving with velocity v will traverse the space in time t = L/v.
-But note that the arrow is now moving in a continuum, hence the question of defining the set of points that it traverses during the journey is not well formulated. 
+Note that this summation is allowed since the set of rationals is denumerably infinite according to Cantor.
+From this it follows that
+
+$$ m([0,1]) - m(all rationals in [0,1]) = 1 $$
+
+Hence the irrationals that are left over after all the rationals have been removed, have measure 1. This is an amazing result, since it is saying that the non-denumberable sum of all the irrational number that exist over this interval has a finite measure, even though each number individually has measure zero.
+This result resolves Zeno's Plurality Paradox, since the set of points that removed from the line segment is a subset of the set of rationals. Hence if the arrow were to traverse the segment [0,1] by taking an denumerable infinite number of tiny steps between neighboring rational numbers, it woould still travel a total distance of 1 unit.
+The development of Measure Theory further led to a rigorous definition of the integral by Lebesgue which is still in use today, the so called Lebesgue Integral.
 
 Admittedly it is difficult to visualize motion in a continuum, our brains are wired to recognize motion as a discrete set of positions at discrete points in time. If the arrow were replaced by a fundamental particle, say the electron, can we carry out an experiment using a very powerful microscope, in which we try to see how it behaves while its moving over the continuum? Such an experiment was indeed carried out about a hundred years ago, and the results only deepened the mystery. This topic is discussed in the next section.
-
-**since there is no such thing as a sequence of points that make up an interval. So the arrow is not moving from point to point, but instead it is moving a, a long a continuum of points. In order to understand what a continuum is, mathematicians had more fully understand what infinity is. Is there a difference between the number of points in a continuum vs an infinite set of discrete points. It turned out that there was
-The problem here whether we can look at space (and time) as a set of discrete points, or as a continuum of points. The idea of a continuum was poorly understood, until it was clarified in a brilliant series of papers by Cantor in the latter half of the 19th century. He showed that the continuum has a fundamentally different structure then the set of discrete points, indeed the number of points or cardinality of the the continuum, that he called c, is greater than the cardinality of intgeres or the rationals. The continuum is characterized not just by points that it contains, but also measure of its length (or duration).** 
 
 ## Quantum Mechanics and the Paradox
 
