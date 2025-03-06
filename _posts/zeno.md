@@ -108,8 +108,13 @@ The nature of infinity and that of the the continuum was further clarified in a 
 - Then Cantor made the surprising discovery that the cardinality of the set of Real Numbers, i.e., the continuum, is not $\aleph_0$. In fact it is another type of infinity, whose cardinality he called $c$, and furthermore the two infinities can be compared, and that $c > \aleph_0$. Sets that have the same number of elements as that of Real Numbers are called non-denumerable or uncountably infinite.
 - His most surprising conclusion was that the cardinality of any subset of the Real Line, say the interval [0,1], is the same as that of the entire Real Line! This means that there as many Real Numbers between [0,1] as there are over the entire line.
 
-Cantor's discoveries pointed to the fact that number of points in an interval are not a good indication of how long the interval is, since intervals of different sizes can have the same number of points (and whose cardinality is equal to c). 
-If the number of points in an interval of the continuum cannot be used to characterize it, what is a good indicator of the length of an interval in space or the duration of time? It turns out that in order to do so, one has to assign a number to each point in the continuum and then define something called a metric over the continuum. The length of an interval is then defined as the metric value between the two points. Note that this definition is completely independent of the constituents of the continuum itself. Hence the length of an interval cannot be expressed as a function of the number of points that it contains.
+Cantor's discoveries pointed to the fact that number of points in an interval is not a good indication of the length of the interval, since intervals of different sizes can have the same number of points (and whose cardinality is equal to c). 
+If the number of points in an interval of the continuum cannot be used to characterize it, what is a good indicator of the length of an interval in space or the duration of time? 
+This problem was solved a few decades later, around the turn of the century, and the main contributors to it were the French mathematicians Emile Borel and Henri Lebesgue.
+
+
+
+It turns out that in order to do so, one has to assign a number to each point in the continuum and then define something called a metric over the continuum. The length of an interval is then defined as the metric value between the two points. Note that this definition is completely independent of the constituents of the continuum itself. Hence the length of an interval cannot be expressed as a function of the number of points that it contains.
 
 Going back to Zeno's paradox, note that both space and time are continuums. Hence the concepts of the length of a segment of space or the duration of time are well defined using the idea of metrics. 
 Given a segment of length L, an arrow moving with velocity v will traverse the space in time t = L/v.
