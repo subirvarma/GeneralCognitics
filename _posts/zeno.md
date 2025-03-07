@@ -121,13 +121,20 @@ $$ m(\sum_{i=1}^{\infty} Q_i = 0)  $$
 Note that this summation is allowed since the set of rationals is denumerably infinite according to Cantor.
 From this it follows that
 
-$$ m([0,1]) - m(all rationals in [0,1]) = 1 $$
+$$ m([0,1]) - m(all\ rationals\ in\ [0,1]) = 1 $$
 
 Hence the irrationals that are left over after all the rationals have been removed, have measure 1. This is an amazing result, since it is saying that the non-denumberable sum of all the irrational number that exist over this interval has a finite measure, even though each number individually has measure zero.
 This result resolves Zeno's Plurality Paradox, since the set of points that removed from the line segment is a subset of the set of rationals. Hence if the arrow were to traverse the segment [0,1] by taking an denumerable infinite number of tiny steps between neighboring rational numbers, it woould still travel a total distance of 1 unit.
-The development of Measure Theory further led to a rigorous definition of the integral by Lebesgue which is still in use today, the so called Lebesgue Integral.
+The development of Measure Theory further led to a rigorous definition of the integral by Lebesgue which is still in use today, the so called Lebesgue Integral. 
+In order to see the connection between Measure Theory and the integration, note that the calculation that we just did can also be written as the integral
 
-Admittedly it is difficult to visualize motion in a continuum, our brains are wired to recognize motion as a discrete set of positions at discrete points in time. If the arrow were replaced by a fundamental particle, say the electron, can we carry out an experiment using a very powerful microscope, in which we try to see how it behaves while its moving over the continuum? Such an experiment was indeed carried out about a hundred years ago, and the results only deepened the mystery. This topic is discussed in the next section.
+$$ x = \int_{t=0}^{t=1} v(t) dt = 1 $$
+
+where $x$ is the distance covered by the arrow in time interval [0,1], where the velocity function is given by: v(t) = 0 if $t$ is a Rational Number, and 1 otherwise. Admittedly this is not a velocity that we will see in the real world, but it illustrates the fact the theory of integration based on measures is capable of integrating these type of complex functions.
+
+In the last section we saw how the theory of Differential Calculus was put on a firm footing by resolving Zeno's Paradox of the Arrow, while in this section see how the theory of Integral Calculus reached its current rigorous development after resolving the related Paradox of Plurality. These two paradoxes together led to our current understanding of the mathematics of the infinitely small, and the inifintely large.
+
+It is difficult to visualize motion in a continuum, our brains are wired to recognize motion as a discrete set of positions at discrete points in time. If the arrow were replaced by a fundamental particle, say the electron, can we carry out an experiment using a very powerful microscope, in which we try to see how it behaves while its moving over the continuum? Such an experiment was indeed carried out about a hundred years ago, and the results only deepened the mystery. This topic is discussed in the next section.
 
 ## Quantum Mechanics and the Paradox
 
