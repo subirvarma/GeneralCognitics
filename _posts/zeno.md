@@ -112,11 +112,11 @@ Cantor's discoveries pointed to the fact that number of points in an interval is
 If the number of points in an interval of the continuum cannot be used to characterize it, what is a good indicator of the length of an interval in space or the duration of time? 
 This problem was solved a few decades later, around the turn of the century, and the main contributors to it were the French mathematicians Emile Borel and Henri Lebesgue. They generalized the notion of the length of an interval, into a quantity that they called measure, so that their work is called Measure Theory. The measure of simple open segment $[a,b]$ is simply $a-b$, however they were able to extend this concept to more complex sets. In particular they showed that the measure of a de-numberably collection of segments, is the sum of their individual measures, so that
 
-$$ m(\sum_{i=1}^{\infty} X_i) = \sum_{i=1}^{\infty} m(X_i)  $$
+$$ m(\sum_{i=1}^{\infty} X_i) = \sum_{i=1}^{\aleph_0} m(X_i)  $$
 
-Going back to the line segment [0,1], clearly $m[0,1] = 1$. What about the measure for the set of all the Rational Numbers in [0,1]? Since the measure of any individual number is zero, it follows that
+Going back to the line segment [0,1], clearly $m[0,1] = 1$. What about the measure for the set of all the Rational Numbers in [0,1]? Since the measure of any individual number is zero, it follows that if $Q_i$ is the $i^{th}$ rationl number in the interval [0,1], then
 
-$$ m(\sum_{i=1}^{\infty} Q_i = 0)  $$
+$$ m(\sum_{i=1}^{\aleph_0} Q_i = 0)  $$
 
 Note that this summation is allowed since the set of rationals is denumerably infinite according to Cantor.
 From this it follows that
@@ -126,15 +126,19 @@ $$ m([0,1]) - m(all\ rationals\ in\ [0,1]) = 1 $$
 Hence the irrationals that are left over after all the rationals have been removed, have measure 1. This is an amazing result, since it is saying that the non-denumberable sum of all the irrational number that exist over this interval has a finite measure, even though each number individually has measure zero.
 This result resolves Zeno's Plurality Paradox, since the set of points that removed from the line segment is a subset of the set of rationals. Hence if the arrow were to traverse the segment [0,1] by taking an denumerable infinite number of tiny steps between neighboring rational numbers, it woould still travel a total distance of 1 unit.
 The development of Measure Theory further led to a rigorous definition of the integral by Lebesgue which is still in use today, the so called Lebesgue Integral. 
-In order to see the connection between Measure Theory and the integration, note that the calculation that we just did can also be written as the integral
+In order to see the connection between Measure Theory and the integration, note that the calculation of the distance travelled that we just did can also be written as the integral
 
 $$ x = \int_{t=0}^{t=1} v(t) dt = 1 $$
 
-where $x$ is the distance covered by the arrow in time interval [0,1], where the velocity function is given by: v(t) = 0 if $t$ is a Rational Number, and 1 otherwise. Admittedly this is not a velocity that we will see in the real world, but it illustrates the fact the theory of integration based on measures is capable of integrating these type of complex functions.
+where $x$ is the distance covered by the arrow in time interval [0,1], and the velocity function is given by: v(t) = 0 if $t$ is a Rational Number, and 1 otherwise. Admittedly this is not a velocity that we will see in the real world, but it illustrates the fact the theory of integration based on measures is capable of integrating these type of complex functions.
 
-In the last section we saw how the theory of Differential Calculus was put on a firm footing by resolving Zeno's Paradox of the Arrow, while in this section see how the theory of Integral Calculus reached its current rigorous development after resolving the related Paradox of Plurality. These two paradoxes together led to our current understanding of the mathematics of the infinitely small, and the inifintely large.
+In the last section we saw how the theory of Differential Calculus was put on a firm footing by resolving Zeno's Paradox of the Arrow, while in this section see how the theory of Integral Calculus reached its current rigorous development after resolving the related Paradox of Plurality. The resolution of these two paradoxes together led to our current understanding of the mathematics of the infinitely small, and the inifintely large.
 
-It is difficult to visualize motion in a continuum, our brains are wired to recognize motion as a discrete set of positions at discrete points in time. If the arrow were replaced by a fundamental particle, say the electron, can we carry out an experiment using a very powerful microscope, in which we try to see how it behaves while its moving over the continuum? Such an experiment was indeed carried out about a hundred years ago, and the results only deepened the mystery. This topic is discussed in the next section.
+I find it fascinating to think that a Greek Philosopher from 500 BC hit upon the fundamental issues that lie at the heart of calculus. The Greek mathematicians who came after him were sticklers to logical rigor, hence refused to develop calculus any further, without first resolving the paradoxes. Two thousand years later, Newton and Leibniz had no such compulsions, and they went ahead and developed the basics of calculus without first figuring out what an infinitesmal was, and thus launched the Scientific Revolution.
+
+It is difficult to visualize motion in a continuum, our brains are wired to think of motion as a discrete set of positions at discrete points in time. 
+If we were to drill down to a very small object, and try to observe its motion over very small intervals of time, will that make it possible to observe it while actually in motion?
+If the arrow were replaced by a fundamental particle, say the electron, can we carry out an experiment using a very powerful microscope, in which we try to see how it behaves while its moving over the continuum? Such an experiment was indeed carried out about a hundred years ago, and the results only deepened the mystery. This topic is discussed in the next section.
 
 ## Quantum Mechanics and the Paradox
 
@@ -143,30 +147,45 @@ It is difficult to visualize motion in a continuum, our brains are wired to reco
 Figure 1
 
 The photograph in Fig. 1 shows the path several elementary particles as captured in a device called a Bubble Chamber. If we focus on the path of any one of these particles, we can see that it consists of a series of white dots. These are points where the particle is interacting with the contents of the Bubble Chamber, and so these dots can be regarded as a series of observations that fix the position the particle at successive time instants. What is the particle doing at times that are in-between two of the white dots? If we go by Newton's Laws of Motion, the particle will be located at a position whose value can be determined exactly since the particle's velocy is also known.
-On the other hand, Quantum Mechanics has a very surprising answer to this question: We cannot have a precise determination of the particle's position while it is in the in-between area. The only way to do would be take another measurement at the precise time, which will result in another white dot along the particle's trajectory.
+On the other hand, Quantum Mechanics has a very surprising answer to this question: We cannot have a precise determination of the particle's position while it is in the area in-between area two  observed positions. The only way to do would be take another measurement at the precise time, which will result in another white dot along the particle's trajectory.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/zeno2.png) 
 
 Figure 2
 
-In order to get a better understanding of the situation, consider what happens when elementary particles such as electrons behave when passing through a screen with a single slit. When an electron passes through the slit, it's position becomes known with an uncertainity that is equal to the width of the slit, so this is like making a measurement to determine position. The electron then strikes a detector placed after the screen, at which its position once again becomes known. But what happens in-between the slit and the detector, where is the particle located at those times? 
+In order to get a better understanding of the situation, consider what happens when elementary particles such as electrons behave when passing through a screen with a single slit. When an electron passes through the slit, it's position becomes known with an uncertainity that is equal to the width of the slit, so this is like making a measurement to determine position. The electron then strikes a photographic plate placed after the screen, at which time its position once again becomes known. But what happens in-between the slit and the plate, where is the particle located at those times? 
 
 This is analogous to the question we asked about the arrow's behavior between two successive measurements or the question about the location of the elementary particle between two successive white dots in Fig. 1.
-Quantum Mechanics tells us that in between two measurements, the particle essentially does not exist 'in the form of what we normally think of as a particle'. Then what does it look like? The short answer to this question is: We don't know. The only way to talk about the particle in between two successive measurements is by using the language of mathematics, and here is what the math is telling us: 
-All of space is permeated by a 'particle' field, which you can think of as similar to the electromagnetic field but for matter. This matter field contains energy, and this energy is not diffused througout space, but is concentrated in energy quanta. These quanta of energy is what we call particles.
-It is possible to extract information about the location and momemntum of these energy quanta, and if the uncertainity in its location is $\Delta x$ and the uncertainity in its position is given by $\Delta p$, then these two connected by the following equation
+Quantum Mechanics tells us that in between two measurements, the particle essentially does not exist 'in the form of what we normally think of as a particle'. Then what does it look like? The short answer to this question is: We don't know. The particle definitely exists as a particle at the exact time that a measurement is made, that we know for sure since we can observe it.
+
+The only way to talk about the particle in between two successive measurements is by using the language of mathematics, and here is what the math is telling us: 
+All of space is permeated by a 'particle field', which you can think of as similar to the electromagnetic field but for matter. This matter field contains energy, and this energy is not diffused througout space, but is concentrated in energy quanta. These quanta of energy is what we observe as particles.
+
+It is possible to extract information about the location and momentum of these energy quanta, but not both at the same time. If the uncertainity in its location is $\Delta x$ and the uncertainity in its position is given by $\Delta p$, then these two are connected by the following equation, first derived by Werner Heisenberg
 
 $$  \Delta x \Delta p \ge {h\over 2\pi} $$
 
+where $h$ is Planck's constant.
 Hence if a particle's position is completely known, then we can have absolutely no information about its momentum and conversly if its momentum is known exactly, then it can be located anywhere in space.
 
-Going back to the single slit experiment in Fig. 2, when the particle goes through the slit, the uncertainity in its verticle location is $\Delta y = \plusminus B$ where $B$ is the length of the slit. Hence the Uncertainity Principle tells us that there is also an uncertainity in the component of its momentum in the vertical direction given by 
+Going back to the single slit experiment in Fig. 2, when the particle approaches the slit, it has a momentum in the horizontal direction but not in the vertical direction. However by going through the slit it acquires a momentum in the vertical direction as we see next.
+When the particle goes through the slit, the uncertainity in its verticle location is $\Delta y = \pm B$ where $B$ is the width of the slit. Hence the Uncertainity Principle tells us that there is also an uncertainity in the component of its momentum in the vertical direction given by 
 
-$$ \Delta p \ge {h\over 2{\pi B}}   $$
+$$ \Delta p_y \ge {h\over 2{\pi B}}   $$
 
-This uncertanity in the y momentum causes the trajectory of the particle of spread out after the screen Moreover the the existence of the null points in the diffraction pattern on the screen are exactly what we would observe if this experiment where to be carried out with light waves. From this we can conclude that in-between the two measurements, the particle no onger exisHow can this be so?ts as a particle, but has acquired wave like properties. How can this be so? We don't know. All that we can say is that the mathematical equations that this mysterious entity obeys, is precisely the same as that of a wave propagating through space.
+This uncertanity in the y momentum causes the trajectory of the particle of spread out after the slit. However this still doesn't explain the diffraction pattern that we observe on the photographic plate, if this were a classical particle there would be no null points in the pattern,
+It turns out that the null points are exactly what we would observe if this experiment where to be carried out with light waves (or any other kind of wave) instead of particles. 
+Here is a short explanation for this (taken fron Feynman, Volume 3): The vertical momentum $p_y$ has a spread equal to $p_0 \Delta\theta$, where $p_0$ is the horizontal momentum $\Delta\theta$ is the angle at which the first null occurs. How can we compute $\Delta\theta$? Assuming that we are talking about waves, the first null occurs at an angle at which waves from edge of the slit have to travel one wavelength farther than the waves from the other edge, from which it can be shown that $\Delta\theta = {\lambda\over B}$, where $\lambda$ is the wavelength.
+from which it follows that $\Delta p_y = {p_0\lambda\over B}$.
+Hence if we were to pin down the position of the partcle more exactly by making the slit narrower, i.e., reducing B, then the diffraction pattern spreads out more, i.e., the $y$ component of the momentum becomes even larger. Also $\Delta p_y B = p_0\lambda = h$. The last equation follows from the De Broglie formula for matter waves. Hence we have recovered the Uncertainity Principle since B is the uncertanity in the vertical position.
 
-Going back to Zeno's paradox, QM and QFT tell us that a particle exists as what we understand to be a particle, only at the times at which it is being observed. Hence Zeno was not wrong to ask how does the particle move between successive instants, though his conclusion that particle cannot actually move was the wrong one. The truth is even stranger. The partcle does move, since differential calculus tells us that it has a non-zero velocity as atll time instants, however QM tells us that it is impossible to visulaize its movement, since it no longer exists as a partcle.
+From this we can conclude that in-between the two measurements, the particle no longer exists 'as a particle', it has acquired wave like properties!! How can this be so? We don't know. All that we can say is that the mathematical equations that this mysterious entity obeys, is precisely the same as that of a wave propagating through space.
+
+Going back to Zeno's paradox, Quantum Mechanics tells us that a particle exists as what we understand to be a particle, only at the times at which it is being observed. Nobody has seen a particle while it is transitioning between two obeservations, since as soon as we observe it, it becomes a particle! This goes back to the conundrum we had raised in previous sections about trying to visualize the actual motion of a particle, as opposed to just saying that it is at spot A at time $t_A$ and at spot B at time $t_B$. Quantum Mechanics is telling us that this is as close as we can get in describing motion, since the particle becomes a diffuse wave like entity in-between two observations.
+
+
+
+Hence Zeno was not wrong to ask how does the particle move between successive instants, though his conclusion that particle cannot actually move was the wrong one. The truth is even stranger. The partcle does move, since differential calculus tells us that it has a non-zero velocity as atll time instants, however QM tells us that it is impossible to visulaize its movement, since it no longer exists as a partcle.
 
 ## So Where Does That Leave us? Immanuel Kant's take on the Paradox
 
