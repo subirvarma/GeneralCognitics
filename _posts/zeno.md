@@ -151,6 +151,16 @@ Figure 1
 The photograph in Fig. 1 shows the path several elementary particles as captured in a device called a Bubble Chamber. If we focus on the path of any one of these particles, we can see that it consists of a series of white dots. These are points where the particle is interacting with the contents of the Bubble Chamber, and so these dots can be regarded as a series of observations that fix the position the particle at successive time instants. What is the particle doing at times that are in-between two of the white dots? If we go by Newton's Laws of Motion, the particle will be located at a position whose value can be determined exactly since the particle's velocy is also known.
 On the other hand, Quantum Mechanics has a very surprising answer to this question: We cannot have a precise determination of the particle's position while it is in the area in-between area two  observed positions. The only way to do would be take another measurement at the precise time, which will result in another white dot along the particle's trajectory.
 
+When an object traverses a certain distance, we are only observing it at discrete instants of time. This is not so obvious when looking at the movement of a macroscopic object like a arrow. Newtonian  Mechanics helps us interpret hat happened at the instants in-between two observations. Given the mathematical picture of a dense interval of points on the continuum, we can predict the location of the arrow with any amoiunt of precision, at any time instant (even though the arrow was not being observed at that instant).
+
+But is this what happens in reality? Quantum Mechanics tells us that the answer to this question is No!. The particle does not exist as aparticle in-between two observations. In order to pinpoint its location at a certain time, we actually have to observe it that instant, and we can make successive observations intervals as small as we wish. But, there is always a gap between any two observations, since the observations are at most denumerably infinite, i.e., they can never be dense in the sense of the Real Number line. Hence the gap leads to an in-between segemnt of space, and the question arises: What is the particle doing while it is in these gaps?  Quantum Mechanics tells us the following:
+
+- Newton's Laws do not apply to the particle when it is traversing the gaps between successive observations.
+- The behavior of the particle in those gaps is described by the equations of Quantum Mechanics, specifically the Schrodinger equation. This equation does not tell us where the particle is located at a specific instant, but instead gives us probabilties of its location in space.
+
+This raises the question: Does the paricle move along a dense continuum of points in between observations, as 19th century mathematics would have us beleive? Well, something is moving in the continuum (since Schrodinger's equation is a differential equation from calculus, which pre-supposes the continuum), but not what we understand to be a particle.
+Hence the particle cannot be visualized while it is in-between two observations. Hence it exists as a particle only at the most countably infinite number of points when it is being observed.
+
 ![](https://subirvarma.github.io/GeneralCognitics/images/zeno2.png) 
 
 Figure 2
@@ -196,6 +206,13 @@ The great philosopher Immanuel Kant also spent time thnking deeply about Zeno's 
 From this Kant would conclude that the world that we imagine is entirely a creation of our brains i.e., the Phenomenon and the Noumenon are not the same thing. Furthermore even space and time are organizing principles that the brain has created, they don't actually exist in the Noumenon. Since these are our creations, we can imagine that they cen be sub-divided into smaller and smaller parts, as we saw in Zeno's Paradox of Plurality, but we don't really know whether the Noumenon can also be subject to this. 
 
 This point of view is in surprisingly good accordance with the conclusions from Quantum Mechanics. Perhaps Kant's Noumenon can be identified to be the mysterious Quantum Fields pervading through space.
+
+ Kant thought that the resolution to Zeno's paradox required this, and hence canno
+
+ Kant insisted that world that we see is a creation of our mind, and not something that exists inreality, in particuloar the notions of space and time. Heisenberg ran with this idea. Quantum Mechanics says that the world that we perceive exists as a result of of interaction of data coming to our sense organs. When we are not observing it beahaves in a manner described the equations of Quantum Mechanics, which are not in accord with our understanding of how the world works.
+
+Kant's contributions are mostly an historical footnote today, but it should be noted that he was the first of the modern philosophers to raise doubts aout the true nature of space and time. He thought that these are the creation of our mind to organize all the sensory data that we are being bombarded with, and don't really exist in the Noumenon. The idea of taking an interval of space or time, and chopping it up into an indunumerably infinite or un-countably infinite number of pieces is something that can be done in the realm of mathematics, but can it be done to actual time and space? Kant's answer to this was that since these are creations of the mind, it is fitting to apply the idea of the continuum to them, since the continuum is another creation of the human mind.
+His doubts about the reality of space and time were later borne out with the development of Quantum Mechanics. He served as a source of inspiration for Heisenberg, who it is said kept a copy of Kant with him at the time he was coming up with his ideas.  Heisenberg in some sense extended Kant's ideas further, by stating that the picture of the world that our mind creates for us, only exists at the instant that we are observing it, i.e., whe our mind is interacting with the entities that exist out these. Hence not just space and time, but also the the very notion of material objects are a creation of our mind.
 
 ## The Future of the Paradox
 
