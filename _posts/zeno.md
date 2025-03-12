@@ -23,16 +23,17 @@ The question that Zeno asked is the following: Can we tell if the arrow is in mo
 Let's assume that the arrow occupies a set of points in space at time $t_C$ which correspond to the shape of the arrow. In order to be in motion at that instant, the arrow will have to occupy space that exceeds the size of the arrow. But this leads to the conclusion that arrow will be in two different places at the same instant of time, which is an absurdity. From this Zeno concluded that at any atomic instant of time, the arrow is actually at rest, i.e., not moving. So if we now look at the all instants of time that lie in the interval $[t_A, t_B]$, then at any one of those instants the arrow is at rest. Then the question arises, how does the arrow get from point A to point B? This is a paradox since in reality we do see that the arrow is moving. 
 
 Fundamental to the statement of the paradox is the notion of atomic instances of time. Aristotle was one of the first philosophers who tried to resolve the paradox, and he did so by questioning whether these instances do in fact exist. He suggested that time is instead made up of continuous intervals of finite duration, and during these intervals the arrow is indeed allowed to travel through space. 
-This was not a wholly satisfactory resolution, since mathematically speaking, one could easily define an instant of time, it is just a number, but what is an interval? If it is in turn made of atomic instants, then  it should be further dividable. 
-Morever if an interval is be made up of an infinity of these atomic time instances each of duration zero, then again, how can a finite duration arise from an infinity of time instances of duration zero? One can see that the paradox of the arrow is really a question about the deep nature of time and space, and also the nature of infinity, questions that were not resolved until the 19th century. It is said that the Ancient Greeks where so disturbed by these paradoxes that they completely left out the concept of infinity in their development of mathematics and science, most of which happened after the time of Zeno. This prevented them developing infinitesimal calculus, even though they had all fundamental concepts needed to do so.
+This was not a wholly satisfactory resolution, since mathematically speaking, one can easily define an instant of time, it is just a number, but what is an interval? If it is in turn made of atomic instants, then  it should be further dividable. 
+Morever if an interval is be made up of an infinity of these atomic time instances each of duration zero, then again, how can a finite duration arise from an infinity of these time instances? One can see that the paradox of the arrow is really a question about the deep nature of time and space, and also the nature of infinity, questions that were not resolved until the 19th century. It is said that the Ancient Greeks where so disturbed by these paradoxes that they completely avoided the mention of infinity in their development of mathematics and science, most of which happened after the time of Zeno. This prevented them developing infinitesimal calculus, even though they had all fundamental concepts needed to do so.
 
 The arrow paradox raises several questions, that are all related to each other:
 
 - What is meant for an object to be in motion?
-- What is the nature of time and space? Are they continuous intervals, or is there a smallest atomic unit beyond which they cannot be sub-divided further?
+- What is the nature of time and space? Are they made up of continuous intervals, or is there a smallest atomic unit beyond which they cannot be sub-divided further?
 - What is the nature of infinity? How can an interval of finite duration arise out of an infinity of constituent parts each of which is a dimensionless point.
 
-More fundamentally, what is the true nature of reality and what is its relation to mathematics? If we confine ourselves to the mathematical world, we can clearly go about subdividing an interval into smaller and smaller parts, and continue to do this indefinitely. But is this is something that can be done in the real world, either to space or to time? So the paradox raised some very deep questions, which philosophers were not in a position to answer, until the first glimmerings appeared with the Scientific Revolution in the 17th century.
+If we confine ourselves to the mathematical world, we can clearly go about subdividing an interval into smaller and smaller parts, and continue to do this indefinitely. But is this is something that can be done in the real world, either to space or to time? So the pradox also raised questions about the true nature of reality its relation to mathematics. 
+These questions stumped philosophers, until the first glimmerings appeared with the Scientific Revolution in the 17th century.
 
 ## How Can an Object be in Motion?
 
@@ -55,30 +56,30 @@ for the location of the arrow. These formulae enable us to compute the location 
 
 Newton and Leibniz's definition of the derivative involves very small, but finite, time intervals, which are set to zero in order to get the final answer. However this leads to the mathematical problem of dividing by zero. Indeed in part of the calculation $\delta t$ is treated like a very small but finite quantity, while in other parts of the calculation its value is to set to zero. For example consider the case when motion is defined by the equation $x(t) = t^2$, as a function of time. Then
 
-$$ \delta x = x(t+\delta) - x(t) = (t+\delta t)^2 - t^2 = 2t\delta + \delta^2  $$
+$$ \delta x = x(t+\delta t) - x(t) = (t+\delta t)^2 - t^2 = 2t.\delta t + {\delta t}^2  $$
 
 so that
 
-$$ v_{avg} = {\delta x\over{\delta t}} = {2t\delta + \delta^2\over\delta} $$
+$$ v_{avg} = {\delta x\over{\delta t}} = {2t.\delta t + {\delta t}^2\over\delta t} $$
 
-If we treat $\delta$ as a finite quantity such that $\delta > 0$, then we can divide the numerator and denominator by this quantity to get
+If we treat $\delta t$ as a finite quantity such that $\delta t > 0$, then we can divide the numerator and denominator by this quantity to get
 
-$$ v_{avg} = {2t + \delta} $$
+$$ v_{avg} = {2t + \delta t} $$
 
-Newton and Leibniz's methodology called for setting $\delta = 0$, to get the final answer
+Newton and Leibniz's methodology called for setting $\delta t = 0$, to get the final answer
 
 $$ v(t) = 2t $$
 
-Notice how $\delta$ was simultaneously treated as a quantity that is non-zero in the first step (in order to avoid dividing by zero), AND it was set equal to zero in the second step. Hence Newton and Leibniz side-stepped the important question that Zeno had posed about the nature of time, by treating it as both continuous and discrete during the course of their calculation. If they had shown this to Zeno, I am sure he would have dismissed this as the wrong resolution to his paradox for this reason.
+Notice how $\delta t$ was simultaneously treated as a quantity that is non-zero in the first step (in order to avoid dividing by zero), AND it was set equal to zero in the second step. Hence Newton and Leibniz side-stepped the important question that Zeno had posed about the nature of time, by treating it as both continuous and discrete during the course of their calculation. If they had shown this calculation to Zeno, I am sure he would have dismissed this as the wrong resolution to his paradox for this reason.
 
-Newton or Leibniz didn't have a solution to the problem of obtaining a more rigorous definition of the derivative, and the first steps in this direction had to wait for the French mathematician Augustin-Louis Cauchy in the early 1800s, when he introduced the concepts of limits and convergence of a series into calculus. Later, in the 1860s The German mathematician Karl Weierstrass fully developed these ideas and gave the definition of the derivative which is still in use today. According to Weierstrass the velocity $v(t_1)$ at time instant $t_1$ is given by
+Newton or Leibniz didn't have a solution to the problem of obtaining a more rigorous definition of the derivative, and the first steps in this direction had to wait for the French mathematician Augustin-Louis Cauchy in the 1820s, when he introduced the concepts of limits and convergence of a series into calculus. Later, in the 1860s The German mathematician Karl Weierstrass fully developed these ideas and gave the definition of the derivative which is still in use today. According to Weierstrass the velocity $v(t_1)$ at time instant $t_1$ is given by
 
 $$ v(t_1) = \lim_{t_2\rightarrow t_1}{{x(t_2) - x(t_1)}\over{t_2 - t_1}}  $$
 
-The $\lim$ or limit operation is defined as follows: For every $\epsilon >0$, there exists a $\delta >0$, such that if $|t_2 - t_1| < \delta$, then $|x(t_2) - x(t_1)| < \epsilon$ (where $|t|$ is defined as the absolute value of $t$). When put in words, this definition is saying that we can make $x(t_2)$ as close as we want to the initial point $x(t_1)$, by choosing the instant $t_2$ to be sufficiently close to $t_1$. In other words, even if want the distance between $x(t_2)$ and $x(t_1)$ to be less than a tiny amount, say 0.0000000001, one can still find a $t_2$, a tiny amount away from $t_1$, that should make this possible.
+The $\lim$ or limit operation is defined as follows: For every $\epsilon >0$, there exists a $\delta >0$, such that if $|t_2 - t_1| < \delta$, then $|x(t_2) - x(t_1)| < \epsilon$ (where $|t|$ is defined as the absolute value of $t$). When put in words, this definition is saying that we can make $x(t_2)$ as close as we want to the initial point $x(t_1)$, by choosing the instant $t_2$ to be sufficiently close to $t_1$. In other words, if we want the distance between $x(t_2)$ and $x(t_1)$ to be less than a tiny amount, say 0.0000000001, we can always find a $t_2$, a tiny distance away from $t_1$, that makes this possible.
 
 Hence the velocity $v(t_1)$ at time $t_1$ is defined as the limit to the sequence of average velocities ${{x(t_2) - x(t_1)}\over{t_2 - t_1}}$, as the time instants $t_2$ gets closer and closer to $t_1$. Note that $t_2$ can approach $t_1$ from either the left or the right, and the derivative is well defined only for the case when the resulting two limits are equal.
-In this definition of the velocity we are no longer dividing by zero, and instead define the derivative as the limit of a convergent sequence, and this limit always exists if the function $x(t)$ is continuous at point $t$ (i.e., there are no jumps in the function at $x(t)$ at time $t$). 
+In this definition of the velocity we are no longer dividing by zero, and instead define the derivative as the limit of a convergent sequence, and this limit always exists if the function $x(t)$ is continuous at point $t$ (i.e., there are no jumps in the function at time $t$). 
 
 Note that this definition does not involve the concept of intervals or infinitesimals of either time or space, everything is in term of individual instants of time and points in space. 
 It assumes that the next point $t_2$ can be made as close as we wish to $t_1$, without ever actually 'touching' it. 
@@ -91,7 +92,7 @@ This resolution to the paradox does the job mathematically speaking, but does it
 We can try to pin down the arrow's trajectory by looking at intermediate instants of time, for example if $t_C = {t_A + t_B\over 2}$, then the arrow will be at the point $x(t_C)$ at $t=t_C$. But this not enough to pin down the motion, since we still don't know how the arrow got from $x(t_A)$ to $x(t_C)$. We can continue this procedure of halving the time intervals *ad infinitum*, but however many times we do it, it is still impossible to pin down the instant at which the arrow is actually moving, since there is always a gap between successive points!
 
 This description of the arrows flight implicitly assumes that both space and time are made up of discrete points, so that the arrow is moving from one discrete point to another as time progresses. This is clearly not a satisfactory picture, since given the starting point $x(t_A)$, clearly there is no 'next' point that the arrow can go to, since if there was any such point, one can always find another point that is closer to the starting point by using the halving procedure. 
-This means that trying to understand the movement of the arrow, as something that is moving from point to point in space, does not make sense. The arrow is in fact moving over the continuum of points, which is why it is impossible to find out the point where it will be at the very next instant, **since the next instant does not exist in a continuum of points**.
+This means that trying to understand the movement of the arrow, as something that is moving from point to point in space, does not make sense. The arrow is in fact moving over the continuum of points, which is why it is impossible to find out the point where it will be at the very next instant, **since the next instant does not exist in a continuum**.
 
 We can make the successive points as close together as we like, since space and time are both continuums. It turns out, that this is as close as we can get to picturing movement. Note that movement is actually happening over a continuum but our brains have a great deal of difficulty picturing this. We are more comfortable with points in space, and starting from a point we look for the next point in space that the arrow will occupy. However math is telling us that there is no next point! But this does not mean that movement cannot happen. The arrow does move, but its moving over a dense continuum of points which we can't visualize very well. Not only we can't visualize it, but when this idea was first introduced by Cauchy, Weierstrass et.al., even mathematicians had a poor understanding of what a continuum is. 
 
@@ -117,7 +118,7 @@ The nature of infinity and that of the continuum was further clarified in a bril
 
 Cantor's discoveries pointed to the fact that number of points in an interval is not a good indication of the length of the interval, since intervals of different sizes can have the same number of points (and whose cardinality is equal to c). 
 If the number of points in an interval of the continuum cannot be used to characterize it, what is a good indicator of the length of an interval in space or the duration of time? 
-This problem was solved a few decades later, around the turn of the 20th century, and the main contributors to it were the French mathematicians Emile Borel and Henri Lebesgue. They generalized the notion of the length of an interval, into a quantity that they called measure, so that their work is called Measure Theory. The measure of simple open segment $[a,b]$ is simply $a-b$, however they were able to extend this concept to more complex sets. In particular they showed that the measure of a de-numeberably infinite collection of segments, is the sum of their individual measures, so that
+This problem was solved a few decades later, around the turn of the 20th century, and the main contributors to it were the French mathematicians Emile Borel and Henri Lebesgue. They generalized the notion of the length of an interval, into a quantity that they called measure, so that their work is called Measure Theory. The measure of simple open segment $[a,b]$ is simply $a-b$, however they were able to extend this concept to more complex sets. In particular they showed that the measure of a de-numerably infinite collection of segments, is the sum of their individual measures, so that
 
 $$ m(\sum_{i=1}^{\aleph_0} X_i) = \sum_{i=1}^{\aleph_0} m(X_i)  $$
 
@@ -128,17 +129,17 @@ $$ m(\sum_{i=1}^{\aleph_0} Q_i) = 0  $$
 Note that this summation is allowed since the set of Rational Numbers is denumerably infinite according to Cantor.
 From this it follows that
 
-$$ m([0,1]) - m(all\ rationals\ in\ [0,1]) =  m(all\ irrationals\ in\ [0,1] =  1 $$
+$$ m([0,1]) - m(all\ rationals\ in\ [0,1]) =  m(all\ irrationals\ in\ [0,1]) =  1 $$
 
 Hence the irrationals that are left over after all the rationals have been removed, have measure 1. This is an amazing result, since it is saying that the non-denumerable infinite sum of all the irrational number that exist over this interval has a finite measure, even though each number individually has measure zero.
 This result resolves Zeno's Plurality Paradox, since the set of points that are removed from the line segment during the halving procedure is a subset of the set of rationals. Hence if the arrow were to traverse the segment [0,1] by taking an denumerable infinite number of tiny steps between neighboring rational numbers, it would still travel a total distance of 1 unit.
 
 The development of Measure Theory further led to a rigorous definition of the integral by Lebesgue which is still in use today, the so called Lebesgue Integral. 
-In order to see the connection between Measure Theory and the integration, note that the calculation of the distance travelled by the arrow that we just did can also be written as the integral
+In order to see the connection between Measure Theory and the integration, note that the calculation that we just did can also be written as the integral
 
-$$ x = \int_{0}^{1} v(t) dt = 1 $$
+$$ m(all\ irrationals\ in\ [0,1]) = \int_{0}^{1} v(t) dt = 1 $$
 
-where $x$ is the distance covered by the arrow in time interval [0,1], and the velocity function is given by: v(t) = 0 if $t$ is a Rational Number, and 1 otherwise. Admittedly this is not a velocity that we will see in the real world, but it illustrates the fact the theory of integration based on measures is capable of integrating these type of complex functions.
+where the function $v(t)$ is given by: v(t) = 0 if $t$ is a Rational Number, and 1 otherwise. Older definitions of the integral, such as the one given by Bernhard Riemann, were incapable of integrating these type of complex funcions.
 
 In the last section we saw how the theory of differential calculus was put on a firm theoretical footing and this resolved Zeno's Paradox of the Movement of the Arrow, while in this section we see how the theory of Integral Calculus reached its current rigorous development after resolving the related Paradox of Plurality. The resolution of these two paradoxes together led to our current understanding of the mathematics of the infinitely small, and the infinitely large.
 
@@ -150,16 +151,16 @@ But does it make sense to talk of motion of the arrow in these gaps at the insta
 
 This raises the mystery of what exactly is the arrow doing in-between two such observations. If we go by Newton's Laws of Motion, then the position (and velocity) of the object can be predicted once we know its initial position, velocity and the forces acting on it. In particular in the absence of any force, an object moving at a particular velocity will keep moving at the same velocity. This would allow us to predict its position, even though it is not being observed.
 Is this what happens in the real world?
-If we were to drill down to a very small object, and try to observe its motion over very small intervals of time, what is actually observed?
+If we were to drill down to a very small object, and try to observe its motion over very small intervals of time, what do we see?
 If the arrow were replaced by a fundamental particle, say the electron, can we carry out an experiment using a very powerful microscope, in which we try to see how it behaves while its moving over the continuum? Such an experiment was indeed carried out about a hundred years ago, and the results only deepened the mystery. This topic is discussed in the next section.
 
 ## Quantum Mechanics and the Paradox
 
-![](https://subirvarma.github.io/GeneralCognitics/images/zeno1) 
+![](https://subirvarma.github.io/GeneralCognitics/images/zeno1.png) 
 
 Figure 1
 
-The photograph in Fig. 1 shows the path several elementary particles as captured in a device called a Bubble Chamber. If we focus on the path of any one of these particles, we can see that it consists of a series of white dots. These are points at which the particle is interacting with the contents of the Bubble Chamber, and so these dots can be regarded as a series of observations that fix the position the particle at successive time instants. What is the particle doing at times that are in-between two of the white dots? If we go by Newton's Laws of Motion, the particle will be located at a position whose value can be determined exactly since the particle's velocity is also known.
+The photograph in Fig. 1 shows the path of several elementary particles as captured in a device called a Bubble Chamber. If we focus on the path of any one of these particles, we can see that it consists of a series of white dots. These are points at which the particle is interacting with the contents of the Bubble Chamber, and so these dots can be regarded as a series of observations that fix the position the particle at successive time instants. What is the particle doing at times that are in-between two of the white dots? If we go by Newton's Laws of Motion, the particle will be located at a position whose value can be determined exactly since the particle's velocity is also known.
 On the other hand, Quantum Mechanics has a very surprising answer to this question: We cannot have a precise determination of the particle's position while it is in the space in-between area two  observed positions. The only way to do would be take another measurement in the gap interval, which would have resulted in another white dot along the particle's trajectory in Fig. 1.
 
 When an object traverses a certain distance, we are only observing it at discrete instants of time. This is not so obvious when looking at the movement of a macroscopic object like an arrow. Newtonian  Mechanics helps us interpret hat happened at the instants in-between two observations. Given the mathematical picture of a dense interval of points on the continuum, we can predict the location of the arrow with any amount of precision, at any time instant (even though the arrow was not being observed at that instant).
@@ -217,13 +218,13 @@ This raises the following interesting question: If the particle is stationary at
 
 ## Philosophy and Zeno's Paradox
 
-As we have seen the paradox has played a very influential role in the development of calculus, as well as our ideas about the nature of infinity. It also had a very important effect on modern philosophy.
+Not only did the paradox play a very influential role in the development of calculus, as well as our ideas about the nature of infinity, it also had a big influence on modern philosophy.
 The great philosopher Immanuel Kant, who did most of his work in the late 1700s, spent time thinking deeply about Zeno's paradox, and the conclusions that he drew from this investigation led to his ground breaking work *Critique of Pure Reason*. 
 
-Kant concluded that there is a difference between the world as it exists in reality, which he called the Noumenon, and the picture of the world that our mind presents to us, which he called the Phenomenon. Our brain is constantly getting bombarded with sensory data, and fortunately it has figured out a way in which the chaos can be organized, and this is by arranging events so that they are spread out in time, and exist in space. In his view space and time are not real things that exist in the Noumenon, but are creations of our minds. Hence they are more like a frame of reference or a stage on which everything else happens. He also concluded that treating space and time as real things leads to Zeno's paradoxes. For example Zeno's Paradox of Plurality requires us to chop up a segment of space into infinitely small pieces. But the idea of sub-dividing an object infinitely many times is an idea from mathematics not from real life, since in practice something like that can never be carried out. But Zeno assumed that this could be done, thus leading to the paradox.
+Kant concluded that there is a difference between the world as it exists in reality, which he called the Noumenon, and the picture of the world that our mind presents to us, which he called the Phenomenon. Our brain is constantly getting bombarded with sensory data, and fortunately it has figured out a way in which the chaos can be organized, and this is by arranging events so that they are spread out in time, and exist in space. In his view space and time are not real things that exist in reality or the Noumenon, but are creations of our minds. Hence they are more like a frame of reference or a stage on which everything else happens. He also concluded that treating space and time as real things leads to Zeno's paradoxes. For example Zeno's Paradox of Plurality requires us to chop up a segment of space into infinitely small pieces. But the idea of sub-dividing an object infinitely many times is an idea from mathematics not from real life, since in practice something like that can never be carried out. But Zeno assumed that this could be done, thus leading to the paradox.
 
 Kant was the first of the modern philosophers to raise doubts about the true nature of space and time. 
-These ideas later had a big influence on the development of Quantum Mechanics. Kant served as a source of inspiration for Heisenberg, who it is said kept a copy of Kant with him at the time he was coming up with his ideas.  Heisenberg in some sense extended Kant's ideas further, by denying the real existence of even the material particles like the electron (in the form that we understand to be a particle). Thus the electron exists as a particle only at the time we are observing it, and at other times it exists as a diffuse wave like entity. So in some sense it can be said that the world evolves in time in the Noumenon, to which we don't have access. It becomes visible to us when we make observations, but only at the instant of the observation.
+These ideas later had a big influence on the development of Quantum Mechanics. Kant served as a source of inspiration for Heisenberg, who it is said kept a copy of Kant with him at the time he was coming up with his ideas.  Heisenberg in some sense extended Kant's ideas further, by denying the real existence of even the material particles like the electron (in the form that we understand to be a particle). Thus the electron exists as a particle only at the time we are observing it, and at other times it exists as a diffuse wave like entity. So in some sense it can be said that the world exists and evolves in time in the Noumenon, to which we don't have access. It becomes visible to us when we look at it, but only at the instant of the observation.
 
 
 ## The Future of the Paradox
