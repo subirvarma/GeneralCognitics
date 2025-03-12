@@ -5,7 +5,6 @@ title: "Zeno's Paradox"
 
 # Zeno's Paradox of the Arrow
 
- [online book on this subject](https://srdas.github.io/DLBook2/)
 
 ## Introduction
 
