@@ -12,6 +12,7 @@ title: "The Technology That Made Broadband Wireless Possible"
 
 ## The Fourier Transform
 
+![](https://subirvarma.github.io/GeneralCognitics/images/ofdm1.png) 
 
 
 ### The Discrete Fourier Transform
