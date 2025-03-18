@@ -18,13 +18,6 @@ title: "The Technology That Made Broadband Wireless Possible"
 
 
 
-
-## The Wireless Channel
-
-
-
-
-
 ## Single Carrier Modulation 
 
 
@@ -32,13 +25,22 @@ title: "The Technology That Made Broadband Wireless Possible"
 
 
 
-### Problems with SCM in Broadband Systems
+## The Wireless Channel
+
+
+
+
+
+
+### Problems with SCM in Broadband Wireless Systems
 
 
 
 
 
 ## OFDM: How to Pack More Bits into a Single Large Symbol
+
+
 
 
 ### The OFDM Transmitter
