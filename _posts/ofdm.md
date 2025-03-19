@@ -100,16 +100,16 @@ Figure: Inter-Symbol Interference in Single Carrier Systems
 
 Figure: Generating an OFDM Symbol
 
-![](https://subirvarma.github.io/GeneralCognitics/images/ofdm14.png) 
+![](https://subirvarma.github.io/GeneralCognitics/images/ofdm14.jpg) 
 
 Figure: Generating an OFDM Symbol
 
-![](https://subirvarma.github.io/GeneralCognitics/images/ofdm15.png) 
+![](https://subirvarma.github.io/GeneralCognitics/images/ofdm15.jpg) 
 
 Figure: Inter-Symbol interference in OFDM
 
 
-![](https://subirvarma.github.io/GeneralCognitics/images/ofdm16.png) 
+![](https://subirvarma.github.io/GeneralCognitics/images/ofdm16.jpg) 
 
 Figure: Effect of Channel Distortion in OFDM
 
@@ -118,22 +118,22 @@ Figure: Effect of Channel Distortion in OFDM
 ### The OFDM Transmitter and Receiver
 
 
-![](https://subirvarma.github.io/GeneralCognitics/images/ofdm21.png) 
+![](https://subirvarma.github.io/GeneralCognitics/images/ofdm21.gif) 
 
 Figure: The Overall System using OFDM, Transmitter + Receiver
 
 
-![](https://subirvarma.github.io/GeneralCognitics/images/ofdm18.png) 
+![](https://subirvarma.github.io/GeneralCognitics/images/ofdm18) 
 
 Figure: OFDM Sub-Carriers
 
 
-![](https://subirvarma.github.io/GeneralCognitics/images/ofdm19.png) 
+![](https://subirvarma.github.io/GeneralCognitics/images/ofdm19.jpg) 
 
 Figure: OFDM vs Regular Frequency Division Multiplexing
 
 
-![](https://subirvarma.github.io/GeneralCognitics/images/ofdm20.png) 
+![](https://subirvarma.github.io/GeneralCognitics/images/ofdm20.ppm) 
 
 Figure: Using Inverse Discrete Fourier Transform in an OFDM Transmitter
 
