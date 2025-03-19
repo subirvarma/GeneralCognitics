@@ -123,9 +123,9 @@ Figure: Effect of Channel Distortion in OFDM
 Figure: The Overall System using OFDM, Transmitter + Receiver
 
 
-![](https://subirvarma.github.io/GeneralCognitics/images/ofdm18) 
+![](https://subirvarma.github.io/GeneralCognitics/images/ofdm18.jpg) 
 
-Figure: OFDM Sub-Carriers
+Figure 18: OFDM Sub-Carriers
 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm19.jpg) 
