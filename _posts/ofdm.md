@@ -15,16 +15,22 @@ The wireless technology did, as the transition from 3G networks to 4G happened r
 
 Before I launch into OFDM and 4G wireless, I want to briefly mention the technology that they replaced, namely 3G wireless. The latter was launched in 2001, and was the first technology that seriously tried to integrate voice AND data communications capability into the handset. Unfortunately the 3G protocol was designed in the era when voice was still based on an older technology called circuit switching, and thats what went into 3G. Data was considered to be the less important feature, hence its design was an add-on, and it also used circuit switching. Unfortunately circuit switching is not the baest way to handle data, which handicapped 3G phone performance. 
 The other big issue with 3G was the PHY or physical layer protocol that was used, which was based on a technology called Code Division Multiple Access or CDMA. CDMA paired well with circuit switching, but it was not very well suited for data. '
-However it had a very strong political backing, in the form of Qualcomm Networks which held a number of important CDMA patents.
+However it had a very strong political backing, in the form of the companies Qualcomm and Ericsson which held a number of important CDMA patents.
 So the transition from CDMA to OFDM is also a story of how an insurgent technology, promoted by a few small start-ups, was able to overcome the powerful forces that were aligned against it.
 
-I had some personal involvement in the transition from 3G to 4G wireless, and had a first hand view of the politics involved. I was a co-founder of a start-up called Aperto Networks that did some of the work that ultimately resulted in 4G, and for a number of years I was a member of the IEEE 802.16 Standards Committee that was working on 4G, even chairing the Medium Access Control or MAC group for a while. The MAC protocol lies on top of PHY layers such as CDMA or OFDM, and it had to re-thought for packet based wireless communications. But this article is not about the MAC, perhaps it will be a subject of a future article.
+I had some personal involvement in the transition from 3G to 4G wireless, and had a first hand view of the politics involved. I was a co-founder of a start-up called Aperto Networks that did some of the work that ultimately resulted in 4G, and for a number of years I was a member of the IEEE 802.16 Standards Committee that was working on 4G, even chairing the Medium Access Control or MAC group for a while. The MAC protocol lies on top of PHY layers such as CDMA or OFDM, and it had to completely re-thought for packet based wireless communications. But this article is not about the MAC, perhaps it will be a subject of a future article.
 
 ## The Fourier Transform
+
+To get to an understanding of how OFDM works, it is necessary to know a mathematical technique called the Fourier Transform. It was discovered by Joseph Fourier of France in the 1820s, and since then it has become one of the most powerful tools in the arsenal for mathematicians and engineers.
+In an earlier article, I wrote about how a lot of comnplex system can be organized using the 2-layer principle. This states that it is possible to transform something that looks very complicated, such as a color image with hundreds of thousands of pixels, into another simpler object such as a vector, by abstracting out its critical components. The mathematical transformation that converts an image into the vector (called the Latent Vector), was represented by a Neural Network. This transform works in both directions, so it is possible to recover the original image from its Latent Vector representation.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm2.png) 
 
 Figure 1: Decomposition of a signal into its components
+
+The Fourier Transform can be considered to be another example of this 2-layer principle. By means of this transform, one can take a shape, as represented by a mathematical function,and decompose it into a bunch of simpler shapes, as represented by the harmonic functions (sines and cosines, see Fig. 1). The original function can be recovered by linearly combining the harmonic functions.
+Hence the Fourier Transform can be considered to be one of the first examples of the 2-layer principle, in which a mathematical operation rather than a Neural Network, is used to transform one layer to another.
 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm3.png) 
