@@ -25,7 +25,7 @@ I had some personal involvement in the transition from 3G to 4G wireless, and ha
 To get to an understanding of how OFDM works, it is necessary to know a mathematical technique called the Fourier Transform. It was discovered by Joseph Fourier of France in the 1820s, and since then it has become one of the most powerful tools in the arsenal for mathematicians and engineers.
 In an earlier article, I wrote about how a lot of comnplex system can be organized using the 2-layer principle. This states that it is possible to transform something that looks very complicated, such as a color image with hundreds of thousands of pixels, into another simpler object such as a vector, by abstracting out its critical components. The mathematical transformation that converts an image into the vector (called the Latent Vector), was represented by a Neural Network. This transform works in both directions, so it is possible to recover the original image from its Latent Vector representation.
 
-![](https://subirvarma.github.io/GeneralCognitics/images/ofdm2.png) 
+![](https://subirvarma.github.io/GeneralCognitics/images/ofdm22.png) 
 
 Figure 1: Decomposition of a signal into its components
 
