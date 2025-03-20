@@ -42,17 +42,16 @@ By using the Euler Formula $e^{j\theta} = \cos\theta + j\sin\theta$, it can also
 
 $$ x(t) = \sum_{n=-N}^N c_n e^{{2\pi n\over T}t}\ where\ c_n = {1\over T}\int_{-{T\over 2}}^{T\over 2} x(t)e^{-{2\pi n\over T}t} dt  $$
 
-The quantity $2\pi\over T$ is referred to as the angular frequency $\omega$, and using this notation the equations become
+The quantity $1\over T$ is the frequency $f$, and using this notation the equations become
 
-$$ x(t) = \sum_{n=-N}^N c_n e^{n\omega t}\ where\ c_n = {1\over T}\int_{-{T\over 2}}^{T\over 2} x(t)e^{-n\omega t} dt  $$
-
+$$ x(t) = \sum_{n=-N}^N c_n e^{2\pi nf t}\ where\ c_n = {1\over T}\int_{-{T\over 2}}^{T\over 2} x(t)e^{-2\pi nf t} dt  $$
 
 where $c_n$ is now a complex number. 
 
 Since the Fourier Series can only be used for perioidic signals, what about aperiodic signals. This is where the Fourier Transform comes into the picture, and is given by the formulae:
 
-$$ x(t) = {1\over 2\pi}\int_{-\infty}^{\infty} X(\omega)e^{\omega t} d\omega  $$
-$$ X(\omega) = \int_{-\infty}^{\infty} x(t) e^{-\omega t} dt $$
+$$ x(t) = \int_{-\infty}^{\infty} X(f)e^{2\pi f t} df  $$
+$$ X(f) = \int_{-\infty}^{\infty} x(t) e^{-2\pi f t} dt $$
 
 
 
