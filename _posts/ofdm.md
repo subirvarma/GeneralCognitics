@@ -10,7 +10,7 @@ title: "The Technology That Made Broadband Wireless Possible"
 
 Those of you who are old enough will recall the era before 2010 when Nokia, Motorola and Blackberry dominated the market for wireless handsets. These phones had become quite proficient in handling mobile voice calls, but when it came to data, the bitrates that they provided was not quite good enough. It was possible to do some text based web surfing, but when it came to full graphics based web pages, or youtube video streaming, they were not quite up to the task. All this changed in 2011, when suddenly phones suddenly became as good as desktop terminals in running even the most graphics laden content, and streaming video became omnipresent. 
 
-It was not due to the iPhone, since this handset was launched in 2007. So what changed? 
+So what changed? It was not due to the iPhone, since this handset had been launched a few years earlier in 2007. 
 The wireless technology did, as the transition from 3G networks to 4G happened right around that time. This article is about a key technology in 4G wireless that enabled higher data rates, called Orthogonal Frequency Division Multiplexing or OFDM. The name sounds rather formidable, but I think it is possible to explain the essence of how OFDM works even to the non specialist with some knowledge of college level maths, and I am going to make an attempt to do so. OFDM exists at the bottom of the communications protocol stack, and most people don't even know about its exisence, since most of the attention is grabbed by handsets such as the iPhone and the applications running on it. But without OFDM, high speed communications on the iPhone would not have been possible.
 
 Before I launch into OFDM and 4G wireless, I want to briefly mention the technology that they replaced, namely 3G wireless. The latter was launched in 2001, and was the first technology that seriously tried to integrate voice AND data communications capability into the handset. Unfortunately the 3G protocol was designed in the era when voice was still based on an older technology called circuit switching, and thats what went into 3G. Data was considered to be the less important feature, hence its design was an add-on, based on a voice centric technology called circuit switching. Unfortunately circuit switching is not the best way to handle data, which does better with a technology called packet switching, and this handicapped 3G phone performance. 
@@ -71,7 +71,7 @@ Hence if $x(t)$ is aperiodic, the frequencies $f$ needed to represent it is no l
 
 ### The Discrete Fourier Transform
 
-The Fourier Transform works well enough for signals that are continous in time, but we live in a digital world, and the computers that we depend on can only process discrete numbers. In order to enable this, a continuous signal has to be discretized, 
+The Fourier Transform works well enough for signals that are continous in time, but we live in a digital world, and the computers that we depend on can only process discrete numbers. In order to enable this, a continuous signal has to be discretized, before any further processing can be applied to it and furthermore the Fourier Transform has to take this into account. The next few figures go through the discretization process, and the resulting transform called the Discrete Fourier Transform or DFT. OFDM utilizes DFT in its design, hence the foucus on this.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm22a.png) 
 
@@ -83,7 +83,7 @@ As before, let $x(t)$ be a continuous time signal that is defined over the onter
 
 Figure: Fourier Transform (in red) for a signal that is sampled in time (in blue)
 
-Let $x[n]$ denote samples of this signal, taken at the rate of $f_s={1\over T_s}$ samples/second, where $T_s$ is the sampling period. Furthermore assume that N samples are taken over the interval, so that $N = {1\over T_s}$.
+Let $x[n]$ denote samples of this signal, taken at the rate of $f_s={1\over T_s}$ samples/second, where $T_s$ is the sampling period. Furthermore assume that N samples are taken over the interval $[0,1]$, so that $N = {1\over T_s}$.
 Thus we have
 
 $$ x[n] = x(nT_s), \ \ \ for\ \ \  0\le n\le N-1\ \ \ and\ \ \  0\ \ \ otherwise $$
