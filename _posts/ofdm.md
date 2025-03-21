@@ -73,17 +73,28 @@ Hence if $x(t)$ is aperiodic, the frequencies $f$ needed to represent it is no l
 
 The Fourier Transform works well enough for signals that are continous in time, but we live in a digital world, and the computers that we depend on can only process discrete numbers. In order to enable this, a continuous signal has to be discretized, 
 
+![](https://subirvarma.github.io/GeneralCognitics/images/ofdm22a.png) 
 
-and the first step in this direction was taken by by the eminent scientist Harry Nyquist, who worked in Bell Labs in the period prior to World War 2. This work was further extended by Claude Shannon, so the work is referred to as the Nyquist-Shannon Sampling Theorem. 
+Figure: Fourier Transform (in red) for a signal (in blue)
 
-As before, let $x(t)$ be a continuous time signal that is defined over the onterval $[0,1]$, and let $x[n]$ denote samples of this signal, taken at the rate of $f_s={1\over T_s}$ samples/second, where $T_s$ is the sampling period. Furthermore assume that N samples are taken over the interval, so that $N = {1\over T_s}$.
+As before, let $x(t)$ be a continuous time signal that is defined over the onterval $[0,1]$ with Fourier Transform $\tilde X(f)$.
+
+![](https://subirvarma.github.io/GeneralCognitics/images/ofdm22b.png) 
+
+Figure: Fourier Transform (in red) for a signal that is sampled in time (in blue)
+
+Let $x[n]$ denote samples of this signal, taken at the rate of $f_s={1\over T_s}$ samples/second, where $T_s$ is the sampling period. Furthermore assume that N samples are taken over the interval, so that $N = {1\over T_s}$.
 Thus we have
 
 $$ x[n] = x(nT_s), \ \ \ for\ \ \  0\le n\le N-1\ \ \ and\ \ \  0\ \ \ otherwise $$
 
-Furthermore assume that $X(f)$ is the (regular) Fourier Transform of $x[n], 0\le n\le N-1$, so that
+Furthermore assume that $X(f)$ is the Fourier Transform of $x[n], 0\le n\le N-1$, so that
 
 $$ X(f) = \sum_{n=0}^{N-1} x[n] e^{-j2\pi fn},\ \ \ 0\le f\le 1  $$
+
+![](https://subirvarma.github.io/GeneralCognitics/images/ofdm22c.png) 
+
+Figure: Inverse Fourier Transform (in blue) for a signal that is sampled in frequency (in red)
 
 If we evaluate $X(f)$ only at discrete values of frequency $[0, \Delta f, 2\Delta f,..., (N-1)\Delta_f]$, where $\Delta f = {1\over N}$, and defining $X_k = X(k\Delta f]$, then
 
@@ -95,23 +106,20 @@ $$ x[n] = {1\over N}\sum_{k=0}^{N-1} X_k e^{j2\pi {k\over N}n} \ \ \ for\ \ \ n=
 
 The last two equations constitute the Discrete Fourier Transform and the Inverse Discrere Fourier Transform respectively. Note that both $x[n]$ and $X_k$ are periodic with period N.
 
-![](https://subirvarma.github.io/GeneralCognitics/images/ofdm22a.png) 
-
-Figure: Fourier Transform (in red) for a signal (in blue)
 
 
 
-![](https://subirvarma.github.io/GeneralCognitics/images/ofdm22b.png) 
 
-Figure: Fourier Transform (in red) for a signal that is sampled in time (in blue)
 
-![](https://subirvarma.github.io/GeneralCognitics/images/ofdm22c.png) 
 
-Figure: Inverse Fourier Transform (in blue) for a signal that is sampled in frequency (in red)
+
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm22d.png) 
 
 Figure: Fourier and Inverse Fourier Transforms for a signal that is sampled in both time and frequency
+
+
+and the first step in this direction was taken by by the eminent scientist Harry Nyquist, who worked in Bell Labs in the period prior to World War 2. This work was further extended by Claude Shannon, so the work is referred to as the Nyquist-Shannon Sampling Theorem. 
 
 ## Single Carrier Modulation 
 
