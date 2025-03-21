@@ -27,7 +27,7 @@ The abstract representation is often easier to manipulate and analyze, and a mum
 
 - Representing data such as images and language using Latent Variables. The mathematical transformation in this case is represented by Artificial Neural Networks. This representation lies at the heart of all the progress being made in this field.
 - Representing physical measurements using the idea of Fields. This started with Maxwell and the Electromagnetic Field, and went on to represent matter using Quantum Fields. Also the Schrodinger Wave Function for a particle can be represented either in terms of its location x in space, or its momentum p, and and these two representation $\psi(x)$ and $\psi(p)$ are Fourier Transforms of each other!
-- Representing Biological data using the DNA code. In this case the abstract representation actually exists in the real world as well.
+- Representing Biological data using the DNA code. In this case the abstract Layer 2 representation actually exists in the real world too.
 
 It can be argued that a great deal of scientific progress in the last 200 years has been made by exploting the 2-Layer Principle. 
 This principle was first discovered by Joseph Fourier more than 200 years ago, with his invention of the Fourer Transform.
@@ -39,11 +39,12 @@ Before launching into the Fourier Transform, I am going to introduce a simpler v
 
 Figure 1: Decomposition of a time domain signal into its frequency domain components
 
-The fundamental idea behind the Fourier Series is illustrated in Fig. 1, which shows a periodic time domain signal with period T (in approximate square wave shape, in the lower left of the figure). Fourier proposed that any such signal can be represented as a linear combination of sine and cosine functions, as follows:
+The fundamental idea behind the Fourier Series is illustrated in Fig. 1, which shows a periodic time domain signal with period T (in approximate square wave shape, in the lower left of the figure). Fourier proposed that any such signal can be represented as a linear combination of sine and cosine functions, whose frequencies are integer multiples of the base frequency ${2\pi\over T}$, as follows
 
 $$ x(t) = a_0 + \sum_{n=1}^N [a_n \cos {2\pi n\over T}t + b_n \sin {2\pi n\over T}t] $$
 
-This decomposition of $x(t)$ into simpler functions is known as the Fourier Series. You can see why x(t) has to be a periodic function with period T, since both sine and cosine are periodic with this period. In this case the Layer 2 representation is the set of coefficients ${a_0, a_1, b_1, a_2, b_2, ...}$. Hence we have replaced a complex time based periodic function, by an equivalent representation which consists of a bunch of numbers, which is a massive amount of simplification.
+This decomposition of $x(t)$ into simpler functions is known as the Fourier Series. You can see why x(t) is constrained to be a periodic function with period T, since both sine and cosine are periodic with this period. In this case the Layer 2 representation for the signal $x(t)$ is the set of coefficients ${a_0, a_1, b_1, a_2, b_2, ...}$. Hence we have replaced a complex time based periodic function, by an equivalent representation which consists of a bunch of numbers, which is a huge amount of simplification.
+Fourier's insight was his realization that this decomposition could be done for any periodic function $x(t)$.
 Fourier showed that these co-efficients can be computed using the formulae:
 
 $$ a_0 = {1\over T}\int_{-{T\over 2}}^{T\over 2} x(t) dt $$
@@ -54,11 +55,10 @@ There is an equivalent representation of the Fourier Series using complex number
 
 $$ x(t) = \sum_{n=-N}^N c_n e^{{2\pi n\over T}t}\ \ \ where\ \ \ c_n = {1\over T}\int_{-{T\over 2}}^{T\over 2} x(t)e^{-{2\pi n\over T}t} dt  $$
 
+where $c_n$ is now a complex number. 
 The quantity $1\over T$ is the frequency $f$, and using this notation the equations become
 
 $$ x(t) = \sum_{n=-N}^N c_n e^{2\pi nf t}\ \ \ where\ \ \ c_n = {1\over T}\int_{-{T\over 2}}^{T\over 2} x(t)e^{-2\pi nf t} dt  $$
-
-where $c_n$ is now a complex number. 
 
 Since the Fourier Series can only be used for perioidic signals, what about aperiodic signals that occur just once in time.
 This is where the Fourier Transform comes into the picture, and is given by the formulae:
@@ -66,7 +66,16 @@ This is where the Fourier Transform comes into the picture, and is given by the 
 $$ x(t) = \int_{-\infty}^{\infty} X(f)e^{2\pi f t} df  $$
 $$ X(f) = \int_{-\infty}^{\infty} x(t) e^{-2\pi f t} dt $$
 
-Hence if $x(t)$ is aperiodic, the frequencies needed to represent it is no longer form a discrete set, but instead become a continuum of frequences! In order to get an intuitive understanding for why this is the case, note that in the Fourier Series representation, two neighboring frequencies are separated by $\Delta f = 
+Thus the Fourier Transform of an aperiodic time function $x(t)$ ia another aperiodic function $X(f)$ that exists in the frequency space.
+Hence if $x(t)$ is aperiodic, the frequencies $f$ needed to represent it is no longer form a discrete set, but instead become a function $X(f)$ that exists over a continuum of frequences! In order to get an intuitive understanding for why this is the case, note that in the Fourier Series representation, two neighboring frequencies are separated by $\Delta f = {1\over T}$. We can convert a periodic $x(t)$ into a aperiodic function by making $T$ larger and larger, and in the limit as $T\rightarrow\infty$, we can see that the separation between adjacent frequencies in its Fourier Series representation goes to zero, which is the same as saying that the frquencies now form a continuum (also the product $nf$ approaches a finite quantity, as $n$ goes to infinity and $f$ goes to zero).
+
+### The Discrete Fourier Transform
+
+The Fourier Transform works well enough for signals that are continous in time, but we live in a digital world, and the computers that we depend on can only process discrete numbers. In order to enable this, a continous signal has to be discretized, and the first step in this direction was taken by by the eminent scientist Harry Nyquist, who worked in Bell Labs in the period prior to World War 2.
+
+
+
+## Single Carrier Modulation 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm3.png) 
 
@@ -82,15 +91,6 @@ Figure 3: Effect of Pulse Width on Bandwidth
 
 Figure 4: Fourier Transform of a Passband Rectangular Pulse
 
-
-
-In an earlier article, I wrote about how a lot of complex system can be organized using the 2-layer principle. This states that it is possible to transform something that looks very complicated, such as a color image with hundreds of thousands of pixels, into another simpler object such as a vector, by abstracting out its critical components. The mathematical transformation that converts an image into the vector (called the Latent Vector), was represented by a Neural Network. This transform works in both directions, so it is possible to recover the original image from its Latent Vector representation.
-
-### The Discrete Fourier Transform
-
-
-
-## Single Carrier Modulation 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm7.png) 
 
