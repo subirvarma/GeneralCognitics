@@ -22,7 +22,15 @@ I had some personal involvement in the transition from 3G to 4G wireless, and ha
 
 ## The Fourier Transform
 
-To get to an understanding of how OFDM works, it is necessary to know a mathematical technique called the Fourier Transform. It was first published by Joseph Fourier of France in the 1820s, and since then it has become one of the most powerful tools in the arsenal for mathematicians and engineers.
+To get to an understanding of how OFDM works, it is necessary to know a mathematical technique called the Fourier Transform. It was first published by Joseph Fourier of France in the 1820s, and since then it has become one of the most powerful tools in the arsenal for mathematicians and engineers. The Fourier Transform is another example of the 2-Layer Principle for organizing complex data, that I talked about in an earlier article called "Latent Varibales and Latent Spaces". The principle states that data can often be represented in two ways: (1) As it exists in the real world, and thus can be measured using instruments, and (2) In an abstract mathematical space, which we can access only by performing some mathematical operations on the real world data. Moreover the two represenations can be transformed into one another using math.
+The abstract representation is often easier to manipulate and analyze, and a mumber of difficult problems in the real world can be solved, by first solving the problem in the abstract space. Other examples of this 2-Layer Principle from the earlier article include:
+
+- Representing data such as images and language using Latent Variables. The mathematical transformation in this case is represented by Artificial Neural Networks. This representation lies at the heart of all the progress being made in this field.
+- Representing physical measurements using the idea of Fields. This started with Maxwell and the Electromagnetic Field, and went on to represent matter usig Quantum Fields.
+- Representing Biological data using the DNA code. In this case the abstract representation actually exists in the real world as well.
+
+It can be argued that a great deal of scientific progress in the last 200 years has been made by exploting the 2-Layer Principle, and this whole field was first discovered by Joseph Fourier more than 200 years ago, with his invention of the Fourer Transform.
+This transform can be used to represent a signal that exists in time, such as the ones that are used in communications networks, in an abstract representation that is instead based on the frequencies that signal occupies. Its not an exaggeration to say that almost all of communications theory is based on the frequency based representation which is also called the Spectrum of the signal.  by using the spectral representation, we are able o manipulate the real time based signal in various ways, which would be impossible to do otherwise.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm22.png) 
 
