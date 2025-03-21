@@ -92,11 +92,21 @@ Furthermore assume that $X(f)$ is the Fourier Transform of $x[n], 0\le n\le N-1$
 
 $$ X(f) = \sum_{n=0}^{N-1} x[n] e^{-j2\pi fn},\ \ \ 0\le f\le 1  $$
 
+From this equation we can see that $X(f)$ is a periodic function. Hence discretization in the time domain causes periodicity in the frequency domain.
+
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm22c.png) 
 
 Figure: Inverse Fourier Transform (in blue) for a signal that is sampled in frequency (in red)
 
-If we evaluate $X(f)$ only at discrete values of frequency $[0, \Delta f, 2\Delta f,..., (N-1)\Delta_f]$, where $\Delta f = {1\over N}$, and defining $X_k = X(k\Delta f]$, then
+If, instead of discretizing the time domain signal $x(t)$, what would happen if we discretized the frequency domain signal $\tilde X(f)?
+If we evaluate $X(f)$ only at discrete values of frequency $[0, \Delta f, 2\Delta f,..., (N-1)\Delta_f]$, where $\Delta f = {1\over N}$, and defining $X_k = {\tilde X}(k\Delta f]$, then what is its Inverse Fourier Transform? The result of this operation is shown in the above figure and as can be seen, it results in a periodic and continuous  function in time.
+
+
+![](https://subirvarma.github.io/GeneralCognitics/images/ofdm22d.png) 
+
+Figure: Fourier and Inverse Fourier Transforms for a signal that is sampled in both time and frequency
+
+Finally, what would be the result if both the time domain and frequency domain functions were to be discretized as shown in the above figure? This results in the Discrete Fourier Transform, whose equations are given by:
 
 $$ X_k = \sum_{n=0}^{N-1} x[n] e^{-j2\\pi {k\over N}n},\ \ \ for\ \ \ k=0,1,...,N-1  $$
 
@@ -104,22 +114,11 @@ This formula can be inverted to obtain
 
 $$ x[n] = {1\over N}\sum_{k=0}^{N-1} X_k e^{j2\pi {k\over N}n} \ \ \ for\ \ \ n=0,1,...N-1 $$
 
-The last two equations constitute the Discrete Fourier Transform and the Inverse Discrere Fourier Transform respectively. Note that both $x[n]$ and $X_k$ are periodic with period N.
+The last two equations constitute the Discrete Fourier Transform and the Inverse Discrere Fourier Transform respectively. Note that these transforms allow all signals to be processed in the digital domain.
 
-
-
-
-
-
-
-
-
-![](https://subirvarma.github.io/GeneralCognitics/images/ofdm22d.png) 
-
-Figure: Fourier and Inverse Fourier Transforms for a signal that is sampled in both time and frequency
-
-
-and the first step in this direction was taken by by the eminent scientist Harry Nyquist, who worked in Bell Labs in the period prior to World War 2. This work was further extended by Claude Shannon, so the work is referred to as the Nyquist-Shannon Sampling Theorem. 
+You may be wondering that by discretizing a continuos time signal, we may be throwing away useful information. 
+But in fact this is not the case, as was proven by Harry Nyquist, who worked in Bell Labs in the period prior to World War 2. This work was further extended by Claude Shannon, so the work is referred to as the Nyquist-Shannon Sampling Theorem. 
+The theorem states that as long as we sample a signal fast enough, it is always possible to re-create the original signal from the samples. The minimum sampling rate for perfect re-construction is $2B$, where $B$ is the maximum frequency in the Fourier Transform of $x(t)$. This is an amazing result, and one can get an intuitive understanding of why is is true by examining Fig. xx. It shows that if a continuous time signal is discretized, then its resulting Fourier Transform is just the periodic continuation of $\tilde X(f)$, where the latter was the Fourier transform of the continuous time signal. Hence if we were to filter out just one of these shapes, and take its Inverse Fourier Transform, the we would have  recovered the original signal $x(t)$!
 
 ## Single Carrier Modulation 
 
