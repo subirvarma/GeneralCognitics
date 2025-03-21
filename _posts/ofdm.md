@@ -26,42 +26,47 @@ To get to an understanding of how OFDM works, it is necessary to know a mathemat
 The abstract representation is often easier to manipulate and analyze, and a mumber of difficult problems in the real world can be solved, by first solving the problem in the abstract space. Other examples of this 2-Layer Principle from the earlier article include:
 
 - Representing data such as images and language using Latent Variables. The mathematical transformation in this case is represented by Artificial Neural Networks. This representation lies at the heart of all the progress being made in this field.
-- Representing physical measurements using the idea of Fields. This started with Maxwell and the Electromagnetic Field, and went on to represent matter usig Quantum Fields.
+- Representing physical measurements using the idea of Fields. This started with Maxwell and the Electromagnetic Field, and went on to represent matter using Quantum Fields. Also the Schrodinger Wave Function for a particle can be represented either in terms of its location x in space, or its momentum p, and and these two representation $\psi(x)$ and $\psi(p)$ are Fourier Transforms of each other!
 - Representing Biological data using the DNA code. In this case the abstract representation actually exists in the real world as well.
 
-It can be argued that a great deal of scientific progress in the last 200 years has been made by exploting the 2-Layer Principle, and this whole field was first discovered by Joseph Fourier more than 200 years ago, with his invention of the Fourer Transform.
-This transform can be used to represent a signal that exists in time, such as the ones that are used in communications networks, in an abstract representation that is instead based on the frequencies that signal occupies. Its not an exaggeration to say that almost all of communications theory is based on the frequency based representation which is also called the Spectrum of the signal.  by using the spectral representation, we are able o manipulate the real time based signal in various ways, which would be impossible to do otherwise.
+It can be argued that a great deal of scientific progress in the last 200 years has been made by exploting the 2-Layer Principle. 
+This principle was first discovered by Joseph Fourier more than 200 years ago, with his invention of the Fourer Transform.
+This transform can be used to represent a signal that exists in time, such as the ones that are used in communications networks, in an abstract representation that is instead based on the frequencies that signal occupies. Its not an exaggeration to say that almost all of communications theory is based on the frequency based representation which is also called the Spectrum of the signal.  By using the spectral representation, we are able to manipulate time based signals in various ways, which would be impossible to do otherwise.
+
+Before launching into the Fourier Transform, I am going to introduce a simpler version, that was also discovered by Fourier, called the Fourier Series.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm22.png) 
 
 Figure 1: Decomposition of a time domain signal into its frequency domain components
 
-The fundamental idea behind the transform is illustrated in Fig. 1, which shows a periodic time domain signal with period T. Fourier proposed that any such signal can be written as a simple linear combinations of sine and cosine functions, as follows:
+The fundamental idea behind the Fourier Series is illustrated in Fig. 1, which shows a periodic time domain signal with period T (in approximate square wave shape, in the lower left of the figure). Fourier proposed that any such signal can be represented as a linear combination of sine and cosine functions, as follows:
 
 $$ x(t) = a_0 + \sum_{n=1}^N [a_n \cos {2\pi n\over T}t + b_n \sin {2\pi n\over T}t] $$
 
-This decomposition of $x(t)$ ino simpler functions is known as the Fourier Series. The co-efficients are given by 
+This decomposition of $x(t)$ into simpler functions is known as the Fourier Series. You can see why x(t) has to be a periodic function with period T, since both sine and cosine are periodic with this period. In this case the Layer 2 representation is the set of coefficients ${a_0, a_1, b_1, a_2, b_2, ...}$. Hence we have replaced a complex time based periodic function, by an equivalent representation which consists of a bunch of numbers, which is a massive amount of simplification.
+Fourier showed that these co-efficients can be computed using the formulae:
 
 $$ a_0 = {1\over T}\int_{-{T\over 2}}^{T\over 2} x(t) dt $$
 $$ a_n = {1\over T}\int_{-{T\over 2}}^{T\over 2} x(t)\cos{{2\pi n\over T}t} dt,\ for\ n\ge 1 $$
 $$ b_n = {1\over T}\int_{-{T\over 2}}^{T\over 2} x(t)\sin{{2\pi n\over T}t} dt,\ for\ n\ge 1 $$
 
-By using the Euler Formula $e^{j\theta} = \cos\theta + j\sin\theta$, it can also be written as
+There is an equivalent representation of the Fourier Series using complex numbers, which utilizes the Euler Formula $e^{j\theta} = \cos\theta + j\sin\theta$:
 
-$$ x(t) = \sum_{n=-N}^N c_n e^{{2\pi n\over T}t}\ where\ c_n = {1\over T}\int_{-{T\over 2}}^{T\over 2} x(t)e^{-{2\pi n\over T}t} dt  $$
+$$ x(t) = \sum_{n=-N}^N c_n e^{{2\pi n\over T}t}\ \ \ where\ \ \ c_n = {1\over T}\int_{-{T\over 2}}^{T\over 2} x(t)e^{-{2\pi n\over T}t} dt  $$
 
 The quantity $1\over T$ is the frequency $f$, and using this notation the equations become
 
-$$ x(t) = \sum_{n=-N}^N c_n e^{2\pi nf t}\ where\ c_n = {1\over T}\int_{-{T\over 2}}^{T\over 2} x(t)e^{-2\pi nf t} dt  $$
+$$ x(t) = \sum_{n=-N}^N c_n e^{2\pi nf t}\ \ \ where\ \ \ c_n = {1\over T}\int_{-{T\over 2}}^{T\over 2} x(t)e^{-2\pi nf t} dt  $$
 
 where $c_n$ is now a complex number. 
 
-Since the Fourier Series can only be used for perioidic signals, what about aperiodic signals. This is where the Fourier Transform comes into the picture, and is given by the formulae:
+Since the Fourier Series can only be used for perioidic signals, what about aperiodic signals that occur just once in time.
+This is where the Fourier Transform comes into the picture, and is given by the formulae:
 
 $$ x(t) = \int_{-\infty}^{\infty} X(f)e^{2\pi f t} df  $$
 $$ X(f) = \int_{-\infty}^{\infty} x(t) e^{-2\pi f t} dt $$
 
-
+Hence if $x(t)$ is aperiodic, the frequencies needed to represent it is no longer form a discrete set, but instead become a continuum of frequences! In order to get an intuitive understanding for why this is the case, note that in the Fourier Series representation, two neighboring frequencies are separated by $\Delta f = 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm3.png) 
 
