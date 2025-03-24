@@ -31,7 +31,7 @@ The abstract representation is often easier to manipulate and analyze, and a mum
 
 It can be argued that a great deal of scientific progress in the last 200 years has been made by exploting the 2-Layer Principle. 
 This principle was first discovered by Joseph Fourier more than 200 years ago, with his invention of the Fourer Transform.
-This transform can be used to represent a signal that exists in time, such as the ones that are used in communications networks, in an abstract representation that is instead based on the frequencies that signal occupies. Its not an exaggeration to say that almost all of communications theory is based on the frequency based representation which is also called the Spectrum of the signal.  By using the spectral representation, we are able to manipulate time based signals in various ways, which would be impossible to do otherwise.
+This transform can be used to represent a signal that exists in time, such as the ones that are used in communications networks, into an abstract representation that is instead based on the frequencies that signal occupies. It is not an exaggeration to say that almost all of communications theory is based on the frequency based representation which is also called the spectrum of the signal.  By using the spectral representation, we are able to manipulate time based signals in various ways, which would be impossible to do otherwise.
 
 Before launching into the Fourier Transform, I am going to introduce a simpler version, that was also discovered by Fourier, called the Fourier Series.
 
@@ -39,11 +39,13 @@ Before launching into the Fourier Transform, I am going to introduce a simpler v
 
 Figure 1: Decomposition of a time domain signal into its frequency domain components
 
-The fundamental idea behind the Fourier Series is illustrated in Fig. 1, which shows a periodic time domain signal with period T (in approximate square wave shape, in the lower left of the figure). Fourier proposed that any such signal can be represented as a linear combination of sine and cosine functions, whose frequencies are integer multiples of the base frequency ${2\pi\over T}$, as follows
+The fundamental idea behind the Fourier Series is illustrated in Fig. 1, which shows a periodic time domain signal with period T (in approximate square wave shape, in the lower left of the figure). Fourier proposed that any such signal can be represented as a linear combination of sine and cosine functions, also called tones, whose frequencies are integer multiples of the base frequency ${2\pi\over T}$, as follows
 
 $$ x(t) = a_0 + \sum_{n=1}^N [a_n \cos {2\pi n\over T}t + b_n \sin {2\pi n\over T}t] $$
 
-This decomposition of $x(t)$ into simpler functions is known as the Fourier Series. You can see why x(t) is constrained to be a periodic function with period T, since both sine and cosine are periodic with this period. In this case the Layer 2 representation for the signal $x(t)$ is the set of coefficients ${a_0, a_1, b_1, a_2, b_2, ...}$. Hence we have replaced a complex time based periodic function, by an equivalent representation which consists of a bunch of numbers, which is a huge amount of simplification.
+This decomposition of a complicated function into its tones is known as the Fourier Series. The transform can also be understood by thinking in terms of musical notes. Expert musicians are said to have the ability to make out individual tones in a complex piece of music, their brain is essentially carrying out the Fourier Transform!
+
+You can see why x(t) is constrained to be a periodic function with period T, since both sine and cosine are periodic with this period. In this case the Layer 2 representation for the signal $x(t)$ is the set of coefficients ${a_0, a_1, b_1, a_2, b_2, ...}$. Hence we have replaced a complex time based periodic function, by an equivalent representation which consists of a bunch of numbers, which is a huge amount of simplification.
 Fourier's insight was his realization that this decomposition could be done for any periodic function $x(t)$.
 Fourier showed that these co-efficients can be computed using the formulae:
 
@@ -67,7 +69,7 @@ $$ x(t) = \int_{-\infty}^{\infty} X(f)e^{2\pi f t} df  $$
 $$ X(f) = \int_{-\infty}^{\infty} x(t) e^{-2\pi f t} dt $$
 
 Thus the Fourier Transform of an aperiodic time function $x(t)$ ia another aperiodic function $X(f)$ that exists in the frequency space.
-Hence if $x(t)$ is aperiodic, the frequencies $f$ needed to represent it is no longer form a discrete set, but instead become a function $X(f)$ that exists over a continuum of frequences! In order to get an intuitive understanding for why this is the case, note that in the Fourier Series representation, two neighboring frequencies are separated by $\Delta f = {1\over T}$. We can convert a periodic $x(t)$ into a aperiodic function by making $T$ larger and larger, and in the limit as $T\rightarrow\infty$, we can see that the separation between adjacent frequencies in its Fourier Series representation goes to zero, which is the same as saying that the frquencies now form a continuum (also the product $nf$ approaches a finite quantity, as $n$ goes to infinity and $f$ goes to zero).
+Hence if $x(t)$ is aperiodic, the frequencies $f$ needed to represent it is no longer form a discrete set, but instead become a function $X(f)$ that exists over a continuum of frequences! In order to provide an heuristic justification for these formulae, note that in the Fourier Series representation, two neighboring frequencies are separated by $\Delta f = {1\over T}$. We can convert a periodic $x(t)$ into a aperiodic function by making $T$ larger and larger, and in the limit as $T\rightarrow\infty$, we can see that the separation between adjacent frequencies in its Fourier Series representation goes to zero, which is the same as saying that the frquencies now form a continuum (also the product $nf$ approaches a finite quantity, as $n$ goes to infinity and $f$ goes to zero).
 
 ### The Discrete Fourier Transform
 
