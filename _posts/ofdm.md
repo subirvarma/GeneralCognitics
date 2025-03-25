@@ -142,32 +142,39 @@ Figure: The Received Signal
 
 Once again we see the spreading of individual pulses at the receiver which can lead to high bit error rates. Note that the received signal is the sum of the amplitudes from all the pulses that are active at any one point in time.
 
-![](https://subirvarma.github.io/GeneralCognitics/images/ofdm4.jpg) 
+![](https://subirvarma.github.io/GeneralCognitics/images/ofdm4.png) 
 
 Figure: Fourier Transform of a Square Pulse
 
-So how should we modify the pulse shape to avoid interference? The Fourier Transform comes to our rescue in solving this problem. The above figure shows the Fourier Transform for a square pulse in the time domain and this results in the so called sinc function in the frequency domain given by
+So how should we modify the pulse shape to avoid interference? The Fourier Transform comes to our rescue in solving this problem. The above figure shows the Fourier Transform for a square pulse $x(t)$ in the time domain and this results in the so called sinc function $X(f)$ in the frequency domain, given by
 
-$$ H(f) = {\sin 2\pi f_s t\over{2\pi t}} $$
+$$ X(f) = {\sin \pi f T t\over{\pi f}} $$
 
-where $f_s = {1\over T_s}$ and $T_s$ is the symbol time.
+where $T$ is the symbol time. Note that $X(f)$ has zeroes at the points ${n\over T}$ for interger values of $n$.
 
-![](https://subirvarma.github.io/GeneralCognitics/images/ofdm28.png) 
+![](https://subirvarma.github.io/GeneralCognitics/images/ofdm30.png) 
 
 Figure: Fourier Transform of a Sinc Pulse
+
+Using this result, it follows that the Fourier Transform of the sinc function $x(t) = {\sin \pi F t\over{\pi t}}$ in the time domain, is given by a square pulse $X(f)$ in the frequency domain, as shown in the above figure. It turns out that the sinc pulse is the optimum way to send digital data over a channel, and this was discovered by Nyquist. In order to make these shapes realizable using circuitry, he derived a slightly modified form of the sinc pulse, now known as Nyquist Pulses, and these are in use for digital communications even today.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm26.png) 
 
 Figure: Sending 1011 Using Sinc Pulses
 
+Note the time version of the sinc has zeroes at $nT$ for integer values of $n$, and this property is very useful when sending a train of pulses back to back, separated by the period $T$. The above figure shows the case when the bit sequence 1011 is modulated using sinc pulses, and the resulting waveform in time. Just as in the case of square pulses, the waveform for a particular pulse leaks over to other pulses, but with one big distinction: The peak of a particular pulse, co-incides with the zeroes of all the neighboring pulses! This property follows from the fact that the sinc has zeroes at integer multiples of $T$.
 
-![](https://subirvarma.github.io/GeneralCognitics/images/ofdm5.png) 
+![](https://subirvarma.github.io/GeneralCognitics/images/ofdm31.png) 
 
 Figure 3: Effect of Sinc Pulse Width on Bandwidth
+
+Another very important property of sinc pulses is the variation of bandwidth with the width of a pulse. In general, as the pulse width, i.e., T increases, the bandwidth required for transmission decreases, as shown in the above figure (for the case $T=1$). In general the required bandwidth is ${1\over{2T}}$, i.e., one half the symbol rate. This is a very important property that comes into use in the design of OFDM.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm27.png) 
 
 Figure: End to End Communication System
+
+If were designing a baseband digital communications system, this is almost all we need to know, and the end-to-end block diagram of such a system is shown above. The bitstream that originates from the source on the left, gets shaped by three filters on the way to the destination, the Transmit and Receive Filters, as well as the frequency reponse of the channel itself. The Nyquist sinc type filter that we have discussed, actually gets implemented as two filters, one at the transmitter and the other at the receiver. These filters are designed such that their serial operation results in the Nyquist pulse shape.
 
 ### Sending Data over a Radio Frequency (RF) Link
 
