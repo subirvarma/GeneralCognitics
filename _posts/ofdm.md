@@ -185,7 +185,7 @@ Baseband communication systems are an important topic in their own right, and ar
 Figure 4: Fourier Transform of a Passband Rectangular Pulse
 
 
-![](https://subirvarma.github.io/GeneralCognitics/images/ofdm7.png) 
+![](https://subirvarma.github.io/GeneralCognitics/images/ofdm33.png) 
 
 Figure: Modulation using Phase Shift Keying
 
