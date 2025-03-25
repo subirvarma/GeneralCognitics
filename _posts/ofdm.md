@@ -128,18 +128,29 @@ The theorem states that as long as we sample a signal fast enough, it is always 
 
 Figure: Sending Morse Code Data
 
+At the dawn of the Communications Age, when Samuel Morse was experimenting with ways in which he could send the code pulses across, he noticed that received pulses tended to get smeared out in time (see above figure), and thus interfere with neighboring pulses. In order to avoid this, he left enough of an interval between pulses, as shown in the figure. This solved his problem, but at the cost of a reduced data rate. In our own digital age, all data is in the form of 1s and 0s, and the communications engineers working in the eraly years of modern communications, faced exactly the same problem, i.e., how to best this data across the channel.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm24.png) 
 
 Figure: Sending the Sequence 101101 Suing Square Wave Pulses
 
+The most straightforward way of solving the problem was to use a square pulse, and the above figure shows the resulting signal when 101101 is sent using these.
+
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm25.png) 
 
 Figure: The Received Signal
 
+Once again we see the spreading of individual pulses at the receiver which can lead to high bit error rates. Note that the received signal is the sum of the amplitudes from all the pulses that are active at any one point in time.
+
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm4.png) 
 
 Figure: Fourier Transform of a Square Pulse
+
+So how should we modify the pulse shape to avoid interference? The Fourier Transform comes to our rescue in solving this problem. The above figure shows the Fourier Transform for a square pulse in the time domain and this results in the so called sinc function in the frequency domain given by
+
+$$ H(f) = {\sin 2\pi f_s t\over{2\pi t}} $$
+
+where $f_s = {1\over T_s}$ and $T_s$ is the symbol time.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm28.png) 
 
