@@ -156,7 +156,7 @@ where $T$ is the symbol time. Note that $X(f)$ has zeroes at the points ${n\over
 
 Figure: Fourier Transform of a Sinc Pulse
 
-Using this result, it follows that the Fourier Transform of the sinc function $x(t) = {\sin \pi F t\over{\pi t}}$ in the time domain, is given by a square pulse $X(f)$ in the frequency domain, as shown in the above figure. It turns out that the sinc pulse is the optimum way to send digital data over a channel, and this was discovered by Nyquist. In order to make these shapes realizable using circuitry, he derived a slightly modified form of the sinc pulse, now known as Nyquist Pulses, and these are in use for digital communications even today.
+Using this result, it follows that the Fourier Transform of the sinc function $x(t) = {\sin \pi F t\over{\pi t}}$ in the time domain, is given by a square pulse $X(f)$ in the frequency domain, as shown in the above figure. It turns out that the sinc pulse is the optimum way to send digital data over a channel, and this was discovered by Nyquist. In order to make these shapes realizable using circuitry, he derived a slightly modified form of the sinc pulse, now known as a Raised Cosine Pulse, and these are in use for digital communications even today.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm26.png) 
 
@@ -174,9 +174,11 @@ Another very important property of sinc pulses is the variation of bandwidth wit
 
 Figure: End to End Communication System
 
-If were designing a baseband digital communications system, this is almost all we need to know, and the end-to-end block diagram of such a system is shown above. The bitstream that originates from the source on the left, gets shaped by three filters on the way to the destination, the Transmit and Receive Filters, as well as the frequency reponse of the channel itself. The Nyquist sinc type filter that we have discussed, actually gets implemented as two filters, one at the transmitter and the other at the receiver. These filters are designed such that their serial operation results in the Nyquist pulse shape.
+If were designing a baseband digital communications system, this is almost all we need to know, and the end-to-end block diagram of such a system is shown above. The bitstream that originates from the source on the left, gets shaped by three filters on the way to the destination, the Transmit and Receive Filters, as well as the frequency reponse of the channel itself. The Nyquist sinc type filter that we have discussed, actually gets implemented as two filters, one at the transmitter and the other at the receiver. These filters, called Root Raised Cosime Filters or RRC, are designed such that their serial operation results in the Raised Cosine pulse shape.
 
-### Sending Data over a Radio Frequency (RF) Link
+Baseband communication systems are an important topic in their own right, and are used in sending digital data over Fiber Optic communications for example. However, for wireless and cable systems the basedband signal has to be upconverted to the appropriate frequency slot, before it can be transmitted, and this is the subject of the next section.
+
+### Sending Digital Data over a Radio Frequency (RF) Link
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm6.png) 
 
@@ -198,7 +200,7 @@ Figure: Modulation using 8-PSK
 Figure: Generating I and Q Components of a QAM signal
 
 
-![](https://subirvarma.github.io/GeneralCognitics/images/ofdm10.png) 
+![](https://subirvarma.github.io/GeneralCognitics/images/ofdm32.png) 
 
 Figure: A Single Carrier based QAM Modulator
 
