@@ -126,22 +126,39 @@ The theorem states that as long as we sample a signal fast enough, it is always 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm23.png) 
 
+Figure: Sending Morse Code Data
+
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm24.png) 
 
+Figure: Sending the Sequence 101101 Suing Square Wave Pulses
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm25.png) 
 
+Figure: The Received Signal
 
-![](https://subirvarma.github.io/GeneralCognitics/images/ofdm3.png) 
+![](https://subirvarma.github.io/GeneralCognitics/images/ofdm4.png) 
 
-Figure 2: Fourier Transform of a Baseband Rectangular Pulse
+Figure: Fourier Transform of a Square Pulse
+
+![](https://subirvarma.github.io/GeneralCognitics/images/ofdm28.png) 
+
+Figure: Fourier Transform of a Sinc Pulse
+
+![](https://subirvarma.github.io/GeneralCognitics/images/ofdm26.png) 
+
+Figure: Sending 1011 Using Sinc Pulses
 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm5.png) 
 
-Figure 3: Effect of Pulse Width on Bandwidth
+Figure 3: Effect of Sinc Pulse Width on Bandwidth
 
+![](https://subirvarma.github.io/GeneralCognitics/images/ofdm27.png) 
+
+Figure: End to End Communication System
+
+### Sending Data over a Radio Frequency (RF) Link
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm6.png) 
 
