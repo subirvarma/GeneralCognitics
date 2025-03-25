@@ -142,7 +142,7 @@ Figure: The Received Signal
 
 Once again we see the spreading of individual pulses at the receiver which can lead to high bit error rates. Note that the received signal is the sum of the amplitudes from all the pulses that are active at any one point in time.
 
-![](https://subirvarma.github.io/GeneralCognitics/images/ofdm4.png) 
+![](https://subirvarma.github.io/GeneralCognitics/images/ofdm4.jpg) 
 
 Figure: Fourier Transform of a Square Pulse
 
