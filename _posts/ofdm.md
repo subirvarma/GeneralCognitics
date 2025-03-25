@@ -124,6 +124,15 @@ The theorem states that as long as we sample a signal fast enough, it is always 
 
 ## Single Carrier Modulation 
 
+![](https://subirvarma.github.io/GeneralCognitics/images/ofdm23.png) 
+
+
+![](https://subirvarma.github.io/GeneralCognitics/images/ofdm24.png) 
+
+
+![](https://subirvarma.github.io/GeneralCognitics/images/ofdm25.png) 
+
+
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm3.png) 
 
 Figure 2: Fourier Transform of a Baseband Rectangular Pulse
