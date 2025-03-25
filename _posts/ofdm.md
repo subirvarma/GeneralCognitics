@@ -122,7 +122,20 @@ You may be wondering that by discretizing a continuos time signal, we may be thr
 But in fact this is not the case, as was proven by Harry Nyquist, who worked in Bell Labs in the period prior to World War 2. This work was further extended by Claude Shannon, so the work is referred to as the Nyquist-Shannon Sampling Theorem. 
 The theorem states that as long as we sample a signal fast enough, it is always possible to re-create the original signal from the samples. The minimum sampling rate for perfect re-construction is $2B$, where $B$ is the maximum frequency in the Fourier Transform of $x(t)$. This is an amazing result, and one can get an intuitive understanding of why is is true by examining Fig. xx. It shows that if a continuous time signal is discretized, then its resulting Fourier Transform is just the periodic continuation of $\tilde X(f)$, where the latter was the Fourier transform of the continuous time signal. Hence if we were to filter out just one of these shapes, and take its Inverse Fourier Transform, the we would have  recovered the original signal $x(t)$!
 
-## Baseband Communications
+## The Wireless Channel
+
+![](https://subirvarma.github.io/GeneralCognitics/images/ofdm12.png) 
+
+Figure: Sources of Multipath Interference
+
+
+![](https://subirvarma.github.io/GeneralCognitics/images/ofdm13.png) 
+
+Figure: Inter-Symbol Interference due to Multipath
+
+
+
+## Digital Baseband Communications
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm23.png) 
 
@@ -175,10 +188,13 @@ Another very important property of sinc pulses is the variation of bandwidth wit
 Figure: End to End Communication System
 
 If were designing a baseband digital communications system, this is almost all we need to know, and the end-to-end block diagram of such a system is shown above. The bitstream that originates from the source on the left, gets shaped by three filters on the way to the destination, the Transmit and Receive Filters, as well as the frequency reponse of the channel itself. The Nyquist sinc type filter that we have discussed, actually gets implemented as two filters, one at the transmitter and the other at the receiver. These filters, called Root Raised Cosime Filters or RRC, are designed such that their serial operation results in the Raised Cosine pulse shape.
+Note that more than 1 bit can be mapped on to the same symbol, for example by using a set of sinc pulses with different amplitudes. For example if four amplitues are used, then 2 bits can be mapped on to each symbol.
 
 Baseband communication systems are an important topic in their own right, and are used in sending digital data over Fiber Optic communications for example. However, for wireless and cable systems the basedband signal has to be upconverted to the appropriate frequency slot, before it can be transmitted, and this is the subject of the next section.
 
-### Sending Digital Data over a Radio Frequency (RF) Link
+## Sending Digital Data over a Radio Frequency (RF) Link Using Single Carrier Modulation (SCM)
+
+Data transmission over a wireless channel requires that the signal be confined to an assigned slot in the spectrum, called a channel. This can be done by taking a basedband signal and multiplying it by a carrier wave whose frequency is set to the center frequency of the channel.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm6.png) 
 
@@ -208,25 +224,6 @@ Figure: A Single Carrier based QAM Modulator
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm11.png) 
 
 Figure: A Single Carrier based QAM De-Modulator
-
-
-
-
-
-
-
-## The Wireless Channel
-
-![](https://subirvarma.github.io/GeneralCognitics/images/ofdm12.png) 
-
-Figure: Sources of Multipath Interference
-
-
-![](https://subirvarma.github.io/GeneralCognitics/images/ofdm13.png) 
-
-Figure: Inter-Symbol Interference due to Multipath
-
-
 
 
 ### Problems with SCM in Broadband Wireless Systems
