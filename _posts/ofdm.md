@@ -147,7 +147,7 @@ Figure: Inter-Symbol Interference due to Multipath
 
 
 
-## Digital Baseband Communications
+## Digital Baseband Communications OR How Data is Sent on a Fiber Optic Link
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm23.png) 
 
@@ -157,7 +157,7 @@ At the dawn of the Communications Age, when Samuel Morse was experimenting with 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm24.png) 
 
-Figure: Sending the Sequence 101101 Suing Square Wave Pulses
+Figure: Sending the Sequence 101101 using Square Wave Pulses
 
 The most straightforward way of solving the problem was to use a square pulse, and the above figure shows the resulting signal when 101101 is sent using these.
 
@@ -165,7 +165,7 @@ The most straightforward way of solving the problem was to use a square pulse, a
 
 Figure: The Received Signal
 
-Once again we see the spreading of individual pulses at the receiver which can lead to high bit error rates, a phenomenon known as Inter Symbol Interference or ISI. Note that the received signal is the sum of the amplitudes from all the pulses that are active at any one point in time.
+Once again we see the spreading of individual pulses, also called symbols, at the receiver which can lead to high bit error rates, a phenomenon known as Inter Symbol Interference or ISI. Note that the received signal is the sum of the amplitudes from all the symbols that are active at any one point in time.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm4.png) 
 
@@ -173,21 +173,21 @@ Figure: Fourier Transform of a Square Pulse
 
 So how should we modify the pulse shape to avoid ISI? The Fourier Transform comes to our rescue in solving this problem. The above figure shows the Fourier Transform for a square pulse $x(t)$ in the time domain and this results in the so called sinc function $X(f)$ in the frequency domain, given by
 
-$$ X(f) = {\sin \pi f T t\over{\pi f}} $$
+$$ X(f) = {\sin \pi f T\over{\pi f}} $$
 
-where $T$ is the symbol time. Note that $X(f)$ has zeroes at the points ${n\over T}$ for integer values of $n$.
+where $T$ is the pulse duration, which we will also refer to as the Symbol Time. Note that the Fourier Transform $X(f)$ has zeroes at the points ${n\over T}$ for integer values of $n$.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm30.png) 
 
 Figure: Fourier Transform of a Sinc Pulse
 
-From this it follows that the Fourier Transform of the sinc function $x(t) = {\sin \pi F t\over{\pi t}}$ in the time domain, is given by a square pulse $X(f)$ in the frequency domain, as shown in the above figure. It turns out that the sinc pulse is the optimum way to send digital data over a channel, and this was discovered by Nyquist. In order to make these shapes realizable using circuitry, he derived a slightly modified form of the sinc pulse, now known as a Raised Cosine Pulse, and these are in use for digital communications even today. 
+Consider a sinc function that is defined in the time domain given by $x(t) = {\sin \pi F t\over{\pi t}}$. From the prior discussion it follows that its Fourier Transform is given by a square pulse $X(f)$ in the frequency domain, as shown in the above figure. It turns out that the time domain sinc pulse is the optimum way to send digital data over a channel, and this was discovered by Nyquist. In order to make these shapes realizable using circuitry, he derived a slightly modified form of the sinc pulse, now known as a Raised Cosine Pulse, and these are in use for digital communications even today. 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm26.png) 
 
 Figure: Sending 1011 Using Sinc Pulses
 
-Note the time version of the sinc has zeroes at $nT$ for integer values of $n$, and this property is very useful when sending a train of pulses back to back, separated by the period $T$. The above figure shows the case when the bit sequence 1011 is modulated using sinc pulses, and the resulting waveform in time. Just as in the case of square pulses, the waveform for a particular pulse leaks over to other pulses, but with one big distinction: The peak of a particular pulse, co-incides with the zeroes of all the neighboring pulses! This property follows from the fact that the sinc has zeroes at integer multiples of $T$. This property implies that is no ISI interference between neighboring sinc pulses.
+Note the time version of the sinc has zeroes at $nT$ for integer values of $n$, and this property is very useful when sending a train of pulses back to back, separated by the period $T$. The above figure shows the resulting waveform when the bit sequence 1011 in time using sinc pulses. Just as in the case of square pulses, the signal for a particular pulse leaks over to other pulses, but with one big distinction: The peak of a pulse, co-incides with the zeroes of all the neighboring pulses! This property follows from the fact that the sinc has zeroes at integer multiples of $T$. This property implies that is no inter symbol interference between neighboring sinc pulses.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm31.png) 
 
@@ -197,27 +197,29 @@ Another very important property of sinc pulses is the variation of bandwidth wit
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm27.png) 
 
-Figure: End to End Communication System
+Figure: End to End Baseband Communication System
 
-If were designing a baseband digital communications system, this is almost all we need to know, and the end-to-end block diagram of such a system is shown above. The bits stream that originates from the source on the left, gets shaped by three filters on the way to the destination, the Transmit and Receive Filters, as well as the frequency reponse of the channel itself. The Nyquist sinc type filter that we have discussed, actually gets implemented as two filters, one at the transmitter and the other at the receiver. These filters, called Root Raised Cosime Filters or RRC, are designed such that their serial operation results in the Raised Cosine pulse shape.
-Note that more than 1 bit can be mapped on to the same symbol, for example by using a set of sinc pulses with different amplitudes. If four amplitudes are used, then 2 bits can be mapped on to each symbol.
+If were designing a baseband digital communications system, this is almost all we need to know, and the end-to-end block diagram of such a system is shown above. The bits stream that originates from the source on the left, gets shaped by three filters on the way to the destination, the Transmit and Receive Filters, as well as the frequency response of the channel itself. The Nyquist sinc type filter that we have discussed, actually gets implemented as two filters, one at the transmitter and the other at the receiver. These filters, called Root Raised Cosime Filters or RRC, are designed such that their serial operation results in the Raised Cosine pulse shape.
+Note that more than 1 bit can be mapped on to the same symbol, for example by using a set of sinc pulses with different amplitudes. If four amplitudes are used, then 2 bits can be mapped on to each symbol, so that the bitrate f the channel would be twice the symbol rate.
 
 Baseband communication systems are an important topic in their own right, and are used in sending digital data over Fiber Optic communications for example. However, for wireless and cable systems the basedband signal has to be upconverted to the appropriate frequency slot, before it can be transmitted, and this is the subject of the next section.
 
-## Sending Digital Data over a Radio Frequency (RF) Link Using Single Carrier Modulation (SCM)
+## Single Carrier Modulation OR How Data is Sent over a Cable Modem
 
-Data transmission over a wireless channel requires that the signal energy be confined to an assigned frequency slot in the spectrum, called a channel (for example cellular 4G communications happens over channels that are allocated in the frequency band between 600 MHz and 2.4 GHz). This can be done by taking a baseband signal and multiplying it by a carrier wave whose frequency is set to the center frequency of the channel. How can we shift our signal from one frequency band to another? Once again the Fourier Transform comes to the rescue, as explained next.
+Data transmission over a wireless channel requires that the signal energy be confined to an assigned frequency slot in the spectrum, called a channel (for example cellular 4G communications happens over channels that are allocated in the frequency band between 600 MHz and 2.4 GHz).  How can we shift our signal from one frequency band to another? Once again the Fourier Transform comes to the rescue, as shown in the figure below.
+
+This can be done by taking a baseband signal and multiplying it by a carrier wave whose frequency is set to the center frequency of the channel.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm36.png) 
 
-If $x(t)$ and $X(f)$ are Fourier Transforms of each other, then it can be shown that the Fourier Transform of $x(t) e^{j2\pi gt}$ is given $X(f-g)$ (see above figure).
-An application of the Euler Formula then leads to the fact that Fourier Transform of $x(t)\cos (2\pi f_0 t)$ is given by ${X(f-f_0)+X(f+f_0)\over 2}$. This is precisely the property that we are looking for, i.e., the ability to move the spectrum occupied by the baseband pulse. The resulting waveform is known as a passband pulse and the cosine function is called the carrier wave.
+If $X(f)$ is the Fourier Transforms of $x(t)$, then it can be shown that the Fourier Transform of $x_g(t) = x(t) e^{j2\pi gt}$ is given $X(f-g)$ (see above figure).
+An application of the Euler Formula then leads to the result that Fourier Transform of $x(t)\cos (2\pi f_0 t)$ is given by ${X(f-f_0)+X(f+f_0)\over 2}$. This is precisely the property that we are looking for, i.e., the ability to shift the spectrum occupied by the baseband pulse. The resulting waveform is known as a passband pulse and the cosine function is called the carrier wave.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm6.png) 
 
 Figure 4: (a) A Baseband Sinc Pulse and its Fourier Transform (b) A Passband Sinc Pulse and its Fourier Transform. The baseband pulse has been shifted by 7.5 GHz.
 
-The shifting operation of a baseband pulse is illustrated in the above figure. Note that as a result of the shift, the bandwidth occupied by the passband pulse is double that of the baseband pulse. For a pulse of width $T$, the passband bandwidth is ${1\over{2T}}$ while the passband bandwidth is ${1\over T}$.
+The shift in frequency of a baseband sinc pulse from 0 GHz to 7.5 GHz is illustrated in the above figure. Note that as a result of the shift, the bandwidth occupied by the passband pulse is double that of the baseband pulse. For a pulse of width $T$, the baseband bandwidth that it occupes is ${1\over{2T}}$ while its passband bandwidth usage is ${1\over T}$.
 
 The addition of the carrier wave to achieve passband operation results in some interesting new possibilities that did not exist in the baseband case. In particular it allows us to use the parameters of the carrier wave as another way in which sinc pulses can be differentiated. In the baseband we were confined to using the amplitude of the sinc pulse as means of differentiation, but now in the passband we can also make use of the phase of the carrier wave. Hence it is possible to define a so called constellation of passband sinc pulses, with differing amplitudes and phases, and this is called Quadrature Amplitude Modulation or QAM. One of the simplest QAM constelations is called Quadrature Phase Shift Keying or QPSK, anf we will describe that next.
 
@@ -255,7 +257,7 @@ Figure: Inter-Symbol Interference in Single Carrier Systems
 
 
 
-## OFDM: How to Pack More Bits into a Single Large Symbol
+## OFDM OR How Data is Sent over a Broadband Wireless Link
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm17.png) 
 
@@ -300,5 +302,5 @@ Figure: Using Inverse Discrete Fourier Transform in an OFDM Transmitter
 
 
 
-## OFDM Implementation using the Fourier Transform
+## OFDM Implementation using the Discrete Fourier Transform
 
