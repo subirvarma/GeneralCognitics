@@ -27,10 +27,13 @@ Figure: OFDM vs Regular Frequency Division Multiplexing
 The basic idea behind OFDM is not that difficult to grasp, and an analogy can be made with the shift in the computer hardware industry that happened in the early 2000s. 
 After the launch of the web in the mid 1990s, focus shifted to building more and more powerful servers that could be used for serving web pages, and for a time companies such as SUN Microsystems thrived by supplying this market. However it soon became clear that even the most powerful single machine could not keep up with the demand. Fortunately companies such as Google pioneered the concept of a datacenter made up of thousands of cheap commodity Dell type servers. By working together in parallel, these machines became capable of scaling up to serve even the most demanding workload. At the same time, this "Datcenter as Computer" architecture made the system more robust, since it could easily recover from the loss of a few of the machines at any one time, due to the redundancy that was built into the system.
 Hence there was a shift from single monlithic system that was expensive and prone to failure, to a distributed robust system with thousands of subsystems, which could easily scale up.
-Exactly the same dynamic occured in wireless system. Wireless technolgies that came before OFDM (called Single Carrier Modulation) could be likened to single large ship that was ferrying your data across the wireless link (see top part of above figure). As shown in the bottom part of the figure, OFDM can likened to splitting up that data and carrying it on hundreds of smaller ships, called sub-carriers in the jargon. This comes with several benefits:
+Exactly the same dynamic occured in wireless system. The broadband wireless technolgies that came before OFDM (called single carrier modulation) worked by having each transmission occupy the entire channel spectrum (see top part of above figure). 
+As shown in the bottom part of the figure, OFDM can likened to splitting up that data stream and carrying it on hundreds of smaller peices of spectrum, called sub-carriers in the jargon. This comes with several benefits:
 
 - OFDM systems can be easily scaled up to higher data speeds by adding more sub-carriers (just like making a data center more powerful by adding servers). Single carrier systems are much more difficult to scale up for reasons that we will go into in this article.
 - OFDM systems are much more robust in unforgiving wireless environment. Problems in the wireless channel are often limited to local parts of the spectrum, called frequency selective fading. In an OFDM system this affects only some of the sub-carriers, and using channel coding techniques it is even possible to recover the lost data. Single carrier systems on the other hand don't work very well in this environment, since (using the ship analogy) problems that are localized in the spectrum end of affecting the entire ship.
+
+There are other benfits to using OFDM that I will get into later in the article.
 
 ## The Fourier Transform
 
@@ -185,7 +188,7 @@ Consider a sinc function that is defined in the time domain given by $x(t) = {\s
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm26.png) 
 
-Figure: Sending 1011 Using Sinc Pulses
+Figure: Resulting waveform in time when sending 1011 Using 4 Sinc Pulses
 
 Note the time version of the sinc has zeroes at $nT$ for integer values of $n$, and this property is very useful when sending a train of pulses back to back, separated by the period $T$. The above figure shows the resulting waveform when the bit sequence 1011 in time using sinc pulses. Just as in the case of square pulses, the signal for a particular pulse leaks over to other pulses, but with one big distinction: The peak of a pulse, co-incides with the zeroes of all the neighboring pulses! This property follows from the fact that the sinc has zeroes at integer multiples of $T$. This property implies that is no inter symbol interference between neighboring sinc pulses.
 
@@ -206,14 +209,14 @@ Baseband communication systems are an important topic in their own right, and ar
 
 ## Single Carrier Modulation OR How Data is Sent over a Cable Modem
 
-Data transmission over a wireless channel requires that the signal energy be confined to an assigned frequency slot in the spectrum, called a channel (for example cellular 4G communications happens over channels that are allocated in the frequency band between 600 MHz and 2.4 GHz).  How can we shift our signal from one frequency band to another? Once again the Fourier Transform comes to the rescue, as shown in the figure below.
+Data transmission over a wireless channel requires that the signal energy be confined to an assigned frequency slot in the spectrum, called a channel (for example cellular 4G communications happens over channels that are allocated in various frequency bands between 600 MHz and 2.4 GHz).  How can we shift our signal from one frequency band to another? Once again the Fourier Transform comes to the rescue, as shown in the figure below.
 
 This can be done by taking a baseband signal and multiplying it by a carrier wave whose frequency is set to the center frequency of the channel.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm36.png) 
 
 If $X(f)$ is the Fourier Transforms of $x(t)$, then it can be shown that the Fourier Transform of $x_g(t) = x(t) e^{j2\pi gt}$ is given $X(f-g)$ (see above figure).
-An application of the Euler Formula then leads to the result that Fourier Transform of $x(t)\cos (2\pi f_0 t)$ is given by ${X(f-f_0)+X(f+f_0)\over 2}$. This is precisely the property that we are looking for, i.e., the ability to shift the spectrum occupied by the baseband pulse. The resulting waveform is known as a passband pulse and the cosine function is called the carrier wave.
+An application of the Euler Formula then leads to the result that Fourier Transform of $x(t)\cos (2\pi f_0 t)$ is given by ${X(f-f_0)+X(f+f_0)\over 2}$. This is precisely the property that we are looking for, i.e., the ability to shift the spectrum occupied by the baseband pulse. The resulting waveform is known as a passband pulse and the cosine function used to do the translation is called the carrier wave.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm6.png) 
 
@@ -221,11 +224,33 @@ Figure 4: (a) A Baseband Sinc Pulse and its Fourier Transform (b) A Passband Sin
 
 The shift in frequency of a baseband sinc pulse from 0 GHz to 7.5 GHz is illustrated in the above figure. Note that as a result of the shift, the bandwidth occupied by the passband pulse is double that of the baseband pulse. For a pulse of width $T$, the baseband bandwidth that it occupes is ${1\over{2T}}$ while its passband bandwidth usage is ${1\over T}$.
 
-The addition of the carrier wave to achieve passband operation results in some interesting new possibilities that did not exist in the baseband case. In particular it allows us to use the parameters of the carrier wave as another way in which sinc pulses can be differentiated. In the baseband we were confined to using the amplitude of the sinc pulse as means of differentiation, but now in the passband we can also make use of the phase of the carrier wave. Hence it is possible to define a so called constellation of passband sinc pulses, with differing amplitudes and phases, and this is called Quadrature Amplitude Modulation or QAM. One of the simplest QAM constelations is called Quadrature Phase Shift Keying or QPSK, anf we will describe that next.
+The addition of the carrier wave to achieve passband operation results in some interesting new possibilities that did not exist in the baseband case. In particular it allows us to use the parameters of the carrier wave as another way in which sinc pulses can be differentiated. In the baseband we were confined to using the amplitude of the sinc pulse as means of differentiation, but now in the passband we can also make use of the phase of the carrier wave. Hence it is possible to define a so called constellation of passband sinc pulses, with differing amplitudes and phases, and this is called Quadrature Amplitude Modulation or QAM. One of the simplest QAM constelations is called Quadrature Phase Shift Keying or QPSK, and we will describe that next.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm33.png) 
 
 Figure: Passband Modulation using Quadrature Phase Shift Keying or QPSK
+
+The basic idea behind QPSK is quite simple and is illustrated in the above figure.
+The incoming bit stream gets grouped together two bits at a time, and then the following mapping is done:
+
+- Bit pattern 00 gets mapped on to the carrier wave $A\cos (2\pi f_c t + {\pi\over 4})$.
+- Bit pattern 10 gets mapped on to $A\cos (2\pi f_c t + {3\pi\over 4})$.
+- Bit pattern 11 gets mapped on to $A\cos (2\pi f_c t + {5\pi\over 4})$.
+- Bit pattern 01 gets mapped on to $A\cos (2\pi f_c t + {7\pi\over 4})$.
+
+Hence vwe can see that the different bit patterns are differntiated based solely on the phase of the carrier wave, which occupes 4 points on a circle when plotted in the complex plane.
+Using the formula $\cos(A+B) = \cos A\cos B - \sin A\sin B$, the mappings become:
+
+$$ 00 \rightarrow A{\cos 2\pi f_c t - \sin 2\pi f_c t\over\sqrt{2}}  $$
+$$ 10 \rightarrow A{-\cos 2\pi f_c t - \sin 2\pi f_c t\over\sqrt{2}}  $$
+$$ 11 \rightarrow A{-\cos 2\pi f_c t + \sin 2\pi f_c t\over\sqrt{2}}  $$
+$$ 01 \rightarrow A{\cos 2\pi f_c t + \sin 2\pi f_c t\over\sqrt{2}}  $$
+
+Using this equations, the transmitter can be implemented as shown below:
+
+
+
+
 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm8.png) 
