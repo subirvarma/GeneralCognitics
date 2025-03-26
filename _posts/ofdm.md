@@ -20,10 +20,22 @@ So the transition from CDMA to OFDM is also a story of how an insurgent technolo
 
 I had some personal involvement in the transition from 3G to 4G wireless, and had a first hand view of the politics involved. I was a co-founder of a start-up called Aperto Networks that did some of the work that ultimately resulted in 4G, and for a number of years I was a member of the IEEE 802.16 Standards Committee that was working on 4G, even chairing the Medium Access Control or MAC group for a while. The MAC protocol lies on top of PHY layers such as CDMA or OFDM, and it had to completely re-designed for packet based wireless communications. But this article is not about the MAC, perhaps it will be a subject of a future article.
 
+![](https://subirvarma.github.io/GeneralCognitics/images/ofdm19.jpg) 
+
+Figure: OFDM vs Regular Frequency Division Multiplexing
+
+The basic idea behind OFDM is not that difficult to grasp, and an analogy can be made with the shift in the computer hardware industry that happened in the early 2000s. 
+After the launch of the web in the mid 1990s, focus shifted to building more and more powerful servers that could be used for serving web pages, and for a time companies such as SUN Microsystems thrived by supplying this market. However it soon became clear that even the most powerful single machine could not keep up with the demand. Fortunately companies such as Google pioneered the concept of a datacenter made up of thousands of cheap commodity Dell type servers. By working together in parallel, these machines became capable of scaling up to serve even the most demanding workload. At the same time, this "Datcenter as Computer" architecture made the system more robust, since it could easily recover from the loss of a few of the machines at any one time, due to the redundancy that was built into the system.
+Hence there was a shift from single monlithic system that was expensive and prone to failure, to a distributed robust system with thousands of subsystems, which could easily scale up.
+Exactly the same dynamic occured in wireless system. Wireless technolgies that came before OFDM (called Single Carrier Modulation) could be likened to single large ship that was ferrying your data across the wireless link (see top part of above figure). As shown in the bottom part of the figure, OFDM can likened to splitting up that data and carrying it on hundreds of smaller ships, called sub-carriers in the jargon. This comes with several benefits:
+
+- OFDM systems can be easily scaled up to higher data speeds by adding more sub-carriers (just like making a data center more powerful by adding servers). Single carrier systems are much more difficult to scale up for reasons that we will go into in this article.
+- OFDM systems are much more robust in unforgiving wireless environment. Problems in the wireless channel are often limited to local parts of the spectrum, called frequency selective fading. In an OFDM system this affects only some of the sub-carriers, and using channel coding techniques it is even possible to recover the lost data. Single carrier systems on the other hand don't work very well in this environment, since (using the ship analogy) problems that are localized in the spectrum end of affecting the entire ship.
+
 ## The Fourier Transform
 
 To get to an understanding of how OFDM works, it is necessary to know a mathematical technique called the Fourier Transform. It was first published by Joseph Fourier of France in the 1820s, and since then it has become one of the most powerful tools in the arsenal for mathematicians and engineers. The Fourier Transform is another example of the 2-Layer Principle for organizing complex data, that I talked about in an earlier article called "Latent Varibales and Latent Spaces". The principle states that data can often be represented in two ways: (1) As it exists in the real world, and thus can be measured using instruments, and (2) In an abstract mathematical space, which we can access only by performing some mathematical operations on the real world data. Moreover the two represenations can be transformed into one another using math.
-The abstract representation is often easier to manipulate and analyze, and a mumber of difficult problems in the real world can be solved, by first solving the problem in the abstract space. Other examples of this 2-Layer Principle from the earlier article include:
+The abstract representation is often easier to manipulate and analyze, and a number of difficult problems in the real world can be solved, by first solving the problem in the abstract space. Other examples of this 2-Layer Principle from the earlier article include:
 
 - Representing data such as images and language using Latent Variables. The mathematical transformation in this case is represented by Artificial Neural Networks. This representation lies at the heart of all the progress being made in this field.
 - Representing physical measurements using the idea of Fields. This started with Maxwell and the Electromagnetic Field, and went on to represent matter using Quantum Fields. Also the Schrodinger Wave Function for a particle can be represented either in terms of its location x in space, or its momentum p, and and these two representation $\psi(x)$ and $\psi(p)$ are Fourier Transforms of each other!
@@ -277,9 +289,6 @@ Figure: The Overall System using OFDM, Transmitter + Receiver
 Figure 18: OFDM Sub-Carriers
 
 
-![](https://subirvarma.github.io/GeneralCognitics/images/ofdm19.jpg) 
-
-Figure: OFDM vs Regular Frequency Division Multiplexing
 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm20.ppm) 
