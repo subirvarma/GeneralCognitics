@@ -47,11 +47,11 @@ The abstract representation is often easier to manipulate and analyze, and a num
 
 - Representing data such as images and language using Latent Variables. The mathematical transformation in this case is represented by Artificial Neural Networks. This representation lies at the heart of all the progress being made in this field.
 - Representing physical measurements using the idea of Fields. This started with Maxwell and the Electromagnetic Field, and went on to represent matter using Quantum Fields. Also the Schrodinger Wave Function for a particle can be represented either in terms of its location x in space, or its momentum p, and and these two representation $\psi(x)$ and $\psi(p)$ are Fourier Transforms of each other!
-- Representing Biological data using the DNA code. In this case the abstract Layer 2 representation actually exists in the real world too.
 
 It can be argued that a great deal of scientific progress in the last 200 years has been made by exploting the 2-Layer Principle. 
-This principle was first discovered by Joseph Fourier more than 200 years ago, with his invention of the Fourer Transform.
-This transform can be used to represent a signal that exists in time, such as the ones that are used in communications networks, into an abstract representation that is instead based on the frequencies that signal occupies. It is not an exaggeration to say that almost all of communications theory is based on the frequency based representation which is also called the spectrum of the signal.  By using the spectral representation, we are able to manipulate time based signals in various ways, which would be impossible to do otherwise.
+The Fourier Transform can be considered to be the original example of this principle, and hence it fitting that the fundamental duality of matter in terms of waves and particles is intimately connected with it. 
+Within the realm of communications systems, 
+this transform can be used to represent a signal that exists in time, into an abstract representation that is instead based on the frequencies that signal occupies. It is not an exaggeration to say that almost all of the progress in communications theory in the last 100 years is based on expoliting the properties of the frequency based representation which is also called the spectrum of the signal.  By using the spectral representation, we are able to manipulate time based signals in various ways, which would be impossible to do otherwise. 
 
 Before launching into the Fourier Transform, I am going to introduce a simpler version, that was also discovered by Fourier, called the Fourier Series.
 
