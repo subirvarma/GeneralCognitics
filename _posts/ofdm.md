@@ -46,7 +46,7 @@ To get to an understanding of how OFDM works, it is necessary to know a mathemat
 The abstract representation is often easier to manipulate and analyze, and a number of difficult problems in the real world can be solved, by first solving the problem in the abstract space. Other examples of this 2-Layer Principle from the earlier article include:
 
 - Representing data such as images and language using Latent Variables. The mathematical transformation in this case is represented by Artificial Neural Networks. This representation lies at the heart of all the progress being made in this field.
-- Representing physical measurements using the idea of Fields. This started with Maxwell and the Electromagnetic Field, and went on to represent matter using Quantum Fields. Also the Schrodinger Wave Function for a particle can be represented either in terms of its location x in space, or its momentum p, and and these two representation $\psi(x)$ and $\psi(p)$ are Fourier Transforms of each other!
+- Representing physical phenmenona using the idea of Fields. This started with Maxwell and the Electromagnetic Field, and went on to represent matter using Quantum Fields. Also the Schrodinger Wave Function for a particle can be represented either in terms of its location x in space, or its momentum p, and and these two representation $\psi(x)$ and $\psi(p)$ are Fourier Transforms of each other!
 
 It can be argued that a great deal of scientific progress in the last 200 years has been made by exploting the 2-Layer Principle. 
 The Fourier Transform can be considered to be the original example of this principle, and hence it fitting that the fundamental duality of matter in terms of waves and particles is intimately connected with it. 
@@ -214,68 +214,63 @@ Baseband communication systems are an important topic in their own right, and ar
 
 ## Single Carrier Modulation OR How Data is Sent over a Cable Modem
 
-Data transmission over a wireless channel requires that the signal energy be confined to an assigned frequency slot in the spectrum, called a channel (for example cellular 4G communications happens over channels that are allocated in various frequency bands between 600 MHz and 2.4 GHz).  How can we shift our signal from one frequency band to another? Once again the Fourier Transform comes to the rescue, as shown in the figure below.
-
-This can be done by taking a baseband signal and multiplying it by a carrier wave whose frequency is set to the center frequency of the channel.
+Data transmission over a wireless or cable systems requires that the signal energy be confined to an assigned frequency slot in the spectrum, called a channel (for example cellular 4G communications happens over channels that are allocated in various frequency bands between 600 MHz and 2.4 GHz).  How can we shift our signal from the  baseband to another to channel that exists at a higher frequency in the spectrum? Once again the Fourier Transform comes to the rescue, as shown in the figure below.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm36.png) 
 
-If $X(f)$ is the Fourier Transforms of $x(t)$, then it can be shown that the Fourier Transform of $x_g(t) = x(t) e^{j2\pi gt}$ is given $X(f-g)$ (see above figure).
-An application of the Euler Formula then leads to the result that Fourier Transform of $x(t)\cos (2\pi f_0 t)$ is given by ${X(f-f_0)+X(f+f_0)\over 2}$. This is precisely the property that we are looking for, i.e., the ability to shift the spectrum occupied by the baseband pulse. The resulting waveform is known as a passband pulse and the cosine function used to do the translation is called the carrier wave.
+If we take a baseband signal and multiply it by a carrier wave, then the Fourier Transform tells us that the resulting signal now occupies a channel whose center frequency co-icides with that of the carrier. This can be shown using the following calculation:
+If $X(f)$ is the Fourier Transforms of $x(t)$, then the Fourier Transform of $x_g(t) = x(t) e^{j2\pi gt}$ is given $X(f-g)$ (see above figure).
+An application of the Euler Formula $e^{j\theta} = \cox\theta+j\sin\theta$ then leads to the result that Fourier Transform of $x(t)\cos (2\pi f_0 t)$ is given by ${X(f-f_0)+X(f+f_0)\over 2}$. This is precisely the property that we are looking for, i.e., the ability to shift the spectrum occupied by the baseband pulse. The resulting waveform is known as a passband pulse and the cosine function used to do the translation is the carrier wave.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm6.png) 
 
 Figure 4: (a) A Baseband Sinc Pulse and its Fourier Transform (b) A Passband Sinc Pulse and its Fourier Transform. The baseband pulse has been shifted by 7.5 GHz.
 
-The shift in frequency of a baseband sinc pulse from 0 GHz to 7.5 GHz is illustrated in the above figure. Note that as a result of the shift, the bandwidth occupied by the passband pulse is double that of the baseband pulse. For a pulse of width $T$, the baseband bandwidth that it occupes is ${1\over{2T}}$ while its passband bandwidth usage is ${1\over T}$.
+The shift in frequency of a baseband sinc pulse from 0 GHz to 7.5 GHz is illustrated in the above figure. Note that as a result of the shift, the bandwidth occupied by the passband pulse is double that of the baseband pulse, i.e., for a pulse of width $T$, the baseband bandwidth that it occupes is ${1\over{2T}}$ while its passband bandwidth usage is ${1\over T}$.
 
-The addition of the carrier wave to achieve passband operation results in some interesting new possibilities that did not exist in the baseband case. In particular it allows us to use the parameters of the carrier wave as another way in which sinc pulses can be differentiated. In the baseband we were confined to using the amplitude of the sinc pulse as means of differentiation, but now in the passband we can also make use of the phase of the carrier wave. Hence it is possible to define a so called constellation of passband sinc pulses, with differing amplitudes and phases, and this is called Quadrature Amplitude Modulation or QAM. One of the simplest QAM constelations is called Quadrature Phase Shift Keying or QPSK, and we will describe that next.
+The use of the carrier wave results in some interesting new possibilities that did not exist in the baseband case. In particular it allows us to use the parameters of the carrier wave as another way in which sinc pulses can be differentiated. In the baseband case we were confined to using the amplitude of the sinc pulse as means of differentiation, but now in the passband we can also make use of the phase of the carrier wave. Hence it is now possible to define a so called constellation of passband sinc pulses, with differing amplitudes and phases, and this is called Quadrature Amplitude Modulation or QAM. One of the simplest QAM constelations is called Quadrature Phase Shift Keying or QPSK, and we will describe that next.
 
-![](https://subirvarma.github.io/GeneralCognitics/images/ofdm33.png) 
+The basic idea behind QPSK is quite simple and goes as follows: 
+The incoming bit stream gets grouped together two bits at a time, followed by a mapping to one of four waveforms, for $0\le t\le T$, where $T$ is the symbol time:
+
+- Bit pattern 00 gets mapped on to the carrier wave $\sqrt{2}A\cos(2\pi f_c t + {\pi\over 4})$.
+- Bit pattern 10 gets mapped on to $\sqrt{2} A\cos (2\pi f_c t + {3\pi\over 4})$.
+- Bit pattern 11 gets mapped on to $\sqrt{2} A\cos (2\pi f_c t + {5\pi\over 4})$.
+- Bit pattern 01 gets mapped on to $\sqrt{2} A\cos (2\pi f_c t + {7\pi\over 4})$.
+
+Hence we can see that the different bit patterns are differentiated based solely on the phase of the carrier wave. This mapping can be nicely represented in the complex plane as follows:
+- Bit pattern 00 gets mapped on to the complex number $({1\over{\sqrt 2}}, {j\over{\sqrt 2}}) $
+- Bit pattern 10 gets mapped on to $(-{1\over{\sqrt 2}}, {j\over{\sqrt 2}})$
+- Bit pattern 11 gets mapped on to $(-{1\over{\sqrt 2}}, -{j\over{\sqrt 2}})$
+- Bit pattern 01 gets mapped on to $({1\over{\sqrt 2}}, -{j\over{\sqrt 2}})$
+
+![](https://subirvarma.github.io/GeneralCognitics/images/ofdm37.png) 
 
 Figure: Passband Modulation using Quadrature Phase Shift Keying or QPSK
 
-The basic idea behind QPSK is quite simple and is illustrated in the above figure.
-The incoming bit stream gets grouped together two bits at a time, and then the following mapping is done:
+The 4 values can also be plotted on the complex plane as shown above
 
-- Bit pattern 00 gets mapped on to the carrier wave $A\cos (2\pi f_c t + {\pi\over 4})$.
-- Bit pattern 10 gets mapped on to $A\cos (2\pi f_c t + {3\pi\over 4})$.
-- Bit pattern 11 gets mapped on to $A\cos (2\pi f_c t + {5\pi\over 4})$.
-- Bit pattern 01 gets mapped on to $A\cos (2\pi f_c t + {7\pi\over 4})$.
+Using this mapping the QPSK waveform can be written as:
 
-Hence vwe can see that the different bit patterns are differntiated based solely on the phase of the carrier wave, which occupes 4 points on a circle when plotted in the complex plane.
-Using the formula $\cos(A+B) = \cos A\cos B - \sin A\sin B$, the mappings become:
+$$ x(t) = \sqrt{2} A [Re(a)\cos(2\pi f_c t) + Im(a)\sin(2\pi f_c t),\ \ \ 0\le t\le T $$
 
-$$ 00 \rightarrow A{\cos 2\pi f_c t - \sin 2\pi f_c t\over\sqrt{2}}  $$
-$$ 10 \rightarrow A{-\cos 2\pi f_c t - \sin 2\pi f_c t\over\sqrt{2}}  $$
-$$ 11 \rightarrow A{-\cos 2\pi f_c t + \sin 2\pi f_c t\over\sqrt{2}}  $$
-$$ 01 \rightarrow A{\cos 2\pi f_c t + \sin 2\pi f_c t\over\sqrt{2}}  $$
-
-Using this equations, the transmitter can be implemented as shown below:
-
-
-
-
-
-
-![](https://subirvarma.github.io/GeneralCognitics/images/ofdm8.png) 
-
-Figure: Modulation using 8-PSK
-
-
-![](https://subirvarma.github.io/GeneralCognitics/images/ofdm9.png) 
-
-Figure: Generating I and Q Components of a QAM signal
-
+where the complex number $a$ takes on one of the four values from the mapping above, depending upon the bits being transmitted. The numbers $\sqrt{2} A \Re{a}$ and $\sqrt{2} A \Im{a}$ are also referred to as the I and Q amplitudes of the signal $x(t)$.
+Using this equations, the QPSK transmitter can be implemented as shown below:
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm32.png) 
 
-Figure: A Single Carrier based QAM Modulator
+Figure: A Single Carrier based QPSK Modulator
 
+The figure shows that the incoming bit stream on the left is first converted to consecutively occuring pairs of bits in the Serial to Parallel Converter. Since 2 bits map to a single symbol, the resulting symbol rate $R_s$ is half of the bitrate $R_b$. The mapping from bitpairs to the imaginary number $a$ is then used to determine the Real and Complaex parts of $a$, which determine the I and Q amplitudes of signal. Next the baseband pulse for the signal is generated by using the Nyquist Root Raised Cosine (RRC) Filter in order to avoid Inter Symbol Interference, as discussed in the prior section. This is followed by multiplication of the I and Q components of the amplitude by $\cos(2\pi f_c t)$ and $\sin(2\pi f_c t)$ resepectively, in order to shift the pulse to the center frequency $f_c$. Finally the two compnents are added to generate the signal to be transmitted.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm11.png) 
 
 Figure: A Single Carrier based QAM De-Modulator
+
+
+![](https://subirvarma.github.io/GeneralCognitics/images/ofdm38.png) 
+
+Figure: Higher Level Signal Constellation (a) QPSK (b) 8-PSK (c) 32QAM (d) 16QAM (e) 128QAM
 
 
 ### Problems with SCM in Broadband Wireless Systems
