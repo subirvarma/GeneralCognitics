@@ -252,7 +252,7 @@ The 4 values can also be plotted on the complex plane as shown above
 
 Using this mapping the QPSK waveform can be written as:
 
-$$ x(t) = \sqrt{2} A [Re(a)\cos(2\pi f_c t) + Im(a)\sin(2\pi f_c t),\ \ \ 0\le t\le T $$
+$$ x(t) = \sqrt{2} A [Re(a)\cos(2\pi f_c t) - Im(a)\sin(2\pi f_c t),\ \ \ 0\le t\le T $$
 
 where the complex number $a$ takes on one of the four values from the mapping above, depending upon the bits being transmitted. The numbers $\sqrt{2} A \Re{a}$ and $\sqrt{2} A \Im{a}$ are also referred to as the I and Q amplitudes of the signal $x(t)$.
 Using this equations, the QPSK transmitter can be implemented as shown below:
@@ -265,12 +265,17 @@ The figure shows that the incoming bit stream on the left is first converted to 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm11.png) 
 
-Figure: A Single Carrier based QAM De-Modulator
+Figure: A Single Carrier based QPSK De-Modulator
 
+A QPSK receiver is shown above. The incoming pulse is first multiplied by the carrier so as to shift it in frequency to the baseband, and isolate its I and Q components. This is followed by the receive RRC filtering, and finally sampling to recover the bits.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm38.png) 
 
-Figure: Higher Level Signal Constellation (a) QPSK (b) 8-PSK (c) 32QAM (d) 16QAM (e) 128QAM
+Figure: Higher Level Signal Constellation (a) QPSK (b) 8-PSK (c) 32-QAM (d) 16-QAM (e) 128-QAM
+
+The bitrate for a single carrier system can be increased over that of QPSK by packing more bits into a single symbol. This can be done by increasing the number of shapes, which can be done either by varing the phase of the carrier or its amplitude. As for QPSK, this can be conveniently illustrated on the complex plane, as shown in the above figure, which shows the I and Q components, for a few higher order modulations. For example 128-QAM maps 7 bits to each symbol, so that the resulting bit rate is 3.5x that of QPSK (for the same symbol rate).
+So how far can this process go, i.e., can we keep increasing the constellation size and realize greater and greater bitrates? It turns out that with more sophisticated  systems, it is possible to incraese it by quite a bit. For example the cable modem standard DOCSIS specifies that 4096-QAM is mandatory, while 8192-QAM and 16,384-QM are optional on cable modems!
+But ultimately, this technique runs into the Shannon Channel Capacity limit $C = B\log (1+{S\over N})$, since packing more constellation points means that they will move closer and closer to each other, and at some point the noise in the channel will make it impossible to differentiate one symbol from another. In fact DOCSIS 3.1, which is the latest iteration of the standard, now specifies that OFDM be used instead of QAM, which allows even higher bitrates by increasing the channel bandwidth $B$ without compromising on the error performance.
 
 
 ### Problems with SCM in Broadband Wireless Systems
