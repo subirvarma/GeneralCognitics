@@ -142,18 +142,6 @@ You may be wondering that by discretizing a continuos time signal, we may be thr
 But in fact this is not the case, as was proven by Harry Nyquist, who worked in Bell Labs in the period prior to World War 2. This work was further extended by Claude Shannon, so the work is referred to as the Nyquist-Shannon Sampling Theorem. 
 The theorem states that as long as we sample a signal fast enough, it is always possible to re-create the original signal from the samples. The minimum sampling rate for perfect re-construction is $2B$, where $B$ is the maximum frequency in the Fourier Transform of $x(t)$. This is an amazing result, and one can get an intuitive understanding of why is is true by examining Fig. xx. It shows that if a continuous time signal is discretized, then its resulting Fourier Transform is just the periodic continuation of $\tilde X(f)$, where the latter was the Fourier transform of the continuous time signal. Hence if we were to filter out just one of these shapes, and take its Inverse Fourier Transform, the we would have  recovered the original signal $x(t)$!
 
-## The Wireless Channel
-
-![](https://subirvarma.github.io/GeneralCognitics/images/ofdm12.png) 
-
-Figure: Sources of Multipath Interference
-
-
-![](https://subirvarma.github.io/GeneralCognitics/images/ofdm13.png) 
-
-Figure: Inter-Symbol Interference due to Multipath
-
-
 
 ## Digital Baseband Communications OR How Data is Sent on a Fiber Optic Link
 
@@ -276,6 +264,18 @@ Figure: Higher Level Signal Constellation (a) QPSK (b) 8-PSK (c) 32-QAM (d) 16-Q
 The bitrate for a single carrier system can be increased over that of QPSK by packing more bits into a single symbol. This can be done by increasing the number of shapes, which can be done either by varing the phase of the carrier or its amplitude. As for QPSK, this can be conveniently illustrated on the complex plane, as shown in the above figure, which shows the I and Q components, for a few higher order modulations. For example 128-QAM maps 7 bits to each symbol, so that the resulting bit rate is 3.5x that of QPSK (for the same symbol rate).
 So how far can this process go, i.e., can we keep increasing the constellation size and realize greater and greater bitrates? It turns out that with more sophisticated  systems, it is possible to incraese it by quite a bit. For example the cable modem standard DOCSIS specifies that 4096-QAM is mandatory, while 8192-QAM and 16,384-QM are optional on cable modems!
 But ultimately, this technique runs into the Shannon Channel Capacity limit $C = B\log (1+{S\over N})$, since packing more constellation points means that they will move closer and closer to each other, and at some point the noise in the channel will make it impossible to differentiate one symbol from another. In fact DOCSIS 3.1, which is the latest iteration of the standard, now specifies that OFDM be used instead of QAM, which allows even higher bitrates by increasing the channel bandwidth $B$ without compromising on the error performance.
+
+## The Wireless Channel
+
+![](https://subirvarma.github.io/GeneralCognitics/images/ofdm12.png) 
+
+Figure: Sources of Multipath Interference
+
+
+![](https://subirvarma.github.io/GeneralCognitics/images/ofdm13.png) 
+
+Figure: Inter-Symbol Interference due to Multipath
+
 
 
 ### Problems with SCM in Broadband Wireless Systems
