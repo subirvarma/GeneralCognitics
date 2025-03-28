@@ -269,14 +269,27 @@ But ultimately, this technique runs into the Shannon Channel Capacity limit $C =
 
 ## The Wireless Channel
 
+In order to understand why Single Carrier Modulation does not work very well over wireless, we first have to understand a few things about the nature of impairments that affect transmissions in this type of channel. There are quite a few of them, including:
+
+- Interference from other wireless system operating the vicinity. This is less of a problem in the licensed frequency bands like LTE, but even here there could be interference from neeighboring cells using the same frequency band.
+- Wireless propagation related issues: As for all electromagnetic waves, the transmitted power falls off as the inverse of the square of the distance. But a bigger source of decrease in signal strength is the fact it is expected to penetrate one or more walls on the way to the receiver. Each time it does so, its power can reduce by upto two orders of magnitude.
+
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm12.png) 
 
 Figure: Sources of Multipath Interference
 
+There is another more serious problem that afflicts wireless systems, that of multipath, and is illustrated in the figure above. Multipath is also mostly due to the fact that the transmissions encounter a lot of clutter on their way from a high transmit antenna, to the receiver that usually located at street level. As a result the transmitted signal bounces around from the objects in the environment, and several copies of the signal arrive at the receiver withion a few microseconds of another. For example the figure shows signals arriving at the handset in a moving vehicle after bouncing off one or more buildings, other vehicles in the vicinity etc. We have all come across multipath when ocassionally we hear echoes on a long ditance voice connection, or 'ghosts' on an over the air TV transmission.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm13.png) 
 
 Figure: Inter-Symbol Interference due to Multipath
+
+The addition of multiple copies of the same signal separated in time (shown in the above figure) causes a phenomenon called interference, which leads to situation where they completely cancel each other out, called destructive interference, or they can reinforce each other, called constructive interference. The situation where the signals cancel each other is referred to as deep fade, and before the advent of OFDM, it plagued broadband wireless systems that were using single carrier modulation.
+
+So why does multipath affect broadband wireless systems such as 4G more than the
+
+
+
 
 
 
