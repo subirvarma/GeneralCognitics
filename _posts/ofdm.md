@@ -18,8 +18,6 @@ The other big issue with 3G was the PHY or physical layer protocol that was used
 However it had a very strong political backing, in the form of the companies Qualcomm and Ericsson which held a number of important CDMA patents.
 So the transition from CDMA to OFDM is also a story of how an insurgent technology, promoted by a few small start-ups, was able to overcome the powerful forces that were aligned against it.
 
-I had some personal involvement in the transition from 3G to 4G wireless, and had a first hand view of the politics involved. I was a co-founder of a start-up called Aperto Networks that did some of the work that ultimately resulted in 4G, and for a number of years I was a member of the IEEE 802.16 Standards Committee that was working on 4G, even chairing the Medium Access Control or MAC group for a while. The MAC protocol lies on top of PHY layers such as CDMA or OFDM, and it had to completely re-designed for packet based wireless communications. But this article is not about the MAC, perhaps it will be a subject of a future article.
-
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm19.jpg) 
 
 Figure: OFDM vs Regular Frequency Division Multiplexing
@@ -39,6 +37,10 @@ OFDM can likened to splitting up that data stream and carrying it on hundreds of
 
 Morover OFDM systems are much more robust in an unforgiving wireless environment. Problems in the wireless channel are often limited to local parts of the spectrum, called frequency selective fading. In an OFDM system this affects only some of the sub-carriers, and using channel coding techniques it is even possible to recover the lost data. Single carrier systems on the other hand don't work very well in this environment, since problems that are localized in the spectrum end up affecting the entire transmission.
 Also much higher data rates are acheivable in OFDM by adding additional sub-carriers, assuming a wider channel is available. Single carrier systems can also increase their data rate by using a wider channel, however in doing so they run up against the wireless channel, which becomes much less hospitable to transmissions as the channel width increases. This has to do with a phenomenon called multipath fading, which we will talk about in more detail later in this article.
+
+I had some personal involvement in the transition from 3G to 4G wireless, and had a first hand view of the politics involved. I was a co-founder of a start-up called Aperto Networks that did some of the work that ultimately resulted in 4G, and for a number of years I was a member of the IEEE 802.16 Standards Committee that was working on 4G, even chairing the Medium Access Control or MAC group for a while. The MAC protocol lies on top of PHY layers such as CDMA or OFDM, and it had to completely re-designed for packet based wireless communications. But this article is not about the MAC, perhaps it will be a subject of a future article.
+
+
 
 ## The Fourier Transform
 
