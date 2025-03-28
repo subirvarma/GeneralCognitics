@@ -294,7 +294,7 @@ It is possible to plot the frequency reponse of a wireless channel, and one such
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm16.png) 
 
-Figure: Channel Reponse comapred to the Signal Spectrum for Narrowband (top) and Broadband Systems (bottom)
+Figure: Channel Response compared to the Signal Spectrum for Narrowband (top) and Broadband Systems (bottom)
 
 So why does multipath affect broadband wireless systems such as 4G more than previous generation of systems, even though they were all based on single carrier type modulation. One way to understand this is by examining the channel frequency response. If the transmissions are of the narrowband type, then there is a good chance that their spectrum is fully contained in the flat part of the channel response, which alleviates the problem. However it is a broadbad channel, then there is a good chance the signal spectrum spans a larger part of the channel response spectrum, that contains one or more notches, which lead to problems. Another problem is that the channel is dynamic, especially if the receiver is moving around. So the loaction of the notches can contantly change during the duration of a single data session.
 
