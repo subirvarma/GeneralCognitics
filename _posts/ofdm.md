@@ -285,8 +285,16 @@ There is another more serious problem that afflicts wireless systems, that of mu
 Figure: Inter-Symbol Interference due to Multipath
 
 The addition of multiple copies of the same signal separated in time (shown in the above figure) causes a phenomenon called interference, which leads to situation where they completely cancel each other out, called destructive interference, or they can reinforce each other, called constructive interference. The situation where the signals cancel each other is referred to as deep fade, and before the advent of OFDM, it plagued broadband wireless systems that were using single carrier modulation.
+The channel is dynamic.
 
-So why does multipath affect broadband wireless systems such as 4G more than the
+![](https://subirvarma.github.io/GeneralCognitics/images/ofdm40.png) 
+
+Figure: Inter-Symbol Interference due to Multipath
+
+It is possible to plot the frequency reponse of a wireless channel, and one such plot is shown the above figure. We can see that the response is not uniform with frequency, but exhibits dips at various points in the spectrum. This is precisely due to the effect of multipath propagation.
+
+So why does multipath affect broadband wireless systems such as 4G more than previous generation of systems, even though they were all based on single carrier type modulation. One way to understand this is by examining the channel frequency response. If the transmissions are of the narrowband type, then there is a good chance that their spectrum occupies the flat part of the channel response, which is re
+
 
 
 
