@@ -285,32 +285,35 @@ There is another more serious problem that afflicts wireless systems, that of mu
 Figure: Inter-Symbol Interference due to Multipath
 
 The addition of multiple copies of the same signal separated in time (shown in the above figure) causes a phenomenon called interference, which leads to situation where they completely cancel each other out, called destructive interference, or they can reinforce each other, called constructive interference. The situation where the signals cancel each other is referred to as deep fade, and before the advent of OFDM, it plagued broadband wireless systems that were using single carrier modulation.
-The channel is dynamic.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm40.png) 
 
-Figure: Inter-Symbol Interference due to Multipath
+Figure: Frequency Response of a Wireless Channel
 
 It is possible to plot the frequency reponse of a wireless channel, and one such plot is shown the above figure. We can see that the response is not uniform with frequency, but exhibits dips at various points in the spectrum. This is precisely due to the effect of multipath propagation.
 
-So why does multipath affect broadband wireless systems such as 4G more than previous generation of systems, even though they were all based on single carrier type modulation. One way to understand this is by examining the channel frequency response. If the transmissions are of the narrowband type, then there is a good chance that their spectrum occupies the flat part of the channel response, which is re
+![](https://subirvarma.github.io/GeneralCognitics/images/ofdm16.png) 
 
+Figure: Channel Reponse comapred to the Signal Spectrum for Narrowband (top) and Broadband Systems (bottom)
 
+So why does multipath affect broadband wireless systems such as 4G more than previous generation of systems, even though they were all based on single carrier type modulation. One way to understand this is by examining the channel frequency response. If the transmissions are of the narrowband type, then there is a good chance that their spectrum is fully contained in the flat part of the channel response, which alleviates the problem. However it is a broadbad channel, then there is a good chance the signal spectrum spans a larger part of the channel response spectrum, that contains one or more notches, which lead to problems. Another problem is that the channel is dynamic, especially if the receiver is moving around. So the loaction of the notches can contantly change during the duration of a single data session.
 
+![](https://subirvarma.github.io/GeneralCognitics/images/ofdm39.png) 
 
+Figure: Illustration of Interference in the Time Domain,for Narrowband Systems (top part) and Broadband Systems (bottom part)
 
-
-
-### Problems with SCM in Broadband Wireless Systems
-
-
-Figure: Inter-Symbol Interference in Single Carrier Systems
-
-
-
+Multipath interference can be understood more directly by examining its effect in the time domain, and this is shown in the above figure. It illustrates the case when the bit sequence 
+100101 is transmitted using a symbol time of 10 microseconds in the top two figures and 0.1 microsecond in the bottom two figures. 
+The 10 microsecond symbol corresponds to a narrowband transmission, and part (b) we can see two multipath signals arriving with a time offset at the receiver. The amount of multipath delay is of the order of 1-2 microseconds, which is much less than the symbol time. This is the case that corresponds to flat fading, and there are well known techniques to combat it.
+With the broadband signal on the other hand, since the symbol time is only 0.1 microseconds, the 1-2 microsecond delay spread in the multipath now affects many more symbols in the future, and this corresponds to the case of frequency selective fading. Note that with single carrier modulation, the symbol time decreases as we increase its bandwidth, so the frequency selective problem becomes worse at higher data speeds.
 
 
 ## OFDM OR How Data is Sent over a Broadband Wireless Link
+
+
+![](https://subirvarma.github.io/GeneralCognitics/images/ofdm18.jpg) 
+
+Figure 18: OFDM Sub-Carriers
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm17.png) 
 
@@ -325,11 +328,6 @@ Figure: Generating an OFDM Symbol
 Figure: Inter-Symbol interference in OFDM
 
 
-![](https://subirvarma.github.io/GeneralCognitics/images/ofdm16.jpg) 
-
-Figure: Effect of Channel Distortion in OFDM
-
-
 
 ### The OFDM Transmitter and Receiver
 
@@ -339,9 +337,7 @@ Figure: Effect of Channel Distortion in OFDM
 Figure: The Overall System using OFDM, Transmitter + Receiver
 
 
-![](https://subirvarma.github.io/GeneralCognitics/images/ofdm18.jpg) 
 
-Figure 18: OFDM Sub-Carriers
 
 
 
