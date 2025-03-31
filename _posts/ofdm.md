@@ -355,7 +355,7 @@ Figure: OFDM Sub-Carriers
 
 Note that it is no longer necessary to shape the transmit pulses into the shape of a sinc in order to avoid Inter Symbol Interference (since interference is avoided by using another technique as explained below), hence the transmit pulse can be a square pulse. As a result, the shape of the frequency reponse for the pulse is in the form of a sinc function. This is illustrated in the above figure which shows the spectrum for an entire OFDM symbol, consisting of muliple subcariers. Each of the subcarriers assumes a sinc shape as shown, and since they are spaced from each other by a multiple of a frequency, it results in the shape shown. Note unlike in regular Frequency Division Multiplexing, it is not necessary to leave a guard interval between sub-carriers, since they don't interfere with another due to the orthogonality property.
 
-![](https://subirvarma.github.io/GeneralCognitics/images/ofdm44.jpg) 
+![](https://subirvarma.github.io/GeneralCognitics/images/ofdm44.png) 
 
 Figure: Frequency Selective Fading in an OFDM System
 
@@ -369,16 +369,11 @@ The above figure shows an OFDM transmitter and receiver. On the transmit side it
 On the receive side the signal is first decomposed into its indivdual components by multiplication with the N single carriers in parallel. This is followed by a parallel to serial converter and then the detection block in which the transmitted bits are recovered, .
 
 
-### Implementatuin Using the Discrete Fourier Transform
+### OFDM Implementation Using the Discrete Fourier Transform
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm20.ppm) 
 
 Figure: Using Inverse Discrete Fourier Transform in an OFDM Transmitter
 
 
-
-
-
-
-## OFDM Implementation using the Discrete Fourier Transform
 
