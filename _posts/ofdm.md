@@ -344,31 +344,32 @@ The process of generation of single OFDM symbol is shown in the above figure. Le
 
 Figure: Inter-Symbol Gap in OFDM
 
-There is a big benefit in using large symbols as shown in the above figure. It is now possible to leave a gap between sucessive symbols without loosing too much link capacity. As long as this gap is larger than the interval at which larget multipath signal arrives at the receiver, the OFDM system will be immune to Inter Symbol Interference. 
+There is a big benefit in using large symbols as shown in the above figure. It is now possible to leave a gap between sucessive symbols without loosing too much link capacity. As long as this gap is larger than the interval at which larget multipath signal arrives at the receiver, the OFDM system will be immune to Inter Symbol Interference. The inter-symbol gap is ot left empty, but instead the last portion of the next symbol (equal to the length of the gap) is inserted there, this technique is known as the Cyclic Prefix Extension.
 
 Consider the following example: If we were to transmit a million symbols per second using single-carrier modulation, then the duration of each symbol would be one microsecond or less. 
 If the same million symbols per second are spread among one thousand sub-carriers, then the duration of each symbol can be longer by a factor of a thousand (i.e., one millisecond) for orthogonality with approximately the same bandwidth. Assume that an inter-symbol gap or guard interval of 1/8 of the symbol length is inserted between each symbol. Intersymbol interference can be avoided if the multipath time-spreading (the time between the reception of the first and the last echo) is shorter than the guard interval (i.e., 125 microseconds). This corresponds to a maximum difference of 37.5 kilometers between the lengths of the paths, which is good enough for most cellular wireless transmissions.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm18.jpg) 
 
-Figure 18: OFDM Sub-Carriers
+Figure: OFDM Sub-Carriers
 
-What does an OFDM symbol look like in the frequency domain. This is shown in the above figure 
+Note that it is no longer necessary to shape the transmit pulses into the shape of a sinc in order to avoid Inter Symbol Interference (since interference is avoided by using another technique as explained below), hence the transmit pulse can be a square pulse. As a result, the shape of the frequency reponse for the pulse is in the form of a sinc function. This is illustrated in the above figure which shows the spectrum for an entire OFDM symbol, consisting of muliple subcariers. Each of the subcarriers assumes a sinc shape as shown, and since they are spaced from each other by a multiple of a frequency, it results in the shape shown. Note unlike in regular Frequency Division Multiplexing, it is not necessary to leave a guard interval between sub-carriers, since they don't interfere with another due to the orthogonality property.
+
+![](https://subirvarma.github.io/GeneralCognitics/images/ofdm44.jpg) 
+
+Figure: Frequency Selective Fading in an OFDM System
+
+Part (a) of the above figure shows the frequnecy response of a channel undergoing frequency selective fading (the solid line). If we use Single Carrier Modulation in such a channel, then its frequency spectrum spans the entire channel bandwidth, and as a result, the frequency selective fading can cause a whole symbol to be lost. On the other hand, as Part (b) of the figure shows, wih an OFDM system, the portions of the spectrum that are affected by the frequency selective fades, are localized to only a few of the subcarriers in the OFDM signal, which makes the transmission muct more robust compared to single carrier systems. As we discuss next, it is also possible to use different modulation schmemes on different sub-carriers, so that the part of the spectrum which is subject to fading can adaptively change its modulation to a  more robust one such as QPSK.
+
+![](https://subirvarma.github.io/GeneralCognitics/images/ofdm21.png) 
+
+Figure: The OFDM Transmitter and Receiver
+
+The above figure shows an OFDM transmitter and receiver. On the transmit side it shows the serial bit stream getting mapped to N single carrier symbols. Note that we can use a different modulation for each single carrier, so far examples if sub-carrier 1 is using 256-QAM then 8 bits get mapped, while if sub-carrier 2 is using QPSK (since it is in a more callenging part of the channel spectrum , then 2 bits get mapped. The individual single carrier symbols are then added together to generate the OFDM symbol that gets transmitted over the channel.
+On the receive side the signal is first decomposed into its indivdual components by multiplication with the N single carriers in parallel. This is followed by a parallel to serial converter and then the detection block in which the transmitted bits are recovered, .
 
 
-
-### The OFDM Transmitter and Receiver
-
-
-![](https://subirvarma.github.io/GeneralCognitics/images/ofdm21.gif) 
-
-Figure: The Overall System using OFDM, Transmitter + Receiver
-
-
-
-
-
-
+### Implementatuin Using the Discrete Fourier Transform
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm20.ppm) 
 
