@@ -292,7 +292,7 @@ Figure: Frequency Response of a Wireless Channel
 
 It is possible to plot the frequency reponse of a wireless channel, and one such plot is shown the above figure. We can see that the response is not uniform with frequency, but exhibits dips at various points in the spectrum. This is precisely due to the effect of multipath propagation.
 
-![](https://subirvarma.github.io/GeneralCognitics/images/ofdm16.png) 
+![](https://subirvarma.github.io/GeneralCognitics/images/ofdm16.jpg) 
 
 Figure: Channel Response compared to the Signal Spectrum for Narrowband (top) and Broadband Systems (bottom)
 
