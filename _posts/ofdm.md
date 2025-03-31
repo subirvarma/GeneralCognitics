@@ -342,6 +342,8 @@ The process of generation of single OFDM symbol is shown in the above figure. Le
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm41.png) 
 
+Figure: Inter-Symbol Gap in OFDM
+
 There is a big benefit in using large symbols as shown in the above figure. It is now possible to leave a gap between sucessive symbols without loosing too much link capacity. As long as this gap is larger than the interval at which larget multipath signal arrives at the receiver, the OFDM system will be immune to Inter Symbol Interference. 
 
 Consider the following example: If we were to transmit a million symbols per second using single-carrier modulation, then the duration of each symbol would be one microsecond or less. 
@@ -352,16 +354,6 @@ If the same million symbols per second are spread among one thousand sub-carrier
 Figure 18: OFDM Sub-Carriers
 
 What does an OFDM symbol look like in the frequency domain. This is shown in the above figure 
-
-![](https://subirvarma.github.io/GeneralCognitics/images/ofdm17.png) 
-
-Figure: Generating an OFDM Symbol
-
-
-
-![](https://subirvarma.github.io/GeneralCognitics/images/ofdm15.jpg) 
-
-Figure: Inter-Symbol interference in OFDM
 
 
 
