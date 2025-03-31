@@ -149,7 +149,7 @@ The theorem states that as long as we sample a signal fast enough, it is always 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm23.png) 
 
-Figure: Sending Morse Code Data
+Figure: Sending Morse Code Data (a) Transmitted Data (b) Received Data
 
 At the dawn of the Communications Age, when Samuel Morse was experimenting with ways in which he could send the code pulses across, he noticed that received pulses tended to get smeared out in time (see above figure), and thus interfere with neighboring pulses. In order to avoid this, he left enough of a gap between pulses, as shown in the figure. This solved his problem, but at the cost of a reduced data rate. In our own digital age, all data is in the form of 1s and 0s, and the communications engineers working in the early years of digital transmission, faced exactly the same problem, i.e., how to reliably get the bits across the channel.
 
@@ -185,7 +185,7 @@ Consider a sinc function that is defined in the time domain given by $x(t) = {\s
 
 Figure: Resulting waveform in time when sending 1011 Using 4 Sinc Pulses
 
-Note the time version of the sinc has zeroes at $nT$ for integer values of $n$, and this property is very useful when sending a train of pulses back to back, separated by the period $T$. The above figure shows the resulting waveform when the bit sequence 1011 in time using sinc pulses. Just as in the case of square pulses, the signal for a particular pulse leaks over to other pulses, but with one big distinction: The peak of a pulse, co-incides with the zeroes of all the neighboring pulses! This property follows from the fact that the sinc has zeroes at integer multiples of $T$. This property implies that is no inter symbol interference between neighboring sinc pulses.
+Note the time version of the sinc has zeroes at $nT$ for integer values of $n$, and this property is very useful when sending a train of pulses back to back, separated by the period $T$. The above figure shows the resulting waveform when the bit sequence 1011 in time using sinc pulses. Just as in the case of square pulses, the signal for a particular pulse leaks over to other pulses, but with one big distinction: The peak of a pulse, co-incides with the zeroes of all the neighboring pulses! This property follows from the fact that the sinc has zeroes at integer multiples of $T$. This property implies that is no inter symbol interference between neighboring sinc pulses, even when they are stacked next to each other at intervals of ${1\over T}$.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm31.png) 
 
@@ -310,6 +310,36 @@ With the broadband signal on the other hand, since the symbol time is only 0.1 m
 
 ## OFDM OR How Data is Sent over a Broadband Wireless Link
 
+- [ ] Now bring the magic of the Fourier transform in to the picture.
+- [ ] Start by talking about SC: In SC ISI is avoided by using nyquist pulses. These have to be tiny in order to occupy the full spectrum.
+- [ ] But there is another way to avoid isi, as Morse showed us at the very start of the communications age, ie leave a large gap between consecutive pulses.
+- [ ] In sc modulation this solution does not work because the pulse times are tiny. But if what if we had large time pulses.
+- [ ] But recall that the Fourier transform tells us that large time pulses will result in tiny frequency domain pulses, ie we are back in the narrowband world of 2G systems. 
+- [ ] On the face of it this is not a good thing, since large time domain pulses means lower bit rate, we are back in the narrowband domain.
+- [ ] But what if we do the following: Keep the large time pulse, but transmit a whole bunch of them in parallel, so that together they carry as much data as the tiny broadband pulses, within a certain time interval. 
+- [ ] But then won’t these time pulses interfere with one another?
+- [ ] Not if we multiply them with sub carriers that are orthogonal to each other. In the frequency domain this means choosing pulse shapes that don’t interfere with each other. But it turns out that sinc pulses have this property, as long as they are separated by frequencies that are integer multiples. 
+- [ ] Here is an extra bonus: We now have the luxury of avoiding multipath interference by leaving a gap between the large time domain pulses, something that was not possible for the SC case. 
+- [ ] In the frequency domain, frequency selective fading becomes less of a problem since it affects only a subset of the carriers. 
+- [ ] The last two bullets effectively make OFDM the best choice for broadband wireless.
+
+Is there a more robust way to transmit over a wireless channel, which does not suffer from multipath interference? It turns out there is, and it was discovered by Robert Chang from Bells Labs in 1966, building on some earlier work by Franco and Lachs. He discovered OFDM by inverting the problem in some sense, by using the magic of the Fourier Transform. In order to understand OFDM, consider the following:
+
+Recall that Nyquist showed us that it is possible to stack up pulses in time right next to each other with their peaks separated by an interval of $T$, and still avoind Inter Symbol Interference, as long as we shape them using the sinc function. This results in a bandwidth usage of ${\over{2T}} for the signal. The only way to send data faster is by making the pulse width $T$ smaller, which results in a larger bandwidth used.
+But there is another way to avoid Inter Symbol Interference, as Morse discovered almost 200 years ago, which is by leaving a large gap between successive time pulses. However this technique is not compatible with broadband communications, since it leads in a large reduction in the symbol rate. But is there a way out of this conundrum?
+
+It turns out there is! If we transmit very large symbols (in time), this allows us to leave a small gap between successive symbols without loosing too much capacity. But large symbols lead to smaller bandwidth if we are using single carrier modulation. However what if we transmit multiple symbols in parallel at the same time? Hence each symbol will carry less data by itself, but in aggregate all the symbols together can carry as much data as the single carrier case. This is exactly what OFDM does!
+
+![](https://subirvarma.github.io/GeneralCognitics/images/ofdm14.jpg) 
+
+Figure: Generating an OFDM Symbol
+
+But how can we transmit multiple symbols in parallel, without them interfering with one other? This is were genius struck, with idea that the parallel transmissions could be made independent of each other, by multiplying them with carrier waves that are orthogonal to each other. 
+This allows each individual symbol to be receoved at the receiver, by multiplying it with the carrier wave with the same frequency as that used for transmitting that symbol.
+As Fourier showed, carrier waves can be made orthogonal to each other by making sure that their frequencies are integral multiples of each other. 
+
+The process of generation of single OFM symbol is shown in the above figure. 
+
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm18.jpg) 
 
@@ -319,9 +349,7 @@ Figure 18: OFDM Sub-Carriers
 
 Figure: Generating an OFDM Symbol
 
-![](https://subirvarma.github.io/GeneralCognitics/images/ofdm14.jpg) 
 
-Figure: Generating an OFDM Symbol
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm15.jpg) 
 
