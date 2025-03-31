@@ -338,12 +338,20 @@ But how can we transmit multiple symbols in parallel, without them interfering w
 This allows each individual symbol to be receoved at the receiver, by multiplying it with the carrier wave with the same frequency as that used for transmitting that symbol.
 As Fourier showed, carrier waves can be made orthogonal to each other by making sure that their frequencies are integral multiples of each other. 
 
-The process of generation of single OFM symbol is shown in the above figure. 
+The process of generation of single OFDM symbol is shown in the above figure. Let say we have to transmit the 9 bit sequence 010010011, shown in top part of the figure. If we use Single Carrier modulation, then the transmission of each bit will take T seconds (assuming BPSK modulation), for a total time of 9T seconds. With OFDM, we are going to use up the entire 9T seconds to transmit a single symbol (or bit in this case), as shown in the left side of the figure, and then multiply each symbol by a carrier whose frequencies are integral multiples of each other, an shown in the right hand side. We then add up all the 9 symbols together to generate the final synbol of duration 9T seconds, as shown at the bottom. Hence once again we end of transmtiing 9 bits in 9T seconds (as in single carrier), but now we are doing it in a way that is much more robust to wireless channel impairments such as multipath and interference. 
 
+![](https://subirvarma.github.io/GeneralCognitics/images/ofdm41.png) 
+
+There is a big benefit in using large symbols as shown in the above figure. It is now possible to leave a gap between sucessive symbols without loosing too much link capacity. As long as this gap is larger than the interval at which larget multipath signal arrives at the receiver, the OFDM system will be immune to Inter Symbol Interference. 
+
+Consider the following example: If we were to transmit a million symbols per second using single-carrier modulation, then the duration of each symbol would be one microsecond or less. 
+If the same million symbols per second are spread among one thousand sub-carriers, then the duration of each symbol can be longer by a factor of a thousand (i.e., one millisecond) for orthogonality with approximately the same bandwidth. Assume that an inter-symbol gap or guard interval of 1/8 of the symbol length is inserted between each symbol. Intersymbol interference can be avoided if the multipath time-spreading (the time between the reception of the first and the last echo) is shorter than the guard interval (i.e., 125 microseconds). This corresponds to a maximum difference of 37.5 kilometers between the lengths of the paths, which is good enough for most cellular wireless transmissions.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm18.jpg) 
 
 Figure 18: OFDM Sub-Carriers
+
+What does an OFDM symbol look like in the frequency domain. This is shown in the above figure 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm17.png) 
 
