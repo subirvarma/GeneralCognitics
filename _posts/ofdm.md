@@ -122,7 +122,7 @@ From this equation we can see that $X(f)$ is a periodic function. Hence discreti
 
 Figure: Inverse Fourier Transform (in blue) for a signal that is sampled in frequency (in red)
 
-If, instead of discretizing the time domain signal $x(t)$, what would happen if we discretized the frequency domain signal $\tilde X(f)?
+If, instead of discretizing the time domain signal $x(t)$, what would happen if we discretized the frequency domain signal $\tilde X(f)$?
 If we evaluate $X(f)$ only at discrete values of frequency $[0, \Delta f, 2\Delta f,..., (N-1)\Delta_f]$, where $\Delta f = {1\over N}$, and defining $X_k = {\tilde X}(k\Delta f]$, then what is its Inverse Fourier Transform? The result of this operation is shown in the above figure and as can be seen, it results in a periodic and continuous  function in time.
 
 
@@ -371,9 +371,15 @@ On the receive side the signal is first decomposed into its indivdual components
 
 ### OFDM Implementation Using the Discrete Fourier Transform
 
-![](https://subirvarma.github.io/GeneralCognitics/images/ofdm20.ppm) 
+![](https://subirvarma.github.io/GeneralCognitics/images/ofdm45.png) 
 
-Figure: Using Inverse Discrete Fourier Transform in an OFDM Transmitter
+Figure: OFDM Transmitter Implementation using an Inverse Discrete Fourier Transform (IDFT)
+
+
+
+![](https://subirvarma.github.io/GeneralCognitics/images/ofdm46.png) 
+
+Figure: OFDM Receiver Implementation using a Discrete Fourier Transform (DFT)
 
 
 
