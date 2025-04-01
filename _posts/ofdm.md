@@ -366,20 +366,65 @@ Part (a) of the above figure shows the frequnecy response of a channel undergoin
 Figure: The OFDM Transmitter and Receiver
 
 The above figure shows an OFDM transmitter and receiver. On the transmit side it shows the serial bit stream getting mapped to N single carrier symbols. Note that we can use a different modulation for each single carrier, so far examples if sub-carrier 1 is using 256-QAM then 8 bits get mapped, while if sub-carrier 2 is using QPSK (since it is in a more callenging part of the channel spectrum , then 2 bits get mapped. The individual single carrier symbols are then added together to generate the OFDM symbol that gets transmitted over the channel.
-On the receive side the signal is first decomposed into its indivdual components by multiplication with the N single carriers in parallel. This is followed by a parallel to serial converter and then the detection block in which the transmitted bits are recovered, .
+On the receive side the signal is first decomposed into its indivdual components by multiplication with the N single carriers in parallel. This is followed by a parallel to serial converter and then the detection block in which the transmitted bits are recovered.
 
 
 ### OFDM Implementation Using the Discrete Fourier Transform
+
+The OFDM Transmitter and Receiver systems that were shown at the end of the last section have a very big problem: They are basically un-implementable! The reason for this is that they require as many oscillators as there are sub-carriers in the system, and given that a realistic OFDM system can have hunderds if not thousand of sub-carriers, implementation can get very expensive.
+
+So what is the way out? Well, once again the Fourier Transform comes to the rescue, this time in the form of the Discrete Fourier Transform or DFT. As we show next, DFT allows us to replace the operation of multiplying with a sine or cosine signal, with that of taking the DFT or the inverse-DFT, which is much easier to do.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm45.png) 
 
 Figure: OFDM Transmitter Implementation using an Inverse Discrete Fourier Transform (IDFT)
 
+At Transmitter:
 
+Equation for the baseband signal in continuous time
+
+$$ s(t) = \sum_{n=0}^{N-1} A_n e^{{j2\pi n\over T}t}, \ \ \ 0\le t\le T $$
+
+Equation for the passband signal in continuous time
+
+$$ x(t) = \Re{e^{2\pi f_c t} s(t)} \ \ \ 0\le t\le T$$
+
+Equation for the baseband signal in discrete time
+
+$$ s_k = \sum_{n=0}^{N-1} A_n e^{j2\pi nk\over T}\ \ \ 1\le k\le N-1 $$
+
+Digital to Analog Conversion to generate $s(t)$
+
+Equation for the passband signal in continuous time
+
+$$ x(t) = \Re{e^{2\pi f_c t} s(t)} \ \ \ 0\le t\le T$$
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm46.png) 
 
 Figure: OFDM Receiver Implementation using a Discrete Fourier Transform (DFT)
 
+At Receiver:
+
+Received passband signal in continuous time
+
+$$ y(t) = x(t) + n(t)\ \ \ 0\le t\le T $$
+
+Received baseband signal in continuous time (real part)
+
+$$ r_{real}(t) = y(t) \cos(2\pi f_c t) \ \ \ 0\le t\le T $$
+
+Received baseband signal in continuous time (imaginary part)
+
+$$ r_{imaginary}(t) = y(t) \sin(2\pi f_c t) \ \ \ 0\le t\le T $$
+
+$$ r(t) = y(t) e^{2\pi f_c t}\ \ \ 0\le t\le T $$
+
+Analog to Digital Conversion to generate $r_k$ sequence
+
+Recovery of the transmitted symbols using DFT
+
+$$  A_n = \sum_{k=0}^{N-1} r_k e^{-{j2\pi nk\over T}},\ \ \ 0\le n\le N-1 $$
+
+Use Symbol Detector to regenerate the bit sequence corresponding to the complex valued signal.
 
 
