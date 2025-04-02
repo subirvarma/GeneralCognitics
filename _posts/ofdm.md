@@ -373,11 +373,7 @@ that constitute the OFDM baseband signal, and finally added together to generate
 
 $$ x(t) = \sum_{n=0}^{N-1} A_n e^{{j2\pi n\over T}t}, \ \ \ 0\le t\le T $$
 
-The next equation shows the baseband pulse being multiplied by a carrier wave at frequency $f_c$ to generate the passband pulse of duration $T$.
-
-$$ s(t) = \Re[{e^{2\pi f_c t} s(t)}] \ \ \ 0\le t\le T$$
-
-We are now going to sample the baseband pulse s(t), thus generating N samples $x_k, 1\le K\le N$ at time $t = {T\over N}, {2T\over N},...,{(N-1)T\over N}, T$. Substituting these in the equation for $x(t)$ it follows that the samples $x_k, 1\le k\le N$ are given by
+We are now going to sample the baseband pulse x(t) N times, at times $t = {T\over N}, {2T\over N},...,{(N-1)T\over N}, T$, thus generating N samples $x_k, 1\le K\le N$. Substituting these in the equation for $x(t)$ it follows that the samples $x_k, 1\le k\le N$ satisfy the following equation:
 
 $$ x_k = {1\over N}\sum_{n=0}^{N-1} A_n e^{j2\pi nk\over N}\ \ \ 1\le k\le N $$
 
@@ -385,28 +381,25 @@ This is where magic happens! If you go back to the section on the Discrete Fouri
 This observation provides a straightforward way in which the numbers $A_n$ can be receovered at the Receiver, simply carry out the inverse operation (which is just the regular DFT), and these numbers appear.
 But before we can do that, we have to transmit the signal over the analog channel, and in order to do this we will have to transform the samples $x_k, 1\le k\le N$ into an analog pulse. This is done using a Digital to Analog Converter (DAC) as shown in the figure, and is done separately for the Real and Imaginary components. The resulting two analog signals are then multiplied by the carrier wave at frequency $f_c$ to generate the passband signal $s(t)$ that is transmitted over the channel.
 
-$$ s(t) = \Re{e^{2\pi f_c t} x(t)} \ \ \ 0\le t\le T$$
+$$ s(t) = \Re[{e^{2\pi f_c t} x(t)}] \ \ \ 0\le t\le T$$
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm46.png) 
 
 Figure: OFDM Receiver Implementation using a Discrete Fourier Transform (DFT)
 
-At Receiver:
-
-Received passband signal in continuous time
+The received passband pulse $r(t)$ is given by
 
 $$ r(t) = s(t) + n(t)\ \ \ 0\le t\le T $$
 
-Received baseband signal in continuous time 
+where $n(n)$ is the channel noise.  The received signal can be shifted to the baseband as follows 
 
 $$ y(t) = r(t) e^{2\pi f_c t}\ \ \ 0\le t\le T $$
 
-Analog to Digital Conversion to generate $r_k$ sequence
+Note that the signal $y(t)$ has a real and imaginary part, and each of these sent through a Analog to Digital Converter, to generate
+the complex valued discrete sequence $y_k, 1\le k\le N$. Subsequently DFT is used to recover the complex valued QAM symbols $A_n, 1\le n\le N$, given by
 
-Recovery of the transmitted symbols using DFT
+$$  A_n = {1\over N}\sum_{k=0}^{N-1} y_k e^{-{j2\pi nk\over T}},\ \ \ 1\le n\le N $$
 
-$$  A_n = \sum_{k=0}^{N-1} y_k e^{-{j2\pi nk\over T}},\ \ \ 1\le n\le N $$
-
-Use Symbol Detector to regenerate the bit sequence corresponding to the complex valued signal.
+These QAM symbols are then sent to a Symbol Detector to regenerate the bit sequence corresponding to each symbol.
 
 
