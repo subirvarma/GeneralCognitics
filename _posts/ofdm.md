@@ -390,13 +390,13 @@ The next equation shows the baseband pulse being multiplied by a carrier wave at
 
 $$ s(t) = \Re[{e^{2\pi f_c t} s(t)}] \ \ \ 0\le t\le T$$
 
-We are now going to sample the baseband pulse s(t), thus generating N samples $x_k, 1\le K\le N$ at time $t = {T\over N}, {2T\over N},...,{(N-1)T\over N}, 1$. Substituting these in the equation for $x(t)$ it follows that the samples $x_k, 1\le k\le N$ are given by
+We are now going to sample the baseband pulse s(t), thus generating N samples $x_k, 1\le K\le N$ at time $t = {T\over N}, {2T\over N},...,{(N-1)T\over N}, T$. Substituting these in the equation for $x(t)$ it follows that the samples $x_k, 1\le k\le N$ are given by
 
 $$ x_k = {1\over N}\sum_{n=0}^{N-1} A_n e^{j2\pi nk\over N}\ \ \ 1\le k\le N $$
 
 This is where magic happens! If you go back to the section on the Discrete Fourier Transform, you will see that these equations are exactly the same as for the Inverse DFT for a signal whose frequency samples are given by $A_n, 1\le n\le N$. Hence we have avoided the use of all the oscillators in the generation of an OFDM pulse, simply by discretizing the signal and using the inverse DFT on it.
 This observation provides a straightforward way in which the numbers $A_n$ can be receovered at the Receiver, simply carry out the inverse operation (which is just the regular DFT), and these numbers appear.
-But before we can do that, we have to transmit the signal over the analog channel, and in order to do this we will have to transform the samples $x_k, 1\le k\le N$ into an analog pulse. This is done using a Digital to Analog Converter (DAC) as shown in the figure, and is done separately for the Real and Imaginary components. The resulting two analog signals are then multiplied by the carrier wave at frequency $f_c$ to generate the passband signal $x(t)$ that is transmitted over the channel.
+But before we can do that, we have to transmit the signal over the analog channel, and in order to do this we will have to transform the samples $x_k, 1\le k\le N$ into an analog pulse. This is done using a Digital to Analog Converter (DAC) as shown in the figure, and is done separately for the Real and Imaginary components. The resulting two analog signals are then multiplied by the carrier wave at frequency $f_c$ to generate the passband signal $s(t)$ that is transmitted over the channel.
 
 $$ s(t) = \Re{e^{2\pi f_c t} x(t)} \ \ \ 0\le t\le T$$
 
