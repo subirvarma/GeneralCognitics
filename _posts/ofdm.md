@@ -373,31 +373,32 @@ On the receive side the signal is first decomposed into its indivdual components
 
 The OFDM Transmitter and Receiver systems that were shown at the end of the last section have a very big problem: They are basically un-implementable! The reason for this is that they require as many oscillators as there are sub-carriers in the system, and given that a realistic OFDM system can have hunderds if not thousand of sub-carriers, implementation can get very expensive.
 
-So what is the way out? Well, once again the Fourier Transform comes to the rescue, this time in the form of the Discrete Fourier Transform or DFT. As we show next, DFT allows us to replace the operation of multiplying with a sine or cosine signal, with that of taking the DFT or the inverse-DFT, which is much easier to do.
+So what is the way out? Well, once again the Fourier Transform comes to the rescue, this time in the form of the Discrete Fourier Transform or DFT. As we show next, DFT allows us to replace the operation of multiplying with a sine or cosine signal, with that of taking the DFT or the inverse-DFT, which is much easier to do. This critical idea was first fully developed by Weinstein and Ebert at Bell Labs in 1971, five years after the original OFDM paper Robert Chang. Bell Labs however did not show much interest in this technology, and the first commercial implementation had to wait to 1993, with the start-up Amati Networks who applied OFDM to ADSL transmissions, which take place over Twisted Pair copper wiring.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm45.png) 
 
-Figure: OFDM Transmitter Implementation using an Inverse Discrete Fourier Transform (IDFT)
+Figure: OFDM Transmitter Implementation using an Inverse Discrete Fourier Transformation
 
-At Transmitter:
+In order to see how DFT can be applied to OFDM, lets start with the OFDM Transmitter that was shown in the previous section.
+The following equation captures the generation of the baseband signal. Note that the sequence $A_n, n=0,...,N-1$ is the set
+of complex numbers that captures the type of modulation being used. These then get multiplied by the set of discrete carriers
+that constitute the OFDM baseband signal, and finally added together to generate the OFDM baseband pulse.
 
-Equation for the baseband signal in continuous time
+$$ x(t) = \sum_{n=0}^{N-1} A_n e^{{j2\pi n\over T}t}, \ \ \ 0\le t\le T $$
 
-$$ s(t) = \sum_{n=0}^{N-1} A_n e^{{j2\pi n\over T}t}, \ \ \ 0\le t\le T $$
+The next equation shows the baseband pulse being multiplied by a carrier wave at frequency $f_c$ to generate the passband pulse of duration $T$.
 
-Equation for the passband signal in continuous time
+$$ s(t) = \Re[{e^{2\pi f_c t} s(t)}] \ \ \ 0\le t\le T$$
 
-$$ x(t) = \Re{e^{2\pi f_c t} s(t)} \ \ \ 0\le t\le T$$
+We are now going to sample the baseband pulse s(t), thus generating N samples $x_k, 1\le K\le N$ at time $t = {T\over N}, {2T\over N},...,{(N-1)T\over N}, 1$. Substituting these in the equation for $x(t)$ it follows that the samples $x_k, 1\le k\le N$ are given by
 
-Equation for the baseband signal in discrete time
+$$ x_k = {1\over N}\sum_{n=0}^{N-1} A_n e^{j2\pi nk\over N}\ \ \ 1\le k\le N $$
 
-$$ s_k = \sum_{n=0}^{N-1} A_n e^{j2\pi nk\over T}\ \ \ 1\le k\le N-1 $$
+This is where magic happens! If you go back to the section on the Discrete Fourier Transform, you will see that these equations are exactly the same as for the Inverse DFT for a signal whose frequency samples are given by $A_n, 1\le n\le N$. Hence we have avoided the use of all the oscillators in the generation of an OFDM pulse, simply by discretizing the signal and using the inverse DFT on it.
+This observation provides a straightforward way in which the numbers $A_n$ can be receovered at the Receiver, simply carry out the inverse operation (which is just the regular DFT), and these numbers appear.
+But before we can do that, we have to transmit the signal over the analog channel, and in order to do this we will have to transform the samples $x_k, 1\le k\le N$ into an analog pulse. This is done using a Digital to Analog Converter (DAC) as shown in the figure, and is done separately for the Real and Imaginary components. The resulting two analog signals are then multiplied by the carrier wave at frequency $f_c$ to generate the passband signal $x(t)$ that is transmitted over the channel.
 
-Digital to Analog Conversion to generate $s(t)$
-
-Equation for the passband signal in continuous time
-
-$$ x(t) = \Re{e^{2\pi f_c t} s(t)} \ \ \ 0\le t\le T$$
+$$ s(t) = \Re{e^{2\pi f_c t} x(t)} \ \ \ 0\le t\le T$$
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm46.png) 
 
@@ -407,23 +408,23 @@ At Receiver:
 
 Received passband signal in continuous time
 
-$$ y(t) = x(t) + n(t)\ \ \ 0\le t\le T $$
+$$ r(t) = s(t) + n(t)\ \ \ 0\le t\le T $$
 
 Received baseband signal in continuous time (real part)
 
-$$ r_{real}(t) = y(t) \cos(2\pi f_c t) \ \ \ 0\le t\le T $$
+$$ y_{real}(t) = r(t) \cos(2\pi f_c t) \ \ \ 0\le t\le T $$
 
 Received baseband signal in continuous time (imaginary part)
 
-$$ r_{imaginary}(t) = y(t) \sin(2\pi f_c t) \ \ \ 0\le t\le T $$
+$$ y_{imaginary}(t) = r(t) \sin(2\pi f_c t) \ \ \ 0\le t\le T $$
 
-$$ r(t) = y(t) e^{2\pi f_c t}\ \ \ 0\le t\le T $$
+$$ y(t) = r(t) e^{2\pi f_c t}\ \ \ 0\le t\le T $$
 
 Analog to Digital Conversion to generate $r_k$ sequence
 
 Recovery of the transmitted symbols using DFT
 
-$$  A_n = \sum_{k=0}^{N-1} r_k e^{-{j2\pi nk\over T}},\ \ \ 0\le n\le N-1 $$
+$$  A_n = \sum_{k=0}^{N-1} y_k e^{-{j2\pi nk\over T}},\ \ \ 1\le n\le N $$
 
 Use Symbol Detector to regenerate the bit sequence corresponding to the complex valued signal.
 
