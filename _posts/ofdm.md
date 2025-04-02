@@ -310,19 +310,6 @@ With the broadband signal on the other hand, since the symbol time is only 0.1 m
 
 ## OFDM OR How Data is Sent over a Broadband Wireless Link
 
-- [ ] Now bring the magic of the Fourier transform in to the picture.
-- [ ] Start by talking about SC: In SC ISI is avoided by using nyquist pulses. These have to be tiny in order to occupy the full spectrum.
-- [ ] But there is another way to avoid isi, as Morse showed us at the very start of the communications age, ie leave a large gap between consecutive pulses.
-- [ ] In sc modulation this solution does not work because the pulse times are tiny. But if what if we had large time pulses.
-- [ ] But recall that the Fourier transform tells us that large time pulses will result in tiny frequency domain pulses, ie we are back in the narrowband world of 2G systems. 
-- [ ] On the face of it this is not a good thing, since large time domain pulses means lower bit rate, we are back in the narrowband domain.
-- [ ] But what if we do the following: Keep the large time pulse, but transmit a whole bunch of them in parallel, so that together they carry as much data as the tiny broadband pulses, within a certain time interval. 
-- [ ] But then won’t these time pulses interfere with one another?
-- [ ] Not if we multiply them with sub carriers that are orthogonal to each other. In the frequency domain this means choosing pulse shapes that don’t interfere with each other. But it turns out that sinc pulses have this property, as long as they are separated by frequencies that are integer multiples. 
-- [ ] Here is an extra bonus: We now have the luxury of avoiding multipath interference by leaving a gap between the large time domain pulses, something that was not possible for the SC case. 
-- [ ] In the frequency domain, frequency selective fading becomes less of a problem since it affects only a subset of the carriers. 
-- [ ] The last two bullets effectively make OFDM the best choice for broadband wireless.
-
 Is there a more robust way to transmit over a wireless channel, which does not suffer from multipath interference? It turns out there is, and it was discovered by Robert Chang from Bells Labs in 1966, building on some earlier work by Franco and Lachs. He discovered OFDM by inverting the problem in some sense, by using the magic of the Fourier Transform. In order to understand OFDM, consider the following:
 
 Recall that Nyquist showed us that it is possible to stack up pulses in time right next to each other with their peaks separated by an interval of $T$, and still avoind Inter Symbol Interference, as long as we shape them using the sinc function. This results in a bandwidth usage of ${\over{2T}} for the signal. The only way to send data faster is by making the pulse width $T$ smaller, which results in a larger bandwidth used.
@@ -410,13 +397,7 @@ Received passband signal in continuous time
 
 $$ r(t) = s(t) + n(t)\ \ \ 0\le t\le T $$
 
-Received baseband signal in continuous time (real part)
-
-$$ y_{real}(t) = r(t) \cos(2\pi f_c t) \ \ \ 0\le t\le T $$
-
-Received baseband signal in continuous time (imaginary part)
-
-$$ y_{imaginary}(t) = r(t) \sin(2\pi f_c t) \ \ \ 0\le t\le T $$
+Received baseband signal in continuous time 
 
 $$ y(t) = r(t) e^{2\pi f_c t}\ \ \ 0\le t\le T $$
 
