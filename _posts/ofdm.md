@@ -40,6 +40,13 @@ Also much higher data rates are acheivable in OFDM by adding additional sub-carr
 
 I had some personal involvement in the transition from 3G to 4G wireless, and had a first hand view of the politics involved. I was a co-founder of a start-up called Aperto Networks that did some of the work that ultimately resulted in 4G, and for a number of years I was a member of the IEEE 802.16 Standards Committee that was working on 4G, even chairing the Medium Access Control or MAC group for a while. The MAC protocol lies on top of PHY layers such as CDMA or OFDM, and it had to completely re-designed for packet based wireless communications. But this article is not about the MAC, perhaps it will be a subject of a future article.
 
+OFDM was invented by Robert Chang from Bell Labs in 1966, but his original proposal was too expensive to implement. The technology was given its current more implementable form by Weinstein and Boaz, also from Bell Labs, in 1971. Unfortunately it was a technology that was ahead of its time, and Bell Labs itself did not show any interest in commercially deploying it. It stayed in this dormant state until the 1990s, when the Internet beacme widespread, and broadband access became a critical problem to solve. 
+A start-up called Amati Communications applied OFDM (which they called Discrete Multitone Modulation or DMT) to solving the difficult problem of transmitting at broadband speeds over the twsited pair copper cabling that existed in all homes to support land-line voice communications. In 1993 they successfully demanstrated that they could acheive speeds of 2 mbps over twisted pair, that was much better than the 32 kbps modems that were used for data communications at the time. OFDM was subsequently adapted as the standard for the ADSL Standard for sending braodband data over twisted pair and was deployed widely.
+
+Amati also proposed OFDM for Cable Modems in the IEEE 802.14 Standards Group that was working in Cable Modem standards. I was a member of this group, it was there during 1995 that I first heard the term OFDM being used, in a presentation by Amati. The Hybrid Fiber Coax of HFC plant used for cable is much more hospitable to digiatl transmissions compared to twisted pair, and as a result the initial Cable Modems standards which came from Cable Labs in 1998, and was called DOCSIS 1.0, used a less robust and simpler scheme called Single Carrier QAM modulation. Ultimately cable also adopted OFDM with the DOCSIS 3.1 release of the standard, which happened in 2013. The motivation was for realizing very high bandwidth using wide channels (wider than the standard 6 MHz used for regulat cable TV), something that single carrier QAM could not do.
+
+
+
 
 
 ## The Fourier Transform
