@@ -179,7 +179,7 @@ The theorem states that as long as we sample a signal fast enough, it is always 
 
 Figure: Sending Morse Code Data (a) Transmitted Data (b) Received Data
 
-At the dawn of the Communications Age, when Samuel Morse was experimenting with ways in which he could send the code pulses across, he noticed that received pulses tended to get smeared out in time (see above figure), and thus interfere with neighboring pulses. In order to avoid this, he left enough of a gap between pulses, as shown in the figure. This solved his problem, but at the cost of a reduced data rate. In our own digital age, all data is in the form of 1s and 0s, and the communications engineers working in the early years of digital transmission, faced exactly the same problem, i.e., how to reliably get the bits across the channel.
+At the dawn of the Communications Age, when Samuel Morse was experimenting with ways in which he could send the code pulses across a telegraph line, he noticed that received pulses tended to get smeared out in time (see above figure), and thus interfere with neighboring pulses. In order to avoid this, he left enough of a gap between pulses, as shown in the figure. This solved his problem, but at the cost of a reduced data rate. In our own digital age, all data is in the form of 1s and 0s, and the communications engineers working in the early years of digital transmission, faced exactly the same problem, i.e., how to reliably get the bits across the channel.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm24.png) 
 
@@ -197,11 +197,11 @@ Once again we see the spreading of individual pulses, also called symbols, at th
 
 Figure: Fourier Transform of a Square Pulse
 
-So how should we modify the pulse shape to avoid ISI? The Fourier Transform comes to our rescue in solving this problem. The above figure shows the Fourier Transform for a square pulse $x(t)$ in the time domain and this results in the so called sinc function $X(f)$ in the frequency domain, given by
+So what kind of pulse shape should we use to avoid ISI? The Fourier Transform comes to our rescue in solving this problem. The above figure shows the Fourier Transform for a square pulse $x(t)$ in the time domain and this results in the so called sinc function $X(f)$ in the frequency domain, given by
 
 $$ X(f) = {\sin \pi f T\over{\pi f}} $$
 
-where $T$ is the pulse duration, which we will also refer to as the Symbol Time. Note that the Fourier Transform $X(f)$ has zeroes at the points ${n\over T}$ for integer values of $n$.
+where $T$ is the pulse duration, which we will also refer to as the Symbol Time. Note that $X(f)$ is symmetric around $f=0$ and it has zeroes at the frequency values ${n\over T}$ for integer values of $n$. A pulse such the one shown is called a baseband pulse, since its Fourier Transform occupies frequencies that include $f=0$. When computing the bandwidth for a baseband pulse, we only consider the half plane $f\ge 0$, by this criteria the bandwidth for the pulse shown in the figure is ${1\over T}. 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm30.png) 
 
@@ -213,7 +213,8 @@ Consider a sinc function that is defined in the time domain given by $x(t) = {\s
 
 Figure: Resulting waveform in time when sending 1011 Using 4 Sinc Pulses
 
-Note the time version of the sinc has zeroes at $nT$ for integer values of $n$, and this property is very useful when sending a train of pulses back to back, separated by the period $T$. The above figure shows the resulting waveform when the bit sequence 1011 in time using sinc pulses. Just as in the case of square pulses, the signal for a particular pulse leaks over to other pulses, but with one big distinction: The peak of a pulse, co-incides with the zeroes of all the neighboring pulses! This property follows from the fact that the sinc has zeroes at integer multiples of $T$. This property implies that is no inter symbol interference between neighboring sinc pulses, even when they are stacked next to each other at intervals of ${1\over T}$.
+Note the time version of the sinc has zeroes at $nT$ for integer values of $n$, and this property is very useful when sending a train of pulses back to back, separated by the period $T$. The above figure shows the resulting waveform when the bit sequence 1011 iis transmitted using sinc pulses. 
+Just as in the case of square pulses, the signal for a particular pulse leaks over to other pulses, but with one big distinction: The peak of a pulse, co-incides with the zeroes of all the neighboring pulses! This property follows from the fact that the sinc has zeroes at integer multiples of $T$. This property implies that is no inter symbol interference between neighboring sinc pulses, even when they are stacked next to each other at intervals of ${1\over T}$.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm31.png) 
 
