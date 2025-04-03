@@ -173,25 +173,49 @@ But in fact this is not the case, as was proven by Harry Nyquist, who worked in 
 The theorem states that as long as we sample a signal fast enough, it is always possible to re-create the original signal from the samples. The minimum sampling rate for perfect re-construction is $2B$, where $B$ is the maximum frequency in the Fourier Transform of $x(t)$. This is an amazing result, and one can get an intuitive understanding of why is is true by examining the second figure in this section. It shows that if a continuous time signal is discretized, then its resulting Fourier Transform is just the periodic continuation of $\tilde X(f)$, where the latter was the Fourier transform of the continuous time signal. Hence if we were to filter out just one of these shapes, and take its Inverse Fourier Transform, the we would have recovered the original signal $x(t)$!
 
 
-## Digital Baseband Communications 
+## Designing the Best Signal: The Nyquist Pulse 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm23.png) 
 
 Figure: Sending Morse Code Data (a) Transmitted Data (b) Received Data
 
-At the dawn of the Communications Age, when Samuel Morse was experimenting with ways in which he could send the code pulses across a telegraph line, he noticed that received pulses tended to get smeared out in time (see above figure), and thus interfere with neighboring pulses. In order to avoid this, he left enough of a gap between pulses, as shown in the figure. This solved his problem, but at the cost of a reduced data rate. In our own digital age, all data is in the form of 1s and 0s, and the communications engineers working in the early years of digital transmission, faced exactly the same problem, i.e., how to reliably get the bits across the channel.
+At the dawn of the Communications Age, when Samuel Morse was experimenting with ways in which he could send the code pulses across a telegraph line, he noticed that received pulses tended to get smeared out in time (see above figure), and thus interfere with neighboring pulses. In order to avoid this, he left enough of a gap between pulses, as shown in the figure. This solved his problem, but at the cost of a reduced data rate. In our own digital age, all data is in the form of 1s and 0s, and the communications engineers working in the early years of digital transmission, faced exactly the same problem, i.e., how to reliably get the bits across the channel without them interfering with each other.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm24.png) 
 
 Figure: Sending the Sequence 101101 using Square Wave Pulses
 
-The most straightforward way of solving the problem was to use a square pulse, and the above figure shows the resulting signal when 101101 is sent using these.
+Consider the transmission of the bit sequence 101101 using Square Wave pulses as shown above.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm25.png) 
 
-Figure: The Received Signal
+Figure: Sending the Sequence 101101 using Square Wave Pulses
 
-Once again we see the spreading of individual pulses, also called symbols, at the receiver which can lead to high bit error rates, a phenomenon known as Inter Symbol Interference or ISI. Note that the received signal is the sum of the amplitudes from all the symbols that are active at any one point in time.
+This figure the corresponding signal at the receiver, and we can see that thay have smeared into one another.
+
+Harry Nyquist was a scientist who worked at Bell Labs during the 1920s and 30s on problems in communications and control, we already came across him in the prior section with regard to the Sampling Theorem. His name is not that well known to the general public today, but the contributions that he made laid the foundations for both communications and control, and later scientists who came after him, like Claude Shannon, built upon his work. 
+Nyquist decided to attack the problem of optimal pulse design in order to avoid inter symbol interference, and the main tool that he used for this was the Fourier Transform.
+
+![](https://subirvarma.github.io/GeneralCognitics/images/ofdm47.png) 
+
+Figure: Signal Filtering due to Channel
+
+When a pulse is sent through a channel, its shape gets distorted due to its interaction with the channel. This can be captured in the frequency space by the following equation:
+
+$$ Y(f) = H(f)X(f) $$
+
+where $H(f)$ is called the Transfer Function of the channel, while $X(f)$ and $Y(f)$ are the Inverse Fourier Transforms of the input and output pulses resepectively. $H(f)$ is the inverse Fourier Transform of the impulse response of the channel $h(t)$, which is obtained by sending a very short narrow signal, approximating the Dirac Delta Function into the channel. This euation clearly captures the distorting effect of the channel on the input signal.
+
+![](https://subirvarma.github.io/GeneralCognitics/images/ofdm48.png) 
+
+Figure: Adding Transmit and Receive Filters to the System
+
+Nyquist proposed that we add two filters to the design, as shown above, namely the Input Pulse Shaping Filter and the Output Pulse Shaping Filter. The input-output response of the system is now captured by
+
+$$ Y(f) = R(f)H(f)G(f)X(f)
+
+The $G(f)$ and $R(f)$ are now under the control of the designer, and thay can be tailored so as to eliminate Inter Symbol Interference.
+Nyquist looked around for pulse shapes $Y(f)$ at the receiver the have no Inter Symbol Interference.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm4.png) 
 
@@ -201,37 +225,48 @@ So what kind of pulse shape should we use to avoid ISI? The Fourier Transform co
 
 $$ X(f) = {\sin \pi f T\over{\pi f}} $$
 
-where $T$ is the pulse duration, which we will also refer to as the Symbol Time. Note that $X(f)$ is symmetric around $f=0$ and it has zeroes at the frequency values ${n\over T}$ for integer values of $n$. A pulse such the one shown is called a baseband pulse, since its Fourier Transform occupies frequencies that include $f=0$. When computing the bandwidth for a baseband pulse, we only consider the half plane $f\ge 0$, by this criteria the bandwidth for the pulse shown in the figure is ${1\over T}. 
+where $T$ is the pulse duration, which we will also refer to as the Symbol Time. Note that $X(f)$ is symmetric around $f=0$ and it has zeroes at the frequency values ${n\over T}$ for integer values of $n$. A pulse such the one shown is called a baseband pulse, since its Fourier Transform is centered at $f=0$. (When computing the bandwidth for a baseband pulse, we only consider the half plane $f\ge 0$, by this criteria the bandwidth for the pulse shown in the figure is ${1\over T}). 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm30.png) 
 
 Figure: Fourier Transform of a Sinc Pulse
 
-Consider a sinc function that is defined in the time domain given by $x(t) = {\sin \pi F t\over{\pi t}}$. From the prior discussion it follows that its Fourier Transform is given by a square pulse $X(f)$ in the frequency domain, as shown in the above figure. It turns out that the time domain sinc pulse is the optimum way to send digital data over a channel, and this was discovered by Nyquist. In order to make these shapes realizable using circuitry, he derived a slightly modified form of the sinc pulse, now known as a Raised Cosine Pulse, and these are in use for digital communications even today. 
+Next lets invert the problem by using the sinc sunction as the input  with zeroes at ${n\over F}, n=1, 2,...$ where $F = {1\over T}$.
+
+$$ x(t) = {\sin {\pi t\over F}\over{\pi t}} $$
+
+From the prior discussion it follows that its Inverse Fourier Transform is given by a square pulse $X(f)$ in the frequency domain, as shown in the above figure. 
+It turns out that the time domain sinc pulse is the optimum signal shape to avoid Inter Symbol Interference as discussed next.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm26.png) 
 
 Figure: Resulting waveform in time when sending 1011 Using 4 Sinc Pulses
 
-Note the time version of the sinc has zeroes at $nT$ for integer values of $n$, and this property is very useful when sending a train of pulses back to back, separated by the period $T$. The above figure shows the resulting waveform when the bit sequence 1011 iis transmitted using sinc pulses. 
+Note the time domain version of the sinc has zeroes at $nT$ for integer values of $n$, and this property is very useful when sending a train of pulses back to back, separated by the period $T$. The above figure shows the resulting waveform when the bit sequence 1011 iis transmitted using sinc pulses. 
 Just as in the case of square pulses, the signal for a particular pulse leaks over to other pulses, but with one big distinction: The peak of a pulse, co-incides with the zeroes of all the neighboring pulses! This property follows from the fact that the sinc has zeroes at integer multiples of $T$. This property implies that is no inter symbol interference between neighboring sinc pulses, even when they are stacked next to each other at intervals of ${1\over T}$.
+
+Based on this property, Nyquist proposed that the filters $G(f)$ and $R(f)$ should be deisgned in such a way so that the system response $G(f)H(f)R(f)$ should be such that the resulting frequency response is a square wave. This would ensure that is a signal is sent into the system, then its output pulse shape $y(t)$ would be a sinc function, with zero Inter Symbol Interference.
+In order to make the G(f)$ and $R(f)$ filters realizable using circuitry, he derived a slightly modified form of the sinc pulse, now known as a Raised Cosine Pulse, and these are in use for digital communications even today. 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm31.png) 
 
 Figure 3: Effect of Sinc Pulse Width on Bandwidth
 
-Another very important property of sinc pulses is the variation of bandwidth with the width of a pulse. In general, as the pulse width, i.e., T increases, the bandwidth required for transmission decreases, as shown in the above figure (for the case $T=1$). In general the required bandwidth is ${1\over{2T}}$, i.e., one half the symbol rate. This is a very important property that comes into use in the design of OFDM. The sinc function has the property that its Fourier Transform X(f) uses up the least amount of bandwidth, and a more efficient function has not been found.
+Another very important property of sinc pulses is the variation of bandwidth with the width of a pulse. In general, as the pulse width, i.e., T increases, the bandwidth required for transmission decreases, as shown in the above figure (for the case $T=1$). In general the required bandwidth is ${1\over{2T}}$, i.e., one half the symbol rate. This is a very important property that comes into use in the design of OFDM. The sinc function has the property that its Fourier Transform X(f) uses up the least amount of bandwidth, and a more efficient pulse shape has not been found. They are now called Nyquist Pulses in his honor.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm27.png) 
 
 Figure: End to End Baseband Communication System
 
-If were designing a baseband digital communications system, this is almost all we need to know, and the end-to-end block diagram of such a system is shown above. The bits stream that originates from the source on the left, gets shaped by three filters on the way to the destination, the Transmit and Receive Filters, as well as the frequency response of the channel itself. The Nyquist sinc type filter that we have discussed, actually gets implemented as two filters, one at the transmitter and the other at the receiver. These filters, called Root Raised Cosime Filters or RRC, are designed such that their serial operation results in the Raised Cosine pulse shape.
-Note that more than 1 bit can be mapped on to the same symbol, for example by using a set of sinc pulses with different amplitudes. If four amplitudes are used, then 2 bits can be mapped on to each symbol, so that the bitrate f the channel would be twice the symbol rate.
+The individual filters $G(f)$ and $R(f)$ are implemented as
+Root Raised Cosime Filters or RRC, and these are designed such that their serial operation results in the Raised Cosine pulse shape.
 
-Baseband communication systems are an important topic in their own right, and are used in sending digital data over Fiber Optic communications for example. However, for wireless and cable systems the basedband signal has to be upconverted to the appropriate frequency slot, before it can be transmitted, and this is the subject of the next section.
+In the discussion so far we haven't talked about how bits actually get mapped to the signaling waveform such as the sinc pulse. Since we are sending analog waveforms over the channel, we have the freedom to modify the waveform so that instead instead of sending only two types (which map into the bits 0 and 1), we can choose to send 4 types of waveforms, which allows us to map 2 bits to each waveform. This topic is discussed in the next section.
 
-## Single Carrier Modulation OR How Data is Sent over a Cable Modem
+Baseband communication systems are an important topic in their own right, and are used in sending digital data over media such as twisted pair copper loop whose ferquency response is centered at zero. However, for wireless and cable systems over channels that are centered at higher frequencies, and thus 
+the basedband signal has to be shifted to the appropriate frequency slot, before it can be transmitted, and this is the subject of the next section.
+
+## Single Carrier Modulation QAM OR How Data is Sent over a Cable Modem
 
 Data transmission over a wireless or cable systems requires that the signal energy be confined to an assigned frequency slot in the spectrum, called a channel (for example cellular 4G communications happens over channels that are allocated in various frequency bands between 600 MHz and 2.4 GHz).  How can we shift our signal from the  baseband to another to channel that exists at a higher frequency in the spectrum? Once again the Fourier Transform comes to the rescue, as shown in the figure below.
 
