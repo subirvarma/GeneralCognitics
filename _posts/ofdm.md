@@ -1,9 +1,9 @@
 ---
 layout: default
-title: "The Technology That Made Broadband Wireless Possible"
+title: "The Technology Behind 4G Wireless"
 ---
 
-# The Technology That Made Broadband Wireless Possible
+# The Technology Behind 4G Wireless
 
 
 ## Introduction
@@ -38,8 +38,7 @@ and as shown in the bottom part of the figure, communication engineers came up w
 
 OFDM can likened to splitting up the data stream and carrying it on hundreds of smaller peices of spectrum, called sub-carriers in the jargon. Each of these sub-carriers is now carrying much less data compared to single carrier system, but since there are thousands of them, they make up for lower capacity by working in parallel, and thus are able to acheive at least an equivalent data rate, and a much higher data rate in practice. This is due to the fact that different sub-carriers in OFDM can adaptively be tuned so that parts of of the spectrum that are less noisy carry more data. This luxury is not available to single carrier QAM systems, in which transmissions are effectively done at the lowest common denominator of the speeds that are available.
 
-Morover OFDM systems are much more robust in an unforgiving wireless environment. Multipath self-interefrence only affects a subset of OFDM sub-carriers, a phenomenon also called frequency selective fading.  The system can then choose not to use those sub-carriers or use a more robust transmission scheme for these, while still be able to use the good parts of the spectrum. Using channel coding techniques it is even possible to recover the lost data. Single carrier systems QAM on the other hand don't work very well in this environment, since problems that are localized in the spectrum end up affecting the entire transmission.
-Also much higher data rates are acheivable in OFDM by adding additional sub-carriers, assuming a wider channel is available. Single carrier QAM systems can also increase their data rate by using a wider channel, however in doing so they run up against the wireless channel, which becomes much less hospitable to single carrier transmissions as the channel width increases.
+OFDM systems are much more robust in the unforgiving wireless environment. Multipath self-interefrence only affects a subset of OFDM sub-carriers, a phenomenon also called frequency selective fading.  The system can then choose not to use those sub-carriers or use a more robust transmission scheme for these, while still be able to use the good parts of the spectrum. Using channel coding techniques it is even possible to recover the lost data. Single carrier systems QAM on the other hand don't work very well in this environment, since problems that are localized in the spectrum end up affecting the entire transmission.
 
 It would not be an exaggeration to say that today we are living in the age of OFDM! Whether you are surfing the web on your cellphone, or streaming movies on your cable modem, or connncting to the web over WiFi at the coffee shop, it is all happening over links that use OFDM modulation. It is the base technology on which our modern connected world runs.
 
@@ -417,7 +416,7 @@ Part (a) of the above figure shows the frequency response of a channel undergoin
 
 In some sense OFDM is a logical inverse of single carrier based modulation, since
 
-- In single carrier modulation leads to a sequence of tiny pulses in time, that are tightly stacked next to each other and kept orthogonal by using the sinc function AND these pulses have a wide spectral band in the frequency domain. Furthermore neighboring spectral bands are kept orthogonal by leaving a gap in-between them.
+- Single carrier modulation leads to a sequence of tiny pulses in time, that are tightly stacked next to each other and kept orthogonal by using the sinc function AND these pulses have a wide spectral band in the frequency domain. Furthermore neighboring spectral bands are kept orthogonal by leaving a gap in-between them.
 - OFDM modulation leads to a sequence of tiny sub-carriers in frequency, that are tightly stacked next to each other and kept orthogonal by using the sinc function AND these sub-carriers have a wide pulse in the time domain. Furthermore neighboring time pulses are kept orthogonal by leaving a gap in-between them.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm21.png) 
@@ -430,30 +429,31 @@ On the receive side the signal is first decomposed into its indivdual components
 
 ### OFDM Implementation Using the Discrete Fourier Transform
 
-The OFDM Transmitter and Receiver systems that were shown at the end of the last section have a very big problem: They are basically un-implementable! The reason for this is that they require as many oscillators as there are sub-carriers in the system, and given that a realistic OFDM system can have hunderds if not thousand of sub-carriers, implementation can get very expensive.
+The OFDM Transmitter and Receiver systems that were shown at the end of the last section have a very big problem: They are basically un-implementable! The reason for this is that they require as many oscillators as there are sub-carriers in the system, and given that a realistic OFDM system can have hundreds if not thousand of sub-carriers, implementation can get very expensive.
 
-So what is the way out? Well, once again the Fourier Transform comes to the rescue, this time in the form of the Discrete Fourier Transform or DFT. As we show next, DFT allows us to replace the operation of multiplying with a sine or cosine signal, with that of taking the DFT or the inverse-DFT, which is much easier to do. This critical idea was first fully developed by Weinstein and Ebert at Bell Labs in 1971, five years after the original OFDM paper Robert Chang. Bell Labs however did not show much interest in this technology, and the first commercial implementation had to wait to 1993, with the start-up Amati Networks who applied OFDM to ADSL transmissions, which take place over Twisted Pair copper wiring.
+So what is the way out? Well, once again the Fourier Transform comes to the rescue, this time in the form of the Discrete Fourier Transform or DFT. As we show next, DFT allows us to replace the operation of multiplying with a sine or cosine signal, with that of computing the DFT or the inverse-DFT, which is much easier to do. This critical idea was first fully developed by Weinstein and Ebert at Bell Labs in 1971, five years after the original OFDM paper by Robert Chang. Bell Labs however did not show much interest in this technology, and the first commercial implementation had to wait to 1993, with the start-up Amati Networks who applied OFDM to ADSL transmissions, which take place over Twisted Pair copper wiring.
+
+In order to see how DFT can be applied to OFDM, lets start with the OFDM Transmitter that was shown in the previous section.
+The following equation captures the generation of the baseband signal. Note that the sequence $A_n, n=0,...,N-1$ is the set
+of complex numbers that captures the type of modulation being used. These then get multiplied by the set of N discrete carriers
+that constitute the OFDM baseband signal, and finally added together to generate the OFDM baseband pulse.
+
+$$ x(t) = \sum_{n=0}^{N-1} A_n e^{{j2\pi n\over T}t}, \ \ \ 0\le t\le T $$
+
+We are now going to sample the baseband pulse $x(t)$ N times, at time instants $t = {T\over N}, {2T\over N},...,{(N-1)T\over N}, T$, thus generating N samples $x_k, 1\le K\le N$. Substituting these in the equation for $x(t)$ it follows that the samples satisfy the following equation:
+
+$$ x_k = \sum_{n=1}^{N} A_n e^{j2\pi nk\over N},\ \ \ 1\le k\le N $$
+
+This is where magic happens! If you go back to the section on the Discrete Fourier Transform, you will notice that these equations are exactly the same as for the Inverse DFT for a signal whose frequency samples are given by $A_n, 1\le n\le N$. Hence we have avoided the use of all the oscillators in the generation of an OFDM pulse, simply by discretizing the signal and using the inverse DFT to generate its samples.
+This observation provides a straightforward way in which the numbers $A_n$ can be recovered at the Receiver, simply carry out the inverse operation (which is just the regular DFT), and these numbers appear.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm45.png) 
 
 Figure: OFDM Transmitter Implementation using an Inverse Discrete Fourier Transformation
 
-In order to see how DFT can be applied to OFDM, lets start with the OFDM Transmitter that was shown in the previous section.
-The following equation captures the generation of the baseband signal. Note that the sequence $A_n, n=0,...,N-1$ is the set
-of complex numbers that captures the type of modulation being used. These then get multiplied by the set of discrete carriers
-that constitute the OFDM baseband signal, and finally added together to generate the OFDM baseband pulse.
+But before we can do that, we have to transmit the signal over the analog channel, and in order to do this we will have to transform the samples $x_k, 1\le k\le N$ into an analog pulse. This is done using a Digital to Analog Converter (DAC) as shown in the above figure, and is done separately for the Real and Imaginary components. The resulting two analog signals are then multiplied by the carrier wave at frequency $f_c$ to generate the passband signal $s(t)$ that is transmitted over the channel.
 
-$$ x(t) = \sum_{n=0}^{N-1} A_n e^{{j2\pi n\over T}t}, \ \ \ 0\le t\le T $$
-
-We are now going to sample the baseband pulse x(t) N times, at times $t = {T\over N}, {2T\over N},...,{(N-1)T\over N}, T$, thus generating N samples $x_k, 1\le K\le N$. Substituting these in the equation for $x(t)$ it follows that the samples $x_k, 1\le k\le N$ satisfy the following equation:
-
-$$ x_k = {1\over N}\sum_{n=0}^{N-1} A_n e^{j2\pi nk\over N}\ \ \ 1\le k\le N $$
-
-This is where magic happens! If you go back to the section on the Discrete Fourier Transform, you will see that these equations are exactly the same as for the Inverse DFT for a signal whose frequency samples are given by $A_n, 1\le n\le N$. Hence we have avoided the use of all the oscillators in the generation of an OFDM pulse, simply by discretizing the signal and using the inverse DFT on it.
-This observation provides a straightforward way in which the numbers $A_n$ can be receovered at the Receiver, simply carry out the inverse operation (which is just the regular DFT), and these numbers appear.
-But before we can do that, we have to transmit the signal over the analog channel, and in order to do this we will have to transform the samples $x_k, 1\le k\le N$ into an analog pulse. This is done using a Digital to Analog Converter (DAC) as shown in the figure, and is done separately for the Real and Imaginary components. The resulting two analog signals are then multiplied by the carrier wave at frequency $f_c$ to generate the passband signal $s(t)$ that is transmitted over the channel.
-
-$$ s(t) = \Re[{e^{2\pi f_c t} x(t)}] \ \ \ 0\le t\le T$$
+$$ s(t) = \Re[{e^{2\pi f_c t} x(t)}], \ \ \ 0\le t\le T$$
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm46.png) 
 
@@ -461,16 +461,16 @@ Figure: OFDM Receiver Implementation using a Discrete Fourier Transform (DFT)
 
 The received passband pulse $r(t)$ is given by
 
-$$ r(t) = s(t) + n(t)\ \ \ 0\le t\le T $$
+$$ r(t) = s(t) + n(t),\ \ \ 0\le t\le T $$
 
-where $n(n)$ is the channel noise.  The received signal can be shifted to the baseband as follows 
+where $n(t)$ is the channel noise.  The received signal can be shifted to the baseband as follows 
 
-$$ y(t) = r(t) e^{2\pi f_c t}\ \ \ 0\le t\le T $$
+$$ y(t) = r(t) e^{2\pi f_c t},\ \ \ 0\le t\le T $$
 
 Note that the signal $y(t)$ has a real and imaginary part, and each of these sent through a Analog to Digital Converter, to generate
-the complex valued discrete sequence $y_k, 1\le k\le N$. Subsequently DFT is used to recover the complex valued QAM symbols $A_n, 1\le n\le N$, given by
+a complex valued discrete sequence $y_k, 1\le k\le N$. Subsequently DFT is used to recover the complex valued QAM symbols $A_n, 1\le n\le N$, given by
 
-$$  A_n = {1\over N}\sum_{k=0}^{N-1} y_k e^{-{j2\pi nk\over T}},\ \ \ 1\le n\le N $$
+$$  A_n = {1\over N}\sum_{k=1}^{N} y_k e^{-{j2\pi nk\over T}},\ \ \ 1\le n\le N $$
 
 These QAM symbols are then sent to a Symbol Detector to regenerate the bit sequence corresponding to each symbol.
 
