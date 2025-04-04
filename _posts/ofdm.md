@@ -415,6 +415,11 @@ Figure: Frequency Selective Fading in an OFDM System
 
 Part (a) of the above figure shows the frequency response of a channel undergoing frequency selective fading (the solid line). If we use Single Carrier Modulation in such a channel, then its frequency spectrum spans the entire channel bandwidth, and as a result, the frequency selective fading can cause a whole symbol to be lost. On the other hand, as Part (b) of the figure shows, with an OFDM system, the portions of the spectrum that are affected by the frequency selective fades, are localized to only a few of the subcarriers in the OFDM signal, which makes the transmission much more robust compared to single carrier systems. Since we are allowed to use different modulation schemes on different sub-carriers, the part of the spectrum which is subject to fading can adaptively change its modulation to a  something more robust such as QPSK, or even refrain from from using the affected sub-carriers.
 
+In some sense OFDM is a logical inverse of single carrier based modulation, since
+
+- In single carrier modulation leads to a sequence of tiny pulses in time, that are tightly stacked next to each other and kept orthogonal by using the sinc function AND these pulses have a wide spectral band in the frequency domain. Furthermore neighboring spectral bands are kept orthogonal by leaving a gap in-between them.
+- OFDM modulation leads to a sequence of tiny sub-carriers in frequency, that are tightly stacked next to each other and kept orthogonal by using the sinc function AND these sub-carriers have a wide pulse in the time domain. Furthermore neighboring time pulses are kept orthogonal by leaving a gap in-between them.
+
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm21.png) 
 
 Figure: The OFDM Transmitter and Receiver
