@@ -179,19 +179,19 @@ The theorem states that as long as we sample a signal fast enough, it is always 
 
 Figure: Sending Morse Code Data (a) Transmitted Data (b) Received Data
 
-At the dawn of the Communications Age, when Samuel Morse was experimenting with ways in which he could send the code pulses across a telegraph line, he noticed that received pulses tended to get smeared out in time (see above figure), and thus interfere with neighboring pulses. In order to avoid this, he left enough of a gap between pulses, as shown in the figure. This solved his problem, but at the cost of a reduced data rate. In our own digital age, all data is in the form of 1s and 0s, and the communications engineers working in the early years of digital transmission, faced exactly the same problem, i.e., how to reliably get the bits across the channel without them interfering with each other.
+At the dawn of the Communications Age, when Samuel Morse was experimenting with ways in which he could send the Morse Code pulses across a telegraph line, he noticed that received pulses tended to get smeared out in time (see above figure), and thus interfere with neighboring pulses. In order to avoid this, he left enough of a gap between pulses, as shown in the figure. This solved his problem, but at the cost of a reduced data rate. In our own digital age, all data is in the form of 1s and 0s, and the communications engineers working in the early years of digital transmission, faced exactly the same problem, i.e., how to reliably get the bits across the channel without them interfering with each other.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm24.png) 
 
 Figure: Sending the Sequence 101101 using Square Wave Pulses
 
-Consider the transmission of the bit sequence 101101 using Square Wave pulses as shown above.
+Consider the back-to-back transmission of the bit sequence 101101 using Square Wave pulses as shown above.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm25.png) 
 
 Figure: Sending the Sequence 101101 using Square Wave Pulses
 
-This figure the corresponding signal at the receiver, and we can see that they have smeared into one another.
+This figure shows the corresponding signal at the receiver, and we can see that they have smeared into one another.
 
 Harry Nyquist was a scientist who worked at Bell Labs during the 1920s and 30s on problems in communications and control, we already came across him in the prior section with regard to the Sampling Theorem. His name is not that well known to the general public today, but the contributions that he made laid the foundations for both communications and control theory, and later scientists who came after him, like Claude Shannon, built upon his work. 
 Nyquist decided to attack the problem of optimal pulse design in order to avoid inter symbol interference, and the main tool that he used for this was the Fourier Transform.
