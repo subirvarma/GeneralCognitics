@@ -1,9 +1,9 @@
 ---
 layout: default
-title: "The Technology Behind 4G Wireless"
+title: "OFDM or How the World of Ubiquitous High Speed Wireless Came To Be"
 ---
 
-# The Technology Behind 4G Wireless
+# OFDM or How the World of Ubiquitous High Speed Wireless Came To Be
 
 
 ## Introduction
@@ -66,6 +66,8 @@ Intel wanted to position IEEE 802.16 as a competitor to the 3G wireless technolo
 WiMAX was adopted by some of the big equipment vendors such as Samsung and Nokia, and the service provider Sprint actually started deploying this technology in 2007 in the Washington DC area. I briefly worked for Sprint in their Herndon office at that time, and I could see the excitement in the organization about the new possibilities that WiMAX opened up. I thus got an early preview of the world of streaming video and high speed web surfing over wireless handsets, that became widely available a few years later.
 
 There were two powerful holdouts against WiMAX, namely the chip company Qualcomm and the equipment provider Ericsson. They correctly identified WiMAX as a way in which Intel could bypass the semi-monopoly that they enjoyed in the 3G cellular space, and thus dominate the next generation of wireless technology. They also recognized the shortcoming of 3G technology in support broadband data, and consequently abandoned the next generation CDMA technology they had been developing, and made the pragmatic decision to focus 3GPP, which was working on the standards for 4G at that time, into using OFDM as well! But this was going to be the 3GPP version of OFDM, not the OFDM technology that was developed by WiMAX. Qualcomm and Ericsson had sufficient clout among the large service providers, who subsequently all threw their hat behind the Qualcomm-Ericsson version of OFDM, which came to be called LTE, for Long Term Evolution. All the other big vendors saw the writing on the wall and adopted LTE as well, and the current 4G era began with the LTE deployments by Verizon in the US, that began towards the end of 2010. WiMAX was continued to be deployed by Clearwire Wireless (which was the company to which Sprint had sold its WiMAX division), but withered away due to lack of support from the service provider community.
+
+So, what does the future hold? An excellent overview of the ways in which 5G Wireless is attempting to improve bitrates can be found [here](https://www.waveform.com/a/b/guides/5g-and-shannons-law?srsltid=AfmBOoor-PAfvBq--oh4OUZa0We5FzqMd1n2hmGNdTUGR415T4Qwlcm1).
 
 So much so for history, the rest of this article is going to get deep into OFDM technology, which involves a little bit of math, mainly the math of the Fourier Transform. But it is worth the effort.
 
@@ -473,5 +475,8 @@ a complex valued discrete sequence $y_k, 1\le k\le N$. Subsequently DFT is used 
 $$  A_n = {1\over N}\sum_{k=1}^{N} y_k e^{-{j2\pi nk\over T}},\ \ \ 1\le n\le N $$
 
 These QAM symbols are then sent to a Symbol Detector to regenerate the bit sequence corresponding to each symbol.
+
+
+
 
 
