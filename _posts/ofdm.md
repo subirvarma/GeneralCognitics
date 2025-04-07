@@ -224,7 +224,7 @@ So what kind of pulse shape should we use to avoid ISI? The Fourier Transform co
 
 $$ X(f) = {\sin \pi f T\over{\pi f}} $$
 
-where $T$ is the pulse duration, which we will also refer to as the Symbol Time. Note that $X(f)$ is symmetric around $f=0$ and it has zeroes at the frequency values ${n\over T}$ for integer values of $n$. A pulse such the one shown is called a baseband pulse, since its Fourier Transform is centered at $f=0$. (When computing the bandwidth for a baseband pulse, we only consider the half plane $f\ge 0$, by this criteria the bandwidth for the pulse shown in the figure is ${1\over T}). 
+where $T$ is the pulse duration, which we will also refer to as the Symbol Time. Note that $X(f)$ is symmetric around $f=0$ and it has zeroes at the frequency values ${n\over T}$ for integer values of $n$. A pulse such the one shown is called a baseband pulse, since its Fourier Transform is centered at $f=0$. (When computing the bandwidth for a baseband pulse, we only consider the half plane $f\ge 0$, by this criteria the bandwidth for the pulse shown in the figure is ${1\over T})$. 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm30.png) 
 
