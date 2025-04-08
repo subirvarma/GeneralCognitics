@@ -169,7 +169,7 @@ $$ x[n] = {1\over N}\sum_{k=0}^{N-1} X_k e^{j2\pi {k\over N}n} \ \ \ for\ \ \ n=
 The last two equations constitute the Discrete Fourier Transform and the Inverse Discrete Fourier Transform respectively. Note that these transforms allow signals to be processed in the digital domain.
 
 You may be wondering that by discretizing a continuous time signal, we may be throwing away useful information. 
-But in fact this is not the case, as was proven by Harry Nyquist, who worked in Bell Labs in the period prior to World War 2. This work was further extended by Claude Shannon, so the work is referred to as the Nyquist-Shannon Sampling Theorem. 
+But in fact this is not the case, as was proven by Harry Nyquist, who worked in Bell Labs in the period prior to World War 2, I will have more to say about him in the next section. This work was further extended by the legendary Claude Shannon, so the work is referred to as the Nyquist-Shannon Sampling Theorem. 
 The theorem states that as long as we sample a signal fast enough, it is always possible to re-create the original signal from the samples. The minimum sampling rate for perfect re-construction is $2B$, where $B$ is the maximum frequency in the Fourier Transform of $x(t)$. This is an amazing result, and one can get an intuitive understanding of why is is true by examining the second figure in this section. It shows that if a continuous time signal is discretized, then its resulting Fourier Transform is just the periodic continuation of $\tilde X(f)$, where the latter was the Fourier transform of the continuous time signal $x(t)$. Hence if we were to filter out just one of these shapes, and take its Inverse Fourier Transform, then we would have recovered the original signal $x(t)$!
 
 
@@ -185,15 +185,15 @@ At the dawn of the Communications Age, when Samuel Morse was experimenting with 
 
 Figure: Sending the Sequence 101101 using Square Wave Pulses
 
-Consider the back-to-back transmission of the bit sequence 101101 using Square Wave pulses as shown above.
+Consider the back-to-back transmission of the bit sequence 101101 using Square Wave pulses of the type that Nyquist was using, as shown above.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm25.png) 
 
 Figure: Sending the Sequence 101101 using Square Wave Pulses
 
-This figure shows the corresponding signal at the receiver, and we can see that they have smeared into one another.
+This figure shows the corresponding signal at the receiver, and we can see that the bits have smeared into one another.
 
-Harry Nyquist was a scientist who worked at Bell Labs during the 1920s and 30s on problems in communications and control, we already came across him in the prior section with regard to the Sampling Theorem. His name is not that well known to the general public today, but the contributions that he made laid the foundations for both communications and control theory, and later scientists who came after him, like Claude Shannon, built upon his work. 
+Harry Nyquist came up with a solution to this problem during the 1930s. His name is not that well known to the general public today, but the contributions that he made laid the foundations for both communications and control theory, and later scientists who came after him, like Claude Shannon, built upon his work. 
 Nyquist decided to attack the problem of optimal pulse design in order to avoid inter symbol interference, and the main tool that he used for this was the Fourier Transform.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm47.png) 
@@ -204,28 +204,29 @@ When a pulse is sent through a channel, its shape gets distorted due to its inte
 
 $$ Y(f) = H(f)X(f) $$
 
-where $H(f)$ is called the Transfer Function of the channel, while $X(f)$ and $Y(f)$ are the Inverse Fourier Transforms of the input and output pulses respectively. $H(f)$ is the inverse Fourier Transform of the impulse response of the channel $h(t)$, which is obtained by sending a very short narrow signal, approximating the Dirac Delta Function into the channel. This equation clearly captures the distorting effect of the channel on the input signal.
+were $H(f)$ is called the Transfer Function of the channel, while $X(f)$ and $Y(f)$ are the Inverse Fourier Transforms of the input and output pulses respectively. $H(f)$ is the inverse Fourier Transform of the impulse response of the channel $h(t)$, which is obtained by sending a very short narrow signal, approximating the Dirac Delta Function into the channel. This equation clearly captures the distorting effect of the channel on the input signal.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm48.png) 
 
 Figure: Adding Transmit and Receive Filters to the System
 
-Nyquist proposed that we add two filters to the design, as shown above, namely the Input Pulse Shaping Filter and the Output Pulse Shaping Filter. The input-output response of the system is now captured by
+Nyquist proposed that we add two filters to the system, as shown above, namely the Input Pulse Shaping Filter and the Output Pulse Shaping Filter. The input-output response of the system is now captured by
 
-$$ Y(f) = R(f)H(f)G(f)X(f)
+$$ Y(f) = R(f)H(f)G(f)X(f) $$
 
-The $G(f)$ and $R(f)$ are now under the control of the designer, and thay can be tailored so as to eliminate Inter Symbol Interference.
-Nyquist looked around for pulse shapes $Y(f)$ at the receiver the have no Inter Symbol Interference.
+The filter frequency responses $G(f)$ and $R(f)$ are under the control of the designer, and thay can be tailored so as to eliminate Inter Symbol Interference.
+Next Nyquist searched for for pulse shapes $Y(f)$ at the receiver that have no Inter Symbol Interference.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm4.png) 
 
 Figure: Fourier Transform of a Square Pulse
 
-So what kind of pulse shape should we use to avoid ISI? The Fourier Transform comes to our rescue in solving this problem. The above figure shows the Fourier Transform for a square pulse $x(t)$ in the time domain and this results in the so called sinc function $X(f)$ in the frequency domain, given by
+So what kind of pulse shape should we use to avoid ISI? The Fourier Transform comes to our rescue in solving this problem. The above figure shows the Fourier Transform for a square pulse $x(t)$ in the time domain with pulse duration $T$, which we will also refer to as the Symbol Time.
+Its Fourier Transform results in the so called sinc function $X(f)$ in the frequency domain, given by
 
 $$ X(f) = {\sin \pi f T\over{\pi f}} $$
 
-where $T$ is the pulse duration, which we will also refer to as the Symbol Time. Note that $X(f)$ is symmetric around $f=0$ and it has zeroes at the frequency values ${n\over T}$ for integer values of $n$. A pulse such the one shown is called a baseband pulse, since its Fourier Transform is centered at $f=0$. (When computing the bandwidth for a baseband pulse, we only consider the half plane $f\ge 0$, by this criteria the bandwidth for the pulse shown in the figure is ${1\over T})$. 
+Note that $X(f)$ is symmetric around $f=0$ and it has zeroes at the frequency values ${n\over T}$ for integer values of $n$. A pulse such the one shown is called a baseband pulse, since its Fourier Transform is centered at $f=0$. (When computing the bandwidth, or frequencies occupied by the spectum, we only consider the half plane $f\ge 0$, by this criteria the bandwidth for the pulse shown in the figure is ${1\over T})$. 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm30.png) 
 
