@@ -219,7 +219,7 @@ Next Nyquist searched for for pulse shapes $Y(f)$ at the receiver that have no I
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm4.png) 
 
-Figure: Fourier Transform of a Square Pulse
+Figure: Time Domain Square Pulse and its Fourier Transform
 
 So what kind of pulse shape should we use to avoid ISI? The Fourier Transform comes to our rescue in solving this problem. The above figure shows the Fourier Transform for a square pulse $x(t)$ in the time domain with pulse duration $T$, which we will also refer to as the Symbol Time.
 Its Fourier Transform results in the so called sinc function $X(f)$ in the frequency domain, given by
@@ -230,11 +230,11 @@ Note that $X(f)$ is symmetric around $f=0$ and it has zeroes at the frequency va
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm30.png) 
 
-Figure: Fourier Transform of a Sinc Pulse
+Figure: Time Domain Sinc Pulse and its Fourier Transform
 
 Next lets invert the problem by using the sinc sunction as the input, with zeroes at ${n\over F}, n=1, 2,...$ where $F = {1\over T}$, given by
 
-$$ x(t) = {\sin {\pi F t\over{\pi t}} $$
+$$ x(t) = {\sin {\pi F t\over{\pi t}}} $$
 
 From the prior discussion it follows that its Inverse Fourier Transform is given by a square pulse $X(f)$ in the frequency domain, as shown in the above figure. 
 It turns out that the time domain sinc pulse is the optimum signal shape to avoid Inter Symbol Interference as discussed next.
@@ -244,68 +244,69 @@ It turns out that the time domain sinc pulse is the optimum signal shape to avoi
 Figure: Resulting waveform in time when sending 1011 Using 4 Sinc Pulses
 
 Note the time domain version of the sinc has zeroes at $nT$ for integer values of $n$, and this property is very useful when sending a train of pulses back to back, separated by the period $T$. The above figure shows the resulting waveform when the bit sequence 1011 iis transmitted using a stream of sinc pulses separated by time $T$. 
-Just as in the case of square pulses, the signal for a particular pulse leaks over to other pulses, but with one big distinction: The peak of a pulse, coincides with the zeroes of all the neighboring pulses! This property follows from the fact that the sinc has zeroes at integer multiples of $T$. This property implies that there is no inter symbol interference between neighboring sinc pulses, even when they are stacked next to each other at intervals of $T$.
+Just as in the case of square pulses, the signal for a particular pulse leaks over to other pulses, but with one big distinction: The peak of a pulse, coincides with the zeroes of all the neighboring pulses which follows from the fact that the sinc has zeroes at integer multiples of $T$! This property implies that there is no Inter Symbol Interference between neighboring sinc pulses, even when they are stacked next to each other at intervals of $T$.
 
-Based on this property, Nyquist proposed that the filters $G(f)$ and $R(f)$ should be designed in such a way so that the product $G(f)H(f)R(f)$ results in a frequency response which is a square wave. This would ensure that the output pulse shape $y(t)$ at the receiver would be a sinc function, with zero Inter Symbol Interference.
+Based on this observation, Nyquist proposed that the filters $G(f)$ and $R(f)$ should be designed in such a way so that the product $Y(f) = G(f)H(f)R(f)$ results in a frequency domain shape of a square pulse. This will ensure that the time domain output pulse shape $y(t)$ at the receiver would be a sinc function, with zero Inter Symbol Interference.
 In order to make the $G(f)$ and $R(f)$ filters realizable using circuitry, he derived a slightly modified form of the sinc pulse, known as a Raised Cosine Pulse, and these are in use for digital communications even today. The sinc function has the property that its Fourier Transform X(f) uses up the least amount of bandwidth, and a more efficient pulse shape has not been found. They are now called Nyquist Pulses in his honor.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm31.png) 
 
 Figure 3: Effect of Sinc Pulse Width on Bandwidth
 
-Another very important property of sinc pulses is the variation of bandwidth with the width of a pulse. In general, as the pulse width T increases, the bandwidth required for transmission decreases, as shown in the above figure (for the case $T=1$). In general the required bandwidth is ${1\over{2T}}$, i.e., one half the symbol rate. This is a very important property that comes into use in the design of OFDM. 
+Another very important property of sinc pulses is the variation of bandwidth with the width of a pulse. As the pulse width T decreases, the bandwidth required for transmission increases, as shown in the above figure (for the case $T=1$). In general the required bandwidth for a sinc pulse of duration $T$ is ${1\over{2T}}$, i.e., one half the symbol rate. 
+This is a very important property that tells us that as we increase the rate at which are transmitting data into the channel by decreasing $T$, the corresponding channel bandwidth needed increases at the rate of ${1\over {2T}}$. 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm27.png) 
 
 Figure: End to End Baseband Communication System
 
 The individual filters $G(f)$ and $R(f)$ are implemented as
-Root Raised Cosine Filters or RRC, and these are designed such that their serial operation results in the Raised Cosine pulse shape, as shown above. Inter Symbol Interference mitigation works well enough as long as the channel is reasonably good. However wireless channels exhibit something called multipath interference, which needs additional work to mitigate.
+Root Raised Cosine Filters or RRC, and these are designed such that their serial operation results in the Raised Cosine pulse shape, as shown above. Inter Symbol Interference mitigation using sinc pulses works well enough as long as the channel is reasonably good. However wireless channels exhibit something called multipath interference, which needs additional work to mitigate.
 
-In the discussion so far we haven't talked about how bits actually get mapped to the signaling waveform such as the sinc pulse. Since we are sending analog waveforms over the channel, we have the freedom to modify the waveform so that instead of sending only two types of waveforms (say +sinc and -sinc which map into the bits 0 and 1), we can choose to send four types of waveforms (say +2*sinc, +sinc, -sinc and -2*sinc), which allows us to map 2 bits to each waveform, thus doubling the bitrate for a given symbol rate. This topic is discussed in detail in the next section.
+In the discussion so far we haven't talked about how data bits actually get mapped to the signaling waveform such as the sinc pulse. Since we are sending analog waveforms over the channel, we have the freedom to modify the waveform so that instead of sending only two types of waveforms (say +sinc and -sinc which map into the bits 0 and 1), we can choose to send four types of waveforms (say +2*sinc, +sinc, -sinc and -2*sinc), which allows us to map 2 bits to each waveform, thus doubling the bitrate for a given symbol rate. This topic is discussed in detail in the next section.
 
 Baseband communication systems are an important topic in their own right, and are used in sending digital data over media such as twisted pair copper loop whose frequency response is centered at zero. However, channels in wireless and cable systems are centered at higher frequencies, and thus the baseband signal has to be shifted before it can be transmitted, and this is the subject of the next section.
 
 ## Designing Signals with Multiple Levels and Phases: Single Carrier QAM Modulation
 
-Data transmission over a wireless or cable systems requires that the signal energy be confined to an assigned frequency slot in the spectrum, called a channel (for example cellular 4G communications happens over channels that are allocated in various frequency bands between 600 MHz and 2.4 GHz).  How can we shift our signal from the baseband to another to a channel with a larger center frequency? Once again the Fourier Transform comes to the rescue, as shown in the figure below.
+Data transmission over a wireless or cable systems requires that the signal energy be confined to an assigned frequency slot in the spectrum, called a channel (for example cellular 4G communications happens over channels that are allocated in various frequency bands between 600 MHz and 2.4 GHz).  How can we shift our signal from the baseband to a channel with a larger center frequency? Once again the Fourier Transform comes to the rescue, as shown in the figure below.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm36.png) 
 
 Figure: Shifting the Center Frequency of a Signal
 
-If we take a baseband signal and multiply it by a complex exponential, then the Fourier Transform tells us that the resulting signal now occupies a channel whose center frequency coincides with that of the carrier. This can be shown using the following calculation:
+If we take a baseband signal and multiply it by a complex exponential at frequency $g$, then the Fourier Transform tells us that the resulting signal now occupies a channel whose center frequency is precisely $g$. This can be shown using the following calculation:
 If $X(f)$ is the Fourier Transforms of $x(t)$, then the Fourier Transform of $x_g(t) = x(t) e^{j2\pi gt}$ is given $X(f-g)$ (see above figure).
-An application of the Euler Formula $e^{j\theta} = \cos\theta+j\sin\theta$ then leads to the result that Fourier Transform of $x(t)\cos (2\pi f_0 t)$ is given by ${X(f-f_0)+X(f+f_0)\over 2}$. This is precisely the property that we are looking for, i.e., the ability to shift the spectrum occupied by the baseband pulse. The resulting waveform is known as a passband pulse and the cosine function used to do the translation is called the carrier wave.
+An application of the Euler Formula $e^{j\theta} = \cos\theta+j\sin\theta$ leads to the result that Fourier Transform of $x(t)\cos (2\pi f_0 t)$ is given by ${X(f-f_0)+X(f+f_0)\over 2}$. This is the property that we are looking for, i.e., the ability to shift the spectrum occupied by the baseband pulse. The resulting waveform is known as a passband pulse and the cosine function used to do the translation is called the carrier wave.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm6.png) 
 
 Figure: (a) A Baseband Sinc Pulse and its Fourier Transform (b) A Passband Sinc Pulse and its Fourier Transform. The baseband pulse has been shifted by 7.5 GHz.
 
-The shift in frequency of a baseband sinc pulse from 0 GHz to 7.5 GHz is illustrated in the above figure. Note that as a result of the shift, the bandwidth occupied by the passband pulse is double that of the baseband pulse, i.e., for a pulse of width $T$, the baseband bandwidth that it occupies is ${1\over{2T}}$ while its passband bandwidth usage is ${1\over T}$.
+The shift in frequency of a baseband sinc pulse from 0 GHz, as shown in column A, to 7.5 GHz, as shown in column B, is illustrated in the above figure. Note that as a result of the shift, the bandwidth occupied by the passband pulse is double that of the baseband pulse, i.e., for a sinc pulse of width $T$, the baseband bandwidth that it occupies is ${1\over{2T}}$ while its passband bandwidth usage is ${1\over T}$.
 
-The use of the carrier wave results in some interesting new possibilities that did not exist in the baseband case. In particular it allows us to use the parameters of the carrier wave as another way in which sinc pulses can be differentiated. In the baseband case we were confined to using the amplitude of the sinc pulse as means of differentiation, but now in the passband we can also make use of the phase of the carrier wave. Hence it is now possible to define a so called constellation of passband sinc pulses, with differing amplitudes and phases, and this is called Quadrature Amplitude Modulation or QAM. One of the simplest QAM constellations uses four different signals and is called Quadrature Phase Shift Keying or QPSK, and we will describe that next.
+The use of the carrier wave allows us to use its parameters as another way in which sinc pulses can be differentiated. 
+In particular we can use both the amplitude of the sinc pulse as well as the phase of the carrier wave to differentiate pulses. Hence it is now possible to define a so called constellation of passband sinc pulses, with differing amplitudes and phases, and this is called Quadrature Amplitude Modulation or QAM. One of the simplest QAM constellations uses four different signals and is called Quadrature Phase Shift Keying or QPSK, and we will describe that next.
 
 The basic idea behind QPSK is quite simple and goes as follows: 
-The incoming bit stream gets grouped together two bits at a time, followed by a mapping to one of four waveforms, for $0\le t\le T$, where $T$ is the symbol time:
+The incoming bit stream gets grouped together two bits at a time, followed by a mapping to one of four waveforms described below, for $0\le t\le T$, where $T$ is the symbol time:
 
-- Bit pattern 00 gets mapped on to the carrier wave $\sqrt{2}A\cos(2\pi f_c t + {\pi\over 4})$.
-- Bit pattern 10 gets mapped on to $\sqrt{2} A\cos (2\pi f_c t + {3\pi\over 4})$.
-- Bit pattern 11 gets mapped on to $\sqrt{2} A\cos (2\pi f_c t + {5\pi\over 4})$.
-- Bit pattern 01 gets mapped on to $\sqrt{2} A\cos (2\pi f_c t + {7\pi\over 4})$.
+- Bit pattern 00 gets mapped to the carrier wave $\sqrt{2}A\cos(2\pi f_c t + {\pi\over 4})$.
+- Bit pattern 10 gets mapped to $\sqrt{2} A\cos (2\pi f_c t + {3\pi\over 4})$.
+- Bit pattern 11 gets mapped to $\sqrt{2} A\cos (2\pi f_c t + {5\pi\over 4})$.
+- Bit pattern 01 gets mapped to $\sqrt{2} A\cos (2\pi f_c t + {7\pi\over 4})$.
 
-Note that the signal is also shaped by the sinc function $\sinc(\pi Ft)$, which we have left out for convenience.
 We can see that the different bit patterns are differentiated based solely on the phase of the carrier wave. This mapping can be nicely represented in the complex plane as follows:
-- Bit pattern 00 gets mapped on to the complex number $({1\over{\sqrt 2}}, {j\over{\sqrt 2}}) $
-- Bit pattern 10 gets mapped on to $(-{1\over{\sqrt 2}}, {j\over{\sqrt 2}})$
-- Bit pattern 11 gets mapped on to $(-{1\over{\sqrt 2}}, -{j\over{\sqrt 2}})$
-- Bit pattern 01 gets mapped on to $({1\over{\sqrt 2}}, -{j\over{\sqrt 2}})$
+- Bit pattern 00 gets mapped to the complex number $({1\over{\sqrt 2}}, {j\over{\sqrt 2}}) $
+- Bit pattern 10 gets mapped to $(-{1\over{\sqrt 2}}, {j\over{\sqrt 2}})$
+- Bit pattern 11 gets mapped to $(-{1\over{\sqrt 2}}, -{j\over{\sqrt 2}})$
+- Bit pattern 01 gets mapped to $({1\over{\sqrt 2}}, -{j\over{\sqrt 2}})$
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm37.png) 
 
 Figure: Passband Modulation using Quadrature Phase Shift Keying or QPSK
 
-These 4 values can also be plotted on the complex plane as shown above
+These four values numbers can be plotted on the complex plane as shown above.
 
 Using this mapping the QPSK waveform can be written as:
 
@@ -318,7 +319,7 @@ Using these equations, the QPSK transmitter can be implemented as shown below:
 
 Figure: A Single Carrier based QPSK Modulator
 
-The figure shows that the incoming bit stream on the left is first converted to consecutively occurring pairs of bits in the Serial to Parallel Converter. Since 2 bits map to a single symbol, the resulting symbol rate $R_s$ is half of the bitrate $R_b$. The mapping from bit pairs to the imaginary number $a$ is then used to determine the Real and Complex parts of $a$, which determine the I and Q components of signal. Next the baseband pulse for the signal is generated by using the Nyquist Root Raised Cosine (RRC) Filter in order to avoid Inter Symbol Interference, as discussed in the prior section. This is followed by multiplication of the I and Q components of the amplitude by the carriers $\cos(2\pi f_c t)$ and $\sin(2\pi f_c t)$ respectively, in order to shift the pulse to the center frequency $f_c$. Finally the two components are subtracted to generate the signal to be transmitted.
+The figure shows that the incoming bit stream on the left is first converted to consecutively occurring pairs of bits in the Serial to Parallel Converter. Since 2 bits map to a single symbol, the resulting symbol rate $R_s$ is half of the bitrate $R_b$. The table lookup mapping from bit pairs to the complex number $a$ is then used to determine the Real and Complex parts of $a$, which determine the I and Q components of signal. Next the baseband pulse for the signal is generated by using the Nyquist Root Raised Cosine (RRC) Filter in order to avoid Inter Symbol Interference, as discussed in the prior section. This is followed by multiplication of the I and Q components by the carriers $\cos(2\pi f_c t)$ and $\sin(2\pi f_c t)$ respectively, in order to shift the pulse to the center frequency $f_c$. Finally the two components are subtracted to generate the signal to be transmitted.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm11.png) 
 
@@ -332,12 +333,12 @@ Figure: Higher Level Signal Constellation (a) QPSK (b) 8-PSK (c) 32-QAM (d) 16-Q
 
 The bitrate for a single carrier system can be increased over that of QPSK by packing more bits into a single symbol. This can be done by increasing the number of possible waveforms, which can be done either by varying the phase of the carrier or its amplitude. As for QPSK, this can be conveniently illustrated on the complex plane, as shown in the above figure, which shows the I and Q components for a few higher order modulations. For example 128-QAM maps 7 bits to each symbol, so that the resulting bit rate is 3.5x that of QPSK (for the same symbol rate).
 
-So how far can this process go, i.e., can we keep increasing the constellation size and realize greater and greater bitrates? It turns out that with more sophisticated  systems it is possible to increase it by quite a bit. For example the cable modem standard DOCSIS specifies that 4096-QAM is mandatory, while 8192-QAM and 16,384-QM are optional on cable modems!
+So how far can this process go, i.e., can we keep increasing the constellation size and realize greater and greater bitrates? It turns out that with more sophisticated  systems it is possible to increase it by quite a bit. For example the cable modem standard DOCSIS 3 specifies that 4096-QAM is mandatory, while 8192-QAM and 16,384-QM are optional on cable modems!
 But ultimately, this technique runs into the Shannon Channel Capacity limit $C = B\log (1+{S\over N})$, since packing more constellation points means that they will move closer and closer to each other, and at some point the noise in the channel will make it impossible to differentiate one symbol from another. In fact DOCSIS 3.1, which is the latest iteration of the standard, now specifies that OFDM be used instead of QAM, which allows even higher bitrates by increasing the channel bandwidth $B$ without compromising on the error performance.
 
 ## The Wireless Channel
 
-In order to understand why Single Carrier Modulation does not work very well over wireless, we first have to understand a few things about the nature of impairments that affect transmissions in this type of channel. There are quite a few of them, including:
+In order to understand why Single Carrier Modulation QAM does not work very well over wireless, we first have to understand a few things about the nature of impairments that affect transmissions in this type of channel. There are quite a few of them, including:
 
 - Interference from other wireless system operating the vicinity. This is less of a problem in the licensed frequency bands like LTE, but even here there could be interference from neighboring cells using the same frequency band.
 - Wireless propagation related issues: As for all electromagnetic waves, the transmitted power falls off as the inverse of the square of the distance. But a bigger source of decrease in signal strength is the fact it is expected to penetrate one or more walls on the way to the receiver. Each time it does so, its power can reduce by up to two orders of magnitude.
@@ -346,13 +347,13 @@ In order to understand why Single Carrier Modulation does not work very well ove
 
 Figure: Sources of Multipath Interference
 
-There is another more serious problem that afflicts wireless systems, that of multipath, and is illustrated in the figure above. Multipath is mostly due to the fact that the transmissions encounter a lot of clutter on their way from a high transmit antenna, to the receiver that usually located at street level. As a result the transmitted signal bounces around from the objects in the environment, and several copies of the signal arrive at the receiver within a few microseconds of another. For example the figure shows signals arriving at the handset in a moving vehicle after bouncing off one or more buildings, other vehicles in the vicinity etc. We have all come across multipath when occasionally we hear echoes on a long distance voice connection, or an on-screen visual impairment called 'ghosts' in an over the air TV transmission (in which multiple copies of objects appear on the screen).
+There is another more serious problem that afflicts wireless systems, that of multipath, and is illustrated in the figure above. Multipath is due to the fact that the transmissions encounter a lot of clutter on their way from a high transmit antenna, to the handset that is usually located at street level. As a result the transmitted signal bounces around from the objects in the environment, and several copies of the signal arrive at the receiver within a few microseconds of another. For example the figure shows signals arriving at the handset in a moving vehicle after bouncing off one or more buildings, other vehicles in the vicinity etc. We have all come across multipath in other type of networks, such as when occasionally we hear echoes on a long distance VoIP connection, or an on-screen visual impairment called 'ghosts' in an over the air TV transmission (in which multiple copies of objects appear on the screen).
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm13.png) 
 
 Figure: Inter-Symbol Interference due to Multipath
 
-The addition of multiple copies of the same signal separated in time (shown in the above figure) leads to situation where they completely cancel each other out, called destructive interference, or they can reinforce each other, called constructive interference. The situation where the signals cancel each other is referred to as deep fade, and before the advent of OFDM, it plagued broadband wireless systems that were using single carrier modulation.
+The superposition of multiple copies of the same signal, separated in time, at the receiver (shown in the above figure) leads to a situation where they can completely cancel each other out, called destructive interference, or they can reinforce each other, called constructive interference. The situation where the signals cancel each other is referred to as deep fade, and before the advent of OFDM, it plagued broadband wireless systems that were using single carrier QAM modulation.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm40.png) 
 
@@ -364,7 +365,12 @@ It is possible to plot the frequency response of a wireless channel, and one suc
 
 Figure: Channel Response compared to the Signal Spectrum for Narrowband (top) and Broadband Systems (bottom)
 
-So why does multipath affect broadband wireless systems more than previous generation of narrowband systems such as 2G or 3G. One way to understand this is by examining the channel frequency response. If the transmissions are of the narrowband type, then there is a good chance that their spectrum is fully contained in the flat part of the channel response, which alleviates the problem. However if it is a broadband channel, then the (single carrier QAM) signal spectrum is much wider, and as a result it spans the part of the channel spectrum with the deep fade notches, which lead to reception problems. Another problem is that the channel is dynamic, especially if the receiver is moving around. So the location of the notches can constantly change during the duration of a single data session.
+So why does multipath affect single carrier QAM systems more than previous generation of narrowband systems such as 2G or 3G. One way to understand this is by examining the channel frequency response. 
+
+- If the transmissions are of the narrowband type, then there is a good chance that their spectrum is fully contained in the flat part of the channel response, as shown in the top part of the figure, which alleviates the problem. This scenario is called Flat Fading.
+- However if it is a broadband QAM signal, then its pulse width in time is much narrower and a result, its signal spectrum becomes wider, as was explained in the section of Nyquist Pulses. The wider signal spectrum spans the part of the channel spectrum with the deep fade notches, which lead to reception problems, as shown in the bottom part of the figure. This scenario is called Frequency Selective Fading.
+
+Another problem is that the channel is dynamic, especially if the receiver is moving around, so the location of the notches in the channel response can constantly change during the duration of a single data session.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm39.png) 
 
@@ -372,61 +378,62 @@ Figure: Illustration of Interference in the Time Domain for Narrowband Systems (
 
 Multipath interference can be understood more directly by examining its effect in the time domain, and this is shown in the above figure. It illustrates the case when the bit sequence 
 100101 is transmitted using a symbol time of 10 us in the top two figures and 0.1 us in the bottom two figures. 
-The 10 us symbol corresponds to a narrowband transmission, and part (b) we can see two multipath signals arriving with a time offset at the receiver. The amount of multipath delay is of the order of 1-2 us, which is much less than the symbol time. This is the case that corresponds to flat fading, and there are well known techniques to combat it.
-With the broadband signal on the other hand, since the symbol time is only 0.1 us, the 1-2 us delay spread in the multipath now affects many more symbols in the future, and this corresponds to the case of frequency selective fading. Note that with single carrier modulation, the symbol time decreases as we increase its bandwidth, so the frequency selective problem becomes worse at higher data speeds.
+The 10 us symbol corresponds to a narrowband transmission, and part (b) we can see two multipath signals arriving with a time offset at the receiver. The amount of multipath delay is of the order of 1-2 us, which is much less than the symbol time of 10 us. This is the case that corresponds to Flat Fading, and there are well known techniques to combat it.
+With the broadband signal on the other hand, since the symbol time is only 0.1 us, the 1-2 us delay spread in the multipath now affects many more symbols in the future, as shown in part (d) of the figure, and this corresponds to the case of Frequency Selective Fading. Note that with single carrier QAM modulation, the symbol time decreases as we increase its occupied bandwidth, so the frequency selective problem becomes worse at higher data speeds.
 
 ## OFDM OR How Data is Sent over a Broadband Wireless Link
 
-Is there a more robust way to transmit over a wireless channel, which does not suffer from multipath interference? It turns out there is, and it was first proposed by Robert Chang from Bells Labs in 1966, building on some earlier work by Franco and Lachs. He discovered OFDM by inverting the transmission problem in some sense from time to the frequency space by using the magic of the Fourier Transform. 
+Is there a more robust way to transmit broadband data over a wireless channel, which does not suffer from multipath interference? It turns out there is, and it was first proposed by Robert Chang from Bells Labs in 1966, building on some earlier work by Franco and Lachs. He discovered OFDM by inverting the transmission problem in some sense, from the time to the frequency domain, by using the magic of the Fourier Transform. 
 
-Recall that Nyquist showed us that it is possible to stack up pulses in time right next to each other with their peaks separated by an interval of $T$, and still avoid Inter Symbol Interference, as long as we shape them using the sinc function and this results in a bandwidth usage of ${\over{2T}}$ for the signal. The only way to send data faster is by making the pulse width $T$ smaller, which results in a larger bandwidth used.
-But there is another way to avoid Inter Symbol Interference, as Morse discovered almost 200 years ago, which is by leaving a large gap between successive time pulses. However this technique is not compatible with broadband communications, since it leads in a large reduction in the symbol rate. But is there a way out of this conundrum?
+Recall that Nyquist showed us that it is possible to stack up baseband pulses right next to each other in time, with their peaks separated by an interval of $T$, and still avoid Inter Symbol Interference, as long as we shape them using the sinc function, and this results in a bandwidth usage of ${1\over{2T}}$ for the signal. The only way to send data faster is by making the pulse width $T$ smaller, which results in a larger bandwidth used.
+But there is another way to avoid Inter Symbol Interference, as Morse discovered almost 200 years ago, which is by leaving a large gap between successive time pulses. However this technique is not compatible with broadband communications, since it leads in a big reduction in the symbol rate. But is there a way out of this conundrum?
 
-It turns out there is! If we transmit very large symbols (in time), this allows us to leave a relatively small gap between successive symbols without losing too much capacity. But large symbols lead to smaller bandwidth if we are using single carrier modulation. However what if we transmit multiple symbols in parallel at the same time? Hence each symbol will carry less data by itself, but in aggregate all the symbols together can carry as much data in a given interval of time as the single carrier case. This is exactly what OFDM does!
+It turns out there is! If we transmit very large symbols (in time), this allows us to leave a relatively small gap between successive symbols without losing too much capacity. But large symbols lead to smaller symbol rate if we are using single carrier QAM modulation. However what if we transmit multiple symbols in parallel at the same time? Hence each symbol will carry a smaller amount of data by itself, but in aggregate all the symbols together can carry as much data in a given interval of time as the single carrier QAM case. This is exactly what OFDM does!
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm14.jpg) 
 
 Figure: Generating an OFDM Symbol
 
-But how can we transmit multiple symbols in parallel, without them interfering with one other? This is were genius struck, with idea that the parallel transmissions could be made independent of each other, by multiplying them with carrier waves that are orthogonal to each other. 
-This allows each individual symbol to be recovered at the receiver, by multiplying it with the carrier wave with the same frequency as that used for transmitting that symbol.
-As Fourier showed, carrier waves can be made orthogonal to each other by making sure that their frequencies are integral multiples of each other. 
+But how can we transmit multiple symbols in parallel, without them interfering with one other? This is were genius struck, with the idea that the parallel transmissions can be made independent of each other, by multiplying them with carrier waves that are orthogonal to each other. 
+This allows each individual symbol to be recovered at the receiver, by multiplying it with the carrier wave at the same frequency that was used for transmitting that symbol.
+As Fourier showed, carrier waves, which are just sine and cosine functions, can be made orthogonal to each other by making sure that their frequencies are integral multiples of each other. 
 
-The process of generation of single OFDM symbol is shown in the above figure. Let say we have to transmit the 9 bit sequence 010010011, shown in top part of the figure. If we use Single Carrier modulation, then the transmission of each bit will take T seconds (assuming BPSK modulation), for a total time of 9T seconds. With OFDM, we are going to use up the entire 9T seconds to transmit a single symbol (or bit in this case), as shown in the left side of the figure, and then multiply each symbol by a carrier whose frequencies are integral multiples of each other, an shown in the right hand side. We then add up all the 9 symbols together to generate the final symbol, also of duration 9T seconds, as shown at the bottom. Hence once again we end of transmitting 9 bits in 9T seconds (as in the single carrier case), but now we are doing it in a way that is much more robust to wireless channel impairments such as multipath and interference. 
+The process of generating a single OFDM symbol is shown in the above figure. Let say we have to transmit the 9 bit sequence 010010011, shown in top part of the figure. If we use Single Carrier QAM modulation, then the transmission of each bit will take T seconds (assuming BPSK modulation), for a total time of 9T seconds. With OFDM, we are going to use up the entire 9T seconds to transmit a single symbol (or bit in this case), as shown in the left side of the figure. We multiply each symbol by a carrier whose frequencies are integral multiples of each other, an shown in the right hand side. We then add up all the 9 symbols together to generate the final symbol, also of duration 9T seconds, which is shown at the bottom. Hence once again we end of transmitting 9 bits in 9T seconds (as in the single carrier QAM case), but now we are doing it in a way that is much more robust to wireless channel impairments such as multipath and interference. 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm41.png) 
 
 Figure: Inter-Symbol Gap in OFDM
 
-There is a big benefit in using large symbols as shown in the above figure. It is now possible to leave a relatively large gap between successive symbols without loosing too much link capacity. As long as this gap is larger than the path length (in time) of longest multipath signal, the OFDM system will be immune to Inter Symbol Interference. The inter-symbol gap is not left empty, but instead the last portion of the next symbol (equal to the length of the gap) is inserted there, and this technique is known as the Cyclic Prefix Extension.
+There is a big benefit in using large symbols as shown in the above figure. It is now possible to leave a relatively large gap between successive symbols without losing too much link capacity. As long as this gap is larger than the path length (in time) of longest multipath signal, the OFDM system will be immune to Inter Symbol Interference. The inter-symbol gap is not left empty, but instead the last portion of the next symbol (equal to the length of the gap) is inserted there, and this technique is known as the Cyclic Prefix Extension.
 
-Consider the following example: If we were to transmit a million symbols per second using single carrier modulation, then the duration of each symbol would be one microsecond or less. 
-If the same million symbols per second are spread among one thousand sub-carriers, then the duration of each symbol will be longer by a factor of a thousand (i.e., one millisecond) with approximately the same bandwidth. Assume that an inter-symbol gap or guard interval of 1/8 of the symbol length is inserted between each symbol. Inter Symbol Interference can be avoided if the multipath time-spreading (the time between the reception of the first and the last echo) is shorter than the guard interval (i.e., 125 microseconds). This corresponds to a maximum difference of 37.5 kilometers between the length of the main signal and its largest multipath component.
+Consider the following example: If we were to transmit a million symbols per second using single carrier QAM modulation, then the duration of each symbol would be one microsecond or less. 
+If the same million symbols per second are spread among one thousand OFDM sub-carriers, then the duration of each symbol will be longer by a factor of a thousand (i.e., one millisecond) with approximately the same total bandwidth used. Assume that an inter-symbol gap or guard interval of 1/8 of the symbol length is inserted between each symbol. Inter Symbol Interference can be avoided if the multipath time-spreading (the time between the reception of the first and the last echo) is shorter than the guard interval (i.e., 125 microseconds). This corresponds to a maximum difference of 37.5 kilometers between the length of the main signal and its largest multipath component.
+
 4G LTE uses a symbol time of 66.7 us and a Guard Interval of 4.69 us, which allows the system to accommodate path variation of up to 1.4 km, which is good enough for densely deployed LTE cells.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm18.jpg) 
 
 Figure: OFDM Sub-Carriers
 
-Note that it is no longer necessary to shape the transmit pulses into the shape of a sinc in order to avoid Inter Symbol Interference (since interference is avoided by using the Guard Interval), hence the transmit signal can be a square pulse for each sub-carrier. As a result, the shape of the per carrier frequency response is in the form of a sinc function. This is illustrated in the above figure which shows the spectrum for a full OFDM symbol, consisting of multiple subcarriers. Each of the subcarriers assumes a sinc shaped spectrum as shown, and since they are spaced apart from each other by a multiple of a frequency, it results in the shape shown. Note unlike in regular single carrier based Frequency Division Multiplexing, it is not necessary to leave a guard band between sub-carriers, since they don't interfere with another due to the orthogonality property.
+Note that it is no longer necessary to shape the transmit pulses into the shape of a sinc in order to avoid Inter Symbol Interference (since interference is avoided by using the Guard Interval), hence the transmit signal can be a square pulse for each sub-carrier. As a result, the shape of the per carrier frequency response is in the form of a sinc function. This is illustrated in the above figure which shows the spectrum for a full OFDM symbol, consisting of multiple subcarriers. Each of the subcarriers assumes a sinc shaped spectrum as shown, and since they are spaced apart from each other by a multiple of a frequency, it results in the shape shown. Note that unlike in regular single carrier based Frequency Division Multiplexing, it is not necessary to leave a guard band between sub-carriers, since they don't interfere with another due to the orthogonality property.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm44.png) 
 
 Figure: Frequency Selective Fading in an OFDM System
 
-Part (a) of the above figure shows the frequency response of a channel undergoing frequency selective fading (the solid line). If we use Single Carrier Modulation in such a channel, then its frequency spectrum spans the entire channel bandwidth, and as a result, the frequency selective fading can cause a whole symbol to be lost. On the other hand, as Part (b) of the figure shows, with an OFDM system, the portions of the spectrum that are affected by the frequency selective fades, are localized to only a few of the subcarriers in the OFDM signal, which makes the transmission much more robust compared to single carrier systems. Since we are allowed to use different modulation schemes on different sub-carriers, the part of the spectrum which is subject to fading can adaptively change its modulation to a  something more robust such as QPSK, or even refrain from using the affected sub-carriers.
+Part (a) of the above figure shows the frequency response of a channel undergoing frequency selective fading (the solid line). If we use Single Carrier Modulation QAM in such a channel, then its frequency spectrum spans the entire channel bandwidth, and as a result, the frequency selective fading can cause a whole symbol to be lost. On the other hand, as Part (b) of the figure shows, with an OFDM system, the portions of the spectrum that are affected by the frequency selective fades, are localized to only a few of the subcarriers in the OFDM signal, which makes the transmission much more robust compared to single carrier systems. Since we are allowed to use different modulation schemes on different sub-carriers, the part of the spectrum which is subject to fading can adaptively change its modulation to a  something more robust such as QPSK, or even refrain from using the affected sub-carriers.
 
 In some sense OFDM is a logical inverse of single carrier based modulation, since
 
-- Single carrier modulation leads to a sequence of tiny pulses in time, that are tightly stacked next to each other and kept orthogonal by using the sinc function AND these pulses have a wide spectral band in the frequency domain. Furthermore neighboring spectral bands are kept orthogonal by leaving a gap in-between them.
+- Single carrier modulation QAM leads to a sequence of tiny pulses in time, that are tightly stacked next to each other and kept orthogonal by using the sinc function AND these pulses have a wide spectral band in the frequency domain. Furthermore neighboring spectral bands are kept orthogonal by leaving a gap in-between them.
 - OFDM modulation leads to a sequence of tiny sub-carriers in frequency, that are tightly stacked next to each other and kept orthogonal by using the sinc function AND these sub-carriers have a wide pulse in the time domain. Furthermore neighboring time pulses are kept orthogonal by leaving a gap in-between them.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm21.png) 
 
 Figure: The OFDM Transmitter and Receiver
 
-The above figure shows an OFDM transmitter and receiver. On the transmit side it shows the serial bit stream getting mapped to N single carrier symbols. Note that we can use a different modulation for sub-carrier, so far example if sub-carrier 1 is using 256-QAM then 8 bits get mapped to each of its symbols, while if sub-carrier 2 is using QPSK (since it is in a more challenging part of the channel spectrum) , then 2 bits get mapped. The individual single carrier symbols are then added together to generate the OFDM symbol that then gets transmitted over the channel, after shifting the subcarriers to a higher part of the spectrum is required.
-On the receive side the signal is first decomposed into its individual components by multiplication with the N single carriers in parallel. This is followed by a parallel to serial converter and the detection block in which the transmitted bits are recovered.
+The above figure shows an OFDM transmitter and receiver. On the transmit side it shows the serial bit stream getting mapped to N single carrier QAM symbols. Note that we can use a different modulation for each sub-carrier, so far example if sub-carrier 1 is using 256-QAM then 8 bits get mapped to each of its symbols, while if sub-carrier 2 is using QPSK (since it is in a more challenging part of the channel spectrum) , then 2 bits get mapped to its symbol. The individual single carrier symbols QAM are then added together to generate the OFDM symbol that then gets transmitted over the channel (after shifting the subcarriers to a higher part of the spectrum in the RF  block).
+On the receive side the signal is first decomposed into its individual components by multiplication with the N subcarriers in parallel. This is followed by a parallel to serial converter and the detection block in which the transmitted bits are recovered.
 
 
 ### OFDM Implementation Using the Discrete Fourier Transform
@@ -436,18 +443,19 @@ The OFDM Transmitter and Receiver systems that were shown at the end of the last
 So what is the way out? Well, once again the Fourier Transform comes to the rescue, this time in the form of the Discrete Fourier Transform or DFT. As we show next, DFT allows us to replace the operation of multiplying with a sine or cosine signal, with that of computing the DFT or the inverse-DFT, which is much easier to do. This critical idea was first fully developed by Weinstein and Ebert at Bell Labs in 1971, five years after the original OFDM paper by Robert Chang. Bell Labs however did not show much interest in this technology, and the first commercial implementation had to wait to 1993, with the start-up Amati Networks who applied OFDM to ADSL transmissions, which take place over Twisted Pair copper wiring.
 
 In order to see how DFT can be applied to OFDM, lets start with the OFDM Transmitter that was shown in the previous section.
-The following equation captures the generation of the baseband signal. Note that the sequence $A_n, n=0,...,N-1$ is the set
-of complex numbers that captures the type of modulation being used. These then get multiplied by the set of N discrete carriers
-that constitute the OFDM baseband signal, and finally added together to generate the OFDM baseband pulse.
+The following equation captures the generation of the baseband signal:
 
-$$ x(t) = \sum_{n=0}^{N-1} A_n e^{{j2\pi n\over T}t}, \ \ \ 0\le t\le T $$
+$$ x(t) = \sum_{n=1}^{N} A_n e^{{j2\pi n\over T}t}, \ \ \ 0\le t\le T $$
 
-We are now going to sample the baseband pulse $x(t)$ N times, at time instants $t = {T\over N}, {2T\over N},...,{(N-1)T\over N}, T$, thus generating N samples $x_k, 1\le K\le N$. Substituting these in the equation for $x(t)$ it follows that the samples satisfy the following equation:
+Note that the sequence $A_n, n=1,...,N$ is the set
+of complex numbers that captures the type of QAM modulation being used. These then get multiplied by the set of N discrete carriers and added together to generate the OFDM baseband pulse.
+
+We are now going to sample the baseband pulse $x(t)$ N times, at time instants $t = {T\over N}, {2T\over N},...,{(N-1)T\over N}, T$, thus generating N samples $x_k, 1\le K\le N$. Substituting these in the equation for $x(t)$, it follows that the samples satisfy the following equation:
 
 $$ x_k = \sum_{n=1}^{N} A_n e^{j2\pi nk\over N},\ \ \ 1\le k\le N $$
 
 This is where magic happens! If you go back to the section on the Discrete Fourier Transform, you will notice that these equations are exactly the same as for the Inverse DFT for a signal whose frequency samples are given by $A_n, 1\le n\le N$. Hence we have avoided the use of all the oscillators in the generation of an OFDM pulse, simply by discretizing the signal and using the inverse DFT to generate its samples.
-This observation provides a straightforward way in which the numbers $A_n$ can be recovered at the Receiver, simply carry out the inverse operation (which is just the regular DFT), and these numbers appear.
+This observation provides a straightforward way in which the numbers $A_n$ can be recovered at the Receiver, simply carry out the inverse operation (which is just the regular DFT), and these numbers re-appear!
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/ofdm45.png) 
 
