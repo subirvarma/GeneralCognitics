@@ -16,6 +16,18 @@ title: "Book Review: The Fabric of Reality by David Deutsch"
 Hence the noumenon is forever out of reach for us, since the brain is incapable of rendering it for us. 
 We can never peer behind the curtain.
 
+We can never peer behind the curtain.
+- Considers our genes to be a type of VR renderer, the output of which is the organism itself.
+- [ ] Genes not only render the organism, but through the organism also render the environment that the organism exists in.
+
+The main strands of a TOE
+- [ ] Multiverse and QM
+- [ ] The generalized Turing hypothesis 
+- [ ] Poppers epistemology for science
+- [ ] Darwin’s theory as modified by Dawkins. Evolution works through genes, not the organism as a whole. Hence survival of the fittest applies at the gene level. 
+- [ ] Deutsch says that these 4 strands are interconnected and support each other. Not completely clear to me. 
+
+
 
 
 
