@@ -8,6 +8,11 @@ title: "Taming Randomness: The Story of Brownian Motion"
 
 ## Introduction
 
+At the dawn of the 20th century, there were two new sciences that were launched. One of them of course, was Quantum Mechanics, that came into existence with Max Planck's 1901 paper on Black Body Radiation. The other less well known one, was the science of Random Processes, and this was introduced by the French mathematician Bachelier, also around the same time. Quantum Mechanics of course went on the upend our ideas of Physics and reality in general, but what about Bachelier's discovery? This article is on precisely this topic.
+
+The science of randomness was founded in the 17th century by Blaise Pascal. This was further developed in the 18th century, with the names most associated with it being Jacob Bernoulli and Alexandre De Moivre. Most of this work had to do with the development of the theory of random events and variables, such as the probabilities encountered in tossing of a coin or a 6-sided dice. There was no connection made with the rapidly developing methods in analysis, that resulted in developments such as the Borel Measure and the Lebesgue Integral towardsthe end of the 19th century.
+The major contribution that the 20th century made to the science of randomness, is precisely this connection, and it all started with Bachelier's work from 1900. Why was this important? It laid the science of Random Processes on a firm mathematical foundation, by connecting it with the rest of mathematical analysis. This didn't happen immeditaely with Bachelier, but two decades later with Andrei Kolmogorov's axiomization of Prability Theory (this has an interesting echo with Quantum Mechanics that also took about two decades two mature from Planck to Heisenberg and Schrodinger). This made it possible to talk about quantities that evolve randomly in time, which is precisely what a Random Process is. But how important are these processes? Well, the most famous example of a randomly evolving process is the Stock Market, and this is precisely what Bachelier was studying in his 1900 paper. His work was essentially lost until the 1950s, when it came to the attention of the economist eminent Paul Samuelson. He soon applied it to create a model for the Stock Market
+
 - [ ] What is the most random thing possible?
 - [ ] The drunkards walk
 - [ ] Limiting case of the drunkards walk, becomes something that captures the essence of randomness in a form that is amenable to analysis ie the BM
@@ -33,7 +38,7 @@ title: "Taming Randomness: The Story of Brownian Motion"
 - [ ] Yes we can, and the result is the Weiner Process: Donsker's Theorem
 - [ ] Properties of the Weiner Process
 
-## Adding Random Noise to Models
+## Adding Randomness to Models
 
 - [ ] Why is it important? A convenient way to add randomness to a model. WP is analytically tractable. 
 - [ ] Applications: Stock Market, image generation, noise filtering
@@ -48,7 +53,7 @@ title: "Taming Randomness: The Story of Brownian Motion"
 
 - [ ] Go through the signal + noise model, as per page 15 of Oksendal's book. How this naturally leads to the Ito Integral.
 - [ ] dx/dt = Ax + B dW/dt equivalent to x = int(Ax dt) + int(B dW).  The latter is the Ito integral. 
-- [ ] Rough derivation of the Ito Integral
+- [ ] Rough derivation of the existence proof of the Ito Integral
 
 ### Functions of the Weiner Process and the Ito Formula
 
