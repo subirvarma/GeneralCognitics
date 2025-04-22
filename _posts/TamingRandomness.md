@@ -7,8 +7,11 @@ title: "Taming Randomness: The Story of Brownian Motion"
 
 ## Introduction
 
-Talk about Robert Brown's discovery of Brownian Motion and Einstein explantion for it.
+![](https://subirvarma.github.io/GeneralCognitics/images/weiner1.png) 
 
+Figure 1
+
+In 1827 the Scottish botanist Robert Brown was peering through his misroscope at minute particles of pollen suspended in a drop of water, when he noticed something strange. The pollen particles seemed to be moving about randomly, with no preferential direction. That being the age of Newtonian Mechanics, Brown looked for a force that might be causing the particles to move, but he couldn't find any that was visible. This phenomenon was named after him,and in fact most of us would have seen particles of dust dancing around in a beam of sunlight in a darkened room, which is also another example of Brownian Motion. The cause of the random motion remained a mystery until 1905, when the young Albert Einsten came up with a satifactory explanation in his very first published paper. Einstein theorized that the pollen particles where being pushed around by the molecules of water, which are too tiny to be seen under a microscope. At any point in time, there are slight imbalances in the number of water molecules extering pressure on the pollen in various directions, as a result of which it gets pushed in random directions as time goes on. Einstein also derived the average distance the particle moves in time $t$, which he showed was proportional to $\sqrt{t}$. In order to get these results Einstein utilized the newly discovered science of Statistical Mechanics, which is used to obtain laws that govern the Physics of a large assemblage of tiny particles. But in this case, we are not interested in the behavior of millions of particles acting together to create macroscopic quantities such as pressure, but in the motion of a single particle at a time, and this was something new to Physics. Unbeknownst ti Einstein, Brownian Motion had already been analyzed five years earlier in the context of a model for the Stock Market, and this is discuused next.
 
 ### Two New Sciences
 
@@ -26,7 +29,7 @@ Later in the 1960s Black and Scholes extended Samuelson's work to create a model
 
 Talk about Image Generation using BM
 
-### A Model for Brownian Motion
+### The Weiner Process Model for Brownian Motion
 
 Talk about random sums, and how they can be scaled to create BM.
 
