@@ -24,6 +24,8 @@ Kiyosi Ito was a Japanese mathematician who made the next important advance in t
 But how important are these Random Processes? Well, the most famous example of a randomly evolving continuous time process is the stock market, and this is precisely what Bachelier studied in his 1900 paper. His work was essentially lost until the 1950s, when it came to the attention of the  eminent economist Paul Samuelson, who built on Ito's work and applied it to create a model for the Stock Market called the Logarithmic Brownian Motion.
 Later in the 1960s Black and Scholes extended Samuelson's work to create a model for options trading. This resulted in a Partial Differential Equation named after them, whose solution is probably the most important mathematical result in use in Wall Street today. In fact I recently came acrosss a list of the most imprtant equations in science, and the Black-Scholes equation was listed along with others such as Maxwell Equations for electromagnetism and Schrodinger's Equation for the wave function.
 
+Talk about Image Generation using BM
+
 ### A Model for Brownian Motion
 
 Talk about random sums, and how they can be scaled to create BM.
