@@ -5,24 +5,30 @@ title: "Taming Randomness: The Story of Brownian Motion"
 
 # Taming Randomness: The Story of Brownian Motion
 
-
 ## Introduction
 
-At the dawn of the 20th century, there were two new sciences that were launched. One of them of course, was Quantum Mechanics, that came into existence with Max Planck's 1901 paper on Black Body Radiation. The other less well known one, was the science of Random Processes, and this was launched in a PhD Thesis by the French mathematician Bachelier, also around the same time. Quantum Mechanics of course went on the upend our ideas of Physics and reality in general, but what about Bachelier's discovery? This article is on precisely this topic.
+Talk about Robert Brown's discovery of Brownian Motion and Einstein explantion for it.
+
+
+### Two New Sciences
+
+At the dawn of the 20th century, there were two new sciences that were launched. One of them of course, was Quantum Mechanics, that came into existence with Max Planck's 1901 paper on Black Body Radiation. The other less well known one, was the science of Random Processes, and this was launched in a PhD Thesis by the French mathematician Louis Bachelier, also around the same time. Quantum Mechanics of course went on the upend our ideas of Physics and reality in general, but what about Bachelier's discovery? This article is on precisely this topic.
 
 The science of random events, or Probability Theory, was founded in the 17th century by the French mathematician and philosopher Blaise Pascal who wasn the first one assign numbers to notions such as the probability of winning at a game of chance. 
 This was further developed in the 18th century, with the name most associated with it being the Swiss mathematician Jacob Bernoulli. Bernoulli initiated the idea of a repeated random trial, which was the first step towards the definition of a Random Process. For example if we toss a coin N times, he gave a formula for the probability that $n$ of those are heads (and the remaining $N-n$ are tails), now called the Binomial Distribution. But what if we were to look at an infinite sequence of coin or dice tosses, this then becomes a (discrete valued) Random Process. Extending this further, what if the random quantity evolves continuously in time? This is a continuous time Random Process, and the analysis of this is exponentialy harder than the discrete time version. Consequently very little progress had been made in this area and part of the reason was that there was no connection made between Probability Theory and the rapidly developing methods in analysis that resulted in developments such as the Borel Measure and the Lebesgue Integral towards the end of the 19th century.
 
 The major contribution that the 20th century made to the science of randomness, is precisely this connection, and it all started with Bachelier's work from 1900. Why was this important? It laid the science of Random Processes on a firm mathematical foundation, by connecting it with the rest of mathematical analysis. This process started with Bachelier, and was completed two decades later with Russian mathematician Andrei Kolmogorov's axiomization of Prabability Theory. This made it possible to talk about quantities that evolve randomly and continuously in time, which is precisely what a Random Process is. This has an interesting echo with Quantum Mechanics that also took about two decades two mature from Planck to Heisenberg and Schrodinger. 
 
-<Talk about Weiner's contribution here>
-
-Before Weiner Einstein also contruted to the study of Brownian motion.
-
 Kiyosi Ito was a Japanese mathematician who made the next important advance in the theory of Brownian Motion. Working in wartime Tokyo during the 1940s, he came up with the idea of extending the idea of integration to the case when the integrand is Brownian Motion, and this is now called the Ito Integral in his honor. This idea was very influential in many practical applications since it allowed the analysis of functions of the Brownian Motion. This resulted in the extension of Random Process models beyond Brownian Motion, thus initiating the study of general Random Diffusion Proceses.
 
 But how important are these Random Processes? Well, the most famous example of a randomly evolving continuous time process is the stock market, and this is precisely what Bachelier studied in his 1900 paper. His work was essentially lost until the 1950s, when it came to the attention of the  eminent economist Paul Samuelson, who built on Ito's work and applied it to create a model for the Stock Market called the Logarithmic Brownian Motion.
 Later in the 1960s Black and Scholes extended Samuelson's work to create a model for options trading. This resulted in a Partial Differential Equation named after them, whose solution is probably the most important mathematical result in use in Wall Street today. In fact I recently came acrosss a list of the most imprtant equations in science, and the Black-Scholes equation was listed along with others such as Maxwell Equations for electromagnetism and Schrodinger's Equation for the wave function.
+
+### A Model for Brownian Motion
+
+Talk about random sums, and how they can be scaled to create BM.
+
+Weiner's contribution
 
 Image and Video generation using the Langevin Process.
 
