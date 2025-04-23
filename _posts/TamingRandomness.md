@@ -45,7 +45,7 @@ Later in the 1960s the economists Fischer Black and Myron Scholes extended Ito a
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/weiner6.png) 
 
-Figure 5: Signals in Noise
+Figure 6: Signals in Noise
 
 Brownian Motion has evolved into a powerful tool for modeling random phenomena. Whenever the need arises to capture the randomness that exists in fields such as communications system or electrical circuits, Brownian Motion is the go-to model that engineers use. An example of a a deterministic signal subject to random noise is shown in the above figure. The clean signal is transmitted, while the noise is added during the course of transmisssion over a communications channel. The Filtering Problem looks at ways in which the signal can be extracted from the noise which is usually modeled as a Brownian Motion. Norbert Weiner (more about him in the next section) and Richard Kalman are names associated with the solution to the filtering problem.
 
@@ -59,6 +59,13 @@ But the most interesting, and surprising, application of Brownian Motion has hap
 
 There was one name that I haven't mentioned in my brief survey of mathematicians who have contributed to the theory of the Brownian Motion, and it is that of Norbert Weiner. This is quite a big omission since the terms Brownian Motion and Weiner Process are often used inter-changeably. Strictly speaking Brownian Motion is the physical phenomenon that Robert Brown discovered and Einstein analyzed, while the Weiner Process is a mathemtaical model for it (this is the terminology that I will use in the rest of this article). Norbert Weiner was the first one to do a rigorous mathematical analysis of Brownian Motion in the early 1920s, and abstracted it to create the mathematical notion of a Weiner Process. He proved several important properties for it, such as the fact that its sample paths are continuous in time, while at the same time its derivative does not exist anywhere.
 Weiner was a child prodigy who got his PhD from Harvard at age 19, and spent his career teaching at MIT. His work spanned mathematics, both pure and applied, as well philosophy and towards the latter part of his life what we call Artificial Intelligence (he called it Cybernetics). He contributed more than anyone else to the emerging field of Signal Processing as used in communications systems, and was a big influence on the later work of Claude Shannon and John von Neummann.
+
+The theory of sample paths of a continuously varying random signal was not sufficiently well developed when Weiner was working on the problem in the early 1920s, and had to wait for Kolmogorov's axiomitization of Probability Theory ten years later. During the 1950s the mathematician Monroe Donsker gave a highly intuitive explanation of how the Weiner Process arises as a limiting case of Brownian Motion, and this is what I am going to describe in this section.
+
+![](https://subirvarma.github.io/GeneralCognitics/images/weiner8.png) 
+
+Figure 8: Scaling Random Walks
+
 
 Talk about random sums, and how they can be scaled to create BM.
 
