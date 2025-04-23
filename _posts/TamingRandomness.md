@@ -37,16 +37,17 @@ Extending this idea further, what if the random quantity evolves continuously in
 The analysis of a continuous time Random Process is exponentialy harder than the discrete time version. Consequently very little progress had been made in this area by 1900 and part of the reason was that there was no connection made between Probability Theory and the rapidly developing methods in analysis that resulted in developments such as the Borel Measure and the Lebesgue Integral towards the end of the 19th century.
 The major contribution that the 20th century made to the science of randomness, is precisely this connection. It laid the science of Random Processes on a firm mathematical foundation, by connecting it with the rest of mathematical analysis. This process started with Bachelier, and was completed two decades later with great Russian mathematician Andrei Kolmogorov's axiomatization of Probability Theory. This made it possible to talk about quantities that evolve randomly and continuously in time, which is precisely what a Random Process is. This has an interesting echo with Quantum Mechanics that also took about two decades two mature from Planck to Heisenberg and Schrodinger. 
 
-Kiyosi Ito was a Japanese mathematician who made the next important advance in the theory of Random Processes. Working in wartime Tokyo during the 1940s, he came up with the idea of extending the idea of the integral to the case when the integration is done with respect to Brownian Motion, and this is now called the Ito Integral in his honor. This idea was very influential since it allowed mathematicians to build more complex Random Processes by using Brownian Motion as a basic building block. This laid the foundation for several important applications of Random Processes that happened in the following decades.
+Kiyosi Ito was a Japanese mathematician who made the next important advance in the theory of Random Processes. Working in wartime Tokyo during the 1940s, he came up with the idea of extending the idea of the integral to the case when the integration is done with respect to Brownian Motion, and this is now called the Ito Integral in his honor. I found this to be a totally mind blowing concept when I first learnt about in grad school in the late 1980s, and even today I consider it a privilage that I understand what it means.
+This idea was very influential since it allowed mathematicians to build more complex Random Processes by using Brownian Motion as a basic building block. This laid the foundation for several important applications of Random Processes that happened in the following decades.
 
 But how important are these Random Processes? Well, the most famous example of a randomly evolving continuous time process is the stock market, and this is precisely what Bachelier studied in his 1900 paper. His work was essentially lost until the 1950s, when it came to the attention of the  eminent economist Paul Samuelson, who built on Ito's work and applied it to create a model for the stock market called the Logarithmic Brownian Motion.
-Later in the 1960s Fischer Black and Myron Scholes extended Samuelson's work to create a model for stock options trading. This resulted in a Partial Differential Equation named after them, whose solution is probably the most important mathematical result in use in Wall Street trading today. In fact I recently came acrosss a list of the most imprtant equations in science, and the Black-Scholes equation was listed along with others such as Maxwell Equations for electromagnetism and Schrodinger's Equation for the quantum wave function.
+Later in the 1960s the economists Fischer Black and Myron Scholes extended Ito and Samuelson's theories to create a model for stock options trading. This resulted in a Partial Differential Equation named after them, whose solution is probably the most important mathematical result in use in Wall Street trading today. In fact I recently came acrosss a list of the most imprtant equations in science, and the Black-Scholes equation was listed along with others such as Maxwell Equations for electromagnetism and Schrodinger's Equation for the quantum wave function.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/weiner6.png) 
 
 Figure 5: Signals in Noise
 
-Brownian Motion has evolved into a powerful tool for modeling random phenomena. Whenever the need arises to capture the randomness that exists in fields such as communications system or electrical circuits, Brownian Motion is the go-to model that engineers use. An example of a sine wave signal subject to random noise is shown in the above figure. The sine wave is the transmitted signal, while the noise is added during the course of transmisssion over a channel. The Filtering Problem looks at ways in which the signal can be extracted from the noise which is usually modeled as a Brownian Motion.
+Brownian Motion has evolved into a powerful tool for modeling random phenomena. Whenever the need arises to capture the randomness that exists in fields such as communications system or electrical circuits, Brownian Motion is the go-to model that engineers use. An example of a a deterministic signal subject to random noise is shown in the above figure. The clean signal is transmitted, while the noise is added during the course of transmisssion over a communications channel. The Filtering Problem looks at ways in which the signal can be extracted from the noise which is usually modeled as a Brownian Motion. Norbert Weiner (more about him in the next section) and Richard Kalman are names associated with the solution to the filtering problem.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/weiner7.png) 
 
@@ -54,7 +55,10 @@ Figure 6: Training a Neural Network to generate images
 
 But the most interesting, and surprising, application of Brownian Motion has happened during the last decade, when it was used to create a Neural Network model that can generate realistic images and videos. This model ouperformed all competing methods, and it has become the most prevalent image/vdeo generation model in use today. This topic is treated in greater detail later, but a rough idea of how it done can be seen in the above figure. The top row shows the process of adding incremental noise to an image, until it becomes indistinguishable from noise. The bottom row trains the Neural Network by learning how to recover the original image from noise. Once the network is trained, it can generate new images by starting from a noise sample.
 
-## The Weiner Process Model for Brownian Motion
+## From Brownian Motion to the Weiner Process
+
+There was one name that I haven't mentioned in my brief survey of mathematicians who have contributed to the theory of the Brownian Motion, and it is that of Norbert Weiner. This is quite a big omission since the terms Brownian Motion and Weiner Process are often used inter-changeably. Strictly speaking Brownian Motion is the physical phenomenon that Robert Brown discovered and Einstein analyzed, while the Weiner Process is a mathemtaical model for it (this is the terminology that I will use in the rest of this article). Norbert Weiner was the first one to do a rigorous mathematical analysis of Brownian Motion in the early 1920s, and abstracted it to create the mathematical notion of a Weiner Process. He proved several important properties for it, such as the fact that its sample paths are continuous in time, while at the same time its derivative does not exist anywhere.
+Weiner was a child prodigy who got his PhD from Harvard at age 19, and spent his career teaching at MIT. His work spanned mathematics, both pure and applied, as well philosophy and towards the latter part of his life what we call Artificial Intelligence (he called it Cybernetics). He contributed more than anyone else to the emerging field of Signal Processing as used in communications systems, and was a big influence on the later work of Claude Shannon and John von Neummann.
 
 Talk about random sums, and how they can be scaled to create BM.
 
@@ -65,16 +69,11 @@ Image and Video generation using the Langevin Process.
 - [ ] What is the most random thing possible?
 - [ ] The drunkards walk
 - [ ] Limiting case of the drunkards walk, becomes something that captures the essence of randomness in a form that is amenable to analysis ie the BM
-- [ ] History of BM: Einstein, application to stock trading Bachelier, Weiner, KL expansion
+- [ ] History of BM: Einstein, application to stock trading Bachelier, Weiner, KKL expansion
 - [ ] Diffusion processes 
-- [ ] Modern applications: Black Scholes equation, image generation
 
 ### Historical Notes
 
-- [ ] Bacheliers 1900 work on Stock Market models
-- [ ] Einstein’s 1905 work on Brownian Motion.
-- [ ] Weiner's work in the 1920s
-- [ ] Ito's work in the 1940s
 - [ ] Donsker's work in the 1950s
 
 ## The Weiner Process
