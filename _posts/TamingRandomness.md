@@ -57,16 +57,29 @@ But the most interesting, and surprising, application of Brownian Motion has hap
 
 ## From Brownian Motion to the Weiner Process
 
-There was one name that I haven't mentioned in my brief survey of mathematicians who have contributed to the theory of the Brownian Motion, and it is that of Norbert Weiner. This is quite a big omission since the terms Brownian Motion and Weiner Process are often used inter-changeably. Strictly speaking Brownian Motion is the physical phenomenon that Robert Brown discovered and Einstein analyzed, while the Weiner Process is a mathemtaical model for it (this is the terminology that I will use in the rest of this article). Norbert Weiner was the first one to do a rigorous mathematical analysis of Brownian Motion in the early 1920s, and abstracted it to create the mathematical notion of a Weiner Process. He proved several important properties for it, such as the fact that its sample paths are continuous in time, while at the same time its derivative does not exist anywhere.
-Weiner was a child prodigy who got his PhD from Harvard at age 19, and spent his career teaching at MIT. His work spanned mathematics, both pure and applied, as well philosophy and towards the latter part of his life what we call Artificial Intelligence (he called it Cybernetics). He contributed more than anyone else to the emerging field of Signal Processing as used in communications systems, and was a big influence on the later work of Claude Shannon and John von Neummann.
+There was one name that I haven't mentioned in my brief survey of mathematicians who have contributed to the theory of the Brownian Motion, and it is that of Norbert Weiner. This is quite a big omission since the terms Brownian Motion and Weiner Process are often used inter-changeably. Strictly speaking Brownian Motion is the physical phenomenon that Robert Brown discovered and Einstein analyzed, while the Weiner Process is a mathemtical model for it (this is the terminology that I will use in the rest of this article). Norbert Weiner was the first one to do a rigorous mathematical analysis of Brownian Motion in the early 1920s, and abstracted it to create the mathematical notion of a Weiner Process. He proved several important properties for it, such as the fact that its sample paths are continuous in time, while at the same time its derivative does not exist anywhere.
+Weiner was a child prodigy who got his PhD from Harvard at age 19, and spent his career teaching at MIT. His work spanned mathematics, both pure and applied, as well philosophy and towards the latter part of his life what we call Artificial Intelligence (he called it Cybernetics). He contributed more than anyone else to the emerging field of Signal Processing, and was a big influence on the later work of Claude Shannon and John von Neummann.
 
-The theory of sample paths of a continuously varying random signal was not sufficiently well developed when Weiner was working on the problem in the early 1920s, and had to wait for Kolmogorov's axiomitization of Probability Theory ten years later. During the 1950s the mathematician Monroe Donsker gave a highly intuitive explanation of how the Weiner Process arises as a limiting case of Brownian Motion, and this is what I am going to describe in this section.
+The theory of sample paths of a continuously varying random process was not sufficiently well developed when Weiner was working on the problem in the early 1920s, and had to wait for Kolmogorov's axiomitization of Probability Theory ten years later. During the 1950s Monroe Donsker gave a highly intuitive explanation of how the Weiner Process arises as a limiting case of simpler Random Processes, and this is what I am going to describe in this section.
+
+![](https://subirvarma.github.io/GeneralCognitics/images/weiner9.png) 
+
+Figure: Outcome of a Coin Tossing Experiment
+
+Lets start with a very simple process, that of tossing a coin. Let the Random Variable $X_n$ be the result of the $n^{th}$ toss, and assign $X_n =  1$ if the result is a Heads and -1 to Tails. Define $S_n$ to be the Random Sum given by
+
+$$ S_n = X_1 + X_2 + ...+ X_n $$
+
+The figure above graphs one possible sample path for $S_n$ resulting from the tosses $THHTHT$. This process is known as a Random Walk and it has the interesting property that once we know the value of $S_n$, the future evolution of the process is completely independent of what happened prior to the $n^{th}$ toss. These type of processes, in which the the future is independent of the past given the present, form an important category called Markov Processes. 
+
+So we have a process that seems to be moving about randomly, but it is not quite a Brownian Motion yet. 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/weiner8.png) 
 
-Figure 8: Scaling Random Walks
+Figure: Scaling Random Walks
 
-How can we go about creating a model for Brownian Motion? The movement essentially consists of very short movements in random directions, and the interval between changes in direction is extremely short. Consider the sum $S_n$ given by
+How can we go about creating a model for Brownian Motion? A sample path of the partcle consists of very short movements in random directions, and the time interval between changes in direction is extremely short. 
+Consider the sum $S_n$ given by
 
 $$ S_n = \sum_{i=1}^n X_i $$
 
