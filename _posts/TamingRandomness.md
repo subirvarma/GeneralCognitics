@@ -1,9 +1,9 @@
 ---
 layout: default
-title: "Taming Randomness: The Story of Brownian Motion"
+title: "Encounters with Randomness: The Story of Brownian Motion"
 ---
 
-# Taming Randomness: The Story of Brownian Motion
+# Encounters with Randomness: The Story of Brownian Motion
 
 ## Introduction
 
@@ -66,6 +66,11 @@ The theory of sample paths of a continuously varying random signal was not suffi
 
 Figure 8: Scaling Random Walks
 
+How can we go about creating a model for Brownian Motion? The movement essentially consists of very short movements in random directions, and the interval between changes in direction is extremely short. Consider the sum $S_n$ given by
+
+$$ S_n = \sum_{i=1}^n X_i $$
+
+where the sequence $X_i, 1\le i\le n$ consists of independent, identically distributed Random Variables, with mean 0 and variance 1.
 
 Talk about random sums, and how they can be scaled to create BM.
 
@@ -142,6 +147,11 @@ Image and Video generation using the Langevin Process.
 - [ ] During training we are mapping LVs back to images
 - [ ] Create new images by interpolating in the latent space
 - [ ] Text to image conversion: Map text to a latent variable using a LLM, and then map the LV to an image.
+
+## My Personal Encounters with Randomness
+
+- Reflected Brownian Motion, as part of my PhD Thesis
+- Stock Market prediction using a Neural Network model
 
 
 
