@@ -86,20 +86,25 @@ t\in \left[{i-1\over n}, {i\over n}\right]$$
 
 Figure: Scaling Random Walks for n = 100 (blue), n = 400 (red) and n = 10000 (green)
 
-The figure above three different sample paths for $W_n(t)$ over the interval $[0,1]$, with the interval between successive changes in direction becoming smaller as $n$ increases. As $n\rightarrow\infty$, Donsker's Theorem says that $W_n(t)$ converges to a Weiner Process.
-But, what is the definition of the Weiner Process? A Random Process $W(t)$ is called a Weiner Process if it satisifes the following:
+The figure above three different sample paths for $W_n(t)$ over the interval $[0,1]$, with the interval between successive changes in direction becoming smaller as $n$ increases. As $n\rightarrow\infty$, Donsker's Theorem says that $W_n(t), 0\le t\le 1$ converges to a Weiner Process. What does it mean to take the limit $n\uparrow\infty$ for the interpolated Random Sums? Since we are constrained to be in the interval $[0,1]$, it means that successive coin tosses are happening faster and faster, and in the limit they are being done over the continuum. Since each coin toss results in a change of direction for $W_n(t)$, it follows that in the limit, the change of direction is happening at each instant. This is a bit difficult ti visualize, but essentially this also means that in the limit the Weiner Process $W(t), 0\le t\le 1$ does not have a derivative at any point in the interval $[0,1]$ (since at every point where the direction of a function changes, its derivative at that point is not well defined).
+
+But, what is the definition of the Weiner Process? A Random Process $W(t), 0\le t\le 1$ is called a Weiner Process if it satisifes the following:
 
 - The sample paths of $W(t)$ are continuous.
-- $W(t)$ has the Markov Property, i.e., the future evolution of $W(t)$ after time $t$, only depends on $W(t)$ and not on pat values.
-- Over finite time increments $t_{j-1}$ to $t_j$, $W(t_j) - W(t_{j-1})$ is Normally distributed with mean 0 and variance $t_j - t_{j-1}$. 
+- The increments $W(t_1) - W(t_0),...,W(t_m) - W(t_{m-1}), 0 = t_0 < t_1 < ...<t_{m-1} < t_m$ are independent.
+- Over finite time increments $t_{j-1}$ to $t_j$, $W(t_j) - W(t_{j-1})$ is Normally distributed with mean 0 and variance $t_j - t_{j-1}$.
 
-The first question that arises is: What does convergence mean when the objects we are talking about are Random Processes? Lets first consider what consider what convergence means in the context of the Random Sum $S_n$. Can we say anything about the convergence of the scaled version of this sum given by ${S_n\over\sqrt{n}}$? We certainly can, and this is one of the most famous results in Probability Theory called the Central Limit Theorem or CLT. It says that the distribution of ${S_n\over\sqrt{n}}$ converges to the Standard Gaussian Distribution $N(0,1)$. More precisely
+There is a bit of ambiguity in the notation $W(t)$ can refer both the Random Process over the interval $[0,1]$, as well the Random Variable $W(t)$ at time $t$. We will specifically specify the time range when referring to the Random Process.
+
+A question that arises is: What does convergence mean when the objects we are talking about are Random Processes? Lets first consider what consider what convergence means in the context of the Random Sum $S_n$. Can we say anything about the convergence of the scaled version of this sum given by ${S_n\over\sqrt{n}}$? We certainly can, and this is one of the most famous results in Probability Theory called the Central Limit Theorem or CLT. It says that the distribution of ${S_n\over\sqrt{n}}$ converges to the Standard Gaussian Distribution $N(0,1)$. More precisely
 
 $$ {S_n\over\sqrt{n}} \rightarrow  {1\over\sqrt{2\pi}}e^{-{x^2\over 2}}\ \ \ as\ \ \ n\uparrow\infty $$
 
-This kind of convergence for Random Variables is called Convergence in Distribution or Weak Convergence. It basically says that in the limit, we may not be able to tell the precise number to which $S_n$ will converge to (which is the traditional idea of convergence for determinitic series), but we give precise estimates of the probability of the Random Sum ending up in an interval over the Real Line, say $[a,b]$, and this is given by the Normal Distribution. 
+This kind of convergence for Random Variables is called Convergence in Distribution or Weak Convergence. It basically says that in the limit, we may not be able to tell the precise number to which ${S_n\over\sqrt{n}}$ will converge to (which is the traditional idea of convergence for determinitic series), but we can give precise estimates of the probability of the Random Sum ending up in an interval over the Real Line, say $[a,b]$, and this is given by the Normal Distribution. 
 
-Can we define a similar type of Weak Convergence for Random Functions $W_n(t), 0\le t\le 1$ as $n\uparrow\infty$? In order to do so, we will have to specify the following:
+Can we define a similar type of Weak Convergence for Random Functions $W_n(t), 0\le t\le 1$ as $n\uparrow\infty$? 
+
+In order to do so, we will have to specify the following:
 
 - We will have to specify the set in which $W_n(t)$ is an element, usually called $\Omega$ in Probability Theory. In the case of the Random Sums, this was quite simple, $S_n$ was an element of the set of Integers. For $W_n(t)$ the appropriate set is called $C[0,1]$, which is the set of all possible continuous functions defined in the interval $[0,1]$. We will also have to define a metric over this space, since without a metric we cannot talk about distance between elements in the set. This is given by
 
