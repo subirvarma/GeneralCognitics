@@ -96,25 +96,17 @@ But, what is the definition of the Weiner Process? A Random Process $W(t), 0\le 
 
 There is a bit of ambiguity in the notation $W(t)$ can refer both the Random Process over the interval $[0,1]$, as well the Random Variable $W(t)$ at time $t$. We will specifically specify the time range when referring to the Random Process.
 
-A question that arises is: What does convergence mean when the objects we are talking about are Random Processes? Lets first consider what consider what convergence means in the context of the Random Sum $S_n$. Can we say anything about the convergence of the scaled version of this sum given by ${S_n\over\sqrt{n}}$? We certainly can, and this is one of the most famous results in Probability Theory called the Central Limit Theorem or CLT. It says that the distribution of ${S_n\over\sqrt{n}}$ converges to the Standard Gaussian Distribution $N(0,1)$. More precisely
+A question that arises is: What does convergence mean when the objects we are talking about are Random Processes? 
+
+Lets first consider what consider what convergence means in the context of the Random Sum $S_n$. Can we say anything about the convergence of the scaled version of this sum given by ${S_n\over\sqrt{n}}$? We certainly can, and this is one of the most famous results in Probability Theory called the Central Limit Theorem or CLT. It says that the distribution of ${S_n\over\sqrt{n}}$ converges to the Standard Gaussian Distribution $N(0,1)$. More precisely
 
 $$ {S_n\over\sqrt{n}} \rightarrow  {1\over\sqrt{2\pi}}e^{-{x^2\over 2}}\ \ \ as\ \ \ n\uparrow\infty $$
 
 This kind of convergence for Random Variables is called Convergence in Distribution or Weak Convergence. It basically says that in the limit, we may not be able to tell the precise number to which ${S_n\over\sqrt{n}}$ will converge to (which is the traditional idea of convergence for determinitic series), but we can give precise estimates of the probability of the Random Sum ending up in an interval over the Real Line, say $[a,b]$, and this is given by the Normal Distribution. 
 
-Can we define a similar type of Weak Convergence for Random Functions $W_n(t), 0\le t\le 1$ as $n\uparrow\infty$? 
+Can we define a similar type of Weak Convergence for Random Functions $W_n(t), 0\le t\le 1$ as $n\uparrow\infty$? Hence if $P_n$ is a probability measure over the space of Random Functions $W_n(t), 0\le t\le 1$, and if $P_W$ is the probability measure for the Weiner Proces $W(t), 0\le t\le 1$, then does $P_n\rightarrow P$ as $n\uparrow\infty$? It turns that this is indeed the case, and this is Donsker's Theorem.
+Note that there is a whole bunch of mathematical subtleties that I have swept under rug, for instance: What does it mean to define a probability space consisting of functions (as opposed to numbers) and what is the metric for that space? What is the appropriate notion of events for this space and lastly what does it mean to define a probability measure for those events? For those of you wanting to get deeper, there are several excellent books available, in particular "Convergence of Probability Measures$ by Patrick Billingsley is standard reference for the theory of weak convergence.
 
-In order to do so, we will have to specify the following:
-
-- We will have to specify the set in which $W_n(t)$ is an element, usually called $\Omega$ in Probability Theory. In the case of the Random Sums, this was quite simple, $S_n$ was an element of the set of Integers. For $W_n(t)$ the appropriate set is called $C[0,1]$, which is the set of all possible continuous functions defined in the interval $[0,1]$. We will also have to define a metric over this space, since without a metric we cannot talk about distance between elements in the set. This is given by
-
-$$ \rho(x,y) = \sup_t|x(t) - y(t)|  $$
-
-- We will have to define a Probability Measure over the appropriate subsets of $\Omega$. We will use the notation $P_n$ to refer to Probability Measures for the Random Functions $W_n(t)$, for the case when the interval $[0,1]$ is divided into $n$ equal parts.
-
-Using these definitions, the sequence of Probability Measures $\{P_n\}$ is said to converge weakly to the Measure $P$ if
-
-$$ 
 
 Until now I haven't formally defined what a Weiner Process is, we will try to figure out its properties with the help of the fact it is the limiting case of Random Sums.
 - Continuous but no derivatives anywhere, continuously changes direction. The fractal Self similarity property.
