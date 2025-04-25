@@ -73,19 +73,20 @@ $$ S_n = X_1 + X_2 + ...+ X_n $$
 The figure above graphs one possible sample path for $S_n$ resulting from the tosses $THHTHT$. This process is known as a Random Walk and it has the interesting property that once we know the value of $S_n$, the future evolution of the process is completely independent of what happened prior to the $n^{th}$ toss. These type of processes, in which the the future is independent of the past given the present, form an important category called Markov Processes. 
 
 So we have a process that seems to be moving about randomly, but it is not quite a Brownian Motion yet. 
+How can we go about creating a model for Brownian Motion? First of all we need to introduce time as a variable. Also compared to the Random Sum, Brownian Motion exhibits much faster changes in direction, and also successive changes happen much quicker in time. One way to accomplish all these goals is by doing the following:
+
+- Scale the Random Sums by ${1\over{sqrt{n}}}$ so that as $n$ increases, the jumps in the $S_n$ values become smaller.
+- In order to introduce a time dependence, divide the interval interval $[0,1]$ into $n$ equal sub-intervals $[{i-1\over n}, {i\over n}], i = 1, 2,...n$
+- Define a random function $W_n(t), 0\le t\le 1$ such that it is equal to scaled sum ${S_i\over{\sqrt n}}$ at the point ${1\over n}$ and then interpolate between successive sums to create a continuous function over $0\le t\le 1$ whose value at point $t$ is given by:
+
+$$ W_n(t) = {S_{n-1}\over{\sqrt{n}}} + \left[{t - {(i-1)\over n}\over{1\over n}}\right] {1\over{\sqrt{n}}} X_i\ \ \ for\ \ \
+t\in \left[{i-1\over n}, {i\over n}\right]$$
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/weiner8.png) 
 
 Figure: Scaling Random Walks
 
-How can we go about creating a model for Brownian Motion? A sample path of the partcle consists of very short movements in random directions, and the time interval between changes in direction is extremely short. 
-Consider the sum $S_n$ given by
-
-$$ S_n = \sum_{i=1}^n X_i $$
-
-where the sequence $X_i, 1\le i\le n$ consists of independent, identically distributed Random Variables, with mean 0 and variance 1.
-
-Talk about random sums, and how they can be scaled to create BM.
+The figure above three different sample paths for $W_n(t)$, with the interval between successive changes in direction becoming smaller as $n$ increases. As $n\rightarrow\infty$, Donsker's Theorem says that $W_n(t)$ converges to a Weiner Process.
 
 Weiner's contribution
 
