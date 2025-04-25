@@ -87,6 +87,11 @@ t\in \left[{i-1\over n}, {i\over n}\right]$$
 Figure: Scaling Random Walks for n = 100 (blue), n = 400 (red) and n = 10000 (green)
 
 The figure above three different sample paths for $W_n(t)$ over the interval $[0,1]$, with the interval between successive changes in direction becoming smaller as $n$ increases. As $n\rightarrow\infty$, Donsker's Theorem says that $W_n(t)$ converges to a Weiner Process.
+But, what is the definition of the Weiner Process? A Random Process $W(t)$ is called a Weiner Process if it satisifes the following:
+
+- The sample paths of $W(t)$ are continuous.
+- $W(t)$ has the Markov Property, i.e., the future evolution of $W(t)$ after time $t$, only depends on $W(t)$ and not on pat values.
+- Over finite time increments $t_{j-1}$ to $t_j$, $W(t_j) - W(t_{j-1})$ is Normally distributed with mean 0 and variance $t_j - t_{j-1}$. 
 
 The first question that arises is: What does convergence mean when the objects we are talking about are Random Processes? Lets first consider what consider what convergence means in the context of the Random Sum $S_n$. Can we say anything about the convergence of the scaled version of this sum given by ${S_n\over\sqrt{n}}$? We certainly can, and this is one of the most famous results in Probability Theory called the Central Limit Theorem or CLT. It says that the distribution of ${S_n\over\sqrt{n}}$ converges to the Standard Gaussian Distribution $N(0,1)$. More precisely
 
