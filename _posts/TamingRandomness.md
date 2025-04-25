@@ -75,18 +75,42 @@ The figure above graphs one possible sample path for $S_n$ resulting from the to
 So we have a process that seems to be moving about randomly, but it is not quite a Brownian Motion yet. 
 How can we go about creating a model for Brownian Motion? First of all we need to introduce time as a variable. Also compared to the Random Sum, Brownian Motion exhibits much faster changes in direction, and also successive changes happen much quicker in time. One way to accomplish all these goals is by doing the following:
 
-- Scale the Random Sums by ${1\over{sqrt{n}}}$ so that as $n$ increases, the jumps in the $S_n$ values become smaller.
-- In order to introduce a time dependence, divide the interval interval $[0,1]$ into $n$ equal sub-intervals $[{i-1\over n}, {i\over n}], i = 1, 2,...n$
-- Define a random function $W_n(t), 0\le t\le 1$ such that it is equal to scaled sum ${S_i\over{\sqrt n}}$ at the point ${1\over n}$ and then interpolate between successive sums to create a continuous function over $0\le t\le 1$ whose value at point $t$ is given by:
+- Scale the Random Sums by ${1\over{\sqrt{n}}}$ so that as $n$ increases, the jumps in the $S_n$ values become smaller.
+- In order to introduce a time dependence, restrict the Random Walk to the time interval interval $[0,1]$ such that changes in the Random Sum occur at at the $n$ time instants given by $[{i-1\over n}, {i\over n}], i = 1, 2,...n$
+- Define a random function $W_n(t), 0\le t\le 1$ such that it is equal to the scaled sum ${S_i\over{\sqrt n}}$ at the point ${i\over n}$ and then interpolate between successive sums to create a continuous function over $0\le t\le 1$ whose value at point $t$ is given by:
 
 $$ W_n(t) = {S_{n-1}\over{\sqrt{n}}} + \left[{t - {(i-1)\over n}\over{1\over n}}\right] {1\over{\sqrt{n}}} X_i\ \ \ for\ \ \
 t\in \left[{i-1\over n}, {i\over n}\right]$$
 
-![](https://subirvarma.github.io/GeneralCognitics/images/weiner8.png) 
+![](https://subirvarma.github.io/GeneralCognitics/images/weiner10.png) 
 
-Figure: Scaling Random Walks
+Figure: Scaling Random Walks for n = 100 (blue), n = 400 (red) and n = 10000 (green)
 
-The figure above three different sample paths for $W_n(t)$, with the interval between successive changes in direction becoming smaller as $n$ increases. As $n\rightarrow\infty$, Donsker's Theorem says that $W_n(t)$ converges to a Weiner Process.
+The figure above three different sample paths for $W_n(t)$ over the interval $[0,1]$, with the interval between successive changes in direction becoming smaller as $n$ increases. As $n\rightarrow\infty$, Donsker's Theorem says that $W_n(t)$ converges to a Weiner Process.
+
+The first question that arises is: What does convergence mean when the objects we are talking about are Random Processes? Lets first consider what consider what convergence means in the context of the Random Sum $S_n$. Can we say anything about the convergence of the scaled version of this sum given by ${S_n\over\sqrt{n}}$? We certainly can, and this is one of the most famous results in Probability Theory called the Central Limit Theorem or CLT. It says that the distribution of ${S_n\over\sqrt{n}}$ converges to the Standard Gaussian Distribution $N(0,1)$. More precisely
+
+$$ {S_n\over\sqrt{n}} \rightarrow  {1\over\sqrt{2\pi}}e^{-{x^2\over 2}}\ \ \ as\ \ \ n\uparrow\infty $$
+
+This kind of convergence for Random Variables is called Convergence in Distribution or Weak Convergence. It basically says that in the limit, we may not be able to tell the precise number to which $S_n$ will converge to (which is the traditional idea of convergence for determinitic series), but we give precise estimates of the probability of the Random Sum ending up in an interval over the Real Line, say $[a,b]$, and this is given by the Normal Distribution. 
+
+Can we define a similar type of Weak Convergence for Random Functions $W_n(t), 0\le t\le 1$ as $n\uparrow\infty$? In order to do so, we will have to specify the following:
+
+- We will have to specify the set in which $W_n(t)$ is an element, usually called $\Omega$ in Probability Theory. In the case of the Random Sums, this was quite simple, $S_n$ was an element of the set of Integers. For $W_n(t)$ the appropriate set is called $C[0,1]$, which is the set of all possible continuous functions defined in the interval $[0,1]$. We will also have to define a metric over this space, since without a metric we cannot talk about distance between elements in the set. This is given by
+
+$$ \rho(x,y) = \sup_t|x(t) - y(t)|  $$
+
+- We will have to define a Probability Measure over the appropriate subsets of $\Omega$. We will use the notation $P_n$ to refer to Probability Measures for the Random Functions $W_n(t)$, for the case when the interval $[0,1]$ is divided into $n$ equal parts.
+
+Using these definitions, the sequence of Probability Measures $\{P_n\}$ is said to converge weakly to the Measure $P$ if
+
+$$ 
+
+Until now I haven't formally defined what a Weiner Process is, we will try to figure out its properties with the help of the fact it is the limiting case of Random Sums.
+- Continuous but no derivatives anywhere, continuously changes direction. The fractal Self similarity property.
+- Independent Stationary Increments
+- Gaussian distribution in the limit. Estimate of how much it will wander from the origin.
+- Absolute Sum of variations
 
 Weiner's contribution
 
