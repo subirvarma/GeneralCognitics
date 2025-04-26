@@ -84,7 +84,7 @@ t\in \left[{i-1\over n}, {i\over n}\right]$$
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/weiner10.png) 
 
-Figure: Scaling Random Walks for n = 100 (blue), n = 400 (red) and n = 10000 (green)
+Figure: Scaled and Interpolated Random Sums over $0\le t\le 1$ for n = 100 (blue), n = 400 (red) and n = 10000 (green)
 
 The figure above three different sample paths for $W_n(t)$ over the interval $[0,1]$, with the interval between successive changes in direction becoming smaller as $n$ increases. As $n\rightarrow\infty$, Donsker's Theorem says that $W_n(t), 0\le t\le 1$ converges to a Weiner Process. What does it mean to take the limit $n\uparrow\infty$ for the interpolated Random Sums? Since we are constrained to be in the interval $[0,1]$, it means that successive coin tosses are happening faster and faster, and in the limit they are being done over the continuum. Since each coin toss results in a change of direction for $W_n(t)$, it follows that in the limit, the change of direction is happening at each instant. This is a bit difficult to visualize, but essentially this also means that in the limit the Weiner Process $W(t), 0\le t\le 1$ does not have a derivative at any point in the interval $[0,1]$ (since at every point where the direction of a function changes, its derivative at that point is not well defined).
 
@@ -102,15 +102,25 @@ We now show that the Random Functions $W_n(t), 0\le t\le 1$ satisfy properties (
 
 $$ W_n({j\over n}) - W_n({i\over n}) = {1\over\sqrt n}\sum_{k=i}^j X_k $$
 
-Hence this difference, for non over-lapping intervals, is the sum of distinct independent Random Variables $S_k$, from which property (2) follows for $W_n(t)$. In order to show property (3), note that $E(S_n) = 0$ while $E(S_n^2) = n$ so that
+Hence this difference, for non over-lapping intervals, is the sum of distinct independent Random Variables $S_k$, from which property (2) follows for $W_n(t)$. 
+In order to show property (3), note that $E(S_n) = 0$ while 
+
+$$  E(S_n^2) = E(\sum_{i=1}^n\sum_{j=1}^n X_i X_j) = n\ \ \ since\ \ \ E(X_i^2) = 1\ \ \ and\ \ \ E(X_iX_j) = 0\ \ \  for\ \ \ i\ne j  $$ 
+
+so that for $j > i$
+
+$$ E(S_j - S_i)^2 = E(S_j^2) + E(S_i^2) - 2E(S_i S_j) = j + i - 2i = j - i $$
+
+It follows that
 
 $$ E[W_n({j\over n}) - W_n({i\over n})] = 0 $$
 
 and
 
-$$ E[{W_n({j\over n}) - W_n({i\over n})}^2}] =    {1\over n}       $$
+$$ E[W_n({j\over n}) - W_n({i\over n})]^2 = {1\over n}E(S_j - S_i)^2  = {j\over n} - {i\over n}  $$
 
-
+Setting $t_j = {j\over n}$ and $t_i = {i\over n}$, 
+as $n\uparrow\infty$, it follows from the Central Limit Theorem that $W_n(t_j) - W_n(t_i)$ will converge in distribution to a Normal distribution with mean 0 and variance $t_j - t_i$. 
 
 A question that arises is: What does convergence mean when the objects we are talking about are Random Processes? 
 Lets first consider what consider what convergence means in the context of the Random Sum $S_n$. Can we say anything about the convergence of the scaled version of this sum given by ${S_n\over\sqrt{n}}$? We certainly can, and this is one of the most famous results in Probability Theory called the Central Limit Theorem or CLT. It says that the distribution of ${S_n\over\sqrt{n}}$ converges to the Standard Gaussian Distribution $N(0,1)$. More precisely
@@ -132,27 +142,11 @@ There is a result known as the Kolmogorov Extension Theorem which states that if
 
 - Absolute Sum of variations
 
-Image and Video generation using the Langevin Process.
+## Stochastic Calculus and the Ito Integral
 
-- [ ] What is the most random thing possible?
-- [ ] The drunkards walk
-- [ ] Limiting case of the drunkards walk, becomes something that captures the essence of randomness in a form that is amenable to analysis ie the BM
-- [ ] History of BM: Einstein, application to stock trading Bachelier, Weiner, KKL expansion
-- [ ] Diffusion processes 
-
-### Historical Notes
-
-- [ ] Donsker's work in the 1950s
-
-## The Weiner Process
-
-- [ ] Introduce RVs
-- [ ] Introduce random vectors and then discrete time random process
-- [ ] Talk about law of large numbers
-- [ ] Go on to continuous time random process
-- [ ] Can we take an infinite sequence of random processes and scale them?
-- [ ] Yes we can, and the result is the Weiner Process: Donsker's Theorem
-- [ ] Properties of the Weiner Process
+- [ ] Go through the signal + noise model, as per page 15 of Oksendal's book. How this naturally leads to the Ito Integral.
+- [ ] dx/dt = Ax + B dW/dt equivalent to x = int(Ax dt) + int(B dW).  The latter is the Ito integral. 
+- [ ] Rough derivation of the existence proof of the Ito Integral
 
 ## Adding Randomness to Models
 
@@ -164,12 +158,6 @@ Image and Video generation using the Langevin Process.
 - [ ] Example: Financial Derivatives
 - [ ] Modeling the space of Latent Variables
 - [ ] Example: Diffusion based Image Generation
-
-## Stochastic Calculus
-
-- [ ] Go through the signal + noise model, as per page 15 of Oksendal's book. How this naturally leads to the Ito Integral.
-- [ ] dx/dt = Ax + B dW/dt equivalent to x = int(Ax dt) + int(B dW).  The latter is the Ito integral. 
-- [ ] Rough derivation of the existence proof of the Ito Integral
 
 ### Functions of the Weiner Process and the Ito Formula
 
@@ -204,9 +192,11 @@ Image and Video generation using the Langevin Process.
 - [ ] Create new images by interpolating in the latent space
 - [ ] Text to image conversion: Map text to a latent variable using a LLM, and then map the LV to an image.
 
+
 ## My Personal Encounters with Randomness
 
 - Reflected Brownian Motion, as part of my PhD Thesis
+- Russian probabilists at UMD in the late 1980s
 - Stock Market prediction using a Neural Network model
 
 
