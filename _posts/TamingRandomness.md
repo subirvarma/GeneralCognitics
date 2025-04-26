@@ -86,35 +86,39 @@ t\in \left[{i-1\over n}, {i\over n}\right]$$
 
 Figure: Scaling Random Walks for n = 100 (blue), n = 400 (red) and n = 10000 (green)
 
-The figure above three different sample paths for $W_n(t)$ over the interval $[0,1]$, with the interval between successive changes in direction becoming smaller as $n$ increases. As $n\rightarrow\infty$, Donsker's Theorem says that $W_n(t), 0\le t\le 1$ converges to a Weiner Process. What does it mean to take the limit $n\uparrow\infty$ for the interpolated Random Sums? Since we are constrained to be in the interval $[0,1]$, it means that successive coin tosses are happening faster and faster, and in the limit they are being done over the continuum. Since each coin toss results in a change of direction for $W_n(t)$, it follows that in the limit, the change of direction is happening at each instant. This is a bit difficult ti visualize, but essentially this also means that in the limit the Weiner Process $W(t), 0\le t\le 1$ does not have a derivative at any point in the interval $[0,1]$ (since at every point where the direction of a function changes, its derivative at that point is not well defined).
+The figure above three different sample paths for $W_n(t)$ over the interval $[0,1]$, with the interval between successive changes in direction becoming smaller as $n$ increases. As $n\rightarrow\infty$, Donsker's Theorem says that $W_n(t), 0\le t\le 1$ converges to a Weiner Process. What does it mean to take the limit $n\uparrow\infty$ for the interpolated Random Sums? Since we are constrained to be in the interval $[0,1]$, it means that successive coin tosses are happening faster and faster, and in the limit they are being done over the continuum. Since each coin toss results in a change of direction for $W_n(t)$, it follows that in the limit, the change of direction is happening at each instant. This is a bit difficult to visualize, but essentially this also means that in the limit the Weiner Process $W(t), 0\le t\le 1$ does not have a derivative at any point in the interval $[0,1]$ (since at every point where the direction of a function changes, its derivative at that point is not well defined).
+
+There is a bit of ambiguity in the notation $W(t)$ can refer both the Random Process over the interval $[0,1]$, as well the Random Variable $W(t)$ at time $t$. We will use the convention that $W(t)$ refers to the function $W(t)$ defined over $[0,1]$, while we will use $W_t$ to refer to the Random Variable at time $t$.
 
 But, what is the definition of the Weiner Process? A Random Process $W(t), 0\le t\le 1$ is called a Weiner Process if it satisifes the following:
 
-- The sample paths of $W(t)$ are continuous.
-- The increments $W(t_1) - W(t_0),...,W(t_m) - W(t_{m-1}), 0 = t_0 < t_1 < ...<t_{m-1} < t_m$ are independent.
-- Over finite time increments $t_{j-1}$ to $t_j$, $W(t_j) - W(t_{j-1})$ is Normally distributed with mean 0 and variance $t_j - t_{j-1}$.
+(1) The sample paths of $W(t)$ are continuous and $W(0) = 0$.
 
-There is a bit of ambiguity in the notation $W(t)$ can refer both the Random Process over the interval $[0,1]$, as well the Random Variable $W(t)$ at time $t$. We will specifically specify the time range when referring to the Random Process.
+(2) The increments $W_{t_1} - W_{t_0},...,W_{t_m} - W_{t_{m-1}}, 0 = t_0 < t_1 < ...<t_{m-1} < t_m$ are independent.
+
+(3) Over finite time increments $t_{j-1}$ to $t_j$, $W_{t_j} - W_{t_{j-1}}$ is Normally distributed with mean 0 and variance $t_j - t_{j-1}$. This also be expressed as:
+
+$$ P(a\le W_t\le b) = {1\over\sqrt{2\pi}}\int_a^b e^{-{x^2\over 2t}} dx $$
 
 A question that arises is: What does convergence mean when the objects we are talking about are Random Processes? 
-
 Lets first consider what consider what convergence means in the context of the Random Sum $S_n$. Can we say anything about the convergence of the scaled version of this sum given by ${S_n\over\sqrt{n}}$? We certainly can, and this is one of the most famous results in Probability Theory called the Central Limit Theorem or CLT. It says that the distribution of ${S_n\over\sqrt{n}}$ converges to the Standard Gaussian Distribution $N(0,1)$. More precisely
 
 $$ {S_n\over\sqrt{n}} \rightarrow  {1\over\sqrt{2\pi}}e^{-{x^2\over 2}}\ \ \ as\ \ \ n\uparrow\infty $$
 
-This kind of convergence for Random Variables is called Convergence in Distribution or Weak Convergence. It basically says that in the limit, we may not be able to tell the precise number to which ${S_n\over\sqrt{n}}$ will converge to (which is the traditional idea of convergence for determinitic series), but we can give precise estimates of the probability of the Random Sum ending up in an interval over the Real Line, say $[a,b]$, and this is given by the Normal Distribution. 
+This kind of convergence for Random Variables is called Convergence in Distribution or Weak Convergence. It basically says that in the limit, we may not be able to tell the precise number to which ${S_n\over\sqrt{n}}$ will converge to (which is the traditional idea of convergence for determinitic series), but we can give precise estimates of the probability of the Random Sum falling within an interval, say $[a,b]$, and this is given by the Normal Distribution. 
 
-Can we define a similar type of Weak Convergence for Random Functions $W_n(t), 0\le t\le 1$ as $n\uparrow\infty$? Hence if $P_n$ is a probability measure over the space of Random Functions $W_n(t), 0\le t\le 1$, and if $P_W$ is the probability measure for the Weiner Proces $W(t), 0\le t\le 1$, then does $P_n\rightarrow P$ as $n\uparrow\infty$? It turns that this is indeed the case, and this is Donsker's Theorem.
-Note that there is a whole bunch of mathematical subtleties that I have swept under rug, for instance: What does it mean to define a probability space consisting of functions (as opposed to numbers) and what is the metric for that space? What is the appropriate notion of events for this space and lastly what does it mean to define a probability measure for those events? For those of you wanting to get deeper, there are several excellent books available, in particular "Convergence of Probability Measures$ by Patrick Billingsley is standard reference for the theory of weak convergence.
+Can we define a similar type of Weak Convergence result for Random Functions $W_n(t), 0\le t\le 1$ as $n\uparrow\infty$? Hence if $P_n$ is a probability measure over the space of Random Functions $W_n(t), 0\le t\le 1$, and if $P_W$ is the probability measure for the Weiner Proces $W(t), 0\le t\le 1$, then does $P_n\rightarrow P$ as $n\uparrow\infty$? It turns that this is indeed the case, and this is the content of Donsker's Theorem.
+Note that there is a whole bunch of mathematical subtleties that I have swept under rug, for instance: What does it mean to define a probability space consisting of functions (as opposed to numbers) and what is the metric for that space? What is the appropriate notion of events for this space and lastly what does it mean to define a probability measure for those events? For those of you wanting to get deeper, there are several excellent books available, in particular "Convergence of Probability Measures" by Patrick Billingsley is standard reference for the theory of weak convergence.
 
+There are some intuitive arguments to show how the interpolated random sums $W_n(t)$ converge to the Weiner process
 
-Until now I haven't formally defined what a Weiner Process is, we will try to figure out its properties with the help of the fact it is the limiting case of Random Sums.
-- Continuous but no derivatives anywhere, continuously changes direction. The fractal Self similarity property.
-- Independent Stationary Increments
-- Gaussian distribution in the limit. Estimate of how much it will wander from the origin.
+The notion of a probability measure over spaces of functions is a convenient mathematical abstraction, but in practice we use something that is easier to deal with, namely multi-dimensional distributions at a finite number of time instants. For example the distribution for the Weiner Process at the finite set of time instants $(t_1,t_2,...t_n)$ is given by
+
+$$ P(x_1\le W_{t_1}\le y_1, x_2\le W_{t_2}\le y_2,...,x_n\le W_{t_n}\le y_n) = \int_{x_1}^{y_1} \int_{x_2}^{y_2} \int_{x_n}^{y_n} N(0,t_1)N(0,t_2-t_1),...,N(0,t_n-t_{n-1})dx_1 dx_2...dx_n  $$
+
+There is a result known as the Kolmogorov Extension Theorem which states that if these distributions exist for all possible finite time instants in the interval $[0,1]$, gthen it implies the existence of a corresponding probability measure over the space of functions $x(t), 0\le t\le 1$.
+
 - Absolute Sum of variations
-
-Weiner's contribution
 
 Image and Video generation using the Langevin Process.
 
