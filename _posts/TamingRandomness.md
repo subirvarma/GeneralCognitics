@@ -93,7 +93,18 @@ There is a bit of ambiguity in the notation since $W^n(t)$ can refer both to the
 
 There is another way to analyze a Random Process and that is by fixing the time instants $t_1,t_2,..,t_n$ at which we sample the random process. This avoid the necessity of considering the space of continuous sample paths, and instead we now have a vector of Random Variables ${W_{t_1}, W_{t_2},...,W_{t_n)}}$, and these can be analyzed by assigning a joint Probability Density Function to the vector, which is a much easier proposition. Kolmogorov showed that if we are able to assign probabilities to all possible vectors of the resulting Random Variables, then this uniquely determines the Probability Measure that exists over the space of continuous functions, and this is called the Kolmogorov Extension Theorem. Most of the work in practical applications of Random Processes is done using joint distributions over vectors.
 
-We now provide some heuristic arguments to show that the Random Process $W^n(t)$ converges to the Weiner Process $W(t)$ as $n\uparrow\infty$. We start by showing a couple of important properties for the Random Process $W^n(t)$. In the following we will refer to the vector $W^n_{j\over n} - W^n_{i\over n}$ as an increment of the Random Process $W^n(t)$.
+We now provide some heuristic arguments to show that the Random Sum Process $W^n(t)$ converges to the Weiner Process $W(t)$ as $n\uparrow\infty$. 
+But before we do that, the following question has to be answered: What does convergence mean when the objects we are talking about are Random Processes? 
+Lets first consider what consider what convergence means in the context of RAndom Variables. Give the the Random Sum $S_n$, can we say anything about the convergence of the scaled version of this sum given by ${S_n\over\sqrt{n}}$? We certainly can, and this is one of the most famous results in Probability Theory called the Central Limit Theorem or CLT. It says that the probability distribution of ${S_n\over\sqrt{n}}$ converges to the Standard Gaussian Distribution $N(0,1)$. More precisely
+
+$$ {S_n\over\sqrt{n}} \rightarrow  {1\over\sqrt{2\pi}}e^{-{x^2\over 2}}\ \ \ as\ \ \ n\uparrow\infty $$
+
+This kind of convergence for Random Variables is called Convergence in Distribution or Weak Convergence. It basically says that in the limit, we may not be able to tell the precise number to which ${S_n\over\sqrt{n}}$ will converge to (which is the traditional idea of convergence for a determinitic series), but we can give precise estimates of the probability of the Random Sum falls within an interval, say $[a,b]$, and this is given by the Normal Distribution. 
+
+Can we define a similar type of Weak Convergence result for Random Functions $W_n(t), 0\le t\le 1$ as $n\uparrow\infty$? This is a difficult problem to solve, and a whole host of brilliant minds worked on this problem in 1950s, the most prominent names being Donsker in the US, Skorokhod, Kolmogorov and Prohorov in the USSR. 
+For those of you wanting to get deeper, there are several excellent books available, in particular "Convergence of Probability Measures" by Patrick Billingsley is standard reference for the theory of weak convergence over functional spaces. 
+
+In this aritcle I will give some heuristic arguments for this convergence and I will start by showing a couple of important properties for the Random Process $W^n(t)$. In the following I will refer to the Random Variable $W^n_{j\over n} - W^n_{i\over n}$ as a time increment of the Random Process $W^n(t)$.
 
 **The Independent Stationary Increment (ISI) Property**
    
@@ -101,53 +112,32 @@ Note that the increment $W^n_{j\over n} - W^n_{i\over n}$ can be written as
 
 $$ W^n_{j\over n} - W^n_{i\over n} = {1\over\sqrt n}\sum_{k=i}^j X_k $$
 
-Hence overlapping increments are the sum of distinct independent Random Variables $X_k$. From this we can conclude that non-overlapping increments of $W^n(t)$ form independent Random Variables, which is known as the Independent Stationary Increment (ISI) property. The stationarity refers to the fact that the distribution of an increment in only a function of its length and is indpendent of where it islocated over the time interval.
+Hence non-overlapping increments are the sum of distinct independent Random Variables $X_k$. From this we can conclude that non-overlapping increments of $W^n(t)$ form independent Random Variables, which is known as the Independent Stationary Increment (ISI) property. The stationarity refers to the fact that the distribution of an increment in only a function of the number of $X_k$'s that there are in the summation, and is independent of where it is located over the time interval.
 
 **Distribution for Increments of $W^n(t)$**
 
-We established that increments of $W^n(t)$ are stationary and independent, we now given expression for their distribution.
+We established that increments of $W^n(t)$ are stationary and independent, we now given expression for their probability distribution.
 We start with
 
-$$ W^n_{j\over n} - W^n_{i\over n} = {1\over\sqrt n}\sum_{k=i}^j X_k = {1\over\sqrt n}(S_j - S_i) $$
+$$ W^n_{j\over n} = {1\over\sqrt n}\sum_{k=1}^j X_k $$
 
-Note that $E(S_k) = 0$ while 
+This can also be written as
 
-$$  E(S_k^2) = E(\sum_{i=1}^k\sum_{j=1}^k X_i X_j) = k\ \ \ since\ \ \ E(X_i^2) = 1\ \ \ and\ \ \ E(X_i X_j) = 0\ \ \  for\ \ \ i\ne j  $$ 
+$$ W^n_{j\over n} = ({1\over\sqrt j}\sum_{k=1}^j X_k)\sqrt{j\over n} $$
 
-so that for $j > i$
+The Central Limit Theorem tells us that if we let $j$ and $n$ go to infinity, while keeping the ratio ${j\over n} = t$ constant, then 
 
-$$ E(S_j - S_i)^2 = E(S_j^2) + E(S_i^2) - 2E(S_i S_j) = j + i - 2i = j - i $$
+$$ W^n_{t} \rightarrow N(0,1)\sqrt{t} = N(0,t) = {1\over\sqrt{2\pi t}}e^{-{x^2\over{2t}}}   $$
 
-It follows that
-
-$$ E[W^n_{j\over n} - W^n_{i\over n}]^2 = {1\over n}E(S_j - S_i)^2  = {j\over n} - {i\over n}  $$
-
-Also note that
-
-$$ E[W^n_{j\over n} - W^n_{i\over n}] = 0 $$
-
-Setting $t_j = {j\over n}$ and $t_i = {i\over n}$, 
-as $n\uparrow\infty$, it follows from the Central Limit Theorem that the increment $W^n_{j\over n} - W^n_{i\over n}$ converges in distribution to a Normal distribution with mean 0 and variance $t_j - t_i$. 
-
-But, what is the definition of the Weiner Process? A Random Process $W(t), 0\le t\le 1$ is called a Weiner Process if it satisifes the following conditions:
+It turns out that these two properties are precisely what characterize a Weiner process. A Random Process $W(t), 0\le t\le 1$ is called a Weiner Process if it satisifes the following conditions:
 
 1. The sample paths of $W(t)$ are continuous with $W_0 = 0$.
-2. The increments $W_{t_1} - W_{t_0},...,W_{t_m} - W_{t_{m-1}}, 0 = t_0 < t_1 < ...<t_{m-1} < t_m$ are independent Random Variables. This is called the Independent Stationary Increment (ISI) property.
+2. The increments $W_{t_1} - W_{t_0},...,W_{t_m} - W_{t_{m-1}}, 0 = t_0 < t_1 < ...<t_{m-1} < t_m$ are independent Random Variables, i.e., the Independent Stationary Increment property.
 3. Over finite time increments $t_{j-1}$ to $t_j$, $W_{t_j} - W_{t_{j-1}}$ is Normally distributed with mean 0 and variance $t_j - t_{j-1}$, and this can be written as:
 
-$$ P(a\le W_{t_j}-W_{t_{j-1}}\le b) = {1\over\sqrt{2\pi}}\int_a^b e^{-{x^2\over 2(t_j - t_{j-1})}} dx $$
+$$ P(a\le W_{t_j}-W_{t_{j-1}}\le b) = {1\over\sqrt{2\pi(t_j-t_i)}}\int_a^b e^{-{x^2\over 2(t_j - t_{j-1})}} dx $$
 
-A question that arises is: What does convergence mean when the objects we are talking about are Random Processes? 
-Lets first consider what consider what convergence means in the context of the Random Sum $S_n$. Can we say anything about the convergence of the scaled version of this sum given by ${S_n\over\sqrt{n}}$? We certainly can, and this is one of the most famous results in Probability Theory called the Central Limit Theorem or CLT. It says that the distribution of ${S_n\over\sqrt{n}}$ converges to the Standard Gaussian Distribution $N(0,1)$. More precisely
-
-$$ {S_n\over\sqrt{n}} \rightarrow  {1\over\sqrt{2\pi}}e^{-{x^2\over 2}}\ \ \ as\ \ \ n\uparrow\infty $$
-
-This kind of convergence for Random Variables is called Convergence in Distribution or Weak Convergence. It basically says that in the limit, we may not be able to tell the precise number to which ${S_n\over\sqrt{n}}$ will converge to (which is the traditional idea of convergence for determinitic series), but we can give precise estimates of the probability of the Random Sum falling within an interval, say $[a,b]$, and this is given by the Normal Distribution. 
-
-Can we define a similar type of Weak Convergence result for Random Functions $W_n(t), 0\le t\le 1$ as $n\uparrow\infty$? Hence if $P_n$ is a probability measure over the space of Random Functions $W_n(t), 0\le t\le 1$, and if $P_W$ is the probability measure for the Weiner Proces $W(t), 0\le t\le 1$, then does $P_n\rightarrow P$ as $n\uparrow\infty$? It turns that this is indeed the case, and this is the content of Donsker's Theorem.
-Note that there is a whole bunch of mathematical subtleties that I have swept under rug, for instance: What does it mean to define a probability space consisting of functions (as opposed to numbers) and what is the metric for that space? What is the appropriate notion of events for this space and lastly what does it mean to define a probability measure for those events? For those of you wanting to get deeper, there are several excellent books available, in particular "Convergence of Probability Measures" by Patrick Billingsley is standard reference for the theory of weak convergence.
-
-There are some intuitive arguments to show how the interpolated random sums $W_n(t)$ converge to the Weiner process
+Since the Random Sum Process $W^n(t)$ converges to a process as $n\uparrow\infty$ that satisfies these three properties, we can see why Donsker's Theorem might be true. 
 
 The notion of a probability measure over spaces of functions is a convenient mathematical abstraction, but in practice we use something that is easier to deal with, namely multi-dimensional distributions at a finite number of time instants. For example the distribution for the Weiner Process at the finite set of time instants $(t_1,t_2,...t_n)$ is given by
 
