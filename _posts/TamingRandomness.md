@@ -87,7 +87,7 @@ t\in \left[{i-1\over n}, {i\over n}\right]$$
 
 Figure: Scaled and Interpolated Random Sums over $0\le t\le 1$ for n = 100 (blue), n = 400 (red) and n = 10000 (green)
 
-The figure above three different sample paths for $W_n(t)$ over the interval $[0,1]$, with the gap between successive changes in direction becoming smaller and smaller as $n$ increases. As $n\rightarrow\infty$, Donsker's Theorem says that $W_n(t), 0\le t\le 1$ converges to a Weiner Process. What does it mean to take the limit $n\uparrow\infty$ for the interpolated Random Sums? Since we are constrained to be in the interval $[0,1]$, it means that successive coin tosses are happening faster and faster, and in the limit they are being done over the continuum. Since each coin toss results in a change of direction for $W_n(t)$, it follows that in the limit, the change of direction is happening at each instant! This is a bit difficult to visualize, but essentially this also means that in the limit the Weiner Process $W(t), 0\le t\le 1$ does not have a derivative at any point in the interval $[0,1]$ (since the derivative is not defined at points at which the direction of a function changes). 
+The figure above three different sample paths for $W_n(t)$ over the interval $[0,1]$, with the gap between successive changes in direction becoming smaller and smaller as $n$ increases. As $n\rightarrow\infty$, Donsker's Theorem says that $W_n(t), 0\le t\le 1$ converges to a Weiner Process. What does it mean to take the limit $n\uparrow\infty$ for the interpolated Random Sums? Since we are constrained to be in the interval $[0,1]$, it means that successive coin tosses are happening faster and faster, and in the limit they are being done over the continuum. Since each coin toss results in a change of direction for $W_n(t)$, it follows that in the limit, the change of direction is happening at each and every time instant! This is a bit difficult to visualize, but essentially this also means that in the limit a sample path of the Weiner Process $W(t), 0\le t\le 1$ does not have a derivative at any point in the interval $[0,1]$ (since the derivative is not defined at points at which the direction of a function changes). 
 
 There is a bit of ambiguity in the notation since $W^n(t)$ can refer both to the sample path of the Random Process over the interval $[0,1]$, as well the Random Variable $W^(t)$ at time $t$. We will use the convention that $W^n(t)$ refers to the function $W^n(t)$ defined over an interval such as $[0,1]$, while we will use $W^n_t$ to refer to the Random Variable at time $t$.
 
@@ -145,7 +145,10 @@ $$ P(x_1\le W_{t_1}\le y_1, x_2\le W_{t_2}\le y_2,...,x_n\le W_{t_n}\le y_n) = \
 
 There is a result known as the Kolmogorov Extension Theorem which states that if these distributions exist for all possible finite time instants in the interval $[0,1]$, gthen it implies the existence of a corresponding probability measure over the space of functions $x(t), 0\le t\le 1$.
 
+There are a couple of important properties of the Weiner Process that I want to mention before we move on to the next section:
+
 - Absolute Sum of variations
+- The Weiner Process has the Self Similarity property, i.e., it is Fractal
 
 ## Stochastic Calculus and the Ito Integral
 
