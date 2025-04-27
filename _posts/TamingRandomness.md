@@ -80,18 +80,54 @@ How can we go about creating a model for Brownian Motion? First of all we need t
 - In order to introduce a time dependence, restrict the Random Walk to the time interval interval $[0,1]$ such that changes in the Random Sum occur at at the $n$ time instants given by ${1\over n}, {2\over n},...,{n-1\over n}, 1$
 - Define a random function $W_n(t), 0\le t\le 1$ such that it is equal to the scaled sum ${S_i\over{\sqrt n}}$ at the point ${i\over n}$ and then interpolate between successive sums to create a continuous function over $0\le t\le 1$ whose value at time $t$ is given by:
 
-$$ W_n(t) = {S_{i-1}\over{\sqrt{n}}} + \left[{t - {(i-1)\over n}\over{1\over n}}\right] {1\over{\sqrt{n}}} X_i\ \ \ for\ \ \
+$$ W^n(t) = {S_{i-1}\over{\sqrt{n}}} + \left[{t - {(i-1)\over n}\over{1\over n}}\right] {1\over{\sqrt{n}}} X_i\ \ \ for\ \ \
 t\in \left[{i-1\over n}, {i\over n}\right]$$
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/weiner10.png) 
 
 Figure: Scaled and Interpolated Random Sums over $0\le t\le 1$ for n = 100 (blue), n = 400 (red) and n = 10000 (green)
 
-The figure above three different sample paths for $W_n(t)$ over the interval $[0,1]$, with the gap between successive changes in direction becoming smaller and smaller as $n$ increases. As $n\rightarrow\infty$, Donsker's Theorem says that $W_n(t), 0\le t\le 1$ converges to a Weiner Process. What does it mean to take the limit $n\uparrow\infty$ for the interpolated Random Sums? Since we are constrained to be in the interval $[0,1]$, it means that successive coin tosses are happening faster and faster, and in the limit they are being done over the continuum. Since each coin toss results in a change of direction for $W_n(t)$, it follows that in the limit, the change of direction is happening at each instant! This is a bit difficult to visualize, but essentially this also means that in the limit the Weiner Process $W(t), 0\le t\le 1$ does not have a derivative at any point in the interval $[0,1]$ (since the derivative is not defined at points at which the direction of a function changes).
+The figure above three different sample paths for $W_n(t)$ over the interval $[0,1]$, with the gap between successive changes in direction becoming smaller and smaller as $n$ increases. As $n\rightarrow\infty$, Donsker's Theorem says that $W_n(t), 0\le t\le 1$ converges to a Weiner Process. What does it mean to take the limit $n\uparrow\infty$ for the interpolated Random Sums? Since we are constrained to be in the interval $[0,1]$, it means that successive coin tosses are happening faster and faster, and in the limit they are being done over the continuum. Since each coin toss results in a change of direction for $W_n(t)$, it follows that in the limit, the change of direction is happening at each instant! This is a bit difficult to visualize, but essentially this also means that in the limit the Weiner Process $W(t), 0\le t\le 1$ does not have a derivative at any point in the interval $[0,1]$ (since the derivative is not defined at points at which the direction of a function changes). 
 
-There is a bit of ambiguity in the notation since $W(t)$ can refer both to the sample path of the Random Process over the interval $[0,1]$, as well the Random Variable $W(t)$ at time $t$. We will use the convention that $W(t)$ refers to the function $W(t)$ defined over an interval such as $[0,1]$, while we will use $W_t$ to refer to the Random Variable at time $t$.
+There is a bit of ambiguity in the notation since $W^n(t)$ can refer both to the sample path of the Random Process over the interval $[0,1]$, as well the Random Variable $W^(t)$ at time $t$. We will use the convention that $W^n(t)$ refers to the function $W^n(t)$ defined over an interval such as $[0,1]$, while we will use $W^n_t$ to refer to the Random Variable at time $t$.
 
-There is another way to analyze a Random Process and that is by fixing the time instants $t_1,t_2,..,t_n$ at which we sample the random process. This avoid the necessity of considering the space of continuous sample paths, and instead we now have a finite sequence of Random Variables $\{W_{t_1}, _{t_2},...,W_{t_n)}\}$, and these can be analyzed by assigning a joint Probability Density Function to the coillection, which is a much easier proposition. Kolmogorov showed that if we are able to assign probabilities to all possible finite collections of the resulting Random Variables, then this uniquely detrmines the Probability Measure that exists over the space of continuous functions, and this is called the Kolmogorov Extension Theorem. Most of the work in practical applications of Random Processes is done using joint distributions at a finite collection of time instants.
+There is another way to analyze a Random Process and that is by fixing the time instants $t_1,t_2,..,t_n$ at which we sample the random process. This avoid the necessity of considering the space of continuous sample paths, and instead we now have a vector of Random Variables ${W_{t_1}, W_{t_2},...,W_{t_n)}}$, and these can be analyzed by assigning a joint Probability Density Function to the vector, which is a much easier proposition. Kolmogorov showed that if we are able to assign probabilities to all possible vectors of the resulting Random Variables, then this uniquely determines the Probability Measure that exists over the space of continuous functions, and this is called the Kolmogorov Extension Theorem. Most of the work in practical applications of Random Processes is done using joint distributions over vectors.
+
+We now provide some heuristic arguments to show that the Random Process $W^n(t)$ converges to the Weiner Process $W(t)$ as $n\uparrow\infty$. We start by showing a couple of important properties for the Random Process $W^n(t)$. In the following we will refer to the vector $W^n_{j\over n} - W^n_{i\over n}$ as an increment of the Random Process $W^n(t)$.
+
+**The Independent Stationary Increment (ISI) Property**
+   
+Note that the increment $W^n_{j\over n} - W^n_{i\over n}$ can be written as
+
+$$ W^n_{j\over n} - W^n_{i\over n} = {1\over\sqrt n}\sum_{k=i}^j X_k $$
+
+Hence overlapping increments are the sum of distinct independent Random Variables $X_k$. From this we can conclude that non-overlapping increments of $W^n(t)$ form independent Random Variables, which is known as the Independent Stationary Increment (ISI) property. The stationarity refers to the fact that the distribution of an increment in only a function of its length and is indpendent of where it islocated over the time interval.
+
+**Distribution for Increments of $W^n(t)**
+
+We established that increments of $W^n(t)$ are stationary and independent, we now given expression for their distribution.
+We start with
+
+$$ W^n_{j\over n} - W^n_{i\over n} = {1\over\sqrt n}\sum_{k=i}^j X_k = {1\over\sqrt n}(S_j - S_i) $$
+
+Note that $E(S_k) = 0$ while 
+
+$$  E(S_k^2) = E(\sum_{i=1}^k\sum_{j=1}^k X_i X_j) = k\ \ \ since\ \ \ E(X_i^2) = 1\ \ \ and\ \ \ E(X_i X_j) = 0\ \ \  for\ \ \ i\ne j  $$ 
+
+so that for $j > i$
+
+$$ E(S_j - S_i)^2 = E(S_j^2) + E(S_i^2) - 2E(S_i S_j) = j + i - 2i = j - i $$
+
+It follows that
+
+$$ E[W^n_{j\over n} - W^n_{i\over n}]^2 = {1\over n}E(S_j - S_i)^2  = {j\over n} - {i\over n}  $$
+
+Also note that
+
+$$ E[W^n_{j\over n} - W^n_{i\over n}] = 0 $$
+
+Setting $t_j = {j\over n}$ and $t_i = {i\over n}$, 
+as $n\uparrow\infty$, it follows from the Central Limit Theorem that the increment $W^n_{j\over n} - W^n_{i\over n}$ converges in distribution to a Normal distribution with mean 0 and variance $t_j - t_i$. 
 
 But, what is the definition of the Weiner Process? A Random Process $W(t), 0\le t\le 1$ is called a Weiner Process if it satisifes the following conditions:
 
@@ -100,30 +136,6 @@ But, what is the definition of the Weiner Process? A Random Process $W(t), 0\le 
 3. Over finite time increments $t_{j-1}$ to $t_j$, $W_{t_j} - W_{t_{j-1}}$ is Normally distributed with mean 0 and variance $t_j - t_{j-1}$, and this can be written as:
 
 $$ P(a\le W_{t_j}-W_{t_{j-1}}\le b) = {1\over\sqrt{2\pi}}\int_a^b e^{-{x^2\over 2(t_j - t_{j-1})}} dx $$
-
-We now show that the Random Functions $W_n(t), 0\le t\le 1$ satisfy properties (2) and (3) (property (1) is straightforward). Note that
-
-$$ W_n({j\over n}) - W_n({i\over n}) = {1\over\sqrt n}\sum_{k=i}^j X_k $$
-
-Hence this difference, for non over-lapping intervals, is the sum of distinct independent Random Variables $S_k$, from which property (2) follows for $W_n(t)$. 
-In order to show property (3), note that $E(S_n) = 0$ while 
-
-$$  E(S_n^2) = E(\sum_{i=1}^n\sum_{j=1}^n X_i X_j) = n\ \ \ since\ \ \ E(X_i^2) = 1\ \ \ and\ \ \ E(X_iX_j) = 0\ \ \  for\ \ \ i\ne j  $$ 
-
-so that for $j > i$
-
-$$ E(S_j - S_i)^2 = E(S_j^2) + E(S_i^2) - 2E(S_i S_j) = j + i - 2i = j - i $$
-
-It follows that
-
-$$ E[W_n({j\over n}) - W_n({i\over n})] = 0 $$
-
-and
-
-$$ E[W_n({j\over n}) - W_n({i\over n})]^2 = {1\over n}E(S_j - S_i)^2  = {j\over n} - {i\over n}  $$
-
-Setting $t_j = {j\over n}$ and $t_i = {i\over n}$, 
-as $n\uparrow\infty$, it follows from the Central Limit Theorem that $W_n(t_j) - W_n(t_i)$ will converge in distribution to a Normal distribution with mean 0 and variance $t_j - t_i$. 
 
 A question that arises is: What does convergence mean when the objects we are talking about are Random Processes? 
 Lets first consider what consider what convergence means in the context of the Random Sum $S_n$. Can we say anything about the convergence of the scaled version of this sum given by ${S_n\over\sqrt{n}}$? We certainly can, and this is one of the most famous results in Probability Theory called the Central Limit Theorem or CLT. It says that the distribution of ${S_n\over\sqrt{n}}$ converges to the Standard Gaussian Distribution $N(0,1)$. More precisely
