@@ -103,7 +103,7 @@ $$ W^n_{j\over n} - W^n_{i\over n} = {1\over\sqrt n}\sum_{k=i}^j X_k $$
 
 Hence overlapping increments are the sum of distinct independent Random Variables $X_k$. From this we can conclude that non-overlapping increments of $W^n(t)$ form independent Random Variables, which is known as the Independent Stationary Increment (ISI) property. The stationarity refers to the fact that the distribution of an increment in only a function of its length and is indpendent of where it islocated over the time interval.
 
-**Distribution for Increments of $W^n(t)**
+**Distribution for Increments of $W^n(t)$**
 
 We established that increments of $W^n(t)$ are stationary and independent, we now given expression for their distribution.
 We start with
