@@ -172,11 +172,17 @@ The quadratic variation of a function $f$ on the interval $[a,b]$ over some part
 
 $$ Q(f) = \lim_{|\Pi|\rightarrow 0} |f(x_i) - f(x_{i-1})|^2  $$
 
-Similarly the bounded variation for $f$ is defined as
+Similarly the variation for $f$ is defined as
 
 $$ V(f) = \lim_{|\Pi|\rightarrow 0} |f(x_i) - f(x_{i-1})|  $$
 
-It can be shown that bounded variation for the Weiner Process diverges, while its quadratic variation over an interval $[a,b]$ is given by $b-a$.
+For regular functions, their variation is bounded, while their quadratic variation is 0.
+However, for Weiner Processes it can be shown that its variation diverges, while its quadratic variation over an interval $[a,b]$ is given by $b-a$,.i.e.,
+
+$$ \lim_{n\rightarrow\infty}\sum_{i=1}^n |W_{kt\over n} - W_{(k-1)t\over n}|^2 = t $$
+
+Hence the squared difference of the values of a Weiner Process on an interval is just the length of the interval.
+This result is sometimes written as $(dW_t)^2 = dt$ which we will use in the next section in Ito Integral calculations.
 
 
 
