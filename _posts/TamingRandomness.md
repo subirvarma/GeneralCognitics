@@ -144,12 +144,6 @@ we can see why Donsker's Theorem might be true. Actually what Donsker proved was
 
 The fact that Weiner process has variance $t$ implies that it tends to move away further and further away from the origin in proportion to $sqrt{t}$ as time passes. But at the same time its mean remains zero, which means that returns to the origin quite often, in fact infinitely many times if we let it run.
 
-The notion of a probability measure over spaces of functions is a convenient mathematical abstraction, but in practice we use something that is easier to deal with, namely multi-dimensional distributions at a finite number of time instants. For example the distribution for the Weiner Process at the finite set of time instants $(t_1,t_2,...t_n)$ is given by
-
-$$ P(x_1\le W_{t_1}\le y_1, x_2\le W_{t_2}\le y_2,...,x_n\le W_{t_n}\le y_n) = \int_{x_1}^{y_1} \int_{x_2}^{y_2} \int_{x_n}^{y_n} N(0,t_1)N(0,t_2-t_1),...,N(0,t_n-t_{n-1})dx_1 dx_2...dx_n  $$
-
-There is a result known as the Kolmogorov Extension Theorem which states that if these distributions exist for all possible finite time instants in the interval $[0,1]$, gthen it implies the existence of a corresponding probability measure over the space of functions $x(t), 0\le t\le 1$.
-
 There are a few important properties of the Weiner Process that I want to mention before we move on to the Ito Integral:
 
 **Uniqueness of the Weiner Process**
@@ -171,11 +165,17 @@ $$ f(t) = f(s) + (t-s)f'(r)  $$
 
 This is called the Mean Value Theorem in Calculus, and it says that it is possible to predict the value of a function at some future time $t$, based on its value at a past time $s$, and the derivative of the function at some $r$ that lies between $s$ and $t$. This clearly violates the ISI property of the Weiner process, since knowing $W(s)$ does not give us any information about the value of $W(t)$ in the future, however close $t$ maybe from $s$ from whichwe can conclude that the derivative $f'$ does not exist at any time $r$.
 
-**Quadratic Variation of the Weiner Process**
+**Quadratic Variation and Bounded Variation of the Weiner Process**
 
-The quadratic variation of a function $F$ on the interval $[a,b]$ over some partition $\Pi={a=x_0,x_1,...x_n=b}$ is defined as
+The quadratic variation of a function $f$ on the interval $[a,b]$ over some partition $\Pi={a=x_0,x_1,...x_n=b}$ is defined as
 
 $$ Q(f) = \lim_{|\Pi|\rightarrow 0} |f(x_i) - f(x_{i-1})|^2  $$
+
+Similarly ehe bounded variation for $f$ is defined as
+
+$$ V(f) = \lim_{|\Pi|\rightarrow 0} |f(x_i) - f(x_{i-1})|  $$
+
+
 
 - Absolute Sum of variations
 - The Weiner Process has the Self Similarity property, i.e., it is Fractal
