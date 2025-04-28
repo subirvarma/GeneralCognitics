@@ -179,15 +179,11 @@ $$ V(f) = \lim_{|\Pi|\rightarrow 0} |f(x_i) - f(x_{i-1})|  $$
 For regular functions, their variation is bounded, while their quadratic variation is 0.
 However, for Weiner Processes it can be shown that its variation diverges, while its quadratic variation over an interval $[a,b]$ is given by $b-a$,.i.e.,
 
-$$ \lim_{n\rightarrow\infty}\sum_{i=1}^n |W_{kt\over n} - W_{(k-1)t\over n}|^2 = t $$
+$$ \lim_{n\rightarrow\infty}\sum_{i=1}^n |W_{kt/n} - W_{(k-1)t/n}|^2 = t $$
 
 Hence the squared difference of the values of a Weiner Process on an interval is just the length of the interval.
 This result is sometimes written as $(dW_t)^2 = dt$ which we will use in the next section in Ito Integral calculations.
 
-
-
-
-- Absolute Sum of variations
 - The Weiner Process has the Self Similarity property, i.e., it is Fractal
 
 ## Stochastic Calculus and the Ito Integral
