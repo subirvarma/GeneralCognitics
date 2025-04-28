@@ -131,13 +131,13 @@ $$ W^n_{t} \rightarrow N(0,1)\sqrt{t} = N(0,t) = {1\over\sqrt{2\pi t}}e^{-{x^2\o
 
 Hence the scaled sum, whose increments happen faster and faster in time, converges to the Normal distribution with mean zero and variance $t$ in the limit. 
 
-It turns out that these two properties are precisely what characterize a Weiner process. A Random Process $W(t), 0\le t\le 1$ is called a Weiner Process if it satisifes the following conditions:
+It turns out that these two properties are precisely what characterize a Weiner process. 
+The Weiner Process is a collection of Random Variables that are indexed by time, and satisfy the following four properties:
 
-1. The sample paths of $W(t)$ are continuous with $W_0 = 0$.
-2. The increments $W_{t_1} - W_{t_0},...,W_{t_m} - W_{t_{m-1}}, 0 = t_0 < t_1 < ...<t_{m-1} < t_m$ are independent Random Variables, i.e., the Independent Stationary Increment property.
-3. Over finite time increments $t_{j-1}$ to $t_j$, $W_{t_j} - W_{t_{j-1}}$ is Normally distributed with mean 0 and variance $t_j - t_{j-1}$, and this can be written as:
-
-$$ P(a\le W_{t_j}-W_{t_{j-1}}\le b) = {1\over\sqrt{2\pi(t_j-t_i)}}\int_a^b e^{-{x^2\over 2(t_j - t_{j-1})}} dx $$
+1. For all times $t$, $W_t$ is normally distributed with mean 0 and variance $t$.
+2. The Random Variable $W_t - W_s$ is Normally distributed with mean 0 and variance $t-s$.
+3.The Random Variable $W_t - W_s$ is independent of the Random Variable ${W_v: v\le s}$ for all $s < t$.
+4. Almost surely, the function $W(t)$ is continuous.
 
 Since the increments of the Random Sum Process ${S_n\over\sqrt{n}}$ converge to a Normal Distribution with mean zero and variance $t$ as $n\uparrow\infty$, and furthermore they exhibit the ISI property,
 we can see why Donsker's Theorem might be true. Actually what Donsker proved was something much deeper, he showed convergence over the space of probability measures defined for the space of continuous functions, not just for probability distributions at a finite number of time instants.
@@ -163,9 +163,19 @@ $$ X(t) = X(0) + b + \sigma W(t) $$
 
 Note that $X(t)$ is simply a scaled version of the Weiner Process that starts at $X(0)$, and is such that at time $t$,$X_t$ is distributed according to $N(b,\sigma)$. Hence the Weiner Process can be considered to be an universal continuous time Random Process, since as soon as we constrain the increments to be ISI, there is only one process that can result. This accounts for the popularity of the Weiner process in modeling phenomena such as the Stock Market, since in this case the Efficient Market Hypothesis leads to the ISI property. 
 
+**The Weiner Process is nowhere differentiable**
+
+I am not going to prove this here, but you can get some intuition why this is the case by considering the following equation
+
+$$ f(t) = f(s) + (t-s)f'(r)  $$
+
+This is called the Mean Value Theorem in Calculus, and it says that it is possible to predict the value of a function at some future time $t$, based on its value at a past time $s$, and the derivative of the function at some $r$ that lies between $s$ and $t$. This clearly violates the ISI property of the Weiner process, since knowing $W(s)$ does not give us any information about the value of $W(t)$ in the future, however close $t$ maybe from $s$ from whichwe can conclude that the derivative $f'$ does not exist at any time $r$.
+
 **Quadratic Variation of the Weiner Process**
 
+The quadratic variation of a function $F$ on the interval $[a,b]$ over some partition $\Pi={a=x_0,x_1,...x_n=b}$ is defined as
 
+$$ Q(f) = \lim_{|\Pi|\rightarrow 0} |f(x_i) - f(x_{i-1})|^2  $$
 
 - Absolute Sum of variations
 - The Weiner Process has the Self Similarity property, i.e., it is Fractal
