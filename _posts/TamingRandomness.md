@@ -137,7 +137,8 @@ It turns out that these two properties are precisely what characterize a Weiner 
 
 $$ P(a\le W_{t_j}-W_{t_{j-1}}\le b) = {1\over\sqrt{2\pi(t_j-t_i)}}\int_a^b e^{-{x^2\over 2(t_j - t_{j-1})}} dx $$
 
-Since the Random Sum Process $W^n(t)$ converges to a process as $n\uparrow\infty$ that satisfies these three properties, we can see why Donsker's Theorem might be true. 
+Since the limiting increments of the Random Sum Process $W^n(t)$ converge to a Normal Distribution as $n\uparrow\infty$, and furthermore they exhibit the ISI property,
+we can see why Donsker's Theorem might be true. Actually what Donsker proved was something much stronger, he showed convergence for the space of probability measures defined over the space of continuous functions, not just
 
 The notion of a probability measure over spaces of functions is a convenient mathematical abstraction, but in practice we use something that is easier to deal with, namely multi-dimensional distributions at a finite number of time instants. For example the distribution for the Weiner Process at the finite set of time instants $(t_1,t_2,...t_n)$ is given by
 
