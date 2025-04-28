@@ -104,20 +104,20 @@ This kind of convergence for Random Variables is called Convergence in Distribut
 Can we define a similar type of Weak Convergence result for Random Functions $W_n(t), 0\le t\le 1$ as $n\uparrow\infty$? This is a difficult problem to solve, and a whole host of brilliant minds worked on this problem in 1950s, the most prominent names being Donsker in the US, Skorokhod, Kolmogorov and Prohorov in the USSR. 
 For those of you wanting to get deeper, there are several excellent books available, in particular "Convergence of Probability Measures" by Patrick Billingsley is standard reference for the theory of weak convergence over functional spaces. 
 
-In this aritcle I will give some heuristic arguments for this convergence and I will start by showing a couple of important properties for the Random Process $W^n(t)$. In the following I will refer to the Random Variable $W^n_{j\over n} - W^n_{i\over n}$ as a time increment of the Random Process $W^n(t)$.
+In this aritcle I will give some heuristic arguments for this convergence and I will start by showing a couple of important properties for the Random Sum $S_n$. In the following I will refer to the Random Variable $S_j - S_i$ as an increment of the Random Sum.
 
-**The Independent Stationary Increment (ISI) Property**
+1. **The Independent Stationary Increment (ISI) Property**
    
-Note that the increment $W^n_{j\over n} - W^n_{i\over n}$ can be written as
+Note that the increment $S_j - S_i$ can be written as
 
-$$ W^n_{j\over n} - W^n_{i\over n} = {1\over\sqrt n}\sum_{k=i}^j X_k $$
+$$ S_j - S_i = \sum_{k=i}^j X_k $$
 
-Hence non-overlapping increments are the sum of distinct independent Random Variables $X_k$. From this we can conclude that non-overlapping increments of $W^n(t)$ form independent Random Variables, which is known as the Independent Stationary Increment (ISI) property. The stationarity refers to the fact that the distribution of an increment in only a function of the number of $X_k$'s that there are in the summation, and is independent of where it is located over the time interval.
+Hence non-overlapping increments of $S_n$ are the sum of distinct independent Random Variables $X_k$. From this we can conclude that they form independent Random Variables, which is known as the Independent Stationary Increment (ISI) property. The stationarity refers to the fact that the distribution of an increment is only a function of the number of Random Variables $X_k$'s that there are in the summation, and is independent of where it is located over the time interval.
 
-**Distribution for Increments of $W^n(t)$**
+2. **Limting Distribution for Scaled Increments of $S_n$**
 
-We established that increments of $W^n(t)$ are stationary and independent, we now given expression for their probability distribution.
-We start with
+We established that increments of $S_n$ are stationary and independent, we now given expression for their limiting probability distribution. As before we introduce a time variable $t$, and split up the time interval $[0,1]$ into $n$ equal parts at which points $S_n$ changes it value.
+We start with the scaled sum
 
 $$ W^n_{j\over n} = {1\over\sqrt n}\sum_{k=1}^j X_k $$
 
@@ -129,6 +129,8 @@ The Central Limit Theorem tells us that if we let $j$ and $n$ go to infinity, wh
 
 $$ W^n_{t} \rightarrow N(0,1)\sqrt{t} = N(0,t) = {1\over\sqrt{2\pi t}}e^{-{x^2\over{2t}}}   $$
 
+Hence the scaled sum, whose increments happen faster and faster in time, converges to the Normal distribution with mean zero and variance $t$ in the limit. 
+
 It turns out that these two properties are precisely what characterize a Weiner process. A Random Process $W(t), 0\le t\le 1$ is called a Weiner Process if it satisifes the following conditions:
 
 1. The sample paths of $W(t)$ are continuous with $W_0 = 0$.
@@ -137,8 +139,10 @@ It turns out that these two properties are precisely what characterize a Weiner 
 
 $$ P(a\le W_{t_j}-W_{t_{j-1}}\le b) = {1\over\sqrt{2\pi(t_j-t_i)}}\int_a^b e^{-{x^2\over 2(t_j - t_{j-1})}} dx $$
 
-Since the limiting increments of the Random Sum Process $W^n(t)$ converge to a Normal Distribution as $n\uparrow\infty$, and furthermore they exhibit the ISI property,
+Since the increments of the Random Sum Process ${S_n\over\sqrt{n}}$ converge to a Normal Distribution with mean zero and variance $t$ as $n\uparrow\infty$, and furthermore they exhibit the ISI property,
 we can see why Donsker's Theorem might be true. Actually what Donsker proved was something much deeper, he showed convergence over the space of probability measures defined for the space of continuous functions, not just for probability distributions at a finite number of time instants.
+
+The fact that Weiner process has variance $t$ implies that it tends to move away further and further away from the origin in proportion to $sqrt{t}$ as time passes. But at the same time its mean remains zero, which means that returns to the origin quite often, in fact infinitely many times if we let it run.
 
 The notion of a probability measure over spaces of functions is a convenient mathematical abstraction, but in practice we use something that is easier to deal with, namely multi-dimensional distributions at a finite number of time instants. For example the distribution for the Weiner Process at the finite set of time instants $(t_1,t_2,...t_n)$ is given by
 
@@ -146,7 +150,22 @@ $$ P(x_1\le W_{t_1}\le y_1, x_2\le W_{t_2}\le y_2,...,x_n\le W_{t_n}\le y_n) = \
 
 There is a result known as the Kolmogorov Extension Theorem which states that if these distributions exist for all possible finite time instants in the interval $[0,1]$, gthen it implies the existence of a corresponding probability measure over the space of functions $x(t), 0\le t\le 1$.
 
-There are a couple of important properties of the Weiner Process that I want to mention before we move on to the next section:
+There are a few important properties of the Weiner Process that I want to mention before we move on to the Ito Integral:
+
+**Uniqueness of the Weiner Process**
+ 
+The statement of the result is as follows: Let $X(t)$ be Random Process that satisfies the following two conditions:
+- The Random Process is continuous, and
+- It has Independent Stationary Increments
+Then there exist unique constants $b$ and $\sigma$, such that $X(t)$ is given by 
+
+$$ X(t) = X(0) + b + \sigma W(t) $$
+
+Note that $X(t)$ is simply a scaled version of the Weiner Process that starts at $X(0)$, and is such that at time $t$,$X_t$ is distributed according to $N(b,\sigma)$. Hence the Weiner Process can be considered to be an universal continuous time Random Process, since as soon as we constrain the increments to be ISI, there is only one process that can result. This accounts for the popularity of the Weiner process in modeling phenomena such as the Stock Market, since in this case the Efficient Market Hypothesis leads to the ISI property. 
+
+**Quadratic Variation of the Weiner Process**
+
+
 
 - Absolute Sum of variations
 - The Weiner Process has the Self Similarity property, i.e., it is Fractal
