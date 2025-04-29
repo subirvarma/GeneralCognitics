@@ -225,16 +225,16 @@ $$ X(t) = X(0) + \int_0^t b(s,X(s))ds + \int_0^t \sigma(s,X(s))dW(t) $$
 
 and we can see the Ito Integral appearing on the right hand side of this equation. Note that $X(t)$ is now a random process, and so are $b$ and $\sigma$ since they are functions of $X(t)$. But does the Ito Integral even exist, in other words is it well defined? The traditional Riemann Integral is defined as the limit
 
-$$ \int_0^t f(t)dt = \lim_{n\rightarrow\infty}\sum_{i=1}^n f(t_i^*)(t_i - t_{i-1}),\ \ \ t_{i-1}\le t_i^*\le t_i $$
+$$ \int_0^t f(t)dt = \lim_{n\rightarrow\infty}\sum_{i=1}^n f(t_i^q)(t_i - t_{i-1}),\ \ \ t_{i-1}\le t_i^q\le t_i $$
 
 where the sum is taken over the partition ${t_0 = 0, t_1, t_2,...,t_n = t}$. Clearly this won't work since the integration is with respect to the time parameter.
 The Riemann-Stieljes Integral on the other hand can be used to integrate with respect to another function, and is defined as:
 
-$$ \int_0^t f(t)dh(t) = \lim_{n\rightarrow\infty}\sum_{i=1}^n f(t_i^*)(h(t_i) - h(t_{i-1})),\ \ \ t_{i-1}\le t_i^*\le t_i $$
+$$ \int_0^t f(t)dh(t) = \lim_{n\rightarrow\infty}\sum_{i=1}^n f(t_i^q)(h(t_i) - h(t_{i-1})),\ \ \ t_{i-1}\le t_i^q\le t_i $$
 
 This integral exists only if $g(t)$ has a bounded variation, i.e.,
 
-$$ V(g(t)) = \lim_{|\Pi|\rightarrow 0} |g(t_i) - g(t_{i-1})|  $$
+$$ V(g) = \lim_{|\Pi|\rightarrow 0} |g(t_i) - g(t_{i-1})|  $$
 
 is a finite quantity. We saw in the last section that this property is not true for the Weiner Proces, hence we cannot use the Stieljes Integral for our purpose.
 
