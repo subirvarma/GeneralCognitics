@@ -188,14 +188,49 @@ However, for Weiner Processes it can be shown that its variation diverges, while
 $$ \lim_{n\rightarrow\infty}\sum_{i=1}^n |W_{kt/n} - W_{(k-1)t/n}|^2 = t $$
 
 Hence the squared difference of the values of a Weiner Process on an interval is just the length of the interval.
-This result is sometimes written as $(dW_t)^2 = dt$ which we will use in the next section in Ito Integral calculations.
-
+This result is sometimes written as $(dW_t)^2 = dt$ which we will use in the next section on the Ito Integral.
 
 ## Stochastic Calculus and the Ito Integral
 
 - [ ] Go through the signal + noise model, as per page 15 of Oksendal's book. How this naturally leads to the Ito Integral.
 - [ ] dx/dt = Ax + B dW/dt equivalent to x = int(Ax dt) + int(B dW).  The latter is the Ito integral. 
 - [ ] Rough derivation of the existence proof of the Ito Integral
+
+Now that we have defined the Weiner Process, the next natural step is build upon this and create other random processes that use it as a building block. Kiyosi Ito carried out this program in the 1940s, and his first step was to define a random process $I(t)$ that could be expressed as an integral over the Weiner Process:
+
+$$ I(t) = \int_0^t f(s) dW(s)  $$
+
+where $W(s) is a Weiner Process starting at the origin and $f(s)$ is a Random Process.
+Integrating with respect to the Weiner Process is highly non-intuitive, how did he come up with this idea? It turns out it arises naturally when we try to add a random noise component to a dynamical system model, such as the following one:
+
+$$ {dX\over dt} = b(t,X_t) $$
+
+where $b$ is some function. Suppose that the time evolution of $X(t)$ has some random component that we want to capture. One way of doing this is by
+
+$$ {dX\over dt} = b(t,X(t)) + \sigma(t, X_t)N(t) $$
+
+where $\sigma$ is another function and $N(t)$ is some sort of random process that represents noise. Based on models used in engineering, we would like the random variables $N_{t_1}$ and $N_{t_2}$ to be independent, $E(N_t) = 0$ for all $t$, and also that $N(t)$ to be a stationary process. It turns out that there is no 'reasonable' process that satisfies these conditions. In fact any such process would not even be continuous since we are requiring two neighboring random variables to be independent irrespective of how close they are in time.
+
+Consider the discrete time version of this equation, that can be written as
+
+$$ X_k - X_{k-1} = b(t_k, X_k)\Delta t_k + \sigma(t_k,X_k)N_k\Delta t_k $$
+
+where $X_j = X(t_j), W_k = W(t_k), \Delta t_k = t_k - t_{k-1}$. If we replace $N_k\Delta t_k$ by the increment of some stochastic process $V(t)$ such that $\Delta V_k = V_k - V_{k-1}$. Based on the properties of $N(t)$, we would like $V(t)$ to have independent stationary increments with mean 0. Based on what we learnt in the prior section, the only continuous random process with independent stationary increment is the Weiner Process so that the equation can be written as
+
+$$ X_k - X_{k-1} = b(t_k, X_k)\Delta t_k + \sigma(t_k,X_k)(W_k - W_{k-1}) $$
+
+which is the same as
+
+$$ X_k = X_0 + \sum_{j=1}^k b(t_j,x_j)\Delta t_j + \sum_{j=1}^k \sigma(t_j,X_j)\Delta W_j $$
+
+Assume that as $\Delta t_j\rightarrow 0$, the following limit exists
+
+$$ X(t) = X(0) + \int_0^t b(s,X_s)ds + \int_0^t \sigma(s,X_s)dW(t) $$
+
+and we can see the Ito Integral appearing on the right hand side of this equation. 
+
+
+
 
 ## Adding Randomness to Models
 
