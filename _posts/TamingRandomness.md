@@ -192,10 +192,6 @@ This result is sometimes written as $(dW_t)^2 = dt$ which we will use in the nex
 
 ## Stochastic Calculus and the Ito Integral
 
-- [ ] Go through the signal + noise model, as per page 15 of Oksendal's book. How this naturally leads to the Ito Integral.
-- [ ] dx/dt = Ax + B dW/dt equivalent to x = int(Ax dt) + int(B dW).  The latter is the Ito integral. 
-- [ ] Rough derivation of the existence proof of the Ito Integral
-
 Now that we have defined the Weiner Process, the next natural step is build upon this and create other random processes that use it as a building block. Kiyosi Ito carried out this program in the 1940s, and his first step was to define a random process $I(t)$ that could be expressed as an integral over the Weiner Process:
 
 $$ I(t) = \int_0^t f(s) dW(s)  $$
@@ -225,10 +221,27 @@ $$ X_k = X_0 + \sum_{j=1}^k b(t_j,x_j)\Delta t_j + \sum_{j=1}^k \sigma(t_j,X_j)\
 
 Assume that as $\Delta t_j\rightarrow 0$, the following limit exists
 
-$$ X(t) = X(0) + \int_0^t b(s,X_s)ds + \int_0^t \sigma(s,X_s)dW(t) $$
+$$ X(t) = X(0) + \int_0^t b(s,X(s))ds + \int_0^t \sigma(s,X(s))dW(t) $$
 
-and we can see the Ito Integral appearing on the right hand side of this equation. 
+and we can see the Ito Integral appearing on the right hand side of this equation. Note that $X(t)$ is now a random process, and so are $b$ and $\sigma$ since they are functions of $X(t)$. But does the Ito Integral even exist, in other words is it well defined? The traditional Riemann Integral is defined as the limit
 
+$$ \int_0^t f(t)dt = \lim_{n\rightarrow\infty}\sum_{i=1}^n f(t_i^*)(t_i - t_{i-1}),\ \ \ t_{i-1}\le t_i^*\le t_i $$
+
+where the sum is taken over the partition ${t_0 = 0, t_1, t_2,...,t_n = t}$. Clearly this won't work since the integration is with respect to the time parameter.
+The Riemann-Stieljes Integral on the other hand can be used to integrate with respect to another function, and is defined as:
+
+$$ \int_0^t f(t)dh(t) = \lim_{n\rightarrow\infty}\sum_{i=1}^n f(t_i^*)(h(t_i) - h(t_{i-1})),\ \ \ t_{i-1}\le t_i^*\le t_i $$
+
+This integral exists only if $g(t)$ has a bounded variation, i.e.,
+
+$$ V(g(t)) = \lim_{|\Pi|\rightarrow 0} |g(t_i) - g(t_{i-1})|  $$
+
+is a finite quantity. We saw in the last section that this property is not true for the Weiner Proces, hence we cannot use the Stieljes Integral for our purpose.
+
+
+![](https://subirvarma.github.io/GeneralCognitics/images/weiner13.png) 
+
+Figure: A Simple Integrand $A(t)$
 
 
 
