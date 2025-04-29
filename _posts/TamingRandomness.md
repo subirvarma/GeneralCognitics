@@ -1,9 +1,9 @@
 ---
 layout: default
-title: "Encounters with Randomness: The Story of Brownian Motion"
+title: "Encounters with Extreme Randomness: The Story of Brownian Motion"
 ---
 
-# Encounters with Randomness: The Story of Brownian Motion
+# Encounters with Extreme Randomness: The Story of Brownian Motion
 
 ## Introduction
 
