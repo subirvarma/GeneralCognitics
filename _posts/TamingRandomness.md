@@ -55,12 +55,12 @@ Figure 6: Training a Neural Network to generate images
 
 But the most interesting, and surprising, application of Brownian Motion has happened during the last decade, when it was used to create a Neural Network model that can generate realistic images and videos. This model ouperformed all competing methods, and it has become the most prevalent image/vdeo generation model in use today. This topic is treated in greater detail later, but a rough idea of how it done can be seen in the above figure. The top row shows the process of adding incremental random numbers to an image, until it becomes indistinguishable from noise. The bottom row trains the Neural Network by learning how to recover the original image from noise. Once the network is trained, it can generate new images by starting from a noise sample.
 
-## From Brownian Motion to the Weiner Process
-
 There was one name that I didn't mentioned in my brief survey of mathematicians who have contributed to the theory of the Brownian Motion, and it is that of Norbert Weiner. This is quite a big omission since the terms Brownian Motion and Weiner Process are often used inter-changeably. Strictly speaking Brownian Motion is the physical phenomenon that Robert Brown discovered and Einstein analyzed, while the Weiner Process is a mathematical model for it and this is the terminology that I will use in the rest of this article. Norbert Weiner was the first one to do a rigorous mathematical analysis of Brownian Motion in the early 1920s, and abstracted it to create the mathematical notion of a Weiner Process. He proved several important properties for it, such as the fact that its sample paths are continuous in time, while at the same time its derivative does not exist anywhere.
 Weiner was a child prodigy who got his PhD from Harvard at age 19 and spent his career teaching at MIT. His work spanned mathematics, both pure and applied, as well philosophy and towards the latter part of his life what we call Artificial Intelligence (he called it Cybernetics). He contributed more than anyone else to the emerging field of Signal Processing, and was a big influence on the later work of Claude Shannon and John von Neummann.
 
-The theory of a random process in continuous time was not sufficiently well developed when Weiner was working on the problem in the early 1920s, and had to wait for Kolmogorov's axiomitization of Probability Theory ten years later. During the 1950s Monroe Donsker gave a highly intuitive explanation of how the Weiner Process arises as a limiting case of simpler Random Processes, and this is what I am going to describe in this section.
+The theory of a random process in continuous time was not sufficiently well developed when Weiner was working on the problem in the early 1920s, and had to wait for Kolmogorov's axiomitization of Probability Theory ten years later. During the 1950s Monroe Donsker gave a highly intuitive explanation of how the Weiner Process arises as a limiting case of simpler Random Processes, and this is what I am going to describe in the next section.
+
+## From Brownian Motion to the Weiner Process
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/weiner11.png) 
 
@@ -82,7 +82,7 @@ How can we go about creating a model for Brownian Motion? First of all we need t
 
 $$ W^n(t) = {S_{\lfloor nt\rfloor}\over{\sqrt{n}}}\ \ \ 1\le n\le N,\ \ \ 0\le t\le 1 $$
 
-where the floor function $\lfloor nt\rfloor$ gives the smallest integer less than or equal to $nt$.
+where the floor function $\lfloor nt\rfloor$ results in the smallest integer less than or equal to $nt$.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/weiner10.png) 
 
@@ -141,9 +141,14 @@ The Weiner Process is a collection of Random Variables that are indexed by time,
 4. Almost surely, the function $W(t)$ is continuous.
 
 Since the increments of the Random Sum Process $W^n$ converge to a Normal Distribution with mean zero and variance $t$ as $n\uparrow\infty$, and furthermore they exhibit the ISI property,
-we can see why Donsker's Theorem might be true. Actually what Donsker proved was something much deeper, he showed convergence over the space of probability measures defined for the space of continuous functions, not just for probability distributions at a finite number of time instants.
-
+we can see why Donsker's Theorem might be true. Actually what Donsker proved was something much deeper, he showed convergence over the space of probability measures defined for the space of  functions, not just for probability distributions at a finite number of time instants.
 The fact that Weiner process has variance $t$ implies that it tends to move away further and further away from the origin in proportion to $sqrt{t}$ as time passes. But at the same time its mean remains zero, which means that returns to the origin quite often, in fact infinitely many times if we let it run.
+
+![](https://subirvarma.github.io/GeneralCognitics/images/weiner12.png) 
+
+Figure: Self Similarity of the Weiner Process
+
+The Weiner Process remains one of the weirdest objects that mathematicians have come up with, the idea of a continuous function not posessing a derivative at any point in its domain is highly non-intuitive. All this is tied to another property of the Weiner Process, its self-similarity. This means that if we had a very powerful microscope and focused it on a tiny interval of time, what we would see would be indistinguishable from the larger picture of the Weiner Process. We can go on increasing the magnification, without ever runnning into a limit to this property. Thus the mystery of the Weiner Process is tied to the fact that it is defined over the continuum, which is like an endless pit, we can never get to the bottom of it. The Weiner Process performs its minuscle movements in the nooks and cranies of this pit, and this is something that is difficult ti visualize at the macro level.
 
 There are a few important properties of the Weiner Process that I want to mention before we move on to the Ito Integral:
 
