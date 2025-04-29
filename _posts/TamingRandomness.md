@@ -146,9 +146,10 @@ The fact that Weiner process has variance $t$ implies that it tends to move away
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/weiner12.png) 
 
-Figure: Self Similarity of the Weiner Process
+Figure: Self-Similarity of the Weiner Process
 
-The Weiner Process remains one of the weirdest objects that mathematicians have come up with, the idea of a continuous function not posessing a derivative at any point in its domain is highly non-intuitive. All this is tied to another property of the Weiner Process, its self-similarity. This means that if we had a very powerful microscope and focused it on a tiny interval of time, what we would see would be indistinguishable from the larger picture of the Weiner Process. We can go on increasing the magnification, without ever runnning into a limit to this property. Thus the mystery of the Weiner Process is tied to the fact that it is defined over the continuum, which is like an endless pit, we can never get to the bottom of it. The Weiner Process performs its minuscle movements in the nooks and cranies of this pit, and this is something that is difficult ti visualize at the macro level.
+The Weiner Process remains one of the weirdest objects that mathematicians have created, the idea of a continuous function not posessing a derivative at any point in its domain is highly non-intuitive. This is tied to another property of the Weiner Process, its self-similarity. This means that if we had a very powerful microscope and focused it on a tiny interval of time, what we would see would be indistinguishable from the larger picture of the Weiner Process. We can go on increasing the magnification, without ever runnning into a limit to this property. The mystery of the Weiner Process is due to the fact that it is defined over the continuum, which is like an endless pit, we can never get to the bottom of it. The Weiner Process performs its minuscle movements in the nooks and cranies of this pit, and this is something that is difficult to visualize at the macro level. And we can never get to the point where we can actually see the Weiner particle make its movements, as we delve deeper, we continue to see segements with their craggy shape.
+This reminds me of another deep mystery from the science of Quantum Mechanics, the fact that we can never see a quantum particle like the electron in the act of moving, all we can see are discrete points in space which mark its path. In between these points, the electron travels in a mysterious realm in which it becomes a diffuse wave like phenomenon. This point is discussed further in my article [Zeno's Paradox of the Arrow](https://subirvarma.github.io/GeneralCognitics/2025/03/11/Zeno.html).
 
 There are a few important properties of the Weiner Process that I want to mention before we move on to the Ito Integral:
 
@@ -189,7 +190,6 @@ $$ \lim_{n\rightarrow\infty}\sum_{i=1}^n |W_{kt/n} - W_{(k-1)t/n}|^2 = t $$
 Hence the squared difference of the values of a Weiner Process on an interval is just the length of the interval.
 This result is sometimes written as $(dW_t)^2 = dt$ which we will use in the next section in Ito Integral calculations.
 
-- The Weiner Process has the Self Similarity property, i.e., it is Fractal
 
 ## Stochastic Calculus and the Ito Integral
 
