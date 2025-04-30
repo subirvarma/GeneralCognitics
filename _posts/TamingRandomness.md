@@ -256,6 +256,22 @@ This result implies that if for the sequence $X^n_t$ with mean 0, we can show th
 
 Figure: A Simple Integrand $A(t)$
 
+Consider a simple process $A(t)$ of the type shown in the above figure. It is constructed by choosing a finite number of time instants $0=t_0<t_1<...<t_n<\infty$ and associate a $F_t$ measurable random variable $Y_j$ such that $A(t)= Y_j$ on the assocaited interval $t_j<t<t_{j+1}$. Then the stochastic integral for $A(t)$ is defines as
+
+$$ \int_0^t A(t)dW(t) = \Sum_{i=0}^j Y_i(W_{t_1+1} - W_{t_i}) +Y_j(B_t - B_{t_j})  $$
+
+Ito showed that this integral satisfies the Ito Isometry property, which states that
+
+$$ E[\int_0^t A(s)dW(s)]^2 = \int_0^t E[A(s)^2] ds $$
+
+In the next step we will generalize the stochastic integral from simple processes to more general processes. It can be shown that it is always possible to approximate a bounded $F_t$ measurable process with continuous paths $A(t)$, as the limit of a sequence of simple processes $A^n(t)$, in the following sense:
+
+$$ \lim_{n\rightarrow\infty}\int_0^t E[A(s) - A^n(s)]^2 ds = 0, \ \ \ for\ \ \ all\ \ \ t  $$
+
+
+
+
+
 
 
 
