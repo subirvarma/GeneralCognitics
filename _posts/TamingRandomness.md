@@ -32,7 +32,10 @@ But what if we were to look at an infinite sequence of coin tosses, this then be
 
 Figure 3: Continuous Time Random Processes
 
-Extending this idea further, what if the random quantity evolves continuously in time? This then becomes a continuous time Random Process, and an example of this is shown the above figure. You can think of these graphs as being created by the Brownian Motion of a pollen particle whose movement is confined to just one dimension, either up or down along the y-axis, or the variation in the stock price for a company over time. Note that there are several curves shown in the figure, and each of them represents a possible evolution of the random process when starting from the origin  $t=0$, also called a sample path. These sample paths constitutes the different outcomes in time for the Random Process and just as we assign a probability to an individual event, for example getting a Heads whena when tossing a coin, we now assign a probability to the entire sample path as a whole. 
+Extending this idea further, what if the random quantity evolves continuously in time? This then becomes a continuous time Random Process, and an example of this is shown the above figure. You can think of these graphs as being created by the Brownian Motion of a pollen particle whose movement is confined to just one dimension, either up or down along the y-axis, or the variation in the stock price for a company over time. Note that there are several curves shown in the figure, and each of them represents a possible time evolution of the random process when starting from the origin at $t=0$, also called a sample path. These sample paths constitute the different outcomes in time for the Random Process and just as we assign a probability to an individual event, for example getting a Heads when tossing a coin, we now assign a probability to the entire sample path as a whole. There are two ways to look at these curves:
+
+- In terms of the time evolution of the random process, as captured in a single sample path, or
+- By fixing the time $t$, and then looking at the values of the random process over the the collection of sample paths. This is shown by the two dotted lines in the figure for the case when time has been fixed at $t_1$ and $t_2$. In this case, we no longer have a random process, since the time evolution is lost, and instead we end up with a random variable. 
 
 The analysis of a continuous time Random Process is exponentialy harder than the discrete time version since the set of possible outcomes is the space of continuous functions which is very hard to analyze. Consequently very little progress had been made in this area by 1900 and part of the reason was that there was no connection made between Probability Theory and the rapidly developing methods in analysis that had resulted in developments such as the Borel Measure and the Lebesgue Integral towards the end of the 19th century.
 The major contribution that the 20th century made to the science of randomness, is precisely this connection. It laid the science of Random Processes on a firm mathematical foundation, by connecting it with the rest of mathematical analysis. This process started with Bachelier, and was completed two decades later with great Russian mathematician Andrei Kolmogorov's axiomatization of Probability Theory which made it possible to talk about quantities that evolve randomly and continuously in time, which is precisely what a Random Process is. This has an interesting echo with Quantum Mechanics that also took about two decades two mature from Planck to Heisenberg and Schrodinger. 
@@ -197,22 +200,22 @@ Now that we have defined the Weiner Process, the next natural step is build upon
 
 $$ I(t) = \int_0^t f(s) dW(s)  $$
 
-where $W(s) is a Weiner Process starting at the origin and $f(s)$ is a Random Process.
-Integrating with respect to the Weiner Process is highly non-intuitive, how did he come up with this idea? It turns out it arises naturally when we try to add a random noise component to a dynamical system model, such as the following one:
+where $W(s$) is a Weiner Process starting at the origin and $f(s)$ is some other random process.
+Integrating with respect to the Weiner Process is highly non-intuitive, how did he come up with this idea? It turns out it arises naturally when we try to add a random noise component to a deterministic dynamical system model, such as the following one,
 
 $$ {dX\over dt} = b(t,X_t) $$
 
 where $b$ is some function. Suppose that the time evolution of $X(t)$ has some random component that we want to capture. One way of doing this is by
 
-$$ {dX\over dt} = b(t,X(t)) + \sigma(t, X_t)N(t) $$
+$$ {dX_t\over dt} = b(t,X_t) + \sigma(t, X_t)N_t $$
 
-where $\sigma$ is another function and $N(t)$ is some sort of random process that represents noise. Based on models used in engineering, we would like the random variables $N_{t_1}$ and $N_{t_2}$ to be independent, $E(N_t) = 0$ for all $t$, and also that $N(t)$ to be a stationary process. It turns out that there is no 'reasonable' process that satisfies these conditions. In fact any such process would not even be continuous since we are requiring two neighboring random variables to be independent irrespective of how close they are in time.
+where $\sigma$ is another function and $N(t)$ is some sort of random process that represents noise. Based on models used in engineering, we would like the random variables $N_{t_1}$ and $N_{t_2}$ to be independent, $E(N_t) = 0$ for all $t$, and require $N(t)$ to be a stationary process. It turns out that there is no 'reasonable' process that satisfies these conditions. In fact any such process would not even be continuous since we are requiring two neighboring random variables to be independent irrespective of how close they are in time.
 
 Consider the discrete time version of this equation, that can be written as
 
 $$ X_k - X_{k-1} = b(t_k, X_k)\Delta t_k + \sigma(t_k,X_k)N_k\Delta t_k $$
 
-where $X_j = X(t_j), W_k = W(t_k), \Delta t_k = t_k - t_{k-1}$. If we replace $N_k\Delta t_k$ by the increment of some stochastic process $V(t)$ such that $\Delta V_k = V_k - V_{k-1}$. Based on the properties of $N(t)$, we would like $V(t)$ to have independent stationary increments with mean 0. Based on what we learnt in the prior section, the only continuous random process with independent stationary increment is the Weiner Process so that the equation can be written as
+where $X_j = X(t_j), W_k = W(t_k), \Delta t_k = t_k - t_{k-1}$. Lets replace $N_k\Delta t_k$ by the increment of some stochastic process $V(t)$ such that $\Delta V_k = V_k - V_{k-1}$. Based on the properties of $N(t)$, we would like $V(t)$ to have independent stationary increments with mean 0. We learnt in the prior section that the only continuous random process with independent stationary increment is the Weiner Process so that the equation can be written as
 
 $$ X_k - X_{k-1} = b(t_k, X_k)\Delta t_k + \sigma(t_k,X_k)(W_k - W_{k-1}) $$
 
@@ -220,7 +223,7 @@ which is the same as
 
 $$ X_k = X_0 + \sum_{j=1}^k b(t_j,x_j)\Delta t_j + \sum_{j=1}^k \sigma(t_j,X_j)\Delta W_j $$
 
-Assume that as $\Delta t_j\rightarrow 0$, the following limit exists
+Assume that the following limit exists as $\Delta t_j\rightarrow 0$,
 
 $$ X(t) = X(0) + \int_0^t b(s,X(s))ds + \int_0^t \sigma(s,X(s))dW(t) $$
 
@@ -228,7 +231,7 @@ and we can see the Ito Integral appearing on the right hand side of this equatio
 
 $$ \int_0^t f(t)dt = \lim_{n\rightarrow\infty}\sum_{i=1}^n f(t_i^q)(t_i - t_{i-1}),\ \ \ t_{i-1}\le t_i^q\le t_i $$
 
-where the sum is taken over the partition ${t_0 = 0, t_1, t_2,...,t_n = t}$. Clearly this won't work since the integration is with respect to the time parameter.
+where the sum is taken over the partition ${t_0 = 0, t_1, t_2,...,t_n = t}$. Clearly this won't work since the Ito integration is not with respect to the time parameter.
 The Riemann-Stieljes Integral on the other hand can be used to integrate with respect to another function, and is defined as:
 
 $$ \int_0^t f(t)dh(t) = \lim_{n\rightarrow\infty}\sum_{i=1}^n f(t_i^q)(h(t_i) - h(t_{i-1})),\ \ \ t_{i-1}\le t_i^q\le t_i $$
@@ -237,12 +240,23 @@ This integral exists only if $g(t)$ has a bounded variation, i.e.,
 
 $$ V(g) = \lim_{|\Pi|\rightarrow 0} |g(t_i) - g(t_{i-1})|  $$
 
-is a finite quantity. We saw in the last section that this property is not true for the Weiner Proces, hence we cannot use the Stieljes Integral for our purpose.
+is a finite quantity. We saw in the last section that this property is not true for the Weiner Proces, hence we cannot use the Stieljes Integral fto define the Ito Integral.
 
+We learnt about the concept of convergence in distribuion in the prior sections, I am going to introduce a new kind of convergence called convergence in probability, since this is needed to define the Ito Integral. A sequence of random variables ${X_t^n}$ is said to converge to a random variable $X$ if
+
+$$ \lim_{n\rightarrow\infty} P(|X_t - X|>\epsilon) = 0 $$
+
+There is an useful result due to the Russian Mathematician Pafnuty Tchebychev which states that for a given random variable $V$ with mean ${\overline V}$ and variance $\sigma_V^2$, for any $\epsilon > 0$
+
+$$ P(|V - {\overline V}|\ge\epsilon) \le {\sigma_V^2\over\epsilon^2} $$
+
+This result implies that if for the sequence $X^n_t$ with mean 0, we can show that $E(X^n_t)^2$ tends to zero as $n\uparrow\infty$, then the sequence converges in probability. This is precisely how the existence of the Ito Integral is proven, by showing that it is the limit in probability of a sequence of simpler integrals.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/weiner13.png) 
 
 Figure: A Simple Integrand $A(t)$
+
+
 
 
 
