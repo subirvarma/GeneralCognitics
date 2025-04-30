@@ -170,7 +170,8 @@ I am not going to prove this here, but you can get some intuition why this is th
 
 $$ f(t) = f(s) + (t-s)f'(r)  $$
 
-This is called the Mean Value Theorem in Calculus, and it says that it is possible to predict the value of a function at some future time $t$, based on its value at a past time $s$, and the derivative of the function at some $r$ that lies between $s$ and $t$. This clearly violates the ISI property of the Weiner process, since knowing $W(s)$ does not give us any information about the value of $W(t)$ in the future, however close $t$ maybe from $s$ from whichwe can conclude that the derivative $f'$ does not exist at any time $r$.
+This is called the Mean Value Theorem in Calculus, and it says that it is possible to predict the value of a function at some future time $t$, based on its value at a past time $s$, and the derivative of the function at some $r$ that lies between $s$ and $t$. This clearly violates the ISI property of the Weiner process, since knowing $W(s)$ does not give us any information about the value of $W(t)$ in the future, however close $t$ maybe from $s$ from whic hwe can conclude that the derivative $f'$ does not exist at any time $r$ in the rage $[s,t]$.
+The lack of derivative can also be deduced from the fact that $W(t)$ is a fractal curve. I order for the derivative to exist, the ratio ${W(t)-W(s)\over{t-s}}$ has to converge as $t$ gets closer and closer to $s$. Beacuse of its fractal nature, $W(t)$ continues to move around randomly irrespective of how close $t$ is to $s$, thus ruling out the derivative.
 
 **Quadratic Variation and Bounded Variation of the Weiner Process**
 
