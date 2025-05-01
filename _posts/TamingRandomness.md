@@ -278,6 +278,12 @@ $$ \lim_{n\rightarrow\infty}E[\int_0^t (A(s) - A^n(s)) dW(s)]^2 = 0, \ \ \ for\ 
 
 An application of the Tchebychev inequality leads to the conclusion that $\int_0^t A^n(s)dW(s)$ converges in probability to $\int_0^t A(s)dW(s)$ as $n\uparrow\infty$.
 
+ - Add para on F_t adapation for A_t
+
+### Ito's Formula
+
+Look up Evans p4
+
 
 
 
