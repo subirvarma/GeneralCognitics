@@ -244,17 +244,17 @@ is a finite quantity. We saw in the last section that this property is not true 
 
 We learnt about the concept of convergence in distribuion in the prior sections, I am going to introduce a new kind of convergence called convergence in probability, since this is needed to define the Ito Integral. A sequence of random variables ${X_t^n}$ is said to converge to a random variable $X$ if
 
-$$ \lim_{n\rightarrow\infty} P(|X_t - X|>\epsilon) = 0 $$
+$$ \lim_{n\rightarrow\infty} P(|X_t^n - X|>\epsilon) = 0 $$
 
 There is an useful result due to the Russian Mathematician Pafnuty Tchebychev which states that for a given random variable $V$ with mean ${\overline V}$ and variance $\sigma_V^2$, for any $\epsilon > 0$
 
 $$ P(|V - {\overline V}|\ge\epsilon) \le {\sigma_V^2\over\epsilon^2} $$
 
-For random processes with zero means, this becomes
+For random variable with zero mean, this becomes
 
 $$ P(|V|\ge\epsilon) \le {E[V]^2\over\epsilon^2} $$
 
-This result implies that if for the sequence $X^n_t$ with mean 0, we can show that $E(X^n_t)^2$ tends to zero as $n\uparrow\infty$, then the sequence converges in probability. This is precisely how the existence of the Ito Integral is proven, by showing that it is the limit in probability of a sequence of simpler integrals.
+This result implies that if for the sequence $X^n_t$ with mean 0, we can show that $E(X^n_t - X_t)^2$ tends to zero as $n\uparrow\infty$, then the sequence ${X^n_t}$ converges in probability tp $X_t$. This is precisely how the existence of the Ito Integral is proven, by showing that it is the limit in probability of a sequence of simpler integrals.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/weiner13.png) 
 
@@ -272,7 +272,11 @@ In the next step we will generalize the stochastic integral from simple processe
 
 $$ \lim_{n\rightarrow\infty}\int_0^t E[A(s) - A^n(s)]^2 ds = 0, \ \ \ for\ \ \ all\ \ \ t  $$
 
-An application of the Tchebychev inequality leads to
+From the Ito Isometry property it follows that
+
+$$ \lim_{n\rightarrow\infty}E[\int_0^t (A(s) - A^n(s)) dW(s)]^2 = 0, \ \ \ for\ \ \ all\ \ \ t  $$
+
+An application of the Tchebychev inequality leads to the conclusion that $\int_0^t A^n(s)dW(s)$ converges in probability to $\int_0^t A(s)dW(s)$ as $n\uparrow\infty$.
 
 
 
