@@ -379,32 +379,17 @@ $$ \log S(t) - \log S(0) = (b - {\sigma^2\over 2})t + \sigma W(t) $$
 
 which can be written
 
-$$ S(t) = S(0)\exp^{(b-{\sigma^2\over 2})+\sigma W(t)}  $$
+$$ S(t) = S(0)\exp^{(b-{\sigma^2\over 2})t+\sigma W(t)}  $$
 
 $S(t)$ is called a Geometric Brownian Motion.
 
 Here is an informal proof of the Ito Formula:
 
 
-## Adding Randomness to Models
+## Modeling the Stock Market
 
-- [ ] Why is it important? A convenient way to add randomness to a model. WP is analytically tractable. 
-- [ ] Applications: Stock Market, image generation, noise filtering
-- [ ] Processes that can be modeled as signal plus noise
-- [ ] Great interest in extracting the signal, the filtering problem, Kalman Filtering
-- [ ] Processes that can be modeled as a function of a Random Process
-- [ ] Example: Financial Derivatives
-- [ ] Modeling the space of Latent Variables
-- [ ] Example: Diffusion based Image Generation
 
-### Functions of the Weiner Process and the Ito Formula
 
-- [ ] Why is this important? Because we want to build models for random phenomena, and a convenient way to do this is by expressing them as functionals of the Weiner process. Y_t=f(W_t).
-- [ ] How do we get an expression for Y_t?
-- [ ] By using the Ito formula. This involves evaluating a stochastic integral. 
-- [ ] Diffusion Processes and Stochastic differential equations 
-- [ ] Start with Weiner process to Brownian motion to Ito diffusion to Ito process
-- [ ] Some important functions: Langevin equation, exponential Ito Process
 
 ## Stock Market Models using Geometric WP
 
