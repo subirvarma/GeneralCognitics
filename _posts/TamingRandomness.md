@@ -235,7 +235,7 @@ $$ dX(t) = b(t,X(t))dt + \sigma(t,X(t))dW(t) $$
 
 Figure: Diffusion Process of the type described by a Stochastic Differential Equation
 
-Note that this is an abbreviation of the integral form since dX, dW$ and $dt$ don't have any meaning by themselves.
+Note that this is an abbreviation of the integral form since $dX, dW$ and $dt$ don't have any meaning by themselves.
 This is referred to as a Stochastic Differential Equation also called a Diffusion Process. Tha latter name arises out of the observation that the equation describes the gradual spreading of a particle following $X(t)$ as it spreads around the deterministic trajectory defined by ${dX\over dt} = b(t,X_t)$, as shown in the above figure.
 
 Does the Ito Integral even exist, in other words is it well defined? The traditional Riemann Integral is defined as the limit
@@ -326,7 +326,9 @@ Hence the dependence of $b$ and $\sigma$ on time is entirely captured by the $X(
 
 ### Ito's Formula
 
-The Ito formula is a generalization of the Fundamental Theorem of Calculus as applied to Stochastic Integrals. Recall that the Fundamental Theorem establishes differentiation and ibntegration as inverse operations, as follows
+In addition to defining his eponymous intgeral, Kiyoshi Ito made another fundamental contribution the field of Staochastic Calculus by introducing the Ito's Formula (sometimes calles the Ito's Lemma), which was published in 1951. We can start with some diffusion process, and then using this formula, transform it another diffusion process. Sometimes we take a complex diffusion and transform it into a simpler diffusion, which is one of the common uses of the transform. It can also be used to compute the Ito Integral for some special cases an example of which is gien in this section.
+
+The Ito formula is a generalization of the Fundamental Theorem of Calculus as applied to Stochastic Integrals. Recall that the Fundamental Theorem establishes differentiation and integration as inverse operations, as follows
 
 $$ f(x) - f(x_0) = \int_x^{x_0} f'(x) dx  $$
 
@@ -339,7 +341,7 @@ and ${\partial^2 f\over{\partial x^2}}=2$, thus
 
 $$ W_t^2 = \int_0^t 2W_s dW_s + {1\over 2}\int_0^t 2ds = 2\int_0^t W_s dW_s + t $$
 
-which leads to
+which allows us to compute the Ito Integral given by
 
 $$ \int_0^t W_s dW_s = {W_t^2 - t\over 2} $$
 
@@ -358,6 +360,10 @@ $$ Y(t) = X^2(t) + t^2\ \ \ where\ \ \ dX(t) = b(t)dt + \sigma(t)dW(t) $$
 then
 
 $$ dY(t) = (2t + \sigma^2(t) + 2b(t)X(t))dt + 2\sigma(t)X(t)dW(t) $$
+
+As an example of the application of the Ito's Formula, consider the following diffusion process
+
+$$ dS(t) = S
 
 Here is an informal proof of the Ito Formula:
 
