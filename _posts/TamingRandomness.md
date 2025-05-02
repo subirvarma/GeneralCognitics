@@ -227,7 +227,18 @@ Assume that the following limit exists as $\Delta t_j\rightarrow 0$,
 
 $$ X(t) = X(0) + \int_0^t b(s,X(s))ds + \int_0^t \sigma(s,X(s))dW(t) $$
 
-and we can see the Ito Integral appearing on the right hand side of this equation. Note that $X(t)$ is now a random process, and so are $b$ and $\sigma$ since they are functions of $X(t)$. But does the Ito Integral even exist, in other words is it well defined? The traditional Riemann Integral is defined as the limit
+and we can see the Ito Integral appearing on the right hand side of this equation. Note that $X(t)$ is now a random process, and so are $b$ and $\sigma$ since they are functions of $X(t)$. This equation is often written in the differential form as
+
+$$ dX(t) = b(t,X(t))dt + \sigma(t,X(t))dW(t) $$
+
+![](https://subirvarma.github.io/GeneralCognitics/images/weiner14.png) 
+
+Figure: Diffusion Process of the type described by a Stochastic Differential Equation
+
+Note that this is an abbreviation of the integral form since dX, dW$ and $dt$ don't have any meaning by themselves.
+This is referred to as a Stochastic Differential Equation also called a Diffusion Process. Tha latter name arises out of the observation that the equation describes the gradual spreading of a particle following $X(t)$ as it spreads around the deterministic trajectory defined by ${dX\over dt} = b(t,X_t)$, as shown in the above figure.
+
+Does the Ito Integral even exist, in other words is it well defined? The traditional Riemann Integral is defined as the limit
 
 $$ \int_0^t f(t)dt = \lim_{n\rightarrow\infty}\sum_{i=1}^n f(t_i^q)(t_i - t_{i-1}),\ \ \ t_{i-1}\le t_i^q\le t_i $$
 
@@ -282,7 +293,40 @@ An application of the Tchebychev inequality leads to the conclusion that $\int_0
 
 ### Ito's Formula
 
-Look up Evans p4
+The Ito formula is a generalization of the Fundamental Theorem of Calculus as applied to Staochastic Integrals. Recall that the Fundamental Theorem establishes differentiation and ibntegration as inverse operations, as follows
+
+$$ f(x) - f(x_0) = \int_x^{x_0} f'(x) dx  $$
+
+What if the function $f$ operates on a Weiner Process instead, as in $f(W_t)$? Ito showed that the Fundamental Theorem has to be modifies as follows
+
+$$ f(W_t) - f(W_0) = {1\over 2}\int_0^t {\partial^2 f\over{\partial x^2}}ds + \int_0^t {\partial f\over{\partial x}} dW_u $$
+
+This equation can also be interpreted as stating that a function $f$ of the Weiner Process $W_t$ is a Diffusion Process with co-efficients ${1\over 2}{\partial^2 f\over{\partial x^2}}$ and ${\partial f\over{\partial x}}$. This is probably the most important result in Stochastic Calculus, it allows us to construct new diffusion processes from existing ones by operating on them using a suitable function $f$. For example if $f(x) = x^2$, then ${\partial f\over{\partial x}}=2x$
+and ${\partial^2 f\over{\partial x^2}}=2$, thus
+
+$$ W_t^2 = \int_0^t 2W_s dW_s + {1\over 2}\int_0^t 2ds = 2\int_0^t W_s dW_s + t $$
+
+which leads to
+
+$$ \int_0^t W_s dW_s = {W_t^2 - t\over 2} $$
+
+What if $f(t,X_t)$ is a function of another diffusion process $X(t)$ given by $dX(t) = b(t,X(t))dt + \sigma(t,X(t))dW(t)$? There is a generalized version of the Ito Formula that applies to this case, given by
+
+$$ f(t,X_t) - f(0,X_0) = {1\over 2}\int_0^t {\partial^2 f\over{\partial x^2}}(dX_u)^2 + \int_0^t {\partial f\over{\partial x}} dX_u  + \int_0^t {\partial f\over{\partial t}} dt  $$
+
+which can also be written as
+
+$$  f(t,X_t) - f(0,X_0) =  \int_0^t ({\partial f\over{\partial u}} + b{\partial f\over{\partial x}} + {\sigma^2\over 2}{\partial^2 f\over{\partial x^2}} )du + \int_0^t \sigma{\partial f\over{\partial x}} dW_u $$
+
+As an example if 
+
+$$ Y(t) = X^2(t) + t^2\ \ \ where\ \ \ dX(t) = b(t)dt + \sigma(t)dW(t) $$
+
+then
+
+$$ dY(t) = (2t + \sigma^2(t) + 2b(t)X(t))dt + 2\sigma(t)X(t)dW(t) $$
+
+
 
 
 
