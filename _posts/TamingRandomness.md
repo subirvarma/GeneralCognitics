@@ -326,7 +326,7 @@ then
 
 $$ dY(t) = (2t + \sigma^2(t) + 2b(t)X(t))dt + 2\sigma(t)X(t)dW(t) $$
 
-
+Here is an informal proof of the Ito Formula:
 
 
 
