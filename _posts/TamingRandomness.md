@@ -388,7 +388,7 @@ Here is an informal proof of the Ito Formula:
 
 ## Modeling the Stock Market
 
-
+When I lfirst learnt about the Weiner Process and Stochastic Calculus in grad school in the late 1980s, the main applications that text books talked about were in the fields of Filtering and Control theory. Now 40 years later almost everyone who learns Stochastic Calculus is from the field of mathematical finance. In 1985 the Black Scholes equation was already about a decade old, but its use hadn't become prevalant in Wall Street. There has been an explosion in the financial markets since then, with new financial products that make use of stock derivatives. This has made Stochastic Calculus a must have skill for the so called Quants who work on Wall Street, and we will give a brief description of this in this section. At the same time there has been a backlash against the use of the Weiner Process to model stocks led the trader Nicholas Taleb, some of these ideas can be traced back to a paper that Benoit Mandelbrot wrote on this subject in the early 1960s.
 
 
 ## Stock Market Models using Geometric WP
