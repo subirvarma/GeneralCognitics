@@ -291,9 +291,42 @@ An application of the Tchebychev inequality leads to the conclusion that $\int_0
 
  - Add para on F_t adapation for A_t
 
+The Ito Integral allows us to build a wide variety of random processes by using the equation
+
+$$ X(t) = X(0) + \int_0^t b(s,X(s))ds + \int_0^t \sigma(s,X(s))dW(t) $$
+
+The random process $X(t)$ defined in this manner is called a diffusion process, and these constitute the main objects of study in the field of continuous values random processes.
+This equation is commonly written in the differential form as 
+
+$$ dX(t) = b(t,X(t))dt + \sigma(t,X(t))dW(t) $$
+
+Hence a diffusion process has drift component $b(t,X(t))$ and furthermore its dependence on the Weiner Process $W(t)$ is influneced by $\sigma(t,X(t)$. 
+Not only can these functions vary as a function of time, but they can also be dependent on the value of $X(t)$ at a time instant $t$ which makes them a random process.
+The analysis of the general cadse is not simple, however there are some simple sepcial cases that occur frequentli in applications:
+
+1. Weiner Process with Drift: This is given by the equation
+
+$$ dX(t) = b(t)dt + \sigma(t)dW(t) $$
+
+In the case the functions $b$ abd $\sigma$ are deterministic. A even simpler process is when they are are constants:
+
+$$ dX(t) = b dt + \sigma dW(t) $$
+
+In this case the stochastic differential equation can be solved to obtain
+
+$$ X(t) = X(0) + bt + \sigma W(t) $$
+
+Hence this is a modified Weiner Process whose mean value increases linearly with time, and whose variance at time $t$ is given by $\sigma^2 t$. Its distribution at time $t$ is given by the Normal Distribution $N(bt, \sigma\sqrt{t})$.
+
+2. Ito Diffusions: These follow the equation
+
+$$ dX(t) = b(X(t))dt + \sigma(X(t))dW(t) $$
+
+Hence the dependence of $b$ and $\sigma$ on time is entirely captured by the $X(t)$ dependence. Ito diffusions where a focus of research activity in the 1950s and 1960s, and their theory is well developed. Their most important property is that they are Markov Processes, just like the Weiner Process.
+
 ### Ito's Formula
 
-The Ito formula is a generalization of the Fundamental Theorem of Calculus as applied to Staochastic Integrals. Recall that the Fundamental Theorem establishes differentiation and ibntegration as inverse operations, as follows
+The Ito formula is a generalization of the Fundamental Theorem of Calculus as applied to Stochastic Integrals. Recall that the Fundamental Theorem establishes differentiation and ibntegration as inverse operations, as follows
 
 $$ f(x) - f(x_0) = \int_x^{x_0} f'(x) dx  $$
 
