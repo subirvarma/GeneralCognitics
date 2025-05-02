@@ -361,20 +361,29 @@ then
 
 $$ dY(t) = (2t + \sigma^2(t) + 2b(t)X(t))dt + 2\sigma(t)X(t)dW(t) $$
 
-As an example of the application of the Ito's Formula, consider the following diffusion process
+As an example of the application of Ito's Formula, consider the following diffusion process which is used to model stock market returns (this model is discussed in detail in the next section):
 
-$$ dS(t) = S
+$$ dS(t) = bS(t)dt + \sigma S(t)dW(t)  $$
+
+where $b,\sigma$ are constants. Does there exist a function $f$ such that $f(S)$ is a simpler diffusion process? Lets try the log function
+
+$$ f(S) = \log S $$
+
+Applying Ito's formula it follows that
+
+$$ d(\log S) = {df\over dS}dS + {1\over 2}\sigma^2S^2{d^2f\over dS^2}dt = (b - {\sigma^2\over 2})dt + \sigma dW  $$
+
+We can see that $\log S$ is a simple Weiner process with drift. Since the co-efficients $b,\sigma$ are constnt, we can actually solve this equation to get
+
+$$ \log S(t) - \log S(0) = (b - {\sigma^2\over 2})t + \sigma W(t) $$
+
+which can be written
+
+$$ S(t) = S(0)\exp^{(b-{\sigma^2\over 2})+\sigma W(t)}  $$
+
+$S(t)$ is called a Geometric Brownian Motion.
 
 Here is an informal proof of the Ito Formula:
-
-
-
-
-
-
-
-
-
 
 
 ## Adding Randomness to Models
