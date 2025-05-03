@@ -334,7 +334,9 @@ Hence the dependence of $b$ and $\sigma$ on time is entirely captured by the $X(
 
 ### Ito's Formula
 
-In addition to defining his eponymous intgeral, Kiyoshi Ito made another fundamental contribution the field of Staochastic Calculus by introducing the Ito's Formula (sometimes calles the Ito's Lemma), which was published in 1951. We can start with some diffusion process, and then using this formula, transform it another diffusion process. Sometimes we take a complex diffusion and transform it into a simpler diffusion, which is one of the common uses of the transform. It can also be used to compute the Ito Integral for some special cases an example of which is gien in this section.
+In addition to defining his eponymous intgeral, Kiyoshi Ito made another fundamental contribution the field of Staochastic Calculus by introducing the Ito's Formula (sometimes calles the Ito's Lemma), which was published in 1951. 
+The Ito Formula is basically a mathematical machine for transforming a given diffusion process into another such process.
+Sometimes we take a complex diffusion and transform it into a simpler diffusion, which is one of the common uses of the transform. It can also be used to compute the Ito Integral for some special cases an example of which is gien in this section.
 
 The Ito formula is a generalization of the Fundamental Theorem of Calculus as applied to Stochastic Integrals. Recall that the Fundamental Theorem establishes differentiation and integration as inverse operations, as follows
 
@@ -360,6 +362,8 @@ $$ f(t,X_t) - f(0,X_0) = {1\over 2}\int_0^t {\partial^2 f\over{\partial x^2}}(dX
 which can also be written as
 
 $$  f(t,X_t) - f(0,X_0) =  \int_0^t ({\partial f\over{\partial u}} + b{\partial f\over{\partial x}} + {\sigma^2\over 2}{\partial^2 f\over{\partial x^2}} )du + \int_0^t \sigma{\partial f\over{\partial x}} dW_u $$
+
+Hence the transformed process $f(t,X_t)$ is also a diffusion process with drift and volatility components as given above.
 
 As an example if 
 
