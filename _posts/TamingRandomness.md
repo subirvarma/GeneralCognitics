@@ -143,6 +143,10 @@ The Weiner Process is a collection of Random Variables that are indexed by time,
 3.The Random Variable $W_t - W_s$ is independent of the Random Variable ${W_v: v\le s}$ for all $s < t$.
 4. Almost surely, the function $W(t)$ is continuous.
 
+![](https://subirvarma.github.io/GeneralCognitics/images/weiner15.png) 
+
+Figure: Three Possible Realizations of the Weiner Process
+
 Since the increments of the Random Sum Process $W^n$ converge to a Normal Distribution with mean zero and variance $t$ as $n\uparrow\infty$, and furthermore they exhibit the ISI property,
 we can see why Donsker's Theorem might be true. Actually what Donsker proved was something much deeper, he showed convergence over the space of probability measures defined for the space of  functions, not just for probability distributions at a finite number of time instants.
 The fact that Weiner process has variance $t$ implies that it tends to move away further and further away from the origin in proportion to $sqrt{t}$ as time passes. But at the same time its mean remains zero, which means that returns to the origin quite often, in fact infinitely many times if we let it run.
@@ -302,7 +306,7 @@ $$ dX(t) = b(t,X(t))dt + \sigma(t,X(t))dW(t) $$
 
 Hence a diffusion process has drift component $b(t,X(t))$ and furthermore its dependence on the Weiner Process $W(t)$ is influneced by $\sigma(t,X(t)$. 
 Not only can these functions vary as a function of time, but they can also be dependent on the value of $X(t)$ at a time instant $t$ which makes them a random process.
-The analysis of the general cadse is not simple, however there are some simple sepcial cases that occur frequentli in applications:
+The analysis of the general cadse is not simple, however there are some simple special cases that occur frequently in applications:
 
 1. Weiner Process with Drift: This is given by the equation
 
@@ -317,6 +321,10 @@ In this case the stochastic differential equation can be solved to obtain
 $$ X(t) = X(0) + bt + \sigma W(t) $$
 
 Hence this is a modified Weiner Process whose mean value increases linearly with time, and whose variance at time $t$ is given by $\sigma^2 t$. Its distribution at time $t$ is given by the Normal Distribution $N(bt, \sigma\sqrt{t})$.
+
+![](https://subirvarma.github.io/GeneralCognitics/images/weiner16.png) 
+
+Figure: Three possible realizations of a Wiener Process with Constant Drift
 
 2. Ito Diffusions: These follow the equation
 
@@ -387,6 +395,10 @@ Here is an informal proof of the Ito Formula:
 
 
 ## Modeling the Stock Market
+
+![](https://subirvarma.github.io/GeneralCognitics/images/weiner17.png) 
+
+Figure: Three Possible Realizations of a Logarithmic Wiener Process
 
 When I lfirst learnt about the Weiner Process and Stochastic Calculus in grad school in the late 1980s, the main applications that text books talked about were in the fields of Filtering and Control theory. Now 40 years later almost everyone who learns Stochastic Calculus is from the field of mathematical finance. In 1985 the Black Scholes equation was already about a decade old, but its use hadn't become prevalant in Wall Street. There has been an explosion in the financial markets since then, with new financial products that make use of stock derivatives. This has made Stochastic Calculus a must have skill for the so called Quants who work on Wall Street, and we will give a brief description of this in this section. At the same time there has been a backlash against the use of the Weiner Process to model stocks led the trader Nicholas Taleb, some of these ideas can be traced back to a paper that Benoit Mandelbrot wrote on this subject in the early 1960s.
 
