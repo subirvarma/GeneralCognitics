@@ -406,11 +406,30 @@ Here is an informal proof of the Ito Formula:
 
 ## Modeling the Stock Market
 
+When I lfirst learnt about the Weiner Process and Stochastic Calculus in grad school in the late 1980s, the main applications that text books talked about were in the fields of Filtering and Control theory. Now 40 years later almost everyone who learns Stochastic Calculus is doing it so that they can apply it to the field of mathematical finance. In 1985 the Black Scholes equation was already about a decade old, but its use hadn't become prevalant in Wall Street. There has been an explosion in the financial markets since then, with new financial products that make use of stock derivatives. This has made Stochastic Calculus a must have skill for the so called Quants who work on Wall Street, and we will give a brief description of this in this section. At the same time there has been a backlash against the use of the Weiner Process to model stocks led the trader Nicholas Taleb, some of these ideas can be traced back to a paper that Benoit Mandelbrot wrote on this subject in the early 1960s.
+
+The earliest model for stocks can be traced back to Bachelier, and it models it using a Wiener Process with drift:
+
+$$ S(t) = \mu dt + \sigma W(t) $$
+
+This model captures that the future of the stock market cannot be predictedn by knowing how it has been doing in the past, which is the Markov property of the Wiener Process. This is also known as the Efficient Market Hypothesis in Finance, and was most forcefully advocated by the economist Eugene Fama in the last 1960s. This model can be improves by noting that the  change in the value of a stock is dependent on its current price, since only the percentage increase or decrease from the current price is what really matters to a trader. The modified equation is
+
+$$ dS(t) = \mu S dt + \sigma S dW(t)  $$
+
+As shown in the prior section, this stochastic differential equation can be solved  using the Ito Formula to obtain
+
+$$ S(t) = S(0)\exp^{(\mu-{\sigma^2\over 2})t+\sigma W(t)}  $$
+
 ![](https://subirvarma.github.io/GeneralCognitics/images/weiner17.png) 
 
 Figure: Three Possible Realizations of a Logarithmic Wiener Process
 
-When I lfirst learnt about the Weiner Process and Stochastic Calculus in grad school in the late 1980s, the main applications that text books talked about were in the fields of Filtering and Control theory. Now 40 years later almost everyone who learns Stochastic Calculus is from the field of mathematical finance. In 1985 the Black Scholes equation was already about a decade old, but its use hadn't become prevalant in Wall Street. There has been an explosion in the financial markets since then, with new financial products that make use of stock derivatives. This has made Stochastic Calculus a must have skill for the so called Quants who work on Wall Street, and we will give a brief description of this in this section. At the same time there has been a backlash against the use of the Weiner Process to model stocks led the trader Nicholas Taleb, some of these ideas can be traced back to a paper that Benoit Mandelbrot wrote on this subject in the early 1960s.
+This is known as the Geometric Wiener Process, and is the most copmmon stock market model used today. Since all changes are in terms of percentage increments or decrments, this means that the value of $S(t)$ can never dip below zero, unlike the Wiener Process with drift. If there was no random component, this equation will evolve as
+
+$$ S(t) = S(0)\exp^{\mu t} $$
+
+Hence the Geometric Wiener Process can be regarded as a random variation aroind this exponential curve. The above figure three possible sample paths of the Geometric Weiner Process, along with the deterministic curve.
+
 
 
 ## Stock Market Models using Geometric WP
