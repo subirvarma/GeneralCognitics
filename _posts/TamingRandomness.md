@@ -412,9 +412,8 @@ The earliest model for stocks can be traced back to Bachelier, and it models it 
 
 $$ S(t) = \mu dt + \sigma W(t) $$
 
-This model captures that the future of the stock market cannot be predicted by knowing how it has been doing in the past, only the current price matters, which is same as the Markov property of the Wiener Process. This is also known as the weak form of the Efficient Market Hypothesis (EMH) in Finance, and was most forcefully advocated by the economist Eugene Fama in the late 1960s. There is a group of investors known as Technical Analysts who try to predict the market by looking at stock patterns that have occurred in the past, thus directly contradicting the EMH. This is an extremely difficult undertaking, and most Technical Analysts end up loosing money. However there are a few that do manage to beat the market, at least during intervals, and that raises the question whether the market behavior varies over time, and there are times when the EMH is violated. 
-
-This model can be improved by noting that the  change in the value of a stock is dependent on its current price, since only the percentage increase or decrease from the current price is what really matters to a trader. The modified equation is
+This model is the one that was originally proposed by Bachelier in his PhD thesis back in 1900. Wince the Wiener process as independent and stationary increments, it implies that the change $S(t+h) - S(t)$ in $S(t)$ is independent of previous changes, and also that the change is independent of the $S(t)$ as well. This does not agree with the way the stock market actually behaves, since in reality the change is greater if $S(t)$ is larger
+The model can be improved by noting that the  change in the value of a stock is dependent on its current price, since only the percentage increase or decrease from the current price is what really matters to a trader. The modified equation is
 
 $$ dS(t) = \mu S dt + \sigma S dW(t)  $$
 
@@ -422,18 +421,28 @@ As shown in the prior section, this stochastic differential equation can be solv
 
 $$ S(t) = S(0)\exp^{(\mu-{\sigma^2\over 2})t+\sigma W(t)}  $$
 
+This is known as the Geometric Wiener Process, and is the most copmmon stock market model used today. Since all changes are in terms of percentage increments or decrments, this means that the value of $S(t)$ can never dip below zero, unlike the Wiener Process with drift.
+
+This model captures that the future of the stock market cannot be predicted by knowing how it has been doing in the past, only the current price matters, which is same as the Markov property. 
+This is also known as the weak form of the Efficient Market Hypothesis (EMH) in Finance, and was most forcefully advocated by the economist Eugene Fama in the late 1960s. There is a group of investors known as Technical Analysts who try to predict the market by looking at stock patterns that have occurred in the past, thus directly contradicting the EMH. This is an extremely difficult undertaking, and most Technical Analysts end up loosing money. However there are a few that do manage to beat the market, at least during intervals, and that raises the question whether the market behavior varies over time, and there are times when the EMH is violated. 
+
 ![](https://subirvarma.github.io/GeneralCognitics/images/weiner17.png) 
 
 Figure: Three Possible Realizations of a Logarithmic Wiener Process
 
-This is known as the Geometric Wiener Process, and is the most copmmon stock market model used today. Since all changes are in terms of percentage increments or decrments, this means that the value of $S(t)$ can never dip below zero, unlike the Wiener Process with drift. If there was no random component, this equation will evolve as
+ If there was no random component, $S(t)$ will evolve as
 
 $$ S(t) = S(0)\exp^{\mu t} $$
 
-This equation saya that when the variance is zero, the stock price grows at a continuously compunded rate of $\mu$ per unit time.
-The Geometric Wiener Process can be regarded as a random variation aroind this exponential curve. The above figure three possible sample paths of the Geometric Weiner Process, along with the deterministic curve.
+This equation saya that when the variance is zero, the stock price grows at a continuously compounded rate of $\mu$ per unit time.
+The Geometric Wiener Process can be regarded as a random variation around this exponential curve. The above figure three possible sample paths of the Geometric Weiner Process, along with the deterministic curve.
 
+Note that the Geometric Wiener Process does not have the Independent Stationary Increment property, even though it is still a Markov process. 
+On the other hand the logarithm of $S(t)$ can be written as
 
+$$ \log S(t) = \log S(0) + (\mu - {\sigma^2\over 2})t +\sigma W(t) $$
+
+which is just the Wiener Process with drift.
 
 ## Stock Market Models using Geometric WP
 
