@@ -403,12 +403,12 @@ $S(t)$ is called a Geometric Brownian Motion.
 
 Here is an informal proof of the Ito Formula:
 
-
 ## Modeling the Stock Market
 
-When I lfirst learnt about the Weiner Process and Stochastic Calculus in grad school in the late 1980s, the main applications that text books talked about were in the fields of Filtering and Control theory. Now 40 years later almost everyone who learns Stochastic Calculus is doing it so that they can apply it to the field of mathematical finance. In 1985 the Black Scholes equation was already about a decade old, but its use hadn't become prevalant in Wall Street. There has been an explosion in the financial markets since then, with new financial products that make use of stock derivatives. This has made Stochastic Calculus a must have skill for the so called Quants who work on Wall Street, and we will give a brief description of this in this section. At the same time there has been a backlash against the use of the Weiner Process to model stocks led the trader Nicholas Taleb, some of these ideas can be traced back to a paper that Benoit Mandelbrot wrote on this subject in the early 1960s.
+When I lfirst learnt about the Weiner Process and Stochastic Calculus in grad school in the late 1980s, the main applications that text books talked about were in the fields of Filtering and Control theory. Now 40 years later almost everyone who learns Stochastic Calculus is doing it so that they can apply it to the field of mathematical finance. In 1985 the Black Scholes equation was already about a decade old, but its use hadn't become prevalant in Wall Street. There has been an explosion in the financial markets since then, with new financial products that make use of stock derivatives. This has made Stochastic Calculus a must have skill for the so called Quants who work on Wall Street. At the same time there has been a backlash against the use of the Weiner Process to model stocks led by the trader and author Nassim Nicholas Taleb, some of these ideas can be traced back to a paper that Benoit Mandelbrot wrote on this topic in the early 1960s.
+The stock market is the closest anyone of us will get to encountering pure randomness in our daily lives. Understanding how the market behaves is critical to most of us who have part of our savings invested in the market, but we normally don't think about it unless at times of market turmoil. However there is a class of financial industry professional called Equity Traders who has to deal with this randomness on a day-to-day basis. They buy and sell equities frequently, sometimes several times a day, and their profession is a constant fight against the randomness of the market. 
 
-The earliest model for stocks can be traced back to Bachelier, and it models it using a Wiener Process with drift:
+The earliest model for stocks can be traced back to Bachelier, and it uses a Wiener Process with drift given by
 
 $$ S(t) = \mu dt + \sigma W(t) $$
 
@@ -428,13 +428,13 @@ This is also known as the weak form of the Efficient Market Hypothesis (EMH) in 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/weiner17.png) 
 
-Figure: Three Possible Realizations of a Logarithmic Wiener Process
+Figure: Three Possible Realizations of the Geometric Wiener Process
 
  If there was no random component, $S(t)$ will evolve as
 
 $$ S(t) = S(0)\exp^{\mu t} $$
 
-This equation saya that when the variance is zero, the stock price grows at a continuously compounded rate of $\mu$ per unit time.
+This equation says that when the variance is zero, the stock price grows at a continuously compounded rate of $\mu$ per unit time.
 The Geometric Wiener Process can be regarded as a random variation around this exponential curve. The above figure three possible sample paths of the Geometric Weiner Process, along with the deterministic curve.
 
 Note that the Geometric Wiener Process does not have the Independent Stationary Increment property, even though it is still a Markov process. 
@@ -442,7 +442,25 @@ On the other hand the logarithm of $S(t)$ can be written as
 
 $$ \log S(t) = \log S(0) + (\mu - {\sigma^2\over 2})t +\sigma W(t) $$
 
-which is just the Wiener Process with drift.
+which is just the standard Wiener Process with drift.
+
+### Does the Stock Market Follow a Wiener Process?
+
+Wiener Process models for the stock market have been used since the 1960s, after Samuelson introduced Bachelier's original work to the financial community.
+A huge amount of money, trillions of dollars, is tied to trades that base their justification to this model. In particular the Black-Scholes model for option's pricing, probably the most important formula in use in finacial markets, is based on the Wiener Process model.
+The question arises: Are we justified in using the Wiener Process to model the market? Mathematically this question can be posed as: Assume that the stock price closed at $S(0)$ at the end of the previous trading day, then the model says that the price at the end of the next trading day is distributed according to the random variable $S(t)$ given by
+
+$$ \log S(t) = \log S(0) + (\mu - {\sigma^2\over 2})t +\sigma \sqrt{t}N(0,1) $$
+
+where $N(0,1)$ is a sample from a Normal Distribution with mean 0 and variance $1$. This random variable is independent of anything that might have happened in the market on the previous day, or any of the days before that. Paul Samuelson justified this model by stating that all the information needed to trade on day $n+1$ is entirely summarized by the price of the stock at the end of trading day $n$, i.e., the Efficient Market Hypothesis. Hence any change in the value of the stock that happens on day $n+1$ is due to new information that comes in as the day proceeds, and any such information is instantly incorporated into the price of the stock. This makes the assumption that all traders have access to most complete information that is available about factors that affect market, and moreover they are all perfectly rational humans who are able to make trading decisions using the facts as they become available.
+
+Samuelson's assumptions justifying the use of the Wiener Proess model have been disputed over the years since then. 
+One large contingent whose entire profession is based on the assumption that the EMH is not true, is the Hedge Fund industry. Most of them place their trades on the basis of their understanding of how the market will behave based on various factors in the past history. The best of Hedge Funds, such as Renaissance Capital, have consistently beaten the market over a time period of decades, which makes one think that they have discovered some regularities in the market, and this goes against the EMH. The economists Sanford Grossman and Joseph Stiglitz gave the following argument against the EMH: All trading is based on two parties getting together and coming to an agreement on the price of a stock The buying party beleives that the stock will aprreciate, while the selling party has the opposite view. In order to make this trade happen, each party has presumably done some research to justify their actions, and this research is presumably based on the past history of the stock, the industry it is in, the state of the economy etc. However if the EMH were true, all this research would be completely useless, since eveyrthing that there is to knopw is summarized in the current price of the stock. Thus all trading on Wall Street would grind to a halt.
+
+A lot of work in this area has been done by Professors Andrew Lo and Craig Mackinlay, who teach at MIT and UPenn respectively. Lo has written a nice book on this topic for the general public called [Adaptive Markets](https://www.amazon.com/Adaptive-Markets-Financial-Evolution-Thought/dp/0691135142) where his ideas are lucidly explained. For those wanting to dig deeper into the math and statistics they used in their work, can read their paper [When are contrarian profits due to stock market overreaction?](https://www-2.rotman.utoronto.ca/~kan/3032/pdf/PredictabilityOfReturns_ShortHorizon/Lo_MacKinlay_RFS_1990.pdf).
+Lo and Mackinlay argue that Samuelson's assumptions that all trader's are perfectly rational people who at any instant have all the information needed to trade the stock they are interested in is not quite true in the real world. Most traders don't make use of all the the available information to make their decisions, they use some information and heuristics instead. Morever not all traders are at the same level of expertise. There are the Wall Street quants who are experts at their jobs, and then there is the mass of mom and pop traders who trade on the basis of what they last heard on TV. 
+
+
 
 ## Stock Market Models using Geometric WP
 
