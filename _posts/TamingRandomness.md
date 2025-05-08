@@ -417,18 +417,16 @@ Samuelson improved the model by noting that the  change in the value of a stock 
 
 $$ dS(t) = \mu S dt + \sigma S dW(t)  $$
 
+![](https://subirvarma.github.io/GeneralCognitics/images/weiner17.png) 
+
+Figure: Three Possible Realizations of the Geometric Wiener Process
+
 As shown in the prior section, this stochastic differential equation can be solved  using the Ito Formula to obtain
 
 $$ S(t) = S(0)\exp^{(\mu-{\sigma^2\over 2})t+\sigma W(t)}  $$
 
 This is known as the Geometric Wiener Process, and is the most copmmon stock market model used today. Since all changes are in terms of percentage increments or decrments, this means that the value of $S(t)$ can never dip below zero, unlike the Wiener Process with drift. 
-The Bachelier model can be regarded as the value of an invsestment in which the gains are not invested back into the portfolio, hence any change is due to gain or loss in the original amount. The Samuelson model on the other hand re-invests its gains back into the portfolio, so it results in the well known variation due to continuously compounding gains, which results in the exponential behavior.
-
-![](https://subirvarma.github.io/GeneralCognitics/images/weiner17.png) 
-
-Figure: Three Possible Realizations of the Geometric Wiener Process
-
- If there was no random component, $S(t)$ will evolve as
+If there was no random component, $S(t)$ will evolve as
 
 $$ S(t) = S(0)\exp^{\mu t} $$
 
@@ -441,6 +439,8 @@ On the other hand the logarithm of $S(t)$ can be written as
 $$ \log S(t) = \log S(0) + (\mu - {\sigma^2\over 2})t +\sigma W(t) $$
 
 which is just the standard Wiener Process with drift.
+
+The model based on the Wiener Process with drift can be regarded as the value of an invsestment in which the gains are not invested back into the portfolio, hence any change is due to gain or loss in the original amount. The model based on the Geometric Wiener Process on the other hand re-invests its gains back into the portfolio, so it results in the exponential behavior due to continuously compounding gains.
 
 Both these models are based on the assumption that the future of the stock market cannot be predicted by knowing how it has been doing in the past, only the current price matters, which is same as the Markov property. 
 This is also known as the weak form of the Efficient Market Hypothesis (EMH) in Finance, and was most forcefully advocated by the economist Eugene Fama in the late 1960s. There is a group of investors known as Technical Analysts who try to predict the market by looking at stock patterns that have occurred in the past, thus directly contradicting the EMH. This is an extremely difficult undertaking, and most Technical Analysts end up loosing money. However there are a few that do manage to beat the market, at least during intervals, and that raises the question whether the market behavior varies over time, and there are times when the EMH is violated. 
