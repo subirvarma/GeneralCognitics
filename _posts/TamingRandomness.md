@@ -477,7 +477,7 @@ So if the market does not follow the Wiener Process, what kind of statistics bes
 
 Figure: Tail Behavior comparison of the Normal and Fat Tailed distributions
 
-The empirical returns in the tails behave as a power law $p(x)\propto {1\over|x|^{1+\alpha|}$ with the exponent $\alpha$ close to 3 in the limit, which is further illustrated in the plot of the complementary distribution function $\int_x^\infty p(x)dx$ as shown above. There are a number of distributions that obey the power law, the most popular being the Truncated Levy Distrubution (TLD).
+The empirical returns in the tails behave as a power law $p(x)\propto {1\over|x|^{1+\alpha|}}$ with the exponent $\alpha$ close to 3 in the limit, which is further illustrated in the plot of the complementary distribution function $\int_x^\infty p(x)dx$ as shown above. There are a number of distributions that obey the power law, the most popular being the Truncated Levy Distrubution (TLD).
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/weiner20.png) 
 
