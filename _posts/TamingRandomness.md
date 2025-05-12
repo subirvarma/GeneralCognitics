@@ -487,13 +487,15 @@ We can plot the sample paths for a random process following the non-Normal distr
 
 $$ \log S_t = \log S_0 + (\mu - {\sigma^2\over 2})t +\sigma \sqrt{t}\xi_{NG} $$
 
-Here $\xi_{NG}$ is a sample drawn from a Non-Normal distribution with mean $0$ and variance $1$. This equation implicity assumes that successive samples for non-overlapping intervals are independent, and also that the variation with $t$ follows the $\sqrt t$ property of the Wiener Process. The left hand side plot in the above figure shows the results of the simulation, and we can see that non-Normal processes exhibit large jumps from time to time which has a greater resemblance to the actual behavior of financial markets. This is further illustrated in the right hand side plot, which shows the log returns for the Normal and the Truncated Levy distribution.
+Here $\xi_{NG}$ is a sample drawn from a Non-Normal distribution with mean $0$ and variance $1$. This equation implicity assumes that successive samples for non-overlapping intervals are independent, and also that the variation with $t$ follows the $\sqrt t$ property of the Wiener Process. The left hand side plot in the above figure shows the results of the simulation, and we can see that non-Normal processes exhibit large jumps from time to time which has a greater resemblance to the actual behavior of financial markets. This is further illustrated in the right hand side plot, which plots samples of the log return ($\log S_t$ - \log $S_0$) random variables for the Normal and the Truncated Levy distribution.
 
-
+Earlier in this article I stated that the Winer Process with drift enjoys the uniqueness property, i.e., it is the only random process which is continuous with independent stationary incremenets. This seems to contradict the above figure which shows the simulation of other random processes which have these properties. As you may have guessed, the resolution to this contradiction lies in the fact that the non-Normal sample paths shown in the figure are not continuous, since there is always a finite time difference between successive changes in $S_t$ in the simulation. However, even in this case, as $t$ becomes larger, $S_t$ can be written as the scaled sum of independent identically distributed random variables, which tends towards a Normal distribution because of the Central Limit Theorem. Hence for large values of $t$, we can expect the non-Normal processes to converge to the Wiener Process with drift.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/weiner21.png) 
 
-Figure: Prices of European Call Options as computed by the Black-Scholes model (dotted line) and the Truncated Levi Distribution based model
+Figure: Prices of European Call Options as computed by the Black-Scholes model (dotted line) and the Truncated Levi Distribution (TLD) based model
+
+The most important application of the Wiener Process model in finance is the Black-Scholes equation for options pricing. If this random process is not an accurate representatiobn of the Stock Market, then what are its implications? As shown by [Domenico et.al.](https://arxiv.org/pdf/2302.02769), it is possible to price options using Monte Carlo simulations driven by sample paths of the random process controlling the market movements, and this is plotted in the above figure. It shows that there is big disprecancy between the Black-Scholes model and non-Normal models for small values of Time to Maturity for the option. However, as $t$ increases, these values converge, and this is due to the fact that the non-Normal random process converges to the Wiener Process as $t$ increases.
 
 ## Image Generation using the Langevin Process
 
