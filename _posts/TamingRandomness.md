@@ -497,7 +497,16 @@ Figure: Prices of European Call Options as computed by the Black-Scholes model (
 
 The most important application of the Wiener Process model in finance is the Black-Scholes equation for options pricing. If this random process is not an accurate representatiobn of the Stock Market, then what are its implications? As shown by [Domenico et.al.](https://arxiv.org/pdf/2302.02769), it is possible to price options using Monte Carlo simulations driven by sample paths of the random process controlling the market movements, and this is plotted in the above figure. It shows that there is big disprecancy between the Black-Scholes model and non-Normal models for small values of Time to Maturity for the option. However, as $t$ increases, these values converge, and this is due to the fact that the non-Normal random process converges to the Wiener Process as $t$ increases.
 
-## Image Generation using the Langevin Process
+## Image Generation using the Langevin Diffusion Process
+
+Paul Langevin was a physicist who worked in Paris in the early decades of the 20th century. He proposed a new type of diffusion process to model the motion of particles in a viscous fluid, which reads as follows (with the notation that $v(t)$ is the velocity of the particle at time $t$ and $m$ is its mass):
+
+$$  m dv(t) = -\lambda v(t) dt + \eta dW(t) $$
+
+The first term on RHS of the equation represents the viscous force on the particle that dampens its movement while the second term represents the random forces due to collisions with the molecules of the fluid.
+One of the most unpected applications of the Wiener Process happened in 2015 when [Jascha Sohl-Dickstein](https://arxiv.org/abs/1503.03585) and his collaborators showed the Langevin Process can be used to generate images. Until then the best image generation technique was based on a type of Neural Network called Generative Adversarial Networks (GANs), which were notoriously difficult to train. It was shown within a few years that the diffusion based technique yielded better images, and could be extended to encompass text to image generation as well as video generation. This has led to widespread adoption of tools such Dall-E-2 and Dall-E-3 from OpenAI and Imagen from Google which are all based on this technique.
+
+In order to understand the connection between diffusions and image generation, lets start with a typical digital image. It is made up hundreds of thousands of individual blobs of color called pixels, the value of which is represented  by an integer between 0 and 255. For any one image the value of a pixel is fixed, but if we have a collection of images, then the pixel value varies and can be considered to be a random variable following some distribution. The collection of pixels that make up an image is a random vector $(X_1, X_2,...,X_n)$ consisting of correlated random variables, with distribution $f(x_1, x_2,...,x_n)$. If we had access to this distribution $f$, then it would be possible to generate new images by sampling from it. In reality $f$ is some fantastically comnplex function which is not expressible using a simple equation. But what if we sample from a simpler distribution, such as the Normal distribution, and then somehow move the samples around so that they end up following $f$? This can be accomplished using the Langevin diffusion.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/weiner22.png) 
 
