@@ -538,11 +538,27 @@ so that at time $T$, its distribution is given by $p_T$. We choose the functions
 
 We define a reverse time SDE given by
 
-$$ dx = [f(x,t) - g^2(t)\nabla_x\log\ p_t(x)]dt + g(t)d{\overline w}  $$
+$$ dX(t) = [f(x,t) - g^2(t)\nabla_x\log\ p_t(x)]dt + g(t)d{\overline w}  $$
 
 $x(T)$ is sampled from a Normal distribution, and then its value is allowed to change according to this SDE. With appropriate choice of $f$ and $g$, this equation can be shown to be equivalent to the Langevin Diffusion Process discussed earlier. This implies that the noisy image with distribution $p_T$ is gradually transformed into a proper image sampled from the distribution $p_{data}$.
 
+[Song et.al.](https://arxiv.org/pdf/1907.05600) proposed the following choice for the functions $f$ and $g$,
 
+$$ f(x,t) = 0\ \ \ and\ \ \ g(t) = \beta'(t) $$
+
+where $\beta'(t)$ is a function with the properties $\beta(0) = 0, \beta'(t) > 0, \beta(t)\rightarrow\infty$ for $t\rigtharrow\infty$, which results in the Forward Diffusion
+
+$$ dX(t) = \beta'(t) dW(t) $$
+
+It can be shown that variance $V(X_t)$ satisfies the equation
+
+$$ V(X_t) = V(X_0) + \beta(t) $$
+
+so that it increases monotonically with $t$, so clearly $X_t$ does not converge as $t$ increases. However the scaled process $Y_t = {X_t\over{\sqrt{\beta(t)}}}$ converges to the Standard Normal distribution $N(0,I)$.
+
+For this choice of $f$ and $g$, the Backward Diffusion can be written as
+
+$$ dX(t) = -g^2(t)\nabla_x\log\ p_t(x)dt + g(t)d{\overline w} $$
 
 - [ ] Take an image and add noise to it, until it becomes completely random 
 - [ ] Pixels jointly distributed as per Gaussian distribution in the Latent Space. 
