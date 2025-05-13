@@ -524,6 +524,24 @@ The Langevin diffusion gives us a very powerful tool for sampling from complex d
 
 Figure: Using Stochastic Differential Equations to transform an image into noise (top, from left to right), and transforming noise back into an image (bottom, right to left)
 
+The main idea behind using Stochastic Differential Equations to generate images is shown in the above figure, and consists of the following steps:
+
+**Forward Diffusion**
+
+We start with images $X_0$ distributed according to some unknown distribution given by $p_{data}$. As shown in the arrow going from left to right in the top part of the figure, we let $X_t$ evolve according to the following SDE
+
+$$ dX(t) = f(X_t,t)dt + g(t)dW_t $$
+
+so that at time $T$, its distribution is given by $p_T$. We choose the functions $f$ and $g$ such that $p_T$ is distributed according to the Normal distribution $N(0,I)$.
+
+**Backward Diffusion**
+
+We define a reverse time SDE given by
+
+$$ dx = [f(x,t) - g^2(t)\nabla_x\log\ p_t(x)]dt + g(t)d{\overline w}  $$
+
+$x(T)$ is sampled from a Normal distribution, and then its value is allowed to change according to this SDE. With appropriate choice of $f$ and $g$, this equation can be shown to be equivalent to the Langevin Diffusion Process discussed earlier. This implies that the noisy image with distribution $p_T$ is gradually transformed into a proper image sampled from the distribution $p_{data}$.
+
 
 
 - [ ] Take an image and add noise to it, until it becomes completely random 
