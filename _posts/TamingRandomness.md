@@ -536,11 +536,11 @@ so that at time $T$, its distribution is given by $p_T$. We choose the functions
 
 **Backward Diffusion**
 
-The Backward Diffusion allows us to sample from the original distribution $p_{data]$, by sampling from the Normal distribition $N(0,I)$ at $t=T$ and then working backwards to get to $p_{data}$ at $t=0$. We define a reverse time SDE given by
+The Backward Diffusion allows us to sample from the original distribution $p_{data}$, by sampling from the Normal distribition $N(0,I)$ at $t=T$ and then working backwards to get to $p_{data}$ at $t=0$. We define a reverse time SDE given by
 
 $$ d{\overline X}(t) = [f({\overline X}_t,t) - g^2(t)\nabla_x\log\ p_t({\overline X}_t)]dt + g(t)d{\overline w}_t  $$
 
-In this equation time runs backwards from $t=T$ to $t=0$, and the backwards Wiener Process ${\overline w}_t$ has the property that ${\overline w}_{t-s} - {\overline w}_t$ is independent of $\overline w}_t$ for $s>0$. The mathematician Brian Anderson showed in the 1980s that the time reversed diffusion process ${\overline X)_t$ has the same distribution as the forward time process $X_t$.
+In this equation time runs backwards from $t=T$ to $t=0$, and the backwards Wiener Process ${\overline w_t}$ has the property that ${\overline w}_{t-s} - {\overline w}_t$ is independent of ${\overline w}_t$ for $s>0$. The mathematician Brian Anderson showed in the 1980s that the time reversed diffusion process ${\overline X}_t$ has the same distribution as the forward time process $X_t$.
 
 $x(T)$ is sampled from a Normal distribution, and then its value is allowed to change according to this SDE. With appropriate choice of $f$ and $g$, this equation can be shown to be equivalent to the Langevin Diffusion Process discussed earlier. This implies that the noisy image with distribution $p_T$ is gradually transformed into a proper image sampled from the distribution $p_{data}$.
 
