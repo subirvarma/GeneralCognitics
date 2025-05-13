@@ -510,7 +510,7 @@ In order to understand the connection between diffusions and image generation, c
 
 Consider the following Stochastic Differential Equation of the Langevin type
 
-$$ dX_t = \nabla\log p(X_t) + \sqrt{2} W_t $$
+$$ dX_t = \nabla\log p(X_t)dt + \sqrt{2} dW_t $$
 
 This process can be approximately computed by discretizing it, resulting in
 
