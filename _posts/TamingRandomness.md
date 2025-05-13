@@ -532,13 +532,15 @@ We start with images $X_0$ distributed according to some unknown distribution gi
 
 $$ dX(t) = f(X_t,t)dt + g(t)dW_t $$
 
-so that at time $T$, its distribution is given by $p_T$. We choose the functions $f$ and $g$ such that $p_T$ is distributed according to the Normal distribution $N(0,I)$.
+so that at time $T$, its distribution is given by $p_T$. We choose the functions $f$ and $g$ such that $p_T$ is distributed according to the Normal distribution $N(0,I)$ regardless of their initial distribution.
 
 **Backward Diffusion**
 
-We define a reverse time SDE given by
+The Backward Diffusion allows us to sample from the original distribution $p_{data]$, by sampling from the Normal distribition $N(0,I)$ at $t=T$ and then working backwards to get to $p_{data}$ at $t=0$. We define a reverse time SDE given by
 
-$$ dX(t) = [f(x,t) - g^2(t)\nabla_x\log\ p_t(x)]dt + g(t)d{\overline w}  $$
+$$ d{\overline X}(t) = [f({\overline X}_t,t) - g^2(t)\nabla_x\log\ p_t({\overline X}_t)]dt + g(t)d{\overline w}_t  $$
+
+In this equation time runs backwards from $t=T$ to $t=0$, and the backwards Wiener Process ${\overline w}_t$ has the property that ${\overline w}_{t-s} - {\overline w}_t$ is independent of $\overline w}_t$ for $s>0$. The mathematician Brian Anderson showed in the 1980s that the time reversed diffusion process ${\overline X)_t$ has the same distribution as the forward time process $X_t$.
 
 $x(T)$ is sampled from a Normal distribution, and then its value is allowed to change according to this SDE. With appropriate choice of $f$ and $g$, this equation can be shown to be equivalent to the Langevin Diffusion Process discussed earlier. This implies that the noisy image with distribution $p_T$ is gradually transformed into a proper image sampled from the distribution $p_{data}$.
 
@@ -546,7 +548,7 @@ $x(T)$ is sampled from a Normal distribution, and then its value is allowed to c
 
 $$ f(x,t) = 0\ \ \ and\ \ \ g(t) = \beta'(t) $$
 
-where $\beta'(t)$ is a function with the properties $\beta(0) = 0, \beta'(t) > 0, \beta(t)\rightarrow\infty$ for $t\rigtharrow\infty$, which results in the Forward Diffusion
+where $\beta'(t)$ is a function with the properties $\beta(0) = 0, \beta'(t) > 0, \beta(t)\rightarrow\infty$ for $t\rightarrow\infty$, which results in the Forward Diffusion
 
 $$ dX(t) = \beta'(t) dW(t) $$
 
@@ -558,16 +560,19 @@ so that it increases monotonically with $t$, so clearly $X_t$ does not converge 
 
 For this choice of $f$ and $g$, the Backward Diffusion can be written as
 
-$$ dX(t) = -g^2(t)\nabla_x\log\ p_t(x)dt + g(t)d{\overline w} $$
+$$ d{\overline X}(t) = -g^2(t)\nabla_x\log\ p_t({\overline X}_t)dt + g(t)d{\overline w} $$
 
-- [ ] Take an image and add noise to it, until it becomes completely random 
-- [ ] Pixels jointly distributed as per Gaussian distribution in the Latent Space. 
-- [ ] Train a NN to convert the LV from this space into an image 
-- [ ] How is this even possible?
-- [ ] The noise is actually a latent vector. By using the Langevin Process to add noise, we are constraining the Latent Space to obey the Gaussian Distribution.
-- [ ] During training we are mapping LVs back to images
-- [ ] Create new images by interpolating in the latent space
-- [ ] Text to image conversion: Map text to a latent variable using a LLM, and then map the LV to an image.
+In discrete time this equation becomes
+
+$$ {\overline X}_{t-s} \approx {\overline X}_t + sg^2(t)\nabla_x\log\ p_t({\overline X}_t) + g(t)\sqrt{s}\epsilon $$
+
+where $\epsilon$ is sampled from the Normal distribution $N(0,I)$. Recall that the Langevin Diffusion was given by
+
+$$ X_{t+h} = X_t + s\ \log\nabla\log\ p(X_t) + \sqrt{2}s\epsilon  $$
+
+and it had the property that the distribution of $X_t$ converges to $p(X)$ over time. The Backwards Diffusion equation has the same struscture, with the difference that $p_t$ is used rather than the target distribution $p_{data}$. However $p_t$ converges to $p_{data}$ as $t\rightarrow 0$, so the Langevin convergence still holds.
+
+The description that I just gave contains the essence of the argument about diffusion based image generation systems work. If you want to dig deeper into this subject you can read the excellent [blog](https://www.peterholderrieth.com/blog/2023/Langevin-Dynamics-An-introduction-for-Machine-Learning-Engineers/) by Peter Holderreith on this topic or the original [paper](https://arxiv.org/pdf/2011.13456) by Song et.al.
 
 
 ## My Personal Encounters with Randomness
