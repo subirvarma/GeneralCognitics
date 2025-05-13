@@ -514,13 +514,17 @@ $$ dX_t = \nabla\log p(X_t) + \sqrt{2} W_t $$
 
 This process can be approximately computed by discretizing it, resulting in
 
-$$ X_{t+h} = X_t + s\log\nabla\log p(X_t) + sqrt{2}s\epsilon  $$
+$$ X_{t+h} = X_t + s\ \log\nabla\log\ p(X_t) + \sqrt{2}s\epsilon  $$
 
 where $s$ is the step size and $\epsilon ~ N(0,1)$. This can be interpreted as an update of $X_t$ by going in the direction pointed to by $\nabla\log p(X_t)$, which is somewhat similar to the parameter update step in the Stochastic Gradient Descent Algorithm used for training Neural Networks, though in this case we are performing an ascent, not descent. In addition the second term adds some random noise to the step update. Note that the gradient term pished $X_t$ into regions where $p(x)$ is high. Hence as $X_t$ evolves over time, it moves into regions with high probability, and in the limit it is distrbuted according to $p(x)$. But what about the noise term? It has been put there to prevent $X_t$ from getting stuck in a local maximum of $p(x)$, which would cause the iteration to get stuck and there would be no movement.
+
+The Langevin diffusion gives us a very powerful tool for sampling from complex distributions, and we are going to use it to sample from the distribution of pixel values in images.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/weiner22.png) 
 
 Figure: Using Stochastic Differential Equations to transform an image into noise (top, from left to right), and transforming noise back into an image (bottom, right to left)
+
+
 
 - [ ] Take an image and add noise to it, until it becomes completely random 
 - [ ] Pixels jointly distributed as per Gaussian distribution in the Latent Space. 
