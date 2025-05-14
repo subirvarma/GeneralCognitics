@@ -568,11 +568,35 @@ $$ {\overline X}_{t-s} \approx {\overline X}_t + sg^2(t)\nabla_x\log\ p_t({\over
 
 where $\epsilon$ is sampled from the Normal distribution $N(0,I)$. Recall that the Langevin Diffusion was given by
 
-$$ X_{t+h} = X_t + s\ \log\nabla\log\ p(X_t) + \sqrt{2}s\epsilon  $$
+$$ X_{t+h} = X_t + s\ \nabla\log\ p(X_t) + \sqrt{2}s\epsilon  $$
 
 and it had the property that the distribution of $X_t$ converges to $p(X)$ over time. The Backwards Diffusion equation has the same struscture, with the difference that $p_t$ is used rather than the target distribution $p_{data}$. However $p_t$ converges to $p_{data}$ as $t\rightarrow 0$, so the Langevin convergence still holds.
 
-The description that I just gave contains the essence of the argument about diffusion based image generation systems work. If you want to dig deeper into this subject you can read the excellent [blog](https://www.peterholderrieth.com/blog/2023/Langevin-Dynamics-An-introduction-for-Machine-Learning-Engineers/) by Peter Holderreith on this topic or the original [paper](https://arxiv.org/pdf/2011.13456) by Song et.al.
+In the discussion so far the subject of Neural Networks has not come up, so what role do they play? Recall that the probability density over images $p_{data}$ or $p_t$ is so complex that it cannot be captures in the usual way of mathematical equations, and this goes for the gradient $\nabla\log p_{t}$ as well. Hoever it can be represented using the millions of parameters in a Neural Network, and this is something that has become possible only in the last decade as our ability to train these networks has improved. These networks can be trained to estimate $\nabla\log p_{t}$, lets call is $s_{\theta}(X_t,t)$, where $\theta$ represents the parameters of the Neural Network. With this the equation for recovering the distribution $p_{data}$ becomes
+
+$$ {\overline X}_{t-s} \approx {\overline X}_t + sg^2(t)s_{\theta}({\overline X_t},t) + g(t)\sqrt{s}\epsilon $$
+
+The description that I just gave contains the essence of the argument about diffusion based image generation systems work. If you want to dig deeper into this subject, including details about the implementation, you can read the excellent [blog](https://www.peterholderrieth.com/blog/2023/Langevin-Dynamics-An-introduction-for-Machine-Learning-Engineers/) by Peter Holderreith on this topic or the original [paper](https://arxiv.org/pdf/2011.13456) by Song et.al. I have also written a tutorial on this subject and it can be found [here](https://subirvarma.github.io/GeneralCognitics/2022/10/14/DiffusionModels.html).
+
+## Is There a Connection with Quantum Mechanics?
+
+- [ ] QM and the wiener process were birthed in the same year, 1900, but are they related?
+- [ ] QM is based on the wave function, for which we still don’t have a physical interpretation.
+- [ ] Moreover QM also leads to predictions that are probabilities. But probabilities enter QM in a rather forced way by means of the Born rule. There is no physical explanation first it.
+- [ ] Can we introduce randomness into QM without using the born rule? Such that the randomness is driven by the random fluctuations of the wiener process?
+- [ ] Can we use the wiener process to introduce probability into QM in a different way that is more physically plausible? 
+- [ ] The Fokker Planck equation WP
+- [ ] QM probabilities satisfy a version of this
+- [ ] This results in a diffusion model that explains the randomness
+- [ ] Analogy with Brownian motion. Something is impacting the particles that causes them to move randomly. Inversely proportional to m.
+- [ ] Does not explain non locality though.
+
+I remarked at the start of this article that Quantum Mechanics and the Wiener Process were both birthed in the year 1900, but are they related? Considering that both of them involve the concept of randomness at a very deep level, one might tend to think so. 
+Quantum Mechanics is based on the concept of a Wave Function $\psi$, for which we still don't have a physical interpretation. Quantum Mechanics leads to predictions that are probabilities, but these probabilities enter the theory in a rather forced, through the Born Rule, which 1 dimension states that the probability $p(\Delta x)$ of finding a partcle in the interval $\Delta x$ is given by
+
+$$ p(\Delta x) = \int_{\Delta x} \psi\psi^* dx  $$
+
+All of Quantum Mechanics is based on this rule, but again we have no clue as to why it works. Is it possible to introduce randomness into Quantum Mechanics without using the Born Rule? And more interestingly, can that randomness be due to the fluctuations of the Wiener Process operating at a very deep level in nature? Eisnstein showed that the randomness of the pollen particles was due to bombardment by water molecules. Is there some phenomenon operating deep in the structure of space-time that similarly causes randomness in Quantum Theory by bombarding tiny particles such as the electron. If this were true, it would provide a physical explanation for mysterious equations of Quantum Mechanics that would have made Einstein happy! 
 
 
 ## My Personal Encounters with Randomness
