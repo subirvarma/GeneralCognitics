@@ -592,11 +592,42 @@ The description that I just gave contains the essence of the argument about diff
 - [ ] Does not explain non locality though.
 
 I remarked at the start of this article that Quantum Mechanics and the Wiener Process were both birthed in the year 1900, but are they related? Considering that both of them involve the concept of randomness at a very deep level, one might tend to think so. 
-Quantum Mechanics is based on the concept of a Wave Function $\psi$, for which we still don't have a physical interpretation. Quantum Mechanics leads to predictions that are probabilities, but these probabilities enter the theory in a rather forced, through the Born Rule, which 1 dimension states that the probability $p(\Delta x)$ of finding a partcle in the interval $\Delta x$ is given by
+Quantum Mechanics is based on the concept of a Wave Function $\psi$, for which we still don't have a physical interpretation. Quantum Mechanics leads to predictions that are probabilities, but these probabilities enter the theory in a rather forced, through the Born Rule, which in 1 dimension states that the probability $p(\Delta x)$ of finding a partcle in the interval $\Delta x$ is given by
 
 $$ p(\Delta x) = \int_{\Delta x} \psi\psi^* dx  $$
 
 All of Quantum Mechanics is based on this rule, but again we have no clue as to why it works. Is it possible to introduce randomness into Quantum Mechanics without using the Born Rule? And more interestingly, can that randomness be due to the fluctuations of the Wiener Process operating at a very deep level in nature? Eisnstein showed that the randomness of the pollen particles was due to bombardment by water molecules. Is there some phenomenon operating deep in the structure of space-time that similarly causes randomness in Quantum Theory by bombarding tiny particles such as the electron. If this were true, it would provide a physical explanation for mysterious equations of Quantum Mechanics that would have made Einstein happy! 
+
+There has been some work done over the years to connect Quantum Mechanics and the Wiener Process, and in order to understand this, I am going to introduce an important equation in the theory of Diffusion Processes called the Fokker-Planck equation. This is a Partial Differential Equation for the probability density $\rho(x,t)$ for a diffusion process
+
+$$  dX(t) = m(X(t), t)dt + \sigma^2(X_t, t)dW_t $$
+
+and is given by
+
+$$  {\partial\rho(x,t)\over{\partial t}} = {1\over 2}{\partial^2\rho(x,t)\sigma^2(x,t)\over{\partial x^2}} - {\partial\rho(x,t)m(x,t)\over{\partial x}} $$
+
+Note for the case of a Winer Process, $m = 0$ and $\sigma = 1$, so it reduses to
+
+$$ {\partial\rho\over{\partial t}} = {1\over 2}{\partial^2\rho\over{\partial x^2}} $$
+
+which has the expected solution
+
+$$ \rho(x,t) = {1\over{{\sqrt{2t}}}} e^{-{x^2\over{2\sigma^2 t}}} $$
+
+In the case of Quantum Mechanics we have the Schrodinger Equation for $\psi$ given by
+
+$$ i{\hbar}{\partial\psi\over{\partial t}} = -{\hbar^2\over{2m}}\nabla^2\psi + V(x)\psi $$
+
+The Born Rule says that the probability density for Quantum Mechanics is given by $\rho_{QM} = \psi\psi^* $.
+It can be shown that $\rho_{QM}$ satisfies the following equation (for a derivation see the paper by [S. Agrawal](https://homes.psd.uchicago.edu/~sethi/Teaching/P243-W2020/final-papers/agrawal.pdf) on this topic)
+
+$$ {\partial\rho\over{\partial t}} = {\hbar^2\over{2m}}\nabla^2\rho_{QM} - \nabla.(\rho(u+v)) $$
+
+where
+
+$$  \pxi(x) = \rho_{QM}e^{iS(x)\over\hbar} $$
+$$ v = {\nabla S\over m} $$
+$$ u = {\hbar^2\over{2m}}{\nabla\rho_{QM}\over\rho_{QM}}
 
 
 ## My Personal Encounters with Randomness
