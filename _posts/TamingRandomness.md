@@ -338,6 +338,12 @@ $$ dX(t) = b(X(t))dt + \sigma(X(t))dW(t) $$
 
 Hence the dependence of $b$ and $\sigma$ on time is entirely captured by the $X(t)$ dependence. Ito diffusions where a focus of research activity in the 1950s and 1960s, and their theory is well developed. Their most important property is that they are Markov Processes, just like the Weiner Process.
 
+How does one go about solving a Stochastic Differential Equation? In the next section we will meet Ito's Formula that allows us to get explicit solutions for some special cases, but there is a more general method which 'solves' these equtions by simulating their sample paths, its called the Euler-Maruyama method. Its based on discretizing time in the interval $[0,T]$ into $n$ steps $[0, s, 2s,3s,...,Ns]$ such that $Ns=T$ and then carrying out the iteration
+
+$$ X_{(n+1)s} = X_{ns} + sb(X_{ns},ns) + \sigma(X_{ns},ns)\sqrt{s}\epsilon  $$
+
+where $\epsilon$ is a sample from $N(0,I)$. Every time we run this iteration we will get a different sample path, and if we are interested in the average value or variance of $X_t$, then we can run multiple of these iterations starting from the same point $X_0$, and then take the average of the result.
+
 ### Ito's Formula
 
 In addition to defining his eponymous intgeral, Kiyoshi Ito made another fundamental contribution the field of Staochastic Calculus by introducing the Ito's Formula (sometimes calles the Ito's Lemma), which was published in 1951. 
@@ -562,7 +568,8 @@ For this choice of $f$ and $g$, the Backward Diffusion can be written as
 
 $$ d{\overline X}(t) = -g^2(t)\nabla_x\log\ p_t({\overline X}_t)dt + g(t)d{\overline w} $$
 
-In discrete time this equation becomes
+In practice these equations are implemented using the Euler-Maruyama method by discretizing time which results in a multistage process shown in the figure.
+In discrete time the equation becomes
 
 $$ {\overline X}_{t-s} \approx {\overline X}_t + sg^2(t)\nabla_x\log\ p_t({\overline X}_t) + g(t)\sqrt{s}\epsilon $$
 
@@ -592,21 +599,21 @@ The description that I just gave contains the essence of the argument about diff
 - [ ] Does not explain non locality though.
 
 I remarked at the start of this article that Quantum Mechanics and the Wiener Process were both birthed in the year 1900, but are they related? Considering that both of them involve the concept of randomness at a very deep level, one might tend to think so. 
-Quantum Mechanics is based on the concept of a Wave Function $\psi$, for which we still don't have a physical interpretation. Quantum Mechanics leads to predictions that are probabilities, but these probabilities enter the theory in a rather forced, through the Born Rule, which in 1 dimension states that the probability $p(\Delta x)$ of finding a partcle in the interval $\Delta x$ is given by
+Quantum Mechanics is based on the concept of a Wave Function $\psi$, for which we still don't have a physical interpretation. It gives no clear picture of the movement of particles in-between successive measurements and leads to predictions that are probabilities. But these probabilities enter the theory in a rather forced way, through the Born Rule, which in 1 dimension states that the probability $p(\Delta x)$ of finding a partcle in the interval $\Delta x$ is given by
 
 $$ p(\Delta x) = \int_{\Delta x} \psi\psi^* dx  $$
 
 All of Quantum Mechanics is based on this rule, but again we have no clue as to why it works. Is it possible to introduce randomness into Quantum Mechanics without using the Born Rule? And more interestingly, can that randomness be due to the fluctuations of the Wiener Process operating at a very deep level in nature? Eisnstein showed that the randomness of the pollen particles was due to bombardment by water molecules. Is there some phenomenon operating deep in the structure of space-time that similarly causes randomness in Quantum Theory by bombarding tiny particles such as the electron. If this were true, it would provide a physical explanation for mysterious equations of Quantum Mechanics that would have made Einstein happy! 
 
-There has been some work done over the years to connect Quantum Mechanics and the Wiener Process, and in order to understand this, I am going to introduce an important equation in the theory of Diffusion Processes called the Fokker-Planck equation. This is a Partial Differential Equation for the probability density $\rho(x,t)$ for a diffusion process
+There has been some work done over the years to connect Quantum Mechanics and the Wiener Process, and in order to understand this, I am going to introduce an important equation in the theory of Diffusion Processes called the Fokker-Planck equation. Consider the diffusion given by
 
 $$  dX(t) = m(X(t), t)dt + \sigma^2(X_t, t)dW_t $$
 
-and is given by
+The Fokker-Planck equation for this diffusion is a Partial Differential Equation for the probability density $\rho(x,t)$ for the random variable $X_t$ and is given by
 
 $$  {\partial\rho(x,t)\over{\partial t}} = {1\over 2}{\partial^2\rho(x,t)\sigma^2(x,t)\over{\partial x^2}} - {\partial\rho(x,t)m(x,t)\over{\partial x}} $$
 
-Note for the case of a Winer Process, $m = 0$ and $\sigma = 1$, so it reduses to
+Note for the case of a Wiener Process, $m = 0$ and $\sigma = 1$, so it reduces to
 
 $$ {\partial\rho\over{\partial t}} = {1\over 2}{\partial^2\rho\over{\partial x^2}} $$
 
