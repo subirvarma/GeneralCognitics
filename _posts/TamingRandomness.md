@@ -623,7 +623,11 @@ $$ \rho(x,t) = {1\over{{\sqrt{2t}}}} e^{-{x^2\over{2\sigma^2 t}}} $$
 
 In the case of Quantum Mechanics we have the Schrodinger Equation for $\psi$ given by
 
-$$ i{\hbar}{\partial\psi\over{\partial t}} = -{\hbar^2\over{2m}}\nabla^2\psi + V(x)\psi $$
+$$ i{\hbar}{\partial\psi\over{\partial t}} = -{\hbar^2\over{2m}}{\partial^2\psi\over{\partial x^2}} + V(x)\psi $$
+
+If we make the substitution $i\rightarrow -i$, then the Schrodinger equation becomes
+
+$$ {\hbar}{\partial\psi\over{\partial t}} = {\hbar^2\over{2m}}{\partial^2\psi\over{\partial x^2}} - V(x)\psi $$
 
 The Born Rule says that the probability density for Quantum Mechanics is given by $\rho_{QM} = \psi\psi^* $.
 It can be shown that $\rho_{QM}$ satisfies the following equation (for a derivation see the paper by [S. Agrawal](https://homes.psd.uchicago.edu/~sethi/Teaching/P243-W2020/final-papers/agrawal.pdf) on this topic)
@@ -634,7 +638,7 @@ where
 
 $$  \pxi(x) = \rho_{QM}e^{iS(x)\over\hbar} $$
 $$ v = {\nabla S\over m} $$
-$$ u = {\hbar^2\over{2m}}{\nabla\rho_{QM}\over\rho_{QM}}
+$$ u = {\hbar^2\over{2m}}{\nabla\rho_{QM}\over\rho_{QM}} $$
 
 
 ## My Personal Encounters with Randomness
