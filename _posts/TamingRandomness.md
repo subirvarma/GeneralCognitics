@@ -427,6 +427,19 @@ $S(t)$ is an important random process and is called the Geometric Brownian Motio
 
 Here is an informal proof of the Ito Formula:
 
+The Taylor Expansion of $df(t,X_t)$, where $dX_t = b(t,X_t)dt + \sigma(t,X_t)dW_t$ can be written as
+
+$$ df(t,X_t) = {\partial f\over\partial t}dt + {\partial f\over\partial x} dX_t + {1\over 2} {\partial^2 f\over\partial^2 x} (dX_t)^2 + \ \ \ higher\ \ \ order\ \ \ terms $$
+
+$$ = {\partial f\over\partial t}dt + {\partial f\over\partial x}(b.dt + \sigma.dW_t) + {1\over 2} {\partial^2 f\over{\partial^2 x}}[(b^2.(dt)^2 + 2b.\sigma.dt.dw_t + \sigma^2.(dW_t)^2] + \ \ \ higher\ \ \ order\ \ \ terms$$
+
+From the prior section we saw that the Quadratic Variation Property for Wiener processes imples that $dW_t^2 = dt$, while the terms with $dt^2$ and $dt.dW_t$ can be ignored. Also ignoring the higher order terms we get
+
+$$ df(t,X_t) = [{\partial f\over\partial t} + b.{\partial f\over\partial x} + {\sigma^2\over 2}{\partial^2 f\over{\partial^2 x}}]dt + {\partial f\over\partial x}.\sigma.dW_t $$
+
+which is the Ito Formula.
+
+
 ## Modeling the Stock Market
 
 When I lfirst learnt about the Weiner Process and Stochastic Calculus in grad school in the late 1980s, the main applications that text books talked about were in the fields of Filtering and Control theory. Now 40 years later almost everyone who learns Stochastic Calculus is doing it so that they can apply it to the field of mathematical finance. In 1985 the Black Scholes equation was already about a decade old, but its use hadn't become prevalant in Wall Street. There has been an explosion in the financial markets since then, with new financial products that make use of stock derivatives. This has made Stochastic Calculus a must have skill for the so called Quants who work on Wall Street. At the same time there has been a backlash against the use of the Weiner Process to model stocks led by the trader and author Nassim Nicholas Taleb, some of these ideas can be traced back to a paper that Benoit Mandelbrot wrote on this topic in the early 1960s.
