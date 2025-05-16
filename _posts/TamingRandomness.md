@@ -110,12 +110,13 @@ There is a bit of ambiguity in the notation since $W(t)$ can refer both to the s
 We now provide some heuristic arguments to show that the Random Sum Process $W^n(t)$ converges to the Wiener Process $W(t)$ as $n\rightarrow\infty$. 
 But before we do that, the following question has to be answered: What does convergence mean when the objects we are talking about are random processes? 
 Lets first consider what consider what convergence means in the context of random variables. 
-Clearly the random sum $S_n = X_1 + X_ + ...+ X_n$ diverges to infinity as $n$ increases,
-but can we say anything about the convergence of the scaled version of this sum given by ${S_n\over\sqrt{n}}$? We certainly can, and this is one of the most famous results in Probability Theory called the Central Limit Theorem or CLT. It says that the probability distribution of ${S_n\over\sqrt{n}}$ converges to the Normal or Standard Gaussian Distribution $N(0,1)$. More precisely if the individual jumps $X_i$ have mean $m$ and variance $\sigma^2$, then 
+We defined the random $S_n = X_1+X_2+...+X_n$ in the context that each $X_i$ was the outcome of a coin toss, but we can extent this to the more general case where the $X_i$ are arbitrary random variables with mean $m$ and variance $\sigma^2$. We will assume the $X_i$ are independent of one another, and furthermore thay are all identically distributed.
 
-$$ {S_n\over\sqrt{n}} \rightarrow  {1\over\sqrt{2\pi\sigma^2}}e^{-{(x-m)^2\over {2\sigma^2}}}\ \ \ as\ \ \ n\rightarrow\infty $$
+Under these conditions can we say anything about the convergence of the scaled version of this sum given by ${S_n\over\sqrt{n}}$? We certainly can, and this is one of the most famous results in Probability Theory called the Central Limit Theorem or CLT. It says that the probability distribution of ${S_n\over\sqrt{n}}$ converges to the Normal or Standard Gaussian Distribution $N(0,1)$. More precisely 
 
-This kind of convergence for random variables is called convergence in distribution or weak convergence. It basically says that in the limit, we may not be able to tell the precise value to which ${S_n\over\sqrt{n}}$ will converge to (which is the traditional idea of convergence for a determinitic series), but we can give precise estimates of the probability that it falls within a specified interval, say $[a,b]$, and this is given by the Normal Distribution. In the rest of this section we will assume that $m = 0$ and $\sigma = 1$.
+$$ {S_n\over\sqrt{n}} \xrightarrow[\text {D}]{\text{}}  {1\over\sqrt{2\pi\sigma^2}}e^{-{(x-m)^2\over {2\sigma^2}}}\ \ \ as\ \ \ n\rightarrow\infty $$
+
+This kind of convergence for random variables is called convergence in distribution or weak convergence and is denoted by $\xrightarrow[\text {D}]{\text{}}$ in the equation. It basically says that in the limit, we may not be able to tell the precise value to which ${S_n\over\sqrt{n}}$ will converge to (which is the traditional idea of convergence for a determinitic series), but we can give precise estimates of the probability that it falls within a specified interval, say $[a,b]$, and this is given by the Normal Distribution. In the rest of this section we will assume that $m = 0$ and $\sigma = 1$.
 
 Can we define a similar type of weak convergence result for random functions $W^n(t), 0\le t\le 1$ as $n\rightarrow\infty$? This is a difficult problem to solve since now we are now talking about a probability space consisting of functions. A whole host of brilliant minds worked on this problem in 1950s, the most prominent names being Donsker in the US, Skorokhod, Kolmogorov and Prohorov in the USSR. 
 For those of you wanting to get deeper into this topic, there are several excellent books available, in particular "Convergence of Probability Measures" by Patrick Billingsley is standard reference for the theory of weak convergence over functional spaces. 
@@ -144,9 +145,9 @@ $$ W^n_{j/n} = ({1\over\sqrt j}\sum_{k=1}^j X_k)\sqrt{j\over n} $$
 The Central Limit Theorem tells us that if we let $j$ and $n$ go to infinity, while keeping the ratio ${j\over n} = t$ constant, then the 
 random sum ${1\over\sqrt j}\sum_{k=1}^j X_k)$ converges to the Normal Distribution $N(0,1)$. Hence $W^n_{j/n}$ converges to a random variable $W_t$ which is the product of a Normally distributed random variable and $\sqrt{t}$, which is again a Normal distribution $N(0,t)$ with mean zero and variance $t$. This can be written as
 
-$$ W^n_t \rightarrow W_t ~  N(0,t) = {1\over\sqrt{2\pi t}}e^{-{x^2\over{2t}}}   $$
+$$ W^n_t \xrightarrow[\text {D}]{\text{}} W_t ~  N(0,t) = {1\over\sqrt{2\pi t}}e^{-{x^2\over{2t}}}   $$
 
-It turns out that these two properties are precisely what characterize a Wiener process. 
+It turns out that these two properties are precisely what characterize the Wiener process $W(t)$. 
 
 More formally, the Weiner Process is a collection of random variables that are indexed by time, and satisfy the following four properties:
 
@@ -157,7 +158,12 @@ More formally, the Weiner Process is a collection of random variables that are i
 
 Since the random walk $W^n_t$ converges to a Normal distribution with mean zero and variance $t$ as $n\rightarrow\infty$, and furthermore it exhibits the ISI property,
 we can see why it might converge to a limiting process that has the same properties, which is the content of Donsker's Theorem.
-Actually what Donsker proved was something much deeper, he showed convergence over the space of probability measures defined for the space of  functions, not just for probability distributions at a finite number of time instants.
+Actually what Donsker proved was something much deeper, he showed that
+
+$$ W^n(t) \xrightarrow[\text {D}]{\text{}} W(t)  $$
+
+which is a convergence over the space of probability measures defined over the space of  random functions, not just for probability distributions at a finite number of time instants. Hence all suitably scaled versions of Random Walks converge to the Wiener Process.
+This convergence can be considered to be a stronger version of the Central Limit Theorem for random variables, which is a special case of Donsker's Theorem for the case $t=1$. Just as the Normal distribution is the universal limiting distribution for random variables, the Wiener Process is the universal limiting distribution for random functions, which explains why it so important in applications.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/weiner15.png) 
 
@@ -221,24 +227,26 @@ This result is informally written as $(dW_t)^2 = dt$ and is critical in proving 
 
 Now that we have defined the Weiner Process, the next natural step is build upon this and create other random processes that use it as a building block. Kiyosi Ito carried out this program in the 1940s, and his first step was to define a random process $I(t)$ that could be expressed as an integral over the Weiner Process:
 
-$$ I(t) = \int_0^t f(s) dW(s)  $$
+$$ I(t) = \int_0^t f(s,W_s) dW_s  $$
 
-where $W(s$) is a Weiner Process starting at the origin and $f(s)$ is some other random process.
-Integrating with respect to the Weiner Process is highly non-intuitive, how did he come up with this idea? It turns out it arises naturally when we try to add a random noise component to a deterministic dynamical system model, such as the following one,
+where $W(t)$ is a Wiener Process starting at the origin and $f(t,W_t)$ is another random process defined in terms of $W(t)$.
+Integrating with respect to a wildly varying random function is highly non-intuitive, how did he come up with this idea? It turns out that this integral arises naturally when we add a random noise component to a deterministic dynamical system model, such as the following one,
 
-$$ {dX\over dt} = b(t,X_t) $$
+$$ {dX(t)\over dt} = b(t,X_t) $$
 
 where $b$ is some function. Suppose that the time evolution of $X(t)$ has some random component that we want to capture. One way of doing this is by
 
-$$ {dX_t\over dt} = b(t,X_t) + \sigma(t, X_t)N_t $$
+$$ {dX(t)\over dt} = b(t,X_t) + \sigma(t, X_t)N_t $$
 
-where $\sigma$ is another function and $N(t)$ is some sort of random process that represents noise. Based on models used in engineering, we would like the random variables $N_{t_1}$ and $N_{t_2}$ to be independent, $E(N_t) = 0$ for all $t$, and require $N(t)$ to be a stationary process. It turns out that there is no 'reasonable' process that satisfies these conditions. In fact any such process would not even be continuous since we are requiring two neighboring random variables to be independent irrespective of how close they are in time.
+where $\sigma$ is another function and $N(t)$ is some sort of random process that represents noise. Based on models used in engineering, we would like the random variables $N_{t_1}$ and $N_{t_2}$ to be independent, $E(N_t) = 0$ for all $t$, and require $N(t)$ to be a stationary process. This agrees with the intuitive notion that $X(t)$ is being driven by random noise impulses that can completely different from one instant to another.
+
+It turns out that there is no 'reasonable' process $N(t)$ that satisfies these conditions. In fact any such process would not even be continuous since we are requiring two neighboring random variables to be independent irrespective of how close they are in time.
 
 Consider the discrete time version of this equation, that can be written as
 
 $$ X_k - X_{k-1} = b(t_k, X_k)\Delta t_k + \sigma(t_k,X_k)N_k\Delta t_k $$
 
-where $X_j = X(t_j), W_k = W(t_k), \Delta t_k = t_k - t_{k-1}$. Lets replace $N_k\Delta t_k$ by the increment of some stochastic process $V(t)$ such that $\Delta V_k = V_k - V_{k-1}$. Based on the properties of $N(t)$, we would like $V(t)$ to have independent stationary increments with mean 0. We learnt in the prior section that the only continuous random process with independent stationary increment is the Weiner Process so that the equation can be written as
+where $X_j = X(t_j), W_k = W(t_k), \Delta t_k = t_k - t_{k-1}$. Lets replace $N_k\Delta t_k$ by the increment of some stochastic process $V(t)$ such that $\Delta V_k = V_k - V_{k-1}$. Based on the properties of $N(t)$, we would like $V(t)$ to have independent stationary increments with mean 0, and lets also contrain it to be continuous. We learnt in the prior section that the only continuous random process with independent stationary increments is the Wiener Process so that the equation can be written as
 
 $$ X_k - X_{k-1} = b(t_k, X_k)\Delta t_k + \sigma(t_k,X_k)(W_k - W_{k-1}) $$
 
@@ -248,18 +256,18 @@ $$ X_k = X_0 + \sum_{j=1}^k b(t_j,x_j)\Delta t_j + \sum_{j=1}^k \sigma(t_j,X_j)\
 
 Assume that the following limit exists as $\Delta t_j\rightarrow 0$,
 
-$$ X(t) = X(0) + \int_0^t b(s,X(s))ds + \int_0^t \sigma(s,X(s))dW(t) $$
+$$ X(t) = X_0 + \int_0^t b(s,X_s)ds + \int_0^t \sigma(s,X_s)dW_t $$
 
 and we can see the Ito Integral appearing on the right hand side of this equation. Note that $X(t)$ is now a random process, and so are $b$ and $\sigma$ since they are functions of $X(t)$. This equation is often written in the differential form as
 
-$$ dX(t) = b(t,X(t))dt + \sigma(t,X(t))dW(t) $$
+$$ dX(t) = b(t,X_t)dt + \sigma(t,X_t)dW_t $$
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/weiner14.png) 
 
 Figure: Diffusion Process of the type described by a Stochastic Differential Equation
 
-Note that this is an abbreviation of the integral form since $dX, dW$ and $dt$ don't have any meaning by themselves.
-This is referred to as a Stochastic Differential Equation also called a Diffusion Process. Tha latter name arises out of the observation that the equation describes the gradual spreading of a particle following $X(t)$ as it spreads around the deterministic trajectory defined by ${dX\over dt} = b(t,X_t)$, as shown in the above figure.
+Note that this is just an abbreviation of the integral form since $dX$, $dW$ and $dt$ don't have any meaning by themselves.
+This is referred to as a Stochastic Differential Equation or SDE and is also called a Diffusion Process. Tha latter name arises out of the observation that the equation describes the gradual spreading of a particle's trajectory around the deterministic trajectory defined by ${dX(t)\over dt} = b(t,X_t)$, as shown in the above figure.
 
 Does the Ito Integral even exist, in other words is it well defined? The traditional Riemann Integral is defined as the limit
 
