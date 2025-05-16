@@ -211,6 +211,7 @@ The quadratic variation of a function $f$ on the interval $[a,b]$ over some part
 
 $$ Q(f) = \lim_{|\Pi|\rightarrow 0} |f(x_i) - f(x_{i-1})|^2  $$
 
+where $\Pi$ is the max value over the partitions $x_i - x_{i-1}$.
 Similarly the variation for $f$ is defined as the limit
 
 $$ V(f) = \lim_{|\Pi|\rightarrow 0} |f(x_i) - f(x_{i-1})|  $$
@@ -273,8 +274,8 @@ Does the Ito Integral even exist, in other words is it well defined? The traditi
 
 $$ \int_0^t f(t)dt = \lim_{n\rightarrow\infty}\sum_{i=1}^n f(t_i^q)(t_i - t_{i-1}),\ \ \ t_{i-1}\le t_i^q\le t_i $$
 
-where the sum is taken over the partition ${t_0 = 0, t_1, t_2,...,t_n = t}$. Clearly this won't work since the Ito integration is not with respect to the time parameter.
-The Riemann-Stieljes Integral on the other hand can be used to integrate with respect to another function, and is defined as:
+where the sum is taken over the partition ${t_0 = 0, t_1, t_2,...,t_n = t}$. Clearly this won't work since the Ito integral is not with respect to the time parameter.
+The Riemann-Stieltjes Integral on the other hand can be used to integrate with respect to another function, and is defined as:
 
 $$ \int_0^t f(t)dh(t) = \lim_{n\rightarrow\infty}\sum_{i=1}^n f(t_i^q)(h(t_i) - h(t_{i-1})),\ \ \ t_{i-1}\le t_i^q\le t_i $$
 
@@ -282,13 +283,13 @@ This integral exists only if $g(t)$ has a bounded variation, i.e.,
 
 $$ V(g) = \lim_{|\Pi|\rightarrow 0} |g(t_i) - g(t_{i-1})|  $$
 
-is a finite quantity. We saw in the last section that this property is not true for the Weiner Proces, hence we cannot use the Stieljes Integral fto define the Ito Integral.
+is a finite quantity. We saw in the last section that this property is not true for the Wiener Proces, hence we cannot use the Stieltjes Integral to define the Ito Integral.
 
-We learnt about the concept of convergence in distribuion in the prior sections, I am going to introduce a new kind of convergence called convergence in probability, since this is needed to define the Ito Integral. A sequence of random variables ${X_t^n}$ is said to converge to a random variable $X$ if
+We learnt about the concept of convergence in distribuion in the prior sections, I am going to introduce another kind of convergence called convergence in probability which is needed to define the Ito Integral. A sequence of random variables ${X_t^n}$ is said to converge in probability to a random variable $X$ if for any $\epsilon > 0$,
 
 $$ \lim_{n\rightarrow\infty} P(|X_t^n - X|>\epsilon) = 0 $$
 
-There is an useful result due to the Russian Mathematician Pafnuty Tchebychev which states that for a given random variable $V$ with mean ${\overline V}$ and variance $\sigma_V^2$, for any $\epsilon > 0$
+There is an useful result due to the Russian Mathematician Pafnuty Tchebychev which states that for a random variable $V$ with mean ${\overline V}$ and variance $\sigma_V^2$, for any $\epsilon > 0$
 
 $$ P(|V - {\overline V}|\ge\epsilon) \le {\sigma_V^2\over\epsilon^2} $$
 
@@ -296,17 +297,18 @@ For random variable with zero mean, this becomes
 
 $$ P(|V|\ge\epsilon) \le {E[V]^2\over\epsilon^2} $$
 
-This result implies that if for the sequence $X^n_t$ with mean 0, we can show that $E(X^n_t - X_t)^2$ tends to zero as $n\uparrow\infty$, then the sequence ${X^n_t}$ converges in probability tp $X_t$. This is precisely how the existence of the Ito Integral is proven, by showing that it is the limit in probability of a sequence of simpler integrals.
+Hence given a sequence $\{X^n_t\}$ with mean 0, if we can show that $E(X^n_t - X_t)^2$ tends to zero as $n\rightarrow\infty$, then ${X^n_t}$ converges in probability to $X_t$. This is precisely how the existence of the Ito Integral is proven, by showing that it is the limit in probability of a sequence of simpler integrals.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/weiner13.png) 
 
 Figure: A Simple Integrand $A(t)$
 
-Consider a simple process $A(t)$ of the type shown in the above figure. It is constructed by choosing a finite number of time instants $0=t_0<t_1<...<t_n<\infty$ and associate a $F_t$ measurable random variable $Y_j$ such that $A(t)= Y_j$ on the associated interval $t_j<t<t_{j+1}$. Then the stochastic integral for $A(t)$ is defined as
+Consider a simple random process $A(t)$ of the type shown in the above figure. It is constructed by choosing a finite number of time instants $0=t_0<t_1<...<t_n<\infty$ and associate a random variable $Y_j$ such that $A(t)= Y_j$ on the associated interval $t_j<t<t_{j+1}$. Furthermore he also assumed that the random variable $Y_j$ is independent of the further evolution of $W(t)$ for $t\ge t_j$. Random functions $A(t)$ that satisfy this property are referred to as $F_t$ measurable with respect to the Wiener Process.
+Then the stochastic integral for $A(t)$ is defined as
 
 $$ \int_0^t A(t)dW(t) = \sum_{i=0}^j Y_i(W_{t_1+1} - W_{t_i}) +Y_j(B_t - B_{t_j})  $$
 
-Ito showed that this integral satisfies the Ito Isometry property, which states that
+Ito showed that if $A(t)$ is F_f$ measurable then this simple integral satisfies the Ito Isometry property, which states that
 
 $$ E[\int_0^t A(s)dW(s)]^2 = \int_0^t E[A(s)^2] ds $$
 
@@ -318,22 +320,20 @@ From the Ito Isometry property it follows that
 
 $$ \lim_{n\rightarrow\infty}E[\int_0^t (A(s) - A^n(s)) dW(s)]^2 = 0, \ \ \ for\ \ \ all\ \ \ t  $$
 
-An application of the Tchebychev inequality leads to the conclusion that $\int_0^t A^n(s)dW(s)$ converges in probability to $\int_0^t A(s)dW(s)$ as $n\uparrow\infty$.
-
- - Add para on F_t adapation for A_t
+An application of the Tchebychev inequality leads to the conclusion that $\int_0^t A^n(s)dW(s)$ converges in probability to $\int_0^t A(s)dW(s)$ as $n\rightarrow\infty$.
 
 The Ito Integral allows us to build a wide variety of random processes by using the equation
 
-$$ X(t) = X(0) + \int_0^t b(s,X(s))ds + \int_0^t \sigma(s,X(s))dW(t) $$
+$$ X(t) = X_0 + \int_0^t b(s,X(s))ds + \int_0^t \sigma(s,X(s))dW(t) $$
 
-The random process $X(t)$ defined in this manner is called a diffusion process, and these constitute the main objects of study in the field of continuous values random processes.
+The random process $X(t)$ defined in this manner is called a diffusion process, and these constitute the main objects of study in the field of continuous valued random processes.
 This equation is commonly written in the differential form as 
 
-$$ dX(t) = b(t,X(t))dt + \sigma(t,X(t))dW(t) $$
+$$ dX_t = b(t,X_t)dt + \sigma(t,X_t)dW_t $$
 
-Hence a diffusion process has drift component $b(t,X(t))$ and furthermore its dependence on the Weiner Process $W(t)$ is influneced by $\sigma(t,X(t)$. 
-Not only can these functions vary as a function of time, but they can also be dependent on the value of $X(t)$ at a time instant $t$ which makes them a random process.
-The analysis of the general cadse is not simple, however there are some simple special cases that occur frequently in applications:
+Hence a diffusion process has drift component $b(t,X_t)$ and furthermore its dependence on the Weiner Process $W(t)$ is influenced by $\sigma(t,X_t)$. 
+Not only can these functions vary as a function of time, but they can also be dependent on the value of $X_t$ at a time instant $t$ which makes them a random process.
+The analysis of the general case is not simple, however there are some simple special cases that occur frequently in applications:
 
 1. Weiner Process with Drift: This is given by the equation
 
