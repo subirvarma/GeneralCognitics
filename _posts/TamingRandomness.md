@@ -331,55 +331,52 @@ This equation is commonly written in the differential form as
 
 $$ dX_t = b(t,X_t)dt + \sigma(t,X_t)dW_t $$
 
-Hence a diffusion process has drift component $b(t,X_t)$ and furthermore its dependence on the Weiner Process $W(t)$ is influenced by $\sigma(t,X_t)$. 
-Not only can these functions vary as a function of time, but they can also be dependent on the value of $X_t$ at a time instant $t$ which makes them a random process.
+Hence a diffusion process has random drift component $b(t,X_t)$ and furthermore the random increments of the Wiener Process Process $dW_t$ are randomly modified by $\sigma(t,X_t)$. 
 The analysis of the general case is not simple, however there are some simple special cases that occur frequently in applications:
 
 1. Weiner Process with Drift: This is given by the equation
 
-$$ dX(t) = b(t)dt + \sigma(t)dW(t) $$
+$$ dX_t = b dt + \sigma dW_t $$
 
-In the case the functions $b$ abd $\sigma$ are deterministic. A even simpler process is when they are are constants:
+In this case the SDE can be solved to obtain
 
-$$ dX(t) = b dt + \sigma dW(t) $$
+$$ X_t = X_0 + bt + \sigma W_t $$
 
-In this case the stochastic differential equation can be solved to obtain
-
-$$ X(t) = X(0) + bt + \sigma W(t) $$
-
-Hence this is a modified Weiner Process whose mean value increases linearly with time, and whose variance at time $t$ is given by $\sigma^2 t$. Its distribution at time $t$ is given by the Normal Distribution $N(bt, \sigma\sqrt{t})$.
+Hence this is a modified Wiener Process whose mean value increases linearly with time, and whose variance at time $t$ is given by $\sigma^2 t$. Its probability distribution at time $t$ is given by the Normal Distribution $N(X_0+bt, \sigma\sqrt{t})$.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/weiner16.png) 
 
 Figure: Three possible realizations of a Wiener Process with Constant Drift
 
-2. Ito Diffusions: These follow the equation
+Some example sample paths of a Wiener Process with drift are shown in the above figure.
 
-$$ dX(t) = b(X(t))dt + \sigma(X(t))dW(t) $$
+2. Time Homogenuous Ito Diffusions: These follow the diffusion equation
 
-Hence the dependence of $b$ and $\sigma$ on time is entirely captured by the $X(t)$ dependence. Ito diffusions where a focus of research activity in the 1950s and 1960s, and their theory is well developed. Their most important property is that they are Markov Processes, just like the Weiner Process.
+$$ dX_t = b(X_t)dt + \sigma(X_t)dW_t $$
+
+Hence the dependence of $b$ and $\sigma$ on time is entirely captured by their $X_t$ dependence. Ito diffusions were a focus of research activity in the 1950s and 1960s, and their theory is well developed. An important property is that they are Markov Processes, just like the Wiener Process.
 
 How does one go about solving a Stochastic Differential Equation? In the next section we will meet Ito's Formula that allows us to get explicit solutions for some special cases, but there is a more general method which 'solves' these equtions by simulating their sample paths, its called the Euler-Maruyama method. Its based on discretizing time in the interval $[0,T]$ into $n$ steps $[0, s, 2s,3s,...,Ns]$ such that $Ns=T$ and then carrying out the iteration
 
-$$ X_{(n+1)s} = X_{ns} + sb(X_{ns},ns) + \sigma(X_{ns},ns)\sqrt{s}\epsilon  $$
+$$ X_{(n+1)s} = X_{ns} + sb(ns,X_{ns}) + \sigma(ns,X_{ns})\sqrt{s}\epsilon\ \ \ n = 0,1,...,N-1  $$
 
-where $\epsilon$ is a sample from $N(0,I)$. Every time we run this iteration we will get a different sample path, and if we are interested in the average value or variance of $X_t$, then we can run multiple of these iterations starting from the same point $X_0$, and then take the average of the result.
+where $\epsilon$ is a sample from from the Normal distribution $N(0,I)$. Every time we run this iteration we, get a different sample path, and if we are interested in the average value or variance of $X_t$, then we can run multiple of these iterations starting from the same point $X_0$, and then take the average of the result.
 
-### Ito's Formula
+### The Ito Formula
 
-In addition to defining his eponymous intgeral, Kiyoshi Ito made another fundamental contribution the field of Staochastic Calculus by introducing the Ito's Formula (sometimes calles the Ito's Lemma), which was published in 1951. 
-The Ito Formula is basically a mathematical machine for transforming a given diffusion process into another such process.
-Sometimes we take a complex diffusion and transform it into a simpler diffusion, which is one of the common uses of the transform. It can also be used to compute the Ito Integral for some special cases an example of which is gien in this section.
+In addition to defining his eponymous intgeral, Kiyoshi Ito made another fundamental contribution the field of Stochastic Calculus by discovering the Ito Formula (sometimes calles Ito's Lemma), which was published in 1951. 
+The Ito Formula is basically a mathematical machine for transforming a given diffusion process into another diffusion.
+Sometimes we take a complex diffusion and transform it into a simpler diffusion, which is one of the common uses of the formula. It can also be used to compute the Ito Integral for some special cases, an example of which is given later in this section.
 
-The Ito formula is a generalization of the Fundamental Theorem of Calculus as applied to Stochastic Integrals. Recall that the Fundamental Theorem establishes differentiation and integration as inverse operations, as follows
+The Ito formula is a generalization of the Fundamental Theorem of Calculus as applied to stochastic integrals. Recall that the Fundamental Theorem establishes differentiation and integration as inverse operations, as follows
 
-$$ f(x) - f(x_0) = \int_x^{x_0} f'(x) dx  $$
+$$ f(x) - f(x_0) = \int_x^{x_0} {df\over dx} dx  $$
 
 What if the function $f$ operates on a Weiner Process instead, as in $f(W_t)$? Ito showed that the Fundamental Theorem has to be modifies as follows
 
-$$ f(W_t) - f(W_0) = {1\over 2}\int_0^t {\partial^2 f\over{\partial x^2}}ds + \int_0^t {\partial f\over{\partial x}} dW_u $$
+$$ f(W_t) - f(W_0) = {1\over 2}\int_0^t {\partial^2 f\over{\partial x^2}}ds + \int_0^t {\partial f\over{\partial x}} dW_s $$
 
-This equation can also be interpreted as stating that a function $f$ of the Weiner Process $W_t$ is a Diffusion Process with co-efficients ${1\over 2}{\partial^2 f\over{\partial x^2}}$ and ${\partial f\over{\partial x}}$. This is probably the most important result in Stochastic Calculus, it allows us to construct new diffusion processes from existing ones by operating on them using a suitable function $f$. For example if $f(x) = x^2$, then ${\partial f\over{\partial x}}=2x$
+This equation can also be interpreted as stating that a function $f$ of the Wiener Process $W_t$ is a Diffusion Process with drift and volatility co-efficients ${1\over 2}{\partial^2 f\over{\partial x^2}}$ and ${\partial f\over{\partial x}}$. This is probably the most important result in Stochastic Calculus, it allows us to construct new diffusion processes from existing ones by operating on them using a suitable function $f$. For example if $f(x) = x^2$, then ${\partial f\over{\partial x}}=2x$
 and ${\partial^2 f\over{\partial x^2}}=2$, thus
 
 $$ W_t^2 = \int_0^t 2W_s dW_s + {1\over 2}\int_0^t 2ds = 2\int_0^t W_s dW_s + t $$
@@ -388,7 +385,7 @@ which allows us to compute the Ito Integral given by
 
 $$ \int_0^t W_s dW_s = {W_t^2 - t\over 2} $$
 
-What if $f(t,X_t)$ is a function of another diffusion process $X(t)$ given by $dX(t) = b(t,X(t))dt + \sigma(t,X(t))dW(t)$? There is a generalized version of the Ito Formula that applies to this case, given by
+What if $f(t,X_t)$ is a function of a general diffusion process $X(t)$ given by $dX_t = b(t,X_t)dt + \sigma(t,X_t)dW_t)$? There is a generalized version of the Ito Formula that applies to this case, given by
 
 $$ f(t,X_t) - f(0,X_0) = {1\over 2}\int_0^t {\partial^2 f\over{\partial x^2}}(dX_u)^2 + \int_0^t {\partial f\over{\partial x}} dX_u  + \int_0^t {\partial f\over{\partial t}} dt  $$
 
@@ -400,15 +397,15 @@ Hence the transformed process $f(t,X_t)$ is also a diffusion process with drift 
 
 As an example if 
 
-$$ Y(t) = X^2(t) + t^2\ \ \ where\ \ \ dX(t) = b(t)dt + \sigma(t)dW(t) $$
+$$ Y(t) = X^2(t) + t^2\ \ \ where\ \ \ dX_t = b(t)dt + \sigma(t)dW_t $$
 
 then
 
-$$ dY(t) = (2t + \sigma^2(t) + 2b(t)X(t))dt + 2\sigma(t)X(t)dW(t) $$
+$$ dY_t = (2t + \sigma^2(t) + 2b(t)X_t dt + 2\sigma(t) X_t dW_t $$
 
 As an example of the application of Ito's Formula, consider the following diffusion process which is used to model stock market returns (this model is discussed in detail in the next section):
 
-$$ dS(t) = bS(t)dt + \sigma S(t)dW(t)  $$
+$$ dS_t = bS_t dt + \sigma S_t dW_t  $$
 
 where $b,\sigma$ are constants. Does there exist a function $f$ such that $f(S)$ is a simpler diffusion process? Lets try the log function
 
@@ -416,9 +413,9 @@ $$ f(S) = \log S $$
 
 Applying Ito's formula it follows that
 
-$$ d(\log S) = {df\over dS}dS + {1\over 2}\sigma^2S^2{d^2f\over dS^2}dt = (b - {\sigma^2\over 2})dt + \sigma dW  $$
+$$ d(\log S) = {df\over dS}dS + {1\over 2}\sigma^2S^2{d^2f\over dS^2}dt = (b - {\sigma^2\over 2})dt + \sigma dW_t  $$
 
-We can see that $\log S$ is a simple Weiner process with drift. Since the co-efficients $b,\sigma$ are constnt, we can actually solve this equation to get
+Thus $\log S$ is a simple Wiener process with drift. Since the co-efficients $b,\sigma$ are constant, we cansolve this equation to get
 
 $$ \log S(t) - \log S(0) = (b - {\sigma^2\over 2})t + \sigma W(t) $$
 
@@ -426,7 +423,7 @@ which can be written
 
 $$ S(t) = S(0)\exp^{(b-{\sigma^2\over 2})t+\sigma W(t)}  $$
 
-$S(t)$ is called a Geometric Brownian Motion.
+$S(t)$ is an important random process and is called the Geometric Brownian Motion.
 
 Here is an informal proof of the Ito Formula:
 
