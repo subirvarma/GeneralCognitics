@@ -13,53 +13,54 @@ Figure 1: Brownian Motion
 
 In 1827 the Scottish botanist Robert Brown was peering through his microscope at minute particles of pollen suspended in a drop of water, when he noticed something strange. The pollen particles seemed to be moving about randomly, with no preferential direction. That being the age of Newtonian Mechanics, Brown looked for a force that might be causing the particles to move, but he couldn't find any that was visible. This phenomenon was named after him, and in fact most of us have seen particles of dust dancing around in a beam of sunlight in a darkened room, which is another example of Brownian Motion. 
 
-The cause of the random motion remained a mystery until 1905, when the young Albert Einsten came up with a satisfactory explanation in his very first published paper. Einstein theorized that the pollen particles where being pushed around by the molecules of water, which are too tiny to be seen under a microscope. At any point in time, there are slight imbalances in the number of water molecules extering pressure on the pollen grain in various directions, as a result of which it gets pushed in random directions as time goes on. The question arises, how far does the pollen particle travel in time duration $t$? Since it is contantly changing direction, Newton's Law's of Motion is certainly of no use here. In fact it could be seen, that the particle covered random different distances in the same time duration, which implies that its motion could only analysed using the tools of probability theory. Robert Clerk Maxwell and others had introduced probabilistic thinking into Physics a few decades earlier with their Kinetic Theory of Gases. This theory though looked at macro properties such as pressure, and not the movements of individual particles. In this case we are interested in the random motion of a single particle, and this was something new to Physics. Nevertheless Einstein was able to use the tools of Kinetic Theory to show that that motion of the particle follows a well known statistical law, that of the Normal or Gaussian distribution, and that 
+The cause of the random motion remained a mystery until 1905, when the young Albert Einsten came up with a satisfactory explanation in his very first published paper. Einstein theorized that the pollen particles wh
+ere being pushed around by the molecules of water, which are too tiny to be seen under a microscope. At any point in time, there are slight imbalances in the number of water molecules extering pressure on the pollen grain from various directions, as a result of which it gets pushed around randomly as time goes on. The question arises, how far does the pollen particle travel in time duration $t$? Since it is contantly changing direction, Newton's Law's of Motion are of certainly no use here. In fact it could be seen, that the particle covered random different distances in the same time duration, which implies that its motion could only analysed using the tools of probability theory. Robert Clerk Maxwell and others had introduced probabilistic thinking into Physics a few decades earlier with their Kinetic Theory of Gases. This theory though tried to predict macro properties such as pressure, and not the movements of individual particles. In this case we are interested in the random motion of a single particle, and this was something new to Physics. Nevertheless Einstein was able to use the tools of Kinetic Theory to show that that motion of the particle follows a well known statistical law, that of the Normal or Gaussian distribution, and that 
 the average distance the particle moves in time $t$ is proportional to $\sqrt{t}$.
 
-Unbeknownst to Einstein, Brownian Motion had already been analyzed five years earlier by Louis Bachelier in the context of a model for the stock market. There is a deep connection between the random wriggling of the pollen particles that Brown saw, and the movement of securities in the stock market, they share the same mathematical model, called the Wiener Process. In our own Artificial Intelligence age, the operation of the most popular image generation tools such as Dall-E-2 from OpenAI is also based on the very same Wiener Process!
+Unbeknownst to Einstein, Brownian Motion had already been analyzed five years earlier by the French mathematician Louis Bachelier in the context of a model for the stock market. There is a deep connection between the random wriggling of the pollen particles that Brown saw, and the movement of securities in the stock market, they share the same mathematical model, called the Wiener Process. In our own Artificial Intelligence age, the operation of the most popular image generation tools such as Dall-E-2 from OpenAI is also based on the very same Wiener Process!
 
 ### Two New Sciences
 
-At the dawn of the 20th century, there were two new sciences that were launched. One of them of course, was Quantum Mechanics, that came into existence with Max Planck's 1901 paper on Black Body Radiation. The other less well known one, was the science of Random Processes, and this was launched in a PhD Thesis by the French mathematician Louis Bachelier, also around the same time. Quantum Mechanics of course went on the upend our ideas of Physics and reality in general, but what about Bachelier's discovery? This article is on precisely this topic.
+At the dawn of the 20th century, there were two new sciences that were launched. One of them of course, was Quantum Mechanics, that came into existence with Max Planck's 1901 paper on Black Body Radiation. The other less well known one, was the science of random processes, and this was initiated in his PhD Thesis by Louis Bachelier, also around the same time. Quantum Mechanics of course went on the upend our ideas of physics and reality in general, but what about Bachelier's discovery? This article is on precisely this topic.
 
-The science of random events, or Probability Theory, was founded in the 17th century by the French mathematician and philosopher Blaise Pascal who was the first one assign numbers to notions such as the probability of winning at a game of chance. 
-This was further developed in the 18th century, with the name most associated with it being the Swiss mathematician Jacob Bernoulli. Bernoulli initiated the idea of a repeated random trial, which was the first step towards the definition of a Random Process. For example if we toss a coin N times, he gave a formula for the probability that $n$ of those are heads and the remaining $N-n$ are tails, now called the Binomial Distribution. 
+The science of random events, or probability theory, was founded in the 17th century by the French mathematician and philosopher Blaise Pascal who was the first one assign numbers to notions such as the probability of winning at a game of chance. For example if we were to toss a 6-headed dice then the probability that it will result in the number 4, is ${1\over 6}$, and these probabilistic outcomes are given the name random variables.
+This was further developed in the 18th century, with the name most associated with it being the Swiss mathematician Jacob Bernoulli. Bernoulli initiated the idea of a repeated random trial, which was the first step towards the definition of a random process. For example if we toss a coin N times, he gave a formula for the probability that $n$ of those are heads and the remaining $N-n$ are tails, now called the Binomial Distribution. 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/weiner4.png) 
 
 Figure 2: Discrete Time Random Processes
 
-But what if we were to look at an infinite sequence of coin tosses, this then becomes a (discrete valued) Random Process. An example of such a random process is shown above, it is created by tossing a coin multiple times, with Heads represented by 1 and Tails by 0. 
+But what if we were to look at an infinite sequence of coin tosses, this then becomes a (discrete valued) random process. An example of such a random process is shown above, it is created by tossing a coin multiple times, with heads represented by the random variable 1 and tails by 0. 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/weiner2.png) 
 
 Figure 3: Continuous Time Random Processes
 
-Extending this idea further, what if the random quantity evolves continuously in time? This then becomes a continuous time Random Process, and an example of this is shown the above figure. You can think of these graphs as being created by the Brownian Motion of a pollen particle whose movement is confined to just one dimension, either up or down along the y-axis, or the variation in the stock price for a company over time. Note that there are several curves shown in the figure, and each of them represents a possible time evolution of the random process when starting from the origin at $t=0$, also called a sample path. These sample paths constitute the different outcomes in time for the Random Process and just as we assign a probability to an individual event, for example getting a Heads when tossing a coin, we now assign a probability to the entire sample path as a whole. There are two ways to look at these curves:
+Extending this idea further, what if the random quantity evolves continuously in time? This then becomes a continuous time random process, and an example of this is shown the above figure. You can think of these curves as being created by the Brownian Motion of a pollen particle whose movement is confined to just one dimension, either up or down along the y-axis, or the variation in the stock price for a company over time. Note that there are several curves shown in the figure, and each of them represents a possible time evolution of the random process when starting from the origin at $t=0$, these are called sample paths. They constitute the different outcomes in time for a random process and just as we assign a probability to an individual event, for example the probability of getting a heads when tossing a coin, we now assign a probability to the entire sample path as a whole. There are two ways to look at these curves:
 
-- In terms of the time evolution of the random process, as captured in a single sample path, or
-- By fixing the time $t$, and then looking at the values of the random process over the the collection of sample paths. This is shown by the two dotted lines in the figure for the case when time has been fixed at $t_1$ and $t_2$. In this case, we no longer have a random process, since the time evolution is lost, and instead we end up with a random variable. 
+- In terms of the time evolution of the random process, as captured in a single sample path, say $X(t)$, or
+- By fixing the time $t$, and then looking at the values of the random process over the the collection of sample paths. This is shown by the two dotted lines in the figure for the case when time has been fixed at $t_1$ and $t_2$. In this case, we no longer have a random process, since the time evolution is lost, and instead we end up with the random variables $X(t_1)$ and $X(t_2)$. 
 
-The analysis of a continuous time Random Process is exponentialy harder than the discrete time version since the set of possible outcomes is the space of continuous functions which is very hard to analyze. Consequently very little progress had been made in this area by 1900 and part of the reason was that there was no connection made between Probability Theory and the rapidly developing methods in analysis that had resulted in developments such as the Borel Measure and the Lebesgue Integral towards the end of the 19th century.
-The major contribution that the 20th century made to the science of randomness, is precisely this connection. It laid the science of Random Processes on a firm mathematical foundation, by connecting it with the rest of mathematical analysis. This process started with Bachelier, and was completed two decades later with great Russian mathematician Andrei Kolmogorov's axiomatization of Probability Theory which made it possible to talk about quantities that evolve randomly and continuously in time, which is precisely what a Random Process is. This has an interesting echo with Quantum Mechanics that also took about two decades two mature from Planck to Heisenberg and Schrodinger. 
+The analysis of a continuous time Random Process is exponentialy harder than the discrete time version since the set of possible outcomes is the space of continuous functions which is very hard to analyze. Consequently very little progress had been made in this area by 1900 and part of the reason was that there was no connection made between probability theory and the rapidly developing methods in analysis that had resulted in developments such as the Borel Measure and the Lebesgue Integral towards the end of the 19th century.
+The major contribution that the 20th century mathematicians made to the science of randomness, is precisely this connection. It laid the science of random processes on a firm foundation, by connecting it with the rest of mathematical analysis. This process started with Bachelier, and was completed two decades later with great Russian mathematician Andrei Kolmogorov's axiomatization of probability theory which made it possible to talk about quantities that evolve randomly and continuously in time, which is precisely what a random process is. This has an interesting echo with Quantum Mechanics that also took about two decades two mature from Planck to Heisenberg and Schrodinger. 
 
-Kiyosi Ito was a Japanese mathematician who made the next important advance in the theory of Random Processes. Working in wartime Tokyo during the 1940s, he came up with the idea of extending the idea of the integral to the case when the integration is done with respect to Brownian Motion, and this is now called the Ito Integral in his honor. I found this to be a totally mind blowing concept when I first learnt about in grad school in the late 1980s, and even today I consider it a privilage that I understand what it means.
-This idea was very influential since it allowed mathematicians to build more complex Random Processes by using Brownian Motion as a basic building block. This laid the foundation for several important applications of Random Processes that happened in the following decades.
+Kiyosi Ito was a Japanese mathematician who made the next important advance in the theory of Random Processes. Working in wartime Tokyo during the 1940s, he came up with the idea of extending the idea of the integral to the case when the integration is done with respect to the random fluctuations of Brownian Motion, and this is now called the Ito Integral in his honor. I found this to be a totally mind blowing concept when I first learnt about in grad school in the late 1980s, and even today I consider it a privilage that I understand what it means.
+This idea was very influential since it allowed mathematicians to build more complex random processes by using Brownian Motion as a basic building block. This laid the foundation for several important applications of random processes that happened in the following decades.
 
-But how important are these Random Processes? Well, the most famous example of a randomly evolving continuous time process is the stock market, and this is precisely what Bachelier studied in his 1900 paper. His work was essentially lost until the 1950s, when it came to the attention of the  eminent economist Paul Samuelson, who built on Ito's work and applied it to create a model for the stock market called the Logarithmic Brownian Motion.
-Later in the 1960s the economists Fischer Black and Myron Scholes extended Ito and Samuelson's theories to create a model for stock options trading. This resulted in a Partial Differential Equation named after them, whose solution is probably the most important mathematical result in use in Wall Street trading today. In fact I recently came acrosss a list of the most imprtant equations in science, and the Black-Scholes equation was listed along with others such as Maxwell Equations for electromagnetism and Schrodinger's Equation for the quantum wave function.
+But how important are these random processes in practice? Well, the most famous example of a randomly evolving continuous time process is the stock market, and this is precisely what Bachelier studied in his 1900 paper. His work was essentially lost until the 1950s, when it came to the attention of the  eminent economist Paul Samuelson, who built on Ito's work and applied it to create a model for the stock market called the Geometric Brownian Motion.
+Later in the early 1970s the economists Fischer Black and Myron Scholes used Ito and Samuelson's work to create a model for pricing stock options. This resulted in a partial differential equation named after them, whose solution is probably the most important mathematical result in use in Wall Street trading today. In fact I recently came acrosss a list of the most important equations in science, and the Black-Scholes equation was listed along with others such as Maxwell Equations for electromagnetism and Schrodinger's Equation for the quantum wave function.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/weiner6.png) 
 
 Figure 6: Signals in Noise
 
-Brownian Motion has evolved into a powerful tool for modeling random phenomena. Whenever the need arises to capture the randomness that exists in fields such as communications system or electrical circuits, Brownian Motion is the go-to model that engineers use. An example of a deterministic signal subject to random noise is shown in the above figure. The clean signal is transmitted, while the noise is added during the course of transmisssion over a communications channel. The Filtering Problem looks at ways in which the signal can be extracted from the noise which is usually modeled as a Brownian Motion. Norbert Weiner (more about him in the next section) and Richard Kalman are names associated with the solution to the filtering problem.
+Brownian Motion has evolved into a powerful tool for modeling random phenomena. Whenever the need arises to capture the randomness that exists in fields such as communications system or electrical circuits, Brownian Motion is the go-to model that engineers use. An example of a deterministic signal subject to random noise is shown in the above figure. The clean signal is transmitted, while the noise is added during the course of transmisssion over a communications channel and the Filtering Problem looks at ways in which the signal can be extracted from the noise at the receiver. Norbert Wiener (more about him in the next section) and Richard Kalman are names associated with the solution to the filtering problem.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/weiner7.png) 
 
 Figure 6: Training a Neural Network to generate images
 
-But the most interesting, and surprising, application of Brownian Motion has happened during the last decade, when it was used to create a Neural Network model that can generate realistic images and videos. This model ouperformed all competing methods, and it has become the most prevalent image/vdeo generation model in use today. This topic is treated in greater detail later, but a rough idea of how it done can be seen in the above figure. The top row shows the process of adding incremental random numbers to an image, until it becomes indistinguishable from noise. The bottom row trains the Neural Network by learning how to recover the original image from noise. Once the network is trained, it can generate new images by starting from a noise sample.
+But the most interesting, and surprising, application of Brownian Motion has happened within the last decade, when it was used to create a Neural Network model that can generate realistic images and videos. This model ouperformed all competing methods, and it has become the most prevalent image and video generation model in use today. This topic is treated in greater detail later, but a rough idea of how it done can be seen in the above figure. The top row shows the process of adding incremental random noise to an image, until it becomes indistinguishable from pure noise. The bottom row trains the Neural Network by learning how to recover the original image from noise. Once the network is trained, it can generate new images by starting from a noise sample.
 
 There was one name that I didn't mentioned in my brief survey of mathematicians who have contributed to the theory of the Brownian Motion, and it is that of Norbert Wiener. This is quite a big omission since the terms Brownian Motion and Wiener Process are often used inter-changeably. Strictly speaking Brownian Motion is the physical phenomenon that Robert Brown discovered and Einstein analyzed, while the Wiener Process is a mathematical model for it and this is the terminology that I will use in the rest of this article. Norbert Wiener was the first one to do a rigorous mathematical analysis of Brownian Motion in the early 1920s, and abstracted it to create the mathematical notion of a Wiener Process. He proved several important properties for it, such as the fact that its sample paths are continuous in time, while at the same time its derivative does not exist anywhere.
 Wiener was a child prodigy who got his PhD from Harvard at age 19 and spent his career teaching at MIT. His work spanned mathematics, both pure and applied, as well philosophy and towards the latter part of his life what we call Artificial Intelligence (he called it Cybernetics). He contributed more than anyone else to the emerging field of Signal Processing, and was a big influence on the later work of Claude Shannon and John von Neummann.
@@ -70,60 +71,68 @@ The theory of a random process in continuous time was not sufficiently well deve
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/weiner11.png) 
 
-Figure: Outcome of a Coin Tossing Experiment
+Figure: The Random Walk: Outcome of a Coin Tossing Experiment
 
-Lets start with a very simple process, that of tossing a coin. Let the Random Variable $X_n$ be the result of the $n^{th}$ toss, and assign $X_n =  1$ if the result is a Heads and $-1$ to Tails. Define $S_n$ to be the Random Sum given by
+Lets start with a very simple process, that of tossing a coin. Let the Random Variable $X_n$ be the result of the $n^{th}$ toss, and assign $X_n =  1$ if the result is a heads and $-1$ to tails. Define $S_n$ to be the random sum given by
 
-$$ S_n = X_1 + X_2 + ...+ X_n $$
+$$ S_n = X_1 + X_2 + ...+ X_n,\ \ \ n = 1,2,...\ \ \ and \ \ \ S_0 = 0 $$
 
-If we interpolate in a step-wise fashion between successive values of $S_n$, then it results in the continuous valued Random Process shown in the above figure which
-shows one possible sample path that can result. This process is known as a Random Walk and it has the interesting property that once we know the value of $S_n$, the future evolution of the process is completely independent of what happened prior to the $n^{th}$ toss. These type of processes, in which the the future is independent of the past given the present, form an important category called Markov Processes and the Wiener Process belongs to it. 
+If we interpolate in a step-wise fashion between successive values of $S_n$ by introducing time as a variable, then it results in the continuous valued random process shown in the above figure, which shows one possible sample path that can result. 
+The random sum has the interesting property that once we know the value of $S_n$, the future evolution of the process is completely independent of what happened prior to the $n^{th}$ toss. These type of processes, in which the the future is independent of the past given the present, form an important category called Markov Processes and the Wiener Process belongs to it. 
 
-So we have a continuous time process that seems to be moving about randomly, but it is not quite a Brownian Motion yet. 
-How can we go about creating a model for Brownian Motion? First of all we need to introduce time as a variable. Also compared to the Random Sum, Brownian Motion exhibits much faster changes in direction, and also successive changes happen much quicker in time. One way to accomplish all these goals is by doing the following:
+Lets extend the random sum into continuous time by defining the function $W^n(t)$ as follows:
 
-- Scale the Random Sums by ${1\over{\sqrt{n}}}$ so that as $n$ increases, the jumps in the $S_n$ values become smaller, i.e., the particle covers smaller and smaller distances before it changes direction.
-- In order to introduce a time dependence, restrict the Random Walk to the time interval interval $[0,1]$ such that changes in the Random Sum occur at at the $n$ time instants given by ${1\over n}, {2\over n},...,{n-1\over n}, 1$
-- Define a random function $W_n(t), 0\le t\le 1$ such that it is equal to the scaled sum ${S_i\over{\sqrt n}}$ at the point ${i\over n}$ and then maintains this value until it gets to the next point ${i+1\over n}$, at which point it takes the next jump. 
+$$ W^n(t) = S_{\lfloor t\rfloor}\ \ \ \ t\ge 0 $$
+
+Note that the floor function $\lfloor t\rfloor$ results in the smallest integer less than or equal to $t$. This proces is known as a
+Random Walk and as shown it is created by defining the function $Wt), t\ge 0$ such that it is equal to the sum $S_i$ at time $t=i$ and then maintains this value until it gets to the next point $i+1$, at which point it makes the next random jump. This Random Walk process comes to an end after the first $n$ jumps.
+
+So we have a continuous time process that seems to be evolving randomly, but it is not quite a Brownian Motion yet. 
+How can we go about creating a more exact model? Brownian Motion exhibits much faster changes in direction compared to the Random Walk, and also successive changes happen much quicker in time. One way to accomplish these goals is by doing the following:
+
+- Restrict the Random Walk to the time interval interval $t\in [0,1]$ so that the random jumps occur at at the $n$ time instants given by ${1\over n}, {2\over n},...,{n-1\over n}, 1$. Hence as $n$ increases the jumps happen faster and faster.
+- Scale the random sums by ${1\over{\sqrt{n}}}$ so that as $n$ increases, the jumps in the $S_n$ values become smaller, i.e., the particle covers smaller and smaller distances with each change of direction.
+
+This results in the scaled Random Walk
 
 $$ W^n(t) = {S_{\lfloor nt\rfloor}\over{\sqrt{n}}}\ \ \ 1\le n\le N,\ \ \ 0\le t\le 1 $$
 
-where the floor function $\lfloor nt\rfloor$ results in the smallest integer less than or equal to $nt$.
+Note that $W_n(t), 0\le t\le 1$ is equal to the scaled random sum ${S_i\over{\sqrt n}}$ at $t = {i\over n}$ and then maintains this value until it gets to $t = {i+1\over n}$, at which point it takes the next jump. 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/weiner10.png) 
 
 Figure: Scaled and Interpolated Random Sums over $0\le t\le 1$ for n = 100 (blue), n = 400 (red) and n = 10000 (green)
 
-The figure above three different sample paths for $W^n(t)$ over the interval $[0,1]$, with the gap between successive changes in direction becoming smaller and smaller as $n$ increases. As $n\rightarrow\infty$, Donsker's Theorem says that $W^n(t), 0\le t\le 1$ converges to a Wiener Process. What does it mean to take the limit $n\uparrow\infty$ for the interpolated Random Sums? Since we are constrained to be in the interval $[0,1]$, it means that successive coin tosses are happening faster and faster, and in the limit they are being done over the continuum. Since each coin toss results in a change of direction for $W^n(t)$, it follows that in the limit, the change of direction is happening at each and every time instant! This is a bit difficult to visualize, but essentially this also means that in the limit a sample path of the Wiener Process $W(t), 0\le t\le 1$ does not have a derivative at any point in the interval $[0,1]$ (since the derivative is not defined at points at which the direction of a function changes). 
+The figure above three different sample paths for $W^n(t)$ over the interval $[0,1]$, with the gap between successive changes in direction becoming smaller and smaller as $n$ increases. As $n\rightarrow\infty$, Donsker's Theorem says that $W^n(t), 0\le t\le 1$ converges to a Wiener Process. What does it mean to take the limit $n\rightarrow\infty$? Since $W^n(t)$ is constrained to be in the interval $[0,1]$, it means that successive jumps are happening faster and faster, and in the limit they are being done over the continuum $t\in [0,1]$. **Since each jump results in a change of direction for $W^n(t)$, it follows that in the limit, the change of direction is happening at each and every time instant!** This is a bit difficult to visualize, but essentially this also means that in the limit a sample path of the Wiener Process $W(t), 0\le t\le 1$ does not have a derivative at any point in the interval $[0,1]$ (since the derivative is not defined at points at which the direction of a function changes). 
 
-There is a bit of ambiguity in the notation since $W(t)$ can refer both to the sample path of the Random Process over the interval $[0,1]$, as well the Random Variable $W(t)$ at time $t$. We will use the convention that $W(t)$ refers to the function defined over an interval such as $[0,1]$, while we will use $W_t$ to refer to the Random Variable at time $t$.
+There is a bit of ambiguity in the notation since $W(t)$ can refer both to the sample path of the random process over the interval $[0,1]$, as well the random variable $W(t)$ at time $t$. We will use the convention that $W(t)$ refers to the function defined over an interval such as $[0,1]$, while $W_t$ refers to the random variable at time $t$.
 
-There is another way to analyze a Random Process and that is by fixing the time instants $t_1,t_2,..,t_n$ at which we sample the random process. This avoid the necessity of considering the space of continuous sample paths, and instead we now have a vector of Random Variables ${W_{t_1}, W_{t_2},...,W_{t_n)}}$, and these can be analyzed by assigning a joint Probability Density Function to the vector, which is a much easier proposition. Kolmogorov showed that if we are able to assign probabilities to all possible vectors of the resulting Random Variables, then this uniquely determines the Probability Measure that exists over the space of continuous functions, and this is called the Kolmogorov Extension Theorem. Most of the work in practical applications of Random Processes is done using joint distributions over vectors.
+We now provide some heuristic arguments to show that the Random Sum Process $W^n(t)$ converges to the Wiener Process $W(t)$ as $n\rightarrow\infty$. 
+But before we do that, the following question has to be answered: What does convergence mean when the objects we are talking about are random processes? 
+Lets first consider what consider what convergence means in the context of random variables. 
+Clearly the random sum $S_n = X_1 + X_ + ...+ X_n$ diverges to infinity as $n$ increases,
+but can we say anything about the convergence of the scaled version of this sum given by ${S_n\over\sqrt{n}}$? We certainly can, and this is one of the most famous results in Probability Theory called the Central Limit Theorem or CLT. It says that the probability distribution of ${S_n\over\sqrt{n}}$ converges to the Normal or Standard Gaussian Distribution $N(0,1)$. More precisely if the individual jumps $X_i$ have mean $m$ and variance $\sigma^2$, then 
 
-We now provide some heuristic arguments to show that the Random Sum Process $W^n(t)$ converges to the Wiener Process $W(t)$ as $n\uparrow\infty$. 
-But before we do that, the following question has to be answered: What does convergence mean when the objects we are talking about are Random Processes? 
-Lets first consider what consider what convergence means in the context of Random Variables. Give the the Random Sum $S_n$, can we say anything about the convergence of the scaled version of this sum given by ${S_n\over\sqrt{n}}$? We certainly can, and this is one of the most famous results in Probability Theory called the Central Limit Theorem or CLT. It says that the probability distribution of ${S_n\over\sqrt{n}}$ converges to the Standard Gaussian Distribution $N(0,1)$. More precisely
+$$ {S_n\over\sqrt{n}} \rightarrow  {1\over\sqrt{2\pi\sigma^2}}e^{-{(x-m)^2\over {2\sigma^2}}}\ \ \ as\ \ \ n\rightarrow\infty $$
 
-$$ {S_n\over\sqrt{n}} \rightarrow  {1\over\sqrt{2\pi}}e^{-{x^2\over 2}}\ \ \ as\ \ \ n\uparrow\infty $$
+This kind of convergence for random variables is called convergence in distribution or weak convergence. It basically says that in the limit, we may not be able to tell the precise value to which ${S_n\over\sqrt{n}}$ will converge to (which is the traditional idea of convergence for a determinitic series), but we can give precise estimates of the probability that it falls within a specified interval, say $[a,b]$, and this is given by the Normal Distribution. In the rest of this section we will assume that $m = 0$ and $\sigma = 1$.
 
-This kind of convergence for Random Variables is called Convergence in Distribution or Weak Convergence. It basically says that in the limit, we may not be able to tell the precise number to which ${S_n\over\sqrt{n}}$ will converge to (which is the traditional idea of convergence for a determinitic series), but we can give precise estimates of the probability of the Random Sum falls within an interval, say $[a,b]$, and this is given by the Normal Distribution. 
+Can we define a similar type of weak convergence result for random functions $W^n(t), 0\le t\le 1$ as $n\rightarrow\infty$? This is a difficult problem to solve since now we are now talking about a probability space consisting of functions. A whole host of brilliant minds worked on this problem in 1950s, the most prominent names being Donsker in the US, Skorokhod, Kolmogorov and Prohorov in the USSR. 
+For those of you wanting to get deeper into this topic, there are several excellent books available, in particular "Convergence of Probability Measures" by Patrick Billingsley is standard reference for the theory of weak convergence over functional spaces. 
 
-Can we define a similar type of Weak Convergence result for Random Functions $W^n(t), 0\le t\le 1$ as $n\uparrow\infty$? This is a difficult problem to solve, and a whole host of brilliant minds worked on this problem in 1950s, the most prominent names being Donsker in the US, Skorokhod, Kolmogorov and Prohorov in the USSR. 
-For those of you wanting to get deeper, there are several excellent books available, in particular "Convergence of Probability Measures" by Patrick Billingsley is standard reference for the theory of weak convergence over functional spaces. 
-
-In this aritcle I will give some heuristic arguments for this convergence and I will start by showing a couple of important properties for the Random Sum process $W^n(t)$. In the following I will refer to the Random Variable $W^n_{j/n} - W^n_{i/n}$ as an increment of the Random Sum process.
+In this aritcle I will give some heuristic arguments for this convergence and I will start by showing a couple of important properties for $W^n(t)$. 
 
 1. **The Independent Stationary Increment (ISI) Property**
    
 Note that the increment $W^n_{j/n} - W^n_{i/n}$ can be written as
 
-$$ W^n_{j/n} - W^n_{i/n} = \sum_{k=i}^j X_k $$
+$$ W^n_{j/n} - W^n_{i/n} = {\sum_{k=i}^j X_k\over\sqrt{n}} $$
 
-Hence non-overlapping increments of $W^n$ are the sum of distinct independent Random Variables $X_k$. From this we can conclude that they form independent Random Variables, which is known as the Independent Stationary Increment (ISI) property. The stationarity refers to the fact that the distribution of an increment is only a function of the number of Random Variables $X_k$'s that there are in the summation, and is independent of where it is located over the time interval.
+Hence non-overlapping increments of $W^n$ are the sum of distinct independent random variables $X_k$. From this we can conclude that they form independent random variables themselves, which is known as the Independent Stationary Increment (ISI) property. The stationarity refers to the fact that the distribution of an increment is only a function of the number of Random Variables $X_k$'s that it contains, and is independent of where it is located over the time interval.
 
 2. **Limting Distribution for Scaled Increments of $S_n$**
 
-We established that increments of $W^n$ are stationary and independent, we now given expression for their limiting probability distribution. As before we introduce a time variable $t$, and split up the time interval $[0,1]$ into $n$ equal parts at which points $S^n$ changes it value.
+We established that increments of $W^n$ are stationary and independent, we now given an expression for their limiting probability distribution. 
 We start with the scaled sum
 
 $$ W^n_{j/ n} = {1\over\sqrt n}\sum_{k=1}^j X_k $$
@@ -132,38 +141,41 @@ This can also be written as
 
 $$ W^n_{j/n} = ({1\over\sqrt j}\sum_{k=1}^j X_k)\sqrt{j\over n} $$
 
-The Central Limit Theorem tells us that if we let $j$ and $n$ go to infinity, while keeping the ratio ${j\over n} = t$ constant, then the Random Variable $W^n_t$ converges to
+The Central Limit Theorem tells us that if we let $j$ and $n$ go to infinity, while keeping the ratio ${j\over n} = t$ constant, then the 
+random sum ${1\over\sqrt j}\sum_{k=1}^j X_k)$ converges to the Normal Distribution $N(0,1)$. Hence $W^n_{j/n}$ converges to a random variable $W_t$ which is the product of a Normally distributed random variable and $\sqrt{t}$, which is again a Normal distribution $N(0,t)$ with mean zero and variance $t$. This can be written as
 
-$$ W^n_t \rightarrow N(0,1)\sqrt{t} = N(0,t) = {1\over\sqrt{2\pi t}}e^{-{x^2\over{2t}}}   $$
+$$ W^n_t \rightarrow W_t ~  N(0,t) = {1\over\sqrt{2\pi t}}e^{-{x^2\over{2t}}}   $$
 
-Hence the Random Variable $W^n_t$ converges to the Normal distribution with mean zero and variance $t$ in the limit. 
+It turns out that these two properties are precisely what characterize a Wiener process. 
 
-It turns out that these two properties are precisely what characterize a Weiner process. 
-The Weiner Process is a collection of Random Variables that are indexed by time, and satisfy the following four properties:
+More formally, the Weiner Process is a collection of random variables that are indexed by time, and satisfy the following four properties:
 
 1. For all times $t$, $W_t$ is normally distributed with mean 0 and variance $t$.
 2. The Random Variable $W_t - W_s$ is Normally distributed with mean 0 and variance $t-s$.
-3.The Random Variable $W_t - W_s$ is independent of the Random Variable ${W_v: v\le s}$ for all $s < t$.
-4. Almost surely, the function $W(t)$ is continuous.
+3. The Random Variable $W_t - W_s$ is independent of the Random Variable ${W_v: v\le s}$ for all $s < t$.
+4. The function $W(t)$ is continuous.
+
+Since the random walk $W^n_t$ converges to a Normal distribution with mean zero and variance $t$ as $n\rightarrow\infty$, and furthermore it exhibits the ISI property,
+we can see why it might converge to a limiting process that has the same properties, which is the content of Donsker's Theorem.
+Actually what Donsker proved was something much deeper, he showed convergence over the space of probability measures defined for the space of  functions, not just for probability distributions at a finite number of time instants.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/weiner15.png) 
 
-Figure: Three Possible Realizations of the Weiner Process
+Figure: Three Possible Realizations of the Wiener Process
 
-Since the increments of the Random Sum Process $W^n$ converge to a Normal Distribution with mean zero and variance $t$ as $n\uparrow\infty$, and furthermore they exhibit the ISI property,
-we can see why Donsker's Theorem might be true. Actually what Donsker proved was something much deeper, he showed convergence over the space of probability measures defined for the space of  functions, not just for probability distributions at a finite number of time instants.
-The fact that Weiner process has variance $t$ implies that it tends to move away further and further away from the origin in proportion to $sqrt{t}$ as time passes. But at the same time its mean remains zero, which means that returns to the origin quite often, in fact infinitely many times if we let it run.
+Three possible sample paths for the Wiener Process are shown above.
+The fact that Wiener process has variance $t$ implies that it tends to move away further and further away from the origin in proportion to $\sqrt{t}$ as time passes. But at the same time its mean remains zero, which means that returns to the origin quite often, in fact infinitely many times if we let it run to infinity.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/weiner12.png) 
 
-Figure: Self-Similarity of the Weiner Process
+Figure: Self-Similarity or Fractal Property of the Wiener Process
 
-The Weiner Process remains one of the weirdest objects that mathematicians have created, the idea of a continuous function not posessing a derivative at any point in its domain is highly non-intuitive. This is tied to another property of the Weiner Process, its self-similarity. This means that if we had a very powerful microscope and focused it on a tiny interval of time, what we would see would be indistinguishable from the larger picture of the Weiner Process. We can go on increasing the magnification, without ever runnning into a limit to this property. The mystery of the Weiner Process is due to the fact that it is defined over the continuum, which is like an endless pit, we can never get to the bottom of it. The Weiner Process performs its minuscle movements in the nooks and cranies of this pit, and this is something that is difficult to visualize at the macro level. And we can never get to the point where we can actually see the Weiner particle make its movements, as we delve deeper, we continue to see segements with their craggy shape.
-This reminds me of another deep mystery from the science of Quantum Mechanics, the fact that we can never see a quantum particle like the electron in the act of moving, all we can see are discrete points in space which mark its path. In between these points, the electron travels in a mysterious realm in which it becomes a diffuse wave like phenomenon. This point is discussed further in my article [Zeno's Paradox of the Arrow](https://subirvarma.github.io/GeneralCognitics/2025/03/11/Zeno.html).
+The Wiener Process remains one of the weirdest objects that mathematicians have created, the idea of a continuous function not posessing a derivative at any point in its domain is highly non-intuitive. This is tied to another property of the Wiener Process, namely its self-similarity. This means that if we had a very powerful microscope and focused it on a tiny interval of time, what we would see would be indistinguishable from the larger picture of the Wiener Process. We can go on increasing the magnification, without ever runnning into a limit to this property. The mystery of the Wiener Process is due to the fact that it is defined over the continuum, which is like an endless pit, we can never get to the bottom of it. The Wiener Process performs its minuscle movements in the nooks and cranies of this pit, and this is something that is difficult to visualize at the macro level. And we can never get to the point where we can actually see the Wiener particle make its jumps, as we delve deeper, we continue to a continuous function with its craggy shape.
+This reminds me of another deep mystery from the science of Quantum Mechanics, the fact that we can never see a quantum particle like the electron in the act of moving, all we can see are discrete points in space which mark its path. In between those points, the electron travels in a mysterious realm in which it becomes a diffuse wave like phenomenon. This point is discussed further in my article [Zeno's Paradox of the Arrow](https://subirvarma.github.io/GeneralCognitics/2025/03/11/Zeno.html). There is a relation between the Schrodinger equation and the equations of the Wiener Process that we will return at the end of this article.
 
-There are a few important properties of the Weiner Process that I want to mention before we move on to the Ito Integral:
+There are a few important properties of the Wiener Process that I want to mention before we move on to the Ito Integral:
 
-**Uniqueness of the Weiner Process**
+**Uniqueness of the Wiener Process**
  
 The statement of the result is as follows: Let $X(t)$ be Random Process that satisfies the following two conditions:
 - The Random Process is continuous, and
@@ -172,21 +184,22 @@ Then there exist unique constants $b$ and $\sigma$, such that $X(t)$ is given by
 
 $$ X(t) = X(0) + b + \sigma W(t) $$
 
-Note that $X(t)$ is simply a scaled version of the Weiner Process that starts at $X(0)$, and is such that at time $t$,$X_t$ is distributed according to $N(b,\sigma)$. Hence the Weiner Process can be considered to be an universal continuous time Random Process, since as soon as we constrain the increments to be ISI, there is only one process that can result. This accounts for the popularity of the Weiner process in modeling phenomena such as the Stock Market, since in this case the Efficient Market Hypothesis leads to the ISI property. 
+Note that $X(t)$ is simply a scaled version of the Wiener Process, known as the Wiener Process with drift. It starts at $X(0)$ and is such that at time $t$, $X_t$ is distributed according to the Normal distribution $N(b,\sigma^2)$. Hence the Wiener Process can be considered to be an universal continuous time random process, since as soon as we constrain the increments to be ISI, there is only one process that can satisfy the two requirements. 
 
-**The Weiner Process is nowhere differentiable**
+**The Wiener Process is nowhere differentiable**
 
 I am not going to prove this here, but you can get some intuition why this is the case by considering the following equation
 
 $$ f(t) = f(s) + (t-s)f'(r)  $$
 
-This is called the Mean Value Theorem in Calculus, and it says that it is possible to predict the value of a function at some future time $t$, based on its value at a past time $s$, and the derivative of the function at some $r$ that lies between $s$ and $t$. This clearly violates the ISI property of the Weiner process, since knowing $W(s)$ does not give us any information about the value of $W(t)$ in the future, however close $t$ maybe from $s$ from whic hwe can conclude that the derivative $f'$ does not exist at any time $r$ in the rage $[s,t]$.
-The lack of derivative can also be deduced from the fact that $W(t)$ is a fractal curve. I order for the derivative to exist, the ratio ${W(t)-W(s)\over{t-s}}$ has to converge as $t$ gets closer and closer to $s$. Beacuse of its fractal nature, $W(t)$ continues to move around randomly irrespective of how close $t$ is to $s$, thus ruling out the existence of this limit, and hence the derivative. 
+This is called the Mean Value Theorem in Calculus, and it says that it is possible to predict the value of a function at some future time $t$, based on its value at a past time $s$, and the derivative of the function at some $r$ that lies between $s$ and $t$. This clearly violates the ISI property of the Weiner process, since knowing $W(s)$ does not give us any information about the value of $W(t)$ in the future, however close $t$ maybe from $s$. From this we can conclude that the derivative $f'$ does not exist at any time $r$ in the rage $[s,t]$.
+The lack of derivative can also be deduced from the fact that $W(t)$ is a fractal curve. In order for the derivative to exist, the ratio ${W(t)-W(s)\over{t-s}}$ has to converge as $t$ gets closer and closer to $s$. Beacuse of its fractal nature, $W(t)$ continues to move around randomly irrespective of how close $t$ is to $s$, thus ruling out the existence of this limit, and hence the derivative. 
 
-The lack of derivative takes us back to [Zeno's Paradox of the Arrow](https://subirvarma.github.io/GeneralCognitics/2025/03/11/Zeno.html), which says that the arrow seems to be moving and not moving at the same time. Wierstrass was able to resolve this paradox by rigorously defing the velocity of the arrrow, which is the same as the first derivative ${dx\over dt}$. According to this, even if the arrow is not moving at any one time instant, it still has a well defined velocity and hence moves over time. 
-What if we replace the arrow by a particle moving according to the Wiener Process? In this case it does not have a derivative anywhere, so its velocity is not well defined. Then how does it still move, Wierstrass's solution does not apply anymore. Perhaps one way to look at it is that a physical particle always moves a finite amount before it changes direction, so the ideal particle moving according to the Wiener process is not physically realizable.
+The lack of derivative again harks back to [Zeno's Paradox of the Arrow](https://subirvarma.github.io/GeneralCognitics/2025/03/11/Zeno.html), which tries to prove that an arrow in flight is moving and not moving at the same time. Wierstrass was able to resolve this paradox by rigorously defing the velocity of the arrrow, which is the same as defining the derivative ${dx\over dt}$. According to Wierstrass, even if the arrow is not moving at any one time instant, it still has a well defined velocity and hence moves over time. 
+What if we replace the arrow by a particle moving according to the Wiener Process? In this case it does not have a derivative anywhere, so its velocity is not well defined. Then how does it still move, Wierstrass's solution to the paradox does not apply anymore. Perhaps one way to look at it is that a physical particle such as a pollen grain always moves a finite amount before it changes direction, so it does have a well defined velocity.
+This means that a particle strictly moving according to the Wiener process is not physically realizable. The Wiener process is a mathematical idealization that captures extreme randomness, and is a popular modeling tool since it has nice analytic properties.
 
-**Quadratic Variation and Bounded Variation of the Weiner Process**
+**Quadratic Variation and Bounded Variation of the Wiener Process**
 
 The quadratic variation of a function $f$ on the interval $[a,b]$ over some partition $\Pi={a=x_0,x_1,...x_n=b}$ is defined as
 
