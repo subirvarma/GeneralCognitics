@@ -184,7 +184,7 @@ Then there exist unique constants $b$ and $\sigma$, such that $X(t)$ is given by
 
 $$ X(t) = X(0) + b + \sigma W(t) $$
 
-Note that $X(t)$ is simply a scaled version of the Wiener Process, known as the Wiener Process with drift. It starts at $X(0)$ and is such that at time $t$, $X_t$ is distributed according to the Normal distribution $N(b,\sigma^2)$. Hence the Wiener Process can be considered to be an universal continuous time random process, since as soon as we constrain the increments to be ISI, there is only one process that can satisfy the two requirements. 
+Note that $X(t)$ is simply a scaled version of the Wiener Process, known as the Wiener Process with drift. It starts at $X(0)$ and is such that at time $t$, $X_t$ is distributed according to the Normal distribution $N(b,\sigma^2)$. Hence the Wiener Process can be considered to be an universal continuous time random process, since as soon as we constrain the increments to be ISI, there is only one process that can satisfy the two requirements. If we come across a continuous random process that is not Wiener, then it won't have the ISI property. Or if it has the ISI property then it won't be continuous. There are important continuous random processes, such as the Poisson Process, that fall in the latter category.
 
 **The Wiener Process is nowhere differentiable**
 
@@ -201,21 +201,21 @@ This means that a particle strictly moving according to the Wiener process is no
 
 **Quadratic Variation and Bounded Variation of the Wiener Process**
 
-The quadratic variation of a function $f$ on the interval $[a,b]$ over some partition $\Pi={a=x_0,x_1,...x_n=b}$ is defined as
+The quadratic variation of a function $f$ on the interval $[a,b]$ over some partition $\Pi={a=x_0,x_1,...x_n=b}$ is defined as the limit
 
 $$ Q(f) = \lim_{|\Pi|\rightarrow 0} |f(x_i) - f(x_{i-1})|^2  $$
 
-Similarly the variation for $f$ is defined as
+Similarly the variation for $f$ is defined as the limit
 
 $$ V(f) = \lim_{|\Pi|\rightarrow 0} |f(x_i) - f(x_{i-1})|  $$
 
 For regular functions, their variation is bounded, while their quadratic variation is 0.
-However, for Weiner Processes it can be shown that its variation diverges, while its quadratic variation over an interval $[a,b]$ is given by $b-a$,.i.e.,
+However, for Wiener Processes it can be shown that its variation diverges to infinity, while its quadratic variation over an interval $[a,b]$ is given by $b-a$. This means that
 
 $$ \lim_{n\rightarrow\infty}\sum_{i=1}^n |W_{kt/n} - W_{(k-1)t/n}|^2 = t $$
 
-Hence the squared difference of the values of a Weiner Process on an interval is just the length of the interval.
-This result is sometimes written as $(dW_t)^2 = dt$ which we will use in the next section on the Ito Integral.
+Hence the squared difference of the values of a Wiener Process on an interval is just the length of the interval.
+This result is informally written as $(dW_t)^2 = dt$ and is critical in proving some important properties for the Wiener Process.
 
 ## Stochastic Calculus and the Ito Integral
 
