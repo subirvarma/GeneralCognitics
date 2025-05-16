@@ -192,6 +192,12 @@ $$ X(t) = X(0) + b + \sigma W(t) $$
 
 Note that $X(t)$ is simply a scaled version of the Wiener Process, known as the Wiener Process with drift. It starts at $X(0)$ and is such that at time $t$, $X_t$ is distributed according to the Normal distribution $N(b,\sigma^2)$. Hence the Wiener Process can be considered to be an universal continuous time random process, since as soon as we constrain the increments to be ISI, there is only one process that can satisfy the two requirements. If we come across a continuous random process that is not Wiener, then it won't have the ISI property. Or if it has the ISI property then it won't be continuous. There are important continuous random processes, such as the Poisson Process, that fall in the latter category.
 
+The uniqueness property can be understood using the following heuristic argument. From the continuity property we can write the increment $X_t - X_s$ as the sum of equal size smaller increments by sub-dividing the interval $[s,t]$, so that
+
+$$ X_t - X_s = \sum (X_{t_i} - X_{t_j})  $$
+
+But the Independent Stationary Increment Property states that $(X_{t_i} - X_{t_j})$ are indpependent identically distributed random variables, so this equation is just a random sum. By the Central Limit Theorem, as the number of sub-divisions increases it follows that $X_t - X_s$ follows the statistics of a Normal distribution with variance $t-s$, i,.e., a Wiener Process. Note that because of the nature of the continuum, this sub-division can be done no matter how small the interval $t-s$ is.
+
 **The Wiener Process is nowhere differentiable**
 
 I am not going to prove this here, but you can get some intuition why this is the case by considering the following equation
