@@ -550,24 +550,24 @@ The most important application of the Wiener Process model in finance is the Bla
 
 ## Image Generation using the Langevin Diffusion Process
 
-Paul Langevin was a physicist who worked in Paris in the early decades of the 20th century. He proposed a new type of diffusion process to model the motion of particles in a viscous fluid, which reads as follows (with the notation that $v(t)$ is the velocity of the particle at time $t$ and $m$ is its mass):
+Paul Langevin was a physicist who worked in Paris in the early decades of the 20th century. He proposed an improvement to Einstein's model for Brownian Motion by using the following equation to model the motion of particles in a viscous fluid, which reads as follows (with the notation that $v(t)$ is the velocity of the particle at time $t$ and $m$ is its mass):
 
 $$  m dv(t) = -\lambda v(t) dt + \eta dW(t) $$
 
 The first term on RHS of the equation represents the viscous force on the particle that dampens its movement while the second term represents the random forces due to collisions with the molecules of the fluid.
-One of the most unpexcted applications of the Wiener Process happened in 2015 when [Jascha Sohl-Dickstein](https://arxiv.org/abs/1503.03585) and his collaborators showed the Langevin Process can be used to generate images. Until then the best image generation technique was based on a type of Neural Network called Generative Adversarial Networks or GANs, which are notoriously difficult to train. It was shown within a few years that the diffusion based technique yielded better images, and could be extended to encompass text to image generation as well as video generation. This has led to widespread adoption of tools such Dall-E-2 and Dall-E-3 from OpenAI and Imagen from Google which are all based on this technique.
+One of the most unexpected applications of the Wiener Process happened in 2015 when [Jascha Sohl-Dickstein](https://arxiv.org/abs/1503.03585) and his collaborators showed the Langevin Process can be used to generate images. Until then the best image generation technique was based on a type of Neural Network called Generative Adversarial Networks or GANs, which are notoriously difficult to train. It was shown within a few years that the diffusion based technique yielded better images, and could be extended to encompass text to image generation as well as video generation. This has led to widespread adoption of tools such Dall-E-2 and Dall-E-3 from OpenAI and Imagen from Google which are all based on this technique.
 
-In order to understand the connection between diffusions and image generation, consider a typical digital image. It is made up hundreds of thousands of individual blobs of color called pixels, the value of which is represented  by an integer between 0 and 255. For any one image the value of a pixel is fixed, but if we have a collection of images, then the pixel value varies and can be considered to be a random variable. The collection of pixels that make up an image consisting of $n$ pixels is a random vector $(X_1, X_2,...,X_n)$ consisting of correlated random variables, with distribution $f(x_1, x_2,...,x_n)$. If we had access to this distribution, then it would be possible to generate new images by sampling from it. In reality $f$ is some fantastically comnplex function which is not expressible using a simple equation. But what if we sample from a simpler distribution, such as the Normal distribution, and then somehow move the samples around so that they end up following $f$? This can be accomplished using the Langevin diffusion.
+In order to understand the connection between diffusions and image generation, consider a typical digital image. It is made up hundreds of thousands of individual blobs of color called pixels, the value of which is represented  by a group of three integers between 0 and 255, for the red, blue and green colors. For any one image the value of a pixel is fixed, but if we have a collection of images, then the pixel value varies and can be considered to be a random variable. The collection of pixels that make up an image consisting of $n$ pixels is a random vector $(X_1, X_2,...,X_n)$ consisting of correlated random variables, with distribution probability $f(x_1, x_2,...,x_n)$. If we had access to this distribution, then it would be possible to generate new images by sampling from it. In reality $f$ is some fantastically complex function which is not expressible using a simple equation. But what if we sample from a simpler distribution, such as the Normal distribution, and then somehow modify the samples so that they end up following $f$? This can be accomplished by using the Langevin diffusion.
 
 Consider the following Stochastic Differential Equation of the Langevin type
 
 $$ dX_t = \nabla\log p(X_t)dt + \sqrt{2} dW_t $$
 
-This process can be approximately computed by discretizing it, resulting in
+where $p(x)$ is the target probability density function that we are trying to move the distribution of $X_t$ to. This process can be approximately computed by discretizing it, resulting in
 
-$$ X_{t+h} = X_t + s\ \log\nabla\log\ p(X_t) + \sqrt{2}s\epsilon  $$
+$$ X_{t+h} = X_t + s\ \log\nabla\log\ p(X_t) + \sqrt{2s}\epsilon  $$
 
-where $s$ is the step size and $\epsilon ~ N(0,1)$. This can be interpreted as an update of $X_t$ by going in the direction pointed to by $\nabla\log p(X_t)$, which is somewhat similar to the parameter update step in the Stochastic Gradient Descent Algorithm used for training Neural Networks, though in this case we are performing an ascent, not descent. In addition the second term adds some random noise to the step update. Note that the gradient term pished $X_t$ into regions where $p(x)$ is high. Hence as $X_t$ evolves over time, it moves into regions with high probability, and in the limit it is distrbuted according to $p(x)$. But what about the noise term? It has been put there to prevent $X_t$ from getting stuck in a local maximum of $p(x)$, which would cause the iteration to get stuck and there would be no movement.
+where $s$ is the step size and $\epsilon$ is a sample from the Standard Normal distribution $N(0,1)$. This can be interpreted as an update of $X_t$ by going in the direction pointed to by $\nabla\log p(X_t)$, which is somewhat similar to the parameter update step in the Stochastic Gradient Descent Algorithm used for training Neural Networks, though in this case we are performing an ascent, not descent. In addition the second term adds some random noise to the step update. Note that the gradient term pushes $X_t$ into regions where the value of $p(x)$ is high. Thus as $X_t$ evolves over time, it moves into regions with high probability, and in the limit it is distributed according to $p(x)$. But what about the noise term? It has been put there to prevent $X_t$ from getting stuck in a local maximum of $p(x)$, which would cause the iteration to get stuck and there would be no movement.
 
 The Langevin diffusion gives us a very powerful tool for sampling from complex distributions, and we are going to use it to sample from the distribution of pixel values in images.
 
@@ -579,29 +579,30 @@ The main idea behind using Stochastic Differential Equations to generate images 
 
 **Forward Diffusion**
 
-We start with images $X_0$ distributed according to some unknown distribution given by $p_{data}$. As shown in the arrow going from left to right in the top part of the figure, we let $X_t$ evolve according to the following SDE
+We start with images $X_0$ distributed according to some unknown distribution given by $p_{data}(x_1,x_2,...,x_n)$$. As shown in the arrow going from left to right in the top part of the figure, we let $X_t$ evolve according to the following (non-Langevin) SDE
 
-$$ dX(t) = f(X_t,t)dt + g(t)dW_t $$
+$$ dX_t = f(X_t,t)dt + g(t)dW_t $$
 
-so that at time $T$, its distribution is given by $p_T$. We choose the functions $f$ and $g$ such that $p_T$ is distributed according to the Normal distribution $N(0,I)$ regardless of their initial distribution.
+so that at time $T$, the distribution of X_T$ is given by $p_T(x_1,x_2,...,x_n)$. We choose the functions $f$ and $g$ such that $p_T$(x_1,x_2,...,x_n)$ is distributed according to the Normal distribution $N(0,I)$ regardless of their initial distribution.
 
 **Backward Diffusion**
 
-The Backward Diffusion allows us to sample from the original distribution $p_{data}$, by sampling from the Normal distribition $N(0,I)$ at $t=T$ and then working backwards to get to $p_{data}$ at $t=0$. We define a reverse time SDE given by
+The Backward Diffusion allows us to sample from the original distribution $p_{data}(x_1,x_2,...,x_n)$, by sampling from the Normal distribition $N(0,I)$ at $t=T$ and then working backwards to get to $p_{data}(x_1,x_2,...,x_n)$ at $t=0$. We define a reverse time SDE given by
 
-$$ d{\overline X}(t) = [f({\overline X}_t,t) - g^2(t)\nabla_x\log\ p_t({\overline X}_t)]dt + g(t)d{\overline w}_t  $$
+$$ d{\overline X}_t = [f({\overline X}_t,t) - g^2(t)\nabla_x\log\ p_t({\overline X}_t)]dt + g(t)d{\overline W}_t  $$
 
-In this equation time runs backwards from $t=T$ to $t=0$, and the backwards Wiener Process ${\overline w_t}$ has the property that ${\overline w}_{t-s} - {\overline w}_t$ is independent of ${\overline w}_t$ for $s>0$. The mathematician Brian Anderson showed in the 1980s that the time reversed diffusion process ${\overline X}_t$ has the same distribution as the forward time process $X_t$.
+where $p_t(x)$ is the distribution for $X_t$.
+In this equation time runs backwards from $t=T$ to $t=0$, and the backwards Wiener Process ${\overline W_t}$ has the property that ${\overline W}_{t-s} - {\overline W}_t$ is independent of ${\overline W}_t$ for $s>0$. The mathematician Brian Anderson showed in the 1980s that the time reversed diffusion process ${\overline X}_t$ has the same distribution as the forward time process $X_t$.
 
-$x(T)$ is sampled from a Normal distribution, and then its value is allowed to change according to this SDE. With appropriate choice of $f$ and $g$, this equation can be shown to be equivalent to the Langevin Diffusion Process discussed earlier. This implies that the noisy image with distribution $p_T$ is gradually transformed into a proper image sampled from the distribution $p_{data}$.
+$x(T)$ is sampled from a Normal distribution, and then its value is allowed to change according to this SDE. With appropriate choice of $f$ and $g$, this equation can be shown to be equivalent to the Langevin Diffusion Process discussed earlier. This implies that the noisy image $X_T$ with distribution $N(0,I)$ is gradually transformed into a proper image $X(0)$ sampled from the distribution $p_{data}(x_1,x_2,...,x_n)$.
 
 [Song et.al.](https://arxiv.org/pdf/1907.05600) proposed the following choice for the functions $f$ and $g$,
 
-$$ f(x,t) = 0\ \ \ and\ \ \ g(t) = \beta'(t) $$
+$$ f(x,t) = 0\ \ \ and\ \ \ g(t) = \beta'(t)  $$
 
-where $\beta'(t)$ is a function with the properties $\beta(0) = 0, \beta'(t) > 0, \beta(t)\rightarrow\infty$ for $t\rightarrow\infty$, which results in the Forward Diffusion
+where $\beta'(t) = {d\beta\over dt}$ is a function with the properties $\beta(0) = 0, \beta'(t) > 0, \beta(t)\rightarrow\infty$ for $t\rightarrow\infty$, which results in the Forward Diffusion
 
-$$ dX(t) = \beta'(t) dW(t) $$
+$$ dX_t = \beta'(t) dW_t $$
 
 It can be shown that variance $V(X_t)$ satisfies the equation
 
@@ -611,7 +612,7 @@ so that it increases monotonically with $t$, so clearly $X_t$ does not converge 
 
 For this choice of $f$ and $g$, the Backward Diffusion can be written as
 
-$$ d{\overline X}(t) = -g^2(t)\nabla_x\log\ p_t({\overline X}_t)dt + g(t)d{\overline w} $$
+$$ d{\overline X}_t = -g^2(t)\nabla_x\log\ p_t({\overline X}_t)dt + g(t)d{\overline W}_t $$
 
 In practice these equations are implemented using the Euler-Maruyama method by discretizing time which results in a multistage process shown in the figure.
 In discrete time the equation becomes
@@ -620,15 +621,15 @@ $$ {\overline X}_{t-s} \approx {\overline X}_t + sg^2(t)\nabla_x\log\ p_t({\over
 
 where $\epsilon$ is sampled from the Normal distribution $N(0,I)$. Recall that the Langevin Diffusion was given by
 
-$$ X_{t+h} = X_t + s\ \nabla\log\ p(X_t) + \sqrt{2}s\epsilon  $$
+$$ X_{t+h} = X_t + s\ \nabla\log\ p(X_t) + \sqrt{2s}\epsilon  $$
 
-and it had the property that the distribution of $X_t$ converges to $p(X)$ over time. The Backwards Diffusion equation has the same struscture, with the difference that $p_t$ is used rather than the target distribution $p_{data}$. However $p_t$ converges to $p_{data}$ as $t\rightarrow 0$, so the Langevin convergence still holds.
+and it had the property that the distribution of $X_t$ converges to $p(X)$ over time. The Backwards Diffusion equation has the same struscture, with the difference that $p_t(x_1,x_2,...,x_n)$ is used rather than the target distribution $p_{data}(x_1,x_2,...,x_n)$. However $p_t(x_1,x_2,...,x_n)$ converges to $p_{data}(x_1,x_2,...,x_n)$ as $t\rightarrow 0$, so that the Langevin convergence still holds.
 
-In the discussion so far the subject of Neural Networks has not come up, so what role do they play? Recall that the probability density over images $p_{data}$ or $p_t$ is so complex that it cannot be captures in the usual way of mathematical equations, and this goes for the gradient $\nabla\log p_{t}$ as well. Hoever it can be represented using the millions of parameters in a Neural Network, and this is something that has become possible only in the last decade as our ability to train these networks has improved. These networks can be trained to estimate $\nabla\log p_{t}$, lets call is $s_{\theta}(X_t,t)$, where $\theta$ represents the parameters of the Neural Network. With this the equation for recovering the distribution $p_{data}$ becomes
+In the discussion so far the subject of Neural Networks has not come up, so what role do they play? The probability distribution over images $p_{data}(x_1,x_2,..,x_n)$ or $p_t(x_1,x_2,...,x_n)$ is so complex that it cannot be captures in the usual way by using mathematical equations, and this goes for the gradient $\nabla\log p_{t}$ as well. However even the most complex distribution can be represented using the millions of parameters in a Neural Network, and this is something that has become possible only in the last decade as our ability to train these networks has improved. These networks can be trained to estimate $\nabla\log p_{t}$, lets call is $r(\theta, X_t,t)$, where $\theta$ represents the parameters of the Neural Network. With this substitution the equation for recovering the distribution $p_{data}(x_1,x_2,...x_n)$ becomes
 
-$$ {\overline X}_{t-s} \approx {\overline X}_t + sg^2(t)s_{\theta}({\overline X_t},t) + g(t)\sqrt{s}\epsilon $$
+$$ {\overline X}_{t-s} \approx {\overline X}_t + sg^2(t) r({\theta},{\overline X}_t,t)  + g(t)\sqrt{s}\epsilon $$
 
-The description that I just gave contains the essence of the argument about diffusion based image generation systems work. If you want to dig deeper into this subject, including details about the implementation, you can read the excellent [blog](https://www.peterholderrieth.com/blog/2023/Langevin-Dynamics-An-introduction-for-Machine-Learning-Engineers/) by Peter Holderreith on this topic or the original [paper](https://arxiv.org/pdf/2011.13456) by Song et.al. I have also written a tutorial on this subject and it can be found [here](https://subirvarma.github.io/GeneralCognitics/2022/10/14/DiffusionModels.html).
+The description that I just gave contains the essence of the argument about how diffusion based image generation systems work. If you want to dig deeper into this subject, including details about the implementation, you can read the excellent [blog](https://www.peterholderrieth.com/blog/2023/Langevin-Dynamics-An-introduction-for-Machine-Learning-Engineers/) by Peter Holderreith on this topic or the original [paper](https://arxiv.org/pdf/2011.13456) by Song et.al. I have also written a tutorial on this subject and it can be found [here](https://subirvarma.github.io/GeneralCognitics/2022/10/14/DiffusionModels.html).
 
 ## Is There a Connection with Quantum Mechanics?
 
