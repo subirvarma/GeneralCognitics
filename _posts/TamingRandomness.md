@@ -542,11 +542,17 @@ Here $\xi_{NG}$ is a sample drawn from a Non-Normal distribution with mean $0$ a
 
 Earlier in this article I stated that the Wiener Process with drift enjoys the uniqueness property, i.e., it is the only random process which is continuous with independent stationary incremenets. This seems to contradict the above figure which shows the simulation of other random processes, such as the Truncated Levy, which have these properties. As you may have guessed, the resolution to this contradiction lies in the fact that the non-Normal sample paths shown in the figure are not continuous, since there is always a finite time difference between successive changes in $S_t$ in the simulation. However, even in this case, as $t$ becomes larger, $S_t$ can be written as the scaled sum of independent identically distributed random variables, which tends towards a Normal distribution because of the Central Limit Theorem. Hence for large values of $t$, we can expect the non-Normal processes to converge to the Wiener Process with drift.
 
+The most important application of the Wiener Process model in finance is the Black-Scholes equation for options pricing, which is given by
+
+$$ rf_t = {\partial f_t\over\partial t} + rS_t {\partial f_t\over\partial S_t} + {\sigma^2 S_t^2\over 2}{\partial^2 f_t\over\partial S_t^2}  $$
+
+In this equation, $f(S_t,t)$ is the value of a European style call option, $r$ is the constant risk-free rate of return, and $S_t$ is the stock on which the option is based. The model assumes that $S_t$ follows the Geometric Wiener Process model described earlier with variance $\sigma^2$. Note that this is a regular Partial DIfferential Equation, not a SDE. I am not including a derivation of this equation, but if you are interested, an excellent description can be found in this [article](https://math.uchicago.edu/~may/REU2024/REUPapers/Jiang,Asher.pdf). The main tool used in the derivation is the Ito Formula, and it can be easily understood using the Stochastic Calculus concepts developed in this article.
+
 ![](https://subirvarma.github.io/GeneralCognitics/images/weiner21.png) 
 
 Figure: Prices of European Call Options as computed by the Black-Scholes model (dotted line) and the Truncated Levi Distribution (TLD) based model
 
-The most important application of the Wiener Process model in finance is the Black-Scholes equation for options pricing. If this random process is not an accurate representatiobn of the Stock Market, then what are its implications? As shown by [Domenico et.al.](https://arxiv.org/pdf/2302.02769), it is possible to price options using Monte Carlo simulations driven by sample paths of the random process controlling the market movements, and this is plotted in the above figure. It shows that there is big disprecancy between the Black-Scholes model and non-Normal models for small values of Time to Maturity for the option. However, as $t$ increases, these values converge, and this is due to the fact that the non-Normal random process converges to the Wiener Process as $t$ increases.
+What are the effects of a non-Wiener Process model on call options pricing? As shown by [Domenico et.al.](https://arxiv.org/pdf/2302.02769), it is possible to price options using Monte Carlo simulations driven by sample paths of the random process controlling the market movements, and this is plotted in the above figure. It shows that there is big disprecancy between the Black-Scholes model and non-Normal models for small values of Time to Maturity for the option. However, as $t$ increases, these values converge, and this is due to the fact that the non-Normal random process converges to the Wiener Process as $t$ increases.
 
 ## Image Generation using the Langevin Diffusion Process
 
@@ -557,7 +563,7 @@ $$  m dv(t) = -\lambda v(t) dt + \eta dW(t) $$
 The first term on RHS of the equation represents the viscous force on the particle that dampens its movement while the second term represents the random forces due to collisions with the molecules of the fluid.
 One of the most unexpected applications of the Wiener Process happened in 2015 when [Jascha Sohl-Dickstein](https://arxiv.org/abs/1503.03585) and his collaborators showed the Langevin Process can be used to generate images. Until then the best image generation technique was based on a type of Neural Network called Generative Adversarial Networks or GANs, which are notoriously difficult to train. It was shown within a few years that the diffusion based technique yielded better images, and could be extended to encompass text to image generation as well as video generation. This has led to widespread adoption of tools such Dall-E-2 and Dall-E-3 from OpenAI and Imagen from Google which are all based on this technique.
 
-In order to understand the connection between diffusions and image generation, consider a typical digital image. It is made up hundreds of thousands of individual blobs of color called pixels, the value of which is represented  by a group of three integers between 0 and 255, for the red, blue and green colors. For any one image the value of a pixel is fixed, but if we have a collection of images, then the pixel value varies and can be considered to be a random variable. The collection of pixels that make up an image consisting of $n$ pixels is a random vector $(X_1, X_2,...,X_n)$ consisting of correlated random variables, with distribution probability $f(x_1, x_2,...,x_n)$. If we had access to this distribution, then it would be possible to generate new images by sampling from it. In reality $f$ is some fantastically complex function which is not expressible using a simple equation. But what if we sample from a simpler distribution, such as the Normal distribution, and then somehow modify the samples so that they end up following $f$? This can be accomplished by using the Langevin diffusion.
+In order to understand the connection between diffusions and image generation, consider a typical digital image. It is made up hundreds of thousands of individual blobs of color called pixels, the value of which is represented  by a group of three integers between 0 and 255, for the red, blue and green colors. For any one image the value of a pixel is fixed, but if we have a collection of images, then the pixel value varies and can be considered to be a random variable. The collection of pixels that make up an image consisting of $n$ pixels is a random vector $(X_1, X_2,...,X_n)$ consisting of correlated random variables, with distribution probability $f(x_1, x_2,...,x_n)$. If we had access to this distribution, then it would be possible to generate new images by sampling from it. In reality $f$ is some fantastically complex function which cannot be described using a simple equation. But what if we sample from a simpler distribution, such as the Normal distribution, and then somehow modify the samples so that they end up following $f$? This can be accomplished by using the Langevin diffusion.
 
 Consider the following Stochastic Differential Equation of the Langevin type
 
@@ -575,26 +581,27 @@ The Langevin diffusion gives us a very powerful tool for sampling from complex d
 
 Figure: Using Stochastic Differential Equations to transform an image into noise (top, from left to right), and transforming noise back into an image (bottom, right to left)
 
+In the discussion that follows, we will treat $X_t$ as a n-dimensional Wiener Process consisting of components $X_t = (x_{1t}, x_{2t},...,x_{nt})$.
 The main idea behind using Stochastic Differential Equations to generate images is shown in the above figure, and consists of the following steps:
 
 **Forward Diffusion**
 
-We start with images $X_0$ distributed according to some unknown distribution given by $p_{data}(x_1,x_2,...,x_n)$$. As shown in the arrow going from left to right in the top part of the figure, we let $X_t$ evolve according to the following (non-Langevin) SDE
+The main idea is to treat the pixels of the image as the components of a n-dimensional random process $X_t$, whose initial value $X_0$ is equal to actual pixel values, and is distributed according to some unknown distribution given by $p_{data}(x_1,x_2,...,x_n)$. As shown in the arrow going from left to right in the top part of the figure, we now let $X_t$ evolve according to the following (non-Langevin) SDE
 
 $$ dX_t = f(X_t,t)dt + g(t)dW_t $$
 
-so that at time $T$, the distribution of X_T$ is given by $p_T(x_1,x_2,...,x_n)$. We choose the functions $f$ and $g$ such that $p_T$(x_1,x_2,...,x_n)$ is distributed according to the Normal distribution $N(0,I)$ regardless of their initial distribution.
+so that at time $T$, the distribution of X_T$ is given by $p_T(x_1,x_2,...,x_n)$. We choose the functions $f$ and $g$ such that $p_T$(x_1,x_2,...,x_n)$ is distributed according to the Normal distribution $N(0,I)$ regardless of their initial distribution. As shown in the figure, the end result of this process is that the image gets converted into random noise.
 
 **Backward Diffusion**
 
-The Backward Diffusion allows us to sample from the original distribution $p_{data}(x_1,x_2,...,x_n)$, by sampling from the Normal distribition $N(0,I)$ at $t=T$ and then working backwards to get to $p_{data}(x_1,x_2,...,x_n)$ at $t=0$. We define a reverse time SDE given by
+The Backward Diffusion allows us to sample from the original distribution $p_{data}(x_1,x_2,...,x_n)$, by sampling from the Normal distribition $N(0,I)$ at $t=T$ and then use the Langevin Diffusion to work backwards to get back to $p_{data}(x_1,x_2,...,x_n)$ at $t=0$, in other words we start with pure noise, and gradually convert it back into a proper image. In order to do this we introduce a Reverse Time SDE given by
 
 $$ d{\overline X}_t = [f({\overline X}_t,t) - g^2(t)\nabla_x\log\ p_t({\overline X}_t)]dt + g(t)d{\overline W}_t  $$
 
 where $p_t(x)$ is the distribution for $X_t$.
-In this equation time runs backwards from $t=T$ to $t=0$, and the backwards Wiener Process ${\overline W_t}$ has the property that ${\overline W}_{t-s} - {\overline W}_t$ is independent of ${\overline W}_t$ for $s>0$. The mathematician Brian Anderson showed in the 1980s that the time reversed diffusion process ${\overline X}_t$ has the same distribution as the forward time process $X_t$.
+In this equation time runs backwards from $t=T$ to $t=0$, and the Backwards Wiener Process ${\overline W_t}$ has the property that ${\overline W}_{t-s} - {\overline W}_t$ is independent of ${\overline W}_t$ for $s>0$. The mathematician Brian Anderson showed in the 1980s that the time reversed diffusion process ${\overline X}_t$ has the same distribution as the forward time process $X_t$.
 
-$x(T)$ is sampled from a Normal distribution, and then its value is allowed to change according to this SDE. With appropriate choice of $f$ and $g$, this equation can be shown to be equivalent to the Langevin Diffusion Process discussed earlier. This implies that the noisy image $X_T$ with distribution $N(0,I)$ is gradually transformed into a proper image $X(0)$ sampled from the distribution $p_{data}(x_1,x_2,...,x_n)$.
+$x(T)$ is sampled from a Normal distribution, and then its value is allowed to change according to this SDE. With appropriate choice of $f$ and $g$, this equation can be shown to be equivalent to the Langevin Diffusion Process. This implies that the noisy image $X_T$ with distribution $N(0,I)$ is gradually transformed into a proper image $X_0$ sampled from the distribution $p_{data}(x_1,x_2,...,x_n)$.
 
 [Song et.al.](https://arxiv.org/pdf/1907.05600) proposed the following choice for the functions $f$ and $g$,
 
