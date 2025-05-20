@@ -651,12 +651,12 @@ The description that I just gave contains the essence of the argument about how 
 - [ ] Analogy with Brownian motion. Something is impacting the particles that causes them to move randomly. Inversely proportional to m.
 - [ ] Does not explain non locality though.
 
-I remarked at the start of this article that Quantum Mechanics and the Wiener Process were both birthed in the year 1900, but are they related? Considering that both of them involve the concept of randomness at a very deep level, one might tend to think so. 
-Quantum Mechanics is based on the concept of a Wave Function $\psi$, for which we still don't have a physical interpretation. It gives no clear picture of the movement of particles in-between successive measurements and leads to predictions that are probabilities. But these probabilities enter the theory in a rather forced way, through the Born Rule, which in 1 dimension states that the probability $p(\Delta x)$ of finding a partcle in the interval $\Delta x$ is given by
+I remarked at the start of this article that Quantum Mechanics and the Wiener Process were both birthed in the year 1900, but are they related? Considering that both of them involve the concept of randomness at a very deep level, one might suspect that to be the case. 
+Quantum Mechanics is based on the concept of a Wave Function $\psi$, for which we still don't have a physical interpretation. It gives no clear picture of the motion of particles in-between successive measurements and leads to predictions that are probabilities. But these probabilities enter the theory in a rather artificial way, through the Born Rule, which in one dimension states that the probability $p(\Delta x)$ of finding a partcle in the interval $\Delta x$ is given by
 
 $$ p(\Delta x) = \int_{\Delta x} \psi\psi^* dx  $$
 
-All of Quantum Mechanics is based on this rule, but again we have no clue as to why it works. Is it possible to introduce randomness into Quantum Mechanics without using the Born Rule? And more interestingly, can that randomness be due to the fluctuations of the Wiener Process operating at a very deep level in nature? Eisnstein showed that the randomness of the pollen particles was due to bombardment by water molecules. Is there some phenomenon operating deep in the structure of space-time that similarly causes randomness in Quantum Theory by bombarding tiny particles such as the electron. If this were true, it would provide a physical explanation for mysterious equations of Quantum Mechanics that would have made Einstein happy! 
+All of Quantum Mechanics is based on this rule, but again we have no clue as to why it works. Is it possible to introduce randomness into Quantum Mechanics without using the Born Rule? And more interestingly, can that randomness be due to the fluctuations of some sort of Diffusion Process operating at a very deep level in nature? Einstein showed that the randomness of the pollen particles was due to bombardment by water molecules. Is there some phenomenon operating deep in the structure of space-time that similarly causes randomness in Quantum Theory by randomly bombarding tiny particles such as the electron. If this were true, it would provide a physical explanation for mysterious equations of Quantum Mechanics that would have made Einstein happy! 
 
 There has been some work done over the years to connect Quantum Mechanics and the Wiener Process, and in order to understand this, I am going to introduce an important equation in the theory of Diffusion Processes called the Fokker-Planck equation. Consider the diffusion given by
 
@@ -674,9 +674,36 @@ which has the expected solution
 
 $$ \rho(x,t) = {1\over{{\sqrt{2t}}}} e^{-{x^2\over{2\sigma^2 t}}} $$
 
-In the case of Quantum Mechanics we have the Schrodinger Equation for $\psi$ given by
+In the case of Quantum Mechanics we have the Schrodinger Equation for $\psi$ given by (for the case when there are no external fields)
 
-$$ i{\hbar}{\partial\psi\over{\partial t}} = -{\hbar^2\over{2m}}{\partial^2\psi\over{\partial x^2}} + V(x)\psi $$
+$$ i{\hbar}{\partial\psi\over{\partial t}} = -{\hbar^2\over{2m}}{\partial^2\psi\over{\partial x^2}}  $$
+
+Consider the motion of a particle in free space, whose initial location is localized in the neighborhood of the origin. Unlike for the Wiener Process, we cannot have the particle be located exactly at $x=0$ at $t=0$, since the Heisenberg Uncertainity Principle would require that it have an infinite uncertainity in its initial momentum. Instead we assume that the wave function at $t=0$ is distributed according to a Normal Distribution given by
+
+$$ \psi(x,0) = \sqrt[4]{2\over\pi} \exp^{-x^2 + ik_0x} $$
+
+The solution to the Schrodinger equation with this initial condition is given by
+
+$$ \psi(x,t) = {\sqrt[4]{2\over\pi}\over\sqrt{1+2it}}\exp{-{(x-k_0t)^2\over{1+4t^2}}\exp{{i\over{1+4t^2}}((k_0+2tx)x-{tk_0^2\ over2}}) $$
+
+with probability density given by
+
+$$ |\psi(x,t)|^2 = {\sqrt{2\over\pi}\over\sqrt{1+4t^2}}\exp^{-{2(x-k_0t)^2\over {1+4t^2} $$
+
+For large values of $t$, this can be written as
+
+$$ |\psi(x,t)|^2 = {1\over\sqrt{2\pi t^2}}\exp^{-{2(x-k_0t)^2\over {2t^2} $$
+
+This looks suspiciously like the probability density for the Wiener Process, except that variance has a $t^2$ dependence on time, rather than $t$.
+
+Is it possible to come up with a Diffusion Process whose probability distribution behaves like this? There have been various attempts over the years to solve this problem, including by Schrodinger himself, since he was not happy with the Born Rule interpretation for his wave function. The best known theory was proposed by Princeton mathematician Edward Wilson in the mid 1960s.
+
+
+
+
+
+
+
 
 If we make the substitution $i\rightarrow -i$, then the Schrodinger equation becomes
 
