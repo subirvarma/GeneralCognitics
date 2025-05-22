@@ -158,7 +158,7 @@ $$ W^n_{j/n} = ({1\over\sqrt j}\sum_{k=1}^j X_k)\sqrt{j\over n} $$
 The Central Limit Theorem tells us that if we let $j$ and $n$ go to infinity, while keeping the ratio ${j\over n} = t$ constant, then the 
 random sum ${1\over\sqrt j}\sum_{k=1}^j X_k)$ converges to the Normal Distribution $N(0,1)$. Hence $W^n_{j/n}$ converges to a random variable $W_t$ which is the product of $\sqrt{t}$ and a Normally distributed random variable, and this is also distributed according to a Normal distribution $N(0,t)$ with mean zero and variance $t$. This can be written as
 
-$$ W^n_t \xrightarrow[\text {}]{\text{D}} W_t\ \ \ where\ \ \  W_t ~  N(0,t) = {1\over\sqrt{2\pi t}}e^{-{x^2\over{2t}}}   $$
+$$ W^n_t \xrightarrow[\text {}]{\text{D}} W_t\ \ \ as\ \ \ n\rightarrow\infty\ \ \ where\ \ \  W_t \sim  N(0,t) = {1\over\sqrt{2\pi t}}e^{-{x^2\over{2t}}}   $$
 
 It turns out that these two properties are precisely what characterize the Wiener process $W(t)$. 
 
@@ -244,11 +244,11 @@ However, for Wiener Processes it can be shown that its variation diverges to inf
 $$ \lim_{n\rightarrow\infty}\sum_{i=1}^n |W_{kt/n} - W_{(k-1)t/n}|^2 = t $$
 
 Hence the squared difference of the values of a Wiener Process on an interval is just the length of the interval.
-This result is informally written as $(dW_t)^2 = dt$ and is critical in proving some important properties for the Wiener Process.
+This result is informally written as $(dW_t)^2 = dt$ and is critical in proving some important properties for the Wiener Process. For a proof of this property please see the paper by [Carlstein](https://math.uchicago.edu/~may/REU2019/REUPapers/Carlstein.pdf).
 
 ## Stochastic Calculus and the Ito Integral
 
-Now that we have defined the Weiner Process, the next natural step is build upon this and create other random processes that use it as a building block. Kiyosi Ito carried out this program in the 1940s, and his first step was to define a random process $I(t)$ that could be expressed as an integral over the Weiner Process:
+Now that we have defined the Wiener Process, the next natural step is build upon this and create other random processes that use it as a building block. Kiyosi Ito carried out this program in the 1940s, and he started by defining a random process $I(t)$ that could be expressed as an integral over the Wiener Process:
 
 $$ I(t) = \int_0^t f(s,W_s) dW_s  $$
 
@@ -257,11 +257,11 @@ Integrating with respect to a wildly varying random function is highly non-intui
 
 $$ {dX(t)\over dt} = b(t,X_t) $$
 
-where $b$ is some function. Suppose that the time evolution of $X(t)$ has some random component that we want to capture. One way of doing this is by
+where $b$ is some function. Suppose that the time evolution of $X(t)$ has a random component that we want to capture. One way of doing this is by
 
 $$ {dX(t)\over dt} = b(t,X_t) + \sigma(t, X_t)N_t $$
 
-where $\sigma$ is another function and $N(t)$ is some sort of random process that represents noise. Based on models used in engineering, we would like the random variables $N_{t_1}$ and $N_{t_2}$ to be independent, $E(N_t) = 0$ for all $t$, and require $N(t)$ to be a stationary process. This agrees with the intuitive notion that $X(t)$ is being driven by random noise impulses that can completely different from one instant to another.
+where $\sigma$ is another function and $N(t)$ is some sort of random process that models noise. Based on models used in engineering, we would like the random variables $N_{t_1}$ and $N_{t_2}$ to be independent, $E(N_t) = 0$ for all $t$, and require $N(t)$ to be a stationary process. This agrees with the intuitive notion that $X(t)$ is being driven by random noise impulses that can be completely different from one instant to another.
 
 It turns out that there is no 'reasonable' process $N(t)$ that satisfies these conditions. In fact any such process would not even be continuous since we are requiring two neighboring random variables to be independent irrespective of how close they are in time.
 
@@ -269,7 +269,7 @@ Consider the discrete time version of this equation, that can be written as
 
 $$ X_k - X_{k-1} = b(t_k, X_k)\Delta t_k + \sigma(t_k,X_k)N_k\Delta t_k $$
 
-where $X_j = X(t_j), W_k = W(t_k), \Delta t_k = t_k - t_{k-1}$. Lets replace $N_k\Delta t_k$ by the increment of some stochastic process $V(t)$ such that $\Delta V_k = V_k - V_{k-1}$. Based on the properties of $N(t)$, we would like $V(t)$ to have independent stationary increments with mean 0, and lets also constrain it to be continuous. We learnt in the prior section that the only continuous random process with independent stationary increments is the Wiener Process so that the equation can be written as
+where $X_j = X(t_j), N_k = N(t_k)$ and $\Delta t_k = t_k - t_{k-1}$. Lets replace $N_k\Delta t_k$ by the increment of some stochastic process $V(t)$ such that $\Delta V_k = V_k - V_{k-1}$. Based on the properties of $N(t)$, we would like $V(t)$ to have independent stationary increments with mean 0, and lets also constrain it to be continuous. We learnt in the prior section that the only continuous random process with independent stationary increments is the Wiener Process so that the equation can be written as
 
 $$ X_k - X_{k-1} = b(t_k, X_k)\Delta t_k + \sigma(t_k,X_k)(W_k - W_{k-1}) $$
 
@@ -281,16 +281,18 @@ Assume that the following limit exists as $\Delta t_j\rightarrow 0$,
 
 $$ X(t) = X_0 + \int_0^t b(s,X_s)ds + \int_0^t \sigma(s,X_s)dW_t $$
 
-and we can see the Ito Integral appearing on the right hand side of this equation. Note that $X(t)$ is now a random process, and so are $b$ and $\sigma$ since they are functions of $X(t)$. This equation is often written in the differential form as
+and we can see the Ito Integral appearing on the right hand side of this equation. Note that $X(t)$ is now a random process, and so are $b$ and $\sigma$ since they are functions of $X(t)$ so that there are three sources of randomness in this equation. $b(t,X_t)$ is called the random drift of the Diffusion Process and $\sigma(t,X_t)$ is called the volatility.
 
-$$ dX(t) = b(t,X_t)dt + \sigma(t,X_t)dW_t $$
+This equation is often written in the differential form as
+
+$$ dX_t = b(t,X_t)dt + \sigma(t,X_t)dW_t $$
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/weiner14.png) 
 
 Figure: Diffusion Process of the type described by a Stochastic Differential Equation
 
-Note that this is just an abbreviation of the integral form since $dX$, $dW$ and $dt$ don't have any meaning by themselves.
-This is referred to as a Stochastic Differential Equation or SDE and is also called a Diffusion Process. Tha latter name arises out of the observation that the equation describes the gradual spreading of a particle's trajectory around the deterministic trajectory defined by ${dX(t)\over dt} = b(t,X_t)$, as shown in the above figure.
+Note that this is just an abbreviation of the integral form since $dX_t$, $dW_t$ and $dt$ don't have any meaning by themselves.
+This is referred to as a Stochastic Differential Equation or SDE and the resulting process $X(t) is called a Diffusion Process. Tha latter name arises out of the observation that the equation describes the gradual spreading of a particle's trajectory around the deterministic trajectory defined by ${dX(t)\over dt} = b(t,X_t)$, as shown in the above figure.
 
 Does the Ito Integral even exist, in other words is it well defined? The traditional Riemann Integral is defined as the limit
 
@@ -299,7 +301,7 @@ $$ \int_0^t f(t)dt = \lim_{n\rightarrow\infty}\sum_{i=1}^n f(t_i^q)(t_i - t_{i-1
 where the sum is taken over the partition ${t_0 = 0, t_1, t_2,...,t_n = t}$. Clearly this won't work since the Ito integral is not with respect to the time parameter.
 The Riemann-Stieltjes Integral on the other hand can be used to integrate with respect to another function, and is defined as:
 
-$$ \int_0^t f(t)dh(t) = \lim_{n\rightarrow\infty}\sum_{i=1}^n f(t_i^q)(h(t_i) - h(t_{i-1})),\ \ \ t_{i-1}\le t_i^q\le t_i $$
+$$ \int_0^t f(t)dg(t) = \lim_{n\rightarrow\infty}\sum_{i=1}^n f(t_i^q)(g(t_i) - g(t_{i-1})),\ \ \ t_{i-1}\le t_i^q\le t_i $$
 
 This integral exists only if $g(t)$ has a bounded variation, i.e.,
 
@@ -307,7 +309,7 @@ $$ V(g) = \lim_{|\Pi|\rightarrow 0} |g(t_i) - g(t_{i-1})|  $$
 
 is a finite quantity. We saw in the last section that this property is not true for the Wiener Proces, hence we cannot use the Stieltjes Integral to define the Ito Integral.
 
-We learnt about the concept of convergence in distribution in the prior sections, I am going to introduce another kind of convergence called convergence in probability which is needed to define the Ito Integral. A sequence of random variables ${X_t^n}$ is said to converge in probability to a random variable $X$ if for any $\epsilon > 0$,
+We learnt about the concept of convergence in distribution in the prior sections, I am going to introduce another kind of convergence called convergence in probability which is needed to define the Ito Integral. A sequence of random variables ${X_t^n}$ is said to converge in probability to a random variable $X$, if for any $\epsilon > 0$,
 
 $$ \lim_{n\rightarrow\infty} P(|X_t^n - X|>\epsilon) = 0 $$
 
@@ -325,12 +327,12 @@ Hence given a sequence $\{X^n_t\}$ with mean 0, if we can show that $E(X^n_t - X
 
 Figure: A Simple Integrand $A(t)$
 
-Consider a simple random process $A(t)$ of the type shown in the above figure. It is constructed by choosing a finite number of time instants $0=t_0<t_1<...<t_n<\infty$ and associate a random variable $Y_j$ such that $A(t)= Y_j$ on the associated interval $t_j<t<t_{j+1}$. Furthermore he also assumed that the random variable $Y_j$ is independent of the further evolution of $W(t)$ for $t\ge t_j$. Random functions $A(t)$ that satisfy this property are referred to as $F_t$ measurable with respect to the Wiener Process.
+Consider a simple random process $A(t)$ of the type shown in the above figure. It is constructed by choosing a finite number of time instants $0=t_0<t_1<...<t_n<\infty$ and associate a random variable $Y_j$ such that $A(t)= Y_j$ on the interval $t_j<t<t_{j+1}$. Furthermore he also assumed that the random variable $Y_j$ is independent of the further evolution of $W(t)$ for $t\ge t_j$. Random functions $A(t)$ that satisfy this property are referred to as $F_t$ measurable with respect to the Wiener Process.
 Then the stochastic integral for $A(t)$ is defined as
 
 $$ \int_0^t A(t)dW(t) = \sum_{i=0}^j Y_i(W_{t_1+1} - W_{t_i}) +Y_j(B_t - B_{t_j})  $$
 
-Ito showed that if $A(t)$ is F_f$ measurable then this simple integral satisfies the Ito Isometry property, which states that
+Ito showed that if $A(t)$ is $F_t$ measurable then this integral satisfies the Ito Isometry property, which states that
 
 $$ E[\int_0^t A(s)dW(s)]^2 = \int_0^t E[A(s)^2] ds $$
 
@@ -348,13 +350,11 @@ The Ito Integral allows us to build a wide variety of random processes by using 
 
 $$ X(t) = X_0 + \int_0^t b(s,X(s))ds + \int_0^t \sigma(s,X(s))dW(t) $$
 
-The random process $X(t)$ defined in this manner is called a diffusion process, and these constitute the main objects of study in the field of continuous valued random processes.
-This equation is commonly written in the differential form as 
-
-$$ dX_t = b(t,X_t)dt + \sigma(t,X_t)dW_t $$
-
-Hence a diffusion process has random drift component $b(t,X_t)$ and furthermore the random increments of the Wiener Process $dW_t$ are randomly modified by $\sigma(t,X_t)$. 
 The analysis of the general case is not simple, however there are some simple special cases that occur frequently in applications:
+
+![](https://subirvarma.github.io/GeneralCognitics/images/weiner16.png) 
+
+Figure: Three possible realizations of a Wiener Process with Constant Drift
 
 1. Weiner Process with Drift: This is given by the equation
 
@@ -364,12 +364,7 @@ In this case the SDE can be solved to obtain
 
 $$ X_t = X_0 + bt + \sigma W_t $$
 
-Hence this is a modified Wiener Process whose mean value increases linearly with time, and whose variance at time $t$ is given by $\sigma^2 t$. Its probability distribution at time $t$ is given by the Normal Distribution $N(X_0+bt, \sigma\sqrt{t})$.
-
-![](https://subirvarma.github.io/GeneralCognitics/images/weiner16.png) 
-
-Figure: Three possible realizations of a Wiener Process with Constant Drift
-
+Hence this is a modified Wiener Process whose mean value increases linearly with time, and whose variance at time $t$ is given by $\sigma^2 t$. Its probability distribution at time $t$ is given by the Normal Distribution $N(X_0+bt, \sigma^2 t)$.
 Some example sample paths of a Wiener Process with drift are shown in the above figure.
 
 2. Time Homogeneuous Ito Diffusions: These follow the diffusion equation
