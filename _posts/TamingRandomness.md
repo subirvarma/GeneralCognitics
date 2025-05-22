@@ -640,17 +640,6 @@ The description that I just gave contains the essence of the argument about how 
 
 ## Is There a Connection with Quantum Mechanics?
 
-- [ ] QM and the wiener process were birthed in the same year, 1900, but are they related?
-- [ ] QM is based on the wave function, for which we still don’t have a physical interpretation.
-- [ ] Moreover QM also leads to predictions that are probabilities. But probabilities enter QM in a rather forced way by means of the Born rule. There is no physical explanation first it.
-- [ ] Can we introduce randomness into QM without using the born rule? Such that the randomness is driven by the random fluctuations of the wiener process?
-- [ ] Can we use the wiener process to introduce probability into QM in a different way that is more physically plausible? 
-- [ ] The Fokker Planck equation WP
-- [ ] QM probabilities satisfy a version of this
-- [ ] This results in a diffusion model that explains the randomness
-- [ ] Analogy with Brownian motion. Something is impacting the particles that causes them to move randomly. Inversely proportional to m.
-- [ ] Does not explain non locality though.
-
 I remarked at the start of this article that Quantum Mechanics and the Wiener Process were both birthed in the year 1900, but are they related? Considering that both of them involve the concept of randomness at a very deep level, one might suspect that to be the case. 
 Quantum Mechanics is based on the concept of a Wave Function $\psi$, for which we still don't have a physical interpretation. It gives no clear picture of the motion of particles in-between successive measurements and leads to predictions that are probabilities. But these probabilities enter the theory in a rather artificial way, through the Born Rule, which in one dimension states that the probability $p(\Delta x)$ of finding a partcle in the interval $\Delta x$ is given by
 
@@ -678,25 +667,32 @@ In the case of Quantum Mechanics we have the Schrodinger Equation for $\psi$ giv
 
 $$ i{\hbar}{\partial\psi\over{\partial t}} = -{\hbar^2\over{2m}}{\partial^2\psi\over{\partial x^2}}  $$
 
-Consider the motion of a particle in free space, whose initial location is localized in the neighborhood of the origin. Unlike for the Wiener Process, we cannot have the particle be located exactly at $x=0$ at $t=0$, since the Heisenberg Uncertainity Principle would require that it have an infinite uncertainity in its initial momentum. Instead we assume that the wave function at $t=0$ is distributed according to a Normal Distribution given by
+Consider the motion of a particle in free space, whose initial location is localized in the neighborhood of the origin. Unlike for the Wiener Process, we cannot have the particle be located exactly at $x=0$ at $t=0$, since the Heisenberg Uncertainity Principle would require that it have an infinite uncertainity in its initial momentum. Instead we assume that its wave function at $t=0$ is distributed according to a Normal distribution given by (with $m = \hbar = 1$),
 
-$$ \psi(x,0) = \sqrt[4]{2\over\pi} \exp^{-x^2 + ik_0x} $$
+$$ \psi(x,0) = \sqrt[4]{2\over\pi} \exp^{-x^2 + ip_0x} $$
 
-The solution to the Schrodinger equation with this initial condition is given by
+where $p_0$ is the initial average momentum of the particle. Hence both the initial position and the initial momentum of the particle are Normally distributed random quantities, connected together by the Uncertainity Principle. Solving the Schrodinger equation will tell us how the particle's location changes with time, and is given by (see [this article](https://en.wikipedia.org/wiki/Wave_packet) for a nice description of free quantum particles)
 
-$$ \psi(x,t) = {\sqrt[4]{2\over\pi}\over\sqrt{1+2it}}\exp{-{(x-k_0t)^2\over{1+4t^2}}\exp{{i\over{1+4t^2}}((k_0+2tx)x-{tk_0^2\ over2}}) $$
+$$ \psi(x,t) = \sqrt[4]{2\over\pi}{1\over\sqrt{1+2it}}\exp^{-{(x-p_0t)^2\over {1+4t^2}}} \exp^{i{(p_0+2tx)x-{tp_0^2\over 2}\over {1+4t^2}}} $$
 
 with probability density given by
 
-$$ |\psi(x,t)|^2 = {\sqrt{2\over\pi}\over\sqrt{1+4t^2}}\exp^{-{2(x-k_0t)^2\over {1+4t^2} $$
+$$ |\psi(x,t)|^2 = \sqrt{2\over\pi}{1\over\sqrt{1+4t^2}} \exp^{-{(x-p_0t)^2\over {1+4t^2}}} $$
 
 For large values of $t$, this can be written as
 
-$$ |\psi(x,t)|^2 = {1\over\sqrt{2\pi t^2}}\exp^{-{2(x-k_0t)^2\over {2t^2} $$
+$$ |\psi(x,t)|^2 = {1\over\sqrt{2\pi t^2}} \exp^{-{2(x-p_0 t)^2\over {2t^2}}} $$
 
-This looks suspiciously like the probability density for the Wiener Process, except that variance has a $t^2$ dependence on time, rather than $t$.
+![](https://subirvarma.github.io/GeneralCognitics/images/weiner23.png) 
 
-Is it possible to come up with a Diffusion Process whose probability distribution behaves like this? There have been various attempts over the years to solve this problem, including by Schrodinger himself, since he was not happy with the Born Rule interpretation for his wave function. The best known theory was proposed by Princeton mathematician Edward Wilson in the mid 1960s.
+Figure: Probability distribution of a free particle as a function of time
+
+This equation says that if the particle with initial average momentum $p_0$ is initially confined to a location around the origin at $t=0$, then the probability of locating it at time $t$ is a Normal distribition centered at $p_0 t$, i.e., on the average it has moved to the right, and its location has become even more uncertain due to the variance which increases as $t^2$. The quantum mechanical explanation for this behavior is the following: Since the initial momentum is a random quantity, as time increases the range of possible distances covered by the particle increases depending on the spread of the momentum values.
+The expression does look suspiciously like the probability density for a Wiener Process with drift, except that variance has a $t^2$ dependence on time, rather than $t$. Hence the range of possible locations for both a Wiener particle and a quantum particle becomes more and more spread out over time.
+
+Is it possible to come up with a Diffusion Process whose probability distribution behaves like this? In other words, does the quantum particle derive its randomness from being driven by a Wiener Process?
+If so, this would be a natural way to introduce probability into Quantum Mechanics, rather than using the Born Rule.
+There have been various attempts over the years to solve this problem, including by Schrodinger himself, since he was not happy with the Born Rule interpretation for his wave function. The best known theory was proposed by Princeton mathematician Edward Nelson in the mid 1960s and goes by the name Stochastic Quantum Mechanics (see [this article](https://shs.hal.science/halshs-00996258v1/document) for a recent review of Nelson's theory).
 
 
 
