@@ -158,7 +158,7 @@ $$ W^n_{j/n} = ({1\over\sqrt j}\sum_{k=1}^j X_k)\sqrt{j\over n} $$
 The Central Limit Theorem tells us that if we let $j$ and $n$ go to infinity, while keeping the ratio ${j\over n} = t$ constant, then the 
 random sum ${1\over\sqrt j}\sum_{k=1}^j X_k)$ converges to the Normal Distribution $N(0,1)$. Hence $W^n_{j/n}$ converges to a random variable $W_t$ which is the product of $\sqrt{t}$ and a Normally distributed random variable, and this is also distributed according to a Normal distribution $N(0,t)$ with mean zero and variance $t$. This can be written as
 
-$$ W^n_t \xrightarrow[\text {}]{\text{D}}\ \ \ where\ \ \  W_t ~  N(0,t) = {1\over\sqrt{2\pi t}}e^{-{x^2\over{2t}}}   $$
+$$ W^n_t \xrightarrow[\text {}]{\text{D}} W_t\ \ \ where\ \ \  W_t ~  N(0,t) = {1\over\sqrt{2\pi t}}e^{-{x^2\over{2t}}}   $$
 
 It turns out that these two properties are precisely what characterize the Wiener process $W(t)$. 
 
