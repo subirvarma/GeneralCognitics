@@ -156,9 +156,9 @@ This can also be written as
 $$ W^n_{j/n} = ({1\over\sqrt j}\sum_{k=1}^j X_k)\sqrt{j\over n} $$
 
 The Central Limit Theorem tells us that if we let $j$ and $n$ go to infinity, while keeping the ratio ${j\over n} = t$ constant, then the 
-random sum ${1\over\sqrt j}\sum_{k=1}^j X_k)$ converges to the Normal Distribution $N(0,1)$. Hence $W^n_{j/n}$ converges to a random variable $W_t$ which is the product of a Normally distributed random variable and $\sqrt{t}$, which is again a Normal distribution $N(0,t)$ with mean zero and variance $t$. This can be written as
+random sum ${1\over\sqrt j}\sum_{k=1}^j X_k)$ converges to the Normal Distribution $N(0,1)$. Hence $W^n_{j/n}$ converges to a random variable $W_t$ which is the product of $\sqrt{t}$ and a Normally distributed random variable, and this is also distributed according to a Normal distribution $N(0,t)$ with mean zero and variance $t$. This can be written as
 
-$$ W^n_t \xrightarrow[\text {D}]{\text{}} W_t ~  N(0,t) = {1\over\sqrt{2\pi t}}e^{-{x^2\over{2t}}}   $$
+$$ W^n_t \xrightarrow[\text {}]{\text{D}}\ \ \ where\ \ \  W_t ~  N(0,t) = {1\over\sqrt{2\pi t}}e^{-{x^2\over{2t}}}   $$
 
 It turns out that these two properties are precisely what characterize the Wiener process $W(t)$. 
 
@@ -169,14 +169,14 @@ More formally, the Weiner Process is a collection of random variables that are i
 3. The Random Variable $W_t - W_s$ is independent of the Random Variable ${W_v: v\le s}$ for all $s < t$.
 4. The function $W(t)$ is continuous.
 
-Since the random walk $W^n_t$ converges to a Normal distribution with mean zero and variance $t$ as $n\rightarrow\infty$, and furthermore it exhibits the ISI property,
-we can see why it might converge to a limiting process that has the same properties, which is the content of Donsker's Theorem.
+Since the random variable $W^n_t$ converges to a Normal distribution with mean zero and variance $t$ as $n\rightarrow\infty$, and furthermore since non-overlapping increments of the Random Walk $W^n(t)$ exhibits the ISI property,
+we can see why it might converge to a limiting process that has the same properties.
 Actually what Donsker proved was something much deeper, he showed that
 
-$$ W^n(t) \xrightarrow[\text {D}]{\text{}} W(t)  $$
+$$ W^n(t) \xrightarrow[\text {}]{\text{D}} W(t)  $$
 
-which is a convergence over the space of probability measures defined over the space of  random functions, not just for probability distributions at a finite number of time instants. Hence all suitably scaled versions of Random Walks converge to the Wiener Process.
-This convergence can be considered to be a stronger version of the Central Limit Theorem for random variables, which is a special case of Donsker's Theorem for the case $t=1$. Just as the Normal distribution is the universal limiting distribution for random variables, the Wiener Process is the universal limiting distribution for random functions, which explains why it so important in applications.
+which is a convergence over the space of probability measures defined over the space of  random functions, not just for probability distributions at a finite number of time instants.
+This convergence can be considered to be a stronger version of the Central Limit Theorem for random variables, which is a special case of Donsker's Theorem for the case $t=1$. Just as the Normal distribution is the universal limiting distribution for random variables, the Wiener Process is the universal limiting distribution for random functions, which explains why it occurs so frequently in applications.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/weiner15.png) 
 
@@ -189,7 +189,10 @@ The fact that Wiener process has variance $t$ implies that it tends to move away
 
 Figure: Self-Similarity or Fractal Property of the Wiener Process
 
-The Wiener Process remains one of the weirdest objects that mathematicians have created, the idea of a continuous function not possessing a derivative at any point in its domain is highly non-intuitive. This is tied to another property of the Wiener Process, namely its self-similarity. This means that if we had a very powerful microscope and focused it on a tiny interval of time, what we would see would be indistinguishable from the larger picture of the Wiener Process. We can go on increasing the magnification, without ever encountering a limit to this property. The mystery of the Wiener Process is due to the fact that it is defined over the continuum, which is like an endless pit, we can never get to the bottom of it. The Wiener Process performs its minuscule movements in the nooks and crannies of this pit, and this is something that is difficult to visualize at the macro level. And we can never get to the point where we can actually see the Wiener particle make its jumps, as we delve deeper, we continue to a continuous function with its craggy shape.
+The Wiener Process remains one of the weirdest objects that mathematicians have created, the idea of a continuous function not possessing a derivative at any point in its domain is highly non-intuitive. This is connected to another property of the Wiener Process, namely its self-similarity. This means that if we had a very powerful microscope and focused it on a tiny interval of time, what we would see would be indistinguishable from the larger picture of the Wiener Process. We can go on increasing the magnification, without ever encountering a limit to this property. Mathematically speaking, this property arises due to the fact that the random variables
+$W_t$ and ${1\over{sqrt{c}}W_{t\over c}$ possess the same distribution.
+
+The mystery of the Wiener Process is due to the fact that it is defined over the continuum, which is like an endless pit, we can never get to the bottom of it. The Wiener Process performs its minuscule movements in the nooks and crannies of this pit, and this is something that is difficult to visualize at the macro level. And we can never get to the point where we can actually see the Wiener particle make its jumps, as we delve deeper, we continue to a continuous function with its craggy shape.
 This reminds me of another deep mystery from the science of Quantum Mechanics, the fact that we can never see a quantum particle like the electron in the act of moving, all we can see are discrete points in space which mark its path. In between those points, the electron travels in a mysterious realm in which it becomes a diffuse wave like phenomenon. This point is discussed further in my article [Zeno's Paradox of the Arrow](https://subirvarma.github.io/GeneralCognitics/2025/03/11/Zeno.html). There is a relation between the Schrodinger equation and the equations of the Wiener Process that we will return at the end of this article.
 
 There are a few important properties of the Wiener Process that I want to mention before we move on to the Ito Integral:
