@@ -694,27 +694,31 @@ Is it possible to come up with a Diffusion Process whose probability distributio
 If so, this would be a natural way to introduce probability into Quantum Mechanics, rather than using the Born Rule.
 There have been various attempts over the years to solve this problem, including by Schrodinger himself, since he was not happy with the Born Rule interpretation for his wave function. The best known theory was proposed by Princeton mathematician Edward Nelson in the mid 1960s and goes by the name Stochastic Quantum Mechanics (see [this article](https://shs.hal.science/halshs-00996258v1/document) for a recent review of Nelson's theory).
 
+Nelson assumed that a quantum particle in vacuum is drven by the following Stochastic Differential Equation
 
+$$ dX_t = b(X_t,t)dt+ dW_t $$
 
+The function $b(X_t,t)$ is called the mean forward velocity, while $W(t)$ is a standard Wiener Process with mean zero and variance $\nu = {\sigma^2\over 2}$. Unlike the case for Brownian Motion, there is no fluid that is pushing the particles around, and Nelson left open the question of what is responsible for the randomness. He suggested it could be due to processes happpening deep in the fabric of space-time which we cannot detect. [Markopoulou and Smolin](https://arxiv.org/pdf/gr-qc/0311059) have proposed a Quantum Theory of Gravity which also makes use of this idea.
 
+The Fokker-Planck equation for this diffusion is given by
 
+$$ {\partial\rho\over\partial t} = -{\partial(b\rho)\over\partial x} + \nu{\partial^2\rho\over{\partial x^2}} $$
 
+Nelson proposed the following special form for the diffusion
 
+$$ dx_t = [{1\over m}{\partial S(x,t){\partial x}} + {\nu\over R^2(x,t)}{\partial^2 R^2(x,t)\over{\partial x^2}}] + dW_t $$
 
-If we make the substitution $i\rightarrow -i$, then the Schrodinger equation becomes
+where the functions $S(x,t)$ and $R(x,t)$ satisfy the following equation
 
-$$ {\hbar}{\partial\psi\over{\partial t}} = {\hbar^2\over{2m}}{\partial^2\psi\over{\partial x^2}} - V(x)\psi $$
+$$ {\partial S(x,t)\over{\partial t}} = -{1\over{2m}} ({\partial S(x,t){\partial x}})^2 - V + {\hbar^2\over{2mR}} {\partial^2 R(x,t)\over{\partial x}}  $$
 
-The Born Rule says that the probability density for Quantum Mechanics is given by $\rho_{QM} = \psi\psi^* $.
-It can be shown that $\rho_{QM}$ satisfies the following equation (for a derivation see the paper by [S. Agrawal](https://homes.psd.uchicago.edu/~sethi/Teaching/P243-W2020/final-papers/agrawal.pdf) on this topic)
+If we specify that the probability density for the diffusion be equal to $R^2$, i.e., $\rho = R^2$, then the Fokker-Planck eqyation simlplifies to
 
-$$ {\partial\rho\over{\partial t}} = {\hbar^2\over{2m}}\nabla^2\rho_{QM} - \nabla.(\rho(u+v)) $$
+$$ {\partial R^2\over\partial t} = -{\partial({{1\over m} [{\partial (S\over{\partial x}})^2 R^2 }]\over{\partial x}} $$
 
-where
+These last two equations are called the Madelung equations, and can also be derived by setting $\psi = R\exp^{iS\over\hbar}$ in Schrodinger's equation.
+This implies that diffusion model and the Schrodinger model for a quantum particle are equivalent descriptions, since the equations for both these models can be reduced to the Madelung equations. Hence the Schrodinger equation is just a convenient mathematical way to write the Madelung equations, it does not have any real existence in nature. 
 
-$$  \pxi(x) = \rho_{QM}e^{iS(x)\over\hbar} $$
-$$ v = {\nabla S\over m} $$
-$$ u = {\hbar^2\over{2m}}{\nabla\rho_{QM}\over\rho_{QM}} $$
 
 
 ## My Personal Encounters with Randomness
