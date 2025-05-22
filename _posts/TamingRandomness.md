@@ -5,6 +5,18 @@ title: "Encounters with Extreme Randomness: The Story of Brownian Motion"
 
 # Encounters with Extreme Randomness: The Story of Brownian Motion
 
+**Contents**     
+
+- Introduction   
+     Two New Sciences     
+- From Brownian Motion to the Wiener Process      
+- Stochastic Calculus and the Ito Integral
+- Ito's Formula     
+- Modeling the Stock Market      
+Does the Stock Market Follow a Wiener Process      
+- Image Generation Using the Langevin Diffusion Process       
+- Is there a Connection with Quantum Mechanics?    
+
 ## Introduction
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/weiner1.png) 
