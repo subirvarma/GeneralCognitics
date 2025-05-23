@@ -458,4 +458,117 @@ $$ df(t,X_t) = [{\partial f\over\partial t} + b.{\partial f\over\partial x} + {\
 
 which is the Ito Formula.
 
+## Modeling the Stock Market
+
+When I first learnt about the Wiener Process and Stochastic Calculus in grad school in the late 1980s, the main applications that text books talked about were in the fields of filtering and control theory. Now 40 years later almost everyone who learns Stochastic Calculus is doing it so that they can apply it to mathematical finance, in other words, to become a Wall Street quant. In 1985 the Black Scholes equation was already about a decade old, but its use hadn't become prevalent in Wall Street. There has been an explosion in the financial markets since then, with new financial products that make use of stock derivatives and this has made Stochastic Calculus a must have skill for quants. At the same time there has been a backlash against the use of the Wiener Process to model stocks, especially after the 2007-2008 financial crisis. A prominent voice arguing for this is the trader and author Nassim Nicholas Taleb though some of these ideas can be traced back to a paper that Benoit Mandelbrot wrote on this topic in the early 1960s.
+
+The stock market is the closest anyone of us will get to encountering pure randomness in our daily lives. Understanding how the market behaves is important to most of us who have part of our savings invested in the market, but we normally don't think about it unless at times of market turmoil. However there is a class of financial industry professionals called equity traders who have to deal with this randomness on a day-to-day basis. They buy and sell equities frequently, sometimes several times a day, and their profession is a constant struggle against the randomness of the market. 
+
+The earliest random process model for stocks can be traced back to Bachelier from his PhD thesis back in 1901.
+It uses a Wiener Process with drift given by (though it was not called by this name then)
+
+$$ S(t) = \mu dt + \sigma W(t) $$
+
+The first term captures that fact that there is usually an upward drift in the market over time, while the second term captures the volatility in the process.
+Since the Wiener process has independent and stationary increments, it implies that the random change $S_{t+h} - S_t$ in $S(t)$ is independent of whatever happened in the market at time $t$ and earlier, including the value $S_t$ as well.
+This does not agree with the way the stock market actually behaves, since in reality the change is greater if $S_t$ is larger.
+In the 1960s Samuelson improved the model by noting that the  change in the value of a stock is dependent on its current price, since only the percentage increase or decrease from the current price is what really matters to a trader. 
+In other words, it doesn't matter whether you are holding $1 million dollar portfolio or a $1 dollar portfolio, you would still want the same 10% annual return.
+Taking this into account, the modified model is
+
+$$ dS_t = \mu S dt + \sigma S dW_t  $$
+
+which states that the fractional change ${dS_t\over S}$ should be a Wiener Process with drift.
+
+![](https://subirvarma.github.io/GeneralCognitics/images/weiner17.png) 
+
+Figure: Three Possible Realizations of the Geometric Wiener Process
+
+As shown in the prior section, this Stochastic Differential Equation can be solved  using the Ito Formula to obtain
+
+$$ S(t) = S(0)\exp^{(\mu-{\sigma^2\over 2})t+\sigma W(t)}  $$
+
+This is known as the Geometric Wiener Process, and is the most common stock market model used today. Since all changes are in terms of percentage increments or decrements, this means that the value of $S(t)$ can never dip below zero, unlike the plain Wiener Process with drift. 
+If there was no random component, $S(t)$ will evolve as
+
+$$ S(t) = S(0)\exp^{\mu t} $$
+
+This equation says that when the volatility is zero, the stock price grows at a continuously compounded rate of $\mu$ per unit time.
+The Geometric Wiener Process can be regarded as a random variation around this exponential curve. The above figure shows three possible sample paths of the Geometric Wiener Process, along with the deterministic curve.
+
+Note that the Geometric Wiener Process does not have the Independent Stationary Increment property, since the increment $S_{t+h} - S_t$ is dependent on the starting value $S_t$.
+It is still a Markov process though and its logarithm can be written as
+
+$$ \log S(t) = \log S(0) + (\mu - {\sigma^2\over 2})t +\sigma W(t) $$
+
+which is just the standard Wiener Process with drift.
+
+Bachelier's original market model of the Wiener Process with drift can be regarded as the value of an investment in which the gains are not invested back into the portfolio, hence any change is due to gain or loss in the starting amount $S(0)$. The model based on the Geometric Wiener Process on the other hand re-invests its gains back into the portfolio, so it results in the exponential behavior due to continuously compounding gains.
+
+This model is based on the assumption that the future of the stock market cannot be predicted by the knowledge of how it has done in the past, only the current price matters, which is same as the Markov property. 
+This is also known as the weak form of the Efficient Market Hypothesis (EMH) in finance, and was most forcefully advocated by the economist Eugene Fama in the late 1960s. There is a group of investors known as Technical Analysts who try to predict the market by looking at stock patterns that have occurred in the past, thus directly contradicting the EMH. This is an extremely difficult undertaking, and most Technical Analysts end up loosing money. However there are a few that do manage to beat the market, at least during intervals, and this raises the question of whether the market behavior varies over time, so that there are times when the EMH is violated. 
+
+### Does the Stock Market Follow a Wiener Process?
+
+Wiener Process models for the stock market have been used since the 1960s, after Samuelson introduced Bachelier's original work to the financial community.
+A huge amount of money, trillions of dollars, is tied to trades that base their justification on this model. In particular the Black-Scholes model for option's pricing, probably the most important formula in use in financial markets, is based on the Wiener Process model.
+The question arises: Are we justified in using the Wiener Process to model the market? 
+
+Assume that the stock price closed at $S(0)$ at the end of the previous trading day, then by using the Euler-Maruyama method for simulating a SDE,
+the model says that the price at the end of the next trading day is distributed according to the random variable $S_t$ given by
+
+$$ \log S_t = \log S_0 + (\mu - {\sigma^2\over 2})t +\sigma \sqrt{t}\epsilon $$
+
+where $\epsion$ is a sample from a Normal (or Gaussian) Distribution with mean $0$ and variance $1$. This random variable is independent of anything that might have happened in the market on the previous day, or any of the days before that. Paul Samuelson justified this model by stating that all the information needed to trade on day $n+1$ is entirely summarized by the price of the stock at the end of trading day $n$, i.e., the EMH. Hence any change in the value of the stock that happens on day $n+1$ is due to new information that comes in as the day progresses, and any such information is instantly incorporated into the price of the stock. This makes the assumption that all traders have access to most complete information that is available about factors that affect the market at all times, and moreover they are all perfectly rational humans who are able to make trading decisions using the facts as they become available.
+
+Samuelson's assumptions justifying the use of the Wiener Process model have been disputed over the years since it was first proposed. 
+One large contingent whose entire profession is based on the proposition that the EMH is not true, is the Hedge Fund industry. Most of them place their trades on the basis of their understanding of how the market will behave based on various factors in the past history. The best Hedge Funds, such as Renaissance Capital, have consistently beaten the market over a time period of decades, which makes one think that they have discovered some regularities in the market, and this goes against the EMH. The economists Sanford Grossman and Joseph Stiglitz gave the following argument against the EMH: All trading is based on two parties getting together and coming to an agreement on the price of a stock The buying party believes that the stock will appreciate, while the selling party has the opposite view. In order to make this trade happen, each party has presumably done some research to justify their actions, and this research is usually based on the past history of the stock, the industry it is in, the state of the economy etc. However if the EMH were true, all this research would be completely useless, since everything that there is to know about a stock is summarized in its current price. Thus all trading on Wall Street would grind to a halt.
+
+A lot of work in this area has been done by Professors Andrew Lo and Craig Mackinlay, who teach at MIT and UPenn respectively. Lo has written a nice book on this topic for the general public called [Adaptive Markets](https://www.amazon.com/Adaptive-Markets-Financial-Evolution-Thought/dp/0691135142) where his ideas are lucidly explained. For those wanting to dig deeper into the math and statistics they used in their work, can read their book [A Non-Random Walk Down Wall Street](https://assets.press.princeton.edu/chapters/s6558.pdf).
+Lo and Mackinlay argue that Samuelson's assumptions that all trader's are perfectly rational people, who at any instant have all the information needed to trade the stock they are interested in, is not quite true in the real world. Most traders don't make use of all the the available information to make their decisions, they use partial information and heuristics instead, which is known as the Bounded Rationality hypothesis. Moreover not all traders are at the same level of expertise. There are the Wall Street quants who are experts at their jobs, and then there is the mass of mom and pop traders who trade on the basis of what they last heard on TV, and this creates opportunities for profits to flow in the expected direction. In their opinion the EMH may be approximately true if the market has reached an equilibrium, where there is very little volatility so that the trading heuristics that traders use work most of the time. But at times of extreme market volatility, such as what happened during the 2007-2008 Financial Crisis, the trading environment changes radically, and the old rules go out of the window. During these times the EMH certainly does not hold, and it creates an opportunity for the savviest of traders who manage to keep their heads amid the turmoil.
+
+Lo and Mackinlay carried out statistical tests on the market data to see whether it satisfies the assumption of a Wiener Process. They did two kinds of tests:
+
+1. If the random variable $\log S_t - \log S_0$ were indeed distributed according to the Normal distribution $N(\mu, \sigma^2 t)$, then its variance over a time period $t$ should be proportional to $t$. Lo and Mackinlay found that the variance of two-week returns was three times the variance of one week returns, not twice the variance as the theory predicts. In other words the variance varies as $1.5t$ as a function of time, rather than $t$, which means the market increments do not follow the Normal distribution.
+
+2. Lo and MacKinlay also tested the applicability of the independent stationary increments property to the market by computing the 750-day rolling-window first-order autocorrelations over successive days for the market index, over the period from 1928 to 2013. An autocorrelation of 1 implies that that tomorrows market return will be positive (or negative) if it was positive (or negative) today, a value of -1 implies that the market will flip in the successive days from positive to negative or vice-versa while a value of 0 implies that the market returns on successive days are independent, i,e, the EMH. Their result is plotted on page 281 of [Adaptive Markets](https://www.amazon.com/Adaptive-Markets-Financial-Evolution-Thought/dp/0691135142). It shows that there were only two periods in which the autocorrelation was close to zero, during the 1930s, and in the period from the mid 1980s to the end of the millennium. In the period from the 1940s to the mid 1980s, the autocorrelation was consistently positive, in other words there was a lot of money that could have been made  by betting the market will behave tomorrow as it did today. Since the early 2000s on the other hand, the autocorrelation has become negative, i.e., the market reverses itself on most days. In any case, this shows that the independent stationary increments property is rarely true for the market.
+
+![](https://subirvarma.github.io/GeneralCognitics/images/weiner18.png) 
+
+Figure: Comparison of the Normal Distribution with Fat Tailed distributions
+
+So if the market does not follow the Wiener Process, what kind of statistics best describe it? The most straightforward way of approaching this problem is by empirically estimating the distribution of $\log S_t$, i.e. the log of the market gains in an interval $t$. As shown in the above figure, this distribution is distinctly non-Normal (the Normal distribution has also been plotted using the dotted line). It typically exhibits a sharp central body and a fat-tailed behavior, which leads to large price movements. This means that extreme events occur more often than predicted by the Normal distribution. 
+
+![](https://subirvarma.github.io/GeneralCognitics/images/weiner19.png) 
+
+Figure: Tail Behavior comparison of the Normal and Fat Tailed distributions
+
+The empirical returns in the tails behave as a power law $p(x)\propto {1\over|x|^{1+\alpha|}}$ with the exponent $\alpha$ close to 3 in the limit, which is further illustrated in the plot of the complementary distribution function $\int_x^\infty p(x)dx$ as shown above. There are a number of distributions that obey the power law, the most popular being the Truncated Levy Distribution (TLD).
+
+![](https://subirvarma.github.io/GeneralCognitics/images/weiner20.png) 
+
+Figure: Sample Paths generated by Fat Tailed Distributions (left) and the sample log returns for the Normal and the Truncated Levy distributions (TLD)
+
+We can plot the sample paths for a random process following the non-Normal distributions by using a slightly modified form of the Euler-Maruyama equation to generate samples at intervals of $t$
+
+$$ \log S_t = \log S_0 + (\mu - {\sigma^2\over 2})t +\sigma \sqrt{t}\xi_{NG} $$
+
+Here $\xi_{NG}$ is a sample drawn from a Non-Normal distribution with mean $0$ and variance $1$. This equation implicitly assumes that successive samples for non-overlapping intervals are independent, and also that the variation with $t$ follows the $\sqrt t$ property of the Wiener Process. The left hand side plot in the above figure shows the results of the simulation, and we can see that non-Normal processes exhibit large jumps from time to time which has a greater resemblance to the actual behavior of financial markets. This is further illustrated in the right hand side plot, which plots samples of the log return ($\log S_t - \log S_0$) for the Normal and the Truncated Levy distribution.
+
+Earlier in this article I stated that the Wiener Process with drift enjoys the uniqueness property, i.e., it is the only random process which is continuous with independent stationary increments. This seems to contradict the above figure which shows the simulation of other random processes, such as the Truncated Levy, which have these properties. As you may have guessed, the resolution to this contradiction lies in the fact that the non-Normal sample paths shown in the figure are not continuous, since there is always a finite time difference between successive changes in $S_t$ in the simulation. However, even in this case, as $t$ becomes larger, $S_t$ can be written as the scaled sum of independent identically distributed random variables, which tends towards a Normal distribution because of the Central Limit Theorem. Hence for large values of $t$, we can expect the non-Normal processes to converge to the Wiener Process with drift.
+
+The most important application of the Wiener Process model in finance is the Black-Scholes equation for options pricing, which is given by
+
+$$ rf_t = {\partial f_t\over\partial t} + rS_t {\partial f_t\over\partial S_t} + {\sigma^2 S_t^2\over 2}{\partial^2 f_t\over\partial S_t^2}  $$
+
+In this equation, $f(S_t,t)$ is the value of a European style call option, $r$ is the constant risk-free rate of return, and $S_t$ is the stock on which the option is based. The model assumes that $S_t$ follows the Geometric Wiener Process model described earlier with variance $\sigma^2$. The model is independent of the value of the drift co-efficient $b$.
+Note that this is a regular Partial Differential Equation, not a SDE. I am not including a derivation of this equation, but if you are interested, an excellent description can be found in this [article](https://math.uchicago.edu/~may/REU2024/REUPapers/Jiang,Asher.pdf). The main tool used in the derivation is the Ito Formula, and it can be understood using the Stochastic Calculus concepts developed in this article.
+
+![](https://subirvarma.github.io/GeneralCognitics/images/weiner21.png) 
+
+Figure: Prices of European Call Options as computed by the Black-Scholes model (dotted line) and the Truncated Levi Distribution (TLD) based model
+
+What are the effects of a non-Wiener Process model on call options pricing? As shown by [Domenico et.al.](https://arxiv.org/pdf/2302.02769), it is possible to price options using Monte Carlo simulations driven by sample paths of the random process controlling the market movements, and this is plotted in the above figure. It shows that there is big discrepancy between the Black-Scholes model and non-Normal models for small values of Time to Maturity for the option. However, as $t$ increases, these values converge, and this is due to the fact that the non-Normal random process converges to the Wiener Process as $t$ increases.
+
+
 
