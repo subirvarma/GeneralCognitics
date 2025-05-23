@@ -730,7 +730,7 @@ $$ {\partial\rho\over\partial t} = -{\partial(b\rho)\over\partial x} + \nu{\part
 
 Nelson proposed the following special form for the diffusion trajectory of the particle
 
-$$ dx_t = {1\over m}[{{\partial S(x,t)\over{\partial x}} + {\nu\over R^2(x,t)}{\partial^2 R^2(x,t)\over{\partial x^2}}]dt + dW_t $$
+$$ dx_t = {1\over m}[{\partial S(x,t)\over{\partial x}} + {\nu\over R^2(x,t)} {\partial^2 R^2(x,t)\over {\partial x^2}}]dt + dW_t $$
 
 where the functions $S(x,t)$ and $R(x,t)$ are constrained to satisfy the following equation
 
