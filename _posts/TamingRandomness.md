@@ -585,7 +585,7 @@ Consider the following n-dimensional Stochastic Differential Equation of the Lan
 
 $$ dX_t = \nabla\log p(X_t)dt + \sqrt{2} dW_t $$
 
-Note that $X(t) = (X_{1}(t), X_{2}(t),...,X_{n}(t))$ and $W(t) = (W_(t),W_2(t),...,W_n(t))$ are n-dimensional random processes, while $\nabla$ is the vector operator $\nabla = ({\partial\over {\partial x_1}, {\partial\over {\partial x_2},...,{\partial\over {\partial x_n})$. 
+Note that $X(t) = (X_{1}(t), X_{2}(t),...,X_{n}(t))$ and $W(t) = (W_(t),W_2(t),...,W_n(t))$ are n-dimensional random processes, while $\nabla$ is the vector operator $\nabla = ({\partial\over {\partial x_1}}, {\partial\over {\partial x_2}},...,{\partial\over {\partial x_n}})$. 
 Also $p(x_1,x_2,...,x_n)$ is the target probability density function that we are trying to move the distribution of $X_t$ to. 
 This SDE can be simulated using the Euler-Maruyama technique, resulting in
 
