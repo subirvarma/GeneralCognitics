@@ -379,3 +379,83 @@ $$ X_{(n+1)s} = X_{ns} + sb(ns,X_{ns}) + \sigma(ns,X_{ns})\sqrt{s}\epsilon\ \ \ 
 
 where $\epsilon$ is a sample from the Normal distribution $N(0,I)$. Every time we run this iteration we, get a different sample path, and if we are interested in the average value or variance of $X_t$, then we can run multiple of these iterations starting from the same point $X_0$, and then take the average of the result.
 
+## The Ito Formula
+
+In addition to defining his eponymous integral, Kiyoshi Ito made another fundamental contribution the field of Stochastic Calculus by discovering the Ito Formula (sometimes called Ito's Lemma), which was published in 1951. 
+It is the Differential Calculus counterpart to the Ito Integral, and can be considered to be a mathematical machine for transforming a given diffusion process into another.
+By use of this formula we can take a complex diffusion and transform it into a simpler diffusion, which is one of its common uses. It can also be used to compute the Ito Integral for some special cases, an example of which is given later in this section.
+
+The Ito formula is a generalization of the Fundamental Theorem of Calculus as applied to stochastic integrals. Recall that the Fundamental Theorem establishes differentiation and integration as inverse operations, as follows
+
+$$ f(x) - f(x_0) = \int_x^{x_0} {df\over dx} dx  $$
+
+Insteda, what if the function $f$ operates on a Wiener Process instead, as in $f(W_t)$? Ito showed that the Fundamental Theorem has to be modifies as follows
+
+$$ f(W_t) - f(W_0) = {1\over 2}\int_0^t {\partial^2 f\over{\partial x^2}}ds + \int_0^t {\partial f\over{\partial x}} dW_s $$
+
+This equation can also be interpreted as stating that a function $f$ of the Wiener Process $W_t$ is a Diffusion Process with drift and volatility co-efficients given by ${1\over 2}{\partial^2 f\over{\partial x^2}}$ and ${\partial f\over{\partial x}}$. This is probably the most important result in Stochastic Calculus, it allows us to construct new diffusion processes from existing ones by operating on them using a suitable function $f$. For example if $f(x) = x^2$, then ${\partial f\over{\partial x}}=2x$
+and ${\partial^2 f\over{\partial x^2}}=2$, thus
+
+$$ W_t^2 = \int_0^t 2W_s dW_s + {1\over 2}\int_0^t 2ds = 2\int_0^t W_s dW_s + t $$
+
+which allows us to compute the Ito Integral given by
+
+$$ \int_0^t W_s dW_s = {W_t^2 - t\over 2} $$
+
+Not that if this were an ordinary integral than the $-{t\over 2}$ term would not exist.
+
+What if $f(t,X_t)$ is a function of a general diffusion process $X(t)$ given by $dX_t = b(t,X_t)dt + \sigma(t,X_t)dW_t)$? There is a generalized version of the Ito Formula that applies to this case, given by
+
+$$ f(t,X_t) - f(0,X_0) = {1\over 2}\int_0^t {\partial^2 f\over{\partial x^2}}(dX_s)^2 + \int_0^t {\partial f\over{\partial x}} dX_s  + \int_0^t {\partial f\over{\partial t}} ds  $$
+
+which can also be written as
+
+$$  f(t,X_t) - f(0,X_0) =  \int_0^t ({\partial f\over{\partial s}} + b{\partial f\over{\partial x}} + {\sigma^2\over 2}{\partial^2 f\over{\partial x^2}} )ds + \int_0^t \sigma{\partial f\over{\partial x}} dW_s $$
+
+Hence the transformed process $f(t,X_t)$ is also a diffusion process with drift and volatility components as given above.
+
+For example, if 
+
+$$ Y(t) = X^2(t) + t^2\ \ \ where\ \ \ dX_t = b(t)dt + \sigma(t)dW_t $$
+
+then
+
+$$ dY_t = (2t + \sigma^2(t) + 2b(t)X_t dt + 2\sigma(t) X_t dW_t $$
+
+As an example of the application of Ito's Formula, consider the following diffusion process which is used to model stock market returns (this model is discussed in detail in the next section):
+
+$$ dS_t = bS_t dt + \sigma S_t dW_t  $$
+
+where $b,\sigma$ are constants. Does there exist a function $f$ such that $f(S)$ is a simpler diffusion process? Lets try the log function
+
+$$ f(S) = \log S $$
+
+Applying Ito's formula it follows that
+
+$$ d(\log S) = bS{df\over dS}dS + {1\over 2}\sigma^2S^2{d^2f\over dS^2}dt + \sigma S {df\over dS} dW_t = (b - {\sigma^2\over 2})dt + \sigma dW_t  $$
+
+Thus $\log S$ is a simple Wiener process with drift. Since the co-efficients $b,\sigma$ are constant, we can solve this equation to get
+
+$$ \log S(t) - \log S(0) = (b - {\sigma^2\over 2})t + \sigma W(t) $$
+
+which can be written
+
+$$ S(t) = S(0)\exp^{(b-{\sigma^2\over 2})t+\sigma W(t)}  $$
+
+$S(t)$ is an important random process and is called the Geometric Brownian Motion.
+
+Here is an informal proof of the Ito Formula:
+
+The Taylor Expansion of $df(t,X_t)$, where $dX_t = b(t,X_t)dt + \sigma(t,X_t)dW_t$ can be written as
+
+$$ df(t,X_t) = {\partial f\over\partial t}dt + {\partial f\over\partial x} dX_t + {1\over 2} {\partial^2 f\over\partial^2 x} (dX_t)^2 + \ \ \ higher\ \ \ order\ \ \ terms $$
+
+$$ = {\partial f\over\partial t}dt + {\partial f\over\partial x}(b.dt + \sigma.dW_t) + {1\over 2} {\partial^2 f\over{\partial^2 x}}[(b^2.(dt)^2 + 2b.\sigma.dt.dw_t + \sigma^2.(dW_t)^2] + \ \ \ higher\ \ \ order\ \ \ terms$$
+
+From the prior section we saw that the Quadratic Variation Property for Wiener processes imples that $dW_t^2 = dt$, while the terms with $dt^2$ and $dt.dW_t$ can be ignored. Also ignoring the higher order terms we get
+
+$$ df(t,X_t) = [{\partial f\over\partial t} + b.{\partial f\over\partial x} + {\sigma^2\over 2}{\partial^2 f\over{\partial^2 x}}]dt + {\partial f\over\partial x}.\sigma.dW_t $$
+
+which is the Ito Formula.
+
+
