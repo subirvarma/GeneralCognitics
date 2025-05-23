@@ -688,7 +688,7 @@ In the case of Quantum Mechanics we have the Schrodinger Equation for $\psi$ giv
 
 $$ i{\hbar}{\partial\psi\over{\partial t}} = -{\hbar^2\over{2m}}{\partial^2\psi\over{\partial x^2}}  $$
 
-Consider the motion of a particle in free space, which is initially localized in the neighborhood of the origin. Unlike for the Wiener Process, we cannot have the particle be located exactly at $x=0$ at $t=0$, since the Heisenberg Uncertainty Principle would require that it have an infinite uncertainty in its initial momentum. Instead we assume that its wave function at $t=0$ is distributed according to a Normal distribution given by (with $m = \hbar = 1$),
+Consider the motion of a particle in free space, which is initially localized in the neighborhood of the origin. Unlike for the Wiener Process, we cannot have the particle be located exactly at $x=0$ at $t=0$, since the Heisenberg Uncertainty Principle would require that it have an infinite uncertainty in its initial momentum. Instead we assume that its wave function at $t=0$ is distributed according to a Normal distribution given by (with $m = \hbar = 1$ and $\sigma^2 = {1\over 2}),
 
 $$ \psi(x,0) = \sqrt[4]{2\over\pi} \exp^{-x^2 + ip_0x} $$
 
@@ -722,26 +722,27 @@ Nelson assumed that a quantum particle in free space is driven by the following 
 
 $$ dX_t = b(X_t,t)dt+ dW_t $$
 
-The function $b(X_t,t)$ is called the mean forward velocity, while $W(t)$ is a standard Wiener Process with mean zero and variance $\nu = {\sigma^2\over 2}$. Unlike the case for Brownian Motion, there is no fluid that is pushing the particles around, and Nelson left open the question of what is responsible for the randomness. He suggested it could be due to processes happpening deep in the fabric of space-time which we cannot detect. [Markopoulou and Smolin](https://arxiv.org/pdf/gr-qc/0311059) have proposed a Quantum Theory of Gravity which also makes use of this idea.
+The function $b(X_t,t)$ is called the mean forward velocity, while $W(t)$ is a standard Wiener Process with mean zero and variance $\nu = {\sigma^2\over 2}$. Unlike the case for Brownian Motion, there is no fluid that is pushing the particles around, and Nelson left open the question of what is responsible for the randomness. He suggested it could be due to processes happpening deep in the fabric of space-time which we cannot detect. [Markopoulou and Smolin](https://arxiv.org/pdf/gr-qc/0311059) have proposed a theory for the structure of space-time which also makes use of this idea.
 
-The Fokker-Planck equation for this diffusion is given by
+The Fokker-Planck equation for the probability density for this diffusion is given by
 
 $$ {\partial\rho\over\partial t} = -{\partial(b\rho)\over\partial x} + \nu{\partial^2\rho\over{\partial x^2}} $$
 
-Nelson proposed the following special form for the diffusion
+Nelson proposed the following special form for the diffusion trajectory of the particle
 
-$$ dx_t = [{1\over m}{\partial S(x,t){\partial x}} + {\nu\over R^2(x,t)}{\partial^2 R^2(x,t)\over{\partial x^2}}] + dW_t $$
+$$ dx_t = [{1\over m}{\partial S(x,t)\over{\partial x}} + {\nu\over R^2(x,t)}{\partial^2 R^2(x,t)\over{\partial x^2}}]dt + dW_t $$
 
-where the functions $S(x,t)$ and $R(x,t)$ satisfy the following equation
+where the functions $S(x,t)$ and $R(x,t)$ are constrained to satisfy the following equation
 
-$$ {\partial S(x,t)\over{\partial t}} = -{1\over{2m}} ({\partial S(x,t){\partial x}})^2 - V + {\hbar^2\over{2mR}} {\partial^2 R(x,t)\over{\partial x}}  $$
+$$ {\partial S(x,t)\over{\partial t}} = -{1\over{2m}} ({\partial S(x,t)\over{\partial x}})^2 - V + {\hbar^2\over{2mR(x,t)}} {\partial^2 R(x,t)\over{\partial x}}  $$
 
 If we specify that the probability density for the diffusion be equal to $R^2$, i.e., $\rho = R^2$, then the Fokker-Planck equation simplifies to
 
-$$ {\partial R^2\over\partial t} = -{\partial({{1\over m} [{\partial (S\over{\partial x}})^2 R^2 }]\over{\partial x}} $$
+$$ {\partial R^2\over\partial t} = -{\partial({{1\over m} [({\partial S\over{\partial x}})^2 R^2 }]\over{\partial x}} $$
 
 These last two equations are called the Madelung equations, and can also be derived by setting $\psi = R\exp^{iS\over\hbar}$ in Schrodinger's equation.
 This implies that diffusion model and the Schrodinger model for a quantum particle are equivalent descriptions, since the equations for both these models can be reduced to the Madelung equations. Hence the Schrodinger equation is just a convenient mathematical way to write the Madelung equations, it does not have any real existence in nature. 
+But can we assume that the Schrodinger equation were not known, and then derive it by using the Madelung equations? This part of the theory does not quite work yet, and has prevented it from achieving greater prominence in the physics community.
 
 
 
