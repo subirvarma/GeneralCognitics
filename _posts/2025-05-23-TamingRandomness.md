@@ -690,5 +690,19 @@ $$ i{\hbar}{\partial\psi\over{\partial t}} = -{\hbar^2\over{2m}}{\partial^2\psi\
 
 Consider the motion of a particle in free space, which is initially localized in the neighborhood of the origin. Unlike for the Wiener Process, we cannot have the particle be located exactly at $x=0$ at $t=0$, since the Heisenberg Uncertainty Principle would require that it have an infinite uncertainty in its initial momentum. Instead we assume that its wave function at $t=0$ is distributed according to a Normal distribution given by (with $m = \hbar = 1$ and $\sigma^2 = {1\over 2}),
 
+$$ \psi(x,0) = \sqrt[4]{2\over\pi} \exp^{-x^2 + ip_0x} $$
+
+where $p_0$ is the initial average momentum of the particle. Hence both the initial position and the initial momentum of the particle are Normally distributed random quantities, connected together by the Uncertainty Principle. Solving the Schrodinger equation will tell us how the particle's location changes with time, and this results in the expression (see [this article](https://en.wikipedia.org/wiki/Wave_packet) for a nice description of free quantum particles)
+
+$$ \psi(x,t) = \sqrt[4]{2\over\pi}{1\over\sqrt{1+2it}}\exp^{-{(x-p_0t)^2\over {1+4t^2}}} \exp^{i{(p_0+2tx)x-{tp_0^2\over 2}\over {1+4t^2}}} $$
+
+with probability density given by
+
+$$ |\psi(x,t)|^2 = \sqrt{2\over\pi}{1\over\sqrt{1+4t^2}} \exp^{-{(x-p_0t)^2\over {1+4t^2}}} $$
+
+For large values of $t$, this can be written as
+
+$$ |\psi(x,t)|^2 = {1\over\sqrt{2\pi t^2}} \exp^{-{2(x-p_0 t)^2\over {2t^2}}} $$
+
 
 
