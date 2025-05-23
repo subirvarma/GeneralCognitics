@@ -382,18 +382,18 @@ where $\epsilon$ is a sample from the Normal distribution $N(0,I)$. Every time w
 ### The Ito Formula
 
 In addition to defining his eponymous integral, Kiyoshi Ito made another fundamental contribution the field of Stochastic Calculus by discovering the Ito Formula (sometimes called Ito's Lemma), which was published in 1951. 
-The Ito Formula is basically a mathematical machine for transforming a given diffusion process into another diffusion.
-Sometimes we take a complex diffusion and transform it into a simpler diffusion, which is one of the common uses of the formula. It can also be used to compute the Ito Integral for some special cases, an example of which is given later in this section.
+It is the Differential Calculus counterpart to the Ito Integral, and can be considered to be a mathematical machine for transforming a given diffusion process into another.
+By use of this formula we can take a complex diffusion and transform it into a simpler diffusion, which is one of its common uses. It can also be used to compute the Ito Integral for some special cases, an example of which is given later in this section.
 
 The Ito formula is a generalization of the Fundamental Theorem of Calculus as applied to stochastic integrals. Recall that the Fundamental Theorem establishes differentiation and integration as inverse operations, as follows
 
 $$ f(x) - f(x_0) = \int_x^{x_0} {df\over dx} dx  $$
 
-What if the function $f$ operates on a Weiner Process instead, as in $f(W_t)$? Ito showed that the Fundamental Theorem has to be modifies as follows
+Insteda, what if the function $f$ operates on a Wiener Process instead, as in $f(W_t)$? Ito showed that the Fundamental Theorem has to be modifies as follows
 
 $$ f(W_t) - f(W_0) = {1\over 2}\int_0^t {\partial^2 f\over{\partial x^2}}ds + \int_0^t {\partial f\over{\partial x}} dW_s $$
 
-This equation can also be interpreted as stating that a function $f$ of the Wiener Process $W_t$ is a Diffusion Process with drift and volatility co-efficients ${1\over 2}{\partial^2 f\over{\partial x^2}}$ and ${\partial f\over{\partial x}}$. This is probably the most important result in Stochastic Calculus, it allows us to construct new diffusion processes from existing ones by operating on them using a suitable function $f$. For example if $f(x) = x^2$, then ${\partial f\over{\partial x}}=2x$
+This equation can also be interpreted as stating that a function $f$ of the Wiener Process $W_t$ is a Diffusion Process with drift and volatility co-efficients given by ${1\over 2}{\partial^2 f\over{\partial x^2}}$ and ${\partial f\over{\partial x}}$. This is probably the most important result in Stochastic Calculus, it allows us to construct new diffusion processes from existing ones by operating on them using a suitable function $f$. For example if $f(x) = x^2$, then ${\partial f\over{\partial x}}=2x$
 and ${\partial^2 f\over{\partial x^2}}=2$, thus
 
 $$ W_t^2 = \int_0^t 2W_s dW_s + {1\over 2}\int_0^t 2ds = 2\int_0^t W_s dW_s + t $$
@@ -402,17 +402,19 @@ which allows us to compute the Ito Integral given by
 
 $$ \int_0^t W_s dW_s = {W_t^2 - t\over 2} $$
 
+Not that if this were an ordinary integral than the $-{t\over 2}$ term would not exist.
+
 What if $f(t,X_t)$ is a function of a general diffusion process $X(t)$ given by $dX_t = b(t,X_t)dt + \sigma(t,X_t)dW_t)$? There is a generalized version of the Ito Formula that applies to this case, given by
 
-$$ f(t,X_t) - f(0,X_0) = {1\over 2}\int_0^t {\partial^2 f\over{\partial x^2}}(dX_u)^2 + \int_0^t {\partial f\over{\partial x}} dX_u  + \int_0^t {\partial f\over{\partial t}} dt  $$
+$$ f(t,X_t) - f(0,X_0) = {1\over 2}\int_0^t {\partial^2 f\over{\partial x^2}}(dX_s)^2 + \int_0^t {\partial f\over{\partial x}} dX_s  + \int_0^t {\partial f\over{\partial t}} ds  $$
 
 which can also be written as
 
-$$  f(t,X_t) - f(0,X_0) =  \int_0^t ({\partial f\over{\partial u}} + b{\partial f\over{\partial x}} + {\sigma^2\over 2}{\partial^2 f\over{\partial x^2}} )du + \int_0^t \sigma{\partial f\over{\partial x}} dW_u $$
+$$  f(t,X_t) - f(0,X_0) =  \int_0^t ({\partial f\over{\partial s}} + b{\partial f\over{\partial x}} + {\sigma^2\over 2}{\partial^2 f\over{\partial x^2}} )ds + \int_0^t \sigma{\partial f\over{\partial x}} dW_s $$
 
 Hence the transformed process $f(t,X_t)$ is also a diffusion process with drift and volatility components as given above.
 
-As an example if 
+For example, if 
 
 $$ Y(t) = X^2(t) + t^2\ \ \ where\ \ \ dX_t = b(t)dt + \sigma(t)dW_t $$
 
@@ -430,7 +432,7 @@ $$ f(S) = \log S $$
 
 Applying Ito's formula it follows that
 
-$$ d(\log S) = {df\over dS}dS + {1\over 2}\sigma^2S^2{d^2f\over dS^2}dt = (b - {\sigma^2\over 2})dt + \sigma dW_t  $$
+$$ d(\log S) = bS{df\over dS}dS + {1\over 2}\sigma^2S^2{d^2f\over dS^2}dt + \sigma S {df\over dS} dW_t = (b - {\sigma^2\over 2})dt + \sigma dW_t  $$
 
 Thus $\log S$ is a simple Wiener process with drift. Since the co-efficients $b,\sigma$ are constant, we can solve this equation to get
 
@@ -459,16 +461,17 @@ which is the Ito Formula.
 ## Modeling the Stock Market
 
 When I first learnt about the Wiener Process and Stochastic Calculus in grad school in the late 1980s, the main applications that text books talked about were in the fields of filtering and control theory. Now 40 years later almost everyone who learns Stochastic Calculus is doing it so that they can apply it to mathematical finance, in other words, to become a Wall Street quant. In 1985 the Black Scholes equation was already about a decade old, but its use hadn't become prevalent in Wall Street. There has been an explosion in the financial markets since then, with new financial products that make use of stock derivatives and this has made Stochastic Calculus a must have skill for quants. At the same time there has been a backlash against the use of the Wiener Process to model stocks, especially after the 2007-2008 financial crisis. A prominent voice arguing for this is the trader and author Nassim Nicholas Taleb though some of these ideas can be traced back to a paper that Benoit Mandelbrot wrote on this topic in the early 1960s.
-The stock market is the closest anyone of us will get to encountering pure randomness in our daily lives. Understanding how the market behaves is important to most of us who have part of our savings invested in the market, but we normally don't think about it unless at times of market turmoil. However there is a class of financial industry professionals called equity traders who has to deal with this randomness on a day-to-day basis. They buy and sell equities frequently, sometimes several times a day, and their profession is a constant struggle against the randomness of the market. 
+
+The stock market is the closest anyone of us will get to encountering pure randomness in our daily lives. Understanding how the market behaves is important to most of us who have part of our savings invested in the market, but we normally don't think about it unless at times of market turmoil. However there is a class of financial industry professionals called equity traders who have to deal with this randomness on a day-to-day basis. They buy and sell equities frequently, sometimes several times a day, and their profession is a constant struggle against the randomness of the market. 
 
 The earliest random process model for stocks can be traced back to Bachelier from his PhD thesis back in 1901.
-It uses a Wiener Process with drift given by
+It uses a Wiener Process with drift given by (though it was not called by this name then)
 
 $$ S(t) = \mu dt + \sigma W(t) $$
 
-The first term captures that fact that there is usually an upward drift in the market over time, while the second term captures the volatility in process.
-Since the Wiener process as independent and stationary increments, it implies that the random change $S_{t+h} - S_t$ in $S(t)$ is independent of whatever happened in the market at time $t$ and earlier, including the value $S_t$ as well.
-This does not agree with the way the stock market actually behaves, since in reality the change is greater if $S(t)$ is larger.
+The first term captures that fact that there is usually an upward drift in the market over time, while the second term captures the volatility in the process.
+Since the Wiener process has independent and stationary increments, it implies that the random change $S_{t+h} - S_t$ in $S(t)$ is independent of whatever happened in the market at time $t$ and earlier, including the value $S_t$ as well.
+This does not agree with the way the stock market actually behaves, since in reality the change is greater if $S_t$ is larger.
 In the 1960s Samuelson improved the model by noting that the  change in the value of a stock is dependent on its current price, since only the percentage increase or decrease from the current price is what really matters to a trader. 
 In other words, it doesn't matter whether you are holding $1 million dollar portfolio or a $1 dollar portfolio, you would still want the same 10% annual return.
 Taking this into account, the modified model is
@@ -481,17 +484,17 @@ which states that the fractional change ${dS_t\over S}$ should be a Wiener Proce
 
 Figure: Three Possible Realizations of the Geometric Wiener Process
 
-As shown in the prior section, this stochastic differential equation can be solved  using the Ito Formula to obtain
+As shown in the prior section, this Stochastic Differential Equation can be solved  using the Ito Formula to obtain
 
 $$ S(t) = S(0)\exp^{(\mu-{\sigma^2\over 2})t+\sigma W(t)}  $$
 
-This is known as the Geometric Wiener Process, and is the most common stock market model used today. Since all changes are in terms of percentage increments or decrements, this means that the value of $S(t)$ can never dip below zero, unlike the Wiener Process with drift. 
+This is known as the Geometric Wiener Process, and is the most common stock market model used today. Since all changes are in terms of percentage increments or decrements, this means that the value of $S(t)$ can never dip below zero, unlike the plain Wiener Process with drift. 
 If there was no random component, $S(t)$ will evolve as
 
 $$ S(t) = S(0)\exp^{\mu t} $$
 
 This equation says that when the volatility is zero, the stock price grows at a continuously compounded rate of $\mu$ per unit time.
-The Geometric Wiener Process can be regarded as a random variation around this exponential curve. The above figure three possible sample paths of the Geometric Weiner Process, along with the deterministic curve.
+The Geometric Wiener Process can be regarded as a random variation around this exponential curve. The above figure shows three possible sample paths of the Geometric Wiener Process, along with the deterministic curve.
 
 Note that the Geometric Wiener Process does not have the Independent Stationary Increment property, since the increment $S_{t+h} - S_t$ is dependent on the starting value $S_t$.
 It is still a Markov process though and its logarithm can be written as
@@ -500,28 +503,29 @@ $$ \log S(t) = \log S(0) + (\mu - {\sigma^2\over 2})t +\sigma W(t) $$
 
 which is just the standard Wiener Process with drift.
 
-Bachelier's original market model of the Wiener Process with drift can be regarded as the value of an investment in which the gains are not invested back into the portfolio, hence any change is due to gain or loss in the original amount. The model based on the Geometric Wiener Process on the other hand re-invests its gains back into the portfolio, so it results in the exponential behavior due to continuously compounding gains.
+Bachelier's original market model of the Wiener Process with drift can be regarded as the value of an investment in which the gains are not invested back into the portfolio, hence any change is due to gain or loss in the starting amount $S(0)$. The model based on the Geometric Wiener Process on the other hand re-invests its gains back into the portfolio, so it results in the exponential behavior due to continuously compounding gains.
 
-Both these models are based on the assumption that the future of the stock market cannot be predicted by knowing how it has been doing in the past, only the current price matters, which is same as the Markov property. 
-This is also known as the weak form of the Efficient Market Hypothesis (EMH) in finance, and was most forcefully advocated by the economist Eugene Fama in the late 1960s. There is a group of investors known as Technical Analysts who try to predict the market by looking at stock patterns that have occurred in the past, thus directly contradicting the EMH. This is an extremely difficult undertaking, and most Technical Analysts end up loosing money. However there are a few that do manage to beat the market, at least during intervals, and that raises the question whether the market behavior varies over time, and whether there are times when the EMH is violated. 
+This model is based on the assumption that the future of the stock market cannot be predicted by the knowledge of how it has done in the past, only the current price matters, which is same as the Markov property. 
+This is also known as the weak form of the Efficient Market Hypothesis (EMH) in finance, and was most forcefully advocated by the economist Eugene Fama in the late 1960s. There is a group of investors known as Technical Analysts who try to predict the market by looking at stock patterns that have occurred in the past, thus directly contradicting the EMH. This is an extremely difficult undertaking, and most Technical Analysts end up loosing money. However there are a few that do manage to beat the market, at least during intervals, and this raises the question of whether the market behavior varies over time, so that there are times when the EMH is violated. 
 
 ### Does the Stock Market Follow a Wiener Process?
 
 Wiener Process models for the stock market have been used since the 1960s, after Samuelson introduced Bachelier's original work to the financial community.
-A huge amount of money, trillions of dollars, is tied to trades that base their justification to this model. In particular the Black-Scholes model for option's pricing, probably the most important formula in use in financial markets, is based on the Wiener Process model.
+A huge amount of money, trillions of dollars, is tied to trades that base their justification on this model. In particular the Black-Scholes model for option's pricing, probably the most important formula in use in financial markets, is based on the Wiener Process model.
 The question arises: Are we justified in using the Wiener Process to model the market? 
 
-Assume that the stock price closed at $S(0)$ at the end of the previous trading day, then the model says that the price at the end of the next trading day is distributed according to the random variable $S_t$ given by
+Assume that the stock price closed at $S(0)$ at the end of the previous trading day, then by using the Euler-Maruyama method for simulating a SDE,
+the model says that the price at the end of the next trading day is distributed according to the random variable $S_t$ given by
 
-$$ \log S_t = \log S_0 + (\mu - {\sigma^2\over 2})t +\sigma \sqrt{t}\xi_G $$
+$$ \log S_t = \log S_0 + (\mu - {\sigma^2\over 2})t +\sigma \sqrt{t}\epsilon $$
 
-where $\xi_G$ is a sample from a Normal (or Gaussian) Distribution with mean $0$ and variance $1$. This random variable is independent of anything that might have happened in the market on the previous day, or any of the days before that. Paul Samuelson justified this model by stating that all the information needed to trade on day $n+1$ is entirely summarized by the price of the stock at the end of trading day $n$, i.e., the EMH. Hence any change in the value of the stock that happens on day $n+1$ is due to new information that comes in as the day progresses, and any such information is instantly incorporated into the price of the stock. This makes the assumption that all traders have access to most complete information that is available about factors that affect the market at all times, and moreover they are all perfectly rational humans who are able to make trading decisions using the facts as they become available.
+where $\epsion$ is a sample from a Normal (or Gaussian) Distribution with mean $0$ and variance $1$. This random variable is independent of anything that might have happened in the market on the previous day, or any of the days before that. Paul Samuelson justified this model by stating that all the information needed to trade on day $n+1$ is entirely summarized by the price of the stock at the end of trading day $n$, i.e., the EMH. Hence any change in the value of the stock that happens on day $n+1$ is due to new information that comes in as the day progresses, and any such information is instantly incorporated into the price of the stock. This makes the assumption that all traders have access to most complete information that is available about factors that affect the market at all times, and moreover they are all perfectly rational humans who are able to make trading decisions using the facts as they become available.
 
 Samuelson's assumptions justifying the use of the Wiener Process model have been disputed over the years since it was first proposed. 
 One large contingent whose entire profession is based on the proposition that the EMH is not true, is the Hedge Fund industry. Most of them place their trades on the basis of their understanding of how the market will behave based on various factors in the past history. The best Hedge Funds, such as Renaissance Capital, have consistently beaten the market over a time period of decades, which makes one think that they have discovered some regularities in the market, and this goes against the EMH. The economists Sanford Grossman and Joseph Stiglitz gave the following argument against the EMH: All trading is based on two parties getting together and coming to an agreement on the price of a stock The buying party believes that the stock will appreciate, while the selling party has the opposite view. In order to make this trade happen, each party has presumably done some research to justify their actions, and this research is usually based on the past history of the stock, the industry it is in, the state of the economy etc. However if the EMH were true, all this research would be completely useless, since everything that there is to know about a stock is summarized in its current price. Thus all trading on Wall Street would grind to a halt.
 
-A lot of work in this area has been done by Professors Andrew Lo and Craig Mackinlay, who teach at MIT and UPenn respectively. Lo has written a nice book on this topic for the general public called [Adaptive Markets](https://www.amazon.com/Adaptive-Markets-Financial-Evolution-Thought/dp/0691135142) where his ideas are lucidly explained. For those wanting to dig deeper into the math and statistics they used in their work, can read their paper [When are contrarian profits due to stock market overreaction?](https://www-2.rotman.utoronto.ca/~kan/3032/pdf/PredictabilityOfReturns_ShortHorizon/Lo_MacKinlay_RFS_1990.pdf).
-Lo and Mackinlay argue that Samuelson's assumptions that all trader's are perfectly rational people, who at any instant have all the information needed to trade the stock they are interested in, is not quite true in the real world. Most traders don't make use of all the the available information to make their decisions, they use partial information and heuristics instead, which is known as the Bounded Rationality hypothesis. Moreover not all traders are at the same level of expertise. There are the Wall Street quants who are experts at their jobs, and then there is the mass of mom and pop traders who trade on the basis of what they last heard on TV, and this creates opportunities for profits to flow in the expected direction. In their opinion the EMH may be approximately true in the market has reached an equilibrium, where there is very little volatility so that the trading heuristics that most traders use have settled down to a profitable state. But at times of extreme market volatility, such as what happened during the 2007-2008 Financial Crisis, the trading environment changes radically, and the old rules go out of the window. During these times the EMH certainly does not hold, and it creates an opportunity for the savviest of traders who manage to keep their heads amid the turmoil.
+A lot of work in this area has been done by Professors Andrew Lo and Craig Mackinlay, who teach at MIT and UPenn respectively. Lo has written a nice book on this topic for the general public called [Adaptive Markets](https://www.amazon.com/Adaptive-Markets-Financial-Evolution-Thought/dp/0691135142) where his ideas are lucidly explained. For those wanting to dig deeper into the math and statistics they used in their work, can read their book [A Non-Random Walk Down Wall Street](https://assets.press.princeton.edu/chapters/s6558.pdf).
+Lo and Mackinlay argue that Samuelson's assumptions that all trader's are perfectly rational people, who at any instant have all the information needed to trade the stock they are interested in, is not quite true in the real world. Most traders don't make use of all the the available information to make their decisions, they use partial information and heuristics instead, which is known as the Bounded Rationality hypothesis. Moreover not all traders are at the same level of expertise. There are the Wall Street quants who are experts at their jobs, and then there is the mass of mom and pop traders who trade on the basis of what they last heard on TV, and this creates opportunities for profits to flow in the expected direction. In their opinion the EMH may be approximately true if the market has reached an equilibrium, where there is very little volatility so that the trading heuristics that traders use work most of the time. But at times of extreme market volatility, such as what happened during the 2007-2008 Financial Crisis, the trading environment changes radically, and the old rules go out of the window. During these times the EMH certainly does not hold, and it creates an opportunity for the savviest of traders who manage to keep their heads amid the turmoil.
 
 Lo and Mackinlay carried out statistical tests on the market data to see whether it satisfies the assumption of a Wiener Process. They did two kinds of tests:
 
@@ -533,7 +537,7 @@ Lo and Mackinlay carried out statistical tests on the market data to see whether
 
 Figure: Comparison of the Normal Distribution with Fat Tailed distributions
 
-So if the market does not follow the Wiener Process, what kind of statistics best describe it? The most straightforward way of approaching this problem is by empirically estimating the distribution of $\log S_t$, i.e. the market gains in an interval $t$. As shown in the above figure, this distribution typically exhibits a sharp central body and a fat-tailed behavior, which leads to large price movements. This means that extreme events occur more often than predicted by the Normal distribution, which is shown as the dotted line in the figure. 
+So if the market does not follow the Wiener Process, what kind of statistics best describe it? The most straightforward way of approaching this problem is by empirically estimating the distribution of $\log S_t$, i.e. the log of the market gains in an interval $t$. As shown in the above figure, this distribution is distinctly non-Normal (the Normal distribution has also been plotted using the dotted line). It typically exhibits a sharp central body and a fat-tailed behavior, which leads to large price movements. This means that extreme events occur more often than predicted by the Normal distribution. 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/weiner19.png) 
 
@@ -549,7 +553,7 @@ We can plot the sample paths for a random process following the non-Normal distr
 
 $$ \log S_t = \log S_0 + (\mu - {\sigma^2\over 2})t +\sigma \sqrt{t}\xi_{NG} $$
 
-Here $\xi_{NG}$ is a sample drawn from a Non-Normal distribution with mean $0$ and variance $1$. This equation implicitly assumes that successive samples for non-overlapping intervals are independent, and also that the variation with $t$ follows the $\sqrt t$ property of the Wiener Process. The left hand side plot in the above figure shows the results of the simulation, and we can see that non-Normal processes exhibit large jumps from time to time which has a greater resemblance to the actual behavior of financial markets. This is further illustrated in the right hand side plot, which plots samples of the log return ($\log S_t - \log S_0$) random variables for the Normal and the Truncated Levy distribution.
+Here $\xi_{NG}$ is a sample drawn from a Non-Normal distribution with mean $0$ and variance $1$. This equation implicitly assumes that successive samples for non-overlapping intervals are independent, and also that the variation with $t$ follows the $\sqrt t$ property of the Wiener Process. The left hand side plot in the above figure shows the results of the simulation, and we can see that non-Normal processes exhibit large jumps from time to time which has a greater resemblance to the actual behavior of financial markets. This is further illustrated in the right hand side plot, which plots samples of the log return ($\log S_t - \log S_0$) for the Normal and the Truncated Levy distribution.
 
 Earlier in this article I stated that the Wiener Process with drift enjoys the uniqueness property, i.e., it is the only random process which is continuous with independent stationary increments. This seems to contradict the above figure which shows the simulation of other random processes, such as the Truncated Levy, which have these properties. As you may have guessed, the resolution to this contradiction lies in the fact that the non-Normal sample paths shown in the figure are not continuous, since there is always a finite time difference between successive changes in $S_t$ in the simulation. However, even in this case, as $t$ becomes larger, $S_t$ can be written as the scaled sum of independent identically distributed random variables, which tends towards a Normal distribution because of the Central Limit Theorem. Hence for large values of $t$, we can expect the non-Normal processes to converge to the Wiener Process with drift.
 
@@ -557,7 +561,8 @@ The most important application of the Wiener Process model in finance is the Bla
 
 $$ rf_t = {\partial f_t\over\partial t} + rS_t {\partial f_t\over\partial S_t} + {\sigma^2 S_t^2\over 2}{\partial^2 f_t\over\partial S_t^2}  $$
 
-In this equation, $f(S_t,t)$ is the value of a European style call option, $r$ is the constant risk-free rate of return, and $S_t$ is the stock on which the option is based. The model assumes that $S_t$ follows the Geometric Wiener Process model described earlier with variance $\sigma^2$. Note that this is a regular Partial Differential Equation, not a SDE. I am not including a derivation of this equation, but if you are interested, an excellent description can be found in this [article](https://math.uchicago.edu/~may/REU2024/REUPapers/Jiang,Asher.pdf). The main tool used in the derivation is the Ito Formula, and it can be easily understood using the Stochastic Calculus concepts developed in this article.
+In this equation, $f(S_t,t)$ is the value of a European style call option, $r$ is the constant risk-free rate of return, and $S_t$ is the stock on which the option is based. The model assumes that $S_t$ follows the Geometric Wiener Process model described earlier with variance $\sigma^2$. The model is independent of the value of the drift co-efficient $b$.
+Note that this is a regular Partial Differential Equation, not a SDE. I am not including a derivation of this equation, but if you are interested, an excellent description can be found in this [article](https://math.uchicago.edu/~may/REU2024/REUPapers/Jiang,Asher.pdf). The main tool used in the derivation is the Ito Formula, and it can be understood using the Stochastic Calculus concepts developed in this article.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/weiner21.png) 
 
@@ -569,22 +574,24 @@ What are the effects of a non-Wiener Process model on call options pricing? As s
 
 Paul Langevin was a physicist who worked in Paris in the early decades of the 20th century. He proposed an improvement to Einstein's model for Brownian Motion by using the following equation to model the motion of particles in a viscous fluid, which reads as follows (with the notation that $v(t)$ is the velocity of the particle at time $t$ and $m$ is its mass):
 
-$$  m dv(t) = -\lambda v(t) dt + \eta dW(t) $$
+$$  m dv_t = -\lambda v_t dt + \eta dW_t $$
 
 The first term on RHS of the equation represents the viscous force on the particle that dampens its movement while the second term represents the random forces due to collisions with the molecules of the fluid.
-One of the most unexpected applications of the Wiener Process happened in 2015 when [Jascha Sohl-Dickstein](https://arxiv.org/abs/1503.03585) and his collaborators showed the Langevin Process can be used to generate images. Until then the best image generation technique was based on a type of Neural Network called Generative Adversarial Networks or GANs, which are notoriously difficult to train. It was shown within a few years that the diffusion based technique yielded better images, and could be extended to encompass text to image generation as well as video generation. This has led to widespread adoption of tools such Dall-E-2 and Dall-E-3 from OpenAI and Imagen from Google which are all based on this technique.
+One of the most unexpected applications of the Wiener Process happened in 2015 when [Jascha Sohl-Dickstein](https://arxiv.org/abs/1503.03585) and his collaborators showed that the Langevin Process can be used to generate images. Until then the best image generation technique was based on a type of Neural Network called Generative Adversarial Networks or GANs, which are notoriously difficult to train. It was shown within a few years that the diffusion based technique yielded better images, and could be extended to encompass text to image generation as well as video generation. This has led to widespread adoption of tools such Dall-E-2 and Dall-E-3 from OpenAI and Imagen from Google which are all based on this technique.
 
-In order to understand the connection between diffusions and image generation, consider a typical digital image. It is made up hundreds of thousands of individual blobs of color called pixels, the value of which is represented  by a group of three integers between 0 and 255, for the red, blue and green colors. For any one image the value of a pixel is fixed, but if we have a collection of images, then the pixel value varies and can be considered to be a random variable. The collection of pixels that make up an image consisting of $n$ pixels is a random vector $(X_1, X_2,...,X_n)$ consisting of correlated random variables, with distribution probability $f(x_1, x_2,...,x_n)$. If we had access to this distribution, then it would be possible to generate new images by sampling from it. In reality $f$ is some fantastically complex function which cannot be described using a simple equation. But what if we sample from a simpler distribution, such as the Normal distribution, and then somehow modify the samples so that they end up following $f$? This can be accomplished by using the Langevin diffusion.
+In order to understand the connection between diffusions and image generation, consider a typical digital image. It is made up hundreds of thousands of individual blobs of color called pixels, the value of which is represented  by a group of three integers between 0 and 255, for the red, blue and green colors. For any one image the value of a pixel is fixed, but if we have a collection of images, then the pixel value varies and can be considered to be a random variable. The collection of $n$ pixels that make up an image can be considered to be a random vector $(X_1, X_2,...,X_n)$ consisting of correlated random variables, with probability distribution $f(x_1, x_2,...,x_n)$. If we had access to this distribution, then it would be possible to generate new images by sampling from it. In reality $f$ is some fantastically complex function which cannot be described using a simple equation. But what if we sample from a simpler distribution, such as the Normal distribution, and then somehow modify the samples so that they end up following $f$ instead? This can be accomplished by using the Langevin diffusion.
 
-Consider the following Stochastic Differential Equation of the Langevin type
+Consider the following n-dimensional Stochastic Differential Equation of the Langevin type
 
 $$ dX_t = \nabla\log p(X_t)dt + \sqrt{2} dW_t $$
 
-where $p(x)$ is the target probability density function that we are trying to move the distribution of $X_t$ to. This process can be approximately computed by discretizing it, resulting in
+Note that $X(t) = (X_{1}(t), X_{2}(t),...,X_{n}(t))$ and $W(t) = (W_(t),W_2(t),...,W_n(t))$ are n-dimensional random processes, while $\nabla$ is the vector operator $\nabla = ({\partial\over {\partial x_1}, {\partial\over {\partial x_2},...,{\partial\over {\partial x_n})$. 
+Also $p(x_1,x_2,...,x_n)$ is the target probability density function that we are trying to move the distribution of $X_t$ to. 
+This SDE can be simulated using the Euler-Maruyama technique, resulting in
 
-$$ X_{t+h} = X_t + s\ \log\nabla\log\ p(X_t) + \sqrt{2s}\epsilon  $$
+$$ X_{t+s} = X_t + s\ \log\nabla\log\ p(X_t) + \sqrt{2s}\epsilon  $$
 
-where $s$ is the step size and $\epsilon$ is a sample from the Standard Normal distribution $N(0,1)$. This can be interpreted as an update of $X_t$ by going in the direction pointed to by $\nabla\log p(X_t)$, which is somewhat similar to the parameter update step in the Stochastic Gradient Descent Algorithm used for training Neural Networks, though in this case we are performing an ascent, not descent. In addition the second term adds some random noise to the step update. Note that the gradient term pushes $X_t$ into regions where the value of $p(x)$ is high. Thus as $X_t$ evolves over time, it moves into regions with high probability, and in the limit it is distributed according to $p(x)$. But what about the noise term? It has been put there to prevent $X_t$ from getting stuck in a local maximum of $p(x)$, which would cause the iteration to get stuck and there would be no movement.
+In this equation $s$ is the step size and $\epsilon$ is a n-dimensional noise sample from the Normal distribution $N(0,I)$. This can be interpreted as an update to the value of $X_t$ by moving in the direction pointed to by $\nabla\log p(X_t)$, which is somewhat similar to the parameter update step in the Stochastic Gradient Descent Algorithm used for training Neural Networks, though in this case we are performing an ascent, not descent. The presence of the second term adds some random noise to the step update. Note that the gradient term pushes $X_t$ into regions where the value of $p(x)$ is high. Thus as $X_t$ evolves over time, it moves into regions with high probability, and in the limit it is distributed according to $p(x)$. But what about the noise term? It has been put there to prevent $X_t$ from getting stuck in a local maximum of $p(x)$, which would cause the iteration to get stuck and there would be no movement.
 
 The Langevin diffusion gives us a very powerful tool for sampling from complex distributions, and we are going to use it to sample from the distribution of pixel values in images.
 
@@ -592,27 +599,26 @@ The Langevin diffusion gives us a very powerful tool for sampling from complex d
 
 Figure: Using Stochastic Differential Equations to transform an image into noise (top, from left to right), and transforming noise back into an image (bottom, right to left)
 
-In the discussion that follows, we will treat $X_t$ as a n-dimensional Wiener Process consisting of components $X_t = (x_{1t}, x_{2t},...,x_{nt})$.
 The main idea behind using Stochastic Differential Equations to generate images is shown in the above figure, and consists of the following steps:
 
 **Forward Diffusion**
 
-The main idea is to treat the pixels of the image as the components of a n-dimensional random process $X_t$, whose initial value $X_0$ is equal to actual pixel values, and is distributed according to some unknown distribution given by $p_{data}(x_1,x_2,...,x_n)$. As shown in the arrow going from left to right in the top part of the figure, we now let $X_t$ evolve according to the following (non-Langevin) SDE
+We will treat the pixels of the image as the components of a n-dimensional random process $X(t)$, whose initial value $X(0)$ is equal to actual pixel values, and is distributed according to some unknown distribution given by $p_{data}(x_1,x_2,...,x_n)$. As shown in the arrow going from left to right in the top part of the figure, we now let $X(t)$ evolve according to the following Stochastic Differential Equation
 
 $$ dX_t = f(X_t,t)dt + g(t)dW_t $$
 
-so that at time $T$, the distribution of X_T$ is given by $p_T(x_1,x_2,...,x_n)$. We choose the functions $f$ and $g$ such that $p_T$(x_1,x_2,...,x_n)$ is distributed according to the Normal distribution $N(0,I)$ regardless of their initial distribution. As shown in the figure, the end result of this process is that the image gets converted into random noise.
+so that at time $T$, the distribution of $X_T$ is given by $p_T(x_1,x_2,...,x_n)$. We choose the functions $f$ and $g$ such that $p_T(x_1,x_2,...,x_n)$ is distributed according to the Normal distribution $N(0,I)$ regardless of its initial distribution. As shown in the figure, the end result of this process is that the pixels get completely randomized, so that all correlations between them are lost, and the end result is a noise image.
 
 **Backward Diffusion**
 
-The Backward Diffusion allows us to sample from the original distribution $p_{data}(x_1,x_2,...,x_n)$, by sampling from the Normal distribition $N(0,I)$ at $t=T$ and then use the Langevin Diffusion to work backwards to get back to $p_{data}(x_1,x_2,...,x_n)$ at $t=0$, in other words we start with pure noise, and gradually convert it back into a proper image. In order to do this we introduce a Reverse Time SDE given by
+The Backward Diffusion allows us to sample from the original distribution $p_{data}(x_1,x_2,...,x_n)$, by sampling from the Normal distribition $N(0,I)$ at $t=T$ and then use the Langevin Diffusion to work backwards to recover $p_{data}(x_1,x_2,...,x_n)$ at $t=0$. In other words we start with pure noise, and gradually convert it back into a proper image. In order to do this we introduce a Reverse Time SDE given by
 
 $$ d{\overline X}_t = [f({\overline X}_t,t) - g^2(t)\nabla_x\log\ p_t({\overline X}_t)]dt + g(t)d{\overline W}_t  $$
 
 where $p_t(x)$ is the distribution for $X_t$.
 In this equation time runs backwards from $t=T$ to $t=0$, and the Backwards Wiener Process ${\overline W_t}$ has the property that ${\overline W}_{t-s} - {\overline W}_t$ is independent of ${\overline W}_t$ for $s>0$. The mathematician Brian Anderson showed in the 1980s that the time reversed diffusion process ${\overline X}_t$ has the same distribution as the forward time process $X_t$.
 
-$x(T)$ is sampled from a Normal distribution, and then its value is allowed to change according to this SDE. With appropriate choice of $f$ and $g$, this equation can be shown to be equivalent to the Langevin Diffusion Process. This implies that the noisy image $X_T$ with distribution $N(0,I)$ is gradually transformed into a proper image $X_0$ sampled from the distribution $p_{data}(x_1,x_2,...,x_n)$.
+Hence $X_T$ is sampled from a Normal distribution, and then its value is allowed to change according to this SDE. With appropriate choice of $f$ and $g$, this equation can be shown to be equivalent to the Langevin Diffusion Process. This implies that the noisy image $X_T$ with distribution $N(0,I)$ is gradually transformed into a proper image $X_0$ sampled from the distribution $p_{data}(x_1,x_2,...,x_n)$.
 
 [Song et.al.](https://arxiv.org/pdf/1907.05600) proposed the following choice for the functions $f$ and $g$,
 
@@ -626,14 +632,14 @@ It can be shown that variance $V(X_t)$ satisfies the equation
 
 $$ V(X_t) = V(X_0) + \beta(t) $$
 
-so that it increases monotonically with $t$, so clearly $X_t$ does not converge as $t$ increases. However the scaled process $Y_t = {X_t\over{\sqrt{\beta(t)}}}$ converges to the Standard Normal distribution $N(0,I)$.
+so that it increases monotonically with $t$, which implies that $X_t$ divergesas $t$ increases. However the scaled process $Y_t = {X_t\over{\sqrt{\beta(t)}}}$ converges to the Standard Normal distribution $N(0,I)$.
 
 For this choice of $f$ and $g$, the Backward Diffusion can be written as
 
 $$ d{\overline X}_t = -g^2(t)\nabla_x\log\ p_t({\overline X}_t)dt + g(t)d{\overline W}_t $$
 
 In practice these equations are implemented using the Euler-Maruyama method by discretizing time which results in a multistage process shown in the figure.
-In discrete time the equation becomes
+In discrete time the Backward Diffusion equation becomes
 
 $$ {\overline X}_{t-s} \approx {\overline X}_t + sg^2(t)\nabla_x\log\ p_t({\overline X}_t) + g(t)\sqrt{s}\epsilon $$
 
@@ -643,9 +649,11 @@ $$ X_{t+h} = X_t + s\ \nabla\log\ p(X_t) + \sqrt{2s}\epsilon  $$
 
 and it had the property that the distribution of $X_t$ converges to $p(X)$ over time. The Backwards Diffusion equation has the same struscture, with the difference that $p_t(x_1,x_2,...,x_n)$ is used rather than the target distribution $p_{data}(x_1,x_2,...,x_n)$. However $p_t(x_1,x_2,...,x_n)$ converges to $p_{data}(x_1,x_2,...,x_n)$ as $t\rightarrow 0$, so that the Langevin convergence still holds.
 
-In the discussion so far the subject of Neural Networks has not come up, so what role do they play? The probability distribution over images $p_{data}(x_1,x_2,..,x_n)$ or $p_t(x_1,x_2,...,x_n)$ is so complex that it cannot be captures in the usual way by using mathematical equations, and this goes for the gradient $\nabla\log p_{t}$ as well. However even the most complex distribution can be represented using the millions of parameters in a Neural Network, and this is something that has become possible only in the last decade as our ability to train these networks has improved. These networks can be trained to estimate $\nabla\log p_{t}$, lets call is $r(\theta, X_t,t)$, where $\theta$ represents the parameters of the Neural Network. With this substitution the equation for recovering the distribution $p_{data}(x_1,x_2,...x_n)$ becomes
+In the discussion so far the subject of Neural Networks has not come up, so what role do they play? The probability distribution over images $p_{data}(x_1,x_2,..,x_n)$ or $p_t(x_1,x_2,...,x_n)$ are so complex that they cannot be expressed in the usual way by using mathematical equations, and this goes for the gradient $\nabla\log p_{t}$ as well. However even the most complex distribution can be represented using the millions of parameters in a Neural Network, and this is something that has become possible only in the last decade as our ability to train these networks has improved. These networks can be trained to estimate $\nabla\log p_{t}$, lets call is $r(\theta, X_t,t)$, where $\theta$ represents the parameters of the Neural Network. With this substitution the equation for recovering the distribution $p_{data}(x_1,x_2,...x_n)$ becomes
 
 $$ {\overline X}_{t-s} \approx {\overline X}_t + sg^2(t) r({\theta},{\overline X}_t,t)  + g(t)\sqrt{s}\epsilon $$
+
+The network is trained by minimizing the error between the images generated by the Backward Diffusion and the original images in the training dataset, and this process is repeated hundreds of thousands of times until the parameters converge.
 
 The description that I just gave contains the essence of the argument about how diffusion based image generation systems work. If you want to dig deeper into this subject, including details about the implementation, you can read the excellent [blog](https://www.peterholderrieth.com/blog/2023/Langevin-Dynamics-An-introduction-for-Machine-Learning-Engineers/) by Peter Holderreith on this topic or the original [paper](https://arxiv.org/pdf/2011.13456) by Song et.al. I have also written a tutorial on this subject and it can be found [here](https://subirvarma.github.io/GeneralCognitics/2022/10/14/DiffusionModels.html).
 
