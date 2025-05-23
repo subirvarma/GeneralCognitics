@@ -682,7 +682,7 @@ $$ {\partial\rho\over{\partial t}} = {1\over 2}{\partial^2\rho\over{\partial x^2
 
 which has the expected solution
 
-$$ \rho(x,t) = {1\over{{\sqrt{2t}}}} exp^{-{x^2\over{2t}}} $$
+$$ \rho(x,t) = {1\over{\sqrt{2t}}} exp^{-{x^2\over{2t}}} $$
 
 In the case of Quantum Mechanics we have the Schrodinger Equation for $\psi$ given by (for the case when there are no external fields)
 
