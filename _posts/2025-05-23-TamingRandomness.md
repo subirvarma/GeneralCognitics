@@ -738,7 +738,7 @@ $$ {\partial S(x,t)\over{\partial t}} = -{1\over 2m} ({\partial S(x,t)\over{\par
 
 If we specify that the probability density for the diffusion be equal to $R^2$, i.e., $\rho = R^2$, then the Fokker-Planck equation simplifies to
 
-$$ {\partial R^2\over\partial t} = -{\partial({{1\over m} [({\partial S\over{\partial x}})^2 R^2 }]\over{\partial x}} $$
+ {\partial R^2\over\partial t} = -{\partial({{1\over m} [({\partial S\over{\partial x}})^2 R^2 }]\over{\partial x}} 
 
 These last two equations are called the Madelung equations, and can also be derived by setting $\psi = R\exp^{iS\over\hbar}$ in Schrodinger's equation.
 This implies that diffusion model and the Schrodinger model for a quantum particle are equivalent descriptions, since the equations for both these models can be reduced to the Madelung equations. Hence the Schrodinger equation is just a convenient mathematical way to write the Madelung equations, it does not have any real existence in nature. 
