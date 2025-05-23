@@ -664,33 +664,35 @@ Quantum Mechanics is based on the concept of a Wave Function $\psi$, for which w
 
 $$ p(\Delta x) = \int_{\Delta x} \psi\psi^* dx  $$
 
-All of Quantum Mechanics is based on this rule, but again we have no clue as to why it works. Is it possible to introduce randomness into Quantum Mechanics without using the Born Rule? And more interestingly, can that randomness be due to the fluctuations of some sort of Diffusion Process operating at a very deep level in nature? Einstein showed that the randomness of the pollen particles was due to bombardment by water molecules. Is there some phenomenon operating deep in the structure of space-time that similarly causes randomness in Quantum Theory by randomly bombarding tiny particles such as the electron. If this were true, it would provide a physical explanation for mysterious equations of Quantum Mechanics that would have made Einstein happy! 
+All of Quantum Mechanics is based on this rule, but again we have no clue as to why it works. It is not possible to write down an expression such as $x(t)$ to describes the path of a particle in Quantum Mechanics, all we can predict are the probabilities. In diffusion processes on the other hand, the location of a particle is also probabilistic, but unlike Quantum Mechanics, we do have Stochastic Differential Equations that explain how the probabilities get into the model.
 
-There has been some work done over the years to connect Quantum Mechanics and the Wiener Process, and in order to understand this, I am going to introduce an important equation in the theory of Diffusion Processes called the Fokker-Planck equation. Consider the diffusion given by
+Is it possible to introduce randomness into Quantum Mechanics without using the Born Rule? And more interestingly, can that randomness be due to the fluctuations of some sort of diffusion process operating at a very deep level in nature? Einstein showed that the randomness of the pollen particles was due to bombardment by water molecules. Is there some phenomenon operating deep in the structure of space-time that similarly causes randomness in Quantum Theory by randomly bombarding tiny particles such as the electron. If this were true, it would provide a physical explanation for mysterious equations of Quantum Mechanics that would have made Einstein happy! 
 
-$$  dX(t) = m(X(t), t)dt + \sigma^2(X_t, t)dW_t $$
+There has been some work done over the years to connect Quantum Mechanics and the diffusion processes, and in order to understand this, I am going to introduce an important equation in the theory of diffusion processes called the Fokker-Planck equation. Consider the diffusion given by
+
+$$  dX_t = m(X_t, t)dt + \sigma^2(X_t, t)dW_t $$
 
 The Fokker-Planck equation for this diffusion is a Partial Differential Equation for the probability density $\rho(x,t)$ for the random variable $X_t$ and is given by
 
 $$  {\partial\rho(x,t)\over{\partial t}} = {1\over 2}{\partial^2\rho(x,t)\sigma^2(x,t)\over{\partial x^2}} - {\partial\rho(x,t)m(x,t)\over{\partial x}} $$
 
-Note for the case of a Wiener Process, $m = 0$ and $\sigma = 1$, so it reduces to
+Note that for the case of a Wiener Process, $m = 0$ and $\sigma = 1$, so it reduces to
 
 $$ {\partial\rho\over{\partial t}} = {1\over 2}{\partial^2\rho\over{\partial x^2}} $$
 
 which has the expected solution
 
-$$ \rho(x,t) = {1\over{{\sqrt{2t}}}} e^{-{x^2\over{2\sigma^2 t}}} $$
+$$ \rho(x,t) = {1\over{{\sqrt{2t}}}} exp^{-{x^2\over{2t}}} $$
 
 In the case of Quantum Mechanics we have the Schrodinger Equation for $\psi$ given by (for the case when there are no external fields)
 
 $$ i{\hbar}{\partial\psi\over{\partial t}} = -{\hbar^2\over{2m}}{\partial^2\psi\over{\partial x^2}}  $$
 
-Consider the motion of a particle in free space, whose initial location is localized in the neighborhood of the origin. Unlike for the Wiener Process, we cannot have the particle be located exactly at $x=0$ at $t=0$, since the Heisenberg Uncertainty Principle would require that it have an infinite uncertainty in its initial momentum. Instead we assume that its wave function at $t=0$ is distributed according to a Normal distribution given by (with $m = \hbar = 1$),
+Consider the motion of a particle in free space, which is initially localized in the neighborhood of the origin. Unlike for the Wiener Process, we cannot have the particle be located exactly at $x=0$ at $t=0$, since the Heisenberg Uncertainty Principle would require that it have an infinite uncertainty in its initial momentum. Instead we assume that its wave function at $t=0$ is distributed according to a Normal distribution given by (with $m = \hbar = 1$),
 
 $$ \psi(x,0) = \sqrt[4]{2\over\pi} \exp^{-x^2 + ip_0x} $$
 
-where $p_0$ is the initial average momentum of the particle. Hence both the initial position and the initial momentum of the particle are Normally distributed random quantities, connected together by the Uncertainty Principle. Solving the Schrodinger equation will tell us how the particle's location changes with time, and is given by (see [this article](https://en.wikipedia.org/wiki/Wave_packet) for a nice description of free quantum particles)
+where $p_0$ is the initial average momentum of the particle. Hence both the initial position and the initial momentum of the particle are Normally distributed random quantities, connected together by the Uncertainty Principle. Solving the Schrodinger equation will tell us how the particle's location changes with time, and this results in the expression (see [this article](https://en.wikipedia.org/wiki/Wave_packet) for a nice description of free quantum particles)
 
 $$ \psi(x,t) = \sqrt[4]{2\over\pi}{1\over\sqrt{1+2it}}\exp^{-{(x-p_0t)^2\over {1+4t^2}}} \exp^{i{(p_0+2tx)x-{tp_0^2\over 2}\over {1+4t^2}}} $$
 
@@ -706,14 +708,17 @@ $$ |\psi(x,t)|^2 = {1\over\sqrt{2\pi t^2}} \exp^{-{2(x-p_0 t)^2\over {2t^2}}} $$
 
 Figure: Probability distribution of a free particle as a function of time
 
-This equation says that if the particle with initial average momentum $p_0$ is initially confined to a location around the origin at $t=0$, then the probability of locating it at time $t$ is a Normal distribution centered at $p_0 t$, i.e., on the average it has moved to the right, and its location has become even more uncertain due to the variance which increases as $t^2$. The quantum mechanical explanation for this behavior is the following: Since the initial momentum is a random quantity, as time increases the range of possible distances covered by the particle increases depending on the spread of the momentum values.
+This equation says that if the particle with initial average momentum $p_0$ is initially confined to a location around the origin at $t=0$, then on the average it moves to the right, but we can't predict its exact location.
+The probability of locating it in a specific area is governed by a Normal distribution centered at $p_0 t$, i.e., on the average it has moved to the right, and its location has become even more uncertain due to the variance which increases as $t^2$ (see above figure). 
+
+The quantum mechanical explanation for this behavior is the following: Since the initial momentum is a random quantity, as time increases the range of possible distances covered by the particle increases depending on the spread of the momentum values, but there is no explanation for where the randomness is coming from.
 The expression does look suspiciously like the probability density for a Wiener Process with drift, except that variance has a $t^2$ dependence on time, rather than $t$. Hence the range of possible locations for both a Wiener particle and a quantum particle becomes more and more spread out over time.
 
-Is it possible to come up with a Diffusion Process whose probability distribution behaves like this? In other words, does the quantum particle derive its randomness from being driven by a Wiener Process?
+Is it possible to come up with a diffusion process whose probability distribution behaves like the one predicted by the Born Rule? In other words, does the quantum particle derive its randomness from being driven by a Wiener Process?
 If so, this would be a natural way to introduce probability into Quantum Mechanics, rather than using the Born Rule.
 There have been various attempts over the years to solve this problem, including by Schrodinger himself, since he was not happy with the Born Rule interpretation for his wave function. The best known theory was proposed by Princeton mathematician Edward Nelson in the mid 1960s and goes by the name Stochastic Quantum Mechanics (see [this article](https://shs.hal.science/halshs-00996258v1/document) for a recent review of Nelson's theory).
 
-Nelson assumed that a quantum particle in vacuum is driven by the following Stochastic Differential Equation
+Nelson assumed that a quantum particle in free space is driven by the following Stochastic Differential Equation
 
 $$ dX_t = b(X_t,t)dt+ dW_t $$
 
