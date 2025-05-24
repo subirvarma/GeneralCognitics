@@ -292,7 +292,8 @@ $$ dX_t = b(t,X_t)dt + \sigma(t,X_t)dW_t $$
 Figure: Diffusion Process of the type described by a Stochastic Differential Equation
 
 Note that this is just an abbreviation of the integral form since $dX_t$, $dW_t$ and $dt$ don't have any meaning by themselves.
-This is referred to as a Stochastic Differential Equation or SDE and the resulting process $X(t) is called a Diffusion Process. Tha latter name arises out of the observation that the equation describes the gradual spreading of a particle's trajectory around the deterministic trajectory defined by ${dX(t)\over dt} = b(t,X_t)$, as shown in the above figure.
+This is referred to as a Stochastic Differential Equation or SDE and the resulting process $X(t)$ is called a Diffusion Process. 
+Tha latter name arises out of the observation that the equation describes the gradual spreading of a particle's trajectory around the deterministic trajectory defined by ${dX(t)\over dt} = b(t,X_t)$, as shown in the above figure.
 
 Does the Ito Integral even exist, in other words is it well defined? The traditional Riemann Integral is defined as the limit
 
