@@ -736,5 +736,13 @@ where the functions $S(x,t)$ and $R(x,t)$ are constrained to satisfy the followi
 
 $$ {\partial S(x,t)\over{\partial t}} = -{1\over{2m}} ({\partial S(x,t)\over{\partial x}})^2 - V + {\hbar^2\over{2mR(x,t)}} {\partial^2 R(x,t)\over{\partial x}}  $$
 
+If we specify that the probability density for the diffusion be equal to $R^2$, i.e., $\rho = R^2$, then the Fokker-Planck equation simplifies to
+
+$$ {\partial R^2\over\partial t} = -{\partial({{1\over m} [({\partial S\over{\partial x}})^2 R^2 }]\over{\partial x}} $$
+
+These last two equations are called the Madelung equations, and can also be derived by setting $\psi = R\exp^{iS\over\hbar}$ in Schrodinger's equation.
+This implies that diffusion model and the Schrodinger model for a quantum particle are equivalent descriptions, since the equations for both these models can be reduced to the Madelung equations. Hence the Schrodinger equation is just a convenient mathematical way to write the Madelung equations, it does not have any real existence in nature. 
+But can we assume that the Schrodinger equation were not known, and then derive it by using the Madelung equations? This part of the theory does not quite work yet, and has prevented it from achieving greater prominence in the physics community.
+
 
 
