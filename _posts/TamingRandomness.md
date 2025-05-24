@@ -379,7 +379,7 @@ $$ X_{(n+1)s} = X_{ns} + sb(ns,X_{ns}) + \sigma(ns,X_{ns})\sqrt{s}\epsilon\ \ \ 
 
 where $\epsilon$ is a sample from the Normal distribution $N(0,I)$. Every time we run this iteration we, get a different sample path, and if we are interested in the average value or variance of $X_t$, then we can run multiple of these iterations starting from the same point $X_0$, and then take the average of the result.
 
-### The Ito Formula
+## The Ito Formula
 
 In addition to defining his eponymous integral, Kiyoshi Ito made another fundamental contribution the field of Stochastic Calculus by discovering the Ito Formula (sometimes called Ito's Lemma), which was published in 1951. 
 It is the Differential Calculus counterpart to the Ito Integral, and can be considered to be a mathematical machine for transforming a given diffusion process into another.
