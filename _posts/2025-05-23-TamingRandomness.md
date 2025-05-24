@@ -688,7 +688,7 @@ In the case of Quantum Mechanics we have the Schrodinger Equation for $\psi$ giv
 
 $$ i{\hbar}{\partial\psi\over{\partial t}} = -{\hbar^2\over{2m}}{\partial^2\psi\over{\partial x^2}}  $$
 
-Consider the motion of a particle in free space, which is initially localized in the neighborhood of the origin. Unlike for the Wiener Process, we cannot have the particle be located exactly at $x=0$ at $t=0$, since the Heisenberg Uncertainty Principle would require that it have an infinite uncertainty in its initial momentum. Instead we assume that its wave function at $t=0$ is distributed according to a Normal distribution given by (with $m = \hbar = 1$ and $\sigma^2 = {1\over 2}),
+Consider the motion of a particle in free space, which is initially localized in the neighborhood of the origin. Unlike for the Wiener Process, we cannot have the particle be located exactly at $x=0$ at $t=0$, since the Heisenberg Uncertainty Principle would require that it have an infinite uncertainty in its initial momentum. Instead we assume that its wave function at $t=0$ is distributed according to a Normal distribution given by (with $m = \hbar = 1$ and $\sigma^2 = {1\over 2}$),
 
 $$ \psi(x,0) = \sqrt[4]{2\over\pi} \exp^{-x^2 + ip_0x} $$
 
@@ -703,6 +703,30 @@ $$ |\psi(x,t)|^2 = \sqrt{2\over\pi}{1\over\sqrt{1+4t^2}} \exp^{-{(x-p_0t)^2\over
 For large values of $t$, this can be written as
 
 $$ |\psi(x,t)|^2 = {1\over\sqrt{2\pi t^2}} \exp^{-{2(x-p_0 t)^2\over {2t^2}}} $$
+
+![](https://subirvarma.github.io/GeneralCognitics/images/weiner23.png) 
+
+Figure: Probability distribution of a free particle as a function of time
+
+This equation says that if the particle with initial average momentum $p_0$ is initially confined to a location around the origin at $t=0$, then on the average it moves to the right, but we can't predict its exact location.
+The probability of locating it in a specific area is governed by a Normal distribution centered at $p_0 t$, i.e., on the average it has moved to the right, and its location has become even more uncertain due to the variance which increases as $t^2$ (see above figure). 
+
+The quantum mechanical explanation for this behavior is the following: Since the initial momentum is a random quantity, as time increases the range of possible distances covered by the particle increases depending on the spread of the momentum values, but there is no explanation for where the randomness is coming from.
+The expression does look suspiciously like the probability density for a Wiener Process with drift, except that variance has a $t^2$ dependence on time, rather than $t$. Hence the range of possible locations for both a Wiener particle and a quantum particle becomes more and more spread out over time.
+
+Is it possible to come up with a diffusion process whose probability distribution behaves like the one predicted by the Born Rule? In other words, does the quantum particle derive its randomness from being driven by a Wiener Process?
+If so, this would be a natural way to introduce probability into Quantum Mechanics, rather than using the Born Rule.
+There have been various attempts over the years to solve this problem, including by Schrodinger himself, since he was not happy with the Born Rule interpretation for his wave function. The best known theory was proposed by Princeton mathematician Edward Nelson in the mid 1960s and goes by the name Stochastic Quantum Mechanics (see [this article](https://shs.hal.science/halshs-00996258v1/document) for a recent review of Nelson's theory).
+
+Nelson assumed that a quantum particle in free space is driven by the following Stochastic Differential Equation
+
+$$ dX_t = b(X_t,t)dt+ dW_t $$
+
+The function $b(X_t,t)$ is called the mean forward velocity, while $W(t)$ is a standard Wiener Process with mean zero and variance $\nu = {\sigma^2\over 2}$. Unlike the case for Brownian Motion, there is no fluid that is pushing the particles around, and Nelson left open the question of what is responsible for the randomness. He suggested it could be due to processes happpening deep in the fabric of space-time which we cannot detect. [Markopoulou and Smolin](https://arxiv.org/pdf/gr-qc/0311059) have proposed a theory for the structure of space-time which also makes use of this idea.
+
+The Fokker-Planck equation for the probability density for this diffusion is given by
+
+$$ {\partial\rho\over\partial t} = -{\partial(b\rho)\over\partial x} + \nu{\partial^2\rho\over{\partial x^2}} $$
 
 
 
