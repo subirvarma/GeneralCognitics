@@ -728,5 +728,13 @@ The Fokker-Planck equation for the probability density for this diffusion is giv
 
 $$ {\partial\rho\over\partial t} = -{\partial(b\rho)\over\partial x} + \nu{\partial^2\rho\over{\partial x^2}} $$
 
+Nelson proposed the following special form for the diffusion trajectory of the particle
+
+$$ dx_t = [{1\over m}{\partial S(x,t)\over{\partial x}} + {\nu\over R^2(x,t)}{\partial^2 R^2(x,t)\over{\partial x^2}}]dt + dW_t $$
+
+where the functions $S(x,t)$ and $R(x,t)$ are constrained to satisfy the following equation
+
+$$ {\partial S(x,t)\over{\partial t}} = -{1\over{2m}} ({\partial S(x,t)\over{\partial x}})^2 - V + {\hbar^2\over{2mR(x,t)}} {\partial^2 R(x,t)\over{\partial x}}  $$
+
 
 
