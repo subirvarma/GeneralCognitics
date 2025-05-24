@@ -474,7 +474,7 @@ The first term captures that fact that there is usually an upward drift in the m
 Since the Wiener process has independent and stationary increments, it implies that the random change $S_{t+h} - S_t$ in $S(t)$ is independent of whatever happened in the market at time $t$ and earlier, including the value $S_t$ as well.
 This does not agree with the way the stock market actually behaves, since in reality the change is greater if $S_t$ is larger.
 In the 1960s Samuelson improved the model by noting that the  change in the value of a stock is dependent on its current price, since only the percentage increase or decrease from the current price is what really matters to a trader. 
-In other words, it doesn't matter whether you are holding $$1$ million dollar portfolio or a $$1$ dollar portfolio, you would still want the same 10% annual return.
+In other words, it doesn't matter whether you are holding a million dollar portfolio or a one dollar portfolio, you would still want the same 10% annual return.
 Taking this into account, the modified model is
 
 $$ dS_t = \mu S dt + \sigma S dW_t  $$
