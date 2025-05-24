@@ -734,7 +734,7 @@ $$ dx_t = [{1\over m}{\partial S(x,t)\over{\partial x}} + {\nu\over R^2(x,t)}{\p
 
 where the functions $S(x,t)$ and $R(x,t)$ are constrained to satisfy the following equation
 
-$$ {\partial S(x,t)\over{\partial t}} = -{1\over{2m}} ({\partial S(x,t)\over{\partial x}})^2 - V + {\hbar^2\over{2mR(x,t)}} {\partial^2 R(x,t)\over{\partial x}}  $$
+$$ {\partial S(x,t)\over{\partial t}} = -{1\over{2m}} ({\partial S(x,t)\over{\partial x}})^2 - V + {\hbar^2\over{2mR(x,t)}} {\partial^2 R(x,t)\over{\partial x^2}}  $$
 
 If we specify that the probability density for the diffusion be equal to $R^2$, i.e., $\rho = R^2$, then the Fokker-Planck equation simplifies to
 
