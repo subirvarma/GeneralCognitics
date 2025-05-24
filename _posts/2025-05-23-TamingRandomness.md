@@ -125,7 +125,7 @@ But before we do that, the following question has to be answered: What does conv
 Lets first consider what consider what convergence means in the context of random variables. 
 Recall that we defined the random sum $S_n = X_1+X_2+...+X_n$ such that each $X_i$ was the outcome of a coin toss, but we can extent this to the more general case where the $X_i$ are arbitrary random variables with mean $m$ and variance $\sigma^2$. We will assume the $X_i$ are independent of one another, and furthermore thay are all identically distributed.
 
-Under these conditions can we say anything about the convergence of the scaled version of this sum given by ${S_n\over\sqrt{n}}$? We certainly can, and this is one of the most famous results in probability theory called the Central Limit Theorem or CLT. It says that the probability distribution of ${S_n\over\sqrt{n}}$ converges to the Normal or Standard Gaussian Distribution $N(0,1)$. More precisely 
+Under these conditions can we say anything about the convergence of the scaled version of this sum given by ${S_n\over\sqrt{n}}$? We certainly can, and this is one of the most famous results in probability theory called the Central Limit Theorem or CLT. It says that the probability distribution of ${S_n\over\sqrt{n}}$ converges to the Normal or Standard Gaussian Distribution $N(m,\sigma^2)$. More precisely 
 
 $$ {S_n\over\sqrt{n}} \xrightarrow[\text {}]{\text{D}}  {1\over\sqrt{2\pi\sigma^2}}e^{-{(x-m)^2\over {2\sigma^2}}}\ \ \ as\ \ \ n\rightarrow\infty $$
 
@@ -474,7 +474,7 @@ The first term captures that fact that there is usually an upward drift in the m
 Since the Wiener process has independent and stationary increments, it implies that the random change $S_{t+h} - S_t$ in $S(t)$ is independent of whatever happened in the market at time $t$ and earlier, including the value $S_t$ as well.
 This does not agree with the way the stock market actually behaves, since in reality the change is greater if $S_t$ is larger.
 In the 1960s Samuelson improved the model by noting that the  change in the value of a stock is dependent on its current price, since only the percentage increase or decrease from the current price is what really matters to a trader. 
-In other words, it doesn't matter whether you are holding $1 million dollar portfolio or a $1 dollar portfolio, you would still want the same 10% annual return.
+In other words, it doesn't matter whether you are holding $$1$ million dollar portfolio or a $$1$ dollar portfolio, you would still want the same 10% annual return.
 Taking this into account, the modified model is
 
 $$ dS_t = \mu S dt + \sigma S dW_t  $$
