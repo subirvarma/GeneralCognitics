@@ -1,7 +1,24 @@
 ---
 layout: default
-title: "Book Review: The Fabric of Reality by David Deutsch"
+title: "Book Reviews"
 ---
+
+# Book Review: Critical Mass, How One Thing Leads to Another by Philip Ball
+
+Summary:
+- Start by talking bout city segregation statistics in the US. Racism has gone down in the US since the 1960s, especially in metropolitan areas. The what accounts for the segregation that we see in cities?
+- Talk about stock market fluctuations. Can these be caused by trading patterns rather than market fundamentals?
+- Is there a science that connects macroscopic behavior to microscopis rules of interacton between individual entities?
+- Beginnings of such a science: Maxwell's kinetic theory of gasses. Assumes that particles move independently, leads to Gaussian distribution. This did not explain phase transitions.
+- Van der Waals theory of phase transitions. He introduced rules for interaction between particles.
+- Other systems that also exhibit phase transitions: Magnetic materials, the Ising model, crowd motion,
+- Traffic models, the concept of metastability
+- Ch8 can be omitted, it does not really talk about individual interactions
+- How trading patterns can cause market volatility
+
+
+
+
 
 # Book Review: The Fabric of Reality by David Deutsch
 
