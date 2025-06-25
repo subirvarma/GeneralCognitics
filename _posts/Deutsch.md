@@ -13,8 +13,12 @@ Summary:
 - Van der Waals theory of phase transitions. He introduced rules for interaction between particles.
 - Other systems that also exhibit phase transitions: Magnetic materials, the Ising model, crowd motion,
 - Traffic models, the concept of metastability
-- Ch8 can be omitted, it does not really talk about individual interactions
+- Ch 8 on stock market models can be omitted, it does not really talk about individual interactions
 - How trading patterns can cause market volatility
+- The Power Law and Self Organized Criticality (SoC), non-equilibrieum models. Natural Systems that obey this law: Eartquakes, forest fires, volcanic activity
+- Power Law in human systems (Zipf)
+- Model for Firms, power laws in these models, how individual behavior can be used to explain rise and fall of firms
+- 
 
 
 
