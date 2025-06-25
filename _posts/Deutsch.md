@@ -6,7 +6,7 @@ title: "Book Reviews"
 # Book Review: Critical Mass, How One Thing Leads to Another by Philip Ball
 
 Summary:
-- Start by talking bout city segregation statistics in the US. Racism has gone down in the US since the 1960s, especially in metropolitan areas. The what accounts for the segregation that we see in cities?
+- Start by talking about city segregation statistics in the US. Racism has gone down in the US since the 1960s, especially in metropolitan areas. The what accounts for the segregation that we see in cities?
 - Talk about stock market fluctuations. Can these be caused by trading patterns rather than market fundamentals?
 - Is there a science that connects macroscopic behavior to microscopis rules of interacton between individual entities?
 - Beginnings of such a science: Maxwell's kinetic theory of gasses. Assumes that particles move independently, leads to Gaussian distribution. This did not explain phase transitions.
@@ -17,8 +17,13 @@ Summary:
 - How trading patterns can cause market volatility
 - The Power Law and Self Organized Criticality (SoC), non-equilibrieum models. Natural Systems that obey this law: Eartquakes, forest fires, volcanic activity
 - Power Law in human systems (Zipf)
-- Model for Firms, power laws in these models, how individual behavior can be used to explain rise and fall of firms
-- 
+- Model for Firms, power laws for sizes of firms, how individual behavior can be used to explain rise and fall of firms
+- Models for alliances, corporate and political, Axelrod model
+- Schelling model, p389. How macrobehavior cannot be predicted from individual behavior, racial segregation
+- Hysterisis effects in crime stats, Ormerod and Campbell model
+- Models for human culture, formation of stable cultural differences
+- Sugarscape: Models for society, emergence of in-equality
+- Graph models, small world models, models for the web, 
 
 
 
