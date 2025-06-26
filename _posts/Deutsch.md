@@ -1,9 +1,11 @@
 ---
 layout: default
-title: "Book Reviews"
+title: "Systems of Interacting Particles"
 ---
 
-# Book Review: Critical Mass, How One Thing Leads to Another by Philip Ball
+# Systems of Interacting Particles
+
+Book Review: Critical Mass, How One Thing Leads to Another by Philip Ball
 
 Summary:
 - Start by talking about city segregation statistics in the US. Racism has gone down in the US since the 1960s, especially in metropolitan areas. The what accounts for the segregation that we see in cities?
@@ -23,7 +25,68 @@ Summary:
 - Hysterisis effects in crime stats, Ormerod and Campbell model
 - Models for human culture, formation of stable cultural differences
 - Sugarscape: Models for society, emergence of in-equality
-- Graph models, small world models, models for the web, 
+- Graph models, small world models, models for the web,
+
+## Introduction
+
+
+
+## The First Models: Kinetic Theory of Gases
+
+
+
+
+## Models Exhibiting Phase Transitions
+
+- Gas/liquids, magnetic materials, crowd motion, Traffic Models
+
+
+
+## Non-Equilibrium Models: Self Organized Criticality (SOC)
+
+
+
+
+## The Power Law
+
+
+### Why do the Power Laws Arise?
+
+- Scale Free Interactions
+- Due to purposive behavior on part of individual agents, p 331
+
+### Examples: Company Sizes, Stock Market, 
+
+
+### Small World Models: Social Networks
+
+
+## Application to Human Interactions
+
+
+### Model for Segregation in Cities
+
+
+### Models of Alliances in Companies and Countries
+
+
+### Human Culture (Axelrod Model)
+
+
+### Sugarscape
+
+## Neural Networks as Interacting Particle Systems
+
+- Start with random connection strengths, gradually change them to optimize a global loss function
+- Skip connections and Attention as ways to reduce the average connection length L
+- Analogy with Spin Glasses
+- Hopfield Networks
+
+
+### 
+
+
+
 
 
 
