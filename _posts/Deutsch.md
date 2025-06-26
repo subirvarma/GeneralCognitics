@@ -61,7 +61,7 @@ Summary:
 ### Small World Models: Social Networks
 
 
-## Application to Human Interactions
+## Application to Human Affaira
 
 
 ### Model for Segregation in Cities
