@@ -81,6 +81,8 @@ Summary:
 - Skip connections and Attention as ways to reduce the average connection length L
 - Analogy with Spin Glasses
 - Hopfield Networks
+- Re-Normalization Applied to Neural Networks
+- Models of Space Time
 
 
 
