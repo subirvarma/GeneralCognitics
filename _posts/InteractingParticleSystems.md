@@ -29,6 +29,21 @@ Summary:
 
 ## Introduction
 
+A couple of moinths ago when I was doing research for my post on Brownian Motion, I saw a reference to the book "Critical Mass: How One Thing Leads to Another" by the science writer Phillip Ball. I finally got around to reading the book, and this post is the result. The book is over 650 pages and has a lot of material on the topic of Interacting Particle Systems. In this post I will attempt to summarize the parts that I found the most interesting, but I would encourage you to read the entire book, it is a fascinating topic.
+
+So what are Interacting Particle Systems (or IPS)? As the name implies, these are systems consisting of multitudes of particles which influence each others movement in some fashion. These systems can serve as abstract representations of several real world systems that are of practical interest, such as:
+
+- All of matter can be considered to be an IPS, which individual particles being atoms or molecules. Phenomena such as phase transitions from liquid to a gas, or from a non-magnetic material to magnetic, fall within the range of topics that have been analysed using intarcting partcle models.
+- The motion of crowds of people is an example of IPS. The theory can be used to predict what happens in a crowded room when everyone tries to exist at once, a painfully common occurrence which ahs led to loss of life.
+- Moving vehicles on the road are another example of IPS. Phenomena such gridlock in rush hour traffic have been studied using the theory.
+
+A very interesting application of the theory has been to models for structures that exist in our society. These include:
+
+- 
+
+
+
+
 
 
 ## The First Models: Kinetic Theory of Gases
