@@ -47,7 +47,7 @@ Summary:
 
 
 
-## The Power Law
+## Emergence of Power Laws in Interacting Particle Systems
 
 
 ### Why do the Power Laws Arise?
@@ -82,7 +82,11 @@ Summary:
 - Analogy with Spin Glasses
 - Hopfield Networks
 - Re-Normalization Applied to Neural Networks
-- Models of Space Time
+
+  
+## Space Time as Interacting Particle Systems
+
+- Discrete models for Space-Time
 
 
 
