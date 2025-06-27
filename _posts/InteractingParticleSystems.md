@@ -37,9 +37,16 @@ So what are Interacting Particle Systems (or IPS)? As the name implies, these ar
 - The motion of crowds of people is an example of IPS. The theory can be used to predict what happens in a crowded room when everyone tries to exist at once, a painfully common occurrence which ahs led to loss of life.
 - Moving vehicles on the road are another example of IPS. Phenomena such gridlock in rush hour traffic have been studied using the theory.
 
-A very interesting application of the theory has been to models for structures that exist in our society. These include:
+A very interesting application of the IPS theory has been to model structures that exist in our society. These include:
 
-- 
+- Traders in a stock market are influenced by the trading decisions of other traders, and thus can be considered to be a type of IPS. A lot of times stock market fluctuations are caused not by fundamental factors such economic news, but solely as a result of how trading is done, and this can cause large variations in the stock market.
+- IPS has been used to model the phenomenon of racial segregation in cities, with the home buying habits of individuals serving as the IPS interactions. An eye-opening result of this analysis is that individual may be fairly tolerant of other races, but even small differences in their buying decisions can result in segregated neighborhoods.
+- There is a very interesting IPS model that was used to capture the shifting alliances between countries that preceded the First World War. It was able to accurately predict the members of the two alliances that existed at the time war broke out.
+- Business entities such as companies, which interact with one another according to the forces of co-operation and competition. Just like political alliances between countries, companies often form competing consortiums, and these can be analyzed using the tools of IPS.
+- In Multi-ethnic countries such as the US there are competing cultures, and it is interesting to analyze the process whereby a single culture can come to dominate over all the others, and IPS can help in this regard.
+- Can the macro economy be modeled as an IPS? This has also been tried and resulted in an IPS model called Sugarscape.
+
+The core behavior that causes IPS, is of course the fact that entitities don't act independently, but in fact their behavior is influnced by other entities in the environment they inhabit. Some of these interactions are local, i.e., with neighboring entities, but there are models that feature what are known as scale free interactions. As the name imnplies, these interactions can be global in scale, i.e., any entity can potentially interact with any of the other entities in the model. These interactions increasingly characterize the modern world due to the spread of Internet and Social Media as well as broadcast media such as TV News. IPS involving Scale Free interactions have a characteristic signature: Quantities of interest in these models obey the so-called Power Law in the way their probability distributions behave. These are also referred to as Zipf distributions, and are characterized by a "winner take all" effect, where a few of the entities dominate their ecosystems.
 
 
 
