@@ -38,7 +38,9 @@ Spin Glasses and neural networks
 
 ## Introduction
 
-
+The science of Statistical Mechanics was founded in the mid-1800s, the pioneers were the great physicists James Clerk Maxwell and Ludwig Boltzmann. The main idea behind this was to seek an explanation for the macro properties of a large number of interacting particles. This was at a time when Atomic Theory was still a controversial subject, not every scientist was convinced that matter is made up of innumerable number of atoms or molecules.
+The science of Classical Mechanics, as founded by Newton, was not of much use in a analyzing the behavior of a large number of particles, in fact the math become insolvable for as little as a system of three interacting particles.
+Nevertheless, There was a strong motivation to understand the properties of these systems, given that ordinary matter, whether in the solid, liquid or gas form is nothing elese but a collection of a large number of interacting particles. A deeper understanding of the behavior of matter had become a more pressing problem due to the recently discovered science of Thermodynamics, which had found practical applications in the design and analysis  of efficient steam engines. Scientists such as Carnot, Helmholtz and Clausius had discovered the First Law of Thermodynamics (Energy is conserved in any physical interaction) and the Second Law (the Entropy of a system always increases over time). 
 
 
 
