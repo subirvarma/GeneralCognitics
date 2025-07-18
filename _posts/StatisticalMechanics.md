@@ -84,7 +84,7 @@ $$ E = -{\partial\log Z\over\partial\beta} $$
 
 and
 
-$$  S = -{\beta\over Z}{\partial Z\partial \beta} + \log Z $$
+$$  S = -{\beta\over Z}{\partial Z\over \partial\beta} + \log Z $$
 
 But we have yet to identify the significance of the constant $\beta$. Using the above formula for $S$, it follows that
 
@@ -98,11 +98,11 @@ Using the formula for $E$ the last two terms cancel off, leaving
 
 $$ \beta = {dS\over dE} $$
 
-But what is the significance of the derivative ${dS\over dE}$? It can be easily shown that if two systems energies $E_1, E_2$ and entropies $S_1,S_2$ are connected to each other, and if initially ${dS_1\over dE_1 > {dS_2\over dE_2}$, then energy flows from system 1 to system 2, and in equilibrium the two derivatives are equal. This motivates the definition of temperature $T$ as
+But what is the significance of the derivative ${dS\over dE}$? It can be easily shown that if two systems energies $E_1, E_2$ and entropies $S_1,S_2$ are connected to each other, and if initially ${dS_1\over dE_1} > {dS_2\over dE_2}$, then energy flows from system 1 to system 2, and in equilibrium the two derivatives are equal. This motivates the definition of temperature $T$ as
 
-$$ {\over T} = \beta = {\partial S\over \partial E}  $$
+$$ {1\over T} = \beta = {\partial S\over \partial E}  $$
 
-We are using the partial derivative since in the more general case S may be function of other variables such as the volume or pressre for example. Hence temperature enters statistical mechanics as the inverse of the Lagrange multiplier $\beta$ used to maximize the entropy!
+We are using the partial derivative since in the more general case S may be function of other variables such as the volume or pressure for example. Hence temperature enters statistical mechanics as the inverse of the Lagrange multiplier $\beta$ used to maximize the entropy!
 
 
 
