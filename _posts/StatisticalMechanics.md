@@ -55,16 +55,64 @@ $$ H(p_1,p_2,...,p_n) = -\sum_i p_i \log p_i \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \
 He called this quantity the etropy of the probability distribution (note that since the $p_i < 1$, $H$ is a always positive quantity). This definition agrees with the intuitive notion that more "spread out" a distribution is, the higher is its entropy. For example if $x$ is known with certainity then $H=0$ which is its minimum value, and conversely if nothing is known about $x$, then $H=\log n$ which is its maximum value, and this is achieved when $p_i = {1\over n}, i=1,2,...n$, i.e., all of the $x_i$'s are equally possible. Unbeknownst to Shannon, this formula had been discovered a few decades earlier by Boltzmann in the context of his theory of statistical mechanics. However the formula for entropy was not central to his development of the theory which he derived using other physical considerations.
 Shannon's work showed that entropy was a purely mathematical concept independent of its applications in thermodynamics. Within a few years after that, it was shown that all of statistical mechanics can be derived by taking this formula for entropy as the starting point. The only physical assumption required was an enumeration of the particles under study and their energy levels. Before we get into how this was done, lets finish the problem that was posed in the beginning of this section. For the case when the constraint on the expectation $<f(x>$ is taken into account, the maximum entropy estimate for the $p_i$'s are given by
 
-$$ p_i = {e^{-\mu f(x_i)}\over{\sum_i e^{-\mu f(x_i)}}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (3) $$                  
+$$ p_i = {e^{-\beta f(x_i)}\over{\sum_i e^{-\beta f(x_i)}}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (3) $$                  
 
-where $\mu$ is a constant that can be determined by substituting into equation (1) and is given by solving the equation
+where $\beta$ is a constant that can be determined by substituting into equation (1) and is given by solving the equation
 
-$$ < f(x) > = -{\partial\log Z\over\partial\mu} \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (4) $$
+$$ < f(x) > = -{\partial\log Z\over\partial\beta} \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (4) $$
 
 The derivation of (3) is a straightforward exercise in optimization using the method of Lagrange Multipliers in which we maximize (3) subject to the constraints (2) and $\sum_i p_i = 1$.
-The denominator in this equation is a famous quantity called the Partition Function in statistical mechanics, and is denoted by $Z$ while the distribution itself is called the Boltzmann distribution. Note that the maximum entropy distribution for this case is not given by the uniform distribution $p_1={1\over n}$, and this is due to the fact that the $p_i$ values are constrained by the average $<f(x)>$ from equation (1). 
+The denominator in this equation is a famous quantity called the Partition Function in statistical mechanics, and is denoted by $Z$ while the distribution itself is called the Boltzmann distribution. Note that the maximum entropy distribution for this case is not given by the uniform distribution $p_1={1\over n}$, and this is due to the fact that the $p_i$ values are constrained by the average $<f(x)>$ from equation (1). From the probability theory point of view, the maximum entropy estimate solved an old problem from the time of Laplace, namely what are the best probability estimates given insufficient information. Laplace recommended the use of of the uniform distribution in this situation. The maximum entropy technique allows us to improve upon by incorporatong other pieces of information, if they are available.
 
-Up until this point, the discussion has been purely in terms of probability theory. We are now going to use this to model a physical system.
+Up until this point, the discussion has been purely in terms of probability theory but now we are now going to use this to model a physical system. 
+Consider a system that can be in one of N microstates, such that in microstate $i$ it has energy $E_i$. Also define $p_i$ as the probability that the system is in state $i$.
+For example the system may be a closed box containg a gas made up of N molecules, in which case $E_i$ would be the sum of the kinetic enegies of all the molecules. Define the entropy of the system as
+
+$$ S = -\sum_i p_i \log p_i $$
+
+and its average energy as 
+
+$$ E = \sum_i p_i E_i   $$
+
+The maximum entropy principle tells us that the $p_i$ are given by the Boltzmann distribution, namely
+
+$$ p_i = {e^{-\beta E_i}\over Z} \ \ \ where \ \ \ Z = \sum_i e^{-\beta E_i}  $$
+
+This formula enables us to compute $E$ and $S$ as functions of $Z$, in particular
+
+$$ E = -{\partial\log Z\over\partial\beta} $$
+
+and
+
+$$  S = -{\beta\over Z}{\partial Z\partial \beta} + \log Z $$
+
+But we have yet to identify the significance of the constant $\beta$. Using the above formula for $S$, it follows that
+
+$$ dS = \beta dE + E d\beta + d\log Z  $$
+
+Since $Z$ is a function of $\beta$, this can be written as
+
+$$ dS = \beta dE + E d\beta + {d\log Z\ d\beta\over d\beta}  $$
+
+Using the formula for $E$ the last two terms cancel off, leaving
+
+$$ \beta = {dS\over dE} $$
+
+But what is the significance of the derivative ${dS\over dE}$? It can be easily shown that if two systems energies $E_1, E_2$ and entropies $S_1,S_2$ are connected to each other, and if initially ${dS_1\over dE_1 > {dS_2\over dE_2}$, then energy flows from system 1 to system 2, and in equilibrium the two derivatives are equal. This motivates the definition of temperature $T$ as
+
+$$ {\over T} = \beta = {\partial S\over \partial E}  $$
+
+We are using the partial derivative since in the more general case S may be function of other variables such as the volume or pressre for example. Hence temperature enters statistical mechanics as the inverse of the Lagrange multiplier $\beta$ used to maximize the entropy!
+
+
+
+![](https://subirvarma.github.io/GeneralCognitics/images/stat1.png) 
+
+Figure 1: System of particles immersed in a heat bath
+
+Consider to containers A and B with gas molecules, such that the gas in A has energy $E_A$ and entropy $S_A$, while the gas in B has $E_B$ and $S_B$ as the corresponding quantities.
+
+Consider the system shown in figure 1, which shows a closed box contaning a gas made up of N particles. The box is immersed in a large heat bath
 
 
 
