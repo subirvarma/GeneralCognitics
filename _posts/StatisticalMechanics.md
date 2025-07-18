@@ -105,34 +105,14 @@ $$ {1\over T} = \beta = {\partial S\over \partial E}  $$
 We are using the partial derivative since in the more general case S may be function of other variables such as the volume or pressure for example. Hence temperature enters statistical mechanics as the inverse of the Lagrange multiplier $\beta$ used to maximize the entropy! Note that we have derived some of the most important formulae in statistical mechanics by starting from the concept of entropy alone, which is quite amazing! But what is entropy? Changes in entropy can be measured in the lab, and indeed entropy was introduced into thermodynamics well before statistical mechanics came along. From Shannon-Boltzmann formula (1), it is a measure of our lack of information about the microscopic details of a system. Hence instead of worrying about the details of each individual particle. we put them in these discrete energy buckets, and this determines the entropy of the system. However this implies that the entropy is also conencted with the observer, for example an observer who has a more granular view of the system will have different measure of entropy. But how can we reconcile this with the fact that entropy can be objectively measured?
 This can be explained as follows: In the equilibrium state the number of microstates that result in the same macro measurement such as energy is enormous. Hence even if we drill down to more garnular view of the system, the microstates that contribute to the macro measurement are concentrated around the same region in probability space.
 
-If this had been the usual description of statistical mechanics, then at this point I would have introduced the model for a ideal gas, and then apply the formulae tht we just derived to compute its average energy and entropy etc. But we are going to take a slightly different path and instead analyze a system used to model ferro magnetism, called the Ising model. This system is less complex than the ideal gas, since the atoms are fixed in place rather than zippling around a box, but at the same time it enables us introduce the concept of coupling between atoms in a siimpler way than for the case of a gas. In particular coupling between atoms leads to phase transitions.
+If this had been the usual description of statistical mechanics, then at this point I would have introduced the model for a ideal gas, and then apply the formulae tht we just derived to compute its average energy and entropy etc. But we are going to take a slightly different path and instead analyze a system used to model ferro magnetism, called the Ising model. This system is less complex than the ideal gas, since the atoms are fixed in place rather than zippling around a box, but at the same time it enables us introduce the concept of coupling between atoms in a siimpler way than for the case of a gas. In particular coupling between atoms leads to phase transitions which can be demonstrated in the Ising model without getting into very complex analysis.
+
+## The Ising Model
 
 
 
-![](https://subirvarma.github.io/GeneralCognitics/images/stat1.png) 
 
-Figure 1: System of particles immersed in a heat bath
-
-Consider to containers A and B with gas molecules, such that the gas in A has energy $E_A$ and entropy $S_A$, while the gas in B has $E_B$ and $S_B$ as the corresponding quantities.
-
-Consider the system shown in figure 1, which shows a closed box contaning a gas made up of N particles. The box is immersed in a large heat bath
-
-
-
-### Energy, Entropy, Temperature
-
-
-
-### The Boltzmann Distribution and the Partition Funtion
-
-
-
-### Macro Properties from the Partition Function
-
-
-
-## The Higher Dimensional Ising Model and Phase Transitions
-
+           
 
 
 ## Spin Glass Models
