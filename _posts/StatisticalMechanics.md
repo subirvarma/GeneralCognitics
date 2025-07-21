@@ -102,16 +102,38 @@ But what is the significance of the derivative ${dS\over dE}$? It can be easily 
 
 $$ {1\over T} = \beta = {\partial S\over \partial E}  $$
 
-We are using the partial derivative since in the more general case S may be function of other variables such as the volume or pressure for example. Hence temperature enters statistical mechanics as the inverse of the Lagrange multiplier $\beta$ used to maximize the entropy! Note that we have derived some of the most important formulae in statistical mechanics by starting from the concept of entropy alone, which is quite amazing! But what is entropy? Changes in entropy can be measured in the lab, and indeed entropy was introduced into thermodynamics well before statistical mechanics came along. From Shannon-Boltzmann formula (1), it is a measure of our lack of information about the microscopic details of a system. Hence instead of worrying about the details of each individual particle. we put them in these discrete energy buckets, and this determines the entropy of the system. However this implies that the entropy is also conencted with the observer, for example an observer who has a more granular view of the system will have different measure of entropy. But how can we reconcile this with the fact that entropy can be objectively measured?
-This can be explained as follows: In the equilibrium state the number of microstates that result in the same macro measurement such as energy is enormous. Hence even if we drill down to more garnular view of the system, the microstates that contribute to the macro measurement are concentrated around the same region in probability space.
+We are using the partial derivative since in the more general case S may be function of other variables such as the volume or an external magnetic field for example. Hence temperature enters statistical mechanics as the inverse of the Lagrange multiplier $\beta$ used to maximize the entropy! Note that we have derived some of the most important formulae in statistical mechanics by starting from the concept of entropy alone, which is quite amazing! But what is entropy? Changes in entropy can be measured in the lab, and indeed entropy was introduced into thermodynamics well before statistical mechanics came along. From Shannon-Boltzmann formula (1), it is a measure of our lack of information about the microscopic details of a system. Hence instead of worrying about the details of each individual particle. we put them in these discrete energy buckets, and this determines the entropy of the system. However this implies that the entropy is also conencted with the observer, for example an observer who has a more granular view of the system will have different measure of entropy. But how can we reconcile this with the fact that entropy can be objectively measured?
+This can be explained as follows: In the equilibrium state the number of microstates that result in the same macro measurement such as energy is enormous. Hence even if we drill down to more garnular view of the system, the microstates that contribute to the average value of the macro measurement are concentrated around the same region in probability space.
+
+There is an useful relation between the partition functions fo two or more independent systems that we will use later. Since the partition function for a single system is given by $Z = \sum_i e^{-\beta E_i}$, it follows that for two systems with partition functions  is given by $Z_1 = \sum_i e^{-\beta E_i}$ and $Z_2 = \sum_i e^{-\beta E'_i}$
+
+$$ Z = \sum_i\sum_j  e^{-\beta (E_i + E'_j)}  $$
+
+which can also be written as the product of the original partition functions as follows
+
+$$ Z = \sum_i e^{-\beta E_i} \sum_j e^{-\beta E'_j}  = Z_1 Z_2 $$
 
 If this had been the usual description of statistical mechanics, then at this point I would have introduced the model for a ideal gas, and then apply the formulae tht we just derived to compute its average energy and entropy etc. But we are going to take a slightly different path and instead analyze a system used to model ferro magnetism, called the Ising model. This system is less complex than the ideal gas, since the atoms are fixed in place rather than zippling around a box, but at the same time it enables us introduce the concept of coupling between atoms in a siimpler way than for the case of a gas. In particular coupling between atoms leads to phase transitions which can be demonstrated in the Ising model without getting into very complex analysis.
 
-## The Ising Model
+## Models for Magnetism
+
+
+### Model for Paramagnetism
+
+
+### Ising Model in One Dimension
 
 
 
+### Ising Model for More than One Dimension: Phase Transitions
 
+
+
+### Model for a Gas with Phase Transitions
+
+
+
+### The Re-Normalization Group
            
 
 
