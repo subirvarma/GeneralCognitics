@@ -117,6 +117,17 @@ If this had been the usual description of statistical mechanics, then at this po
 
 ## Models for Magnetism
 
+Certain atoms possess a magnetic moment, which we denote as $\mu$, due to the intrinsic spin of theor out-valance electrons. When an external magnetic field with intensity $H$ ia pplied, then the energy of one of these atoms is given by
+
+$$ E = -j\mu H $$
+
+ where $j = +1$ if the magnetic moment of the spin aligned with the external field, and $j = -1$ otherwise.  We will analyze two types of magnetic materials:
+
+  - In paramagnetic materials, the individual spins are decoupled from one another. As a result the material only exhibits magnetic properties in the presence of an external field,
+  - Ferromagnetic materials on the other hand, individual spins are coupled with those of their neighbors, as a result of which the material remans magnetized even in the absence of the external field.
+
+The first model for magnetic materials was proposed by Lenz in the early 1920s. He gave the problem of analyzing the model to his PhD student Ising, who was able to analyze the system for the case when the atoms are arranged in $d = 1$ dimension using the tools of statistical mechanics. The case $d \ge 2$ doesn't have a simple exact solution, but it can be approximated by the mean field approximation. It was shown that models with dimension $d\ge 2$ exhibit phase transitions, which is defined a sudden change in the properties of a material when the temperature or one of the physical variables is reduced (or increased) beyond a certain threshold. Phase transitions is the most interesting property in the physics of interacting particles and the Ising model is simplest system that exhibits this behavior. As a result it has become an extremely important model, and all manners of systems have been analyzed using variations of his model. It was later found out that the mathematics of Ising models and that of quantum field theory are the same, which led to a lot of cross fertilization between the two fields.
+Around 1970, the physicist Wilson revoluionized our understanding of phase transitions by introducing the theory of the renormalization group. This theory unified the physics of phase transitions occuring in a wide variety of physically disparate materials.
 
 ### Model for Paramagnetism
 
