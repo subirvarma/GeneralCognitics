@@ -151,24 +151,94 @@ $$ E = -{\partial\log Z\over\partial\beta} = - Nj\ \tanh(\beta j) $$
 
 so that the average energy for a single atom at temperate $T$ and in the presence of the magnetic field wih coupling $j$ is
 
-$$ {E\over N} = -j\ \tanh(\beta j)  $$
+$$ {E\over N} = e = -j\ \tanh(\beta j)  $$
 
-it follows that the average spin ${\overline\sigma}$ for a single atom is given by
+it follows that the average spin ${\overline\sigma}$ for a single atom is given by the hyperbolic tangent function as follows
 
-$$ \overline\sigma = \tanh\beta $$
+$$ \overline\sigma = \tanh\beta j $$
 
+![](https://subirvarma.github.io/GeneralCognitics/images/stat2.png) 
 
+Figure 1: The hyperbolic tangent function $\tanh$
 
-
-
-
+A graph of the average spin as function of the inverse temperature $\beta$ is shown in figure 1,
+Since we are considering positive temperatures only, we will focus on the half plane $\beta > 0$. At very low temperatutes $\beta\rightarrow\infty$, and as a result the average spin become 1 and the average energy is minimized at $e = -1$. Hene at low temperatures each atom becomes perfectly aligned with the external magnetic field, and this is lowest energy configuration. Conversely at high temeperatures $\beta\rightarrow 0$ and as as result the average spin goes to zero, and so does the average energy. This implies that at high temperatures the system is no longer magnetized and the spins are randomly aligned in the up or down direction. As the temperature is reduce, the spins start to gradually align with the external field, but note that there is no phase change, i.e., a sudden shift from non-magnetic to magnetic.
 
 
 ### Ising Model in One Dimension
 
+![](https://subirvarma.github.io/GeneralCognitics/images/stat3.png) 
+
+Figure 2: One dimensional Ising model
+
+The Ising model incorporates interactions between neighboring atoms and the one dimensional case is discussed in this section (see figure 2). The energy for a given configuration of spins is written as
+
+$$  E = -j\sum_i \sigma_i\sigma _{i+1} $$
+
+Note that unlike the previous case, there is no external magnetic field present.
+Each of terms in this expression in minimized when $\sigma_i = \sigma_{i+1}$, i.e., the spins are aligned together either with $\sigma_i = \sigma_{i+1} = 1$ or $\sigma_i = \sigma_{i+1} = -1$, which implies that there are two configurations with the minimum energy value, which correspond to all the spins pointing up or all the spins pointing down. The partition function for this system is given by
+
+$$ Z = \sum_{all\ configs} e^{-j\beta\sum_i \sigma_i\sigma _{i+1}}  $$
+
+This sum has to be evaluated over all possible spin configurations, which makes it a non-trivial problem. The analysis can be simplified by defining a set of variable $\mu_i$ which is the product of neighboring spins, i.e.,
+
+$$  \mu_i =  \sigma_i\sigma _{i+1},\ \ i = 1,2,...,N-1  $$
+
+Note that $\mu$ is defines on per connection basis, rathar than on a per atom basis.
+With this definition the partition function $Z'$ for any one configuration becomes
+
+$$ Z' = \sum_{i} e^{-j\beta\sum_i \mu_i}  $$
+
+But note that this exactly the same partition function as for the case when there is no interaction. Leveraging the solution we obatined for that case, it follows that thw partition function for a single atom is given by
+
+$$  Z' = 2\cosh(\beta j)  $$
+
+and that for the entire system is simply
+
+$$ Z = 2^{N-1}\cosh^{N-1}(\beta j) $$
+
+as a result of the independence property. It follows that the average $\mu$ value for any single connection is given by
+
+$$ \overline\mu = \overline{\sigma_i\sigma _{i+1}} = \tanh(\beta j) $$
+
+The correlation between the spins of neighboring atoms goes to zero as temperature increases as expected, but what about low temperatures? The above equation tells us that the average of the connection values $\overline\mu$ goes to one, but from this can we conclude that the all atoms have transitioned to the up for down spin configuration? We cannot since even if most of the spins at $\sigma_i = 1$, there can be islands of atoms with $\sigma_i = -1$, and this is consistent with having an overall average $\overline\mu$ of 1. Indeed it can be shown that the correlation between atoms separated by $n$ positions is given by
+
+$$ \overline{\sigma_i\sigma_{i+n}} = \tanh^{n-1}(\beta j) $$
+
+This implies that even at very low temperatures, for example for $\beta = 0.9999$, we can still make $n$ large enough so the the correlation goes to zero. This implies that there is no phase transition in the one dimensional Ising model, even at very low temperatures. It does not exhibit the phenomenon of spontaneous magnetisation in the absence of an external magnetic field.
 
 
 ### Ising Model for More than One Dimension: Phase Transitions
+
+![](https://subirvarma.github.io/GeneralCognitics/images/stat8.png) 
+
+Figure 3: The Ising model in two dimensions
+
+
+
+![](https://subirvarma.github.io/GeneralCognitics/images/stat4.png) 
+
+Figure 4: $\tanh y$ and $Ty=2dj$ when T is high
+
+
+
+![](https://subirvarma.github.io/GeneralCognitics/images/stat5.png) 
+
+Figure 5: $\tanh y$ and $Ty=2dj$ when $T < 2dj$
+
+
+
+
+![](https://subirvarma.github.io/GeneralCognitics/images/stat6.png) 
+
+Figure 6: Graph of $\tanh(y + B\beta)$
+
+
+
+![](https://subirvarma.github.io/GeneralCognitics/images/stat7.png) 
+
+Figure 7: Graphic solution to Ty $2dj = \tanh(y + B\beta)$
+
 
 
 
