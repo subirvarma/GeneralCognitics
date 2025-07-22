@@ -119,9 +119,9 @@ If this had been the usual description of statistical mechanics, then at this po
 
 Certain atoms possess a magnetic moment, which we denote as $\mu$, due to the intrinsic spin of theor out-valance electrons. When an external magnetic field with intensity $H$ ia pplied, then the energy of one of these atoms is given by
 
-$$ E = -j\mu H $$
+$$ E = -\sigma\mu H $$
 
- where $j = +1$ if the magnetic moment of the spin aligned with the external field, and $j = -1$ otherwise.  We will analyze two types of magnetic materials:
+ where the spin $\sigma = +1$ if the magnetic moment of the spin aligned with the external field, and $\sigma = -1$ otherwise.  We will analyze two types of magnetic materials:
 
   - In paramagnetic materials, the individual spins are decoupled from one another. As a result the material only exhibits magnetic properties in the presence of an external field,
   - Ferromagnetic materials on the other hand, individual spins are coupled with those of their neighbors, as a result of which the material remans magnetized even in the absence of the external field.
@@ -130,6 +130,38 @@ The first model for magnetic materials was proposed by Lenz in the early 1920s. 
 Around 1970, the physicist Wilson revoluionized our understanding of phase transitions by introducing the theory of the renormalization group. This theory unified the physics of phase transitions occuring in a wide variety of physically disparate materials.
 
 ### Model for Paramagnetism
+
+We will modify the notation slightly and write
+
+$$ E = -j\sigma  $$
+
+where $\sigma$ is the same as before and $j=\mu H$.
+
+The partition function for a single atom at temperature $T = {1\over\beta}$, in the presence of a magnetic field can be extressed in terms of an hyperbolic function, as
+
+$$ Z = e^{\beta j} + e^{-\beta j} = 2 \cosh(\beta j) $$
+
+Since the atoms don't interact with each other, it follows that the partition function for a collection of N atoms is given by
+
+$$ Z = 2^N\ \cosh^N(\beta j)  $$
+
+so that $\log Z = N\log 2 + N\log[\cosh(\beta j)]$.  It follows that the average energy for the system is given by
+
+$$ E = -{\partial\log Z\over\partial\beta} = - Nj\ \tanh(\beta j) $$
+
+so that the average energy for a single atom at temperate $T$ and in the presence of the magnetic field wih coupling $j$ is
+
+$$ {E\over N} = -j\ \tanh(\beta j)  $$
+
+it follows that the average spin $[\overline\sigma}$ for a single atom is given by
+
+$$ \overline\sigma = \tanh\beta $$
+
+
+
+
+
+
 
 
 ### Ising Model in One Dimension
