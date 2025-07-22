@@ -153,7 +153,7 @@ so that the average energy for a single atom at temperate $T$ and in the presenc
 
 $$ {E\over N} = -j\ \tanh(\beta j)  $$
 
-it follows that the average spin $[\overline\sigma}$ for a single atom is given by
+it follows that the average spin ${\overline\sigma}$ for a single atom is given by
 
 $$ \overline\sigma = \tanh\beta $$
 
