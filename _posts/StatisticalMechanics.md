@@ -205,7 +205,7 @@ The correlation between the spins of neighboring atoms goes to zero as temperatu
 
 $$ \overline{\sigma_i\sigma_{i+n}} = \tanh^{n-1}(\beta j) $$
 
-This implies that even at very low temperatures, for example for $\beta = 0.9999$, we can still make $n$ large enough so the the correlation goes to zero. This implies that there is no phase transition in the one dimensional Ising model, even at very low temperatures. It does not exhibit the phenomenon of spontaneous magnetisation in the absence of an external magnetic field.
+This implies that even at very low temperatures, for example for $\beta = 0.9999$, we can still make $n$ large enough so the the correlation goes to zero. This implies that there is no phase transition in the one dimensional Ising model for non-zero temperature values. It does not exhibit the phenomenon of spontaneous magnetisation in the absence of an external magnetic field.
 
 
 ### Ising Model for More than One Dimension: Phase Transitions
@@ -214,7 +214,21 @@ This implies that even at very low temperatures, for example for $\beta = 0.9999
 
 Figure 3: The Ising model in two dimensions
 
+Spontaneous magnetisation happens in a system when the spin state of even a single atom propagates through the material and re-orients all the spins. We just saw that in one dimension this does not happen, since the correlation between spins fades the further away we get. One way of of understanding this is by noting that a spin at a particular location has at most one spin (from the direction of propagation) which influences its own spin. However this is not the case in higher dimensions. For example for $d=2$, each atom has four neighbors, and as a result if the majority of their spins is aligned in a certain direction, then it influences the target atom to align inthe same direction. Hence he presence of multiple neighbors acts as a kind of error corerction when choosing the spin value.
 
+Unfortunately the exact analysis of Ising models for $d\ge 2$ is extremely difficult, even for the case $d = 2$. Fortunately there exists a simple approximation method, called Mean Value Analysis, that preserves important properties such as phase transitions in the model.
+
+The energy level at a single site is given by
+
+$$ E = -j\sigma\sum_{i=1}^n\sigma_i  $$
+
+where $i$ is the number of neighbors for a single atom. It is easy to see that in $d$ dimensions, the number of neighbors is given by $2d$. The Mean Field Approximation simplifies this expression by replacing ${\sum_{i=1}^n\sigma_i\over 2d}$ by its average, which we denote as $\sigma'$, so that the energy becomes
+
+$$ E = -2dj\sigma\sigma'  $$
+
+But this is precisely the energy level for the one dimensional Ising model with neighboring spins $\sigma$ and $\sigma'$! Leveraging the solution for this model from the prior section it follows that the average spin is given by
+
+$$ \overline\sigma = \tanh(2dj\beta\\sigma') $$
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat4.png) 
 
