@@ -228,19 +228,33 @@ $$ E = -2dj\sigma\sigma'  $$
 
 But this is precisely the energy level for the one dimensional Ising model with neighboring spins $\sigma$ and $\sigma'$! Leveraging the solution for this model from the prior section it follows that the average spin is given by
 
-$$ \overline\sigma = \tanh(2dj\beta\\sigma') $$
+$$ \overline\sigma = \tanh(2dj\beta\sigma') $$
+
+But in equilibrium the average spin at a site should be equal to the average spin that the atom sees in its neighbors, it follows that
+
+$$ \sigma' = \tanh(2dj\beta\\sigma') $$
+
+Making the substitution $y = 2dj\beta\sigma'$, it follows that
+
+$$ {y\over{2dj\beta}} = \tanh y  $$
+
+which can also be written as 
+
+$$ {yT\over{2dj}} = \tanh y  $$
+
+The solution $y$ to this equation corresponds to the intersection of the line ${yT\over{2dj}}$ with the function $\tanh y$, which we denote as $z_1$ and $z_2$ respectively,.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat4.png) 
 
-Figure 4: $\tanh y$ and $Ty=2dj$ when T is high
+Figure 4: $z_1 = \tanh y$ and $z_2 = {yT\over{2dj}}$ when T is high
 
-
+These two functions are plotted in figure 4 for the case when the temperature $T$ is very high. In this case the line $z_2$ only intersects $z_1$ at $y=0$ which corresponds to $\sigma'=0$, i.e., all the spins are aligned in random directions. 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat5.png) 
 
 Figure 5: $\tanh y$ and $Ty=2dj$ when $T < 2dj$
 
-
+However as $T$ is reduced, then ultimately the straight line does intersect the $\tanh$ curve as shown in figure 5, and there is a critical temperature $T_c = 2dj$ at which the slope of the line is one, which is the same as the slope of of $\tanh$ at the origin. Any increase in $T$ beyond this point causes the two curves to intersect. When this happens there exists another solution $\sigma'$ which is non-zero, and this corresponds to magnetization of the material. Note that now there are two solutions $0$ and $\sigma'$ to the equation, and the question arises which one does the system choose. If the system starts from a state of random spins at $\sigma'=0$, then it stays in this state even after the $T >T_c$, until something cases the state to change. This is the phenomenon of phase change, and it can be triggered by the presence of an external magnetic field.
 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat6.png) 
