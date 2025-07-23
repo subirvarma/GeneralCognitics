@@ -248,13 +248,16 @@ The solution $y$ to this equation corresponds to the intersection of the line ${
 
 Figure 4: $z_1 = \tanh y$ and $z_2 = {yT\over{2dj}}$ when T is high
 
-These two functions are plotted in figure 4 for the case when the temperature $T$ is very high. In this case the line $z_2$ only intersects $z_1$ at $y=0$ which corresponds to $\sigma'=0$, i.e., all the spins are aligned in random directions. 
+These two functions are plotted in figure 4 for the case when the temperature $T$ is very high. In this case the line $z_2$ only intersects $z_1$ at $y=0$ which corresponds to $\sigma'=0$, i.e., all the spins are aligned in random directions. This is due to the fact that the entropy associated with random spins at high temperature values overpowers the tendency to shift to a lower energy state with all the spins aligned.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat5.png) 
 
 Figure 5: $\tanh y$ and ${yT\over{2dj}}$ when $T < 2dj$
 
-However as $T$ is reduced, then ultimately the straight line does intersect the $\tanh$ curve as shown in figure 5, and there is a critical temperature $T_c = 2dj$ at which the slope of the line is one, which is the same as the slope of of $\tanh$ at the origin. Any increase in $T$ beyond this point causes the two curves to intersect. When this happens there exists another solution $\sigma'$ which is non-zero, and this corresponds to magnetization of the material. Note that now there are two solutions at $0$ and $\sigma'$ to the equation, and the question arises which one does the system choose. If the system starts from a state of random spins at $T > T_c$, then it stays in this state even after the $T < T_c$, until something causes the spins to align. This is the phenomenon of phase change, and it can be triggered by the presence of an external magnetic field.
+However as $T$ is reduced, then ultimately the straight line does intersect the $\tanh$ curve as shown in figure 5, and there is a critical temperature $T_c = 2dj$ at which the slope of the line is one, which is the same as the slope of of $\tanh$ at the origin. Any increase in $T$ beyond this point causes the two curves to intersect. When this happens there exists another solution $\sigma'$ which is non-zero, and this corresponds to magnetization of the material. Since there are now two solutions at average spins $0$ and $\sigma'$, the question arises which one does the system choose. 
+If the system starts from a state of random spins at $T > T_c$, then it stays in this state even after the $T < T_c$, until something causes the spins to align. This is the phenomenon of phase change, and it can be triggered by the presence of an external magnetic field.
+Thus the solution for $\sigma' = 0$ is unstable, and the system can tip into the $\sigma' = +1$ or $\sigma' = -1$ state very easily if $T<T_c$, as shown next.
+This analysis also implies that if we start from a low temperature state and gradually increase temperature, then the magnetization abruptly switches off when the temperature crosses $T_c$.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat6.png) 
 
@@ -270,11 +273,12 @@ $$ \sigma' = \tanh(2dj\sigma' + H\beta)  $$
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat7.png) 
 
-Figure 7: Graphic solution to {$Ty\over{2dj}} = \tanh(y + H\beta)$
+Figure 7: Graphic solution to ${Ty\over{2dj}} = \tanh(y + H\beta)$
 
 The solution lies at the intersection of the curves
 
-$$ z_1 = \tanh(y + H\beta)$ and $z_2 = {yT\over{2dj}}$, and is plotted in figure 7. The tanh function has now shifted to the left if $B>0$, and as a result there is only solution to the equation which corresponds to $\sigma' > 0$, i.e., in the presence of the external magnetic field the solution at $\sigma'=0$ goes away. This means that if we were to start with the system in the state $\sigma'0$ and $T<T_c$, then switching on the external magnetic field insstantaneously causes the spin to become aligned with the field. This is phase change, and happens in ferromagnetic materials. Unlike for paramagnetic materials, the system statys in the magnetized state even after the external field is switched off. If the external field were pointing in the opposite direction, then it would have the system to flip to $\sigma'=-1$.
+$z_1 = \tanh(y + H\beta)$ and $z_2 = {yT\over{2dj}}$, and is plotted in figure 7. The tanh function has now shifted to the left if $B>0$, and as a result there is only solution to the equation which corresponds to $\sigma' > 0$, i.e., in the presence of the external magnetic field the solution at $\sigma'=0$ goes away. This means that if we were to start with the system in the state $\sigma'0$ and $T<T_c$, then switching on the external magnetic field insstantaneously causes the spin to become aligned with the field. This is phase change, and happens in ferromagnetic materials. Unlike for paramagnetic materials, the system statys in the magnetized state even after the external field is switched off. If the external field were pointing in the opposite direction, then it would have the system to flip to $\sigma'=-1$.
+
 
 
 ### Model for a Gas with Phase Transitions
