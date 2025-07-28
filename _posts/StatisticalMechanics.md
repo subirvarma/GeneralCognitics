@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "From Statistical Mechanics to Neurel Networks"
+title: "From Statistical Mechanics to Neural Networks"
 ---
 
 # From Statistical Mechanics to Neural Networks
@@ -260,13 +260,13 @@ which can also be written as
 
 $$ {yT\over{2dj}} = \tanh y  $$
 
-The solution $y$ to this equation corresponds to the intersection of the line ${yT\over{2dj}}$ with the function $\tanh y$, which we denote as $z_1$ and $z_2$ respectively,.
+The solution $y$ to this equation corresponds to the intersection of the line $z_1 = {yT\over{2dj}}$ with the function $z_2 = \tanh y$, 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat4.png) 
 
 Figure 4: $z_1 = \tanh y$ and $z_2 = {yT\over{2dj}}$ when T is high
 
-These two functions are plotted in figure 4 for the case when the temperature $T$ is very high. In this case the line $z_2$ only intersects $z_1$ at $y=0$ which corresponds to $\sigma'=0$, i.e., all the spins are aligned in random directions. This is due to the fact that the entropy associated with random spins at high temperature values overpowers the tendency to shift to a lower energy state with all the spins aligned.
+These two functions are plotted in figure 4 for the case when the temperature $T$ is very high. In this case the line $z_2$ only intersects $z_1$ at $y=0$ which corresponds to $\sigma'=0$, i.e., there is no preferred orientation for the spins. This is due to the fact that the high temperature introduces thermal energy that causes some of the spins to mis-aligned with the mean field.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat5.png) 
 
