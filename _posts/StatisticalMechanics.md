@@ -76,6 +76,14 @@ and its average energy as
 
 $$ E = \sum_i p_i E_i   $$
 
+But what is the physical significance of this definition for entropy? Changes in entropy can be measured in the lab, and indeed entropy was introduced into thermodynamics well before statistical mechanics came along. From Shannon-Boltzmann formula (2), it is a measure of our lack of information about the microscopic details of a system. 
+Hence instead of worrying about the details of each individual particle, we identify the microstates of discrete energy levels $E_i, i = 1, 2, ...,N$ created due to their joint behavior
+and this determines the entropy of the system. This is sometimes referred to as 'blurry' view of the system, since we don't know what an individual particle is doing, but we have a probabilistic handle on how they are jointly behaving.
+However this implies that the entropy is also connected with the observer, for example an observer who has a more granular view of the system may have different view of what a microstate is. But how can we reconcile this with the fact that entropy can be objectively measured?
+This can be explained as follows: In the equilibrium state the number of microstates that result in the same macro measurement, such as the average energy, is enormous. Hence even if we drill down to more granular view of the system, the microstates that contribute to the average value of the macro measurement are concentrated around the same region in probability space.
+
+As an example consider a piece of iron with N atoms, each of which can have two spin orientation, up or down. A particular orientation of all the N spins together is a microstate for this system, and there are $2^N$ possible microstates. The energy $E_i$ of a microstate is a function of $(P,Q)$, where $P$ is the number of atoms with up spin and $Q = N - P$ is the number with down spin. This system, which is called the Ising model, is analysed in more detail in the following sections.
+
 The maximum entropy principle tells us that that our best estimates of the $p_i$ are obtained by solving the optimization problem of maximizing $S$ subject to the constraints (1) and $\sum_i p_ =1 $. This can be done by the method of Lagrange multipliers as the maximization of $L$ given by
 
 $$ L = -\sum_i p_i \log p_i + \alpha(\sum_i p_i - 1) +\beta(E - \sum_i p_i E_i)  $$
@@ -112,11 +120,11 @@ We are using the partial derivative since in the more general case S may be func
 
 Hence temperature enters statistical mechanics as the inverse of the Lagrange multiplier $\beta$ used to maximize the entropy! Note that we have derived some of the most important formulae in statistical mechanics by starting from the concept of entropy alone, which is quite amazing! 
 
-But what is entropy? Changes in entropy can be measured in the lab, and indeed entropy was introduced into thermodynamics well before statistical mechanics came along. From Shannon-Boltzmann formula (2), it is a measure of our lack of information about the microscopic details of a system. 
-Hence instead of worrying about the details of each individual particle, we identify the microstates of discrete energy levels $E_i, i = 1, 2, ...,N$ created due to their joint behavior
-and this determines the entropy of the system. This is sometimes referred to as 'blurry' view of the system, since we don't know what an individual particle is doing, but we have a probabilistic handle on how they are jointly behaving.
-However this implies that the entropy is also connected with the observer, for example an observer who has a more granular view of the system may have different view of what a microstate is. But how can we reconcile this with the fact that entropy can be objectively measured?
-This can be explained as follows: In the equilibrium state the number of microstates that result in the same macro measurement, such as the average energy, is enormous. Hence even if we drill down to more granular view of the system, the microstates that contribute to the average value of the macro measurement are concentrated around the same region in probability space.
+There is another macro-quantity that we will need later, and that is the Helmholtz Free Energy $F$, defined as
+
+$$ F = E -  TS $$ 
+
+From the formula for entropy, it is easy to see that $F = -T\log Z$.
 
 There is an useful relation between the partition functions for two or more independent systems that we will use later. Since the partition function for a single system is given by $Z = \sum_i e^{-\beta E_i}$, it follows that for two systems with partition functions  is given by $Z_1 = \sum_i e^{-\beta E_i}$ and $Z_2 = \sum_i e^{-\beta E'_i}$
 
@@ -130,27 +138,26 @@ If this had been the usual description of statistical mechanics, then at this po
 
 ## Models for Magnetism
 
-Certain atoms possess a magnetic moment, which we denote as $\mu$, due to the intrinsic spin of theor out-valance electrons. When an external magnetic field with intensity $H$ ia pplied, then the energy of one of these atoms is given by
+Certain atoms possess a magnetic moment, which we denote as $\mu$, due to the intrinsic spin of their outer-valance electrons. When an external magnetic field with intensity $H$ is pplied, then the energy $e$ of one of these atoms is given by
 
-$$ E = -\sigma\mu H $$
+$$ e = -\sigma\mu H $$
 
  where the spin $\sigma = +1$ if the magnetic moment of the spin aligned with the external field, and $\sigma = -1$ otherwise.  We will analyze two types of magnetic materials:
 
   - In paramagnetic materials, the individual spins are decoupled from one another. As a result the material only exhibits magnetic properties in the presence of an external field,
-  - Ferromagnetic materials on the other hand, individual spins are coupled with those of their neighbors, as a result of which the material remans magnetized even in the absence of the external field.
+  - In ferromagnetic materials on the other hand, individual spins are coupled with those of their neighbors, as a result of which the material remans magnetized even in the absence of the external field.
 
-The first model for magnetic materials was proposed by Lenz in the early 1920s. He gave the problem of analyzing the model to his PhD student Ising, who was able to analyze the system for the case when the atoms are arranged in $d = 1$ dimension using the tools of statistical mechanics. The case $d \ge 2$ doesn't have a simple exact solution, but it can be approximated by the mean field approximation. It was shown that models with dimension $d\ge 2$ exhibit phase transitions, which is defined a sudden change in the properties of a material when the temperature or one of the physical variables is reduced (or increased) beyond a certain threshold. Phase transitions is the most interesting property in the physics of interacting particles and the Ising model is simplest system that exhibits this behavior. As a result it has become an extremely important model, and all manners of systems have been analyzed using variations of his model. It was later found out that the mathematics of Ising models and that of quantum field theory are the same, which led to a lot of cross fertilization between the two fields.
-Around 1970, the physicist Wilson revoluionized our understanding of phase transitions by introducing the theory of the renormalization group. This theory unified the physics of phase transitions occuring in a wide variety of physically disparate materials.
+The first model for magnetic materials was proposed by Lenz in the early 1920s. He gave the problem of analyzing the model to his PhD student Ising, who was able to solve the problem for the case when the atoms are arranged in $d = 1$ dimension, using the tools of statistical mechanics. The case $d \ge 2$ doesn't have a simple exact solution, but it can be approximated by the mean field approximation. It was shown that models with dimension $d\ge 2$ exhibit phase transitions, which is defined as a sudden change in the properties of a material when the temperature or one of the physical variables is reduced (or increased) beyond a certain threshold. Phase transitions is the most interesting property in the physics of interacting particles and the Ising model is simplest system that exhibits this behavior. As a result it has become an extremely important model, and all manners of systems have been analyzed using variations of this model. It was later found out that the mathematics of Ising models and that of quantum field theory are the same, which led to a lot of cross fertilization between the two fields. In addition to Lenz and Ising, the names most associated with this model are the Russian physicists Landau and Ginzburg and Americans Wilson and Kadanoff.
 
 ### Model for Paramagnetism
 
 We will modify the notation slightly and write
 
-$$ E = -j\sigma  $$
+$$ e = -j\sigma  $$
 
-where $\sigma$ is the same as before and $j=\mu H$.
+for the energy of a single atom, where $\sigma$ is the same as before and $j=\mu H$.
 
-The partition function for a single atom at temperature $T = {1\over\beta}$, in the presence of a magnetic field can be extressed in terms of an hyperbolic function, as
+Hence the partition function for a single atom at temperature $T = {1\over\beta}$, in the presence of a magnetic field can be expressed in terms of an hyperbolic function, as
 
 $$ Z = e^{\beta j} + e^{-\beta j} = 2 \cosh(\beta j) $$
 
@@ -158,24 +165,24 @@ Since the atoms don't interact with each other, it follows that the partition fu
 
 $$ Z = 2^N\ \cosh^N(\beta j)  $$
 
-so that $\log Z = N\log 2 + N\log[\cosh(\beta j)]$.  It follows that the average energy for the system is given by
+so that $\log Z = N\log 2 + N\log[\cosh(\beta j)]$.  It follows that the average energy $E$ for the system of $N$ atoms is given by
 
 $$ E = -{\partial\log Z\over\partial\beta} = - Nj\ \tanh(\beta j) $$
 
-so that the average energy for a single atom at temperate $T$ and in the presence of the magnetic field wih coupling $j$ is
+so that the average energy for a single atom at temperate $T$ and in the presence of the magnetic field with coupling $j$ is
 
-$$ {E\over N} = e = -j\ \tanh(\beta j)  $$
+$$ {E\over N} = {\overline e} = -j\ \tanh(\beta j)  $$
 
-it follows that the average spin ${\overline\sigma}$ for a single atom is given by the hyperbolic tangent function as follows
+It follows that the average spin ${\overline\sigma}$ for a single atom is given by the hyperbolic tangent function as follows
 
-$$ \overline\sigma = \tanh\beta j $$
+$$ \overline\sigma = \tanh(\beta j) $$
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat2.png) 
 
 Figure 1: The hyperbolic tangent function $\tanh$
 
 A graph of the average spin as function of the inverse temperature $\beta$ is shown in figure 1,
-Since we are considering positive temperatures only, we will focus on the half plane $\beta > 0$. At very low temperatutes $\beta\rightarrow\infty$, and as a result the average spin become 1 and the average energy is minimized at $e = -1$. Hene at low temperatures each atom becomes perfectly aligned with the external magnetic field, and this is lowest energy configuration. Conversely at high temeperatures $\beta\rightarrow 0$ and as as result the average spin goes to zero, and so does the average energy. This implies that at high temperatures the system is no longer magnetized and the spins are randomly aligned in the up or down direction. As the temperature is reduce, the spins start to gradually align with the external field, but note that there is no phase change, i.e., a sudden shift from non-magnetic to magnetic.
+Since we are considering positive temperatures only, we will focus on the half plane $\beta > 0$. At very low temperatutes $\beta\rightarrow\infty$, and as a result the average spin become 1 and the average energy is minimized at ${\overline e} = -1$. Hence at low temperatures each atom becomes perfectly aligned with the external magnetic field, and this is lowest energy configuration. Conversely at high temeperatures $\beta\rightarrow 0$ and as as result the average spin goes to zero, and so does the average energy. This implies that at high temperatures the system is no longer magnetized and the spins are randomly aligned in the up or down direction. As the temperature is reduced, the spins start to gradually align with the external field, but note that there is no phase change, i.e., a sudden shift from non-alignment to alignment, it happens gradually.
 
 
 ### Ising Model in One Dimension
@@ -193,32 +200,30 @@ Each of terms in this expression in minimized when $\sigma_i = \sigma_{i+1}$, i.
 
 $$ Z = \sum_{all\ configs} e^{-j\beta\sum_i \sigma_i\sigma _{i+1}}  $$
 
-This sum has to be evaluated over all possible spin configurations, which makes it a non-trivial problem. The analysis can be simplified by defining a set of variable $\mu_i$ which is the product of neighboring spins, i.e.,
+This sum has to be evaluated over all possible spin configurations, which makes it a non-trivial problem. The analysis can be simplified by defining a set of variables $\mu_i$ which is the product of neighboring spins, i.e.,
 
 $$  \mu_i =  \sigma_i\sigma _{i+1},\ \ i = 1,2,...,N-1  $$
 
 Note that $\mu$ is defines on per connection basis, rathar than on a per atom basis.
 With this definition the partition function $Z'$ for any one configuration becomes
 
-$$ Z' = \sum_{i} e^{-j\beta\sum_i \mu_i}  $$
+$$ Z' = e^{-j\beta\sum_i \mu_i}  $$
 
-But note that this exactly the same partition function as for the case when there is no interaction. Leveraging the solution we obatined for that case, it follows that thw partition function for a single atom is given by
-
-$$  Z' = 2\cosh(\beta j)  $$
-
-and that for the entire system is simply
+But note that this exactly the same partition function as for the case analyzed in the previous section, i.e., when there are $N-1$ atoms in a magnetic field, and there is no interaction between atoms. 
+Leveraging the solution we obatained for that case, it follows that the partition function for 
+and that for the 1-D Ising model is simply
 
 $$ Z = 2^{N-1}\cosh^{N-1}(\beta j) $$
 
-as a result of the independence property. It follows that the average $\mu$ value for any single connection is given by
+It follows that the average $\mu$ value for any single connection is given by
 
 $$ \overline\mu = \overline{\sigma_i\sigma _{i+1}} = \tanh(\beta j) $$
 
-The correlation between the spins of neighboring atoms goes to zero as temperature increases as expected, but what about low temperatures? The above equation tells us that the average of the connection values $\overline\mu$ goes to one, but from this can we conclude that the all atoms have transitioned to the up for down spin configuration? We cannot since even if most of the spins at $\sigma_i = 1$, there can be islands of atoms with $\sigma_i = -1$, and this is consistent with having an overall average $\overline\mu$ of 1. Indeed it can be shown that the correlation between atoms separated by $n$ positions is given by
+The correlation between the spins of neighboring atoms goes to zero as temperature increases as expected, but what about low temperatures? This equation tells us that the average of the connection values $\overline\mu$ goes to one, but from this can we conclude that the all atoms have transitioned to the up for down spin configuration? We cannot since even if most of the spins at $\sigma_i = 1$, there can be islands of atoms with $\sigma_i = -1$, and this is consistent with having an overall average $\overline\mu$ of 1. Indeed it can be shown that the correlation between atoms separated by $n$ positions is given by
 
 $$ \overline{\sigma_i\sigma_{i+n}} = \tanh^{n-1}(\beta j) $$
 
-This implies that even at very low temperatures, for example for $\beta = 0.9999$, we can still make $n$ large enough so the the correlation goes to zero. This implies that there is no phase transition in the one dimensional Ising model for non-zero temperature values. It does not exhibit the phenomenon of spontaneous magnetisation in the absence of an external magnetic field.
+This implies that even at very low temperatures, for example for $\beta = 0.9999$, we can still make $n$ large enough so the the correlation goes to zero. From this we can conclude that there is no phase transition in the 1-D Ising model for non-zero temperature values, i.e., it does not exhibit the phenomenon of spontaneous magnetisation in the absence of an external magnetic field.
 
 
 ### Ising Model for More than One Dimension: Phase Transitions
@@ -227,17 +232,17 @@ This implies that even at very low temperatures, for example for $\beta = 0.9999
 
 Figure 3: The Ising model in two dimensions
 
-Spontaneous magnetisation happens in a system when the spin state of even a single atom propagates through the material and re-orients all the spins. We just saw that in one dimension this does not happen, since the correlation between spins fades the further away we get. One way of of understanding this is by noting that a spin at a particular location has at most one spin (from the direction of propagation) which influences its own spin. However this is not the case in higher dimensions. For example for $d=2$, each atom has four neighbors, and as a result if the majority of their spins is aligned in a certain direction, then it influences the target atom to align inthe same direction. Hence he presence of multiple neighbors acts as a kind of error corerction when choosing the spin value.
+Spontaneous magnetisation happens in a system when the spin state of even a single atom propagates through the material and re-orients all the spins. We just saw that in one dimension this does not happen, since the correlation between spins fades the further away we get. One way of understanding this is by noting that the spin at a particular atom has at most two spins which influences its own spin. However this is not the case in higher dimensions. For example for $d=2$, each atom has four neighbors, and as a result if the majority of their spins are aligned in a certain direction, then it influences the target atom to align inthe same direction. Hence he presence of multiple neighbors acts as a kind of error corerction when choosing the spin value.
 
-Unfortunately the exact analysis of Ising models for $d\ge 2$ is extremely difficult, even for the case $d = 2$. Fortunately there exists a simple approximation method, called Mean Value Analysis, that preserves important properties such as phase transitions in the model.
+Unfortunately the exact analysis of Ising models for $d\ge 2$ is extremely difficult, even for the case $d = 2$. Fortunately there exists a simple approximation method, called mean value analysis, that preserves important properties such as phase transitions in the model.
 
-The energy level at a single site is given by
+The energy level for a single atom is given by
 
-$$ E = -j\sigma\sum_{i=1}^n\sigma_i  $$
+$$ e = -j\sigma\sum_{i=1}^n\sigma_i  $$
 
-where $i$ is the number of neighbors for a single atom. It is easy to see that in $d$ dimensions, the number of neighbors is given by $2d$. The Mean Field Approximation simplifies this expression by replacing ${\sum_{i=1}^n\sigma_i\over 2d}$ by its average, which we denote as $\sigma'$, so that the energy becomes
+where $i$ is the number of neighbors for the atom. It is easy to see that in $d$ dimensions, the number of neighbors is given by $2d$. The Mean Field Approximation simplifies this expression by replacing ${\sum_{i=1}^n\sigma_i\over 2d}$ by its average, which we denote as $\sigma'$, so that the energy becomes
 
-$$ E = -2dj\sigma\sigma'  $$
+$$ e = -2dj\sigma\sigma'  $$
 
 But this is precisely the energy level for the one dimensional Ising model with neighboring spins $\sigma$ and $\sigma'$! Leveraging the solution for this model from the prior section it follows that the average spin is given by
 
