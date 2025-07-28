@@ -279,22 +279,22 @@ The solution lies at the intersection of the curves
 
 $z_1 = \tanh(y + H\beta)$ and $z_2 = {yT\over{2dj}}$, and is plotted in figure 7. The tanh function has now shifted to the left if $B>0$, and as a result there is only solution to the equation which corresponds to $\sigma' > 0$, i.e., in the presence of the external magnetic field the solution at $\sigma'=0$ goes away. This means that if we were to start with the system in the state $\sigma'0$ and $T<T_c$, then switching on the external magnetic field insstantaneously causes the spin to become aligned with the field. This is phase change, and happens in ferromagnetic materials. Unlike for paramagnetic materials, the system statys in the magnetized state even after the external field is switched off. If the external field were pointing in the opposite direction, then it would have the system to flip to $\sigma'=-1$.
 
+<Model for a gas with interactions>
+
+## The Landau Theory for Phase Transitions: Introducing the Energy Landscape
 
 
-### Model for a Gas with Phase Transitions
 
-
-
-### The Re-Normalization Group
+## The Re-Normalization Group
            
 
 
-## Spin Glass Models
+## Spin Glass Models: Complex Energy Landscapes
 
 
 
 
-## From Spin Glass to Hopfield Networks
+## From Spin Glass to Hopfield Networks: Engineering the Energy Landsacpe
 
 
 
@@ -302,13 +302,14 @@ $z_1 = \tanh(y + H\beta)$ and $z_2 = {yT\over{2dj}}$, and is plotted in figure 7
 ## From Hopfield Networks to Boltzmann Machines
 
 
-
-## From Boltzmann Machines to Modern Neural Networks
-
+### Diffusion Models as Overloaded Hopfield Networks
 
 
 
-## Diffusion Models as Overloaded Hopfield Networks
+
+## From Boltzmann Machines to Modern Neural Networks: Approximating the Landscape of Latent Spaces
+
+
 
 
 Physics of IPS
