@@ -205,15 +205,22 @@ This sum has to be evaluated over all possible spin configurations, which makes 
 $$  \mu_i =  \sigma_i\sigma _{i+1},\ \ i = 1,2,...,N-1  $$
 
 Note that $\mu$ is defines on per connection basis, rathar than on a per atom basis.
-With this definition the partition function $Z'$ for any one configuration becomes
+With this definition the partition function $Z$ becomes
 
-$$ Z' = e^{-j\beta\sum_i \mu_i}  $$
+$$ Z = Z_1 + Z_2 $$
 
-But note that this exactly the same partition function as for the case analyzed in the previous section, i.e., when there are $N-1$ atoms in a magnetic field, and there is no interaction between atoms. 
-Leveraging the solution we obatained for that case, it follows that the partition function for 
-and that for the 1-D Ising model is simply
+where $Z_1$ is the partition function for the case when the first spin is $+1$, and $Z_2$  for the case when the first spin is $-1$. Note that both $Z_1$ and Z_2$ are given by
 
-$$ Z = 2^{N-1}\cosh^{N-1}(\beta j) $$
+Z_1 = Z_2 = \sum_{i=1}^{N-1} e^{-j\beta\sum_i \mu_i}  $$
+
+But note that this exactly the same partition function as for the case analyzed in the previous section, i.e., when there are $N-1$ atoms in a magnetic field and there is no interaction between neighboring atoms. 
+Leveraging the solution we obatained for that case, it follows that
+
+$$ Z_1 = Z_2 = 2^{N-1}\cosh^{N-1}(\beta j) $$
+
+and
+
+$$ Z =  2^N\cosh^{N-1}(\beta j) $$
 
 It follows that the average $\mu$ value for any single connection is given by
 
@@ -244,58 +251,68 @@ where $i$ is the number of neighbors for the atom. It is easy to see that in $d$
 
 $$ e = -2dj\sigma\sigma'  $$
 
-But this is precisely the energy level for the one dimensional Ising model with neighboring spins $\sigma$ and $\sigma'$! Leveraging the solution for this model from the prior section it follows that the average spin is given by
+But this is precisely the energy level for a single atom with spin $\sigma$ in the presence of an external magnetic field with strength $2dj\sigma'$.
+Leveraging the solution for this model from two sections ago, it follows that the average spin at temperature $T$ = {1\over\beta}$ is given by
 
 $$ \overline\sigma = \tanh(2dj\beta\sigma') $$
 
-But in equilibrium the average spin at a site should be equal to the average spin that the atom sees in its neighbors, it follows that
+But in equilibrium the average spin for an atom should be equal to the mean field value, i.e.,
 
 $$ \sigma' = \tanh(2dj\beta\\sigma') $$
 
 Making the substitution $y = 2dj\beta\sigma'$, it follows that
 
-$$ {y\over{2dj\beta}} = \tanh y  $$
+$$ {y\over{2dj\beta}} = \tanh\ y  $$
 
 which can also be written as 
 
-$$ {yT\over{2dj}} = \tanh y  $$
+$$ {yT\over{2dj}} = \tanh\ y  $$
 
 The solution $y$ to this equation corresponds to the intersection of the line $z_1 = {yT\over{2dj}}$ with the function $z_2 = \tanh y$, 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat4.png) 
 
-Figure 4: $z_1 = \tanh y$ and $z_2 = {yT\over{2dj}}$ when T is high
+Figure 4: $z_1 = \tanh\ y$ and $z_2 = {yT\over{2dj}}$ when T is high
 
-These two functions are plotted in figure 4 for the case when the temperature $T$ is very high. In this case the line $z_2$ only intersects $z_1$ at $y=0$ which corresponds to $\sigma'=0$, i.e., there is no preferred orientation for the spins. This is due to the fact that the high temperature introduces thermal energy that causes some of the spins to mis-aligned with the mean field.
+These two functions are plotted in figure 4 for the case when the temperature $T$ is very high. In this case the line $z_2$ only intersects $z_1$ at $y=0$ which corresponds to $\sigma'=0$, i.e., there is no preferred orientation for the spins. This is due to the fact that the high temperature introduces thermal energy that causes some of the spins to be misaligned with the mean field.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat5.png) 
 
-Figure 5: $\tanh y$ and ${yT\over{2dj}}$ when $T < 2dj$
+Figure 5: $\tanh\ y$ and ${yT\over{2dj}}$ when $T < 2dj$
 
-However as $T$ is reduced, then ultimately the straight line does intersect the $\tanh$ curve as shown in figure 5, and there is a critical temperature $T_c = 2dj$ at which the slope of the line is one, which is the same as the slope of of $\tanh$ at the origin. Any increase in $T$ beyond this point causes the two curves to intersect. When this happens there exists another solution $\sigma'$ which is non-zero, and this corresponds to magnetization of the material. Since there are now two solutions at average spins $0$ and $\sigma'$, the question arises which one does the system choose. 
+However as $T$ is reduced, then ultimately the straight line does intersect the $\tanh$ curve as shown in figure 5, and there is a critical temperature $T_c = 2dj$ at which the slope of the line is one, which is the same as the slope of $\tanh$ at the origin. Any increase in $T$ beyond this point causes the two curves to intersect. When this happens there existsa second solution $\sigma'$ which is non-zero, and this corresponds to magnetization of the material. The amount of magnetization gradually increases until at larger temperatures it approached $\sigma'= +$ or $-1$. 
+
+Since there are now two solutions at average spins $0$ and $\sigma'$, the question arises which one does the system choose. 
 If the system starts from a state of random spins at $T > T_c$, then it stays in this state even after the $T < T_c$, until something causes the spins to align. This is the phenomenon of phase change, and it can be triggered by the presence of an external magnetic field.
 Thus the solution for $\sigma' = 0$ is unstable, and the system can tip into the $\sigma' = +1$ or $\sigma' = -1$ state very easily if $T<T_c$, as shown next.
-This analysis also implies that if we start from a low temperature state and gradually increase temperature, then the magnetization abruptly switches off when the temperature crosses $T_c$.
+This analysis also implies that if we start from a low temperature state and gradually increase temperature, then the magnetization initially decreases and then abruptly switches off when the temperature crosses $T_c$.
+
+![](https://subirvarma.github.io/GeneralCognitics/images/stat5.png) 
+
+Figure 6: $\tanh\ y$ and ${yT\over{2dj}}$ when $T < 2dj$
+
+The average spin $\sigma'$ is usually denoted using the symbol $m$, and is called the order parameter, since its value determines whether the microstates are ordered or at random.
+This kind of phase transition in which there is an initial gradual decrease in the order parameter, followed by an abrupt decrease to zero beyond the critical temperature, is referred to as a second order phase transition, and is illustrated in figure 6.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat6.png) 
 
-Figure 6: Graph of $\tanh(y + B\beta)$
+Figure 7: Graph of $\tanh(y + B\beta)$
 
-In the presence of an external magnetic field with intensity $H$, the energy per atom is given by
+In the presence of an external magnetic field with intensity $B$, the energy per atom is given by
 
-$$ E = -2dj\beta\sigma\sigma' - H\sigma = -(2dj\beta\sigma' + B)\sigma $$
+$$ e = -2dj\sigma\sigma' - B\sigma = -(2dj\sigma' + B)\sigma $$
 
+The first term is due to interaction with neighboring atoms, while the second term is due to the external field.
 Using the same logic as before it follows that in equilibrium the average spin for the system is given by the solution to the equation
 
-$$ \sigma' = \tanh(2dj\sigma' + H\beta)  $$
+$$ m = \tanh(2djm\beta + B\beta)  $$
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat7.png) 
 
-Figure 7: Graphic solution to ${Ty\over{2dj}} = \tanh(y + H\beta)$
+Figure 8: Graphic solution to ${Ty\over{2dj}} = \tanh(y + B\beta)$
 
 The solution lies at the intersection of the curves
-
-$z_1 = \tanh(y + H\beta)$ and $z_2 = {yT\over{2dj}}$, and is plotted in figure 7. The tanh function has now shifted to the left if $B>0$, and as a result there is only solution to the equation which corresponds to $\sigma' > 0$, i.e., in the presence of the external magnetic field the solution at $\sigma'=0$ goes away. This means that if we were to start with the system in the state $\sigma'0$ and $T<T_c$, then switching on the external magnetic field insstantaneously causes the spin to become aligned with the field. This is phase change, and happens in ferromagnetic materials. Unlike for paramagnetic materials, the system statys in the magnetized state even after the external field is switched off. If the external field were pointing in the opposite direction, then it would have the system to flip to $\sigma'=-1$.
+$z_1 = \tanh(y + B\beta)$ and $z_2 = {yT\over{2dj}}$, and is plotted in figure 8. The $\tanh$ function has now shifted to the left if $B>0$, and as a result there is only one solution to the equation which corresponds to $m > 0$, i.e., in the presence of the external magnetic field the solution at $m=0$ goes away. This means that if we were to start with the system in the state $m = 0$ and $T<T_c$, then switching on the external magnetic field instantaneously causes the spin to become aligned with the field. This is a phase change, and happens in ferromagnetic materials. Unlike for paramagnetic materials, the system stays in the magnetized state even after the external field is switched off. If the external field were pointing in the opposite direction, then it would have the system to flip to $m=-1$.
 
 <Model for a gas with interactions>
 
