@@ -224,9 +224,9 @@ $$ Z =  2^N\cosh^{N-1}(\beta j) $$
 
 It follows that the average $\mu_{av}$ value for any single connection is given by
 
-$$ \mu_{av} = (\sigma_i\sigma _{i+1})_{av} = \tanh(\beta j) $$
+$$ \mu_{av} = (\sigma_i\sigma_{i+n})_{av} = \tanh(\beta j) $$
 
-The correlation between the spins of neighboring atoms goes to zero as temperature increases as expected, but what about low temperatures? This equation tells us that the average of the connection values $\mu_{av} goes to one, but from this can we conclude that the all atoms have transitioned to the up for down spin configuration? We cannot since even if most of the spins at $\sigma_i = 1$, there can be islands of atoms with $\sigma_i = -1$, and this is consistent with having an overall average $\mu_{av}$ of 1. Indeed it can be shown that the correlation between atoms separated by $n$ positions is given by
+The correlation between the spins of neighboring atoms goes to zero as temperature increases as expected, but what about low temperatures. This equation tells us that the average of the connection values $\mu_{av}$ goes to one, but from this can we conclude that the all atoms have transitioned to the up for down spin configuration? We cannot since even if most of the spins at $\sigma_i = 1$, there can be islands of atoms with $\sigma_i = -1$, and this is consistent with having an overall average $\mu_{av}$ of 1. Indeed it can be shown that the correlation between atoms separated by $n$ positions is given by
 
 $$ (\sigma_i\sigma_{i+n})_{av} = \tanh^{n-1}(\beta j) $$
 
