@@ -42,9 +42,9 @@ The neural networks that that we see today are a direct descendant of these earl
 
 ## System with a Large Number of Interacting Particles
 
-Suppose a quantity $x$ can assume the discrete values $x_i, i=1,2,..n$ with the unknown probabilities $p_i$, and all that is known is the expectation $<f_{av}$ of the function $f(x_i)$, so that
+Suppose a quantity $x$ can assume the discrete values $x_i, i=1,2,..n$ with the unknown probabilities $p_i$, and all that is known is the expectation $f_{av}$ of the function $f(x_i)$, so that
 
-$$  f(x)_{av} = \sum_{i=1}^n p_i f(x_i)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \  (1)                                                                                           $$          
+$$  f_{av} =  \sum_i p_i f(x_i)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \  (1)   $$          
 
 On the basis of this information what are the best estimates of the probabilities $p_i, i=1,2,...n$? This is a classic problem in probability theory, and in order to solve it we need a measure of our ignorance of distribution. If we have such a formula, that quantifies ignorance or uncertainity, then the best estimates for the $p_i$ would be those that maximize this quanitity.
 
@@ -55,7 +55,7 @@ $$ H(p_1,p_2,...,p_n) = -\sum_i p_i \log p_i \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \
 He called this quantity the entropy of the probability distribution (note that since all the $p_i < 1$, $H$ is a always positive quantity). This definition agrees with the intuitive notion that more "spread out" a distribution is, the higher is its entropy. For example if $x$ is known with certainity then $H=0$ which is its minimum value, and conversely if nothing is known about $x$, then $H=\log\ n$ which is its maximum value, and this is achieved when $p_i = {1\over n}, i=1,2,...n$, i.e., all of the $x_i$'s are equally possible. 
 
 Unbeknownst to Shannon, this formula had been discovered a few decades earlier by Boltzmann in the context of his theory of statistical mechanics. However the formula for entropy was not central to his development of the theory which he derived using other physical considerations.
-Shannon's work showed that entropy was a purely mathematical concept independent of its applications in thermodynamics. Within a few years after that, it was shown that all of statistical mechanics can be derived by taking this formula for entropy as the starting point. The only physical assumption required was an enumeration of the particles under study and their energy levels. Before we get into how this was done, lets finish the problem that was posed in the beginning of this section. For the case when the constraint on the expectation $<f(x>$ is taken into account, the maximum entropy estimate for the $p_i$'s are given by
+Shannon's work showed that entropy was a purely mathematical concept independent of its applications in thermodynamics. Within a few years after that, it was shown that all of statistical mechanics can be derived by taking this formula for entropy as the starting point. The only physical assumption required was an enumeration of the particles under study and their energy levels. Before we get into how this was done, lets finish the problem that was posed in the beginning of this section. For the case when the constraint on the expectation $f_{av}$ is taken into account, the maximum entropy estimate for the $p_i$'s are given by
 
 $$ p_i = {e^{-\beta f(x_i)}\over{\sum_i e^{-\beta f(x_i)}}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (3) $$                  
 
@@ -64,15 +64,16 @@ where $\beta$ is a constant that can be determined by substituting into equation
 $$ f_{av} = -{\partial\log Z\over\partial\beta} \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (4) $$
 
 The derivation of (3) is a straightforward exercise in optimization using the method of Lagrange Multipliers in which we maximize the entropy given by (2), subject to the constraints (1) and $\sum_i p_i = 1$.
-The denominator in this equation is a famous quantity called the partition function in statistical mechanics, and is denoted by $Z$ while the distribution itself is called the Boltzmann distribution. Note that the maximum entropy distribution for this case is not given by the uniform distribution $p_1={1\over n}$, and this is due to the fact that the $p_i$ values are constrained by the average $<f_{av}$ from equation (1). From the probability theory point of view, the maximum entropy estimate solved an old problem from the time of Laplace, namely what are the best probability estimates given insufficient information. Laplace recommended the use of of the uniform distribution in this situation. The maximum entropy technique allows us to improve upon by incorporatong other pieces of information susch as the average, if they are available.
+The denominator in this equation is a famous quantity called the partition function in statistical mechanics, and is denoted by $Z$ while the distribution itself is called the Boltzmann distribution. Note that the maximum entropy distribution for this case is not given by the uniform distribution $p_1={1\over n}$, and this is due to the fact that the $p_i$ values are constrained by the average $f_{av}$ from equation (1). From the probability theory point of view, the maximum entropy estimate solved an old problem from the time of Laplace, namely what are the best probability estimates given insufficient information. Laplace recommended the use of of the uniform distribution in this situation. The maximum entropy technique allows us to improve upon this by incorporatong other pieces of information such as the average, if they are available.
 
 Up until this point, the discussion has been purely in terms of probability theory but now we are now going to use this to model a physical system. 
-Consider a system that can be in one of N microstates, such that in microstate $i$ it has energy $E_i$. Also define $p_i$ as the probability that the system is in state microstate $i$.
+Consider a system that is in equilibrioum at temperature $T$. This can be acheived by putting the system in an infinite heat bath at temperature T, and assuming that it can exchange energy with the heat bath but not particles.
+Assume that it can be in one of N microstates, such that in microstate $i$ it has energy $E_i$. Also define $p_i$ as the equilibrium probability that the system is in state microstate $i$.
 For example the system may be ferromagnet consisting of N atoms, in which case a microstate would correspond to a particular joint orientation of their individual spins. Define the entropy of the system as
 
 $$ S = -\sum_i p_i \log p_i $$
 
-and its average energy as 
+and its average energy in equilibrium as 
 
 $$ E_{av} = \sum_i p_i E_i   $$
 
@@ -247,12 +248,16 @@ The energy level for a single atom is given by
 
 $$ e = -j\sigma\sum_{i=1}^n\sigma_i  $$
 
-where $i$ is the number of neighbors for the atom. It is easy to see that in $d$ dimensions, the number of neighbors is given by $2d$. The Mean Field Approximation simplifies this expression by replacing ${\sum_{i=1}^n\sigma_i\over 2d}$ by its average, which we denote as $\sigma'$, so that the energy per atom becomes
+where $n$ is the number of neighbors for the atom. It is easy to see that in $d$ dimensions, the number of neighbors is given by $2d$. The Mean Field Approximation simplifies this expression by replacing ${\sum_{i=1}^n\sigma_i\over 2d}$ by its average, which we denote as $\sigma'$, so that the energy per atom becomes
 
 $$ e = -2dj\sigma\sigma'  $$
 
 But this is precisely the energy level for a single atom with spin $\sigma$ in the presence of an external magnetic field with strength $2dj\sigma'$.
-Leveraging the solution for this model from two sections ago, it follows that the average spin at temperature $T = {1\over\beta}$ is given by
+Leveraging the solution for this model from two sections ago, it follows that the partition function and the average energy for the system are given by
+
+$$ Z = 2^N\cosh^N(2dj\beta\sigma')\ \ \ \ E_{av} = -2Ndj\sigma'\tanh(2dj\beta\sigma') $$ $$
+
+From this it follows that the average spin is given by
 
 $$ \sigma_{av} = \tanh(2dj\beta\sigma') $$
 
@@ -326,6 +331,34 @@ The variation of $m$ with $T$ is shown above, and we can see that there is no ph
 <Model for a gas with interactions>
 
 ## The Landau Theory for Phase Transitions: Introducing the Energy Landscape
+
+The method used to study phase transitions in the prevous section was based on the direct computation of the partition function, which in general is a tough task for most realistic models.
+There is an alternative approach to studying phase transitions, and this was discovered by Lev Landau around 1940, and is based on the computation of the Free Energy F for a system. This method significantly expanded the range of systems that could be analyzed using the methods of Statistical Mechanics and is now the de facto technique used. It allows us to go beyond the assumption made by mean field analysis, by allowing the field to actually vary as a function of position, thus resulting in a generalization of statistical mechanics called statistical field theory.
+Free Energy based methods also serve as a starting point for ways in which statistical mechanics methods were first applied in the design of Neural Networks, as discussed in the following sections.
+
+Recall that the equilibrum Free Energy for a system at temperatutre $T$ was defined as 
+
+$$ F_{therm} = E_{av} - TS = -T\log Z  $$
+
+We are going to generalize the definition of Free Energy to non-equilibrium states, which is why I have added the subscript *therm* to the formula.
+For a d-dimensional Ising Model, using the mean field approximation, Z was derived in the previous section, and is given by
+
+$$ Z = 2^N\cosh^N(2djm\beta) $$
+
+so that
+
+$$ F_{therm} = -NT\log 2 - NT\log(\cosh(2djm\beta))  $$
+
+
+
+
+
+
+
+
+
+
+
 
 
 
