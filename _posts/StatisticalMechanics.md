@@ -42,9 +42,9 @@ The neural networks that that we see today are a direct descendant of these earl
 
 ## System with a Large Number of Interacting Particles
 
-Suppose a quantity $x$ can assume the discrete values $x_i, i=1,2,..n$ with the unknown probabilities $p_i$, and all that is known is the expectation $<f(x)>$ of the function $f(x_i)$, so that
+Suppose a quantity $x$ can assume the discrete values $x_i, i=1,2,..n$ with the unknown probabilities $p_i$, and all that is known is the expectation $<f_{av}$ of the function $f(x_i)$, so that
 
-$$  < f(x) > = \sum_{i=1}^n p_i f(x_i)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \  (1)                                                                                           $$          
+$$  f(x)_{av} = \sum_{i=1}^n p_i f(x_i)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \  (1)                                                                                           $$          
 
 On the basis of this information what are the best estimates of the probabilities $p_i, i=1,2,...n$? This is a classic problem in probability theory, and in order to solve it we need a measure of our ignorance of distribution. If we have such a formula, that quantifies ignorance or uncertainity, then the best estimates for the $p_i$ would be those that maximize this quanitity.
 
@@ -61,10 +61,10 @@ $$ p_i = {e^{-\beta f(x_i)}\over{\sum_i e^{-\beta f(x_i)}}}\ \ \ \ \ \ \ \ \ \ \
 
 where $\beta$ is a constant that can be determined by substituting into equation (1) and is given by solving the equation
 
-$$ < f(x) > = -{\partial\log Z\over\partial\beta} \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (4) $$
+$$ f_{av} = -{\partial\log Z\over\partial\beta} \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (4) $$
 
 The derivation of (3) is a straightforward exercise in optimization using the method of Lagrange Multipliers in which we maximize the entropy given by (2), subject to the constraints (1) and $\sum_i p_i = 1$.
-The denominator in this equation is a famous quantity called the partition function in statistical mechanics, and is denoted by $Z$ while the distribution itself is called the Boltzmann distribution. Note that the maximum entropy distribution for this case is not given by the uniform distribution $p_1={1\over n}$, and this is due to the fact that the $p_i$ values are constrained by the average $<f(x)>$ from equation (1). From the probability theory point of view, the maximum entropy estimate solved an old problem from the time of Laplace, namely what are the best probability estimates given insufficient information. Laplace recommended the use of of the uniform distribution in this situation. The maximum entropy technique allows us to improve upon by incorporatong other pieces of information susch as the average, if they are available.
+The denominator in this equation is a famous quantity called the partition function in statistical mechanics, and is denoted by $Z$ while the distribution itself is called the Boltzmann distribution. Note that the maximum entropy distribution for this case is not given by the uniform distribution $p_1={1\over n}$, and this is due to the fact that the $p_i$ values are constrained by the average $<f_{av}$ from equation (1). From the probability theory point of view, the maximum entropy estimate solved an old problem from the time of Laplace, namely what are the best probability estimates given insufficient information. Laplace recommended the use of of the uniform distribution in this situation. The maximum entropy technique allows us to improve upon by incorporatong other pieces of information susch as the average, if they are available.
 
 Up until this point, the discussion has been purely in terms of probability theory but now we are now going to use this to model a physical system. 
 Consider a system that can be in one of N microstates, such that in microstate $i$ it has energy $E_i$. Also define $p_i$ as the probability that the system is in state microstate $i$.
@@ -74,7 +74,7 @@ $$ S = -\sum_i p_i \log p_i $$
 
 and its average energy as 
 
-$$ E = \sum_i p_i E_i   $$
+$$ E_{av} = \sum_i p_i E_i   $$
 
 But what is the physical significance of this definition for entropy? Changes in entropy can be measured in the lab, and indeed entropy was introduced into thermodynamics well before statistical mechanics came along. From Shannon-Boltzmann formula (2), it is a measure of our lack of information about the microscopic details of a system. 
 Hence instead of worrying about the details of each individual particle, we identify the microstates of discrete energy levels $E_i, i = 1, 2, ...,N$ created due to their joint behavior
@@ -86,35 +86,35 @@ As an example consider a piece of iron with N atoms, each of which can have two 
 
 The maximum entropy principle tells us that that our best estimates of the $p_i$ are obtained by solving the optimization problem of maximizing $S$ subject to the constraints (1) and $\sum_i p_ =1 $. This can be done by the method of Lagrange multipliers as the maximization of $L$ given by
 
-$$ L = -\sum_i p_i \log p_i + \alpha(\sum_i p_i - 1) +\beta(E - \sum_i p_i E_i)  $$
+$$ L = -\sum_i p_i \log p_i + \alpha(\sum_i p_i - 1) +\beta(E_{av} - \sum_i p_i E_i)  $$
 
 where $\alpha$ and $\beta$ are called Lagrange multipliers. This problem can be easily solved by taking the first derivatives, resulting in the Boltzmann distribution
 
 $$ p_i = {e^{-\beta E_i}\over Z} \ \ \ where \ \ \ Z = \sum_i e^{-\beta E_i}  $$
 
-This formula enables us to compute $E$ and $S$ as functions of $Z$, in particular
+This formula enables us to compute $E_{av}$ and $S$ as functions of $Z$, in particular
 
-$$ E = -{\partial\log Z\over\partial\beta} $$
+$$ E_{av} = -{\partial\log Z\over\partial\beta} $$
 
 and
 
-$$  S = \beta E + \log Z = -{\beta\over Z}{\partial Z\over \partial\beta} + \log Z $$
+$$  S = \beta E_{av} + \log Z = -{\beta\over Z}{\partial Z\over \partial\beta} + \log Z $$
 
 But we have yet to identify the significance of the constant $\beta$. Using the above formula for $S$, it follows that
 
-$$ dS = \beta dE + E d\beta + d\log Z  $$
+$$ dS = \beta dE_{av} + E_{av} d\beta + d\log Z  $$
 
 Since $Z$ is a function of $\beta$, this can be written as
 
-$$ dS = \beta dE + E d\beta + {d\log Z\ d\beta\over d\beta}  $$
+$$ dS = \beta dE_{av} + E_{av} d\beta + {d\log Z\ d\beta\over d\beta}  $$
 
-Using the formula for $E$ the last two terms cancel off, leading to the formula
+Using the formula for $E_{av}$ the last two terms cancel off, leading to the formula
 
-$$ \beta = {dS\over dE} $$
+$$ \beta = {dS\over dE_{av}} $$
 
-But what is the significance of the derivative ${dS\over dE}$? It can be easily shown that if two systems with energies $E_1, E_2$ and entropies $S_1,S_2$ are connected to each other, and if initially ${dS_1\over dE_1} > {dS_2\over dE_2}$, then energy flows from system 1 to system 2, and in equilibrium the two derivatives are equal. This motivates the definition of temperature $T$ as the inverse of $\beta$, given by
+But what is the significance of the derivative ${dS\over dE_{av}}$? It can be easily shown that if two systems with energies $E_{av}(1), E_{av}(2)$ and entropies $S_1,S_2$ are connected to each other, and if initially ${dS_1\over dE_{av}(1)} > {dS_2\over dE_{av}(2)}$, then energy flows from system 1 to system 2, and in equilibrium the two derivatives are equal. This motivates the definition of temperature $T$ as the inverse of $\beta$, given by
 
-$$ {1\over T} = \beta = {\partial S\over \partial E}  $$
+$$ {1\over T} = \beta = {\partial S\over \partial E_{av}}  $$
 
 We are using the partial derivative since in the more general case S may be function of other variables such as the volume or an external magnetic field for example.
 
@@ -122,7 +122,7 @@ Hence temperature enters statistical mechanics as the inverse of the Lagrange mu
 
 There is another macro-quantity that we will need later, and that is the Helmholtz Free Energy $F$, defined as
 
-$$ F = E -  TS $$ 
+$$ F = E_{av} -  TS $$ 
 
 From the formula for entropy, it is easy to see that $F = -T\log Z$.
 
@@ -142,7 +142,7 @@ Certain atoms possess a magnetic moment, which we denote as $\mu$, due to the in
 
 $$ e = -\sigma\mu H $$
 
- where the spin $\sigma = +1$ if the magnetic moment of the spin aligned with the external field, and $\sigma = -1$ otherwise.  We will analyze two types of magnetic materials:
+where the spin $\sigma = +1$ if the magnetic moment of the spin aligned with the external field, and $\sigma = -1$ otherwise.  We will analyze two types of magnetic materials:
 
   - In paramagnetic materials, the individual spins are decoupled from one another. As a result the material only exhibits magnetic properties in the presence of an external field,
   - In ferromagnetic materials on the other hand, individual spins are coupled with those of their neighbors, as a result of which the material remans magnetized even in the absence of the external field.
@@ -155,7 +155,7 @@ We will modify the notation slightly and write
 
 $$ e = -j\sigma  $$
 
-for the energy of a single atom, where $\sigma$ is the same as before and $j=\mu H$.
+for the energy of a single atom, where $\sigma$ is the same as before and $j=\mu H$ is called the coupling constant.
 
 Hence the partition function for a single atom at temperature $T = {1\over\beta}$, in the presence of a magnetic field can be expressed in terms of an hyperbolic function, as
 
@@ -165,25 +165,24 @@ Since the atoms don't interact with each other, it follows that the partition fu
 
 $$ Z = 2^N\ \cosh^N(\beta j)  $$
 
-so that $\log Z = N\log 2 + N\log[\cosh(\beta j)]$.  It follows that the average energy $E$ for the system of $N$ atoms is given by
+so that $\log Z = N\log 2 + N\log[\cosh(\beta j)]$.  It follows that the average energy $E_{av}$ for the system of $N$ atoms is given by
 
-$$ E = -{\partial\log Z\over\partial\beta} = - Nj\ \tanh(\beta j) $$
+$$ E_{av} = -{\partial\log Z\over\partial\beta} = - Nj\ \tanh(\beta j) $$
 
-so that the average energy for a single atom at temperate $T$ and in the presence of the magnetic field with coupling $j$ is
+so that the average energy $e_{av}$ for a single atom at temperate $T$ and in the presence of the magnetic field with coupling $j$ is
 
-$$ {E\over N} = {\overline e} = -j\ \tanh(\beta j)  $$
+$$ e_{av} = {E_{av}\over N} = -j\ \tanh(\beta j)  $$
 
-It follows that the average spin ${\overline\sigma}$ for a single atom is given by the hyperbolic tangent function as follows
+If the average spin for a single atom is $\sigma_{av}$ then since $e_{av} = -j\sigma_{av}$, it follows that
 
-$$ \overline\sigma = \tanh(\beta j) $$
+$$ \sigma_{av} = \tanh(\beta j) $$
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat2.png) 
 
-Figure 1: The hyperbolic tangent function $\tanh$
+Figure 1: Average spin $\sigma_{av}$ as a function of $\beta = {1\over T}$
 
-A graph of the average spin as function of the inverse temperature $\beta$ is shown in figure 1,
-Since we are considering positive temperatures only, we will focus on the half plane $\beta > 0$. At very low temperatutes $\beta\rightarrow\infty$, and as a result the average spin become 1 and the average energy is minimized at ${\overline e} = -1$. Hence at low temperatures each atom becomes perfectly aligned with the external magnetic field, and this is lowest energy configuration. Conversely at high temeperatures $\beta\rightarrow 0$ and as as result the average spin goes to zero, and so does the average energy. This implies that at high temperatures the system is no longer magnetized and the spins are randomly aligned in the up or down direction. As the temperature is reduced, the spins start to gradually align with the external field, but note that there is no phase change, i.e., a sudden shift from non-alignment to alignment, it happens gradually.
-
+A graph of the average spin $\sigma_{av}$ as function of the inverse temperature $\beta$ is shown in figure 1,
+Since we are considering positive temperatures only, we will focus on the half plane $\beta > 0$. At very low temperatutes $\beta\rightarrow\infty$, and as a result the average spin become 1 and the average energy is minimized at $e_{av} = -1$. Hence at low temperatures each atom becomes perfectly aligned with the external magnetic field, and this is lowest energy configuration. Conversely at high temeperatures $\beta\rightarrow 0$ and as as result the average spin goes to zero, and so does the average energy. This implies that at high temperatures the system is no longer magnetized and the spins are randomly aligned in the up or down direction. As the temperature is reduced, the spins start to gradually align with the external field, but note that there is no phase change, i.e., a sudden shift from non-alignment to alignment, it happens gradually. On the other hand, there is a phase change if the external magnetic field is switched from $+B$ to $-B$. This causes the average spin to flip to $\sigma_{av} = -\tanh(\beta j)$ (even though the average energy remains the same). This is a sudden change in the average spin, and is referred to as a phase transition of type 1. 
 
 ### Ising Model in One Dimension
 
@@ -204,12 +203,13 @@ This sum has to be evaluated over all possible spin configurations, which makes 
 
 $$  \mu_i =  \sigma_i\sigma _{i+1},\ \ i = 1,2,...,N-1  $$
 
-Note that $\mu$ is defines on per connection basis, rathar than on a per atom basis.
+Note that $\mu$ is defined on per connection basis, rathar than on a per atom basis.
 With this definition the partition function $Z$ becomes
 
 $$ Z = Z_1 + Z_2 $$
 
-where $Z_1$ is the partition function for the case when the first spin is $+1$, and $Z_2$  for the case when the first spin is $-1$. Note that both $Z_1$ and Z_2$ are given by
+where $Z_1$ is the partition function for the case when the first spin is $+1$, and $Z_2$  for the case when the first spin is $-1$ (speification of the first spin, in combination with the sequence $\mu_i, 1 = 1,2,..,N-1$ allows us to recover all the remaining spins $\sigma_2,...\sigma_{N-1}$).
+Note that both $Z_1$ and Z_2$ are equal and are given by
 
 Z_1 = Z_2 = \sum_{i=1}^{N-1} e^{-j\beta\sum_i \mu_i}  $$
 
@@ -218,17 +218,17 @@ Leveraging the solution we obatained for that case, it follows that
 
 $$ Z_1 = Z_2 = 2^{N-1}\cosh^{N-1}(\beta j) $$
 
-and
+so that
 
 $$ Z =  2^N\cosh^{N-1}(\beta j) $$
 
-It follows that the average $\mu$ value for any single connection is given by
+It follows that the average $\mu_{av}$ value for any single connection is given by
 
-$$ \overline\mu = \overline{\sigma_i\sigma _{i+1}} = \tanh(\beta j) $$
+$$ \mu_{av} = (\sigma_i\sigma _{i+1})_{av} = \tanh(\beta j) $$
 
-The correlation between the spins of neighboring atoms goes to zero as temperature increases as expected, but what about low temperatures? This equation tells us that the average of the connection values $\overline\mu$ goes to one, but from this can we conclude that the all atoms have transitioned to the up for down spin configuration? We cannot since even if most of the spins at $\sigma_i = 1$, there can be islands of atoms with $\sigma_i = -1$, and this is consistent with having an overall average $\overline\mu$ of 1. Indeed it can be shown that the correlation between atoms separated by $n$ positions is given by
+The correlation between the spins of neighboring atoms goes to zero as temperature increases as expected, but what about low temperatures? This equation tells us that the average of the connection values $\mu_{av} goes to one, but from this can we conclude that the all atoms have transitioned to the up for down spin configuration? We cannot since even if most of the spins at $\sigma_i = 1$, there can be islands of atoms with $\sigma_i = -1$, and this is consistent with having an overall average $\mu_{av}$ of 1. Indeed it can be shown that the correlation between atoms separated by $n$ positions is given by
 
-$$ \overline{\sigma_i\sigma_{i+n}} = \tanh^{n-1}(\beta j) $$
+$$ (\sigma_i\sigma_{i+n})_{av} = \tanh^{n-1}(\beta j) $$
 
 This implies that even at very low temperatures, for example for $\beta = 0.9999$, we can still make $n$ large enough so the the correlation goes to zero. From this we can conclude that there is no phase transition in the 1-D Ising model for non-zero temperature values, i.e., it does not exhibit the phenomenon of spontaneous magnetisation in the absence of an external magnetic field.
 
@@ -247,20 +247,22 @@ The energy level for a single atom is given by
 
 $$ e = -j\sigma\sum_{i=1}^n\sigma_i  $$
 
-where $i$ is the number of neighbors for the atom. It is easy to see that in $d$ dimensions, the number of neighbors is given by $2d$. The Mean Field Approximation simplifies this expression by replacing ${\sum_{i=1}^n\sigma_i\over 2d}$ by its average, which we denote as $\sigma'$, so that the energy becomes
+where $i$ is the number of neighbors for the atom. It is easy to see that in $d$ dimensions, the number of neighbors is given by $2d$. The Mean Field Approximation simplifies this expression by replacing ${\sum_{i=1}^n\sigma_i\over 2d}$ by its average, which we denote as $\sigma'$, so that the energy per atom becomes
 
 $$ e = -2dj\sigma\sigma'  $$
 
 But this is precisely the energy level for a single atom with spin $\sigma$ in the presence of an external magnetic field with strength $2dj\sigma'$.
-Leveraging the solution for this model from two sections ago, it follows that the average spin at temperature $T$ = {1\over\beta}$ is given by
+Leveraging the solution for this model from two sections ago, it follows that the average spin at temperature $T = {1\over\beta}$ is given by
 
-$$ \overline\sigma = \tanh(2dj\beta\sigma') $$
+$$ \sigma_{av} = \tanh(2dj\beta\sigma') $$
 
-But in equilibrium the average spin for an atom should be equal to the mean field value, i.e.,
+But in equilibrium the average spin for an atom should be equal to the mean field value, i.e., $\sigma_{av} = \sigma'$ and we will call this quantity $m$. 
+$m$ is called the order parameter, since its value determines the degree of order present in the spins of the system.
+Hence the following equation should be satisfied
 
-$$ \sigma' = \tanh(2dj\beta\\sigma') $$
+$$ m = \tanh(2dj\beta m) $$
 
-Making the substitution $y = 2dj\beta\sigma'$, it follows that
+Making the substitution $y = 2dj\beta m$, it follows that
 
 $$ {y\over{2dj\beta}} = \tanh\ y  $$
 
@@ -274,25 +276,24 @@ The solution $y$ to this equation corresponds to the intersection of the line $z
 
 Figure 4: $z_1 = \tanh\ y$ and $z_2 = {yT\over{2dj}}$ when T is high
 
-These two functions are plotted in figure 4 for the case when the temperature $T$ is very high. In this case the line $z_2$ only intersects $z_1$ at $y=0$ which corresponds to $\sigma'=0$, i.e., there is no preferred orientation for the spins. This is due to the fact that the high temperature introduces thermal energy that causes some of the spins to be misaligned with the mean field.
+These two functions are plotted in figure 4 for the case when the temperature $T$ is very high. In this case the line $z_2$ only intersects $z_1$ at $y=0$ which corresponds to $m=0$, i.e., there is no preferred orientation for the spins. This is due to the fact that the high temperature introduces thermal energy that causes some of the spins to be misaligned with the mean field.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat5.png) 
 
 Figure 5: $\tanh\ y$ and ${yT\over{2dj}}$ when $T < 2dj$
 
-However as $T$ is reduced, then ultimately the straight line does intersect the $\tanh$ curve as shown in figure 5, and there is a critical temperature $T_c = 2dj$ at which the slope of the line is one, which is the same as the slope of $\tanh$ at the origin. Any increase in $T$ beyond this point causes the two curves to intersect. When this happens there existsa second solution $\sigma'$ which is non-zero, and this corresponds to magnetization of the material. The amount of magnetization gradually increases until at larger temperatures it approached $\sigma'= +$ or $-1$. 
+However as $T$ is reduced, then ultimately the straight line does intersect the $\tanh$ curve as shown in figure 5, and there is a critical temperature $T_c = 2dj$ at which the slope of the line is one, which is the same as the slope of $\tanh$ at the origin. Any increase in $T$ beyond this point causes the two curves to intersect. When this happens there exists a second value of $m'$ which is non-zero, and this corresponds to magnetization of the material. The amount of magnetization gradually increases until at very low temperatures it approaches $m' = +$ or $-1$. 
 
-Since there are now two solutions at average spins $0$ and $\sigma'$, the question arises which one does the system choose. 
+Since there are now two solutions at average spins $0$ and $m'$, the question arises which one does the system choose. 
 If the system starts from a state of random spins at $T > T_c$, then it stays in this state even after the $T < T_c$, until something causes the spins to align. This is the phenomenon of phase change, and it can be triggered by the presence of an external magnetic field.
-Thus the solution for $\sigma' = 0$ is unstable, and the system can tip into the $\sigma' = +1$ or $\sigma' = -1$ state very easily if $T<T_c$, as shown next.
-This analysis also implies that if we start from a low temperature state and gradually increase temperature, then the magnetization initially decreases and then abruptly switches off when the temperature crosses $T_c$.
+Thus the solution for $m' = 0$ is unstable, and the system can tip into the state $m' = +1$ or $m' = -1$ very easily if $T<T_c$, as shown next.
+This analysis also implies that if we start from a low temperature state and gradually increase temperature, then the magnetization initially decreases and then abruptly switches off when the temperature becomes greater than $T_c$.
 
-![](https://subirvarma.github.io/GeneralCognitics/images/stat5.png) 
+![](https://subirvarma.github.io/GeneralCognitics/images/stat9.png) 
 
-Figure 6: $\tanh\ y$ and ${yT\over{2dj}}$ when $T < 2dj$
+Figure 6: Variation of the order parameter $m$ with $T$
 
-The average spin $\sigma'$ is usually denoted using the symbol $m$, and is called the order parameter, since its value determines whether the microstates are ordered or at random.
-This kind of phase transition in which there is an initial gradual decrease in the order parameter, followed by an abrupt decrease to zero beyond the critical temperature, is referred to as a second order phase transition, and is illustrated in figure 6.
+This kind of phase transition in which there is an initial gradual decrease in the order parameter, followed by an abrupt change to zero beyond the critical temperature, is referred to as a second order phase transition, and is illustrated in figure 6.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat6.png) 
 
@@ -303,7 +304,7 @@ In the presence of an external magnetic field with intensity $B$, the energy per
 $$ e = -2dj\sigma\sigma' - B\sigma = -(2dj\sigma' + B)\sigma $$
 
 The first term is due to interaction with neighboring atoms, while the second term is due to the external field.
-Using the same logic as before it follows that in equilibrium the average spin for the system is given by the solution to the equation
+Using the same logic as before it follows that in equilibrium the order parameter for the system is given by the solution to the equation
 
 $$ m = \tanh(2djm\beta + B\beta)  $$
 
@@ -312,13 +313,15 @@ $$ m = \tanh(2djm\beta + B\beta)  $$
 Figure 8: Graphic solution to ${Ty\over{2dj}} = \tanh(y + B\beta)$
 
 The solution lies at the intersection of the curves
-$z_1 = \tanh(y + B\beta)$ and $z_2 = {yT\over{2dj}}$, and is plotted in figure 8. The $\tanh$ function has now shifted to the left if $B>0$, and as a result there is only one solution to the equation which corresponds to $m > 0$, i.e., in the presence of the external magnetic field the solution at $m=0$ goes away (except for the case when $\beta=0$). This means that if we were to start with the system in the state $m = 0$ with $B=0$, then switching on event a tiny amount of external magnetic field instantaneously causes the value of $m$ to become non-zero, i.e.m the system becomes magnetized. This is a phase change, and happens in ferromagnetic materials. Unlike for paramagnetic materials, the system stays in the magnetized state even after the external field is switched off. If the external field were pointing in the opposite direction, then it would have the system to flip to $m=-1$.
+$z_1 = \tanh(y + B\beta)$ and $z_2 = {yT\over{2dj}}$, and is plotted in figure 8. The $\tanh$ function has now shifted to the left if $B>0$, and as a result there is only one solution $m' > 0$ to the equation, i.e., in the presence of the external magnetic field the solution at $m'=0$ goes away (except for the case when $\beta=0$). 
+This means that if we were to start with the system in which $T < T_c$ with $B=0$, then we saw earlier there are two possible values for $m$, i.e. $m = 0$ or $m=m'$.
+However if we switch  on even a tiny amount of external magnetic field $B$, then it instantaneously causes the system to shift to $m=m'>0$ since the solution $m=0$ is no langer allowed due to the shist of the $\tanh$ curve to the left i.e., the system becomes magnetized. This is a phase change, and happens in ferromagnetic materials. Unlike for paramagnetic materials, the system stays in the magnetized state even after the external field is switched off. If the external field were pointing in the opposite direction, then it would have caused the system to flip to $m'=-1$.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat10.png) 
 
 Figure 9: Variation of $m$ with $T$ in the presence of an external magnetic field $B$
 
-The variation of $m$ with $T$ is shown above, and we can see that there is no phase transition as $T$ is varied. Howvever a phase transition does happen when the field $B$ is fliped from positive to negative or vice versa, it causes an instantaneous change in the sign of $m$ as well. This is an example of a first order phase transition.
+The variation of $m$ with $T$ is shown above, and we can see that there is no phase transition as $T$ is varied. Howvever a phase transition does happen when the field $B$ is fliped from positive to negative or vice versa, and it causes an instantaneous change in the sign of $m$ as well. This is an example of a first order phase transition.
 
 <Model for a gas with interactions>
 
