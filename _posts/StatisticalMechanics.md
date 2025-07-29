@@ -312,7 +312,13 @@ $$ m = \tanh(2djm\beta + B\beta)  $$
 Figure 8: Graphic solution to ${Ty\over{2dj}} = \tanh(y + B\beta)$
 
 The solution lies at the intersection of the curves
-$z_1 = \tanh(y + B\beta)$ and $z_2 = {yT\over{2dj}}$, and is plotted in figure 8. The $\tanh$ function has now shifted to the left if $B>0$, and as a result there is only one solution to the equation which corresponds to $m > 0$, i.e., in the presence of the external magnetic field the solution at $m=0$ goes away. This means that if we were to start with the system in the state $m = 0$ and $T<T_c$, then switching on the external magnetic field instantaneously causes the spin to become aligned with the field. This is a phase change, and happens in ferromagnetic materials. Unlike for paramagnetic materials, the system stays in the magnetized state even after the external field is switched off. If the external field were pointing in the opposite direction, then it would have the system to flip to $m=-1$.
+$z_1 = \tanh(y + B\beta)$ and $z_2 = {yT\over{2dj}}$, and is plotted in figure 8. The $\tanh$ function has now shifted to the left if $B>0$, and as a result there is only one solution to the equation which corresponds to $m > 0$, i.e., in the presence of the external magnetic field the solution at $m=0$ goes away (except for the case when $\beta=0$). This means that if we were to start with the system in the state $m = 0$ with $B=0$, then switching on event a tiny amount of external magnetic field instantaneously causes the value of $m$ to become non-zero, i.e.m the system becomes magnetized. This is a phase change, and happens in ferromagnetic materials. Unlike for paramagnetic materials, the system stays in the magnetized state even after the external field is switched off. If the external field were pointing in the opposite direction, then it would have the system to flip to $m=-1$.
+
+![](https://subirvarma.github.io/GeneralCognitics/images/stat10.png) 
+
+Figure 9: Variation of $m$ with $T$ in the presence of an external magnetic field $B$
+
+The variation of $m$ with $T$ is shown above, and we can see that there is no phase transition as $T$ is varied. Howvever a phase transition does happen when the field $B$ is fliped from positive to negative or vice versa, it causes an instantaneous change in the sign of $m$ as well. This is an example of a first order phase transition.
 
 <Model for a gas with interactions>
 
