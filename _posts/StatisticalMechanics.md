@@ -208,10 +208,10 @@ With this definition the partition function $Z$ becomes
 
 $$ Z = Z_1 + Z_2 $$
 
-where $Z_1$ is the partition function for the case when the first spin is $+1$, and $Z_2$  for the case when the first spin is $-1$ (speification of the first spin, in combination with the sequence $\mu_i, 1 = 1,2,..,N-1$ allows us to recover all the remaining spins $\sigma_2,...\sigma_{N-1}$).
-Note that both $Z_1$ and Z_2$ are equal and are given by
+where $Z_1$ is the partition function for the case when the first spin is $+1$, and $Z_2$  for the case when the first spin is $-1$ (speification of the first spin, in combination with the sequence $\mu_i, 1 = 1,2,..,N-1$ allows us to recover all the remaining spins $\sigma_2,...\sigma_N$).
+Note that both $Z_1$ and $Z_2$ are equal and are given by
 
-Z_1 = Z_2 = \sum_{i=1}^{N-1} e^{-j\beta\sum_i \mu_i}  $$
+$$ Z_1 = Z_2 = \sum_{i=1}^{N-1} e^{-j\beta\sum_i \mu_i}  $$
 
 But note that this exactly the same partition function as for the case analyzed in the previous section, i.e., when there are $N-1$ atoms in a magnetic field and there is no interaction between neighboring atoms. 
 Leveraging the solution we obatained for that case, it follows that
