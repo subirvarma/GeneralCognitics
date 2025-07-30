@@ -240,54 +240,86 @@ This implies that even at very low temperatures, for example for $\beta = 0.9999
 
 Figure 3: The Ising model in two dimensions
 
-Spontaneous magnetisation happens in a system when the spin state of even a single atom propagates through the material and re-orients all the spins. We just saw that in one dimension this does not happen, since the correlation between spins fades the further away we get. One way of understanding this is by noting that the spin at a particular atom has at most two spins which influences its own spin. However this is not the case in higher dimensions. For example for $d=2$, each atom has four neighbors, and as a result if the majority of their spins are aligned in a certain direction, then it influences the target atom to align inthe same direction. Hence he presence of multiple neighbors acts as a kind of error corerction when choosing the spin value.
+Spontaneous magnetisation happens in a system when the spin state of even a single atom propagates through the material and re-orients all the spins. We just saw that in one dimension this does not happen, since the correlation between spins fades the further away we get, irrespective of the temperature. One way of understanding this is by noting that the spin at a particular atom has at most two spins which influences its own spin. However this is not the case in higher dimensions. For example for $d=2$, each atom has four neighbors, and as a result if the majority of their spins are aligned in a certain direction, then it influences the target atom to align inthe same direction. Hence he presence of multiple neighbors acts as a kind of error corerction when choosing the spin value.
 
-Unfortunately the exact analysis of Ising models for $d\ge 2$ is extremely difficult, even for the case $d = 2$. Fortunately there exists a simple approximation method, called mean value analysis, that preserves important properties such as phase transitions in the model.
+Unfortunately the exact analysis of Ising models for $d\ge 2$ is extremely difficult, even for the case $d = 2$. However there exists a simple approximation method, called mean field analysis, that preserves important properties such as phase transitions in the model.
 
 The energy level for a single atom is given by
 
 $$ e = -j\sigma\sum_{i=1}^n\sigma_i  $$
 
-where $n$ is the number of neighbors for the atom. It is easy to see that in $d$ dimensions, the number of neighbors is given by $2d$. The Mean Field Approximation simplifies this expression by replacing ${\sum_{i=1}^n\sigma_i\over 2d}$ by its average, which we denote as $\sigma'$, so that the energy per atom becomes
+where $n$ is the number of neighbors for the atom. 
 
-$$ e = -2dj\sigma\sigma'  $$
+The energy for a configuration of N atoms in $d$ dimensions is given by
 
-But this is precisely the energy level for a single atom with spin $\sigma$ in the presence of an external magnetic field with strength $2dj\sigma'$.
+$$  E = -J\sum_i\sum_j \sigma_i \sigma_j  $$
+
+where the summation is done over pairs of nearest neighbors. Expressing the spins in terms of their fluctuations $\delta\sigma_i$ from their average value $m_i = (\sigma_i)_{av}$, 
+
+$$ E = -J\sum_i\sum_j(m_i + \delta\sigma_i)(m_j + \delta\sigma_j)  $$
+
+Expanding this expression and ignoring the product of the fluctuations $\delta\sigma_i\delta\sigma_j$ assuming it is neglegible, we get
+
+$$ E = -J\sum_i\sum_j(m_i m_j + m_i\delta_j + m_j\delta \sigma_i)  $$
+
+According to the mean field approximation $m_i = m_j = m$, i.e., the mean value value of the spins is the same everywhere. This leads to
+
+$$ E = -J\sum_i\sum_j(m^2 + (\sigma_j - m) + m(\sigma_i - m))  $$
+
+From translational inveriance of the atoms it follows that
+
+$$ E = -Jm\sum_i\sum_j(m^2 + 2(\sigma_i - m))  $$
+
+Note that $\sum_i\sum_j = {1\over 2}\sum_i\sum_{j\in nn(i)}$ where the $1\over 2} avoids double counting pairs of sites and $nn(i)$ is the number of nearest neighbors of $i$. 
+Since there is no dependence on $j$ in the summation, the inner sum is simply $\sum_{j\in nn(i)} = 2d$, where $2d$ is the number of neighbors for any atom, and $d$ is the number of dimensions. This leads to
+
+$$ \sigma_i\sigma_j \rightarrow d\sum_{i=1}^N $$
+
+The expression for energy simplifies to 
+
+$$  E = -dJm\sum_{i=1}^N(2\sigma_i -m) $$
+$$    = {NdJm^2} - 2dJm\sum_i\sigma_i $$
+
+But this is simply the total energy level for a configuration of independent atoms in the presence of a magnetic field with intensity $2dJm$.
 Leveraging the solution for this model from two sections ago, it follows that the partition function and the average energy for the system are given by
 
-$$ Z = 2^N\cosh^N(2dj\beta\sigma')\ \ \ \ E_{av} = -2Ndj\sigma'\tanh(2dj\beta\sigma') $$ $$
+$$ Z = e^{-\beta NdJm^2} 2^N\cosh^N(2dj\beta m) $$
 
-From this it follows that the average spin is given by
+and the average energy for the system is given by
 
-$$ \sigma_{av} = \tanh(2dj\beta\sigma') $$
+$$ E_{av} = {\partial\log Z\over{\partial\beta}} = -2NdJm\tanh(2dj\beta m) $$ 
 
-But in equilibrium the average spin for an atom should be equal to the mean field value, i.e., $\sigma_{av} = \sigma'$ and we will call this quantity $m$. 
+From this it follows that the average spin for an atom is given by
+
+$$ \sigma_{av} = \tanh(2dJ\beta m) $$
+
+But in equilibrium the average spin for an atom should be equal to the mean field value, i.e., $\sigma_{av} = m$. 
 $m$ is called the order parameter, since its value determines the degree of order present in the spins of the system.
 Hence the following equation should be satisfied
 
-$$ m = \tanh(2dj\beta m) $$
+$$ m = \tanh(2dJ\beta m) $$
 
-Making the substitution $y = 2dj\beta m$, it follows that
+Making the substitution $y = 2dJ\beta m$, it follows that
 
 $$ {y\over{2dj\beta}} = \tanh\ y  $$
 
 which can also be written as 
 
-$$ {yT\over{2dj}} = \tanh\ y  $$
+$$ {yT\over{2dJ}} = \tanh\ y  $$
 
-The solution $y$ to this equation corresponds to the intersection of the line $z_1 = {yT\over{2dj}}$ with the function $z_2 = \tanh y$, 
+The solution $y$ to this equation corresponds to the intersection of the line $z_1 = {yT\over{2dJ}}$ with the function $z_2 = \tanh y$, 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat4.png) 
 
-Figure 4: $z_1 = \tanh\ y$ and $z_2 = {yT\over{2dj}}$ when T is high
+Figure 4: $z_1 = \tanh\ y$ and $z_2 = {yT\over{2dJ}}$ when T is high
 
 These two functions are plotted in figure 4 for the case when the temperature $T$ is very high. In this case the line $z_2$ only intersects $z_1$ at $y=0$ which corresponds to $m=0$, i.e., there is no preferred orientation for the spins. This is due to the fact that the high temperature introduces thermal energy that causes some of the spins to be misaligned with the mean field.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat5.png) 
 
-Figure 5: $\tanh\ y$ and ${yT\over{2dj}}$ when $T < 2dj$
+Figure 5: $\tanh\ y$ and ${yT\over{2dJ}}$ when $T < 2dJ$
 
-However as $T$ is reduced, then ultimately the straight line does intersect the $\tanh$ curve as shown in figure 5, and there is a critical temperature $T_c = 2dj$ at which the slope of the line is one, which is the same as the slope of $\tanh$ at the origin. Any increase in $T$ beyond this point causes the two curves to intersect. When this happens there exists a second value of $m'$ which is non-zero, and this corresponds to magnetization of the material. The amount of magnetization gradually increases until at very low temperatures it approaches $m' = +$ or $-1$. 
+However as $T$ is reduced, then ultimately the straight line does intersect the $\tanh$ curve as shown in figure 5, and there is a critical temperature $T_c = 2dJ$ at which the slope of the line is one, which is the same as the slope of $\tanh$ at the origin. Any increase in $T$ beyond this point causes the two curves to intersect. When this happens there exists a second value of $m'$ which is non-zero, and this corresponds to magnetization of the material. The amount of magnetization gradually increases until at very low temperatures it approaches $m' = +$ or $-1$. 
 
 Since there are now two solutions at average spins $0$ and $m'$, the question arises which one does the system choose. 
 If the system starts from a state of random spins at $T > T_c$, then it stays in this state even after the $T < T_c$, until something causes the spins to align. This is the phenomenon of phase change, and it can be triggered by the presence of an external magnetic field.
@@ -304,21 +336,29 @@ This kind of phase transition in which there is an initial gradual decrease in t
 
 Figure 7: Graph of $\tanh(y + B\beta)$
 
-In the presence of an external magnetic field with intensity $B$, the energy per atom is given by
+In the presence of an external magnetic field with intensity $B$, the energy for the system is given by
 
-$$ e = -2dj\sigma\sigma' - B\sigma = -(2dj\sigma' + B)\sigma $$
+$$  E = -J\sum_i\sum_j \sigma_i \sigma_j - B\sum_i\sigma_i $$
 
 The first term is due to interaction with neighboring atoms, while the second term is due to the external field.
+Carrying out the same calculations as above, it can be shown that the $Z$ and $E_{av}$ are given by
+
+$$ Z = e^{-\beta NdJm^2} 2^N\cosh^N(2dJm\beta + B\beta) $$
+
+and 
+
+$$ E_{av} = -2NdJm\ \tanh(2dJm\beta + B\beta) $$ 
+
 Using the same logic as before it follows that in equilibrium the order parameter for the system is given by the solution to the equation
 
-$$ m = \tanh(2djm\beta + B\beta)  $$
+$$ m = \tanh(2dJm\beta + B\beta)  $$
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat7.png) 
 
-Figure 8: Graphic solution to ${Ty\over{2dj}} = \tanh(y + B\beta)$
+Figure 8: Graphic solution to ${Ty\over{2dJ}} = \tanh(y + B\beta)$
 
 The solution lies at the intersection of the curves
-$z_1 = \tanh(y + B\beta)$ and $z_2 = {yT\over{2dj}}$, and is plotted in figure 8. The $\tanh$ function has now shifted to the left if $B>0$, and as a result there is only one solution $m' > 0$ to the equation, i.e., in the presence of the external magnetic field the solution at $m'=0$ goes away (except for the case when $\beta=0$). 
+$z_1 = \tanh(y + B\beta)$ and $z_2 = {yT\over{2dJ}}$, and is plotted in figure 8. The $\tanh$ function has now shifted to the left if $B>0$, and as a result there is only one solution $m' > 0$ to the equation, i.e., in the presence of the external magnetic field the solution at $m'=0$ goes away (except for the case when $\beta=0$). 
 This means that if we were to start with the system in which $T < T_c$ with $B=0$, then we saw earlier there are two possible values for $m$, i.e. $m = 0$ or $m=m'$.
 However if we switch  on even a tiny amount of external magnetic field $B$, then it instantaneously causes the system to shift to $m=m'>0$ since the solution $m=0$ is no langer allowed due to the shist of the $\tanh$ curve to the left i.e., the system becomes magnetized. This is a phase change, and happens in ferromagnetic materials. Unlike for paramagnetic materials, the system stays in the magnetized state even after the external field is switched off. If the external field were pointing in the opposite direction, then it would have caused the system to flip to $m'=-1$.
 
@@ -327,8 +367,6 @@ However if we switch  on even a tiny amount of external magnetic field $B$, then
 Figure 9: Variation of $m$ with $T$ in the presence of an external magnetic field $B$
 
 The variation of $m$ with $T$ is shown above, and we can see that there is no phase transition as $T$ is varied. Howvever a phase transition does happen when the field $B$ is fliped from positive to negative or vice versa, and it causes an instantaneous change in the sign of $m$ as well. This is an example of a first order phase transition.
-
-<Model for a gas with interactions>
 
 ## The Landau Theory for Phase Transitions: Introducing the Energy Landscape
 
