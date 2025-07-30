@@ -193,7 +193,7 @@ Figure 2: One dimensional Ising model
 
 The Ising model incorporates interactions between neighboring atoms and the one dimensional case is discussed in this section (see figure 2). The energy for a given configuration of spins is written as
 
-$$  E = -j\sum_i \sigma_i\sigma _{i+1} $$
+$$  E = -J\sum_i \sigma_i\sigma _{i+1} $$
 
 Note that unlike the previous case, there is no external magnetic field present.
 Each of terms in this expression in minimized when $\sigma_i = \sigma_{i+1}$, i.e., the spins are aligned together either with $\sigma_i = \sigma_{i+1} = 1$ or $\sigma_i = \sigma_{i+1} = -1$, which implies that there are two configurations with the minimum energy value, which correspond to all the spins pointing up or all the spins pointing down. The partition function for this system is given by
@@ -270,7 +270,7 @@ From translational inveriance of the atoms it follows that
 
 $$ E = -Jm\sum_i\sum_j(m^2 + 2(\sigma_i - m))  $$
 
-Note that $\sum_i\sum_j = {1\over 2}\sum_i\sum_{j\in nn(i)}$ where the $1\over 2} avoids double counting pairs of sites and $nn(i)$ is the number of nearest neighbors of $i$. 
+Note that $\sum_i\sum_j = {1\over 2}\sum_i\sum_{j\in nn(i)}$ where the ${1\over 2}$ factor avoids double counting pairs of sites and $nn(i)$ is the number of nearest neighbors of $i$. 
 Since there is no dependence on $j$ in the summation, the inner sum is simply $\sum_{j\in nn(i)} = 2d$, where $2d$ is the number of neighbors for any atom, and $d$ is the number of dimensions. This leads to
 
 $$ \sigma_i\sigma_j \rightarrow d\sum_{i=1}^N $$
@@ -328,9 +328,9 @@ This analysis also implies that if we start from a low temperature state and gra
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat9.png) 
 
-Figure 6: Variation of the order parameter $m$ with $T$
+Figure 6: Variation of mean field $m$ with $T$
 
-This kind of phase transition in which there is an initial gradual decrease in the order parameter, followed by an abrupt change to zero beyond the critical temperature, is referred to as a second order phase transition, and is illustrated in figure 6.
+This kind of phase transition in which there is an initial gradual decrease in mean field, followed by an abrupt change to zero beyond the critical temperature, is referred to as a second order phase transition, and is illustrated in figure 6.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat6.png) 
 
@@ -349,7 +349,7 @@ and
 
 $$ E_{av} = -2NdJm\ \tanh(2dJm\beta + B\beta) $$ 
 
-Using the same logic as before it follows that in equilibrium the order parameter for the system is given by the solution to the equation
+Using the same logic as before it follows that in equilibrium the mean field for the system is given by the solution to the equation
 
 $$ m = \tanh(2dJm\beta + B\beta)  $$
 
@@ -370,7 +370,7 @@ The variation of $m$ with $T$ is shown above, and we can see that there is no ph
 
 ## The Landau Theory for Phase Transitions: Introducing the Energy Landscape
 
-The method used to study phase transitions in the prevous section was based on the direct computation of the partition function, which in general is a tough task for most realistic models.
+The method used to study phase transitions in the prevous section was based on the direct computation of the partition function, which in general is a tough task if the mean field approximation is not made.
 There is an alternative approach to studying phase transitions, and this was discovered by Lev Landau around 1940, and is based on the computation of the Free Energy F for a system. This method significantly expanded the range of systems that could be analyzed using the methods of Statistical Mechanics and is now the de facto technique used. It allows us to go beyond the assumption made by mean field analysis, by allowing the field to actually vary as a function of position, thus resulting in a generalization of statistical mechanics called statistical field theory.
 Free Energy based methods also serve as a starting point for ways in which statistical mechanics methods were first applied in the design of Neural Networks, as discussed in the following sections.
 
@@ -381,13 +381,43 @@ $$ F_{therm} = E_{av} - TS = -T\log Z  $$
 We are going to generalize the definition of Free Energy to non-equilibrium states, which is why I have added the subscript *therm* to the formula.
 For a d-dimensional Ising Model, using the mean field approximation, Z was derived in the previous section, and is given by
 
-$$ Z = 2^N\cosh^N(2djm\beta) $$
+$$ Z = e^{-\beta NdJm^2} 2^N\cosh^N(2dJm_{eq}\beta) $$
 
 so that
 
-$$ F_{therm} = -NT\log 2 - NT\log(\cosh(2djm\beta))  $$
+$$ F_{therm} = -NdJm^2 - {N\over\beta}\log(\cosh(2dJm_{eq}\beta))  $$
 
+In these equations $m_{eq}$ is the equilibrium value of the mean field. Landau notes that this function can be defined even for the case $m$ is not the equilibrium value, thus resulting
+in the free energy $F(m)$  given by
 
+$$ F(m) = -NdJm^2 - NT\log(\cosh(2dJm\beta))  $$
+
+From thermodynamics we know that equilibrium occurs at the minimum value of $F(m)$, thus
+
+$$ {\partial F\over{\partial m}} = 0\ \ \ implies\ \ \ m_{eq} = \tanh(2dJm_{eq}\beta) $$
+
+which agrees with our earlier calculations. In Landau's theory, $m$ is called the *order parameter* since $m>0$ implies some degree of order (a fraction of the spins are pointing in the same direction), while if $m=0$ the spins are completely randomized.
+
+The next step is to understand the behavior of $F(m)$ as a function of $m$. In order to do this, we first express it as a polynomial in $m$. This is facilitated by using polynomial expansions for $\cosh x \approx 1 + {1\over 2}x^2 {1\over 4!}x^4 +...$ and $\log(1+x)\approx x - {x^\over 2} + ...$.
+Substituting in the expression for $F(m)$ we obtain
+
+$$ F(m) = -NT\log 2 + [NJd(1-2dJ\beta)]m^2 + ({2N\beta^3 J^4 d^4\over 3})m^4 + ...  $$
+
+Note that $F(m)$ is symmetric with respect to $m$. Also
+
+$$ {\partial F(m)\over{\partial m}} = 2mNJd(1-2dJ\beta) + {8m^3 N\beta^3 J^4 d^4\over 3}  $$
+
+It follows that of $F(m)$ has a single minima at $m = 0$ if $T > 2dJ$. On the other hand if $T < 2dJ$ the there are 3 minima, at
+
+$$ m = 0\ \ \ and \ \ \ \m = pm\sqrt{3(2dJ\beta - 1)\over{4(dJ\beta)^3}} $$
+
+Note the $T = 2dJ$ was identified as the critical temperature $T_c$ in the earlier analysis.
+
+![](https://subirvarma.github.io/GeneralCognitics/images/stat11.png) 
+
+Figure 10: Free Energy $F(m)$ as a function of $m$, for $T > 2dJ$ and $T < 2dJ$
+
+$F(m)$ is plotted in figure 10, and it clearly shows the effect of varying $T$ on it shape.
 
 
 
