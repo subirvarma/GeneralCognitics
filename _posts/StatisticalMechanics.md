@@ -409,7 +409,7 @@ $$ {\partial F(m)\over{\partial m}} = 2mNJd(1-2dJ\beta) + {8m^3 N\beta^3 J^4 d^4
 
 It follows that of $F(m)$ has a single minima at $m = 0$ if $T > 2dJ$. On the other hand if $T < 2dJ$ the there are 3 minima, at
 
-$$ m = 0\ \ \ and \ \ \ \m = pm\sqrt{3(2dJ\beta - 1)\over{4(dJ\beta)^3}} $$
+$$ m = 0\ \ \ and \ \ \ m = \pm\sqrt{3(2dJ\beta - 1)\over{4(dJ\beta)^3}} $$
 
 Note the $T = 2dJ$ was identified as the critical temperature $T_c$ in the earlier analysis.
 
