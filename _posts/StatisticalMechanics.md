@@ -387,7 +387,7 @@ so that
 
 $$ F_{therm} = -NdJm^2 - {N\over\beta}\log(\cosh(2dJm_{eq}\beta))  $$
 
-In these equations $m_{eq}$ is the equilibrium value of the mean field. Landau notes that this function can be defined even for the case $m$ is not the equilibrium value, thus resulting
+In these equations $m_{eq}$ is the equilibrium value of the mean field. Landau noted that this function can be defined even for the case $m$ is not the equilibrium value, thus resulting
 in the free energy $F(m)$  given by
 
 $$ F(m) = -NdJm^2 - NT\log(\cosh(2dJm\beta))  $$
@@ -398,16 +398,19 @@ $$ {\partial F\over{\partial m}} = 0\ \ \ implies\ \ \ m_{eq} = \tanh(2dJm_{eq}\
 
 which agrees with our earlier calculations. In Landau's theory, $m$ is called the *order parameter* since $m>0$ implies some degree of order (a fraction of the spins are pointing in the same direction), while if $m=0$ the spins are completely randomized.
 
-The next step is to understand the behavior of $F(m)$ as a function of $m$. In order to do this, we first express it as a polynomial in $m$. This is facilitated by using polynomial expansions for $\cosh x \approx 1 + {1\over 2}x^2 {1\over 4!}x^4 +...$ and $\log(1+x)\approx x - {x^\over 2} + ...$.
-Substituting in the expression for $F(m)$ we obtain
+The next step is to understand the behavior of $F(m)$ as a function of $m$. In order to do this, we first express it as a polynomial in $m$. This is facilitated by using polynomial expansions for 
+
+$$\cosh x \approx 1 + {1\over 2}x^2 + {1\over 4!}x^4 +...\ \ \  and\ \ \ log (1+x) \approx x - {x^2\over 2} + ...$$
+
+Substituting these in the expression for $F(m)$ we obtain
 
 $$ F(m) = -NT\log 2 + [NJd(1-2dJ\beta)]m^2 + ({2N\beta^3 J^4 d^4\over 3})m^4 + ...  $$
 
-Note that $F(m)$ is symmetric with respect to $m$. Also
+Note that $F(m)$ is symmetric with respect to $m$. Ignoring higher order terms the derivative with respect to $m$ is given by
 
 $$ {\partial F(m)\over{\partial m}} = 2mNJd(1-2dJ\beta) + {8m^3 N\beta^3 J^4 d^4\over 3}  $$
 
-It follows that of $F(m)$ has a single minima at $m = 0$ if $T > 2dJ$. On the other hand if $T < 2dJ$ the there are 3 minima, at
+It follows that $F(m)$ has a single minima at $m = 0$ if $T > 2dJ$. On the other hand if $T < 2dJ$ the there are 3 minima, at
 
 $$ m = 0\ \ \ and \ \ \ m = \pm\sqrt{3(2dJ\beta - 1)\over{4(dJ\beta)^3}} $$
 
@@ -417,9 +420,14 @@ Note the $T = 2dJ$ was identified as the critical temperature $T_c$ in the earli
 
 Figure 10: Free Energy $F(m)$ as a function of $m$, for $T > 2dJ$ and $T < 2dJ$
 
-$F(m)$ is plotted in figure 10, and it clearly shows the effect of varying $T$ on it shape.
+$F(m)$ is plotted in figure 10, and it clearly shows the effect of varying $T$ on it shape and provides an alternative explanation of how phase changes come about.
+When $T < T_c$, there are three values of $m$ at which ${\partial F(m)\over{\partial m}} = 0$, hence the system can be one og three states at equilibrium. However the case $m=) is clearly not a stable state, since even a slight change in the value of $m$ can cause the system to transition to the other two states.
 
+Note that $m$ at equilibrium can also be written as
 
+$$ m = \sqrt{{3(T_c - T)\over{(dJ)^3\beta^2} }}  $$
+
+i.e., $m$ has a quadratic variation with $T$ in the neighborhood of the critical temperature. This was also evident in figure 6 in the previous section. Even though this behavior was arrived at in the context of the Ising model, it turns out that all second order phase transitions for $d\ge 4$ also exhibit this quadratic variation irrespective of the physical material involved. For $d = 2, 3$ the exponent is not ${1\over 2}$ from experimental data, hence the Landau theory fails for $d=2,3$. The correct exponents for these cases were computed with the help of the renormalization group theory in the 1970s.
 
 
 
