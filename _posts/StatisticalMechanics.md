@@ -125,7 +125,11 @@ There is another macro-quantity that we will need later, and that is the Helmhol
 
 $$ F = E_{av} -  TS $$ 
 
-From the formula for entropy, it is easy to see that $F = -T\log Z$.
+From the formula for entropy, it is easy to see that $F = -T\log Z$. Since $S = \log Z + \beta E_{av}$, it follows that
+
+$$  S = \beta(E_{av} - F) $$
+
+This formula justifies the use of $F$ as the amount of useful energy that can be extracted from the system at constant temperature, since the entropy $S$, which is a measure of the amount of disorder is proportional to the diference between the total energy $E_{av}$ and the useful energy $F$.
 
 There is an useful relation between the partition functions for two or more independent systems that we will use later. Since the partition function for a single system is given by $Z = \sum_i e^{-\beta E_i}$, it follows that for two systems with partition functions  is given by $Z_1 = \sum_i e^{-\beta E_i}$ and $Z_2 = \sum_i e^{-\beta E'_i}$
 
@@ -134,6 +138,8 @@ $$ Z = \sum_i\sum_j  e^{-\beta (E_i + E'_j)}  $$
 which can also be written as the product of the original partition functions as follows
 
 $$ Z = \sum_i e^{-\beta E_i} \sum_j e^{-\beta E'_j}  = Z_1 Z_2 $$
+
+These are the classic formulae of statistical mechanics and have been around since the time of Boltzmann in the latter part of the 19th century. They represent a remrkable advance in our knowledge of the world, since they connect a quantity $Z$ which is a function of invisible microscopic properties of the system, with quantities such as $E_{ev}, T$ and $S$ are macroscopic quantities that we can measure with our instruments. Remember that when these furmulae were discovered atomic theory was still a controversial hypothesis among physicists, in fact Boltzmann was at the receiving end of a lot of scorn due to this. The discoveries of the 20th century validated him thinking, and in fact statistical mechanics served as a prototype for some of the great theories that were discovered, including quantum mechanics (by way of Planck and his theory of black body radiation) and quantum field theory. Late in the 20th century Hawking and others showed that Black Holes possess macroscopic thermodynamic properties such as temperature and entropy.
 
 If this had been the usual description of statistical mechanics, then at this point I would have introduced the model for a ideal gas, and then apply the formulae tht we just derived to compute its average energy and entropy etc. But we are going to take a slightly different path and instead analyze a system used to model ferro magnetism, called the Ising model. This system is less complex than the ideal gas, since the atoms are fixed in place rather than zippling around a box, but at the same time it enables us introduce the concept of coupling between atoms in a siimpler way than for the case of a gas. In particular coupling between atoms leads to phase transitions which can be demonstrated in the Ising model without getting into very complex analysis.
 
