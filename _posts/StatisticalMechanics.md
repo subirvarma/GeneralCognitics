@@ -66,14 +66,19 @@ $$ f_{av} = -{\partial\log Z\over\partial\beta} \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 
 The derivation of (3) is a straightforward exercise in optimization using the method of Lagrange Multipliers in which we maximize the entropy given by (2), subject to the constraints (1) and $\sum_i p_i = 1$.
 The denominator in this equation is a famous quantity called the partition function in statistical mechanics, and is denoted by $Z$ while the distribution itself is called the Boltzmann distribution. Note that the maximum entropy distribution for this case is not given by the uniform distribution $p_1={1\over n}$, and this is due to the fact that the $p_i$ values are constrained by the average $f_{av}$ from equation (1). From the probability theory point of view, the maximum entropy estimate solved an old problem from the time of Laplace, namely what are the best probability estimates given insufficient information. Laplace recommended the use of of the uniform distribution in this situation. The maximum entropy technique allows us to improve upon this by incorporatong other pieces of information such as the average, if they are available.
 
+![](https://subirvarma.github.io/GeneralCognitics/images/stat13.png) 
+
+Figure 0: Average spin $\sigma_{av}$ as a function of $\beta = {1\over T}$
+
 Up until this point, the discussion has been purely in terms of probability theory but now we are now going to use this to model a physical system. 
-Consider a system that is in equilibrioum at temperature $T$. This can be acheived by putting the system in an infinite heat bath at temperature T, and assuming that it can exchange energy with the heat bath but not particles.
-Assume that it can be in one of N microstates, such that in microstate $i$ it has energy $E_i$. Also define $p_i$ as the equilibrium probability that the system is in state microstate $i$.
+Consider a system that is in equilibrium at temperature $T$. This can be achieved by putting the system in an infinite heat bath at temperature T, and assuming that it can exchange energy with the heat bath but not particles (see above figure). The energy $E$ of the system is not fixed, but can fluctuate as shown in the right hand side of the figure. This fluctuation is due to the conenergy exchange with the heat bath.
+
+Assume that the system can be in one of N microstates, such that in microstate $i$ it has energy $E_i$. Also define $p_i$ as the probability that the system is in state microstate $i$.
 For example the system may be ferromagnet consisting of N atoms, in which case a microstate would correspond to a particular joint orientation of their individual spins. Define the entropy of the system as
 
 $$ S = -\sum_i p_i \log p_i $$
 
-and its average energy in equilibrium as 
+and its average energy as 
 
 $$ E_{av} = \sum_i p_i E_i   $$
 
@@ -85,7 +90,7 @@ This can be explained as follows: In the equilibrium state the number of microst
 
 As an example consider a piece of iron with N atoms, each of which can have two spin orientation, up or down. A particular orientation of all the N spins together is a microstate for this system, and there are $2^N$ possible microstates. The energy $E_i$ of a microstate is a function of $(P,Q)$, where $P$ is the number of atoms with up spin and $Q = N - P$ is the number with down spin. This system, which is called the Ising model, is analysed in more detail in the following sections.
 
-The maximum entropy principle tells us that that our best estimates of the $p_i$ are obtained by solving the optimization problem of maximizing $S$ subject to the constraints (1) and $\sum_i p_ =1 $. This can be done by the method of Lagrange multipliers as the maximization of $L$ given by
+The maximum entropy principle tells us that that our best estimates of the $p_i$ are obtained by solving the optimization problem of maximizing $S$ subject to the constraints (1) and $\sum_i p_i = 1$. This can be done by the method of Lagrange multipliers as the maximization of $L$ given by
 
 $$ L = -\sum_i p_i \log p_i + \alpha(\sum_i p_i - 1) +\beta(E_{av} - \sum_i p_i E_i)  $$
 
@@ -121,16 +126,6 @@ We are using the partial derivative since in the more general case S may be func
 
 Hence temperature enters statistical mechanics as the inverse of the Lagrange multiplier $\beta$ used to maximize the entropy! Note that we have derived some of the most important formulae in statistical mechanics by starting from the concept of entropy alone, which is quite amazing! 
 
-There is another macro-quantity that we will need later, and that is the Helmholtz Free Energy $F$, defined as
-
-$$ F = E_{av} -  TS $$ 
-
-From the formula for entropy, it is easy to see that $F = -T\log Z$. Since $S = \log Z + \beta E_{av}$, it follows that
-
-$$  S = \beta(E_{av} - F) $$
-
-This formula justifies the use of $F$ as the amount of useful energy that can be extracted from the system at constant temperature, since the entropy $S$, which is a measure of the amount of disorder is proportional to the diference between the total energy $E_{av}$ and the useful energy $F$.
-
 There is an useful relation between the partition functions for two or more independent systems that we will use later. Since the partition function for a single system is given by $Z = \sum_i e^{-\beta E_i}$, it follows that for two systems with partition functions  is given by $Z_1 = \sum_i e^{-\beta E_i}$ and $Z_2 = \sum_i e^{-\beta E'_i}$
 
 $$ Z = \sum_i\sum_j  e^{-\beta (E_i + E'_j)}  $$
@@ -142,6 +137,30 @@ $$ Z = \sum_i e^{-\beta E_i} \sum_j e^{-\beta E'_j}  = Z_1 Z_2 $$
 These are the classic formulae of statistical mechanics and have been around since the time of Boltzmann in the latter part of the 19th century. They represent a remrkable advance in our knowledge of the world, since they connect a quantity $Z$ which is a function of invisible microscopic properties of the system, with quantities such as $E_{ev}, T$ and $S$ are macroscopic quantities that we can measure with our instruments. Remember that when these furmulae were discovered atomic theory was still a controversial hypothesis among physicists, in fact Boltzmann was at the receiving end of a lot of scorn due to this. The discoveries of the 20th century validated him thinking, and in fact statistical mechanics served as a prototype for some of the great theories that were discovered, including quantum mechanics (by way of Planck and his theory of black body radiation) and quantum field theory. Late in the 20th century Hawking and others showed that Black Holes possess macroscopic thermodynamic properties such as temperature and entropy.
 
 If this had been the usual description of statistical mechanics, then at this point I would have introduced the model for a ideal gas, and then apply the formulae tht we just derived to compute its average energy and entropy etc. But we are going to take a slightly different path and instead analyze a system used to model ferro magnetism, called the Ising model. This system is less complex than the ideal gas, since the atoms are fixed in place rather than zippling around a box, but at the same time it enables us introduce the concept of coupling between atoms in a siimpler way than for the case of a gas. In particular coupling between atoms leads to phase transitions which can be demonstrated in the Ising model without getting into very complex analysis.
+
+### Free Energy
+
+There is another macro-quantity that we will need later, and that is the Helmholtz Free Energy $F$, defined as
+
+$$ F = E_{av} -  TS $$ 
+
+From the formula for entropy, it is easy to see that 
+
+$$   F = -T\log Z   $$
+
+From this equation you can start to see why $F$ might be an important quantity in statistical mechanics. We saw earlier that the partition function $Z$ plays a vital role as the connector between microscopic properties of a system and its macroscopic behavior. The equation above is essentially saying that $F$ and $Z$ are the same thing. It can be re-written as
+
+$$ e^{-\beta F} = \sum_i e^{-\beta E_i} $$
+
+This equation shows that $F$ is a macro distillation of all the microscopic energy interactions within the system. 
+
+There is another important use of the Free Energy, which is as a way to identify the thermal equilibrium state for the system. Note that the formulae for $E_{ev}, S$ and $F$ shown above hold whether the system is in a state of equilibrium or not. So how would we characterize the state of thermal equilibrium?
+
+Since $S = \log Z + \beta E_{av}$, it follows that
+
+$$  S = \beta(E_{av} - F) $$
+
+This formula justifies the use of $F$ as the amount of useful energy that can be extracted from the system at constant temperature, since the entropy $S$, which is a measure of the amount of disorder is proportional to the diference between the total energy $E_{av}$ and the useful energy $F$.
 
 ## Models for Magnetism
 
