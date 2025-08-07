@@ -154,13 +154,15 @@ $$ e^{-\beta F} = \sum_i e^{-\beta E_i} $$
 
 This equation shows that $F$ is a macro distillation of all the microscopic energy interactions within the system. 
 
-There is another important use of the Free Energy, which is as a way to identify the thermal equilibrium state for the system. Note that the formulae for $E_{ev}, S$ and $F$ shown above hold whether the system is in a state of equilibrium or not. So how would we characterize the state of thermal equilibrium?
+There is another important use of the Free Energy, which is as a way to identify the thermal equilibrium state for the system. Note that the formulae for $E_{ev}, S$ and $F$ shown above hold whether the system is in a state of equilibrium or not. So how can we characterize the state of thermal equilibrium? From the Second Law of Thermodynamics we know that equilibrium is characterized by the maximization of entropy, but note that this is the entropy of the system plus that of its surroundings. It turns out that equilibrium can also characterized as the state at which the free energy of the system is minimized. In order to see this consider a system that starts at some temperature $T$ and also ends at the same temperature, but in the process draws an amount of heat equal to $Q$ from the heat bath. From the Conservation of Energy it follows that $\Delta E_{system} = Q$ Also the change in entropy for the heat bath is $\Delta S_{bath} = -{Q\over T}$. From the Second Law since $\Delta S_{bath} + \Delta S_{system} \ge 0$ it follows that $\Delta S_{systam} \ge {Q\over T}$. Thus
 
-Since $S = \log Z + \beta E_{av}$, it follows that
+$$   \Delta F_{system} = \Delta E_{system} - T\Delta S_{system} \le Q  - T{Q\over T} = 0 $$
 
-$$  S = \beta(E_{av} - F) $$
+so that 
 
-This formula justifies the use of $F$ as the amount of useful energy that can be extracted from the system at constant temperature, since the entropy $S$, which is a measure of the amount of disorder is proportional to the diference between the total energy $E_{av}$ and the useful energy $F$.
+$$ \Delta F_{system} \le 0 $$
+
+Hence a system that only interacts with its surroundings through the exchange of heat, the free energy never increases. As the system sttles down towards equilibrium, the free energy decreases until it reaches a minimum when equilibrium is reached. Hence in an isolated system kept at contatnt temperature (and volume), the equilibrium is the state of minimum Helmholtz free energy. This criteris is very powerful since it depends on the just system, and is independent of the surroundings.
 
 ## Models for Magnetism
 
