@@ -151,6 +151,7 @@ There is another macro thermodynamic quantity that we will need later, and that 
 
 $$ F = E_{av} -  TS $$ 
 
+This quantity is called free energy since it is the portion of system energy that can be used to do useful work, the portion $TS$ due to entropy is pure disorder which cannot be used to do work.
 From the formula for entropy, it is easy to see that 
 
 $$   F = -T\log Z   $$
