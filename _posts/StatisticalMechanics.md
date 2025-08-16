@@ -304,7 +304,7 @@ $$ E = -J\sum_i\sum_j(m_i m_j + m_i\delta_j + m_j\delta \sigma_i)  $$
 
 According to the mean field approximation $m_i = m_j = m$, i.e., the mean value value of the spins is the same everywhere. This leads to
 
-$$ E = -J\sum_i\sum_j(m + m(\sigma_j - m) + m(\sigma_i - m)) = -J\sum_i\sum_j(2\sigma_j - m) $$
+$$ E = -J\sum_i\sum_j(m + m(\sigma_j - m) + m(\sigma_i - m))  $$
 
 From translational inveriance of the atoms it follows that
 
@@ -320,22 +320,21 @@ The expression for energy simplifies to
 $$  E = -dJm\sum_{i=1}^N(2\sigma_i -m) $$
 $$    = {NdJm^2} - 2dJm\sum_i\sigma_i $$
 
-But this is simply the total energy level for a configuration of independent atoms in the presence of a magnetic field with intensity $2dJm$.
-Leveraging the solution for this model from two sections ago, it follows that the partition function and the average energy for the system are given by
+But this is simply the total energy level for a configuration of independent or paramagnetic atoms in the presence of a magnetic field with intensity $2dJm$.
+Leveraging the solution for this model from two sections ago, it follows that the partition function is given by
 
 $$ Z = e^{-\beta NdJm^2} 2^N\cosh^N(2dj\beta m) $$
 
 and the average energy for the system is given by
 
-$$ E_{av} = {\partial\log Z\over{\partial\beta}} = -2NdJm\tanh(2dj\beta m) $$ 
+$$ E_{av} = {\partial\log Z\over{\partial\beta}} = -2NdJm\ \tanh(2dj\beta m) $$ 
 
-From this it follows that the average spin for an atom is given by
+From this it follows that the average spin for the system is given by
 
 $$ \sigma_{av} = \tanh(2dJ\beta m) $$
 
-But in equilibrium the average spin for an atom should be equal to the mean field value, i.e., $\sigma_{av} = m$. 
-$m$ is called the order parameter, since its value determines the degree of order present in the spins of the system.
-Hence the following equation should be satisfied
+But in equilibrium the average spin should be equal to the mean field value, i.e., $\sigma_{av} = m$. 
+Hence the following equation should be satisfied in thernal equilibrium
 
 $$ m = \tanh(2dJ\beta m) $$
 
@@ -347,30 +346,30 @@ which can also be written as
 
 $$ {yT\over{2dJ}} = \tanh\ y  $$
 
-The solution $y$ to this equation corresponds to the intersection of the line $z_1 = {yT\over{2dJ}}$ with the function $z_2 = \tanh y$, 
+The solution $y$ to this equation corresponds to the intersection of the line $z_1 = {yT\over{2dJ}}$ with the function $z_2 = \tanh\ y$, 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat4.png) 
 
-Figure 4: $z_1 = \tanh\ y$ and $z_2 = {yT\over{2dJ}}$ when T is high
+Figure 4: $z_1 = {yT\over{2dJ}}$ and $z_2 = \tanh\ y$ when $T > 2dJ$ 
 
-These two functions are plotted in figure 4 for the case when the temperature $T$ is very high. In this case the line $z_2$ only intersects $z_1$ at $y=0$ which corresponds to $m=0$, i.e., there is no preferred orientation for the spins. This is due to the fact that the high temperature introduces thermal energy that causes some of the spins to be misaligned with the mean field.
+These two functions are plotted in figure 4 for the case when the temperature $T$ is very high. In this case the line $z_1$ only intersects $z_2$ at $y=0$ which corresponds to $m=0$, i.e., there is no preferred orientation for the spins. This is due to the fact that the high temperature introduces thermal energy that causes some of the spins to be misaligned with the mean field.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat5.png) 
 
 Figure 5: $\tanh\ y$ and ${yT\over{2dJ}}$ when $T < 2dJ$
 
-However as $T$ is reduced, then ultimately the straight line does intersect the $\tanh$ curve as shown in figure 5, and there is a critical temperature $T_c = 2dJ$ at which the slope of the line is one, which is the same as the slope of $\tanh$ at the origin. Any increase in $T$ beyond this point causes the two curves to intersect. When this happens there exists a second value of $m'$ which is non-zero, and this corresponds to magnetization of the material. The amount of magnetization gradually increases until at very low temperatures it approaches $m' = +$ or $-1$. 
+However as $T$ is reduced, then ultimately the straight line does intersect the $\tanh$ curve as shown in figure 5, and there is a critical temperature $T_c = 2dJ$ at which the slope of the line is one, which is the same as the slope of $\tanh$ at the origin. Any decrease in $T$ beyond this point causes the two curves to intersect. When this happens there exist two other non-zero values for m, say $m'$ and $-m'$, and this corresponds to magnetization of the material. The amount of magnetization gradually increases until at very low temperatures it approaches $m = +1$ or $-1$. 
 
-Since there are now two solutions at average spins $0$ and $m'$, the question arises which one does the system choose. 
+Since there are now three possible solutions at average spins $0$ and $m'$ and $-m'$, the question arises: which one does the system choose?. 
 If the system starts from a state of random spins at $T > T_c$, then it stays in this state even after the $T < T_c$, until something causes the spins to align. This is the phenomenon of phase change, and it can be triggered by the presence of an external magnetic field.
-Thus the solution for $m' = 0$ is unstable, and the system can tip into the state $m' = +1$ or $m' = -1$ very easily if $T<T_c$, as shown next.
+Thus the solution for $m = 0$ is unstable, and the system can tip into the state $m = +1$ or $m = -1$ very easily if $T<T_c$, as shown next.
 This analysis also implies that if we start from a low temperature state and gradually increase temperature, then the magnetization initially decreases and then abruptly switches off when the temperature becomes greater than $T_c$.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat9.png) 
 
 Figure 6: Variation of mean field $m$ with $T$
 
-This kind of phase transition in which there is an initial gradual decrease in mean field, followed by an abrupt change to zero beyond the critical temperature, is referred to as a second order phase transition, and is illustrated in figure 6.
+This kind of phase transition in which there is an initial gradual decrease in the magnetic field, followed by an abrupt change to zero beyond the critical temperature, is referred to as a second order phase transition, and is illustrated in figure 6.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat6.png) 
 
@@ -397,16 +396,16 @@ $$ m = \tanh(2dJm\beta + B\beta)  $$
 
 Figure 8: Graphic solution to ${Ty\over{2dJ}} = \tanh(y + B\beta)$
 
-The solution lies at the intersection of the curves
-$z_1 = \tanh(y + B\beta)$ and $z_2 = {yT\over{2dJ}}$, and is plotted in figure 8. The $\tanh$ function has now shifted to the left if $B>0$, and as a result there is only one solution $m' > 0$ to the equation, i.e., in the presence of the external magnetic field the solution at $m'=0$ goes away (except for the case when $\beta=0$). 
-This means that if we were to start with the system in which $T < T_c$ with $B=0$, then we saw earlier there are two possible values for $m$, i.e. $m = 0$ or $m=m'$.
-However if we switch  on even a tiny amount of external magnetic field $B$, then it instantaneously causes the system to shift to $m=m'>0$ since the solution $m=0$ is no langer allowed due to the shist of the $\tanh$ curve to the left i.e., the system becomes magnetized. This is a phase change, and happens in ferromagnetic materials. Unlike for paramagnetic materials, the system stays in the magnetized state even after the external field is switched off. If the external field were pointing in the opposite direction, then it would have caused the system to flip to $m'=-1$.
+The solution lies at the intersection of the curves $z_1 = {yT\over{2dJ}}$ and
+$z_2 = \tanh(y + B\beta)$, and is plotted in figure 8. The $\tanh$ function has now shifted to the left if $B>0$, and as a result there is only one solution $m' > 0$ to the equation, i.e., in the presence of the external magnetic field the other two solutions away (except for the case when $\beta=0$). 
+This means that if we were to start with the system in which $T < T_c$ with $B=0$, then we saw earlier there are three possible values for $m$, i.e. $m = 0$ or $m=m'$ or $m=-m'$.
+However if we switch  on even a tiny amount of external magnetic field $B$, then it instantaneously causes the system to shift to $m=m'$ since the other two solutions are no langer allowed due to the shist of the $\tanh$ curve to the left i.e., the system becomes magnetized. This is a phase change, and happens in ferromagnetic materials. Unlike for paramagnetic materials, the system stays in the magnetized state even after the external field is switched off. If the external field were pointing in the opposite direction, then it would have caused the system to flip to $m=-m'$.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat10.png) 
 
 Figure 9: Variation of $m$ with $T$ in the presence of an external magnetic field $B$
 
-The variation of $m$ with $T$ is shown above, and we can see that there is no phase transition as $T$ is varied. Howvever a phase transition does happen when the field $B$ is fliped from positive to negative or vice versa, and it causes an instantaneous change in the sign of $m$ as well. This is an example of a first order phase transition.
+The variation of $m$ with $T$ for both $B>0$ and $B<0$ is shown above, and we can see that there is no phase transition. However a phase transition does occur when the field $B$ is fliped from positive to negative or vice versa, and it causes an instantaneous change in the sign of $m$. This is an example of a first order phase transition since there is a sudden change in the phase.
 
 ## The Landau Theory for Phase Transitions: Introducing the Energy Landscape
 
