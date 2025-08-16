@@ -186,7 +186,9 @@ where the spin $\sigma = +1$ if the magnetic moment of the spin aligned with the
   - In paramagnetic materials, the individual spins are decoupled from one another. As a result the material only exhibits magnetic properties in the presence of an external field,
   - In ferromagnetic materials on the other hand, individual spins are coupled with those of their neighbors, as a result of which the material remans magnetized even in the absence of the external field.
 
-The first model for magnetic materials was proposed by Lenz in the early 1920s. He gave the problem of analyzing the model to his PhD student Ising, who was able to solve the problem for the case when the atoms are arranged in $d = 1$ dimension, by using the tools of statistical mechanics. The case $d \ge 2$ doesn't have a simple exact solution, but it can be approximated by the mean field approximation. It was shown that models with dimension $d\ge 2$ exhibit phase transitions, which is defined as a sudden change in the properties of a material when the temperature or one of the physical variables is reduced (or increased) beyond a certain threshold. Phase transitions is the most interesting property in the physics of interacting particles and the Ising model is simplest system that exhibits this behavior. As a result it has become an extremely important model, and all manners of systems have been analyzed using variations of this model. It was later found out that the mathematics of Ising models and that of quantum field theory are the same, which led to a lot of cross fertilization between the two fields. In addition to Lenz and Ising, the names most associated with this model are the Russian physicists Landau and Ginzburg and Americans Wilson and Kadanoff.
+The first model for magnetic materials was proposed by Lenz in the early 1920s. He gave the problem of analyzing the model to his PhD student Ising, who was able to solve the problem for the case when the atoms are arranged in $d = 1$ dimension, by using the tools of statistical mechanics. The case $d = 2$ doesn't have a simple exact solution, and it was not solved until the 1940s, and the case $d\ge 3$ is still unsolved.
+However it can be shown that models with $d\ge 2$ exhibit phase transitions, which is defined as a sudden change in the properties of a material when the temperature or one of the physical variables is reduced (or increased) beyond a certain threshold. 
+Phase transition is the most interesting property in thermodynamics and the Ising model is simplest system that exhibits this behavior. As a result it has become an extremely important model, and all manners of systems have been analyzed using variations of this model. It was later found out that the mathematics of Ising models and that of quantum field theory are the same, which led to a lot of cross fertilization between the two fields. In addition to Lenz and Ising, the names most associated with this model are the Russian physicists Landau and Ginzburg and Americans Wilson and Kadanoff.
 
 ### Model for Paramagnetism
 
@@ -200,19 +202,19 @@ Hence the partition function for a single atom at temperature $T = {1\over\beta}
 
 $$ Z = e^{\beta j} + e^{-\beta j} = 2 \cosh(\beta j) $$
 
-Since the atoms don't interact with each other, it follows that the partition function for a collection of N atoms is given by
+Now consider a system with $N$ atoms. Since the system is paramagnetic, the atoms don't interact with each other, it follows that the partition function for a collection of N atoms is given by
 
 $$ Z = 2^N\ \cosh^N(\beta j)  $$
 
-so that $\log Z = N\log 2 + N\log[\cosh(\beta j)]$.  It follows that the average energy $E_{av}$ for the system of $N$ atoms is given by
+so that $\log Z = N\log 2 + N\log[\cosh(\beta j)]$.  It follows that the average energy $E_{av}$ is given by
 
 $$ E_{av} = -{\partial\log Z\over\partial\beta} = - Nj\ \tanh(\beta j) $$
 
-so that the average energy $e_{av}$ for a single atom at temperate $T$ and in the presence of the magnetic field with coupling $j$ is
+so that the average energy  density $e_{av}$ at temperate $T$ (in the presence of the magnetic field with coupling $j$) is given by
 
 $$ e_{av} = {E_{av}\over N} = -j\ \tanh(\beta j)  $$
 
-If the average spin for a single atom is $\sigma_{av}$ then since $e_{av} = -j\sigma_{av}$, it follows that
+If the average spin for the system is $\sigma_{av}$ then since $e_{av} = -j\sigma_{av}$, it follows that
 
 $$ \sigma_{av} = \tanh(\beta j) $$
 
@@ -220,7 +222,7 @@ $$ \sigma_{av} = \tanh(\beta j) $$
 
 Figure 1: Average spin $\sigma_{av}$ as a function of $\beta = {1\over T}$
 
-A graph of the average spin $\sigma_{av}$ as function of the inverse temperature $\beta$ is shown in figure 1,
+A graph of the average spin $\sigma_{av}$ as function of the inverse temperature $\beta$ is shown in figure 1.
 Since we are considering positive temperatures only, we will focus on the half plane $\beta > 0$. At very low temperatutes $\beta\rightarrow\infty$, and as a result the average spin become 1 and the average energy is minimized at $e_{av} = -1$. Hence at low temperatures each atom becomes perfectly aligned with the external magnetic field, and this is lowest energy configuration. Conversely at high temeperatures $\beta\rightarrow 0$ and as as result the average spin goes to zero, and so does the average energy. This implies that at high temperatures the system is no longer magnetized and the spins are randomly aligned in the up or down direction. As the temperature is reduced, the spins start to gradually align with the external field, but note that there is no phase change, i.e., a sudden shift from non-alignment to alignment, it happens gradually. On the other hand, there is a phase change if the external magnetic field is switched from $+B$ to $-B$. This causes the average spin to flip to $\sigma_{av} = -\tanh(\beta j)$ (even though the average energy remains the same). This is a sudden change in the average spin, and is referred to as a phase transition of type 1. 
 
 ### Ising Model in One Dimension
@@ -234,7 +236,7 @@ The Ising model incorporates interactions between neighboring atoms and the one 
 $$  E = -J\sum_i \sigma_i\sigma _{i+1} $$
 
 Note that unlike the previous case, there is no external magnetic field present.
-Each of terms in this expression in minimized when $\sigma_i = \sigma_{i+1}$, i.e., the spins are aligned together either with $\sigma_i = \sigma_{i+1} = 1$ or $\sigma_i = \sigma_{i+1} = -1$, which implies that there are two configurations with the minimum energy value, which correspond to all the spins pointing up or all the spins pointing down. The partition function for this system is given by
+Each of the terms in this expression in minimized when $\sigma_i = \sigma_{i+1}$, i.e., the spins are aligned together either with $\sigma_i = \sigma_{i+1} = 1$ or $\sigma_i = \sigma_{i+1} = -1$, which implies that there are two configurations with the minimum energy value, which correspond to all the spins pointing up or all the spins pointing down. The partition function for this system is given by
 
 $$ Z = \sum_{all\ configs} e^{-j\beta\sum_i \sigma_i\sigma _{i+1}}  $$
 
@@ -261,7 +263,7 @@ so that
 
 $$ Z =  2^N\cosh^{N-1}(\beta j) $$
 
-It follows that the average $\mu_{av}$ value for any single connection is given by
+It follows that the average $\mu_{av}$ is given by
 
 $$ \mu_{av} = (\sigma_i\sigma_{i+n})_{av} = \tanh(\beta j) $$
 
