@@ -280,9 +280,9 @@ This implies that even at very low temperatures, for example for $\beta = 0.9999
 
 Figure 3: The Ising model in two dimensions
 
-Spontaneous magnetisation happens in a system when the spin state of even a single atom propagates through the material and re-orients all the spins. We just saw that in one dimension this does not happen, since the correlation between spins fades the further away we get, irrespective of the temperature. One way of understanding this is by noting that the spin at a particular atom has at most two spins which influences its own spin. However this is not the case in higher dimensions. For example for $d=2$, each atom has four neighbors, and as a result if the majority of their spins are aligned in a certain direction, then it influences the target atom to align inthe same direction. Hence he presence of multiple neighbors acts as a kind of error corerction when choosing the spin value.
+Spontaneous magnetisation happens in a system when the spin state of even a single atom propagates through the material and re-orients all the spins. We just saw that in one dimension this does not happen, since the correlation between spins fades the further away we get, irrespective of the temperature. One way of understanding this is by noting that the spin at a particular atom has at most two other spins which directly infuence it, i.e., those of its immediate neighbors. However this is not the case in higher dimensions. For example for $d=2$, each atom has four neighbors, and as a result if the majority of their spins are aligned in a certain direction, then it influences the target atom to align in the same direction. Hence the presence of multiple neighbors acts as a kind of error corection when choosing the spin value.
 
-Unfortunately the exact analysis of Ising models for $d\ge 2$ is extremely difficult, even for the case $d = 2$. However there exists a simple approximation method, called mean field analysis, that preserves important properties such as phase transitions in the model.
+Unfortunately the exact analysis of Ising models for $d\ge 2$ is extremely difficult. However there exists a simple approximation method, called mean field analysis, that preserves important properties such as phase transitions.
 
 The energy level for a single atom is given by
 
@@ -304,7 +304,7 @@ $$ E = -J\sum_i\sum_j(m_i m_j + m_i\delta_j + m_j\delta \sigma_i)  $$
 
 According to the mean field approximation $m_i = m_j = m$, i.e., the mean value value of the spins is the same everywhere. This leads to
 
-$$ E = -J\sum_i\sum_j(m^2 + (\sigma_j - m) + m(\sigma_i - m))  $$
+$$ E = -J\sum_i\sum_j(m + m(\sigma_j - m) + m(\sigma_i - m)) = -J\sum_i\sum_j(2\sigma_j - m) $$
 
 From translational inveriance of the atoms it follows that
 
@@ -313,7 +313,7 @@ $$ E = -Jm\sum_i\sum_j(m^2 + 2(\sigma_i - m))  $$
 Note that $\sum_i\sum_j = {1\over 2}\sum_i\sum_{j\in nn(i)}$ where the ${1\over 2}$ factor avoids double counting pairs of sites and $nn(i)$ is the number of nearest neighbors of $i$. 
 Since there is no dependence on $j$ in the summation, the inner sum is simply $\sum_{j\in nn(i)} = 2d$, where $2d$ is the number of neighbors for any atom, and $d$ is the number of dimensions. This leads to
 
-$$ \sigma_i\sigma_j \rightarrow d\sum_{i=1}^N $$
+$$ \sum_i\sum_j \rightarrow d\sum_{i=1}^N $$
 
 The expression for energy simplifies to 
 
