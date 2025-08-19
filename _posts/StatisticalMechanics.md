@@ -505,20 +505,19 @@ Back in the 1950s scientists were actively investigating the properties of new m
 - Below the critical temperature, the material become magnetic. However, after gradually increasing as the temperature was further reduced, the magnetisation hit a limit at a finite temperature and stayed there even at lower temperatures.
 
 This was a new kind of magnetic behavior not seen before, and soon physicists came up with an explanation for it. As shown in figure 12, all the spins of ferromagnetic materials tend to align at lower temperatures, while those in anti-ferromagnetic also tend to align but in opposite directions. Spin Glasses on the other hand do not exhibit any such regularity. Even at low temperatures, their spins can have different orientations as shown in the right hand side of the figure, and once a particular orientation is reached, it remains frozen as the temperature is further reduced towards zero. Hence some of the interactions are ferromagnetic (shown in blue), while others are anti-ferromagnetic (shown in red).
-It seems that the presence of the copper atoms in the spin glass interfere with the tendency of iron atoms to try to line up as temperature decreases. This random orientations of frozen spins is said to be "dis-ordered". In the same way that an amorphous solid like window glass doesn’t have an orderly crystal structure, a spin glass doesn’t have an orderly magnetic structure. But is there any structural law that these seeemingly randon frozen spin configurations obey? This turned out to be a very difficult theoretical problem, and the solution did not emerge for another three decades.
-
+It seems that the presence of the copper atoms in the spin glass interfere with the tendency of iron atoms to try to line up as temperature decreases. This random orientations of frozen spins is said to be "dis-ordered". In the same way that an amorphous solid like window glass doesn’t have an orderly crystal structure, a spin glass doesn’t have an orderly magnetic structure. But is there any structural law that these seeemingly random frozen spin configurations obey? This turned out to be a very difficult theoretical problem, and the solution did not emerge for another three decades.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat15.png) 
 
 Figure 13: Ordering of Spins
 
-
+Systems can be arranged in a continuum as shown in figure 13, with systems exhibiting complete order (such as a crystal) on the left hand side, and systems that exist in a completely disordered state (such as a gas) on the right hand side. These two extremes are relatively easy to model, as we have seen in our sections on statistical mechanics. However since spin glasses exist in the in-between space of partial order, whose structure does not repeat, they are particularly difficult to analyze. Many systems, especially those that fall outside the realm of physics, such as the behavior of crowds or road traffic, fall into this in-between category. Hence if the spin glass system can be solved, then it can lead greater understanding in multiple other areas.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat16.png) 
 
 Figure 14: Energy Landscape in Spin Glasses
 
-
+Something that was realized pretty early in the study of spin glasses is that below the critical temperature, their energy landscape is quite unlike that for magnetic ferromagnetic materials. It consists of multipe peaks and valley as shown in figure 14.
 
 ### Spin Glass Models: Edwards Anderson (EA) and Sherrington Kirkpatrick (SK) Models
 
