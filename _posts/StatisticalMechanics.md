@@ -490,18 +490,53 @@ Note that this expression is no longer symmetric in $m$ sue to the presence of o
 
 Figure 11: Free Energy $F(m)$ as a function of $m$, for $B < 0$, $B = 0$ and $B > 0$
 
-The shape of $F(m)$ as a function of $B$ is shown in figure 11, and illustrates a first order phase transition. When $B\neq 0$, $F(m)$ exhibits an asymmetric shape as function of $m$, such that for $B>0$ the minima that occurs for $m>0$ is deeper than that for $m<0$ (and vice versa if $B<0$). The shallower minima corresponds to a meta-stable state, and the system transitions to the more stable deeper minima by traversing the energy barrier between the two. If the sign of $B$ is flipped, then it causes an instantaneous change in the magnetization $m$ which also changes sign, and this is characteristic of first order phase transitions.
+The shape of $F(m)$ as a function of $B$ is shown in figure 11, and illustrates a first order phase transition. When $B\neq 0$, $F(m)$ exhibits an asymmetric shape as function of $m$, such that for $B>0$ the minima that occurs for $m>0$ is deeper than that for $m<0$ (and vice versa if $B<0$). The shallower minima corresponds to a meta-stable state, and the system transitions to the more stable deeper minima by traversing the energy barrier between the two. If the sign of $B$ is flipped, then it causes an instantaneous change in the magnetization $m$ which also changes sign, and this is characteristic of first order phase transitions.           
+
+
+## Spin Glass Models: Frozen Complexity
+
+![](https://subirvarma.github.io/GeneralCognitics/images/stat14.png) 
+
+Figure 12: Spin Orientation in Ferromagetic, Anti-Ferromagnetic and Spin Glass materials
+
+Back in the 1950s scientists were actively investigating the properties of new materials created as a result of mixing two or more elements. This was a fruitful avenue of research and resulted in the discovery of semiconductors, that were created by adding impurities such as phosphorus to silicon. In the same spirit a group at Bell Labs created a new material by adding ferromagnetic atoms, such as iron, to a conducting substrate, such as copper. When they studied the magnetic properties of this material as a function of temperature, they found something interesting. 
+
+- When the temperature exceeded some critical point, there was no magnetism detected, which is just as in ferromagnetic materials
+- Below the critical temperature, the material become magnetic. However, after gradually increasing as the temperature was further reduced, the magnetisation hit a limit at a finite temperature and stayed there even at lower temperatures.
+
+This was a new kind of magnetic behavior not seen before, and soon physicists came up with an explanation for it. As shown in figure 12, all the spins of ferromagnetic materials tend to align at lower temperatures, while those in anti-ferromagnetic also tend to align but in opposite directions. Spin Glasses on the other hand do not exhibit any such regularity. Even at low temperatures, their spins can have different orientations as shown in the right hand side of the figure, and once a particular orientation is reached, it remains frozen as the temperature is further reduced towards zero. Hence some of the interactions are ferromagnetic (shown in blue), while others are anti-ferromagnetic (shown in red).
+It seems that the presence of the copper atoms in the spin glass interfere with the tendency of iron atoms to try to line up as temperature decreases. This random orientations of frozen spins is said to be "dis-ordered". In the same way that an amorphous solid like window glass doesn’t have an orderly crystal structure, a spin glass doesn’t have an orderly magnetic structure. But is there any structural law that these seeemingly randon frozen spin configurations obey? This turned out to be a very difficult theoretical problem, and the solution did not emerge for another three decades.
+
+
+![](https://subirvarma.github.io/GeneralCognitics/images/stat15.png) 
+
+Figure 13: Ordering of Spins
+
+
+
+![](https://subirvarma.github.io/GeneralCognitics/images/stat16.png) 
+
+Figure 14: Energy Landscape in Spin Glasses
+
+
+
+### Spin Glass Models: Edwards Anderson (EA) and Sherrington Kirkpatrick (SK) Models
+
+![](https://subirvarma.github.io/GeneralCognitics/images/stat17.png) 
+
+Figure 15: Spin Interactions in the Sherrington Kirkpatrick Model
+
+
+![](https://subirvarma.github.io/GeneralCognitics/images/stat18.png) 
+
+Figure 16: Variation of the Edwards Anderson Order Parameter with temperature
 
 
 
 
 
 
-## The Re-Normalization Group
-           
-
-
-## Spin Glass Models: Complex Energy Landscapes
+### The Parisi Solution to SK Model: Complex Energy Landscapes
 
 
 
@@ -511,15 +546,19 @@ The shape of $F(m)$ as a function of $B$ is shown in figure 11, and illustrates 
 
 
 
-## From Hopfield Networks to Boltzmann Machines
+## From Hopfield Networks to Boltzmann Machines: Restricted Boltzmann Machines, Deep Boltzmann Machines
+
+
+
+
+
+
+## Modern Neural Networks as Modified SK Models
+
 
 
 ### Diffusion Models as Overloaded Hopfield Networks
 
-
-
-
-## From Boltzmann Machines to Modern Neural Networks: Approximating the Landscape of Latent Spaces
 
 
 
