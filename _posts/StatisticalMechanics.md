@@ -551,14 +551,14 @@ $$  J  \sim {1\over{\sqrt{2\pi}}} e^{-{x^2\over 2}} $$
 
 The scaling $\sqrt{N}$ ensures that the total energy does not blow up to infinity as $N$ increases, while the Standard Normal assumption completely randomizes all interactions. Note that for a particular realization of the random variable $J$, the interactions are fixed but at random values. 
 
-Recall that for the case of ferrmagnetism, the magnetized phase was characterized by the fact that the average magnetization $m$ was non-zero, i.e.,
+Recall that for the case of ferrmagnetism, the magnetized phase was characterized by the fact that the average magnetization $m$ was non-zero. If $E(\sigma_i) = m_i$, then
 
-$$ {1\over N}\sum_i\sigma_i = m > 0 $$
+$$ {1\over N}\sum_i m_i = m > 0 $$
 
-In the SK model clearly ${1\over N}\sum_i\sigma_i = 0$ once we average over all possible values of the the interaction $J$, which has an average of zero. So how can we characterize the magnetized phase in SK models?
+In the SK model clearly ${1\over N}\sum_i m_i = 0$ once we average over all possible values of the the interaction $J$, which has an average of zero. So how can we characterize the magnetized phase in SK models?
 Edwards and Anderson suggested that we use the following critera instead
 
-$$ q_{EA} = {\over N}\sum_i\sigma_i^2 > 0  $$
+$$ q_{EA} = {\over N}\sum_i m_i^2 > 0  $$
 
 where $q_{EA}$ is called the Edwards-Anderson order parameter.
 
@@ -577,13 +577,17 @@ $$ (Z_J)^n = \sum_{(s)^1}\sum_{(s)^2}...\sum_{(s)^n}e^{-\sum_{a=1}^n \beta E_J[s
 
 where each of the summations $\sum_{(s)^i}$ is over all possible configuations of the spins in a replica that are compatible with the frozen interaction $J$. Then the free energy density for the system of replicas is defined by
 
-$$ f_n = -{1\over{\beta Nn}}\log Z_n $$
+$$ f_n(N) = -{1\over{\beta Nn}}\log E_J(Z_J)^n $$
 
-Since $A^n\approx 1 + n\log A$$, it follows that
+where the expectation is carried out over the random variable $J$. At the end of this step we still have $n$ replicas, but they are no longer independent. Indeed they are connected due to the fact that their spins are constrained by the fact that they all follow the common interaction law given by $J$.
 
-$$ \lim_{n\rightarrow 0} f_n = {\overline f} $$
+Since $A^n\approx 1 + n\log A$, it follows that
 
-If this procedure works then it leads to an averaging over the randomness $J$.
+$$ \lim_{n\rightarrow 0} f_n(N) = {\overline f(N)} $$
+
+If this procedure works then it leads to an averaging over the randomness $J$. Finally taking the limit $N\uparrow\infty$, the free energy density is given by
+
+$$ {\overline f} = \lim_{N\uparrow\infty} f(N) $$
 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat18.png) 
