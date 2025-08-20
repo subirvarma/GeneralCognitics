@@ -562,12 +562,28 @@ $$ q_{EA} = {\over N}\sum_i\sigma_i^2 > 0  $$
 
 where $q_{EA}$ is called the Edwards-Anderson order parameter.
 
-So how do we go about analyzing this model? Using the Landau theory for phase transitions, we start with the free energy function $F_N(J)$ for $N$ atoms given by
+So how do we go about analyzing this model? Using the Landau theory for phase transitions, we start with the free energy density function $f_N(J)$ for $N$ atoms and for a particular realization of the interaction stregth $J$, given by
 
-$$ F_N(J) = {1\over{N\beta}} \log{\sum_{\sigma}\e^{-\beta E_N}}  $$
+$$ f_N(J) = {1\over{N\beta}} \log{\sum_{\sigma}e^{-\beta E_N}}  $$
 
-Note that in this expression is for a particular frozen configuration $J$ of the interactions strengths, which has assumed the role of the order parameter. We will have take the limit $N\uparrow\infty$ and also averege $F(J)$ over all possible realization of random values of $J$ to get the expression for $F$.
+The free energy density $f$ for is then obtained by averaging over $J$ and taking the limit as $N\uparrow\infty$
 
+$$ {\overline f} = \lim_{N\uparrow\infty}\sum_{J} P[J] f_N(J) $$
+
+This is an exteremly difficult problem in probability theory. In the 1960s a way to solve it arose in the context of Quantum Field Theory, and is known as the replica method. It works as follows:
+With the random interactions frozen at $J$, consider $n$ independent replicas of the system, each with a possible different configuration of the spins. Define a partition function $(Z_J)^n$ for this system given by
+
+$$ (Z_J)^n = \sum_{(s)^1}\sum_{(s)^2}...\sum_{(s)^n}e^{-\sum_{a=1}^n \beta E_J[s^a]} $$
+
+where each of the summations $\sum_{(s)^i}$ is over all possible configuations of the spins in a replica that are compatible with the frozen interaction $J$. Then the free energy density for the system of replicas is defined by
+
+$$ f_n = -{1\over{\beta Nn}}\log Z_n $$
+
+Since $A^n\approx 1 + n\log A$$, it follows that
+
+$$ \lim_{n\rightarrow 0} f_n = {\overline f} $$
+
+If this procedure works then it leads to an averaging over the randomness $J$.
 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat18.png) 
