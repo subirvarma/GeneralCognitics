@@ -587,7 +587,7 @@ $$ \lim_{n\rightarrow 0} f_n(N) = {\overline f(N)} $$
 
 If this procedure works then it leads to an averaging over the randomness $J$. Finally taking the limit $N\uparrow\infty$, the free energy density is given by
 
-$$ {\overline f} = \lim_{N\uparrow\infty} f(N) $$
+$$ {\overline f} = \lim_{N\uparrow\infty} {\overline f(N)} $$
 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat18.png) 
