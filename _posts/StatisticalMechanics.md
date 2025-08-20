@@ -525,10 +525,37 @@ Something that was realized pretty early in the study of spin glasses is that be
 
 Figure 15: Spin Interactions in the Sherrington Kirkpatrick Model
 
+Samuel Edwards and Phillip Anderson were the first physicists to come up with a mathematical model for spin glasses. In the proces they introduced several new theoretical ideas that have proven to be very useful, but their model itself was a bit difficult to analyze. Shortly therafter, David Sherrington and Scott Kirkpatrick introduced their epynomous model (which we will call the SK model), which was a simplified version of the EA model, and this proved to be very influential in the subsequent years, since the model was easier to analyze also captured some of the essential aspects of spin glasses.
+
+Recall that the energy function for the Ising model was given by
+
+$$ E = -J\sum_i\sum_j{i}\sigma_i\sigma_j $$
+
+This assumed that all interactions were confined to neighboring atoms ($j{i}$ being the neighbors of $i$), and more importantly the strength of the interaction $J$ is the same for all interactions. Sherrington and Kirkpatrick made the following modifications to this:
+
+- Each atom can interact with all the other atoms in the lattice, and moreover interactions always happen in a pairwise fashion (see figure 15). This is called the Fully Connected assumption and differentiated the SK model from the earlier EA model that used neighboring interactions only. This assumption simoplified the mathematical analysis of the model.
+- The strength of the interaction $J_{ij}$ is a function of the two atoms taking part in the interaction
+
+The second assumption is the important one, since it captures the fact that the random spin orientations lead to variable coupling strength between atoms.
+Under these assumptions the energy function becomes
+
+$$  E = \sum_{i=1}^N\sum_{j=1}^N J_{ij}\sigma_i\sigma_j $$
+
+But what is the nature of the spin interactions $J_{ij}$? Sherrington and Kirkpatrick assumed that $J_{ij}$ can be written as
+
+$$ J_{ij} = {J\over\sqrt{N}}  $$
+
+and furthermore $J$ is a random variable that obeys the Standard Normal distribution, i.e.,
+
+$$  J  \sim {1\over{\sqrt{2\pi}}} e^{-{x^2\over 2}} $$
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat18.png) 
 
 Figure 16: Variation of the Edwards Anderson Order Parameter with temperature
+
+The scaling $\sqrt{N}$ ensures that the total energy does not blow up to infinity as $N$ increases, while the Standard Normal assumption completely randomizes all interactions. Note that for a particular realization of the random variable $J$, the interactions are fixed but at random values. 
+
+So how do we go about analyzing this model? 
 
 
 
