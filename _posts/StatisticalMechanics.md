@@ -529,9 +529,9 @@ Samuel Edwards and Phillip Anderson were the first physicists to come up with a 
 
 Recall that the energy function for the Ising model was given by
 
-$$ E = -J\sum_i\sum_j{i}\sigma_i\sigma_j $$
+$$ E = -J\sum_i\sum_{j[i]}\sigma_i\sigma_j $$
 
-This assumed that all interactions were confined to neighboring atoms ($j{i}$ being the neighbors of $i$), and more importantly the strength of the interaction $J$ is the same for all interactions. Sherrington and Kirkpatrick made the following modifications to this:
+This assumed that all interactions were confined to neighboring atoms ($j[i]$ being the neighbors of $i$), and more importantly the strength of the interaction $J$ is the same for all interactions. Sherrington and Kirkpatrick made the following modifications to this:
 
 - Each atom can interact with all the other atoms in the lattice, and moreover interactions always happen in a pairwise fashion (see figure 15). This is called the Fully Connected assumption and differentiated the SK model from the earlier EA model that used neighboring interactions only. This assumption simoplified the mathematical analysis of the model.
 - The strength of the interaction $J_{ij}$ is a function of the two atoms taking part in the interaction
@@ -549,7 +549,7 @@ and furthermore $J$ is a random variable that obeys the Standard Normal distribu
 
 $$  J  \sim {1\over{\sqrt{2\pi}}} e^{-{x^2\over 2}} $$
 
-The scaling $\sqrt{N}$ ensures that the total energy does not blow up to infinity as $N$ increases, while the Standard Normal assumption completely randomizes all interactions. Note that for a particular realization of the random variable $J$, the interactions are fixed but at random values. 
+The scaling $\sqrt{N}$ ensures that the total energy does not blow up to infinity as $N$ increases, while the Standard Normal assumption completely randomizes all interactions. Note that for a particular realization of the random variable $J$, the interactions are fixed, or quenched, but at random values. This observation lies at the heart of the SK model, i.e., the interactions can assume random values, but they follow a well defined statistical distribution.
 
 Recall that for the case of ferrmagnetism, the magnetized phase was characterized by the fact that the average magnetization $m$ was non-zero. If $E(\sigma_i) = m_i$, then
 
@@ -564,11 +564,15 @@ where $q_{EA}$ is called the Edwards-Anderson order parameter.
 
 So how do we go about analyzing this model? Using the Landau theory for phase transitions, we start with the free energy density function $f_N(J)$ for $N$ atoms and for a particular realization of the interaction stregth $J$, given by
 
-$$ f_N(J) = {1\over{N\beta}} \log{\sum_{\sigma}e^{-\beta E_N}}  $$
+$$ f_N(J) = -{1\over{N\beta}} \log{\sum_{\sigma}e^{-\beta E_N}}  $$
 
-The free energy density $f$ for is then obtained by averaging over $J$ and taking the limit as $N\uparrow\infty$
+The free energy density ${\overline f}$ for is then obtained by averaging over $J$ 
 
-$$ {\overline f} = \lim_{N\uparrow\infty}\sum_{J} P[J] f_N(J) $$
+$$ {\overline f(N)} = \sum_{J} P[J] f_N(J) = -{1\over N\beta}E_J(\log Z) $$
+
+and then taking the limit as $N\uparrow\infty$,
+
+$$ {\overline f} = \lim_{N\uparrow\infty}{\overline f(N)} $$
 
 This is an exteremly difficult problem in probability theory. In the 1960s a way to solve it arose in the context of Quantum Field Theory, and is known as the replica method. It works as follows:
 With the random interactions frozen at $J$, consider $n$ independent replicas of the system, each with a possible different configuration of the spins. Define a partition function $(Z_J)^n$ for this system given by
@@ -581,7 +585,7 @@ $$ f_n(N) = -{1\over{\beta Nn}}\log E_J(Z_J)^n $$
 
 where the expectation is carried out over the random variable $J$. At the end of this step we still have $n$ replicas, but they are no longer independent. Indeed they are connected due to the fact that their spins are constrained by the fact that they all follow the common interaction law given by $J$.
 
-Since $A^n\approx 1 + n\log A$, it follows that
+Since $E(\log Z) = \lim_{n\rightarrow 0}{1\over n}\log (Z)^n$, it follows that
 
 $$ \lim_{n\rightarrow 0} f_n(N) = {\overline f(N)} $$
 
