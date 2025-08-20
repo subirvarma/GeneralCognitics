@@ -511,7 +511,7 @@ It seems that the presence of the copper atoms in the spin glass interfere with 
 
 Figure 13: Ordering of Spins
 
-Systems can be arranged in a continuum as shown in figure 13, with systems exhibiting complete order (such as a crystal) on the left hand side, and systems that exist in a completely disordered state (such as a gas) on the right hand side. These two extremes are relatively easy to model, as we have seen in our sections on statistical mechanics. However since spin glasses exist in the in-between space of partial order, whose structure does not repeat, they are particularly difficult to analyze. Many systems, especially those that fall outside the realm of physics, such as the behavior of crowds or road traffic, fall into this in-between category. Hence if the spin glass system can be solved, then it can lead greater understanding in multiple other areas.
+Systems can be arranged in a continuum as shown in figure 13, with systems exhibiting complete order (such as a crystal) on the left hand side, and systems that exist in a completely disordered state (such as a gas) on the right hand side. These two extremes are relatively easy to model, as we have seen in our sections on statistical mechanics. However since spin glasses exist in the in-between space of partial disorder, whose structure does not repeat, they are particularly difficult to analyze. Many systems, especially those that fall outside the realm of physics, such as the behavior of crowds or road traffic, fall into this in-between category. Hence if the spin glass system can be solved, then it can lead to greater understanding in multiple other areas.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat16.png) 
 
@@ -537,9 +537,9 @@ This assumed that all interactions were confined to neighboring atoms ($j{i}$ be
 - The strength of the interaction $J_{ij}$ is a function of the two atoms taking part in the interaction
 
 The second assumption is the important one, since it captures the fact that the random spin orientations lead to variable coupling strength between atoms.
-Under these assumptions the energy function becomes
+Under these assumptions the energy function for $N$ atoms becomes
 
-$$  E = \sum_{i=1}^N\sum_{j=1}^N J_{ij}\sigma_i\sigma_j $$
+$$  E_N = \sum_{i=1}^N\sum_{j=1}^N J_{ij}\sigma_i\sigma_j $$
 
 But what is the nature of the spin interactions $J_{ij}$? Sherrington and Kirkpatrick assumed that $J_{ij}$ can be written as
 
@@ -549,13 +549,31 @@ and furthermore $J$ is a random variable that obeys the Standard Normal distribu
 
 $$  J  \sim {1\over{\sqrt{2\pi}}} e^{-{x^2\over 2}} $$
 
+The scaling $\sqrt{N}$ ensures that the total energy does not blow up to infinity as $N$ increases, while the Standard Normal assumption completely randomizes all interactions. Note that for a particular realization of the random variable $J$, the interactions are fixed but at random values. 
+
+Recall that for the case of ferrmagnetism, the magnetized phase was characterized by the fact that the average magnetization $m$ was non-zero, i.e.,
+
+$$ {1\over N}\sum_i\sigma_i = m > 0 $$
+
+In the SK model clearly ${1\over N}\sum_i\sigma_i = 0$ once we average over all possible values of the the interaction $J$, which has an average of zero. So how can we characterize the magnetized phase in SK models?
+Edwards and Anderson suggested that we use the following critera instead
+
+$$ q_{EA} = {\over N}\sum_i\sigma_i^2 > 0  $$
+
+where $q_{EA}$ is called the Edwards-Anderson order parameter.
+
+So how do we go about analyzing this model? Using the Landau theory for phase transitions, we start with the free energy function $F_N(J)$ for $N$ atoms given by
+
+$$ F_N(J) = {1\over{N\beta}} \log{\sum_{\sigma}\e^{-\beta E_N}}  $$
+
+Note that in this expression is for a particular frozen configuration $J$ of the interactions strengths, which has assumed the role of the order parameter. We will have take the limit $N\uparrow\infty$ and also averege $F(J)$ over all possible realization of random values of $J$ to get the expression for $F$.
+
+
+
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat18.png) 
 
 Figure 16: Variation of the Edwards Anderson Order Parameter with temperature
 
-The scaling $\sqrt{N}$ ensures that the total energy does not blow up to infinity as $N$ increases, while the Standard Normal assumption completely randomizes all interactions. Note that for a particular realization of the random variable $J$, the interactions are fixed but at random values. 
-
-So how do we go about analyzing this model? 
 
 
 
