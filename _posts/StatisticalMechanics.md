@@ -585,9 +585,9 @@ $$ f_n(N) = -{1\over{\beta Nn}}\log E_J(Z_J)^n $$
 
 where the expectation is carried out over the random variable $J$. At the end of this step we still have $n$ replicas, but they are no longer independent. Indeed they are connected due to the fact that their spins are constrained by the fact that they all follow the common interaction law given by $J$.
 
-Since $E(\log Z) = \lim_{n\rightarrow 0}{1\over n}\log (Z)^n$, it follows that
+Since $E(\log Z) = \lim_{n\rightarrow 0}{1\over n}\log E(Z)^n$, it follows that
 
-$$ \lim_{n\rightarrow 0} f_n(N) = {\overline f(N)} $$
+$$ \lim_{n\rightarrow 0} f_n(N) = -{1\over{\beta N}}E_J(\log Z) = {\overline f(N)} $$
 
 If this procedure works then it leads to an averaging over the randomness $J$. Finally taking the limit $N\uparrow\infty$, the free energy density is given by
 
