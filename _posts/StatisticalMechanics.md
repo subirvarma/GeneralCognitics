@@ -533,19 +533,19 @@ $$ H = -J\sum_i\sum_{j[i]}\sigma_i\sigma_j $$
 
 This assumed that all interactions were confined to neighboring atoms ($j[i]$ being the neighbors of $i$), and more importantly the strength of the interaction $J$ is the same for all interactions. Sherrington and Kirkpatrick made the following modifications to this:
 
-- Each atom can interact with all the other atoms in the lattice, and moreover interactions always happen in a pairwise fashion (see figure 15). This is called the Fully Connected assumption and differentiated the SK model from the earlier EA model that used neighboring interactions only. This assumption simoplified the mathematical analysis of the model.
+- Each atom can interact with all the other atoms in the lattice, and moreover interactions always happen in a pairwise fashion (see figure 15). This is called the Fully Connected assumption and differentiated the SK model from the earlier EA model that used neighboring interactions only. This assumption simplified the mathematical analysis of the model.
 - The strength of the interaction $J_{ij}$ is a function of the two atoms taking part in the interaction
 
-The second assumption is the important one, since it captures the fact that the random spin orientations lead to variable coupling strength between atoms.
+The second assumption is an important one, since it captures the fact that the random spin orientations lead to variable coupling strength between atoms.
 Under these assumptions the energy function for $N$ atoms becomes
 
-$$  H_N = \sum_{i=1}^N\sum_{j=1}^N J_{ij}\sigma_i\sigma_j $$
+$$  H_N = \sum_{i=1}^N\sum_{j<i} J_{ij}\sigma_i\sigma_j $$
 
 But what is the nature of the spin interactions $J_{ij}$? Sherrington and Kirkpatrick assumed that $J_{ij}$ can be written as
 
 $$ J_{ij} = {J\over\sqrt{N}}  $$
 
-and furthermore $J$ is a random variable that obeys the Standard Normal distribution, i.e.,
+where $J$ is a random variable that obeys the Standard Normal distribution, i.e.,
 
 $$  J  \sim {1\over{\sqrt{2\pi}}} e^{-{x^2\over 2}} $$
 
@@ -558,19 +558,20 @@ $$ {1\over N}\sum_i m_i = m > 0 $$
 In the SK model clearly ${1\over N}\sum_i m_i = 0$ once we average over all possible values of the the interaction $J$, which has an average of zero. So how can we characterize the magnetized phase in SK models?
 Edwards and Anderson suggested that we use the following critera instead
 
-$$ q_{EA} = {\over N}\sum_i m_i^2 > 0  $$
+$$ q_{EA} = {1\over N}\sum_i m_i^2 > 0  $$
 
 where $q_{EA}$ is called the Edwards-Anderson order parameter.
 
 So how do we go about analyzing this model? Using the Landau theory for phase transitions, we start with the free energy density function $f_N(J)$ for $N$ atoms and for a particular realization of the interaction stregth $J$, given by
 
-$$ f_N(J) = -{1\over{N\beta}} \log{\sum_{\sigma}e^{-\beta H_N}}  $$
+$$ f_N(J) = -{1\over{\beta N}} \log{\sum_{\sigma}e^{-\beta H_N}} = -{1\over{\beta N}}\log Z  $$
 
-The free energy density ${\overline f}$ for is then obtained by averaging over $J$ 
+where the summation is over all possible configurations of the spins.
+The free energy density ${\overline f}(N)$ for $N$ particles is then obtained by averaging over $J$ 
 
 $$ {\overline f(N)} = \sum_{J} P[J] f_N(J) = -{1\over N\beta}E(\log Z) $$
 
-and then taking the limit as $N\uparrow\infty$,
+and then taking the limit as $N\uparrow\infty$, we  finally obtain
 
 $$ {\overline f} = \lim_{N\uparrow\infty}{\overline f(N)} $$
 
@@ -582,7 +583,7 @@ $$ (Z_J)^n = \sum_{(s)^1}\sum_{(s)^2}...\sum_{(s)^n}e^{-\sum_{a=1}^n \beta H_J[s
 where each of the summations $\sum_{(s)^i}$ is over all possible configuations of the spins in a replica that are compatible with the frozen interaction $J$.
 The average over the distribution of $J$ is given by
 
-$$  E(Z^n) = \sum_J p(J) (Z_J)^n 
+$$  E(Z^n) = \sum_J p(J) (Z_J)^n $$
 
 At the end of this step we still have $n$ replicas, but they are no longer independent. Indeed they are correlated due to the fact that their spins are constrained by the fact that they all follow the common interaction law given by $J$.
 The free energy density for the system of replicas is defined by
@@ -596,6 +597,9 @@ $$ \lim_{n\rightarrow 0} f_n(N) = -{1\over{\beta N}}E(\log Z) = {\overline f(N)}
 Finally taking the limit $N\uparrow\infty$, the free energy density is given by
 
 $$ {\overline f} = \lim_{N\uparrow\infty} {\overline f(N)} $$
+
+
+ 
 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat18.png) 
