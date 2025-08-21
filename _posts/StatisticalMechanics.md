@@ -529,7 +529,7 @@ Samuel Edwards and Phillip Anderson were the first physicists to come up with a 
 
 Recall that the energy function for the Ising model was given by
 
-$$ E = -J\sum_i\sum_{j[i]}\sigma_i\sigma_j $$
+$$ H = -J\sum_i\sum_{j[i]}\sigma_i\sigma_j $$
 
 This assumed that all interactions were confined to neighboring atoms ($j[i]$ being the neighbors of $i$), and more importantly the strength of the interaction $J$ is the same for all interactions. Sherrington and Kirkpatrick made the following modifications to this:
 
@@ -539,7 +539,7 @@ This assumed that all interactions were confined to neighboring atoms ($j[i]$ be
 The second assumption is the important one, since it captures the fact that the random spin orientations lead to variable coupling strength between atoms.
 Under these assumptions the energy function for $N$ atoms becomes
 
-$$  E_N = \sum_{i=1}^N\sum_{j=1}^N J_{ij}\sigma_i\sigma_j $$
+$$  H_N = \sum_{i=1}^N\sum_{j=1}^N J_{ij}\sigma_i\sigma_j $$
 
 But what is the nature of the spin interactions $J_{ij}$? Sherrington and Kirkpatrick assumed that $J_{ij}$ can be written as
 
@@ -564,11 +564,11 @@ where $q_{EA}$ is called the Edwards-Anderson order parameter.
 
 So how do we go about analyzing this model? Using the Landau theory for phase transitions, we start with the free energy density function $f_N(J)$ for $N$ atoms and for a particular realization of the interaction stregth $J$, given by
 
-$$ f_N(J) = -{1\over{N\beta}} \log{\sum_{\sigma}e^{-\beta E_N}}  $$
+$$ f_N(J) = -{1\over{N\beta}} \log{\sum_{\sigma}e^{-\beta H_N}}  $$
 
 The free energy density ${\overline f}$ for is then obtained by averaging over $J$ 
 
-$$ {\overline f(N)} = \sum_{J} P[J] f_N(J) = -{1\over N\beta}E_J(\log Z) $$
+$$ {\overline f(N)} = \sum_{J} P[J] f_N(J) = -{1\over N\beta}E(\log Z) $$
 
 and then taking the limit as $N\uparrow\infty$,
 
@@ -577,19 +577,23 @@ $$ {\overline f} = \lim_{N\uparrow\infty}{\overline f(N)} $$
 This is an exteremly difficult problem in probability theory. In the 1960s a way to solve it arose in the context of Quantum Field Theory, and is known as the replica method. It works as follows:
 With the random interactions frozen at $J$, consider $n$ independent replicas of the system, each with a possible different configuration of the spins. Define a partition function $(Z_J)^n$ for this system given by
 
-$$ (Z_J)^n = \sum_{(s)^1}\sum_{(s)^2}...\sum_{(s)^n}e^{-\sum_{a=1}^n \beta E_J[s^a]} $$
+$$ (Z_J)^n = \sum_{(s)^1}\sum_{(s)^2}...\sum_{(s)^n}e^{-\sum_{a=1}^n \beta H_J[s^a]} $$
 
-where each of the summations $\sum_{(s)^i}$ is over all possible configuations of the spins in a replica that are compatible with the frozen interaction $J$. Then the free energy density for the system of replicas is defined by
+where each of the summations $\sum_{(s)^i}$ is over all possible configuations of the spins in a replica that are compatible with the frozen interaction $J$.
+The average over the distribution of $J$ is given by
 
-$$ f_n(N) = -{1\over{\beta Nn}}\log E_J(Z_J)^n $$
+$$  E(Z^n) = \sum_J p(J) (Z_J)^n 
 
-where the expectation is carried out over the random variable $J$. At the end of this step we still have $n$ replicas, but they are no longer independent. Indeed they are connected due to the fact that their spins are constrained by the fact that they all follow the common interaction law given by $J$.
+At the end of this step we still have $n$ replicas, but they are no longer independent. Indeed they are correlated due to the fact that their spins are constrained by the fact that they all follow the common interaction law given by $J$.
+The free energy density for the system of replicas is defined by
 
-Since $E(\log Z) = \lim_{n\rightarrow 0}{1\over n}\log E(Z)^n$, it follows that
+$$ f_n(N) = -{1\over{\beta Nn}}\log E(Z^n) $$
 
-$$ \lim_{n\rightarrow 0} f_n(N) = -{1\over{\beta N}}E_J(\log Z) = {\overline f(N)} $$
+Since $E(\log Z) = \lim_{n\rightarrow 0}{1\over n}\log E(Z^n)$, it follows that
 
-If this procedure works then it leads to an averaging over the randomness $J$. Finally taking the limit $N\uparrow\infty$, the free energy density is given by
+$$ \lim_{n\rightarrow 0} f_n(N) = -{1\over{\beta N}}E(\log Z) = {\overline f(N)} $$
+
+Finally taking the limit $N\uparrow\infty$, the free energy density is given by
 
 $$ {\overline f} = \lim_{N\uparrow\infty} {\overline f(N)} $$
 
