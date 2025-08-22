@@ -602,7 +602,7 @@ Since $E(\log Z) = \lim_{n\rightarrow 0} {E(Z^n) - 1\over n}$, it follows that
 
 $$ \lim_{n\rightarrow 0} f_n(N) = -{1\over{\beta N}}E(\log Z(N)) = {\overline f(N)} $$
 
-Taking the limit assumes that $E(Z^n(N))$ contunes to be well defines even when the number of repliocas $n$ is not an integer, which is known as analytical continuation in mathematics.
+Taking the limit assumes that $E(Z^n(N))$ contunes to be well defined even when the number of replicas $n$ is not an integer, which is known as analytical continuation in mathematics.
 Finally taking the limit $N\uparrow\infty$, the free energy density is given by
 
 $$ {\overline f} = \lim_{N\uparrow\infty} {\overline f(N)} $$
@@ -613,9 +613,15 @@ It can be shown that $E(Z^n(N))$ can be written as a function of the overlap mat
 
 $$ E(Z^n(N)) = \int \prod_{(ab)} {dQ_{ab}\over{2\pi}} e^{NA[Q_{ab}]}  $$
 
-Taking the limit $N\rightarrow\infty$, this expression can be evaluated by the saddle point approximation method, which says that
+Taking the limit $N\rightarrow\infty$, this expression can be evaluated by the saddle point approximation method, which leads to
 
-$$ \lim_{N\rightarrow\infty} E(Z^n(N)) \approx 
+$$ f_n = -\lim_{N\rightarrow\infty} {1\over{\beta Nn}}\log E(Z^n(N)) = {1\over{\beta n}} A_{sp}[Q_{ab}] $$
+
+where $A_{sp}$ is evaluated at the value of $Q_{ab}$  which achieves its saddle point, i.e., ${\partial A\over{\partial Q_{ab}}} = 0$. The free energy ${\overline f}$ is then evaluated by taking the limit of $f_n$ as $n\rightarrow 0$. 
+
+So how do we get hold of the values of $Q_{ab}$ at the saddle point? The way scientists have proceeded is by making educated guesses (called *ansatz*), and then verifying that the math works out. The simplest structure for $Q_{ab}$ is known as the replica symmetric (RS) solution. In this case the overlap $q_{ab}$ between any two replicas is the same, i.e., $q_{ab} = q_0$ for $a\ne b$ and $q_{aa} = q_d$ for self overlap along the diagonal. This ansatz correctly describes the high temperature regime, but it becomes unstable as the temperature is lowered below a threshold $T_c$ and this correponds to a phase change.
+
+
 
 
  
