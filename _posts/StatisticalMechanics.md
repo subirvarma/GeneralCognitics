@@ -598,6 +598,8 @@ Finally taking the limit $N\uparrow\infty$, the free energy density is given by
 
 $$ {\overline f} = \lim_{N\uparrow\infty} {\overline f(N)} $$
 
+Note that ny using the replica trick, we have replaced the calculation of $E(\log Z}$ by $\log E(Z)$, which helps in simplifying the computation.
+
 
  
 
