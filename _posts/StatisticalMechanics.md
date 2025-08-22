@@ -534,12 +534,13 @@ $$ H = -J\sum_i\sum_{j[i]}\sigma_i\sigma_j $$
 This assumed that all interactions were confined to neighboring atoms ($j[i]$ being the neighbors of $i$), and more importantly the strength of the interaction $J$ is the same for all interactions. Sherrington and Kirkpatrick made the following modifications to this:
 
 - Each atom can interact with all the other atoms in the lattice, and moreover interactions always happen in a pairwise fashion (see figure 15). This is called the Fully Connected assumption and differentiated the SK model from the earlier EA model that used neighboring interactions only. This assumption simplified the mathematical analysis of the model.
-- The strength of the interaction $J_{ij}$ is a function of the two atoms taking part in the interaction
+- As before, the spins $\sigma_i$ can assume values $\pm 1$.
+- The strength of the interaction $J_{ij}$ is a function of the two atoms taking part in the interaction and can vary randomly in magnitude as well as sign.
 
-The second assumption is an important one, since it captures the fact that the random spin orientations lead to variable coupling strength between atoms.
+The second assumption is an important one, since it captures the fact that the random spin orientations and variable distances between atoms lead to variable coupling strengths.
 Under these assumptions the energy function for $N$ atoms becomes
 
-$$  H_N = \sum_{i=1}^N\sum_{j<i} J_{ij}\sigma_i\sigma_j $$
+$$ H_N = -\sum_i\sum_{j[i]} J_{ij}\sigma_i\sigma_j $$
 
 But what is the nature of the spin interactions $J_{ij}$? Sherrington and Kirkpatrick assumed that $J_{ij}$ can be written as
 
@@ -550,12 +551,14 @@ where $J$ is a random variable that obeys the Standard Normal distribution, i.e.
 $$  J  \sim {1\over{\sqrt{2\pi}}} e^{-{x^2\over 2}} $$
 
 The scaling $\sqrt{N}$ ensures that the total energy does not blow up to infinity as $N$ increases, while the Standard Normal assumption completely randomizes all interactions. Note that for a particular realization of the random variable $J$, the interactions are fixed, or quenched, but at random values. This observation lies at the heart of the SK model, i.e., the interactions can assume random values, but they follow a well defined statistical distribution.
+Because of the quenched disorder, every energy function $E$ in a spin glass is different from all others, since every sample corresponds to a different set of coupling $J_{ij}$. Even though samples are microscopically different, the display the same macroscopic behavior on the average.
 
 Recall that for the case of ferrmagnetism, the magnetized phase was characterized by the fact that the average magnetization $m$ was non-zero. If $E(\sigma_i) = m_i$, then
 
 $$ {1\over N}\sum_i m_i = m > 0 $$
 
 In the SK model clearly ${1\over N}\sum_i m_i = 0$ once we average over all possible values of the the interaction $J$, which has an average of zero. So how can we characterize the magnetized phase in SK models?
+If a low temperature phase exists for the SK model, there must some spin configurations that are more likely to occur than others.
 Edwards and Anderson suggested that we use the following critera instead
 
 $$ q_{EA} = {1\over N}\sum_i m_i^2 > 0  $$
@@ -567,7 +570,7 @@ So how do we go about analyzing this model? Using the Landau theory for phase tr
 $$ f_N(J) = -{1\over{\beta N}} \log{\sum_{\sigma}e^{-\beta H_N}} = -{1\over{\beta N}}\log Z  $$
 
 where the summation is over all possible configurations of the spins.
-The free energy density ${\overline f}(N)$ for $N$ particles is then obtained by averaging over $J$ 
+The free energy density ${\overline f}(N)$ for $N$ particles is then obtained by averaging over the coupling distribution $J$ 
 
 $$ {\overline f(N)} = \sum_{J} P[J] f_N(J) = -{1\over N\beta}E(\log Z) $$
 
@@ -576,7 +579,12 @@ and then taking the limit as $N\uparrow\infty$, we  finally obtain
 $$ {\overline f} = \lim_{N\uparrow\infty}{\overline f(N)} $$
 
 This is an exteremly difficult problem in probability theory. In the 1960s a way to solve it arose in the context of Quantum Field Theory, and is known as the replica method. It works as follows:
-With the random interactions frozen at $J$, consider $n$ independent replicas of the system, each with a possible different configuration of the spins. Define a partition function $(Z_J)^n$ for this system given by
+With the random interactions frozen at $J_{ij}$, consider $n$ independent replicas of the system. Replicas have the same couplings $_J_{ij}$, but evolve independently, so that they can end up with a different spin configuration.
+Using the replica idea, the overlap function $q_{ab}$ between two replicas is given by
+
+$$ q_{ab} = {1\over N} \sum_{i=1}^N E(s_i^a.s_i^b) $$
+
+Define a partition function $(Z_J)^n$ for the system of $n$ replicas by
 
 $$ (Z_J)^n = \sum_{(s)^1}\sum_{(s)^2}...\sum_{(s)^n}e^{-\sum_{a=1}^n \beta H_J[s^a]} $$
 
@@ -588,17 +596,26 @@ $$  E(Z^n) = \sum_J p(J) (Z_J)^n $$
 At the end of this step we still have $n$ replicas, but they are no longer independent. Indeed they are correlated due to the fact that their spins are constrained by the fact that they all follow the common interaction law given by $J$.
 The free energy density for the system of replicas is defined by
 
-$$ f_n(N) = -{1\over{\beta Nn}}\log E(Z^n) $$
+$$ f_n(N) = -{1\over{\beta Nn}}\log E(Z^n(N)) $$
 
-Since $E(\log Z) = \lim_{n\rightarrow 0}{1\over n}\log E(Z^n)$, it follows that
+Since $E(\log Z) = \lim_{n\rightarrow 0} {E(Z^n) - 1\over n}$, it follows that
 
-$$ \lim_{n\rightarrow 0} f_n(N) = -{1\over{\beta N}}E(\log Z) = {\overline f(N)} $$
+$$ \lim_{n\rightarrow 0} f_n(N) = -{1\over{\beta N}}E(\log Z(N)) = {\overline f(N)} $$
 
+Taking the limit assumes that $E(Z^n(N))$ contunes to be well defines even when the number of repliocas $n$ is not an integer, which is known as analytical continuation in mathematics.
 Finally taking the limit $N\uparrow\infty$, the free energy density is given by
 
 $$ {\overline f} = \lim_{N\uparrow\infty} {\overline f(N)} $$
 
-Note that ny using the replica trick, we have replaced the calculation of $E(\log Z}$ by $\log E(Z)$, which helps in simplifying the computation.
+Note that by using the replica trick, we have replaced the calculation of $E(\log Z)$ by $\log E(Z)$, which helps in simplifying the computation.
+
+It can be shown that $E(Z^n(N))$ can be written as a function of the overlap matrix $Q_{ab}$ which describes the overlap between two replicas $a$ and $b$:
+
+$$ E(Z^n(N)) = \int \prod_{(ab)} {dQ_{ab}\over{2\pi}} e^{NA[Q_{ab}]}  $$
+
+Taking the limit $N\rightarrow\infty$, this expression can be evaluated by the saddle point approximation method, which says that
+
+$$ \lim_{N\rightarrow\infty} E(Z^n(N)) \approx 
 
 
  
