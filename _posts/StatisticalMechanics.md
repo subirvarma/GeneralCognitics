@@ -620,9 +620,13 @@ $$ f_n = -\lim_{N\rightarrow\infty} {1\over{\beta Nn}}\log E(Z^n(N)) = {1\over{\
 where $A_{sp}$ is evaluated at the value of $Q_{ab}$  which achieves its saddle point, i.e., ${\partial A\over{\partial Q_{ab}}} = 0$. The free energy ${\overline f}$ is then evaluated by taking the limit of $f_n$ as $n\rightarrow 0$. 
 
 So how do we get hold of the values of $Q_{ab}$ at the saddle point? The way scientists have proceeded is by making educated guesses (called *ansatz*), and then verifying that the math works out. The simplest structure for $Q_{ab}$ is known as the replica symmetric (RS) solution. In this case the overlap $q_{ab}$ between any two replicas is the same, i.e., $q_{ab} = q_0$ for $a\ne b$ and $q_{aa} = q_d$ for self overlap along the diagonal. This ansatz correctly describes the high temperature regime, but it becomes unstable as the temperature is lowered below a threshold $T_c$ and this correponds to a phase change.
+The correct structure, that was proposed by Parisi, is a matrix $Q_{ab}$ with an iterative block structure in which the symmtry between pairs of replicas breaks down, i.e., $q_{ab}\ne q_{ba}$.
 
+![](https://subirvarma.github.io/GeneralCognitics/images/stat19.png) 
 
+Figure 16: 1-RSB parametrization of the overlap matrix $Q_{ab}$. $q_$ represents the degree of similarity between 2 replicas inside the innermost block of size $m\times m$, while $q_0$ is the outermost block value.
 
+The first iteration of replica symmetry breaking (RSB) is shown in figure 16. The $Q_{ab}$ matrix is parametrized by a dagonal value of $q_d$, and two off-diagonal values that can either be $q_1$ if the two replicas belong to the same block of size $m\times m$, or $q_0$ is the replicas fall outside the innermost block. If 1-RSB fails to stabilize the solution, then this procedure can be iteratively repeated within each of the blocks, leading to k step RSB or k-RSB. Thus there can be multiple phase changes as the temperature is reduced, each stabilized by a different value of $k$. In the limit $k\rightarrow infty$, q becomes a function $q(x), 0\le x\le 1$.
 
  
 
