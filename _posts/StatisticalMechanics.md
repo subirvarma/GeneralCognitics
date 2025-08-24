@@ -540,7 +540,7 @@ This assumed that all interactions were confined to neighboring atoms ($j[i]$ be
 The second assumption is an important one, since it captures the fact that the random spin orientations and variable distances between atoms lead to variable coupling strengths.
 Under these assumptions the energy function for $N$ atoms becomes
 
-$$ H_N = -\sum_i\sum_{j[i]} J_{ij}\sigma_i\sigma_j $$
+$$ H_N = -\sum_i\sum_{j<i} J_{ij}\sigma_i\sigma_j $$
 
 But what is the nature of the spin interactions $J_{ij}$? Sherrington and Kirkpatrick assumed that $J_{ij}$ can be written as
 
@@ -624,7 +624,7 @@ The correct structure, that was proposed by Parisi, is a matrix $Q_{ab}$ with an
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat19.png) 
 
-Figure 16: 1-RSB parametrization of the overlap matrix $Q_{ab}$. $q_$ represents the degree of similarity between 2 replicas inside the innermost block of size $m\times m$, while $q_0$ is the outermost block value.
+Figure 16: 1-RSB parametrization of the overlap matrix $Q_{ab}$. $q_1$ represents the degree of similarity between 2 replicas inside the innermost block of size $m\times m$, while $q_0$ is the outermost block value.
 
 The first iteration of replica symmetry breaking (RSB) is shown in figure 16. The $Q_{ab}$ matrix is parametrized by a dagonal value of $q_d$, and two off-diagonal values that can either be $q_1$ if the two replicas belong to the same block of size $m\times m$, or $q_0$ is the replicas fall outside the innermost block. If 1-RSB fails to stabilize the solution, then this procedure can be iteratively repeated within each of the blocks, leading to k step RSB or k-RSB. Thus there can be multiple phase changes as the temperature is reduced, each stabilized by a different value of $k$. In the limit $k\rightarrow infty$, q becomes a function $q(x), 0\le x\le 1$.
 
