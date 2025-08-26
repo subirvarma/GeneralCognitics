@@ -575,9 +575,9 @@ $$ q_{EA} = {1\over N}\sum_i m_i^2 > 0  $$
 where $q_{EA}$ is called the Edwards-Anderson order parameter. Hence the Ising model is characterized by $q = m,\ q_{EA} = 1$, while spin glass models are characterized by $q = 0,\ 0\le q_{EA} \le 1$.
 
 These definitions were further refined in subsequent years, with the introduction of the concept of a "pure state", but in order to do so we first have to clarify what a state is.
-The characteristic feature of a spin glass phase is the existence of very many free energy valleys which are separated by very high energy barriers (as opposed to the Ising model that has a only a couple of free energy valleys, see figure 10). It was realized that the best way to characterize a spin glass system is in terms of the space of free energy valleys, and these are called the pure states of the system. Note that each pure state is made up of a large number of spin configurations and can be assigned a statistical weight $P_{\alpha}$ determined by its free energy $F_{\aplha}$ given by
+The characteristic feature of a spin glass phase is the existence of very many free energy valleys which are separated by very high energy barriers (as opposed to the Ising model that has a only a couple of free energy valleys, see figure 10). It was realized that the best way to characterize a spin glass system is in terms of the space of free energy valleys, and these are called the pure states of the system. Note that each pure state is made up of a large number of spin configurations and can be assigned a statistical weight $P_{\alpha}$ determined by its free energy $F_{\alpha}$ given by
 
-$$ P_{\alpha} = {e^{-\beta F_{\alpha}}\over{\sum_{\gamma}e^{-\beta F_{\gamma}} $$
+$$ P_{\alpha} = {e^{-\beta F_{\alpha}}\over{\sum_{\gamma}e^{-\beta F_{\gamma}}}} $$
 
 Note that there can be an infinite number of pur states in a spin glass, unrelated to one another by any symmetry. An Ising model has two pure states, corresponding to the $+m$ and $-m$ magnetizations, and also it can be easily put into one of these pure states by turning on an external magnetic field. This is not the case for a spin glass, there does not exist any macroscopis way to use an external field to put into into one of the pure states. Hence the system is described by a maixture of pure states such that any obeservable $O$ is given by
 
@@ -590,29 +590,29 @@ $$ q^{\alpha\beta} = {1\over N}\sum_{i} m_i^{\alpha} m_i{\beta} $$
 where $m_i^{\alpha}$ is the magnetization of spin $i$ in the valley $\alpha$. 
 We can also define the probability dstribution of the overlap between two pure states, given by
 
-$$ P(q) = \sum_{\alpha,\beta} P_{\alpha} P_{\beta} \delta(q - q^{\alpha\beta}) $$
+$$ P(q) = \sum_{\alpha\beta} P_{\alpha} P_{\beta} \delta(q - q^{\alpha\beta}) $$
 
-and this also includes the self overlap $q^{\alpha\alpha}$. Note that $P(q)$ was defined for a particular frozen value of the couplings $J_{ij]$. If we average over $J$, then this results in {\overline P}(q)$ which can be used to characterize the spin glass model. 
+and this also includes the self overlap $q^{\alpha\alpha}$. Note that $P(q)$ was defined for a particular frozen value of the couplings $J_{ij}$. If we average over $J$, then this results in ${\overline P}(q)$ which can be used to characterize the spin glass model. The focus of the analysis of spin glass models has been to derive an expression for this distribution.
 
-In an Ising model there ixists one pure state at high temperature (with E(m_i) = 0), and two pure states at low temperature (with $E(m_i) > 0$ and $E(m_i) < 0$) with equal probability. Thus at hight $T$ $P(q) = \delta(q)$ and for low $T$, $P(q) = {1\over 2}[\delta(q+m^2)+\delta(q-m^2)]$. Since there are an infinite number of pure states in a spin glass, $q$ can take on many more values.
+In an Ising model there exists one pure state at high temperature (with E(m_i) = 0), and two pure states at low temperature (with $E(m_i) > 0$ and $E(m_i) < 0$) with equal probability. Thus at high $T$, $P(q) = \delta(q)$ and for low $T$, $P(q) = {1\over 2}[\delta(q+m^2)+\delta(q-m^2)]$. Since there are an infinite number of pure states in a spin glass, $q$ can take on many more values.
 
 ### The Replica Method
 
-So how do we go about analyzing the SK spin glass model? Using the Landau theory for phase transitions, we start with the free energy density function $f_N(J)$ for $N$ atoms and for a particular realization of the interaction stregth $J$, given by
+So how do we go about analyzing the SK spin glass model? Using the Landau theory for phase transitions, we start with the free energy density function $f_N(J)$ for $N$ atoms for a particular realization of the interaction strength $J$, given by
 
-$$ f_N(J) = -{1\over{\beta N}} \log{\sum_{\sigma}e^{-\beta H_N}} = -{1\over{\beta N}}\log Z  $$
+$$ f_N(J) = -{1\over{\beta N}} \log{\sum_{\sigma}e^{-\beta H_N(J,\sigma)}} = -{1\over{\beta N}}\log Z_N(J)  $$
 
 where the summation is over all possible configurations of the spins.
-The free energy density ${\overline f}(N)$ for $N$ particles is then obtained by averaging over the coupling distribution $J$ 
+The average free energy density ${\overline f}(N)$ for $N$ particles is then obtained by averaging over the coupling distribution $J$ 
 
-$$ {\overline f(N)} = \sum_{J} P[J] f_N(J) = -{1\over N\beta}E(\log Z) $$
+$$ {\overline f_N} = \sum_{J} P[J] f_N(J) = -{1\over N\beta}E(\log Z_N(J)) $$
 
 and then taking the limit as $N\uparrow\infty$, we  finally obtain
 
-$$ {\overline f} = \lim_{N\uparrow\infty}{\overline f(N)} $$
+$$ {\overline f} = \lim_{N\uparrow\infty}{\overline f_N} $$
 
-This is an exteremly difficult problem in probability theory. In the 1960s a way to solve it arose in the context of Quantum Field Theory, and is known as the replica method. It works as follows:
-With the random interactions frozen at $J_{ij}$, consider $n$ independent replicas of the system. Replicas have the same couplings $_J_{ij}$, but evolve independently, so that they can end up with a different spin configuration.
+This is an exteremly difficult problem in probability theory due to the complexity in evaluating $E(\log Z)$.. In the 1960s a way to solve similar problems arose in the context of Quantum Field Theory, and is known as the replica method. It works as follows:
+With the random interactions frozen at $J_{ij}$, consider $n$ independent replicas of the system. Replicas have the same couplings $J_{ij}$, but evolve independently, so that they can end up with a different spin configuration.
 Using the replica idea, the overlap function $q_{ab}$ between two replicas is given by
 
 $$ q_{ab} = {1\over N} \sum_{i=1}^N E(s_i^a.s_i^b) $$
@@ -629,18 +629,18 @@ $$  E(Z^n) = \sum_J p(J) (Z_J)^n $$
 At the end of this step we still have $n$ replicas, but they are no longer independent. Indeed they are correlated due to the fact that their spins are constrained by the fact that they all follow the common interaction law given by $J$.
 The free energy density for the system of replicas is defined by
 
-$$ f_n(N) = -{1\over{\beta Nn}}\log E(Z^n(N)) $$
+$$ f_n(N) = -{1\over{\beta Nn}}\log E(Z^n) $$
 
 Since $E(\log Z) = \lim_{n\rightarrow 0} {E(Z^n) - 1\over n}$, it follows that
 
-$$ \lim_{n\rightarrow 0} f_n(N) = -{1\over{\beta N}}E(\log Z(N)) = {\overline f(N)} $$
+$$ \lim_{n\rightarrow 0} f_n(N) = -{1\over{\beta N}}E(\log Z) = {\overline f(N)} $$
 
-Taking the limit assumes that $E(Z^n(N))$ contunes to be well defined even when the number of replicas $n$ is not an integer, which is known as analytical continuation in mathematics.
+Taking this limit assumes that $E(Z^n)$ contunes to be well defined even when the number of replicas $n$ is not an integer, which is known as analytical continuation in mathematics.
 Finally taking the limit $N\uparrow\infty$, the free energy density is given by
 
 $$ {\overline f} = \lim_{N\uparrow\infty} {\overline f(N)} $$
 
-Note that by using the replica trick, we have replaced the calculation of $E(\log Z)$ by $\log E(Z)$, which helps in simplifying the computation.
+Note that by using the replica trick, we have replaced the computation of $E(\log Z)$ by $\log E(Z)$, which helps in simplifying the calculations.
 
 It can be shown that $E(Z^n(N))$ can be written as a function of the overlap matrix $Q_{ab}$ which describes the overlap between two replicas $a$ and $b$:
 
