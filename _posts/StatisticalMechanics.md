@@ -504,43 +504,44 @@ Back in the 1950s scientists were actively investigating the properties of new m
 - When the temperature exceeded some critical point, there was no magnetism detected, which is just as in ferromagnetic materials
 - Below the critical temperature, the material become magnetic. However, after gradually increasing as the temperature was further reduced, the magnetisation hit a limit at a finite temperature and stayed there even at lower temperatures.
 
-This was a new kind of magnetic behavior not seen before, and soon physicists came up with an explanation for it. As shown in figure 12, all the spins of ferromagnetic materials tend to align at lower temperatures, while those in anti-ferromagnetic also tend to align but in opposite directions. Spin Glasses on the other hand do not exhibit any such regularity. Even at low temperatures, their spins can have different orientations as shown in the right hand side of the figure, and once a particular orientation is reached, it remains frozen as the temperature is further reduced towards zero. Hence some of the interactions are ferromagnetic (shown in blue), while others are anti-ferromagnetic (shown in red).
-It seems that the presence of the copper atoms in the spin glass interfere with the tendency of iron atoms to try to line up as temperature decreases. This random orientations of frozen spins is said to be "dis-ordered". In the same way that an amorphous solid like window glass doesn’t have an orderly crystal structure, a spin glass doesn’t have an orderly magnetic structure. But is there any structural law that these seeemingly random frozen spin configurations obey? This turned out to be a very difficult theoretical problem, and the solution did not emerge for another three decades.
+This was a new kind of magnetic behavior not seen before, and soon physicists came up with an explanation for it. As shown in figure 12, all the spins of ferromagnetic materials tend to align at lower temperatures, while those in anti-ferromagnetic also tend to align but in opposite directions. Spin Glasses on the other hand do not exhibit any such regularity. Even at low temperatures, their spins can have different orientations at low temperatures as shown in the right hand side of the figure. Hence some of the interactions are ferromagnetic (shown in blue), while others are anti-ferromagnetic (shown in red).
+It seems that the presence of the copper atoms in the spin glass interferes with the tendency of iron atoms to try to line up as temperature decreases. This random orientations of spins is said to be "dis-ordered". In the same way that an amorphous solid like window glass doesn’t have an orderly crystal structure, a spin glass doesn’t have an orderly magnetic structure. But is there any structural law that these seeemingly random spin configurations obey and which could be predicted using the tools of statistical mechanics? This turned out to be a very difficult theoretical problem, and the solution did not emerge for another three decades.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat15.png) 
 
 Figure 13: Ordering of Spins
 
-Systems can be arranged in a continuum as shown in figure 13, with systems exhibiting complete order (such as a crystal) on the left hand side, and systems that exist in a completely disordered state (such as a gas) on the right hand side. These two extremes are relatively easy to model, as we have seen in our sections on statistical mechanics. However since spin glasses exist in the in-between space of partial disorder, whose structure does not repeat, they are particularly difficult to analyze. Many systems, especially those that fall outside the realm of physics, such as the behavior of crowds or road traffic, fall into this in-between category. Hence if the spin glass system can be solved, then it can lead to greater understanding in multiple other areas.
+Systems can be arranged in a continuum as shown in figure 13, with systems exhibiting complete order (such as when all spins are oriented in the same direcionl) on the left hand side, and systems that exist in a completely disordered state (such as the para-magnetic state at higher temperatures) on the right hand side. But there is a subtle difference between the pure randomness of a disordered state and the disorder that we see in a spin glass when it is below the critical temperature. The latter looks as random as a paramagnetic material, but there are some differences:
 
-![](https://subirvarma.github.io/GeneralCognitics/images/stat16.png) 
+- The randomness in the ferromagnetic material gradually decreases as the temperature is reduced, and ultimately it becomes completely ordered at $T=0$. The randomness in the spin glass on the other hand becomes "frozen" as the temperature is reduced, and maintains the randomness even at $T=0$.
+- The nature of the interaction term $J_{ij}$ influences the statistics of the random looking configurations in the spin glass. We will see in the next section that there are some order parameters that are able to capture the frozen disorder in a spin glass.
 
-Figure 14: Energy Landscape in Spin Glasses
+Many systems, especially those that fall outside the realm of physics of materials, such as the behavior of crowds or road traffic, involve complex random interactions between their individual units. Hence if the spin glass system can be solved, then it can lead to greater understanding in multiple other areas.
 
-Something that was realized pretty early in the study of spin glasses is that below the critical temperature, their energy landscape is quite unlike that for magnetic ferromagnetic materials. It consists of multipe peaks and valley as shown in figure 14.
 
 ### Spin Glass Models: Edwards Anderson (EA) and Sherrington Kirkpatrick (SK) Models
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat17.png) 
 
-Figure 15: Spin Interactions in the Sherrington Kirkpatrick Model
+Figure 14: Spin Interactions in the Sherrington Kirkpatrick Model
 
-Samuel Edwards and Phillip Anderson were the first physicists to come up with a mathematical model for spin glasses. In the proces they introduced several new theoretical ideas that have proven to be very useful, but their model itself was a bit difficult to analyze. Shortly therafter, David Sherrington and Scott Kirkpatrick introduced their epynomous model (which we will call the SK model), which was a simplified version of the EA model, and this proved to be very influential in the subsequent years, since the model was easier to analyze also captured some of the essential aspects of spin glasses.
+Samuel Edwards and Phillip Anderson were the first physicists to come up with a mathematical model for spin glasses. In the proces they introduced several new theoretical ideas that have proven to be very fruitful, but their model itself was a bit difficult to analyze. Shortly therafter, David Sherrington and Scott Kirkpatrick introduced their epynomous model (which we will call the SK model), which was a simplified version of the EA model, and this proved to be very influential in the subsequent years, since the model was easier to analyze also captured some of the essential aspects of spin glasses.
 
 Recall that the energy function for the Ising model was given by
 
 $$ H = -J\sum_i\sum_{j[i]}\sigma_i\sigma_j $$
 
-This assumed that all interactions were confined to neighboring atoms ($j[i]$ being the neighbors of $i$), and more importantly the strength of the interaction $J$ is the same for all interactions. Sherrington and Kirkpatrick made the following modifications to this:
+This assumed that all interactions were confined to neighboring atoms ($j[i]$ being the neighbors of $i$), and more importantly the strength of the interaction $J$ is the same for all interactions. Sherrington and Kirkpatrick made the following modifications to this model:
 
-- Each atom can interact with all the other atoms in the lattice, and moreover interactions always happen in a pairwise fashion (see figure 15). This is called the Fully Connected assumption and differentiated the SK model from the earlier EA model that used neighboring interactions only. This assumption simplified the mathematical analysis of the model.
+- Each atom can interact with all the other atoms in the lattice, and moreover interactions always happen in a pairwise fashion (see figure 14) and this is called the fully connected assumption. This assumption simplified the mathematical analysis of the model.
 - As before, the spins $\sigma_i$ can assume values $\pm 1$.
-- The strength of the interaction $J_{ij}$ is a function of the two atoms taking part in the interaction and can vary randomly in magnitude as well as sign.
+- The strength of the interaction $J_{ij}$ is not a constant anymore, but is a function of the two atoms taking part in the interaction and can vary randomly in magnitude as well as sign.
 
-The second assumption is an important one, since it captures the fact that the random spin orientations and variable distances between atoms lead to variable coupling strengths.
+The second assumption is an important one, since it captures the fact that the coupling $J_{ij}$ sometimes leads to two spins pointing in the same direction, and at other times to the them pointing in opposite directions.
+The variable coupling strength captures the fact that the interacting atoms are at variable distances from each other.
 Under these assumptions the energy function for $N$ atoms becomes
 
-$$ H_N = -\sum_i\sum_{j<i} J_{ij}\sigma_i\sigma_j $$
+$$ H_N = -\sum_i\sum_{j\lt i} J_{ij}\sigma_i\sigma_j $$
 
 But what is the nature of the spin interactions $J_{ij}$? Sherrington and Kirkpatrick assumed that $J_{ij}$ can be written as
 
@@ -550,22 +551,54 @@ where $J$ is a random variable that obeys the Standard Normal distribution, i.e.
 
 $$  J  \sim {1\over{\sqrt{2\pi}}} e^{-{x^2\over 2}} $$
 
-The scaling $\sqrt{N}$ ensures that the total energy does not blow up to infinity as $N$ increases, while the Standard Normal assumption completely randomizes all interactions. Note that for a particular realization of the random variable $J$, the interactions are fixed, or quenched, but at random values. This observation lies at the heart of the SK model, i.e., the interactions can assume random values, but they follow a well defined statistical distribution.
-Because of the quenched disorder, every energy function $E$ in a spin glass is different from all others, since every sample corresponds to a different set of coupling $J_{ij}$. Even though samples are microscopically different, the display the same macroscopic behavior on the average.
+The scaling $\sqrt{N}$ ensures that the total energy does not blow up to infinity as $N$ increases, while the Standard Normal assumption completely randomizes all interactions. 
+This observation lies at the heart of the SK model, i.e., the interactions can assume random values, but they follow a well defined statistical distribution.
+Note that for a particular realization of the random variables $J_{ij}$, the interactions are fixed, or quenched, but at random values. 
 
-Recall that for the case of ferrmagnetism, the magnetized phase was characterized by the fact that the average magnetization $m$ was non-zero. If $E(\sigma_i) = m_i$, then
+*Because of the quenched disorder, every energy function $E$ in a spin glass is different from all others, since every sample corresponds to a different set of coupling $J_{ij}$. Even though samples are microscopically different, the display the same macroscopic behavior on the average.*
 
-$$ {1\over N}\sum_i m_i = m > 0 $$
+### Order Parameters in a Spin Glass System
 
-In the SK model clearly ${1\over N}\sum_i m_i = 0$ once we average over all possible values of the the interaction $J$, which has an average of zero. So how can we characterize the magnetized phase in SK models?
+Recall that for the case of Ising model the magnetized phase was characterized by the fact that the average magnetization $m$ was non-zero. If $E(\sigma_i) = m_i$, then
+
+$$ q = {1\over N}\sum_i m_i = m \ne 0 $$
+
+due to the fact that the a majority of atoms are pointing in the same direction in the magnetized phase.
+In the SK model clearly ${1\over N}\sum_i m_i = 0$ even for a single realization of the random variables $J_{ij}$, and this is due to the fact that these are interactions are symmetrically distributed around the origin.
+
+So how can we characterize the magnetized phase in the SK model?
 If a low temperature phase exists for the SK model, there must some spin configurations that are more likely to occur than others.
-Edwards and Anderson suggested that we use the following critera instead
+Edwards and Anderson suggested that we use the following order function instead
 
 $$ q_{EA} = {1\over N}\sum_i m_i^2 > 0  $$
 
-where $q_{EA}$ is called the Edwards-Anderson order parameter.
+where $q_{EA}$ is called the Edwards-Anderson order parameter. Hence the Ising model is characterized by $q = m,\ q_{EA} = 1$, while spin glass models are characterized by $q = 0,\ 0\le q_{EA} \le 1$.
 
-So how do we go about analyzing this model? Using the Landau theory for phase transitions, we start with the free energy density function $f_N(J)$ for $N$ atoms and for a particular realization of the interaction stregth $J$, given by
+These definitions were further refined in subsequent years, with the introduction of the concept of a "pure state", but in order to do so we first have to clarify what a state is.
+The characteristic feature of a spin glass phase is the existence of very many free energy valleys which are separated by very high energy barriers (as opposed to the Ising model that has a only a couple of free energy valleys, see figure 10). It was realized that the best way to characterize a spin glass system is in terms of the space of free energy valleys, and these are called the pure states of the system. Note that each pure state is made up of a large number of spin configurations and can be assigned a statistical weight $P_{\alpha}$ determined by its free energy $F_{\aplha}$ given by
+
+$$ P_{\alpha} = {e^{-\beta F_{\alpha}}\over{\sum_{\gamma}e^{-\beta F_{\gamma}} $$
+
+Note that there can be an infinite number of pur states in a spin glass, unrelated to one another by any symmetry. An Ising model has two pure states, corresponding to the $+m$ and $-m$ magnetizations, and also it can be easily put into one of these pure states by turning on an external magnetic field. This is not the case for a spin glass, there does not exist any macroscopis way to use an external field to put into into one of the pure states. Hence the system is described by a maixture of pure states such that any obeservable $O$ is given by
+
+$$ E(O) = \sum_{\alpha} P_{\alpha} E(O_{\alpha}) $$
+
+The overlap between two pure states, which ia a maesure of distance between them is given by
+
+$$ q^{\alpha\beta} = {1\over N}\sum_{i} m_i^{\alpha} m_i{\beta} $$
+
+where $m_i^{\alpha}$ is the magnetization of spin $i$ in the valley $\alpha$. 
+We can also define the probability dstribution of the overlap between two pure states, given by
+
+$$ P(q) = \sum_{\alpha,\beta} P_{\alpha} P_{\beta} \delta(q - q^{\alpha\beta}) $$
+
+and this also includes the self overlap $q^{\alpha\alpha}$. Note that $P(q)$ was defined for a particular frozen value of the couplings $J_{ij]$. If we average over $J$, then this results in {\overline P}(q)$ which can be used to characterize the spin glass model. 
+
+In an Ising model there ixists one pure state at high temperature (with E(m_i) = 0), and two pure states at low temperature (with $E(m_i) > 0$ and $E(m_i) < 0$) with equal probability. Thus at hight $T$ $P(q) = \delta(q)$ and for low $T$, $P(q) = {1\over 2}[\delta(q+m^2)+\delta(q-m^2)]$. Since there are an infinite number of pure states in a spin glass, $q$ can take on many more values.
+
+### The Replica Method
+
+So how do we go about analyzing the SK spin glass model? Using the Landau theory for phase transitions, we start with the free energy density function $f_N(J)$ for $N$ atoms and for a particular realization of the interaction stregth $J$, given by
 
 $$ f_N(J) = -{1\over{\beta N}} \log{\sum_{\sigma}e^{-\beta H_N}} = -{1\over{\beta N}}\log Z  $$
 
@@ -622,11 +655,10 @@ where $A_{sp}$ is evaluated at the value of $Q_{ab}$  which achieves its saddle 
 So how do we get hold of the values of $Q_{ab}$ at the saddle point? The way scientists have proceeded is by making educated guesses (called *ansatz*), and then verifying that the math works out. The simplest structure for $Q_{ab}$ is known as the replica symmetric (RS) solution. In this case the overlap $q_{ab}$ between any two replicas is the same, i.e., $q_{ab} = q_0$ for $a\ne b$ and $q_{aa} = q_d$ for self overlap along the diagonal. This ansatz correctly describes the high temperature regime, but it becomes unstable as the temperature is lowered below a threshold $T_c$ and this correponds to a phase change.
 The correct structure, that was proposed by Parisi, is a matrix $Q_{ab}$ with an iterative block structure in which the symmtry between pairs of replicas breaks down, i.e., $q_{ab}\ne q_{ba}$.
 
-![](https://subirvarma.github.io/GeneralCognitics/images/stat19.png) 
 
-Figure 16: 1-RSB parametrization of the overlap matrix $Q_{ab}$. $q_1$ represents the degree of similarity between 2 replicas inside the innermost block of size $m\times m$, while $q_0$ is the outermost block value.
+Figure 14: 1-RSB parametrization of the overlap matrix $Q_{ab}$. $q_1$ represents the degree of similarity between 2 replicas inside the innermost block of size $m\times m$, while $q_0$ is the outermost block value.
 
-The first iteration of replica symmetry breaking (RSB) is shown in figure 16. The $Q_{ab}$ matrix is parametrized by a dagonal value of $q_d$, and two off-diagonal values that can either be $q_1$ if the two replicas belong to the same block of size $m\times m$, or $q_0$ is the replicas fall outside the innermost block. If 1-RSB fails to stabilize the solution, then this procedure can be iteratively repeated within each of the blocks, leading to k step RSB or k-RSB. Thus there can be multiple phase changes as the temperature is reduced, each stabilized by a different value of $k$. In the limit $k\rightarrow infty$, q becomes a function $q(x), 0\le x\le 1$.
+The first iteration of replica symmetry breaking (RSB) is shown in figure 14. The $Q_{ab}$ matrix is parametrized by a dagonal value of $q_d$, and two off-diagonal values that can either be $q_1$ if the two replicas belong to the same block of size $m\times m$, or $q_0$ is the replicas fall outside the innermost block. If 1-RSB fails to stabilize the solution, then this procedure can be iteratively repeated within each of the blocks, leading to k step RSB or k-RSB. Thus there can be multiple phase changes as the temperature is reduced, each stabilized by a different value of $k$. In the limit $k\rightarrow infty$, q becomes a function $q(x), 0\le x\le 1$.
 
  
 
@@ -635,6 +667,11 @@ The first iteration of replica symmetry breaking (RSB) is shown in figure 16. Th
 
 Figure 16: Variation of the Edwards Anderson Order Parameter with temperature
 
+![](https://subirvarma.github.io/GeneralCognitics/images/stat16.png) 
+
+Figure 14: Energy Landscape in Spin Glasses
+
+Something that was realized pretty early in the study of spin glasses is that below the critical temperature, their energy landscape is quite unlike that for magnetic ferromagnetic materials. It consists of multipe peaks and valley as shown in figure 14.
 
 
 
