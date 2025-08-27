@@ -678,38 +678,59 @@ The correct structure, that was proposed by Parisi, is a matrix $Q_{ab}$ with an
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat20.png) 
 
-Figure 14: 1-RSB parametrization of the overlap matrix $Q_{ab}$. $q_1$ represents the degree of similarity between 2 replicas inside the innermost block of size $m\times m$, while $q_0$ is the outermost block value.
+Figure 14: Illustration of replica symmetry, 1-RSB and 2-RSB, from left to right
 
 The first two iteration of replica symmetry breaking (RSB) is shown in figure 14. 
 
 - The leftmost figure shows the case when the replica symmetry is unbroken in the high temperature case, in which all elements of the matrix are zero.
 - The middle figure shows the simplest case of replica symmetry breaking, called 1-RSB. The $Q_{ab}$ matrix is parametrized by a diagonal value of $q_d$, and two off-diagonal values that can either be $q_1$ if the two replicas belong to the same block of size $m\times m$, or $q_0$ is the replicas fall outside the innermost block.
-- This procedure can be iteratively repeated within each of the blocks, leading to k step RSB or k-RSB, and an example of 2-RSB is shown in the rightmost figure. 
+- This procedure can be iteratively repeated within each of the blocks, leading to k step RSB or k-RSB. An example of 2-RSB is shown in the rightmost figure with corresponding parameters $q_d, q_1, q_2$ and $q_3$.
 
- 
+ To summarize, we have obtained a solution for the free energy ${\overline f}$ as a function of the elements of the matrix $Q_{ab}$, which can be regarded as an order parameter and this order parameter is the overlap between configurations belonging to different replicas. But what is the meaning of this solution in terms of the spin glass model? We will answer this in the next sub-section.
 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat18.png) 
 
 Figure 16: Variation of the Edwards Anderson Order Parameter with temperature
 
-![](https://subirvarma.github.io/GeneralCognitics/images/stat16.png) 
 
-Figure 14: Energy Landscape in Spin Glasses
+### Connection between Replica Symmetry Breaking and the Spin Glass Model
 
-Something that was realized pretty early in the study of spin glasses is that below the critical temperature, their energy landscape is quite unlike that for magnetic ferromagnetic materials. It consists of multipe peaks and valley as shown in figure 14.
+We defined the probability distribution of the overlap between two states ${\overline P}(q)$ two sub-sections ago, and it turns out that this function can be expressed in terms of the replicas as follows:
+
+$$ {\overline P}(q) = \lim_{n\rightarrow 0}{2\over{n(n-1)}} \sum_{a\gt b} \delta(q - q_{ab}) $$
+
+This equation is saying that the average probability that two pure states of the system have overlap $q$ is equal to the fraction of elements of the overlap matrix $Q_{ab}$ that are equal to $q$. This means that the
+elements of the overlap matrix (after taking the limit $N\rightarrow\infty$), are the physical values of the overlap between pure states, and the number of elements of $Q_{ab}$ equal to q is related to the probability of $q$. Hence surprisingly the matrix $Q_{ab}$ that arose a result of a mathematical trick to simplify calculations, also has a deep connection to the physics of the spin glass model. 
+
+We now apply this formula to the $Q_{ab}$ matrix that was proposed in the previous section.
+
+**The Replica Symmetric Solution**
+
+In this case $q_{ab}$ = q_0$ for all values of $a$ and $b$. From the above equation it follows that
+
+$$ {\overline P}(q) = \delta(q-q_0) $$
+
+This is saying that there is only one possible value for the overlap between pure states, and this must also hold for the self-overlap between them.
+From this it follows that there must be only one pure state with self-overlap $q_0$. Hence the replica symmetric solution is valid only if there is a single equilibrium state.
+This is typically the paramagnetic state which exists at high temperatures.
+
+**The 1-RSB Solution**
 
 
 
 
 
 
-### The Parisi Solution to SK Model: Complex Energy Landscapes
 
 
 
 
-## From Spin Glass to Hopfield Networks: Engineering the Energy Landsacpe
+
+
+
+
+## From Spin Glass to Hopfield Networks: Engineering the Energy Landsacpe of a Spin Glass
 
 
 
