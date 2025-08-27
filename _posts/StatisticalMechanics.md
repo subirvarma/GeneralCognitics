@@ -557,7 +557,7 @@ Note that for a particular realization of the random variables $J_{ij}$, the int
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat16.png) 
 
-Figure 14: Energy Landscape in Spin Glasses
+Figure 15: Energy Landscape in Spin Glasses
 
 Something that was realized pretty early in the study of spin glasses is that below the critical temperature, their free energy landscape is quite unlike that for magnetic ferromagnetic materials. It consists of multipe peaks and valleys as shown in figure 14 which seem to be quite random and it leads to the observation that a spin glass has an infinite nuber of phases potentially. But is there an order that exists within this randomness? The discovery that there is indeed an order is one of the triumphs of physics, and it won Giorgio Parisi the Nobel Prize in 2024.
 
@@ -678,7 +678,7 @@ The correct structure, that was proposed by Parisi, is a matrix $Q_{ab}$ with an
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat20.png) 
 
-Figure 14: Illustration of replica symmetry, 1-RSB and 2-RSB, from left to right
+Figure 16: Illustration of replica symmetry, 1-RSB and 2-RSB, from left to right
 
 The first two iteration of replica symmetry breaking (RSB) is shown in figure 14. 
 
@@ -717,9 +717,17 @@ This is typically the paramagnetic state which exists at high temperatures.
 
 **The 1-RSB Solution**
 
+The $Q_{ab}$ matrix for the 1-RSB solution as per the Parisi ansatz was shown the middle part of figure 17. This solution splits up the replicas in groups of size $m$ suuch that overlap between replicas within a group is $q_1$, and between groups is $q_0$. The overlap distribution is given by 
 
+$$ {\overline P}(q) = {m-1\over{n-1}}\delta(q-q_1) + {n-m\over{n-1}}\delta(q-q_0) \ \ \ wih\ \ \ 1\le m\le n $$
 
+We now have to take the limit as $n\rightarrow 0$ to complete the replica solution. This does not make much sense since we effectively reducing the size of the overlap matrix to zero. However it can  argued that this limit can be taken in a mathematically formal manner (similar to raising a number to a fractional power, such $x^{1\over 2}$ for example). In this limit $m$ must also be promoted to a real number, rather than an integer. This results in
 
+$$ {\overline P}(q) = (1-m)\delta(q-q_1) + m\delta(q-q_0)\ \ \ 0 \le m \le 1 $$
+
+So now we need to determine the parameters $m, q_0, q_1$ to complete the 1-RSB solution. This can be done my substituting these numbers back in the expression for $A_{sp}$, and then finding the values of $m, q_0$ and $q_1$ at the saddle point for this expression.
+
+There is a class of spin glass models called p-spin spherical model or PSM, for the 1-RSB solution is exact, i.e., there is no further breaking of the replica symmetry as the temperature is reduced. However this is not the case for the SK model, and in this case the symmetry keep breaking ad-infintum as the temperature is reduced.
 
 
 
