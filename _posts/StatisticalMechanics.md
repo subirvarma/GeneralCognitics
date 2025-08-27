@@ -555,78 +555,99 @@ The scaling $\sqrt{N}$ ensures that the total energy does not blow up to infinit
 This observation lies at the heart of the SK model, i.e., the interactions can assume random values, but they follow a well defined statistical distribution.
 Note that for a particular realization of the random variables $J_{ij}$, the interactions are fixed, or quenched, but at random values. 
 
+![](https://subirvarma.github.io/GeneralCognitics/images/stat16.png) 
+
+Figure 14: Energy Landscape in Spin Glasses
+
+Something that was realized pretty early in the study of spin glasses is that below the critical temperature, their free energy landscape is quite unlike that for magnetic ferromagnetic materials. It consists of multipe peaks and valleys as shown in figure 14 which seem to be quite random and it leads to the observation that a spin glass has an infinite nuber of phases potentially. But is there an order that exists within this randomness? The discovery that there is indeed an order is one of the triumphs of physics, and it won Giorgio Parisi the Nobel Prize in 2024.
+
 *Because of the quenched disorder, every energy function $E$ in a spin glass is different from all others, since every sample corresponds to a different set of coupling $J_{ij}$. Even though samples are microscopically different, the display the same macroscopic behavior on the average.*
 
 ### Order Parameters in a Spin Glass System
 
-Recall that for the case of Ising model the magnetized phase was characterized by the fact that the average magnetization $m$ was non-zero. If $E(\sigma_i) = m_i$, then
+Recall that for the case of Ising model the magnetized phase was characterized by the fact that the average magnetization $m$ was non-zero. Note that a single phase can have multiple configuraions of spins, and define the average spin value at site $i$, $E(\sigma_i)$ as the average over all these configurations.
+If $E(\sigma_i) = m_i$, then for $T < T_c$, the average over all the $N$ sites is given by
 
-$$ q = {1\over N}\sum_i m_i = m \ne 0 $$
+$$ q = {1\over N}\sum_i m_i = m  $$
 
-due to the fact that the a majority of atoms are pointing in the same direction in the magnetized phase.
-In the SK model clearly ${1\over N}\sum_i m_i = 0$ even for a single realization of the random variables $J_{ij}$, and this is due to the fact that these are interactions are symmetrically distributed around the origin.
+$m\ne 0$ due to the fact that the a majority of atoms are pointing in the same direction in the magnetized phase.
+In the SK model $q$ cannot be used to characterize the magnetized phase since ${1\over N}\sum_i m_i = 0$ even for a single realization of the random variables $J_{ij}$, and this is due to the fact that these interactions are symmetrically distributed around the origin  as a result of which the spins are randomly oriented even in equilibrium (at low temperature).
 
 So how can we characterize the magnetized phase in the SK model?
 If a low temperature phase exists for the SK model, there must some spin configurations that are more likely to occur than others.
-Edwards and Anderson suggested that we use the following order function instead
+Edwards and Anderson suggested that we use the following order parameter instead
 
 $$ q_{EA} = {1\over N}\sum_i m_i^2 > 0  $$
 
-where $q_{EA}$ is called the Edwards-Anderson order parameter. Hence the Ising model is characterized by $q = m,\ q_{EA} = 1$, while spin glass models are characterized by $q = 0,\ 0\le q_{EA} \le 1$.
+where $q_{EA}$ is called the Edwards-Anderson order parameter. Hence spin glass models are characterized by $q = 0,\ 0\le q_{EA} \le 1$.
 
-These definitions were further refined in subsequent years, with the introduction of the concept of a "pure state", but in order to do so we first have to clarify what a state is.
-The characteristic feature of a spin glass phase is the existence of very many free energy valleys which are separated by very high energy barriers (as opposed to the Ising model that has a only a couple of free energy valleys, see figure 10). It was realized that the best way to characterize a spin glass system is in terms of the space of free energy valleys, and these are called the pure states of the system. Note that each pure state is made up of a large number of spin configurations and can be assigned a statistical weight $P_{\alpha}$ determined by its free energy $F_{\alpha}$ given by
+These definitions were further refined in subsequent years, with the introduction of the concept of a "pure state", but in order to do so we first have to clarify what a state is in this context.
+The characteristic feature of a spin glass phase is the existence of very many free energy valleys which are separated by very high energy barriers (as opposed to the Ising model that has a only a couple of free energy valleys, see figures 10 and 14). It was realized that the best way to characterize a spin glass system is in terms of the space of free energy valleys, and these are called the pure states of the system. Note that each pure state is made up of a large number of spin configurations and can be assigned a statistical weight $P_{\alpha}$ determined by its free energy $F_{\alpha}$ given by
 
 $$ P_{\alpha} = {e^{-\beta F_{\alpha}}\over{\sum_{\gamma}e^{-\beta F_{\gamma}}}} $$
 
-Note that there can be an infinite number of pur states in a spin glass, unrelated to one another by any symmetry. An Ising model has two pure states, corresponding to the $+m$ and $-m$ magnetizations, and also it can be easily put into one of these pure states by turning on an external magnetic field. This is not the case for a spin glass, there does not exist any macroscopis way to use an external field to put into into one of the pure states. Hence the system is described by a maixture of pure states such that any obeservable $O$ is given by
+Note that there can be an infinite number of pure states in a spin glass, unrelated to one another by any symmetry. An Ising model has two pure states, corresponding to the $+m$ and $-m$ magnetizations, and also it can be easily put into one of these pure states by turning on an external magnetic field. This is not the case for a spin glass, there does not exist any macroscopic way to use an external field to put into into one of its pure states. Hence the system is described by a mixture of pure states such that any observable $O$ is given by
 
 $$ E(O) = \sum_{\alpha} P_{\alpha} E(O_{\alpha}) $$
 
-The overlap between two pure states, which ia a maesure of distance between them is given by
+When a system with very large $N$ enters a pure state it tends to stay there, since there are very high energy barriers between pure states when the system is in equilibrium.
 
-$$ q^{\alpha\beta} = {1\over N}\sum_{i} m_i^{\alpha} m_i{\beta} $$
+Given two spin configurations ($\sigma$ and $\tau$), the overlap between them is defined as
 
-where $m_i^{\alpha}$ is the magnetization of spin $i$ in the valley $\alpha$. 
-We can also define the probability dstribution of the overlap between two pure states, given by
+$$ q[\sigma,\tau] = {1\over N} \sum_{i}\sigma_i\tau_i $$
+
+Hence overlap is a measure of the similarity between different configurations.
+This definition is furter extended to define the the overlap between two pure states ($\alpha$ and $\beta$), which ia a measure of distance between them, and is given by
+
+$$ q^{\alpha\beta} = {1\over N}\sum_{i} m_i^{\alpha} m_i^{\beta} $$
+
+where $m_i^{\alpha}$ is the average magnetization of spin $i$ in the valley $\alpha$. Note that the self overlap for a pure state $q^{\alpha\alpha} = q_{EA}$, which is the same as the Edwards Anderson order parameter.
+We can also define the probability distribution of the overlap between two pure states, given by
 
 $$ P(q) = \sum_{\alpha\beta} P_{\alpha} P_{\beta} \delta(q - q^{\alpha\beta}) $$
 
-and this also includes the self overlap $q^{\alpha\alpha}$. Note that $P(q)$ was defined for a particular frozen value of the couplings $J_{ij}$. If we average over $J$, then this results in ${\overline P}(q)$ which can be used to characterize the spin glass model. The focus of the analysis of spin glass models has been to derive an expression for this distribution.
+Note that $P(q)$ was defined for a particular frozen value of the couplings $J_{ij}$. If we average over $J_{ij}$, then this results in ${\overline P}(q)$ which can be used to characterize the spin glass model and it is a function of the distribution of $J_{ij}$. The focus of the analysis of spin glass models has been to derive an expression for this distribution.
 
-In an Ising model there exists one pure state at high temperature (with E(m_i) = 0), and two pure states at low temperature (with $E(m_i) > 0$ and $E(m_i) < 0$) with equal probability. Thus at high $T$, $P(q) = \delta(q)$ and for low $T$, $P(q) = {1\over 2}[\delta(q+m^2)+\delta(q-m^2)]$. Since there are an infinite number of pure states in a spin glass, $q$ can take on many more values.
+In an Ising model there exists one pure state at high temperature (with $E(m_i) = 0$), and two pure states at low temperature (with $E(m_i) > 0$ and $E(m_i) < 0$) with equal probability. The overlaps are given by
+
+$$ q^{++} = m^2,\ \ \ q^{--} = m^2,\ \ \ q^{+-} = q^{-+} = -m^2  $$
+
+Thus at high $T$, $P(q) = \delta(q)$ and this system is said to exhibit replica symmetry.
+For low $T$, $P(q) = {1\over 2}[\delta(q+m^2)+\delta(q-m^2)]$. Since there are an infinite number of pure states in a spin glass, $q$ can take on many more values and the system now exhibits what is called replica symmetry breaking or RSB.
+
+Note that the number of peaks of $P(q)$ is not equal to the number of pure states, but to the number of possible values taken by the overlap. We will see in the next section that the simplest type of spin glass also has only two peaks in this distribution, but has an infinite number of pure states, unlike the Ising model.
 
 ### The Replica Method
 
 So how do we go about analyzing the SK spin glass model? Using the Landau theory for phase transitions, we start with the free energy density function $f_N(J)$ for $N$ atoms for a particular realization of the interaction strength $J$, given by
 
-$$ f_N(J) = -{1\over{\beta N}} \log{\sum_{\sigma}e^{-\beta H_N(J,\sigma)}} = -{1\over{\beta N}}\log Z_N(J)  $$
+$$ f(N,J) = -{1\over{\beta N}} \log{\sum_{(\sigma)}e^{-\beta H_N(J,\sigma)}} = -{1\over{\beta N}}\log Z_N(J)  $$
 
-where the summation is over all possible configurations of the spins.
+where the summation is over all possible configurations of the spins that are compatible with $J$.
 The average free energy density ${\overline f}(N)$ for $N$ particles is then obtained by averaging over the coupling distribution $J$ 
 
-$$ {\overline f_N} = \sum_{J} P[J] f_N(J) = -{1\over N\beta}E(\log Z_N(J)) $$
+$$ {\overline f}(N) = \sum_{J} P[J] f_N(J) = -{1\over N\beta}E(\log Z_N(J)) $$
 
 and then taking the limit as $N\uparrow\infty$, we  finally obtain
 
-$$ {\overline f} = \lim_{N\uparrow\infty}{\overline f_N} $$
+$$ {\overline f} = \lim_{N\uparrow\infty}{\overline f}(N) $$
 
-This is an exteremly difficult problem in probability theory due to the complexity in evaluating $E(\log Z)$.. In the 1960s a way to solve similar problems arose in the context of Quantum Field Theory, and is known as the replica method. It works as follows:
+This is an exteremly difficult problem in probability theory due to the complexity in evaluating $E(\log Z)$. In the 1960s a way to solve similar problems arose in the context of Quantum Field Theory, and is known as the replica method. It works as follows:
 With the random interactions frozen at $J_{ij}$, consider $n$ independent replicas of the system. Replicas have the same couplings $J_{ij}$, but evolve independently, so that they can end up with a different spin configuration.
-Using the replica idea, the overlap function $q_{ab}$ between two replicas is given by
+Using the replica idea, the overlap function $q_{ab}$ between two replicas is given by 
 
-$$ q_{ab} = {1\over N} \sum_{i=1}^N E(s_i^a.s_i^b) $$
+$$ q_{ab} = {1\over N} \sum_{i=1}^N \sigma_i^a \sigma_i^b $$
 
-Define a partition function $(Z_J)^n$ for the system of $n$ replicas by
+Define a partition function $(Z_J)^n$ for the system of $n$ replicas by (since the replicas are independent, it is a product of the individual partition functions)
 
 $$ (Z_J)^n = \sum_{(s)^1}\sum_{(s)^2}...\sum_{(s)^n}e^{-\sum_{a=1}^n \beta H_J[s^a]} $$
 
-where each of the summations $\sum_{(s)^i}$ is over all possible configuations of the spins in a replica that are compatible with the frozen interaction $J$.
-The average over the distribution of $J$ is given by
+where each of the summations $\sum_{(s)^i}$ is over all possible configuations of the spins in a replica.
+The average over the distribution of $J_{ij}$ is given by
 
 $$  E(Z^n) = \sum_J p(J) (Z_J)^n $$
 
-At the end of this step we still have $n$ replicas, but they are no longer independent. Indeed they are correlated due to the fact that their spins are constrained by the fact that they all follow the common interaction law given by $J$.
+After this averaging we still have $n$ replicas, but they are no longer independent. Indeed they are correlated since their spins are constrained by the fact that they all follow the common interaction law given by $J$.
 The free energy density for the system of replicas is defined by
 
 $$ f_n(N) = -{1\over{\beta Nn}}\log E(Z^n) $$
@@ -640,11 +661,11 @@ Finally taking the limit $N\uparrow\infty$, the free energy density is given by
 
 $$ {\overline f} = \lim_{N\uparrow\infty} {\overline f(N)} $$
 
-Note that by using the replica trick, we have replaced the computation of $E(\log Z)$ by $\log E(Z)$, which helps in simplifying the calculations.
+Note that by using the replica trick, we have replaced the computation of $E(\log Z)$ by $\log E(Z)$, which simplifies the calculation considerably.
 
-It can be shown that $E(Z^n(N))$ can be written as a function of the overlap matrix $Q_{ab}$ which describes the overlap between two replicas $a$ and $b$:
+It can be shown that $E(Z^n(N))$ can be written as a function of the overlap matrix $Q_{ab}$ (with elements $q_{ab}$ defined earlier), which describes the overlap between two replicas $a$ and $b$:
 
-$$ E(Z^n(N)) = \int \prod_{(ab)} {dQ_{ab}\over{2\pi}} e^{NA[Q_{ab}]}  $$
+$$ E(Z^n(N)) = \int \prod_{(ab)} {dQ_{ab}\over{2\pi}} e^{-NA[Q_{ab}]}  $$
 
 Taking the limit $N\rightarrow\infty$, this expression can be evaluated by the saddle point approximation method, which leads to
 
@@ -655,10 +676,15 @@ where $A_{sp}$ is evaluated at the value of $Q_{ab}$  which achieves its saddle 
 So how do we get hold of the values of $Q_{ab}$ at the saddle point? The way scientists have proceeded is by making educated guesses (called *ansatz*), and then verifying that the math works out. The simplest structure for $Q_{ab}$ is known as the replica symmetric (RS) solution. In this case the overlap $q_{ab}$ between any two replicas is the same, i.e., $q_{ab} = q_0$ for $a\ne b$ and $q_{aa} = q_d$ for self overlap along the diagonal. This ansatz correctly describes the high temperature regime, but it becomes unstable as the temperature is lowered below a threshold $T_c$ and this correponds to a phase change.
 The correct structure, that was proposed by Parisi, is a matrix $Q_{ab}$ with an iterative block structure in which the symmtry between pairs of replicas breaks down, i.e., $q_{ab}\ne q_{ba}$.
 
+![](https://subirvarma.github.io/GeneralCognitics/images/stat20.png) 
 
 Figure 14: 1-RSB parametrization of the overlap matrix $Q_{ab}$. $q_1$ represents the degree of similarity between 2 replicas inside the innermost block of size $m\times m$, while $q_0$ is the outermost block value.
 
-The first iteration of replica symmetry breaking (RSB) is shown in figure 14. The $Q_{ab}$ matrix is parametrized by a dagonal value of $q_d$, and two off-diagonal values that can either be $q_1$ if the two replicas belong to the same block of size $m\times m$, or $q_0$ is the replicas fall outside the innermost block. If 1-RSB fails to stabilize the solution, then this procedure can be iteratively repeated within each of the blocks, leading to k step RSB or k-RSB. Thus there can be multiple phase changes as the temperature is reduced, each stabilized by a different value of $k$. In the limit $k\rightarrow infty$, q becomes a function $q(x), 0\le x\le 1$.
+The first two iteration of replica symmetry breaking (RSB) is shown in figure 14. 
+
+- The leftmost figure shows the case when the replica symmetry is unbroken in the high temperature case, in which all elements of the matrix are zero.
+- The middle figure shows the simplest case of replica symmetry breaking, called 1-RSB. The $Q_{ab}$ matrix is parametrized by a diagonal value of $q_d$, and two off-diagonal values that can either be $q_1$ if the two replicas belong to the same block of size $m\times m$, or $q_0$ is the replicas fall outside the innermost block.
+- This procedure can be iteratively repeated within each of the blocks, leading to k step RSB or k-RSB, and an example of 2-RSB is shown in the rightmost figure. 
 
  
 
