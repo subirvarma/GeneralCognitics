@@ -688,12 +688,6 @@ The first two iteration of replica symmetry breaking (RSB) is shown in figure 14
 
  To summarize, we have obtained a solution for the free energy ${\overline f}$ as a function of the elements of the matrix $Q_{ab}$, which can be regarded as an order parameter and this order parameter is the overlap between configurations belonging to different replicas. But what is the meaning of this solution in terms of the spin glass model? We will answer this in the next sub-section.
 
-
-![](https://subirvarma.github.io/GeneralCognitics/images/stat18.png) 
-
-Figure 16: Variation of the Edwards Anderson Order Parameter with temperature
-
-
 ### Connection between Replica Symmetry Breaking and the Spin Glass Model
 
 We defined the probability distribution of the overlap between two states ${\overline P}(q)$ two sub-sections ago, and it turns out that this function can be expressed in terms of the replicas as follows:
@@ -729,7 +723,19 @@ So now we need to determine the parameters $m, q_0, q_1$ to complete the 1-RSB s
 
 There is a class of spin glass models called p-spin spherical model or PSM, for the 1-RSB solution is exact, i.e., there is no further breaking of the replica symmetry as the temperature is reduced. However this is not the case for the SK model, and in this case the symmetry keep breaking ad-infintum as the temperature is reduced.
 
+![](https://subirvarma.github.io/GeneralCognitics/images/stat21.png) 
 
+Figure 17: Illustration of replica symmetry breaking
+
+Figure 17 shows the changes in the free energy landscape as the temperature lowered on the left, and the distribution of the overlaps on the right:
+
+- At high temeperatures there is only a single pure state and the energy landscape is fairly flight, so that individual configurations are widely spread out and have a low degree of overlap. This is illustrated by the greem curve on the right which shows that the overlaps have a single peak at the zero overlap value.
+- As the temperature reduced below the critical value, we see the formation of multiple pure state and there is split of the of overlap distribution into a bi-modal shape. Configurations can be in the same pure state in which case they have a high overlap value, or they can be in different pure states, in which vase the overlap tends to be near zero.
+- An even further reduction in the temperature causes more replica symmtry breaking, as a result of which we now see that each of the pure states from the second stage has further split into multiple pure states lying within the energy valley formed in stage 2. Furthermore the overlap distribution has developed a peak near 1, which implies that at low temeperatures all the configurations tend to lie near the ground state.
+
+As the temperature approaches zero, in addition to to the explosion in the number of pure states, the number of configurations per pure state decreases, until at $T=0$ there is only one configuration per pure state.
+In this situation the self overlap becomes equal to 1, while the cross overlap between states is zero. This process is completely probabilistic, so the system may end up in a different configuration every time it is
+gradually frozen.
 
 
 
@@ -756,6 +762,10 @@ There is a class of spin glass models called p-spin spherical model or PSM, for 
 
 ### Diffusion Models as Overloaded Hopfield Networks
 
+
+![](https://subirvarma.github.io/GeneralCognitics/images/stat18.png) 
+
+Figure 16: Variation of the Edwards Anderson Order Parameter with temperature
 
 
 
