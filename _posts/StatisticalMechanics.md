@@ -747,9 +747,14 @@ gradually frozen.
 ## From Spin Glass to Hopfield Networks: Engineering the Energy Landscape of a Spin Glass
 
 
+![](https://subirvarma.github.io/GeneralCognitics/images/stat22.png) 
+
+Figure 18
 
 
+![](https://subirvarma.github.io/GeneralCognitics/images/stat23.png) 
 
+Figure 18
 
 
 ## From Hopfield Networks to Boltzmann Machines: Restricted Boltzmann Machines, Deep Boltzmann Machines
