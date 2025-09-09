@@ -744,7 +744,10 @@ gradually frozen.
 
 
 
-## From Spin Glass to Hopfield Networks: Engineering the Energy Landsacpe of a Spin Glass
+## From Spin Glass to Hopfield Networks: Engineering the Energy Landscape of a Spin Glass
+
+
+
 
 
 
