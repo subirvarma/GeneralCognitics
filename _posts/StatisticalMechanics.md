@@ -191,7 +191,7 @@ where the spin $\sigma = +1$ if the magnetic moment of the spin aligned with the
   - In ferromagnetic materials on the other hand, individual spins are coupled with those of their neighbors, as a result of which the material remans magnetized even in the absence of the external field.
 
 The first model for magnetic materials was proposed by Lenz in the early 1920s. He gave the problem of analyzing the model to his PhD student Ising, who was able to solve the problem for the case when the atoms are arranged in $d = 1$ dimension, by using the tools of statistical mechanics. The case $d = 2$ doesn't have a simple exact solution, and it was not solved until the 1940s, and the case $d\ge 3$ is still unsolved.
-However it can be shown that models with $d\ge 2$ exhibit phase transitions, which is defined as a sudden change in the properties of a material when the temperature or one of the physical variables is reduced (or increased) beyond a certain threshold. 
+However using approximations it can be shown that models with $d\ge 2$ exhibit phase transitions, which is defined as a sudden change in the properties of a material when the temperature or one of the physical variables is reduced (or increased) beyond a certain threshold. 
 Phase transition is the most interesting property in thermodynamics and the Ising model is simplest system that exhibits this behavior. As a result it has become an extremely important model, and all manners of systems have been analyzed using variations of this model. It was later found out that the mathematics of Ising models and that of quantum field theory are the same, which led to a lot of cross fertilization between the two fields. In addition to Lenz and Ising, the names most associated with this model are the Russian physicists Landau and Ginzburg and Americans Wilson and Kadanoff.
 
 ### Model for Paramagnetism
@@ -214,7 +214,7 @@ so that $\log Z = N\log 2 + N\log[\cosh(\beta j)]$.  It follows that the average
 
 $$ E_{av} = -{\partial\log Z\over\partial\beta} = - Nj\ \tanh(\beta j) $$
 
-so that the average energy  density $e_{av}$ at temperate $T$ (in the presence of the magnetic field with coupling $j$) is given by
+so that the average energy  density $e_{av}$ at temperate $T$ (in the presence of the magnetic field with coupling $j$) is given by the product of the individual partition functions
 
 $$ e_{av} = {E_{av}\over N} = -j\ \tanh(\beta j)  $$
 
@@ -235,9 +235,10 @@ Since we are considering positive temperatures only, we will focus on the half p
 
 Figure 2: One dimensional Ising model
 
-The Ising model incorporates interactions between neighboring atoms and the one dimensional case is discussed in this section (see figure 2). The energy for a given configuration of spins is written as
+We come to our first model for an interacting particle system which is called the Ising mode.
+This model incorporates interactions between neighboring atoms and the one dimensional case is discussed in this section (see figure 2). The energy for a given configuration of spins is written as
 
-$$  E = -J\sum_i \sigma_i\sigma _{i+1} $$
+$$  E = -j\sum_i \sigma_i\sigma _{i+1} $$
 
 Note that unlike the previous case, there is no external magnetic field present.
 Each of the terms in this expression in minimized when $\sigma_i = \sigma_{i+1}$, i.e., the spins are aligned together either with $\sigma_i = \sigma_{i+1} = 1$ or $\sigma_i = \sigma_{i+1} = -1$, which implies that there are two configurations with the minimum energy value, which correspond to all the spins pointing up or all the spins pointing down. The partition function for this system is given by
@@ -248,18 +249,18 @@ This sum has to be evaluated over all possible spin configurations, which makes 
 
 $$  \mu_i =  \sigma_i\sigma _{i+1},\ \ i = 1,2,...,N-1  $$
 
-Note that $\mu$ is defined on per connection basis, rathar than on a per atom basis.
+Note that $\mu$ is defined on per connection basis, rather than on a per atom basis.
 With this definition the partition function $Z$ becomes
 
 $$ Z = Z_1 + Z_2 $$
 
-where $Z_1$ is the partition function for the case when the first spin is $+1$, and $Z_2$  for the case when the first spin is $-1$ (speification of the first spin, in combination with the sequence $\mu_i, 1 = 1,2,..,N-1$ allows us to recover all the remaining spins $\sigma_2,...\sigma_N$).
+where $Z_1$ is the partition function for the case when the first spin is $+1$, and $Z_2$  for the case when the first spin is $-1$ (note that specification of the first spin, in combination with the sequence $\mu_i, 1 = 1,2,..,N-1$ allows us to recover all the remaining spins $\sigma_2,...\sigma_N$).
 Note that both $Z_1$ and $Z_2$ are equal and are given by
 
 $$ Z_1 = Z_2 = \sum_{i=1}^{N-1} e^{-j\beta\sum_i \mu_i}  $$
 
-But note that this exactly the same partition function as for the case analyzed in the previous section, i.e., when there are $N-1$ atoms in a magnetic field and there is no interaction between neighboring atoms. 
-Leveraging the solution we obatained for that case, it follows that
+But this is exactly the same partition function as for the case analyzed in the previous section, i.e., when there are $N-1$ atoms in a magnetic field and there is no interaction between neighboring atoms. 
+Leveraging the solution we obtained for that case, it follows that
 
 $$ Z_1 = Z_2 = 2^{N-1}\cosh^{N-1}(\beta j) $$
 
@@ -271,7 +272,7 @@ It follows that the average $\mu_{av}$ is given by
 
 $$ \mu_{av} = (\sigma_i\sigma_{i+n})_{av} = \tanh(\beta j) $$
 
-The correlation between the spins of neighboring atoms goes to zero as temperature increases as expected, but what about low temperatures. This equation tells us that the average of the connection values $\mu_{av}$ goes to one, but from this can we conclude that the all atoms have transitioned to the up for down spin configuration? We cannot since even if most of the spins at $\sigma_i = 1$, there can be islands of atoms with $\sigma_i = -1$, and this is consistent with having an overall average $\mu_{av}$ of 1. Indeed it can be shown that the correlation between atoms separated by $n$ positions is given by
+The correlation between the spins of neighboring atoms goes to zero as temperature increases as expected, but what about low temperatures. This equation tells us that the average of the connection values $\mu_{av}$ goes to one, but from this can we conclude that the all atoms have transitioned to the up for down spin configuration? We cannot since even if most of the spins at $\sigma_i = 1$, there can be islands of atoms with $\sigma_i = -1$, and this is consistent with having an overall average $\mu_{av}$ of 1. Indeed it can be shown that the correlation between spins separated by $n$ positions is given by
 
 $$ (\sigma_i\sigma_{i+n})_{av} = \tanh^{n-1}(\beta j) $$
 
@@ -284,9 +285,9 @@ This implies that even at very low temperatures, for example for $\beta = 0.9999
 
 Figure 3: The Ising model in two dimensions
 
-Spontaneous magnetisation happens in a system when the spin state of even a single atom propagates through the material and re-orients all the spins. We just saw that in one dimension this does not happen, since the correlation between spins fades the further away we get, irrespective of the temperature. One way of understanding this is by noting that the spin at a particular atom has at most two other spins which directly infuence it, i.e., those of its immediate neighbors. However this is not the case in higher dimensions. For example for $d=2$, each atom has four neighbors, and as a result if the majority of their spins are aligned in a certain direction, then it influences the target atom to align in the same direction. Hence the presence of multiple neighbors acts as a kind of error corection when choosing the spin value.
+Spontaneous magnetisation happens in a system when the spin state of even a single atom propagates through the material and re-orients all the spins. We just saw that in one dimension this does not happen, since the correlation between spins fades the further away we get, irrespective of the temperature. One way of understanding this is by noting that the spin at a particular atom has at most two other spins which directly infuence it, i.e., those of its immediate neighbors. However this is not the case in higher dimensions. For example for $d=2$, each atom has four neighbors, and as a result if the majority of their spins are aligned in a certain direction, then it influences the target atom to align in the same direction. Hence the presence of multiple neighbors acts as a kind of error correction when determining the spin value.
 
-Unfortunately the exact analysis of Ising models for $d\ge 2$ is extremely difficult. However there exists a simple approximation method, called mean field analysis, that preserves important properties such as phase transitions.
+Unfortunately the exact analysis of Ising models for $d\ge 2$ is extremely difficult. However there exists a simple approximation method, called mean field analysis, that preserves important properties such as phase transitions and we will describe that next.
 
 The energy level for a single atom is given by
 
@@ -296,23 +297,23 @@ where $n$ is the number of neighbors for the atom.
 
 The energy for a configuration of N atoms in $d$ dimensions is given by
 
-$$  E = -J\sum_i\sum_j \sigma_i \sigma_j  $$
+$$  E = -j\sum_i\sum_j \sigma_i \sigma_j  $$
 
 where the summation is done over pairs of nearest neighbors. Expressing the spins in terms of their fluctuations $\delta\sigma_i$ from their average value $m_i = (\sigma_i)_{av}$, 
 
-$$ E = -J\sum_i\sum_j(m_i + \delta\sigma_i)(m_j + \delta\sigma_j)  $$
+$$ E = -j\sum_i\sum_j(m_i + \delta\sigma_i)(m_j + \delta\sigma_j)  $$
 
 Expanding this expression and ignoring the product of the fluctuations $\delta\sigma_i\delta\sigma_j$ assuming it is neglegible, we get
 
-$$ E = -J\sum_i\sum_j(m_i m_j + m_i\delta_j + m_j\delta \sigma_i)  $$
+$$ E = -j\sum_i\sum_j(m_i m_j + m_i\delta_j + m_j\delta \sigma_i)  $$
 
 According to the mean field approximation $m_i = m_j = m$, i.e., the mean value value of the spins is the same everywhere. This leads to
 
-$$ E = -J\sum_i\sum_j(m + m(\sigma_j - m) + m(\sigma_i - m))  $$
+$$ E = -j\sum_i\sum_j(m^2 + m(\sigma_j - m) + m(\sigma_i - m))  $$
 
 From translational inveriance of the atoms it follows that
 
-$$ E = -Jm\sum_i\sum_j(m^2 + 2(\sigma_i - m))  $$
+$$ E = -j\sum_i\sum_j(m^2 + 2(\sigma_i - m))  $$
 
 Note that $\sum_i\sum_j = {1\over 2}\sum_i\sum_{j\in nn(i)}$ where the ${1\over 2}$ factor avoids double counting pairs of sites and $nn(i)$ is the number of nearest neighbors of $i$. 
 Since there is no dependence on $j$ in the summation, the inner sum is simply $\sum_{j\in nn(i)} = 2d$, where $2d$ is the number of neighbors for any atom, and $d$ is the number of dimensions. This leads to
@@ -321,7 +322,7 @@ $$ \sum_i\sum_j \rightarrow d\sum_{i=1}^N $$
 
 The expression for energy simplifies to 
 
-$$  E = -dJm\sum_{i=1}^N(2\sigma_i -m) $$
+$$  E = -djm\sum_{i=1}^N(2\sigma_i -m) $$
 $$    = {NdJm^2} - 2dJm\sum_i\sigma_i $$
 
 But this is simply the total energy level for a configuration of independent or paramagnetic atoms in the presence of a magnetic field with intensity $2dJm$.
