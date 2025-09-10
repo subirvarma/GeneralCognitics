@@ -508,9 +508,9 @@ Back in the 1950s scientists were actively investigating the properties of new m
 - Below the critical temperature, the material become magnetic. However, after gradually increasing as the temperature was further reduced, the magnetisation hit a limit at a finite temperature and stayed there even at lower temperatures.
 
 This was a new kind of magnetic behavior not seen before, and soon physicists came up with an explanation for it. As shown in figure 12, all the spins of ferromagnetic materials tend to align at lower temperatures, while those in anti-ferromagnetic also tend to align but in opposite directions. Spin Glasses on the other hand do not exhibit any such regularity. Even at low temperatures, their spins can have different orientations as shown in the right hand side of the figure. Hence some of the interactions are ferromagnetic (shown in blue), while others are anti-ferromagnetic (shown in red).
-It seems that the presence of the copper atoms in the spin glass interferes with the tendency of iron atoms to try to line up as temperature decreases. This random orientations of spins is said to be "dis-ordered". In the same way that an amorphous solid like window glass doesn’t have an orderly crystal structure, a spin glass doesn’t have an orderly magnetic structure. But is there any structural law that these seeemingly random spin configurations obey which could be predicted using the tools of statistical mechanics? This turned out to be a very difficult theoretical problem, and the solution did not emerge for another three decades until the mid-1980s.
+It seems that the presence of the copper atoms in the spin glass interferes with the tendency of iron atoms to try to line up as temperature decreases and this random orientations of spins is said to be "dis-ordered". In the same way that an amorphous solid like window glass doesn’t have an orderly crystal structure, a spin glass doesn’t have an orderly magnetic structure. But is there any structural law that these seeemingly random spin configurations obey which could be predicted using the tools of statistical mechanics? This turned out to be a very difficult theoretical problem, and the solution did not emerge for another three decades until the mid-1980s.
 
-There is a subtle difference between the pure randomness of a disordered state in a ferromagnetic material when $T > T_c$ and the disorder that we see in a spin glass when $T < T_c. The latter looks as random as a paramagnetic material, but there are some differences:
+There is a subtle difference between the pure randomness of the paramagnetic state in a ferromagnetic material when $T > T_c$ and the disorder that we see in a spin glass when $T < T_c. The latter looks as random as a paramagnetic state, but there are some differences:
 The randomness in the ferromagnetic material gradually decreases as the temperature is reduced, and ultimately it becomes completely ordered at $T=0$. The randomness in the spin glass on the other hand becomes "frozen" as the temperature is reduced, and it maintains the randomness even at $T=0$.
 We will see in the next section that there are some order parameters that are able to capture the frozen disorder in a spin glass.
 
@@ -522,9 +522,9 @@ As mentioned in the introduction, a large number of systems exhibit spin glass t
 
 Figure 14: Spin Interactions in the Sherrington Kirkpatrick Model
 
-Samuel Edwards and Phillip Anderson were the first physicists to come up with a mathematical model for spin glasses. In the proces they introduced several new theoretical ideas that have proven to be very fruitful, but their model itself was a bit difficult to analyze. Shortly therafter, David Sherrington and Scott Kirkpatrick introduced their epynomous model (which we will call the SK model), which was a simplified version of the EA model, and this proved to be very influential in the subsequent years, since the model was easier to analyze also captured some of the essential aspects of spin glasses.
+Samuel Edwards and Phillip Anderson were the first physicists to come up with a mathematical model for spin glasses in the mid-1970s. In the proces they introduced several new theoretical ideas that have proven to be very fruitful, but their model itself was a bit difficult to analyze. Shortly therafter, David Sherrington and Scott Kirkpatrick introduced their epynomous model (which we will call the SK model), which was a simplified version of the EA model, and this proved to be very influential in the subsequent years, since the model was easier to analyze also captured some of the essential aspects of spin glasses.
 
-Recall that the energy function for the Ising model was given by
+Recall that the energy function for the Ising model was given by (we are going to use capital J for the interaction strength)
 
 $$ H = -J\sum_i\sum_{j[i]}\sigma_i\sigma_j $$
 
@@ -558,16 +558,14 @@ Figure 15: Energy Landscape in Spin Glasses
 
 Something that was realized pretty early in the study of spin glasses is that below the critical temperature, their free energy landscape is quite unlike that for magnetic ferromagnetic materials. It consists of multipe peaks and valleys as shown in figure 14 which seem to be quite random and it leads to the observation that a spin glass has an infinite nuber of phases potentially. But is there an order that exists within this randomness? The discovery that there is indeed an order is one of the triumphs of physics, and it won Giorgio Parisi the Nobel Prize in 2024.
 
-*Because of the quenched disorder, every energy function $E$ in a spin glass is different from all others, since every sample corresponds to a different set of coupling $J_{ij}$. Even though samples are microscopically different, the display the same macroscopic behavior on the average.*
-
 ### Order Parameters in a Spin Glass System
 
-Recall that for the case of Ising model the magnetized phase was characterized by the fact that the average magnetization $m$ was non-zero. Note that a single phase can have multiple configuraions of spins, and define the average spin value at site $i$, $E(\sigma_i)$ as the average over all these configurations.
+Recall that for the case of Ising model the magnetized phase was characterized by the fact that the average magnetization $m$ was non-zero. Note that for a given value of $m$, the system can have multiple configuraions of spins, and define the average spin value at site $i$, $E(\sigma_i)$ as the average over all these configurations.
 If $E(\sigma_i) = m_i$, then for $T < T_c$, the average over all the $N$ sites is given by
 
 $$ q = {1\over N}\sum_i m_i = m  $$
 
-$m\ne 0$ due to the fact that the a majority of atoms are pointing in the same direction in the magnetized phase.
+and $m\ne 0$ due to the fact that the a majority of atoms are pointing in the same direction in the magnetized phase.
 In the SK model $q$ cannot be used to characterize the magnetized phase since ${1\over N}\sum_i m_i = 0$ even for a single realization of the random variables $J_{ij}$, and this is due to the fact that these interactions are symmetrically distributed around the origin  as a result of which the spins are randomly oriented even in equilibrium (at low temperature).
 
 So how can we characterize the magnetized phase in the SK model?
@@ -579,7 +577,7 @@ $$ q_{EA} = {1\over N}\sum_i m_i^2 > 0  $$
 where $q_{EA}$ is called the Edwards-Anderson order parameter. Hence spin glass models are characterized by $q = 0,\ 0\le q_{EA} \le 1$.
 
 These definitions were further refined in subsequent years, with the introduction of the concept of a "pure state", but in order to do so we first have to clarify what a state is in this context.
-The characteristic feature of a spin glass phase is the existence of very many free energy valleys which are separated by very high energy barriers (as opposed to the Ising model that has a only a couple of free energy valleys, see figures 10 and 14). It was realized that the best way to characterize a spin glass system is in terms of the space of free energy valleys, and these are called the pure states of the system. Note that each pure state is made up of a large number of spin configurations and can be assigned a statistical weight $P_{\alpha}$ determined by its free energy $F_{\alpha}$ given by
+The characteristic feature of a spin glass phase is the existence of very many free energy valleys which are separated by very high energy barriers (as opposed to the Ising model that has a only a couple of free energy valleys, see figures 10 and 15). It was realized that the best way to characterize a spin glass system is in terms of the space of free energy valleys, and these are called the pure states of the system. Note that each pure state is made up of a large number of spin configurations and can be assigned a statistical weight $P_{\alpha}$ determined by its free energy $F_{\alpha}$, and is given by
 
 $$ P_{\alpha} = {e^{-\beta F_{\alpha}}\over{\sum_{\gamma}e^{-\beta F_{\gamma}}}} $$
 
@@ -594,7 +592,7 @@ Given two spin configurations ($\sigma$ and $\tau$), the overlap between them is
 $$ q[\sigma,\tau] = {1\over N} \sum_{i}\sigma_i\tau_i $$
 
 Hence overlap is a measure of the similarity between different configurations.
-This definition is furter extended to define the the overlap between two pure states ($\alpha$ and $\beta$), which ia a measure of distance between them, and is given by
+This definition is furter extended to define the the overlap between two pure states ($\alpha$ and $\beta$), which is a measure of distance between them, and is given by
 
 $$ q^{\alpha\beta} = {1\over N}\sum_{i} m_i^{\alpha} m_i^{\beta} $$
 
@@ -605,12 +603,12 @@ $$ P(q) = \sum_{\alpha\beta} P_{\alpha} P_{\beta} \delta(q - q^{\alpha\beta}) $$
 
 Note that $P(q)$ was defined for a particular frozen value of the couplings $J_{ij}$. If we average over $J_{ij}$, then this results in ${\overline P}(q)$ which can be used to characterize the spin glass model and it is a function of the distribution of $J_{ij}$. The focus of the analysis of spin glass models has been to derive an expression for this distribution.
 
-In an Ising model there exists one pure state at high temperature (with $E(m_i) = 0$), and two pure states at low temperature (with $E(m_i) > 0$ and $E(m_i) < 0$) with equal probability. The overlaps are given by
+In an Ising model there exists one pure state when $T>T_c$ (with $E(m_i) = 0$), and two pure states when $T<T_c$$) (with $E(m_i) > 0$ and $E(m_i) < 0$) with equal probability. The overlaps are given by
 
 $$ q^{++} = m^2,\ \ \ q^{--} = m^2,\ \ \ q^{+-} = q^{-+} = -m^2  $$
 
 Thus at high $T$, $P(q) = \delta(q)$ and this system is said to exhibit replica symmetry.
-For low $T$, $P(q) = {1\over 2}[\delta(q+m^2)+\delta(q-m^2)]$. Since there are an infinite number of pure states in a spin glass, $q$ can take on many more values and the system now exhibits what is called replica symmetry breaking or RSB.
+For low $T$ on the other hand, $P(q) = {1\over 2}[\delta(q+m^2)+\delta(q-m^2)]$. Since there are an infinite number of pure states in a spin glass, $q$ can take on many more values and the system now exhibits what is called replica symmetry breaking or RSB.
 
 Note that the number of peaks of $P(q)$ is not equal to the number of pure states, but to the number of possible values taken by the overlap. We will see in the next section that the simplest type of spin glass also has only two peaks in this distribution, but has an infinite number of pure states, unlike the Ising model.
 
