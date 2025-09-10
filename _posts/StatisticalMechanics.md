@@ -313,7 +313,7 @@ $$ E = -j\sum_i\sum_j(m^2 + m(\sigma_j - m) + m(\sigma_i - m))  $$
 
 From translational inveriance of the atoms it follows that
 
-$$ E = -j\sum_i\sum_j(m^2 + 2(\sigma_i - m))  $$
+$$ E = -j\sum_i\sum_j(2m\sigma_i - m^2)  $$
 
 Note that $\sum_i\sum_j = {1\over 2}\sum_i\sum_{j\in nn(i)}$ where the ${1\over 2}$ factor avoids double counting pairs of sites and $nn(i)$ is the number of nearest neighbors of $i$. 
 Since there is no dependence on $j$ in the summation, the inner sum is simply $\sum_{j\in nn(i)} = 2d$, where $2d$ is the number of neighbors for any atom, and $d$ is the number of dimensions. This leads to
@@ -322,28 +322,27 @@ $$ \sum_i\sum_j \rightarrow d\sum_{i=1}^N $$
 
 The expression for energy simplifies to 
 
-$$  E = -djm\sum_{i=1}^N(2\sigma_i -m) $$
-$$    = {NdJm^2} - 2dJm\sum_i\sigma_i $$
+$$  E = {Ndjm^2} - 2djm\sum_i\sigma_i $$
 
-But this is simply the total energy level for a configuration of independent or paramagnetic atoms in the presence of a magnetic field with intensity $2dJm$.
+But this is simply the total energy level for a configuration of independent or paramagnetic atoms in the presence of a magnetic field with intensity $2djm$.
 Leveraging the solution for this model from two sections ago, it follows that the partition function is given by
 
-$$ Z = e^{-\beta NdJm^2} 2^N\cosh^N(2dj\beta m) $$
+$$ Z = e^{-\beta Ndjm^2} 2^N\cosh^N(2dj\beta m) $$
 
 and the average energy for the system is given by
 
-$$ E_{av} = {\partial\log Z\over{\partial\beta}} = -2NdJm\ \tanh(2dj\beta m) $$ 
+$$ E_{av} = {\partial\log Z\over{\partial\beta}} = -2Ndjm\ \tanh(2dj\beta m) $$ 
 
 From this it follows that the average spin for the system is given by
 
-$$ \sigma_{av} = \tanh(2dJ\beta m) $$
+$$ \sigma_{av} = \tanh(2dj\beta m) $$
 
 But in equilibrium the average spin should be equal to the mean field value, i.e., $\sigma_{av} = m$. 
 Hence the following equation should be satisfied in thernal equilibrium
 
-$$ m = \tanh(2dJ\beta m) $$
+$$ m = \tanh(2dj\beta m) $$
 
-Making the substitution $y = 2dJ\beta m$, it follows that
+Making the substitution $y = 2dj\beta m$, it follows that
 
 $$ {y\over{2dj\beta}} = \tanh\ y  $$
 
@@ -365,7 +364,7 @@ Figure 5: $\tanh\ y$ and ${yT\over{2dJ}}$ when $T < 2dJ$
 
 However as $T$ is reduced, then ultimately the straight line does intersect the $\tanh$ curve as shown in figure 5, and there is a critical temperature $T_c = 2dJ$ at which the slope of the line is one, which is the same as the slope of $\tanh$ at the origin. Any decrease in $T$ beyond this point causes the two curves to intersect. When this happens there exist two other non-zero values for m, say $m'$ and $-m'$, and this corresponds to magnetization of the material. The amount of magnetization gradually increases until at very low temperatures it approaches $m = +1$ or $-1$. 
 
-Since there are now three possible solutions at average spins $0$ and $m'$ and $-m'$, the question arises: which one does the system choose?. 
+Since there are now three possible solutions at average spins $0$ and $m'$ and $-m'$, the question arises: which one does the system choose? 
 If the system starts from a state of random spins at $T > T_c$, then it stays in this state even after the $T < T_c$, until something causes the spins to align. This is the phenomenon of phase change, and it can be triggered by the presence of an external magnetic field.
 Thus the solution for $m = 0$ is unstable, and the system can tip into the state $m = +1$ or $m = -1$ very easily if $T<T_c$, as shown next.
 This analysis also implies that if we start from a low temperature state and gradually increase temperature, then the magnetization initially decreases and then abruptly switches off when the temperature becomes greater than $T_c$.
@@ -374,7 +373,7 @@ This analysis also implies that if we start from a low temperature state and gra
 
 Figure 6: Variation of mean field $m$ with $T$
 
-This kind of phase transition in which there is an initial gradual decrease in the magnetic field, followed by an abrupt change to zero beyond the critical temperature, is referred to as a second order phase transition, and is illustrated in figure 6.
+This kind of phase transition in which there is an initial gradual decrease in the magnetization as temperature increases, followed by an abrupt change to zero beyond the critical temperature, is referred to as a second order phase transition, and is illustrated in figure 6.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat6.png) 
 
@@ -382,65 +381,65 @@ Figure 7: Graph of $\tanh(y + B\beta)$
 
 In the presence of an external magnetic field with intensity $B$, the energy for the system is given by
 
-$$  E = -J\sum_i\sum_j \sigma_i \sigma_j - B\sum_i\sigma_i $$
+$$  E = -j\sum_i\sum_j \sigma_i \sigma_j - B\sum_i\sigma_i $$
 
 The first term is due to interaction with neighboring atoms, while the second term is due to the external field.
 Carrying out the same calculations as above, it can be shown that the $Z$ and $E_{av}$ are given by
 
-$$ Z = e^{-\beta NdJm^2} 2^N\cosh^N(2dJm\beta + B\beta) $$
+$$ Z = e^{-\beta Ndjm^2} 2^N\cosh^N(2djm\beta + B\beta) $$
 
 and 
 
-$$ E_{av} = -2NdJm\ \tanh(2dJm\beta + B\beta) $$ 
+$$ E_{av} = -2Ndjm\ \tanh(2djm\beta + B\beta) $$ 
 
 Using the same logic as before it follows that in equilibrium the mean field for the system is given by the solution to the equation
 
-$$ m = \tanh(2dJm\beta + B\beta)  $$
+$$ m = \tanh(2djm\beta + B\beta)  $$
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat7.png) 
 
 Figure 8: Graphic solution to ${Ty\over{2dJ}} = \tanh(y + B\beta)$
 
 The solution lies at the intersection of the curves $z_1 = {yT\over{2dJ}}$ and
-$z_2 = \tanh(y + B\beta)$, and is plotted in figure 8. The $\tanh$ function has now shifted to the left if $B>0$, and as a result there is only one solution $m' > 0$ to the equation, i.e., in the presence of the external magnetic field the other two solutions away (except for the case when $\beta=0$). 
+$z_2 = \tanh(y + B\beta)$, and is plotted in figure 8. The $\tanh$ function has now shifted to the left if $B>0$, and as a result there is only one solution $m' > 0$ to the equation, i.e., in the presence of the external magnetic field the other two solutions go away (except for the case when $\beta=0$). 
 This means that if we were to start with the system in which $T < T_c$ with $B=0$, then we saw earlier there are three possible values for $m$, i.e. $m = 0$ or $m=m'$ or $m=-m'$.
-However if we switch  on even a tiny amount of external magnetic field $B$, then it instantaneously causes the system to shift to $m=m'$ since the other two solutions are no langer allowed due to the shist of the $\tanh$ curve to the left i.e., the system becomes magnetized. This is a phase change, and happens in ferromagnetic materials. Unlike for paramagnetic materials, the system stays in the magnetized state even after the external field is switched off. If the external field were pointing in the opposite direction, then it would have caused the system to flip to $m=-m'$.
+However if we switch  on even a tiny amount of external magnetic field $B$, then it instantaneously causes the system to shift to $m=m'$ since the other two solutions are no langer allowed due to the shift of the $\tanh$ curve to the left i.e., the system becomes magnetized. This is a phase change, and happens in ferromagnetic materials. Unlike for paramagnetic materials, the system stays in the magnetized state even after the external field is switched off. If the external field were pointing in the opposite direction, then it would have caused the system to flip to $m=-m'$.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat10.png) 
 
 Figure 9: Variation of $m$ with $T$ in the presence of an external magnetic field $B$
 
-The variation of $m$ with $T$ for both $B>0$ and $B<0$ is shown above, and we can see that there is no phase transition. However a phase transition does occur when the field $B$ is fliped from positive to negative or vice versa, and it causes an instantaneous change in the sign of $m$. This is an example of a first order phase transition since there is a sudden change in the phase.
+The variation of $m$ with $T$ for both $B>0$ and $B<0$ is shown above, and we can see that there is no phase transition as the temperature is varied. However a phase transition does occur when the field $B$ is fliped from positive to negative or vice versa, and it causes an instantaneous change in the sign of $m$. This is an example of a first order phase transition since there is a sudden change in the phase.
 
 ## The Landau Theory for Phase Transitions: Introducing the Energy Landscape
 
 The method used to study phase transitions in the prevous section was based on the direct computation of the partition function, which in general is a tough task if the mean field approximation is not made.
-There is an alternative approach to studying phase transitions, and this was discovered by Lev Landau around 1940, and is based on the computation of the Free Energy F for a system. This method significantly expanded the range of systems that could be analyzed using the methods of statistical mechanics and is now the de facto technique used. It allows us to go beyond the assumption made by mean field analysis, by allowing the field to actually vary as a function of position, thus resulting in a generalization of statistical mechanics called statistical field theory.
-Free Energy based methods also serve as a starting point for ways in which statistical mechanics methods were first applied to the design of Neural Networks, as discussed in the following sections.
+There is an alternative approach to studying phase transitions, and this was discovered by Lev Landau around 1940, and is based on the computation of the free energy F for a system. This method significantly expanded the range of systems that could be analyzed using the methods of statistical mechanics and is now the de facto technique used. It allows us to go beyond the assumption made by mean field analysis, by allowing the field to actually vary as a function of position, thus resulting in a generalization of statistical mechanics called statistical field theory.
+Free energy based methods also serve as a starting point for ways in which statistical mechanics methods were first applied to the design of neural networks, as discussed in the following sections.
 
 **The Case B = 0**
 
-Recall that the Free Energy $F_{therm}$ for a system in thermal equilibrium at temperatutre $T$ was defined as 
+Recall that the free energy $F_{therm}$ for a system in thermal equilibrium at temperature $T$ was defined as 
 
 $$ F_{therm} = E_{av} - TS = -T\log Z  $$
 
-I am going to generalize the definition of Free Energy to non-equilibrium states, which is why I have added the subscript *therm* to the formula.
-For a d-dimensional Ising Model, using the mean field approximation, Z was derived in the previous section for the case $B=0$, and is given by
+I am going to generalize the definition of free energy to non-equilibrium states, which is why I have added the subscript *therm* to the formula.
+For a d-dimensional Ising Model using the mean field approximation, Z was derived in the previous section for the case $B=0$, and is given by
 
-$$ Z = e^{-\beta NdJm^2} 2^N\cosh^N(2dJm_{eq}\beta) $$
+$$ Z = e^{-\beta Ndjm^2} 2^N\cosh^N(2djm_{eq}\beta) $$
 
 so that
 
-$$ F_{therm} = -NdJm_{eq}^2 - {N\over\beta}\log(\cosh(2dJm_{eq}\beta))  $$
+$$ F_{therm} = -Ndjm_{eq}^2 - {N\over\beta}\log(\cosh(2djm_{eq}\beta))  $$
 
 In these equations $m_{eq}$ is the equilibrium value of the mean field. Landau pointed out that this function can be defined even for the case $m$ is not the equilibrium value, thus resulting
 in the free energy $F(m)$ as a function of $m$,  given by
 
-$$ F(m) = -NdJm^2 - NT\log(\cosh(2dJm\beta))  $$
+$$ F(m) = -Ndjm^2 - NT\log(\cosh(2djm\beta))  $$
 
-From thermodynamics we know that equilibrium occurs at the minimum value of $F(m)$, thus solving
-${\partial F(m)\over{\partial m}} = 0$ leads to $m_{eq} = \tanh(2dJm_{eq}\beta)$.
-which agrees with our earlier calculations. In Landau's theory, $m$ is called the *order parameter* since $m>0$ implies some degree of order (a fraction of the spins are pointing in the same direction), while if $m=0$ the spins are completely randomized.
+From classical thermodynamics we know that equilibrium occurs at the minimum value of $F(m)$. Solving
+${\partial F(m)\over{\partial m}} = 0$ leads to $m_{eq} = \tanh(2djm_{eq}\beta)$.
+which agrees with our earlier calculations. In Landau's theory, $m$ is called the *order parameter* since $m>0$ implies some degree of order (since a larger fraction of the spins are pointing in the same direction), while if $m=0$ the spins are completely randomized.
 
 The next step is to understand the behavior of $F(m)$ as a function of $m$. In order to do this, we first express it as a polynomial in $m$. This is facilitated by using polynomial expansions for 
 
@@ -448,25 +447,25 @@ $$\cosh x \approx 1 + {1\over 2}x^2 + {1\over 4!}x^4 +...\ \ \  and\ \ \ \log (1
 
 Substituting these in the expression for $F(m)$ we obtain
 
-$$ F(m) = -NT\log 2 + [NJd(1-2dJ\beta)]m^2 + ({2N\beta^3 J^4 d^4\over 3})m^4 + ...  $$
+$$ F(m) = -NT\log 2 + [Njd(1-2dJ\beta)]m^2 + ({2N\beta^3 j^4 d^4\over 3})m^4 + ...  $$
 
 Note that $F(m)$ is symmetric with respect to $m$. Ignoring higher order terms, the derivative with respect to $m$ is given by
 
-$$ {\partial F(m)\over{\partial m}} = 2mNJd(1-2dJ\beta) + {8m^3 N\beta^3 J^4 d^4\over 3}  $$
+$$ {\partial F(m)\over{\partial m}} = 2mNjd(1-2dj\beta) + {8m^3 N\beta^3 j^4 d^4\over 3}  $$
 
-It follows that $F(m)$ has a single minima at $m = 0$ if $T > 2dJ$. On the other hand if $T < 2dJ$ the there are 2 minima, at
+It follows that $F(m)$ has a single minima at $m = 0$ if $T > 2dj$. On the other hand if $T < 2dj$ the there are 2 minima, at
 
-$$ m = \pm\sqrt{3(2dJ\beta - 1)\over{4(dJ\beta)^3}} $$
+$$ m = \pm\sqrt{3(2dj\beta - 1)\over{4(dj\beta)^3}} $$
 
 as well as another stationary point at $m=0$.
-Remember the $T = 2dJ$ was identified as the critical temperature $T_c$ in the earlier analysis.
+Remember the $T = 2dj$ was identified as the critical temperature $T_c$ for ferro magnetic phase transition in the earlier analysis.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat11.png) 
 
 Figure 10: Free Energy $F(m)$ as a function of $m$, for $T > 2dJ$ and $T < 2dJ$
 
 $F(m)$ is plotted in figure 10, and it clearly shows the effect of varying $T$ on it shape and provides an alternative explanation of how phase changes come about.
-When $T > T_c$ then there is only one stable state at $m=0$ at which the Free Energy is at a minimum, an this corresponds to the non-magnetized state.
+When $T > T_c$ then there is only one stable state at $m=0$ at which the free energy is at a minimum, an this corresponds to the non-magnetized state.
 When $T < T_c$, there are three values of $m$ at which ${\partial F(m)\over{\partial m}} = 0$, hence the system can be one of three states at equilibrium. 
 
 The states $m = \pm\sqrt{3(2dJ\beta - 1)\over{4(dJ\beta)^3}}$ are stable corresponding to when spins are predominantly aligned in the up or down direction.
