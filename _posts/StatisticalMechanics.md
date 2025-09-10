@@ -462,31 +462,30 @@ Remember the $T = 2dj$ was identified as the critical temperature $T_c$ for ferr
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat11.png) 
 
-Figure 10: Free Energy $F(m)$ as a function of $m$, for $T > 2dJ$ and $T < 2dJ$
+Figure 10: Free Energy $F(m)$ as a function of $m$, for $T > 2dj$ and $T < 2dj$
 
 $F(m)$ is plotted in figure 10, and it clearly shows the effect of varying $T$ on it shape and provides an alternative explanation of how phase changes come about.
 When $T > T_c$ then there is only one stable state at $m=0$ at which the free energy is at a minimum, an this corresponds to the non-magnetized state.
-When $T < T_c$, there are three values of $m$ at which ${\partial F(m)\over{\partial m}} = 0$, hence the system can be one of three states at equilibrium. 
-
-The states $m = \pm\sqrt{3(2dJ\beta - 1)\over{4(dJ\beta)^3}}$ are stable corresponding to when spins are predominantly aligned in the up or down direction.
+When $T < T_c$, there are three values of $m$ at which ${\partial F(m)\over{\partial m}} = 0$, hence the system can be one of three states:
+The states $m = \pm\sqrt{3(2dj\beta - 1)\over{4(dj\beta)^3}}$ are stable corresponding to when spins are predominantly aligned in the up or down direction ans these are the two possible states when the system is at thermal equilibrum.
 However the state $m=0$ is clearly not a stable state, since even a slight change in the value of $m$ can cause the system to transition to the other two states.
 The other thing to note is that the value of the magnetization $m$ changes continuously with $T$, hence it is an example of a second order phase transition. Starting from $T>T_c$, if $T$ is gradually reduced, the two minima become gradually shallower until they disappear at $T=T_c$.
 
 Using the equilibrium value of $m$ given by
 
-$$ m = \sqrt{{3(T_c - T)\over{(dJ)^3\beta^2} }}  $$
+$$ m = \sqrt{{3(T_c - T)\over{4(dj)^3\beta^2} }}  $$
 
 we can see that $m$ has a quadratic variation with $T$ in the neighborhood of the critical temperature. This was also evident in figure 6 in the previous section. Even though this behavior was arrived at in the context of the Ising model, it turns out that all second order phase transitions for $d\ge 4$ exhibit this quadratic variation irrespective of the physical material involved. For $d = 2, 3$ the exponent is not ${1\over 2}$ from experimental data, hence the Landau theory fails for $d=2,3$. The correct exponents for these cases were computed with the help of the renormalization group theory in the 1970s.
 
 **The Case B > 0**
 
-The analysis for this case is exactly the same, except now the starting expression for the Free Energy is
+The analysis for this case is exactly the same as for the case $B=0$, except now the starting expression for the free energy is
 
-$$ F(m) = -NdJm^2 - {N\over\beta}\log(\cosh(2dJm\beta) + B\beta)  $$
+$$ F(m) = -Ndjm^2 - {N\over\beta}\log(\cosh(2djm\beta) + B\beta)  $$
 
 Once again, using the approximations for the $\cosh$ and $\log$ functions, it can be shown that
 
-$$ F(m) = -NT\log 2 + NJdm^2 - {N\over{2T}}(B + 2dJm)^2  + {N\over{24T^3}}(B + 2dJm)^4 + ... $$
+$$ F(m) = -NT\log 2 + Njdm^2 - {N\over{2T}}(B + 2djm)^2  + {N\over{24T^3}}(B + 2djm)^4 + ... $$
 
 Note that this expression is no longer symmetric in $m$ sue to the presence of odd powers of $m$.
 
@@ -508,20 +507,14 @@ Back in the 1950s scientists were actively investigating the properties of new m
 - When the temperature exceeded some critical point, there was no magnetism detected, which is just as in ferromagnetic materials
 - Below the critical temperature, the material become magnetic. However, after gradually increasing as the temperature was further reduced, the magnetisation hit a limit at a finite temperature and stayed there even at lower temperatures.
 
-This was a new kind of magnetic behavior not seen before, and soon physicists came up with an explanation for it. As shown in figure 12, all the spins of ferromagnetic materials tend to align at lower temperatures, while those in anti-ferromagnetic also tend to align but in opposite directions. Spin Glasses on the other hand do not exhibit any such regularity. Even at low temperatures, their spins can have different orientations at low temperatures as shown in the right hand side of the figure. Hence some of the interactions are ferromagnetic (shown in blue), while others are anti-ferromagnetic (shown in red).
-It seems that the presence of the copper atoms in the spin glass interferes with the tendency of iron atoms to try to line up as temperature decreases. This random orientations of spins is said to be "dis-ordered". In the same way that an amorphous solid like window glass doesn’t have an orderly crystal structure, a spin glass doesn’t have an orderly magnetic structure. But is there any structural law that these seeemingly random spin configurations obey and which could be predicted using the tools of statistical mechanics? This turned out to be a very difficult theoretical problem, and the solution did not emerge for another three decades.
+This was a new kind of magnetic behavior not seen before, and soon physicists came up with an explanation for it. As shown in figure 12, all the spins of ferromagnetic materials tend to align at lower temperatures, while those in anti-ferromagnetic also tend to align but in opposite directions. Spin Glasses on the other hand do not exhibit any such regularity. Even at low temperatures, their spins can have different orientations as shown in the right hand side of the figure. Hence some of the interactions are ferromagnetic (shown in blue), while others are anti-ferromagnetic (shown in red).
+It seems that the presence of the copper atoms in the spin glass interferes with the tendency of iron atoms to try to line up as temperature decreases. This random orientations of spins is said to be "dis-ordered". In the same way that an amorphous solid like window glass doesn’t have an orderly crystal structure, a spin glass doesn’t have an orderly magnetic structure. But is there any structural law that these seeemingly random spin configurations obey which could be predicted using the tools of statistical mechanics? This turned out to be a very difficult theoretical problem, and the solution did not emerge for another three decades until the mid-1980s.
 
-![](https://subirvarma.github.io/GeneralCognitics/images/stat15.png) 
+There is a subtle difference between the pure randomness of a disordered state in a ferromagnetic material when $T > T_c$ and the disorder that we see in a spin glass when $T < T_c. The latter looks as random as a paramagnetic material, but there are some differences:
+The randomness in the ferromagnetic material gradually decreases as the temperature is reduced, and ultimately it becomes completely ordered at $T=0$. The randomness in the spin glass on the other hand becomes "frozen" as the temperature is reduced, and it maintains the randomness even at $T=0$.
+We will see in the next section that there are some order parameters that are able to capture the frozen disorder in a spin glass.
 
-Figure 13: Ordering of Spins
-
-Systems can be arranged in a continuum as shown in figure 13, with systems exhibiting complete order (such as when all spins are oriented in the same direcionl) on the left hand side, and systems that exist in a completely disordered state (such as the para-magnetic state at higher temperatures) on the right hand side. But there is a subtle difference between the pure randomness of a disordered state and the disorder that we see in a spin glass when it is below the critical temperature. The latter looks as random as a paramagnetic material, but there are some differences:
-
-- The randomness in the ferromagnetic material gradually decreases as the temperature is reduced, and ultimately it becomes completely ordered at $T=0$. The randomness in the spin glass on the other hand becomes "frozen" as the temperature is reduced, and maintains the randomness even at $T=0$.
-- The nature of the interaction term $J_{ij}$ influences the statistics of the random looking configurations in the spin glass. We will see in the next section that there are some order parameters that are able to capture the frozen disorder in a spin glass.
-
-Many systems, especially those that fall outside the realm of physics of materials, such as the behavior of crowds or road traffic, involve complex random interactions between their individual units. Hence if the spin glass system can be solved, then it can lead to greater understanding in multiple other areas.
-
+As mentioned in the introduction, a large number of systems exhibit spin glass type disorder in their interactions, and a greater understanding of spin glasses has led to progress in a number of fields ranging from artificial neural networks to biological systems.
 
 ### Spin Glass Models: Edwards Anderson (EA) and Sherrington Kirkpatrick (SK) Models
 
