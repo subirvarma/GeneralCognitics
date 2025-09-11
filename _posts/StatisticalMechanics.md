@@ -747,24 +747,24 @@ As the temperature approaches zero, in addition to to the explosion in the numbe
 In this situation the self overlap becomes equal to 1, while the cross overlap between states is zero. This process is completely probabilistic, so the system may end up in a different configuration every time it is
 gradually frozen.
 
+## From Spin Glass to Hopfield Networks: Engineering the Energy Landscape of a Spin Glass System
 
-
-
-
-
-
-
-## From Spin Glass to Hopfield Networks: Engineering the Energy Landscape of a Spin Glass
-
+The physiscist John Hopfield was at Princeton during the 1970s, and he was instrumental in luring away Phil Anderson frol Bell Labs to Princeton around 1975. Anderson acquanted Hopfield with his work in spin glasses (see the Edwards-Anderson model in the previous section), and Hopfield began thinking about how they results could be applied to biological systems. He was intrigued by the free energy landscape that occurs with replica symmetry breaking, and in particular he noticed that first order RSB, the landscape exhibits a large number of valleys of the same depth (see the middle part of the figure on the LHS in Fig. 17). Since the minima of each of these valleys resulted in an unique, but random, spin configuration, he reasoned that perhaps such a system can be used as an associative memory, and he succeeded in creating a spin glass model which indeed could do, so as explained next.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat22.png) 
 
 Figure 18
 
+Hopfield started with SK model with full connectivity, shown in the top left of Fig. 18. Recall that this model has energy function given by
+
+$$ H_N = -\sum_i\sum_{j\lt i} J_{ij}\sigma_i\sigma_j $$
+
+in which the random interactions $J_{ij}$ were normally distributed. If we are to use this system as a memory, there should be a way in which the interactions can be engineered so that energy minima (after first order RSB) correpond to bit patterns that we want to store. 
+
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat23.png) 
 
-Figure 18
+Figure 19
 
 
 ## From Hopfield Networks to Boltzmann Machines: Restricted Boltzmann Machines, Deep Boltzmann Machines
