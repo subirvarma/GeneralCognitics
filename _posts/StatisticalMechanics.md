@@ -757,20 +757,36 @@ Figure 18
 
 Hopfield started with SK model with full connectivity, shown in the top left of Fig. 18. Recall that this model has energy function given by
 
-$$ H_N = -\sum_i\sum_{j\lt i} J_{ij}\sigma_i\sigma_j $$
+$$ H = -\sum_i\sum_{j\lt i} J_{ij}\sigma_i\sigma_j $$
 
 in which the interactions $J_{ij}$ were frozen sample from a normal distribution. If we are to use this system as a memory, there should be a way in which the interactions can be engineered so that equilibrieum energy minima correspond to bit patterns that we want to store. In order to acheive this, Hopfield hit upon the novel idea of engineering the energy landsacpe by choosing the interactions to be a function of the bit patterns to be stored in the associative memory.
 
-Assume that each node $\sigma_i, i = 1,2,...N$ in the network can assume values of 0 or 1, and denote the state $x$ of the network as $X = (\sigma_1,...,\sigma_N)$. 
+Assume that each node $\sigma_i, i = 1,2,...N$ in the network can assume values of 0 or 1, and denote the state $X$ of the network as $X = (\sigma_1,...,\sigma_N)$. 
 Furthermore assume that we wish the network to store the states $V^s, s=1,...,n$.
 In order to store these states, Hopfield proposed that the interactions $J_{ij}$ be chosen as
 
-$$ J_{ij} = \sum_{s=1}^n (2V_i^s - 1)(2V_j^s -1)  $$
+$$ J_{ij} = \sum_{s=1}^n (2V_i^s - 1)(2V_j^s -1)\ \ \ and\ \ \ J_{ii} = 0 $$
 
-He also proposed the following rule for making state changes
+He also proposed the following update rule for making state changes
 
-$$ 
+$$ \sigma_i = 1\ \ \ if\ \ \  \sum_{j\ne i}J_{ij}\sigma_j >0\ \ \ and\ \ \ zero\ \ \ otherwise   $$
 
+where $U_i$ is a fixed threshold associated with node $i$. Each node randomly and asynchronously evaluates whether it is above or below its threshold, and adjusts its value accordingly.
+Under these this update rule it can be shown that if the network is in state $V^p$, then it will continue to be in this state after the update. In order to show this, note that
+
+$$ \sum_{j=1}^N T_{ij}V_j^p = \sum_{s=1}^n (2V_i^s - 1) [\sum_{j=1}^N V_j^p(2V_j^s - 1)] $$
+
+The average value of the sum in the brackets is 0 if $s\ne p$ and is equal to ${N\over 2}$ if $s=p$. From this it follows that
+
+$$ \sum_{j=1}^N T_{ij}V_j^P \approx (2V^p_i - 1){N\over 2} $$
+
+which is more than zero if $V^p_i = 1$ and less than zero if $V^p_i = 0$, i.e., it is equal to
+$V_i^p$ as defined earlier. The update rule also results in a monotonically decreasing value of the energy function, since if there is a change $\Delta\sigma_i$ in the value of the $i^{th}$ spin, then
+
+$$  \Delta H = -\Delta\sigma_i \sum_{j\ne i} T_{ij}\sigma_j  $$
+
+These state changes will continue until a stable point such as one of the stored memories $V^s$ is reached. But does the network always converge to one of these stored states?
+Using simulations Hopfield showed that about $0.15N$ states can be simultaneously remembered before the erroe in recall is severe.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat23.png) 
 
