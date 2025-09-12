@@ -749,7 +749,7 @@ gradually frozen.
 
 ## From Spin Glass to Hopfield Networks: Engineering the Energy Landscape of a Spin Glass System
 
-The physiscist John Hopfield was at Princeton during the 1970s, and he was instrumental in luring away Phil Anderson frol Bell Labs to Princeton around 1975. Anderson acquanted Hopfield with his work in spin glasses (see the Edwards-Anderson model in the previous section), and Hopfield began thinking about how they results could be applied to biological systems. He was intrigued by the free energy landscape that occurs with replica symmetry breaking, and in particular he noticed that first order RSB, the landscape exhibits a large number of valleys of the same depth (see the middle part of the figure on the LHS in Fig. 17). Since the minima of each of these valleys resulted in an unique, but random, spin configuration, he reasoned that perhaps such a system can be used as an associative memory, and he succeeded in creating a spin glass model which indeed could do, so as explained next.
+The physiscist John Hopfield was at Princeton during the 1970s, and he was instrumental in luring away Phil Anderson frol Bell Labs to Princeton during that time. Anderson acquanted Hopfield with his work in spin glasses (see the Edwards-Anderson model in the previous section), and Hopfield began thinking about how they results could be applied to model biological systems. He was intrigued by the free energy landscape that occurs with replica symmetry breaking, and in particular he noticed that first order RSB, the landscape exhibits a large number of valleys of the same depth (see the middle part of the figure on the LHS in Fig. 17). Since the minima of each of these valleys resulted in an unique, but random, spin configuration, he reasoned that perhaps such a system can be used as an associative memory, and he succeeded in creating a spin glass model which indeed could do, so as explained next.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat22.png) 
 
@@ -759,7 +759,17 @@ Hopfield started with SK model with full connectivity, shown in the top left of 
 
 $$ H_N = -\sum_i\sum_{j\lt i} J_{ij}\sigma_i\sigma_j $$
 
-in which the random interactions $J_{ij}$ were normally distributed. If we are to use this system as a memory, there should be a way in which the interactions can be engineered so that energy minima (after first order RSB) correpond to bit patterns that we want to store. 
+in which the interactions $J_{ij}$ were frozen sample from a normal distribution. If we are to use this system as a memory, there should be a way in which the interactions can be engineered so that equilibrieum energy minima correspond to bit patterns that we want to store. In order to acheive this, Hopfield hit upon the novel idea of engineering the energy landsacpe by choosing the interactions to be a function of the bit patterns to be stored in the associative memory.
+
+Assume that each node $\sigma_i, i = 1,2,...N$ in the network can assume values of 0 or 1, and denote the state $x$ of the network as $X = (\sigma_1,...,\sigma_N)$. 
+Furthermore assume that we wish the network to store the states $V^s, s=1,...,n$.
+In order to store these states, Hopfield proposed that the interactions $J_{ij}$ be chosen as
+
+$$ J_{ij} = \sum_{s=1}^n (2V_i^s - 1)(2V_j^s -1)  $$
+
+He also proposed the following rule for making state changes
+
+$$ 
 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat23.png) 
