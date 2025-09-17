@@ -749,48 +749,65 @@ gradually frozen.
 
 ## From Spin Glass to Hopfield Networks: Engineering the Energy Landscape of a Spin Glass System
 
-The physiscist John Hopfield was at Princeton during the 1970s, and he was instrumental in luring away Phil Anderson frol Bell Labs to Princeton during that time. Anderson acquanted Hopfield with his work in spin glasses (see the Edwards-Anderson model in the previous section), and Hopfield began thinking about how they results could be applied to model biological systems. He was intrigued by the free energy landscape that occurs with replica symmetry breaking, and in particular he noticed that first order RSB, the landscape exhibits a large number of valleys of the same depth (see the middle part of the figure on the LHS in Fig. 17). Since the minima of each of these valleys resulted in an unique, but random, spin configuration, he reasoned that perhaps such a system can be used as an associative memory, and he succeeded in creating a spin glass model which indeed could do, so as explained next.
+The physiscist John Hopfield was at Princeton during the 1970s, and he was instrumental in luring away Phil Anderson frol Bell Labs to Princeton during that time. Anderson acquainted Hopfield with his work in spin glasses (see the Edwards-Anderson model in the previous section), and Hopfield began thinking about how these results could be applied to model biological systems. He was intrigued by the free energy landscape that occurs with replica symmetry breaking, and in particular he noticed that first order RSB, the landscape exhibits a large number of valleys of the same depth (see the middle part of the figure on the LHS in Fig. 17). Since the minima of each of these valleys resulted in an unique, but random, spin configuration, he reasoned that perhaps such a system can be used as an associative memory, and he succeeded in creating a spin glass model which indeed could do, so as explained next.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat22.png) 
 
 Figure 18
 
-Hopfield started with SK model with full connectivity, shown in the top left of Fig. 18. Recall that this model has energy function given by
+Hopfield started with SK model with full connectivity, shown in the top left of Fig. 18, with the symmetric interaction between nodes $i$ and $j$ given by $J_{ij}$.
+Assume that each node $\sigma_i, i = 1,2,...N$ in the network can assume values of +1 or -1, and denote the state $X$ of the network as $X = (\sigma_1,...,\sigma_N)$. 
+Furthermore assume that the state of the network evolves using the equation
 
-$$ H = -\sum_i\sum_{j\lt i} J_{ij}\sigma_i\sigma_j $$
+$$ \sigma_i(t+\Delta t) = sign(\sum_j J_{ij} S_j(t)) $$
 
-in which the interactions $J_{ij}$ were frozen sample from a normal distribution. If we are to use this system as a memory, there should be a way in which the interactions can be engineered so that equilibrieum energy minima correspond to bit patterns that we want to store. In order to acheive this, Hopfield hit upon the novel idea of engineering the energy landsacpe by choosing the interactions to be a function of the bit patterns to be stored in the associative memory.
+Each node randomly and asynchronously evaluates whether it is above or below its threshold, and adjusts its value accordingly.
 
-Assume that each node $\sigma_i, i = 1,2,...N$ in the network can assume values of 0 or 1, and denote the state $X$ of the network as $X = (\sigma_1,...,\sigma_N)$. 
-Furthermore assume that we wish the network to store the states $V^s, s=1,...,n$.
+If we are to use this system as a memory, there should be a way in which the interactions can be engineered so that equilibrium energy minima correspond to bit patterns that we want to store. In order to acheive this, Hopfield hit upon the novel idea of engineering the energy landscape by choosing the interactions to be a function of the bit patterns to be stored in the associative memory.
+
+Assume that we wish the network to store the states $\xi^s, s=1,...,p$ so that the $\mu^{th}$ excitation pattern can be written as $\{\xi^\mu_1,...,\xi^\mu_N\}$.
 In order to store these states, Hopfield proposed that the interactions $J_{ij}$ be chosen as
 
-$$ J_{ij} = \sum_{s=1}^n (2V_i^s - 1)(2V_j^s -1)\ \ \ and\ \ \ J_{ii} = 0 $$
+$$ J_{ij} = {1\over N}\sum_{\mu=1}^p \xi^\mu_i \xi^\mu_j\ \ \ with\ \ \ J_{ii} = 0 $$
 
-He also proposed the following update rule for making state changes
+which is called the Hebb Rule. 
 
-$$ \sigma_i = 1\ \ \ if\ \ \  \sum_{j\ne i}J_{ij}\sigma_j >0\ \ \ and\ \ \ zero\ \ \ otherwise   $$
+Under these this update rule it can be shown that if the network is in state $\xi^\mu$ at time $t$, then the time evolution rule given earlier leads to the following state change
 
-where $U_i$ is a fixed threshold associated with node $i$. Each node randomly and asynchronously evaluates whether it is above or below its threshold, and adjusts its value accordingly.
-Under these this update rule it can be shown that if the network is in state $V^p$, then it will continue to be in this state after the update. In order to show this, note that
+$$ sign(\sum_j J_{ij}\xi^\mu_j) = sign{1\over N} (\sum_j\sum_\nu \xi^\nu_i \xi^\nu_j \xi^\mu_j) = sign(\sum_\nu \xi^\nu_i \delta_{\nu\mu}) = sign(\xi^\mu_i) $$
 
-$$ \sum_{j=1}^N T_{ij}V_j^p = \sum_{s=1}^n (2V_i^s - 1) [\sum_{j=1}^N V_j^p(2V_j^s - 1)] $$
+This is a result of the approximate orthogonality between the random states
 
-The average value of the sum in the brackets is 0 if $s\ne p$ and is equal to ${N\over 2}$ if $s=p$. From this it follows that
+$$ {1\over N} \sum_j \xi^\mu_j \xi^\nu_j = \delta_{\nu\mu} + O({1\over\sqrt{N}}) $$
 
-$$ \sum_{j=1}^N T_{ij}V_j^P \approx (2V^p_i - 1){N\over 2} $$
-
-which is more than zero if $V^p_i = 1$ and less than zero if $V^p_i = 0$, i.e., it is equal to
-$V_i^p$ as defined earlier. The update rule also results in a monotonically decreasing value of the energy function, since if there is a change $\Delta\sigma_i$ in the value of the $i^{th}$ spin, then
-
-$$  \Delta H = -\Delta\sigma_i \sum_{j\ne i} T_{ij}\sigma_j  $$
-
-These state changes will continue until a stable point such as one of the stored memories $V^s$ is reached. But does the network always converge to one of these stored states?
-Using simulations Hopfield showed that about $0.15N$ states can be simultaneously remembered before the erroe in recall is severe.
+Hence it follows that $\sigma_i(t+\Delta t) = \xi^\mu_i$ for all $i$ for sufficiently large $N$. Note that this argument is not sufficient to gaurantee that the system will end up in 
+state $\xi^\mu$ if it were to start from a state that is slightly different from it.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat23.png) 
 
 Figure 19
+
+Given the update rule, this model has energy function given by
+
+$$ H = -{1\over 2}\sum_i\sum_j J_{ij}\sigma_i\sigma_j $$
+
+since $\sum_j J_{ij}\sigma_j$ is the local field that influences  the spin $\sigma_i$ and tries to align it with itself at time $t+\Delta t$. 
+This results in a monotonically decreasing value of the energy, since if there is a change $\Delta\sigma_i$ in the value of the $i^{th}$ spin, then
+
+$$  \Delta H = -{1\over 2}\Delta\sigma_i \sum_{j} J_{ij}\sigma_j  $$
+
+These state changes will continue until a stable point such as one of the stored memories $\xi^\mu$ is reached. Fig. 19 shows this situation where teh network reaches a minimum of energy closest to the initial condition and stops there.
+
+But does the network always converge to one of these stored states? Using simulations Hopfield showed that about $0.15N$ states can be simultaneously remembered before the error in recall is severe. Within a few years the system was analyzed using the tolls of Statistical Mechanics, and this is described next.
+
+In order to model the system using Statistical Mechanics, we have to introduce temperature into the equations. This is done by changing the state transition equations as follows: Denote the field at node $i$ at time $t$ as 
+
+$$  h_i(t) = \sum_j J_{ij}\sigma_j(t) $$
+
+Assume that $\sigma_i(t+\Delta t)$ becomes 1 with probability $1\over{1+e^{-2\beta h_i(t)}}$$ and -1 with probability ${e^{-2\beta h_i(t)}\over{1+e^{-2\beta h_i(t)}}$$.
+Note that this stochastic dynamics reduces to earlier state transition equation in the limit $\beta\rightarrow\infty$ and the network becomes completely random if $\beta=0$.
+
+
 
 
 ## From Hopfield Networks to Boltzmann Machines: Restricted Boltzmann Machines, Deep Boltzmann Machines
