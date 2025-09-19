@@ -804,8 +804,13 @@ In order to model the system using Statistical Mechanics, we have to introduce t
 
 $$  h_i(t) = \sum_j J_{ij}\sigma_j(t) $$
 
-Assume that $\sigma_i(t+\Delta t)$ becomes 1 with probability $1\over{1+e^{-2\beta h_i(t)}}$$ and -1 with probability ${e^{-2\beta h_i(t)}\over{1+e^{-2\beta h_i(t)}}$$.
+Assume that $\sigma_i(t+\Delta t)$ becomes 1 with probability $1\over{1+e^{-2\beta h_i(t)}}$ and -1 with probability ${e^{-2\beta h_i(t)}\over{1+e^{-2\beta h_i(t)}}}$.
 Note that this stochastic dynamics reduces to earlier state transition equation in the limit $\beta\rightarrow\infty$ and the network becomes completely random if $\beta=0$.
+It can be shown that under this state transition rule, the state of the system approaches the equilibrium Boltzmann distribution at temperature $\beta={1\over T}$ even if the initial state configuration is away fom the equilibrium. Hence the problem of memory retrieval in the Hopfield Network at finite temperatures reduces to that of finding the conditions under which the equilibrium state corresponds to one of the stored memories, when starting from a non-equilibrium state.
+
+**Finite Number of Stored Patterns**
+
+
 
 
 
