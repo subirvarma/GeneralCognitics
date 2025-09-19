@@ -791,27 +791,69 @@ Given the update rule, this model has energy function given by
 
 $$ H = -{1\over 2}\sum_i\sum_j J_{ij}\sigma_i\sigma_j $$
 
+After substituting for $J_{ij}$, this can also be written as
+
+$$  H = -{1\over 2N}\sum_{\mu=1}^p(\sum_{i=1}^N S_i\xi^\mu_i)^2  $$
+
 since $\sum_j J_{ij}\sigma_j$ is the local field that influences  the spin $\sigma_i$ and tries to align it with itself at time $t+\Delta t$. 
 This results in a monotonically decreasing value of the energy, since if there is a change $\Delta\sigma_i$ in the value of the $i^{th}$ spin, then
 
 $$  \Delta H = -{1\over 2}\Delta\sigma_i \sum_{j} J_{ij}\sigma_j  $$
 
-These state changes will continue until a stable point such as one of the stored memories $\xi^\mu$ is reached. Fig. 19 shows this situation where teh network reaches a minimum of energy closest to the initial condition and stops there.
+These state changes will continue until a stable point such as one of the stored memories $\xi^\mu$ is reached. Fig. 19 shows this situation where the network reaches a minimum of energy closest to the initial condition and stops there.
 
-But does the network always converge to one of these stored states? Using simulations Hopfield showed that about $0.15N$ states can be simultaneously remembered before the error in recall is severe. Within a few years the system was analyzed using the tolls of Statistical Mechanics, and this is described next.
+But does the network always converge to one of these stored states? Using simulations Hopfield showed that about $0.15N$ states can be simultaneously remembered before the error in recall is severe. Within a few years the system was analyzed using the tools of Statistical Mechanics, and this is described next.
 
-In order to model the system using Statistical Mechanics, we have to introduce temperature into the equations. This is done by changing the state transition equations as follows: Denote the field at node $i$ at time $t$ as 
+In order to analyze the system using Statistical Mechanics, we have to introduce temperature into the equations. This is done by changing the state transition equations as follows: Denote the field at node $i$ at time $t$ as 
 
 $$  h_i(t) = \sum_j J_{ij}\sigma_j(t) $$
 
 Assume that $\sigma_i(t+\Delta t)$ becomes 1 with probability $1\over{1+e^{-2\beta h_i(t)}}$ and -1 with probability ${e^{-2\beta h_i(t)}\over{1+e^{-2\beta h_i(t)}}}$.
-Note that this stochastic dynamics reduces to earlier state transition equation in the limit $\beta\rightarrow\infty$ and the network becomes completely random if $\beta=0$.
+Note that this stochastic dynamics reduces to earlier state transition equation in the limit $\beta\rightarrow\infty$ so that the original Hopfield Network corresponds to the case $T=0$.
+On the other hand the network becomes completely random if $\beta=0$.
+
 It can be shown that under this state transition rule, the state of the system approaches the equilibrium Boltzmann distribution at temperature $\beta={1\over T}$ even if the initial state configuration is away fom the equilibrium. Hence the problem of memory retrieval in the Hopfield Network at finite temperatures reduces to that of finding the conditions under which the equilibrium state corresponds to one of the stored memories, when starting from a non-equilibrium state.
 
-**Finite Number of Stored Patterns**
+### Finite Number of Stored Patterns**
 
+The partition function $Z$ for the Hopfield network is given by 
 
+$$ Z = \sum_{[s]} \exp[{{\beta\over 2N}\sum_{\mu=1}^p(\sum_{i=1}^N S_i\xi^\mu_i)^2}]   $$
 
+where the first sum is over all possible spin patterns $[s]$, and the effect of the diagonal terma $J_{ii} = 0$ has been ignored since there are much fewer of these terms in the sum.
+The next step is to apply the Hubbard-Stratonovich transformation to the term in the exponent, which results in
+
+$$ Z = \sum_{[s]} \int\prod_{\mu=1}^p dm^{\mu}\ \exp[-{1\over 2}N\beta \sum_{\mu}(m^{\mu})^2 + \beta\sum_{\mu} m^{\mu}\sum_{i} S_i\xi^{\mu}_i ] $$
+
+This transformation results in the introduction of the integral variable $m^{\mu}$. If we sum over all possible values of the spin patterns $[s]$, then this results in
+
+$$ Z = \int\prod_{\mu} dm^{\mu}\ \exp[-{1\over 2}N\beta m^2 + \sum_i \log(2\cosh\beta m.\xi_i) ]  $$
+
+where $m = (m^1,...,m^p)$ and $\xi_i = (\xi^1_i,...,\xi^p_i)$. Recall that the free energy density $f$ is given by
+
+$$ f = -{1\over{\beta N}} \log Z $$
+
+If $N$ is very large the integral over $m$ is dominated by its saddle point value, so that
+$f$ can be approximated as
+
+$$ f = {1\over 2} m^2 - {1\over{\beta N}} \sum_i \log(2\cosh\beta m.\xi_i) $$
+
+The order parameter $m$ is determined by the saddle-point equation ${\partial f\over{\partial m^{\mu}}} = 0$
+
+$$ m = {1\over N} \sum_i \xi_i \tanh(\beta m.\xi_i) $$
+
+Both $f$ and $m$ depend on the particular relation of $\xi_i^\mu, \mu = 1,...,p, i = 1,...,N$, but in the limit as $N\rightarrow\infty$, we can invoke the law of large numbers
+to write
+
+$$ f = {1\over 2} m^2 - {1\over\beta} <\log(2\cosh\beta m.\xi)> $$
+
+and
+
+$$ m = <\xi \tanh(\beta m.\xi)> $$
+
+Hence the order parameter vector $m$ is average overlap between the $\xi$'s and the local magnetization.
+
+#### Singla Pattern Retrieval
 
 
 
