@@ -849,11 +849,25 @@ $$ f = {1\over 2} m^2 - {1\over\beta} <\log(2\cosh\beta m.\xi)> $$
 
 and
 
-$$ m = <\xi \tanh(\beta m.\xi)> $$
+$$ m = <\xi.\tanh(\beta m.\xi)> $$
 
 Hence the order parameter vector $m$ is average overlap between the $\xi$'s and the local magnetization.
 
 #### Singla Pattern Retrieval
+
+We will assume that that the probability distribution of the $\xi_i^\mu$ is given by
+
+$$ p(\xi_i^\mu) = {1\over 2}\delta(\delta^\mu_i - 1) + {1\over 2}\delta(\delta^\mu_i + 1)  $$
+
+and furthermore the $p$ componenents of $\xi_i$ are independent.
+Mirroring the strategy that was used  to solve the general spin glass model, we will propose a candidate value for the order parameter vectoe $m$, such that
+$m^1 > 0$ and $m^\mu = 0, \mu > 1$. It follows that
+
+$$ f = {1\over 2} (m^1)^2 - {1\over\beta} <\log(2\cosh\beta m^1)> $$
+
+$$ m^1 = \tanh(\beta m^1)  $$
+
+These are just the mean field equations for the Isis model
 
 
 
