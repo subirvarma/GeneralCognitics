@@ -853,7 +853,15 @@ $$ m = <\xi.\tanh(\beta m.\xi)> $$
 
 Hence the order parameter vector $m$ is average overlap between the $\xi$'s and the local magnetization.
 
+The thermal average of the spin at node $i$ is given by
+
+$$ <S_i> = <\tanh(\beta m.\xi)> $$
+
 #### Singla Pattern Retrieval
+
+![](https://subirvarma.github.io/GeneralCognitics/images/stat24.png) 
+
+Figure 20: Single pattern retrieval in the Hopfield model
 
 We will assume that that the probability distribution of the $\xi_i^\mu$ is given by
 
@@ -867,7 +875,16 @@ $$ f = {1\over 2} (m^1)^2 - {1\over\beta} <\log(2\cosh\beta m^1)> $$
 
 $$ m^1 = \tanh(\beta m^1)  $$
 
-These are just the mean field equations for the Isis model
+These are just the mean field equations for the Isis model. 
+
+Also the average spin at node $i$ is given by
+
+$$ <S_i> = \xi^1_i \tanh(\beta m^1)  $$
+
+In the limit as $\beta\rightarrow\infty$ (i.e., $T = 0$), it follows that the spins in the network converge to $\xi^1$, or to its mirror image, depending on the sign of $m^1$.
+As shown in Fig. 20, if the network is initialized in a state that is away from the equilibrium, it will converge to one of the two equilibrium states $\pm m$, and in the limit at $T=0$, $m =\pm 1$, so that the equilibrium state is the stored pattern.
+
+We can repeat the calculation that we just did for p different $m$ vectors with a similar structure, i.e., $m^\nu = 1, j=1,...,p$ and $m^\mu = 0$ for $\mu\ne \nu$, such that $m^\nu$ corresponds to the retrieval of the pattern $\xi^\nu$. Hence we can conclude that in a Hopfield network, if the number of patterns is finite, then it is possible to retrieve the appropriate pattern when a noisy version of the pattern is given as the initial condition.
 
 
 
