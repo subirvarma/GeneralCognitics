@@ -747,6 +747,18 @@ As the temperature approaches zero, in addition to to the explosion in the numbe
 In this situation the self overlap becomes equal to 1, while the cross overlap between states is zero. This process is completely probabilistic, so the system may end up in a different configuration every time it is
 gradually frozen.
 
+### The p-Spin Spin Glass Model
+
+Soin Glass modelscan be generalized to the case in which p-spins interact with one another, so that the case $p = 2$ corresponds to the SK model. The Hamiltonian of energy levels are given by 
+
+$$ H_p = -sum_{i_1,...,i_p} A_{i_1,...,i_p}\sigma_{i_1}...\sigma_{i_p} $$
+
+where as usual each of the spins can take on values $\pm 1$, and any group of $p$ spins have an interaction given by $A_{i_1,...,i_p}$. The probability distribution for the interactions is given by
+
+$$ p(A_{i_1,...,i_p}) = [{N^{p-1}\over{\pi J^2 p!}}]{1\over 2} \exp[-{(A_{i_1,...,i_p})^2 N^{p-1}\over{J^2 p!}]  $$
+
+Using these two equations it csn be shown that the energy level $E$ 
+
 ## From Spin Glass to Hopfield Networks: Engineering the Energy Landscape of a Spin Glass System
 
 The physiscist John Hopfield was at Princeton during the 1970s, and he was instrumental in luring away Phil Anderson frol Bell Labs to Princeton during that time. Anderson acquainted Hopfield with his work in spin glasses (see the Edwards-Anderson model in the previous section), and Hopfield began thinking about how these results could be applied to model biological systems. He was intrigued by the free energy landscape that occurs with replica symmetry breaking, and in particular he noticed that first order RSB, the landscape exhibits a large number of valleys of the same depth (see the middle part of the figure on the LHS in Fig. 17). Since the minima of each of these valleys resulted in an unique, but random, spin configuration, he reasoned that perhaps such a system can be used as an associative memory, and he succeeded in creating a spin glass model which indeed could do, so as explained next.
