@@ -749,15 +749,23 @@ gradually frozen.
 
 ### The p-Spin Spin Glass Model
 
-Soin Glass modelscan be generalized to the case in which p-spins interact with one another, so that the case $p = 2$ corresponds to the SK model. The Hamiltonian of energy levels are given by 
+Soin Glass modelscan be generalized to the case in which p-spins interact with one another, so that the case $p = 2$ corresponds to the SK model. The Hamiltonian of the energy levels for a given configuration of spins is given by 
 
-$$ H_p = -sum_{i_1,...,i_p} A_{i_1,...,i_p}\sigma_{i_1}...\sigma_{i_p} $$
+$$ H_p = -sum_{i_1,...,i_p} J_{i_1,...,i_p}\sigma_{i_1}...\sigma_{i_p} $$
 
-where as usual each of the spins can take on values $\pm 1$, and any group of $p$ spins have an interaction given by $A_{i_1,...,i_p}$. The probability distribution for the interactions is given by
+where as usual each of the spins can take on values $\pm 1$, and any group of $p$ spins have a random interaction strength given by $J_{i_1,...,i_p}$, which is distributed according to the Normal distribution given by
 
-$$ p(A_{i_1,...,i_p}) = [{N^{p-1}\over{\pi J^2 p!}}]{1\over 2} \exp[-{(A_{i_1,...,i_p})^2 N^{p-1}\over{J^2 p!}]  $$
+$$ p(J_{i_1,...,i_p}) = [{N^{p-1}\over{\pi p!}}]{1\over 2} \exp[-{(J_{i_1,...,i_p})^2 {N^{p-1}\over{ J^2 p!}}]  $$
 
-Using these two equations it csn be shown that the energy level $E$ 
+For $p=2$ this model reduces to the standard SK model.
+
+This system can be analyzed using the replica method (see [Gross and Mezard](https://www.lptms.universite-paris-saclay.fr/membres/Mezard/Pdf/84_GM_NPB.pdf), and it can be shown that in the limit $p\rightarrow\infty$ and at low temperatures, it becomes a spin glass. This spin glass phase has an interesting structure that can be summarized as follows (for the discussion below recall the a pure state was defined as the set of spin congigurations in a free energy valley of the spin glass phase and the overlap $q_{\alpha\beta}$ between two pure states is given $q_{\alpha\beta} = {1\over N}\sum_i m_i^\alpha m_i$\beta$ where $m_^\alpha$ is the average spin at the $i^{th}$ atom over all the spin configurations that exist in valley $\alpha$):
+
+- For the $p=2$ case there is an infinite series of resplica symmetry breaking as the temperature is reduced below the critical temperature $T_c$. For $p=\infty$ on the other hand, the symmetry breaking stops after the first. This means that in terms of the overlap matrix $Q_{ab]$ there are only two parameters that needed: (1) The self overlap parameter between pure states $q_1$ and the overlap between different pure states $q_0$.
+- In the limit as $p\rightarrow\infty$, these parameters are given by $q_1=1$ and $q_0 = \tanh^2(\beta mh)$. This is under assumption that there is an external magnetic field with intensity $h$ which leads to an average magnetization of $m$. If H=0$ then $q_0=0$.
+- Tha fact that $q_1=1$ implies that $q_1 = {1\over N}\sum_i (m_i^\alpha)^2 = 1$ implies that $m_i^\alpha = \pm 1$, which means that all the spin configurations in valley $\alpha$ have the same spin value at each of the $N$ locations. Thus in the low-temperature phase the system is completely frozen and there are no fluctuations in magnetization.
+- $q_0=0$ implies that there is zero overlap between different pure states, i.e., there are as far apart from each other as they could possibly be.
+- Even though the replica symmetry breaking stops after the first phase, the number of distinct phases that can exist is extremely large.
 
 ## From Spin Glass to Hopfield Networks: Engineering the Energy Landscape of a Spin Glass System
 
