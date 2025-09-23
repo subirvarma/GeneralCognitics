@@ -214,11 +214,11 @@ so that $\log Z = N\log 2 + N\log[\cosh(\beta j)]$.  It follows that the average
 
 $$ E_{av} = -{\partial\log Z\over\partial\beta} = - Nj\ \tanh(\beta j) $$
 
-so that the average energy  density $e_{av}$ at temperate $T$ (in the presence of the magnetic field with coupling $j$) is given by the product of the individual partition functions
+so that the average energy density on a per atom basis $e_{av}$ at temperate $T$ (in the presence of the magnetic field with coupling $j$) is given by the product of the individual partition functions
 
 $$ e_{av} = {E_{av}\over N} = -j\ \tanh(\beta j)  $$
 
-If the average spin for the system is $\sigma_{av}$ then since $e_{av} = -j\sigma_{av}$, it follows that
+If the average spin on a per atom basis is $\sigma_{av}$ then since $e_{av} = -j\sigma_{av}$, it follows that
 
 $$ \sigma_{av} = \tanh(\beta j) $$
 
@@ -243,7 +243,7 @@ $$  E = -j\sum_i \sigma_i\sigma _{i+1} $$
 Note that unlike the previous case, there is no external magnetic field present.
 Each of the terms in this expression in minimized when $\sigma_i = \sigma_{i+1}$, i.e., the spins are aligned together either with $\sigma_i = \sigma_{i+1} = 1$ or $\sigma_i = \sigma_{i+1} = -1$, which implies that there are two configurations with the minimum energy value, which correspond to all the spins pointing up or all the spins pointing down. The partition function for this system is given by
 
-$$ Z = \sum_{all\ configs} e^{-j\beta\sum_i \sigma_i\sigma _{i+1}}  $$
+$$ Z = \sum_{all\ spin\ configs} e^{-j\beta\sum_i \sigma_i\sigma _{i+1}}  $$
 
 This sum has to be evaluated over all possible spin configurations, which makes it a non-trivial problem. The analysis can be simplified by defining a set of variables $\mu_i$ which is the product of neighboring spins, i.e.,
 
@@ -257,7 +257,7 @@ $$ Z = Z_1 + Z_2 $$
 where $Z_1$ is the partition function for the case when the first spin is $+1$, and $Z_2$  for the case when the first spin is $-1$ (note that specification of the first spin, in combination with the sequence $\mu_i, 1 = 1,2,..,N-1$ allows us to recover all the remaining spins $\sigma_2,...\sigma_N$).
 Note that both $Z_1$ and $Z_2$ are equal and are given by
 
-$$ Z_1 = Z_2 = \sum_{i=1}^{N-1} e^{-j\beta\sum_i \mu_i}  $$
+$$ Z_1 = Z_2 = \sum_{all\ [\mu]\ configs} e^{-j\beta\sum_i \mu_i}  $$
 
 But this is exactly the same partition function as for the case analyzed in the previous section, i.e., when there are $N-1$ atoms in a magnetic field and there is no interaction between neighboring atoms. 
 Leveraging the solution we obtained for that case, it follows that
@@ -274,7 +274,7 @@ $$ \mu_{av} = (\sigma_i\sigma_{i+n})_{av} = \tanh(\beta j) $$
 
 The correlation between the spins of neighboring atoms goes to zero as temperature increases as expected, but what about low temperatures. This equation tells us that the average of the connection values $\mu_{av}$ goes to one, but from this can we conclude that the all atoms have transitioned to the up for down spin configuration? We cannot since even if most of the spins at $\sigma_i = 1$, there can be islands of atoms with $\sigma_i = -1$, and this is consistent with having an overall average $\mu_{av}$ of 1. Indeed it can be shown that the correlation between spins separated by $n$ positions is given by
 
-$$ (\sigma_i\sigma_{i+n})_{av} = \tanh^{n-1}(\beta j) $$
+$$ (\sigma_i\sigma_{i+n})_{corr} = \tanh^{n-1}(\beta j) $$
 
 This implies that even at very low temperatures, for example for $\beta = 0.9999$, we can still make $n$ large enough so the the correlation goes to zero. From this we can conclude that there is no phase transition in the 1-D Ising model for non-zero temperature values, i.e., it does not exhibit the phenomenon of spontaneous magnetisation in the absence of an external magnetic field.
 
@@ -333,7 +333,7 @@ and the average energy for the system is given by
 
 $$ E_{av} = {\partial\log Z\over{\partial\beta}} = -2Ndjm\ \tanh(2dj\beta m) $$ 
 
-From this it follows that the average spin for the system is given by
+From this it follows that the average spin  on a per atom basis for the system is given by
 
 $$ \sigma_{av} = \tanh(2dj\beta m) $$
 
@@ -439,7 +439,7 @@ $$ F(m) = -Ndjm^2 - NT\log(\cosh(2djm\beta))  $$
 
 From classical thermodynamics we know that equilibrium occurs at the minimum value of $F(m)$. Solving
 ${\partial F(m)\over{\partial m}} = 0$ leads to $m_{eq} = \tanh(2djm_{eq}\beta)$.
-which agrees with our earlier calculations. In Landau's theory, $m$ is called the *order parameter* since $m>0$ implies some degree of order (since a larger fraction of the spins are pointing in the same direction), while if $m=0$ the spins are completely randomized.
+which agrees with our earlier calculations. In Landau's theory, $m$ is called the *order parameter* since $m>0$ implies some degree of order which is visible at the macro level (since a larger fraction of the spins are pointing in the same direction), while if $m=0$ the spins are completely randomized.
 
 The next step is to understand the behavior of $F(m)$ as a function of $m$. In order to do this, we first express it as a polynomial in $m$. This is facilitated by using polynomial expansions for 
 
@@ -465,17 +465,17 @@ Remember the $T = 2dj$ was identified as the critical temperature $T_c$ for ferr
 Figure 10: Free Energy $F(m)$ as a function of $m$, for $T > 2dj$ and $T < 2dj$
 
 $F(m)$ is plotted in figure 10, and it clearly shows the effect of varying $T$ on it shape and provides an alternative explanation of how phase changes come about.
-When $T > T_c$ then there is only one stable state at $m=0$ at which the free energy is at a minimum, an this corresponds to the non-magnetized state.
+When $T > T_c$ then there is only one equilibrium state at $m=0$ at which the free energy is at a minimum, an this corresponds to the non-magnetized state.
 When $T < T_c$, there are three values of $m$ at which ${\partial F(m)\over{\partial m}} = 0$, hence the system can be one of three states:
-The states $m = \pm\sqrt{3(2dj\beta - 1)\over{4(dj\beta)^3}}$ are stable corresponding to when spins are predominantly aligned in the up or down direction ans these are the two possible states when the system is at thermal equilibrum.
+The states $m_{eq} = \pm\sqrt{3(2dj\beta - 1)\over{4(dj\beta)^3}}$ are stable corresponding to when spins are predominantly aligned in the up or down direction ans these are the two possible states when the system is at thermal equilibrum.
 However the state $m=0$ is clearly not a stable state, since even a slight change in the value of $m$ can cause the system to transition to the other two states.
 The other thing to note is that the value of the magnetization $m$ changes continuously with $T$, hence it is an example of a second order phase transition. Starting from $T>T_c$, if $T$ is gradually reduced, the two minima become gradually shallower until they disappear at $T=T_c$.
 
 Using the equilibrium value of $m$ given by
 
-$$ m = \sqrt{{3(T_c - T)\over{4(dj)^3\beta^2} }}  $$
+$$ m_{eq} = \sqrt{{3(T_c - T)\over{4(dj)^3\beta^2} }}  $$
 
-we can see that $m$ has a quadratic variation with $T$ in the neighborhood of the critical temperature. This was also evident in figure 6 in the previous section. Even though this behavior was arrived at in the context of the Ising model, it turns out that all second order phase transitions for $d\ge 4$ exhibit this quadratic variation irrespective of the physical material involved. For $d = 2, 3$ the exponent is not ${1\over 2}$ from experimental data, hence the Landau theory fails for $d=2,3$. The correct exponents for these cases were computed with the help of the renormalization group theory in the 1970s.
+we can see that $m_{eq}$ has a quadratic variation with $T$ in the neighborhood of the critical temperature. This was also evident in figure 6 in the previous section. Even though this behavior was arrived at in the context of the Ising model, it turns out that all second order phase transitions for $d\ge 4$ exhibit this quadratic variation irrespective of the physical material involved. For $d = 2, 3$ the exponent is not ${1\over 2}$ from experimental data, hence the Landau theory fails for $d=2,3$. The correct exponents for these cases were computed with the help of the renormalization group theory in the 1970s.
 
 **The Case B > 0**
 
@@ -508,13 +508,11 @@ Back in the 1950s scientists were actively investigating the properties of new m
 - Below the critical temperature, the material become magnetic. However, after gradually increasing as the temperature was further reduced, the magnetisation hit a limit at a finite temperature and stayed there even at lower temperatures.
 
 This was a new kind of magnetic behavior not seen before, and soon physicists came up with an explanation for it. As shown in figure 12, all the spins of ferromagnetic materials tend to align at lower temperatures, while those in anti-ferromagnetic also tend to align but in opposite directions. Spin Glasses on the other hand do not exhibit any such regularity. Even at low temperatures, their spins can have different orientations as shown in the right hand side of the figure. Hence some of the interactions are ferromagnetic (shown in blue), while others are anti-ferromagnetic (shown in red).
-It seems that the presence of the copper atoms in the spin glass interferes with the tendency of iron atoms to try to line up as temperature decreases and this random orientations of spins is said to be "dis-ordered". In the same way that an amorphous solid like window glass doesn’t have an orderly crystal structure, a spin glass doesn’t have an orderly magnetic structure. But is there any structural law that these seeemingly random spin configurations obey which could be predicted using the tools of statistical mechanics? This turned out to be a very difficult theoretical problem, and the solution did not emerge for another three decades until the mid-1980s.
+It seems that the presence of the copper atoms in the spin glass interferes with the tendency of iron atoms to try to line up as temperature decreases and this random orientations of spins is said to be "dis-ordered". In the same way that an amorphous solid like window glass doesn’t have an orderly crystal structure, a spin glass doesn’t have an orderly magnetic structure. But is there any structural law that these seeemingly random spin configurations obey which could be predicted using the tools of statistical mechanics? This turned out to be a very difficult theoretical problem, and the solution did not emerge for another three decades until the mid-1980s. It turned out that the solution to the spin glass problam had a wide range of applicability to other difficult problems which involved dis-ordered states, for example in biology, aritficial neural networks and combinatorial optimization.
 
 There is a subtle difference between the pure randomness of the paramagnetic state in a ferromagnetic material when $T > T_c$ and the disorder that we see in a spin glass when $T < T_c. The latter looks as random as a paramagnetic state, but there are some differences:
 The randomness in the ferromagnetic material gradually decreases as the temperature is reduced, and ultimately it becomes completely ordered at $T=0$. The randomness in the spin glass on the other hand becomes "frozen" as the temperature is reduced, and it maintains the randomness even at $T=0$.
 We will see in the next section that there are some order parameters that are able to capture the frozen disorder in a spin glass.
-
-As mentioned in the introduction, a large number of systems exhibit spin glass type disorder in their interactions, and a greater understanding of spin glasses has led to progress in a number of fields ranging from artificial neural networks to biological systems.
 
 ### Spin Glass Models: Edwards Anderson (EA) and Sherrington Kirkpatrick (SK) Models
 
