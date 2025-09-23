@@ -769,7 +769,7 @@ This system can be analyzed using the replica method (see [Gross and Mezard](htt
 
 ## From Spin Glass to Hopfield Networks: Engineering the Energy Landscape of a Spin Glass System
 
-The physiscist John Hopfield was at Princeton during the 1970s, and he was instrumental in luring away Phil Anderson frol Bell Labs to Princeton during that time. Anderson acquainted Hopfield with his work in spin glasses (see the Edwards-Anderson model in the previous section), and Hopfield began thinking about how these results could be applied to model biological systems. He was intrigued by the free energy landscape that occurs with replica symmetry breaking, and in particular he noticed that first order RSB, the landscape exhibits a large number of valleys of the same depth (see the middle part of the figure on the LHS in Fig. 17). Since the minima of each of these valleys resulted in an unique, but random, spin configuration, he reasoned that perhaps such a system can be used as an associative memory, and he succeeded in creating a spin glass model which indeed could do, so as explained next.
+The physicist John Hopfield was at Princeton during the 1970s, and he was instrumental in luring away Phil Anderson from Bell Labs to Princeton during that time. Anderson acquainted Hopfield with his work in spin glasses (see the Edwards-Anderson model in the previous section), and Hopfield began thinking about how these results could be applied to model biological systems. He was intrigued by the free energy landscape that occurs with replica symmetry breaking, and in particular he noticed that first order RSB, the landscape exhibits a large number of valleys of the same depth (see the middle part of the figure on the LHS in Fig. 17). Since the minima of each of these valleys resulted in an unique, but random, spin configuration, he reasoned that perhaps such a system can be used as an associative memory, and he succeeded in creating a spin glass model which indeed could do, so as explained next.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat22.png) 
 
@@ -785,7 +785,7 @@ Each node randomly and asynchronously evaluates whether it is above or below its
 
 If we are to use this system as a memory, there should be a way in which the interactions can be engineered so that equilibrium energy minima correspond to bit patterns that we want to store. In order to acheive this, Hopfield hit upon the novel idea of engineering the energy landscape by choosing the interactions to be a function of the bit patterns to be stored in the associative memory.
 
-Assume that we wish the network to store the states $\xi^s, s=1,...,p$ so that the $\mu^{th}$ excitation pattern can be written as $\{\xi^\mu_1,...,\xi^\mu_N\}$.
+Assume that we wish the network to store the vector states $\xi^s, s=1,...,p$ so that the $\mu^{th}$ excitation pattern can be written as $\{\xi^\mu_1,...,\xi^\mu_N\}$.
 In order to store these states, Hopfield proposed that the interactions $J_{ij}$ be chosen as
 
 $$ J_{ij} = {1\over N}\sum_{\mu=1}^p \xi^\mu_i \xi^\mu_j\ \ \ with\ \ \ J_{ii} = 0 $$
@@ -796,12 +796,12 @@ Under these this update rule it can be shown that if the network is in state $\x
 
 $$ sign(\sum_j J_{ij}\xi^\mu_j) = sign{1\over N} (\sum_j\sum_\nu \xi^\nu_i \xi^\nu_j \xi^\mu_j) = sign(\sum_\nu \xi^\nu_i \delta_{\nu\mu}) = sign(\xi^\mu_i) $$
 
+This implies that once the system is in state $\xi^\mu$, it will stay in state $\xi^\mu$, i.e.,  $\sigma_i(t+\Delta t) = \xi^\mu_i$ for all $i$ for sufficiently large $N$. 
 This is a result of the approximate orthogonality between the random states
 
 $$ {1\over N} \sum_j \xi^\mu_j \xi^\nu_j = \delta_{\nu\mu} + O({1\over\sqrt{N}}) $$
 
-Hence it follows that $\sigma_i(t+\Delta t) = \xi^\mu_i$ for all $i$ for sufficiently large $N$. Note that this argument is not sufficient to gaurantee that the system will end up in 
-state $\xi^\mu$ if it were to start from a state that is slightly different from it.
+Note that this argument is not sufficient to gaurantee that the system will end up in state $\xi^\mu$ if it were to start from a state that is slightly different from it.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat23.png) 
 
@@ -811,11 +811,11 @@ Given the update rule, this model has energy function given by
 
 $$ H = -{1\over 2}\sum_i\sum_j J_{ij}\sigma_i\sigma_j $$
 
-After substituting for $J_{ij}$, this can also be written as
+since $\sum_j J_{ij}\sigma_j$ is the local field that influences  the spin $\sigma_i$ and tries to align it with itself at time $t+\Delta t$. 
+After substituting for $J_{ij}$, $H$ can also be written as
 
 $$  H = -{1\over 2N}\sum_{\mu=1}^p(\sum_{i=1}^N S_i\xi^\mu_i)^2  $$
 
-since $\sum_j J_{ij}\sigma_j$ is the local field that influences  the spin $\sigma_i$ and tries to align it with itself at time $t+\Delta t$. 
 This results in a monotonically decreasing value of the energy, since if there is a change $\Delta\sigma_i$ in the value of the $i^{th}$ spin, then
 
 $$  \Delta H = -{1\over 2}\Delta\sigma_i \sum_{j} J_{ij}\sigma_j  $$
@@ -828,7 +828,7 @@ In order to analyze the system using Statistical Mechanics, we have to introduce
 
 $$  h_i(t) = \sum_j J_{ij}\sigma_j(t) $$
 
-Assume that $\sigma_i(t+\Delta t)$ becomes 1 with probability $1\over{1+e^{-2\beta h_i(t)}}$ and -1 with probability ${e^{-2\beta h_i(t)}\over{1+e^{-2\beta h_i(t)}}}$.
+and assume that $\sigma_i(t+\Delta t)$ becomes 1 with probability $1\over{1+e^{-2\beta h_i(t)}}$ and -1 with probability ${e^{-2\beta h_i(t)}\over{1+e^{-2\beta h_i(t)}}}$.
 Note that this stochastic dynamics reduces to earlier state transition equation in the limit $\beta\rightarrow\infty$ so that the original Hopfield Network corresponds to the case $T=0$.
 On the other hand the network becomes completely random if $\beta=0$.
 
@@ -840,16 +840,17 @@ The partition function $Z$ for the Hopfield network is given by
 
 $$ Z = \sum_{[s]} \exp[{{\beta\over 2N}\sum_{\mu=1}^p(\sum_{i=1}^N S_i\xi^\mu_i)^2}]   $$
 
-where the first sum is over all possible spin patterns $[s]$, and the effect of the diagonal terma $J_{ii} = 0$ has been ignored since there are much fewer of these terms in the sum.
+where the first sum is over all possible spin patterns $[s]$, and the effect of the diagonal terms $J_{ii} = 0$ has been ignored since there are much fewer of these terms in the sum.
 The next step is to apply the Hubbard-Stratonovich transformation to the term in the exponent, which results in
 
 $$ Z = \sum_{[s]} \int\prod_{\mu=1}^p dm^{\mu}\ \exp[-{1\over 2}N\beta \sum_{\mu}(m^{\mu})^2 + \beta\sum_{\mu} m^{\mu}\sum_{i} S_i\xi^{\mu}_i ] $$
 
-This transformation results in the introduction of the integral variable $m^{\mu}$. If we sum over all possible values of the spin patterns $[s]$, then this results in
+This transformation results in the introduction of the integral variable $m^{\mu}$. 
+Using the notation $m = (m^1,...,m^p)$ and $\xi_i = (\xi^1_i,...,\xi^p_i)$, if we sum over all possible values of the spin patterns $[s]$, then this results in
 
 $$ Z = \int\prod_{\mu} dm^{\mu}\ \exp[-{1\over 2}N\beta m^2 + \sum_i \log(2\cosh\beta m.\xi_i) ]  $$
 
-where $m = (m^1,...,m^p)$ and $\xi_i = (\xi^1_i,...,\xi^p_i)$. Recall that the free energy density $f$ is given by
+Recall that the free energy density $f$ is given by
 
 $$ f = -{1\over{\beta N}} \log Z $$
 
@@ -858,11 +859,11 @@ $f$ can be approximated as
 
 $$ f = {1\over 2} m^2 - {1\over{\beta N}} \sum_i \log(2\cosh\beta m.\xi_i) $$
 
-The order parameter $m$ is determined by the saddle-point equation ${\partial f\over{\partial m^{\mu}}} = 0$
+The order parameter vector $m$ is determined by the saddle-point equation ${\partial f\over{\partial m^{\mu}}} = 0$ which results in
 
 $$ m = {1\over N} \sum_i \xi_i \tanh(\beta m.\xi_i) $$
 
-Both $f$ and $m$ depend on the particular relation of $\xi_i^\mu, \mu = 1,...,p, i = 1,...,N$, but in the limit as $N\rightarrow\infty$, we can invoke the law of large numbers
+Both $f$ and $m$ depend on the contents of the memry values $\xi_i^\mu, \mu = 1,...,p, i = 1,...,N$, but in the limit as $N\rightarrow\infty$, we can invoke the law of large numbers
 to write
 
 $$ f = {1\over 2} m^2 - {1\over\beta} <\log(2\cosh\beta m.\xi)> $$
@@ -871,31 +872,29 @@ and
 
 $$ m = <\xi.\tanh(\beta m.\xi)> $$
 
-Hence the order parameter vector $m$ is average overlap between the $\xi$'s and the local magnetization.
+where $\xi = (\xi^1,...,\xi^p)$ is now a random vector whose distribution depends on the memories to be stored.
+Since the thermal average of the magnetization at a node is given by
+$<S_i> = <\tanh(\beta m.\xi)>$,
+it follows that the order parameter vector $m$ is average overlap between the $\xi$'s and the local magnetization.
 
-The thermal average of the spin at node $i$ is given by
-
-$$ <S_i> = <\tanh(\beta m.\xi)> $$
-
-#### Singla Pattern Retrieval
+#### Single Pattern Retrieval
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat24.png) 
 
 Figure 20: Single pattern retrieval in the Hopfield model
 
-We will assume that that the probability distribution of the $\xi_i^\mu$ is given by
+We will assume that that the probability distribution of the the $p$ components of $\xi$ are independent and are given by
 
-$$ p(\xi_i^\mu) = {1\over 2}\delta(\delta^\mu_i - 1) + {1\over 2}\delta(\delta^\mu_i + 1)  $$
+$$ p(\xi^\mu) = {1\over 2}\delta(\xi^\mu - 1) + {1\over 2}\delta(\xi^\mu + 1),\ \ \ \mu = 1,...,p  $$
 
-and furthermore the $p$ componenents of $\xi_i$ are independent.
-Mirroring the strategy that was used  to solve the general spin glass model, we will propose a candidate value for the order parameter vectoe $m$, such that
+Mirroring the strategy that was used  to solve the general spin glass model, we will propose a candidate value for the order parameter vector $m=(m^1,...,m^p)$, such that
 $m^1 > 0$ and $m^\mu = 0, \mu > 1$. It follows that
 
 $$ f = {1\over 2} (m^1)^2 - {1\over\beta} <\log(2\cosh\beta m^1)> $$
 
-$$ m^1 = \tanh(\beta m^1)  $$
+$$ m^1 = \xi^\mu\tanh(\beta m^1\xi^\mu) = \tanh\beta m^1 $$
 
-These are just the mean field equations for the Isis model. 
+which are just the mean field equations for the Isis model. 
 
 Also the average spin at node $i$ is given by
 
