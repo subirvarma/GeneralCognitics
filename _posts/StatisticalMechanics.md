@@ -1,4 +1,4 @@
-+---
+---
 layout: default
 title: "From the Physics of Interacting Particle Systems to AI Models"
 ---
