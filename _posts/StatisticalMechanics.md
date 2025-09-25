@@ -1,4 +1,4 @@
----
++---
 layout: default
 title: "From the Physics of Interacting Particle Systems to AI Models"
 ---
@@ -57,7 +57,8 @@ But what is the formula for the amount of uncertainity in a discrete probability
 
 $$ S(p_1,p_2,...,p_n) = -\sum_i p_i \log p_i \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (2) $$               
 
-He called this quantity the entropy of the probability distribution (note that since all the $p_i \le 1$, $H$ is always a non-negative quantity). This definition agrees with the intuitive notion that more "spread out" a distribution is, the higher is its entropy. For example if $x$ is known with certainity then $S=0$ which is its minimum value, and conversely if nothing is known about $x$, then $S=\log\ n$ which is its maximum value, and this is achieved when $p_i = {1\over n}, i=1,2,...n$, since all of the $x_i$'s are equally possible. 
+He called this quantity the entropy of the probability distribution (note that since all the $p_i \le 1$, $H$ is always a non-negative quantity). This definition agrees with the intuitive notion that more "spread out" a distribution is, the higher is its entropy. For example if $x$ is known with certainity then $S=0$ which is its minimum value, and conversely if nothing is known about $x$, then the probabilities are all equal and given by $p_i = {1\over n}, i=1,2,...n$, which results in an entropy of
+$S=\log\ n$ which is its maximum value. This also implies that if nothing is known about a system other than its entropy $S$, then the approximate number of microstates in the system is given by $e^{\log\ S}$.
 
 Unbeknownst to Shannon, this formula had been discovered a few decades earlier by Boltzmann in the context of his theory of statistical mechanics. However the formula for entropy was not central to his development of the theory which he derived using other physical considerations.
 Shannon's work showed that entropy was a purely mathematical concept independent of its applications in thermodynamics. Within a few years after that, it was shown that all of statistical mechanics can be derived by taking this formula for entropy as the starting point. The only physical assumption required was an enumeration of the states that the system can exist in and their energy levels. Before we get into how this was done, lets finish the problem that was posed in the beginning of this section of estimating the $p_i$ values. The maximum entropy principle tells us that that our best estimates of the $p_i$ are obtained by solving the optimization problem of maximizing $S$ subject to the constraints (1) and $\sum_i p_i = 1$. This can be done by the method of Lagrange multipliers as the maximization of $L$ given by
@@ -89,7 +90,7 @@ An important example of a system is that of a ferromagnet consisting of N atoms,
 In this case a microstate would correspond to a particular joint orientation of their individual spins, for example the microstate $(P,Q)$ would correspond to $P$ atoms with spins pointing up and the $Q$ atoms with spins pointing down. 
 This system, which is called the Ising model, is analysed in more detail in the following sections.
 
-Define the entropy of the system as
+A fundamental quantity in Statistical Mechanics is the entropy of a system, which is defined as
 
 $$ S = -\sum_{i=1}^N p_i \log p_i\ \ \ \ \ \ \ \ (5) $$
 
@@ -97,6 +98,7 @@ and its average energy as
 
 $$ E_{av} = \sum_{i=1}^N p_i E_i\ \ \ \ \ \ \ \  (6)   $$
 
+From the mathematical point of view one can see why entropy may be an important quantity, since it is has direct connection to probabilities of the microstates $p_i$ which are critical in computing macroscopic quantities that we can measure such as $E_{av}$.
 But what is the physical significance of this definition for entropy? Changes in entropy can be measured in the lab, and indeed entropy was introduced into thermodynamics well before statistical mechanics came along. For the system shown in the figure above, if its temperature is increased from $T_1$ to $T_2 > T_1$ by transferring an amount of heat equal to $Q$ from the reservoir, then the increase in its entropy is given by ${Q\over T}$ (called the Clausius formula).
 But according to Shannon and Boltzmann entropy is given by equation (2), and is a measure of our lack of information about the microscopic details of a system.
 This is sometimes referred to as 'blurry' view of the system, since we don't know the state of an individual particle but we can say something about how the energy is distributed among the mass of particles.
@@ -111,9 +113,9 @@ $$ p_i = {e^{-\beta E_i}\over Z} \ \ \ where \ \ \ Z = \sum_i e^{-\beta E_i}  $$
 
 This formula enables us to compute $E_{av}$ and $S$ as functions of $Z$, in particular
 
-$$ E_{av} = -{\partial\log Z\over\partial\beta} $$
+$$ E_{av} =  \sum_{i=1}^N {e^{-\beta E_i}\over Z} E_i   = -{\partial\log Z\over\partial\beta} $$
 
-and
+and substituting $p_i = {e^{-\beta E_i}\over Z}$ into the definition for $S$ gives us
 
 $$  S = \beta E_{av} + \log Z = -{\beta\over Z}{\partial Z\over \partial\beta} + \log Z $$
 
@@ -156,7 +158,7 @@ There is another macro thermodynamic quantity that we will need later, and that 
 $$ F = E_{av} -  TS $$ 
 
 This quantity is called free energy since it is the portion of system energy that can be used to do useful work, the portion $TS$ due to entropy is pure disorder which cannot be used to do work.
-From the formula for entropy, it is easy to see that 
+From the formula $S = \beta E_{av} + \log Z$ for entropy, it is easy to see that 
 
 $$   F = -T\log Z   $$
 
@@ -164,7 +166,7 @@ From this equation you can start to see why $F$ might be an important quantity i
 
 $$ e^{-\beta F} = \sum_i e^{-\beta E_i} $$
 
-This equation shows that $F$ is a macro distillation of all the microscopic energy interactions within the system. 
+This equation shows that $F$ is a macro distillation of all the microscopic energy interactions $E_i$ within the system. 
 
 There is another important use of the Free Energy, which is as a way to identify the thermal equilibrium state for the system. 
 From the second law of thermodynamics we know that equilibrium is characterized by the maximization of entropy, but note that this is the entropy of the system plus that of its surroundings, which is not that straightforward to characterize. 
