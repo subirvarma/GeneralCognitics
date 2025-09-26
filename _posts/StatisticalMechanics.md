@@ -625,10 +625,9 @@ $$   P(q) = {1\over 2}[\delta(q+m^2)+\delta(q-m^2)]   $$
 Figure 14: The overlap distribution function $P(q)$ for a spin glass (top) and a ferromagnet (bottom)
 
 The above figure shows the contrast between the overlap distributions in a spin glass vs a ferromagnet (note that in both cases, unlike what is shown in the figure, the maximum value of the overlap is less than 1, unless $T=0$). In fact in a spin glass the number of phases becomes infinite as $T\rightarrow 0$ as a result of which $P(q)$ becomes a continuous function, and it is this function that serves as the order parameter for these systems.
+Note that the number of peaks of $P(q)$ is not equal to the number of pure states, but to the number of possible values taken by the overlap.
 
-Since there are an infinite number of pure states in a spin glass, $q$ can take on many more values and the system now exhibits what is called replica symmetry breaking or RSB.
-
-Note that the number of peaks of $P(q)$ is not equal to the number of pure states, but to the number of possible values taken by the overlap. We will see in the next section that the simplest type of spin glass also has only two peaks in this distribution, but has an infinite number of pure states, unlike the Ising model.
+But how did scientists arrive at this highly non-intuitive notion of continuous symmtry breaking, and the resulting continous overlap distribution? This was done through another higly non-intuitive mathematical trick called the replica method, and this is the subject of the next section.
 
 ### The Replica Method
 
@@ -639,15 +638,20 @@ $$ f_N(J) = -{1\over{\beta N}} \log{\sum_{(\sigma)}e^{-\beta H_N(J,\sigma)}} = -
 where the summation is over all possible configurations of the spins.
 The average free energy density ${\overline f}(N)$ for $N$ atoms is then obtained by averaging over the coupling distribution $J$ 
 
-$$ {\overline f}_N = \sum_{J} P[J] f_N(J) = -{1\over N\beta}E(\log Z_N(J)) $$
+$$ {\overline f}_N = \sum_{J} P[J] f_N(J) = -{1\over N\beta}E_J(\log Z_N(J)) $$
 
-Finally we average over all the atoms by taking the limit $N\uparrow\infty$ to obtain
+where $E_J$ is the expectation over the distribution of $J$.
+Finally we average over all the atoms by taking the limit $N\uparrow\infty$ to obtain the free energy ${\overline f}$ as
 
 $$ {\overline f} = \lim_{N\uparrow\infty}{\overline f}_N $$
 
-Computing ${\overline f}$ is an exteremly difficult problem in probability theory due to the complexity in evaluating $E(\log Z)$. In the 1960s a way to solve similar problems arose in the context of Quantum Field Theory, and is known as the replica method. It works as follows:
+Computing ${\overline f}$ is an exteremly difficult problem in probability theory due to the complexity in evaluating $E_J(\log Z)$. In the 1960s a way to solve similar problems arose in the context of Quantum Field Theory, and is known as the replica method. It is based on the well known identity
+
+$$ \lim_{n\rightarrow 0} {Z^n - 1\over n} = \lim_{n\rightarrow 0}{e^{n\log Z} - 1\over n} = \lim_{n\rightarrow 0}{n\log Z + {1\over 2!}(n\log Z)^2 +...\over n} = \log Z $$
+
+and works as follows:
 With the random interactions frozen at $J_{ij}$, consider $n$ independent replicas of the system. Replicas have the same couplings $J_{ij}$, but evolve independently, so that they can end up with a different spin configuration.
-The overlap function $q_{ab}$ between two replicas is given by 
+The overlap function $q_{ab}$ between two replicas is defined by 
 
 $$ q_{ab} = {1\over N} \sum_{i=1}^N \sigma_i^a \sigma_i^b $$
 
@@ -655,30 +659,26 @@ The free energy density for this system of replicas is given by
 
 $$ f_n(N,J) = -{1\over{\beta N}} \log (Z_J)^n $$
 
-where the partition function $(Z_J)^n$ for the system of $n$ replicas is given by (since the replicas are independent, it is a product of the individual partition functions)
+Since the replicas are independent, the partition function $(Z_J)^n$ for the system of $n$ replicas is given by 
 
 $$ (Z_J)^n = \sum_{(s)^1}\sum_{(s)^2}...\sum_{(s)^n}e^{-\sum_{a=1}^n \beta H_J[s^a]} $$
 
 where each of the summations $\sum_{(s)^i}$ is over all possible configuations of the spins in a replica. 
-
-Note that
-
-$$ \lim_{n\rightarrow 0} {Z^n - 1\over n} = \lim_{n\rightarrow 0}{e^{n\log Z} - 1\over n} = \lim_{n\rightarrow 0}{n\log Z + {1\over 2!}(n\log Z)^2 +...\over n} = \log Z $$
-
 Define a function $f'_n(N)$ given by
 
-$$  f'_n(N) = -{1\over{\beta Nn}} (E(Z^n) - 1) $$
+$$  f'_n(N) = -{1\over{\beta Nn}} (E_J(Z^n) - 1) $$
 
 where
 
-$$  E(Z^n) = \sum_J p(J) (Z_J)^n $$
+$$  E_J(Z^n) = \sum_J p(J) (Z_J)^n $$
 
-After this averaging we still have $n$ replicas, but they are no longer independent. Indeed they are correlated since their spins are constrained by the fact that they all follow the common interaction law given by $J$.
+Averaging of $J$ results in $n$ replicas, but they are no longer independent. Indeed they are correlated since their spins are constrained by the fact that they all follow the common interaction law given by $J$.
 Taking the limit $n\rightarrow 0$ and using the replica formula, it follows that
 
-$$ \lim_{n\rightarrow 0} f'_n(N) =  -\lim_{n\rightarrow 0}{1\over{\beta Nn}} (E(Z^n) - 1)     = -{1\over{\beta N}}E(\log Z) = {\overline f_N} $$
+$$ \lim_{n\rightarrow 0} f'_n(N) =  -\lim_{n\rightarrow 0}{1\over{\beta Nn}} (E_J(Z^n) - 1)     = -{1\over{\beta N}}E_J(\log Z) = {\overline f_N} $$
 
-Taking this limit assumes that $E(Z^n)$ continues to be well defined even when the number of replicas $n$ is not an integer, which is known as analytical continuation in mathematics.
+Hence we have effectively replaced the computation of $E_J(\log Z)$ by that of $E_J(Z^n)$, which is much easier to do.
+Taking this limit assumes that $E_J(Z^n)$ continues to be well defined even when the number of replicas $n$ is not an integer, which is known as analytical continuation in mathematics.
 Finally taking the limit $N\uparrow\infty$, the free energy density is given by
 
 $$ {\overline f} = \lim_{N\uparrow\infty} {\overline f_N} $$
