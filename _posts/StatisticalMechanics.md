@@ -509,12 +509,18 @@ Back in the 1950s scientists were actively investigating the properties of new m
 - When the temperature exceeded some critical point, there was no magnetism detected, which is just as in ferromagnetic materials
 - Below the critical temperature, the material become magnetic. However, after gradually increasing as the temperature was further reduced, the magnetisation hit a limit at a finite temperature and stayed there even at lower temperatures.
 
-This was a new kind of magnetic behavior not seen before, and soon physicists came up with an explanation for it. As shown in figure 12, all the spins of ferromagnetic materials tend to align at lower temperatures, while those in anti-ferromagnetic also tend to align but in opposite directions. Spin Glasses on the other hand do not exhibit any such regularity. Even at low temperatures, their spins can have different orientations as shown in the right hand side of the figure. Hence some of the interactions are ferromagnetic (shown in blue), while others are anti-ferromagnetic (shown in red).
-It seems that the presence of the copper atoms in the spin glass interferes with the tendency of iron atoms to try to line up as temperature decreases and this random orientations of spins is said to be "dis-ordered". In the same way that an amorphous solid like window glass doesn’t have an orderly crystal structure, a spin glass doesn’t have an orderly magnetic structure. But is there any structural law that these seeemingly random spin configurations obey which could be predicted using the tools of statistical mechanics? This turned out to be a very difficult theoretical problem, and the solution did not emerge for another three decades until the mid-1980s. It turned out that the solution to the spin glass problam had a wide range of applicability to other difficult problems which involved dis-ordered states, for example in biology, aritficial neural networks and combinatorial optimization.
+It seems that the presence of the copper atoms in the spin glass interferes with the tendency of iron atoms to try to line up as temperature decreases and this random orientations of spins is said to be "dis-ordered". In the same way that an amorphous solid like window glass doesn’t have an orderly crystal structure, a spin glass doesn’t have an orderly magnetic structure.
 
-There is a subtle difference between the pure randomness of the paramagnetic state in a ferromagnetic material when $T > T_c$ and the disorder that we see in a spin glass when $T < T_c. The latter looks as random as a paramagnetic state, but there are some differences:
+This was a new kind of magnetic behavior not seen before, and soon physicists came up with a model for it. As shown in figure 12, all the spins of ferromagnetic materials tend to align at $T=0$, while those in anti-ferromagnetic also tend to align but in opposite directions. Spin Glasses on the other hand do not exhibit any such regularity. Even at low temperatures, their spins can have different orientations as shown in the right hand side of the figure. This is a result of the fact that some of the interactions are ferromagnetic (shown in blue), while others are anti-ferromagnetic (shown in red). This results in a phenomenon called 'frustration' whereby a particular atom cannot be given a unique up or down orientation that leads to a minimization of the energy, even at $T=0$. As a result there could be low temperature phases in which the up orientation is present, while there could be other low temperature phases in which the 'down' orientation is present. From this discription one can see that a spin glass system can have many more than two phases in low temperature equilibrium. The spin orientations in each of these phases looks seemingly random, like the temperature induced thermodynamic randomness we see in ferromagnets, but there is a difference between the two.
 The randomness in the ferromagnetic material gradually decreases as the temperature is reduced, and ultimately it becomes completely ordered at $T=0$. The randomness in the spin glass on the other hand becomes "frozen" as the temperature is reduced, and it maintains the randomness even at $T=0$.
 We will see in the next section that there are some order parameters that are able to capture the frozen disorder in a spin glass.
+
+![](https://subirvarma.github.io/GeneralCognitics/images/stat16.png) 
+
+Figure 15: Energy Landscape in Spin Glasses
+
+Something that was realized pretty early in the study of spin glasses is that below the critical temperature, their free energy landscape is quite unlike that for magnetic ferromagnetic materials. It consists of multipe peaks and valleys as shown in figure 14 which seem to be quite random and it leads to the observation that a spin glass has an infinite nuber of phases potentially. But is there an order that exists within this randomness? The discovery os such an order turned out to be a very difficult theoretical problem, and the solution did not emerge for another three decades until the mid-1980s and it won Giorgio Parisi the Nobel Prize in 2024.  It also turned out that the solution to the spin glass problam had a wide range of applicability to other difficult problems which involved dis-ordered states, for example in biology, aritficial neural networks and combinatorial optimization.
+
 
 ### Spin Glass Models: Edwards Anderson (EA) and Sherrington Kirkpatrick (SK) Models
 
@@ -542,7 +548,7 @@ $$ H_N = -\sum_i\sum_{j\lt i} J_{ij}\sigma_i\sigma_j $$
 
 But what is the nature of the spin interactions $J_{ij}$? Sherrington and Kirkpatrick assumed that $J_{ij}$ can be written as
 
-$$ J_{ij} = {J\over\sqrt{N}}  $$
+$$ J_{ij} = J_{ji} = {J\over\sqrt{N}}  $$
 
 where $J$ is a random variable that obeys the Standard Normal distribution, i.e.,
 
@@ -550,31 +556,32 @@ $$  J  \sim {1\over{\sqrt{2\pi}}} e^{-{x^2\over 2}} $$
 
 The scaling $\sqrt{N}$ ensures that the total energy does not blow up to infinity as $N$ increases, while the Standard Normal assumption completely randomizes all interactions. 
 This observation lies at the heart of the SK model, i.e., the interactions can assume random values, but they follow a well defined statistical distribution.
-Note that for a particular realization of the random variables $J_{ij}$, the interactions are fixed, or quenched, but at random values. 
 
-![](https://subirvarma.github.io/GeneralCognitics/images/stat16.png) 
-
-Figure 15: Energy Landscape in Spin Glasses
-
-Something that was realized pretty early in the study of spin glasses is that below the critical temperature, their free energy landscape is quite unlike that for magnetic ferromagnetic materials. It consists of multipe peaks and valleys as shown in figure 14 which seem to be quite random and it leads to the observation that a spin glass has an infinite nuber of phases potentially. But is there an order that exists within this randomness? The discovery that there is indeed an order is one of the triumphs of physics, and it won Giorgio Parisi the Nobel Prize in 2024.
+Note that for a particular realization of the spin glass model, the random variables $J_{ij}$, are fixed or quenched, but at random values. It would seem from this one would need all the 
+${N(N-1)\over{2}}$ values of $J_{ij}$ to fully describe the SK model, which would make any analysis of the model completely intractable.
+Fortunately there is a property called self-averaging that comes to the rescue. Basically it says that average value of macroscopic quantities, such as the free energy, can be calculated by mathematical averaging using the distribution of of $J_{ij}$, even though the system itself is built using only a single realization of $J_{ij}$. This property makes the analysis of the spin glass model more tractable.
 
 ### Order Parameters in a Spin Glass System
 
-Recall that for the case of Ising model the magnetized phase was characterized by the fact that the average magnetization $m$ was non-zero. Note that for a given value of $m$, the system can have multiple configuraions of spins, and define the average spin value at site $i$, $E(\sigma_i)$ as the average over all these configurations.
-If $E(\sigma_i) = m_i$, then for $T < T_c$, the average over all the $N$ sites is given by
-
-$$ q = {1\over N}\sum_i m_i = m  $$
-
-and $m\ne 0$ due to the fact that the a majority of atoms are pointing in the same direction in the magnetized phase.
-In the SK model $q$ cannot be used to characterize the magnetized phase since ${1\over N}\sum_i m_i = 0$ even for a single realization of the random variables $J_{ij}$, and this is due to the fact that these interactions are symmetrically distributed around the origin  as a result of which the spins are randomly oriented even in equilibrium (at low temperature).
+Recall that for the case of Ising model the magnetized phase was characterized by the fact that the thermodynamic average for the magnetization for an atom $E(\sigma_i) = m_i$ was non-zero. 
+In the SK model we now have to take two averages; (1) The thermodynamic average with temperature, as before, and (2) The average over the distribution of the spin glass interactions $J_{ij}$. This double average is typically denoted as $<<\sigma_i>>$. Since the spin glass interactions are symmetrically distributed around the origin, it follows that $<<sigma_i>> = 0$, hence the average magnetization cannot be used as an order parameter in this case.
 
 So how can we characterize the magnetized phase in the SK model?
 If a low temperature phase exists for the SK model, there must some spin configurations that are more likely to occur than others.
 Edwards and Anderson suggested that we use the following order parameter instead
 
-$$ q_{EA} = {1\over N}\sum_i m_i^2 > 0  $$
+$$ q_{EA} = {1\over N}\sum_i (E(\sigma_i))^2
 
-where $q_{EA}$ is called the Edwards-Anderson order parameter. Hence spin glass models are characterized by $q = 0,\ 0\le q_{EA} \le 1$.
+where $q_{EA}$ is called the Edwards-Anderson order parameter. Hence spin glass models are characterized by $E(\sigma_i) = 0,\ 0\le q_{EA} \le 1$.
+Using the self averaging property, $q_{EA}$ can also be written as
+
+$$ q_{EA} = E_J[(E(\sigma_i))^2] > 0  $$
+
+where the outer average is over the distribution of $J_{ij}$. For $T> T_c$, $q_{EA}=0$, since the thermodynamic average is zero, while $0\le q_{EA}\le 1$ for $T<T_c$.
+
+![](https://subirvarma.github.io/GeneralCognitics/images/stat25.png) 
+
+Figure 14: Free energy landscape at different temperatures
 
 These definitions were further refined in subsequent years, with the introduction of the concept of a "pure state", but in order to do so we first have to clarify what a state is in this context. Lets assume that the disorder $J$ in the system is fixed with a given realization of the random interactions.
 The characteristic feature of a spin glass phase is the existence of very many free energy valleys which are separated by very high energy barriers (as opposed to the Ising model that has a only a couple of free energy valleys, see figure 10). It was realized that the best way to characterize a spin glass system is in terms of the space of free energy valleys, and these are called the pure states of the system. Each pure state is made up of a large number of spin configurations and can be assigned a statistical weight $P_{\alpha}$ determined by its free energy $F_{\alpha}$, and is given by
