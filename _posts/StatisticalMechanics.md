@@ -651,9 +651,9 @@ $$ \lim_{n\rightarrow 0} {Z^n - 1\over n} = \lim_{n\rightarrow 0}{e^{n\log Z} - 
 
 and works as follows:
 With the random interactions frozen at $J_{ij}$, consider $n$ independent replicas of the system. Replicas have the same couplings $J_{ij}$, but evolve independently, so that they can end up with a different spin configuration.
-The overlap function $q_{ab}$ between two replicas is defined by 
+The overlap function $Q_{ab}$ between two replicas is defined by 
 
-$$ q_{ab} = {1\over N} \sum_{i=1}^N \sigma_i^a \sigma_i^b $$
+$$ Q_{ab} = {1\over N} \sum_{i=1}^N \sigma_i^a \sigma_i^b $$
 
 The free energy density for this system of replicas is given by
 
@@ -675,25 +675,32 @@ $$  E_J(\log Z_J^n) = \sum_J p(J) Z_J^n $$
 Averaging over $J$ results in $n$ replicas, but they are no longer independent. Indeed they are correlated since their spins are constrained by the fact that they all follow the common interaction law given by $J$.
 Taking the limit $n\rightarrow 0$ and using the replica formula, it follows that
 
-$$ \lim_{n\rightarrow 0} f'_n(N)  = -{1\over{\beta N}}\lim_{n\rightarrow 0}{E_J(Z_J^n) - 1\over n}  = -{1\over{\beta N}}E_J(\log Z) =  {\overline f_N} $$
+$$ \lim_{n\rightarrow 0} f'_N(n)  = -{1\over{\beta N}}\lim_{n\rightarrow 0}{E_J(Z_J^n) - 1\over n}  = -{1\over{\beta N}}E_J(\log Z) =  {\overline f_N} $$
 
-Hence we have effectively replaced the computation of $E_J(\log Z)$ by that of $E_J(Z^n)$, which is much easier to do.
+Hence we have effectively replaced the computation of $E_J(\log Z_J)$ by that of $E_J(Z_J^n)$, which is much easier to do.
 Taking this limit assumes that $E_J(Z^n)$ continues to be well defined even when the number of replicas $n$ is not an integer, which is known as analytical continuation in mathematics.
-Finally taking the limit $N\uparrow\infty$, the free energy density is given by
 
-$$ {\overline f} = \lim_{N\uparrow\infty} {\overline f_N} $$
+After some manipulations, that involve the use of the Hubbard-Stratonovich transform, it can be shown that
 
-It can be shown that $E_J(Z^n)$ can be written as a function of the overlap matrix $Q_{ab}$ (with elements $q_{ab}$ defined earlier), which describes the overlap between two replicas $a$ and $b$:
+$$ E_J(Z_J^n) = \prod_{a\lt b}^n \int dQ_{ab} \exp^{-\beta nN f_n(Q_{ab})}  $$
 
-$$ E(Z^n) = \int \prod_{(ab)} {dQ_{ab}\over{2\pi}} e^{-NA[Q_{ab}]}  $$
+where $Q_{ab}$ is the overlap function between replicas that was introduced earlier, and
+
+$$ f_n(Q_{ab}) = -{\beta\over 4} + {\beta\over 2n}\sum_{a\lt b}^n Q_{ab}^2 - {1\over{\beta n}}\log[\exp^{ \beta^2 \sum_{a\lt b}^n Q_{ab}\sigma_a\sigma_b }] $$
 
 Taking the limit $N\rightarrow\infty$, this expression can be evaluated by the saddle point approximation method, which leads to
 
-$$ f_n(Q_{ab}) = -\lim_{N\rightarrow\infty} {1\over{\beta Nn}}\log E(Z^n(N)) = {1\over{\beta n}} A_{sp}[Q_{ab}] $$
+$$ E_J(Z_J^n)\approx \sqrt{{\delta^2 f\over{\delta Q_{sp}}}} \exp^{-\beta nN f_n(Q_{sp})}  $$
 
-where $A_{sp}$ is evaluated at the value of $Q_{sp}$  which achieves its saddle point, i.e., ${\partial A\over{\partial Q_{ab}}} = 0$. The free energy ${\overline f}(Q_{sp})$ is then evaluated by taking the limit of $f_n$ as $n\rightarrow 0$. 
+where $Q_{sp}$ is evaluated at the value of $Q_{ab}$  which achieves its saddle point, i.e., ${\partial f_n\over{\partial Q_{ab}}} = 0$. 
+It follows that the free energy density is given by $f_n(Q_{sp}$ and 
+the free energy ${\overline f}(Q_{sp})$ can be evaluated by taking the limit of $f_n$ as $n\rightarrow 0$. 
 
-So how do we get hold of the values of $Q_{ab}$ at the saddle point? The way scientists have proceeded is by making educated guesses (called *ansatz*), and then verifying that the math works out. The simplest structure for $Q_{ab}$ is known as the replica symmetric (RS) solution. In this case the overlap $q_{ab}$ between any two replicas is the same, i.e., $q_{ab} = q_0$ for $a\ne b$ and $q_{aa} = q_d$ for self overlap along the diagonal. This ansatz correctly describes the high temperature regime, but it becomes unstable as the temperature is lowered below a threshold $T_c$ and this corresponds to a phase change.
+So how do we get hold of the values of $Q_{sp}$ at the saddle point? The way scientists have proceeded is by making educated guesses (called *ansatz*) which depend on a finite number of parameters, and then computing these parameters by using the saddle point equations.
+
+**The Replica Symmetric Solution**
+
+The simplest structure for $Q_{ab}$ is known as the replica symmetric (RS) solution. In this case the overlap $q_{ab}$ between any two replicas is the same, i.e., $q_{ab} = q_0$ for $a\ne b$ and $q_{aa} = q_d$ for self overlap along the diagonal. This ansatz correctly describes the high temperature regime, but it becomes unstable as the temperature is lowered below a threshold $T_c$ and this corresponds to a phase change.
 The correct structure, that was proposed by Parisi, is a matrix $Q_{ab}$ with an iterative block structure in which the symmetry between pairs of replicas breaks down, i.e., $q_{ab}\ne q_{ba}$.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat20.png) 
