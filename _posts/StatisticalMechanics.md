@@ -536,11 +536,11 @@ $$ H = -J\sum_i\sum_{j[i]}\sigma_i\sigma_j $$
 
 This assumed that all interactions were confined to neighboring atoms ($j[i]$ being the neighbors of $i$), and more importantly the strength of the interaction $J$ is the same for all interactions. Sherrington and Kirkpatrick made the following modifications to this model:
 
-- Each atom can interact with all the other atoms in the lattice, and moreover interactions always happen in a pairwise fashion (see figure 14) and this is called the fully connected assumption. This assumption simplified the mathematical analysis of the model.
+- Each atom can interact with all the other atoms in the lattice, and moreover interactions always happen in a pairwise fashion (see figure 14) and this is called the fully connected assumption. 
 - As before, the spins $\sigma_i$ can assume values $\pm 1$.
 - The strength of the interaction $J_{ij}$ is not a constant anymore, but is a function of the two atoms taking part in the interaction and can vary randomly in magnitude as well as sign.
 
-The third assumption is an important one, since it captures the fact that the coupling $J_{ij}$ sometimes leads to two spins pointing in the same direction, and at other times to the them pointing in opposite directions.
+This first assumption simplified the mathematical analysis of the model, even though it did away with any space structure in the model, such as dimensionality. Hence each atom is the nearest neighbor of every other atom.
 The variable coupling strength captures the fact that the interacting atoms are at variable distances from each other.
 Under these assumptions the energy function for $N$ atoms becomes
 
@@ -659,23 +659,23 @@ The free energy density for this system of replicas is given by
 
 $$ f_n(N,J) = -{1\over{\beta N}} \log (Z_J)^n $$
 
-Since the replicas are independent, the partition function $(Z_J)^n$ for the system of $n$ replicas is given by 
+Since the replicas are independent, the partition function $Z_J^n$ for the system of $n$ replicas is given by 
 
-$$ (Z_J)^n = \sum_{(s)^1}\sum_{(s)^2}...\sum_{(s)^n}e^{-\sum_{a=1}^n \beta H_J[s^a]} $$
+$$ Z_J^n = \prod_{a=1}^n \sum_{\sigma^a} e^{beta\sum_{a=1}\sum_{i\lt j} J_{ij}\sigma^a_i\sigma^a_j} $$
 
-where each of the summations $\sum_{(s)^i}$ is over all possible configuations of the spins in a replica. 
-Define a function $f'_n(N)$ given by
+where each of the summations $\sum_{\sigma^a}$ is over all possible configuations of the spins in a replica labeled by $a$. 
+Define a function $f'_N(n)$ given by
 
-$$  f'_n(N) = -{1\over{\beta Nn}} (E_J(Z^n) - 1) $$
+$$  f'_N(n) = -{1\over{\beta Nn}} \log E_J(Z_J^n) $$
 
 where
 
-$$  E_J(Z^n) = \sum_J p(J) (Z_J)^n $$
+$$  E_J(\log Z_J^n) = \sum_J p(J) Z_J^n $$
 
-Averaging of $J$ results in $n$ replicas, but they are no longer independent. Indeed they are correlated since their spins are constrained by the fact that they all follow the common interaction law given by $J$.
+Averaging over $J$ results in $n$ replicas, but they are no longer independent. Indeed they are correlated since their spins are constrained by the fact that they all follow the common interaction law given by $J$.
 Taking the limit $n\rightarrow 0$ and using the replica formula, it follows that
 
-$$ \lim_{n\rightarrow 0} f'_n(N) =  -\lim_{n\rightarrow 0}{1\over{\beta Nn}} (E_J(Z^n) - 1)     = -{1\over{\beta N}}E_J(\log Z) = {\overline f_N} $$
+$$ \lim_{n\rightarrow 0} f'_n(N)  = -{1\over{\beta N}}\lim_{n\rightarrow 0}{E_J(Z_J^n) - 1\over n}  = -{1\over{\beta N}}E_J(\log Z) =  {\overline f_N} $$
 
 Hence we have effectively replaced the computation of $E_J(\log Z)$ by that of $E_J(Z^n)$, which is much easier to do.
 Taking this limit assumes that $E_J(Z^n)$ continues to be well defined even when the number of replicas $n$ is not an integer, which is known as analytical continuation in mathematics.
@@ -683,7 +683,7 @@ Finally taking the limit $N\uparrow\infty$, the free energy density is given by
 
 $$ {\overline f} = \lim_{N\uparrow\infty} {\overline f_N} $$
 
-It can be shown that $E(Z^n)$ can be written as a function of the overlap matrix $Q_{ab}$ (with elements $q_{ab}$ defined earlier), which describes the overlap between two replicas $a$ and $b$:
+It can be shown that $E_J(Z^n)$ can be written as a function of the overlap matrix $Q_{ab}$ (with elements $q_{ab}$ defined earlier), which describes the overlap between two replicas $a$ and $b$:
 
 $$ E(Z^n) = \int \prod_{(ab)} {dQ_{ab}\over{2\pi}} e^{-NA[Q_{ab}]}  $$
 
