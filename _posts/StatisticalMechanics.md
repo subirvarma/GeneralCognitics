@@ -570,7 +570,7 @@ So how can we characterize the magnetized phase in the SK model?
 If a low temperature phase exists for the SK model, there must some spin configurations that are more likely to occur than others.
 Edwards and Anderson suggested that we use the following order parameter instead
 
-$$ q_{EA} = {1\over N}\sum_i (E(\sigma_i))^2
+$$ q_{EA} = {1\over N}\sum_i (E(\sigma_i))^2 $$
 
 where $q_{EA}$ is called the Edwards-Anderson order parameter. Hence spin glass models are characterized by $E(\sigma_i) = 0,\ 0\le q_{EA} \le 1$.
 Using the self averaging property, $q_{EA}$ can also be written as
@@ -584,26 +584,27 @@ where the outer average is over the distribution of $J_{ij}$. For $T> T_c$, $q_{
 Figure 14: Free energy landscape at different temperatures
 
 These definitions were further refined in subsequent years, with the introduction of the concept of a "pure state", but in order to do so we first have to clarify what a state is in this context. Lets assume that the disorder $J$ in the system is fixed with a given realization of the random interactions.
-The characteristic feature of a spin glass phase is the existence of very many free energy valleys which are separated by very high energy barriers (as opposed to the Ising model that has a only a couple of free energy valleys, see figure 10). It was realized that the best way to characterize a spin glass system is in terms of the space of free energy valleys, and these are called the pure states of the system. Each pure state is made up of a large number of spin configurations and can be assigned a statistical weight $P_{\alpha}$ determined by its free energy $F_{\alpha}$, and is given by
+The characteristic feature of a spin glass phase is the existence of very many free energy valleys which are separated by very high energy barriers. As shown in the top part of the above figure, when $T>T_c$ there exists only a single free energy valley, and the ergodicity of the system is not broken. At temperatures $T<T_c$, the ergodicity breaks, and just below $T_c$ the space of states is divided into maney valleys separated by infinite barriers of free energy, as shown in the middle part of the figure. Inside each of these valleys, the thermal average of a spin at each site $E(\sigma^\alpha_i)$ becomes non-zero, where $\alpha$ denotes the valley. The Edwards-Anderson order parameter in a valley is given by
+
+$$ q^\alpha_EA = {1\over N}\sum_i [E(\sigma^\alpha_i)]^2  $$
+
+In a ferromagnetic material no more phases (or valleys) appear as the temperature is further reduced. However that is not the case in spin glasses, which are characterized by a continuous series of symmetry breaking as the temperature is reduced. The lower part of the figure shows that at a temperature $T_2$ which is just below the temperature $T_i$ in the middle part, each of the three phases in the middle part has broken into multiple new phases, and this fragmentation continues all the way to $T=0$. Note that the value of $q^\alpha_EA$ grows as the number of phases increases, since there are fewer and fewer configurations in each valley, and in the limit $q^\alpha_EA = 1$ at $T=0$. 
+
+In the literature these free energy valleys are also referred to as pure states of the system.
+It was soon realized that $q^\alpha_EA$ was not a sufficient order parameter to characterize the system, since it is restricted to a single valley and soes not give any information about other valleys in the phase space. The parameter $q_{\alpha\beta}$ defined by
+
+$$ q_{\alpha\beta} = {1\over N}\sum_i E(\sigma^\alpha_i)E(\sigma^\beta_i) $$
+
+was introduced as a measure of the extent by which two pure states are close to each other. Note that $\vert q_{\alpha\beta}\vert \le 1$ and $q_{\alpha\alpha} = q^\alpha_EA$ which was defined earlier. The inverse of $q_{\alpha\beta}$ describes a metric which is like the distance between two pure states.
+Note that each pure state can be assigned a statistical weight $P_{\alpha}$ determined by its free energy $F_{\alpha}$ such that 
+$e^{-\beta F_\alpha} = \sum_{[\sigma^alpha_i]} e^{-\beta{\sigma^\alpha_i}}$, where the sum is over the configurations that make up pure state $\alpha$, and is given by
 
 $$ P_{\alpha} = {e^{-\beta F_{\alpha}}\over{\sum_{\gamma}e^{-\beta F_{\gamma}}}} $$
 
-Note that there can be an infinite number of pure states in a spin glass, unrelated to one another by any symmetry. An Ising model has two pure states, corresponding to the $+m$ and $-m$ magnetizations, and also it can be easily put into one of these pure states by turning on an external magnetic field. This is not the case for a spin glass, there does not exist any macroscopic way to use an external field to put into into one of its pure states. Hence the system is described by a mixture of pure states such that any observable $O$ is given by
+The average of any observable $O$ can the be written as
 
 $$ E(O) = \sum_{\alpha} P_{\alpha} E(O_{\alpha}) $$
 
-When a system with very large $N$ enters a pure state it tends to stay there, since there are very high energy barriers between pure states when the system is in equilibrium.
-
-Given two spin configurations ($\sigma$ and $\tau$), the overlap between them is defined as
-
-$$ q[\sigma,\tau] = {1\over N} \sum_{i}\sigma_i\tau_i $$
-
-Hence overlap is a measure of the similarity between different configurations.
-This definition is further extended to define the the overlap between two pure states ($\alpha$ and $\beta$), which is a measure of distance between them, and is given by
-
-$$ q^{\alpha\beta} = {1\over N}\sum_{i} m_i^{\alpha} m_i^{\beta} $$
-
-where $m_i^{\alpha}$ is the average magnetization of spin $i$ in the valley $\alpha$. Note that the self overlap for a pure state $q^{\alpha\alpha} = q_{EA}$, which is the same as the Edwards Anderson order parameter.
 We can also define the probability distribution of the overlap between two pure states for a given realization of the disorder $J$, given by
 
 $$ P^J(q) = \sum_{\alpha\beta} P_{\alpha} P_{\beta} \delta(q - q^{\alpha\beta}) $$
@@ -612,12 +613,18 @@ If we average over $J$, then this results in ${\overline P}(q)$ which can be use
 
 In an Ising model there exists one pure state when $T>T_c$ (with $E(m_i) = 0$), and two pure states when $T<T_c$$) (with $E(m_i) > 0$ and $E(m_i) < 0$) with equal probability. The overlaps are given by
 
-$$ q^{++} = m^2,\ \ \ q^{--} = m^2,\ \ \ q^{+-} = q^{-+} = -m^2  $$
+$$ q_{++} = m^2,\ \ \ q_{--} = m^2,\ \ \ q_{+-} = q_{-+} = -m^2  $$
 
 Thus at high $T$, $P(q) = \delta(q)$ and this system is said to exhibit replica symmetry.
-For low $T$ on the other hand, the overlap distribution has two peaks corresponding to its two pure states:
+For low $T$ on the other hand the spin configurations separate out into two non-overlapping pure states, with overlap distribution given by:
 
 $$   P(q) = {1\over 2}[\delta(q+m^2)+\delta(q-m^2)]   $$ 
+
+![](https://subirvarma.github.io/GeneralCognitics/images/stat26.png) 
+
+Figure 14: The overlap distribution function $P(q)$ for a spin glass (top) and a ferromagnet (bottom)
+
+The above figure shows the contrast between the overlap distributions in a spin glass vs a ferromagnet (note that in both cases, unlike what is shown in the figure, the maximum value of the overlap is less than 1, unless $T=0$). In fact in a spin glass the number of phases becomes infinite as $T\rightarrow 0$ as a result of which $P(q)$ becomes a continuous function, and it is this function that serves as the order parameter for these systems.
 
 Since there are an infinite number of pure states in a spin glass, $q$ can take on many more values and the system now exhibits what is called replica symmetry breaking or RSB.
 
@@ -625,7 +632,7 @@ Note that the number of peaks of $P(q)$ is not equal to the number of pure state
 
 ### The Replica Method
 
-So how do we go about analyzing the SK spin glass model? Using the Landau theory for phase transitions, we start with the free energy density function $f_N(J)$ for $N$ atoms for a particular realization of the interaction strength $J$, given by
+So how do we go about analyzing the SK spin glass mode and compute its free energy functionl? Using the Landau theory for phase transitions, we start with the free energy density function $f_N(J)$ for $N$ atoms for a particular realization of the interaction strength $J$, given by
 
 $$ f_N(J) = -{1\over{\beta N}} \log{\sum_{(\sigma)}e^{-\beta H_N(J,\sigma)}} = -{1\over{\beta N}}\log Z_N(J)  $$
 
