@@ -511,6 +511,11 @@ Back in the 1950s scientists were actively investigating the properties of new m
 
 It seems that the presence of the copper atoms in the spin glass interferes with the tendency of iron atoms to try to line up as temperature decreases and this random orientations of spins is said to be "dis-ordered". In the same way that an amorphous solid like window glass doesn’t have an orderly crystal structure, a spin glass doesn’t have an orderly magnetic structure.
 
+![](https://subirvarma.github.io/GeneralCognitics/images/stat27.png) 
+
+Figure 15: Illustrating Frustration
+
+
 This was a new kind of magnetic behavior not seen before, and soon physicists came up with a model for it. As shown in figure 12, all the spins of ferromagnetic materials tend to align at $T=0$, while those in anti-ferromagnetic also tend to align but in opposite directions. Spin Glasses on the other hand do not exhibit any such regularity. Even at low temperatures, their spins can have different orientations as shown in the right hand side of the figure. This is a result of the fact that some of the interactions are ferromagnetic (shown in blue), while others are anti-ferromagnetic (shown in red). This results in a phenomenon called 'frustration' whereby a particular atom cannot be given a unique up or down orientation that leads to a minimization of the energy, even at $T=0$. As a result there could be low temperature phases in which the up orientation is present, while there could be other low temperature phases in which the 'down' orientation is present. From this discription one can see that a spin glass system can have many more than two phases in low temperature equilibrium. The spin orientations in each of these phases looks seemingly random, like the temperature induced thermodynamic randomness we see in ferromagnets, but there is a difference between the two.
 The randomness in the ferromagnetic material gradually decreases as the temperature is reduced, and ultimately it becomes completely ordered at $T=0$. The randomness in the spin glass on the other hand becomes "frozen" as the temperature is reduced, and it maintains the randomness even at $T=0$.
 We will see in the next section that there are some order parameters that are able to capture the frozen disorder in a spin glass.
@@ -519,7 +524,7 @@ We will see in the next section that there are some order parameters that are ab
 
 Figure 15: Energy Landscape in Spin Glasses
 
-Something that was realized pretty early in the study of spin glasses is that below the critical temperature, their free energy landscape is quite unlike that for magnetic ferromagnetic materials. It consists of multipe peaks and valleys as shown in figure 14 which seem to be quite random and it leads to the observation that a spin glass has an infinite nuber of phases potentially. But is there an order that exists within this randomness? The discovery os such an order turned out to be a very difficult theoretical problem, and the solution did not emerge for another three decades until the mid-1980s and it won Giorgio Parisi the Nobel Prize in 2024.  It also turned out that the solution to the spin glass problam had a wide range of applicability to other difficult problems which involved dis-ordered states, for example in biology, aritficial neural networks and combinatorial optimization.
+Something that was realized pretty early in the study of spin glasses is that below the critical temperature, their free energy landscape is quite unlike that for magnetic ferromagnetic materials. It consists of multipe peaks and valleys as shown in figure 14 which seem to be quite random and it leads to the observation that a spin glass has an infinite nuber of phases potentially. But is there an order that exists within this randomness? The discovery os such an order turned out to be a very difficult theoretical problem, and the solution did not emerge for another three decades until the mid-1980s and it won Giorgio Parisi the Nobel Prize in 2021.  It also turned out that the solution to the spin glass problam had a wide range of applicability to other difficult problems which involved dis-ordered states, for example in biology, aritficial neural networks and combinatorial optimization.
 
 
 ### Spin Glass Models: Edwards Anderson (EA) and Sherrington Kirkpatrick (SK) Models
@@ -528,7 +533,7 @@ Something that was realized pretty early in the study of spin glasses is that be
 
 Figure 14: Spin Interactions in the Sherrington Kirkpatrick Model
 
-Samuel Edwards and Phillip Anderson were the first physicists to come up with a mathematical model for spin glasses in the mid-1970, referred to as the EA model. In the process they introduced several new theoretical ideas that have proven to be very fruitful, but their model itself was a bit difficult to analyze. Shortly therafter, David Sherrington and Scott Kirkpatrick introduced their epynomous model (which we will call the SK model), which was a simplified version of the EA model, and this proved to be very influential in the subsequent years, since the model was easier to analyze also captured some of the essential aspects of spin glasses.
+Samuel Edwards and Phillip Anderson were the first physicists to come up with a mathematical model for spin glasses in the mid-1970, referred to as the EA model. In the process they introduced several new theoretical ideas that have proven to be very fruitful, but their model itself was a bit difficult to analyze. Shortly therafter, David Sherrington and Scott Kirkpatrick introduced their epynomous model (called the SK model), which was a simplified version of the EA model, and this proved to be very influential in the subsequent years, since the model was easier to analyze also captured some of the essential aspects of spin glasses.
 
 Recall that the energy function for the Ising model was given by (we are going to use capital J for the interaction strength)
 
@@ -540,7 +545,7 @@ This assumed that all interactions were confined to neighboring atoms ($j[i]$ be
 - As before, the spins $\sigma_i$ can assume values $\pm 1$.
 - The strength of the interaction $J_{ij}$ is not a constant anymore, but is a function of the two atoms taking part in the interaction and can vary randomly in magnitude as well as sign.
 
-This first assumption simplified the mathematical analysis of the model, even though it did away with any space structure in the model, such as dimensionality. Hence each atom is the nearest neighbor of every other atom.
+This first assumption simplified the mathematical analysis of the model, even though it did away with any space structure in the model, such as dimensionality. Hence each atom is the nearest neighbor of every other atom. This assumption is a bit non-intuitive, but it turned out to be crucial in applying the model to areas beyond physics, susch as biology and neural networks, since in these cases the connections between nodes extends beyond nearest neighbors.
 The variable coupling strength captures the fact that the interacting atoms are at variable distances from each other.
 Under these assumptions the energy function for $N$ atoms becomes
 
@@ -563,21 +568,21 @@ Fortunately there is a property called self-averaging that comes to the rescue. 
 
 ### Order Parameters in a Spin Glass System
 
-Recall that for the case of Ising model the magnetized phase was characterized by the fact that the thermodynamic average for the magnetization for an atom $E(\sigma_i) = m_i$ was non-zero. 
-In the SK model we now have to take two averages; (1) The thermodynamic average with temperature, as before, and (2) The average over the distribution of the spin glass interactions $J_{ij}$. This double average is typically denoted as $<<\sigma_i>>$. Since the spin glass interactions are symmetrically distributed around the origin, it follows that $<<sigma_i>> = 0$, hence the average magnetization cannot be used as an order parameter in this case.
+Recall that for the case of Ising model the magnetized phase was characterized by the fact that the thermodynamic average (using the Boltzmann distribution) for the magnetization for an atom $E(\sigma_i) = m_i$ was non-zero. 
+In the SK model we now have to take two averages; (1) The thermodynamic average $E$ with temperature, as before, and (2) The average $E_J$ over the distribution of the spin glass interactions $J_{ij}$. This double average is typically denoted as $E_J(E(\sigma_i)) = <<\sigma_i>>$. Since the spin glass interactions are symmetrically distributed around the origin, it follows that $<<\sigma_i>> = 0$ even if $E(\sigma_i)>0$, hence the average magnetization cannot be used as an order parameter in this case.
 
 So how can we characterize the magnetized phase in the SK model?
 If a low temperature phase exists for the SK model, there must some spin configurations that are more likely to occur than others.
 Edwards and Anderson suggested that we use the following order parameter instead
 
-$$ q_{EA} = {1\over N}\sum_i (E(\sigma_i))^2 $$
+$$ q_{EA} = = <<\sigma_i^2>>  = E_J[(E(\sigma_i))^2]  $$
 
-where $q_{EA}$ is called the Edwards-Anderson order parameter. Hence spin glass models are characterized by $E(\sigma_i) = 0,\ 0\le q_{EA} \le 1$.
+where the outer average is over the distribution of $J_{ij}$ and $q_{EA}$ is called the Edwards-Anderson order parameter. 
 Using the self averaging property, $q_{EA}$ can also be written as
 
-$$ q_{EA} = E_J[(E(\sigma_i))^2] > 0  $$
+$$ q_{EA} = {1\over N}\sum_i (E(\sigma_i))^2 $$
 
-where the outer average is over the distribution of $J_{ij}$. For $T> T_c$, $q_{EA}=0$, since the thermodynamic average is zero, while $0\le q_{EA}\le 1$ for $T<T_c$.
+ For $T> T_c$, $q_{EA}=0$, since the thermodynamic average is zero, while $0\le q_{EA}\le 1$ for $T<T_c$. Hence spin glass models are characterized by $<<\sigma_i)>> = 0,\ 0\le q_{EA} \le 1$ for $T<_T_c.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat25.png) 
 
@@ -586,18 +591,24 @@ Figure 14: Free energy landscape at different temperatures
 These definitions were further refined in subsequent years, with the introduction of the concept of a "pure state", but in order to do so we first have to clarify what a state is in this context. Lets assume that the disorder $J$ in the system is fixed with a given realization of the random interactions.
 The characteristic feature of a spin glass phase is the existence of very many free energy valleys which are separated by very high energy barriers. As shown in the top part of the above figure, when $T>T_c$ there exists only a single free energy valley, and the ergodicity of the system is not broken. At temperatures $T<T_c$, the ergodicity breaks, and just below $T_c$ the space of states is divided into maney valleys separated by infinite barriers of free energy, as shown in the middle part of the figure. Inside each of these valleys, the thermal average of a spin at each site $E(\sigma^\alpha_i)$ becomes non-zero, where $\alpha$ denotes the valley. The Edwards-Anderson order parameter in a valley is given by
 
-$$ q^\alpha_EA = {1\over N}\sum_i [E(\sigma^\alpha_i)]^2  $$
+$$ q^\alpha_{EA} = {1\over N}\sum_i [E(\sigma^\alpha_i)]^2  $$
 
-In a ferromagnetic material no more phases (or valleys) appear as the temperature is further reduced. However that is not the case in spin glasses, which are characterized by a continuous series of symmetry breaking as the temperature is reduced. The lower part of the figure shows that at a temperature $T_2$ which is just below the temperature $T_i$ in the middle part, each of the three phases in the middle part has broken into multiple new phases, and this fragmentation continues all the way to $T=0$. Note that the value of $q^\alpha_EA$ grows as the number of phases increases, since there are fewer and fewer configurations in each valley, and in the limit $q^\alpha_EA = 1$ at $T=0$. 
+In a ferromagnetic material no more phases (or valleys) appear as the temperature is further reduced. However that is not the case in spin glasses, which are characterized by a continuous series of symmetry breaking as the temperature is reduced. The lower part of the figure shows that at a temperature $T_2$ which is just below the temperature $T_1$ in the middle part, each of the three phases in the middle part has broken into multiple new phases, and this fragmentation continues all the way to $T=0$. Note that the value of $q^\alpha_{EA}$ grows as the number of phases increases, since there are fewer and fewer configurations in each valley, and in the limit $q^\alpha_{EA} = 1$ at $T=0$. 
 
 In the literature these free energy valleys are also referred to as pure states of the system.
-It was soon realized that $q^\alpha_EA$ was not a sufficient order parameter to characterize the system, since it is restricted to a single valley and soes not give any information about other valleys in the phase space. The parameter $q_{\alpha\beta}$ defined by
+It was soon realized that $q^\alpha_{EA}$ was not a sufficient order parameter to characterize the system, since it is restricted to a single valley and soes not give any information about other valleys in the phase space. The parameter $q_{\alpha\beta}$ defined by
 
 $$ q_{\alpha\beta} = {1\over N}\sum_i E(\sigma^\alpha_i)E(\sigma^\beta_i) $$
 
-was introduced as a measure of the extent by which two pure states are close to each other. Note that $\vert q_{\alpha\beta}\vert \le 1$ and $q_{\alpha\alpha} = q^\alpha_EA$ which was defined earlier. The inverse of $q_{\alpha\beta}$ describes a metric which is like the distance between two pure states.
-Note that each pure state can be assigned a statistical weight $P_{\alpha}$ determined by its free energy $F_{\alpha}$ such that 
-$e^{-\beta F_\alpha} = \sum_{[\sigma^alpha_i]} e^{-\beta{\sigma^\alpha_i}}$, where the sum is over the configurations that make up pure state $\alpha$, and is given by
+was introduced as a measure of the extent by which two pure states are close to each other. 
+The pure state overlap is an important parameter for spin glasses, since we will see shortly that it serves as the order parameter for the free energy function in the SK model.
+Note that $\vert q_{\alpha\beta}\vert \le 1$ and $q_{\alpha\alpha} = q^\alpha_{EA}$ which was defined earlier. The inverse of $q_{\alpha\beta}$ describes a metric which is like the distance between two pure states.
+Th free energy $F_\alpha$ of a pure state is given by
+
+$$  e^{-\beta F_\alpha} = \sum_{[\sigma^\alpha_i]} e^{-\beta{\sigma^\alpha_i}}$ $$
+
+where the sum is over the configurations that make up pure state $\alpha$.
+Each pure state can be assigned a statistical weight $P_{\alpha}$ given by
 
 $$ P_{\alpha} = {e^{-\beta F_{\alpha}}\over{\sum_{\gamma}e^{-\beta F_{\gamma}}}} $$
 
@@ -609,43 +620,45 @@ We can also define the probability distribution of the overlap between two pure 
 
 $$ P^J(q) = \sum_{\alpha\beta} P_{\alpha} P_{\beta} \delta(q - q^{\alpha\beta}) $$
 
-If we average over $J$, then this results in ${\overline P}(q)$ which can be used to characterize the spin glass model and it is a function of the distribution of the interactions $J_{ij}$. The focus of the analysis of spin glass models has been to derive an expression for this distribution. The pure state overlap is an important parameter for spin glasses, since we will see shortly that it serves as the order parameter for the free energy function in the SK model.
+If we average over $J$, then this results in ${\overline P}(q)$ which can be used to characterize the spin glass model and it is a function of the distribution of the interactions $J_{ij}$. The focus of the analysis of spin glass models has been to derive an expression for this distribution. 
 
-In an Ising model there exists one pure state when $T>T_c$ (with $E(m_i) = 0$), and two pure states when $T<T_c$$) (with $E(m_i) > 0$ and $E(m_i) < 0$) with equal probability. The overlaps are given by
+In an Ising model there exists one pure state when $T>T_c$ (with $E(\alpha_i) = m = 0$), and two pure states when $T<T_c$ (with $E(\alpha^+_i) = m > 0$ and $E(\alpha^-_i) = -m < 0$) with equal probability. The overlaps are given by
 
 $$ q_{++} = m^2,\ \ \ q_{--} = m^2,\ \ \ q_{+-} = q_{-+} = -m^2  $$
 
-Thus at high $T$, $P(q) = \delta(q)$ and this system is said to exhibit replica symmetry.
+Thus at high $T$, $P(q) = \delta(q)$ this system is said to exhibit replica symmetry.
 For low $T$ on the other hand the spin configurations separate out into two non-overlapping pure states, with overlap distribution given by:
 
 $$   P(q) = {1\over 2}[\delta(q+m^2)+\delta(q-m^2)]   $$ 
+
+as shown in the bottom part of the figure below.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat26.png) 
 
 Figure 14: The overlap distribution function $P(q)$ for a spin glass (top) and a ferromagnet (bottom)
 
-The above figure shows the contrast between the overlap distributions in a spin glass vs a ferromagnet (note that in both cases, unlike what is shown in the figure, the maximum value of the overlap is less than 1, unless $T=0$). In fact in a spin glass the number of phases becomes infinite as $T\rightarrow 0$ as a result of which $P(q)$ becomes a continuous function, and it is this function that serves as the order parameter for these systems.
+This figure shows the contrast between the overlap distributions in a spin glass vs a ferromagnet (note that in both cases, unlike what is shown in the figure, the maximum value of the overlap is less than 1, unless $T=0$). In fact in a spin glass the number of phases becomes infinite as $T\rightarrow 0$ as a result of which $P(q)$ becomes a continuous function, and it is this function that serves as the order parameter for these systems.
 Note that the number of peaks of $P(q)$ is not equal to the number of pure states, but to the number of possible values taken by the overlap.
 
 But how did scientists arrive at this highly non-intuitive notion of continuous symmtry breaking, and the resulting continous overlap distribution? This was done through another higly non-intuitive mathematical trick called the replica method, and this is the subject of the next section.
 
 ### The Replica Method
 
-So how do we go about analyzing the SK spin glass mode and compute its free energy functionl? Using the Landau theory for phase transitions, we start with the free energy density function $f_N(J)$ for $N$ atoms for a particular realization of the interaction strength $J$, given by
+So how do we go about analyzing the SK spin glass mode and compute its free energy function? Using the Landau theory for phase transitions, we start with the free energy density function $f_N(J)$ for $N$ atoms for a particular realization of the interaction strength $J$, given by
 
 $$ f_N(J) = -{1\over{\beta N}} \log{\sum_{(\sigma)}e^{-\beta H_N(J,\sigma)}} = -{1\over{\beta N}}\log Z_N(J)  $$
 
 where the summation is over all possible configurations of the spins.
-The average free energy density ${\overline f}(N)$ for $N$ atoms is then obtained by averaging over the coupling distribution $J$ 
+The average free energy density ${\overline f}(N)$ is then obtained by averaging over the coupling distribution $J$ 
 
-$$ {\overline f}_N = \sum_{J} P[J] f_N(J) = -{1\over N\beta}E_J(\log Z_N(J)) $$
+$$ {\overline f}_N = \sum_{J} P[J] f_N(J) = -{1\over \beta N}E_J(\log Z_N(J)) $$
 
 where $E_J$ is the expectation over the distribution of $J$.
-Finally we average over all the atoms by taking the limit $N\uparrow\infty$ to obtain the free energy ${\overline f}$ as
+Finally we take the limit $N\uparrow\infty$ to obtain the free energy ${\overline f}$ as
 
 $$ {\overline f} = \lim_{N\uparrow\infty}{\overline f}_N $$
 
-Computing ${\overline f}$ is an exteremly difficult problem in probability theory due to the complexity in evaluating $E_J(\log Z)$. In the 1960s a way to solve similar problems arose in the context of Quantum Field Theory, and is known as the replica method. It is based on the well known identity
+Computing ${\overline f}_N$ is an exteremly difficult exercise due to the complexity in evaluating $E_J(\log Z_N(J))$. In the 1960s a way to solve similar problems arose in the context of Quantum Field Theory, and is known as the replica method. It is based on the well known identity
 
 $$ \lim_{n\rightarrow 0} {Z^n - 1\over n} = \lim_{n\rightarrow 0}{e^{n\log Z} - 1\over n} = \lim_{n\rightarrow 0}{n\log Z + {1\over 2!}(n\log Z)^2 +...\over n} = \log Z $$
 
@@ -653,15 +666,15 @@ and works as follows:
 With the random interactions frozen at $J_{ij}$, consider $n$ independent replicas of the system. Replicas have the same couplings $J_{ij}$, but evolve independently, so that they can end up with a different spin configuration.
 The overlap function $Q_{ab}$ between two replicas is defined by 
 
-$$ Q_{ab} = {1\over N} \sum_{i=1}^N \sigma_i^a \sigma_i^b $$
+$$ Q_{ab} = {1\over N} \sum_{i=1}^N E(\sigma_i^a \sigma_i^b) $$
 
 The free energy density for this system of replicas is given by
 
-$$ f_n(N,J) = -{1\over{\beta N}} \log (Z_J)^n $$
+$$ f_n(N,J) = -{1\over{\beta N}} \log Z_J^n $$
 
-Since the replicas are independent, the partition function $Z_J^n$ for the system of $n$ replicas is given by 
+Since the replicas are independent, the partition function $Z_J^n$ is given by 
 
-$$ Z_J^n = \prod_{a=1}^n \sum_{\sigma^a} e^{beta\sum_{a=1}\sum_{i\lt j} J_{ij}\sigma^a_i\sigma^a_j} $$
+$$ Z_J^n = \prod_{a=1}^n \sum_{\sigma^a} e^{\beta\sum_{a=1}^n\sum_{i\lt j} J_{ij}\sigma^a_i\sigma^a_j} $$
 
 where each of the summations $\sum_{\sigma^a}$ is over all possible configuations of the spins in a replica labeled by $a$. 
 Define a function $f'_N(n)$ given by
@@ -670,7 +683,7 @@ $$  f'_N(n) = -{1\over{\beta Nn}} \log E_J(Z_J^n) $$
 
 where
 
-$$  E_J(\log Z_J^n) = \sum_J p(J) Z_J^n $$
+$$  E_J(Z_J^n) = \sum_J p(J) Z_J^n $$
 
 Averaging over $J$ results in $n$ replicas, but they are no longer independent. Indeed they are correlated since their spins are constrained by the fact that they all follow the common interaction law given by $J$.
 Taking the limit $n\rightarrow 0$ and using the replica formula, it follows that
@@ -686,21 +699,30 @@ $$ E_J(Z_J^n) = \prod_{a\lt b}^n \int dQ_{ab} \exp^{-\beta nN f_n(Q_{ab})}  $$
 
 where $Q_{ab}$ is the overlap function between replicas that was introduced earlier, and
 
-$$ f_n(Q_{ab}) = -{\beta\over 4} + {\beta\over 2n}\sum_{a\lt b}^n Q_{ab}^2 - {1\over{\beta n}}\log[\exp^{ \beta^2 \sum_{a\lt b}^n Q_{ab}\sigma_a\sigma_b }] $$
+$$ f_n(Q_{ab}) = -{\beta\over 4} + {\beta\over 2n}\sum_{a\lt b}^n Q_{ab}^2 - {1\over{\beta n}}\log[\sigma_{(\sigma_a)}\exp^{ \beta^2 \sum_{a\lt b}^n Q_{ab}\sigma_a\sigma_b }] $$
 
+where the summation $\sigma_{\sigma_a}$ is over all possible spin configurations.
 Taking the limit $N\rightarrow\infty$, this expression can be evaluated by the saddle point approximation method, which leads to
 
 $$ E_J(Z_J^n)\approx \sqrt{{\delta^2 f\over{\delta Q_{sp}}}} \exp^{-\beta nN f_n(Q_{sp})}  $$
 
 where $Q_{sp}$ is evaluated at the value of $Q_{ab}$  which achieves its saddle point, i.e., ${\partial f_n\over{\partial Q_{ab}}} = 0$. 
-It follows that the free energy density is given by $f_n(Q_{sp}$ and 
-the free energy ${\overline f}(Q_{sp})$ can be evaluated by taking the limit of $f_n$ as $n\rightarrow 0$. 
+It follows that 
+
+$$ f'_N(n) =  -{1\over{\beta Nn}}(K - \beta nN f_n(Q_{sp})) $$
+
+so that
+
+$$ \lim_{N\rightarrow\infty} f'_N(n) = f_n(Q_{sp}) $$
+
+The free energy ${\overline f}(Q_{sp})$ can be evaluated by taking the limit of $f_n(Q_{sp})$ as $n\rightarrow 0$. 
 
 So how do we get hold of the values of $Q_{sp}$ at the saddle point? The way scientists have proceeded is by making educated guesses (called *ansatz*) which depend on a finite number of parameters, and then computing these parameters by using the saddle point equations.
 
 **The Replica Symmetric Solution**
 
-The simplest structure for $Q_{ab}$ is known as the replica symmetric (RS) solution. In this case the overlap $q_{ab}$ between any two replicas is the same, i.e., $q_{ab} = q_0$ for $a\ne b$ and $q_{aa} = q_d$ for self overlap along the diagonal. This ansatz correctly describes the high temperature regime, but it becomes unstable as the temperature is lowered below a threshold $T_c$ and this corresponds to a phase change.
+The simplest structure for $Q_{ab}$ is known as the replica symmetric (RS) solution. In this case the overlap $q_{ab}$ between any two replicas is the same, i.e., $q_{ab} = q_0$ for $a\ne b$ and $q_{aa} = 0$ along the diagonal. Substituting this back into the equation for $f_n(Q_{ab})$ and taking the limit as $n\rightarrow 0$ so that $f(q) = \lim_{n\rightarrow 0} f_n(q)$, it can be shown that the saddle point for $f(q)$ is given by $q=0$ if $T>T_c$. If $T<T_c$ then a solution with $q>0$ does exist, however this solution suffers from the issue that the resulting entropy $S$ is less than zero, which means that the solution is not correct.
+
 The correct structure, that was proposed by Parisi, is a matrix $Q_{ab}$ with an iterative block structure in which the symmetry between pairs of replicas breaks down, i.e., $q_{ab}\ne q_{ba}$.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat20.png) 
