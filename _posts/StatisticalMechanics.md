@@ -699,9 +699,9 @@ $$ E_J(Z_J^n) = \prod_{a\lt b}^n \int dQ_{ab} \exp^{-\beta nN f_n(Q_{ab})}  $$
 
 where $Q_{ab}$ is the overlap function between replicas that was introduced earlier, and
 
-$$ f_n(Q_{ab}) = -{\beta\over 4} + {\beta\over 2n}\sum_{a\lt b}^n Q_{ab}^2 - {1\over{\beta n}}\log[\sigma_{(\sigma_a)}\exp^{ \beta^2 \sum_{a\lt b}^n Q_{ab}\sigma_a\sigma_b }] $$
+$$ f_n(Q_{ab}) = -{\beta\over 4} + {\beta\over 2n}\sum_{a\lt b}^n Q_{ab}^2 - {1\over{\beta n}}\log[\sum_{(\sigma_a)}\exp^{ \beta^2 \sum_{a\lt b}^n Q_{ab}\sigma_a\sigma_b }] $$
 
-where the summation $\sigma_{\sigma_a}$ is over all possible spin configurations.
+where the summation $\sum_{\sigma_a}$ is over all possible spin configurations.
 Taking the limit $N\rightarrow\infty$, this expression can be evaluated by the saddle point approximation method, which leads to
 
 $$ E_J(Z_J^n)\approx \sqrt{{\delta^2 f\over{\delta Q_{sp}}}} \exp^{-\beta nN f_n(Q_{sp})}  $$
@@ -709,9 +709,9 @@ $$ E_J(Z_J^n)\approx \sqrt{{\delta^2 f\over{\delta Q_{sp}}}} \exp^{-\beta nN f_n
 where $Q_{sp}$ is evaluated at the value of $Q_{ab}$  which achieves its saddle point, i.e., ${\partial f_n\over{\partial Q_{ab}}} = 0$. 
 It follows that 
 
-$$ f'_N(n) =  -{1\over{\beta Nn}}(K - \beta nN f_n(Q_{sp})) $$
+$$ f'_N(n) \approx  -{1\over{\beta Nn}}(K - \beta nN f_n(Q_{sp})) $$
 
-so that
+for large values of $N$ (where $K$ is an expression that does not depend on $N$), so that
 
 $$ \lim_{N\rightarrow\infty} f'_N(n) = f_n(Q_{sp}) $$
 
@@ -734,6 +734,7 @@ The first two iteration of replica symmetry breaking (RSB) is shown in figure 16
 - The leftmost figure shows the case when the replica symmetry is unbroken in the high temperature case, in which all elements of the matrix are zero.
 - The middle figure shows the simplest case of replica symmetry breaking, called 1-RSB. The $Q_{ab}$ matrix is parametrized by a diagonal value of $q_d$, and two off-diagonal values that can either be $q_1$ if the two replicas belong to the same block of size $m\times m$, or $q_0$ is the replicas fall outside the innermost block.
 - This procedure can be iteratively repeated within each of the blocks, leading to k step RSB or k-RSB. An example of 2-RSB is shown in the rightmost figure with corresponding parameters $q_0, q_1$ and $q_2$.
+- The complete solution is obtained in the limit $k\rightarrow\infty$, in which case the elements of the matrix become a function $q(x), 0\le x\le 1$.
 
  To summarize, we have obtained a solution for the free energy ${\overline f}$ as a function of the elements of the matrix $Q_{ab}$, which can be regarded as an order parameter and this order parameter is the overlap between configurations belonging to different replicas. But what is the interpretation of this solution in terms of the spin glass model? We will answer this in the next sub-section.
 
