@@ -940,16 +940,32 @@ $$ m^1 = <\xi^\mu\tanh(\beta m^1\xi^\mu)> = \tanh\beta m^1 $$
 
 which are just the mean field equations for the Ising model. 
 
-Also the average spin at node $i$ is given by
+In order to get greater insight into why this is the case, consider an Ising type model in which the spin $s_i$ at site $i$ is given by
 
-$$ <\sigma_i> = \xi^1_i \tanh(\beta m^1)  $$
+$$ \s_i = \xi_i \sigma_i  $$
 
-In the limit as $\beta\rightarrow\infty$ (i.e., $T = 0$), it follows that the spins in the network converge to $\xi^1$, or to its mirror image, depending on the sign of $m^1$.
+where $\xi$ is a vector we are trying to store, and $\sigma_i$ is the usual Ising spin. 
+Assuming that the interactions between nodes follow the Ising rule, i.e.,
+
+$$ s_i = \sign(\sum_j \xi_j\sigma_j $$
+
+it is easy to see that the Hamiltonian for this system is given by
+
+$$ H = -{1\over 2}\sum_i \sum_j \xi_i\xi_j\sigma_i\sigma_j $$
+
+But this is precisely the Hamiltonian for a Hopfield network for the case when $p=1$. Hence such a Hopfield network, also called a Mattis network, is equivalent to an Ising model with spins $s_i = \xi_i\sigma_i$. From this it follows that the average thermodynamic spin in a Mattis network is given by
+
+$$ E(s_i) = \xi_i \tanh(\beta m) $$
+
+In the limit as $\beta\rightarrow\infty$ (i.e., $T = 0$), it follows that the spins in the network converge to $\xi$, or to its mirror image, depending on the sign of $m$.
 As shown in Fig. 20, if the network is initialized in a state that is away from the equilibrium, it will converge to one of the two equilibrium states $\pm m$, and in the limit at $T=0$, $m =\pm 1$, so that the equilibrium state is the stored pattern.
 
-We can repeat the calculation that we just did for p different $m$ vectors with a similar structure, i.e., $m^\nu = 1, j=1,...,p$ and $m^\mu = 0$ for $\mu\ne \nu$, such that $m^\nu$ corresponds to the retrieval of the pattern $\xi^\nu$. Hence we can conclude that in a Hopfield network, if the number of patterns is finite, then it is possible to retrieve the appropriate pattern when a noisy version of the pattern is given as the initial condition.
+We can repeat the calculation that we just did for p different $m$ vectors with a similar structure, i.e., $m^\nu = 1, j=1,...,p$ and $m^\mu = 0$ for $\mu\ne \nu$, such that $m^\nu$ corresponds to the retrieval of the pattern $\xi^\nu$. Hence we can conclude that in a Hopfield network, if the number of patterns is finite, then it is possible to retrieve the appropriate pattern when a noisy version of the pattern is given as the initial condition. This is due to the fact that these ptterns correspond to the global minima for the model.
 
+### Other Symmetric Solutions for the Hopfield Network
 
+[Amit, Gutfreund and Sampolinsky](https://journals.aps.org/pra/abstract/10.1103/PhysRevA.32.1007) were able to prove the following:
+In addition to the p solutions corresponding to $m=(1,...0)$, the equation $M = <\xi\tanh(\beta M.\xi)$ also admits symmteric solutuions in which $M=(m_l,m_l,..,m_l,0...,0)$, where the case $l=1$ was discussed earlier. This is the unique solution in the range $0.461<T<1$, but as the temperature is reduced further, the solution for $l=3$ appears at $T=0.461$ and other solutuions appear one after another as the temperature is decreased further. These solutions correspond to local minima of the energy function and representstates that are equal mixtures of several memories and these are metastable states of the system.
 
 ## From Hopfield Networks to Boltzmann Machines: Restricted Boltzmann Machines, Deep Boltzmann Machines
 
