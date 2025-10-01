@@ -809,23 +809,24 @@ This system can be analyzed using the replica method (see [Gross and Mezard](htt
 
 ## From Spin Glass to Hopfield Networks: Engineering the Energy Landscape of a Spin Glass System
 
-The physicist John Hopfield was at Princeton during the 1970s, and he was instrumental in luring away Phil Anderson from Bell Labs to Princeton during that time. Anderson acquainted Hopfield with his work in spin glasses (see the Edwards-Anderson model in the previous section), and Hopfield began thinking about how these results could be applied to model biological systems. He was intrigued by the free energy landscape that occurs with replica symmetry breaking, and in particular he noticed that first order RSB, the landscape exhibits a large number of valleys of the same depth (see the middle part of the figure on the LHS in Fig. 17). Since the minima of each of these valleys resulted in an unique, but random, spin configuration, he reasoned that perhaps such a system can be used as an associative memory, and he succeeded in creating a spin glass model which indeed could do, so as explained next.
+The physicist John Hopfield was at Princeton during the 1970s, and he was instrumental in luring away Phil Anderson from Bell Labs to Princeton during that time. Anderson acquainted Hopfield with his work in spin glasses (see the Edwards-Anderson model in the previous section), and Hopfield began thinking about how these results could be applied to model biological systems. He was intrigued by the possibility of creating an energy landscape with multiple valleys, and wonderedif the equilibrium spin configuration in each valley (at T = 0) could be used an an associative memory. Subsequently he succeeded in creating a spin glass inspired model which indeed could do, as explained next.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat22.png) 
 
 Figure 18
 
 Hopfield started with SK model with full connectivity, shown in the top left of Fig. 18, with the symmetric interaction between nodes $i$ and $j$ given by $J_{ij}$.
-Assume that each node $\sigma_i, i = 1,2,...N$ in the network can assume values of +1 or -1, and denote the state $X$ of the network as $X = (\sigma_1,...,\sigma_N)$. 
-Furthermore assume that the state of the network evolves using the equation
+Assume that the spin at each node, $\sigma_i, i = 1,2,...N$ in the network can assume values of +1 or -1, and denote the state $X$ of the network as $X = (\sigma_1,...,\sigma_N)$. 
+Furthermore assume that the state of the network according to the equation
 
-$$ \sigma_i(t+\Delta t) = sign(\sum_j J_{ij} S_j(t)) $$
+$$ \sigma_i(t+\Delta t) = sign(\sum_{j\ne i}^N J_{ij} \sigma_j(t)) $$
 
-Each node randomly and asynchronously evaluates whether it is above or below its threshold, and adjusts its value accordingly.
+where $\sum_{j\ne i}^N J_{ij} \sigma_j(t)$ is the local field acting on node $i$ and
+each node randomly and asynchronously evaluates whether it is above or below its threshold, and adjusts its value accordingly.
 
-If we are to use this system as a memory, there should be a way in which the interactions can be engineered so that equilibrium energy minima correspond to bit patterns that we want to store. In order to acheive this, Hopfield hit upon the novel idea of engineering the energy landscape by choosing the interactions to be a function of the bit patterns to be stored in the associative memory.
+If we are to use this system as a memory, there should be a way in which the interactions $J_{ij}$ can be engineered so that the equilibrium energy minima correspond to bit patterns that we want to store. In order to acheive this, Hopfield hit upon the novel idea of engineering the energy landscape by choosing the interactions to be a function of the bit patterns to be stored in the associative memory.
 
-Assume that we wish the network to store the vector states $\xi^s, s=1,...,p$ so that the $\mu^{th}$ excitation pattern can be written as $\{\xi^\mu_1,...,\xi^\mu_N\}$.
+Assume that we wish the network to store the vector states $\xi^s, s=1,...,p$ so that the $\mu^{th}$ excitation pattern can be written as $\xi^\mu=(\xi^\mu_1,...,\xi^\mu_N)$.
 In order to store these states, Hopfield proposed that the interactions $J_{ij}$ be chosen as
 
 $$ J_{ij} = {1\over N}\sum_{\mu=1}^p \xi^\mu_i \xi^\mu_j\ \ \ with\ \ \ J_{ii} = 0 $$
@@ -851,12 +852,12 @@ Given the update rule, this model has energy function given by
 
 $$ H = -{1\over 2}\sum_i\sum_j J_{ij}\sigma_i\sigma_j $$
 
-since $\sum_j J_{ij}\sigma_j$ is the local field that influences  the spin $\sigma_i$ and tries to align it with itself at time $t+\Delta t$. 
-After substituting for $J_{ij}$, $H$ can also be written as
+since $\sum_j J_{ij}\sigma_j$ is the local field that influences  the spin $\sigma_i$ and it tries to align itself with it at time $t+\Delta t$. 
+After substituting for $J_{ij}$, $H$ can be written as
 
-$$  H = -{1\over 2N}\sum_{\mu=1}^p(\sum_{i=1}^N S_i\xi^\mu_i)^2  $$
+$$  H = -{1\over 2N}\sum_{\mu=1}^p(\sum_{i=1}^N sigma_i\xi^\mu_i)^2  $$
 
-This results in a monotonically decreasing value of the energy, since if there is a change $\Delta\sigma_i$ in the value of the $i^{th}$ spin, then
+There is a monotonically decreasing value of the energy with each spin update, since if there is a change $\Delta\sigma_i$ in the value of the $i^{th}$ spin, then
 
 $$  \Delta H = -{1\over 2}\Delta\sigma_i \sum_{j} J_{ij}\sigma_j  $$
 
@@ -874,21 +875,21 @@ On the other hand the network becomes completely random if $\beta=0$.
 
 It can be shown that under this state transition rule, the state of the system approaches the equilibrium Boltzmann distribution at temperature $\beta={1\over T}$ even if the initial state configuration is away fom the equilibrium. Hence the problem of memory retrieval in the Hopfield Network at finite temperatures reduces to that of finding the conditions under which the equilibrium state corresponds to one of the stored memories, when starting from a non-equilibrium state.
 
-### Finite Number of Stored Patterns**
+### Finite Number of Stored Patterns
 
 The partition function $Z$ for the Hopfield network is given by 
 
-$$ Z = \sum_{[s]} \exp[{{\beta\over 2N}\sum_{\mu=1}^p(\sum_{i=1}^N S_i\xi^\mu_i)^2}]   $$
+$$ Z = \sum_{[s]} \exp[{{\beta\over 2N}\sum_{\mu=1}^p(\sum_{i=1}^N \sigma_i\xi^\mu_i)^2}]   $$
 
 where the first sum is over all possible spin patterns $[s]$, and the effect of the diagonal terms $J_{ii} = 0$ has been ignored since there are much fewer of these terms in the sum.
 The next step is to apply the Hubbard-Stratonovich transformation to the term in the exponent, which results in
 
-$$ Z = \sum_{[s]} \int\prod_{\mu=1}^p dm^{\mu}\ \exp[-{1\over 2}N\beta \sum_{\mu}(m^{\mu})^2 + \beta\sum_{\mu} m^{\mu}\sum_{i} S_i\xi^{\mu}_i ] $$
+$$ Z = \sum_{[s]} \int\prod_{\mu=1}^p dm^{\mu}\ \exp[-{1\over 2}N\beta \sum_{\mu}(m^{\mu})^2 + \beta\sum_{\mu} m^{\mu}\sum_{i} \sigma_i\xi^{\mu}_i ] $$
 
-This transformation results in the introduction of the integral variable $m^{\mu}$. 
-Using the notation $m = (m^1,...,m^p)$ and $\xi_i = (\xi^1_i,...,\xi^p_i)$, if we sum over all possible values of the spin patterns $[s]$, then this results in
+This transformation results in the introduction of the integration variable $m^{\mu}$. 
+Using the notation $M = (m^1,...,m^p)$ and $\xi_i = (\xi^1_i,...,\xi^p_i)$, if we sum over all possible values of the spin patterns $[s]$, then this results in
 
-$$ Z = \int\prod_{\mu} dm^{\mu}\ \exp[-{1\over 2}N\beta m^2 + \sum_i \log(2\cosh\beta m.\xi_i) ]  $$
+$$ Z = \int\prod_{\mu} dm^{\mu}\ \exp[-{1\over 2}N\beta M^2 + \sum_i \log(2\cosh\beta M.\xi_i) ]  $$
 
 Recall that the free energy density $f$ is given by
 
@@ -897,25 +898,28 @@ $$ f = -{1\over{\beta N}} \log Z $$
 If $N$ is very large the integral over $m$ is dominated by its saddle point value, so that
 $f$ can be approximated as
 
-$$ f = {1\over 2} m^2 - {1\over{\beta N}} \sum_i \log(2\cosh\beta m.\xi_i) $$
+$$ f = {1\over 2} M.M - {1\over{\beta N}} \sum_i \log(2\cosh\beta M.\xi_i) $$
 
-The order parameter vector $m$ is determined by the saddle-point equation ${\partial f\over{\partial m^{\mu}}} = 0$ which results in
+The order parameter vector vector $M$ is determined by the saddle-point equation ${\partial f\over{\partial m^{\mu}}} = 0$ which results in
 
-$$ m = {1\over N} \sum_i \xi_i \tanh(\beta m.\xi_i) $$
+$$ M = {1\over N} \sum_i \xi_i \tanh(\beta M.\xi_i) $$
 
-Both $f$ and $m$ depend on the contents of the memry values $\xi_i^\mu, \mu = 1,...,p, i = 1,...,N$, but in the limit as $N\rightarrow\infty$, we can invoke the law of large numbers
+Both $f$ and $M$ depend on the contents of the memory values $\xi_i^\mu, \mu = 1,...,p, i = 1,...,N$, but in the limit as $N\rightarrow\infty$, we can invoke the averaging principle
 to write
 
-$$ f = {1\over 2} m^2 - {1\over\beta} <\log(2\cosh\beta m.\xi)> $$
+$$ f = {1\over 2} M.M - {1\over\beta} <\log(2\cosh\beta M.\xi)> $$
 
 and
 
-$$ m = <\xi.\tanh(\beta m.\xi)> $$
+$$ M = <\xi\tanh(\beta M.\xi)> $$
 
 where $\xi = (\xi^1,...,\xi^p)$ is now a random vector whose distribution depends on the memories to be stored.
-Since the thermal average of the magnetization at a node is given by
-$<S_i> = <\tanh(\beta m.\xi)>$,
-it follows that the order parameter vector $m$ is average overlap between the $\xi$'s and the local magnetization.
+
+What is the interpretation of the order parameter $M=(m^1,...,m^p)$? From the prior two equations for $M$, it can be seen that it is just the average overlap between the thermal average of the spins at site $i$, given by $\tanh(\beta M.\xi^i)$ and the $\xi$'s, in particular
+
+$$ m^\mu = <\xi^\mu_i tanh(\beta M.\xi^i)>  $$
+
+In equilibrium at $T=0$ if $\tanh(\beta M.\xi^i) = \xi^\mu_i, i=1,...,N$, i.e., there is perfect overlap between the spin at all the sites and $\xi^\mu$, it follows that $m^\mu = 1$.
 
 #### Single Pattern Retrieval
 
@@ -930,15 +934,15 @@ $$ p(\xi^\mu) = {1\over 2}\delta(\xi^\mu - 1) + {1\over 2}\delta(\xi^\mu + 1),\ 
 Mirroring the strategy that was used  to solve the general spin glass model, we will propose a candidate value for the order parameter vector $m=(m^1,...,m^p)$, such that
 $m^1 > 0$ and $m^\mu = 0, \mu > 1$. It follows that
 
-$$ f = {1\over 2} (m^1)^2 - {1\over\beta} <\log(2\cosh\beta m^1)> $$
+$$ f = {1\over 2} (m^1)^2 - {1\over\beta} <\log(2\cosh\beta m^1\xi^\mu)> = {1\over 2} (m^1)^2 - {1\over\beta} \log(2\cosh\beta m^1$$
 
-$$ m^1 = \xi^\mu\tanh(\beta m^1\xi^\mu) = \tanh\beta m^1 $$
+$$ m^1 = <\xi^\mu\tanh(\beta m^1\xi^\mu)> = \tanh\beta m^1 $$
 
-which are just the mean field equations for the Isis model. 
+which are just the mean field equations for the Ising model. 
 
 Also the average spin at node $i$ is given by
 
-$$ <S_i> = \xi^1_i \tanh(\beta m^1)  $$
+$$ <\sigma_i> = \xi^1_i \tanh(\beta m^1)  $$
 
 In the limit as $\beta\rightarrow\infty$ (i.e., $T = 0$), it follows that the spins in the network converge to $\xi^1$, or to its mirror image, depending on the sign of $m^1$.
 As shown in Fig. 20, if the network is initialized in a state that is away from the equilibrium, it will converge to one of the two equilibrium states $\pm m$, and in the limit at $T=0$, $m =\pm 1$, so that the equilibrium state is the stored pattern.
