@@ -515,8 +515,7 @@ It seems that the presence of the copper atoms in the spin glass interferes with
 
 Figure 15: Illustrating Frustration
 
-
-This was a new kind of magnetic behavior not seen before, and soon physicists came up with a model for it. As shown in figure 12, all the spins of ferromagnetic materials tend to align at $T=0$, while those in anti-ferromagnetic also tend to align but in opposite directions. Spin Glasses on the other hand do not exhibit any such regularity. Even at low temperatures, their spins can have different orientations as shown in the right hand side of the figure. This is a result of the fact that some of the interactions are ferromagnetic (shown in blue), while others are anti-ferromagnetic (shown in red). This results in a phenomenon called 'frustration' whereby a particular atom cannot be given a unique up or down orientation that leads to a minimization of the energy, even at $T=0$. As a result there could be low temperature phases in which the up orientation is present, while there could be other low temperature phases in which the 'down' orientation is present. From this discription one can see that a spin glass system can have many more than two phases in low temperature equilibrium. The spin orientations in each of these phases looks seemingly random, like the temperature induced thermodynamic randomness we see in ferromagnets, but there is a difference between the two.
+This was a new kind of magnetic behavior not seen before, and soon physicists came up with a model for it. As shown in figure 12, all the spins of ferromagnetic materials tend to align at $T=0$, while those in anti-ferromagnetic also tend to align but in opposite directions. Spin Glasses on the other hand do not exhibit any such regularity. Even at low temperatures, their spins can have different orientations as shown in the right hand side of the figure. This is a result of the fact that it is impossible to satisfy all the couplings at the same time. This results in a phenomenon called 'frustration' and arises whenever there exists a loop in which the product of the couplings is negative. As a result there is a proliferation of metstable states in disordered systems i.e., a spin glass system can have many more than two phases in low temperature equilibrium. The spin orientations in each of these phases looks seemingly random, like the temperature induced thermodynamic randomness we see in ferromagnets, but there is a difference between the two.
 The randomness in the ferromagnetic material gradually decreases as the temperature is reduced, and ultimately it becomes completely ordered at $T=0$. The randomness in the spin glass on the other hand becomes "frozen" as the temperature is reduced, and it maintains the randomness even at $T=0$.
 We will see in the next section that there are some order parameters that are able to capture the frozen disorder in a spin glass.
 
@@ -593,17 +592,11 @@ The characteristic feature of a spin glass phase is the existence of very many f
 
 $$ q^\alpha_{EA} = {1\over N}\sum_i [E(\sigma^\alpha_i)]^2  $$
 
-In a ferromagnetic material no more phases (or valleys) appear as the temperature is further reduced. However that is not the case in spin glasses, which are characterized by a continuous series of symmetry breaking as the temperature is reduced. The lower part of the figure shows that at a temperature $T_2$ which is just below the temperature $T_1$ in the middle part, each of the three phases in the middle part has broken into multiple new phases, and this fragmentation continues all the way to $T=0$. Note that the value of $q^\alpha_{EA}$ grows as the number of phases increases, since there are fewer and fewer configurations in each valley, and in the limit $q^\alpha_{EA} = 1$ at $T=0$. 
+In a ferromagnetic material no more phases (or valleys) appear as the temperature is further reduced. However that is not the case in spin glasses, which are characterized by a continuous series of symmetry breaking as the temperature is reduced. 
+In the limit as $N\rightarrow\infty$ there is ergodicity breaking, as a result of which the system in equilibrium explores only a sub-portion of the phase space.
+In the literature these free energy valleys are also referred to as pure states of the system, and in this case the Boltzmann distribution splits into sub-components as shown next.
 
-In the literature these free energy valleys are also referred to as pure states of the system.
-It was soon realized that $q^\alpha_{EA}$ was not a sufficient order parameter to characterize the system, since it is restricted to a single valley and soes not give any information about other valleys in the phase space. The parameter $q_{\alpha\beta}$ defined by
-
-$$ q_{\alpha\beta} = {1\over N}\sum_i E(\sigma^\alpha_i)E(\sigma^\beta_i) $$
-
-was introduced as a measure of the extent by which two pure states are close to each other. 
-The pure state overlap is an important parameter for spin glasses, since we will see shortly that it serves as the order parameter for the free energy function in the SK model.
-Note that $\vert q_{\alpha\beta}\vert \le 1$ and $q_{\alpha\alpha} = q^\alpha_{EA}$ which was defined earlier. The inverse of $q_{\alpha\beta}$ describes a metric which is like the distance between two pure states.
-Th free energy $F_\alpha$ of a pure state is given by
+The free energy $F_\alpha$ of a pure state is given by
 
 $$  e^{-\beta F_\alpha} = \sum_{[\sigma^\alpha_i]} e^{-\beta{\sigma^\alpha_i}}$ $$
 
@@ -615,6 +608,26 @@ $$ P_{\alpha} = {e^{-\beta F_{\alpha}}\over{\sum_{\gamma}e^{-\beta F_{\gamma}}}}
 The average of any observable $O$ can the be written as
 
 $$ E(O) = \sum_{\alpha} P_{\alpha} E(O_{\alpha}) $$
+
+The lower part of the figure shows that at a temperature $T_2$ which is just below the temperature $T_1$ in the middle part, each of the three phases in the middle part has broken into multiple new phases, and this fragmentation continues all the way to $T=0$. Note that the value of $q^\alpha_{EA}$ grows as the number of phases increases, since there are fewer and fewer configurations in each valley, and in the limit $q^\alpha_{EA} = 1$ at $T=0$. 
+
+It was soon realized that $q^\alpha_{EA}$ was not a sufficient order parameter to characterize the system, since it is restricted to a single valley and soes not give any information about other valleys in the phase space. The parameter $q_{\alpha\beta}$ defined by
+
+$$ q_{\alpha\beta} = {1\over N}\sum_i E(\sigma^\alpha_i)E(\sigma^\beta_i) $$
+
+was introduced as a measure of the extent by which two pure states are close to each other. 
+The pure state overlap is an important parameter for spin glasses, since we will see shortly that it serves as the order parameter for the free energy function in the SK model.
+Note that $\vert q_{\alpha\beta}\vert \le 1$ and in particular the self overlap is given by
+
+$$  q_{\alpha\alpha} = {1\over N}\sum_i (E(\sigma^\alpha_i))^2    $$
+
+which is the same as the Edwards Anderson parameter defined earlier. Since
+
+$$  E(\sigma^\alpha_i) \approx {1\over C_\alpha}\sum_{\alpha=1}^C_alpha \sigma^\alpha_i $$
+
+where $C_\alpha$ is the number of configurations associated with the pure state $\alpha$, it follows that $0\le q_{alpha\alpha}\le 1$. Furthermore the number of configurations associated with a pure state decreases as $q_{\alpha\alpha}$ increases, and in the limit if $q_{\alpha\alpha}=1$, then there in only a single configuration associated with the pure state. The latter situation arises in the limit when $T=0$.
+
+The inverse of $q_{\alpha\beta}$ describes a metric which is like the distance between two pure states.
 
 We can also define the probability distribution of the overlap between two pure states for a given realization of the disorder $J$, given by
 
@@ -649,7 +662,7 @@ So how do we go about analyzing the SK spin glass mode and compute its free ener
 $$ f_N(J) = -{1\over{\beta N}} \log{\sum_{(\sigma)}e^{-\beta H_N(J,\sigma)}} = -{1\over{\beta N}}\log Z_N(J)  $$
 
 where the summation is over all possible configurations of the spins.
-The average free energy density ${\overline f}(N)$ is then obtained by averaging over the coupling distribution $J$ 
+Since $f_N(J)$ is a self averaging quantity, it follows that that average free energy density ${\overline f}(N)$ is then obtained by averaging over the coupling distribution $J$ 
 
 $$ {\overline f}_N = \sum_{J} P[J] f_N(J) = -{1\over \beta N}E_J(\log Z_N(J)) $$
 
@@ -668,7 +681,6 @@ $$ E_J(\log Z) = \lim_{n\rightarrow 0} {E_J(Z^n) - 1\over n} =  \lim_{n\rightarr
 
 Hence we have effectively replaced the computation of $E_J(\log Z_J)$ by that of $E_J(Z_J^n)$, which is much easier to do.
 
-and works as follows:
 With the random interactions frozen at $J_{ij}$, consider $n$ independent replicas of the system. Replicas have the same couplings $J_{ij}$, but evolve independently, so that they can end up with a different spin configuration.
 The overlap function $Q_{ab}$ between two replicas is defined by 
 
