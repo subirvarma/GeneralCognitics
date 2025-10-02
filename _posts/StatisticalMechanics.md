@@ -662,6 +662,12 @@ Computing ${\overline f}_N$ is an exteremly difficult exercise due to the comple
 
 $$ \lim_{n\rightarrow 0} {Z^n - 1\over n} = \lim_{n\rightarrow 0}{e^{n\log Z} - 1\over n} = \lim_{n\rightarrow 0}{n\log Z + {1\over 2!}(n\log Z)^2 +...\over n} = \log Z $$
 
+Thus
+
+$$ E_J(\log Z) = \lim_{n\rightarrow 0} {E_J(Z^n) - 1\over n} =  \lim_{n\rightarrow 0} {\log E_J(Z^n)\over n}  $$
+
+Hence we have effectively replaced the computation of $E_J(\log Z_J)$ by that of $E_J(Z_J^n)$, which is much easier to do.
+
 and works as follows:
 With the random interactions frozen at $J_{ij}$, consider $n$ independent replicas of the system. Replicas have the same couplings $J_{ij}$, but evolve independently, so that they can end up with a different spin configuration.
 The overlap function $Q_{ab}$ between two replicas is defined by 
@@ -690,7 +696,6 @@ Taking the limit $n\rightarrow 0$ and using the replica formula, it follows that
 
 $$ \lim_{n\rightarrow 0} f'_N(n)  = -{1\over{\beta N}}\lim_{n\rightarrow 0}{E_J(Z_J^n) - 1\over n}  = -{1\over{\beta N}}E_J(\log Z) =  {\overline f_N} $$
 
-Hence we have effectively replaced the computation of $E_J(\log Z_J)$ by that of $E_J(Z_J^n)$, which is much easier to do.
 Taking this limit assumes that $E_J(Z^n)$ continues to be well defined even when the number of replicas $n$ is not an integer, which is known as analytical continuation in mathematics.
 
 After some manipulations, that involve the use of the Hubbard-Stratonovich transform, it can be shown that
