@@ -844,23 +844,40 @@ Spin Glass models can be generalized to the case in which p-spins interact with 
 
 $$ H_p = -\sum_{i_1>...>i_P} J_{i_1,...,i_p}\sigma_{i_1}...\sigma_{i_p},\ \ \ p\ge 3 $$
 
-Unlike the SK model, the spins in PSM are now real continuous variables. In order to keep the energy finite, the following constarint is imposed
+Unlike the SK model, the spins in PSM are now real continuous variables. In order to keep the energy finite, the following constraint, called the spherical constraint, is imposed
 
 $$ \sum_{i} \sigma_i^2 = N $$
 
-where as usual each of the spins can take on values $\pm 1$, and any group of $p$ spins have a random interaction strength given by $J_{i_1,...,i_p}$, which is distributed according to the Normal distribution given by
+Just as in the SK spin glass, the sum is extended over all groups of $p$ spins, not only the nearest neighbors, so there is no spatial structure.
+
+Any group of $p$ spins have a random interaction strength given by $J_{i_1,...,i_p}$, which is distributed according to the Normal distribution given by
 
 $$ p(J_{i_1,...,i_p}) = {N^{p-1}\over{\pi p!}} \exp[-{(J_{i_1,...,i_p})^2 {N^{p-1}\over{ J^2 p!}}}]  $$
 
 For $p=2$ this model reduces to the standard SK model.
 
-This system can be analyzed using the replica method (see [Gross and Mezard](https://www.lptms.universite-paris-saclay.fr/membres/Mezard/Pdf/84_GM_NPB.pdf), and it can be shown that in the limit $p\rightarrow\infty$ and at low temperatures, it becomes a spin glass. This spin glass phase has an interesting structure that can be summarized as follows (for the discussion below recall the a pure state was defined as the set of spin configurations in a free energy valley of the spin glass phase and the overlap $q_{\alpha\beta}$ between two pure states is given $q_{\alpha\beta} = {1\over N}\sum_i m_i^\alpha m_i^\beta$ where $m_i^\alpha$ is the average spin at the $i^{th}$ atom over all the spin configurations that exist in valley $\alpha$):
+This system can be analyzed using the replica method (see [Castellani and Cavagna](https://www.lptms.universite-paris-saclay.fr/membres/Mezard/Pdf/84_GM_NPB.pdf).
+This system can also be analyzed using the replica method and 
+just as for the SK model, for $T>T_c$ there is no magnetization which corresponds to the replica symmetric case. For $T<T_c$ there is first order RSB, which results in the overlap distribution
 
-- For the $p=2$ case there is an infinite series of replica symmetry breaking as the temperature is reduced below the critical temperature $T_c$. For $p=\infty$ on the other hand, the symmetry breaking stops after the first. This means that in terms of the overlap matrix $Q_{ab}$ there are only two parameters that needed: (1) The self overlap parameter between pure states $q_1$ and the overlap between different pure states $q_0$.
-- In the limit as $p\rightarrow\infty$, these parameters are given by $q_1=1$ and $q_0 = \tanh^2(\beta mh)$. This is under assumption that there is an external magnetic field with intensity $h$ which leads to an average magnetization of $m$. If H=0$ then $q_0=0$.
-- Tha fact that $q_1=1$ implies that $q_1 = {1\over N}\sum_i (m_i^\alpha)^2 = 1$ implies that $m_i^\alpha = \pm 1$, which means that all the spin configurations in valley $\alpha$ have the same spin value at each of the $N$ locations. Thus in the low-temperature phase the system is completely frozen and there are no fluctuations in magnetization.
-- $q_0=0$ implies that there is zero overlap between different pure states, i.e., there are as far apart from each other as they could possibly be.
-- Even though the replica symmetry breaking stops after the first phase, the number of distinct phases that can exist is extremely large.
+$$ {\overline P(q)}) = (1 - m)\delta(q-q_1) + m\delta(q-q_0)\ \ \ with \ \ \ 0\le q_0 \le q_1 \le 1    $$
+
+where $q_1$ and $q_0$ are the self overlap and cross overlap parameters for the system. However unlike the case for the SK model, there is no further symmetry breaking as the temperature is reduced towards zero.
+
+Using the expression for free energy for the system, the solution at the saddle point where the free energy is at a minimum corresponds to
+
+$$ q_0 = 0,\ \ \ m = 1  $$
+
+and $q_1$ is given by the solution to the equation
+
+$$  g(q_1) = {\beta^2\over 2} q^p_1 + \log(1-q_1) + q_1 = 0  $$
+
+It can be readily shown that $g(0) = 0$ and $g(1) = -\infty$. At high $T$ the function is monotonous and only the solution $q_1=0$ exists. However as the temperature is lowered, $g(q_1)$ develops a maximum whose heigh steadily increases. Hence there must be a temperature $T_c$ where the maximum touches the q-axis at
+$q_1=q_s$ and $m=1$. When $T<T_c$, the solution shfts with $q_1 > q_s$ and $m<1$.
+
+and it can be shown that in the limit $p\rightarrow\infty$ and at low temperatures, it becomes a spin glass. This spin glass phase has an interesting structure that can be summarized as follows (for the discussion below recall the a pure state was defined as the set of spin configurations in a free energy valley of the spin glass phase and the overlap $q_{\alpha\beta}$ between two pure states is given $q_{\alpha\beta} = {1\over N}\sum_i m_i^\alpha m_i^\beta$ where $m_i^\alpha$ is the average spin at the $i^{th}$ atom over all the spin configurations that exist in valley $\alpha$):
+
+
 
 ## From Spin Glass to Hopfield Networks: Engineering the Energy Landscape of a Spin Glass System
 
