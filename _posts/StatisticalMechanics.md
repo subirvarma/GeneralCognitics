@@ -1,9 +1,9 @@
 ---
 layout: default
-title: "From the Physics of Interacting Particle Systems to AI Models"
+title: "Statistical Mechanics and Neural Networks: Part 1"
 ---
 
-# From the Physics of Interacting Particle Systems to AI Models
+# Statistical Mechanics and Neural Networks: Part 1
 
 ## Introduction
 
