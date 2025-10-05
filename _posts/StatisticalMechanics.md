@@ -824,23 +824,39 @@ As the temperature approaches zero, in addition to to the explosion in the numbe
 In this situation the self overlap becomes equal to 1, while the cross overlap between states is zero. This process is completely probabilistic, so the system may end up in a different configuration every time it is
 gradually frozen.
 
-### The Existence of Multiple Pure States with RSB
+### Counting the Number of Pure States
 
-In the analysis in the last section we showed the existence of multiple overlap values with replica symmetry breaking, but this only gives indirect confirmation about the existence of multiple pure states. For example in 1-RSB there are just overlap values, but possibly a large number of pure states that share this overlap.
-Note that each pure state has a well defined local magnetization given by $m^\alpha_i = E(\sigma^\alpha_i)$, and a pure state is defined by the vector of its site magnetizations. 
-It turns out that it is possible to define a function $f_{TAP}(m_1,...,m_N)$, called the Thouless-Anderson-Palmer (TAP) free energy, whose local minima coincide with the pure states of the system. The equivalent equation for the minima in the case of the Ising model was given by $m=\tanh(\beta m)$.
+In the analysis in the last section we showed the existence of multiple overlap values with replica symmetry breaking, but this only gives indirect confirmation about the existence of multiple pure states. For example in 1-RSB there are just two overlap values, but possibly a large number of pure states that share this overlap.
+Note that each pure state has a well defined local magnetization given by $m^\alpha_i = E(\sigma^\alpha_i)$, and is defined by the vector of its site magnetizations. 
+It turns out that it is possible to define a function $f_{TAP}(m_1,...,m_N)$, called the Thouless-Anderson-Palmer (TAP) free energy, whose local minima coincide with the pure states of the system. It is given by
 
-Note that the TAP free energy is a function of the magnetizations $m_i$ and not the individual spins $\sigma_i$, hence its minima do not necessarily coincide with the energy minima, i.e., the minima of the Hamiltonian $H(\sigma_1,...,\sigma_N)$. This is result of the fact that at temperatures greater than zero, multiple energy minima may be separated by barriers that are small enough so that they belong to the same pure state. In general the number of minima of $f_{TAP}$ grows exponentially with the size $N$ of the system
+$$ \tanh^{-1} m_i = \beta\sum_j J_{ij}m_j - \beta^2 J^2(1-q_{EA})m_i $$
 
-$$ \eta ~ e^{N\Sigma}  $$
+The equivalent equation for the minima in the case of the Ising model was given by $m=\tanh(\beta m)$. The corresponding free energy density is given by
 
-where the quantity $\Sigma$ is called the complexity of the system
+$$ f = -{\beta\over N}\sum_{ij} J_{ij}m_i m_j - {1\over 4} \beta^2 J^2 (1-q)^2 + {1\over 2N}\sum_i[{1+m_i\over 2} + (1-m_i)\log{1-m_i\over 2}]  $$
+
+Note that the free energy is a function of the magnetizations $m_i$ and not the individual spins $\sigma_i$, hence its minima do not necessarily coincide with the energy minima, i.e., the minima of the Hamiltonian $H(\sigma_1,...,\sigma_N)$. This is result of the fact that at temperatures greater than zero, multiple energy minima may be separated by barriers that are small enough so that they belong to the same pure state. 
+
+[Bray and Moore](https://iopscience.iop.org/article/10.1088/0022-3719/13/19/002) proposed that the density of solutions should counted as a function of $f$, denoted by $N_s(f)$ and they showed that it varies as
+
+$$ N_s(f) \sim \exp^{\alpha N} $$
+
+In general the number of minima of $f_{TAP}$ grows exponentially with the size $N$ of the system
+
+$$ \eta = e^{N\Sigma}  $$
+
+where the quantity $\Sigma$ is called the complexity of the system.
+
+For the case $T=0$ the TAP equation reduces to $m_i = sign(\sum_j J_{ij}m_j$ and by working directly with this equation it can be shown that
+
+$$  {1\over N}E_J (\log N_s) = 0.1992 $$
 
 ### The p-Spin Spherical Spin Glass Model (PSM)
 
-The Sherrington-Kirkpatrick or SK model was the first to be fully analyzed and understood. However its behavior, including the continuous symmtery breaking for $T<T_c$ is quite complex, and it would be nice to have anoter spin glass model with simpler phase properties. One such model that has become popular in recent years is the p-spin Spherical Spin Glass Model or PSM, and we prove a brief description here. In the following sections we will see that this model can be connected to some types of neural networks and thus provides a way in which the loss function in these networks can be studied using the tools from spin glass theory.
+The SK model was the first spin glass model to be fully analyzed and understood. However its behavior, including the continuous symmtery breaking for $T<T_c$ is quite complex, and it would be nice to have anoter spin glass model with simpler phase properties. One such model that has become popular in recent years is the p-spin Spherical Spin Glass Model (or PSM). In the following sections we will see that this model can be connected to some types of neural networks and thus provides a way in which the loss function in these networks can be studied using the tools from spin glass theory.
 
-Spin Glass models can be generalized to the case in which p-spins interact with one another, so that the case $p = 2$ corresponds to the SK model. The Hamiltonian of the energy levels for a given configuration of spins is given by 
+In the PSM model p-spins interact with one another and the Hamiltonian of the energy levels for a given configuration of spins is given by 
 
 $$ H_p = -\sum_{i_1>...>i_P} J_{i_1,...,i_p}\sigma_{i_1}...\sigma_{i_p},\ \ \ p\ge 3 $$
 
@@ -856,15 +872,19 @@ $$ p(J_{i_1,...,i_p}) = {N^{p-1}\over{\pi p!}} \exp[-{(J_{i_1,...,i_p})^2 {N^{p-
 
 For $p=2$ this model reduces to the standard SK model.
 
-This system can be analyzed using the replica method (see [Castellani and Cavagna](https://www.lptms.universite-paris-saclay.fr/membres/Mezard/Pdf/84_GM_NPB.pdf).
-This system can also be analyzed using the replica method and 
-just as for the SK model, for $T>T_c$ there is no magnetization which corresponds to the replica symmetric case. For $T<T_c$ there is first order RSB, which results in the overlap distribution
+This system can be analyzed using the replica method (see [Castellani and Cavagna](https://www.lptms.universite-paris-saclay.fr/membres/Mezard/Pdf/84_GM_NPB.pdf)
+just as for the SK model. For $T>T_c$ there is no magnetization and this corresponds to the replica symmetric case. For $T<T_c$ there is first order RSB, which results in the overlap distribution
 
 $$ {\overline P(q)}) = (1 - m)\delta(q-q_1) + m\delta(q-q_0)\ \ \ with \ \ \ 0\le q_0 \le q_1 \le 1    $$
 
 where $q_1$ and $q_0$ are the self overlap and cross overlap parameters for the system. However unlike the case for the SK model, there is no further symmetry breaking as the temperature is reduced towards zero.
 
-Using the expression for free energy for the system, the solution at the saddle point where the free energy is at a minimum corresponds to
+Using the expression for free energy for the system, it can be shown that at high $T$, the only solution is $q_1 = 0$ and $m$ undetermined, and this is the paramagnetic solution, which corresponds to the replica symmetric case. Does there exist a solution with $q_1\ne 0$? If we choose $m=1$, then the equation for $q_1$ becomes
+
+$$  g(q_1) = {\beta^2\over 2} q^p_1 + \log(1-q_1) + q_1 = 0  $$
+
+
+the solution at the saddle point where the free energy is at a minimum corresponds to
 
 $$ q_0 = 0,\ \ \ m = 1  $$
 
@@ -872,11 +892,20 @@ and $q_1$ is given by the solution to the equation
 
 $$  g(q_1) = {\beta^2\over 2} q^p_1 + \log(1-q_1) + q_1 = 0  $$
 
-It can be readily shown that $g(0) = 0$ and $g(1) = -\infty$. At high $T$ the function is monotonous and only the solution $q_1=0$ exists. However as the temperature is lowered, $g(q_1)$ develops a maximum whose heigh steadily increases. Hence there must be a temperature $T_c$ where the maximum touches the q-axis at
-$q_1=q_s$ and $m=1$. When $T<T_c$, the solution shfts with $q_1 > q_s$ and $m<1$.
+It can be readily shown that $g(0) = 0$ and $g(1) = -\infty$. At high $T$ the function is monotonous and only the solution $q_1=0$ exists. However as the temperature is lowered, $g(q_1)$ develops a maximum whose height steadily increases. Hence there must be a temperature $T_c$ where the maximum touches the q-axis at
+$q_1=q_s$ and this shows the appearance of the spin glass phase.
+When $T<T_c$, the solution shfts with $q_1 > q_s$ and $m<1$. 
 
-and it can be shown that in the limit $p\rightarrow\infty$ and at low temperatures, it becomes a spin glass. This spin glass phase has an interesting structure that can be summarized as follows (for the discussion below recall the a pure state was defined as the set of spin configurations in a free energy valley of the spin glass phase and the overlap $q_{\alpha\beta}$ between two pure states is given $q_{\alpha\beta} = {1\over N}\sum_i m_i^\alpha m_i^\beta$ where $m_i^\alpha$ is the average spin at the $i^{th}$ atom over all the spin configurations that exist in valley $\alpha$):
+It has been proven that this 1RSB solution is exact for the PSM model, i.e., there is no further symmetry breaking as the temperature is further reduced.
 
+There exists an analogue to the TAP equation in the PSM model, which can be used to count the number of pure states when $T<T_c$. When this analysis is carried out, it results in the surprising discovery that:
+
+- The solutions to the TAP equation are given by $m_i = \sqrt{q}\sigma_i$, where the $\sigma_i$ are the minima of the energy function and $q$ is the self overlap, given by
+
+$$ {\partial H(\sigma)\over{\partial\sigma_i}} = 0,\ \ \ \sum_i\sigma_i^2 = N $$
+
+Note that the solutions to this equation $\sigma_i$ do not depend on the temperature. However the value of the self overlap $q$ does. Hence in a PSM there is a 1-1 mapping between the minima of the Hamiltonian and the minima of the free energy. $T=0$ the two co-incide, but as the temperature is increased, thermal fluctuations cause the confgurations to change into pure states.
+  
 
 
 ## From Spin Glass to Hopfield Networks: Engineering the Energy Landscape of a Spin Glass System
