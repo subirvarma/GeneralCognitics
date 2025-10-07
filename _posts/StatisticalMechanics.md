@@ -1034,33 +1034,35 @@ $$ p(\xi^\mu) = {1\over 2}\delta(\xi^\mu - 1) + {1\over 2}\delta(\xi^\mu + 1),\ 
 
 Figure 20: Single pattern retrieval in the Hopfield model
 
+There is a single pattern $\xi^1=(\xi^1_1,...,\xi^1_N)$ to be stored.
+
 Mirroring the strategy that was used  to solve the general spin glass model, we will propose a candidate value for the order parameter vector $m=(m^1,...,m^p)$, such that
-$m^1 > 0$ and $m^\mu = 0, \mu > 1$. It follows that
+$m^1 > 0$ and $m^\mu = 0, \mu > 1$. Using the probability distribution of $\xi^1$, It follows that
 
-$$ f = {1\over 2} (m^1)^2 - {1\over\beta} <\log(2\cosh\beta m^1\xi^\mu)> = {1\over 2} (m^1)^2 - {1\over\beta} \log(2\cosh\beta m^1$$
+$$ f = {1\over 2} (m^1)^2 - {1\over\beta} <\log(2\cosh\beta m^1\xi^1)>_J = {1\over 2} (m^1)^2 - {1\over\beta} \log(2\cosh\beta m^1)      $$
 
-$$ m^1 = <\xi^\mu\tanh(\beta m^1\xi^\mu)> = \tanh\beta m^1 $$
+$$ m^1 = <\xi^1\tanh(\beta m^1\xi^1)>_J = \tanh\beta m^1 $$
 
 which are just the mean field equations for the Ising model. 
 
 In order to get greater insight into why this is the case, consider an Ising type model in which the spin $s_i$ at site $i$ is given by
 
-$$ \s_i = \xi_i \sigma_i  $$
+$$ s_i = \xi^1_i \sigma_i,\ \ \ i=1,...,N  $$
 
-where $\xi$ is a vector we are trying to store, and $\sigma_i$ is the usual Ising spin. 
+where $\xi^1$ is a vector we are trying to store, and $\sigma_i$ is the usual Ising spin. 
 Assuming that the interactions between nodes follow the Ising rule, i.e.,
 
-$$ s_i = \sign(\sum_j \xi_j\sigma_j $$
+$$ \sigma_i = sign(\sum_j s_j) = sign(\sum_j \xi^1_j\sigma_j) $$
 
 it is easy to see that the Hamiltonian for this system is given by
 
-$$ H = -{1\over 2}\sum_i \sum_j \xi_i\xi_j\sigma_i\sigma_j $$
+$$ H =   -{1\over 2}\sum_i \sum_j s_i\s_j =  -{1\over 2}\sum_i \sum_j \xi_i\xi_j\sigma_i\sigma_j $$
 
-But this is precisely the Hamiltonian for a Hopfield network for the case when $p=1$. Hence such a Hopfield network, also called a Mattis network, is equivalent to an Ising model with spins $s_i = \xi_i\sigma_i$. From this it follows that the average thermodynamic spin in a Mattis network is given by
+But this is precisely the Hamiltonian for a Hopfield network for the case when $p=1$. Hence such a Hopfield network, also called a Mattis network, is equivalent to an Ising model with spins $s_i = \xi_i^1\sigma_i$. From this it follows that the average $s$ value in a Mattis network is given by
 
-$$ E(s_i) = \xi_i \tanh(\beta m) $$
+$$ E(s_i) = \xi_i^1 \tanh(\beta m)\ \ \ and\ \ \ <E(s_i)>_J = \tanh(\beta m) $$
 
-In the limit as $\beta\rightarrow\infty$ (i.e., $T = 0$), it follows that the spins in the network converge to $\xi$, or to its mirror image, depending on the sign of $m$.
+In the limit as $\beta\rightarrow\infty$ (i.e., $T = 0$), it follows that the $E(s_i)$ values converge to $\xi^1_i$, or to its mirror image, depending on the sign of $m$.
 As shown in Fig. 20, if the network is initialized in a state that is away from the equilibrium, it will converge to one of the two equilibrium states $\pm m$, and in the limit at $T=0$, $m =\pm 1$, so that the equilibrium state is the stored pattern.
 
 We can repeat the calculation that we just did for p different $m$ vectors with a similar structure, i.e., $m^\nu = 1, j=1,...,p$ and $m^\mu = 0$ for $\mu\ne \nu$, such that $m^\nu$ corresponds to the retrieval of the pattern $\xi^\nu$. Hence we can conclude that in a Hopfield network, if the number of patterns is finite, then it is possible to retrieve the appropriate pattern when a noisy version of the pattern is given as the initial condition. This is due to the fact that these ptterns correspond to the global minima for the model.
