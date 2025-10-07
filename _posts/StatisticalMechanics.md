@@ -899,18 +899,19 @@ When $T<T_c$, the solution shfts with $q_1 > q_s$ and $m<1$.
 It has been proven that this 1RSB solution is exact for the PSM model, i.e., there is no further symmetry breaking as the temperature is further reduced.
 
 There exists an analogue to the TAP equation in the PSM model, which can be used to count the number of pure states when $T<T_c$. When this analysis is carried out, it results in the surprising discovery that:
-
-- The solutions to the TAP equation are given by $m_i = \sqrt{q}\sigma_i$, where the $\sigma_i$ are the minima of the energy function and $q$ is the self overlap, given by
+the solutions to the TAP equation are given by $m_i = \sqrt{q}\sigma_i$, where the $\sigma_i$ are the minima of the energy function and $q$ is the self overlap, given by
 
 $$ {\partial H(\sigma)\over{\partial\sigma_i}} = 0,\ \ \ \sum_i\sigma_i^2 = N $$
 
-Note that the solutions to this equation $\sigma_i$ do not depend on the temperature. However the value of the self overlap $q$ does. Hence in a PSM there is a 1-1 mapping between the minima of the Hamiltonian and the minima of the free energy. $T=0$ the two co-incide, but as the temperature is increased, thermal fluctuations cause the confgurations to change into pure states.
+$$ {1\over N}{p\over 2} q^{{p\over 2}-1} H(\sigma) + {\partial R\over{\partial q}} = 0,\ \ \ where \ \ \ R = 1-{1\over{2\beta}}\log(1-q) - {\beta\over 4}[(p-1)q^p - pq^{p-1}] $$
+
+Note that the solutions to the first equation $\sigma_i$ do not depend on the temperature, however the value of the self overlap $q$ does. Hence in a PSM there is a 1-1 mapping between the minima of the Hamiltonian and the minima of the free energy. $T=0$ the two co-incide, but as the temperature is increased, thermal fluctuations cause the confgurations to change into pure states.
   
 
 
 ## From Spin Glass to Hopfield Networks: Engineering the Energy Landscape of a Spin Glass System
 
-The physicist John Hopfield was at Princeton during the 1970s, and he was instrumental in luring away Phil Anderson from Bell Labs to Princeton during that time. Anderson acquainted Hopfield with his work in spin glasses (see the Edwards-Anderson model in the previous section), and Hopfield began thinking about how these results could be applied to model biological systems. He was intrigued by the possibility of creating an energy landscape with multiple valleys, and wonderedif the equilibrium spin configuration in each valley (at T = 0) could be used an an associative memory. Subsequently he succeeded in creating a spin glass inspired model which indeed could do, as explained next.
+The physicist John Hopfield was at Princeton during the 1970s, and he was instrumental in luring away Phil Anderson from Bell Labs to Princeton during that time. Anderson acquainted Hopfield with his work in spin glasses (see the Edwards-Anderson model in the previous section), and Hopfield began thinking about how these results could be applied to model biological systems. He was intrigued by the possibility of creating an energy landscape with multiple valleys, and wondered if the equilibrium spin configuration in each valley (at T = 0) could be used an an associative memory. Subsequently he succeeded in creating a spin glass inspired model which indeed could do so, as explained next.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat22.png) 
 
@@ -918,7 +919,7 @@ Figure 18
 
 Hopfield started with SK model with full connectivity, shown in the top left of Fig. 18, with the symmetric interaction between nodes $i$ and $j$ given by $J_{ij}$.
 Assume that the spin at each node, $\sigma_i, i = 1,2,...N$ in the network can assume values of +1 or -1, and denote the state $X$ of the network as $X = (\sigma_1,...,\sigma_N)$. 
-Furthermore assume that the state of the network according to the equation
+Furthermore assume that the state of the network evolves according to the equation
 
 $$ \sigma_i(t+\Delta t) = sign(\sum_{j\ne i}^N J_{ij} \sigma_j(t)) $$
 
@@ -934,7 +935,7 @@ $$ J_{ij} = {1\over N}\sum_{\mu=1}^p \xi^\mu_i \xi^\mu_j\ \ \ with\ \ \ J_{ii} =
 
 which is called the Hebb Rule. 
 
-Under these this update rule it can be shown that if the network is in state $\xi^\mu$ at time $t$, then the time evolution rule given earlier leads to the following state change
+With this update rule it can be shown that if the network is in state $\xi^\mu$ at time $t$, then the time evolution rule given earlier leads to the following state change
 
 $$ sign(\sum_j J_{ij}\xi^\mu_j) = sign{1\over N} (\sum_j\sum_\nu \xi^\nu_i \xi^\nu_j \xi^\mu_j) = sign(\sum_\nu \xi^\nu_i \delta_{\nu\mu}) = sign(\xi^\mu_i) $$
 
@@ -956,7 +957,7 @@ $$ H = -{1\over 2}\sum_i\sum_j J_{ij}\sigma_i\sigma_j $$
 since $\sum_j J_{ij}\sigma_j$ is the local field that influences  the spin $\sigma_i$ and it tries to align itself with it at time $t+\Delta t$. 
 After substituting for $J_{ij}$, $H$ can be written as
 
-$$  H = -{1\over 2N}\sum_{\mu=1}^p(\sum_{i=1}^N sigma_i\xi^\mu_i)^2  $$
+$$  H = -{1\over 2N}\sum_{\mu=1}^p(\sum_{i=1}^N \sigma_i\xi^\mu_i)^2  $$
 
 There is a monotonically decreasing value of the energy with each spin update, since if there is a change $\Delta\sigma_i$ in the value of the $i^{th}$ spin, then
 
@@ -966,7 +967,7 @@ These state changes will continue until a stable point such as one of the stored
 
 But does the network always converge to one of these stored states? Using simulations Hopfield showed that about $0.15N$ states can be simultaneously remembered before the error in recall is severe. Within a few years the system was analyzed using the tools of Statistical Mechanics, and this is described next.
 
-In order to analyze the system using Statistical Mechanics, we have to introduce temperature into the equations. This is done by changing the state transition equations as follows: Denote the field at node $i$ at time $t$ as 
+In order to analyze the systems we have to introduce temperature into the equations. This is done by changing the state transition equations as follows: Denote the field at node $i$ at time $t$ as 
 
 $$  h_i(t) = \sum_j J_{ij}\sigma_j(t) $$
 
@@ -978,7 +979,9 @@ It can be shown that under this state transition rule, the state of the system a
 
 ### Finite Number of Stored Patterns
 
-The partition function $Z$ for the Hopfield network is given by 
+Lets assume we are trying to store the $p$ bit patterns
+$\xi^\mu = (\xi^\mu_1,...,\xi^\mu_N), \mu = 1,...p$.
+For this case partition function $Z$ for the Hopfield network is given by 
 
 $$ Z = \sum_{[s]} \exp[{{\beta\over 2N}\sum_{\mu=1}^p(\sum_{i=1}^N \sigma_i\xi^\mu_i)^2}]   $$
 
@@ -987,23 +990,23 @@ The next step is to apply the Hubbard-Stratonovich transformation to the term in
 
 $$ Z = \sum_{[s]} \int\prod_{\mu=1}^p dm^{\mu}\ \exp[-{1\over 2}N\beta \sum_{\mu}(m^{\mu})^2 + \beta\sum_{\mu} m^{\mu}\sum_{i} \sigma_i\xi^{\mu}_i ] $$
 
-This transformation results in the introduction of the integration variable $m^{\mu}$. 
+This transformation results in the introduction of the integration variables $m^{\mu}, i=1,...,p$. 
 Using the notation $M = (m^1,...,m^p)$ and $\xi_i = (\xi^1_i,...,\xi^p_i)$, if we sum over all possible values of the spin patterns $[s]$, then this results in
 
-$$ Z = \int\prod_{\mu} dm^{\mu}\ \exp[-{1\over 2}N\beta M^2 + \sum_i \log(2\cosh\beta M.\xi_i) ]  $$
+$$ Z = \int\prod_{\mu} dm^{\mu}\ \exp[-{1\over 2}N\beta M^2 + \sum_{i=1}^N \log(2\cosh\beta M.\xi_i) ]  $$
 
 Recall that the free energy density $f$ is given by
 
 $$ f = -{1\over{\beta N}} \log Z $$
 
-If $N$ is very large the integral over $m$ is dominated by its saddle point value, so that
+If $N$ is very large the integral over $m^\mu$ is dominated by its saddle point value, so that
 $f$ can be approximated as
 
 $$ f = {1\over 2} M.M - {1\over{\beta N}} \sum_i \log(2\cosh\beta M.\xi_i) $$
 
 The order parameter vector vector $M$ is determined by the saddle-point equation ${\partial f\over{\partial m^{\mu}}} = 0$ which results in
 
-$$ M = {1\over N} \sum_i \xi_i \tanh(\beta M.\xi_i) $$
+$$ m^\mu = {1\over N} \sum_i \xi_i^\mu \tanh(\beta M.\xi_i),\ \ \ \mu=1,...,p $$
 
 Both $f$ and $M$ depend on the contents of the memory values $\xi_i^\mu, \mu = 1,...,p, i = 1,...,N$, but in the limit as $N\rightarrow\infty$, we can invoke the averaging principle
 to write
@@ -1012,25 +1015,24 @@ $$ f = {1\over 2} M.M - {1\over\beta} <\log(2\cosh\beta M.\xi)> $$
 
 and
 
-$$ M = <\xi\tanh(\beta M.\xi)> $$
+$$ m^\mu = <\xi^\mu\tanh(\beta M.\xi)>,\ \ \ \mu=1,...,p $$
 
-where $\xi = (\xi^1,...,\xi^p)$ is now a random vector whose distribution depends on the memories to be stored.
+where $\xi = (\xi^1,...,\xi^p)$ is now a random vector whose distribution depends on the memories to be stored and the expectation is over this distribution.
 
-What is the interpretation of the order parameter $M=(m^1,...,m^p)$? From the prior two equations for $M$, it can be seen that it is just the average overlap between the thermal average of the spins at site $i$, given by $\tanh(\beta M.\xi^i)$ and the $\xi$'s, in particular
+What is the interpretation of the order parameter $M=(m^1,...,m^p)$? 
+From the equation $m^\mu = {1\over N} \sum_i \xi_i^\mu \tanh(\beta M.\xi_i), \mu=1,...,p$, it can be seen that it is just the average overlap between the thermal average of the spins at site $i$, given by $\tanh(\beta M.\xi^i)$ and the $\xi$'s.
+In equilibrium at $T=0$ the tanh just becomes the sign function, and if $sign(\beta M.\xi^i) = \xi^\mu_i, i=1,...,N$, i.e., there is perfect overlap between the spin at all the sites and the $\mu^{th}$ memory $\xi^\mu$, it follows that $m^\mu = 1$ and the rest of the elements of $M$ are zero.
+What if $m = (1,1,0,...,0)$? In this case $\xi^1$ and $\xi^2$ each overlap with the spins in half the locations, hence this would correspond to an imprefect memeory recall.
 
-$$ m^\mu = <\xi^\mu_i tanh(\beta M.\xi^i)>  $$
+In the discussion that follows, ee will assume that that the probability distribution of $\xi = (\xi^1,...,\xi^p), i=1,...,N$  is given by the product of the probabilities
 
-In equilibrium at $T=0$ if $\tanh(\beta M.\xi^i) = \xi^\mu_i, i=1,...,N$, i.e., there is perfect overlap between the spin at all the sites and $\xi^\mu$, it follows that $m^\mu = 1$.
+$$ p(\xi^\mu) = {1\over 2}\delta(\xi^\mu - 1) + {1\over 2}\delta(\xi^\mu + 1),\ \ \ \mu = 1,...,p  $$
 
 #### Single Pattern Retrieval
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat24.png) 
 
 Figure 20: Single pattern retrieval in the Hopfield model
-
-We will assume that that the probability distribution of the the $p$ components of $\xi$ are independent and are given by
-
-$$ p(\xi^\mu) = {1\over 2}\delta(\xi^\mu - 1) + {1\over 2}\delta(\xi^\mu + 1),\ \ \ \mu = 1,...,p  $$
 
 Mirroring the strategy that was used  to solve the general spin glass model, we will propose a candidate value for the order parameter vector $m=(m^1,...,m^p)$, such that
 $m^1 > 0$ and $m^\mu = 0, \mu > 1$. It follows that
