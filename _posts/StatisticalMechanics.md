@@ -1084,14 +1084,14 @@ In the limit as $\beta\rightarrow\infty$ (i.e., $T = 0$), it follows that the Ho
 
 Figure 20: Single pattern retrieval in the Hopfield model
 
-As shown in Fig. 20, if the network is initialized in a state that is away from the equilibrium, it will converge to one of the two equilibrium states $\pm m^1$, and in the limit at $T=0$, $m^1 =\pm 1$, so that the equilibrium state is the stored pattern.
+As shown in Fig. 20, if the network is initialized in a state that is away from the equilibrium, it will converge to one of the two equilibrium states $\pm m^1$, and in the limit at $T=0$, $m^1 =\pm 1$, so that the equilibrium state is the stored pattern, i.e., it works as an associative memory.
 
 We can repeat the calculation that we just did for p different $M$ vectors with a similar structure, i.e., $(m,0,...,0), (0,m,0,...,0),...,(0,...,0,m)$ and in each of these cases the $m^\mu=m$ corresponds to the retrieval of the $\mu^{th}$ pattern. Hence we conclude that in a Hopfield network, if the number of patterns is finite, then it is possible to retrieve the appropriate pattern when a noisy version of the pattern is given as the initial condition. This is due to the fact that these patterns correspond to the global free energy minima for the model.
 
 ### Other Symmetric Solutions for the Hopfield Network
 
 [Amit, Gutfreund and Sampolinsky](https://journals.aps.org/pra/abstract/10.1103/PhysRevA.32.1007) were able to prove the following:
-In addition to the p solutions corresponding to $m=(1,...0)$, the equation $M = <\xi\tanh(\beta M.\xi)$ also admits symmteric solutuions in which $M=(m_l,m_l,..,m_l,0...,0)$, where the case $l=1$ was discussed earlier. This is the unique solution in the range $0.461<T<1$, but as the temperature is reduced further, the solution for $l=3$ appears at $T=0.461$ and other solutuions appear one after another as the temperature is decreased further. These solutions correspond to local minima of the energy function and representstates that are equal mixtures of several memories and these are metastable states of the system.
+In addition to the p solutions corresponding to $M=(1,...0)$, the equation $M = <\xi\tanh(\beta M.\Xi)$ also admits symmteric solutuions in which $M=(m_l,m_l,..,m_l,0...,0)$, where the case $l=1$ was discussed earlier. This is the unique solution in the range $0.461<T<1$, but as the temperature is reduced further, the solution for $l=3$ appears at $T=0.461$ and other solutuions appear one after another as the temperature is decreased further. These solutions correspond to local minima of the energy function and representstates that are equal mixtures of several memories and these are metastable states of the system.
 
 ## From Hopfield Networks to Boltzmann Machines: Restricted Boltzmann Machines, Deep Boltzmann Machines
 
