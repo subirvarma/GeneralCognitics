@@ -1006,25 +1006,26 @@ $$ f = {1\over 2} M.M - {1\over{\beta N}} \sum_i \log(2\cosh\beta M.\xi_i) $$
 
 The order parameter vector vector $M$ is determined by the saddle-point equation ${\partial f\over{\partial m^{\mu}}} = 0$ which results in
 
-$$ m^\mu = {1\over N} \sum_i \xi_i^\mu \tanh(\beta M.\xi_i),\ \ \ \mu=1,...,p $$
+$$ m^\mu_sp = {1\over N} \sum_i \xi_i^\mu \tanh(\beta M_sp.\xi_i),\ \ \ \mu=1,...,p $$
 
 Both $f$ and $M$ depend on the contents of the memory values $\xi_i^\mu, \mu = 1,...,p, i = 1,...,N$, but in the limit as $N\rightarrow\infty$, we can invoke the averaging principle
-to write
+whuch results in the free energy density ${\overline f}$ given by
 
-$$ f = {1\over 2} M.M - {1\over\beta} <\log(2\cosh\beta M.\xi)> $$
+$$ {\overline f} = {1\over 2} M.M - {1\over\beta} <\log(2\cosh\beta M.\xi)> $$
 
 and
 
-$$ m^\mu = <\xi^\mu\tanh(\beta M.\xi)>,\ \ \ \mu=1,...,p $$
+$$ m^\mu_sp = <\xi^\mu\tanh(\beta M_sp.\xi)>,\ \ \ \mu=1,...,p $$
 
-where $\xi = (\xi^1,...,\xi^p)$ is now a random vector whose distribution depends on the memories to be stored and the expectation is over this distribution.
+where $\xi = (\xi^1,...,\xi^p)$ is now a random vector whose distribution depends on the memories to be stored and the expectation $<.>$ is over this distribution.
+The stored memories correspond to the solutions $M_sp = (m^1_sp,...,m^p_sp)$ of this equation since these are the equilibrium states for the network. In the next section we make some guesses for $M_sp$ and correlate them with the stored patterns.
 
-What is the interpretation of the order parameter $M=(m^1,...,m^p)$? 
+**What is the interpretation of the order parameter $M=(m^1,...,m^p)$? 
 From the equation $m^\mu = {1\over N} \sum_i \xi_i^\mu \tanh(\beta M.\xi_i), \mu=1,...,p$, it can be seen that it is just the average overlap between the thermal average of the spins at site $i$, given by $\tanh(\beta M.\xi^i)$ and the $\xi$'s.
 In equilibrium at $T=0$ the tanh just becomes the sign function, and if $sign(\beta M.\xi^i) = \xi^\mu_i, i=1,...,N$, i.e., there is perfect overlap between the spin at all the sites and the $\mu^{th}$ memory $\xi^\mu$, it follows that $m^\mu = 1$ and the rest of the elements of $M$ are zero.
-What if $m = (1,1,0,...,0)$? In this case $\xi^1$ and $\xi^2$ each overlap with the spins in half the locations, hence this would correspond to an imprefect memeory recall.
+What if $m = (1,1,0,...,0)$? In this case $\xi^1$ and $\xi^2$ each overlap with the spins in half the locations, hence this would correspond to an imprefect memeory recall.**
 
-In the discussion that follows, ee will assume that that the probability distribution of $\xi = (\xi^1,...,\xi^p), i=1,...,N$  is given by the product of the probabilities
+In the discussion that follows, we will assume that that the probability distribution of $\xi = (\xi^1,...,\xi^p), i=1,...,N$  is given by the product of the probabilities
 
 $$ p(\xi^\mu) = {1\over 2}\delta(\xi^\mu - 1) + {1\over 2}\delta(\xi^\mu + 1),\ \ \ \mu = 1,...,p  $$
 
@@ -1036,22 +1037,21 @@ Figure 20: Single pattern retrieval in the Hopfield model
 
 There is a single pattern $\xi^1=(\xi^1_1,...,\xi^1_N)$ to be stored.
 Mirroring the strategy that was used  to solve the general spin glass model, we will propose a candidate value for the order parameter vector $m=(m^1,...,m^p)$, such that
-$m^1 > 0$ and $m^\mu = 0, \mu > 1$. Using the probability distribution of $\xi^1$, It follows that
+$m^1 > 0$ and $m^\mu = 0, \mu=2,...,p$. Using the probability distribution of $\xi^1$, It follows that the average free energy density is given by
 
-$$ f = {1\over 2} (m^1)^2 - {1\over\beta} <\log(2\cosh\beta m^1\xi^1)>_J = {1\over 2} (m^1)^2 - {1\over\beta} \log(2\cosh\beta m^1)      $$
+$$ {\overline f} = {1\over 2} (m^1)^2 - {1\over\beta} <\log(2\cosh\beta m^1\xi^1_1)> = {1\over 2} (m^1)^2 - {1\over\beta} \log(2\cosh\beta m^1)      $$
 
-$$ m^1 = <\xi^1\tanh(\beta m^1\xi^1)>_J = \tanh\beta m^1 $$
+$$ m^1_p = <\xi^1\tanh(\beta m^1_sp\xi^1_1)> = \tanh\beta m^1_sp $$
 
-which are just the mean field equations for the Ising model. 
+which are just the free energy density and the mean field equations for the Ising model. 
+The free energy density exibits the well known bi-modal shape for $T<T_c$, and the two minima $\pm m^1_sp$ would correspond to the stored memories. But what bit pattern is being stored in the memory?
 
-In the analysis we have done s far, we have taken the average over the quenched disorder $\xi^1$. However in order to find out is the spins converge to $\xi^1$, we should analyse the system in which the disorder is fixed
-at $\xi^1$. A simple way in which this can be done is by
-considering an Ising type model in which the spin $s_i$ at site $i$ is given by
+Consider an Ising type model in which the spin $s_i$ at site $i$ is given by
 
 $$ s_i = \xi^1_i \sigma_i,\ \ \ i=1,...,N  $$
 
-where $\xi^1$ is a vector we are trying to store, and $\sigma_i$ is the usual Ising spin. 
-Assuming that the interactions between nodes follow the Ising rule, i.e., the energy due to nodes $i$ and $j$ is given by
+where $\xi^1$ is a vector we are trying to store, and $\sigma_i$ is the usual spin that can take values $\pm 1$. 
+Assuming that the interaction energy between nodes follow the Ising rule so that
 
 $$  e_{ij} = -s_i s_j $$
 
@@ -1059,19 +1059,19 @@ It follows that the Hamiltonian for this system is given by
 
 $$ H = -{1\over 2}\sum_i \sum_j s_i s_j =  -{1\over 2}\sum_i \sum_j \xi_i\xi_j\sigma_i\sigma_j $$
 
-But this is precisely the Hamiltonian for a Hopfield network for the case when $p=1$. Hence such a Hopfield network, also called a Mattis network, is equivalent to an Ising model with spins $s_i = \xi_i^1\sigma_i$. 
+But this is precisely the Hamiltonian for a Hopfield network for the case when $p=1$. Such a Hopfield network, also called a Mattis network, is equivalent to an Ising model with spins $s_i = \xi_i^1\sigma_i$. 
 Well not quite, in an Ising model each spin only intreracts with its immediate neighbors, while in the Mattis model each spin interacts with every other spin.
-Fortunately an analysis of this system is quite straightforward and results in the equations
+Fortunately an analysis of this system is quite straightforward and results in the the same equations as the regular Ising model.
 
 $$ f = {1\over 2} m^2 - {1\over\beta} \log(2\cosh\beta m)     $$
 
 $$ m = \tanh\beta m $$
 
-where the order parameter $m = E(s_i)$ is the thermodynamic average spin. Substituting $s_i = \xi^1_i\sigma_i$ it follows that
+where the order parameter $m = E(s_i)$ is the thermodynamic average spin. Since $s_i = \xi^1_i\sigma_i$ it follows that $E(s_i) = m = \xi^1_i E(\sigma_i)$. Substituting this back into the above equations we get
 
 $$ f = {1\over 2} m^2 - {1\over\beta} \log(2\cosh\beta \xi^1_i E(\sigma_i))     $$
 
-$$ \xi^1_i E(\sigma_i) = \tanh\beta \xi^i E(\sigma^1) $$
+$$ \xi^1_i E(\sigma_i) = \tanh\beta \xi^1_i E(\sigma_i) $$
 
 which can also be written as
 
@@ -1080,8 +1080,7 @@ $$ E(\sigma_i) = \xi^1_i\tanh\beta \xi^1_i E(\sigma_i) $$
 But these are precisely the equations for the Hopfield network with $p=1$. From this it follows that the parameter choice $m = (m^1,0,...,0)$ in the Hopfield network for the case $p=1$ is equivalent to a Mattis network in which the spins are given by $s_i = \xi^1_i\sigma_i$, and the parameter $m = m^1$ is just mean field $E(s_i)$ for this model. 
 
 In the limit as $\beta\rightarrow\infty$ (i.e., $T = 0$), it follows that the $E(\sigma_i)$ converges to $\xi^1_i$, or to its mirror image.
-To conclude, the average spins $E(s_i)$ in the Mattis network converge to $E(s_i)=\tanh\beta E(s_i)$, while the average spins $E(\sigma_i)$ in the corresponding Hopfield network converge to 
-$E(\sigma_i) = \xi^1_i\tanh\beta \xi^1_i E(\sigma_i)$.
+To conclude, the average spins $E(s_i)$ in the Mattis network converge bi-modally to $E(s_i)=\tanh\beta E(s_i)$, while the average spins $E(\sigma_i)$ in the corresponding Hopfield network converge to the memory pattern $E(\sigma_i) = \xi^1_i\tanh\beta \xi^1_i E(\sigma_i)$.
 
 As shown in Fig. 20, if the network is initialized in a state that is away from the equilibrium, it will converge to one of the two equilibrium states $\pm m$, and in the limit at $T=0$, $m =\pm 1$, so that the equilibrium state is the stored pattern.
 
