@@ -1006,7 +1006,7 @@ $$ f = {1\over 2} M.M - {1\over{\beta N}} \sum_i \log(2\cosh\beta M.\xi_i) $$
 
 The order parameter vector vector $M$ is determined by the saddle-point equation ${\partial f\over{\partial m^{\mu}}} = 0$ which results in
 
-$$ m^\mu_sp = {1\over N} \sum_i \xi_i^\mu \tanh(\beta M_sp.\xi_i),\ \ \ \mu=1,...,p $$
+$$ m^\mu_{sp} = {1\over N} \sum_i \xi_i^\mu \tanh(\beta M_{sp}.\xi_i),\ \ \ \mu=1,...,p $$
 
 Both $f$ and $M$ depend on the contents of the memory values $\xi_i^\mu, \mu = 1,...,p, i = 1,...,N$, but in the limit as $N\rightarrow\infty$, we can invoke the averaging principle
 whuch results in the free energy density ${\overline f}$ given by
@@ -1015,15 +1015,10 @@ $$ {\overline f} = {1\over 2} M.M - {1\over\beta} <\log(2\cosh\beta M.\xi)> $$
 
 and
 
-$$ m^\mu_sp = <\xi^\mu\tanh(\beta M_sp.\xi)>,\ \ \ \mu=1,...,p $$
+$$ m^\mu_{sp} = <\xi^\mu\tanh(\beta M_{sp}.\xi)>,\ \ \ \mu=1,...,p $$
 
 where $\xi = (\xi^1,...,\xi^p)$ is now a random vector whose distribution depends on the memories to be stored and the expectation $<.>$ is over this distribution.
-The stored memories correspond to the solutions $M_sp = (m^1_sp,...,m^p_sp)$ of this equation since these are the equilibrium states for the network. In the next section we make some guesses for $M_sp$ and correlate them with the stored patterns.
-
-**What is the interpretation of the order parameter $M=(m^1,...,m^p)$? 
-From the equation $m^\mu = {1\over N} \sum_i \xi_i^\mu \tanh(\beta M.\xi_i), \mu=1,...,p$, it can be seen that it is just the average overlap between the thermal average of the spins at site $i$, given by $\tanh(\beta M.\xi^i)$ and the $\xi$'s.
-In equilibrium at $T=0$ the tanh just becomes the sign function, and if $sign(\beta M.\xi^i) = \xi^\mu_i, i=1,...,N$, i.e., there is perfect overlap between the spin at all the sites and the $\mu^{th}$ memory $\xi^\mu$, it follows that $m^\mu = 1$ and the rest of the elements of $M$ are zero.
-What if $m = (1,1,0,...,0)$? In this case $\xi^1$ and $\xi^2$ each overlap with the spins in half the locations, hence this would correspond to an imprefect memeory recall.**
+The stored memories correspond to the solutions $M_{sp} = (m^1_{sp},...,m^p_{sp})$ of this equation since these are the equilibrium states for the network. In the next section we make some guesses for $M_sp$ and correlate them with the stored patterns.
 
 In the discussion that follows, we will assume that that the probability distribution of $\xi = (\xi^1,...,\xi^p), i=1,...,N$  is given by the product of the probabilities
 
