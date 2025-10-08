@@ -974,13 +974,12 @@ $$  h_i(t) = \sum_j J_{ij}\sigma_j(t) $$
 and assume that $\sigma_i(t+\Delta t)$ becomes 1 with probability $1\over{1+e^{-2\beta h_i(t)}}$ and -1 with probability ${e^{-2\beta h_i(t)}\over{1+e^{-2\beta h_i(t)}}}$.
 Note that this stochastic dynamics reduces to earlier state transition equation in the limit $\beta\rightarrow\infty$ so that the original Hopfield Network corresponds to the case $T=0$.
 On the other hand the network becomes completely random if $\beta=0$.
-
-It can be shown that under this state transition rule, the state of the system approaches the equilibrium Boltzmann distribution at temperature $\beta={1\over T}$ even if the initial state configuration is away fom the equilibrium. Hence the problem of memory retrieval in the Hopfield Network at finite temperatures reduces to that of finding the conditions under which the equilibrium state corresponds to one of the stored memories, when starting from a non-equilibrium state.
+Hence the problem of memory retrieval in the Hopfield Network at finite temperatures reduces to that of finding the conditions under which the equilibrium state corresponds to one of the stored memories, when starting from a non-equilibrium state.
 
 ### Finite Number of Stored Patterns
 
 Lets assume we are trying to store the $p$ bit patterns
-$\xi^\mu = (\xi^\mu_1,...,\xi^\mu_N), \mu = 1,...p$.
+$\Xi^\mu = (\xi^\mu_1,...,\xi^\mu_N), \mu = 1,...p$.
 For this case partition function $Z$ for the Hopfield network is given by 
 
 $$ Z = \sum_{[s]} \exp[{{\beta\over 2N}\sum_{\mu=1}^p(\sum_{i=1}^N \sigma_i\xi^\mu_i)^2}]   $$
@@ -991,9 +990,9 @@ The next step is to apply the Hubbard-Stratonovich transformation to the term in
 $$ Z = \sum_{[s]} \int\prod_{\mu=1}^p dm^{\mu}\ \exp[-{1\over 2}N\beta \sum_{\mu}(m^{\mu})^2 + \beta\sum_{\mu} m^{\mu}\sum_{i} \sigma_i\xi^{\mu}_i ] $$
 
 This transformation results in the introduction of the integration variables $m^{\mu}, i=1,...,p$. 
-Using the notation $M = (m^1,...,m^p)$ and $\xi_i = (\xi^1_i,...,\xi^p_i)$, if we sum over all possible values of the spin patterns $[s]$, then this results in
+Using the notation $M = (m^1,...,m^p)$ and $\Xi_i = (\xi^1_i,...,\xi^p_i)$ (note that this is just the set of stored bits associated with node i), if we sum over all possible values of the spin patterns $[s]$, then this results in
 
-$$ Z = \int\prod_{\mu} dm^{\mu}\ \exp[-{1\over 2}N\beta M^2 + \sum_{i=1}^N \log(2\cosh\beta M.\xi_i) ]  $$
+$$ Z = \int\prod_{\mu} dm^{\mu}\ \exp[-{1\over 2}N\beta M^2 + \sum_{i=1}^N \log(2\cosh\beta M.\Xi_i) ]  $$
 
 Recall that the free energy density $f$ is given by
 
@@ -1002,25 +1001,27 @@ $$ f = -{1\over{\beta N}} \log Z $$
 If $N$ is very large the integral over $m^\mu$ is dominated by its saddle point value, so that
 $f$ can be approximated as
 
-$$ f = {1\over 2} M.M - {1\over{\beta N}} \sum_i \log(2\cosh\beta M.\xi_i) $$
+$$ f = {1\over 2} M.M - {1\over{\beta N}} \sum_i \log(2\cosh\beta M.\Xi_i) $$
 
 The order parameter vector vector $M$ is determined by the saddle-point equation ${\partial f\over{\partial m^{\mu}}} = 0$ which results in
 
-$$ m^\mu_{sp} = {1\over N} \sum_i \xi_i^\mu \tanh(\beta M_{sp}.\xi_i),\ \ \ \mu=1,...,p $$
+$$ m^\mu_{sp} = {1\over N} \sum_{i=1}^N \xi_i^\mu \tanh(\beta M_{sp}.\Xi_i),\ \ \ \mu=1,...,p $$
 
 Both $f$ and $M$ depend on the contents of the memory values $\xi_i^\mu, \mu = 1,...,p, i = 1,...,N$, but in the limit as $N\rightarrow\infty$, we can invoke the averaging principle
 whuch results in the free energy density ${\overline f}$ given by
 
-$$ {\overline f} = {1\over 2} M.M - {1\over\beta} <\log(2\cosh\beta M.\xi)> $$
+$$ {\overline f} = {1\over 2} M.M - {1\over\beta} <\log(2\cosh\beta M.\Xi)> $$
 
 and
 
-$$ m^\mu_{sp} = <\xi^\mu\tanh(\beta M_{sp}.\xi)>,\ \ \ \mu=1,...,p $$
+$$ m^\mu_{sp} = <\xi^\mu\tanh(\beta M_{sp}.\Xi)>,\ \ \ \mu=1,...,p $$
 
-where $\xi = (\xi^1,...,\xi^p)$ is now a random vector whose distribution depends on the memories to be stored and the expectation $<.>$ is over this distribution.
-The stored memories correspond to the solutions $M_{sp} = (m^1_{sp},...,m^p_{sp})$ of this equation since these are the equilibrium states for the network. In the next section we make some guesses for $M_sp$ and correlate them with the stored patterns.
+where $\Xi = (\xi^1,...,\xi^p)$ is now a random vector whose distribution depends on the memories to be stored and the expectation $<.>$ is over this distribution.
+So the equilibrium states of the system correspond to different values of the order parameter vector $M_sp =  (m^1_{sp},...,m^p_{sp})$. But what is the relationship between this vector and the memories 
+$(\Xi^1,...\Xi^p)$ that we are trying to store?
+In the next section we make some guesses for $M_sp$ and correlate them with the stored patterns.
 
-In the discussion that follows, we will assume that that the probability distribution of $\xi = (\xi^1,...,\xi^p), i=1,...,N$  is given by the product of the probabilities
+In the discussion that follows, we will assume that that the probability distribution of $\Xi = (\xi^1,...,\xi^p), i=1,...,N$  is given by the product of the probabilities
 
 $$ p(\xi^\mu) = {1\over 2}\delta(\xi^\mu - 1) + {1\over 2}\delta(\xi^\mu + 1),\ \ \ \mu = 1,...,p  $$
 
@@ -1030,39 +1031,41 @@ $$ p(\xi^\mu) = {1\over 2}\delta(\xi^\mu - 1) + {1\over 2}\delta(\xi^\mu + 1),\ 
 
 Figure 20: Single pattern retrieval in the Hopfield model
 
-There is a single pattern $\xi^1=(\xi^1_1,...,\xi^1_N)$ to be stored.
-Mirroring the strategy that was used  to solve the general spin glass model, we will propose a candidate value for the order parameter vector $m=(m^1,...,m^p)$, such that
-$m^1 > 0$ and $m^\mu = 0, \mu=2,...,p$. Using the probability distribution of $\xi^1$, It follows that the average free energy density is given by
+Assume that there is a single pattern $\Xi^1=(\xi^1_1,...,\xi^1_N)$ to be stored.
+Mirroring the strategy that was used  to solve the general spin glass model, we will propose a candidate value for the order parameter vector $M=(m^1,0...,0)$, such that
+$m^1 > 0$. Using the probability distribution of $\Xi^1$, It follows that the average free energy density is given by
 
 $$ {\overline f} = {1\over 2} (m^1)^2 - {1\over\beta} <\log(2\cosh\beta m^1\xi^1_1)> = {1\over 2} (m^1)^2 - {1\over\beta} \log(2\cosh\beta m^1)      $$
 
-$$ m^1_p = <\xi^1\tanh(\beta m^1_sp\xi^1_1)> = \tanh\beta m^1_sp $$
+$$ m^1_{sp} = <\xi^1\tanh(\beta m^1_{sp}\xi^1_1)> = \tanh\beta m^1_{sp} $$
 
 which are just the free energy density and the mean field equations for the Ising model. 
-The free energy density exibits the well known bi-modal shape for $T<T_c$, and the two minima $\pm m^1_sp$ would correspond to the stored memories. But what bit pattern is being stored in the memory?
+The free energy density exibits the well known bi-modal shape for $T<T_c$, and the two minima $\pm m^1_{sp}$ would correspond to the stored memories. 
+But what bit pattern is being stored in the memory?
+The usual Ising model can only 'store' the patterns $(1,...1)$ amd $(-1,...,-1)$, but hopefully the minima of the Hopfield model correspond to an arbitrary bit pattern.
 
 Consider an Ising type model in which the spin $s_i$ at site $i$ is given by
 
 $$ s_i = \xi^1_i \sigma_i,\ \ \ i=1,...,N  $$
 
 where $\xi^1$ is a vector we are trying to store, and $\sigma_i$ is the usual spin that can take values $\pm 1$. 
-Assuming that the interaction energy between nodes follow the Ising rule so that
+Assuming that the interaction energy between nodes follow the Ising rule so that the interaction energy between nodes $i$ and $j$ is given by
 
 $$  e_{ij} = -s_i s_j $$
 
 It follows that the Hamiltonian for this system is given by
 
-$$ H = -{1\over 2}\sum_i \sum_j s_i s_j =  -{1\over 2}\sum_i \sum_j \xi_i\xi_j\sigma_i\sigma_j $$
+$$ H = -{1\over 2}\sum_i \sum_j s_i s_j =  -{1\over 2}\sum_i \sum_j \xi^1_i\xi^1_j\sigma_i\sigma_j $$
 
 But this is precisely the Hamiltonian for a Hopfield network for the case when $p=1$. Such a Hopfield network, also called a Mattis network, is equivalent to an Ising model with spins $s_i = \xi_i^1\sigma_i$. 
 Well not quite, in an Ising model each spin only intreracts with its immediate neighbors, while in the Mattis model each spin interacts with every other spin.
-Fortunately an analysis of this system is quite straightforward and results in the the same equations as the regular Ising model.
+Fortunately an analysis of this system is quite straightforward and results in the the same equations for the free energy $f$ an order parameter $m$ as the regular Ising model.
 
 $$ f = {1\over 2} m^2 - {1\over\beta} \log(2\cosh\beta m)     $$
 
-$$ m = \tanh\beta m $$
+$$ m_{sp} = \tanh\beta m_{sp} $$
 
-where the order parameter $m = E(s_i)$ is the thermodynamic average spin. Since $s_i = \xi^1_i\sigma_i$ it follows that $E(s_i) = m = \xi^1_i E(\sigma_i)$. Substituting this back into the above equations we get
+Since $s_i = \xi^1_i\sigma_i$ it follows that $E(s_i) = m = \xi^1_i E(\sigma_i)$. Substituting this back into the above equations we get
 
 $$ f = {1\over 2} m^2 - {1\over\beta} \log(2\cosh\beta \xi^1_i E(\sigma_i))     $$
 
