@@ -1116,6 +1116,17 @@ $$ f_1  < f_3 < f_5 <...f_{\infty}...< f_6 < f_4 < f_2 $$
 
 The even $n$ solutions are unstable at all temperatures, the odd $n$ solutions proliferate as the temperatures falls below $T_c$. Denoting $T_n$ be the threshold below which the $n$ solution is stable, it can be shown that $T_1 = T_c, T_3 = 0.461T_c, T_5 = 0.385T_c, T_7 = 0.345T_c$. The states with $n>$ were called spurious states at the time Hopfield networks were first proposed since they corresponded to a failure in the retrieval of the memory. This analysis shows that these solutions correspond to local minima of the energy function and representstates that are equal mixtures of several memories and these are metastable states of the system.
 
+### Storing an Infinite Number of Patterns
+
+We consider the case in which the number of stored patterns $p$ scales up with N, so that $p=\alpha N$. The following properties have been proven for this system for the case when $T=0$:
+
+- If $\alpha > \alpha_c = 0.138$, only spin glass type solutions exist, which are not correlated with any the memories that we are trying to store.
+- For $\alpha <\alpha_c$ a stable solution appears which deviates only slightly from the precise pattern that we are trying to store. The error is about 1.5% at $\alpha=\alpha_c$ and decreases to zero rapildy with decreasing $\alpha$. Hence the system more or less functions as an associative memory at least up to $\alpha\approx 0.14$, in agreement with Hopfield's original estimate.
+
+## Modern Hopfield Networks
+
+
+
 
 
 
