@@ -1090,8 +1090,34 @@ We can repeat the calculation that we just did for p different $M$ vectors with 
 
 ### Other Symmetric Solutions for the Hopfield Network
 
-[Amit, Gutfreund and Sampolinsky](https://journals.aps.org/pra/abstract/10.1103/PhysRevA.32.1007) were able to prove the following:
-In addition to the p solutions corresponding to $M=(1,...0)$, the equation $M = <\xi\tanh(\beta M.\Xi)$ also admits symmteric solutuions in which $M=(m_l,m_l,..,m_l,0...,0)$, where the case $l=1$ was discussed earlier. This is the unique solution in the range $0.461<T<1$, but as the temperature is reduced further, the solution for $l=3$ appears at $T=0.461$ and other solutuions appear one after another as the temperature is decreased further. These solutions correspond to local minima of the energy function and representstates that are equal mixtures of several memories and these are metastable states of the system.
+We found a set of $p$ symmetric solutions for the Hopfield network. Are these the only symmetric solutions that exist? No, there are quite a few more, as first shown by
+[Amit, Gutfreund and Sampolinsky](https://journals.aps.org/pra/abstract/10.1103/PhysRevA.32.1007) in their pioneering work on the thermodynamics of Hopfield networks. Consider the $p$ dimensional M vector given by
+
+$$ M = m_n(1,1,...,10,0,0,...,0) $$
+
+where the first $n$ compoenents are ones and the remaining $p-n$ are zero. For a given value of $n$, there are $p!\over{(p-n)!}$ possible solutuins that are equivalent to the one above. These are called symmetric solutions, and the solution in the previous sub-section was actually a special case when $n=1$. The mean field equations are given by
+
+$$  f_n = {n\over 2} m_n^2 - {1\over\beta}<<\log[2\cosh(\betam_n z_n)>>  $$
+
+$$ m_n = {1\over n} <<z_n\tanh(\beta m_n z_n)>>  $$
+
+where
+
+$$  z_n^i = \sum_{\mu=1}^n \xi^\mu_i  $$
+
+Using similar logic to the one that used for $n=1$, it follows that the average spin at the $i^{th}$ node is given by
+
+$$  E(\sigma_i) = m_n z^i_n \tanh(\beta m_n z^i_n) $$
+
+This equation implies that symmetric solutions with $n>1$ represent states which are equal mixtures of several memories. But what is the relationships between these states?
+It can be shown that the following ordering exists between the free energies at $T=0$
+
+$$ f_1  < f_3 < f_5 <...f_{\infty}...< f_6 < f_4 < f_2 $$
+
+The even $n$ solutions are unstable at all temperatures, the odd $n$ solutions proliferate as the temperatures falls below $T_c$. Denoting $T_n$ be the threshold below which the $n$ solution is stable, it can be shown that $T_1 = T_c, T_3 = 0.461T_c, T_5 = 0.385T_c, T_7 = 0.345T_c$. The states with $n>$ were called spurious states at the time Hopfield networks were first proposed since they corresponded to a failure in the retrieval of the memory. This analysis shows that these solutions correspond to local minima of the energy function and representstates that are equal mixtures of several memories and these are metastable states of the system.
+
+
+
 
 ## From Hopfield Networks to Boltzmann Machines: Restricted Boltzmann Machines, Deep Boltzmann Machines
 
