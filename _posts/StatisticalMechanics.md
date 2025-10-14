@@ -1151,14 +1151,25 @@ We consider the case in which the number of stored patterns $p$ scales up with N
 - If $\alpha > \alpha_c = 0.138$, only spin glass type solutions exist, which are not correlated with any the memories that we are trying to store.
 - For $\alpha <\alpha_c$ a stable solution appears which deviates only slightly from the precise pattern that we are trying to store. The error is about 1.5% at $\alpha=\alpha_c$ and decreases to zero rapildy with decreasing $\alpha$. Hence the system more or less functions as an associative memory at least up to $\alpha\approx 0.14$, in agreement with Hopfield's original estimate.
 
-## Modern Hopfield Networks
+### Modern Hopfield Networks
 
 
 
 
 
 
-## From Hopfield Networks to Boltzmann Machines: Restricted Boltzmann Machines, Deep Boltzmann Machines
+## From Hopfield Networks to Boltzmann Machines
+
+Hopfield networks were designed with the objective of being able to retrieve one out of a finite number of stored patterns.
+Hinton and Sejnowski asked a different but related question: Given a dataset consisting of a number of given patterns, such that the probability that the $k^{th}$ pattern will occur is given by $p_k$, how can we design a Hopfield type network such that equilibrium probability that network settles into the $k^{th}$ pattern is also given by $p_k$. But the probability that a network will settle into the $k^{th}$ pattern is proportional to $\exp^{-\beta E_i}$. Hence the problem then reduces to choosing the interactions $J_{ij}$ in the energy function $E$ given by
+
+$$  E_k = -{1\over}\sum_i_sim_j J_{ij}\sigma_i^k\sigma_j^k $$
+
+such that the value of $E_k$ results in the the appropriate value of $p_k\approx \exp^{-\beta E_k}$.
+
+
+GIven a network of $N$ neurons, to fully specify
+
 
 
 
