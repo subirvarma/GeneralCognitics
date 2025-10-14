@@ -913,7 +913,7 @@ Back in the early 1950s, in the very first days of electronic computers, a group
 
 The Metropolis technique is based on building a Markov Chain whose stationary distribution $\pi(\sigma1,...,\sigma_N)$ co-incides with that of the Boltzmann distribution, i.e., 
 
-$$ \pi(\sigma1,...,\sigma_N) = {1\over Z} Exp^{-\beta E(\sigma_1,...,\sigma_N)  $$
+$$ \pi(\sigma1,...,\sigma_N) = {1\over Z} Exp^{-\beta E(\sigma_1,...,\sigma_N)}  $$
 
 The Metropolis algorithm works as follows:
 
