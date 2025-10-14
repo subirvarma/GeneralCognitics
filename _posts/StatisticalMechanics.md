@@ -907,6 +907,34 @@ $$ {1\over N}{p\over 2} q^{{p\over 2}-1} H(\sigma) + {\partial R\over{\partial q
 
 Note that the solutions to the first equation $\sigma_i$ do not depend on the temperature, however the value of the self overlap $q$ does. Hence in a PSM there is a 1-1 mapping between the minima of the Hamiltonian and the minima of the free energy. $T=0$ the two co-incide, but as the temperature is increased, thermal fluctuations cause the confgurations to change into pure states.
   
+## Simulating a Spin Glass System
+
+Back in the early 1950s, in the very first days of electronic computers, a group of physicists who had worked together in the Manhattan Project, got together and figured out how to simulate a system of interacting particles of the Ising type. This group was led by Harry Metropolis, and it is by his name that the resulting algorithm is generally known. The mathematical technique that was used is called Markov Chain Mone Carlo of MCMC, and that is an alternative name for this technique. 
+
+The Metropolis technique is based on building a Markov Chain whose stationary distribution $\pi(\sigma1,...,\sigma_N)$ co-incides with that of the Boltzmann distribution, i.e., 
+
+$$ \pi(\sigma1,...,\sigma_N) = {1\over Z} Exp^{-\beta E(\sigma_1,...,\sigma_N)  $$
+
+The Metropolis algorithm works as follows:
+
+- Start with some configuration $\Sigma = (\sigma_1,...,\sigma_N)$.
+- Propose a move to a new trial configuration $\Sigma'$ and compute the ratio.
+
+$$ {P(\Sigma')\over{P(\Sigma)}} = \exp^{-\beta(E(\Sigma')-E(\Sigma))}  $$
+
+- If $\exp^{-\beta(E(\Sigma')-E(\Sigma))} > RAND(0,1)$ where $RAND(0,1)$ is sampled over the uniform distribution $U(0,1)$, then accept the new configuration $\Sigma'$, otherwise leave the old configuration $\Sigma$.
+
+Note that if the move to $\Sigma'$ causes the energy to go down, then the move is accepted with probability $1$. On the other hand if the move causes the energy to go up, then the move can still be accepted with probability
+$\exp^{-\beta(E(\Sigma')-E(\Sigma))}$ and this probability decreases exponentially as $\Delta(\Sigma',\Sigma) = E(\Sigma') - E(\Sigma)$ increases.
+
+This algorithm simulates the thermal motion of atoms in thermal contact with a heat bath at temperature $T$. After many steps of the algorithm, the system evolves into a Boltzmann distribution.
+The problam of finding the lowest energy configuration for a spin system is known to be NP Hard.
+
+### Simulated Annealing
+
+[Kirkpatrick, Gelatt and Vechi](https://mk.bcgsc.ca/papers/kirkpatrick-simulatedannealing.pdf) applied the Metropolis algorithm to the problem of combinatorial optimization, and called the resulting technique simulated annealing.
+Combinatorial optimization is the problem of minimizing a cost function which is a function of a number of independent variables $(x_1,x_2,...,x_N)$, and this can be likened to the energy function in statistical mechanics.
+If we try to find the minimum using a brute force search over the configuration space, there is a good chance that the optimization will get stuck at a local minumum, and this corresponds to trying to find the lowest energy configuration for a spin system at $T=0$. Kirkpatrick et.al. proposed adding a temperature variable to the optimization, and then using the Metropolis algorithm to find the low energy configurations. This allows the optimization to jump out of local minima as long as $T>0$, with finite probability. They proposed that the optimization start at a high temperature, and then lower the temperature by slow stages until the system "freezes" and no further changes occur. At each temperature the the simulation should proceed long enough for the system to reach equilibrium.
 
 
 ## From Spin Glass to Hopfield Networks: Engineering the Energy Landscape of a Spin Glass System
