@@ -1160,12 +1160,16 @@ We consider the case in which the number of stored patterns $p$ scales up with N
 
 ## From Hopfield Networks to Boltzmann Machines
 
-Hopfield networks were designed with the objective of being able to retrieve one out of a finite number of stored patterns.
-Hinton and Sejnowski asked a different but related question: Given a dataset consisting of a number of given patterns, such that the probability that the $k^{th}$ pattern will occur is given by $p_k$, how can we design a Hopfield type network such that equilibrium probability that network settles into the $k^{th}$ pattern is also given by $p_k$. But the probability that a network will settle into the $k^{th}$ pattern is proportional to $\exp^{-\beta E_i}$. Hence the problem then reduces to choosing the interactions $J_{ij}$ in the energy function $E$ given by
+The discovery of Hopfield networks set off flurry of research activity, and one of the starnds led to work that was being done by Geoffrey Hinton and Terence Sejnowski, then at CMU and NYU respectively.
+They noticed that the Hopfield model carries out minimization of the energy at $T=0$ in order to retrieve the stored patterns, which can potentially lead to the issue of the system getting stuck in local minima. But what if the minimization were carried out at some temperature $T > 0$ by making use of the Metropolis algorithm? This would cause the system to jump out of local minima and thus there would be higher chance that it might ened up in a global minima. However a side consequence is that the equilibrium configuration for $T > 0$ is no longer a fixed pattern, but instead it can be one of many patterns governed by the Boltzmann probability distribution. This seems to go against the idea of using ethe system as a memory as Hopfield had done. However Hinton and Sejnowski had the brilliant idea that instead of using the system as a memory, use it to model the distribution of the patterns in the data. This could be done if the equilibrium Boltzmann distribution could be made to approximate the data distribution.
+Since the Boltzmann distribution is a function of the energy levels, which are in turn a function of the node interactions, the problem reduced to choosing the interactions such that the resulting equilibrium distribution approximated that for the data. Unlike the Hopfield network, the optimal interactions could no longer be written down as a function of the data, but instead had to be learnt from the data.
+Hinton and Sejnowski came up with a learning algorithm for their system, which they called the Boltzmann machine.
+
+Given a dataset consisting of a number of patterns, such that the probability that the $k^{th}$ pattern is given by $p_k$, how can we design a Hopfield type network such that equilibrium probability that network settles into the $k^{th}$ pattern in equilibrium is also given by $p_k$. But the probability that a network will settle into the $k^{th}$ pattern is proportional to $\exp^{-\beta E_i}$. Hence the problem then reduces to choosing the interactions $J_{ij}$ in the energy function $E_k$ given by
 
 $$  E_k = -{1\over}\sum_i_sim_j J_{ij}\sigma_i^k\sigma_j^k $$
 
-such that the value of $E_k$ results in the the appropriate value of $p_k\approx \exp^{-\beta E_k}$.
+so that it results in $p_k\approx \exp^{-\beta E_k}$.
 
 
 GIven a network of $N$ neurons, to fully specify
