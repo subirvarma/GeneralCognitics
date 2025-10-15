@@ -1160,25 +1160,47 @@ We consider the case in which the number of stored patterns $p$ scales up with N
 
 ## From Hopfield Networks to Boltzmann Machines
 
-The discovery of Hopfield networks set off flurry of research activity, and one of the strands led to work that was being done by Geoffrey Hinton and Terence Sejnowski, then at CMU and NYU respectively.
-They noticed that the Hopfield model carries out minimization of the energy at $T=0$ in order to retrieve the stored patterns, which can potentially lead to the issue of the system getting stuck in local minima. But what if the minimization were carried out at some temperature $T > 0$ by making use of the Metropolis algorithm? This would cause the system to jump out of local minima and thus there would be higher chance that it might ened up in a global minima. However a side consequence is that the equilibrium configuration for $T > 0$ is no longer a fixed pattern, but instead it can be one of many patterns governed by the Boltzmann probability distribution. This seems to go against the idea of using ethe system as a memory as Hopfield had done. However Hinton and Sejnowski had the brilliant idea that instead of using the system as a memory, use it to model the distribution of the patterns in the data. This could be done if the equilibrium Boltzmann distribution could be made to approximate the data distribution.
-Since the Boltzmann distribution is a function of the energy levels, which are in turn a function of the node interactions, the problem reduced to choosing the interactions such that the resulting equilibrium distribution approximated that for the data. Unlike the Hopfield network, the optimal interactions could no longer be written down as a function of the data, but instead had to be learnt from the data.
+The discovery of Hopfield networks set off flurry of research activity, and one of the strands led to work that was being done by Geoffrey Hinton and Terence Sejnowski, then at CMU and Johns Hopkins respectively.
+They noticed that the Hopfield model carries out minimization of the energy at $T=0$ in order to retrieve the stored patterns, which can potentially lead to the issue of the system getting stuck in local minima and retrieving the wrong pattern. But what if the minimization were carried out at some temperature $T > 0$ by making use of the Metropolis algorithm? This would cause the system to jump out of local minima with a non-zero probability and thus there would be higher chance that it might ened up in a global minima. 
+However a side consequence of making the optimization probabilistic is that the equilibrium configuration at any $T > 0$ is no longer a fixed pattern, but instead it can be one of many patterns governed by the Boltzmann probability distribution. This seems to go against the idea of using the system as a memory as Hopfield had done. 
+However Hinton and Sejnowski had the brilliant idea that instead of using the system as a memory, use it to model the distribution of the patterns in the data. This could be done if the Boltzmann distribution could be made to approximate the data distribution.
+Since the Boltzmann distribution is a function of the energy levels, which are in turn a function of the node interactions, the problem reduced to choosing the interactions such that the resulting equilibrium distribution approximated that for the data. Unlike the Hopfield network, the optimal interactions could no longer be written down in a simple manner, but instead had to be learnt from the data.
 Hinton and Sejnowski came up with a learning algorithm for their system, which they called the Boltzmann machine.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat30.png) 
 
-Figure 19
+Figure 20
 
-<Why is it useful to model the data distribution>
+An example of how a Boltzmann machine can be put to use is shown in the above figure. The data consists of handwritten images of numerals from 0 to 9, and these are digitized using a $28 x 28$ grid using 0 for white and 1 for black. Any one of the numerals can be written down as a 784 dimensional vector of 1s and 0s, such as $X=(0,0,1,...,0)$ for example. These vectors are distributed according to some unknown distribution $p_X(x_1,x_2,...,x_{784})$ and all we have are samples from this distribution. The Boltzmann machine can be trained using these samples, and it is able to create a representation for this distribution in its node interaction parameters, as shown in the left hand part of the figure. Once the training is complete, it can be used to generate new patterns that confirm to the distribution that it has learnt as shown on the right hand side.
 
-Given a dataset consisting of a number of patterns, such that the probability that the $k^{th}$ pattern is given by $p_k$, how can we design a Hopfield type network such that equilibrium probability that network settles into the $k^{th}$ pattern in equilibrium is also given by $p_k$. But the probability that a network will settle into the $k^{th}$ pattern is proportional to $\exp^{-\beta E_i}$. Hence the problem then reduces to choosing the interactions $J_{ij}$ in the energy function $E_k$ given by
+Back in 1983 when Hinton and Sejnowski first thought of using the Hopfield model to capture distributions in the training data, this must have seemed to be somewhat quixotic. But subsequent develoipments in neural networks have shown that this was a monumental advance in Artificial Intelligence. Indeed latest AI models such as language generating LLMs or image generating models such as DaLLE are are direct descendants that have exploited this fundamental idea. The new models have of course evolved beyond the 'simpe' Boltzmann machines, but they all still generate speech or images by sampling from their representation of some complex probability distribution that have learnt from the training data.
 
-$$  E_k = -{1\over 2}\sum_i\sum_j J_{ij}\sigma_i^k\sigma_j^k $$
+![](https://subirvarma.github.io/GeneralCognitics/images/stat32.png) 
 
-so that it results in $p_k\approx \exp^{-\beta E_k}$.
+Figure 21
 
+An example of a Boltzmann machine is shown in the above figure. As you can see it is basically identical to the Hopfield model, featuring a fully connected topology, with the 'spin' at each node taking on values of 0 or 1. The global energy $E$ is also identical to that in the Hopfield model, given by
 
-GIven a network of $N$ neurons, to fully specify
+$$  E = -\sum_i\sum_{j<i} w_{ij} \sigma_i\sigma_j $$
+
+The symmetric weights $w_{ij}$ are real numbers, that can be either positive or negative, and have to be learnt from the training data, and in this respect the model differs from the Hopfield network.
+If $\Delta E_k$ is the difference in energy levelys between the $k^{th}$ node being 1 or 0, then it can be shown that
+
+$$ \Delta E_k = \sum_i w_{ki}\sigma_i $$
+
+If this were the Hopfield network, then it would adopt the rule that $\sigma_k = 1$ if $\Delta E_k >0$ and $0$ otherwise. The Boltzmann machine on the other hand uses a probabilistic rule derived from the Metropolis algorithm, and this is based on computing a transition probability $p_k$ given by the sigmoid function
+
+$$ p_k = {1\over{(1 + exp^{-\beta\Delta E_k})}}  $$
+
+The rule says that the $k^{th}$ should be turned on with probability given by $p_k$, irrespective of its previous state. As $T\rightarrow 0$, this rule becomes the Hopfield rule, while as $T\rightarrow\infty$ the assignment becomes completely random.
+
+Using our knowledge of thermodynamics, it follows that if this system is allowed to evolve, then it will eventually settle into an equilibrium, such that the probability $p_{\alpha}$ that the system is in state $\alpha$ is given by the Boltzmann distribution
+
+$$  p_{\alpha} = {1\over Z} \exp{-\beta E_{\alpha}}  $$
+
+where $E_{\alpha}$ is the energy of the $\alpha$ state.
+
+So, how would one determine the interaction weights $w_{ij}$ in a Boltmann machine? 
 
 
 
