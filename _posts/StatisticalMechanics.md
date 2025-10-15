@@ -1198,14 +1198,7 @@ Using our knowledge of thermodynamics, it follows that if this system is allowed
 
 $$  p_{\alpha} = {1\over Z} \exp{-\beta E_{\alpha}}  $$
 
-where $E_{\alpha}$ is the energy of the $\alpha$ state.
-
-So, how would one determine the interaction weights $w_{ij}$ in a Boltmann machine? At a high level the idea is the following: Assume that the (unknown) probability that the environment is in state $\alpha$ is given by $q_{alpha}$. We want to choose the $w_{ij}$, and thus $E_{alpha}$, such that $p_{alpha}\approx q_{\alpha}$. Fortunately there is a measure of the distance between probability distributions callled the
-Kullback-Leibler distance, given by
-
-$$  KL(q\vert\vert p) = \sum_{\alpha} q_\alpha \log{q_\alpha\over{\p_alpha}} $$
-
-Note that $KL$ is zero if the two distributions are identical, and is positive otherwise. Note that $p_\alpha$ depends upon the weights hence $KL$ can be altered by changing them.
+where $E_{\alpha}$ is the energy of the $\alpha$ state. We can therefore control the probabilities of network states by controlling their energies.
 
 But before we can apply this formula, there is another architectural subtlety that has to be taken care of. In the above figure we can see that the seven nodes in the Boltzmann machine have been divided into two classes, namely the visible $(v_1,v_2,v_3,v_4)$ and the hidden $(h_1,h_2,h_3)$.
 
@@ -1213,13 +1206,24 @@ But before we can apply this formula, there is another architectural subtlety th
 - The hidden nodes are never clamped, and the the additional weights that they introduce into the network help expand the scope og the environment probability distributions $q$ that can be captured by the 
 model. For example if there are $N_v$ visible nodes $N_h$ hidden nodes, then there are ${(N_v+N_h)^2\over 2}$ parameters that the network can adjust vs ${N_v^2\over 2}$ otherwise.
 
-We now perform gradient-descent on $kL$, so that
+In general, the weights of the connections to the hidden units can be used to represent complex interactions that cannotbe expressed as pairwise interactions between the visible nodes alone. The hidden units are where the network can build its own internal representation of the data.
 
-$$ KL_{new} = KL_{old} - \eta {\partial KL\over{\partial w_{ij}}} $$ 
+So, how would one determine the interaction weights $w_{ij}$ in a Boltmann machine? At a high level the idea is the following: Assume that the (unknown) probability that the environment, as represented by the training data, is in state $\alpha$ is given by $q_{alpha}(v)$. We want to choose the $w_{ij}$, and thus $E_{alpha}$, such that $p_{alpha}(v)\approx q_{\alpha}(v)$ where $p_{\alpha}(v)$ is the probability that the visible nodes in the network are in state $\alpha$.
+Fortunately there is a measure of the distance between probability distributions callled the Kullback-Leibler distance, given by
 
+$$  KL(q(v)\vert\vert p(v)) = \sum_{\alpha} q_\alpha (v)\log{q_\alpha (v)\over{\p_alpha (v)}} $$
 
+where the sum is over all possible states $\alpha$ of V.
+Note that $KL$ is zero if the two distributions are identical, and is positive otherwise. Note that $p_\alpha$ depends upon the weights hence $KL$ can be altered by changing them.
+To find the optimal set of weights $w_{ij}$, we perform gradient-descent on $kL$ with respect to each of the weights, so that
 
+$$ w_{ij} \leftarrow w_{ij} - \eta {\partial KL\over{\partial w_{ij}}} $$ 
 
+where $\eta$ is the learning rate. There is a particularly simple expression for the gradient, given by
+
+$$ {\partial KL\over{\partial w_{ij}}} = -\beta(P_{ij} - P'_{ij}) $$
+
+where $P_{ij}$ is the probability, averaged over all of the training data, that nodes $i$ and $j$ are both on the on state when the visible units are clamped to according to the training data, and $P'_{ij}$ is the corresponding probability when the entire network is running freely. Note that both these probabilities have to be measured after the network has attained equilibrium.
 
 ## Modern Neural Networks as Modified SK Models
 
