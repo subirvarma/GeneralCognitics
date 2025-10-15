@@ -1181,7 +1181,7 @@ Figure 21
 
 An example of a Boltzmann machine is shown in the above figure. As you can see it is basically identical to the Hopfield model, featuring a fully connected topology, with the 'spin' at each node taking on values of 0 or 1. The global energy $E$ is also identical to that in the Hopfield model, given by
 
-$$  E = -\sum_i\sum_{j<i} w_{ij} \sigma_i\sigma_j $$
+$$  E = -\sum_i\sum_{j\lt i} w_{ij} \sigma_i\sigma_j $$
 
 The symmetric weights $w_{ij}$ are real numbers, that can be either positive or negative, and have to be learnt from the training data, and in this respect the model differs from the Hopfield network.
 If $\Delta E_k$ is the difference in energy levelys between the $k^{th}$ node being 1 or 0, then it can be shown that
@@ -1200,9 +1200,22 @@ $$  p_{\alpha} = {1\over Z} \exp{-\beta E_{\alpha}}  $$
 
 where $E_{\alpha}$ is the energy of the $\alpha$ state.
 
-So, how would one determine the interaction weights $w_{ij}$ in a Boltmann machine? 
+So, how would one determine the interaction weights $w_{ij}$ in a Boltmann machine? At a high level the idea is the following: Assume that the (unknown) probability that the environment is in state $\alpha$ is given by $q_{alpha}$. We want to choose the $w_{ij}$, and thus $E_{alpha}$, such that $p_{alpha}\approx q_{\alpha}$. Fortunately there is a measure of the distance between probability distributions callled the
+Kullback-Leibler distance, given by
 
+$$  KL(q\vert\vert p) = \sum_{\alpha} q_\alpha \log{q_\alpha\over{\p_alpha}} $$
 
+Note that $KL$ is zero if the two distributions are identical, and is positive otherwise. Note that $p_\alpha$ depends upon the weights hence $KL$ can be altered by changing them.
+
+But before we can apply this formula, there is another architectural subtlety that has to be taken care of. In the above figure we can see that the seven nodes in the Boltzmann machine have been divided into two classes, namely the visible $(v_1,v_2,v_3,v_4)$ and the hidden $(h_1,h_2,h_3)$.
+
+- The visible nodes are the interface between the network and the outside world, during training all the visible nodes are clamped into specific states determined by the training data.
+- The hidden nodes are never clamped, and the the additional weights that they introduce into the network help expand the scope og the environment probability distributions $q$ that can be captured by the 
+model. For example if there are $N_v$ visible nodes $N_h$ hidden nodes, then there are ${(N_v+N_h)^2\over 2}$ parameters that the network can adjust vs ${N_v^2\over 2}$ otherwise.
+
+We now perform gradient-descent on $kL$, so that
+
+$$ KL_{new} = KL_{old} - \eta {\partial KL\over{\partial w_{ij}}} $$ 
 
 
 
