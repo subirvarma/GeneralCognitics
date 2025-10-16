@@ -1167,6 +1167,11 @@ However Hinton and Sejnowski had the brilliant idea that instead of using the sy
 Since the Boltzmann distribution is a function of the energy levels, which are in turn a function of the node interactions, the problem reduced to choosing the interactions such that the resulting equilibrium distribution approximated that for the data. Unlike the Hopfield network, the optimal interactions could no longer be written down in a simple manner, but instead had to be learnt from the data.
 Hinton and Sejnowski came up with a learning algorithm for their system, which they called the Boltzmann machine.
 
+With the Hopfield network, Hopfield took a lot of care to make sure that when the network settled into an equilibrium, its spins were aligned  according to one of the patterns that system was trying to store.
+This is no longer the case with the Boltzmann machine. We no longer care about the exact pattern that the network has once it is in equilibrium. But we do care about the contraints and relationships that exist
+among its spins, and this should follow the same distibution as the training data. This is the critical difference between the Hopfield and Boltmann networks. One ic concerned with reproducing the exact training patttern,
+while the other is concerned about capturing the rules that govern the patterns in the training data.
+
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat30.png) 
 
 Figure 20
@@ -1224,6 +1229,8 @@ where $\eta$ is the learning rate. There is a particularly simple expression for
 $$ {\partial KL\over{\partial w_{ij}}} = -\beta(P_{ij} - P'_{ij}) $$
 
 where $P_{ij}$ is the probability, averaged over all of the training data, that nodes $i$ and $j$ are both on the on state when the visible units are clamped to according to the training data, and $P'_{ij}$ is the corresponding probability when the entire network is running freely. Note that both these probabilities have to be measured after the network has attained equilibrium.
+
+The training algorithm that was just described for the Boltzmann machinf also brings us to rea
 
 ## Modern Neural Networks as Modified SK Models
 
