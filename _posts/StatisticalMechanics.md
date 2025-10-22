@@ -22,7 +22,7 @@ where $p_i$ is the probability that the system is in the $i^{th}$ state, $\beta=
 This is one of the most important formulae in all of physics and underlies statistical mechanics.
 
 Statistical mechanics also led to a precise definition for the entropy of a collection of particles. Entropy had been introduced in the mid-1800s by Clausius as way of restating Carnot's results for the efficiency of the ideal steam engine, and it is something that could be measured macroscopically, but its true nature remained a mystery.
-Boltzmann showed that entropy was connected to our lack of knowledge of what was happening at the microscopic level, and gave a formula for entropy which was entirely in terms of the probability distribution $p_i$ of the microstates, 
+Boltzmann showed that entropy was a measure of our ignorance of the state of the system, and gave a formula for entropy which was entirely in terms of the probability distribution $p_i$ of the systaem state, 
 
 $$ S = -\sum_i p_i\log p_i $$
 
@@ -30,11 +30,12 @@ so that greater unceratinity about the state of the system led to higher entropy
 This implied that if we have a more detailed view of the system then the entropy would be lower since we would have more information about the state the system is in.
 This did not entirely clear up the matter, since the definition implied that entropy was somehow connected to the observer, hence it was a subjective quantity rather than an objective property of matter. There were paradoxes such as that of Maxwell's Demon that were thought up to illustrate this point, and this is where things stood until Claude Shannon came along.
 
-In the 1940s Shannon was looking for a measure of information contained in a message, and he hit upon a formula that was precisely the same as Boltzmann's definition of entropy (though Shannon was not aware of it at that time). Shannon defined the amount of information in a message as a function of our uncertainity about the contents of the message, the more ignorant we are, greater the information, and this precisely what Boltzmann had identified as the entropy of a system.
+In the 1940s Shannon was looking for a measure of information contained in a message, and he hit upon a formula that was precisely the same as Boltzmann's definition of entropy (though Shannon was not aware of it at that time). Shannon defined the amount of information in a message as a measure of our ignorance about the contents of the message, the more ignorant we are, greater the information, and this precisely what Boltzmann had identified as the entropy of a system.
 Shannon actually derived the formula for entropy by purely probabilistic reasoning, by looking for a measure of the amount of uncertainity in a probability distribution and this definition was applicable to any distribution whatsoever, whether it arose in statistical mechanics or information theory.
 This led to a reformulation and re-thinking of statistical mechanics, in which entropy was now the primary quantity, and it was shown that the rest of the statistical mechanics could be derived starting from this. The only physical assumption required was an ennumeration of the states of the system and their energy levels, the rest of it was purely probabilistic analysis. Hence in some sense statistical mechanics was reduced to a sub-branch of probability theory.
 
 One of the mysteries that statistical mechanics cleared up was that of phase transitions. This is the phenomenon observed when the physical properties of a collection of particles suddenly change, either as a result of variation of temperature or pressure. For example when water suddenly turns to steam at its boiling point or into ice at its freezing point. In the 1870s Van der Waals showed that phase transitions in a gas could be explained using statistical mechanics if we add a force of attraction between particles that are near each other. Thus he introduced the important concept of an interacting particle system in statistical mechanics. Needless to say phase transitions don't occur at the level of individual particles, but somehow a collection of particles collectively exhibit behavior which are not seen at the microscopic level.  
+
 In the 1920s the physicist Lenz and his student Ising came up with a model for ferromagnetism using statistical mechanics. The significance of this model is that it explained magnetism as a result of a phase change in the material. The Ising model has become the most important one in statistical mechanics since it is reasonably simple, but at the same time exhibits complex phase behavior.
 In the next few decades more detail was added to this model, ultimately resulting in statistical field theory which was introduced by the great Russian physicist Lev Landau in the 1940s. A final explanation for certain aspects of phase transitions had to wait until the 1970s with the renormalization group theory proposed by the American physicist Kenneth Wilson.
 
@@ -45,30 +46,22 @@ Some of the biggest advances in physics in the last 100 years have been a result
 - Statistical mechanics has been used to create a model for the phenomena of electrical conduction in metals. This is done by regarding the metal as a sort of closed box that contains a cloud of electrons. The initial analysis of this model was done by Paul Drude before the advent of quantum mechanics, and later Arnold Sommerfield made the quantum corrections in 1927 using the newly proposed theory of Fermi-Dirac statistics.
 - Phenomenona such as superconductivity and superfluidity were explained using the tools from statistical mechanics.
 
-In the last few decades statistical mechanics has been extended to non-traditional systems, and one of these is to a type of material called **spin glasses**. These are made in the lab by creating an alloy of a conducting material such as copper and small amounts of a magnetic materials such as iron. When the temperature is decreased, the magnetic material tries to align all its spins in the same direction, but is prevented from doing so by the surrounding conductor. 
-This complicates the interaction between nearby magnetic atoms as a result of which a partiuclar atom is subject to two types of interactions with its neighbors: Interactions of type 1 tend to align its spin with (some of) its neighbors, while interactions of type 2 tend to orient its spin in the opposite direction to that of (another subset) of its neighbors. As a result, the spin orientation of an atom becomes random even at very low temperatures, and one consequence of this is that the phase change behavior of these materials is very different than that for ferromagnetic materials. More precisely the spin randomness in a ferromagnet is due to random thermal flips in the spin of an atom, which goes to zero at $T=0$. The spin randomness in a spin glass on the other hand is caused not only by thermal flips, but also the random interactions among the spins, and this latter type of randomness does not go to zero at $T=0$. Indeed the randomness in a spin glass gets frozen at low temperatures into a potentially large number of different configurations. Hence unlike a ferromagnet, a spin glass can exhbits thousands of phases at low temperature.
+In the last few decades statistical mechanics has been extended to non-traditional systems, and one of these is to a type of material called **spin glass**. These are made in the lab by creating an alloy of a conducting material such as copper and small amounts of a magnetic materials such as iron. When the temperature is decreased, the magnetic material tries to align all its spins in the same direction, but is prevented from doing so by the surrounding conductor. 
+This complicates the interaction between nearby spins, since a spin can be simulataneously subject to forces that try to align it in opposite directions, which is a phenomenon called 'frustration'. 
+Frustration causes the spin orientation of an atom becomes random even at very low temperatures, and one consequence of this is that the phase change behavior of these materials is very different than that for ferromagnetic materials. The randomness caused due to frustration persists even at $T=0$, and in fact gets frozen at low temperatures into a potentially large number of different configurations. Hence unlike a ferromagnet, a spin glass can exhbits thousands of phases at low temperature.
 It turns out that this is a very interesting property that has been exploited by both biological systems, as well as man-made systems that mimic biological systems such as neural networks. In order to understand why this is the case, consider the following:
 
-- Complex biological systems can be modeled as spin glasses. For example Stuart Kauffmann has pointed out that in a linear sequence of molecules such as proteins or DNA, individual units such amino acids in proteins, are interacting in complex ways with the other units, which is similar to that in a spin glass. The same goes for interactions between basic units such as neurons in an artificial neural network.
-- The many phases in a spin glass can be used to create structure which can be utilized for various things. For example the frozen spin patterns can be used as a memory, so the spin glass becomes a model for associative memory as John Hopfield first pointed out. Similarly a phase can correspond to a particular protein structure, or the structures of genes in the DNA. 
+- Complex biological systems can be modeled as spin glasses. For example Stuart Kauffmann has pointed out that in molecules that are a linear sequence of smaller molecules, such as proteins made from amino acids or DNA made from nucleotides, the smaller units interact in complex ways with the other small units, which is similar to spins in a spin glass. The same goes for interactions between basic units such as neurons in an artificial neural network.
+- The many phases in a spin glass can be used to create an information structure which can be utilized for various things. For example the frozen spin patterns can be used as a memory, so the spin glass becomes a model for associative memory as John Hopfield first pointed out. Similarly a phase can correspond to a particular protein structure, or the structures of genes in the DNA. 
 
 Spin glass models first appeared in the mid-1970s and these were extensions to the classical Ising model for ferro-magnetism. The Edwards-Anderson model was the first one that was proposed, followed by the Sherrington-Kirkpartick or SK model which proved to be more versatile and easier to analyze and has served as the most popular spin glass model since then. A full understanding of the phase transition behavior of the SK model had to wait until the mid 1980s, and the name most closely associated with this is that of the Italian physicist Giorgio Parisi. He showed that the SK model can exist in a very large number of phases that are organized in an hierarchical tree like fashion at low temperature, and sometimes it can be in multiple phases at the same time, a little bit like how water can exist in the liquid and gas phase simultaneously at its boiling point.
 
-Spin glasses by themselves haven't become commercially important as materials, but the models that were built to explain their behavior had an unexpected side effect. They inspired the neural network models that were proposed in 1980s, initially by John Hopfield at Caltech, and later by Geoffrey Hinton and his collaborators. Hopfield regarded his network as a type of spin glass, more precisely as a modified SK model, and showed that the system can be made to function as an associative memory (he was introduced to spin glasses by Phillip Anderson while both were professors at Princeton). Hopfield's great insight was the realization the interaction between spins in his model could be chosen in a manner such that it resulted in as many phases as there are memories to the stored, and moreover the equilibrum state in each phase
-corresponded with one of the stored memories. Hence if the system was initialized in a state that was near one of the stored memories, then it gradually settled into an equilibrium configuration that corresponded to that memory.
+Spin glasses by themselves haven't become commercially important as materials, but the models that were built to explain their behavior had an unexpected side effect. They inspired the neural network models that were proposed in 1980s, initially by John Hopfield at Caltech, and later by Geoffrey Hinton and his collaborators. Hopfield regarded his network as a type of spin glass, more precisely as a modified SK model, and showed that the system can be made to function as an associative memory. Hopfield's great insight was the realization the interaction between spins in his model could be chosen in a manner such that it resulted in as many phases as there are memories to the stored, and moreover the equilibrum state in each phase corresponded with one of the stored memories. Hence if the system was initialized in a state that was near a stored memory, then it gradually settled into an equilibrium configuration that corresponded to that memory.
 
-Geoff Hinton and Pat Sejnowski were inspired by the Hopfield network, but they asked a different question. Instead of trying to reproduce the exact bit patterns, which is what the Hopfield network does, what if a network could be used to generate samples from the (unknown) probability distribution that the training data was drawn from. This is a very important problem in practice, for example consider the following: We have a bunch of N dimensional training data samples $(x_1,...,x_N)$ drawn from some unknown probability distribution $q(x_1,...,x_N)$. For example a sample could be an N pixel image, with each pixel assuming either black or white values.
-If the network can be trained to learn this probability distribution, then it can use it to generate new samples. Thus the network would become a generator of new images similar to those in the training set. This was the very beginning of the field of generative AI which has assumed such gigantic importance in the present day, with LLMs being the prime example.
+Geoff Hinton and Pat Sejnowski were inspired by the Hopfield network, but they asked a different question. Instead of trying to remember the exact bit patterns, which is what the Hopfield network does, what if a network could be used to generate samples from the (unknown) probability distribution that the training data was drawn from. This is a very important problem in practice, for example consider the following: We have a bunch of N dimensional training data samples $(x_1,...,x_N)$ drawn from some unknown probability distribution $q(x_1,...,x_N)$. For example a sample could be an N pixel image, with each pixel assuming either black or white values.
+If the network can be trained to learn this probability distribution, then it can used it to generate new samples. Thus the network would become a generator of new images similar to those in the training set. This was the very beginning of the field of generative AI which has assumed such gigantic importance in the present day, with LLMs being the prime example.
 Hinton and Sejnowski named their network the Boltzmann machine, the reason being that the equilibrium Boltzmann distribution $p$ of their network served as an approximation to the unknown probability distribution $q$. How were they able to accomplish this? They did it introducing the idea of learning the inter-node interactions (or weights) from the training data such that the 'distance' between the distributions $p$ nand $q$ is minimized.
 The neural networks that that we use today are a direct descendant of these early models and use similar principles.
-
-**In fact we will see later that any type of neural network can be regarded as a spin glass model of the SK type in which the weights represent the nodes of the model while the network topology and training data govern the interaction between the nodes.**
-
-**(Statistical mechanics continues to be a source of inspiration for scientists seeking an explanation for the properties of neural networks, it is one of the only tools available that can analyze systems with this level of complexity. For example recently it was used to explain how diffusion models are able to create new images which are significantly different from those present in their training data).**
-
-**Physicists have applied the physics of interacting particle systems to explain the behavior of all kinds of systems, some of which are far removed from it original area of application, why not apply to systems in which the atomic units happen to be humans? This is an active area of research, and a for a good introduction see the book
-"Critical Mass: How One Thing Leads to Another" by the science writer Phillip Ball. 
-For example the economy of a country can be modeled as a system whose micro dynamics are driven by individuals making decisions on things such what to buy, how much to save etc. Even racial segregation cities can be modeled as an interacting particle sysem, in which individual home purchasing decisions can often lead from a mixed neighborhood to a phase transiion that separate out the areas in which various races reside. Other interesting applications of these models have been to study alliances between countries or even between companies jockeying for an advantage in a changing industry, as phase transitions. Sometimes a collection of humans behave differently than any one individual, this is a well established fact, leading to situations in which the mob sometimes goes out of control and does things even though the individuals making up the mob may be decent people in their everyday life. This is remniscent of phase transitions, in which a collection of particles exhibits new properties which are not evident at the atomic level. We will look at some models that actually show phase transitions occuring in systems made up of people, thus explaining some puzzling aspects of the collective behavior of crowds.**
 
 ## System with a Large Number of Interacting Particles
 
@@ -76,7 +69,7 @@ Suppose a quantity $x$ can assume the discrete values $x_i, i=1,2,..n$ with the 
 
 $$  f_{av} =  \sum_i p_i f(x_i)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \  (1)   $$          
 
-On the basis of this information alone, what are the best estimates of the probabilities $p_i, i=1,2,...n$? This is a classic problem in probability theory, and in order to solve it we need a measure of our ignorance of the probability distribution. If we have such a formula, that quantifies ignorance or uncertainity, then the best estimates for the $p_i$ would be those that maximize this quantity.
+On the basis of this information alone, what are the best estimates of the probabilities $p_i, i=1,2,...n$? This is a classic problem in probability theory, and in order to solve it we need a measure of our ignorance of the probability distribution. If we have such a measure, that quantifies ignorance or uncertainity, then the best estimates for $p_i$ would be those that maximize this quantity.
 
 How can we quantify the amount of uncertainity in a discrete probability distribution? Claude Shannon posed this question as part of his development of Information Theory, and formally showed that it is given by
 
@@ -86,12 +79,14 @@ He called this quantity the entropy of the probability distribution (note that s
 $S=\log\ n$ which is its maximum value. This also implies that if nothing is known about a system other than its entropy $S$, then the approximate number of microstates in the system is given by $e^{S}$.
 
 Unbeknownst to Shannon, this formula had been discovered a few decades earlier by Boltzmann in the context of his theory of statistical mechanics. However the formula for entropy was not central to his development of the theory which he derived using other physical considerations.
-Shannon's work showed that entropy was a purely mathematical concept independent of its applications in thermodynamics. Within a few years after that, it was shown that all of statistical mechanics can be derived by taking this formula for entropy as the starting point. The only physical assumption required was an enumeration of the states that the system can exist in and their energy levels. Before we get into how this was done, lets finish the problem that was posed in the beginning of this section of estimating the $p_i$ values. The maximum entropy principle tells us that that our best estimates of the $p_i$ are obtained by solving the optimization problem of maximizing $S$ subject to the constraints (1) and $\sum_i p_i = 1$. This can be done by the method of Lagrange multipliers as the maximization of $L$ given by
+Shannon's work showed that entropy was a purely mathematical concept independent of its applications in thermodynamics. Within a few years after that, it was shown that all of statistical mechanics can be derived by taking this formula for entropy as the starting point. The only physical assumption required was an enumeration of the states that the system can exist in and their energy levels. Before we get into how this was done, lets finish the problem that was posed in the beginning of this section of estimating the $p_i$ values. 
+
+The maximum entropy (or the maximum ignorance) principle says that that our best estimates of the $p_i$ are obtained by solving the optimization problem of maximizing $S$ subject to the constraint $f_{av} =  \sum_i p_i f(x_i)$ and $\sum_i p_i = 1$. This can be done by the method of Lagrange multipliers as the maximization of $L$ given by
 
 $$ L = -\sum_i p_i \log p_i + \alpha(\sum_i p_i - 1) +\beta(f_{av} - \sum_i p_i E_i)  $$
 
-where $\alpha$ and $\beta$ are called Lagrange multipliers. 
-This problem can be easily solved by taking the first derivatives, resulting in
+where $\alpha$ and $\beta$ are constants. 
+This problem can be easily solved by taking the first derivative, resulting in
 
 $$ p_i = {e^{-\beta f(x_i)}\over{\sum_i e^{-\beta f(x_i)}}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (3) $$                  
 
@@ -100,7 +95,7 @@ The number $\beta$ is a constant that can be determined by substituting (3) into
 
 $$ f_{av} = -{\partial\log Z\over\partial\beta} \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (4) $$
 
-Note that the maximum entropy distribution for this case is not given by the uniform distribution $p_1={1\over n}$, and this is due to the fact that the $p_i$ values are constrained by the average $f_{av}$ from equation (1). From the probability theory point of view, the maximum entropy estimate solved an old problem from the time of Laplace, namely what are the best probability estimates given insufficient information. Laplace recommended the use of of the uniform distribution in this situation. The maximum entropy technique allows us to improve upon this by incorporatong other pieces of information such as the average, if they are available.
+Note that the maximum entropy distribution is not the uniform distribution $p_1={1\over n}$ of maximum ignorance, and this is due to the fact that we made use of the extra information in the $f_{av}$ value from equation (1). From the probability theory point of view, the maximum entropy estimate solved an old problem from the time of Laplace, namely what are the best probability estimates given insufficient information. Laplace recommended the use of of the uniform distribution in this situation. The maximum entropy technique allows us to improve upon this by incorporatong other pieces of information such as the average, if they are available.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat13.png) 
 
@@ -109,33 +104,33 @@ Figure 0: A canonical system in a heat bath at temperature T
 Up until this point, the discussion has been purely in terms of probability theory but now we are now going to use this to model a physical system consisting of interacting particles. 
 Consider a system consisting of large number of particles that is in equilibrium at a fixed temperature $T$. This can be achieved by putting the system in an infinite heat bath at temperature T, and assuming that it can exchange energy, but not particles, with the heat bath (see above figure, such a system is called a canonical system in thermodynamics). The energy $E$ of the system is not fixed, but can fluctuate as shown in the right hand side of the figure. This fluctuation is due to the energy exchange with the heat bath required to maintain the temperature at a constant value T. For example if the particles were gas molecules, then the energy of each molecule is equal to its kinetic energy ${1\over 2}mv^2$. Clearly every molecule does not have the same energy and all we can do is work in terms of the distribution of energies since we can't track the energy level of each and every molecule. Hence we are introducing some 'fuzziness' in our knowledge of the system.
 
-Assume that the system can be in one of N microstates, such that in microstate $i$ it has energy $E_i$. Also define $p_i$ as the probability that the system is in state microstate $i$.
-In the gas example, a microstate $i$ would correspond to the set of molecules moving around with the same energy level $E_i$.
+Assume that the system can be in one of M microstates, such that in microstate $i$ it has energy $E_i$. Also define $p_i$ as the probability that the system is in state microstate $i$.
+In the gas example with $N$ gas molecules, a microstate is usually defined as $(n_1,n_2,...,n_r)$ with $\sum_i n_i = N$, where $n_i$ is the number of gas molecules in a discrate quantum state $i$ with energy $e_i$. Hence the energy of the microstate is given by $E_i = \sum_j n_j e_j$
 An important example of a system is that of a ferromagnet consisting of N atoms, such that each atom is fixed in place, but can have two spin values, oriented either up or down.
-In this case a microstate would correspond to a particular joint orientation of their individual spins, for example the microstate $(P,Q)$ would correspond to $P$ atoms with spins pointing up and the $Q$ atoms with spins pointing down. 
-This system, which is called the Ising model, is analysed in more detail in the following sections.
+In this case a microstate would correspond to a particular joint orientation of their individual spins, for example the microstate $(P,Q)$ would correspond to $P$ atoms with spins pointing up and the $Q$ atoms with spins pointing down. This system, which is called the Ising model, is analysed in more detail in the following sections.
 
-A fundamental quantity in Statistical Mechanics is the entropy of a system, which is defined as
+Recall that our ignorance or uncertainity about the system state is captured by the entropy $S$ given by
 
-$$ S = -\sum_{i=1}^N p_i \log p_i\ \ \ \ \ \ \ \ (5) $$
+$$ S = -\sum_{i=1}^M p_i \log p_i\ \ \ \ \ \ \ \ (5) $$
 
-and its average energy as 
+Also the average energy of the system is given by 
 
-$$ E_{av} = \sum_{i=1}^N p_i E_i\ \ \ \ \ \ \ \  (6)   $$
+$$ E_{av} = \sum_{i=1}^M p_i E_i\ \ \ \ \ \ \ \  (6)   $$
 
+Following the modern approach to statistical mechanics, we will use the definition of entropy as the starting point in the analysis.
 From the mathematical point of view one can see why entropy may be an important quantity, since it is has direct connection to probabilities of the microstates $p_i$ which are critical in computing macroscopic quantities that we can measure such as $E_{av}$.
 But what is the physical significance of this definition for entropy? Changes in entropy can be measured in the lab, and indeed entropy was introduced into thermodynamics well before statistical mechanics came along. For the system shown in the figure above, if its temperature is increased from $T_1$ to $T_2 > T_1$ by transferring an amount of heat equal to $Q$ from the reservoir, then the increase in its entropy is given by ${Q\over T}$ (called the Clausius formula).
-But according to Shannon and Boltzmann entropy is given by equation (2), and is a measure of our lack of information about the microscopic details of a system.
-This is sometimes referred to as 'blurry' view of the system, since we don't know the state of an individual particle but we can say something about how the energy is distributed among the mass of particles.
+But according to Shannon and Boltzmann, entropy is given by equation (2), and is a measure of our lack of information about the microscopic details of a system.
 However this implies that the entropy is also connected with the observer, for example an observer who has a more granular view of the system may have different view of what a microstate is. But how can we reconcile this with the fact that changes in entropy can be objectively measured using the Clausius formula?
 This can be explained as follows: In the equilibrium state the number of microstates that result in the same macro measurement, such as temperature, is enormous. Hence even if we drill down to more granular view of the system, the microstates that contribute to the average value of the macro measurement are sharply concentrated around the same region in probability space.
 
-Going back to the example of a ferro magnetic material with with N atoms, each of which can have two spin values, a particular orientation of all the N spins together is a microstate for this system, and there are $2^N$ possible microstates. The energy $E_i$ of a microstate is a function of $(P,Q)$, where $P$ is the number of atoms with up spin and $Q = N - P$ is the number with down spin. 
+Going back to the example of a ferromagnetic material with with N atoms, each of which can have two spin values, a particular orientation of all the N spins together is a microstate for this system, and there are $M=2^N$ possible microstates. The energy $E_i$ of a microstate is a function of $(P,Q)$, where $P$ is the number of atoms with up spin and $Q = N - P$ is the number with down spin. 
 
 The maximum entropy principle from the previous section tells us that that our best estimates of the $p_i$ are given by the Boltzmann distribution
 
 $$ p_i = {e^{-\beta E_i}\over Z} \ \ \ where \ \ \ Z = \sum_i e^{-\beta E_i}  $$
 
+This is sometimes referred to as 'blurry' view of the system, since we don't know the state of an individual particle but we can say something about how the energy is distributed among the mass of particles.
 This formula enables us to compute $E_{av}$ and $S$ as functions of $Z$, in particular
 
 $$ E_{av} =  \sum_{i=1}^N {e^{-\beta E_i}\over Z} E_i   = -{\partial\log Z\over\partial\beta} $$
@@ -174,11 +169,11 @@ $$ Z = \sum_i e^{-\beta E_i} \sum_j e^{-\beta E'_j}  = Z_1 Z_2 $$
 
 These are the classic formulae of statistical mechanics and have been around since the time of Boltzmann in the latter part of the 19th century. They represent a remarkable advance in our knowledge of the world, since they connect a quantity $Z$ which is a function of invisible microscopic properties of the system, with quantities such as $E_{ev}, T$ and $S$ that are macroscopic quantities that we can measure with our instruments. Remember that when these furmulae were discovered atomic theory was still a controversial topic among physicists, in fact Boltzmann was at the receiving end of a lot of scorn since he based statistical mechanics on an unproven hypothesis. The discoveries of the 20th century validated his thinking, and in fact statistical mechanics served as a prototype for some of the great theories that were discovered, including quantum mechanics (by way of Planck and his theory of black body radiation) and quantum field theory. Late in the 20th century Hawking and others showed that even Black Holes possess macroscopic thermodynamic properties such as temperature and entropy.
 
-If this had been the usual description of statistical mechanics, then at this point I would have introduced the model for an ideal gas, and then apply the formulae that we just derived to compute its average energy and entropy etc. But we are going to take a slightly different path and instead focus on the Ising model model for ferro magnetism instead. This system is less complex than the ideal gas, since the atoms are fixed in place rather than zipping around in space, but at the same time it enables us introduce the concept of interaction between atoms in a simpler way than for the case of a gas. In particular coupling between atoms leads to phase transitions which can be demonstrated in the Ising model without getting into very complex analysis.
+If this had been the usual description of statistical mechanics, then at this point I would have introduced the model for an ideal gas, and then apply the formulae that we just derived to compute its average energy and entropy etc. But we are going to take a slightly different path and instead focus on the Ising model model for ferromagnetism instead. This system is less complex than the ideal gas, since the atoms are fixed in place rather than zipping around in space, but at the same time it enables us introduce the concept of interaction between atoms in a simpler way than for the case of a gas. In particular coupling between atoms leads to phase transitions which can be demonstrated in the Ising model without getting into very complex analysis.
 
 ### Free Energy
 
-There is another macro thermodynamic quantity that we will need later, and that is the Helmholtz free energy $F$, defined as
+There is another macro thermodynamic quantity that we will need later, and that is the Helmholtz free energy $F$ defined as
 
 $$ F = E_{av} -  TS $$ 
 
@@ -193,7 +188,7 @@ $$ e^{-\beta F} = \sum_i e^{-\beta E_i} $$
 
 This equation shows that $F$ is a macro distillation of all the microscopic energy interactions $E_i$ within the system. 
 
-There is another important use of the Free Energy, which is as a way to identify the thermal equilibrium state for the system. 
+There is another important use of the free energy, which is as a way to identify the thermal equilibrium state for the system. 
 From the second law of thermodynamics we know that equilibrium is characterized by the maximization of entropy, but note that this is the entropy of the system plus that of its surroundings, which is not that straightforward to characterize. 
 It turns out that thermal equilibrium can also characterized as the state at which the free energy of a system is minimized (without any reference to its surroundings). 
 In order to see this consider a system that starts at some temperature $T$ and also ends at the same temperature, but in the process draws an amount of heat equal to $Q$ from the heat bath. From the conservation of energy it follows that $\Delta E_{system} = Q$ Also the change in entropy for the heat bath is $\Delta S_{bath} = -{Q\over T}$. From the second law since $\Delta S_{bath} + \Delta S_{system} \ge 0$ it follows that $\Delta S_{systam} \ge {Q\over T}$. Thus
@@ -208,53 +203,54 @@ Hence a system that only interacts with its surroundings through the exchange of
 
 ## Models for Magnetism
 
-Certain atoms possess a magnetic moment, which we denote as $\mu$, due to the intrinsic spin of their outer-valance electrons. When an external magnetic field with intensity $H$ is pplied, then the energy $e$ of one of these atoms is given by
+Certain atoms possess a magnetic moment, which we denote as $\mu$, due to the intrinsic spin of their outer-valance electrons. When an external magnetic field with intensity $H$ is applied, then the energy $e$ of one of these atoms is given by
 
 $$ e = -\sigma\mu H $$
 
-where the spin $\sigma = +1$ if the magnetic moment of the spin aligned with the external field, and $\sigma = -1$ otherwise.  We will analyze two types of magnetic materials:
+where the spin $\sigma = +1$ if the magnetic moment of the spin aligns with the external field, and $\sigma = -1$ otherwise.  We will analyze two types of magnetic materials:
 
   - In paramagnetic materials, the individual spins are decoupled from one another. As a result the material only exhibits magnetic properties in the presence of an external field,
   - In ferromagnetic materials on the other hand, individual spins are coupled with those of their neighbors, as a result of which the material remans magnetized even in the absence of the external field.
 
 The first model for magnetic materials was proposed by Lenz in the early 1920s. He gave the problem of analyzing the model to his PhD student Ising, who was able to solve the problem for the case when the atoms are arranged in $d = 1$ dimension, by using the tools of statistical mechanics. The case $d = 2$ doesn't have a simple exact solution, and it was not solved until the 1940s, and the case $d\ge 3$ is still unsolved.
 However using approximations it can be shown that models with $d\ge 2$ exhibit phase transitions, which is defined as a sudden change in the properties of a material when the temperature or one of the physical variables is reduced (or increased) beyond a certain threshold. 
+
 Phase transition is the most interesting property in thermodynamics and the Ising model is simplest system that exhibits this behavior. As a result it has become an extremely important model, and all manners of systems have been analyzed using variations of this model. It was later found out that the mathematics of Ising models and that of quantum field theory are the same, which led to a lot of cross fertilization between the two fields. In addition to Lenz and Ising, the names most associated with this model are the Russian physicists Landau and Ginzburg and Americans Wilson and Kadanoff.
 
 ### Model for Paramagnetism
 
 We will modify the notation slightly and write
 
-$$ e = -j\sigma  $$
+$$ e = -J\sigma  $$
 
-for the energy of a single atom, where $\sigma$ is the same as before and $j=\mu H$ is called the coupling constant.
+for the energy of a single atom, where $\sigma$ is the same as before and $J=\mu H$ is called the coupling constant.
 
 Hence the partition function for a single atom at temperature $T = {1\over\beta}$, in the presence of a magnetic field can be expressed in terms of an hyperbolic function, as
 
-$$ Z = e^{\beta j} + e^{-\beta j} = 2 \cosh(\beta j) $$
+$$ Z = e^{\beta J} + e^{-\beta J} = 2 \cosh(\beta J) $$
 
-Now consider a system with $N$ atoms. Since the system is paramagnetic, the atoms don't interact with each other, it follows that the partition function for a collection of N atoms is given by
+Now consider a system with $N$ atoms. Since the system is paramagnetic, the atoms don't interact with each other, it follows that the partition function for a collection of N atoms is given by the product of the individual partition functions
 
-$$ Z = 2^N\ \cosh^N(\beta j)  $$
+$$ Z = 2^N\ \cosh^N(\beta J)  $$
 
-so that $\log Z = N\log 2 + N\log[\cosh(\beta j)]$.  It follows that the average energy $E_{av}$ is given by
+so that $\log Z = N\log 2 + N\log[\cosh(\beta J)]$.  It follows that the average energy $E_{av}$ is given by
 
-$$ E_{av} = -{\partial\log Z\over\partial\beta} = - Nj\ \tanh(\beta j) $$
+$$ E_{av} = -{\partial\log Z\over\partial\beta} = - NJ\ \tanh(\beta J) $$
 
-so that the average energy density on a per atom basis $e_{av}$ at temperate $T$ (in the presence of the magnetic field with coupling $j$) is given by the product of the individual partition functions
+so that the average energy density on a per atom basis $e_{av}$ at temperate $T$ (in the presence of the magnetic field with coupling $J$) is given by the product of the individual partition functions
 
-$$ e_{av} = {E_{av}\over N} = -j\ \tanh(\beta j)  $$
+$$ e_{av} = {E_{av}\over N} = -J\ \tanh(\beta J)  $$
 
-If the average spin on a per atom basis is $\sigma_{av}$ then since $e_{av} = -j\sigma_{av}$, it follows that
+If the average spin on a per atom basis is $\sigma_{av}$ then since $e_{av} = -J\sigma_{av}$, it follows that
 
-$$ \sigma_{av} = \tanh(\beta j) $$
+$$ \sigma_{av} = \tanh(\beta J) $$
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat2.png) 
 
 Figure 1: Average spin $\sigma_{av}$ as a function of $\beta = {1\over T}$
 
-A graph of the average spin $\sigma_{av}$ as function of the inverse temperature $\beta$ is shown in figure 1.
-Since we are considering positive temperatures only, we will focus on the half plane $\beta > 0$. At very low temperatutes $\beta\rightarrow\infty$, and as a result the average spin become 1 and the average energy is minimized at $e_{av} = -1$. Hence at low temperatures each atom becomes perfectly aligned with the external magnetic field, and this is lowest energy configuration. Conversely at high temeperatures $\beta\rightarrow 0$ and as as result the average spin goes to zero, and so does the average energy. This implies that at high temperatures the system is no longer magnetized and the spins are randomly aligned in the up or down direction. As the temperature is reduced, the spins start to gradually align with the external field, but note that there is no phase change, i.e., a sudden shift from non-alignment to alignment, it happens gradually. On the other hand, there is a phase change if the external magnetic field is switched from $+B$ to $-B$. This causes the average spin to flip to $\sigma_{av} = -\tanh(\beta j)$ (even though the average energy remains the same). This is a sudden change in the average spin, and is referred to as a phase transition of type 1. 
+A graph of the $\tanh$ function is shown in figure 1.
+Since we are considering positive temperatures only, we will focus on the half plane $\beta > 0$. At very low temperatutes $\beta\rightarrow\infty$, and as a result the average spin $\sigma_{av} = 1$ and the average energy is minimized at $e_{av} = -1$. Hence at low temperatures each atom becomes perfectly aligned with the external magnetic field, and this is lowest energy configuration. Conversely at high temeperatures $\beta\rightarrow 0$ and as as result the average spin goes to zero, and so does the average energy. This implies that at high temperatures the system is no longer magnetized and the spins are randomly aligned in the up or down direction. As the temperature is reduced, the spins start to gradually align with the external field, but note that there is no phase change, i.e., a sudden shift from non-alignment to alignment, it happens gradually. On the other hand, there is a phase change if the external magnetic field is switched from $+B$ to $-B$. This causes the average spin to flip to $\sigma_{av} = -\tanh(\beta J)$ (even though the average energy remains the same). This is a sudden change in the average spin, and is referred to as a phase transition of type 1. 
 
 ### Ising Model in One Dimension
 
@@ -265,12 +261,12 @@ Figure 2: One dimensional Ising model
 We come to our first model for an interacting particle system which is called the Ising mode.
 This model incorporates interactions between neighboring atoms and the one dimensional case is discussed in this section (see figure 2). The energy for a given configuration of spins is written as
 
-$$  E = -j\sum_i \sigma_i\sigma _{i+1} $$
+$$  E = -J\sum_i \sigma_i\sigma _{i+1} $$
 
 Note that unlike the previous case, there is no external magnetic field present.
 Each of the terms in this expression in minimized when $\sigma_i = \sigma_{i+1}$, i.e., the spins are aligned together either with $\sigma_i = \sigma_{i+1} = 1$ or $\sigma_i = \sigma_{i+1} = -1$, which implies that there are two configurations with the minimum energy value, which correspond to all the spins pointing up or all the spins pointing down. The partition function for this system is given by
 
-$$ Z = \sum_{all\ spin\ configs} e^{-j\beta\sum_i \sigma_i\sigma _{i+1}}  $$
+$$ Z = \sum_{all\ spin\ configs} e^{-J\beta\sum_i \sigma_i\sigma _{i+1}}  $$
 
 This sum has to be evaluated over all possible spin configurations, which makes it a non-trivial problem. The analysis can be simplified by defining a set of variables $\mu_i$ which is the product of neighboring spins, i.e.,
 
@@ -282,24 +278,24 @@ With this definition the partition function $Z$ becomes
 $$ Z = Z_1 + Z_2 $$
 
 where $Z_1$ is the partition function for the case when the first spin is $+1$, and $Z_2$  for the case when the first spin is $-1$ (note that specification of the first spin, in combination with the sequence $\mu_i, 1 = 1,2,..,N-1$ allows us to recover all the remaining spins $\sigma_2,...\sigma_N$).
-Note that both $Z_1$ and $Z_2$ are equal and are given by
+Both $Z_1$ and $Z_2$ are equal and are given by
 
-$$ Z_1 = Z_2 = \sum_{all\ [\mu]\ configs} e^{-j\beta\sum_i \mu_i}  $$
+$$ Z_1 = Z_2 = \sum_{all\ [\mu]\ configs} e^{-J\beta\sum_i \mu_i}  $$
 
 But this is exactly the same partition function as for the case analyzed in the previous section, i.e., when there are $N-1$ atoms in a magnetic field and there is no interaction between neighboring atoms. 
 Leveraging the solution we obtained for that case, it follows that
 
-$$ Z_1 = Z_2 = 2^{N-1}\cosh^{N-1}(\beta j) $$
+$$ Z_1 = Z_2 = 2^{N-1}\cosh^{N-1}(\beta J) $$
 
 so that
 
-$$ Z =  2^N\cosh^{N-1}(\beta j) $$
+$$ Z =  2^N\cosh^{N-1}(\beta J) $$
 
 It follows that the average $\mu_{av}$ is given by
 
-$$ \mu_{av} = (\sigma_i\sigma_{i+n})_{av} = \tanh(\beta j) $$
+$$ \mu_{av} = (\sigma_i\sigma_{i+1})_{av} = \tanh(\beta J) $$
 
-The correlation between the spins of neighboring atoms goes to zero as temperature increases as expected, but what about low temperatures. This equation tells us that the average of the connection values $\mu_{av}$ goes to one, but from this can we conclude that the all atoms have transitioned to the up for down spin configuration? We cannot since even if most of the spins at $\sigma_i = 1$, there can be islands of atoms with $\sigma_i = -1$, and this is consistent with having an overall average $\mu_{av}$ of 1. Indeed it can be shown that the correlation between spins separated by $n$ positions is given by
+As expected, the correlation between the spins of neighboring atoms goes to zero as temperature increases, but what about low temperatures. This equation tells us that the average of the connection values $\mu_{av}$ goes to one, but from this can we conclude that the all atoms have transitioned to the up for down spin configuration? We cannot since even if most of the spins are at $\sigma_i = 1$, there can be islands of atoms with $\sigma_i = -1$, and this is consistent with having an overall average $\mu_{av}$ of 1. Indeed it can be shown that the correlation between spins separated by $n$ positions is given by
 
 $$ (\sigma_i\sigma_{i+n})_{corr} = \tanh^{n-1}(\beta j) $$
 
@@ -312,35 +308,35 @@ This implies that even at very low temperatures, for example for $\beta = 0.9999
 
 Figure 3: The Ising model in two dimensions
 
-Spontaneous magnetisation happens in a system when the spin state of even a single atom propagates through the material and re-orients all the spins. We just saw that in one dimension this does not happen, since the correlation between spins fades the further away we get, irrespective of the temperature. One way of understanding this is by noting that the spin at a particular atom has at most two other spins which directly infuence it, i.e., those of its immediate neighbors. However this is not the case in higher dimensions. For example for $d=2$, each atom has four neighbors, and as a result if the majority of their spins are aligned in a certain direction, then it influences the target atom to align in the same direction. Hence the presence of multiple neighbors acts as a kind of error correction when determining the spin value.
+Spontaneous magnetisation happens in a system when the spin state of even a single atom propagates through the material and re-orients all the spins. We just saw that in one dimension this does not happen, since the correlation between spins fades the further away we get, irrespective of the temperature. One way of understanding this is by noting that the spin at a particular atom in the 1D case has at most two other spins which directly influence it, i.e., those of its immediate neighbors. However this is not the case in higher dimensions. For example for $d=2$, each atom has four neighbors, and as a result if the majority of their spins are aligned in a certain direction, then it influences the target atom to align in the same direction. Hence the presence of multiple neighbors acts as a kind of error correction when determining the spin value.
 
-Unfortunately the exact analysis of Ising models for $d\ge 2$ is extremely difficult. However there exists a simple approximation method, called mean field analysis, that preserves important properties such as phase transitions and we will describe that next.
+Unfortunately the exact analysis of Ising models for $d\ge 2$ is extremely difficult. However there exists a simple approximation method, called mean field analysis or MFA, that preserves important properties such as phase transitions and we will describe that next.
 
 The energy level for a single atom is given by
 
-$$ e = -j\sigma\sum_{i=1}^n\sigma_i  $$
+$$ e = -J\sigma\sum_{i=1}^n\sigma_i  $$
 
 where $n$ is the number of neighbors for the atom. 
 
-The energy for a configuration of N atoms in $d$ dimensions is given by
+The total energy for a configuration of N atoms in $d$ dimensions is given by
 
-$$  E = -j\sum_i\sum_j \sigma_i \sigma_j  $$
+$$  E = -J\sum_i\sum_j \sigma_i \sigma_j  $$
 
-where the summation is done over pairs of nearest neighbors. Expressing the spins in terms of their fluctuations $\delta\sigma_i$ from their average value $m_i = (\sigma_i)_{av}$, 
+where the summation is done over pairs of nearest neighbors. Expressing the spins in terms of their fluctuations $\delta\sigma_i = (\sigma_i - m_i)$ from their average value $m_i = (\sigma_i)_{av}$, 
 
 $$ E = -j\sum_i\sum_j(m_i + \delta\sigma_i)(m_j + \delta\sigma_j)  $$
 
 Expanding this expression and ignoring the product of the fluctuations $\delta\sigma_i\delta\sigma_j$ assuming it is neglegible, we get
 
-$$ E = -j\sum_i\sum_j(m_i m_j + m_i\delta_j + m_j\delta \sigma_i)  $$
+$$ E = -J\sum_i\sum_j(m_i m_j + m_i\delta_j + m_j\delta \sigma_i)  $$
 
 According to the mean field approximation $m_i = m_j = m$, i.e., the mean value value of the spins is the same everywhere. This leads to
 
-$$ E = -j\sum_i\sum_j(m^2 + m(\sigma_j - m) + m(\sigma_i - m))  $$
+$$ E = -J\sum_i\sum_j(m^2 + m(\sigma_j - m) + m(\sigma_i - m))  $$
 
-From translational inveriance of the atoms it follows that
+From translational invariance of the atoms it follows that
 
-$$ E = -j\sum_i\sum_j(2m\sigma_i - m^2)  $$
+$$ E = -J\sum_i\sum_j(2m\sigma_i - m^2)  $$
 
 Note that $\sum_i\sum_j = {1\over 2}\sum_i\sum_{j\in nn(i)}$ where the ${1\over 2}$ factor avoids double counting pairs of sites and $nn(i)$ is the number of nearest neighbors of $i$. 
 Since there is no dependence on $j$ in the summation, the inner sum is simply $\sum_{j\in nn(i)} = 2d$, where $2d$ is the number of neighbors for any atom, and $d$ is the number of dimensions. This leads to
@@ -349,29 +345,29 @@ $$ \sum_i\sum_j \rightarrow d\sum_{i=1}^N $$
 
 The expression for energy simplifies to 
 
-$$  E = {Ndjm^2} - 2djm\sum_i\sigma_i $$
+$$  E = {NdJm^2} - 2dJm\sum_i\sigma_i $$
 
-But this is simply the total energy level for a configuration of independent or paramagnetic atoms in the presence of a magnetic field with intensity $2djm$.
+But this is simply the total energy level for a configuration of independent or paramagnetic atoms in the presence of a magnetic field with intensity $2dJm$.
 Leveraging the solution for this model from two sections ago, it follows that the partition function is given by
 
-$$ Z = e^{-\beta Ndjm^2} 2^N\cosh^N(2dj\beta m) $$
+$$ Z = e^{-\beta NdJm^2} 2^N\cosh^N(2dJ\beta m) $$
 
 and the average energy for the system is given by
 
-$$ E_{av} = {\partial\log Z\over{\partial\beta}} = -2Ndjm\ \tanh(2dj\beta m) $$ 
+$$ E_{av} = -{\partial\log Z\over{\partial\beta}} = -2NdJm\ \tanh(2dJ\beta m) $$ 
 
 From this it follows that the average spin  on a per atom basis for the system is given by
 
-$$ \sigma_{av} = \tanh(2dj\beta m) $$
+$$ \sigma_{av} = \tanh(2dJ\beta m) $$
 
 But in equilibrium the average spin should be equal to the mean field value, i.e., $\sigma_{av} = m$. 
 Hence the following equation should be satisfied in thernal equilibrium
 
-$$ m = \tanh(2dj\beta m) $$
+$$ m = \tanh(2dJ\beta m) $$
 
-Making the substitution $y = 2dj\beta m$, it follows that
+Making the substitution $y = 2dJ\beta m$, it follows that
 
-$$ {y\over{2dj\beta}} = \tanh\ y  $$
+$$ {y\over{2dJ\beta}} = \tanh\ y  $$
 
 which can also be written as 
 
@@ -389,18 +385,19 @@ These two functions are plotted in figure 4 for the case when the temperature $T
 
 Figure 5: $\tanh\ y$ and ${yT\over{2dJ}}$ when $T < 2dJ$
 
-However as $T$ is reduced, then ultimately the straight line does intersect the $\tanh$ curve as shown in figure 5, and there is a critical temperature $T_c = 2dJ$ at which the slope of the line is one, which is the same as the slope of $\tanh$ at the origin. Any decrease in $T$ beyond this point causes the two curves to intersect. When this happens there exist two other non-zero values for m, say $m'$ and $-m'$, and this corresponds to magnetization of the material. The amount of magnetization gradually increases until at very low temperatures it approaches $m = +1$ or $-1$. 
-
-Since there are now three possible solutions at average spins $0$ and $m'$ and $-m'$, the question arises: which one does the system choose? 
-If the system starts from a state of random spins at $T > T_c$, then it stays in this state even after the $T < T_c$, until something causes the spins to align. This is the phenomenon of phase change, and it can be triggered by the presence of an external magnetic field.
-Thus the solution for $m = 0$ is unstable, and the system can tip into the state $m = +1$ or $m = -1$ very easily if $T<T_c$, as shown next.
-This analysis also implies that if we start from a low temperature state and gradually increase temperature, then the magnetization initially decreases and then abruptly switches off when the temperature becomes greater than $T_c$.
+However as $T$ is reduced the interaction energy due to $J$ gradually overcomes the thermal energy, and a non-zero fraction of spins become aligned on the average. This can be deduced from the above figure, since
+ultimately the straight line does intersect the $\tanh$ curve as $T$ is reduced, and there is a critical temperature $T_c = 2dJ$ at which the slope of the line is one, which is the same as the slope of $\tanh$ at the origin. Any decrease in $T$ beyond this point causes the two curves to intersect. When this happens there exist two other non-zero values for m, say $m'$ and $-m'$, and this corresponds to magnetization of the material. The amount of magnetization gradually increases until at very low temperatures it approaches $m = +1$ or $-1$. 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat9.png) 
 
 Figure 6: Variation of mean field $m$ with $T$
 
-This kind of phase transition in which there is an initial gradual decrease in the magnetization as temperature increases, followed by an abrupt change to zero beyond the critical temperature, is referred to as a second order phase transition, and is illustrated in figure 6.
+Since there are now three possible solutions at average spins $0$ and $m'$ and $-m'$, the question arises: which one does the system choose? 
+
+- If we start from a low temperature state $T<T_c$ at which $m$ is non-zero and gradually increase temperature, then the magnetization initially decreases and then abruptly switches off when the temperature becomes greater than $T_c$. This would be the case if we gradually heat a ferromagnet, and is called the Curie Effect. This kind of phase transition in which there is an initial gradual decrease in the magnetization as temperature increases, followed by an abrupt change to zero beyond the critical temperature, is referred to as a second order phase transition, and is illustrated in figure 6.
+- If the system starts from a state of random spins $m=0$ at $T > T_c$, then it stays in this state even after the $T < T_c$, until something causes the spins to align. This phase change can be triggered by the presence of an external magnetic field.
+
+Thus the solution for $m = 0$ is unstable if $T<T_c$, and the system can tip into the state $m = +1$ or $m = -1$ very easily as shown next.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat6.png) 
 
@@ -408,20 +405,20 @@ Figure 7: Graph of $\tanh(y + B\beta)$
 
 In the presence of an external magnetic field with intensity $B$, the energy for the system is given by
 
-$$  E = -j\sum_i\sum_j \sigma_i \sigma_j - B\sum_i\sigma_i $$
+$$  E = -J\sum_i\sum_j \sigma_i \sigma_j - B\sum_i\sigma_i $$
 
 The first term is due to interaction with neighboring atoms, while the second term is due to the external field.
 Carrying out the same calculations as above, it can be shown that the $Z$ and $E_{av}$ are given by
 
-$$ Z = e^{-\beta Ndjm^2} 2^N\cosh^N(2djm\beta + B\beta) $$
+$$ Z = e^{-\beta NdJm^2} 2^N\cosh^N(2dJm\beta + B\beta) $$
 
 and 
 
-$$ E_{av} = -2Ndjm\ \tanh(2djm\beta + B\beta) $$ 
+$$ E_{av} = -2NdJm\ \tanh(2dJm\beta + B\beta) $$ 
 
 Using the same logic as before it follows that in equilibrium the mean field for the system is given by the solution to the equation
 
-$$ m = \tanh(2djm\beta + B\beta)  $$
+$$ m = \tanh(2dJm\beta + B\beta)  $$
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat7.png) 
 
@@ -437,6 +434,32 @@ However if we switch  on even a tiny amount of external magnetic field $B$, then
 Figure 9: Variation of $m$ with $T$ in the presence of an external magnetic field $B$
 
 The variation of $m$ with $T$ for both $B>0$ and $B<0$ is shown above, and we can see that there is no phase transition as the temperature is varied. However a phase transition does occur when the field $B$ is fliped from positive to negative or vice versa, and it causes an instantaneous change in the sign of $m$. This is an example of a first order phase transition since there is a sudden change in the phase.
+
+## Simulating the Ising Model
+
+The discussion of the Ising model and phase transitions so far has been rather abstract since it has been based on a study of the equations of statistical mechanics. It is possible to get a more intuitive feel for the system dynamics by simulating it on the computer.
+Back in the early 1950s, in the very first days of electronic computers, a group of physicists who had worked together in the Manhattan Project, got together and figured out how to simulate a system of interacting particles of the Ising type. This group was led by Harry Metropolis, and it is by his name that the resulting algorithm is generally known. The mathematical technique that was used is called Markov Chain Mone Carlo of MCMC, and that is an alternative name for this technique. 
+
+The Metropolis technique is based on building a Markov Chain whose stationary distribution $\pi(\sigma_1,...,\sigma_N)$ co-incides with that of the Boltzmann distribution, i.e., 
+
+$$ \pi(\sigma1,...,\sigma_N) = {1\over Z} e^{-\beta E(\sigma_1,...,\sigma_N)}  $$
+
+The Metropolis algorithm works as follows:
+
+- Start with some spin configuration $\Sigma = (\sigma_1,...,\sigma_N)$ and note that probability of this configuration in equilibrium is given by $p(\Sigma) ={1\over Z} e^{-\beta E(\Sigma)}$ .
+- Propose a move to a new trial configuration $\Sigma'$ and compute the ratio.
+
+$$ {p(\Sigma')\over{p(\Sigma)}} = \exp^{-\beta(E(\Sigma')-E(\Sigma))}  $$
+
+- If the move to $\Sigma'$ causes the energy to go down, then $E(\Sigma')-E(\Sigma) <0$ which causes $p(\Sigma') > {p(\Sigma)$ and the move is accepted with probability $1$.
+- On the other hand if the move causes the energy to go up, then the move can still be accepted with probability
+$\exp^{-\beta(E(\Sigma')-E(\Sigma))}$ and this probability decreases exponentially as $\Delta(\Sigma',\Sigma) = E(\Sigma') - E(\Sigma)$ increases.
+
+The probabilistic aspect of the algorithm is implemented by using the following rule: If $\exp^{-\beta(E(\Sigma')-E(\Sigma))} > RAND(0,1)$ where $RAND(0,1)$ is sampled over the uniform distribution $U(0,1)$, then accept the new configuration $\Sigma'$, otherwise leave the old configuration $\Sigma$.
+
+This algorithm simulates the thermal motion of atoms in thermal contact with a heat bath at temperature $T$. After many steps of the algorithm, the system evolves into a Boltzmann distribution.
+If the system is simulated at $T>T_c$ then the thermal energy will cause it to wander among all the possible spin configurations, and the net magnetization $m$ will stay at zero.
+If $T<T_c$ then the thermal energy will still cause disordering among the spins, but a fraction of the spins will tend to get aligned in the same direction on the average, causing $m>0$.
 
 ## The Landau Theory for Phase Transitions: Introducing the Energy Landscape
 
@@ -932,28 +955,6 @@ $$ {1\over N}{p\over 2} q^{{p\over 2}-1} H(\sigma) + {\partial R\over{\partial q
 
 Note that the solutions to the first equation $\sigma_i$ do not depend on the temperature, however the value of the self overlap $q$ does. Hence in a PSM there is a 1-1 mapping between the minima of the Hamiltonian and the minima of the free energy. $T=0$ the two co-incide, but as the temperature is increased, thermal fluctuations cause the confgurations to change into pure states.
   
-## Simulating a Spin Glass System
-
-Back in the early 1950s, in the very first days of electronic computers, a group of physicists who had worked together in the Manhattan Project, got together and figured out how to simulate a system of interacting particles of the Ising type. This group was led by Harry Metropolis, and it is by his name that the resulting algorithm is generally known. The mathematical technique that was used is called Markov Chain Mone Carlo of MCMC, and that is an alternative name for this technique. 
-
-The Metropolis technique is based on building a Markov Chain whose stationary distribution $\pi(\sigma1,...,\sigma_N)$ co-incides with that of the Boltzmann distribution, i.e., 
-
-$$ \pi(\sigma1,...,\sigma_N) = {1\over Z} Exp^{-\beta E(\sigma_1,...,\sigma_N)}  $$
-
-The Metropolis algorithm works as follows:
-
-- Start with some configuration $\Sigma = (\sigma_1,...,\sigma_N)$.
-- Propose a move to a new trial configuration $\Sigma'$ and compute the ratio.
-
-$$ {P(\Sigma')\over{P(\Sigma)}} = \exp^{-\beta(E(\Sigma')-E(\Sigma))}  $$
-
-- If $\exp^{-\beta(E(\Sigma')-E(\Sigma))} > RAND(0,1)$ where $RAND(0,1)$ is sampled over the uniform distribution $U(0,1)$, then accept the new configuration $\Sigma'$, otherwise leave the old configuration $\Sigma$.
-
-Note that if the move to $\Sigma'$ causes the energy to go down, then the move is accepted with probability $1$. On the other hand if the move causes the energy to go up, then the move can still be accepted with probability
-$\exp^{-\beta(E(\Sigma')-E(\Sigma))}$ and this probability decreases exponentially as $\Delta(\Sigma',\Sigma) = E(\Sigma') - E(\Sigma)$ increases.
-
-This algorithm simulates the thermal motion of atoms in thermal contact with a heat bath at temperature $T$. After many steps of the algorithm, the system evolves into a Boltzmann distribution.
-The problam of finding the lowest energy configuration for a spin system is known to be NP Hard.
 
 ### Simulated Annealing
 
