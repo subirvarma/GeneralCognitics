@@ -435,9 +435,19 @@ Figure 9: Variation of $m$ with $T$ in the presence of an external magnetic fiel
 
 The variation of $m$ with $T$ for both $B>0$ and $B<0$ is shown above, and we can see that there is no phase transition as the temperature is varied. However a phase transition does occur when the field $B$ is fliped from positive to negative or vice versa, and it causes an instantaneous change in the sign of $m$. This is an example of a first order phase transition since there is a sudden change in the phase.
 
+![](https://subirvarma.github.io/GeneralCognitics/images/stat33.png) 
+
+Figure: Variation of the State Space and Magnetization of the Ising Model with Temperature
+
+The discussion of the Ising model and phase transitions so far has been rather abstract since it has been based on a study of the equations of statistical mechanics. In order to get a more intuitive feel for changes in the system as the temperature is varied, consider the figure above. Recall that for model with $N$ atoms there are $2^{N}$ possible spin configurations. The colored ovals in the figure represent portions of the state space that are accessible at various temperatures. 
+
+- The blue area in the main oval represents part of the state space that can be accessed when $T>T_c$ and the magnetization $m=0$. This is mostly made up of states in which there are an equal number of up and down spins, but because of thermal fluctuations it also contains configurations with an imbalance in spins.
+- As the temperature is reduced to a level $T_1 < T_c$, the allowed system configurations become smaller, and are represented by the lilac area in the next smallest oval. These configurations are characterized by a net magnetization $m_1$, which means more spins on the avarage point up than down. Note that there are two such lilac areas representing the fact that the system configuration has split up into two distinct phases.
+- If the temperature is further reduced to $T_2 < T_1$, then the allowed configuration space further shrinks as shown by the orange area in the innermost oval, and furthermore the net magnetization $m_2$ increases byond $m_1$
+- In the limit as $T=0$, he ovals shrink to a single point, i.e., the configuration $(+1,...,+1)$ or $(-1,...,-1)$, since all the spins are now fully aligned with each other. Furthermore the net magnetization avieves its maximum value $m=1$ or $m=-1$, depending upon the phase.
+
 ## Simulating the Ising Model
 
-The discussion of the Ising model and phase transitions so far has been rather abstract since it has been based on a study of the equations of statistical mechanics. It is possible to get a more intuitive feel for the system dynamics by simulating it on the computer.
 Back in the early 1950s, in the very first days of electronic computers, a group of physicists who had worked together in the Manhattan Project, got together and figured out how to simulate a system of interacting particles of the Ising type. This group was led by Harry Metropolis, and it is by his name that the resulting algorithm is generally known. The mathematical technique that was used is called Markov Chain Mone Carlo of MCMC, and that is an alternative name for this technique. 
 
 The Metropolis technique is based on building a Markov Chain whose stationary distribution $\pi(\sigma_1,...,\sigma_N)$ co-incides with that of the Boltzmann distribution, i.e., 
