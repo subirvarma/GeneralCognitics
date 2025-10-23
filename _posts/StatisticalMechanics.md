@@ -461,7 +461,7 @@ The Metropolis algorithm works as follows:
 
 $$ {p(\Sigma')\over{p(\Sigma)}} = \exp^{-\beta(E(\Sigma')-E(\Sigma))}  $$
 
-- If the move to $\Sigma'$ causes the energy to go down, then $E(\Sigma')-E(\Sigma) <0$ which causes $p(\Sigma') > {p(\Sigma)$ and the move is accepted with probability $1$.
+- If the move to $\Sigma'$ causes the energy to go down, then $E(\Sigma')-E(\Sigma) <0$ which causes $p(\Sigma') > (p(\Sigma)$ and the move is accepted with probability $1$.
 - On the other hand if the move causes the energy to go up, then the move can still be accepted with probability
 $\exp^{-\beta(E(\Sigma')-E(\Sigma))}$ and this probability decreases exponentially as $\Delta(\Sigma',\Sigma) = E(\Sigma') - E(\Sigma)$ increases.
 
@@ -471,11 +471,10 @@ This algorithm simulates the thermal motion of atoms in thermal contact with a h
 If the system is simulated at $T>T_c$ then the thermal energy will cause it to wander among all the possible spin configurations, and the net magnetization $m$ will stay at zero.
 If $T<T_c$ then the thermal energy will still cause disordering among the spins, but a fraction of the spins will tend to get aligned in the same direction on the average, causing $m>0$.
 
-## The Landau Theory for Phase Transitions: Introducing the Energy Landscape
+## The Landau Theory for Phase Transitions
 
-The method used to study phase transitions in the prevous section was based on the direct computation of the partition function, which in general is a tough task if the mean field approximation is not made.
-There is an alternative approach to studying phase transitions, and this was discovered by Lev Landau around 1940, and is based on the computation of the free energy F for a system. This method significantly expanded the range of systems that could be analyzed using the methods of statistical mechanics and is now the de facto technique used. It allows us to go beyond the assumption made by mean field analysis, by allowing the field to actually vary as a function of position, thus resulting in a generalization of statistical mechanics called statistical field theory.
-Free energy based methods also serve as a starting point for ways in which statistical mechanics methods were first applied to the design of neural networks, as discussed in the following sections.
+There is an alternative approach to studying phase transitions, and this was discovered by Lev Landau around 1940, and is based on the computation of the free energy F for a system. This method significantly expanded the range of systems that could be analyzed using the methods of statistical mechanics and is now the de facto technique used. It allows us to go beyond the assumption made by mean field analysis, by allowing the magnetic field to actually vary as a function of position, thus resulting in a generalization of statistical mechanics called statistical field theory.
+Free energy based methods also serve as a starting point for ways in which statistical mechanics methods were first applied to the design of spin glass models, as discussed in the following sections.
 
 **The Case B = 0**
 
@@ -484,21 +483,20 @@ Recall that the free energy $F_{therm}$ for a system in thermal equilibrium at t
 $$ F_{therm} = E_{av} - TS = -T\log Z  $$
 
 I am going to generalize the definition of free energy to non-equilibrium states, which is why I have added the subscript *therm* to the formula.
-For a d-dimensional Ising Model using the mean field approximation, Z was derived in the previous section for the case $B=0$, and is given by
+For a d-dimensional Ising Model Z was derived in the previous section for the case $B=0$ using the mean field approximation, and is given by
 
-$$ Z = e^{-\beta Ndjm^2} 2^N\cosh^N(2djm_{eq}\beta) $$
+$$ Z = e^{-\beta NdJm^2} 2^N\cosh^N(2dJm_{eq}\beta) $$
 
 so that
 
-$$ F_{therm} = -Ndjm_{eq}^2 - {N\over\beta}\log(\cosh(2djm_{eq}\beta))  $$
+$$ F_{therm} = -NdJm_{eq}^2 - {N\over\beta}\log(\cosh(2dJm_{eq}\beta))  $$
 
-In these equations $m_{eq}$ is the equilibrium value of the mean field. Landau pointed out that this function can be defined even for the case $m$ is not the equilibrium value, thus resulting
-in the free energy $F(m)$ as a function of $m$,  given by
+In these equations $m_{eq}$ is the equilibrium value of the mean field. Landau pointed out that this function can be defined even for the case when the system is not in equilibrium, so that $m$ is not the equilibrium value, thus resulting in the free energy $F(m)$ as a function of $m$,  given by
 
-$$ F(m) = -Ndjm^2 - NT\log(\cosh(2djm\beta))  $$
+$$ F(m) = -NdJm^2 - NT\log(\cosh(2dJm\beta))  $$
 
 From classical thermodynamics we know that equilibrium occurs at the minimum value of $F(m)$. Solving
-${\partial F(m)\over{\partial m}} = 0$ leads to $m_{eq} = \tanh(2djm_{eq}\beta)$.
+${\partial F(m)\over{\partial m}} = 0$ leads to $m_{eq} = \tanh(2dJm_{eq}\beta)$.
 which agrees with our earlier calculations. In Landau's theory, $m$ is called the *order parameter* since $m>0$ implies some degree of order which is visible at the macro level (since a larger fraction of the spins are pointing in the same direction), while if $m=0$ the spins are completely randomized.
 
 The next step is to understand the behavior of $F(m)$ as a function of $m$. In order to do this, we first express it as a polynomial in $m$. This is facilitated by using polynomial expansions for 
@@ -507,45 +505,47 @@ $$\cosh x \approx 1 + {1\over 2}x^2 + {1\over 4!}x^4 +...\ \ \  and\ \ \ \log (1
 
 Substituting these in the expression for $F(m)$ we obtain
 
-$$ F(m) = -NT\log 2 + [Njd(1-2dJ\beta)]m^2 + ({2N\beta^3 j^4 d^4\over 3})m^4 + ...  $$
+$$ F(m) = -NT\log 2 + [NJd(1-2dJ\beta)]m^2 + ({2N\beta^3 J^4 d^4\over 3})m^4 + ...  $$
 
 Note that $F(m)$ is symmetric with respect to $m$. Ignoring higher order terms, the derivative with respect to $m$ is given by
 
-$$ {\partial F(m)\over{\partial m}} = 2mNjd(1-2dj\beta) + {8m^3 N\beta^3 j^4 d^4\over 3}  $$
+$$ {\partial F(m)\over{\partial m}} = 2mNJd(1-2dJ\beta) + {8m^3 N\beta^3 J^4 d^4\over 3}  $$
 
 It follows that $F(m)$ has a single minima at $m = 0$ if $T > 2dj$. On the other hand if $T < 2dj$ the there are 2 minima, at
 
-$$ m = \pm\sqrt{3(2dj\beta - 1)\over{4(dj\beta)^3}} $$
+$$ m = \pm\sqrt{3(2dJ\beta - 1)\over{4(dJ\beta)^3}} $$
 
 as well as another stationary point at $m=0$.
-Remember the $T = 2dj$ was identified as the critical temperature $T_c$ for ferro magnetic phase transition in the earlier analysis.
+Remember the $T = 2dJ$ was identified as the critical temperature $T_c$ for ferromagnetic phase transition in the earlier analysis.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat11.png) 
 
-Figure 10: Free Energy $F(m)$ as a function of $m$, for $T > 2dj$ and $T < 2dj$
+Figure 10: Free Energy $F(m)$ as a function of $m$, for $T > 2dJ$ and $T < 2dJ$
 
 $F(m)$ is plotted in figure 10, and it clearly shows the effect of varying $T$ on it shape and provides an alternative explanation of how phase changes come about.
-When $T > T_c$ then there is only one equilibrium state at $m=0$ at which the free energy is at a minimum, an this corresponds to the non-magnetized state.
-When $T < T_c$, there are three values of $m$ at which ${\partial F(m)\over{\partial m}} = 0$, hence the system can be one of three states:
-The states $m_{eq} = \pm\sqrt{3(2dj\beta - 1)\over{4(dj\beta)^3}}$ are stable corresponding to when spins are predominantly aligned in the up or down direction ans these are the two possible states when the system is at thermal equilibrum.
-However the state $m=0$ is clearly not a stable state, since even a slight change in the value of $m$ can cause the system to transition to the other two states.
-The other thing to note is that the value of the magnetization $m$ changes continuously with $T$, hence it is an example of a second order phase transition. Starting from $T>T_c$, if $T$ is gradually reduced, the two minima become gradually shallower until they disappear at $T=T_c$.
 
-Using the equilibrium value of $m$ given by
+- When $T > T_c$ then there is only a single minima in the free energy plot at $m_{eq}=0$ and this corresponds to the non-magnetized phase.
+- When $T < T_c$, there are three values of $m$ at which ${\partial F(m)\over{\partial m}} = 0$, hence the system can be one of three phases: The magnetizations $m_{eq} = \pm\sqrt{3(2dj\beta - 1)\over{4(dj\beta)^3}}$ are stable corresponding to when spins are predominantly aligned in the up or down direction and these are the two possible phases when the system is at thermal equilibrum. However the case $m=0$ is clearly not stable since even a slight change in the value of $m$ can cause the system to transition to the other two phases.
 
-$$ m_{eq} = \sqrt{{3(T_c - T)\over{4(dj)^3\beta^2} }}  $$
+The other thing to note is that the equilibrium value of the magnetization $m_{eq}$ changes continuously with $T$, hence it is an example of a second order phase transition. Starting from $T<T_c$, if $T$ is gradually increased, the two minima become gradually shallower,i.e, $m_{eq}$ decreases, until they disappear at $T=T_c$ at which point $m_{eq}=0$..
+
+Using the formula
+
+$$ m_{eq} = \sqrt{{3(T_c - T)\over{4(dJ)^3\beta^2} }}  $$
 
 we can see that $m_{eq}$ has a quadratic variation with $T$ in the neighborhood of the critical temperature. This was also evident in figure 6 in the previous section. Even though this behavior was arrived at in the context of the Ising model, it turns out that all second order phase transitions for $d\ge 4$ exhibit this quadratic variation irrespective of the physical material involved. For $d = 2, 3$ the exponent is not ${1\over 2}$ from experimental data, hence the Landau theory fails for $d=2,3$. The correct exponents for these cases were computed with the help of the renormalization group theory in the 1970s.
+
+The big advance that Landau made was the idenification of a phase with the minima of the free energy function. This opened the door to the analysis of systems that have much more complicated phase behavior then the Ising model susch as spin glass systems.
 
 **The Case B > 0**
 
 The analysis for this case is exactly the same as for the case $B=0$, except now the starting expression for the free energy is
 
-$$ F(m) = -Ndjm^2 - {N\over\beta}\log(\cosh(2djm\beta) + B\beta)  $$
+$$ F(m) = -NdJm^2 - {N\over\beta}\log(\cosh(2dJm\beta) + B\beta)  $$
 
 Once again, using the approximations for the $\cosh$ and $\log$ functions, it can be shown that
 
-$$ F(m) = -NT\log 2 + Njdm^2 - {N\over{2T}}(B + 2djm)^2  + {N\over{24T^3}}(B + 2djm)^4 + ... $$
+$$ F(m) = -NT\log 2 + NJdm^2 - {N\over{2T}}(B + 2dJm)^2  + {N\over{24T^3}}(B + 2dJm)^4 + ... $$
 
 Note that this expression is no longer symmetric in $m$ sue to the presence of odd powers of $m$.
 
@@ -553,10 +553,15 @@ Note that this expression is no longer symmetric in $m$ sue to the presence of o
 
 Figure 11: Free Energy $F(m)$ as a function of $m$, for $B < 0$, $B = 0$ and $B > 0$
 
-The shape of $F(m)$ as a function of $B$ is shown in figure 11, and illustrates a first order phase transition. When $B\neq 0$, $F(m)$ exhibits an asymmetric shape as function of $m$, such that for $B>0$ the minima that occurs for $m>0$ is deeper than that for $m<0$ (and vice versa if $B<0$). The shallower minima corresponds to a meta-stable state, and the system transitions to the more stable deeper minima by traversing the energy barrier between the two. If the sign of $B$ is flipped, then it causes an instantaneous change in the magnetization $m$ which also changes sign, and this is characteristic of first order phase transitions.           
+The shape of $F(m)$ for three different balues of $B$ is shown in figure 11. When $B\neq 0$, $F(m)$ exhibits an asymmetric shape as function of $m$, such that there is only a single minima (i.e., a single phase as per the Landau theory). This agrees with our earlier analysis that the presence of the external magnetic field removes second order temperature triggered phase transitions from the Ising model.
+For $B>0$ the minima that occurs for $m>0$ is deeper than that for $m<0$ (and vice versa if $B<0$). The shallower minima corresponds to a meta-stable state, and the system transitions to the more stable deeper minima by traversing the energy barrier between the two. If the sign of $B$ is flipped, then it causes an instantaneous change in the magnetization $m$ which also changes sign, and this is characteristic of first order phase transitions.           
 
+Landau's theory clarifies an important distinction between the minima of the energy function $E(\Sigma)$, where $\Sigma$ is a configuration of the system, and the minima of the free energy function $F(m)$, since it is only the latter type of minima that corresponds to a phase for the system. For $T>0$ there is more than one equilibrium configuration that realizes the $F(m)$ minima, as we saw for the Ising model. However at $T=0$, the system freezes at the maximum value of $m=1$, and at this point there is only a single configuration for the phase.
+In general this minima is subset of the minima for the energy function $E(\Sigma)$, i.e., there are some minima for $E(\Sigma)$ that do not correspond to a true phase for the system.
+These are metastable states and if the temperature is increased beyond zero, then the system will transition to one of the stable phases identified by the minima of $F(m)$.
+This has an interesting consequence for optimization problams, as we shall see in the section of Simulated Annealing.
 
-## Spin Glass Models: Frozen Complexity
+## Spin Glass Models: Frozen Randomness
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat14.png) 
 
