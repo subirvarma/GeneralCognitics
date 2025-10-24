@@ -457,11 +457,11 @@ $$ \pi(\sigma1,...,\sigma_N) = {1\over Z} e^{-\beta E(\sigma_1,...,\sigma_N)}  $
 The Metropolis algorithm works as follows:
 
 - Start with some spin configuration $\Sigma = (\sigma_1,...,\sigma_N)$ and note that probability of this configuration in equilibrium is given by $p(\Sigma) ={1\over Z} e^{-\beta E(\Sigma)}$ .
-- Propose a move to a new trial configuration $\Sigma'$ and compute the ratio.
+- Propose a move to a new trial configuration $\Sigma'$ and compute the ratio. The new configuration is typically one in which one of the spins is flipped, with the others reaming the same.
 
 $$ {p(\Sigma')\over{p(\Sigma)}} = \exp^{-\beta(E(\Sigma')-E(\Sigma))}  $$
 
-- If the move to $\Sigma'$ causes the energy to go down, then $E(\Sigma')-E(\Sigma) <0$ which causes $p(\Sigma') > (p(\Sigma)$ and the move is accepted with probability $1$.
+- If the move to $\Sigma'$ causes the energy to go down i.e., $E(\Sigma')-E(\Sigma) <0$ then $p(\Sigma') > (p(\Sigma)$ and the move is accepted with probability $1$.
 - On the other hand if the move causes the energy to go up, then the move can still be accepted with probability
 $\exp^{-\beta(E(\Sigma')-E(\Sigma))}$ and this probability decreases exponentially as $\Delta(\Sigma',\Sigma) = E(\Sigma') - E(\Sigma)$ increases.
 
@@ -470,6 +470,12 @@ The probabilistic aspect of the algorithm is implemented by using the following 
 This algorithm simulates the thermal motion of atoms in thermal contact with a heat bath at temperature $T$. After many steps of the algorithm, the system evolves into a Boltzmann distribution.
 If the system is simulated at $T>T_c$ then the thermal energy will cause it to wander among all the possible spin configurations, and the net magnetization $m$ will stay at zero.
 If $T<T_c$ then the thermal energy will still cause disordering among the spins, but a fraction of the spins will tend to get aligned in the same direction on the average, causing $m>0$.
+
+![](https://subirvarma.github.io/GeneralCognitics/images/stat34.png) 
+
+Figure: Example sample path in the state space while running the Metropolis algorithm
+
+The above figure shown an example os a sample path through the state space when the algorithm is initialized at a state which is away from the equilibrium given the temperature. Assuming that the model is at temperature $T_1<T_c$, while the initial state belongs to the phase $m=0$. The algorithm wanders randomly in the $m=0$ state space initially, and ultimately approaches the lilac ring which corresponds to equilibrium states for T=T_1$, and once it is there is continues to wander around within the ring such that various other states occur according to the Boltzmann distribution.
 
 ## The Landau Theory for Phase Transitions
 
