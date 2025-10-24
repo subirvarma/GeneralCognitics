@@ -562,10 +562,30 @@ Figure 11: Free Energy $F(m)$ as a function of $m$, for $B < 0$, $B = 0$ and $B 
 The shape of $F(m)$ for three different balues of $B$ is shown in figure 11. When $B\neq 0$, $F(m)$ exhibits an asymmetric shape as function of $m$, such that there is only a single minima (i.e., a single phase as per the Landau theory). This agrees with our earlier analysis that the presence of the external magnetic field removes second order temperature triggered phase transitions from the Ising model.
 For $B>0$ the minima that occurs for $m>0$ is deeper than that for $m<0$ (and vice versa if $B<0$). The shallower minima corresponds to a meta-stable state, and the system transitions to the more stable deeper minima by traversing the energy barrier between the two. If the sign of $B$ is flipped, then it causes an instantaneous change in the magnetization $m$ which also changes sign, and this is characteristic of first order phase transitions.           
 
-Landau's theory clarifies an important distinction between the minima of the energy function $E(\Sigma)$, where $\Sigma$ is a configuration of the system, and the minima of the free energy function $F(m)$, since it is only the latter type of minima that corresponds to a phase for the system. For $T>0$ there is more than one equilibrium configuration that realizes the $F(m)$ minima, as we saw for the Ising model. However at $T=0$, the system freezes at the maximum value of $m=1$, and at this point there is only a single configuration for the phase.
-In general this minima is subset of the minima for the energy function $E(\Sigma)$, i.e., there are some minima for $E(\Sigma)$ that do not correspond to a true phase for the system.
+Landau's theory clarifies an important distinction between the minima of the energy function $E(\Sigma)$, where $\Sigma$ is a configuration of the system, and the minima of the free energy function $F(m)$, since it is only the latter type of minima that correspond to a phase for the system. For $T>0$ there is more than one equilibrium configuration that realizes the $F(m)$ minima, as we saw for the Ising model. However at $T=0$, the system freezes at the maximum value of $m=1$, and at this point there is only a single configuration for the phase.
+As we will see in the next section, for more complex models such as spin glasses  the free energy minima are a subset of the minima for the energy function $E(\Sigma)$, i.e., there are some minima for $E(\Sigma)$ that do not correspond to a true phase for the system.
 These are metastable states and if the temperature is increased beyond zero, then the system will transition to one of the stable phases identified by the minima of $F(m)$.
-This has an interesting consequence for optimization problams, as we shall see in the section of Simulated Annealing.
+This has an interesting consequence for optimization problams, as we shall see in the section of simulated annealing.
+
+### Ising Model vs Real Magnets
+
+If we take a piece of magnetized iron and start heating it. then at a temperature above $T_c$ the magnetization will vanish, as the Ising model predicts. If we continue to increase the temperature
+beyond $T_c$ then the iron will become hotter, but what about the Isis model?
+
+![](https://subirvarma.github.io/GeneralCognitics/images/stat35.png) 
+
+Figure 10: Plot of the average energy $E_{av}$ and magnetization of the Ising model with temperature
+
+The heat in the iron is connected to the kinetic energy of the vibrational thermal motion of the iron atoms. However the Ising model does not incorporate vibrational degrees of freedom. In this case the incraese in temperature is not associated with any further increase in the energy of the system, which can be calculated using the formula for the partition function
+
+$$ Z = e^{-\beta NdJm^2} 2^N\cosh^N(2dJm_{eq}\beta) $$
+
+so that
+
+$$ E_{av} = -{\partial\log Z\over{\partial\beta}} = - 2NdJm_{eq}\tanh(2dJm_{eq}\beta)   $$
+
+As $T\rightarrow\infty$ it follows that $E_{av} = 0$ and this is its maximum value, while its minimum is realized at $T=0$ and is given by $-2NdJm_{eq}$. Hence an increase in temperature causes a randomization of the spins in the Ising model, as captured by the magnetization $m$ which goes to zero once $T>T_c$ (shown in the right hand plot above), but once this happens there is no further effect as the temperature is further increased.
+
 
 ## Spin Glass Models: Frozen Randomness
 
