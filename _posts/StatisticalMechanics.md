@@ -126,11 +126,16 @@ This can be explained as follows: In the equilibrium state the number of microst
 
 Going back to the example of a ferromagnetic material with with N atoms, each of which can have two spin values, a particular orientation of all the N spins together is a microstate for this system, and there are $M=2^N$ possible microstates. The energy $E_i$ of a microstate is a function of $(P,Q)$, where $P$ is the number of atoms with up spin and $Q = N - P$ is the number with down spin. 
 
-The maximum entropy principle from the previous section tells us that that our best estimates of the $p_i$ are given by the Boltzmann distribution
+The maximum entropy principle from the previous section tells us that that our best estimate $p_i$ that the system is in state $i$ is given by the Boltzmann distribution
 
 $$ p_i = {e^{-\beta E_i}\over Z} \ \ \ where \ \ \ Z = \sum_i e^{-\beta E_i}  $$
 
-This is sometimes referred to as 'blurry' view of the system, since we don't know the state of an individual particle but we can say something about how the energy is distributed among the mass of particles.
+![](https://subirvarma.github.io/GeneralCognitics/images/stat36.png) 
+
+Figure 0: Distribution of the energy levels wih varying temperature
+
+Plotting the Boltzmann distribution as a function of the state is a difficult proposition, since the state is multi-dimensional, with thousands of dimensions in realistic models. However it can also
+be plotted as a function of the energy levels $E$, and this is done in the above figure for gas particles moving around with velocities $v$. We can see that as the temperature increases the distribution moves towards the right, as more energetic states become more probable. Hence given the temperature we cannot say for sure what state the system is in, but we can readily estimate the probability of being in a state, given the energy levels which is sometimes referred to as 'blurry' view of the system.
 This formula enables us to compute $E_{av}$ and $S$ as functions of $Z$, in particular
 
 $$ E_{av} =  \sum_{i=1}^N {e^{-\beta E_i}\over Z} E_i   = -{\partial\log Z\over\partial\beta} $$
