@@ -71,12 +71,17 @@ $$  f_{av} =  \sum_i p_i f(x_i)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \
 
 On the basis of this information alone, what are the best estimates of the probabilities $p_i, i=1,2,...n$? This is a classic problem in probability theory, and in order to solve it we need a measure of our ignorance of the probability distribution. If we have such a measure, that quantifies ignorance or uncertainity, then the best estimates for $p_i$ would be those that maximize this quantity.
 
+![](https://subirvarma.github.io/GeneralCognitics/images/stat38.png) 
+
+Figure 0: Illustrating the change in entropy with the spread of the probability distribution
+
 How can we quantify the amount of uncertainity in a discrete probability distribution? Claude Shannon posed this question as part of his development of Information Theory, and formally showed that it is given by
 
 $$ S(p_1,p_2,...,p_n) = -\sum_i p_i \log p_i \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (2) $$               
 
 He called this quantity the entropy of the probability distribution (note that since all the $p_i \le 1$, $H$ is always a non-negative quantity). This definition agrees with the intuitive notion that more "spread out" a distribution is, the higher is its entropy. For example if $x$ is known with certainity then $S=0$ which is its minimum value, and conversely if nothing is known about $x$, then the probabilities are all equal and given by $p_i = {1\over n}, i=1,2,...n$, which results in an entropy of
 $S=\log\ n$ which is its maximum value. This also implies that if nothing is known about a system other than its entropy $S$, then the approximate number of microstates in the system is given by $e^{S}$.
+The above figure illustrates the increase in enetropy with the spread of the probability distribution.
 
 Unbeknownst to Shannon, this formula had been discovered a few decades earlier by Boltzmann in the context of his theory of statistical mechanics. However the formula for entropy was not central to his development of the theory which he derived using other physical considerations.
 Shannon's work showed that entropy was a purely mathematical concept independent of its applications in thermodynamics. Within a few years after that, it was shown that all of statistical mechanics can be derived by taking this formula for entropy as the starting point. The only physical assumption required was an enumeration of the states that the system can exist in and their energy levels. Before we get into how this was done, lets finish the problem that was posed in the beginning of this section of estimating the $p_i$ values. 
@@ -132,9 +137,9 @@ $$ p_i = {e^{-\beta E_i}\over Z} \ \ \ where \ \ \ Z = \sum_i e^{-\beta E_i}  $$
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat36.png) 
 
-Figure 0: Distribution of the energy levels wih varying temperature
+Figure 0: Boltzmann distribution of energy levels wih varying temperature
 
-Plotting the Boltzmann distribution as a function of the state is a difficult proposition, since the state is multi-dimensional, with thousands of dimensions in realistic models. However it can also
+Plotting the Boltzmann distribution as a function of the state is a difficult proposition, since the state is multi-dimensional with thousands of dimensions in realistic models. However it can also
 be plotted as a function of the energy levels $E$, and this is done in the above figure for gas particles moving around with velocities $v$. We can see that as the temperature increases the distribution moves towards the right, as more energetic states become more probable. Hence given the temperature we cannot say for sure what state the system is in, but we can readily estimate the probability of being in a state, given the energy levels which is sometimes referred to as 'blurry' view of the system.
 This formula enables us to compute $E_{av}$ and $S$ as functions of $Z$, in particular
 
@@ -480,7 +485,7 @@ If $T<T_c$ then the thermal energy will still cause disordering among the spins,
 
 Figure: Example sample path in the state space while running the Metropolis algorithm
 
-The above figure shown an example os a sample path through the state space when the algorithm is initialized at a state which is away from the equilibrium given the temperature. Assuming that the model is at temperature $T_1<T_c$, while the initial state belongs to the phase $m=0$. The algorithm wanders randomly in the $m=0$ state space initially, and ultimately approaches the lilac ring which corresponds to equilibrium states for T=T_1$, and once it is there is continues to wander around within the ring such that various other states occur according to the Boltzmann distribution.
+The above figure shown an example of a sample path through the state space when the algorithm is initialized at a state which is away from the equilibrium given the temperature. Assuming that the model is at temperature $T_1<T_c$, while the initial state belongs to the phase $m=0$. The algorithm wanders randomly in the $m=0$ state space initially, and ultimately approaches the lilac ring which corresponds to equilibrium states for T=T_1$, and once it is there is continues to wander around within the ring such that various other states occur according to the Boltzmann distribution.
 
 ## The Landau Theory for Phase Transitions
 
@@ -589,7 +594,18 @@ so that
 
 $$ E_{av} = -{\partial\log Z\over{\partial\beta}} = - 2NdJm_{eq}\tanh(2dJm_{eq}\beta)   $$
 
-As $T\rightarrow\infty$ it follows that $E_{av} = 0$ and this is its maximum value, while its minimum is realized at $T=0$ and is given by $-2NdJm_{eq}$. Hence an increase in temperature causes a randomization of the spins in the Ising model, as captured by the magnetization $m$ which goes to zero once $T>T_c$ (shown in the right hand plot above), but once this happens there is no further effect as the temperature is further increased.
+This formula shows that minimum of the average energy $E_{av}$ is realized at $T=0$ and is given by $-2NdJm_{eq}$. As the temperature is increased, $E_{av}$ achieves its maximum value $E_{av}=0$ at $T=T_c$, 
+since $m_{eq}$ goes to zero at this temperature. 
+Hence an increase in temperature causes a randomization of the spins in the Ising model, as captured by the magnetization $m_{eq}$ (shown in the right hand plot above)
+Any further increase in temperature beyond $T_c$ does not lead to higher energy levels, which is somewhat counter-intuitive, but is a result of the fact that Ising model does not incorporate the vibrational degrees of freedom.
+
+![](https://subirvarma.github.io/GeneralCognitics/images/stat37.png) 
+
+Figure 10: Variation of the Boltzmann distribution in an Ising model with temperature
+
+The above figure shown how the energy levels in the Ising model change with temperature, as captured by the Boltzmann distribution. 
+
+
 
 
 ## Spin Glass Models: Frozen Randomness
