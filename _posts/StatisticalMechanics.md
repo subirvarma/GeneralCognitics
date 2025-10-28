@@ -140,8 +140,12 @@ $$ p_i = {e^{-\beta E_i}\over Z} \ \ \ where \ \ \ Z = \sum_i e^{-\beta E_i}  $$
 Figure 0: Boltzmann distribution of energy levels wih varying temperature
 
 Plotting the Boltzmann distribution as a function of the state is a difficult proposition, since the state is multi-dimensional with thousands of dimensions in realistic models. However it can also
-be plotted as a function of the energy levels $E$, and this is done in the above figure for gas particles moving around with velocities $v$. We can see that as the temperature increases the distribution moves towards the right, as more energetic states become more probable. Hence given the temperature we cannot say for sure what state the system is in, but we can readily estimate the probability of being in a state, given the energy levels which is sometimes referred to as 'blurry' view of the system.
-This formula enables us to compute $E_{av}$ and $S$ as functions of $Z$, in particular
+be plotted as a function of the energy levels $E$, so instead of considering the probability of the system being in state $i$, we instead consider the the probability of the system being in a state with energy $E$.
+For example in the above figure the Boltzmann distribution is plotted for gas particles moving around with velocities $v$. We can see that as the temperature increases the distribution moves towards the right, as more energetic states become more probable. Hence given the temperature we cannot say for sure what state the system is in or what energy it has, but we can estimate the probability of this happening, which is sometimes referred to as 'blurry' view of the system.
+
+An interesting property of the Boltzmann distribution is that the statistics of macroscopic quantities of interest, susch as average energy or the entropy, can be expressed as a function of $Z$ alone. Hence solving a problem
+in statistical mechanics reduces to calculating the $Z$ for the system, which is unfortunately quite difficult in general.
+The average energy $E_{av}$ can be written as
 
 $$ E_{av} =  \sum_{i=1}^N {e^{-\beta E_i}\over Z} E_i   = -{\partial\log Z\over\partial\beta} $$
 
@@ -312,7 +316,7 @@ $$ (\sigma_i\sigma_{i+n})_{corr} = \tanh^{n-1}(\beta j) $$
 This implies that even at very low temperatures, for example for $\beta = 0.9999$, we can still make $n$ large enough so the the correlation goes to zero. From this we can conclude that there is no phase transition in the 1-D Ising model for non-zero temperature values, i.e., it does not exhibit the phenomenon of spontaneous magnetisation in the absence of an external magnetic field.
 
 
-### Ising Model for More than One Dimension: Phase Transitions
+### Ising Model for Two or more Dimensions: Phase Transitions
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat8.png) 
 
@@ -603,38 +607,37 @@ Any further increase in temperature beyond $T_c$ does not lead to higher energy 
 
 Figure 10: Variation of the Boltzmann distribution in an Ising model with temperature
 
-The above figure shown how the energy levels in the Ising model change with temperature, as captured by the Boltzmann distribution. 
+The above figure shown how the distribution of the energy levels in the Ising model changes with temperature, as captured by the Boltzmann distribution. The distribution moves to the left and becomes narrower in the range of possible energies as the temperature decreases. The narrowing in the base can be explained as a result of the phase transition to $m>0$ (or $m<0), which restricts the numkber of spin configurations, and thus the energies, that can be accessed.
 
-
-
-
-## Spin Glass Models: Frozen Randomness
+## Spin Glass Models: Randomized Interactions
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat14.png) 
 
-Figure 12: Spin Orientation in Ferromagetic, Anti-Ferromagnetic and Spin Glass materials
+Figure 12: Spin Orientation in Ferromagetic, Anti-Ferromagnetic and Spin Glass materials. Ferromagnetic interactions in red and anti-ferromagnetic in red.
 
-Back in the 1950s scientists were actively investigating the properties of new materials created as a result of mixing two or more elements. This was a fruitful avenue of research and resulted in the discovery of semiconductors, that were created by adding impurities such as phosphorus to silicon. In the same spirit a group at Bell Labs created a new material by adding ferromagnetic atoms, such as iron, to a conducting substrate, such as copper. When they studied the magnetic properties of this material as a function of temperature, they found something interesting. 
+Back in the 1950s scientists were actively investigating the properties of new materials created as a result of mixing two or more elements. This was a fruitful avenue of research and resulted in the discovery of semiconductors, that were created by adding impurities such as phosphorus to silicon. In the same spirit a group at Bell Labs created a new material by adding small quantities of ferromagnetic atoms, such as iron, to a conducting substrate, such as copper. When they studied the magnetic properties of this material as a function of temperature, they found something interesting. 
 
 - When the temperature exceeded some critical point, there was no magnetism detected, which is just as in ferromagnetic materials
-- Below the critical temperature, the material become magnetic. However, after gradually increasing as the temperature was further reduced, the magnetisation hit a limit at a finite temperature and stayed there even at lower temperatures.
+- Below the critical temperature, the material become magnetic. However, after gradually increasing as the temperature was further reduced, the magnetisation hit a limit at a lower level as compared to ferromagnet, and stayed at that level as the temperature was further reduced.
 
-It seems that the presence of the copper atoms in the spin glass interferes with the tendency of iron atoms to try to line up as temperature decreases and this random orientations of spins is said to be "dis-ordered". In the same way that an amorphous solid like window glass doesn’t have an orderly crystal structure, a spin glass doesn’t have an orderly magnetic structure.
+It seemed that the presence of the copper atoms was interfering with the tendency of iron atoms to try to align with each other as the temperature decreases was reduced. 
+This was a new kind of magnetic behavior not seen before, and soon physicists came up with a model for it. As shown in figure 12, all the spins of ferromagnetic materials tend to align at $T=0$, while those in anti-ferromagnetic also tend to align but in opposite directions. Spin Glasses on the other hand do not exhibit any such regularity since they contain a mixture of ferromagnetic and anti-ferromagnetic interactions. Even at low temperatures their spins can have random looking orientations as shown in the right hand side of the figure. In the same way that an amorphous solid like window glass doesn’t have an orderly crystal structure, a spin glass doesn’t have an orderly magnetic structure.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat27.png) 
 
 Figure 15: Illustrating Frustration
 
-This was a new kind of magnetic behavior not seen before, and soon physicists came up with a model for it. As shown in figure 12, all the spins of ferromagnetic materials tend to align at $T=0$, while those in anti-ferromagnetic also tend to align but in opposite directions. Spin Glasses on the other hand do not exhibit any such regularity. Even at low temperatures, their spins can have different orientations as shown in the right hand side of the figure. This is a result of the fact that it is impossible to satisfy all the couplings at the same time. This results in a phenomenon called 'frustration' and arises whenever there exists a loop in which the product of the couplings is negative. As a result there is a proliferation of metstable states in disordered systems i.e., a spin glass system can have many more than two phases in low temperature equilibrium. The spin orientations in each of these phases looks seemingly random, like the temperature induced thermodynamic randomness we see in ferromagnets, but there is a difference between the two.
-The randomness in the ferromagnetic material gradually decreases as the temperature is reduced, and ultimately it becomes completely ordered at $T=0$. The randomness in spin values in a spin glass on the other hand becomes "frozen" as the temperature is reduced, and it maintains the randomness even at $T=0$.
+It was suggested that the random spins orientations were being caused 
+as result of the fact that it is impossible to satisfy all the inter node spin couplings at the same time. This results in a phenomenon called 'frustration' and arises whenever there exists a loop in which the product of the spins is negative. This is illustrated in the right hand side of above figure: The node in the upper vertex has a anti-ferromagnetic coupling with the node on the left, as a result of which its spin oriented downwards. But not the spin on the right side is in a conundrum. Since it has a ferromagnetic coupling with the other nodes, it doesn't have a one best spin configuration that it can settle to in equilibrium. As sresult it, in some cases it can settle in to UP spin configurations and in other casees to the DOWN spin, and it chooses one of these at random.
+As a result there is a proliferation of metastable states i.e., a spin glass system can have many more than two phases in low temperature equilibrium, and unlike a ferromagnet, the spin configuration in a phase can look random. 
+The randomness in the ferromagnetic material gradually decreases as the temperature is reduced, and ultimately it becomes completely ordered at $T=0$. The randomness in a spin glass on the other hand becomes "frozen" as the temperature is reduced, and it maintains the randomness even at $T=0$.
 We will see in the next section that there are some order parameters that are able to capture the frozen disorder in a spin glass.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat16.png) 
 
 Figure 15: Energy Landscape in Spin Glasses
 
-Something that was realized pretty early in the study of spin glasses is that below the critical temperature, their free energy landscape is quite unlike that for magnetic ferromagnetic materials. It consists of multipe peaks and valleys as shown in figure 14 which seem to be quite random and it leads to the observation that a spin glass has an infinite nuber of phases potentially. But is there an order that exists within this randomness? The discovery os such an order turned out to be a very difficult theoretical problem, and the solution did not emerge for another three decades until the mid-1980s and it won Giorgio Parisi the Nobel Prize in 2021.  It also turned out that the solution to the spin glass problam had a wide range of applicability to other difficult problems which involved dis-ordered states, for example in biology, aritficial neural networks and combinatorial optimization.
-
+It was realized pretty early in the study of spin glasses that below the critical temperature their free energy landscape is quite unlike that for magnetic ferromagnetic materials. It contains multipe peaks and valleys as shown in figure 14 and these seem to be quite random. From Landau theory we know that a phase corresponds to a minima of the free energy, which leads to the observation that a spin glass can have an infinite number of phases potentially. But is there an order that exists within this randomness? The discovery of such an order turned out to be a very difficult theoretical problem, and the solution did not emerge for another three decades until the mid-1980s and it won Giorgio Parisi the Nobel Prize in 2021.  It also turned out that the solution to the spin glass problam had a wide range of applicability to other difficult problems which involved dis-ordered states, for example in biology, aritficial neural networks and combinatorial optimization.
 
 ### Spin Glass Models: Edwards Anderson (EA) and Sherrington Kirkpatrick (SK) Models
 
