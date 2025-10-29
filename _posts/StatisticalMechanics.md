@@ -788,13 +788,15 @@ $$   P(q) = {1\over 2}[\delta(q+m^2)+\delta(q-m^2)]   $$
 
 as shown in the bottom part of the above figure. Note that the number of peaks of $P(q)$ is not equal to the number of pure states, but to the number of possible values taken by the overlap.
 
-This figure also shows the contrast between the overlap distributions in the SK model vs the Ising model (note that in both cases, unlike what is shown in the figure, the maximum value of the overlap is less than 1, unless $T=0$). In fact in a spin glass the number of phases becomes infinite as $T\rightarrow 0$ as a result of which $P(q)$ becomes a continuous function, and it is this function that serves as the order parameter for these systems.
+This figure also shows the contrast between the overlap distributions in the SK model vs the Ising model (note that in both cases, unlike what is shown in the figure, the maximum value of the overlap is less than 1, unless $T=0$). 
+The upper figure shows the overlap distribution in the SK model at some temperature $T$ between zero and $T_c$, and we can see that there are a large number of possible overlaps, which implies the existence of a large number of phases.
+In fact in the SK model the number of phases becomes infinite as $T\rightarrow 0$ as a result of which the overlap distribution $P(q)$ becomes a continuous function, and it is this function that serves as the order parameter for these systems. In effect the overlap distribution $P(q)$ turned out to be long sought after regularity in the random patterns of spin glass phases, and it took the best physicists in the world more than 20 years to discover it. Hence the spin glass phase configurations are random, but their overlaps follow a well defined law that can be computed. The curve tells us that the phase patterns in a spin glass all overlap with each other, but there some patterns that are closer in overlap than others.
 
-But how did scientists arrive at this highly non-intuitive notion of continuous symmtry breaking, and the resulting continous overlap distribution? This was done through another higly non-intuitive mathematical trick called the replica method, and this is the subject of the next section.
+But how did scientists arrive at this highly non-intuitive notion of a continous overlap distribution? This was done through another higly non-intuitive mathematical trick called the replica method, and this is the subject of the next section.
 
 ### The Replica Method
 
-So how do we go about analyzing the SK spin glass mode and compute its free energy function? Using the Landau theory for phase transitions, we start with the free energy density function $f_N(J)$ for $N$ spins for a particular realization of the interaction strength $J_{ij}$, given by
+So how do we go about analyzing the SK spin glass model and compute its free energy function? Using the Landau theory for phase transitions, we start with the free energy density function $f_N(J)$ for $N$ spins for a particular realization of the interaction strength $J_{ij}$, given by
 
 $$ f_N(J) = -{1\over{\beta N}} \log{\sum_{[\sigma]}e^{-\beta H_N(J,\sigma)}} = -{1\over{\beta N}}\log Z_N(J)  $$
 
@@ -814,62 +816,64 @@ $$ \lim_{n\rightarrow 0} {Z^n - 1\over n} = \lim_{n\rightarrow 0}{e^{n\log Z} - 
 
 Thus
 
-$$ E_J(\log Z) = \lim_{n\rightarrow 0} {E_J(Z^n) - 1\over n} =  \lim_{n\rightarrow 0} {\log E_J(Z^n)\over n}  $$
+$$ E_J(\log Z_N) = \lim_{n\rightarrow 0} {E_J(Z^n_N) - 1\over n} =  \lim_{n\rightarrow 0} {\log E_J(Z^n_N)\over n}  $$
 
-Hence we have effectively replaced the computation of $E_J(\log Z_J)$ by that of $E_J(Z_J^n)$, which is much easier to carry out.
+where $Z^n_N$ is system consisting of $n$ independent replicas of the original system.
+Hence we have effectively replaced the computation of $E_J(\log Z_N)$ by that of $E_J(Z_N^n)$, which is much easier to carry out.
 
-With the random interactions frozen at $J_{ij}$, consider $n$ independent replicas of the system. Replicas have the same couplings $J_{ij}$, but evolve independently, so that they can end up with a different spin configuration.
+With the random interactions frozen at $J_{ij}$, consider $n$ independent replicas of the system. Replicas have the same couplings $J_{ij}$, but evolve independently, so that they can end up with different spin configurations. 
 The overlap function $Q_{ab}$ between two replicas is defined by 
 
 $$ Q_{ab} = {1\over N} \sum_{i=1}^N E(\sigma_i^a \sigma_i^b) $$
 
+where the expectation is with respect to the Boltzmann distribution.
 The free energy density for this system of replicas is given by
 
-$$ f_n(N,J) = -{1\over{\beta N}} \log Z_J^n $$
+$$ f_n(N,J) = -{1\over{\beta N}} \log Z_N^n $$
 
 Since the replicas are independent, the partition function $Z_J^n$ is given by 
 
-$$ Z_J^n = \prod_{a=1}^n \sum_{\sigma^a} e^{\beta\sum_{a=1}^n\sum_{i\lt j} J_{ij}\sigma^a_i\sigma^a_j} $$
+$$ Z_N^n = \prod_{a=1}^n \sum_{[\sigma^a]} e^{\beta\sum_{a=1}^n\sum_{i\lt j} J_{ij}\sigma^a_i\sigma^a_j} $$
 
-where each of the summations $\sum_{\sigma^a}$ is over all possible configuations of the spins in a replica labeled by $a$. 
+where each of the summations $\sum_{[\sigma^a]}$ is over all possible configuations of the spins in a replica labeled by $a$. 
 Define a function $f'_N(n)$ given by
 
-$$  f'_N(n) = -{1\over{\beta Nn}} \log E_J(Z_J^n) $$
+$$  f'_N(n) = -{1\over{\beta Nn}} \log E_J(Z_N^n) $$
 
 where
 
-$$  E_J(Z_J^n) = \sum_J p(J) Z_J^n $$
+$$  E_J(Z_N^n) = \sum_J p(J) Z_N^n $$
 
 Averaging over $J$ results in $n$ replicas, but they are no longer independent. Indeed they are correlated since their spins are constrained by the fact that they all follow the common interaction law given by $J$.
 Taking the limit $n\rightarrow 0$ and using the replica formula, it follows that
 
-$$ \lim_{n\rightarrow 0} f'_N(n)  = -{1\over{\beta N}}\lim_{n\rightarrow 0}{E_J(Z_J^n) - 1\over n}  = -{1\over{\beta N}}E_J(\log Z) =  {\overline f_N} $$
+$$ \lim_{n\rightarrow 0} f'_N(n)  = -{1\over{\beta N}}\lim_{n\rightarrow 0}{E_J(Z_N^n) - 1\over n}  = -{1\over{\beta N}}E_J(\log Z_N) =  {\overline f_N} $$
 
-Taking this limit assumes that $E_J(Z^n)$ continues to be well defined even when the number of replicas $n$ is not an integer, which is known as analytical continuation in mathematics.
+Taking this limit assumes that $E_J(Z^n_N)$ continues to be well defined even when the number of replicas $n$ is not an integer, which is known as analytical continuation in mathematics.
 
 After some manipulations, that involve the use of the Hubbard-Stratonovich transform, it can be shown that
 
-$$ E_J(Z_J^n) = \prod_{a\lt b}^n \int dQ_{ab} \exp^{-\beta nN f_n(Q_{ab})}  $$
+$$ E_J(Z_N^n) = \prod_{a\lt b}^n \int dQ_{ab} \exp^{-\beta nN g_n(Q_{ab})}  $$
 
 where $Q_{ab}$ is the overlap function between replicas that was introduced earlier, and
 
-$$ f_n(Q_{ab}) = -{\beta\over 4} + {\beta\over 2n}\sum_{a\lt b}^n Q_{ab}^2 - {1\over{\beta n}}\log[\sum_{(\sigma_a)}\exp^{ \beta^2 \sum_{a\lt b}^n Q_{ab}\sigma_a\sigma_b }] $$
+$$ g_n(Q_{ab}) = -{\beta\over 4} + {\beta\over 2n}\sum_{a\lt b}^n Q_{ab}^2 - {1\over{\beta n}}\log[\sum_{[\sigma_a]}\exp^{ \beta^2 \sum_{a\lt b}^n Q_{ab}\sigma_a\sigma_b }] $$
 
-where the summation $\sum_{\sigma_a}$ is over all possible spin configurations.
+where the summation $\sum_{[\sigma_a]}$ is over all possible spin configurations.
 Taking the limit $N\rightarrow\infty$, this expression can be evaluated by the saddle point approximation method, which leads to
 
-$$ E_J(Z_J^n)\approx \sqrt{{\delta^2 f\over{\delta Q_{sp}}}} \exp^{-\beta nN f_n(Q_{sp})}  $$
+$$ E_J(Z_J^n)\approx \exp^{-\beta nN g_n(Q_{sp})} $$
 
-where $Q_{sp}$ is evaluated at the value of $Q_{ab}$  which achieves its saddle point, i.e., ${\partial f_n\over{\partial Q_{ab}}} = 0$. 
+$$  \approx 1 - \beta nN g_n(Q_{sp})  $$
+
+where $Q_{sp}$ is evaluated at the value of $Q_{ab}$  which achieves its saddle point, i.e., ${\partial g_n\over{\partial Q_{ab}}} = 0$. 
 It follows that 
 
-$$ f'_N(n) \approx  -{1\over{\beta Nn}}(K - \beta nN f_n(Q_{sp})) $$
+$$ f'_N(n) =  -{1\over{\beta Nn}}( 1 - \beta nN g_n(Q_{sp}) - 1) = g_n(Q_{sp}) $$
 
-for large values of $N$ (where $K$ is an expression that does not depend on $N$), so that
+In the final step
 
-$$ \lim_{N\rightarrow\infty} f'_N(n) = f_n(Q_{sp}) $$
-
-The free energy ${\overline f}(Q_{sp})$ can be evaluated by taking the limit of $f_n(Q_{sp})$ as $n\rightarrow 0$. 
+$$ {\overline f} = \lim_{n\rightarrow 0} g_n(Q_{sp}) $$
 
 So how do we get hold of the values of the matrix $Q_{sp}$ at the saddle point? The way scientists have proceeded is by making educated guesses (called *ansatz*) which depend on a finite number of parameters, and then computing these parameters by using the saddle point equations.
 
