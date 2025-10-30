@@ -18,17 +18,19 @@ Boltzmann's great insight was the realization that this randomness could be capt
 
 $$ p_i = {\exp^{-\beta E_i}\over{\sum_j \exp^{-\beta E_j}}}  $$
 
-where $p_i$ is the probability that the system is in the $i^{th}$ state, $\beta={1\over T}$ is the inverse temperature and $E_i$ is the energy of the $i^{th}$ state. The state depends on the physics of the system under consideration: For example for a box of gas it would consist of the velocities of the molecules, for a magnet it would be the orientation of the spins of the individual atome.
-This is one of the most important formulae in all of physics and underlies statistical mechanics.
+where $p_i$ is the probability that the system is in the $i^{th}$ state, $\beta={1\over T}$ is the inverse temperature and $E_i$ is the energy of the $i^{th}$ state. This is one of the most important formulae in all of physics and underlies statistical mechanics.
+The state depends on the physics of the system under consideration: For example for a box of gas it would be the number of molecules moving with a certain velocity, for a magnet it would be the number of atoms with spins pointing in a certain direction etc.
+A few decades after Boltzmann, probability once again entered physics by way of quantum mechanics. In statistical mechanics probabilities reflect the fact that we have an imperfect knowledge about the state the system is in, but is that the case for quantum mecahnics too? In other words does a quantum system such as an electron have internal microstates, and the lack of knowledge of those states leads to uncertainities when we make measurements. A lot of people, including Einstein, though so, and the internal microstates of a quantum system were called hidden variables. However in 1960s, Joseph Bell proved that there are no such hidden variables in quantum theory, and hence quantum probabilities are fundamentally different those in statistical mechanics.
 
-Statistical mechanics also led to a precise definition for the entropy of a collection of particles. Entropy had been introduced in the mid-1800s by Clausius as way of restating Carnot's results for the efficiency of the ideal steam engine, and it is something that could be measured macroscopically, but its true nature remained a mystery.
-Boltzmann showed that entropy was a measure of our ignorance of the state of the system, and gave a formula for entropy which was entirely in terms of the probability distribution $p_i$ of the systaem state, 
+Statistical mechanics also led to a precise definition for the entropy of a system. Entropy had been introduced in the mid-1800s by Clausius as way of restating Carnot's results for the efficiency of the ideal steam engine, and it is something that could be measured macroscopically, but its true nature remained a mystery.
+Boltzmann showed that entropy was a measure of our ignorance of the state of the system, and gave a formula for entropy 
 
 $$ S = -\sum_i p_i\log p_i $$
 
-so that greater unceratinity about the state of the system led to higher entropy. For example $S$ is maximized at $S=\log n$ if $p_i = {1\over n}$ for all $i$, i.e., we have the least amount of information about the systems's state, and it minimized at $S=0$ if one of the $p_i$'s is one and the rest zero.
+where $p_i$ is the probability that the system is in state $i$,
+so that greater unceratinity about the state of the system led to higher entropy. For example $S$ is maximized at $S=\log\ n$ if $p_i = {1\over n}$ for all $i$, i.e., we have the least amount of information about the systems's state, and it is minimized at $S=0$ if one of the $p_i$'s is one and the rest zero.
 This implied that if we have a more detailed view of the system then the entropy would be lower since we would have more information about the state the system is in.
-This did not entirely clear up the matter, since the definition implied that entropy was somehow connected to the observer, hence it was a subjective quantity rather than an objective property of matter. There were paradoxes such as that of Maxwell's Demon that were thought up to illustrate this point, and this is where things stood until Claude Shannon came along.
+This did not entirely clear up the matter, since the definition implied that entropy was somehow connected to the observer's knowledge about the system, hence it was a subjective quantity rather than an objective property of matter. There were paradoxes such as that of Maxwell's Demon that were thought up to illustrate this point, and this is where things stood until Claude Shannon came along.
 
 In the 1940s Shannon was looking for a measure of information contained in a message, and he hit upon a formula that was precisely the same as Boltzmann's definition of entropy (though Shannon was not aware of it at that time). Shannon defined the amount of information in a message as a measure of our ignorance about the contents of the message, the more ignorant we are, greater the information, and this precisely what Boltzmann had identified as the entropy of a system.
 Shannon actually derived the formula for entropy by purely probabilistic reasoning, by looking for a measure of the amount of uncertainity in a probability distribution and this definition was applicable to any distribution whatsoever, whether it arose in statistical mechanics or information theory.
@@ -59,11 +61,11 @@ Spin glass models first appeared in the mid-1970s and these were extensions to t
 Spin glasses by themselves haven't become commercially important as materials, but the models that were built to explain their behavior had an unexpected side effect. They inspired the neural network models that were proposed in 1980s, initially by John Hopfield at Caltech, and later by Geoffrey Hinton and his collaborators. Hopfield regarded his network as a type of spin glass, more precisely as a modified SK model, and showed that the system can be made to function as an associative memory. Hopfield's great insight was the realization the interaction between spins in his model could be chosen in a manner such that it resulted in as many phases as there are memories to the stored, and moreover the equilibrum state in each phase corresponded with one of the stored memories. Hence if the system was initialized in a state that was near a stored memory, then it gradually settled into an equilibrium configuration that corresponded to that memory.
 
 Geoff Hinton and Pat Sejnowski were inspired by the Hopfield network, but they asked a different question. Instead of trying to remember the exact bit patterns, which is what the Hopfield network does, what if a network could be used to generate samples from the (unknown) probability distribution that the training data was drawn from. This is a very important problem in practice, for example consider the following: We have a bunch of N dimensional training data samples $(x_1,...,x_N)$ drawn from some unknown probability distribution $q(x_1,...,x_N)$. For example a sample could be an N pixel image, with each pixel assuming either black or white values.
-If the network can be trained to learn this probability distribution, then it can used it to generate new samples. Thus the network would become a generator of new images similar to those in the training set. This was the very beginning of the field of generative AI which has assumed such gigantic importance in the present day, with LLMs being the prime example.
+If the network can be trained to learn this probability distribution, then it can used it to generate new samples and thus the network would become a generator of new images similar to those in the training set. This was the very beginning of the field of generative AI which has assumed such gigantic importance in the present day, with LLMs being the prime example.
 Hinton and Sejnowski named their network the Boltzmann machine, the reason being that the equilibrium Boltzmann distribution $p$ of their network served as an approximation to the unknown probability distribution $q$. How were they able to accomplish this? They did it introducing the idea of learning the inter-node interactions (or weights) from the training data such that the 'distance' between the distributions $p$ nand $q$ is minimized.
 The neural networks that that we use today are a direct descendant of these early models and use similar principles.
 
-## System with a Large Number of Interacting Particles
+## Systems with a Large Number of Interacting Particles
 
 Suppose a quantity $x$ can assume the discrete values $x_i, i=1,2,..n$ with the unknown probabilities $p_i$, and all that is known is the expectation $f_{av}$ of the function $f(x_i)$, so that
 
@@ -507,11 +509,15 @@ For a d-dimensional Ising Model Z was derived in the previous section for the ca
 
 $$ Z = e^{-\beta NdJm^2} 2^N\cosh^N(2dJm_{eq}\beta) $$
 
+where equilibrium mean field value $m_{eq}$ satisfies the equation
+
+$$ m_{eq} = \tanh(2dJm_{eq}\beta) $$
+
 so that
 
 $$ F_{therm} = -NdJm_{eq}^2 - {N\over\beta}\log(\cosh(2dJm_{eq}\beta))  $$
 
-In these equations $m_{eq}$ is the equilibrium value of the mean field. Landau pointed out that this function can be defined even for the case when the system is not in equilibrium, so that $m$ is not the equilibrium value, thus resulting in the free energy $F(m)$ as a function of $m$,  given by
+Landau pointed out that this function can be defined even for the case when the system is not in equilibrium, so that $m$ is not the equilibrium value, thus resulting in the free energy $F(m)$ as a function of $m$,  given by
 
 $$ F(m) = -NdJm^2 - NT\log(\cosh(2dJm\beta))  $$
 
@@ -657,8 +663,9 @@ This assumed that all interactions were confined to neighboring atoms (the set $
 - As in the Ising model, the spins can assume values $\pm 1$.
 - The strength of the interaction $J_{ij}$ remains symmetric, but is not a constant anymore, but is a function of the two spins taking part in the interaction and can vary randomly in magnitude as well as sign.
 
-This first assumption simplified the mathematical analysis of the model, even though it did away with any spatial structure in the model such as dimensionality. Hence each atom is the nearest neighbor of every other atom. This assumption is a bit non-intuitive, but it turned out to be useful in applying this model to areas beyond physics, such as biology and neural networks, since in these systems the connections between nodes extends beyond nearest neighbors.
-The variable coupling strength captures the fact that the interacting spins are at variable distances from each other in an actual spin glass.
+Before the SK model, prior systems such as the Ising model sought to models systems encountered in physics, susch as ferromagnets, hence all interactions were restricted to be local with neighboring spins. These models turned out to be difficult to analyze, and as we saw in the last section, physicists resorted to the mean field approximation in order to make headway. However if you think about it, the mean field approximation is a non-local assumption, since we are assuming that each spin is influenced by all the other spins in the system. Sherrington and Kirkpatrisk were probably inspired by the success of the mean field model, and sought to create a spin glass model in which each spin explicitly interacts with all the other spins. Their intuition turned out to be correct, and indeed the SK model lent itself to an exact solution, after a lot of effort. Note that the SK model
+does away with any spatial structure such as dimensionality since each atom is the nearest neighbor of every other atom. This assumption is a bit non-intuitive, but it turned out to be useful in applying this model to areas beyond physics, such as biology and neural networks, since in these systems the connections between nodes extends beyond nearest neighbors.
+The variable coupling strength $J_{ij}$ captures the fact that the interacting spins are at variable distances from each other in an actual spin glass.
 Under these assumptions the energy function for $N$ spins becomes
 
 $$ H_N = -\sum_i\sum_{j\lt i} J_{ij}\sigma_i\sigma_j $$
@@ -869,7 +876,7 @@ $$  \approx 1 - \beta nN g_n(Q_{sp})  $$
 where $Q_{sp}$ is evaluated at the value of $Q_{ab}$  which achieves its saddle point, i.e., ${\partial g_n\over{\partial Q_{ab}}} = 0$. 
 It follows that 
 
-$$ f'_N(n) =  -{1\over{\beta Nn}}( 1 - \beta nN g_n(Q_{sp}) - 1) = g_n(Q_{sp}) $$
+$$ f'_N(n) = -{1\over{\beta N}}{E_J(Z_N^n) - 1\over n} = -{1\over{\beta Nn}}( 1 - \beta nN g_n(Q_{sp}) - 1) = g_n(Q_{sp}) $$
 
 In the final step
 
@@ -879,9 +886,9 @@ So how do we get hold of the values of the matrix $Q_{sp}$ at the saddle point? 
 
 **The Replica Symmetric Solution**
 
-The simplest structure for $Q_{ab}$ is known as the replica symmetric (RS) solution. In this case the overlap $q_{ab}$ between any two replicas is the same, i.e., $q_{ab} = q_0$ for $a\ne b$ and $q_{aa} = 1$ along the diagonal. Substituting this back into the equation for $f_n(Q_{ab})$ and taking the limit as $n\rightarrow 0$ so that $f(q) = \lim_{n\rightarrow 0} f_n(q)$, it can be shown that the saddle point for $f(q)$ is given by $q=0$ if $T>T_c$. If $T<T_c$ then a solution with $q>0$ does exist, however this solution suffers from the issue that the resulting entropy $S$ is less than zero, which means that the solution is not correct.
+The simplest structure for $Q_{ab}$ is known as the replica symmetric (RS) solution. In this case the overlap $Q_{ab}$ between any two replicas is the same, i.e., $Q_{ab} = q_0$ for $a\ne b$ and $Q_{aa} = 1$ along the diagonal. Substituting this back into the equation for $f_n(Q_{ab})$ and taking the limit as $n\rightarrow 0$ so that $f(q) = \lim_{n\rightarrow 0} f_n(q)$, it can be shown that the saddle point for $f(q)$ is given by $q=0$ if $T>T_c$. If $T<T_c$ then a solution with $q>0$ does exist, however this solution suffers from the issue that the resulting entropy $S$ is less than zero, which means that the solution is not correct.
 
-The correct structure, that was proposed by Parisi, is a matrix $Q_{ab}$ with an iterative block structure in which the symmetry between pairs of replicas breaks down, i.e., $q_{ab}\ne q_{ba}$.
+The correct structure, that was proposed by Parisi, is a matrix with an iterative block structure in which $Q_{ab}$ depends on both $a$ and $b$.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat20.png) 
 
@@ -894,7 +901,7 @@ The first two iteration of replica symmetry breaking (RSB) is shown in figure 16
 - This procedure can be iteratively repeated within each of the blocks, leading to k step RSB or k-RSB. An example of 2-RSB is shown in the rightmost figure with corresponding parameters $q_0, q_1$ and $q_2$.
 - The complete solution is obtained in the limit $k\rightarrow\infty$, in which case the elements of the matrix become a function $q(x), 0\le x\le 1$.
 
- To summarize, we have obtained a solution for the free energy ${\overline f}$ as a function of the elements of the matrix $Q_{ab}$, which can be regarded as an order parameter and this order parameter is the overlap between configurations belonging to different replicas. But what is the interpretation of this solution in terms of the spin glass model? We will answer this in the next sub-section.
+ To summarize, we have obtained a solution for the free energy ${\overline f}$ as a function of the elements of the matrix $Q_{ab}$, which can be regarded as an order parameter and this order parameter is the overlap between configurations belonging to different replicas. But what is the interpretation of this solution in terms of the spin glass model? We answer this in the next sub-section.
 
 ### Connection between Replica Symmetry Breaking and the Spin Glass Model
 
@@ -902,8 +909,8 @@ We defined the probability distribution of the overlap between two pure states $
 
 $$ {\overline P}(q) = \lim_{n\rightarrow 0}{2\over{n(n-1)}} \sum_{a\gt b} \delta(q - q_{ab}) $$
 
-This equation is saying that the average probability that two pure states of the system have overlap $q$ is equal to the fraction of elements of the overlap matrix $Q_{ab}$ that are equal to $q$. This means that the
-elements of the replica overlap matrix (after taking the limit $N\rightarrow\infty$), are the physical values of the overlap between pure states, and the number of elements of $Q_{ab}$ that are equal to q is related to the probability of $q$. Hence surprisingly the matrix $Q_{ab}$ that arose a result of a mathematical trick to simplify calculations, also has a deep connection to the physics of the spin glass model. 
+This equation is saying that the probability that two pure states of the system have overlap $q$ is equal to the fraction of elements of the overlap matrix $Q_{ab}$ that are equal to $q$. This means that the
+elements of the replica overlap matrix (after taking the limit $n\rightarrow 0$), are the physical values of the overlap between pure states, and the number of elements of $Q_{ab}$ that are equal to q is related to the probability of $q$. Hence surprisingly the matrix $Q_{ab}$ that arose a result of a mathematical trick to simplify calculations, also has a deep connection to the physics of the spin glass model. 
 
 We now apply this formula to the $Q_{ab}$ matrix that was proposed in the previous section.
 
@@ -926,14 +933,20 @@ The $Q_{ab}$ matrix for the 1-RSB solution as per the Parisi ansatz is shown abo
 
 $$ {\overline P}(q) = {m-1\over{n-1}}\delta(q-q_1) + {n-m\over{n-1}}\delta(q-q_0) \ \ \ wih\ \ \ 1\le m\le n $$
 
-We now have to take the limit as $n\rightarrow 0$ to complete the replica solution. This does not make much sense mathematically since we are effectively reducing the size of the overlap matrix to zero. However it can  argued that this limit can be taken in a mathematically formal manner (similar to raising a number to a fractional power, such $x^{1\over 2}$ for example). In this limit $m$ must also be promoted to a real number, rather than an integer. This results in
+We now have to take the limit as $n\rightarrow 0$ to complete the replica solution. This does not make much sense mathematically since we are effectively reducing the size of the overlap matrix to zero. However it can be argued that this limit can be taken in a mathematically formal manner (similar to raising a number to a fractional power, such $x^{1\over 2}$ for example). In this limit $m$ must also be promoted to a real number, rather than an integer. This results in
 
 $$ {\overline P}(q) = (1-m)\delta(q-q_1) + m\delta(q-q_0)\ \ \ 0 \le m \le 1 $$
 
-so that $m$ is interpreted as a probability in the limit as $n\rightaarow 0$.
-So now we need to determine the parameters $m, q_0, q_1$ to complete the 1-RSB solution. This can be done by substituting these numbers back in the expression for $A_{sp}$, and then finding the values of $m, q_0$ and $q_1$ at the saddle point for this expression.
+so that $m$ is interpreted as a probability in the limit as $n\rightarrow 0$. In this equation $q_1$ can be interpreted as the self overlap and $q_0$ as the overlap between two distinct pure states.
+So now we need to determine the parameters $m, q_0, q_1$ to complete the 1-RSB solution. This can be done by substituting these numbers back in the expression for $g_n(Q_{sp})$, and then finding the values of $m, q_0$ and $q_1$ at the saddle point for this expression.
 
-There is a class of spin glass models called p-spin spherical model or PSM discussed in the next section, for the 1-RSB solution is exact, i.e., there is no further breaking of the replica symmetry as the temperature is reduced. However this is not the case for the SK model, and in this case the symmetry keeps breaking ad-infintum as the temperature is reduced.
+There is a class of spin glass models called p-spin spherical model or PSM discussed in the next section, in which the 1-RSB solution is exact, i.e., there is no further breaking of the replica symmetry as the temperature is reduced. However this is not the case for the SK model, and in this case the symmetry keeps breaking ad-infintum as the temperature is reduced. This results in the sequences
+
+$$ q_0 \lt q_1 \lt q_2 \lt ....  $$
+
+$$ m_1 \gt m_2 \gt m_3 \gt ... $$
+
+and in the limit at $k\rightarrow \infty$, it results in a continuous overlap distribution function ${\overline P}(q)$.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat21.png) 
 
@@ -941,31 +954,35 @@ Figure 17: Illustration of replica symmetry breaking
 
 The left hand side of Figure 17 shows the changes in the free energy landscape as the temperature lowered, and the distribution of the overlaps is shown on the right:
 
-- At high temeperatures there is only a single pure state and the energy landscape is fairly flat, so that individual configurations are widely spread out and have a low degree of overlap. This is illustrated by the greem curve on the right which shows that the overlaps have a single peak at the zero overlap value.
-- As the temperature reduced below the critical value, we see the formation of multiple pure state and there is split of the of overlap distribution into a bi-modal shape. Configurations can be in the same pure state in which case they have a high overlap value, or they can be in different pure states, in which vase the overlap tends to be near zero.
-- An even further reduction in the temperature causes more replica symmtry breaking, as a result of which we now see that each of the pure states from the second stage has further split into multiple pure states lying within the energy valley formed in stage 2. Furthermore the overlap distribution has developed a peak near 1, which implies that at low temeperatures all the configurations tend to lie near the ground state.
+- At high temeperatures there is only a single pure state and the energy landscape is fairly flat, so that individual configurations are widely spread out and have a low degree of overlap. This is illustrated by the green curve on the right which shows that the overlaps have a single peak at the zero overlap value.
+- As the temperature is reduced below the critical value, we see the formation of multiple pure states and there is split of the of overlap distribution into a bi-modal shape (orange curve). Configurations can be in the same pure state in which case they have a high overlap value $q_1$, or they can be in different pure states, in which vase the overlap tends to be smaller at $q_0$.
+- An even further reduction in the temperature causes more replica symmtry breaking, as a result of which we now see that each of the pure states from the second stage have further split into multiple pure states lying within the energy valley formed in stage 2. Furthermore the overlap distribution has developed a peak near 1, which implies that at low temperatures each pure state converges to its single configuration with a low degree of overlap with the other configurations (blue curve). In this situation the self overlap becomes equal to 1, while the cross overlap between states is zero. This process is completely probabilistic, so the system may end up in a different configuration every time it is gradually frozen.
 
-As the temperature approaches zero, in addition to to the explosion in the number of pure states, the number of configurations per pure state decreases, until at $T=0$ there is only one configuration per pure state.
-In this situation the self overlap becomes equal to 1, while the cross overlap between states is zero. This process is completely probabilistic, so the system may end up in a different configuration every time it is
-gradually frozen.
+Hence there are two cases in which there is low overlap distribution, but the reasons are different for each: (1) In the high temperature case the overlap is low due to thermal activity, since each spin is flipping back and forth due to the heat energy, (2) At $T=0$ once again the overlap is low, but the reason is different. The spins have converged to random looking configurations, but the randomness is due to the randomness in the interaction strengths. The spins themselves are no longer flipping randomly between states since $T=0$.
+
+![](https://subirvarma.github.io/GeneralCognitics/images/stat39.png) 
+
+Figure 17: Tree like and nested structure in replica symmetry breaking
+
+Another way to visualize replica symmetry breaking is shown in the above figure. At high temperatures we have single pure state, as shown by the large oval (which can be thought to be the space of all configuartions) on the right and the top node in the tree. When the temperature dips below $T_c$ the state splits into three pure states as shown by the three smaller ovals which are now restricted to a smaller subset of configurations. A further reduction in temperature causes these 3 pure states to split into 6 pure states, edach with a even smaller set of possible configurations. The overlap function $q_{\alpha\beta}$ depends on how far the pure states $\alpha$ and $\beta$ are from each other in the tree structure. For example A and B are closer to each other, and further away from the other states C,D,E,F and G. 
 
 ### Counting the Number of Pure States
 
-In the analysis in the last section we showed the existence of multiple overlap values with replica symmetry breaking, but this only gives indirect confirmation about the existence of multiple pure states. For example in 1-RSB there are just two overlap values, but possibly a large number of pure states that share this overlap.
-Note that each pure state has a well defined local magnetization given by $m^\alpha_i = E(\sigma^\alpha_i)$, and is defined by the vector of its site magnetizations. 
+In the analysis in the last section we showed the existence of multiple overlap values with replica symmetry breaking, but this only gives indirect confirmation about the existence of multiple pure states. For example in 1-RSB there are just two overlap values, but possibly a large number of pure states that have these overlaps.
+Note that each pure state has a well defined local magnetization at site $i$ given by $m^\alpha_i = E(\sigma^\alpha_i)$, where the expectation is restricted to a single pure state $\alpha$. 
 It turns out that it is possible to define a function $f_{TAP}(m_1,...,m_N)$, called the Thouless-Anderson-Palmer (TAP) free energy, whose local minima coincide with the pure states of the system. It is given by
 
-$$ \tanh^{-1} m_i = \beta\sum_j J_{ij}m_j - \beta^2 J^2(1-q_{EA})m_i $$
+$$ m_i = \tanh[\beta\sum_j J_{ij}m_j - \beta^2 \sum_j J_{ij}^2(1-m_j^2})m_i] $$
 
-The equivalent equation for the minima in the case of the Ising model was given by $m=\tanh(\beta m)$. The corresponding free energy density is given by
+The equivalent equation for the minima in the case of the Ising model was given by $m=\tanh(\beta m)$. The TAP equations correspond to the stationary points for the following free energy
 
-$$ f = -{\beta\over N}\sum_{ij} J_{ij}m_i m_j - {1\over 4} \beta^2 J^2 (1-q)^2 + {1\over 2N}\sum_i[{1+m_i\over 2} + (1-m_i)\log{1-m_i\over 2}]  $$
+$$ f_{TAP} = -{1\over 2}\sum_{i\ne j} J_{ij}m_i m_j - \sum_i h_i m_i - {\beta\over 4}\sum_{i\ne j}J_{ij}^2(1=m_i^2)(1-m_j^2) + {T\over 2}\sum_i[{1+m_i\over 2}\log(1+m_i\over 2} + (1-m_i)\log{1-m_i\over 2}]  $$
 
 Note that the free energy is a function of the magnetizations $m_i$ and not the individual spins $\sigma_i$, hence its minima do not necessarily coincide with the energy minima, i.e., the minima of the Hamiltonian $H(\sigma_1,...,\sigma_N)$. This is result of the fact that at temperatures greater than zero, multiple energy minima may be separated by barriers that are small enough so that they belong to the same pure state. 
 
-[Bray and Moore](https://iopscience.iop.org/article/10.1088/0022-3719/13/19/002) proposed that the density of solutions should counted as a function of $f$, denoted by $N_s(f)$ and they showed that it varies as
+[Bray and Moore](https://iopscience.iop.org/article/10.1088/0022-3719/13/19/002) proposed that the density of solutions should counted as a function of $f_{TAP}$, denoted by $N_s(f_{TAP})$ and they showed that it varies as
 
-$$ N_s(f) \sim \exp^{\alpha N} $$
+$$ N_s(f_{TAP}) \sim \exp^{\alpha N} $$
 
 In general the number of minima of $f_{TAP}$ grows exponentially with the size $N$ of the system
 
@@ -973,13 +990,13 @@ $$ \eta = e^{N\Sigma}  $$
 
 where the quantity $\Sigma$ is called the complexity of the system.
 
-For the case $T=0$ the TAP equation reduces to $m_i = sign(\sum_j J_{ij}m_j$ and by working directly with this equation it can be shown that
+For the case $T=0$ the TAP equation reduces to $m_i = sign(\sum_j J_{ij}m_j)$ and by working directly with this equation it can be shown that
 
 $$  {1\over N}E_J (\log N_s) = 0.1992 $$
 
 ### The p-Spin Spherical Spin Glass Model (PSM)
 
-The SK model was the first spin glass model to be fully analyzed and understood. However its behavior, including the continuous symmtery breaking for $T<T_c$ is quite complex, and it would be nice to have anoter spin glass model with simpler phase properties. One such model that has become popular in recent years is the p-spin Spherical Spin Glass Model (or PSM). In the following sections we will see that this model can be connected to some types of neural networks and thus provides a way in which the loss function in these networks can be studied using the tools from spin glass theory.
+The SK model was the first spin glass model to be fully analyzed and understood. However its behavior, including the continuous symmtery breaking for $T<T_c$ is quite complex, and it would be nice to have another spin glass model with simpler phase properties. One such model that has become popular in recent years is the p-spin Spherical Spin Glass Model (or PSM). In the following sections we will see that this model can be connected to some types of neural networks and thus provides a way in which the loss function in these networks can be studied using the tools from spin glass theory.
 
 In the PSM model p-spins interact with one another and the Hamiltonian of the energy levels for a given configuration of spins is given by 
 
@@ -997,7 +1014,7 @@ $$ p(J_{i_1,...,i_p}) = {N^{p-1}\over{\pi p!}} \exp[-{(J_{i_1,...,i_p})^2 {N^{p-
 
 For $p=2$ this model reduces to the standard SK model.
 
-This system can be analyzed using the replica method (see [Castellani and Cavagna](https://www.lptms.universite-paris-saclay.fr/membres/Mezard/Pdf/84_GM_NPB.pdf)
+This system can be analyzed using the replica method (see [Castellani and Cavagna](https://www.lptms.universite-paris-saclay.fr/membres/Mezard/Pdf/84_GM_NPB.pdf))
 just as for the SK model. For $T>T_c$ there is no magnetization and this corresponds to the replica symmetric case. For $T<T_c$ there is first order RSB, which results in the overlap distribution
 
 $$ {\overline P(q)}) = (1 - m)\delta(q-q_1) + m\delta(q-q_0)\ \ \ with \ \ \ 0\le q_0 \le q_1 \le 1    $$
