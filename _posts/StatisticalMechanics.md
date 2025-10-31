@@ -968,7 +968,7 @@ Another way to visualize replica symmetry breaking is shown in the above figure.
 
 ### Counting the Number of Pure States
 
-In the analysis in the last section we showed the existence of multiple overlap values with replica symmetry breaking, but this only gives indirect confirmation about the existence of multiple pure states. For example in 1-RSB there are just two overlap values, but possibly a large number of pure states that have these overlaps.
+In the analysis in the last section we showed the existence of multiple overlap values with replica symmetry breaking, but this only gives indirect confirmation about the existence of multiple pure states. For example in 1-RSB there are just two overlap values, but potentially a large number of pure states that have these overlaps.
 Note that each pure state has a well defined local magnetization at site $i$ given by $m^\alpha_i = E(\sigma^\alpha_i)$, where the expectation is restricted to a single pure state $\alpha$. A pure state is determined
 by its vector of magnetizations $(m^\alpha_1,...,m^\alpha_N)$.
 It turns out that it is possible to define a function $f_{TAP}(m_1,...,m_N)$, called the Thouless-Anderson-Palmer (TAP) free energy, whose local minima coincide with the pure states of the system. It is given by
@@ -981,16 +981,15 @@ $$ f_{TAP} = -{1\over 2}\sum_{i\ne j} J_{ij}m_i m_j - \sum_i h_i m_i - {\beta\ov
 
 Note that the free energy is a function of the magnetizations $m_i$ and not the individual spins $\sigma_i$, hence its minima do not necessarily coincide with the energy minima, i.e., the minima of the Hamiltonian $H(\sigma_1,...,\sigma_N)$. This is result of the fact that at temperatures greater than zero, multiple energy minima may be separated by barriers that are small enough so that they belong to the same pure state. 
 
+![](https://subirvarma.github.io/GeneralCognitics/images/stat39.png) 
+
+Figure: Logarithm of the total number of TAP solutions, divided by N, as a function of temperature
+
 [Bray and Moore](https://iopscience.iop.org/article/10.1088/0022-3719/13/19/002) proposed that the density of solutions should counted as a function of $f_{TAP}$, denoted by $N_s(f_{TAP})$ and they showed that it varies as
 
 $$ N_s(f_{TAP}) \sim \exp^{\alpha N} $$
 
-In general the number of minima of $f_{TAP}$ grows exponentially with the size $N$ of the system
-
-$$ \eta = e^{N\Sigma}  $$
-
-where the quantity $\Sigma$ is called the complexity of the system.
-
+The quantity $\alpha$ is plotted in the figure above
 For the case $T=0$ the TAP equation reduces to $m_i = sign(\sum_j J_{ij}m_j)$ and by working directly with this equation it can be shown that
 
 $$  {1\over N}E_J (\log N_s) = 0.1992 $$
