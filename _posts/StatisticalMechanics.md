@@ -969,7 +969,8 @@ Another way to visualize replica symmetry breaking is shown in the above figure.
 ### Counting the Number of Pure States
 
 In the analysis in the last section we showed the existence of multiple overlap values with replica symmetry breaking, but this only gives indirect confirmation about the existence of multiple pure states. For example in 1-RSB there are just two overlap values, but possibly a large number of pure states that have these overlaps.
-Note that each pure state has a well defined local magnetization at site $i$ given by $m^\alpha_i = E(\sigma^\alpha_i)$, where the expectation is restricted to a single pure state $\alpha$. 
+Note that each pure state has a well defined local magnetization at site $i$ given by $m^\alpha_i = E(\sigma^\alpha_i)$, where the expectation is restricted to a single pure state $\alpha$. A pure state is determined
+by its vector of magnetizations $(m^\alpha_1,...,m^\alpha_N)$.
 It turns out that it is possible to define a function $f_{TAP}(m_1,...,m_N)$, called the Thouless-Anderson-Palmer (TAP) free energy, whose local minima coincide with the pure states of the system. It is given by
 
 $$ m_i = \tanh[\beta\sum_j J_{ij}m_j - \beta^2 \sum_j J_{ij}^2(1-m_j^2})m_i] $$
@@ -996,49 +997,37 @@ $$  {1\over N}E_J (\log N_s) = 0.1992 $$
 
 ### The p-Spin Spherical Spin Glass Model (PSM)
 
-The SK model was the first spin glass model to be fully analyzed and understood. However its behavior, including the continuous symmtery breaking for $T<T_c$ is quite complex, and it would be nice to have another spin glass model with simpler phase properties. One such model that has become popular in recent years is the p-spin Spherical Spin Glass Model (or PSM). In the following sections we will see that this model can be connected to some types of neural networks and thus provides a way in which the loss function in these networks can be studied using the tools from spin glass theory.
+The SK model was the first spin glass model to be fully analyzed and understood. However its behavior, including the continuous symmtery breaking for $T<T_c$ is quite complex, and it would be nice to have another spin glass model with simpler phase properties. One such model that has become popular in recent years is the p-spin Spherical Spin Glass Model (or PSM) [Castellani and Cavagna](https://arxiv.org/abs/cond-mat/0505032). In the following sections we will see that this model can be connected to some types of neural networks and thus provides a way in which the loss function in these networks can be studied using the tools from spin glass theory.
 
 In the PSM model p-spins interact with one another and the Hamiltonian of the energy levels for a given configuration of spins is given by 
 
 $$ H_p = -\sum_{i_1>...>i_P} J_{i_1,...,i_p}\sigma_{i_1}...\sigma_{i_p},\ \ \ p\ge 3 $$
 
+In addition to each spin inteacting with each of the other spins in the system, we also multiple spins being able to interact with another at the same time. Hence we can
+consider the PSM to be atype of mean field model.
 Unlike the SK model, the spins in PSM are now real continuous variables. In order to keep the energy finite, the following constraint, called the spherical constraint, is imposed
 
 $$ \sum_{i} \sigma_i^2 = N $$
 
+Under this constraint the self-overlap of each configuration is one (which is also true for the SK model, but in PSM model the $\sigma_i$'s are no longer $\pm 1$).
 Just as in the SK spin glass, the sum is extended over all groups of $p$ spins, not only the nearest neighbors, so there is no spatial structure.
 
 Any group of $p$ spins have a random interaction strength given by $J_{i_1,...,i_p}$, which is distributed according to the Normal distribution given by
 
-$$ p(J_{i_1,...,i_p}) = {N^{p-1}\over{\pi p!}} \exp[-{(J_{i_1,...,i_p})^2 {N^{p-1}\over{ J^2 p!}}}]  $$
+$$ p(J_{i_1,...,i_p}) = {N^{p-1}\over{\pi p!}} \exp[-{(J_{i_1,...,i_p})^2 {N^{p-1}\over{ J^2 p!}}}]\ \ \ p\ge 3  $$
 
-For $p=2$ this model reduces to the standard SK model.
-
-This system can be analyzed using the replica method (see [Castellani and Cavagna](https://www.lptms.universite-paris-saclay.fr/membres/Mezard/Pdf/84_GM_NPB.pdf))
+This system can be analyzed using the replica method 
 just as for the SK model. For $T>T_c$ there is no magnetization and this corresponds to the replica symmetric case. For $T<T_c$ there is first order RSB, which results in the overlap distribution
 
-$$ {\overline P(q)}) = (1 - m)\delta(q-q_1) + m\delta(q-q_0)\ \ \ with \ \ \ 0\le q_0 \le q_1 \le 1    $$
+$$ {\overline P(q)}) = (1 - m)\delta(q-q_1) + m\delta(q-q_0)\ \ \ with \ \ \ 0\le q_0 \le q_1 \le 1\ \ \ and\ \ \ 0\le m\le 1    $$
 
-where $q_1$ and $q_0$ are the self overlap and cross overlap parameters for the system. However unlike the case for the SK model, there is no further symmetry breaking as the temperature is reduced towards zero.
+where $q_1$ and $q_0$ are the self overlap and cross overlap parameters for pure states of the system. 
+The parameters $m, q_0, q_1$ can be determined by solving the saddle point equations for the free energy of the system, and this results in
 
-Using the expression for free energy for the system, it can be shown that at high $T$, the only solution is $q_1 = 0$ and $m$ undetermined, and this is the paramagnetic solution, which corresponds to the replica symmetric case. Does there exist a solution with $q_1\ne 0$? If we choose $m=1$, then the equation for $q_1$ becomes
+$$ q_0 = 0 $$
 
-$$  g(q_1) = {\beta^2\over 2} q^p_1 + \log(1-q_1) + q_1 = 0  $$
-
-
-the solution at the saddle point where the free energy is at a minimum corresponds to
-
-$$ q_0 = 0,\ \ \ m = 1  $$
-
-and $q_1$ is given by the solution to the equation
-
-$$  g(q_1) = {\beta^2\over 2} q^p_1 + \log(1-q_1) + q_1 = 0  $$
-
-It can be readily shown that $g(0) = 0$ and $g(1) = -\infty$. At high $T$ the function is monotonous and only the solution $q_1=0$ exists. However as the temperature is lowered, $g(q_1)$ develops a maximum whose height steadily increases. Hence there must be a temperature $T_c$ where the maximum touches the q-axis at
-$q_1=q_s$ and this shows the appearance of the spin glass phase.
-When $T<T_c$, the solution shfts with $q_1 > q_s$ and $m<1$. 
-
-It has been proven that this 1RSB solution is exact for the PSM model, i.e., there is no further symmetry breaking as the temperature is further reduced.
+i.e., the cross overlap between different pure states is zero. The values of $m$ and $q_1$ are determined by solving additional equations (which I am going o leave out, the interested reader can refer to Section 3.5 of [Castellani and Cavagna](https://arxiv.org/abs/cond-mat/0505032).
+It has been proven that this 1RSB solution is exact for the PSM model, i.e., there is no further symmetry breaking as the temperature is further reduced below $T_c$..
 
 There exists an analogue to the TAP equation in the PSM model, which can be used to count the number of pure states when $T<T_c$. When this analysis is carried out, it results in the surprising discovery that:
 the solutions to the TAP equation are given by $m_i = \sqrt{q}\sigma_i$, where the $\sigma_i$ are the minima of the energy function and $q$ is the self overlap, given by
