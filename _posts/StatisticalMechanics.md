@@ -416,10 +416,8 @@ Figure 6: Variation of mean field $m$ with $T$
 
 Since there are now three possible solutions at average spins $0$ and $m'$ and $-m'$, the question arises: which one does the system choose? 
 
-- If we start from a low temperature state $T<T_c$ at which $m$ is non-zero and gradually increase temperature, then the magnetization initially decreases and then abruptly switches off when the temperature becomes greater than $T_c$. This would be the case if we gradually heat a ferromagnet, and is called the Curie Effect. This kind of phase transition in which there is an initial gradual decrease in the magnetization as temperature increases, followed by an abrupt change to zero beyond the critical temperature, is referred to as a second order phase transition, and is illustrated in figure 6.
-- If the system starts from a state of random spins $m=0$ at $T > T_c$, then it stays in this state even after the $T < T_c$, until something causes the spins to align. This phase change can be triggered by the presence of an external magnetic field.
-
-Thus the solution for $m = 0$ is unstable if $T<T_c$, and the system can tip into the state $m = +1$ or $m = -1$ very easily as shown next.
+- If the system starts from a low temperature state $T<T_c$ at which $m$ is non-zero and gradually increase temperature, then the magnetization initially decreases and then abruptly switches off when the temperature becomes greater than $T_c$. This would be the case if we gradually heat a ferromagnet, and is called the Curie Effect. This kind of phase transition in which there is an initial gradual decrease in the magnetization as temperature increases, followed by an abrupt change to zero beyond the critical temperature, is referred to as a second order phase transition, and is illustrated in figure 6.
+- If the system starts from a state of random spins $m=0$ at $T > T_c$, what happend when the temperature crosses $T_c$? The system now has two options since there are two possible paths it can take, which one does it take? The answer is, neither. It stays in the $m=0$ state until something causes it to change state, and that something is the presence of an external magnetic field. The solution for $m = 0$ is unstable if $T<T_c$, and the system can tip into the state $m\gt 0$  or $m\lt 0$ very easily, as shown next.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat6.png) 
 
@@ -447,9 +445,9 @@ $$ m = \tanh(2dJm\beta + B\beta)  $$
 Figure 8: Graphic solution to ${Ty\over{2dJ}} = \tanh(y + B\beta)$
 
 The solution lies at the intersection of the curves $z_1 = {yT\over{2dJ}}$ and
-$z_2 = \tanh(y + B\beta)$, and is plotted in figure 8. The $\tanh$ function has now shifted to the left if $B>0$, and as a result there is only one solution $m' > 0$ to the equation, i.e., in the presence of the external magnetic field the other two solutions go away (except for the case when $\beta=0$). 
+$z_2 = \tanh(y + B\beta)$, and is plotted in the above figure. The $\tanh$ function has now shifted to the left if $B>0$, and as a result there is only one solution $m' > 0$ to the equation, i.e., in the presence of the external magnetic field the other two solutions go away (except for the case when $\beta=0$). 
 This means that if we were to start with the system in which $T < T_c$ with $B=0$, then we saw earlier there are three possible values for $m$, i.e. $m = 0$ or $m=m'$ or $m=-m'$.
-However if we switch  on even a tiny amount of external magnetic field $B$, then it instantaneously causes the system to shift to $m=m'$ since the other two solutions are no langer allowed due to the shift of the $\tanh$ curve to the left i.e., the system becomes magnetized. This is a phase change, and happens in ferromagnetic materials. Unlike for paramagnetic materials, the system stays in the magnetized state even after the external field is switched off. If the external field were pointing in the opposite direction, then it would have caused the system to flip to $m=-m'$.
+However if we switch  on even a tiny amount of external magnetic field $B$, then it instantaneously causes the system to shift to $m=m'$ since the other two solutions are no langer allowed due to the shift of the $\tanh$ curve to the left. This is a phase change, and happens in ferromagnetic materials. Unlike for paramagnetic materials, the system stays in the magnetized state even after the external field is switched off. If the external field were pointing in the opposite direction, then it would have caused the system to flip to $m=-m'$.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat10.png) 
 
@@ -464,40 +462,53 @@ Figure: Variation of the State Space and Magnetization of the Ising Model with T
 The discussion of the Ising model and phase transitions so far has been rather abstract since it has been based on a study of the equations of statistical mechanics. In order to get a more intuitive feel for changes in the system as the temperature is varied, consider the figure above. Recall that for model with $N$ atoms there are $2^{N}$ possible spin configurations. The colored ovals in the figure represent portions of the state space that are accessible at various temperatures. 
 
 - The blue area in the main oval represents part of the state space that can be accessed when $T>T_c$ and the magnetization $m=0$. This is mostly made up of states in which there are an equal number of up and down spins, but because of thermal fluctuations it also contains configurations with an imbalance in spins.
-- As the temperature is reduced to a level $T_1 < T_c$, the allowed system configurations become smaller, and are represented by the lilac area in the next smallest oval. These configurations are characterized by a net magnetization $m_1$, which means more spins on the avarage point up than down. Note that there are two such lilac areas representing the fact that the system configuration has split up into two distinct phases.
+- As the temperature is reduced to a level $T_1 < T_c$, the allowed system configurations become smaller, and are represented by the lilac area in the next smallest oval. These configurations are characterized by a net magnetization $m_1$, which means more spins on the average point up than down. Note that there are two such lilac areas representing the fact that the system configuration has split up into two distinct phases.
 - If the temperature is further reduced to $T_2 < T_1$, then the allowed configuration space further shrinks as shown by the orange area in the innermost oval, and furthermore the net magnetization $m_2$ increases byond $m_1$
-- In the limit as $T=0$, he ovals shrink to a single point, i.e., the configuration $(+1,...,+1)$ or $(-1,...,-1)$, since all the spins are now fully aligned with each other. Furthermore the net magnetization avieves its maximum value $m=1$ or $m=-1$, depending upon the phase.
+- In the limit as $T=0$, he ovals shrink to a single point, i.e., the configuration $(+1,...,+1)$ or $(-1,...,-1)$, since all the spins are now fully aligned with each other. Furthermore the net magnetization achieves its maximum value $m=1$ or $m=-1$, depending upon the phase.
 
 ## Simulating the Ising Model
 
-Back in the early 1950s, in the very first days of electronic computers, a group of physicists who had worked together in the Manhattan Project, got together and figured out how to simulate a system of interacting particles of the Ising type. This group was led by Harry Metropolis, and it is by his name that the resulting algorithm is generally known. The mathematical technique that was used is called Markov Chain Mone Carlo of MCMC, and that is an alternative name for this technique. 
+Back in the early 1950s, in the very first days of electronic computers, a group of physicists who had worked together in the Manhattan Project, got together and figured out how to simulate a system of interacting particles. Initially their algorithm was used to analyze neutron interactions in a nuclear reactor, and later it was applied to the Ising model. This group was led by Harry Metropolis, and it is by his name that the resulting algorithm is generally known. The mathematical technique that was used is called Markov Chain Mone Carlo of MCMC, and that is an alternative name for this technique. 
 
-The Metropolis technique is based on building a Markov Chain whose stationary distribution $\pi(\sigma_1,...,\sigma_N)$ co-incides with that of the Boltzmann distribution, i.e., 
+The Metropolis algorithm is based on building a Markov Chain whose stationary distribution $\pi(\sigma_1,...,\sigma_N)$ co-incides with that of the Boltzmann distribution, i.e., 
 
 $$ \pi(\sigma1,...,\sigma_N) = {1\over Z} e^{-\beta E(\sigma_1,...,\sigma_N)}  $$
 
 The Metropolis algorithm works as follows:
 
-- Start with some spin configuration $\Sigma = (\sigma_1,...,\sigma_N)$ and note that probability of this configuration in equilibrium is given by $p(\Sigma) ={1\over Z} e^{-\beta E(\Sigma)}$ .
-- Propose a move to a new trial configuration $\Sigma'$ and compute the ratio. The new configuration is typically one in which one of the spins is flipped, with the others reaming the same.
-
-$$ {p(\Sigma')\over{p(\Sigma)}} = \exp^{-\beta(E(\Sigma')-E(\Sigma))}  $$
-
-- If the move to $\Sigma'$ causes the energy to go down i.e., $E(\Sigma')-E(\Sigma) <0$ then $p(\Sigma') > (p(\Sigma)$ and the move is accepted with probability $1$.
+- Start with some spin configuration $\Sigma = (\sigma_1,...,\sigma_N)$ and note that energy of this configuration is given by $E(\Sigma)$ .
+- Propose a move to a new trial configuration $\Sigma'$ by flipping the spin at site $i$ chosen at random, and compute its energy $E(\Sigma')$.
+- Set the spin at site $i$ according to the following rule: If
+- If the move to $\Sigma'$ causes the energy to go down i.e., $E(\Sigma')-E(\Sigma) <0$ then the move is accepted with probability $1$.
 - On the other hand if the move causes the energy to go up, then the move can still be accepted with probability
 $\exp^{-\beta(E(\Sigma')-E(\Sigma))}$ and this probability decreases exponentially as $\Delta(\Sigma',\Sigma) = E(\Sigma') - E(\Sigma)$ increases.
 
 The probabilistic aspect of the algorithm is implemented by using the following rule: If $\exp^{-\beta(E(\Sigma')-E(\Sigma))} > RAND(0,1)$ where $RAND(0,1)$ is sampled over the uniform distribution $U(0,1)$, then accept the new configuration $\Sigma'$, otherwise leave the old configuration $\Sigma$.
 
 This algorithm simulates the thermal motion of atoms in thermal contact with a heat bath at temperature $T$. After many steps of the algorithm, the system evolves into a Boltzmann distribution.
-If the system is simulated at $T>T_c$ then the thermal energy will cause it to wander among all the possible spin configurations, and the net magnetization $m$ will stay at zero.
+If the system is simulated at $T>T_c$ then the thermal energy will cause it to wander spin configurations centered at $m=0$ with no net magnetizat.
 If $T<T_c$ then the thermal energy will still cause disordering among the spins, but a fraction of the spins will tend to get aligned in the same direction on the average, causing $m>0$.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat34.png) 
 
 Figure: Example sample path in the state space while running the Metropolis algorithm
 
-The above figure shown an example of a sample path through the state space when the algorithm is initialized at a state which is away from the equilibrium given the temperature. Assuming that the model is at temperature $T_1<T_c$, while the initial state belongs to the phase $m=0$. The algorithm wanders randomly in the $m=0$ state space initially, and ultimately approaches the lilac ring which corresponds to equilibrium states for T=T_1$, and once it is there is continues to wander around within the ring such that various other states occur according to the Boltzmann distribution.
+The above figure shown an example of a sample path through the state space when the algorithm is initialized at a state which is away from the equilibrium given the temperature. Assume that the model is at temperature $T_1<T_c$, while the initial state belongs to the phase $m=0$. The algorithm wanders randomly in the $m=0$ state space initially, and ultimately approaches the lilac ring which corresponds to equilibrium states for T=T_1$, and once it is there is continues to wander around within the ring such that various other states occur according to the Boltzmann distribution.
+
+Another algorithm to simulate the Ising model was discovered by Roy Galuber in the early 1960s, and works as follows:
+
+- Start with some spin configuration $\Sigma = (\sigma_1,...,\sigma_N)$ and note that energy of this configuration is given by $E(\Sigma)$ .
+- Propose a move to a new trial configuration $\Sigma'$ by flipping the spin at site $i$ chosen at random, and compute its energy $E(\Sigma')$.
+- Flip the spin at site $i$ with the probability $p(\Delta E)$ given by
+
+$$   p(\Delta E) = {1\over{1+e^{\Delta E}}}   $$    
+
+![](https://subirvarma.github.io/GeneralCognitics/images/stat42.png) 
+
+Figure: Comparison between the Metropolos and Galuber spin flipping probabilities ate various temperatures
+
+When run long enough, both the Metropolis and Glauber algorithms lead to the Boltzmann distribution in equilibrium, however their non-equilibrium behavior is slightly different. 
+The above figure plots the spin flipping probability for the two algorirhms at various temperatures. The curves differ most at the highest temperatures, and they become almost indistinguishable at the lowest temperatures, where both curves approximate a stepfunction.
 
 ## The Landau Theory for Phase Transitions
 
@@ -523,13 +534,13 @@ so that
 
 $$ F_{therm} = -NdJm_{eq}^2 - {N\over\beta}\log(\cosh(2dJm_{eq}\beta))  $$
 
-Landau pointed out that this function can be defined even for the case when the system is not in equilibrium, so that $m$ is not the equilibrium value, thus resulting in the free energy $F(m)$ as a function of $m$,  given by
+Landau pointed out that this function can be defined even for the case when the system is not in equilibrium, thus resulting in the free energy $F(m)$ as a function of $m$,  given by
 
 $$ F(m) = -NdJm^2 - NT\log(\cosh(2dJm\beta))  $$
 
-From classical thermodynamics we know that equilibrium occurs at the minimum value of $F(m)$. Solving
+From the second law of thermodynamics we know that equilibrium occurs at the minimum value of $F(m)$. Solving
 ${\partial F(m)\over{\partial m}} = 0$ leads to $m_{eq} = \tanh(2dJm_{eq}\beta)$.
-which agrees with our earlier calculations. In Landau's theory, $m$ is called the *order parameter* since $m>0$ implies some degree of order which is visible at the macro level (since a larger fraction of the spins are pointing in the same direction), while if $m=0$ the spins are completely randomized.
+which agrees with our earlier calculations. In Landau's theory, $m$ is called the *order parameter* since $m>0$ implies some degree of order which is visible at the macro level (since a larger fraction of the spins are pointing in the same direction), while if $m=0$ the spins are on the average randomized.
 
 The next step is to understand the behavior of $F(m)$ as a function of $m$. In order to do this, we first express it as a polynomial in $m$. This is facilitated by using polynomial expansions for 
 
@@ -543,18 +554,18 @@ Note that $F(m)$ is symmetric with respect to $m$. Ignoring higher order terms, 
 
 $$ {\partial F(m)\over{\partial m}} = 2mNJd(1-2dJ\beta) + {8m^3 N\beta^3 J^4 d^4\over 3}  $$
 
-It follows that $F(m)$ has a single minima at $m = 0$ if $T > 2dj$. On the other hand if $T < 2dj$ the there are 2 minima, at
+It follows that $F(m)$ has a single minima at $m = 0$ if $T > 2dj$. On the other hand if $T < 2dj$ there are 2 minima, at
 
 $$ m = \pm\sqrt{3(2dJ\beta - 1)\over{4(dJ\beta)^3}} $$
 
 as well as another stationary point at $m=0$.
-Remember the $T = 2dJ$ was identified as the critical temperature $T_c$ for ferromagnetic phase transition in the earlier analysis.
+Recall the $T = 2dJ$ was identified as the critical temperature $T_c$ for ferromagnetic phase transition in the earlier analysis.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat11.png) 
 
 Figure 10: Free Energy $F(m)$ as a function of $m$, for $T > 2dJ$ and $T < 2dJ$
 
-$F(m)$ is plotted in figure 10, and it clearly shows the effect of varying $T$ on it shape and provides an alternative explanation of how phase changes come about.
+$F(m)$ is plotted in figure 10, and it clearly shows the effect of varying $T$ on its shape and provides an alternative explanation of how phase changes come about:
 
 - When $T > T_c$ then there is only a single minima in the free energy plot at $m_{eq}=0$ and this corresponds to the non-magnetized phase.
 - When $T < T_c$, there are three values of $m$ at which ${\partial F(m)\over{\partial m}} = 0$, hence the system can be one of three phases: The magnetizations $m_{eq} = \pm\sqrt{3(2dj\beta - 1)\over{4(dj\beta)^3}}$ are stable corresponding to when spins are predominantly aligned in the up or down direction and these are the two possible phases when the system is at thermal equilibrum. However the case $m=0$ is clearly not stable since even a slight change in the value of $m$ can cause the system to transition to the other two phases.
@@ -565,7 +576,7 @@ Using the formula
 
 $$ m_{eq} = \sqrt{{3(T_c - T)\over{4(dJ)^3\beta^2} }}  $$
 
-we can see that $m_{eq}$ has a quadratic variation with $T$ in the neighborhood of the critical temperature. This was also evident in figure 6 in the previous section. Even though this behavior was arrived at in the context of the Ising model, it turns out that all second order phase transitions for $d\ge 4$ exhibit this quadratic variation irrespective of the physical material involved. For $d = 2, 3$ the exponent is not ${1\over 2}$ from experimental data, hence the Landau theory fails for $d=2,3$. The correct exponents for these cases were computed with the help of the renormalization group theory in the 1970s.
+we can see that $m_{eq}$ has a quadratic variation with $T$ in the neighborhood of the critical temperature. This was also evident in figure 6 in the previous section. Even though this behavior was arrived at in the context of the Ising model, it turns out that all second order phase transitions for $d\ge 4$ exhibit this quadratic variation irrespective of the physical material involved. For $d = 2, 3$ the exponent is not ${1\over 2}$ (this is known from experimental data), hence the Landau theory fails for $d=2,3$. The correct exponents for these cases were computed with the help of the renormalization group theory in the 1970s.
 
 The big advance that Landau made was the idenification of a phase with the minima of the free energy function. This opened the door to the analysis of systems that have much more complicated phase behavior then the Ising model susch as spin glass systems.
 
@@ -591,7 +602,7 @@ For $B>0$ the minima that occurs for $m>0$ is deeper than that for $m<0$ (and vi
 Landau's theory clarifies an important distinction between the minima of the energy function $E(\Sigma)$, where $\Sigma$ is a configuration of the system, and the minima of the free energy function $F(m)$, since it is only the latter type of minima that correspond to a phase for the system. For $T>0$ there is more than one equilibrium configuration that realizes the $F(m)$ minima, as we saw for the Ising model. However at $T=0$, the system freezes at the maximum value of $m=1$, and at this point there is only a single configuration for the phase.
 As we will see in the next section, for more complex models such as spin glasses  the free energy minima are a subset of the minima for the energy function $E(\Sigma)$, i.e., there are some minima for $E(\Sigma)$ that do not correspond to a true phase for the system.
 These are metastable states and if the temperature is increased beyond zero, then the system will transition to one of the stable phases identified by the minima of $F(m)$.
-This has an interesting consequence for optimization problams, as we shall see in the section of simulated annealing.
+This has an interesting consequence for optimization problams, as we shall see in the discussion of simulated annealing.
 
 ### Ising Model vs Real Magnets
 
@@ -602,7 +613,7 @@ beyond $T_c$ then the iron will become hotter, but what about the Isis model?
 
 Figure 10: Plot of the average energy $E_{av}$ and magnetization of the Ising model with temperature
 
-The heat in the iron is connected to the kinetic energy of the vibrational thermal motion of the iron atoms. However the Ising model does not incorporate vibrational degrees of freedom. In this case the incraese in temperature is not associated with any further increase in the energy of the system, which can be calculated using the formula for the partition function
+The heat in the iron is connected to the kinetic energy of the vibrational thermal motion of the iron atoms. However the Ising model does not incorporate vibrational degrees of freedom. In this case the increase in temperature is not associated with any further increase in the energy of the system, which can be calculated using the formula for the partition function
 
 $$ Z = e^{-\beta NdJm^2} 2^N\cosh^N(2dJm_{eq}\beta) $$
 
@@ -614,12 +625,6 @@ This formula shows that minimum of the average energy $E_{av}$ is realized at $T
 since $m_{eq}$ goes to zero at this temperature. 
 Hence an increase in temperature causes a randomization of the spins in the Ising model, as captured by the magnetization $m_{eq}$ (shown in the right hand plot above)
 Any further increase in temperature beyond $T_c$ does not lead to higher energy levels, which is somewhat counter-intuitive, but is a result of the fact that Ising model does not incorporate the vibrational degrees of freedom.
-
-![](https://subirvarma.github.io/GeneralCognitics/images/stat37.png) 
-
-Figure 10: Variation of the Boltzmann distribution in an Ising model with temperature
-
-The above figure shown how the distribution of the energy levels in the Ising model changes with temperature, as captured by the Boltzmann distribution. The distribution moves to the left and becomes narrower in the range of possible energies as the temperature decreases. The narrowing in the base can be explained as a result of the phase transition to $m>0$ (or $m<0), which restricts the numkber of spin configurations, and thus the energies, that can be accessed.
 
 ## Spin Glass Models: Randomized Interactions
 
