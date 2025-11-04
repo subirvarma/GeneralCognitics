@@ -472,7 +472,7 @@ Back in the early 1950s, in the very first days of electronic computers, a group
 
 The Metropolis algorithm is based on building a Markov Chain whose stationary distribution $\pi(\sigma_1,...,\sigma_N)$ co-incides with that of the Boltzmann distribution, i.e., 
 
-$$ \pi(\sigma1,...,\sigma_N) = {1\over Z} e^{-\beta E(\sigma_1,...,\sigma_N)}  $$
+$$ \pi(\sigma_1,...,\sigma_N) = {1\over Z} e^{-\beta E(\sigma_1,...,\sigma_N)}  $$
 
 The Metropolis algorithm works as follows:
 
@@ -609,7 +609,7 @@ This has an interesting consequence for optimization problams, as we shall see i
 If we take a piece of magnetized iron and start heating it. then at a temperature above $T_c$ the magnetization will vanish, as the Ising model predicts. If we continue to increase the temperature
 beyond $T_c$ then the iron will become hotter, but what about the Isis model?
 
-![](https://subirvarma.github.io/GeneralCognitics/images/stat35.png) 
+![](https://subirvarma.github.io/GeneralCognitics/images/stat43.png) 
 
 Figure 10: Plot of the average energy $E_{av}$ and magnetization of the Ising model with temperature
 
@@ -622,8 +622,7 @@ so that
 $$ E_{av} = -{\partial\log Z\over{\partial\beta}} = - 2NdJm_{eq}\tanh(2dJm_{eq}\beta)   $$
 
 This formula shows that minimum of the average energy $E_{av}$ is realized at $T=0$ and is given by $-2NdJm_{eq}$. As the temperature is increased, $E_{av}$ achieves its maximum value $E_{av}=0$ at $T=T_c$, 
-since $m_{eq}$ goes to zero at this temperature. 
-Hence an increase in temperature causes a randomization of the spins in the Ising model, as captured by the magnetization $m_{eq}$ (shown in the right hand plot above)
+since $m_{eq}$ goes to zero at this temperature, as shown in the above figure. 
 Any further increase in temperature beyond $T_c$ does not lead to higher energy levels, which is somewhat counter-intuitive, but is a result of the fact that Ising model does not incorporate the vibrational degrees of freedom.
 
 ## Spin Glass Models: Randomized Interactions
