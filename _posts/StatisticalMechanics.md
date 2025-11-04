@@ -636,15 +636,15 @@ Back in the 1950s scientists were actively investigating the properties of new m
 - When the temperature exceeded some critical point, there was no magnetism detected, which is just as in ferromagnetic materials
 - Below the critical temperature, the material become magnetic. However, after gradually increasing as the temperature was further reduced, the magnetisation hit a limit at a lower level as compared to ferromagnet, and stayed at that level as the temperature was further reduced.
 
-It seemed that the presence of the copper atoms was interfering with the tendency of iron atoms to try to align with each other as the temperature decreases was reduced. 
-This was a new kind of magnetic behavior not seen before, and soon physicists came up with a model for it. As shown in figure 12, all the spins of ferromagnetic materials tend to align at $T=0$, while those in anti-ferromagnetic also tend to align but in opposite directions. Spin Glasses on the other hand do not exhibit any such regularity since they contain a mixture of ferromagnetic and anti-ferromagnetic interactions. Even at low temperatures their spins can have random looking orientations as shown in the right hand side of the figure. In the same way that an amorphous solid like window glass doesn’t have an orderly crystal structure, a spin glass doesn’t have an orderly magnetic structure.
+It seemed that the presence of the copper atoms was interfering with the tendency of iron atoms to try to align with each other as the temperature was reduced. 
+This was a new kind of magnetic behavior not seen before, and soon physicists came up with a model for it. As shown in the above figure, all the spins of ferromagnetic materials tend to align at $T=0$, while those in anti-ferromagnetic also tend to align but in opposite directions. Spin Glasses on the other hand do not exhibit any such regularity since they contain a mixture of ferromagnetic and anti-ferromagnetic interactions. Even at low temperatures their spins can have random looking orientations as shown in the right hand side figure. In the same way that an amorphous solid like window glass doesn’t have an orderly crystal structure, a spin glass doesn’t have an orderly magnetic structure.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat27.png) 
 
 Figure 15: Illustrating Frustration
 
 It was suggested that the random spins orientations were being caused 
-as result of the fact that it is impossible to satisfy all the inter node spin couplings at the same time. This results in a phenomenon called 'frustration' and arises whenever there exists a loop in which the product of the spins is negative. This is illustrated in the right hand side of above figure: The node in the upper vertex has a anti-ferromagnetic coupling with the node on the left, as a result of which its spin oriented downwards. But now the spin on the right side is in a conundrum. Since it has a ferromagnetic coupling with the other nodes, it doesn't have a one best spin configuration that it can settle to in equilibrium (at $T=0$). As sresult it, in some cases it can settle in to an UP spin configurations and in other casees to the DOWN spin, and it chooses one of these at random.
+as result of the fact that it is impossible to satisfy all the inter-node spin couplings at the same time. This results in a phenomenon called 'frustration' and arises whenever there exists a loop in which the product of the spins is negative. This is illustrated in the right hand side of above figure: The node in the upper vertex has a anti-ferromagnetic coupling with the node on the left, as a result of which its spin oriented downwards. But now the spin on the right side is in a conundrum. Since it has a ferromagnetic coupling with the other nodes, it doesn't have a one best spin configuration that it can settle to in equilibrium (at $T=0$). As result it, in some cases it can settle in to an UP spin configurations and in other casees to the DOWN spin, and it chooses one of these at random.
 As a result there is a proliferation of metastable states i.e., a spin glass system can have many more than two phases in low temperature equilibrium, and unlike a ferromagnet, the spin configuration in a phase can look random. 
 The thermal randomness in a ferromagnetic material gradually decreases as the temperature is reduced, and ultimately it becomes completely ordered at $T=0$. The frustration driven randomness in a spin glass on the other hand becomes "frozen" as the temperature is reduced, and it maintains the randomness even at $T=0$.
 We will see in the next section that there are some order parameters that are able to capture the frozen disorder in a spin glass.
@@ -653,7 +653,7 @@ We will see in the next section that there are some order parameters that are ab
 
 Figure 15: Energy Landscape in Spin Glasses
 
-It was realized pretty early in the study of spin glasses that below the critical temperature their free energy landscape is quite unlike that for magnetic ferromagnetic materials. It contains multipe peaks and valleys as shown in figure 14 and these seem to be quite random. From Landau theory we know that a phase corresponds to a minima of the free energy, which leads to the observation that a spin glass can have an infinite number of phases potentially. But is there an order that exists within this randomness? The discovery of such an order turned out to be a very difficult theoretical problem, and the solution did not emerge for another three decades until the mid-1980s and it won Giorgio Parisi the Nobel Prize in Physics in 2021.  It also turned out that the solution to the spin glass problam had a wide range of applicability to other difficult problems which involved dis-ordered states, for example in biology, aritficial neural networks and combinatorial optimization.
+It was realized pretty early in the study of spin glasses that below the critical temperature their free energy landscape is quite unlike that for magnetic ferromagnetic materials. It contains multipe peaks and valleys as shown in the above figure and these seem to be quite random. From Landau theory we know that a phase corresponds to a minima of the free energy, which leads to the observation that a spin glass can have an infinite number of phases potentially. But is there an order that exists within this randomness? The discovery of such an order turned out to be a very difficult theoretical problem, and the solution did not emerge for another three decades until the mid-1980s and it won Giorgio Parisi the Nobel Prize in Physics in 2021.  It also turned out that the solution to the spin glass problam had a wide range of applicability to other difficult problems which involved dis-ordered states, for example in biology, aritficial neural networks and combinatorial optimization.
 
 ### Spin Glass Models: Edwards Anderson (EA) and Sherrington Kirkpatrick (SK) Models
 
@@ -669,11 +669,11 @@ $$ H = -J\sum_i\sum_{j[i]}\sigma_i\sigma_j $$
 
 This assumed that all interactions were confined to neighboring atoms (the set $j[i]$ being the neighbors of $i$), and more importantly the strength of the interaction $J$ is the same for all interactions. Sherrington and Kirkpatrick made the following modifications to this model:
 
-- Each spin can interact with all the other spins in the lattice, and moreover interactions always happen in a pairwise fashion (see figure 14) and this is called the fully connected assumption (also sometimes called the infinite range assumption). 
+- Each spin can interact with all the other spins in the lattice, and moreover interactions always happen in a pairwise fashion (see above figure) and this is called the fully connected assumption (also sometimes called the infinite range assumption). 
 - As in the Ising model, the spins can assume values $\pm 1$.
 - The strength of the interaction $J_{ij}$ remains symmetric, but is not a constant anymore, but is a function of the two spins taking part in the interaction and can vary randomly in magnitude as well as sign.
 
-Before the SK model, prior systems such as the Ising model sought to models systems encountered in physics, susch as ferromagnets, hence all interactions were restricted to be local with neighboring spins. These models turned out to be difficult to analyze, and as we saw in the last section, physicists resorted to the mean field approximation in order to make headway. However if you think about it, the mean field approximation is a non-local assumption, since we are assuming that each spin is influenced by all the other spins in the system. Sherrington and Kirkpatrisk were probably inspired by the success of the mean field model, and sought to create a spin glass model in which each spin explicitly interacts with all the other spins. Their intuition turned out to be correct, and indeed the SK model lent itself to an exact solution, after a lot of effort. Note that the SK model
+Before the SK model, prior systems such as the Ising model sought to models systems encountered in physics, such as ferromagnets, hence all interactions were restricted to be local with neighboring spins. These models turned out to be difficult to analyze, and as we saw in the last section, physicists resorted to the mean field approximation in order to make headway. However if you think about it, the mean field approximation is a non-local assumption, since we are assuming that each spin is influenced by all the other spins in the system. Sherrington and Kirkpatrisk were probably inspired by the success of the mean field model, and sought to create a spin glass model in which each spin explicitly interacts with all the other spins. Their intuition turned out to be correct, and indeed the SK model lent itself to an exact solution, after a lot of effort. Note that the SK model
 does away with any spatial structure such as dimensionality since each atom is the nearest neighbor of every other atom. This assumption is a bit non-intuitive, but it turned out to be useful in applying this model to areas beyond physics, such as biology and neural networks, since in these systems the connections between nodes extends beyond nearest neighbors.
 The variable coupling strength $J_{ij}$ captures the fact that the interacting spins are at variable distances from each other in an actual spin glass.
 Under these assumptions the energy function for $N$ spins becomes
@@ -713,11 +713,11 @@ This property makes the analysis of the spin glass model more tractable.
 
 ### Order Parameters in a Spin Glass System
 
-Define the average magnetization for the system $m$ as
+Define the average magnetization $m$ for the system as
 
 $$ m = \lim_{N\rightarrow\infty}{1\over N}\sum_i m_i $$
 
-where $m_i = E(\sigma_i)$ is the average (thermodynamic) spin at site $i$. For a ferromagnet clearly $-1\le m\le 1$ since each of the $m_i$ have a common sign. However this is not the case for spin glasses, the $m_i$'s can assume both positive and negative values. Since the random interactions $J_{ij}$ are symmetrically distributed around the origin, it follows that $m=0$ for the SK model, so that the average magnetization cannot be used as an order parameter.
+where $m_i = E(\sigma_i)$ is the (thermodynamic) average of the spin at site $i$. For a ferromagnet clearly $-1\le m\le 1$ since each of the $m_i$ have a common sign. However this is not the case for spin glasses, the $m_i$'s can assume both positive and negative values. Since the random interactions $J_{ij}$ are symmetrically distributed around the origin, it follows that $m=0$ for the SK model, so that the average magnetization cannot be used as an order parameter.
 
 So how can we characterize the magnetized phase in the SK model?
 If a low temperature phase exists for the SK model, there must some spin configurations that are more likely to occur than others.
@@ -727,13 +727,13 @@ $$ q_{EA} = \lim_{N\rightarrow\infty}{1\over N}\sum_i m_i^2 $$
 
 and this is called the Edwards-Anderson order parameter. 
 For $T> T_c$, $q_{EA}=0$, since the thermodynamic average $m_i=0$. If $T<T_c$ then $m_i$ can assume both positive and negative values, $-1\le m_i\le 1$ as in the Ising model. As a result
-$0\le q_{EA}\le 1$ for $T<T_c$. Hence spin glass models are characterized by $m = 0,\ 0\le q_{EA} \le 1$ for $T<_T_c.
+$0\le q_{EA}\le 1$ for $T<T_c$. Hence spin glass models are characterized by $m = 0,\ 0\le q_{EA} \le 1$ for $T<_T_c$.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat18.png) 
 
 Figure 16: Variation of the Edwards Anderson Order Parameter with temperature
 
-The above figure shows the variation of $q_{EA}$ with temperature in the SK model.
+The above figure shows the variation of $q_{EA}$ with the inverse temperature in the SK model for the case $T_c=1$. As shown $q_{EA}$ goes to one in the limit as $T\rightarrow 0$, 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat25.png) 
 
@@ -755,7 +755,7 @@ Each pure state can be assigned a statistical weight $P_{\alpha}$ given by
 
 $$ P_{\alpha} = {e^{-\beta F_{\alpha}}\over{\sum_{\gamma}e^{-\beta F_{\gamma}}}} $$
 
-The average of any observable $O$ can the be written as
+Using this distribution, the average of any observable $O$ can the be written as
 
 $$ E(O) = \sum_{\alpha} P_{\alpha} E(O_{\alpha}) $$
 
@@ -763,7 +763,7 @@ The Edwards-Anderson order parameter for pure state $\alpha$ is given by
 
 $$ q^\alpha_{EA} = {1\over N}\sum_i (m^\alpha_i)^2  $$
 
-In a ferromagnetic material no more than two phases (or valleys) appear as the temperature is reduced. However that is not the case for the SK spin glass model, which is characterized by a continuous series of symmetry breaking as the temperature is reduced. 
+In the Ising model there are only two pur stetes, since no more than two phases (or valleys) appear as the temperature is reduced. However that is not the case for the SK spin glass model, which is characterized by a continuous series of symmetry breaking as the temperature is reduced. 
 The lower part of the figure shows that at a temperature $T_2$ which is just below the temperature $T_1$ in the middle part, each of the three phases in the middle part have broken into multiple new phases, and this fragmentation continues all the way to $T=0$.
 
 It was soon realized that $q^\alpha_{EA}$ was not a sufficient order parameter to characterize the system, since it is restricted to a single valley and does not give any information about the relationship between valleys in the state space. The parameter $q_{\alpha\beta}$ defined by
@@ -782,9 +782,9 @@ which is the same as the Edwards Anderson parameter $q_{EA}$ defined earlier. Si
 $$  m^\alpha_i \approx {1\over{C_\alpha}}\sum_{\alpha=1}^{C_{\alpha}} \sigma^\alpha_i $$
 
 where $C_\alpha$ is the number of configurations associated with the pure state $\alpha$, it follows that $0\le q_{\alpha\alpha}\le 1$. 
-Note that the value of $q_{\alpha\alpha}$ grows as the number of phases increases, since there are fewer and fewer configurations in each valley, and in the limit $q_{\alpha\alpha} =1$ at $T=0$ since there in only a single configuration associated with the pure state. As the temperature increases, more configurations participate in the pure state and as a result the self-overlap becomes less than one.
+Note that the value of $q_{\alpha\alpha}$ grows as the number of phases increases, since there are fewer and fewer configurations in each valley, and in the limit $q_{\alpha\alpha} =1$ at $T=0$ since there in only a single configuration associated with the pure state. On the other hand, as the temperature increases, more configurations participate in the pure state and as a result the self-overlap becomes less than one.
 
-We can also define the probability distribution of the overlap between two pure states for a given realization of the disorder $J_{ij}$, given by
+We also define the probability distribution of the overlap between two pure states for a given realization of the disorder $J_{ij}$, given by
 
 $$ P^J(q) = \sum_{\alpha\beta} P_{\alpha} P_{\beta} \delta(q - q^{\alpha\beta}) $$
 
@@ -794,7 +794,7 @@ If we average over $J$, then this results in ${\overline P}(q)=E_J(P^J(q))$ whic
 
 Figure 14: The overlap distribution function $P(q)$ for a spin glass (top) and a ferromagnet (bottom)
 
-In an Ising model there exists one pure state when $T>T_c$ (with $m_i = 0$), and two pure states when $T<T_c$, lets call them $+$ and $-$, with $m^+_i = m > 0$ and $m^-_i = -m < 0$ with equal probability. The overlaps are given by
+In the Ising model there exists one pure state when $T>T_c$ (with $m_i = 0$), and two pure states when $T<T_c$, lets call them $+$ and $-$, with $m^+_i = m > 0$ and $m^-_i = -m < 0$ with equal probability. The overlaps are given by
 
 $$ q_{++} = m^2,\ \ \ q_{--} = m^2,\ \ \ q_{+-} = q_{-+} = -m^2  $$
 
@@ -848,7 +848,7 @@ The free energy density for this system of replicas is given by
 
 $$ f_n(N,J) = -{1\over{\beta N}} \log Z_N^n $$
 
-Since the replicas are independent, the partition function $Z_J^n$ is given by 
+Since the replicas are independent, the partition function $Z_J^n$ is given by the product
 
 $$ Z_N^n = \prod_{a=1}^n \sum_{[\sigma^a]} e^{\beta\sum_{a=1}^n\sum_{i\lt j} J_{ij}\sigma^a_i\sigma^a_j} $$
 
@@ -883,7 +883,7 @@ $$ E_J(Z_J^n)\approx \exp^{-\beta nN g_n(Q_{sp})} $$
 
 $$  \approx 1 - \beta nN g_n(Q_{sp})  $$
 
-where $Q_{sp}$ is evaluated at the value of $Q_{ab}$  which achieves its saddle point, i.e., ${\partial g_n\over{\partial Q_{ab}}} = 0$. 
+where $Q_{sp}$ is evaluated at the value of $Q_{ab}$  which achieves its saddle point, i.e., at ${\partial g_n\over{\partial Q_{ab}}} = 0$. 
 It follows that 
 
 $$ f'_N(n) = -{1\over{\beta N}}{E_J(Z_N^n) - 1\over n} = -{1\over{\beta Nn}}( 1 - \beta nN g_n(Q_{sp}) - 1) = g_n(Q_{sp}) $$
@@ -896,7 +896,9 @@ So how do we get hold of the values of the matrix $Q_{sp}$ at the saddle point? 
 
 **The Replica Symmetric Solution**
 
-The simplest structure for $Q_{ab}$ is known as the replica symmetric (RS) solution. In this case the overlap $Q_{ab}$ between any two replicas is the same, i.e., $Q_{ab} = q_0$ for $a\ne b$ and $Q_{aa} = 1$ along the diagonal. Substituting this back into the equation for $f_n(Q_{ab})$ and taking the limit as $n\rightarrow 0$ so that $f(q) = \lim_{n\rightarrow 0} f_n(q)$, it can be shown that the saddle point for $f(q)$ is given by $q=0$ if $T>T_c$. If $T<T_c$ then a solution with $q>0$ does exist, however this solution suffers from the issue that the resulting entropy $S$ is less than zero, which means that the solution is not correct.
+The simplest structure for $Q_{ab}$ is known as the replica symmetric (RS) solution. In this case the overlap $Q_{ab}$ between any two replicas is the same, i.e., $Q_{ab} = q_0$ for $a\ne b$ and $Q_{aa} = 1$ along the diagonal. Substituting this back into the equation for $g_n(Q_{ab})$ and taking the limit as $n\rightarrow 0$ so that $f(q) = \lim_{n\rightarrow 0} f_n(q)$, it can be shown that the saddle point for $f(q)$ is given by $q=0$ if $T>T_c$. If $T<T_c$ then a solution with $q>0$ does exist, however this solution suffers from the issue that the resulting entropy $S$ is less than zero, which means that the solution is not correct.
+
+**Replica Symmetry Breaking (RSB)**
 
 The correct structure, that was proposed by Parisi, is a matrix with an iterative block structure in which $Q_{ab}$ depends on both $a$ and $b$.
 
@@ -907,8 +909,8 @@ Figure 16: Illustration of replica symmetry, 1-RSB and 2-RSB, from left to right
 The first two iteration of replica symmetry breaking (RSB) is shown in figure 16. 
 
 - The leftmost figure shows the case when the replica symmetry is unbroken in the high temperature case, in which all elements of the matrix are zero.
-- The middle figure shows the simplest case of replica symmetry breaking, called 1-RSB. The $Q_{ab}$ matrix is parametrized by a diagonal value of $q_d$, and two off-diagonal values that can either be $q_1$ if the two replicas belong to the same block of size $m\times m$, or $q_0$ is the replicas fall outside the innermost block.
-- This procedure can be iteratively repeated within each of the blocks, leading to k step RSB or k-RSB. An example of 2-RSB is shown in the rightmost figure with corresponding parameters $q_0, q_1$ and $q_2$.
+- The middle figure shows the simplest case of replica symmetry breaking, called 1-RSB. The $Q_{ab}$ matrix is parametrized by a diagonal value of $q_d$, and two off-diagonal values that can either be $q_1$ if the two replicas belong to the same inner block of size $m\times m$, or $q_0$ if one of the replicas fall outside the innermost block.
+- This procedure can be iteratively repeated within each of the inner blocks, leading to k step RSB or k-RSB. An example of 2-RSB is shown in the rightmost figure with corresponding parameters $q_0, q_1$ and $q_2$.
 - The complete solution is obtained in the limit $k\rightarrow\infty$, in which case the elements of the matrix become a function $q(x), 0\le x\le 1$.
 
  To summarize, we have obtained a solution for the free energy ${\overline f}$ as a function of the elements of the matrix $Q_{ab}$, which can be regarded as an order parameter and this order parameter is the overlap between configurations belonging to different replicas. But what is the interpretation of this solution in terms of the spin glass model? We answer this in the next sub-section.
@@ -941,7 +943,7 @@ Figure 16: The $Q_{ab}$ matrix for first order RSB
 
 The $Q_{ab}$ matrix for the 1-RSB solution as per the Parisi ansatz is shown above. This solution splits up the replicas in groups of size $m$ such that overlap between replicas within a group is $q_1$, and between groups is $q_0$ ($m=3$ in the figure). The overlap distribution is given by 
 
-$$ {\overline P}(q) = {m-1\over{n-1}}\delta(q-q_1) + {n-m\over{n-1}}\delta(q-q_0) \ \ \ wih\ \ \ 1\le m\le n $$
+$$ {\overline P}(q) = {m-1\over{n-1}}\delta(q-q_1) + {n-m\over{n-1}}\delta(q-q_0) \ \ \ with\ \ \ 1\le m\le n $$
 
 We now have to take the limit as $n\rightarrow 0$ to complete the replica solution. This does not make much sense mathematically since we are effectively reducing the size of the overlap matrix to zero. However it can be argued that this limit can be taken in a mathematically formal manner (similar to raising a number to a fractional power, such $x^{1\over 2}$ for example). In this limit $m$ must also be promoted to a real number, rather than an integer. This results in
 
@@ -962,7 +964,7 @@ and in the limit at $k\rightarrow \infty$, it results in a continuous overlap di
 
 Figure 17: Illustration of replica symmetry breaking
 
-The left hand side of Figure 17 shows the changes in the free energy landscape as the temperature lowered, and the distribution of the overlaps is shown on the right:
+The left hand side of the above figure shows the changes in the free energy landscape as the temperature lowered, and the distribution of the overlaps is shown on the right:
 
 - At high temeperatures there is only a single pure state and the energy landscape is fairly flat, so that individual configurations are widely spread out and have a low degree of overlap. This is illustrated by the green curve on the right which shows that the overlaps have a single peak at the zero overlap value.
 - As the temperature is reduced below the critical value, we see the formation of multiple pure states and there is split of the of overlap distribution into a bi-modal shape (orange curve). Configurations can be in the same pure state in which case they have a high overlap value $q_1$, or they can be in different pure states, in which vase the overlap tends to be smaller at $q_0$.
@@ -974,7 +976,7 @@ Hence there are two cases in which there is low overlap distribution, but the re
 
 Figure 17: Tree like and nested structure in replica symmetry breaking
 
-Another way to visualize replica symmetry breaking is shown in the above figure. At high temperatures we have single pure state, as shown by the large oval (which can be thought to be the space of all configuartions) on the right and the top node in the tree. When the temperature dips below $T_c$ the state splits into three pure states as shown by the three smaller ovals which are now restricted to a smaller subset of configurations. A further reduction in temperature causes these 3 pure states to split into 6 pure states, edach with a even smaller set of possible configurations. The overlap function $q_{\alpha\beta}$ depends on how far the pure states $\alpha$ and $\beta$ are from each other in the tree structure. For example A and B are closer to each other, and further away from the other states C,D,E,F and G. 
+Another way to visualize replica symmetry breaking is shown in the above figure. At high temperatures we have single pure state, as shown by the large oval (which can be thought to be the space of all configuartions) on the right and the top node in the tree. When the temperature dips below $T_c$ the state splits into three pure states as shown by the three smaller ovals which are now restricted to a smaller subset of configurations. A further reduction in temperature causes these 3 pure states to split into 6 pure states, each with a even smaller set of possible configurations. The overlap function $q_{\alpha\beta}$ depends on how far the pure states $\alpha$ and $\beta$ are from each other in the tree structure. For example A and B are closer to each other, and further away from the other states C,D,E,F and G. 
 
 ### Counting the Number of Pure States
 
@@ -983,11 +985,11 @@ Note that each pure state has a well defined local magnetization at site $i$ giv
 by its vector of magnetizations $(m^\alpha_1,...,m^\alpha_N)$.
 It turns out that it is possible to define a function $f_{TAP}(m_1,...,m_N)$, called the Thouless-Anderson-Palmer (TAP) free energy, whose local minima coincide with the pure states of the system. It is given by
 
-$$ m_i = \tanh[\beta\sum_j J_{ij}m_j - \beta^2 \sum_j J_{ij}^2(1-m_j^2})m_i] $$
+$$ m_i = \tanh[\beta\sum_j J_{ij}m_j - \beta^2 \sum_j J_{ij}^2 (1-m_j^2)m_i] $$
 
 The equivalent equation for the minima in the case of the Ising model was given by $m=\tanh(\beta m)$. The TAP equations correspond to the stationary points for the following free energy
 
-$$ f_{TAP} = -{1\over 2}\sum_{i\ne j} J_{ij}m_i m_j - \sum_i h_i m_i - {\beta\over 4}\sum_{i\ne j}J_{ij}^2(1=m_i^2)(1-m_j^2) + {T\over 2}\sum_i[{1+m_i\over 2}\log(1+m_i\over 2} + (1-m_i)\log{1-m_i\over 2}]  $$
+$$ f_{TAP} = -{1\over 2}\sum_{i\ne j} J_{ij}m_i m_j - \sum_i h_i m_i - {\beta\over 4}\sum_{i\ne j}J_{ij}^2 (1-m_i^2) (1-m_j^2) + {T\over 2}\sum_i[{1+m_i\over 2}\log{1+m_i\over 2} + {1-m_i\over 2}\log{1-m_i\over 2}]  $$
 
 Note that the free energy is a function of the magnetizations $m_i$ and not the individual spins $\sigma_i$, hence its minima do not necessarily coincide with the energy minima, i.e., the minima of the Hamiltonian $H(\sigma_1,...,\sigma_N)$. This is result of the fact that at temperatures greater than zero, multiple energy minima may be separated by barriers that are small enough so that they belong to the same pure state. 
 
