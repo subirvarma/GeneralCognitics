@@ -727,7 +727,7 @@ $$ q_{EA} = \lim_{N\rightarrow\infty}{1\over N}\sum_i m_i^2 $$
 
 and this is called the Edwards-Anderson order parameter. 
 For $T> T_c$, $q_{EA}=0$, since the thermodynamic average $m_i=0$. If $T<T_c$ then $m_i$ can assume both positive and negative values, $-1\le m_i\le 1$ as in the Ising model. As a result
-$0\le q_{EA}\le 1$ for $T<T_c$. Hence spin glass models are characterized by $m = 0,\ 0\le q_{EA} \le 1$ for $T<_T_c$.
+$0\le q_{EA}\le 1$ for $T<T_c$. Hence spin glass models are characterized by $m = 0,\ 0\le q_{EA} \le 1$ for $T < T_c$.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat18.png) 
 
@@ -993,35 +993,37 @@ $$ f_{TAP} = -{1\over 2}\sum_{i\ne j} J_{ij}m_i m_j - \sum_i h_i m_i - {\beta\ov
 
 Note that the free energy is a function of the magnetizations $m_i$ and not the individual spins $\sigma_i$, hence its minima do not necessarily coincide with the energy minima, i.e., the minima of the Hamiltonian $H(\sigma_1,...,\sigma_N)$. This is result of the fact that at temperatures greater than zero, multiple energy minima may be separated by barriers that are small enough so that they belong to the same pure state. 
 
-![](https://subirvarma.github.io/GeneralCognitics/images/stat39.png) 
+![](https://subirvarma.github.io/GeneralCognitics/images/stat40.png) 
 
 Figure: Logarithm of the total number of TAP solutions, divided by N, as a function of temperature
 
-[Bray and Moore](https://iopscience.iop.org/article/10.1088/0022-3719/13/19/002) proposed that the density of solutions should counted as a function of $f_{TAP}$, denoted by $N_s(f_{TAP})$ and they showed that it varies as
+[Bray and Moore](https://iopscience.iop.org/article/10.1088/0022-3719/13/19/002) proposed that the density of solutions should counted as a function of the free energy $f_{TAP}$, denoted by $N_s(f_{TAP})$ and they showed that it varies as
 
 $$ N_s(f_{TAP}) \sim \exp^{\alpha N} $$
 
-The quantity $\alpha$ is plotted in the figure above
+The quantity $\alpha$ is plotted in the figure above.
+
 For the case $T=0$ the TAP equation reduces to $m_i = sign(\sum_j J_{ij}m_j)$ and by working directly with this equation it can be shown that
 
 $$  {1\over N}E_J (\log N_s) = 0.1992 $$
 
 ### The p-Spin Spherical Spin Glass Model (PSM)
 
-The SK model was the first spin glass model to be fully analyzed and understood. However its behavior, including the continuous symmtery breaking for $T<T_c$ is quite complex, and it would be nice to have another spin glass model with simpler phase properties. One such model that has become popular in recent years is the p-spin Spherical Spin Glass Model (or PSM) [Castellani and Cavagna](https://arxiv.org/abs/cond-mat/0505032). In the following sections we will see that this model can be connected to some types of neural networks and thus provides a way in which the loss function in these networks can be studied using the tools from spin glass theory.
+The SK model was the first spin glass model to be fully analyzed and understood. However its behavior, including the continuous symmtery breaking for $T<T_c$ is quite complex, and it would be nice to have another spin glass model with simpler phase properties. One such model that has become popular in recent years is the p-spin Spherical Spin Glass Model (or PSM) (see [Castellani and Cavagna](https://arxiv.org/abs/cond-mat/0505032)). This model can be connected to certain types of neural networks and thus provides a way in which the loss function in these networks can be studied using the tools from spin glass theory.
 
-In the PSM model p-spins interact with one another and the Hamiltonian of the energy levels for a given configuration of spins is given by 
+In the PSM model, p-spins interact with one another and the Hamiltonian of the energy levels for a given configuration of spins is given by 
 
 $$ H_p = -\sum_{i_1>...>i_P} J_{i_1,...,i_p}\sigma_{i_1}...\sigma_{i_p},\ \ \ p\ge 3 $$
 
-In addition to each spin inteacting with each of the other spins in the system, we also multiple spins being able to interact with another at the same time. Hence we can
-consider the PSM to be atype of mean field model.
-Unlike the SK model, the spins in PSM are now real continuous variables. In order to keep the energy finite, the following constraint, called the spherical constraint, is imposed
+Thus we have multiple spins being able to interact with another at the same time. 
+The sum is extended over all groups of $p$ spins, not only the nearest neighbors, so there is no spatial structure.
+Hence just as for the SK model, we can
+consider the PSM to be a type of mean field model, but with a greater degree of coupling between spins.
+Note that unlike the SK model, the spins in PSM are now real continuous variables. In order to keep the energy finite, the following constraint, called the spherical constraint, is imposed
 
 $$ \sum_{i} \sigma_i^2 = N $$
 
-Under this constraint the self-overlap of each configuration is one (which is also true for the SK model, but in PSM model the $\sigma_i$'s are no longer $\pm 1$).
-Just as in the SK spin glass, the sum is extended over all groups of $p$ spins, not only the nearest neighbors, so there is no spatial structure.
+Under this constraint the self-overlap of each configuration is one (which is also true for the SK model, but remember that in PSM model the $\sigma_i$'s are no longer $\pm 1$).
 
 Any group of $p$ spins have a random interaction strength given by $J_{i_1,...,i_p}$, which is distributed according to the Normal distribution given by
 
@@ -1033,31 +1035,30 @@ just as for the SK model. For $T>T_c$ there is no magnetization and this corresp
 $$ {\overline P(q)}) = (1 - m)\delta(q-q_1) + m\delta(q-q_0)\ \ \ with \ \ \ 0\le q_0 \le q_1 \le 1\ \ \ and\ \ \ 0\le m\le 1    $$
 
 where $q_1$ and $q_0$ are the self overlap and cross overlap parameters for pure states of the system. 
-The parameters $m, q_0, q_1$ can be determined by solving the saddle point equations for the free energy of the system, and this results in
+The parameters $m, q_0, q_1$ can be determined by solving the saddle point equations for the free energy of the system, and this results in $q_0 = 0$,
+i.e., the cross overlap between different pure states is zero. The values of $m$ and $q_1$ are determined by solving additional equations (which I am going to leave out, the interested reader can refer to Section 3.5 of [Castellani and Cavagna](https://arxiv.org/abs/cond-mat/0505032)).
+It has been shown that this 1RSB solution is exact for the PSM model, i.e., there is no further symmetry breaking as the temperature is further reduced below $T_c$.
 
-$$ q_0 = 0 $$
-
-i.e., the cross overlap between different pure states is zero. The values of $m$ and $q_1$ are determined by solving additional equations (which I am going o leave out, the interested reader can refer to Section 3.5 of [Castellani and Cavagna](https://arxiv.org/abs/cond-mat/0505032).
-It has been proven that this 1RSB solution is exact for the PSM model, i.e., there is no further symmetry breaking as the temperature is further reduced below $T_c$..
-
-There exists an analogue to the TAP equation in the PSM model, which can be used to count the number of pure states when $T<T_c$. When this analysis is carried out, it results in the surprising discovery that:
-the solutions to the TAP equation are given by $m_i = \sqrt{q}\sigma_i$, where the $\sigma_i$ are the minima of the energy function and $q$ is the self overlap, given by
+There exists an analogue to the TAP equation in the PSM model, which can be used to count the number of pure states when $T<T_c$. When this analysis is carried out, it results in the surprising discovery:
+The solutions to the TAP equation are given by $m_i = \sqrt{q}\sigma_i$, where the $\sigma_i$ are the minima of the energy function and $q$ is the self overlap. These are obtained by solving the equations
 
 $$ {\partial H(\sigma)\over{\partial\sigma_i}} = 0,\ \ \ \sum_i\sigma_i^2 = N $$
 
 $$ {1\over N}{p\over 2} q^{{p\over 2}-1} H(\sigma) + {\partial R\over{\partial q}} = 0,\ \ \ where \ \ \ R = 1-{1\over{2\beta}}\log(1-q) - {\beta\over 4}[(p-1)q^p - pq^{p-1}] $$
 
-Note that the solutions to the first equation $\sigma_i$ do not depend on the temperature, however the value of the self overlap $q$ does. Hence in a PSM there is a 1-1 mapping between the minima of the Hamiltonian and the minima of the free energy. $T=0$ the two co-incide, but as the temperature is increased, thermal fluctuations cause the confgurations to change into pure states.
+Note that the solutions $\sigma_i$ to the first equation do not depend on the temperature, however the value of the self overlap $q$ does. Hence in a PSM there is a 1-1 mapping between the minima of the Hamiltonian and the minima of the free energy. At $T=0$ the two co-incide, but as the temperature is increased, thermal fluctuations cause the confgurations to change into pure states.
   
 
 ### Simulated Annealing
 
 [Kirkpatrick, Gelatt and Vechi](https://mk.bcgsc.ca/papers/kirkpatrick-simulatedannealing.pdf) applied the Metropolis algorithm to the problem of combinatorial optimization, and called the resulting technique simulated annealing.
-Combinatorial optimization is the problem of minimizing a cost function which is a function of a number of independent variables $(x_1,x_2,...,x_N)$, and this can be likened to the energy function in statistical mechanics.
-If we try to find the minimum using a brute force search over the configuration space, there is a good chance that the optimization will get stuck at a local minumum, and this corresponds to trying to find the lowest energy configuration for a spin system at $T=0$. Kirkpatrick et.al. proposed adding a temperature variable to the optimization, and then using the Metropolis algorithm to find the low energy configurations. This allows the optimization to jump out of local minima as long as $T>0$, with finite probability. They proposed that the optimization start at a high temperature, and then lower the temperature by slow stages until the system "freezes" and no further changes occur. At each temperature the the simulation should proceed long enough for the system to reach equilibrium.
+Combinatorial optimization is the problem of minimizing a cost function $f(x_1,x_2,...,x_N)$, and this can be likened to the energy function in statistical mechanics.
+If we try to find the minimum using a brute force search over the configuration space, there is a good chance that the optimization will get stuck at a local minumum, and this corresponds to trying to find the lowest energy configuration for a spin system at $T=0$. 
+
+Kirkpatrick et.al. proposed adding a temperature variable to the optimization, which results in random thermal spin fluctuations, and then using the Metropolis algorithm to find the low energy configurations. This allows the optimization to jump out of local minima as long as $T>0$, with finite probability. They proposed that the optimization start at a high temperature, and then lower the temperature by slow stages, until the system "freezes" and no further changes occur. At each temperature the the simulation should proceed long enough for the system to reach equilibrium.
 
 
-## From Spin Glass to Hopfield Networks: Engineering the Energy Landscape of a Spin Glass System
+## Hopfield Networks: Engineering the Energy Landscape of a Spin Glass System
 
 The physicist John Hopfield was at Princeton during the 1970s, and he was instrumental in luring away Phil Anderson from Bell Labs to Princeton during that time. Anderson acquainted Hopfield with his work in spin glasses (see the Edwards-Anderson model in the previous section), and Hopfield began thinking about how these results could be applied to model biological systems. He was intrigued by the possibility of creating an energy landscape with multiple valleys, and wondered if the equilibrium spin configuration in each valley (at T = 0) could be used an an associative memory. Subsequently he succeeded in creating a spin glass inspired model which indeed could do so, as explained next.
 
