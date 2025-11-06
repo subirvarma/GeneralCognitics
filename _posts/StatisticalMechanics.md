@@ -1070,7 +1070,7 @@ The physicist John Hopfield was at Princeton during the 1970s, and he was instru
 
 Figure 18
 
-Hopfield started with SK model with full connectivity, shown in the top left of Fig. 18, with the symmetric interaction between nodes $i$ and $j$ given by $J_{ij}$.
+Hopfield started with a SK type spin glass model with full connectivity, shown in the top left of Fig. 18, with the symmetric interaction between nodes $i$ and $j$ given by $J_{ij}$.
 Assume that the spin at each node, $\sigma_i, i = 1,2,...N$ in the network can assume values of +1 or -1, and denote the state $X$ of the network as $X = (\sigma_1,...,\sigma_N)$. 
 Furthermore assume that the state of the network evolves according to the equation
 
@@ -1079,36 +1079,37 @@ $$ \sigma_i(t+\Delta t) = sign(\sum_{j\ne i}^N J_{ij} \sigma_j(t)) $$
 where $\sum_{j\ne i}^N J_{ij} \sigma_j(t)$ is the local field acting on node $i$ and
 each node randomly and asynchronously evaluates whether it is above or below its threshold, and adjusts its value accordingly. It is not too difficult to see that this rule is equivalent to the Glauber Dynamics from a few sections ago, specialized to the case $T=0$.
 
-![](https://subirvarma.github.io/GeneralCognitics/images/stat23.png) 
-
-Figure 19
-
 Given the update rule, this model has energy function given by
 
 $$ H = -{1\over 2}\sum_i\sum_j J_{ij}\sigma_i\sigma_j $$
 
-since $\sum_j J_{ij}\sigma_j$ is the local field that influences  the spin $\sigma_i$ and it tries to align itself with it at time $t+\Delta t$. 
-After substituting for $J_{ij}$, $H$ can be written as
-
-$$  H = -{1\over 2N}\sum_{\mu=1}^p(\sum_{i=1}^N \sigma_i\xi^\mu_i)^2  $$
-
-There is a monotonically decreasing value of the energy with each spin update, since if there is a change $\Delta\sigma_i$ in the value of the $i^{th}$ spin, then
-
-$$  \Delta H = -{1\over 2}\Delta\sigma_i \sum_{j} J_{ij}\sigma_j  $$
-
-and the signs for $\Delta\sigma_i$ and $\sum_j J_{ij}\sigma_j$ coincide.
- 
-These state changes will continue until a stable point such as one of the stored memories $\xi^\mu$ is reached. Fig. 19 shows this situation where the network reaches a minimum of energy closest to the initial condition and stops there.
-But does the network always converge to one of these stored states? Using simulations Hopfield showed that about $0.15N$ states can be simultaneously remembered before the error in recall is severe.
-
-If we are to use this system as a memory, there should be a way in which the interactions $J_{ij}$ can be chosen so that the equilibrium energy minima correspond to bit patterns that we want to store. In order to acheive this, Hopfield hit upon the novel idea of engineering the energy landscape by choosing the interactions to be a function of the bit patterns to be stored in the associative memory.
+If we are to use this system as a memory, there should be a way to choose the interactions $J_{ij}$ so that the equilibrium energy minima correspond to bit patterns that we want to store. In order to acheive this, Hopfield hit upon the novel idea of engineering the energy landscape by choosing the interactions to be a function of the bit patterns to be stored in the associative memory.
 
 Assume that we wish the network to store the vector states $\Xi^s, s=1,...,p$ so that the $\mu^{th}$ excitation pattern can be written as $\Xi^\mu=(\xi^\mu_1,...,\xi^\mu_N)$.
 In order to store these states, Hopfield proposed that the interactions $J_{ij}$ be chosen according to the Hebb rule
 
 $$ J_{ij} = {1\over N}\sum_{\mu=1}^p \xi^\mu_i \xi^\mu_j\ \ \ with\ \ \ J_{ii} = 0 $$
 
-In the 1940s aritificial neural networks pioneer Donald Hebb proposed that the strength of the connection between two neurons should increase every time the two neurons fire together. The equation above captures this by making $J_{ij}$ proportional to the number of locations in which the $\xi^\mu_i$ and $\xi^\mu_j$ coincide for $\mu=1,...,p$. In order to get some intuition for this, consider the example in which a network with $N=3$ nodes is being used to store the following three vectors:
+Clearly the interaction strengths $J_{ij}$'s can assume both positive and negative values, so the system qualifies as a spin glass, but not of the Sherrington-Kirkpatrick kind, since the $J_{ij}$'s are not Normally distributed.
+After substituting for $J_{ij}$, $H$ can be written as
+
+$$  H = -{1\over 2N}\sum_{\mu=1}^p(\sum_{i=1}^N \sigma_i\xi^\mu_i)^2  $$
+
+![](https://subirvarma.github.io/GeneralCognitics/images/stat45.png) 
+
+Figure 19: Energy landscape and time evolution
+
+The spin updates cause a 
+monotonically decreasing value of the energy (see above figure), since if there is a change $\Delta\sigma_i$ in the value of the $i^{th}$ spin, then
+
+$$  \Delta H = -{1\over 2}\Delta\sigma_i \sum_{j} J_{ij}\sigma_j  $$
+
+and the signs for $\Delta\sigma_i$ and $\sum_j J_{ij}\sigma_j$ coincide.
+These state changes with decreasing energy will continue until a stable point such as one of the stored memories $\xi^\mu$ is reached. Fig. 19 shows this situation where the network reaches a minimum of energy closest to the initial condition and stops there. Note that there is no thermal disorder here, so the system settles at the bottom of the nearest valley.
+But does it converge to one of the stored states? Using simulations Hopfield showed that in most cases it does. However the memory retrieval reliability goes down as more and more states are stored, and about $0.15N$ states can be simultaneously remembered before the error in recall is severe.
+
+How did Hopfield arrive at his formula for the interactions $J_{ij}$?
+In the 1940s aritificial neural networks pioneer Donald Hebb proposed that the strength of the connection between two neurons should increase every time the two neurons fire together. The equation for $J_{ij}$ captures this by making it proportional to the number of locations in which the $\xi^\mu_i$ and $\xi^\mu_j$ coincide for $\mu=1,...,p$. In order to get some intuition for this, consider the example in which a network with $N=3$ nodes is being used to store the following three vectors:
 
 $$ \Xi^a = (\xi^a_1,\xi^a_2,\xi^a_3) $$
 
@@ -1116,9 +1117,10 @@ $$ \Xi^b = (\xi^b_1,\xi^b_2,\xi^b_3) $$
 
 $$ \Xi^c = (\xi^c_1,\xi^c_2,\xi^c_3) $$
 
-This can also be regarded as the vector $\Xi_1=(\xi^a_1,\xi^b_1,\xi^c_1)$ associated with node 1, the vector $\Xi_2=(\xi^a_2,\xi^b_2,\xi^c_2)$ associated with node 2 and the vector $\Xi_3=(\xi^a_3,\xi^b_3,\xi^c_3)$ associated with node 3. The strength of connection between nodes 1 and 2 is proportional to the number of locations in $\Xi_1$ and $\Xi_2$ which are equal, i.e., if the patterns associated with nodes 1 and 2 are closer to each other, then the Hebbian rule causes the spin values at the two nodes tend to draw closer to each other, and vice-versa.
+This can also be regarded as a system in which the vector $\Xi_1=(\xi^a_1,\xi^b_1,\xi^c_1)$ is associated with node 1, the vector $\Xi_2=(\xi^a_2,\xi^b_2,\xi^c_2)$ is associated with node 2 and the vector $\Xi_3=(\xi^a_3,\xi^b_3,\xi^c_3)$ is associated with node 3. The strength of connection between nodes 1 and 2 is proportional to the number of locations in $\Xi_1$ and $\Xi_2$ which are equal. Note that $\Xi_1$ and $\Xi_2$ are closer to each other then this causes the value of $J_{12}$ increase, and this in turn causes the spin values at the two nodes tend to draw closer to each other, and vice-versa.
 
-The spin update rule implies that if the network is in one of the memory states $\Xi^\mu$ at time $t$, then a single step of the state evolution leads to the following spin value at node $i$:
+Assuming that the network is at one of the stored states $\Xi^\mu$, what are the chances that it continue to stay in this state after updates?
+A single step of the state evolution leads to the following spin value $\sigma_i$ at node $i$:
 
 $$ \sigma_i = sign(\sum_{j=1}^N J_{ij}\xi^\mu_j) = sign{1\over N} (\sum_{j=1}^N\sum_{\nu=1}^p \xi^\nu_i \xi^\nu_j \xi^\mu_j) $$
 
@@ -1129,60 +1131,56 @@ $$ \sigma_i = sign(\xi^\mu_i + {1\over N} \sum_{j=1}^N \xi^\mu_j\sum_{\nu\ne\mu}
 The second term is called the crosstalk term, and if its absolute value is less than $1$ for all $i$, then it follows that $\sigma_i = \xi^\mu_i$, i.e., the pattern $\Xi^\mu$ is a fixed point for the network.
 
 It is possible to obtain a rough estimate for the capacity of the Hopfield network by analysing the crosstalk term, and this is done next.
-We want to find an upper bound for $p$, such that the crosstalk term remains small enough with high probability. Multiply the crosstalk term by $\xi^\mu_i$
+In general the crosstalk increases as the number $p$ of stored patterns increases, and 
+we want to find an upper bound for $p$, such that the crosstalk term remains small enough with high probability. Multiply the crosstalk term by $\xi^\mu_i$
 to define
 
 $$ C_i^\mu = -\xi^\mu_i {1\over N} \sum_{j=1}^N \xi^\mu_j\sum_{\nu\ne\mu} \xi^\nu_i \xi^\nu_j $$
 
 Note that if $C_i^\mu$ is negative then the crosstalk term has the same sign as $\xi^\mu_i$, and thus it will not cause a change in its sign. On the other hand if $C_i^\mu$ is positive and greater than 1, then the sign of $\sigma_i$ will change, which will lead to an error in the memory retrieval.
 
-We will estimate the probability $P(C_i^\mu >1$. Assume that $\xi_i^\nu, 1\le i\le N, 1\le\nu\le p$ are purely random with equal probabilities of being $1$ and $-1$. This $C^\mu_i$ is the sum of (roughly) $Np$ independent and identically distributed random variables, say $y_m, 1\le m\le Np$ with equal probabilities of being $1$ and $-1$. Since $E(y_m)=0$ and $Var(y_m) = 1$ for all m, it folows from the central limit theorem that $C_i^\mu$  has approximately a Normal distribution with $N(0,s^2) with mean $0$ and variance $s^2 = {p\over N}$. Therefore if we store $p$ patterns in a Hopfield network with a large number of $n$ nodes, then the probability of error is given by
+We will estimate the probability $P(C_i^\mu >1)$. Assume that $\xi_i^\nu, 1\le i\le N, 1\le\nu\le p$ are purely random with equal probabilities of being $1$ and $-1$. Thus $C^\mu_i$ is the sum of (roughly) $Np$ independent and identically distributed random variables, say $y_m, 1\le m\le Np$ with equal probabilities of being $1$ and $-1$. Since $E(y_m)=0$ and $Var(y_m) = 1$ for all $m$, it folows from the central limit theorem that $C_i^\mu$  has approximately a Normal distribution with $N(0,s^2)$ with mean $0$ and variance $s^2 = {p\over N}$. Therefore if we store $p$ patterns in a Hopfield network with a large number of $N$ nodes, then the probability of error is given by
 
-$$P_{error} = P(C^\mu_i > 1) \approx {1\over 2}(1-erf(\sqrt{N\over{2p}}))\ \ \ with\ \ \ erf(x) = {1\over\sqrt{\pi}}\int_0^x e^{-s^2} ds $$
-
-$$ = sign(\sum_\nu \xi^\nu_i \delta_{\nu\mu}) = sign(\xi^\mu_i) $$
+$$  P_{error} = P(C^\mu_i > 1) \approx {1\over 2}(1-erf(\sqrt{N\over{2p}}))\ \ \ with\ \ \ erf(x) = {1\over\sqrt{\pi}}\int_0^x e^{-s^2} ds $$
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat44.png) 
 
 Figure 19: Error probability in a Hopfield network
 
-The table above shows the error for some values of ${p\over N}$. We can see that error is reasonably low until ${p\over N}=0.138$, and increases sharply after that. This has been borne out by a more thorough analysys of Hopfield networks using the tools from spin glass theory.
+The table above shows the error for some values of ${p\over N}$. We can see that error is reasonably low until ${p\over N}=0.138$, and increases sharply after that. This has been borne out by a more thorough analysis of Hopfield networks using the tools from spin glass theory.
 
+The argument presented in this section for memory recall was of the fixed point type, i.e., if the system was already in one of the memory states, then it will tend to stay there (provided $p<0.138N$). But under normal operations the system will be initialized to some arbitrary state, and if so, will it still converge to one of the memory vectors? It turns out that there are energy minima for the Hopfield network that don't correspond to any of the stored patterns, and there is a chance that the system will end up at one of those. What is the nature of these minima, and what can be done to avoid getting stuck in them? In order to solve these problems we have to introduce thermal motion, i.e., temperature, into the system, which allows the use of the tools from statistical mechanics that we learnt in the prior sections.
 
-Note that this argument is not sufficient to gaurantee that the system will end up in state $\xi^\mu$ if it were to start from a state that is slightly different from it.
+### Hopfield Network with Stochastic Dynamics
 
-![](https://subirvarma.github.io/GeneralCognitics/images/stat23.png) 
+![](https://subirvarma.github.io/GeneralCognitics/images/stat46.png) 
 
-Figure 19
+Figure 19: The probability that node $i$ becomes excited
 
- Within a few years the system was analyzed using the tools of statistical sechanics, and this is described next.
-
-### Finite Number of Stored Patterns
-
-In order to analyze the system we have to introduce temperature into the equations. This is done by changing the state transition equations as follows: Denote the field at node $i$ at time $t$ as 
+We make the following change to the state transition equations in order to take thermal motion into account: Denote the field at node $i$ at time $t$ as 
 
 $$  h_i(t) = \sum_j J_{ij}\sigma_j(t) $$
 
 and assume that $\sigma_i(t+\Delta t)$ becomes 1 with probability $1\over{1+e^{-2\beta h_i(t)}}$ and -1 with probability ${e^{-2\beta h_i(t)}\over{1+e^{-2\beta h_i(t)}}}$.
-Note that this stochastic dynamics reduces to earlier state transition equation in the limit $\beta\rightarrow\infty$ so that the original Hopfield Network corresponds to the case $T=0$.
-On the other hand the network becomes completely random if $\beta=0$.
-Hence the problem of memory retrieval in the Hopfield Network at finite temperatures reduces to that of finding the conditions under which the equilibrium state corresponds to one of the stored memories, when starting from a non-equilibrium state.
+Note that this stochastic dynamics reduces to earlier state transition equation in the limit $\beta\rightarrow\infty$ so that the original Hopfield Network corresponds to the case $T=0$, since $\sigma_i(t+\Delta t) = 1$ if $h_i(t) > 0$ and is $\sigma_i(t+\Delta t) = -1$ otherwise.
+On the other hand the network becomes completely random if $T=\infty$.
+From our knowledge of statistical mechanics, we know that if the system is allowed to evolve then ultimately it will settle down to a set of states whose probabilities are distributed according to the Boltzmann distribution.
 
-Lets assume we are trying to store the $p$ bit patterns
+Lets assume we are trying to store the $p$ patterns
 $\Xi^\mu = (\xi^\mu_1,...,\xi^\mu_N), \mu = 1,...p$.
 For this case partition function $Z$ for the Hopfield network is given by 
 
-$$ Z = \sum_{[s]} \exp[{{\beta\over 2N}\sum_{\mu=1}^p(\sum_{i=1}^N \sigma_i\xi^\mu_i)^2}]   $$
+$$ Z = \sum_{[\sigma]} \exp[{{\beta\over 2N}\sum_{\mu=1}^p(\sum_{i=1}^N \sigma_i\xi^\mu_i)^2}]   $$
 
-where the first sum is over all possible spin patterns $[s]$, and the effect of the diagonal terms $J_{ii} = 0$ has been ignored since there are much fewer of these terms in the sum.
+where the first sum is over all possible spin patterns $[\sigma]$, and the effect of the diagonal terms $J_{ii} = 0$ has been ignored since there are much fewer of these terms in the sum.
 The next step is to apply the Hubbard-Stratonovich transformation to the term in the exponent, which results in
 
-$$ Z = \sum_{[s]} \int\prod_{\mu=1}^p dm^{\mu}\ \exp[-{1\over 2}N\beta \sum_{\mu}(m^{\mu})^2 + \beta\sum_{\mu} m^{\mu}\sum_{i} \sigma_i\xi^{\mu}_i ] $$
+$$ Z = \sum_{[\sigma]} \int\prod_{\mu=1}^p dm^{\mu}\ \exp[-{1\over 2}N\beta \sum_{\mu}(m^{\mu})^2 + \beta\sum_{\mu} m^{\mu}\sum_{i} \sigma_i\xi^{\mu}_i ] $$
 
 This transformation results in the introduction of the integration variables $m^{\mu}, i=1,...,p$. 
-Using the notation $M = (m^1,...,m^p)$ and $\Xi_i = (\xi^1_i,...,\xi^p_i)$ (note that this is just the set of stored bits associated with node i), if we sum over all possible values of the spin patterns $[s]$, then this results in
+Using the notation $M = (m^1,...,m^p)$ and $\Xi_i = (\xi^1_i,...,\xi^p_i)$ (note that this is just the set of values associated with node i), if we sum over all possible values of the spin patterns $[\sigma]$, then this results in
 
-$$ Z = \int\prod_{\mu} dm^{\mu}\ \exp[-{1\over 2}N\beta M^2 + \sum_{i=1}^N \log(2\cosh\beta M.\Xi_i) ]  $$
+$$ Z = \int\prod_{\mu=1}^p dm^{\mu}\ \exp[-{1\over 2}N\beta M^2 + \sum_{i=1}^N \log(2\cosh\beta M.\Xi_i) ]  $$
 
 Recall that the free energy density $f$ is given by
 
@@ -1191,7 +1189,7 @@ $$ f = -{1\over{\beta N}} \log Z $$
 If $N$ is very large the integral over $m^\mu$ is dominated by its saddle point value, so that
 $f$ can be approximated as
 
-$$ f = {1\over 2} M.M - {1\over{\beta N}} \sum_i \log(2\cosh\beta M.\Xi_i) $$
+$$ f = {1\over 2} M_{sp}.M_{sp} - {1\over{\beta N}} \sum_i \log(2\cosh\beta M_{sp}.\Xi_i) $$
 
 The order parameter vector vector $M$ is determined by the saddle-point equation ${\partial f\over{\partial m^{\mu}}} = 0$ which results in
 
@@ -1200,7 +1198,7 @@ $$ m^\mu_{sp} = {1\over N} \sum_{i=1}^N \xi_i^\mu \tanh(\beta M_{sp}.\Xi_i),\ \ 
 Both $f$ and $M$ depend on the contents of the memory values $\xi_i^\mu, \mu = 1,...,p, i = 1,...,N$, but in the limit as $N\rightarrow\infty$, we can invoke the averaging principle
 whuch results in the free energy density ${\overline f}$ given by
 
-$$ {\overline f} = {1\over 2} M.M - {1\over\beta} <\log(2\cosh\beta M.\Xi)> $$
+$$ {\overline f} = {1\over 2} M_{sp}.M_{sp} - {1\over\beta} <\log(2\cosh\beta M_{sp}.\Xi)> $$
 
 and
 
@@ -1218,7 +1216,7 @@ $$ p(\xi^\mu) = {1\over 2}\delta(\xi^\mu - 1) + {1\over 2}\delta(\xi^\mu + 1),\ 
 #### Single Pattern Retrieval
 
 Assume that there is a single pattern $\Xi^1=(\xi^1_1,...,\xi^1_N)$ to be stored.
-Mirroring the strategy that was used  to solve the general spin glass model, we will propose a candidate value for the order parameter vector $M=(m^1,0...,0)$, such that
+Mirroring the strategy that was used  to solve the general spin glass model, we will propose a candidate value for the order parameter vector $M_{sp}=(m^1,0...,0)$, such that
 $m^1 > 0$. Using the probability distribution of $\Xi^1$, It follows that the average free energy density is given by
 
 $$ {\overline f} = {1\over 2} (m^1)^2 - {1\over\beta} <\log(2\cosh\beta m^1\xi^1_1)> = {1\over 2} (m^1)^2 - {1\over\beta} \log(2\cosh\beta m^1)      $$
@@ -1234,7 +1232,7 @@ Consider an Ising model in which the spin $s_i$ at site $i$ is given by
 
 $$ s_i = \xi^1_i \sigma_i,\ \ \ i=1,...,N  $$
 
-where $\Xi^1$ is a vector we are trying to store, and $\sigma_i$ is the spin at node $i$ that can take values $\pm 1$. 
+where $\Xi^1$ is a vector we are trying to store, and $\sigma_i$ is the spin at node $i$ in the Hopfield model. 
 
 Assuming that the interaction energy between nodes follow the Ising rule so that the interaction energy between nodes $i$ and $j$ is given by
 
@@ -1248,7 +1246,9 @@ But this is precisely the Hamiltonian for a Hopfield network for the case when $
 Well not quite, in an Ising model each spin only intreracts with its immediate neighbors, while in the Mattis model each spin interacts with every other spin.
 Fortunately an analysis of this system is quite straightforward and results in the the same equations for the free energy $f$ and order parameter $m$ as the regular Ising model.
 
-$$ f = {1\over 2} m^2 - {1\over\beta} \log(2\cosh\beta m)     $$
+$$ f = {1\over 2} m_{sp}^2 - {1\over\beta} \log(2\cosh\beta m_{sp})     $$
+
+where
 
 $$ m_{sp} = \tanh\beta m_{sp} $$
 
