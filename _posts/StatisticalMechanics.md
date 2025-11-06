@@ -466,9 +466,9 @@ The discussion of the Ising model and phase transitions so far has been rather a
 - If the temperature is further reduced to $T_2 < T_1$, then the allowed configuration space further shrinks as shown by the orange area in the innermost oval, and furthermore the net magnetization $m_2$ increases byond $m_1$
 - In the limit as $T=0$, he ovals shrink to a single point, i.e., the configuration $(+1,...,+1)$ or $(-1,...,-1)$, since all the spins are now fully aligned with each other. Furthermore the net magnetization achieves its maximum value $m=1$ or $m=-1$, depending upon the phase.
 
-## Simulating the Ising Model
+## Simulating Spin Systems
 
-Back in the early 1950s, in the very first days of electronic computers, a group of physicists who had worked together in the Manhattan Project, got together and figured out how to simulate a system of interacting particles. Initially their algorithm was used to analyze neutron interactions in a nuclear reactor, and later it was applied to the Ising model. This group was led by Harry Metropolis, and it is by his name that the resulting algorithm is generally known. The mathematical technique that was used is called Markov Chain Mone Carlo of MCMC, and that is an alternative name for this technique. 
+Back in the early 1950s, in the very first days of electronic computers, a group of physicists who had worked together in the Manhattan Project, got together and figured out how to simulate a system of interacting particles which are subject to thermodynamic randomness. Initially their algorithm was used to analyze neutron interactions in a nuclear reactor, and later it was applied to spin systems such as the Ising model. This group was led by Harry Metropolis, and it is by his name that the resulting algorithm is generally known. The mathematical technique that was used is called Markov Chain Mone Carlo of MCMC, and that is an alternative name for this technique. 
 
 The Metropolis algorithm is based on building a Markov Chain whose stationary distribution $\pi(\sigma_1,...,\sigma_N)$ co-incides with that of the Boltzmann distribution, i.e., 
 
@@ -476,17 +476,16 @@ $$ \pi(\sigma_1,...,\sigma_N) = {1\over Z} e^{-\beta E(\sigma_1,...,\sigma_N)}  
 
 The Metropolis algorithm works as follows:
 
-- Start with some spin configuration $\Sigma = (\sigma_1,...,\sigma_N)$ and note that energy of this configuration is given by $E(\Sigma)$ .
+- Start with some spin configuration $\Sigma = (\sigma_1,...,\sigma_N)$ and note that energy of this configuration is given by $E(\Sigma)$.
 - Propose a move to a new trial configuration $\Sigma'$ by flipping the spin at site $i$ chosen at random, and compute its energy $E(\Sigma')$.
-- Set the spin at site $i$ according to the following rule: If
-- If the move to $\Sigma'$ causes the energy to go down i.e., $E(\Sigma')-E(\Sigma) <0$ then the move is accepted with probability $1$.
-- On the other hand if the move causes the energy to go up, then the move can still be accepted with probability
-$\exp^{-\beta(E(\Sigma')-E(\Sigma))}$ and this probability decreases exponentially as $\Delta(\Sigma',\Sigma) = E(\Sigma') - E(\Sigma)$ increases.
+- Set the spin at site $i$ according to the following rule: 
+  (1) If the move to $\Sigma'$ causes the energy to go down i.e., $E(\Sigma')-E(\Sigma) <0$ then the move is accepted with probability $1$.
+  (2) On the other hand if the move causes the energy to go up, then the move can still be accepted with probability $\exp^{-\beta(E(\Sigma')-E(\Sigma))}$ and this probability decreases exponentially as $\Delta(\Sigma',\Sigma) = E(\Sigma') - E(\Sigma)$ increases.
 
 The probabilistic aspect of the algorithm is implemented by using the following rule: If $\exp^{-\beta(E(\Sigma')-E(\Sigma))} > RAND(0,1)$ where $RAND(0,1)$ is sampled over the uniform distribution $U(0,1)$, then accept the new configuration $\Sigma'$, otherwise leave the old configuration $\Sigma$.
 
 This algorithm simulates the thermal motion of atoms in thermal contact with a heat bath at temperature $T$. After many steps of the algorithm, the system evolves into a Boltzmann distribution.
-If the system is simulated at $T>T_c$ then the thermal energy will cause it to wander spin configurations centered at $m=0$ with no net magnetizat.
+If the system is simulated at $T>T_c$ then the thermal energy will cause it to wander spin configurations centered at $m=0$ with no net magnetization.
 If $T<T_c$ then the thermal energy will still cause disordering among the spins, but a fraction of the spins will tend to get aligned in the same direction on the average, causing $m>0$.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat34.png) 
@@ -495,20 +494,25 @@ Figure: Example sample path in the state space while running the Metropolis algo
 
 The above figure shown an example of a sample path through the state space when the algorithm is initialized at a state which is away from the equilibrium given the temperature. Assume that the model is at temperature $T_1<T_c$, while the initial state belongs to the phase $m=0$. The algorithm wanders randomly in the $m=0$ state space initially, and ultimately approaches the lilac ring which corresponds to equilibrium states for T=T_1$, and once it is there is continues to wander around within the ring such that various other states occur according to the Boltzmann distribution.
 
-Another algorithm to simulate the Ising model was discovered by Roy Galuber in the early 1960s, and works as follows:
+Another algorithm to simulate the Ising model was discovered by Roy Glauber in the early 1960s, and works as follows:
 
-- Start with some spin configuration $\Sigma = (\sigma_1,...,\sigma_N)$ and note that energy of this configuration is given by $E(\Sigma)$ .
+- Start with some spin configuration $\Sigma = (\sigma_1,...,\sigma_N)$ and note that energy of this configuration is given by $E(\Sigma)$.
 - Propose a move to a new trial configuration $\Sigma'$ by flipping the spin at site $i$ chosen at random, and compute its energy $E(\Sigma')$.
 - Flip the spin at site $i$ with the probability $p(\Delta E)$ given by
 
-$$   p(\Delta E) = {1\over{1+e^{\Delta E}}}   $$    
+$$   p(\Delta E) = {1\over{1+e^{\beta\Delta E}}}   $$    
+
+The Glauber rule implies that:
+
+- As $T\rightarrow\infty$, then $p={1\over 2}$, i.e., a spin is flipped with probability half, irrespective of the change $\Delta E$ in energy.
+- If $T\rightarrow 0$, then $p=1$ if $\Delta E <0$ and $p=0$ is $\Delta E > 0$. In this case it becomes a deterministic rule which says that flip with probability 1 if change in energy is negative. 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat42.png) 
 
 Figure: Comparison between the Metropolos and Galuber spin flipping probabilities ate various temperatures
 
 When run long enough, both the Metropolis and Glauber algorithms lead to the Boltzmann distribution in equilibrium, however their non-equilibrium behavior is slightly different. 
-The above figure plots the spin flipping probability for the two algorirhms at various temperatures. The curves differ most at the highest temperatures, and they become almost indistinguishable at the lowest temperatures, where both curves approximate a stepfunction.
+The above figure plots the spin flipping probability for the two algorirhms at various temperatures. The curves differ most at the highest temperatures, and they become almost indistinguishable at the lowest temperatures, where both curves approximate a step function.
 
 ## The Landau Theory for Phase Transitions
 
@@ -1073,27 +1077,7 @@ Furthermore assume that the state of the network evolves according to the equati
 $$ \sigma_i(t+\Delta t) = sign(\sum_{j\ne i}^N J_{ij} \sigma_j(t)) $$
 
 where $\sum_{j\ne i}^N J_{ij} \sigma_j(t)$ is the local field acting on node $i$ and
-each node randomly and asynchronously evaluates whether it is above or below its threshold, and adjusts its value accordingly.
-
-If we are to use this system as a memory, there should be a way in which the interactions $J_{ij}$ can be engineered so that the equilibrium energy minima correspond to bit patterns that we want to store. In order to acheive this, Hopfield hit upon the novel idea of engineering the energy landscape by choosing the interactions to be a function of the bit patterns to be stored in the associative memory.
-
-Assume that we wish the network to store the vector states $\xi^s, s=1,...,p$ so that the $\mu^{th}$ excitation pattern can be written as $\xi^\mu=(\xi^\mu_1,...,\xi^\mu_N)$.
-In order to store these states, Hopfield proposed that the interactions $J_{ij}$ be chosen as
-
-$$ J_{ij} = {1\over N}\sum_{\mu=1}^p \xi^\mu_i \xi^\mu_j\ \ \ with\ \ \ J_{ii} = 0 $$
-
-which is called the Hebb Rule. 
-
-With this update rule it can be shown that if the network is in state $\xi^\mu$ at time $t$, then the time evolution rule given earlier leads to the following state change
-
-$$ sign(\sum_j J_{ij}\xi^\mu_j) = sign{1\over N} (\sum_j\sum_\nu \xi^\nu_i \xi^\nu_j \xi^\mu_j) = sign(\sum_\nu \xi^\nu_i \delta_{\nu\mu}) = sign(\xi^\mu_i) $$
-
-This implies that once the system is in state $\xi^\mu$, it will stay in state $\xi^\mu$, i.e.,  $\sigma_i(t+\Delta t) = \xi^\mu_i$ for all $i$ for sufficiently large $N$. 
-This is a result of the approximate orthogonality between the random states
-
-$$ {1\over N} \sum_j \xi^\mu_j \xi^\nu_j = \delta_{\nu\mu} + O({1\over\sqrt{N}}) $$
-
-Note that this argument is not sufficient to gaurantee that the system will end up in state $\xi^\mu$ if it were to start from a state that is slightly different from it.
+each node randomly and asynchronously evaluates whether it is above or below its threshold, and adjusts its value accordingly. It is not too difficult to see that this rule is equivalent to the Glauber Dynamics from a few sections ago, specialized to the case $T=0$.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat23.png) 
 
@@ -1112,11 +1096,70 @@ There is a monotonically decreasing value of the energy with each spin update, s
 
 $$  \Delta H = -{1\over 2}\Delta\sigma_i \sum_{j} J_{ij}\sigma_j  $$
 
+and the signs for $\Delta\sigma_i$ and $\sum_j J_{ij}\sigma_j$ coincide.
+ 
 These state changes will continue until a stable point such as one of the stored memories $\xi^\mu$ is reached. Fig. 19 shows this situation where the network reaches a minimum of energy closest to the initial condition and stops there.
+But does the network always converge to one of these stored states? Using simulations Hopfield showed that about $0.15N$ states can be simultaneously remembered before the error in recall is severe.
 
-But does the network always converge to one of these stored states? Using simulations Hopfield showed that about $0.15N$ states can be simultaneously remembered before the error in recall is severe. Within a few years the system was analyzed using the tools of Statistical Mechanics, and this is described next.
+If we are to use this system as a memory, there should be a way in which the interactions $J_{ij}$ can be chosen so that the equilibrium energy minima correspond to bit patterns that we want to store. In order to acheive this, Hopfield hit upon the novel idea of engineering the energy landscape by choosing the interactions to be a function of the bit patterns to be stored in the associative memory.
 
-In order to analyze the systems we have to introduce temperature into the equations. This is done by changing the state transition equations as follows: Denote the field at node $i$ at time $t$ as 
+Assume that we wish the network to store the vector states $\Xi^s, s=1,...,p$ so that the $\mu^{th}$ excitation pattern can be written as $\Xi^\mu=(\xi^\mu_1,...,\xi^\mu_N)$.
+In order to store these states, Hopfield proposed that the interactions $J_{ij}$ be chosen according to the Hebb rule
+
+$$ J_{ij} = {1\over N}\sum_{\mu=1}^p \xi^\mu_i \xi^\mu_j\ \ \ with\ \ \ J_{ii} = 0 $$
+
+In the 1940s aritificial neural networks pioneer Donald Hebb proposed that the strength of the connection between two neurons should increase every time the two neurons fire together. The equation above captures this by making $J_{ij}$ proportional to the number of locations in which the $\xi^\mu_i$ and $\xi^\mu_j$ coincide for $\mu=1,...,p$. In order to get some intuition for this, consider the example in which a network with $N=3$ nodes is being used to store the following three vectors:
+
+$$ \Xi^a = (\xi^a_1,\xi^a_2,\xi^a_3) $$
+
+$$ \Xi^b = (\xi^b_1,\xi^b_2,\xi^b_3) $$
+
+$$ \Xi^c = (\xi^c_1,\xi^c_2,\xi^c_3) $$
+
+This can also be regarded as the vector $\Xi_1=(\xi^a_1,\xi^b_1,\xi^c_1)$ associated with node 1, the vector $\Xi_2=(\xi^a_2,\xi^b_2,\xi^c_2)$ associated with node 2 and the vector $\Xi_3=(\xi^a_3,\xi^b_3,\xi^c_3)$ associated with node 3. The strength of connection between nodes 1 and 2 is proportional to the number of locations in $\Xi_1$ and $\Xi_2$ which are equal, i.e., if the patterns associated with nodes 1 and 2 are closer to each other, then the Hebbian rule causes the spin values at the two nodes tend to draw closer to each other, and vice-versa.
+
+The spin update rule implies that if the network is in one of the memory states $\Xi^\mu$ at time $t$, then a single step of the state evolution leads to the following spin value at node $i$:
+
+$$ \sigma_i = sign(\sum_{j=1}^N J_{ij}\xi^\mu_j) = sign{1\over N} (\sum_{j=1}^N\sum_{\nu=1}^p \xi^\nu_i \xi^\nu_j \xi^\mu_j) $$
+
+Splitting this sum to the case $\nu=\mu$ and the rest, it follows that
+
+$$ \sigma_i = sign(\xi^\mu_i + {1\over N} \sum_{j=1}^N \xi^\mu_j\sum_{\nu\ne\mu} \xi^\nu_i \xi^\nu_j) $$
+
+The second term is called the crosstalk term, and if its absolute value is less than $1$ for all $i$, then it follows that $\sigma_i = \xi^\mu_i$, i.e., the pattern $\Xi^\mu$ is a fixed point for the network.
+
+It is possible to obtain a rough estimate for the capacity of the Hopfield network by analysing the crosstalk term, and this is done next.
+We want to find an upper bound for $p$, such that the crosstalk term remains small enough with high probability. Multiply the crosstalk term by $\xi^\mu_i$
+to define
+
+$$ C_i^\mu = -\xi^\mu_i {1\over N} \sum_{j=1}^N \xi^\mu_j\sum_{\nu\ne\mu} \xi^\nu_i \xi^\nu_j $$
+
+Note that if $C_i^\mu$ is negative then the crosstalk term has the same sign as $\xi^\mu_i$, and thus it will not cause a change in its sign. On the other hand if $C_i^\mu$ is positive and greater than 1, then the sign of $\sigma_i$ will change, which will lead to an error in the memory retrieval.
+
+We will estimate the probability $P(C_i^\mu >1$. Assume that $\xi_i^\nu, 1\le i\le N, 1\le\nu\le p$ are purely random with equal probabilities of being $1$ and $-1$. This $C^\mu_i$ is the sum of (roughly) $Np$ independent and identically distributed random variables, say $y_m, 1\le m\le Np$ with equal probabilities of being $1$ and $-1$. Since $E(y_m)=0$ and $Var(y_m) = 1$ for all m, it folows from the central limit theorem that $C_i^\mu$  has approximately a Normal distribution with $N(0,s^2) with mean $0$ and variance $s^2 = {p\over N}$. Therefore if we store $p$ patterns in a Hopfield network with a large number of $n$ nodes, then the probability of error is given by
+
+$$P_{error} = P(C^\mu_i > 1) \approx {1\over 2}(1-erf(\sqrt{N\over{2p}}))\ \ \ with\ \ \ erf(x) = {1\over\sqrt{\pi}}\int_0^x e^{-s^2} ds $$
+
+$$ = sign(\sum_\nu \xi^\nu_i \delta_{\nu\mu}) = sign(\xi^\mu_i) $$
+
+![](https://subirvarma.github.io/GeneralCognitics/images/stat44.png) 
+
+Figure 19: Error probability in a Hopfield network
+
+The table above shows the error for some values of ${p\over N}$. We can see that error is reasonably low until ${p\over N}=0.138$, and increases sharply after that. This has been borne out by a more thorough analysys of Hopfield networks using the tools from spin glass theory.
+
+
+Note that this argument is not sufficient to gaurantee that the system will end up in state $\xi^\mu$ if it were to start from a state that is slightly different from it.
+
+![](https://subirvarma.github.io/GeneralCognitics/images/stat23.png) 
+
+Figure 19
+
+ Within a few years the system was analyzed using the tools of statistical sechanics, and this is described next.
+
+### Finite Number of Stored Patterns
+
+In order to analyze the system we have to introduce temperature into the equations. This is done by changing the state transition equations as follows: Denote the field at node $i$ at time $t$ as 
 
 $$  h_i(t) = \sum_j J_{ij}\sigma_j(t) $$
 
@@ -1124,8 +1167,6 @@ and assume that $\sigma_i(t+\Delta t)$ becomes 1 with probability $1\over{1+e^{-
 Note that this stochastic dynamics reduces to earlier state transition equation in the limit $\beta\rightarrow\infty$ so that the original Hopfield Network corresponds to the case $T=0$.
 On the other hand the network becomes completely random if $\beta=0$.
 Hence the problem of memory retrieval in the Hopfield Network at finite temperatures reduces to that of finding the conditions under which the equilibrium state corresponds to one of the stored memories, when starting from a non-equilibrium state.
-
-### Finite Number of Stored Patterns
 
 Lets assume we are trying to store the $p$ bit patterns
 $\Xi^\mu = (\xi^\mu_1,...,\xi^\mu_N), \mu = 1,...p$.
@@ -1166,9 +1207,9 @@ and
 $$ m^\mu_{sp} = <\xi^\mu\tanh(\beta M_{sp}.\Xi)>,\ \ \ \mu=1,...,p $$
 
 where $\Xi = (\xi^1,...,\xi^p)$ is now a random vector whose distribution depends on the memories to be stored and the expectation $<.>$ is over this distribution.
-So the equilibrium states of the system correspond to different values of the order parameter vector $M_sp =  (m^1_{sp},...,m^p_{sp})$. But what is the relationship between this vector and the memories 
+So the equilibrium states of the system correspond to different values of the order parameter vector $M_{sp} =  (m^1_{sp},...,m^p_{sp})$. But what is the relationship between this vector and the memories 
 $(\Xi^1,...\Xi^p)$ that we are trying to store?
-In the next section we make some guesses for $M_sp$ and correlate them with the stored patterns.
+In the next section we make some guesses for $M_{sp}$ and correlate them with the stored patterns.
 
 In the discussion that follows, we will assume that that the probability distribution of $\Xi = (\xi^1,...,\xi^p), i=1,...,N$  is given by the product of the probabilities
 
@@ -1185,15 +1226,15 @@ $$ {\overline f} = {1\over 2} (m^1)^2 - {1\over\beta} <\log(2\cosh\beta m^1\xi^1
 $$ m^1_{sp} = <\xi^1\tanh(\beta m^1_{sp}\xi^1_1)> = \tanh\beta m^1_{sp} $$
 
 which are just the free energy density and the mean field equations for the Ising model. 
-The free energy density exibits the well known bi-modal shape for $T<T_c$, and the two minima $\pm m^1_{sp}$ would correspond to the stored memories. 
+The free energy density exibits the well known bi-modal shape for $T<T_c$, and the two minima $\pm m^1_{sp}$ would correspond to the stored memories $\Xi^1$ and $-\Xi^1$.. 
 But what bit pattern is being stored in the memory?
-The usual Ising model can only 'store' the patterns $(1,...1)$ amd $(-1,...,-1)$, but hopefully the minima of the Hopfield model correspond to an arbitrary bit pattern.
+The usual Ising model can only 'store' the patterns $(1,...1)$ amd $(-1,...,-1)$, but hopefully the minima of the Hopfield model correspond to the stored bit pattern.
 
 Consider an Ising model in which the spin $s_i$ at site $i$ is given by
 
 $$ s_i = \xi^1_i \sigma_i,\ \ \ i=1,...,N  $$
 
-where $\xi^1$ is a vector we are trying to store, and $\sigma_i$ is the spin at node $i$ that can take values $\pm 1$. 
+where $\Xi^1$ is a vector we are trying to store, and $\sigma_i$ is the spin at node $i$ that can take values $\pm 1$. 
 
 Assuming that the interaction energy between nodes follow the Ising rule so that the interaction energy between nodes $i$ and $j$ is given by
 
@@ -1205,7 +1246,7 @@ $$ H = -{1\over 2}\sum_i \sum_j s_i s_j =  -{1\over 2}\sum_i \sum_j \xi^1_i\xi^1
 
 But this is precisely the Hamiltonian for a Hopfield network for the case when $p=1$. Such a Hopfield network, also called a Mattis network, is equivalent to an Ising model with spins $s_i = \xi_i^1\sigma_i$. 
 Well not quite, in an Ising model each spin only intreracts with its immediate neighbors, while in the Mattis model each spin interacts with every other spin.
-Fortunately an analysis of this system is quite straightforward and results in the the same equations for the free energy $f$ an order parameter $m$ as the regular Ising model.
+Fortunately an analysis of this system is quite straightforward and results in the the same equations for the free energy $f$ and order parameter $m$ as the regular Ising model.
 
 $$ f = {1\over 2} m^2 - {1\over\beta} \log(2\cosh\beta m)     $$
 
@@ -1213,12 +1254,12 @@ $$ m_{sp} = \tanh\beta m_{sp} $$
 
 Clearly this model has the same free energy density and order
 parameters equations as the Hopfield model with $M=(m^1,0,...,0)$, but in this case we do know what the order parameter $m$ is, it is the average value of the spin at a node,
-i.e., $m = E(s_i)$, whih happens to the same at all nodes.
+i.e., $m = E(s_i)$, which happens to the same at all nodes.
 
 Since $s_i = \xi^1_i\sigma_i$ it follows that $E(s_i) = m = \xi^1_i E(\sigma_i)$. 
 From this it follows that the order parameter choice $m = (m^1,0,...,0)$ in the Hopfield network for the case $p=1$ is equivalent to a Mattis network in which the spins are given by $s_i = \xi^1_i\sigma_i$, and the parameter $m = m^1$ is just mean field $E(s_i)$ for this model. 
 
-Since $m=\tanh\beta m$ in the Ising netwotk, it follows that
+Since $m=\tanh\beta m$ in the Ising network, it follows that
 
 $$ \xi^1_i E(\sigma_i) = \tanh\beta \xi^1_i E(\sigma_i) $$
 
@@ -1226,8 +1267,8 @@ which can also be written as
 
 $$ E(\sigma_i) = \xi^1_i\tanh\beta \xi^1_i E(\sigma_i) $$
 
-To conclude, the average spins $E(s_i)$ in the Mattis network converge bi-modally to $E(s_i)=\tanh\beta E(s_i)$, while the average spins $E(\sigma_i)$ in the corresponding Hopfield network converge to the memory pattern $E(\sigma_i) = \xi^1_i\tanh\beta \xi^1_i E(\sigma_i)$.
 In the limit as $\beta\rightarrow\infty$ (i.e., $T = 0$), it follows that the Hopfield spins $E(\sigma_i)$ converges to $\xi^1_i$, or to its mirror image.
+To conclude, the average spins $E(s_i)$ in the Mattis network converge bi-modally to $E(s_i)=\tanh\beta E(s_i)$, while the average spins $E(\sigma_i)$ in the corresponding Hopfield network converge to the memory pattern $E(\sigma_i) = \xi^1_i\tanh\beta \xi^1_i E(\sigma_i)$.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat24.png) 
 
