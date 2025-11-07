@@ -1066,9 +1066,9 @@ Kirkpatrick et.al. proposed adding a temperature variable to the optimization, w
 
 The physicist John Hopfield was at Princeton during the 1970s, and he was instrumental in luring away Phil Anderson from Bell Labs to Princeton during that time. Anderson acquainted Hopfield with his work in spin glasses (see the Edwards-Anderson model in the previous section), and Hopfield began thinking about how these results could be applied to model biological systems. He was intrigued by the possibility of creating an energy landscape with multiple valleys, and wondered if the equilibrium spin configuration in each valley (at T = 0) could be used an an associative memory. Subsequently he succeeded in creating a spin glass inspired model which indeed could do so, as explained next.
 
-![](https://subirvarma.github.io/GeneralCognitics/images/stat22.png) 
+![](https://subirvarma.github.io/GeneralCognitics/images/stat47.png) 
 
-Figure 18
+Figure 18: A Hopfield Network
 
 Hopfield started with a SK type spin glass model with full connectivity, shown in the top left of Fig. 18, with the symmetric interaction between nodes $i$ and $j$ given by $J_{ij}$.
 Assume that the spin at each node, $\sigma_i, i = 1,2,...N$ in the network can assume values of +1 or -1, and denote the state $X$ of the network as $X = (\sigma_1,...,\sigma_N)$. 
@@ -1161,7 +1161,7 @@ We make the following change to the state transition equations in order to take 
 
 $$  h_i(t) = \sum_j J_{ij}\sigma_j(t) $$
 
-and assume that $\sigma_i(t+\Delta t)$ becomes 1 with probability $1\over{1+e^{-2\beta h_i(t)}}$ and -1 with probability ${e^{-2\beta h_i(t)}\over{1+e^{-2\beta h_i(t)}}}$.
+and assume that $\sigma_i(t+\Delta t)$ becomes 1 with probability $1\over{1+e^{-2\beta h_i(t)}}$ and -1 with probability ${e^{-2\beta h_i(t)}\over{1+e^{-2\beta h_i(t)}}}$ (see above figure).
 Note that this stochastic dynamics reduces to earlier state transition equation in the limit $\beta\rightarrow\infty$ so that the original Hopfield Network corresponds to the case $T=0$, since $\sigma_i(t+\Delta t) = 1$ if $h_i(t) > 0$ and is $\sigma_i(t+\Delta t) = -1$ otherwise.
 On the other hand the network becomes completely random if $T=\infty$.
 From our knowledge of statistical mechanics, we know that if the system is allowed to evolve then ultimately it will settle down to a set of states whose probabilities are distributed according to the Boltzmann distribution.
@@ -1191,7 +1191,7 @@ $f$ can be approximated as
 
 $$ f = {1\over 2} M_{sp}.M_{sp} - {1\over{\beta N}} \sum_i \log(2\cosh\beta M_{sp}.\Xi_i) $$
 
-The order parameter vector vector $M$ is determined by the saddle-point equation ${\partial f\over{\partial m^{\mu}}} = 0$ which results in
+The order parameter vector vector $M_{sp}$ is determined by the saddle-point equation ${\partial f\over{\partial m^{\mu}}} = 0$ which results in
 
 $$ m^\mu_{sp} = {1\over N} \sum_{i=1}^N \xi_i^\mu \tanh(\beta M_{sp}.\Xi_i),\ \ \ \mu=1,...,p $$
 
@@ -1267,31 +1267,28 @@ which can also be written as
 
 $$ E(\sigma_i) = \xi^1_i\tanh\beta \xi^1_i E(\sigma_i) $$
 
-In the limit as $\beta\rightarrow\infty$ (i.e., $T = 0$), it follows that the Hopfield spins $E(\sigma_i)$ converges to $\xi^1_i$, or to its mirror image.
-To conclude, the average spins $E(s_i)$ in the Mattis network converge bi-modally to $E(s_i)=\tanh\beta E(s_i)$, while the average spins $E(\sigma_i)$ in the corresponding Hopfield network converge to the memory pattern $E(\sigma_i) = \xi^1_i\tanh\beta \xi^1_i E(\sigma_i)$.
-
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat24.png) 
 
 Figure 20: Single pattern retrieval in the Hopfield model
 
-As shown in Fig. 20, if the network is initialized in a state that is away from the equilibrium, it will converge to one of the two equilibrium states $\pm m^1$, and in the limit at $T=0$, $m^1 =\pm 1$, so that the equilibrium state is the stored pattern, i.e., it works as an associative memory.
+Hence in the limit at $T=0$, the spins $s_i$ in the Mattis network converge bi-modally to $\pm 1$, while the spins $\sigma_i$ in the corresponding Hopfield network converge to the memory pattern $\sigma_i = \pm\xi^1_i$. If the network is initialized at some temperature $T>0$, then it will converge to one of the two valleys (or pure states), such that the average spin for the states in the valley is given by the above formula. In order to retrieve the specific memory, the temperature will have to gradually reduces, as per the Metropolis algorithm, to $T=0$.
 
-We can repeat the calculation that we just did for p different $M$ vectors with a similar structure, i.e., $(m,0,...,0), (0,m,0,...,0),...,(0,...,0,m)$ and in each of these cases the $m^\mu=m$ corresponds to the retrieval of the $\mu^{th}$ pattern. Hence we conclude that in a Hopfield network, if the number of patterns is finite, then it is possible to retrieve the appropriate pattern when a noisy version of the pattern is given as the initial condition. This is due to the fact that these patterns correspond to the global free energy minima for the model.
+We can repeat the calculation that we just did for p different $M_{sp}$ vectors with a similar structure, i.e., $(m,0,...,0), (0,m,0,...,0),...,(0,...,0,m)$ and in each of these cases the $m^\mu=m$ corresponds to the retrieval of the $\mu^{th}$ pattern. Hence we conclude that in a Hopfield network, if the number of patterns is finite, then it is possible to retrieve the appropriate pattern when a noisy version of the pattern is given as the initial condition. This is due to the fact that these patterns correspond to the global free energy minima for the model.
 
 ### Other Symmetric Solutions for the Hopfield Network
 
-We found a set of $p$ symmetric solutions for the Hopfield network. Are these the only symmetric solutions that exist? No, there are quite a few more, as first shown by
-[Amit, Gutfreund and Sampolinsky](https://journals.aps.org/pra/abstract/10.1103/PhysRevA.32.1007) in their pioneering work on the thermodynamics of Hopfield networks. Consider the $p$ dimensional M vector given by
+We found a set of $p$ symmetric solutions for the saddle point equations for the free energy of the Hopfield network. Are these the only symmetric solutions that exist? No, there are quite a few more, as first shown by
+[Amit, Gutfreund and Sampolinsky](https://journals.aps.org/pra/abstract/10.1103/PhysRevA.32.1007) in their pioneering work on the thermodynamics of Hopfield networks. Consider the $p$ dimensional M_{sp} vector given by
 
-$$ M = m_n(1,1,...,10,0,0,...,0) $$
+$$ M_{sp} = m_n(1,1,...,1,0,0,0,...,0) $$
 
-where the first $n$ compoenents are ones and the remaining $p-n$ are zero. For a given value of $n$, there are $p!\over{(p-n)!}$ possible solutuins that are equivalent to the one above. These are called symmetric solutions, and the solution in the previous sub-section was actually a special case when $n=1$. The mean field equations are given by
+where the first $n$ compoenents are ones and the remaining $p-n$ are zero. For a given value of $n$, there are $p!\over{(p-n)!}$ possible solutions that are equivalent to the one above. These are also symmetric solutions, and the solution in the previous section was actually a special case when $n=1$. The mean field equations for the free energy are given by
 
-$$  f_n = {n\over 2} m_n^2 - {1\over\beta}<<\log[2\cosh(\betam_n z_n)>>  $$
+$$  f_n = {n\over 2} m_n^2 - {1\over\beta}<<\log[2\cosh(\beta m_n z_n)>>  $$
 
-$$ m_n = {1\over n} <<z_n\tanh(\beta m_n z_n)>>  $$
+$$ m_n = {1\over n} << z_n\tanh(\beta m_n z_n) >>  $$
 
-where
+where $<< >>$ stands for the average over the distribution of the $\xi^\mu_i$ and
 
 $$  z_n^i = \sum_{\mu=1}^n \xi^\mu_i  $$
 
@@ -1304,14 +1301,16 @@ It can be shown that the following ordering exists between the free energies at 
 
 $$ f_1  < f_3 < f_5 <...f_{\infty}...< f_6 < f_4 < f_2 $$
 
-The even $n$ solutions are unstable at all temperatures, the odd $n$ solutions proliferate as the temperatures falls below $T_c$. Denoting $T_n$ be the threshold below which the $n$ solution is stable, it can be shown that $T_1 = T_c, T_3 = 0.461T_c, T_5 = 0.385T_c, T_7 = 0.345T_c$. The states with $n>$ were called spurious states at the time Hopfield networks were first proposed since they corresponded to a failure in the retrieval of the memory. This analysis shows that these solutions correspond to local minima of the energy function and representstates that are equal mixtures of several memories and these are metastable states of the system.
+The even $n$ solutions are unstable at all temperatures, the odd $n$ solutions proliferate as the temperatures falls below $T_c$. Denoting $T_n$ be the threshold below which the $n$ solution is stable, it can be shown that $T_1 = T_c, T_3 = 0.461T_c, T_5 = 0.385T_c, T_7 = 0.345T_c$. The states with $n>1$ were called spurious states at the time Hopfield networks were first proposed since they corresponded to a failure in the retrieval of the memory. 
+
+This analysis shows that the solution corresponding to $n=1$ is the most stable one, while the solutions for $n>1$ correspond to local minima of the energy function and represent states that are equal mixtures of several memories. How can we avoid getting stuck in one of these states? The solution is to use simulated annealing, starting at $T$ near $T_c$ and then gradually reducing it. This will enable the system to jump out of the states with $n>1$ by making use of the thermal energy.
 
 ### Storing an Infinite Number of Patterns
 
 We consider the case in which the number of stored patterns $p$ scales up with N, so that $p=\alpha N$. The following properties have been proven for this system for the case when $T=0$:
 
 - If $\alpha > \alpha_c = 0.138$, only spin glass type solutions exist, which are not correlated with any the memories that we are trying to store.
-- For $\alpha <\alpha_c$ a stable solution appears which deviates only slightly from the precise pattern that we are trying to store. The error is about 1.5% at $\alpha=\alpha_c$ and decreases to zero rapildy with decreasing $\alpha$. Hence the system more or less functions as an associative memory at least up to $\alpha\approx 0.14$, in agreement with Hopfield's original estimate.
+- For $\alpha <\alpha_c$ a stable solution appears which deviates only slightly from the precise pattern that we are trying to store. The error is about 1.5% at $\alpha=\alpha_c$ and decreases to zero rapidly with decreasing $\alpha$. Hence the system more or less functions as an associative memory at least up to $\alpha\approx 0.14$, in agreement with Hopfield's original estimate.
 
 ### Modern Hopfield Networks
 
