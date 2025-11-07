@@ -1307,16 +1307,49 @@ This analysis shows that the solution corresponding to $n=1$ is the most stable 
 
 ### Storing an Infinite Number of Patterns
 
-We consider the case in which the number of stored patterns $p$ scales up with N, so that $p=\alpha N$. The following properties have been proven for this system for the case when $T=0$:
+We consider the case in which the number of stored patterns $p$ scales up with N, so that $p=\alpha N$. Using Replica based analysis (see [Amit, Gutfreund, Sompolinsky](https://www.physics.rutgers.edu/~morozov/568_s2020/Physics_568_2020_files/Amit_Sompolinsky_PhysRevLett1985.pdf)), the following properties have been proven for this system for the case when $T=0$:
 
 - If $\alpha > \alpha_c = 0.138$, only spin glass type solutions exist, which are not correlated with any the memories that we are trying to store.
 - For $\alpha <\alpha_c$ a stable solution appears which deviates only slightly from the precise pattern that we are trying to store. The error is about 1.5% at $\alpha=\alpha_c$ and decreases to zero rapidly with decreasing $\alpha$. Hence the system more or less functions as an associative memory at least up to $\alpha\approx 0.14$, in agreement with Hopfield's original estimate.
 
 ### Modern Hopfield Networks
 
+More than 30 years after the original Hopfield networ, [Krotov and Hopfield](https://arxiv.org/abs/1606.01164) introduced a model that has much higher memory capacity. They were motivated by the problem of using the Hopfield network for pattern recognition, inwhich case the number of stored patterns is much greater than the number of pixels (or nodes) in the image. They proposed the following energy function for their networ, now called modern Hopfield networks,
 
+$$ H = -\sum_{\mu=1}^K \sum_{i=1}^N\ F(\xi^\mu_i\sigma_i) $$
 
+where $F(x) is some smooth function. If we restrict ourselves to polynomial functions $F(x) = x^n$, then note that $n=2$ corresponds to the usual Hopfield network. Using the same type of crosstalk arguments that were used to compute the capacity of the Hopfield network, they showed that the modern Hopfield network has a capacity of
 
+$$ K^{max} \approx {1\over{2(2n-3)! \log N}} {N^{n-1}\over{\log N}} $$
+
+for the case in which we want error free retrieval. If we are willing to tolerate a small number of errors in the retrieval, then the capacity is given by
+
+$$ K^{max} = \alpha_n N^{n-1} $$
+
+where $\alpha_n$ is a constant that depends on the error threshold probability.
+Hence there is a non-linear relationship between the capacity and the size of the network. The original Hopfield network was invented as a model for synaptic connections in the brain, which is why it restricted itself to two-node interactions. Clearly the modern Hopfield network involves interactions between more than two nodes and hence is not biologically plausible. A few years later [Krotov and Hopfield](https://arxiv.org/abs/2008.06996) showed that if we include hidden nodes in the classic Hopfield network, then the resulting energy function for the visible nodes is the same as for te modern Hopfield network, and also all interactions are of the two node type, thus preserving biological plausability. The addition of hidden nodes increases the number of synaptic connections in the network, which explains the higher capacity of these networks. We will see in the next section that hidden nodes are also critical to the operation of Boltzmann machines.
+
+In 2017 [Demircigil et.al.](https://arxiv.org/abs/1702.01929) showed that if the function $f$ is chosen to exponential, i.e., $F(x) = e^x$, so that the energy function is given by
+
+$$ H = -\sum_{\mu=1}^K\sum_{i=1}^N e^{\xi_i^\mu\sigma_i} $$
+
+then the capacity of the resulting network is given by
+
+$$ K^{max} \approx 2^{N\over 2} $$
+
+[Ramsauer et.al.](https://arxiv.org/abs/2008.02217) further extended Demircigil et.al.'s work to the case the the $\sigma_i$ are no longer constrained to be $\pm 1$. They made the intersting observation that if the energy function is chosen to be (with $\Sigma = (\sigma_1,...,\sigma_N)$)
+
+$$ H = -lse(\beta,\Xi^T.\Sigma) + {1\over 2}\Sigma^T.\Sigma + \beta^{-1}\log N + {1\over 2}M^2 $$
+
+where and $M$ is the largest norm of all the stored patterns and
+
+$$ lse(\beta, Z) = \beta^{-1}\log(\sum_{i=1}^N e^{\beta z_i}) $$
+
+then the update rule for the network is given by
+
+$$ \Sigma  \leftarrow \Xi softmax\ (\beta\Xi^T\Sigma) $$
+
+which is the same as for the Transformer architecture.
 
 
 ## From Hopfield Networks to Boltzmann Machines
