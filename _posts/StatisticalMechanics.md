@@ -5,7 +5,29 @@ title: "Statistical Mechanics and Neural Networks: Part 1"
 
 # Statistical Mechanics and Neural Networks: Part 1
 
+**Contents**     
+
+- Introduction       
+- Statistical Mechanics basics
+  - Boltzmann distribution
+  - Entropy as per Boltzmann and Shannon
+  - Free energy     
+- The Ising model for magnetism and phase transitions
+  - Simulating the Ising model with Metropolis and Glauber algorithms
+- The Landau theory of phase transitions    
+- Spin Glass models: Randomized interactions
+  - The Sherrington-Kirkpatrick (SK) model
+  - The replica method and replica symmetry breaking
+  - The p-spin spherical spin glass model (PSM)
+- Simulated Annealing
+- Hopfield Networks: Engineering the energy landscape
+  - Thermodynamics of the Hopfield model      
+- Boltzmann machines        
+
+
 ## Introduction
+
+This post is a deep dive into the Energy Based Models or EBMs. The original EBMs were proposed in physics in the late 19th century, and form the backbone of the theory of statistical mechanics. So we start with statistical mechanics and the basics of how concepts such as entropy were discovered. We then apply this theory to a model for magnetism called the Ising model. This takes us to the physics behind phase transitions, the simplest example of this being when a piece of iron becomes magnetized as the temperature is reduced. The Ising model can be generailzed to the case when the nodes in the system interact with each other in more complex ways, and this takes us to spin glass models, and the phenomenon of continuous symmtery breaking. The present generation of neural network models can be traced to an EBM called the Hopfield model that was proposed in the early 1980s, and this was soon followed by another more important EBM called the Boltzmann Machine. Until about 2010 these were the only game in town as far as neural networks were concerned, however soon after that people discovered how to train vaery large non-EBM models by fixing the problems in the backpropagation algorithm. Since them EBMs have taken a somewhat of a backseat in AI systems, especially since a way to scale them up hasn't been found. However very large non-EBM systems such as LLMs have run into another problam, which is that of energy consumption. Indeen a large portion of new power capacity being added to our energy grids is being driven by the demand from LLMs. This has caused some people to look at alternative designs that are less power hungry, and perhaps EBMs have a role to play here.
 
 The steam engine was invented in the late 1700s, the inventors were brilliant tinkerers who made this advance solely through smart experimentation. But soon after, the question arose about how to make a better engine, and in particular how could one get the most work out of it. This question led to the launch of the science of thermodynamics, and the biggest early contribution was made by the great French engineer Sadi Carnot. Carnot came up with a model for an ideal engine, and showed that the efficiency of any engine is upper bounded by that of his model. This was the genesis of the second law of thermodynamics, also called the law of entropy and soon after this was joined by the first law, called the law of conservation of energy, with the efforts of Count Rumsfeld, James Joule and others. The concepts of the flow of heat and that of entropy were introduced as part of these laws, but it was a big mystery as to what exactly these were.
 
