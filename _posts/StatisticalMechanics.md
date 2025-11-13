@@ -1380,7 +1380,7 @@ which is the same as for the Transformer architecture.
 ## From Hopfield Networks to Boltzmann Machines
 
 The discovery of Hopfield networks set off flurry of research activity, and one of the strands led to work that was done by Geoffrey Hinton and Terence Sejnowski, then at CMU and Johns Hopkins respectively.
-They noticed that the Hopfield model carries out minimization of the energy at $T=0$ in order to retrieve the stored patterns, which can potentially lead to the issue of the system getting stuck in local minima and retrieving the wrong pattern. But what if the minimization were carried out at some temperature $T > 0$ by making use of the Metropolis algorithm? This would cause the system to jump out of local minima with a non-zero probability and thus there would be higher chance that it might ened up in a global minima. 
+They noticed that the Hopfield model carries out minimization of the energy at $T=0$ in order to retrieve the stored patterns, which can potentially lead to the issue of the system getting stuck in local minima and retrieving the wrong pattern. But what if the minimization were carried out at some temperature $T > 0$ by making use of the Metropolis algorithm? This would cause the system to jump out of local minima with a non-zero probability and thus there would be higher chance that it might end up in a global minima. 
 However a side consequence of making the optimization probabilistic is that the equilibrium configuration at any $T > 0$ is no longer a fixed pattern, but instead it can be one of many patterns governed by the Boltzmann probability distribution. This seems to go against the idea of using the system as a memory as Hopfield had done. 
 However Hinton and Sejnowski had the brilliant idea that instead of using the system as a memory, use it to model the distribution of the patterns in the data. This could be done if the Boltzmann distribution could be made to approximate the unknown data distribution.
 Since the Boltzmann distribution is a function of the energy levels, which are in turn a function of the node interactions, the problem reduced to choosing the interactions such that the resulting equilibrium distribution approximated that for the data. Unlike the Hopfield network, the optimal interactions could no longer be written down in a simple manner, but instead had to be learnt from the data.
@@ -1395,15 +1395,15 @@ while the latter is concerned about capturing the rules that govern the patterns
 
 Figure 20: Training and generation phases for a Boltzmann machine
 
-An example of how a Boltzmann machine can be put to use is shown in the above figure. The data consists of handwritten images of numerals from 0 to 9, and these are digitized using a $28 x 28$ grid using 0 for white and 1 for black. Any one of the numerals can be written down as a 784 dimensional vector of ones and zeroes, say $(x_1,...,x_{784})$. The elemnts of these vectors are distributed according to some unknown distribution $p_X(x_1,x_2,...,x_{784})$ and all we have are samples from this distribution. The Boltzmann machine can be trained using these samples, and it is able to create a representation for this distribution in its node interaction parameters, as shown in the left hand part of the figure. Once the training is complete, it can be used to generate new patterns that confirm to the distribution that it has learnt as shown on the right hand side.
+An example of how a Boltzmann machine can be put to use is shown in the above figure. The data consists of handwritten images of numerals from 0 to 9, and these are digitized using a $28 x 28$ grid using 0 for white and 1 for black. Any one of the numerals can be written down as a 784 dimensional vector of ones and zeroes, say $(x_1,...,x_{784})$. The elements of these vectors are distributed according to some unknown distribution $p_X(x_1,x_2,...,x_{784})$ and all we have are samples from this distribution. The Boltzmann machine can be trained using these samples, and it is able to create a representation for this distribution in its node interaction parameters, as shown in the left hand part of the figure. Once the training is complete, it can be used to generate new patterns that confirm to the distribution that it has learnt as shown on the right hand side.
 
-Back in 1983 when Hinton and Sejnowski first thought of using the Hopfield model to capture distributions in the training data, this must have seemed to be somewhat quixotic. But subsequent developments in neural networks have shown that this was a monumental advance in Artificial Intelligence. Indeed lthe latest AI models such as language generating LLMs or image generating models such as DaLLE are are direct descendants that have exploited this fundamental idea. The new models have of course evolved beyond the Boltzmann machine, but they all still generate speech or images by sampling from their representation of some complex probability distribution that they have learnt from the training data.
+Back in 1983 when Hinton and Sejnowski first thought of using the Hopfield model to capture distributions in the training data, this must have seemed to be somewhat quixotic. But subsequent developments in neural networks have shown that this was a monumental advance in Artificial Intelligence. Indeed lthe latest AI models such as language generating LLMs or image generating models such as SORA are are direct descendants that have exploited this fundamental idea. The new models have of course evolved beyond the Boltzmann machine, but they all still generate speech or images by sampling from their representation of some fantastically complex probability distribution that they have learnt from the training data.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat32.png) 
 
 Figure 21: Boltzmann machine with hidden nodes
 
-An example of a Boltzmann machine is shown in the above figure. As you can see it is basically identical to the Hopfield model, featuring a fully connected topology, with the 'spin' at each node taking on values of 0 or 1. The global energy $E$ is also identical to that in the Hopfield model, given by
+An example of a Boltzmann machine is shown in the above figure. As you can see it is basically identical to the Hopfield model, featuring a fully connected topology, with the 'spin' at each node taking on values of 0 or 1. The global energy $E$ (I am ging to change the notation for energy from H to E for this section ) is also identical to that in the Hopfield model, given by
 
 $$  E = -\sum_i\sum_{j\lt i} w_{ij} \sigma_i\sigma_j - \sum_i \sigma_i b_i $$
 
@@ -1413,70 +1413,79 @@ If $\Delta E_k$ is the difference in energy levels between the $k^{th}$ node bei
 
 $$ \Delta E_k = h_k = \sum_i w_{ki}\sigma_i + b_k $$
 
-![](https://subirvarma.github.io/GeneralCognitics/images/stat48.png) 
+![](https://subirvarma.github.io/GeneralCognitics/images/stat50.png) 
 
 Figure 21: The sigmoid function for various values of $T$
 
-The Boltzmann machine uses a probabilistic rule called Gibbs sampling to update its spins, and this is based on computing a transition probability $p_k$ given by the sigmoid function
+The Boltzmann machine uses a probabilistic rule called Gibbs sampling, which derived from the Glauber rule, to update its spins, and this is based on computing a transition probability $p_k$ given by the sigmoid function
 
-$$ p_k = {1\over{(1 + exp^{-\beta h_k)}}  $$
+$$ p_k = {1\over{1 + exp^{-\beta h_k}}}  $$
 
-This rule says that 
+This rule says that the $k^{th}$ node should be turned on with probability given by $p_k$ given by
 
-$$ p(\sigma_k = 1) = p_k = {1\over{(1 + exp^{-\beta h_k)}} $$
+$$ p(\sigma_k = 1) = p_k = {1\over{1 + exp^{-\beta h_k}}} $$
 
-i.e., the $k^{th}$ node should be turned on with probability given by $p_k$, irrespective of its previous state. As $T\rightarrow 0$, this rule becomes the Hopfield rule, while as $T\rightarrow\infty$ the assignment becomes completely random.
+and this is irrespective of its previous state. As $T\rightarrow 0$, this rule becomes the Hopfield rule, while as $T\rightarrow\infty$ the assignment becomes completely random. The above figure plots $p_k$ for various values of $T$.
 
-There is another architectural subtlety that has to be taken care of. In the above figure we can see that the seven nodes in the Boltzmann machine have been divided into two classes, namely the visible $v = (v_1,v_2,v_3,v_4)$ and the hidden nodes $h= (h_1,h_2,h_3)$.
-
-- The visible nodes are the interface between the network and the outside world, during training they are clamped into specific states determined by the training data.
-- The hidden nodes are never clamped, and the the additional weights that they introduce into the network help expand the scope of the environment probability distributions that can be captured by the 
-model. For example if there are $V$ visible nodes and $H$ hidden nodes, then there are ${(V+H)^2\over 2}$ parameters that the network can adjust vs ${V^2\over 2}$ otherwise.
+There is another architectural subtlety that has to be taken care of. In the figure for the Boltzmann machine we can see that the seven nodes have been divided into two classes, namely the visible nodes $v = (v_1,v_2,v_3,v_4)$ and the hidden nodes $h= (h_1,h_2,h_3)$.
+The visible nodes are the interface between the network and the outside world, during training they are clamped into specific states determined by the training data. The hidden nodes are never clamped, and the the additional weights (or interactions) that they introduce into the network help expand the scope of the environment probability distributions that can be captured by the model. For example if there are $V$ visible nodes and $H$ hidden nodes, then there are ${(V+H)^2\over 2}$ parameters that the network can adjust vs just ${V^2\over 2}$ otherwise.
 
 Thw weights of the connections to the hidden units can be used to represent complex interactions that cannot be expressed as pairwise interactions between the visible nodes alone. The hidden units are where the network can build its own internal representation of the data. This idea has stood the test of time, indeed modern neural networks feature hundreds of hidden layers. Even Boltzmann machines were modified a few years later with multiple hidden layers, to form what are called Deep Boltzmann machines.
 
-Using our knowledge of thermodynamics, it follows that if this system is allowed to evolve, then it will eventually settle into an equilibrium, such that the probability $p(v,h)$ that the system is in state $(v,h)$, where $v$ and $h$ are vectors of the visible and hidden node values, is given by the Boltzmann distribution.
+Using our knowledge of thermodynamics, it follows that if this system is allowed to evolve, then it will eventually settle into an equilibrium, such that the probability $p(v,h)$ that the system is in state $(v,h)$, where $v=(v1_1,...,v_V)$ and $h=(h_1,...,h_H)$ are vectors of the visible and hidden node values, is given by the Boltzmann distribution.
 
 $$  p(v,h) = {1\over Z} \exp^{-\beta E(v,h)}  $$
 
-where $E(v,h)$ is the energy of the $(v,h)$ state. We can therefore control the probabilities of network states by controlling their energies. We are really interested only in the marginal distribution of the visible states, which is given by
+where $E(v,h)$ is the energy of the $(v,h)$ state. We can therefore control the probabilities of network states by controlling their energies. We are really interested in the marginal distribution of the visible states, which is given by
 
 $$ p(v) = \sum_{h} p(v,h) = {1\over Z} \sum_h \exp^{-E(v,h)}  $$
 
 ### Training the Boltzmann Machine
 
-So, how would one determine the interaction weights $w_{ij}$ in a Boltzmann machine? 
+How can we determine the interaction weights $w_{ij}$ (and biases $b_i$) in a Boltzmann machine? 
 Assume that the (unknown) probability that the environment, as represented by the $V$ elements of the training data vector, is in state $v$ is given by $q(v)$.
-Note that there are $2^{v}$ numbers that are needed to fully specify $q(v)$ while there are at most ${(V+H-1)(v+h)\over 2}$ symmetrical weights and $(V+H)$ thresholds.
-However if there are some regularities in the enviromental distribution, then perhaps it could be exploited by the system to approximate it using a fewer number of parameters.
+Note that there are $2^{V}$ probabilities that are needed to fully specify $q(v)$ while there are at most ${(V+H-1)(V+H)\over 2}$ weights and $(V+H)$ thresholds.
+However if there are some regularities in the enviromental distribution, then perhaps it could be exploited by the model to approximate it using a fewer number of parameters.
 
 Assume that we have $N$ training samples with possible values $v(1),...,v(N)$ where $v(i)$ is a vector $v(i) = (v_1(1),...,v_V(1), i=1,...,N$ where $V$ is the number of visible nodes. Assuming that the training set is made up of statistically independent samples, the probability for the entire training dataset is given by
 
 $$  p(V) = \prod_{k=1}^N p(v(k)) $$
 
-We will use the principle of Maximum Likelihood to get estimates of the $w_{ij$. It states that the best estimates of the set $w_{ML}$ consisting of all the weights is given by
+We will now use the principle of Maximum Likelihood to get estimates of the $w_{ij}, b_{i}$. It states that the best estimates, say $w_{ML}, b_{ML}$ are given by
 
-$$  w_{ML} = arg\ max_{w} p(V\vert w) = arg\ max_{w} \log p(V) $$
+$$  w_{ML} = arg\ max_{w} p(V) = arg\ max_{w} \log p(V)\ and\  b_{ML} = arg\ max_{b} p(V) = arg\ max_{b} \log p(V) $$
 
-Since the log function is monotonic increasing, it folows that
+The log function has been used since it simplifies the calculations, and since it is monotonically increasing, it does not affect the maximal values. It can be shown that the maximum likelihood estimate of the weights results in a probability distribution $p(v)$ over the visible states, such that Kullback-Leibler distance $KL(q\vert\vert p)$ between the environmantal distribution $q$ and the model distribution $p$ given by 
 
-$$ w_{ML} = arg\ max_{w} \log(\prod_{k=1}^N p(v(k)) $$ = arg\ max_{w} \sum_{k=1}^N \log p(v(k))  $$
+$$  KL(q\vert\vert p) = \sum_{v} q(v)\log{q(v)\over p(v)} $$
 
-Define $L(w)$ as
+is minimized. 
+
+It follows from the independence of samples that
+
+$$ w_{ML} = arg\ max_{w} \log(\prod_{k=1}^N p(v(k)) = arg\ max_{w} \sum_{k=1}^N \log p(v(k))  $$
+
+and similarly for $b_{ML}$. Define $L(w)$ as
 
 $$ L(w) = \sum_{k=1}^N \log p(v(k)) $$
 
 By the law of total probability
 
-$$ p(v(k)) = \sum_h p(v(k),h) = {1\over Z} \sum_h \exp^{-\beta H(v(k),h)}\ where\ Z = \sum_{x} \exp^{-\beta H(x)} $$
+$$ p(v(k)) = \sum_h p(v(k),h) = {1\over Z} \sum_h \exp^{-\beta E(v(k),h)}\ where\ Z = \sum_{x} \exp^{-\beta E(x)} $$
 
-In this formula $x=(v,h)$ is an equilibrium state of the Boltzmann machine at temperature $T$. It follws that
+In this formula $x=(v,h)$ is an equilibrium state of the Boltzmann machine at temperature $T={1\over\beta}$. It follows that
 
-$$ L(w) = \sum_{k=1}^N \log({1\over Z} \sum_h \exp^{-\beta H(v(k),h)})  $$
+$$ L(w) = \sum_{k=1}^N \log({1\over Z} \sum_h \exp^{-\beta E(v(k),h)})  $$
 
-$$ = \sum_{k=1}^N \log(\sum_h \exp^{-\beta H(v(k),h)}) - \log(\sum_{x} \exp^{-\beta H(x)})  $$
+$$ = \sum_{k=1}^N \log(\sum_h \exp^{-\beta E(v(k),h)}) - \log(\sum_{x} \exp^{-\beta E(x)})  $$
 
-As per the Maximum Likelihood principle, the best estimates of the $w_{ij}$ are those for which $L(w)$ is maximum, and these can be found by taking the derivative
+As per the Maximum Likelihood principle, the best estimates of the $w_{ij}$ are those for which $L(w)$ is maximum. 
+Unfortunately it is not possible to find the best parameters analytically, so we are going to use the gradient ascent algorithm
+
+$$  w_{ij}  \leftarrow  w_{ij} + \eta {\partial L(w)\over{\partial w_{ij}}} $$
+
+where $\eta$ is called the Leearnin Rate parameter, its value can be adjusted to aid the convergence of the maximization.
+In order to implement this we have to compute the derivative
 
 $$ {\partial L(w)\over{\partial w_{ij}}} = \sum_{k=1}^N {\partial\over{\partial w_{ij}}}\log(\sum_h \exp^{-\beta H(v(k),h)}) - {\partial\over{\partial w_{ij}}}\log(\sum_{x} \exp^{-\beta H(x)}) $$
 
@@ -1493,7 +1502,8 @@ Also define
 
 $$ < x_i x_j >_{model} = \sum_{k=1}^N\sum_x p(x) x_i x_j $$
 
-This the correlation between the spins $x_i$ and $x_j$ when the network is allowed to  run freely. The derivative can then be written as
+This the correlation between the spins $x_i$ and $x_j$ when the network is allowed to  run freely. 
+The derivative can then be written as
 
 $$ {\partial L(w)\over{\partial w_{ij}}} = \beta(< x_i x_j >_{data} - <x_i x_j >_{model})  $$
 
@@ -1540,18 +1550,41 @@ $$ {\overline pp}_{ij}^{new} = {pp_{ij}^{old}\over N},\ {\overline pp}_{i0}^{new
 
 $$ {\overline pn}_{ij}^{new} = {pn_{ij}^{old}\over N},\ {\overline pn}_{i0}^{new} = {pn_{i0}^{old}\over N} $$
 
-Finally the weigts and biases are adapted according to
+Finally the weights and biases are adapted according to
 
-$$ \Delta w_{ij} = \eta\beta({\overline pp}_{ij} - {\overline pn_}_{ij} $$
+$$ \Delta w_{ij} = \eta\beta({\overline pp}_{ij} - {\overline pn}_{ij}) $$
 
-$$ \Delta b_{i} = \eta\beta({\overline pp}_{i0} - {\overline pn_}_{i0} $$
-
-
+$$ \Delta b_{i} = \eta\beta({\overline pp}_{i0} - {\overline pn}_{i0}) $$
 
 
 ### Restricted Boltzmann Machines
 
+The Boltzmann machines described in the previous section suffers from the problam that it takes too long to train. This is a result of the fact that training require the system settle down to equilibrium, in both the positive and negative parts of the training cycle. The Restricted Boltzmann Machine or RBM was designed with the objective of making the training more efficient.
 
+![](https://subirvarma.github.io/GeneralCognitics/images/stat49.png) 
+
+Figure 21: A Restricted Boltzmann Machine 
+
+The connections in a RBM are restricted to those between the visible and hidden units, as shown in the above figure. This considerably simplifies both the training as well as the inference phases in the system. The energy in a RBM can be written as
+
+$H(v,h) = -\sum_{i=1}^H\sum_{j=1}^V w_{ij} h_i v_j - \sum_{i=1}^n b_i h_i - \sum_{j=1}^n c_j v_j $$
+
+In terms of probability this means that hidden variables are independent given the visible variables and vice versa
+
+$$ p(h\vert v) = \prod_{i=1}^n p(h_i\vert v)\ and\ p(v\vert h) = \prod_{j=1}^m p(v_j\vert h) $$
+
+where
+
+$$ p(h_1 = 1\vert v) = \sigma(\sum_{j=1}^V w_{ij} v_j + c_i)\ and p(v_j = 1\vert h) = \sigma(\sum_{i=1}^H w_{ij} h_i + b_j) $$
+
+where $\sigma(,)$ stands for the sigmoid function $\sigma(x) = {1\over{(1+\exp^{-x})}}$. 
+The conditional independence simplifies the Gibbs sampling, the new state for all the variables in a layer can be sampled in parallel. Thus a complete sweep throuh all the nodes can be performed in two steps: Sampling a new state $h$ for the hidden nodes based on $p(h\vert v)$ and then sampling the a state $v$ for the visible layer based on $p(v\vert h)$.
+
+It is possible to obtain an expression for the distribution $p(v)$, as follows
+
+$$ p(v) = \sum_h p(v,h) = {1\over Z} \sum_h \exp^{-H(v,h)}  = {1\over Z}\prod_{j=1}^V \exp^{b_j v_j} \prod_{i=1}^n (1 + \exp^{c_i + \sum_{j=1}^m w_{ij} v_j}) $$
+
+This expression shows how the parameters $(w_{ij}, b_i, c_i)$ combine together to generate the visible later probabilities. It can be shown that any distribution on $\{0,1\}^V$ can be modeled arbitrarily well by the RBM with $V$ visible and $k+1$ hidden units, where $k$ denotes the cardinality of the support set for the distribution in the training dataset, i.e., the number of elements in  $\{0,1\}^V$ that have  non-zero probability of being observed.
 
 
 
