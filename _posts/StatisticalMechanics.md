@@ -1438,7 +1438,9 @@ $$  p(v,h) = {1\over Z} \exp^{-\beta E(v,h)}  $$
 
 where $E(v,h)$ is the energy of the $(v,h)$ state. We can therefore control the probabilities of network states by controlling their energies. We are really interested in the marginal distribution of the visible states, which is given by
 
-$$ p(v) = \sum_{h} p(v,h) = {1\over Z} \sum_h \exp^{-E(v,h)}  $$
+$$ p(v) = \sum_{[h]} p(v,h) = {1\over Z} \sum_{[h]} \exp^{-E(v,h)}  $$
+
+where the sum is over all possible permutations of the hidden states.
 
 ### Training the Boltzmann Machine
 
@@ -1471,95 +1473,100 @@ $$ L(w) = \sum_{k=1}^N \log p(v(k)) $$
 
 By the law of total probability
 
-$$ p(v(k)) = \sum_h p(v(k),h) = {1\over Z} \sum_h \exp^{-\beta E(v(k),h)}\ where\ Z = \sum_{x} \exp^{-\beta E(x)} $$
+$$ p(v(k)) = \sum_h p(v(k),h) = {1\over Z} \sum_{[h]} \exp^{-\beta E(v(k),h)}\ where\ Z = \sum_{[x]} \exp^{-\beta E(x)} $$
 
-In this formula $x=(v,h)$ is an equilibrium state of the Boltzmann machine at temperature $T={1\over\beta}$. It follows that
+In this formula $x=(v,h)$ is an equilibrium state of the Boltzmann machine at temperature $T={1\over\beta}$ and the sums are over all possible permutations. It follows that
 
-$$ L(w) = \sum_{k=1}^N \log({1\over Z} \sum_h \exp^{-\beta E(v(k),h)})  $$
+$$ L(w) = \sum_{k=1}^N \log({1\over Z} \sum_{[h]} \exp^{-\beta E(v(k),h)})  $$
 
-$$ = \sum_{k=1}^N \log(\sum_h \exp^{-\beta E(v(k),h)}) - \log(\sum_{x} \exp^{-\beta E(x)})  $$
+$$ = \sum_{k=1}^N \log(\sum_{[h]} \exp^{-\beta E(v(k),h)}) - \log(\sum_{{[x]}} \exp^{-\beta E(x)})  $$
 
-As per the Maximum Likelihood principle, the best estimates of the $w_{ij}$ are those for which $L(w)$ is maximum. 
-Unfortunately it is not possible to find the best parameters analytically, so we are going to use the gradient ascent algorithm
+As per the Maximum Likelihood principle, the best estimates of the $w_{ij}, b_i$ are those for which $L(w)$ is at a maximum. 
+Unfortunately it is not possible to find the best parameters analytically, so we are going to use the gradient ascent algorithm, which iterates from a starting value by using the equation
 
 $$  w_{ij}  \leftarrow  w_{ij} + \eta {\partial L(w)\over{\partial w_{ij}}} $$
 
-where $\eta$ is called the Leearnin Rate parameter, its value can be adjusted to aid the convergence of the maximization.
+where $\eta$ is called the learning rate parameter, its value can be adjusted to aid the convergence to the maximum value.
 In order to implement this we have to compute the derivative
 
-$$ {\partial L(w)\over{\partial w_{ij}}} = \sum_{k=1}^N {\partial\over{\partial w_{ij}}}\log(\sum_h \exp^{-\beta H(v(k),h)}) - {\partial\over{\partial w_{ij}}}\log(\sum_{x} \exp^{-\beta H(x)}) $$
+$$ {\partial L(w)\over{\partial w_{ij}}} = \sum_{k=1}^N {\partial\over{\partial w_{ij}}}\log(\sum_{[h]} \exp^{-\beta E(v(k),h)}) - {\partial\over{\partial w_{ij}}}\log(\sum_{[x]} \exp^{-\beta E(x)}) $$
 
 After some simplification, this can be written as
 
-$$  {\partial L(w)\over{\partial w_{ij}}} = \beta\sum_{k=1}^N(\sum_h p(v(k),h)x_i x_j - \sum_x p(x) x_i x_j)  $$
+$$  {\partial L(w)\over{\partial w_{ij}}} = \beta\sum_{k=1}^N(\sum_{[h]} p(v(k),h)]sigma_i \sigma_j - \sum_{[x]} p(x) \sigma_i \sigma_j)  $$
 
-Defining
+Define
 
-$$ < x_i x_j >_{data} = \sum_{k=1}^N\sum_h p(v(k),h)x_i x_j $$
+$$ < x_i x_j >_{data} = \sum_{k=1}^N\sum_[{h}] p(v(k),h)\sigma_i \sigma_j $$
 
-This is the correlation between the spins $x_i$ and $x_j$ when the visible nodes in the network are clamped to the training vector $v(k)$.
+This is the correlation between the spins $\sigma_i$ and $\sigma_j$ when the visible nodes in the network are clamped to the training vector $v(k)$.
 Also define
 
-$$ < x_i x_j >_{model} = \sum_{k=1}^N\sum_x p(x) x_i x_j $$
+$$ < x_i x_j >_{model} = \sum_{k=1}^N\sum_{[x]} p(x) \sigma_i \sigma_j $$
 
-This the correlation between the spins $x_i$ and $x_j$ when the network is allowed to  run freely. 
+This the correlation between the spins $\sigma_i$ and $x\sigma_j$ when the network is allowed to  run freely. 
 The derivative can then be written as
 
-$$ {\partial L(w)\over{\partial w_{ij}}} = \beta(< x_i x_j >_{data} - <x_i x_j >_{model})  $$
+$$ {\partial L(w)\over{\partial w_{ij}}} = \beta(< \sigma_i \sigma_j >_{data} - <sigma_i \sigma_j >_{model})  $$
 
-The Boltzmann Machine can be trained by using the gradient ascent rule to find the $w_{ij}$ at which $L(w)$ is maximized
+Using this formula, it follows that
+the Boltzmann Machine can be trained by using the gradient ascent rule 
 
-$$  \Delta w_{ij} = \eta {\partial L(w)\over{\partial w_{ij}}} = \eta\beta (< x_i x_j >_{data} - <x_i x_j >_{model})  $$
+$$  w_{ij}\leftarrow w_{ij} + \eta {\partial L(w)\over{\partial w_{ij}}} = w_{ij} + \eta\beta (< \sigma_i \sigma_j >_{data} - <\sigma_i \sigma_j >_{model})  $$
+
+and for the biases
+
+$$  b_i\leftarrow b_i + \eta {\partial L(w)\over{\partial b_i}} = b_i + \eta\beta (< \sigma_i >_{data} - < \sigma_i >_{model})  $$
 
 Note that both these correlations have to be measured after the network has attained equilibrium.
 
-Based on these calculations here is the complete rule for training a Boltzmann Machine:
+Based on these calculations there are two phases to the operation of the Boltzmann machine:
 
-There are two phases to the operation of the Boltzmann machine:
+  (1) Positive phase: In this phase, the network operates in its clamped condition under the direct influence of the training sample. The visible nodes are all clamped onto specific states determined by the environment while the hidden nodes are allowed to run freely.
+  
+  (2) Negative phase. In this second phase, the entire network is allowed to run freely, and therefore with no environmental input. The initial states of the nodes are set randomly. The probability of finding it in any particular global state after each reaches equilibrium depends on the energy function.
 
-  (1) Positive phase: In this phase, the network operates in its clamped condition under the direct influence of the training sample. The visible neurons are all clamped onto specific states determined by the environ- ment.
-  (2) Negative phase. In this second phase, the network is allowed to run freely, and therefore with no environmental input.The states of the units are determined randomly. The probability of finding it in any particular global state depends on the energy function
-
-The training dataset is divides in batces of smaller size, called min-batches, and the gradient is computed over each min batch. The weights and biases are initailized using random numbers, with small values chosen from azero mean Gaussian with a standard deviation of about $0.01$. 
+The training dataset is divides in batches of smaller size, called mini-batches, and the gradient is computed over each mini-batch. The weights and biases are initailized using random numbers, with small values chosen from a zero mean Gaussian with a standard deviation of about $0.01$. 
 
 Initialize
 
 $$  pp_{ij} = 0,\ pp_{i0} = 0,\ pn_{ij} = 0,\ pn_{i0} = 0 $$
 
-For $k=1,2,...,N$:
+For $k=1,2,...,N$ do the following:
 
-Positive Phase: The system is initialized to the starting for the visible units clamped to $v(k)$ and the hidden units are chosen at random, 0 or 1. Allow the system to evolve using Gibbs samplling, until thermal equilibrium is reached. Store the statistics
+**Positive Phase**: The system is initialized to the starting for the visible units clamped to $v(k)$ and the hidden units are chosen at random, 0 or 1. Allow the system to evolve using Gibbs sampling, until thermal equilibrium is reached. Store the statistics
 
-$$ pp_{ij}^{new} = pp_{ij}^{old} +1\ if\ x_i x_j = 1\ pp_{ij}^{old}\ otherwise $$
-
-and for the biases
-
-$$ pp_{i0}^{new} = pp_{i0}^{old} +1\ if\ x_i = 1\ pp_{i0}^{old}\ otherwise $$
-
-Negative Phase: All the nodes the system , both visible and hidden, are chosen at random, 0 or 1. Allow the system to evolve using Gibbs samplling, until thermal equilibrium is reached. Store the statistics
-
-$$ pn_{ij}^{new} = pn_{ij}^{old} +1\ if\ x_i x_j = 1\ pn_{ij}^{old}\ otherwise $$
+$$ pp_{ij}^{new} = pp_{ij}^{old} + 1\ if\ \sigma_i \sigma_j = 1\ and\  pp_{ij}^{old}\ otherwise $$
 
 and for the biases
 
-$$ pn_{i0}^{new} = pn_{i0}^{old} +1\ if\ x_i = 1\ pn_{i0}^{old}\ otherwise $$
+$$ pp_{i0}^{new} = pp_{i0}^{old} + 1\ if\ \sigma_i = 1\ and\ pp_{i0}^{old}\ otherwise $$
+
+**Negative Phase**: All the nodes in the system , both visible and hidden, are chosen at random to 0 or 1. Allow the system to evolve using Gibbs samplling, until thermal equilibrium is reached. Store the statistics
+
+$$ pn_{ij}^{new} = pn_{ij}^{old} + 1\ if\ \sigma_i \sigma_j = 1\ and\ pn_{ij}^{old}\ otherwise $$
+
+and for the biases
+
+$$ pn_{i0}^{new} = pn_{i0}^{old} + 1\ if\ \sigma_i = 1\ and\ pn_{i0}^{old}\ otherwise $$
 
 Normalize
 
-$$ {\overline pp}_{ij}^{new} = {pp_{ij}^{old}\over N},\ {\overline pp}_{i0}^{new} = {pp_{i0}^{old}\over N} $$
+$$ {\overline pp}_{ij}^{new} = {pp_{ij}^{new}\over N},\ {\overline pp}_{i0}^{new} = {pp_{i0}^{new}\over N} $$
 
-$$ {\overline pn}_{ij}^{new} = {pn_{ij}^{old}\over N},\ {\overline pn}_{i0}^{new} = {pn_{i0}^{old}\over N} $$
+$$ {\overline pn}_{ij}^{new} = {pn_{ij}^{new}\over N},\ {\overline pn}_{i0}^{new} = {pn_{i0}^{new}\over N} $$
 
 Finally the weights and biases are adapted according to
 
-$$ \Delta w_{ij} = \eta\beta({\overline pp}_{ij} - {\overline pn}_{ij}) $$
+$$ w_{ij}\leftarrow w_{ij} + \eta\beta({\overline pp}_{ij} - {\overline pn}_{ij}) $$
 
-$$ \Delta b_{i} = \eta\beta({\overline pp}_{i0} - {\overline pn}_{i0}) $$
+$$ b_i\lefarrow b_{i} + \eta\beta({\overline pp}_{i0} - {\overline pn}_{i0}) $$
 
+Note that greater correlation between the spins at nodes $i$ and $j$ when the visible nodes are clamped, leads to an increase in the weight $w_{ij}$, which is another instance of Hebb's rule, though in this case the rule arises naturally through the optimization process (unlike the Hopfield network where it was put in by design). On the other hand when the visible nodes are not clamped, the any increase in the correlation between the spins at nodes $i$ and $j$ leads to a decrease in the weight value $w_{ij}$. 
 
 ### Restricted Boltzmann Machines
 
-The Boltzmann machines described in the previous section suffers from the problam that it takes too long to train. This is a result of the fact that training require the system settle down to equilibrium, in both the positive and negative parts of the training cycle. The Restricted Boltzmann Machine or RBM was designed with the objective of making the training more efficient.
+The Boltzmann machines described in the previous section suffers from the problem that they take too long to train, which is a result of the fact that training require the system to settle down into equilibrium, in both the positive and negative parts of the training cycle. The Restricted Boltzmann Machine or RBM was designed with the objective of making the training more efficient.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat49.png) 
 
@@ -1567,24 +1574,24 @@ Figure 21: A Restricted Boltzmann Machine
 
 The connections in a RBM are restricted to those between the visible and hidden units, as shown in the above figure. This considerably simplifies both the training as well as the inference phases in the system. The energy in a RBM can be written as
 
-$H(v,h) = -\sum_{i=1}^H\sum_{j=1}^V w_{ij} h_i v_j - \sum_{i=1}^n b_i h_i - \sum_{j=1}^n c_j v_j $$
+$$ E(v,h) = -\sum_{i=1}^H\sum_{j=1}^V w_{ij} h_i v_j - \sum_{i=1}^n b_i h_i - \sum_{j=1}^n c_j v_j $$
 
-In terms of probability this means that hidden variables are independent given the visible variables and vice versa
+In terms of probability the RBM architecture implies that that hidden variables are independent given the visible variables and vice versa, i.e.,
 
-$$ p(h\vert v) = \prod_{i=1}^n p(h_i\vert v)\ and\ p(v\vert h) = \prod_{j=1}^m p(v_j\vert h) $$
+$$ p(h\vert v) = \prod_{i=1}^H p(h_i\vert v)\ and\ p(v\vert h) = \prod_{j=1}^V p(v_j\vert h) $$
 
 where
 
-$$ p(h_1 = 1\vert v) = \sigma(\sum_{j=1}^V w_{ij} v_j + c_i)\ and p(v_j = 1\vert h) = \sigma(\sum_{i=1}^H w_{ij} h_i + b_j) $$
+$$ p(h_i = 1\vert v) = sigmoid(\sum_{j=1}^V w_{ij} v_j + c_i)\ and\ p(v_j = 1\vert h) = sigmoid(\sum_{i=1}^H w_{ij} h_i + b_j) $$
 
-where $\sigma(,)$ stands for the sigmoid function $\sigma(x) = {1\over{(1+\exp^{-x})}}$. 
-The conditional independence simplifies the Gibbs sampling, the new state for all the variables in a layer can be sampled in parallel. Thus a complete sweep throuh all the nodes can be performed in two steps: Sampling a new state $h$ for the hidden nodes based on $p(h\vert v)$ and then sampling the a state $v$ for the visible layer based on $p(v\vert h)$.
+where $sigmoid(,)$ stands for the sigmoid function $sigmoid(x) = {1\over{(1+\exp^{-x})}}$. 
+The conditional independence simplifies the Gibbs sampling since the new state for all the variables in a layer can be sampled in parallel. Thus a complete sampling sweep through all the nodes can be performed in two steps: Sample a new state $h$ for the hidden nodes based on $p(h\vert v)$ and then sample the a state $v$ for the visible layer based on $p(v\vert h)$.
 
 It is possible to obtain an expression for the distribution $p(v)$, as follows
 
-$$ p(v) = \sum_h p(v,h) = {1\over Z} \sum_h \exp^{-H(v,h)}  = {1\over Z}\prod_{j=1}^V \exp^{b_j v_j} \prod_{i=1}^n (1 + \exp^{c_i + \sum_{j=1}^m w_{ij} v_j}) $$
+$$ p(v) = \sum_h p(v,h) = {1\over Z} \sum_{[h]} \exp^{-E(v,h)}  = {1\over Z}\prod_{j=1}^V \exp^{b_j v_j} \prod_{i=1}^n (1 + \exp^{c_i + \sum_{j=1}^m w_{ij} v_j}) $$
 
-This expression shows how the parameters $(w_{ij}, b_i, c_i)$ combine together to generate the visible later probabilities. It can be shown that any distribution on $\{0,1\}^V$ can be modeled arbitrarily well by the RBM with $V$ visible and $k+1$ hidden units, where $k$ denotes the cardinality of the support set for the distribution in the training dataset, i.e., the number of elements in  $\{0,1\}^V$ that have  non-zero probability of being observed.
+This expression shows how the parameters $(w_{ij}, b_i, c_i)$ combine together to generate the visible layer probabilities. It can be shown that any distribution on ${0,1}^V$ can be modeled arbitrarily well by an RBM with $V$ visible and $k+1$ hidden units, where $k$ denotes the cardinality of the support set for the distribution in the training dataset, i.e., the number of elements in  ${0,1}^V$ that have  a non-zero probability of being observed.
 
 
 
