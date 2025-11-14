@@ -1566,7 +1566,9 @@ Note that greater correlation between the spins at nodes $i$ and $j$ when the vi
 
 ### Restricted Boltzmann Machines
 
-The Boltzmann machines described in the previous section suffers from the problem that they take too long to train, which is a result of the fact that training require the system to settle down into equilibrium, in both the positive and negative parts of the training cycle. The Restricted Boltzmann Machine or RBM was designed with the objective of making the training more efficient.
+The Boltzmann machines described in the previous section suffers from the problem that they take too long to train, which is a result of the fact that training require the system to settle down into equilibrium, in both the positive and negative parts of the training cycle. 
+In fact it can be shown that the computation of the negative term scales exponentially with system size.
+The Restricted Boltzmann Machine or RBM was designed with the objective of making the training more efficient.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat49.png) 
 
@@ -1617,7 +1619,17 @@ Geoff Hinton proposed that a good approximation to the gradient can be obtained 
 
 $$ w_{ij}\leftarrow w_{ij} + \eta\beta(< v_i h_j >_0 - < v_i h_j >_k) $$
 
-This resulting training algorithm is called k-step contrastive divergence and works quite well in practice, in fact in many cases it works even for $k=1$.
+This resulting training algorithm is called k-step contrastive divergence, or CD, algorithm and works quite well in practice, in fact in many cases it works even for $k=1$. This algorihm works by shaping the energy landscape of the visible nodes of the RBM such that the energy is lowered for the spin configurations that correspond to patterns in the training data, and is raised for patterns that lie close to the training data. In other words, it creates deep energy valleys in the surface area surrounding the patterns in the training data set. Here is an intuitive explanation of how it does that:
+
+- In order to reduce the KL distance between the actual data distribution $q(v)$ and the distribution $p(v)$ as predicted by the RBM, the maximum likelihood function $L(w)$ has to maximized (here $w$ represents the weights and biases in the network).
+- $L$ is maximized by doing the iteration
+
+$$ w_{ij}\leftarrow w_{ij} + \eta\beta(< v_i h_j >_0 - < v_i h_j >_k) $$
+
+- In order to maximize $L(w)$ we need to maximize the positive term $< v_i h_j >_0$ and minimize the negative term $< v_i h_j >_k$. Maximizing the positive term is the same as maximizing the correlation between the training data set and the spins in the hidden layer. Minimizing the negative term is the same as reducing the correlation between visible spins after $k$ iterations and the spins in the hidden layer. But remember that the visible spins after $k$ iterations are obtained by starting from a training data vector, and then doing $k$ iterations. Thus the resulting spin will tend to be close to the original training vector. Recall that in the regular Boltzmann machine the negative phase is initialized with a random spin vector, which makes the convergence happen much slower.
+- From the expression $E = - \sum_v\sum_h w_{ij} h_i v_j$ for the energy, it follows that higher values of $w_{ij}$ lead to lower energy if the training data and hidden layer spins are more correlated And the spins that are part of the nearby vectors are less correlated with the hidden layer.
+
+
 
 
 
