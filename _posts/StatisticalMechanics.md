@@ -101,7 +101,7 @@ On the basis of this information alone, what are the best estimates of the proba
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat38.png) 
 
-Figure 0: Illustrating the change in entropy with the spread of the probability distribution
+Figure 1: Illustrating the change in entropy with the spread of the probability distribution
 
 How can we quantify the amount of uncertainity in a discrete probability distribution? Claude Shannon posed this question as part of his development of Information Theory, and formally showed that it is given by
 
@@ -132,7 +132,7 @@ Note that the maximum entropy distribution is not the uniform distribution $p_1=
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat13.png) 
 
-Figure 0: A canonical system in a heat bath at temperature T
+Figure 2: A canonical system in a heat bath at temperature T
 
 Up until this point, the discussion has been purely in terms of probability theory but now we are now going to use this to model a physical system consisting of gas particles. 
 Consider a system consisting of large number of gas particles that is in equilibrium at a fixed temperature $T$. This can be achieved by putting the system in an infinite heat bath at temperature T, and assuming that it can exchange energy, but not particles, with the heat bath (see above figure, such a system is called a canonical system in thermodynamics). The energy $E$ of the system is not fixed, but can fluctuate as shown in the right hand side of the figure. This fluctuation is due to the energy exchange with the heat bath required to maintain the temperature at a constant value T. 
@@ -164,7 +164,7 @@ $$ p_i = {e^{-\beta E_i}\over Z} \ \ \ where \ \ \ Z = \sum_i e^{-\beta E_i}  $$
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat41.png) 
 
-Figure 0: Boltzmann distribution of energy levels in the Ising model with varying temperature
+Figure 3: Boltzmann distribution of energy levels in the Ising model with varying temperature
 
 Plotting the Boltzmann distribution as a function of the state is a difficult proposition, since the state is multi-dimensional with thousands of dimensions in realistic models. However it can also
 be plotted as a function of the energy levels $E$, so instead of considering the probability of the system being in state $i$, we instead consider the the probability of the system being in a state with energy $E$.
@@ -293,7 +293,7 @@ $$ \sigma_{av} = \tanh(\beta J) $$
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat2.png) 
 
-Figure 1: Average spin $\sigma_{av}$ as a function of $\beta = {1\over T}$
+Figure 4: Average spin $\sigma_{av}$ as a function of $\beta = {1\over T}$
 
 A graph of the $\tanh$ function is shown above.
 Since we are considering positive temperatures only, we will focus on the half plane $\beta > 0$. At very low temperatutes $\beta\rightarrow\infty$, and as a result the average spin $\sigma_{av} = 1$ and the average energy is minimized at $e_{av} = -1$. 
@@ -304,7 +304,7 @@ This implies that at high temperatures the thermal fluctuations dominate the ord
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat3.png) 
 
-Figure 2: One dimensional Ising model
+Figure 5: One dimensional Ising model
 
 We come to our first model for an interacting particle system which 
 ncorporates interactions between neighboring atoms and the one dimensional case is discussed in this section (see the figure above). The energy for a given configuration of spins is written as
@@ -353,7 +353,7 @@ This implies that even at very low temperatures, for example for $\beta = 0.9999
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat8.png) 
 
-Figure 3: The Ising model in two dimensions
+Figure 6: The Ising model in two dimensions
 
 Spontaneous magnetisation happens in a system when the spin state of even a single atom propagates through the material and re-orients all the spins. We just saw that in one dimension this does not happen, since the correlation between spins fades the further away we get, irrespective of the temperature. One way of understanding this is by noting that the spin at a particular atom in the 1D case has at most two other spins which directly influence it, i.e., those of its immediate neighbors. However this is not the case in higher dimensions. For example for $d=2$, each atom has four neighbors, and as a result if the majority of their spins are aligned in a certain direction, then it influences the target atom to align in the same direction. Hence the presence of multiple neighbors acts as a kind of error correction when determining the spin value.
 
@@ -424,20 +424,20 @@ The solution $y$ to this equation corresponds to the intersection of the line $z
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat4.png) 
 
-Figure 4: $z_1 = {yT\over{2dJ}}$ and $z_2 = \tanh\ y$ when $T > 2dJ$ 
+Figure 7: $z_1 = {yT\over{2dJ}}$ and $z_2 = \tanh\ y$ when $T > 2dJ$ 
 
 These two functions are plotted in figure 4 for the case when the temperature $T$ is very high. In this case the line $z_1$ only intersects $z_2$ at $y=0$ which corresponds to $m=0$, i.e., there is no preferred orientation for the spins. This is due to the fact that the high temperature introduces random thermal fluctuations that overcome the ordering tendency due to the mutual interactions.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat5.png) 
 
-Figure 5: $\tanh\ y$ and ${yT\over{2dJ}}$ when $T < 2dJ$
+Figure 8: $\tanh\ y$ and ${yT\over{2dJ}}$ when $T < 2dJ$
 
 However as $T$ is reduced the interaction energy due to $J$ gradually overcomes the thermal energy, and a non-zero fraction of spins become aligned on the average. This can be deduced from the above figure, since
 ultimately the straight line does intersect the $\tanh$ curve as $T$ is reduced, and there is a critical temperature $T_c = 2dJ$ at which the slope of the line is one, which is the same as the slope of $\tanh$ at the origin. Any decrease in $T$ beyond this point causes the two curves to intersect. When this happens there exist two other non-zero values for m, say $m'$ and $-m'$, and this corresponds to magnetization of the material. The amount of magnetization gradually increases until at very low temperatures it approaches $m = +1$ or $-1$. 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat9.png) 
 
-Figure 6: Variation of mean field $m$ with $T$
+Figure 9: Variation of mean field $m$ with $T$
 
 Since there are now three possible solutions at average spins $0$ and $m'$ and $-m'$, the question arises: which one does the system choose? 
 
@@ -446,7 +446,7 @@ Since there are now three possible solutions at average spins $0$ and $m'$ and $
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat6.png) 
 
-Figure 7: Graph of $\tanh(y + B\beta)$
+Figure 10: Graph of $\tanh(y + B\beta)$
 
 In the presence of an external magnetic field with intensity $B$, the energy for the system is given by
 
@@ -467,7 +467,7 @@ $$ m = \tanh(2dJm\beta + B\beta)  $$
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat7.png) 
 
-Figure 8: Graphic solution to ${Ty\over{2dJ}} = \tanh(y + B\beta)$
+Figure 11: Graphic solution to ${Ty\over{2dJ}} = \tanh(y + B\beta)$
 
 The solution lies at the intersection of the curves $z_1 = {yT\over{2dJ}}$ and
 $z_2 = \tanh(y + B\beta)$, and is plotted in the above figure. The $\tanh$ function has now shifted to the left if $B>0$, and as a result there is only one solution $m' > 0$ to the equation, i.e., in the presence of the external magnetic field the other two solutions go away (except for the case when $\beta=0$). 
@@ -476,13 +476,13 @@ However if we switch  on even a tiny amount of external magnetic field $B$, then
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat10.png) 
 
-Figure 9: Variation of $m$ with $T$ in the presence of an external magnetic field $B$
+Figure 12: Variation of $m$ with $T$ in the presence of an external magnetic field $B$
 
 The variation of $m$ with $T$ for both $B>0$ and $B<0$ is shown above, and we can see that there is no phase transition as the temperature is varied. However a phase transition does occur when the field $B$ is fliped from positive to negative or vice versa, and it causes an instantaneous change in the sign of $m$. This is an example of a first order phase transition since there is a sudden change in the phase.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat33.png) 
 
-Figure: Variation of the State Space and Magnetization of the Ising Model with Temperature
+Figure 13: Variation of the State Space and Magnetization of the Ising Model with Temperature
 
 The discussion of the Ising model and phase transitions so far has been rather abstract since it has been based on a study of the equations of statistical mechanics. In order to get a more intuitive feel for changes in the system as the temperature is varied, consider the figure above. Recall that for model with $N$ atoms there are $2^{N}$ possible spin configurations. The colored ovals in the figure represent portions of the state space that are accessible at various temperatures. 
 
@@ -515,7 +515,7 @@ If $T<T_c$ then the thermal energy will still cause disordering among the spins,
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat34.png) 
 
-Figure: Example sample path in the state space while running the Metropolis algorithm
+Figure 14: Example sample path in the state space while running the Metropolis algorithm
 
 The above figure shown an example of a sample path through the state space when the algorithm is initialized at a state which is away from the equilibrium given the temperature. Assume that the model is at temperature $T_1<T_c$, while the initial state belongs to the phase $m=0$. The algorithm wanders randomly in the $m=0$ state space initially, and ultimately approaches the lilac ring which corresponds to equilibrium states for T=T_1$, and once it is there is continues to wander around within the ring such that various other states occur according to the Boltzmann distribution.
 
@@ -534,7 +534,7 @@ The Glauber rule implies that:
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat42.png) 
 
-Figure: Comparison between the Metropolos and Galuber spin flipping probabilities ate various temperatures
+Figure 15: Comparison between the Metropolos and Galuber spin flipping probabilities ate various temperatures
 
 When run long enough, both the Metropolis and Glauber algorithms lead to the Boltzmann distribution in equilibrium, however their non-equilibrium behavior is slightly different. 
 The above figure plots the spin flipping probability for the two algorirhms at various temperatures. The curves differ most at the highest temperatures, and they become almost indistinguishable at the lowest temperatures, where both curves approximate a step function.
@@ -592,7 +592,7 @@ Recall the $T = 2dJ$ was identified as the critical temperature $T_c$ for ferrom
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat11.png) 
 
-Figure 10: Free Energy $F(m)$ as a function of $m$, for $T > 2dJ$ and $T < 2dJ$
+Figure 16: Free Energy $F(m)$ as a function of $m$, for $T > 2dJ$ and $T < 2dJ$
 
 $F(m)$ is plotted in figure 10, and it clearly shows the effect of varying $T$ on its shape and provides an alternative explanation of how phase changes come about:
 
@@ -623,7 +623,7 @@ Note that this expression is no longer symmetric in $m$ sue to the presence of o
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat12.png) 
 
-Figure 11: Free Energy $F(m)$ as a function of $m$, for $B < 0$, $B = 0$ and $B > 0$
+Figure 17: Free Energy $F(m)$ as a function of $m$, for $B < 0$, $B = 0$ and $B > 0$
 
 The shape of $F(m)$ for three different balues of $B$ is shown in figure 11. When $B\neq 0$, $F(m)$ exhibits an asymmetric shape as function of $m$, such that there is only a single minima (i.e., a single phase as per the Landau theory). This agrees with our earlier analysis that the presence of the external magnetic field removes second order temperature triggered phase transitions from the Ising model.
 For $B>0$ the minima that occurs for $m>0$ is deeper than that for $m<0$ (and vice versa if $B<0$). The shallower minima corresponds to a meta-stable state, and the system transitions to the more stable deeper minima by traversing the energy barrier between the two. If the sign of $B$ is flipped, then it causes an instantaneous change in the magnetization $m$ which also changes sign, and this is characteristic of first order phase transitions.           
@@ -640,7 +640,7 @@ beyond $T_c$ then the iron will become hotter, but what about the Isis model?
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat43.png) 
 
-Figure 10: Plot of the average energy $E_{av}$ and magnetization of the Ising model with temperature
+Figure 18: Plot of the average energy $E_{av}$ and magnetization of the Ising model with temperature
 
 The heat in the iron is connected to the kinetic energy of the vibrational thermal motion of the iron atoms. However the Ising model does not incorporate vibrational degrees of freedom. In this case the increase in temperature is not associated with any further increase in the energy of the system, which can be calculated using the formula for the partition function
 
@@ -658,7 +658,7 @@ Any further increase in temperature beyond $T_c$ does not lead to higher energy 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat14.png) 
 
-Figure 12: Spin Orientation in Ferromagetic, Anti-Ferromagnetic and Spin Glass materials. Ferromagnetic interactions in red and anti-ferromagnetic in red.
+Figure 19: Spin Orientation in Ferromagetic, Anti-Ferromagnetic and Spin Glass materials. Ferromagnetic interactions in red and anti-ferromagnetic in red.
 
 Back in the 1950s scientists were actively investigating the properties of new materials created as a result of mixing two or more elements. This was a fruitful avenue of research and resulted in the discovery of semiconductors, that were created by adding impurities such as phosphorus to silicon. In the same spirit a group at Bell Labs created a new material by adding small quantities of ferromagnetic atoms, such as iron, to a conducting substrate, such as copper. When they studied the magnetic properties of this material as a function of temperature, they found something interesting. 
 
@@ -670,7 +670,7 @@ This was a new kind of magnetic behavior not seen before, and soon physicists ca
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat27.png) 
 
-Figure 15: Illustrating Frustration
+Figure 20: Illustrating Frustration
 
 It was suggested that the random spins orientations were being caused 
 as result of the fact that it is impossible to satisfy all the inter-node spin couplings at the same time. This results in a phenomenon called 'frustration' and arises whenever there exists a loop in which the product of the spins is negative. This is illustrated in the right hand side of above figure: The node in the upper vertex has a anti-ferromagnetic coupling with the node on the left, as a result of which its spin oriented downwards. But now the spin on the right side is in a conundrum. Since it has a ferromagnetic coupling with the other nodes, it doesn't have a one best spin configuration that it can settle to in equilibrium (at $T=0$). As result it, in some cases it can settle in to an UP spin configurations and in other casees to the DOWN spin, and it chooses one of these at random.
@@ -680,7 +680,7 @@ We will see in the next section that there are some order parameters that are ab
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat16.png) 
 
-Figure 15: Energy Landscape in Spin Glasses
+Figure 21: Energy Landscape in Spin Glasses
 
 It was realized pretty early in the study of spin glasses that below the critical temperature their free energy landscape is quite unlike that for magnetic ferromagnetic materials. It contains multipe peaks and valleys as shown in the above figure and these seem to be quite random. From Landau theory we know that a phase corresponds to a minima of the free energy, which leads to the observation that a spin glass can have an infinite number of phases potentially. But is there an order that exists within this randomness? The discovery of such an order turned out to be a very difficult theoretical problem, and the solution did not emerge for another three decades until the mid-1980s and it won Giorgio Parisi the Nobel Prize in Physics in 2021.  It also turned out that the solution to the spin glass problam had a wide range of applicability to other difficult problems which involved dis-ordered states, for example in biology, aritficial neural networks and combinatorial optimization.
 
@@ -688,7 +688,7 @@ It was realized pretty early in the study of spin glasses that below the critica
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat17.png) 
 
-Figure 14: Spin Interactions in the Sherrington Kirkpatrick Model
+Figure 22: Spin Interactions in the Sherrington Kirkpatrick Model
 
 Samuel Edwards and Phillip Anderson were the first physicists to come up with a mathematical model for spin glasses in the mid-1970s, referred to as the EA model. In the process they introduced several new theoretical ideas that have proven to be very fruitful, but their model itself was a bit difficult to analyze. Shortly therafter, David Sherrington and Scott Kirkpatrick introduced their epynomous model (called the SK model), which was a simplified version of the EA model, and this proved to be very influential in the subsequent years, since the model was easier to analyze also captured some of the essential aspects of spin glass behavior.
 
@@ -760,13 +760,13 @@ $0\le q_{EA}\le 1$ for $T<T_c$. Hence spin glass models are characterized by $m 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat18.png) 
 
-Figure 16: Variation of the Edwards Anderson Order Parameter with temperature
+Figure 23: Variation of the Edwards Anderson Order Parameter with temperature
 
 The above figure shows the variation of $q_{EA}$ with the inverse temperature in the SK model for the case $T_c=1$. As shown $q_{EA}$ goes to one in the limit as $T\rightarrow 0$, 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat25.png) 
 
-Figure 14: Free energy landscape at different temperatures
+Figure 24: Free energy landscape at different temperatures
 
 These definitions were further refined in subsequent years, with the introduction of the concept of a "pure state", but in order to do so we first have to clarify what a state is in this context. Lets assume that the disorder $J_{ij}$ in the system is fixed with a given realization of the random interactions.
 The characteristic feature of a spin glass phase is the existence of very many free energy valleys which are separated by very high energy barriers (as $N\rightarrow\infty$). 
@@ -821,7 +821,7 @@ If we average over $J$, then this results in ${\overline P}(q)=E_J(P^J(q))$ whic
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat26.png) 
 
-Figure 14: The overlap distribution function $P(q)$ for a spin glass (top) and a ferromagnet (bottom)
+Figure 25: The overlap distribution function $P(q)$ for a spin glass (top) and a ferromagnet (bottom)
 
 In the Ising model there exists one pure state when $T>T_c$ (with $m_i = 0$), and two pure states when $T<T_c$, lets call them $+$ and $-$, with $m^+_i = m > 0$ and $m^-_i = -m < 0$ with equal probability. The overlaps are given by
 
@@ -933,7 +933,7 @@ The correct structure, that was proposed by Parisi, is a matrix with an iterativ
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat20.png) 
 
-Figure 16: Illustration of replica symmetry, 1-RSB and 2-RSB, from left to right
+Figure 26: Illustration of replica symmetry, 1-RSB and 2-RSB, from left to right
 
 The first two iteration of replica symmetry breaking (RSB) is shown in figure 16. 
 
@@ -968,7 +968,7 @@ This is typically the paramagnetic state which exists at high temperatures. Henc
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat28.png) 
 
-Figure 16: The $Q_{ab}$ matrix for first order RSB
+Figure 27: The $Q_{ab}$ matrix for first order RSB
 
 The $Q_{ab}$ matrix for the 1-RSB solution as per the Parisi ansatz is shown above. This solution splits up the replicas in groups of size $m$ such that overlap between replicas within a group is $q_1$, and between groups is $q_0$ ($m=3$ in the figure). The overlap distribution is given by 
 
@@ -991,7 +991,7 @@ and in the limit at $k\rightarrow \infty$, it results in a continuous overlap di
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat21.png) 
 
-Figure 17: Illustration of replica symmetry breaking
+Figure 28: Illustration of replica symmetry breaking
 
 The left hand side of the above figure shows the changes in the free energy landscape as the temperature lowered, and the distribution of the overlaps is shown on the right:
 
@@ -1003,7 +1003,7 @@ Hence there are two cases in which there is low overlap distribution, but the re
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat39.png) 
 
-Figure 17: Tree like and nested structure in replica symmetry breaking
+Figure 29: Tree like and nested structure in replica symmetry breaking
 
 Another way to visualize replica symmetry breaking is shown in the above figure. At high temperatures we have single pure state, as shown by the large oval (which can be thought to be the space of all configuartions) on the right and the top node in the tree. When the temperature dips below $T_c$ the state splits into three pure states as shown by the three smaller ovals which are now restricted to a smaller subset of configurations. A further reduction in temperature causes these 3 pure states to split into 6 pure states, each with a even smaller set of possible configurations. The overlap function $q_{\alpha\beta}$ depends on how far the pure states $\alpha$ and $\beta$ are from each other in the tree structure. For example A and B are closer to each other, and further away from the other states C,D,E,F and G. 
 
@@ -1024,7 +1024,7 @@ Note that the free energy is a function of the magnetizations $m_i$ and not the 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat40.png) 
 
-Figure: Logarithm of the total number of TAP solutions, divided by N, as a function of temperature
+Figure 30: Logarithm of the total number of TAP solutions, divided by N, as a function of temperature
 
 [Bray and Moore](https://iopscience.iop.org/article/10.1088/0022-3719/13/19/002) proposed that the density of solutions should counted as a function of the free energy $f_{TAP}$, denoted by $N_s(f_{TAP})$ and they showed that it varies as
 
@@ -1093,7 +1093,7 @@ The physicist John Hopfield was at Princeton during the 1970s, and he was instru
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat47.png) 
 
-Figure 18: A Hopfield Network
+Figure 31: A Hopfield Network
 
 [Hopfield](https://www.dna.caltech.edu/courses/cs191/paperscs191/Hopfield82.pdf) started with a SK type spin glass model with full connectivity, shown in the top left of Fig. 18, with the symmetric interaction between nodes $i$ and $j$ given by $J_{ij}$.
 Assume that the spin at each node, $\sigma_i, i = 1,2,...N$ in the network can assume values of +1 or -1, and denote the state $X$ of the network as $X = (\sigma_1,...,\sigma_N)$. 
@@ -1122,7 +1122,7 @@ $$  H = -{1\over 2N}\sum_{\mu=1}^p(\sum_{i=1}^N \sigma_i\xi^\mu_i)^2  $$
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat45.png) 
 
-Figure 19: Energy landscape and time evolution
+Figure 32: Energy landscape and time evolution
 
 The spin updates cause a 
 monotonically decreasing value of the energy (see above figure), since if there is a change $\Delta\sigma_i$ in the value of the $i^{th}$ spin, then
@@ -1170,7 +1170,7 @@ $$  P_{error} = P(C^\mu_i > 1) \approx {1\over 2}(1-erf(\sqrt{N\over{2p}}))\ \ \
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat44.png) 
 
-Figure 19: Error probability in a Hopfield network
+Figure 33: Error probability in a Hopfield network
 
 The table above shows the error for some values of ${p\over N}$. We can see that error is reasonably low until ${p\over N}=0.138$, and increases sharply after that. This has been borne out by a more thorough analysis of Hopfield networks using the tools from spin glass theory.
 
@@ -1180,7 +1180,7 @@ The argument presented in this section for memory recall was of the fixed point 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat46.png) 
 
-Figure 19: The probability that node $i$ becomes excited
+Figure 34: The probability that node $i$ becomes excited
 
 We make the following change to the state transition equations in order to take thermal motion into account: Denote the field at node $i$ at time $t$ as 
 
@@ -1294,7 +1294,7 @@ $$ E(\sigma_i) = \xi^1_i\tanh\beta \xi^1_i E(\sigma_i) $$
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat24.png) 
 
-Figure 20: Single pattern retrieval in the Hopfield model
+Figure 35: Single pattern retrieval in the Hopfield model
 
 Hence in the limit at $T=0$, the spins $s_i$ in the Mattis network converge bi-modally to $\pm 1$, while the spins $\sigma_i$ in the corresponding Hopfield network converge to the memory pattern $\sigma_i = \pm\xi^1_i$. If the network is initialized at some temperature $T>0$, then it will converge to one of the two valleys (or pure states), such that the average spin for the states in the valley is given by the above formula. In order to retrieve the specific memory, the temperature will have to gradually reduces, as per the Metropolis algorithm, to $T=0$.
 
@@ -1393,7 +1393,7 @@ while the latter is concerned about capturing the rules that govern the patterns
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat30.png) 
 
-Figure 20: Training and generation phases for a Boltzmann machine
+Figure 36: Training and generation phases for a Boltzmann machine
 
 An example of how a Boltzmann machine can be put to use is shown in the above figure. The data consists of handwritten images of numerals from 0 to 9, and these are digitized using a $28 x 28$ grid using 0 for white and 1 for black. Any one of the numerals can be written down as a 784 dimensional vector of ones and zeroes, say $(x_1,...,x_{784})$. The elements of these vectors are distributed according to some unknown distribution $p_X(x_1,x_2,...,x_{784})$ and all we have are samples from this distribution. The Boltzmann machine can be trained using these samples, and it is able to create a representation for this distribution in its node interaction parameters, as shown in the left hand part of the figure. Once the training is complete, it can be used to generate new patterns that confirm to the distribution that it has learnt as shown on the right hand side.
 
@@ -1401,7 +1401,7 @@ Back in 1983 when Hinton and Sejnowski first thought of using the Hopfield model
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat32.png) 
 
-Figure 21: Boltzmann machine with hidden nodes
+Figure 37: Boltzmann machine with hidden nodes
 
 An example of a Boltzmann machine is shown in the above figure. As you can see it is basically identical to the Hopfield model, featuring a fully connected topology, with the 'spin' at each node taking on values of 0 or 1. The global energy $E$ (I am ging to change the notation for energy from H to E for this section ) is also identical to that in the Hopfield model, given by
 
@@ -1415,7 +1415,7 @@ $$ \Delta E_k = h_k = \sum_i w_{ki}\sigma_i + b_k $$
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat50.png) 
 
-Figure 21: The sigmoid function for various values of $T$
+Figure 38: The sigmoid function for various values of $T$
 
 The Boltzmann machine uses a probabilistic rule called Gibbs sampling, which derived from the Glauber rule, to update its spins, and this is based on computing a transition probability $p_k$ given by the sigmoid function
 
@@ -1572,7 +1572,7 @@ The Restricted Boltzmann Machine or RBM was designed with the objective of makin
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat49.png) 
 
-Figure 21: A Restricted Boltzmann Machine 
+Figure 39: A Restricted Boltzmann Machine 
 
 The connections in a RBM are restricted to those between the visible and hidden units, as shown in the above figure. This considerably simplifies both the training as well as the inference phases in the system. The energy in a RBM can be written as
 
