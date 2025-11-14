@@ -1560,7 +1560,7 @@ Finally the weights and biases are adapted according to
 
 $$ w_{ij}\leftarrow w_{ij} + \eta\beta({\overline pp}_{ij} - {\overline pn}_{ij}) $$
 
-$$ b_i\lefarrow b_{i} + \eta\beta({\overline pp}_{i0} - {\overline pn}_{i0}) $$
+$$ b_i\leftarrow b_{i} + \eta\beta({\overline pp}_{i0} - {\overline pn}_{i0}) $$
 
 Note that greater correlation between the spins at nodes $i$ and $j$ when the visible nodes are clamped, leads to an increase in the weight $w_{ij}$, which is another instance of Hebb's rule, though in this case the rule arises naturally through the optimization process (unlike the Hopfield network where it was put in by design). On the other hand when the visible nodes are not clamped, the any increase in the correlation between the spins at nodes $i$ and $j$ leads to a decrease in the weight value $w_{ij}$. 
 
@@ -1601,15 +1601,13 @@ Recall that weights in the regular Boltzmann network were updated according to
 
 $$ w_{ij}\leftarrow w_{ij} + \eta\beta({\overline pp}_{ij} - {\overline pn}_{ij}) $$
 
-The first term ${\overline pp}_{ij}$ can be simplified by noting that once the visible units are clamped, the equilibrium value of the hidden units can be computed 
-in a single pass due to the idependence property noted above. Let us denote the resulting correlation by $< v_i h_j >_0$. 
+The first term ${\overline pp}_{ij}$ can be simplified by noting that once the visible units are clamped, the equilibrium value of the hidden units can be computed in a single pass due to the idependence property noted above. Let us denote the resulting correlation by $[v_i h_j]_0$. 
 
-In order to obtain the second term ${\overline pn}_{ij}$ we can carry out the following procedure: 
+In order to obtain the second term ${\overline pn}_{ij}$ term we can carry out the following procedure: 
 
 - Starting with the a data vector on the visible units, update all the hidden units in parallel.
 - Update all the visible units in parallel to get a 'reconstruction' of the original data.
 - Update all the hidden units again.
-- ...
 
 Denoting the correlation after $k$ cycles of this procedure as $< v_i h_j >_k$, the weight update equation can be written as
 
