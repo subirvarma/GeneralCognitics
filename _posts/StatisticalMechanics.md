@@ -1601,30 +1601,30 @@ Recall that weights in the regular Boltzmann network were updated according to
 
 $$ w_{ij}\leftarrow w_{ij} + \eta\beta({\overline pp}_{ij} - {\overline pn}_{ij}) $$
 
-The first term ${\overline pp}_{ij}$ can be simplified by noting that once the visible units are clamped, the equilibrium value of the hidden units can be computed in a single pass due to the idependence property noted above. Let us denote the resulting correlation by $[v_i h_j]_0$. 
+The first term ${\overline pp}_{ij}$ can be simplified by noting that once the visible units are clamped, the equilibrium value of the hidden units can be computed in a single pass due to the independence property noted above. Let us denote the resulting correlation by $[v_i h_j]_0$. 
 
-In order to obtain the second term ${\overline pn}_{ij}$ term we can carry out the following procedure: 
+In order to obtain the second term ${\overline pn}_{ij}$ term we can carry out the following procedure: 
 
 - Starting with the a data vector on the visible units, update all the hidden units in parallel.
 - Update all the visible units in parallel to get a 'reconstruction' of the original data.
 - Update all the hidden units again.
 
-Denoting the correlation after $k$ cycles of this procedure as $< v_i h_j >_k$, the weight update equation can be written as
+Denoting the correlation after $k$ cycles of this procedure as $[v_i h_j]_k$, the weight update equation can be written as
 
-$$ w_{ij}\leftarrow w_{ij} + \eta\beta(< v_i h_j >_0 - < v_i h_j >_{infty}) $$
+$$ w_{ij}\leftarrow w_{ij} + \eta\beta([v_i h_j]_0 - [v_i h_j]_{\infty}) $$
 
 Geoff Hinton proposed that a good approximation to the gradient can be obtained after stopping the reconstruction procedure after $k$ steps, so tha
 
-$$ w_{ij}\leftarrow w_{ij} + \eta\beta(< v_i h_j >_0 - < v_i h_j >_k) $$
+$$ w_{ij}\leftarrow w_{ij} + \eta\beta([v_i h_j]_0 - [v_i h_j]_k) $$
 
 This resulting training algorithm is called k-step contrastive divergence, or CD, algorithm and works quite well in practice, in fact in many cases it works even for $k=1$. This algorihm works by shaping the energy landscape of the visible nodes of the RBM such that the energy is lowered for the spin configurations that correspond to patterns in the training data, and is raised for patterns that lie close to the training data. In other words, it creates deep energy valleys in the surface area surrounding the patterns in the training data set. Here is an intuitive explanation of how it does that:
 
 - In order to reduce the KL distance between the actual data distribution $q(v)$ and the distribution $p(v)$ as predicted by the RBM, the maximum likelihood function $L(w)$ has to maximized (here $w$ represents the weights and biases in the network).
 - $L$ is maximized by doing the iteration
 
-$$ w_{ij}\leftarrow w_{ij} + \eta\beta(< v_i h_j >_0 - < v_i h_j >_k) $$
+$$ w_{ij}\leftarrow w_{ij} + \eta\beta([v_i h_j]_0 - [v_i h_j]_k) $$
 
-- In order to maximize $L(w)$ we need to maximize the positive term $< v_i h_j >_0$ and minimize the negative term $< v_i h_j >_k$. Maximizing the positive term is the same as maximizing the correlation between the training data set and the spins in the hidden layer. Minimizing the negative term is the same as reducing the correlation between visible spins after $k$ iterations and the spins in the hidden layer. But remember that the visible spins after $k$ iterations are obtained by starting from a training data vector, and then doing $k$ iterations. Thus the resulting spin will tend to be close to the original training vector. Recall that in the regular Boltzmann machine the negative phase is initialized with a random spin vector, which makes the convergence happen much slower.
+- In order to maximize $L(w)$ we need to maximize the positive term $[v_i h_j]_0$ and minimize the negative term $[v_i h_j]_k$. Maximizing the positive term is the same as maximizing the correlation between the training data set and the spins in the hidden layer. Minimizing the negative term is the same as reducing the correlation between visible spins after $k$ iterations and the spins in the hidden layer. But remember that the visible spins after $k$ iterations are obtained by starting from a training data vector, and then doing $k$ iterations. Thus the resulting spin will tend to be close to the original training vector. Recall that in the regular Boltzmann machine the negative phase is initialized with a random spin vector, which makes the convergence happen much slower.
 - From the expression $E = - \sum_v\sum_h w_{ij} h_i v_j$ for the energy, it follows that higher values of $w_{ij}$ lead to lower energy if the training data and hidden layer spins are more correlated And the spins that are part of the nearby vectors are less correlated with the hidden layer.
 
 
