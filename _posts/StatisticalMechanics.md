@@ -1582,19 +1582,42 @@ $$ p(h\vert v) = \prod_{i=1}^H p(h_i\vert v)\ and\ p(v\vert h) = \prod_{j=1}^V p
 
 where
 
-$$ p(h_i = 1\vert v) = sigmoid(\sum_{j=1}^V w_{ij} v_j + c_i)\ and\ p(v_j = 1\vert h) = sigmoid(\sum_{i=1}^H w_{ij} h_i + b_j) $$
+$$ p(h_i = 1\vert v) = sig(\sum_{j=1}^V w_{ij} v_j + c_i)\ and\ p(v_j = 1\vert h) = sig(\sum_{i=1}^H w_{ij} h_i + b_j) $$
 
-where $sigmoid(,)$ stands for the sigmoid function $sigmoid(x) = {1\over{(1+\exp^{-x})}}$. 
+where $sig(.)$ stands for the sigmoid function $sig(x) = {1\over{(1+\exp^{-x})}}$. 
 The conditional independence simplifies the Gibbs sampling since the new state for all the variables in a layer can be sampled in parallel. Thus a complete sampling sweep through all the nodes can be performed in two steps: Sample a new state $h$ for the hidden nodes based on $p(h\vert v)$ and then sample the a state $v$ for the visible layer based on $p(v\vert h)$.
 
 It is possible to obtain an expression for the distribution $p(v)$, as follows
 
 $$ p(v) = \sum_h p(v,h) = {1\over Z} \sum_{[h]} \exp^{-E(v,h)}  = {1\over Z}\prod_{j=1}^V \exp^{b_j v_j} \prod_{i=1}^n (1 + \exp^{c_i + \sum_{j=1}^m w_{ij} v_j}) $$
 
-This expression shows how the parameters $(w_{ij}, b_i, c_i)$ combine together to generate the visible layer probabilities. It can be shown that any distribution on ${0,1}^V$ can be modeled arbitrarily well by an RBM with $V$ visible and $k+1$ hidden units, where $k$ denotes the cardinality of the support set for the distribution in the training dataset, i.e., the number of elements in  ${0,1}^V$ that have  a non-zero probability of being observed.
+This expression shows how the parameters $(w_{ij}, b_i, c_i)$ combine together to generate the visible layer probabilities. It can be shown that any distribution on $(0,1)^V$ can be modeled arbitrarily well by an RBM with $V$ visible and $k+1$ hidden units, where $k$ denotes the cardinality of the support set for the distribution in the training dataset, i.e., the number of elements in  $(0,1)^V$ that have  a non-zero probability of being observed.
 
+**The Contrastive Divergence (CD) Algorithm**
 
+Recall that weights in the regular Boltzmann network were updated according to
 
+$$ w_{ij}\leftarrow w_{ij} + \eta\beta({\overline pp}_{ij} - {\overline pn}_{ij}) $$
+
+The first term ${\overline pp}_{ij}$ can be simplified by noting that once the visible units are clamped, the equilibrium value of the hidden units can be computed 
+in a single pass due to the idependence property noted above. Let us denote the resulting correlation by $< v_i h_j >_0$. 
+
+In order to obtain the second term ${\overline pn}_{ij}$ we can carry out the following procedure: 
+
+- Starting with the a data vector on the visible units, update all the hidden units in parallel.
+- Update all the visible units in parallel to get a 'reconstruction' of the original data.
+- Update all the hidden units again.
+- ...
+
+Denoting the correlation after $k$ cycles of this procedure as $< v_i h_j >_k$, the weight update equation can be written as
+
+$$ w_{ij}\leftarrow w_{ij} + \eta\beta(< v_i h_j >_0 - < v_i h_j >_{infty}) $$
+
+Geoff Hinton proposed that a good approximation to the gradient can be obtained after stopping the reconstruction procedure after $k$ steps, so tha
+
+$$ w_{ij}\leftarrow w_{ij} + \eta\beta(< v_i h_j >_0 - < v_i h_j >_k) $$
+
+This resulting training algorithm is called k-step contrastive divergence and works quite well in practice, in fact in many cases it works even for $k=1$.
 
 
 
