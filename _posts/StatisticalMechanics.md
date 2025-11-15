@@ -241,7 +241,7 @@ so that
 
 $$ \Delta F_{system} \le 0 $$
 
-Hence for a system that only interacts with its surroundings through the exchange of heat, the free energy never increases, instead it decreases until it reaches a minimum when thermal equilibrium is reached. This implies that in a canonical system kept at constant temperature, thermal equilibrium is the state of minimum Helmholtz free energy. This criteria is very powerful since it depends on the just the system, and is independent of the surroundings. In order to use this criteria, we need a way to calculate the free energy for a system that is not in equilibrium, we will tackle this in a later section. When scientists say that the energy of a system is minimized in equilibrium, they are referring to the free energy, since the total energy as a whole is conserved. As a result of these advantages, the analysis of thermodynamic systems is often based on the computation of its free energy, and this is true of the systems we will encounter in this article.
+Hence for a system that only interacts with its surroundings through the exchange of heat, the free energy never increases, instead it decreases until it reaches a minimum when thermal equilibrium is reached. This implies that in a canonical system kept at constant temperature, thermal equilibrium is the state of minimum Helmholtz free energy. This criteria is very powerful since it depends on the just the system, and is independent of the surroundings. In order to use this criteria, we need a way to calculate the free energy for a system that is not in equilibrium, we will tackle this in a later section. When scientists say that the energy of a system is minimized in equilibrium, they are referring to the free energy, since the total energy as a whole is conserved. As a result of these advantages, the analysis of thermodynamic systems is often based on the computation of their free energy, and this is true of the systems we will encounter in this article.
 
 ## Models for Magnetism
 
@@ -267,7 +267,7 @@ $$ e = -J\sigma  $$
 
 for the energy of a single atom, where $\sigma$ is the same as before and $J=\mu H$ is called the coupling constant.
 
-Hence the partition function for a single spin at temperature $T = {1\over\beta}$, in the presence of a magnetic field can be expressed in terms of an hyperbolic function, as
+The partition function for a single spin at temperature $T = {1\over\beta}$, in the presence of a magnetic field can be expressed in terms of an hyperbolic function, as
 
 $$ Z = e^{\beta J} + e^{-\beta J} = 2 \cosh(\beta J) $$
 
@@ -284,7 +284,7 @@ so that $\log Z = N\log 2 + N\log[\cosh(\beta J)]$.  It follows that the average
 
 $$ E_{av} = -{\partial\log Z\over\partial\beta} = - NJ\ \tanh(\beta J) $$
 
-so that the average energy density on a per spin basis $e_{av}$ at temperate $T$ is given by 
+The average energy density on a per spin basis $e_{av}$ at temperature $T$ is given by 
 
 $$ e_{av} = {E_{av}\over N} = -J\ \tanh(\beta J)  $$
 
@@ -296,9 +296,10 @@ $$ \sigma_{av} = \tanh(\beta J) $$
 
 Figure 4: Average spin $\sigma_{av}$ as a function of $\beta = {1\over T}$
 
-A graph of the $\tanh$ function is shown above.
-Since we are considering positive temperatures only, we will focus on the half plane $\beta > 0$. At very low temperatutes $\beta\rightarrow\infty$, and as a result the average spin $\sigma_{av} = 1$ and the average energy is minimized at $e_{av} = -1$. 
-Hence at low temperatures the infuence of the external magnetic field overcomes the random thermal fluctuations and as a result each spin becomes perfectly aligned with the external field, and this is lowest energy configuration. Conversely at high temeperatures $\beta\rightarrow 0$ and as as result the average spin goes to zero, and so does the average energy. 
+A graph of the $\tanh$ function is shown above. As a result of thermal energy, each spin is constantly flipping back and forth, and as a result the average spin lines between $-1$ and $+1$.
+Since we are considering positive temperatures only, we will focus on the half plane $\beta > 0$. At very low temperatutes $\beta\rightarrow\infty$, and as a result the average spin $\sigma_{av} = 1$ and the average energy is minimized at $e_{av} = -J$. 
+Hence at low temperatures the infuence of the external magnetic field overcomes the random thermal fluctuations and as a result each spin becomes perfectly aligned with the external field, and this is lowest energy configuration. 
+Conversely at high temeperatures $\beta\rightarrow 0$ and as as result the average spin goes to zero, and so does the average energy. 
 This implies that at high temperatures the thermal fluctuations dominate the ordering effect of the external field which results in the spins being randomly aligned in the up or down direction. As the temperature is reduced, the spins start to gradually align with the external field, but note that there is no phase change, i.e., a sudden shift from non-alignment to alignment, it happens gradually. On the other hand, there is a phase change if the external magnetic field is switched from $+B$ to $-B$. This causes the average spin to flip to $\sigma_{av} = -\tanh(\beta J)$ (even though the average energy remains the same). This is a sudden change in the average spin, and is referred to as a phase transition of type 1. 
 
 ### Ising Model in One Dimension
@@ -307,21 +308,21 @@ This implies that at high temperatures the thermal fluctuations dominate the ord
 
 Figure 5: One dimensional Ising model
 
-We come to our first model for an interacting particle system which 
-ncorporates interactions between neighboring atoms and the one dimensional case is discussed in this section (see the figure above). The energy for a given configuration of spins is written as
+We come to our first model for an interacting particle system that 
+incorporates interactions between neighboring atoms and the one dimensional case is discussed in this section (see the figure above). The energy for a given configuration of spins is written as
 
 $$  E = -J\sum_i \sigma_i\sigma _{i+1} $$
 
 Note that unlike the previous case, there is no external magnetic field present.
 Each of the terms in this expression in minimized when $\sigma_i = \sigma_{i+1}$, i.e., the spins are aligned together, either with $\sigma_i = \sigma_{i+1} = 1$ or $\sigma_i = \sigma_{i+1} = -1$. This implies that there are two configurations with the minimum energy value, which correspond to all the spins pointing up or all the spins pointing down. The partition function for this system is given by
 
-$$ Z = \sum_{all\ spin\ configs} e^{-J\beta\sum_i \sigma_i\sigma _{i+1}}  $$
+$$ Z = \sum_{all\ [\sigma]\ configs} e^{-J\beta\sum_i \sigma_i\sigma _{i+1}}  $$
 
 This sum has to be evaluated over all possible spin configurations, which makes it a non-trivial problem. The analysis can be simplified by defining a set of variables $\mu_i$ which is the product of neighboring spins, i.e.,
 
 $$  \mu_i =  \sigma_i\sigma _{i+1},\ \ i = 1,2,...,N-1  $$
 
-Note that $\mu$ is defined on per connection basis, rather than on a per atom basis.
+Note that $\mu_i$ is defined on per connection basis, rather than on a per atom basis.
 With this definition the partition function $Z$ becomes
 
 $$ Z = Z_1 + Z_2 $$
@@ -344,7 +345,7 @@ It follows that the average $\mu_{av}$ is given by
 
 $$ \mu_{av} = (\sigma_i\sigma_{i+1})_{av} = \tanh(\beta J) $$
 
-As expected, the correlation between the spins of neighboring atoms goes to zero as temperature increases, but what about low temperatures. This equation tells us that the average of the connection values $\mu_{av}$ goes to one, but from this can we conclude that the all atoms have transitioned to the up for down spin configuration? We cannot since even if most of the spins are at $\sigma_i = 1$, there can be islands of atoms with $\sigma_i = -1$, and this is consistent with having an overall average $\mu_{av}$ of 1. Indeed it can be shown that the correlation between spins separated by $n$ positions is given by
+As expected, the correlation between the spins of neighboring atoms goes to zero as temperature increases, but what about low temperatures? This equation tells us that the average of the connection values $\mu_{av}$ goes to one, but from this can we conclude that the all atoms have transitioned to the up for down spin configuration? We cannot, since even if most of the spins are at $\sigma_i = 1$, there can be islands of atoms with $\sigma_i = -1$, and this is consistent with having an overall average $\mu_{av}$ of 1. Indeed it can be shown that the correlation between spins separated by $n$ positions is given by
 
 $$ (\sigma_i\sigma_{i+n})_{corr} = \tanh^{n-1}(\beta J) $$
 
@@ -356,15 +357,13 @@ This implies that even at very low temperatures, for example for $\beta = 0.9999
 
 Figure 6: The Ising model in two dimensions
 
-Spontaneous magnetisation happens in a system when the spin state of even a single atom propagates through the material and re-orients all the spins. We just saw that in one dimension this does not happen, since the correlation between spins fades the further away we get, irrespective of the temperature. One way of understanding this is by noting that the spin at a particular atom in the 1D case has at most two other spins which directly influence it, i.e., those of its immediate neighbors. However this is not the case in higher dimensions. For example for $d=2$, each atom has four neighbors, and as a result if the majority of their spins are aligned in a certain direction, then it influences the target atom to align in the same direction. Hence the presence of multiple neighbors acts as a kind of error correction when determining the spin value.
+Spontaneous magnetisation happens in a system when the spin state of even a single atom propagates through the material and re-orients all the spins. We just saw that in one dimension this does not happen, since the correlation between spins fades the further away we get, irrespective of the temperature. One way of understanding this is by noting that the spin at a particular atom in the 1D case has at most two other spins which directly influence it, i.e., those of its immediate neighbors. However for $d=2$, each atom has four neighbors, and as a result if the majority of their spins are aligned in a certain direction, then it influences the target atom to align in the same direction. Hence the presence of multiple neighbors acts as a kind of error correction when determining the spin value.
 
 Unfortunately the exact analysis of Ising models for $d\ge 2$ is extremely difficult. However there exists a simple approximation method, called mean field analysis or MFA, that preserves important properties such as phase transitions and we will describe that next.
 
-The energy level for a single spin is given by
+The energy level for a single spin $\sigma$ with neighbors $\sigma_1,...,\sigma_n is given by
 
 $$ e = -J\sigma\sum_{i=1}^n\sigma_i  $$
-
-where $n$ is the number of neighbors for the spin. 
 
 The total energy for a configuration of N spins in $d$ dimensions is given by
 
@@ -382,7 +381,7 @@ According to the mean field approximation $m_i = m_j = m$, i.e., the mean value 
 
 $$ E = -J\sum_i\sum_j(m^2 + m(\sigma_j - m) + m(\sigma_i - m))  $$
 
-From translational invariance of the spins it follows that
+From translational invariance of the spins (i.e., the average is the same everywhere) it follows that
 
 $$ E = -J\sum_i\sum_j(2m\sigma_i - m^2)  $$
 
@@ -395,7 +394,7 @@ The expression for energy simplifies to
 
 $$  E = {NdJm^2} - 2dJm\sum_i\sigma_i $$
 
-But this is simply the total energy level for a configuration of independent or paramagnetic atoms in the presence of a magnetic field with intensity $2dJm$.
+But this is simply the total energy level for a configuration of $N$ independent or paramagnetic atoms in the presence of a magnetic field with intensity $2dJm$.
 Leveraging the solution for this model from two sections ago, it follows that the partition function is given by
 
 $$ Z = e^{-\beta NdJm^2} 2^N\cosh^N(2dJ\beta m) $$
@@ -427,7 +426,7 @@ The solution $y$ to this equation corresponds to the intersection of the line $z
 
 Figure 7: $z_1 = {yT\over{2dJ}}$ and $z_2 = \tanh\ y$ when $T > 2dJ$ 
 
-These two functions are plotted in figure 4 for the case when the temperature $T$ is very high. In this case the line $z_1$ only intersects $z_2$ at $y=0$ which corresponds to $m=0$, i.e., there is no preferred orientation for the spins. This is due to the fact that the high temperature introduces random thermal fluctuations that overcome the ordering tendency due to the mutual interactions.
+These two functions are plotted above for the case when the temperature $T$ is very high. In this case the line $z_1$ only intersects $z_2$ at $y=0$ which corresponds to $m=0$, i.e., there is no preferred orientation for the spins. This is due to the fact that the high temperature introduces random thermal fluctuations that overcome the ordering tendency due to the mutual interactions.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat5.png) 
 
@@ -440,10 +439,10 @@ ultimately the straight line does intersect the $\tanh$ curve as $T$ is reduced,
 
 Figure 9: Variation of mean field $m$ with $T$
 
-Since there are now three possible solutions at average spins $0$ and $m'$ and $-m'$, the question arises: which one does the system choose? 
+Since the straight line intersects the $\tanh$ curve at three places,  there are three possible solutions at average spins $0$ and $m'$ and $-m'$, the question arises: which one does the system choose? 
 
-- If the system starts from a low temperature state $T<T_c$ at which $m$ is non-zero and gradually increase temperature, then the magnetization initially decreases and then abruptly switches off when the temperature becomes greater than $T_c$. This would be the case if we gradually heat a ferromagnet, and is called the Curie Effect. This kind of phase transition in which there is an initial gradual decrease in the magnetization as temperature increases, followed by an abrupt change to zero beyond the critical temperature, is referred to as a second order phase transition, and is illustrated in figure 6.
-- If the system starts from a state of random spins $m=0$ at $T > T_c$, what happend when the temperature crosses $T_c$? The system now has two options since there are two possible paths it can take, which one does it take? The answer is, neither. It stays in the $m=0$ state until something causes it to change state, and that something is the presence of an external magnetic field. The solution for $m = 0$ is unstable if $T<T_c$, and the system can tip into the state $m\gt 0$  or $m\lt 0$ very easily, as shown next.
+- If the system starts from a low temperature state $T<T_c$ at which $m$ is non-zero and gradually increase temperature, then the magnetization initially decreases and then abruptly switches off when the temperature becomes greater than $T_c$. This would be the case if we gradually heat a ferromagnet, and is called the Curie Effect. This kind of phase transition in which there is an initial gradual decrease in the magnetization as temperature increases, followed by an abrupt change to zero beyond the critical temperature, is referred to as a second order phase transition, and is illustrated in figure 9.
+- If the system starts from a state of random spins $m=0$ at $T > T_c$, what happens when the temperature is gradually reduced and crosses $T_c$? The system now has two options since there are two possible paths it can take, either $+m$ or $-m$, which one does it take? The answer is, neither. It stays in the $m=0$ state until something causes it to change state, and that something is the presence of an external magnetic field. The solution $m = 0$ is unstable if $T<T_c$, and the system can tip into the state $m\gt 0$  or $m\lt 0$ very easily, as shown next.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat6.png) 
 
@@ -472,8 +471,8 @@ Figure 11: Graphic solution to ${Ty\over{2dJ}} = \tanh(y + B\beta)$
 
 The solution lies at the intersection of the curves $z_1 = {yT\over{2dJ}}$ and
 $z_2 = \tanh(y + B\beta)$, and is plotted in the above figure. The $\tanh$ function has now shifted to the left if $B>0$, and as a result there is only one solution $m' > 0$ to the equation, i.e., in the presence of the external magnetic field the other two solutions go away (except for the case when $\beta=0$). 
-This means that if we were to start with the system in which $T < T_c$ with $B=0$, then we saw earlier there are three possible values for $m$, i.e. $m = 0$ or $m=m'$ or $m=-m'$.
-However if we switch  on even a tiny amount of external magnetic field $B$, then it instantaneously causes the system to shift to $m=m'$ since the other two solutions are no langer allowed due to the shift of the $\tanh$ curve to the left. This is a phase change, and happens in ferromagnetic materials. Unlike for paramagnetic materials, the system stays in the magnetized state even after the external field is switched off. If the external field were pointing in the opposite direction, then it would have caused the system to flip to $m=-m'$.
+This means that if we were to initialize the system at $T < T_c$ with $B=0$, then we saw earlier there are three possible values for $m$, i.e. $m = 0$ or $m=m'$ or $m=-m'$.
+However if we switch  on even a tiny amount of external magnetic field $B$, then it instantaneously causes the system to shift to $m=m'$ since the other two solutions are no longer allowed due to the shift of the $\tanh$ curve to the left. This is a phase change, and happens in ferromagnetic materials. Unlike for paramagnetic materials, the system stays in the magnetized state even after the external field is switched off. If the external field were pointing in the opposite direction, then it would have caused the system to flip to $m=-m'$.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat10.png) 
 
@@ -488,19 +487,19 @@ Figure 13: Variation of the State Space and Magnetization of the Ising Model wit
 The discussion of the Ising model and phase transitions so far has been rather abstract since it has been based on a study of the equations of statistical mechanics. In order to get a more intuitive feel for changes in the system as the temperature is varied, consider the figure above. Recall that for model with $N$ atoms there are $2^{N}$ possible spin configurations. The colored ovals in the figure represent portions of the state space that are accessible at various temperatures. 
 
 - The blue area in the main oval represents part of the state space that can be accessed when $T>T_c$ and the magnetization $m=0$. This is mostly made up of states in which there are an equal number of up and down spins, but because of thermal fluctuations it also contains configurations with an imbalance in spins.
-- As the temperature is reduced to a level $T_1 < T_c$, the allowed system configurations become smaller, and are represented by the lilac area in the next smallest oval. These configurations are characterized by a net magnetization $m_1$, which means more spins on the average point up than down. Note that there are two such lilac areas representing the fact that the system configuration has split up into two distinct phases.
+- As the temperature is reduced to a level $T_1 < T_c$, the allowed system configurations become smaller, and are represented by the light blue area in the next smallest oval. These configurations are characterized by a net magnetization $m_1$, which means more spins on the average point up than down. Note that there are two such light blue areas representing the fact that the system configuration has split up into two distinct phases.
 - If the temperature is further reduced to $T_2 < T_1$, then the allowed configuration space further shrinks as shown by the orange area in the innermost oval, and furthermore the net magnetization $m_2$ increases byond $m_1$
 - In the limit as $T=0$, he ovals shrink to a single point, i.e., the configuration $(+1,...,+1)$ or $(-1,...,-1)$, since all the spins are now fully aligned with each other. Furthermore the net magnetization achieves its maximum value $m=1$ or $m=-1$, depending upon the phase.
 
 ## Simulating Spin Systems
 
-Back in the early 1950s, in the very first days of electronic computers, a group of physicists who had worked together in the Manhattan Project, got together and figured out how to simulate a system of interacting particles which are subject to thermodynamic randomness. Initially their algorithm was used to analyze neutron interactions in a nuclear reactor, and later it was applied to spin systems such as the Ising model. This group was led by Harry Metropolis, and it is by his name that the resulting algorithm is generally known. The mathematical technique that was used is called Markov Chain Mone Carlo of MCMC, and that is an alternative name for this technique. 
+Back in the early 1950s, in the very first days of electronic computers, a group of physicists who had worked together in the Manhattan Project, got together and figured out how to simulate a system of interacting particles which are subject to thermodynamic randomness. Initially their algorithm was used to analyze neutron interactions in a nuclear reactor, and later it was applied to spin systems such as the Ising model. This group was led by Harry Metropolis, and it is by his name that the resulting algorithm is generally known. The mathematical technique that was used is called Markov Chain Monte Carlo of MCMC, and that is an alternative name for this technique. 
 
 The Metropolis algorithm is based on building a Markov Chain whose stationary distribution $\pi(\sigma_1,...,\sigma_N)$ co-incides with that of the Boltzmann distribution, i.e., 
 
 $$ \pi(\sigma_1,...,\sigma_N) = {1\over Z} e^{-\beta E(\sigma_1,...,\sigma_N)}  $$
 
-The Metropolis algorithm works as follows:
+It works as follows:
 
 - Start with some spin configuration $\Sigma = (\sigma_1,...,\sigma_N)$ and note that energy of this configuration is given by $E(\Sigma)$.
 - Propose a move to a new trial configuration $\Sigma'$ by flipping the spin at site $i$ chosen at random, and compute its energy $E(\Sigma')$.
@@ -510,15 +509,15 @@ The Metropolis algorithm works as follows:
 
 The probabilistic aspect of the algorithm is implemented by using the following rule: If $\exp^{-\beta(E(\Sigma')-E(\Sigma))} > RAND(0,1)$ where $RAND(0,1)$ is sampled over the uniform distribution $U(0,1)$, then accept the new configuration $\Sigma'$, otherwise leave the old configuration $\Sigma$.
 
-This algorithm simulates the thermal motion of atoms in thermal contact with a heat bath at temperature $T$. After many steps of the algorithm, the system evolves into a Boltzmann distribution.
-If the system is simulated at $T>T_c$ then the thermal energy will cause it to wander spin configurations centered at $m=0$ with no net magnetization.
+This algorithm simulates the random spin of atoms in thermal contact with a heat bath at temperature $T$. After many steps of the algorithm, the system evolves into a Boltzmann distribution.
+If the system is simulated at $T>T_c$ then the thermal energy will cause it to wander among spin configurations centered at $m=0$ with no net magnetization.
 If $T<T_c$ then the thermal energy will still cause disordering among the spins, but a fraction of the spins will tend to get aligned in the same direction on the average, causing $m>0$.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat34.png) 
 
 Figure 14: Example sample path in the state space while running the Metropolis algorithm
 
-The above figure shown an example of a sample path through the state space when the algorithm is initialized at a state which is away from the equilibrium given the temperature. Assume that the model is at temperature $T_1<T_c$, while the initial state belongs to the phase $m=0$. The algorithm wanders randomly in the $m=0$ state space initially, and ultimately approaches the lilac ring which corresponds to equilibrium states for T=T_1$, and once it is there is continues to wander around within the ring such that various other states occur according to the Boltzmann distribution.
+The above figure shown an example of a sample path through the state space when the algorithm is initialized at a state which is away from the equilibrium given the temperature. Assume that the model is at temperature $T_1<T_c$, while the initial state belongs to the phase $m=0$ which implies the system is not in equilibrium. The algorithm wanders randomly in the $m=0$ state space initially, and ultimately approaches the light blue ring which corresponds to equilibrium states for $T=T_1$, and once it is there is continues to wander around within the ring such that various other states occur according to the Boltzmann distribution.
 
 Another algorithm to simulate the Ising model was discovered by Roy Glauber in the early 1960s, and works as follows:
 
@@ -531,7 +530,7 @@ $$   p(\Delta E) = {1\over{1+e^{\beta\Delta E}}}   $$
 The Glauber rule implies that:
 
 - As $T\rightarrow\infty$, then $p={1\over 2}$, i.e., a spin is flipped with probability half, irrespective of the change $\Delta E$ in energy.
-- If $T\rightarrow 0$, then $p=1$ if $\Delta E <0$ and $p=0$ is $\Delta E > 0$. In this case it becomes a deterministic rule which says that flip with probability 1 if change in energy is negative. 
+- If $T\rightarrow 0$, then $p=1$ if $\Delta E <0$ and $p=0$ is $\Delta E > 0$. In this case it becomes a deterministic rule which says that flip with probability 1 if change in energy is negative. For intermediate values of $T$ it assumes a sigmoid shape as shown below.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat42.png) 
 
