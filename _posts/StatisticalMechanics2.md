@@ -1,9 +1,9 @@
 ---
 layout: default
-title: "Statistical Mechanics and Neural Networks: Part 2"
+title: "Energy Based Models Part 2: Hopfield Networks and Boltzmann Machines"
 ---
 
-# Statistical Mechanics and Neural Networks: Part 2
+# Energy Based Models Part 2: Hopfield Networks and Boltzmann Machines
 
 **Contents**     
 
