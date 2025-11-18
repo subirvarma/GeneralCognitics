@@ -1,9 +1,9 @@
 ---
 layout: default
-title: "Statistical Mechanics and Neural Networks: Part 1"
+title: "Energy Based Models Part 1: Ising and Spin Glass Models"
 ---
 
-# Statistical Mechanics and Neural Networks: Part 1
+# Energy Based Models Part 1: Ising and Spin Glass Models
 
 **Contents**     
 
@@ -19,10 +19,7 @@ title: "Statistical Mechanics and Neural Networks: Part 1"
   - The Sherrington-Kirkpatrick (SK) model
   - The replica method and replica symmetry breaking
   - The p-spin spherical spin glass model (PSM)
-- Simulated Annealing
-- Hopfield Networks: Engineering the energy landscape
-  - Thermodynamics of the Hopfield model      
-- Boltzmann machines        
+- Simulated Annealing       
 
 
 ## Abstract
