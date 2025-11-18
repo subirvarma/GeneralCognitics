@@ -9,8 +9,11 @@ title: "Energy Based Models Part 2: Hopfield Networks and Boltzmann Machines"
 
 - Introduction       
 - Hopfield Networks: Engineering the energy landscape
-  - Thermodynamics of the Hopfield model      
-- Boltzmann machines
+  - Thermodynamics of the Hopfield Network
+  - Modern Hopfield Networks      
+- From Hopfield Networks to Boltzmann Machines
+  - Training the Boltzmann Machine
+  - Restricted Boltzmann Machines
 
 ## Hopfield Networks: Engineering the Energy Landscape of a Spin Glass System
 
