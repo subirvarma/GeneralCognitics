@@ -24,10 +24,10 @@ title: "Energy Based Models Part 1: Ising and Spin Glass Models"
 
 ## Abstract
 
-This and the following two posts are a deep dive into Energy Based Models or EBMs. The original EBMs were proposed by physicists in the late 19th century, and form the backbone of the theory of statistical mechanics. So we will start with statistical mechanics and the basics of how concepts such as entropy were discovered. We then apply this theory to a model for magnetism called the Ising model. This takes us to the physics behind phase transitions, the simplest example of this being when a ferromagnetic material becomes magnetized as the temperature is reduced. The Ising model can be generalized to the case when the nodes in the system interact with each other in more complex ways, and this takes us to spin glass models and the phenomenon of continuous symmtery breaking. The present generation of neural network models can be traced to a spin glass inspired EBM called the Hopfield mnetwork that was proposed in the early 1980s, and this was soon followed by another more important EBM called the Boltzmann Machine. Until about 2010 these were the only games in town as far as neural networks were concerned, however soon after that people discovered how to train very large non-EBM models by resolving the problems with the backpropagation training algorithm. Since then EBMs have taken a somewhat of a backseat in AI systems, especially since a way to scale them up hasn't been found. However very large non-EBM systems such as LLMs have run into another problam, which is that of excess energy consumption. Indeed a large portion of new power capacity being added to our energy grids is being driven by the demand from LLMs. This has caused some people to look at alternative designs that are less power hungry, and perhaps EBMs have a role to play here.
+This and the following two posts are a deep dive into Energy Based Models or EBMs. The original EBMs were proposed by physicists in the late 19th century, and form the backbone of the theory of statistical mechanics. So we will start with statistical mechanics and the basics of how concepts such as entropy were discovered. We then apply this theory to a model for magnetism called the Ising model. This takes us to the physics behind phase transitions, the simplest example of this being when a ferromagnetic material becomes magnetized as the temperature is reduced. The Ising model can be generalized to the case when the nodes in the system interact with each other in more complex ways, and this takes us to spin glass models and the phenomenon of continuous symmtery breaking. The present generation of neural network models can be traced to a spin glass inspired EBM called the Hopfield network that was proposed in the early 1980s, and this was soon followed by another more important EBM called the Boltzmann Machine. Until about 2010 these were the only games in town as far as neural networks were concerned, however soon after that people discovered how to train very large non-EBM models by resolving the problems with the backpropagation training algorithm. Since then EBMs have taken a somewhat of a backseat in AI systems, especially since a way to scale them up hasn't been found. However very large non-EBM systems such as LLMs have run into another problam, which is that of excess energy consumption. Indeed a large portion of new power capacity being added to our energy grids is being driven by the demand from LLMs. This has caused some people to look at alternative designs that are less power hungry, and perhaps EBMs have a role to play here.
 As I was putting the finishing touches to this post, a start-up called [Extropic](https://www.wired.com/story/extropic-aims-to-disrupt-the-data-center-bonanza/) announced a new chip that works using EBM principles, and the claim is that it reduces power consumption by four orders of magnitude. 
 
-This post is divided into two parts: Part 1 covers the fundamentals of statistical mechanics and EBMs, and ends with the Boltzmann machine. In Part 2 we will look at more recent developments in this area, including Extropic, and what the future hold for EBMs. 
+This post is divided into three parts: Part 1 covers the fundamentals of statistical mechanics and EBMs, while Part 2 is on Hopfield Networks and Boltzmann Machines. In Part 3 we will look at more recent developments in this area, including Extropic, and what the future holds for EBMs. 
 
 ## Introduction
 
@@ -43,7 +43,7 @@ Boltzmann's great insight was the realization that this randomness could be capt
 $$ p_i = {\exp^{-\beta E_i}\over{\sum_j \exp^{-\beta E_j}}}  $$
 
 where $p_i$ is the probability that the system is in the $i^{th}$ state, $\beta={1\over T}$ is the inverse temperature and $E_i$ is the energy of the $i^{th}$ state. This is one of the most important formulae in all of physics and underlies statistical mechanics.
-The state depends on the physics of the system under consideration: For example for a box of gas it would be the number of molecules moving with a certain velocity, for a magnet it would be the number of atoms with spins pointing in a certain direction etc.
+The definition of a state depends on the physics of the system under consideration: For example for a box of gas it would be the number of molecules moving with a certain velocity, for a magnet it would be the number of atoms with spins pointing in a certain direction etc.
 A few decades after Boltzmann, probability once again entered physics by way of quantum mechanics. In statistical mechanics probabilities reflect the fact that we have an imperfect knowledge about the state the system is in, but is that the case for quantum mecahnics too? In other words does a quantum system such as an electron have internal microstates, and the lack of knowledge of those states leads to uncertainities when we make measurements. A lot of people, including Einstein, though so, and the internal microstates of a quantum system were called hidden variables. However in 1960s, Joseph Bell proved that there are no such hidden variables in quantum theory, and hence quantum probabilities are fundamentally different than those in statistical mechanics.
 
 Statistical mechanics also led to a precise definition for the entropy of a system. Entropy had been introduced in the mid-1800s by the German scientist Rudolf Clausius as way of restating Carnot's results for the efficiency of the ideal steam engine, and it is something that could be measured macroscopically, but its true nature remained a mystery.
@@ -83,7 +83,7 @@ It turns out that this is a very interesting property that has been exploited by
 
 Spin glass models first appeared in the mid-1970s and these were extensions to the classical Ising model for ferro-magnetism. The Edwards-Anderson model was the first one that was proposed, followed by the Sherrington-Kirkpartick or SK model which proved to be more versatile and easier to analyze and has served as the most popular spin glass model since then. A full understanding of the phase transition behavior of the SK model had to wait until the mid 1980s, and the name most closely associated with this is that of the Italian physicist Giorgio Parisi. He showed that the SK model can exist in a very large number of phases that are organized by energy in an hierarchical tree like fashion at low temperature, and sometimes it can be in multiple phases at the same time, a little bit like how water can exist in the liquid and gas phase simultaneously at its boiling point.
 
-Spin glasses by themselves haven't become commercially important as materials, but the models that were built to explain their behavior had an unexpected side effect. They inspired the neural network models that were proposed in 1980s, initially by John Hopfield at Caltech, and later by Geoffrey Hinton and his collaborators. Hopfield regarded his network as a type of spin glass, more precisely as a modified SK model, and showed that the system can be made to function as an associative memory. Hopfield's great insight was the realization the interaction between spins in his model could be chosen in a manner such that it resulted in as many phases as there are memories to the stored, and moreover the equilibrum spin conffiguration in each phase corresponds with one of the stored memories. Hence if the system is initialized in a state that is near a stored memory, then it gradually settles into an equilibrium configuration that corresponds to that memory.
+Spin glasses by themselves haven't become commercially important as materials, but the models that were built to explain their behavior had an unexpected side effect. They inspired the neural network models that were proposed in 1980s, initially by John Hopfield at Caltech, and later by Geoffrey Hinton and his collaborators. Hopfield regarded his network as a type of spin glass, more precisely as a modified SK model, and showed that the system can be made to function as an associative memory. Hopfield's great insight was the realization the interaction between spins in his model could be chosen in a manner such that it resulted in as many phases as there are memories to the stored, and moreover the equilibrum spin configuration in each phase corresponds with one of the stored memories. Hence if the system is initialized in a state that is near a stored memory, then it gradually settles into an equilibrium configuration that corresponds to that memory.
 
 Hinton and Sejnowski were inspired by Hopfield's work, but they asked a different question. Instead of trying to remember the exact bit patterns, which is what the Hopfield network does, what if a network could be used to generate samples from the (unknown) probability distribution that the training data was drawn from. This is a very important problem in practice, for example consider the following: We have a bunch of N dimensional training data samples $(x_1,...,x_N)$ drawn from some unknown probability distribution $q(x_1,...,x_N)$. For example a sample could be an N pixel image, with each pixel assuming either black or white values.
 If the network can be trained to learn this probability distribution, then it can used it to generate new samples and thus the network would become a generator of new images similar to those in the training dataset. This was the very beginning of the field of generative AI which has assumed such gigantic importance in the present day, with LLMs being the prime example.
@@ -106,7 +106,7 @@ How can we quantify the amount of uncertainity in a discrete probability distrib
 
 $$ S(p_1,p_2,...,p_n) = -\sum_i p_i \log p_i \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (2) $$               
 
-He called this quantity the entropy of the probability distribution (note that since all the $p_i \le 1$, $H$ is always a non-negative quantity). This definition agrees with the intuitive notion that more "spread out" a distribution is, the higher is its entropy (the above figure illustrates the increase in entropy with the spread of the probability distribution). For example if $x$ is known with certainity then $S=0$ which is its minimum value, and conversely if nothing is known about $x$, then the probabilities are all equal and given by $p_i = {1\over n}, i=1,2,...n$, which results in an entropy of
+He called this quantity the entropy of the probability distribution (note that since all the $p_i \le 1$, $S$ is always a non-negative quantity). This definition agrees with the intuitive notion that more "spread out" a distribution is, the higher is its entropy (the above figure illustrates the increase in entropy with the spread of the probability distribution). For example if $x$ is known with certainity then $S=0$ which is its minimum value, and conversely if nothing is known about $x$, then the probabilities are all equal and given by $p_i = {1\over n}, i=1,2,...n$, which results in an entropy of
 $S=\log\ n$ which is its maximum value. This also implies that if nothing is known about a system other than its entropy $S$, then the approximate number of microstates in the system is given by $e^{S}$.
 
 Unbeknownst to Shannon, this formula had been discovered a few decades earlier by Boltzmann in the context of his theory of statistical mechanics. However the formula for entropy was not central to Boltzmann's development of the theory which he derived using other physical considerations.
@@ -166,7 +166,7 @@ Figure 3: Boltzmann distribution of energy levels in the Ising model with varyin
 
 Plotting the Boltzmann distribution as a function of the state is a difficult proposition, since the state is multi-dimensional with thousands of dimensions in realistic models. However it can also
 be plotted as a function of the energy levels $E$, so instead of considering the probability of the system being in state $i$, we instead consider the the probability of the system being in a state with energy $E$.
-For example in the above figure the Boltzmann distribution is plotted for the Ising model at four different temperatures (in blue). We can see that as the temperature increases the distribution moves towards the right, as more energetic states become more probable. Hence given the temperature we cannot say for sure what state the system is in or what energy it has, but we can estimate the probability of this happening, which is sometimes referred to as 'blurry' view of the system. Also the sharp peak in the distribution is evident in these curves, which implies that is a configuration is chosen at random (the red curve) then the probability that it will belong t one of the allowed configurations for a given value of $T$ is zero. If so, how would we go about obtaining the configurations in the Ising model if the system were to be simulated on a computer? There are a couple of ways for doing this, namely the Metropolis and Glauber algorithms, and these are described in a following section.
+For example in the above figure the Boltzmann distribution is plotted for the Ising model at four different temperatures (in blue). We can see that as the temperature increases the distribution moves towards the right, as more energetic states become more probable. Hence given the temperature we cannot say for sure what state the system is in or what energy it has, but we can estimate the probability of this happening, which is sometimes referred to as 'blurry' view of the system. Also the sharp peak in the distribution is evident in these curves, which implies that is a configuration is chosen at random (the red curve) then the probability that it will belong to one of the allowed configurations for a given value of $T$ is zero. If so, how would we go about obtaining the configurations in the Ising model if the system were to be simulated on a computer? There are a couple of ways for doing this, namely the Metropolis and Glauber algorithms, and these are described in a following section.
 
 An interesting property of the Boltzmann distribution is that the statistics of macroscopic quantities of interest, such as average energy or the entropy, can be expressed as a function of $Z$ alone. Hence solving a problem
 in statistical mechanics reduces to calculating the $Z$ for the system, which is unfortunately quite difficult in practice.
@@ -177,6 +177,12 @@ $$ E_{av} =  \sum_{i=1}^N {e^{-\beta E_i}\over Z} E_i   = -{\partial\log Z\over\
 and substituting $p_i = {e^{-\beta E_i}\over Z}$ into the definition for $S$ gives us
 
 $$  S = \beta E_{av} + \log Z = -{\beta\over Z}{\partial Z\over \partial\beta} + \log Z $$
+
+The second law of thermodynamics says that entropy of a closed system never decreases, it stays the same or increases. For the system shown in figure 2, the second law says that
+
+$$ S_{heat\ bath} + S_{gas} \ge 0 $$
+
+Note that this law does not rule out a local increase in entropy, in fact this is how living systems are able to function by using the energy coming from the sun to decrease their entropy and bring order to their bodies.
 
 But we have yet to identify the significance of the constant $\beta$. Using the above formula for $S$, it follows that
 
@@ -229,7 +235,7 @@ which shows that $F$ is a macro distillation of all the microscopic energy inter
 
 There is another important use of the free energy, which is as a way to identify the thermal equilibrium state for the system. 
 From the second law of thermodynamics we know that equilibrium is characterized by the maximization of entropy, but note that this is the entropy of the system plus that of its surroundings, which is not that straightforward to characterize. 
-It turns out that thermal equilibrium can also characterized as the state at which the free energy of a system is minimized (without any reference to its surroundings). 
+It turns out that thermal equilibrium can also be characterized as the state at which the free energy of a system is at a minimum (without any reference to its surroundings). 
 In order to see this consider a system that starts at some temperature $T$ and also ends at the same temperature, but in the process draws an amount of heat equal to $Q$ from the heat bath. From the conservation of energy it follows that $\Delta E_{system} = Q$ Also the change in entropy for the heat bath is $\Delta S_{bath} = -{Q\over T}$. From the second law since $\Delta S_{bath} + \Delta S_{system} \ge 0$ it follows that $\Delta S_{systam} \ge {Q\over T}$. Thus
 
 $$   \Delta F_{system} = \Delta E_{system} - T\Delta S_{system} \le Q  - T{Q\over T} = 0 $$
@@ -238,7 +244,9 @@ so that
 
 $$ \Delta F_{system} \le 0 $$
 
-Hence for a system that only interacts with its surroundings through the exchange of heat, the free energy never increases, instead it decreases until it reaches a minimum when thermal equilibrium is reached. This implies that in a canonical system kept at constant temperature, thermal equilibrium is the state of minimum Helmholtz free energy. This criteria is very powerful since it depends on the just the system, and is independent of the surroundings. In order to use this criteria, we need a way to calculate the free energy for a system that is not in equilibrium, we will tackle this in a later section. When scientists say that the energy of a system is minimized in equilibrium, they are referring to the free energy, since the total energy as a whole is conserved. As a result of these advantages, the analysis of thermodynamic systems is often based on the computation of their free energy, and this is true of the systems we will encounter in this article.
+Hence for a system that only interacts with its surroundings through the exchange of heat, the free energy never increases, instead it decreases until it reaches a minimum when thermal equilibrium is reached. This implies that in a canonical system kept at constant temperature, thermal equilibrium is the state of minimum Helmholtz free energy. This criteria is very powerful since it depends on the just the system, and is independent of the surroundings. In order to use this criteria, we need a way to calculate the free energy for a system that is not in equilibrium, we will tackle this in a later section. 
+
+When scientists say that the energy of a system is minimized in equilibrium, they are referring to the free energy, since the total energy as a whole is conserved. As a result of these advantages, the analysis of thermodynamic systems is often based on the computation of their free energy, and this is true of the systems we will encounter in this article.
 
 ## Models for Magnetism
 
@@ -246,7 +254,11 @@ Certain atoms possess a magnetic moment, which we denote as $\mu$, due to the in
 
 $$ e = -\sigma\mu H $$
 
-where the spin $\sigma = +1$ if the magnetic moment of the spin aligns with the external field, and $\sigma = -1$ otherwise.  We will analyze two types of magnetic materials:
+where the spin $\sigma = +1$ if the magnetic moment of the spin aligns with the external field, and $\sigma = -1$ otherwise.  
+
+The system we shall consider is the same as shown in figure 2, except that instead of a gas we have a $N$ atoms that are fixed in place, and can be in one of two states, with spin $+1$ or $-1$. But we still have the thermal heat bath at temperature $T$ that transfers heat energy into the system and thus causes the spin values to become dis-ordered.
+
+We will analyze two types of magnetic materials:
 
   - In paramagnetic materials, the individual spins are decoupled from one another. As a result the material only exhibits magnetic properties in the presence of an external field,
   - In ferromagnetic materials on the other hand, individual spins are coupled with those of their neighbors, as a result of which the material remans magnetized even in the absence of the external field.
@@ -294,10 +306,12 @@ $$ \sigma_{av} = \tanh(\beta J) $$
 Figure 4: Average spin $\sigma_{av}$ as a function of $\beta = {1\over T}$
 
 A graph of the $\tanh$ function is shown above. As a result of thermal energy, each spin is constantly flipping back and forth, and as a result the average spin lines between $-1$ and $+1$.
-Since we are considering positive temperatures only, we will focus on the half plane $\beta > 0$. At very low temperatutes $\beta\rightarrow\infty$, and as a result the average spin $\sigma_{av} = 1$ and the average energy is minimized at $e_{av} = -J$. 
-Hence at low temperatures the infuence of the external magnetic field overcomes the random thermal fluctuations and as a result each spin becomes perfectly aligned with the external field, and this is lowest energy configuration. 
-Conversely at high temeperatures $\beta\rightarrow 0$ and as as result the average spin goes to zero, and so does the average energy. 
-This implies that at high temperatures the thermal fluctuations dominate the ordering effect of the external field which results in the spins being randomly aligned in the up or down direction. As the temperature is reduced, the spins start to gradually align with the external field, but note that there is no phase change, i.e., a sudden shift from non-alignment to alignment, it happens gradually. On the other hand, there is a phase change if the external magnetic field is switched from $+B$ to $-B$. This causes the average spin to flip to $\sigma_{av} = -\tanh(\beta J)$ (even though the average energy remains the same). This is a sudden change in the average spin, and is referred to as a phase transition of type 1. 
+Since we are considering positive temperatures only, we will focus on the half plane $\beta > 0$. 
+
+- At very low temperatutes $\beta\rightarrow\infty$, and as a result the average spin $\sigma_{av} = 1$ and the average energy is minimized at $e_{av} = -J$.  Hence at low temperatures the infuence of the external magnetic field overcomes the random thermal fluctuations and as a result each spin becomes perfectly aligned with the external field, and this is lowest energy configuration.
+- Conversely at high temeperatures $\beta\rightarrow 0$ and as as result the average spin goes to zero, and so does the average energy.  This implies that at high temperatures the thermal fluctuations dominate the ordering effect of the external field which results in the spins being randomly aligned in the up or down direction.
+
+As the temperature is reduced, the spins start to gradually align with the external field, but note that there is no phase change, i.e., a sudden shift from non-alignment to alignment, it happens gradually. On the other hand, there is a phase change if the external magnetic field is switched from $+B$ to $-B$. This causes the average spin to flip to $\sigma_{av} = -\tanh(\beta J)$ (even though the average energy remains the same). This is a sudden change in the average spin, and is referred to as a phase transition of type 1. 
 
 ### Ising Model in One Dimension
 
@@ -310,7 +324,7 @@ incorporates interactions between neighboring atoms and the one dimensional case
 
 $$  E = -J\sum_i \sigma_i\sigma _{i+1} $$
 
-Note that unlike the previous case, there is no external magnetic field present.
+We still have the heat bath at some temperature $T$, but unlike the previous case, there is no external magnetic field present.
 Each of the terms in this expression in minimized when $\sigma_i = \sigma_{i+1}$, i.e., the spins are aligned together, either with $\sigma_i = \sigma_{i+1} = 1$ or $\sigma_i = \sigma_{i+1} = -1$. This implies that there are two configurations with the minimum energy value, which correspond to all the spins pointing up or all the spins pointing down. The partition function for this system is given by
 
 $$ Z = \sum_{all\ [\sigma]\ configs} e^{-J\beta\sum_i \sigma_i\sigma _{i+1}}  $$
@@ -358,15 +372,15 @@ Spontaneous magnetisation happens in a system when the spin state of even a sing
 
 Unfortunately the exact analysis of Ising models for $d\ge 2$ is extremely difficult. However there exists a simple approximation method, called mean field analysis or MFA, that preserves important properties such as phase transitions and we will describe that next.
 
-The energy level for a single spin $\sigma$ with neighbors $\sigma_1,...,\sigma_n is given by
+The energy level for a single spin $\sigma$ with nearest neighbors $\sigma_1,...,\sigma_{nn}$ is given by
 
-$$ e = -J\sigma\sum_{i=1}^n\sigma_i  $$
+$$ e = -J\sigma\sum_{i=1}^{nn}\sigma_i  $$
 
 The total energy for a configuration of N spins in $d$ dimensions is given by
 
-$$  E = -J\sum_i\sum_j \sigma_i \sigma_j  $$
+$$  E = -J\sum_{i=1}^N\sum_{j=1}^{nn(i)} \sigma_i \sigma_j  $$
 
-where the summation is done over pairs of nearest neighbors. Expressing the spins in terms of their fluctuations $\delta\sigma_i = (\sigma_i - m_i)$ from their average value $m_i = (\sigma_i)_{av}$, 
+where $nn(i)$ is the set of nearest neighbors for spin $i$. Expressing the spins in terms of their fluctuations $\delta\sigma_i = (\sigma_i - m_i)$ from their average value $m_i = (\sigma_i)_{av}$, 
 
 $$ E = -j\sum_i\sum_j(m_i + \delta\sigma_i)(m_j + \delta\sigma_j)  $$
 
@@ -378,7 +392,7 @@ According to the mean field approximation $m_i = m_j = m$, i.e., the mean value 
 
 $$ E = -J\sum_i\sum_j(m^2 + m(\sigma_j - m) + m(\sigma_i - m))  $$
 
-From translational invariance of the spins (i.e., the average is the same everywhere) it follows that
+From translational invariance of the spins it follows that
 
 $$ E = -J\sum_i\sum_j(2m\sigma_i - m^2)  $$
 
@@ -409,7 +423,7 @@ Hence the following equation should be satisfied in thermal equilibrium
 
 $$ m = \tanh(2dJ\beta m) $$
 
-Making the substitution $y = 2dJ\beta m$, it follows that
+Making the substitution $y = 2dJ\beta m$, this equation can be written as
 
 $$ {y\over{2dJ\beta}} = \tanh\ y  $$
 
@@ -436,7 +450,7 @@ ultimately the straight line does intersect the $\tanh$ curve as $T$ is reduced,
 
 Figure 9: Variation of mean field $m$ with $T$
 
-Since the straight line intersects the $\tanh$ curve at three places,  there are three possible solutions at average spins $0$ and $m'$ and $-m'$, the question arises: which one does the system choose? 
+Since the straight line intersects the $\tanh$ curve at three places,  there are three possible solutions at average spins $0$, $m'$ and $-m'$, the question arises: which one does the system choose? 
 
 - If the system starts from a low temperature state $T<T_c$ at which $m$ is non-zero and gradually increase temperature, then the magnetization initially decreases and then abruptly switches off when the temperature becomes greater than $T_c$. This would be the case if we gradually heat a ferromagnet, and is called the Curie Effect. This kind of phase transition in which there is an initial gradual decrease in the magnetization as temperature increases, followed by an abrupt change to zero beyond the critical temperature, is referred to as a second order phase transition, and is illustrated in figure 9.
 - If the system starts from a state of random spins $m=0$ at $T > T_c$, what happens when the temperature is gradually reduced and crosses $T_c$? The system now has two options since there are two possible paths it can take, either $+m$ or $-m$, which one does it take? The answer is, neither. It stays in the $m=0$ state until something causes it to change state, and that something is the presence of an external magnetic field. The solution $m = 0$ is unstable if $T<T_c$, and the system can tip into the state $m\gt 0$  or $m\lt 0$ very easily, as shown next.
@@ -531,10 +545,10 @@ The Glauber rule implies that:
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat42.png) 
 
-Figure 15: Comparison between the Metropolos and Galuber spin flipping probabilities ate various temperatures
+Figure 15: Comparison between the Metropolos (blue) and Glauber (red) spin flipping probabilities at various temperatures
 
 When run long enough, both the Metropolis and Glauber algorithms lead to the Boltzmann distribution in equilibrium, however their non-equilibrium behavior is slightly different. 
-The above figure plots the spin flipping probability for the two algorirhms at various temperatures. The curves differ most at the highest temperatures, and they become almost indistinguishable at the lowest temperatures, where both curves approximate a step function.
+The above figure plots the spin flipping probability for the two algorithms at various temperatures. The curves differ most at the highest temperatures, and they become almost indistinguishable at the lowest temperatures, where both curves approximate a step function.
 
 ## The Landau Theory for Phase Transitions
 
@@ -548,7 +562,7 @@ Recall that the free energy $F_{therm}$ for a system in thermal equilibrium at t
 $$ F_{therm} = E_{av} - TS = -T\log Z  $$
 
 I am going to generalize the definition of free energy to non-equilibrium states, which is why I have added the subscript *therm* to the formula.
-For a d-dimensional Ising Model Z was derived in the previous section for the case $B=0$ using the mean field approximation, and is given by
+For a d-dimensional Ising Model, Z was derived in the previous section for the case $B=0$ using the mean field approximation, and is given by
 
 $$ Z = e^{-\beta NdJm^2} 2^N\cosh^N(2dJm_{eq}\beta) $$
 
@@ -594,7 +608,7 @@ Figure 16: Free Energy $F(m)$ as a function of $m$, for $T > 2dJ$ and $T < 2dJ$
 $F(m)$ is plotted in figure 10, and it clearly shows the effect of varying $T$ on its shape and provides an alternative explanation of how phase changes come about:
 
 - When $T > T_c$ then there is only a single minima in the free energy plot at $m_{eq}=0$ and this corresponds to the non-magnetized phase.
-- When $T < T_c$, there are three values of $m$ at which ${\partial F(m)\over{\partial m}} = 0$, hence the system can be one of three phases: The magnetizations $m_{eq} = \pm\sqrt{3(2dj\beta - 1)\over{4(dj\beta)^3}}$ are stable corresponding to when spins are predominantly aligned in the up or down direction and these are the two possible phases when the system is at thermal equilibrum. However the case $m=0$ is clearly not stable since even a slight change in the value of $m$ can cause the system to transition to the other two phases.
+- When $T < T_c$, there are three values of $m$ at which ${\partial F(m)\over{\partial m}} = 0$, hence the system can be one of three phases: The magnetizations $m_{eq} = \pm\sqrt{3(2dj\beta - 1)\over{4(dj\beta)^3}}$ are stable corresponding to when spins are predominantly aligned in the up or down direction and these are the two possible phases when the system is at thermal equilibrum. However the case $m=0$ is clearly not stable since even a very dmall external magnetic field can cause the system to transition to the other two phases, and is referred to as as metastable. 
 
 The other thing to note is that the equilibrium value of the magnetization $m_{eq}$ changes continuously with $T$, hence it is an example of a second order phase transition. Starting from $T<T_c$, if $T$ is gradually increased, the two minima become gradually shallower,i.e, $m_{eq}$ decreases, until they disappear at $T=T_c$ at which point $m_{eq}=0$..
 
@@ -622,18 +636,18 @@ Note that this expression is no longer symmetric in $m$ sue to the presence of o
 
 Figure 17: Free Energy $F(m)$ as a function of $m$, for $B < 0$, $B = 0$ and $B > 0$
 
-The shape of $F(m)$ for three different balues of $B$ is shown in figure 11. When $B\neq 0$, $F(m)$ exhibits an asymmetric shape as function of $m$, such that there is only a single minima (i.e., a single phase as per the Landau theory). This agrees with our earlier analysis that the presence of the external magnetic field removes second order temperature triggered phase transitions from the Ising model.
+The shape of $F(m)$ for three different balues of $B$ is shown in figure 11. When $B\neq 0$, $F(m)$ exhibits an asymmetric shape as function of $m$, such that there is only a single minima (i.e., a single phase as per the Landau theory, the other phase is at a higher energy level and thus becomes metastable). This agrees with our earlier analysis that the presence of the external magnetic field removes second order temperature triggered phase transitions from the Ising model.
 For $B>0$ the minima that occurs for $m>0$ is deeper than that for $m<0$ (and vice versa if $B<0$). The shallower minima corresponds to a meta-stable state, and the system transitions to the more stable deeper minima by traversing the energy barrier between the two. If the sign of $B$ is flipped, then it causes an instantaneous change in the magnetization $m$ which also changes sign, and this is characteristic of first order phase transitions.           
 
-Landau's theory clarifies an important distinction between the minima of the energy function $E(\Sigma)$, where $\Sigma$ is a configuration of the system, and the minima of the free energy function $F(m)$, since it is only the latter type of minima that correspond to a phase for the system. For $T>0$ there is more than one equilibrium configuration that realizes the $F(m)$ minima, as we saw for the Ising model. However at $T=0$, the system freezes at the maximum value of $m=1$, and at this point there is only a single configuration for the phase.
-As we will see in the next section, for more complex models such as spin glasses  the free energy minima are a subset of the minima for the energy function $E(\Sigma)$, i.e., there are some minima for $E(\Sigma)$ that do not correspond to a true phase for the system.
-These are metastable states and if the temperature is increased beyond zero, then the system will transition to one of the stable phases identified by the minima of $F(m)$.
-This has an interesting consequence for optimization problams, as we shall see in the discussion of simulated annealing.
+Landau's theory clarifies some important distinctions between the minima of the energy function $E(\Sigma)$ (where $\Sigma$ is a configuration of the system), and the minima of the free energy function $F(m)$. 
+
+- It is only the free energy minima that correspond to a phase for the system. As we will see in the next section, for more complex models such as spin glasses  the free energy minima are a subset of the minima for the energy function $E(\Sigma)$, i.e., there are some minima for $E(\Sigma)$ that do not correspond to a true phase for the system. These are metastable configurations and if the temperature is increased beyond zero, then the system will transition to one of the stable phases identified by the minima of $F(m)$. This has an interesting consequence for optimization problams, as we shall see in the discussion of simulated annealing.
+- For $T>0$ there is more than one equilibrium configuration that realizes the $F(m)$ minima, as we saw for the Ising model. The system randomly transitions between these configurations with a probability that is given by the Boltzmann ditribution. However at $T=0$, the system freezes at the maximum value of $m=1$, and at this point there is only a single configuration for the phase.
 
 ### Ising Model vs Real Magnets
 
 If we take a piece of magnetized iron and start heating it. then at a temperature above $T_c$ the magnetization will vanish, as the Ising model predicts. If we continue to increase the temperature
-beyond $T_c$ then the iron will become hotter, but what about the Isis model?
+beyond $T_c$ then the iron will become hotter, but what about the Ising model?
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat43.png) 
 
@@ -655,7 +669,7 @@ Any further increase in temperature beyond $T_c$ does not lead to higher energy 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat14.png) 
 
-Figure 19: Spin Orientation in Ferromagetic, Anti-Ferromagnetic and Spin Glass materials. Ferromagnetic interactions in red and anti-ferromagnetic in red.
+Figure 19: Spin Orientation in Ferromagetic, Anti-Ferromagnetic and Spin Glass materials at $T=0$. Ferromagnetic interactions in red and anti-ferromagnetic in red.
 
 Back in the 1950s scientists were actively investigating the properties of new materials created as a result of mixing two or more elements. This was a fruitful avenue of research and resulted in the discovery of semiconductors, that were created by adding impurities such as phosphorus to silicon. In the same spirit a group at Bell Labs created a new material by adding small quantities of ferromagnetic atoms, such as iron, to a conducting substrate, such as copper. When they studied the magnetic properties of this material as a function of temperature, they found something interesting. 
 
@@ -670,7 +684,7 @@ This was a new kind of magnetic behavior not seen before, and soon physicists ca
 Figure 20: Illustrating Frustration
 
 It was suggested that the random spins orientations were being caused 
-as result of the fact that it is impossible to satisfy all the inter-node spin couplings at the same time. This results in a phenomenon called 'frustration' and arises whenever there exists a loop in which the product of the spins is negative. This is illustrated in the right hand side of above figure: The node in the upper vertex has a anti-ferromagnetic coupling with the node on the left, as a result of which its spin oriented downwards. But now the spin on the right side is in a conundrum. Since it has a ferromagnetic coupling with the other nodes, it doesn't have a one best spin configuration that it can settle to in equilibrium (at $T=0$). As result it, in some cases it can settle in to an UP spin configurations and in other casees to the DOWN spin, and it chooses one of these at random.
+as result of the fact that it is impossible to satisfy all the inter-node spin couplings at the same time. This results in a phenomenon called 'frustration' and arises whenever there exists a loop in which the product of the spins is negative. This is illustrated in the right hand side of above figure: The node in the upper vertex has a anti-ferromagnetic coupling with the node on the left, as a result of which its spin oriented downwards. But now the spin on the right side is in a conundrum. Since it has an ferromagnetic coupling with the other nodes, it doesn't have a one best spin configuration that it can settle to in equilibrium (at $T=0$). As result it, in some cases it can settle in to an UP spin configurations and in other casees to the DOWN spin, and it chooses one of these at random.
 As a result there is a proliferation of metastable states i.e., a spin glass system can have many more than two phases in low temperature equilibrium, and unlike a ferromagnet, the spin configuration in a phase can look random. 
 The thermal randomness in a ferromagnetic material gradually decreases as the temperature is reduced, and ultimately it becomes completely ordered at $T=0$. The frustration driven randomness in a spin glass on the other hand becomes "frozen" as the temperature is reduced, and it maintains the randomness even at $T=0$.
 We will see in the next section that there are some order parameters that are able to capture the frozen disorder in a spin glass.
@@ -691,7 +705,7 @@ Samuel Edwards and Phillip Anderson were the first physicists to come up with a 
 
 Recall that the energy function for the Ising model was given by 
 
-$$ H = -J\sum_i\sum_{j[i]}\sigma_i\sigma_j $$
+$$ E = -J\sum_{i=1}^N\sum_{j[i]}\sigma_i\sigma_j $$
 
 This assumed that all interactions were confined to neighboring atoms (the set $j[i]$ being the neighbors of $i$), and more importantly the strength of the interaction $J$ is the same for all interactions. Sherrington and Kirkpatrick made the following modifications to this model:
 
@@ -699,13 +713,14 @@ This assumed that all interactions were confined to neighboring atoms (the set $
 - As in the Ising model, the spins can assume values $\pm 1$.
 - The strength of the interaction $J_{ij}$ remains symmetric, but is not a constant anymore, but is a function of the two spins taking part in the interaction and can vary randomly in magnitude as well as sign.
 
-Before the SK model, prior systems such as the Ising model sought to models systems encountered in physics, such as ferromagnets, hence all interactions were restricted to be local with neighboring spins. These models turned out to be difficult to analyze, and as we saw in the last section, physicists resorted to the mean field approximation in order to make headway. However if you think about it, the mean field approximation is a non-local assumption, since we are assuming that each spin is influenced by all the other spins in the system. Sherrington and Kirkpatrisk were probably inspired by the success of the mean field model, and sought to create a spin glass model in which each spin explicitly interacts with all the other spins. Their intuition turned out to be correct, and indeed the SK model lent itself to an exact solution, after a lot of effort. Note that the SK model
+Before the SK model, prior systems such as the Ising model sought to models systems encountered in physics, such as ferromagnets, hence all interactions were restricted to be local with neighboring spins. These models turned out to be difficult to analyze, and as we saw in the last section, physicists resorted to the mean field approximation in order to make headway. However if you think about it, the mean field approximation is a non-local assumption, since we are assuming that each spin is influenced by all the other spins in the system. Sherrington and Kirkpatrisk were probably inspired by the success of the mean field model, and sought to create a spin glass model in which each spin explicitly interacts with all the other spins. Their intuition turned out to be correct, and indeed the SK model lent itself to an exact solution (though after a lot of effort). Note that the SK model
 does away with any spatial structure such as dimensionality since each atom is the nearest neighbor of every other atom. This assumption is a bit non-intuitive, but it turned out to be useful in applying this model to areas beyond physics, such as biology and neural networks, since in these systems the connections between nodes extends beyond nearest neighbors.
 The variable coupling strength $J_{ij}$ captures the fact that the interacting spins are at variable distances from each other in an actual spin glass.
 Under these assumptions the energy function for $N$ spins becomes
 
-$$ H_N = -\sum_i\sum_{j\lt i} J_{ij}\sigma_i\sigma_j $$
+$$ E = -\sum_{i=1}^N\sum_{j\lt i} J_{ij}\sigma_i\sigma_j $$
 
+For each $i$ the second sum only extends over $j$ that are less than $i$, which avoids double counting the node interactions.
 But what is the nature of the spin interactions $J_{ij}$? Sherrington and Kirkpatrick assumed that $J_{ij}$ can be written as
 
 $$ J_{ij} = J_{ji} = {J\over\sqrt{N}}  $$
@@ -721,11 +736,11 @@ Note that for a particular realization of the spin glass model, the random varia
 ${N(N-1)\over{2}}$ values of the $J_{ij}$ to fully describe the SK model, which would make any analysis of the model completely intractable.
 Fortunately there is a property called self-averaging that comes to the rescue. Basically it says that for a single realization of the interactions $J_{ij}$, the value of macroscopic quantities, such as the free energy, can be calculated by mathematical averaging using the distribution of of $J_{ij}$. This holds true for quantities that are called extensive, which means that their value scales up with the number of spins $N$. However self-averaging does not work for intensive quantitities, which are defined as those whose value is independent of $N$.
 
-We can write the sample average of the free energy for a particular realization of $J_{ij}$ as
+We can write the free energy density for a particular realization of of $J_{ij}$ as
 
 $$ f_N(J) = -{1\over{\beta N}} \log Z $$
 
-Assume that this average is well defined as the system becomes very large at $N\rightarrow\infty$
+Assume that this is well defined as the system becomes very large at $N\rightarrow\infty$, so that it converges to ${\overline f}$ defined by
 
 $$ \lim_{N\rightarrow\infty} f_N(J) = {\overline f}  $$
 
@@ -746,7 +761,7 @@ $$ m = \lim_{N\rightarrow\infty}{1\over N}\sum_i m_i $$
 where $m_i = E(\sigma_i)$ is the (thermodynamic) average of the spin at site $i$. For a ferromagnet clearly $-1\le m\le 1$ since each of the $m_i$ have a common sign. However this is not the case for spin glasses, the $m_i$'s can assume both positive and negative values. Since the random interactions $J_{ij}$ are symmetrically distributed around the origin, it follows that $m=0$ for the SK model, so that the average magnetization cannot be used as an order parameter.
 
 So how can we characterize the magnetized phase in the SK model?
-If a low temperature phase exists for the SK model, there must some spin configurations that are more likely to occur than others.
+If a low temperature phase exists, there must some spin configurations that are more likely to occur than others.
 Edwards and Anderson suggested that we use the following order parameter instead 
 
 $$ q_{EA} = \lim_{N\rightarrow\infty}{1\over N}\sum_i m_i^2 $$
@@ -770,7 +785,9 @@ The characteristic feature of a spin glass phase is the existence of very many f
 As shown in the top part of the above figure, when $T>T_c$ there exists only a single free energy valley, and the ergodicity of the system is not broken (i.e.. the system is capable of visiting every possible spin configuration given enough time).
 At temperatures $T<T_c$, in the limit as $N\rightarrow\infty$ there is ergodicity breaking, as a result of which the system in equilibrium explores only a sub-portion of the state space. 
 Just below $T_c$ the space of spin configurations is divided into maney valleys separated by infinite barriers of free energy, as shown in the middle part of the figure. Inside each of these valleys, the thermal average of a spin at each site $m^{\alpha}_i$ becomes non-zero, where $\alpha$ denotes the valley.
-In the literature these free energy valleys are also referred to as pure states of the system, and in this case the Boltzmann distribution becomes de-generate (or splits into sub-components) as shown next.
+In the literature these free energy valleys are also referred to as pure states of the system, and in this case the Boltzmann distribution becomes de-generate (or splits into sub-components). The Edwards-Anderson order parameter for pure state $\alpha$ is given by
+
+$$ q^\alpha_{EA} = {1\over N}\sum_i (m^\alpha_i)^2  $$
 
 The free energy $F_\alpha$ of a pure state is given by
 
@@ -785,11 +802,7 @@ Using this distribution, the average of any observable $O$ can the be written as
 
 $$ E(O) = \sum_{\alpha} P_{\alpha} E(O_{\alpha}) $$
 
-The Edwards-Anderson order parameter for pure state $\alpha$ is given by
-
-$$ q^\alpha_{EA} = {1\over N}\sum_i (m^\alpha_i)^2  $$
-
-In the Ising model there are only two pur stetes, since no more than two phases (or valleys) appear as the temperature is reduced. However that is not the case for the SK spin glass model, which is characterized by a continuous series of symmetry breaking as the temperature is reduced. 
+In the Ising model there are only two pure stetes, since no more than two phases (or valleys) appear as the temperature is reduced. However that is not the case for the SK spin glass model, which is characterized by a continuous series of symmetry breaking as the temperature is reduced. 
 The lower part of the figure shows that at a temperature $T_2$ which is just below the temperature $T_1$ in the middle part, each of the three phases in the middle part have broken into multiple new phases, and this fragmentation continues all the way to $T=0$.
 
 It was soon realized that $q^\alpha_{EA}$ was not a sufficient order parameter to characterize the system, since it is restricted to a single valley and does not give any information about the relationship between valleys in the state space. The parameter $q_{\alpha\beta}$ defined by
@@ -808,13 +821,14 @@ which is the same as the Edwards Anderson parameter $q_{EA}$ defined earlier. Si
 $$  m^\alpha_i \approx {1\over{C_\alpha}}\sum_{\alpha=1}^{C_{\alpha}} \sigma^\alpha_i $$
 
 where $C_\alpha$ is the number of configurations associated with the pure state $\alpha$, it follows that $0\le q_{\alpha\alpha}\le 1$. 
-Note that the value of $q_{\alpha\alpha}$ grows as the number of phases increases, since there are fewer and fewer configurations in each valley, and in the limit $q_{\alpha\alpha} =1$ at $T=0$ since there in only a single configuration associated with the pure state. On the other hand, as the temperature increases, more configurations participate in the pure state and as a result the self-overlap becomes less than one.
+Note that the value of $q_{\alpha\alpha}$ grows as the number of pure states increases, since there are fewer and fewer configurations in each valley, and in the limit $q_{\alpha\alpha} =1$ at $T=0$ since there in only a single configuration associated with the pure state. On the other hand, as the temperature increases, more configurations participate in the pure state and as a result the self-overlap becomes less than one.
 
 We also define the probability distribution of the overlap between two pure states for a given realization of the disorder $J_{ij}$, given by
 
 $$ P^J(q) = \sum_{\alpha\beta} P_{\alpha} P_{\beta} \delta(q - q^{\alpha\beta}) $$
 
-If we average over $J$, then this results in ${\overline P}(q)=E_J(P^J(q))$ which can be used to characterize the spin glass model (note that it is a function of the distribution of the interactions $J_{ij}$). The focus of the analysis of spin glass models has been to derive an expression for this distribution. 
+If we average over $J$, then this results in ${\overline P}(q)=E_J(P^J(q))$ which can be used to characterize the spin glass model (note that it is a function of the distribution of the interactions $J_{ij}$). This distribution gives us information about the structure of the pure states and how they relate to each other, and hence a
+focus of the analysis of spin glass models has been to derive an expression for it. 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat26.png) 
 
@@ -829,13 +843,13 @@ For low $T$ on the other hand the spin configurations separate out into two non-
 
 $$   P(q) = {1\over 2}[\delta(q+m^2)+\delta(q-m^2)]   $$ 
 
-as shown in the bottom part of the above figure. Note that the number of peaks of $P(q)$ is not equal to the number of pure states, but to the number of possible values taken by the overlap.
+as shown in the bottom part of the above figure. Note that in general the number of peaks of $P(q)$ is not equal to the number of pure states, but to the number of possible values taken by the overlap.
 
 This figure also shows the contrast between the overlap distributions in the SK model vs the Ising model (note that in both cases, unlike what is shown in the figure, the maximum value of the overlap is less than 1, unless $T=0$). 
-The upper figure shows the overlap distribution in the SK model at some temperature $T$ between zero and $T_c$, and we can see that there are a large number of possible overlaps, which implies the existence of a large number of phases.
-In fact in the SK model the number of phases becomes infinite as $T\rightarrow 0$ as a result of which the overlap distribution $P(q)$ becomes a continuous function, and it is this function that serves as the order parameter for these systems. In effect the overlap distribution $P(q)$ turned out to be long sought after regularity in the random patterns of spin glass phases, and it took the best physicists in the world more than 20 years to discover it. Hence the spin glass phase configurations are random, but their overlaps follow a well defined law that can be computed. The curve tells us that the phase patterns in a spin glass all overlap with each other, but there some patterns that are closer in overlap than others.
+The upper figure shows the overlap distribution in the SK model at some temperature $T$ between zero and $T_c$, and we can see that there are a large number of possible overlaps, which implies the existence of a large number of pure states or phases.
+In fact in the SK model the number of phases becomes infinite as $T\rightarrow 0$ (called continuous symmetry breaking) as a result of which the overlap distribution $P(q)$ becomes a continuous function, and it is this function that serves as the order parameter for these systems. In effect the overlap distribution $P(q)$ turned out to be long sought after regularity in the random patterns of spin glass phases, and it took the best physicists in the world more than 20 years to discover it. Hence the spin glass phase configurations are random, even at $T=0$, but their overlaps follow a well defined law that can be computed. The curve tells us that the spin configurationa in different spin glass pure states all overlap with each other, but there some pur states that are closer in overlap than others.
 
-But how did scientists arrive at this highly non-intuitive notion of a continous overlap distribution? This was done through another higly non-intuitive mathematical trick called the replica method, and this is the subject of the next section.
+But how did scientists arrive at this highly non-intuitive notion of a continous symmetry breaking? This was done through another highly non-intuitive mathematical trick called the replica method, and this is the subject of the next section.
 
 ### The Replica Method
 
@@ -843,13 +857,16 @@ So how do we go about analyzing the SK spin glass model and compute its free ene
 
 $$ f_N(J) = -{1\over{\beta N}} \log{\sum_{[\sigma]}e^{-\beta H_N(J,\sigma)}} = -{1\over{\beta N}}\log Z_N(J)  $$
 
-where the summation is over all possible configurations of the spins.
-Since $f_N(J)$ is a self averaging quantity, it follows that that average free energy density ${\overline f}_N$ is then obtained by averaging over the coupling distribution $J$ 
+where the summation is over all possible configurations of the spins, and it has a limit as $N\rightarrow\infty$ given by
+
+$$ {\overline f} = \lim_{N\uparrow\infty}{\overline f}_N $$
+
+Since $f_N(J)$ is a self averaging quantity, it follows that that ${\overline f}$ is also 
+ obtained by averaging over the coupling distribution $J$ so that
 
 $$ {\overline f}_N = \sum_{J} P[J] f_N(J) = -{1\over \beta N}E_J(\log Z_N(J)) $$
 
-where $E_J$ is the expectation over the distribution of $J$.
-Finally we take the limit $N\uparrow\infty$ to obtain the free energy ${\overline f}$ as
+where $E_J$ is the expectation over the distribution of $J$ and
 
 $$ {\overline f} = \lim_{N\uparrow\infty}{\overline f}_N $$
 
@@ -878,8 +895,10 @@ Since the replicas are independent, the partition function $Z_J^n$ is given by t
 
 $$ Z_N^n = \prod_{a=1}^n \sum_{[\sigma^a]} e^{\beta\sum_{a=1}^n\sum_{i\lt j} J_{ij}\sigma^a_i\sigma^a_j} $$
 
-where each of the summations $\sum_{[\sigma^a]}$ is over all possible configuations of the spins in a replica labeled by $a$. 
-Define a function $f'_N(n)$ given by
+where each of the summations $\sum_{[\sigma^a]}$ is over all possible configuations of the spins in a replica labeled by $a$. We are interested in computing
+$f_n(N,J)$ as $n\rightarrow 0$ and $N\rightarrow\infty$.
+We will do this by using self-averaging property, and accordingly lets
+define a function $f'_N(n)$ given by
 
 $$  f'_N(n) = -{1\over{\beta Nn}} \log E_J(Z_N^n) $$
 
@@ -892,7 +911,7 @@ Taking the limit $n\rightarrow 0$ and using the replica formula, it follows that
 
 $$ \lim_{n\rightarrow 0} f'_N(n)  = -{1\over{\beta N}}\lim_{n\rightarrow 0}{E_J(Z_N^n) - 1\over n}  = -{1\over{\beta N}}E_J(\log Z_N) =  {\overline f_N} $$
 
-Taking this limit assumes that $E_J(Z^n_N)$ continues to be well defined even when the number of replicas $n$ is not an integer, which is known as analytical continuation in mathematics.
+Taking this limit assumes that $E_J(Z^n_N)$ continues to be well defined even when the number of replicas $n$ is not an integer, which is an example of analytical continuation in mathematics.
 
 After some manipulations, that involve the use of the Hubbard-Stratonovich transform, it can be shown that
 
@@ -922,28 +941,29 @@ So how do we get hold of the values of the matrix $Q_{sp}$ at the saddle point? 
 
 **The Replica Symmetric Solution**
 
-The simplest structure for $Q_{ab}$ is known as the replica symmetric (RS) solution. In this case the overlap $Q_{ab}$ between any two replicas is the same, i.e., $Q_{ab} = q_0$ for $a\ne b$ and $Q_{aa} = 1$ along the diagonal. Substituting this back into the equation for $g_n(Q_{ab})$ and taking the limit as $n\rightarrow 0$ so that $f(q) = \lim_{n\rightarrow 0} f_n(q)$, it can be shown that the saddle point for $f(q)$ is given by $q=0$ if $T>T_c$. If $T<T_c$ then a solution with $q>0$ does exist, however this solution suffers from the issue that the resulting entropy $S$ is less than zero, which means that the solution is not correct.
+The simplest structure for $Q_{ab}$ is known as the replica symmetric or RS solution. In this case the overlap $Q_{ab}$ between any two replicas is the same, i.e., $Q_{ab} = q_0$ for $a\ne b$ and $Q_{aa} = 1$ along the diagonal. Substituting this back into the equation for $g_n(Q_{ab})$ and taking the limit as $n\rightarrow 0$ so that $g(q) = \lim_{n\rightarrow 0} g_n(q)$, it can be shown that the saddle point for $g(q)$ occurs at $q=0$ if $T>T_c$. 
+If $T<T_c$ then a solution with $q>0$ does exist, however this solution suffers from the issue that the resulting entropy $S$ is less than zero, which means that the solution is not correct.
 
 **Replica Symmetry Breaking (RSB)**
 
-The correct structure, that was proposed by Parisi, is a matrix with an iterative block structure in which $Q_{ab}$ depends on both $a$ and $b$.
+The correct structure for the matrix $Q_{sp}$, that was proposed by Parisi, is a matrix with an iterative block structure in which the matrix elements $Q_{ab}$ depends on both $a$ and $b$.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat20.png) 
 
 Figure 26: Illustration of replica symmetry, 1-RSB and 2-RSB, from left to right
 
-The first two iteration of replica symmetry breaking (RSB) is shown in figure 16. 
+The first two iteration of replica symmetry breaking (RSB) is shown in the above figure. 
 
 - The leftmost figure shows the case when the replica symmetry is unbroken in the high temperature case, in which all elements of the matrix are zero.
 - The middle figure shows the simplest case of replica symmetry breaking, called 1-RSB. The $Q_{ab}$ matrix is parametrized by a diagonal value of $q_d$, and two off-diagonal values that can either be $q_1$ if the two replicas belong to the same inner block of size $m\times m$, or $q_0$ if one of the replicas fall outside the innermost block.
-- This procedure can be iteratively repeated within each of the inner blocks, leading to k step RSB or k-RSB. An example of 2-RSB is shown in the rightmost figure with corresponding parameters $q_0, q_1$ and $q_2$.
+- This procedure can be iteratively repeated within each of the inner blocks, and after $k$ iterations it leads to k step RSB or k-RSB. An example of 2-RSB is shown in the rightmost figure with corresponding parameters $q_0, q_1$ and $q_2$.
 - The complete solution is obtained in the limit $k\rightarrow\infty$, in which case the elements of the matrix become a function $q(x), 0\le x\le 1$.
 
  To summarize, we have obtained a solution for the free energy ${\overline f}$ as a function of the elements of the matrix $Q_{ab}$, which can be regarded as an order parameter and this order parameter is the overlap between configurations belonging to different replicas. But what is the interpretation of this solution in terms of the spin glass model? We answer this in the next sub-section.
 
 ### Connection between Replica Symmetry Breaking and the Spin Glass Model
 
-We defined the probability distribution of the overlap between two pure states ${\overline P}(q)$ a couple of sections ago, and it turns out that this function can be expressed in terms of the replicas as follows:
+We defined the probability distribution of the overlap between two pure states ${\overline P}(q)$ a couple of sections ago, and it turns out that this function can be expressed in terms of the replica matrix as follows:
 
 $$ {\overline P}(q) = \lim_{n\rightarrow 0}{2\over{n(n-1)}} \sum_{a\gt b} \delta(q - q_{ab}) $$
 
@@ -959,7 +979,7 @@ In this case $q_{ab} = q_0$ for all values of $a$ and $b$. From the above equati
 $$ {\overline P}(q) = \delta(q-q_0) $$
 
 This is saying that there is only one possible value $q_0$ for the overlap between pure states, and this value must be the self-overlap of the unique pure state in the system.
-This is typically the paramagnetic state which exists at high temperatures. Hence the replica symmetric solution is only valid if there is a single equilibrium state.
+This is typically the paramagnetic state which exists at high temperatures. Hence the replica symmetric solution is only valid if there is a single pure state, which is the case at high temperatures.
 
 **The 1-RSB Solution**
 
@@ -975,7 +995,7 @@ We now have to take the limit as $n\rightarrow 0$ to complete the replica soluti
 
 $$ {\overline P}(q) = (1-m)\delta(q-q_1) + m\delta(q-q_0)\ \ \ 0 \le m \le 1 $$
 
-so that $m$ is interpreted as a probability in the limit as $n\rightarrow 0$. In this equation $q_1$ can be interpreted as the self overlap and $q_0$ as the overlap between two distinct pure states.
+so that $m$ is interpreted as a probability in the limit as $n\rightarrow 0$. In this equation $q_1$ can be interpreted as the self overlap and $q_0$ as the cross overlap between two distinct pure states.
 So now we need to determine the parameters $m, q_0, q_1$ to complete the 1-RSB solution. This can be done by substituting these numbers back in the expression for $g_n(Q_{sp})$, and then finding the values of $m, q_0$ and $q_1$ at the saddle point for this expression.
 
 There is a class of spin glass models called p-spin spherical model or PSM discussed in the next section, in which the 1-RSB solution is exact, i.e., there is no further breaking of the replica symmetry as the temperature is reduced. However this is not the case for the SK model, and in this case the symmetry keeps breaking ad-infintum as the temperature is reduced. This results in the sequences
@@ -996,13 +1016,13 @@ The left hand side of the above figure shows the changes in the free energy land
 - As the temperature is reduced below the critical value, we see the formation of multiple pure states and there is split of the of overlap distribution into a bi-modal shape (orange curve). Configurations can be in the same pure state in which case they have a high overlap value $q_1$, or they can be in different pure states, in which vase the overlap tends to be smaller at $q_0$.
 - An even further reduction in the temperature causes more replica symmtry breaking, as a result of which we now see that each of the pure states from the second stage have further split into multiple pure states lying within the energy valley formed in stage 2. Furthermore the overlap distribution has developed a peak near 1, which implies that at low temperatures each pure state converges to its single configuration with a low degree of overlap with the other configurations (blue curve). In this situation the self overlap becomes equal to 1, while the cross overlap between states is zero. This process is completely probabilistic, so the system may end up in a different configuration every time it is gradually frozen.
 
-Hence there are two cases in which there is low overlap distribution, but the reasons are different for each: (1) In the high temperature case the overlap is low due to thermal activity, since each spin is flipping back and forth due to the heat energy, (2) At $T=0$ once again the overlap is low, but the reason is different. The spins have converged to random looking configurations, but the randomness is due to the randomness in the interaction strengths. The spins themselves are no longer flipping randomly between states since $T=0$.
+Hence there are two cases in which there is low cross overlap between configurations, but the reasons are different for each: (1) In the high temperature case the cross overlap is low due to thermal activity, since each spin is flipping back and forth due to the heat energy, (2) At $T=0$ once again the cross overlap is low, but the reason is different. The spins have converged to random looking configurations, but the randomness is due to the randomness in the interaction strengths. The spins themselves are no longer flipping randomly between states since $T=0$.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat39.png) 
 
 Figure 29: Tree like and nested structure in replica symmetry breaking
 
-Another way to visualize replica symmetry breaking is shown in the above figure. At high temperatures we have single pure state, as shown by the large oval (which can be thought to be the space of all configuartions) on the right and the top node in the tree. When the temperature dips below $T_c$ the state splits into three pure states as shown by the three smaller ovals which are now restricted to a smaller subset of configurations. A further reduction in temperature causes these 3 pure states to split into 6 pure states, each with a even smaller set of possible configurations. The overlap function $q_{\alpha\beta}$ depends on how far the pure states $\alpha$ and $\beta$ are from each other in the tree structure. For example A and B are closer to each other, and further away from the other states C,D,E,F and G. 
+Another way to visualize replica symmetry breaking is shown in the above figure. At high temperatures we have single pure state, as shown by the large oval (which can be thought to be the space of all configurations) on the right and the top node in the tree. When the temperature dips below $T_c$ the state splits into three pure states as shown by the three smaller ovals which are now restricted to a smaller subset of configurations. A further reduction in temperature causes these 3 pure states to split into 6 pure states, each with a even smaller set of possible configurations. The overlap function $q_{\alpha\beta}$ depends on how far the pure states $\alpha$ and $\beta$ are from each other in the tree structure. For example A and B are closer to each other, and further away from the other states C,D,E,F and G. 
 
 ### Counting the Number of Pure States
 
@@ -1023,7 +1043,7 @@ Note that the free energy is a function of the magnetizations $m_i$ and not the 
 
 Figure 30: Logarithm of the total number of TAP solutions, divided by N, as a function of temperature
 
-[Bray and Moore](https://iopscience.iop.org/article/10.1088/0022-3719/13/19/002) proposed that the density of solutions should counted as a function of the free energy $f_{TAP}$, denoted by $N_s(f_{TAP})$ and they showed that it varies as
+[Bray and Moore](https://iopscience.iop.org/article/10.1088/0022-3719/13/19/002) proposed that the density of solutions to the TAP equation $N_s(f_{TAP})$, should be counted as a function of the free energy $f_{TAP}$, and they showed that it varies as
 
 $$ N_s(f_{TAP}) \sim \exp^{\alpha N} $$
 
@@ -1035,7 +1055,7 @@ $$  {1\over N}E_J (\log N_s) = 0.1992 $$
 
 ### The p-Spin Spherical Spin Glass Model (PSM)
 
-The SK model was the first spin glass model to be fully analyzed and understood. However its behavior, including the continuous symmtery breaking for $T<T_c$ is quite complex, and it would be nice to have another spin glass model with simpler phase properties. One such model that has become popular in recent years is the p-spin Spherical Spin Glass Model (or PSM) (see [Castellani and Cavagna](https://arxiv.org/abs/cond-mat/0505032)). This model can be connected to certain types of neural networks and thus provides a way in which the loss function in these networks can be studied using the tools from spin glass theory.
+The SK model was the first spin glass model to be fully analyzed and understood. However its behavior, including the continuous symmetry breaking for $T<T_c$ is quite complex, and it would be nice to have another spin glass model with simpler phase properties. One such model that has become popular in recent years is the p-spin Spherical Spin Glass Model (or PSM) (see [Castellani and Cavagna](https://arxiv.org/abs/cond-mat/0505032)). This model can be used to analyze certain types of neural networks and thus provides a way in which the loss function in these networks can be studied using the tools from spin glass theory.
 
 In the PSM model, p-spins interact with one another and the Hamiltonian of the energy levels for a given configuration of spins is given by 
 
@@ -1056,7 +1076,7 @@ Any group of $p$ spins have a random interaction strength given by $J_{i_1,...,i
 $$ p(J_{i_1,...,i_p}) = {N^{p-1}\over{\pi p!}} \exp[-{(J_{i_1,...,i_p})^2 {N^{p-1}\over{ J^2 p!}}}]\ \ \ p\ge 3  $$
 
 This system can be analyzed using the replica method 
-just as for the SK model. For $T>T_c$ there is no magnetization and this corresponds to the replica symmetric case. For $T<T_c$ there is first order RSB, which results in the overlap distribution
+just as for the SK model. For $T>T_c$ there is no net magnetization and this corresponds to the replica symmetric case. For $T<T_c$ there is first order RSB, which results in the overlap distribution
 
 $$ {\overline P(q)}) = (1 - m)\delta(q-q_1) + m\delta(q-q_0)\ \ \ with \ \ \ 0\le q_0 \le q_1 \le 1\ \ \ and\ \ \ 0\le m\le 1    $$
 
@@ -1072,7 +1092,7 @@ $$ {\partial H(\sigma)\over{\partial\sigma_i}} = 0,\ \ \ \sum_i\sigma_i^2 = N $$
 
 $$ {1\over N}{p\over 2} q^{{p\over 2}-1} H(\sigma) + {\partial R\over{\partial q}} = 0,\ \ \ where \ \ \ R = 1-{1\over{2\beta}}\log(1-q) - {\beta\over 4}[(p-1)q^p - pq^{p-1}] $$
 
-Note that the solutions $\sigma_i$ to the first equation do not depend on the temperature, however the value of the self overlap $q$ does. Hence in a PSM there is a 1-1 mapping between the minima of the Hamiltonian and the minima of the free energy. At $T=0$ the two co-incide, but as the temperature is increased, thermal fluctuations cause the confgurations to change into pure states.
+Note that the solutions $\sigma_i$ to the first equation do not depend on the temperature, however the value of the self overlap $q$ does. Hence in a PSM there is a 1-1 mapping between the minima of the Hamiltonian and the minima of the free energy. At $T=0$ the two co-incide, but as the temperature is increased, thermal fluctuations cause the minima to occur as pure states. The PSM model is an exception to the rule that the minima of the energy function and the free energy function are not all the same, in this case they are the same!
   
 
 ### Simulated Annealing
@@ -1081,6 +1101,6 @@ Note that the solutions $\sigma_i$ to the first equation do not depend on the te
 Combinatorial optimization is the problem of minimizing a cost function $f(x_1,x_2,...,x_N)$, and this can be likened to the energy function in statistical mechanics.
 If we try to find the minimum using a brute force search over the configuration space, there is a good chance that the optimization will get stuck at a local minumum, and this corresponds to trying to find the lowest energy configuration for a spin system at $T=0$. 
 
-Kirkpatrick et.al. proposed adding a temperature variable to the optimization, which results in random thermal spin fluctuations, and then using the Metropolis algorithm to find the low energy configurations. This allows the optimization to jump out of local minima as long as $T>0$, with finite probability. They proposed that the optimization start at a high temperature, and then lower the temperature by slow stages, until the system "freezes" and no further changes occur. At each temperature the the simulation should proceed long enough for the system to reach equilibrium.
+Kirkpatrick et.al. proposed adding a temperature variable to the optimization, which results in random thermal spin fluctuations, and then using the Metropolis algorithm to find the low energy configurations. This allows the optimization to jump out of local minima as long as $T>0$ with finite probability, since these are metastable configurations. They proposed that the optimization start at a high temperature, and then lower the temperature by slow stages, until the system "freezes" and no further changes occur. At each temperature the the simulation should proceed long enough for the system to reach equilibrium.
 
 
