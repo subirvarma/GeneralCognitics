@@ -665,6 +665,8 @@ This formula shows that minimum of the average energy $E_{av}$ is realized at $T
 since $m_{eq}$ goes to zero at this temperature, as shown in the above figure. 
 Any further increase in temperature beyond $T_c$ does not lead to higher energy levels, which is somewhat counter-intuitive, but is a result of the fact that Ising model does not incorporate the vibrational degrees of freedom.
 
+The Ising model is somewhat of a toy model in its simplicity, and leaves out a whole lot of complications in real systems. In spite of this, it does a very good job of capturing the essential aspects of magnetism, including the phenomenon of phase transitions. Why is that? This mystery was cleared up with the discovery of the renormaliztion group theory by Kadanoff and Wilson in the 1970s. They showed that natural systems are organized in hierarchies, such that the details of the lower levels of the hierarchy are completely hidden from the upper levels, and can be captured in a few a high level parameters. This is the case with the Ising model, since all that it really cares about are the spin orientations and how they interact with each other and external fields. The details of how these spins come about are not imprtant to the model.
+
 ## Spin Glass Models: Randomized Interactions
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat14.png) 
@@ -749,11 +751,14 @@ Acccording to the self-averaging property
 $$ {\overline f} = -\lim_{N\rightarrow\infty}{1\over{\beta N}} E_J(\log Z) = f_{\infty} $$
 
 where the expectation $E_J$ is taken over the distribution of $J$.
-
 This property makes the analysis of the spin glass model more tractable.
+
+The analysis of spin glass models essentially reduces to computing $E_J(\log Z)$, and this is what we will be describing in the rest of this section.
+Computing the partition function (or its expecttaion) is very hard problem in general, and the solution to some of the most intractable problems in statistical field theory and quantum field theory hinges upon this problem. There are a methods to do this that have been discovered over the years, and we are going to learn about one of these, called the replica method, in the next few sections.
 
 ### Order Parameters in a Spin Glass System
 
+We saw that the free energy for the Ising model can be described as a function of its average magnetization $m$, is this also true for spin glass systems?
 Define the average magnetization $m$ for the system as
 
 $$ m = \lim_{N\rightarrow\infty}{1\over N}\sum_i m_i $$
