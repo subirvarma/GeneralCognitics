@@ -520,7 +520,7 @@ The connections in a RBM are restricted to those between the visible and hidden 
 
 $$ E(v,h) = -\sum_{i=1}^H\sum_{j=1}^V w_{ij} h_i v_j - \sum_{i=1}^H b_i h_i - \sum_{j=1}^V c_j v_j $$
 
-In terms of probability the RBM architecture implies that that hidden node spins are independent given the visible node spins and vice versa, i.e.,
+The benefit of having this bi-partite structure is that that hidden node spins are independent given the visible node spins and vice versa, i.e.,
 
 $$ p(h\vert v) = \prod_{i=1}^H p(h_i\vert v)\ and\ p(v\vert h) = \prod_{j=1}^V p(v_j\vert h) $$
 
@@ -567,46 +567,6 @@ This resulting training algorithm is called k-step contrastive divergence, or CD
 $$ w_{ij}\leftarrow w_{ij} + \eta\beta([v_i h_j]_0 - [v_i h_j]_k) $$
 
 - In order to maximize $L(w)$ we need to maximize the positive term $[v_i h_j]_0$ and minimize the negative term $[v_i h_j]_k$. Maximizing the positive term is the same as maximizing the correlation between the training data set and the spins computed in the hidden layer. Minimizing the negative term is the same as reducing the correlation between visible spins and the spins in the hidden layer (both of these as computed after $k$ iterations) . But remember that the visible spins after $k$ iterations are obtained by starting from a training data vector, and then doing $k$ iterations. Thus the resulting spin will tend to be close to the original training vector. On the other hand in the regular Boltzmann machine the negative phase is initialized with a random spin vector, which makes the convergence happen much slower.
-- From the expression $E = - \sum_v\sum_h w_{ij} h_i v_j$ for the energy, it follows that higher values of $w_{ij}$ lead to lower energy if the training data and hidden layer spins are more correlated And the spins that are part of the nearby vectors are less correlated with the hidden layer.
-
-
-
-
-
-
-
-
-Physics of IPS
-- [ ] Can macro properties be derived micro behavior of particles?
-- [ ] Main macro properties: Energy, Entropy, Temperature, Pressure, The nature of heat.  What is it, why does it flow from hot to cold bodies? Phase transitions.
-- [ ] Heat is due to the motion of particles at the micro level. Define S,E in terms of particles, T as a function of S and E. Show that resulting system behaves as expected at macro level.
-- [ ] Micro canonical system: systems with fixed E and T
-- [ ] Canonical systems: systems with fixed T but varying E
-- [ ] Simplest case: No interactions
-- [ ] Boltzmann theory: derivation of equilibrium quantities
-- [ ] Equilibrium as the solution to Entropy Maximization problem?
-- [ ] Addition of interactions
-- [ ] Phase transitions as a result of interactions 
-- [ ] Ising models  for magnetism
-
-From Susskind 
-- [ ] Temperature, energy and entropy definition
-- [ ] The Boltzmann distribution from maximum entropy principle
-- [ ] The Z function
-- [ ] Formula for energy, entropy etc from Boltzmann distribution 
-- [ ] The Ising model, analysis using the Z function and mean field approximation 
-- [ ] Equilibrium energy levels in Ising model 
-- [ ] Phase transitions by varying temperature in the Ising model
-
-Spin glasses
-- [ ] When system can exist in multiple equilibra at the same time
-
-Spin Glasses and neural networks
-- [ ] Hopfield model, relation to spin glasses
-- [ ] Boltzmann Machines
-- [ ] Phase transitions in the Hopfield model, leading to diffusion model
-- [ ] Modern neural networks. The effect of the residual connection on the energy landscape.
-
-
+- From the expression $E = - \sum_v\sum_h w_{ij} h_i v_j$ for the energy, it follows that higher values of $w_{ij}$ lead to lower energy if the training data and hidden layer spins are more correlated AND the spins that are part of the nearby vectors are less correlated with the hidden layer. However the CD algorithm assigns higher $w_{ij}$ values if the data and hidden layer are well correlated, which reduces the energy value for the data vector. Also the algorithm assigns lower $w_{ij}$ values if a nearby visible layer vector has high correlation with the hidden layer, which increases the energy level for the visible layer vector.
 
 
