@@ -30,7 +30,7 @@ The physicist John Hopfield was at Princeton during the 1970s, and he was instru
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat47.png) 
 
-Figure 31: A Hopfield Network
+Figure 1: A Hopfield Network
 
 [Hopfield](https://www.dna.caltech.edu/courses/cs191/paperscs191/Hopfield82.pdf) started with a SK type spin glass model with full connectivity, as shown above, with the symmetric interaction between nodes $i$ and $j$ given by $J_{ij}$.
 Assume that the spin at each node, $\sigma_i, i = 1,2,...N$ in the network can assume values of +1 or -1, and denote the state $X$ of the network as $\Sigma = (\sigma_1,...,\sigma_N)$. 
@@ -61,7 +61,7 @@ $$  E = -{1\over 2N}\sum_{\mu=1}^p(\sum_{i=1}^N \sigma_i\xi^\mu_i)^2  $$
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat45.png) 
 
-Figure 32: Energy landscape and time evolution
+Figure 2: Energy landscape and time evolution
 
 The spin updates cause a 
 monotonically decreasing value of the energy (see above figure), since if there is a change $\Delta\sigma_i$ in the value of the $i^{th}$ spin, then
@@ -109,7 +109,7 @@ $$  P_{error} = P(C^\mu_i > 1) \approx {1\over 2}(1-erf(\sqrt{N\over{2p}}))\ \ \
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat44.png) 
 
-Figure 33: Error probability in a Hopfield network
+Figure 3: Error probability in a Hopfield network
 
 The table above shows the error for some values of ${p\over N}$. We can see that error is reasonably low until ${p\over N}=0.138$, and increases sharply after that. This estimate has been borne out by a more thorough analysis of Hopfield networks using the tools from spin glass theory.
 
@@ -121,7 +121,7 @@ The classic reference for the material in this section is the paper by [Amit, Gu
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat46.png) 
 
-Figure 34: The probability that node $i$ becomes excited
+Figure 4: The probability that node $i$ becomes excited
 
 We make the following change to the state transition equations in order to take thermal dynamics into account: Denote the field at node $i$ at time $t$ as 
 
@@ -234,7 +234,7 @@ Hence in the limit at $T=0$, the spins $s_i$ in the MIsing model converge bi-mod
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat24.png) 
 
-Figure 35: Single pattern retrieval in the Hopfield model
+Figure 5: Single pattern retrieval in the Hopfield model
 
 If the Hopfield network is run at some temperature $T>0$, then in equilibrium it will converge to the bottom of one of the two valleys (or pure states), such that the average spin for the equilibrium states is given by the above formula. Note that if $T>0$ then there is more than one such state, in order to retrieve the specific memory, the temperature will have to be gradually reduced to $T=0$.
 
@@ -336,7 +336,7 @@ while the latter is concerned about capturing the rules that govern the patterns
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat30.png) 
 
-Figure 36: Training and generation phases for a Boltzmann machine
+Figure 6: Training and generation phases for a Boltzmann machine
 
 An example of how a Boltzmann machine can be put to use is shown in the above figure. The data consists of handwritten images of numerals from 0 to 9, and these are digitized using a $28 x 28$ grid using 0 for white and 1 for black. Any one of the numerals can be written down as a 784 dimensional vector of ones and zeroes, say $(x_1,...,x_{784})$. The elements of these vectors are distributed according to some unknown distribution $p_X(x_1,x_2,...,x_{784})$ and all we have are samples from this distribution. The Boltzmann machine can be trained using these samples, and it is able to create a representation for this distribution in its node interaction parameters, as shown in the left hand part of the figure. Once the training is complete, it can be used to generate new patterns that confirm to the distribution that it has learnt as shown on the right hand side.
 
@@ -344,7 +344,7 @@ Back in 1983 when Hinton and Sejnowski first thought of using the Hopfield model
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat32.png) 
 
-Figure 37: Boltzmann machine with hidden nodes
+Figure 7: Boltzmann machine with hidden nodes
 
 An example of a Boltzmann machine is shown in the above figure. It has a a fully connected topology as in the Hopfield network, with the 'spin' at each node taking on values of 0 or 1. The energy $E$ is also identical to that in the Hopfield network, given by
 
@@ -358,7 +358,7 @@ $$ \Delta E_k = h_k = \sum_i w_{ki}\sigma_i + b_k $$
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat50.png) 
 
-Figure 38: The sigmoid function for various values of $T$
+Figure 8: The sigmoid function for various values of $T$
 
 The Boltzmann machine uses a probabilistic rule called Gibbs sampling, which is derived from the Glauber rule, to update its spins, 
 This rule says that the $k^{th}$ node should be turned on (or its spin set to $+1$) with probability given by $p_k$ given by
@@ -514,7 +514,7 @@ The Restricted Boltzmann Machine or RBM was designed with the objective of makin
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat49.png) 
 
-Figure 39: A Restricted Boltzmann Machine 
+Figure 9: A Restricted Boltzmann Machine 
 
 The connections in a RBM are restricted to those between the visible and hidden units, as shown in the above figure which considerably simplifies both the training as well as inference phases in the system. The energy in a RBM can be written as
 
@@ -568,5 +568,41 @@ $$ w_{ij}\leftarrow w_{ij} + \eta\beta([v_i h_j]_0 - [v_i h_j]_k) $$
 
 - In order to maximize $L(w)$ we need to maximize the positive term $[v_i h_j]_0$ and minimize the negative term $[v_i h_j]_k$. Maximizing the positive term is the same as maximizing the correlation between the training data set and the spins computed in the hidden layer. Minimizing the negative term is the same as reducing the correlation between visible spins and the spins in the hidden layer (both of these as computed after $k$ iterations) . But remember that the visible spins after $k$ iterations are obtained by starting from a training data vector, and then doing $k$ iterations. Thus the resulting spin will tend to be close to the original training vector. On the other hand in the regular Boltzmann machine the negative phase is initialized with a random spin vector, which makes the convergence happen much slower.
 - From the expression $E = - \sum_v\sum_h w_{ij} h_i v_j$ for the energy, it follows that higher values of $w_{ij}$ lead to lower energy if the training data and hidden layer spins are more correlated AND the spins that are part of the nearby vectors are less correlated with the hidden layer. However the CD algorithm assigns higher $w_{ij}$ values if the data and hidden layer are well correlated, which reduces the energy value for the data vector. Also the algorithm assigns lower $w_{ij}$ values if a nearby visible layer vector has high correlation with the hidden layer, which increases the energy level for the visible layer vector.
+
+
+## Thermodynamics of the RBM
+
+Unlike the Hopfield networ, RBMs present a number of challenges which has made their analysis using tools from statistical mechanics difficult. In particular:
+
+- We can no longer assign a probability distribution to the data samples (recall that these were set to the Bernoulli distribution in the Hopfield case), since the whole purpose of an RBM is to be able to approximate some unknown data distribution.
+- The weights $w_{ij}$ can no longer be assumed to independent, since in practice it has been foound that there exhibit a strong correlation in atrained RBM.
+
+Some good progress in this area was made by [Decelle, Fissore, Furtlehner](https://arxiv.org/abs/1803.01960), who were able to an analysis of RBMs without making any of these two assumptions (also see [Decelle and Furtlehenr](https://arxiv.org/abs/2011.11307) for a good survey of recent work in this area). They did so by modeling the structure of the weights $w_{ij}$ by using singular value decomposition (SVD) theory, whereby the weight matrix can be expressed in a form that is similar to that in the Hopfield model. Under this assumption, they used replica theory to obtain an expression for the free energy and obtained solutions for the replica symmetric case. 
+Among other things they showed the following:
+
+- Just as in other spin glass type systems, the behavior of the RBM can be classified into paramagnetic, ferromagnetic and spin glass phases. When the RBM is operating properly, it is in ferromagnetic phase.
+- When an RBM starts to train its weghts are initialized to random values and as a result it is in the paramagnetic phase. As the training progresses the weights change and this causes the RBM to cross over to the ferromagnetic portion of the phase space.
+- The number of pure states or valleys in the ferromagnetic phase can be identified by solving the equivalent of the TAP equations for RBMs, and they act as attractors for the visible states. At the equilibrium point in a valley, the visible nodes can be in one of many possible configutrations, and these correpond to variations in an image datpoint that RBM has learnt.
+
+![](https://subirvarma.github.io/GeneralCognitics/images/stat51.png) 
+
+Figure 10: Changes in the weight matrix as the RBM undergoes training 
+
+A great deal of insight can be obtained into the learning behavior of RBMs by analysing the evolution of the weight matrix $w_{ij}$ while the RBM is undergoing training. There are teo ways to look at this matrix: (1) The values of the weights themselves, and the distances between thwm, (2) By doing a singular value decomposition of the $w_{ij}$ matrix, given by
+
+$$  W = U\Sigma V^T $$
+
+where $U$ and $V$ are orthogonal matrices and $\Sigma$ is a diagonal matrix whose elements are the eigenvalues for $W$ (also called the modes of $W$).  
+
+The above figure shows experimental data collected while the RBM was being trained on MNIST data.
+The top part of the figure plots the histogram of the distances between the weight values for three different cases during the course of training. When the training starts the weights are initailized to random Gaussianvalues and hence the histograom of distances is also Gaussian and centered at zero which puts the RBM in the paramagnetic phase. 
+As the training proceeds the RBM enters the ferromagnetic phase and the eigenvalues assume a structure in which there is a dominant mode and this results in high positive or negative inter-weight distance as shown in part (a). This is also seen by directly plotting the eigenvalues, as shown in part (d), we can see that the 'blue' eigenvalue has assumes larger values while the others are still small.
+The resulting samples from the RBM don't look very different than the ones that were used for training.
+Part (b) shows the inter-weignt values after further training has taken place. Part (d) of the figure shws that many more modes have emerged and the histograom of ditsances is much broader, but the generated samples still correspond closely to the training data with not much variation.
+After further training the RBM becomes fully trained and starts to generate a variety of good samples. In this case the eigenvalues are close to each other as seen in part (d) of the figure, while the inter-weight distance is still centered at zero, but with a much smaller variance, as shown in part (c).
+
+
+
+
 
 
