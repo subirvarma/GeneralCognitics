@@ -600,6 +600,7 @@ As the training proceeds the RBM enters the ferromagnetic phase and the eigenval
 The resulting samples from the RBM don't look very different than the ones that were used for training.
 Part (b) shows the inter-weignt values after further training has taken place. Part (d) of the figure shws that many more modes have emerged and the histograom of ditsances is much broader, but the generated samples still correspond closely to the training data with not much variation.
 After further training the RBM becomes fully trained and starts to generate a variety of good samples. In this case the eigenvalues are close to each other as seen in part (d) of the figure, while the inter-weight distance is still centered at zero, but with a much smaller variance, as shown in part (c).
+Part (e) of the figure shows the number of fixed point of the mean field equations for the RBM, and these correspond to the number of patterns that it can produce. We can see that starting from zero in the paramagnetic phase, the number of fixed poits progressively increases as the training goes on, and it actually exceeds the number of MNIST classes if continued for a long time. 
 
 
 
