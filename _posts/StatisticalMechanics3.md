@@ -35,6 +35,10 @@ $$ Z = \sum_{x_1,...,x_N} e^{-E_W(x_1,...,x_N)}  $$
 
 There are two differences compared to older EBMs
 
+![](https://subirvarma.github.io/GeneralCognitics/images/stat53.png) 
+
+Figure 1: Computing the energy function using a neural network
+
 - The state variables $(x_1,...,x_N)$ are no longer restricted to $+1,-1$ but can take on any real value.
 - The energy function $E_W(x_1,...,x_N)$ is described by a neural network whose input is $(x_1,...,x_N)$ and has parameters given by the vector $W$.
 
@@ -47,10 +51,10 @@ The new design raises the following questions:
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat52.png) 
 
-Figure 1: The energy landscape in Boltzmann Machines
+Figure 2: The energy landscape in Boltzmann Machines
 
 The first question is answered in the next subsection in which we introduce a powerful MCMC type sampling algorithm called Langevin sampling. The answer to the training
-question is more involved and occupies the following sections. Not only do we have to come up with training schema that applies to more complex energy landscapes, but the new algorithm also has to avoid the issues that plagued the older Boltzmann Machine system, namely that Boltzmann Machine and related systems could not be scaled beyond a few thousand nodes since the computational cost of sampling became excessive, since it took a very long time to converge. This problem has to do with the difficulty in sampling from a multi-model landscapes, as illustrated in figure 1.
+question is more involved and occupies the following sections. Not only do we have to come up with training schema that applies to more complex energy landscapes, but the new algorithm also has to avoid the issues that plagued the older Boltzmann Machine system, namely that Boltzmann Machine and related systems could not be scaled beyond a few thousand nodes since the computational cost of sampling became excessive, since it took a very long time to converge. This problem has to do with the difficulty in sampling from a multi-model landscapes, as illustrated in figure 2.
 
 
 
