@@ -10,6 +10,16 @@ title: "Energy Based Models Part 3: Recent Developments"
 
 ## Introduction
 
+EBM models entered a winter phase following the success of backprop driven neural network models, heralded by the the AlexNet model of 2012, and more recently with the LLM models from OpenAI and others.
+However beginning in 2019 there has been a renewed interest in EBMs, led by research coming from academia, such as by Stefano Ermon's group at Stanford University. This has led to considerable progress in the
+theory for Boltzmann Machines. The original Boltzmann Machines never became commercially viable due to a couple of problems:
+
+- They were not able to scale up to beyond a few hundred nodes since the training process became too time consuming. This was due to the fact that the sampling alsgorithm was not able to handle multi-model distributions very well. It took an excessive amount of time to move between valleys in the energy landscape during the training process.
+- The original Boltzmann Machine was limited to the quadratic energy function with per node state values of 0 and 1 (or -1 and 1). In order to compete with modern neural networks there was a need to extend node values that are real numbers and more general energy functions.
+
+The second issue was easier to solve, and was resolved with the introduction of Langevin Monte Caro Markov Chain (MCMC) sampling. This enabled the system nodes to have real valued 'spin' values, and these were updated using an iteration that caused the system state to converge to values distributed according to a specified probability distribution. The origins of Langevin sampling lie in the theory of stochastic diffusion processes, and I touched upon this topic in [my post on Brownian Motion](https://subirvarma.github.io/GeneralCognitics/2025/05/23/TamingRandomness.html). 
+Once we use Langevin sampling, it becomes possible to handle energy functions that are more complex than quadratic, indeed te becomes possible use completely arbitrary functions of three or higher orders. This takes us back to the modern developments in neural networks, which basically used these networks to model arbitrary functions of the input variables using regression techniques. This opens up the use of powerful systems such as convolutions neural networks and transformers to model energy functions
+
 
 
 ## EBMs with Complex Energy Functions
