@@ -30,11 +30,9 @@ All these advances in EBM models are impressive, but is there any fundamental be
 These and similar systems are based on the idea of using the physical properties of the substrate on which the chip is built to introduce noise into calculations, which are required as part of the samploig process. So for exmple, in the Extropic system, the states of all the nodes in the Boltzmann machine can be updated in parallel in a single cycle, rather then on a serial one-by-one basis in digital implementations.
 These sytems are still in the reserach phase and they have a long way to go until they approach the performance of modern dititally implemented non-EBM systems.
 
+The holy grail of modern generative systems are LLMs, and the question arises whether EBMs can be used to implement LLMs. The current generation of LLMs are based on auto-regressive sampling using transformers, and generate one word at a time. It turns out that diffusion models can also be used to generate text, which clears the path to using EBM based diffusioins to generate text. Stefano Ermon has founded a start-up called Inception that is working of diffusion based LLMs. These are still implemented in traditional GPU based architectures, and their selling point is faster text generation compared to auto-regressive models as opposed to lower energy consumption.
 
-
-
-- LLMs based on EBMs
-
+There is another branch in modern EBM development called Thermodynamic Computing  which derives its inspiration from the original Hopfield network as opposed to the Boltzmann machine. Recall that the Hopfield network generated specific node configuratoins as opposed to distribution of configurations, and potentially can be used as a computational tool. This wasd actyually pointed out by Hopfield himself, who showed how combinatorial optimization problems such as the Travelling Salesman Problem can be mapped on to the Hopfield network. This work has been updated by reserach groups at Purdue University and UCSB, who have shown how Hopfield networks can be scaled to much larger sizes, using both theoretical advances such as more efficient sampliong techniques, as well new hardware devices that can implemenent this sampling more efficiently. This work is also in its reserach phase at the present time, and its maon driver has been to serve as an alternative to quantum computers for  probabilistic algorithms.
 
 
 ## EBMs with Complex Energy Functions
