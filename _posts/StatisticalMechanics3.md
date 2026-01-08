@@ -37,6 +37,10 @@ There is another branch in modern EBM development called Thermodynamic Computing
 
 ## EBMs with Complex Energy Functions
 
+![](https://subirvarma.github.io/GeneralCognitics/images/stat54.png) 
+
+Figure 1: Computing the energy function using a neural network
+
 Early EBMs from the 1980s, such as the Boltzmann Machine, feature relatively simple energy functions
 
 $$  E = -\sum_i\sum_{j\lt i} w_{ij} \sigma_i\sigma_j - \sum_i b_i \sigma_i $$
