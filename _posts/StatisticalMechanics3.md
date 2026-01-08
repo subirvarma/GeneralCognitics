@@ -10,6 +10,21 @@ title: "Energy Based Models Part 3: Recent Developments"
 
 ## Introduction
 
+All of modern Generative AI systems, such as LLMs for generating text and diffusion models for generating images, are based on the idea of sampling from a probability distribution that represents the statistics of the training data. Hinton and Sejnowski were the first ones to realize the power of this idea, and showed how to obtain a model for the probability distribution by choosing the interaction strengths in a Sherrington-Kirkpatrich type spin glass model, that they called a Boltzmann machine. These systems worked well, but failed to scale up and also suffered from long convergence times. On the other hand these systems had the benefit that they could serve as plausible models for biological neural networks. Also their training methodology was based on statistical ampling and not on the backprop algorithm, so potentially they could be used to create more energy efficient systems. 
+So the question arises whether sampling based EBM models can scale up to node sizes that are comparable to non-EBM based modern artificial neural networks and with comparable or better performance, while being faster and more energy efficient. Modern EBMs are not quite there yet, but have made a good deal of progress in the last decade or so, and this is described in this post.
+
+Modern EBMs are also based on the idea of approximating the training data distribution by a Boltzmann distribution that is parametrized by the interaction strengths of multiple Ising type nodes. This can also be considered to be be the same as the problem of approximating the energy function implied by the training data with the energy function of the EBM model. The original Boltzmann machines were restricted to using fairly simple quadratic enery functions and one way to create a more powerful EBM would be by using more sophistictaed energy functions. The modern theory of on artificial neural networks (ANNs) comes to the rescue here, since it provides us with a way to create very complex parametrized functions that can be used to approximate arbitrarily comples functions. 
+The parameters of the ANN play the role of interaction strengths in the original model and moreover they can be estimated by using the powerful backprop algorithm.
+Using this idea it becomes possible to replace the quadratic energy function in the original Boltzmann machine, with an ANN which can potentially have hundreds of millions of parameters and results in an enormous increase in the modeling power of the resulting EBM. This also enables modern EBMs to piggyback on the advances in ANNs in recent years with powerful models such as convolutional neural networks (CNNs) and transformers.
+With the introduction of ANN based energy functions and the use of the backprop algorithm for training, the question arises whether these modern EBMs are still biologically plausible. I will have a few remarks to say on this topic in the next section.
+
+In order to carry out this agenda, there are two problems that have to be solved:
+
+- How to sample from these EBM models since clearly the Gibbs sampling used in classical Boltzmann machines no longer applies.
+- How to train these EBM models, since again the Contrastive Divergence or CD algorithm used in Boltzmann machines cannot be used anymore.
+
+I am going to spend the the bulk of this article talking about proposed solutions to these problems, so lets get into the next level of detail.
+
 EBM models entered a winter phase following the success of backprop driven neural network models, heralded by the the AlexNet model of 2012, and more recently with the LLM models from OpenAI and others.
 However beginning in 2019 there has been a renewed interest in EBMs, led by research coming from academia, such as by Stefano Ermon's group at Stanford University. This has led to considerable progress in the
 theory for Boltzmann Machines. The original Boltzmann Machines never became commercially viable due to a couple of problems:
@@ -39,7 +54,7 @@ There is another branch in modern EBM development called Thermodynamic Computing
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat54.png) 
 
-Figure 1: Computing the energy function using a neural network
+Figure 1: Computing the energy function using an EBM model
 
 Early EBMs from the 1980s, such as the Boltzmann Machine, feature relatively simple energy functions
 
