@@ -65,31 +65,17 @@ On the other hand, if we use either a CNN or transformer (or any other ANN) to m
 This doesn't mean that biological brains are not designed this way, indeed biological neurons have a very complex interconnection topology (called the connectome) in which each neuron may be connected to thousands of other neurons, and we have very little knowledge about the nature of this network.
 Another way to look at this problem is by recognizing that a complete understanding of the connectome is probably out of our reach at the present time, but we can ignore the details of the node interconnections and focus on the resulting energy function instead. This energy function is also a very complex beast, but fortunately we have a tool at our disposal to model complexity of this magnitude, name the ANN.
 
+Whether we use inter-node interactions or we use a CNN to model the energy function, in either case the probability of the system being in state $(x_1,x_2,...,x_N)$ is given by
 
-Early EBMs from the 1980s, such as the Boltzmann Machine, feature relatively simple energy functions
-
-$$  E = -\sum_i\sum_{j\lt i} w_{ij} \sigma_i\sigma_j - \sum_i b_i \sigma_i $$
-
-where $\sigma_i$ is the spin at node $i$, which can take values ${+1,-1}$, $w_{ij}$ is the symmetric strength of the interaction between nodes $i$ and $j$ and $b_i$ the threshold for activating node $i$. The spins in these networks are updated using Gibbs sampling
-
-$$ p(\sigma_k = 1) = p_k = {1\over{1 + \exp(-\beta h_k)}} $$
-
-Repeated sampling results in the network state gradually moving to an equilibrium configuration which corresponds to a local minima for the energy function.
-The addition of hidden nodes enables these systems to model more complex nodal interactions by increasing the number of parameters available to the model.
-Hinton and the early pioneers limited their models to quadratic energy functions since they wanted them to be biologically plausible so that they could be used as models
-of the brain. This has become less of a requirement for modern AI systems, indeed modern EBMs are defined by the following equation
-
-$$ p(x_1,x_2,...,x_N) = {e^{-E(x_1,...,x_N)}\over{Z}} $$
+$$ p_W(x_1,x_2,...,x_N) = {e^{-E_W(x_1,...,x_N)}\over{Z}} $$
 
 where $Z$ as usual is the partition function
 
 $$ Z = \sum_{x_1,...,x_N} e^{-E_W(x_1,...,x_N)}  $$
 
+The problem that we need to solve is that of choosing the parameters $W$ such that the probability distribution $p_W(x_1,x_2,...,x_N)$ is close to the training daya distribution $p(x_1,x_2,...,x_N)$. But before we get into that, lets talk about how we can sample from these models.
+
 There are two differences compared to older EBMs
-
-![](https://subirvarma.github.io/GeneralCognitics/images/stat53.png) 
-
-Figure 1: Computing the energy function using a neural network
 
 - The state variables $(x_1,...,x_N)$ are no longer restricted to $+1,-1$ but can take on any real value.
 - The energy function $E_W(x_1,...,x_N)$ is described by a neural network whose input is $(x_1,...,x_N)$ and has parameters given by the vector $W$.
@@ -109,11 +95,19 @@ The first question is answered in the next subsection in which we introduce a po
 question is more involved and occupies the following sections. Not only do we have to come up with training schema that applies to more complex energy landscapes, but the new algorithm also has to avoid the issues that plagued the older Boltzmann Machine system, namely that Boltzmann Machine and related systems could not be scaled beyond a few thousand nodes since the computational cost of sampling became excessive, since it took a very long time to converge. This problem has to do with the difficulty in sampling from a multi-model landscapes, as illustrated in figure 2.
 
 
-
-
-
-
 ### MCMC Sampling Using the Langevin Equation
+
+Early EBMs from the 1980s, such as the Boltzmann Machine, feature relatively simple energy functions
+
+$$  E_W = -\sum_i\sum_{j\lt i} w_{ij} \sigma_i\sigma_j - \sum_i b_i \sigma_i $$
+
+where $\sigma_i$ is the spin at node $i$, which can take values ${+1,-1}$, $w_{ij}$ is the symmetric strength of the interaction between nodes $i$ and $j$ and $b_i$ the threshold for activating node $i$. The spins in these networks are updated using Gibbs sampling
+
+$$ p(\sigma_k = 1) = p_k = {1\over{1 + \exp(-\beta h_k)}}\ \ \ where\ \ \ h_k = \sum__i w_{ki}\sigma_i + b_k $$
+
+Repeated sampling results in the network state gradually moving to an equilibrium configuration which corresponds to a local minima for the energy function.
+If the energy function is modeled by an ANN then clearly Gibbs sampling no longer holds. 
+
 
 
 
