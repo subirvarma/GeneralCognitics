@@ -5,7 +5,9 @@ title: "Energy Based Models Part 3: Recent Developments"
 
 # Energy Based Models Part 3: Recent Developments
 
-**Contents**        
+## Abstract
+
+
   
 
 ## Introduction
@@ -13,9 +15,14 @@ title: "Energy Based Models Part 3: Recent Developments"
 All of modern Generative AI systems, such as LLMs for generating text and diffusion models for generating images, are based on the idea of sampling from a probability distribution that represents the statistics of the training data. Hinton and Sejnowski were the first ones to realize the power of this idea, and showed how to obtain a model for the probability distribution by choosing the interaction strengths in a Sherrington-Kirkpatrich type spin glass model, that they called a Boltzmann machine. These systems worked well, but failed to scale up and also suffered from long convergence times. On the other hand these systems had the benefit that they could serve as plausible models for biological neural networks. Also their training methodology was based on statistical ampling and not on the backprop algorithm, so potentially they could be used to create more energy efficient systems. 
 So the question arises whether sampling based EBM models can scale up to node sizes that are comparable to non-EBM based modern artificial neural networks and with comparable or better performance, while being faster and more energy efficient. Modern EBMs are not quite there yet, but have made a good deal of progress in the last decade or so, and this is described in this article.
 
-Modern EBMs are also based on the idea of approximating the training data distribution by a Boltzmann distribution that is parametrized by the interaction strengths of multiple Ising type nodes. This can also be considered to be be the same as the problem of approximating the energy function implied by the training data with the energy function of the EBM model. The original Boltzmann machines were restricted to using fairly simple quadratic enery functions and one way to create a more powerful EBM would be by using more sophistictaed energy functions. The modern theory of on artificial neural networks (ANNs) comes to the rescue here, since it provides us with a way to create very complex parametrized functions that can be used to approximate arbitrarily comples functions. 
-The parameters of the ANN play the role of interaction strengths in the original model and moreover they can be estimated by using the powerful backprop algorithm.
-Using this idea it becomes possible to replace the quadratic energy function in the original Boltzmann machine, with an ANN which can potentially have hundreds of millions of parameters and results in an enormous increase in the modeling power of the resulting EBM. This also enables modern EBMs to piggyback on the advances in ANNs in recent years with powerful models such as convolutional neural networks (CNNs) and transformers.
+Modern EBMs are also based on the idea of approximating the training data distribution by a Boltzmann distribution that is parametrized by the interaction strengths of multiple Ising type nodes, but there is one critical difference. Whereas the Boltzmann machine attempts to model the data distribution directly  using the Boltzmann distribution
+
+$$  p(x_1,...,x_N) = {e^{-E(x_1,...,x_N)\over{Z}} $$
+
+it runs into the problem of getting an estimate for the partition function $Z$ which is a difficult problem to solve. The Contrastive-Divergent (CD) algorithm was an attempt to get around this problem, but it didn't fully succeed as exhibited by the fact that Boltzmann machines don't scale very well. Modern approaches to generative modeling circumvent this problem by trying to get estiamtes of the energy function $E$, or to be more exact, the gradient of the energy function ${\partial E\over{\partial x_i}}$, which is called the score function. As we will see in this article, this allows us to generate samples from the probability distibution $p(x_1,...,x_N)}$ *without explicity knowing what it is!*. This fundamental idea was discovered by several people around the turn of the millenium, and underlies all modern generative models. In order to fully exploit this idea, we need to overcome another weakness with the Boltzmann machine: The fact that it was restricted to using energy functions that are described by quadratic order interactions between nodes and
+one way to create a more powerful EBM would be by using more sophistictaed energy functions. The modern theory of on artificial neural networks (ANNs) comes to the rescue here, since it provides us with a way to create very complex parametrized functions that can be used to approximate arbitrarily complex functions. 
+The parameters of the ANN play the role of interaction strengths in the original Boltzmann machine and moreover they can be estimated by using the powerful backprop algorithm.
+Using this idea it becomes possible to replace the quadratic energy function in the Boltzmann machine, with an ANN which can potentially have hundreds of millions of parameters and this results in an enormous increase in the modeling power of the resulting EBM. This also enables modern EBMs to piggyback on the advances in ANNs in recent years with powerful models such as convolutional neural networks (CNNs) and transformers.
 With the introduction of ANN based energy functions and the use of the backprop algorithm for training, the question arises whether these modern EBMs are still biologically plausible. I will have a few remarks to say on this topic in the next section.
 
 In order to carry out this agenda, there are two problems that have to be solved:
