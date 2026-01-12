@@ -5,7 +5,20 @@ title: "Energy Based Models Part 3: Recent Developments"
 
 # Energy Based Models Part 3: Recent Developments
 
-## Abstract
+## Prologue
+
+There has been considerable progress in the field of Artificial Neural Networks or ANNs in recent years, with the latest models such as ChatGPT or Gemini exhibiting human like characteristics. 
+At the same time there is a lack of understanding on what makes these models so effective, and general lack of understanding between these models and the operation of biological brains. The latter
+carry out the same tasks as ANNs, but are able to do so with much lower energy consumption. How is this possible? 
+
+The field of Energy Based Models provides a possible path to answering these questions. In this article we will show that generative models, the class to which LLMs and imge generation models belong, can be recast as EBMs, in fact as a more sophisticated version of the Boltzmann machines that we encountered in Part 2. This connects generative models to concepts from thermodynamics and the idea of energy minimization that we discussed in Parts 1 and 2. More importantly this creates a possible path by which modern generative ANNs can be connected to models for biological brains. In all likelihood biological brains operate using thermodynamic principles and it is not inconcievable that their architecture and that of generative ANNs share common principles of operation since the same physics underlies both (this is not unlike the fact that both birds and airplanes are able to fly using the Bernoulli's principle from physics, but they use different mechanisms). 
+But how does this knowledge help us? One way in which it can is by helping us find more energy efficient ways of running ANNs and hopefully approach the energy efficiency of biological brains. Current ANNS run on GPUs that are not optimized for thermodynamic operations such as  sampling. However there are new ideas coming up in this area, and several companies are implementing chips that are much more efficient in this area and will be describd in this article.
+
+The EBM approach to generative modeling also enables us to form an intuitive picture of how generative ANNs work and here is high level description that will be elabaorated upon later.
+Real world data such as images or text can be modeled by a spin glass type EBM, with the nodes in the model interacting with each other using a sophistictaed energy function. When fully trained the energy landscape arranges itself such that the minima correspond to generated images (or text) that are similar to those in the training data. The process of generation consists of starting from an initial point in the configuration space (which may look like noise to us), and then navigating the energy landscape until we arrive at a minima, and at this point the configuration looks like an intelligable image. The process of finding the minima is a sampling operation using Langevin sampling, which is a generalization of the Gibbs sampling used for Boltzmann machines. The sampling is made efficient by using an idea that is related to that of simulated annealing that we came across in Part 1, and works by introducing noise at various levels of intensity and gradually reducing it as we approach the minima.
+
+How can we specify what image to generate? This is the province of text to image models which turn a textual description into the corresponding image. How can we fit these models within the frameowrk of EBMs?
+This can be done by mapping the latent vector corresponding to the input text to points on the energy landscape for images.
 
 
   
