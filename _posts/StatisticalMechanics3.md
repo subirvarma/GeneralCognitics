@@ -76,16 +76,17 @@ There is another branch in modern EBM work called Thermodynamic Computing  which
 
 Figure 1: Computing the energy functions for EBMs
 
-The original Ising model for paramagnetism featured a simple energy function, shown in part (a) of the above figure. The interaction strength between nodes was uniform across the entire network, and this resulted in an energy landscape with a couple of minima corresponding to net magnetization of the system. Sherrington and Kirkpatrick modified this model by making the interaction strengths random, ans also each node to interact with every other node in the system, shown in part (b). This led to a complex energy landscape with a large number of minima that scaled up with the number of nodes.
+The original Ising model for paramagnetism featured a simple energy function, shown in part (a) of the above figure. The interaction strength between nodes was uniform across the entire network, and this resulted in an energy landscape with a couple of minima corresponding to net magnetization of the system. Sherrington and Kirkpatrick modified this model by making the interaction strengths random, and also allowed each node to interact with every other node in the system, shown in part (b). This led to a complex energy landscape with a large number of minima that scaled up with the number of nodes.
 The SK model was subsequently used by Hopfield and Hinton to create the first computational and generative models, namely the Hopfield network and the Boltzmann machine, as described in Part 2 of this article series. 
-A way for EBMs to transition to the modern era is shown in the lower part of the figure. Part (c) shows an energy function that is described by convolutional neural network or CNN. These were originally introduced as a way to process images, and given the 2D nature of the nodes in the EBM, there seems to be a good fit for designing EBMs which can be used to generate images. Part (d) of the figure shows an EBM that uses the transformet network for computing energy functions. Transformers are another powerful way to approximate energy functions, traditional LLMs use them as a way to sample from conditional probability distributions.
+
+A way for EBMs to transition to the modern era is shown in the lower part of the figure. Part (c) shows an energy function that is described by convolutional neural network or CNN which were originally introduced as a way to process images. Part (d) of the figure shows an EBM that uses the transformer network for computing energy functions. Transformers are another powerful way to model energy functions, traditional auto-regressive LLMs use them as a way to sample from conditional probability distributions.
 
 Note that in the original EBMs shown in parts (a) and (b), the energy function was parametrized by the interaction strengths between nodes. 
 On the other hand, if we use either a CNN or transformer (or any other ANN) to model the energy function, then the energy function is parametrized by the weights in the ANN. If the EBM is being used as a model for neural processing in biological brains, then what is the connection between the ANN weights and the interaction strengths between nodes? Clearly the interactions are more complex than the two node interactions in the SK model, and involve multiple nodes interacting with one another, and thus closer to the P-Spin or PSM type models described in Part 1. Are these more complex interactions biologically plausible? Interactions between biological neurons seem to be of the two node type, however one way to reduce higher node interactions to two node interactions is by introducing hidden nodes into the model, as first pointed out by Krotov and Hopfied. I haven't seen examples in the literature for this program of converting an EBM with a CNN or transformer based energy function into an equivalent EBM with hidden nodes in which all interactions are of the two node type.
 This doesn't mean that biological brains are not designed this way, indeed biological neurons have a very complex interconnection topology (called the connectome) in which each neuron may be connected to thousands of other neurons, and we have very little knowledge about the nature of this network.
-Another way to look at this problem is by recognizing that a complete understanding of the connectome is probably out of our reach at the present time, but we can ignore the details of the node interconnections and focus on the resulting energy function instead. This energy function is also a very complex beast, but fortunately we have a tool at our disposal to model complexity of this magnitude, name the ANN.
+Another way to look at this problem is by recognizing that a complete understanding of the biological connectome is probably out of our reach at the present time, but we can ignore the details of the node interconnections and focus on the resulting energy function instead. This energy function is also a very complex beast, but fortunately we have a tool at our disposal to model complexity of this magnitude, name complex ANNs such CNNs and transformers (an example of fighting complexity with complexity!).
 
-Whether we use inter-node interactions or we use a CNN to model the energy function, in either case the probability of the system being in state $(x_1,x_2,...,x_N)$ is given by
+Whether we use inter-node interactions or we use a ANN to model the energy function, in either case the probability of the system being in state $(x_1,x_2,...,x_N)$ is given by
 
 $$ p_W(x_1,x_2,...,x_N) = {e^{-E_W(x_1,...,x_N)}\over{Z}} $$
 
@@ -93,18 +94,16 @@ where $Z$ as usual is the partition function
 
 $$ Z = \sum_{x_1,...,x_N} e^{-E_W(x_1,...,x_N)}  $$
 
-The problem that we need to solve is that of choosing the parameters $W$ such that the probability distribution $p_W(x_1,x_2,...,x_N)$ is close to the training daya distribution $p(x_1,x_2,...,x_N)$. But before we get into that, lets talk about how we can sample from these models.
-
 There are two differences compared to older EBMs
 
 - The state variables $(x_1,...,x_N)$ are no longer restricted to $+1,-1$ but can take on any real value.
 - The energy function $E_W(x_1,...,x_N)$ is described by a neural network whose input is $(x_1,...,x_N)$ and has parameters given by the vector $W$.
 
-Since a neural network can be trained to approximate any possible function, it follows that the new EBM is capable of modeling a much wider variety of energy
-landscapes. This opens up the possibility of using moden neural networks such as convolutional networks and transformers as models for the energy function.
+Since a neural network can be trained to approximate arbitrarily functions, it follows that the new EBM is capable of modeling a much wider variety of energy
+landscapes. 
 The new design raises the following questions:
 
-- How can we sample from these networks, since Gibbs sampling clearly does not apply here.
+- How can we sample from these networks, since Gibbs sampling clearly cannot be used here.
 - How do we train these networks? Do Contrastive Divergence (CD) type algorithms still work?
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat52.png) 
@@ -112,8 +111,9 @@ The new design raises the following questions:
 Figure 2: The energy landscape in Boltzmann Machines
 
 The first question is answered in the next subsection in which we introduce a powerful MCMC type sampling algorithm called Langevin sampling. The answer to the training
-question is more involved and occupies the following sections. Not only do we have to come up with training schema that applies to more complex energy landscapes, but the new algorithm also has to avoid the issues that plagued the older Boltzmann Machine system, namely that Boltzmann Machine and related systems could not be scaled beyond a few thousand nodes since the computational cost of sampling became excessive, since it took a very long time to converge. This problem has to do with the difficulty in sampling from a multi-model landscapes, as illustrated in figure 2.
+question is more involved and occupies the following sections. Not only do we have to come up with training schema that applies to more complex energy landscapes, but the new algorithm also has to avoid the issues that plagued the older Boltzmann Machine system, namely that they and related systems could not be scaled beyond a few thousand nodes since the computational cost of sampling became excessive. This problem has to do with the difficulty in sampling from a multi-model landscapes, as illustrated in figure 2.
 
+The problem that we need to solve is that of choosing the parameters $W$ such that the probability distribution $p_W(x_1,x_2,...,x_N)$ is close to the training daTa distribution $p(x_1,x_2,...,x_N)$. But before we get into that, lets talk about how we can sample from these models.
 
 ### MCMC Sampling Using the Langevin Equation
 
@@ -123,12 +123,23 @@ $$  E_W = -\sum_i\sum_{j\lt i} w_{ij} \sigma_i\sigma_j - \sum_i b_i \sigma_i $$
 
 where $\sigma_i$ is the spin at node $i$, which can take values ${+1,-1}$, $w_{ij}$ is the symmetric strength of the interaction between nodes $i$ and $j$ and $b_i$ the threshold for activating node $i$. The spins in these networks are updated using Gibbs sampling
 
-$$ p(\sigma_k = 1) = p_k = {1\over{1 + \exp(-\beta h_k)}}\ \ \ where\ \ \ h_k = \sum__i w_{ki}\sigma_i + b_k $$
+$$ p(\sigma_k = 1\vert \sigma_1,..,\sigma_{k-1},\sigma_{k+1},...,\sigma_N) = p_k = {1\over{1 + e^{-\beta h_k}}} $$
 
+where $h_k = \sum w_{ki}\sigma_i + b_k$. 
 Repeated sampling results in the network state gradually moving to an equilibrium configuration which corresponds to a local minima for the energy function.
-If the energy function is modeled by an ANN then clearly Gibbs sampling no longer holds. 
+Gibbs sampling only works if we are able to compute this conditional probability, if the energy function is modeled by an ANN then clearly this procedure no longer holds. 
 
+The discrete time Langevin diffusion update is given by
 
+$$ X_{n+1} = X_n -\eta \nabla_x \log p_W(X) +\sqrt{2\eta}\epsilon_n,\ \ n = 0,1,2,...  $$
+
+$X_0$ is usually initialized from the Gaussian distribution, $\eta>0$ is the step size and the noise $\epsilon_n$ is distributed according to $N(0,I)$. It can be shown that in equilibrium, the disttribution of $X_n$ converges to $p_W(X)$ as $n\rightarrow\infty$ exponentially fast. Since we want the distribution $p_W(X)$ to converge to the Boltzmann distribution, lets substitute this into the equation, which results in
+
+$$ X_{n+1} = X_n -\eta \nabla_x E_W(X) +\sqrt{2\eta}\epsilon_n,\ \ n = 0,1,2,...  $$
+
+The first two terms on the RHS of this equation are just the Newton method for finding the vector $X$ at which the function $E_W(X)$ is minimized (or equivalently the probability $p_W(X0$ is maximized), while the third term adds some noise to the process. Hence the overall effect is that of moving the system state to regions of higher probability, with the noise term enables the iteration to ocassionally jump out of local minima so that there is a greater probability that the iteration ends near a deeper minima.
+
+The beauty of the Langevin diffusion is that enables us to generate samples from the distribution $p_W(X)$ without having to explicitly compute the partition function $Z$. In the case of the Boltzmann distribution, once we have the energy function $E_W(X)$, we can readily generate samples from it. This frees us from the necessity of relating the energy function back to the inter-node interactions and enables us to sample from arbitrarily complex energy functions
 
 
 ## Training EBMs with Complex Energy Functions
