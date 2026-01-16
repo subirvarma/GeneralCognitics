@@ -94,13 +94,22 @@ The SK model was subsequently used by Hopfield and Hinton to create the first co
 
 A way for EBMs to transition to the modern era is shown in the lower part of the figure. Part (c) shows an energy function that is described by convolutional neural network or CNN which were originally introduced as a way to process images. Part (d) of the figure shows an EBM that uses the transformer network for computing energy functions. Transformers are another powerful way to model energy functions, traditional auto-regressive LLMs use them as a way to sample from conditional probability distributions.
 
+### Using EBMs to Generate Images
+
+![](https://subirvarma.github.io/GeneralCognitics/images/stat56.png) 
+
+Figure 2: Image generation using EBMs
+
+
+### Generative EBMs as Models for Biological Brains
+
+![](https://subirvarma.github.io/GeneralCognitics/images/stat57.png) 
+
+Figure 2: A Model for Biological Brains using EBMs
+
 Note that in the original EBMs shown in parts (a) and (b), the energy function was parametrized by the interaction strengths between nodes. 
 On the other hand, if we use either a CNN or transformer (or any other ANN) to model the energy function, then the energy function is parametrized by the weights in the ANN. If the EBM is being used as a model for neural processing in biological brains, then what is the connection between the ANN weights and the interaction strengths between nodes? Clearly the interactions are more complex than the two node interactions in the SK model, and involve multiple nodes interacting with one another, and thus closer to the P-Spin or PSM type models described in Part 1. Are these more complex interactions biologically plausible? Interactions between biological neurons seem to be of the two node type, however one way to reduce higher node interactions to two node interactions is by introducing hidden nodes into the model, as first pointed out by Krotov and Hopfied. I haven't seen examples in the literature for this program of converting an EBM with a CNN or transformer based energy function into an equivalent EBM with hidden nodes in which all interactions are of the two node type.
 This doesn't mean that biological brains are not designed this way, indeed biological neurons have a very complex interconnection topology (called the connectome) in which each neuron may be connected to thousands of other neurons, and we have very little knowledge about the nature of this network.
-
-![](https://subirvarma.github.io/GeneralCognitics/images/stat55.png) 
-
-Figure 2: Modeling complex biological neural networks by means of energy functions
 
 Another way to look at this problem is by recognizing that a complete understanding of the biological connectome is probably out of our reach at the present time, but we can ignore the details of the node interconnections and focus on the resulting energy function instead. This energy function is also a very complex beast, but fortunately we have a tool at our disposal to model complexity of this magnitude, name complex ANNs such CNNs and transformers (an example of fighting complexity with complexity!).
 
