@@ -84,6 +84,11 @@ A way for EBMs to transition to the modern era is shown in the lower part of the
 Note that in the original EBMs shown in parts (a) and (b), the energy function was parametrized by the interaction strengths between nodes. 
 On the other hand, if we use either a CNN or transformer (or any other ANN) to model the energy function, then the energy function is parametrized by the weights in the ANN. If the EBM is being used as a model for neural processing in biological brains, then what is the connection between the ANN weights and the interaction strengths between nodes? Clearly the interactions are more complex than the two node interactions in the SK model, and involve multiple nodes interacting with one another, and thus closer to the P-Spin or PSM type models described in Part 1. Are these more complex interactions biologically plausible? Interactions between biological neurons seem to be of the two node type, however one way to reduce higher node interactions to two node interactions is by introducing hidden nodes into the model, as first pointed out by Krotov and Hopfied. I haven't seen examples in the literature for this program of converting an EBM with a CNN or transformer based energy function into an equivalent EBM with hidden nodes in which all interactions are of the two node type.
 This doesn't mean that biological brains are not designed this way, indeed biological neurons have a very complex interconnection topology (called the connectome) in which each neuron may be connected to thousands of other neurons, and we have very little knowledge about the nature of this network.
+
+![](https://subirvarma.github.io/GeneralCognitics/images/stat55.png) 
+
+Figure 2: Modeling complex biological neural networks by means of energy functions
+
 Another way to look at this problem is by recognizing that a complete understanding of the biological connectome is probably out of our reach at the present time, but we can ignore the details of the node interconnections and focus on the resulting energy function instead. This energy function is also a very complex beast, but fortunately we have a tool at our disposal to model complexity of this magnitude, name complex ANNs such CNNs and transformers (an example of fighting complexity with complexity!).
 
 Whether we use inter-node interactions or we use a ANN to model the energy function, in either case the probability of the system being in state $(x_1,x_2,...,x_N)$ is given by
@@ -133,6 +138,7 @@ The discrete time Langevin diffusion update is given by
 
 $$ X_{n+1} = X_n -\eta \nabla_x \log p_W(X) +\sqrt{2\eta}\epsilon_n,\ \ n = 0,1,2,...  $$
 
+where $X_n = (x^n_1,...,x^n_N)$ is the state vector at the $n^{th}$ step, 
 $X_0$ is usually initialized from the Gaussian distribution, $\eta>0$ is the step size and the noise $\epsilon_n$ is distributed according to $N(0,I)$. It can be shown that in equilibrium, the disttribution of $X_n$ converges to $p_W(X)$ as $n\rightarrow\infty$ exponentially fast. Since we want the distribution $p_W(X)$ to converge to the Boltzmann distribution, lets substitute this into the equation, which results in
 
 $$ X_{n+1} = X_n -\eta \nabla_x E_W(X) +\sqrt{2\eta}\epsilon_n,\ \ n = 0,1,2,...  $$
