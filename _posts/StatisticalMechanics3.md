@@ -208,18 +208,40 @@ $$ X_{n+1} = X_n -\eta \nabla_x E_W(X) +\sqrt{2\eta}\epsilon_n,\ \ n = 0,1,2,...
 
 The first two terms on the RHS of this equation are just the Newton method for finding the vector $X$ at which the function $E_W(X)$ is minimized (or equivalently the probability $p_W(X0$ is maximized), while the third term adds some noise to the process. Hence the overall effect is that of moving the system state to regions of higher probability, with the noise term enables the iteration to ocassionally jump out of local minima so that there is a greater probability that the iteration ends near a deeper minima.
 
-The beauty of the Langevin diffusion is that enables us to generate samples from the distribution $p_W(X)$ without having to explicitly compute the partition function $Z$. In the case of the Boltzmann distribution, once we have the energy function $E_W(X)$, we can readily generate samples from it. This frees us from the necessity of relating the energy function back to the inter-node interactions and enables us to sample from arbitrarily complex energy functions. Although not very well known, the Langevin diffusion is probably the most important equation in the modern theory of generative models.
-
+The beauty of the Langevin diffusion is that enables us to generate samples from the distribution $p_W(X)$ without having to explicitly compute the partition function $Z$ or even the energy function $E$, all that we need are estimates of the score function ${\partial E\over{\partial x_i}}$. This frees us from the necessity of relating the energy function back to the inter-node interactions and enables us to sample from arbitrarily complex energy functions. Although not very well known, the Langevin diffusion is probably the most important equation in the modern theory of generative models.
 
 ## Training EBMs with Complex Energy Functions
+
+Given a training dataset consisting of a bunch of images, we will start with the problem of training a model that generates new images that look similar to those in the training set. We will assume that the distribution of pixels in the training dataset is given by the (unknown) Boltzmann distribution
+
+$$ p(x_1,x_2,...,x_N) = {e^{-E(x_1,...,x_N)}\over{Z}} $$
+
+Our EBM model in turn in equilibrium has a distribution given by its own energy function
+
+$$ p_W(x_1,x_2,...,x_N) = {e^{-E_W(x_1,...,x_N)}\over{Z}} $$
+
+In order to make the generated images similar to those in the training set, we want to choose the model parameters $W$ so that
+$ p(x_1,x_2,...,x_N)\approx p_W(x_1,x_2,...,x_N)$. This was the approach taken by Hinton and Sejnowski in their training algorithm for the Boltzmann machines, and they showed that the problem reduces to finding the maximum likelihood estimates of $W$. As pointed out earlier this approach runs into the problem of estimating the partition function $Z$ which in general is a difficult one to solve.
+We will will pursue this approach in the next section, but for now we we will describe a more modern approach which avoids the estimation of $Z$ and is based on approximating the energy function so that
+$E(x_1,...,x_N)\approx E_W(x_1,...,x_N)$. This would seem to be a straightforward application of supervised learning if we knew $E(x_1,...,x_N)$, unfortunately
+that is not the case. For Langevin sampling we don't need $E_W$, but do need the score function, so perhaps we should be seeking the approximation
+${\partial E_W\over{\partial x_i}}\approx {\partial E\over{\partial x_i}}$. This results in the problem of choosing the $W$ to minimize the score matching error given by 
+
+$$ L_{SM} = {1\over 2} E_{p(x)}[\vert\vert\nabla_x p_W(X) - \nabla_x \log p(X)\vert\vert]_2^2  $$
+
+where $X=(x_1,...,x_N)$. This approach can be made to work, as first pointed out by Hyvarinen and Dayan, but however runs into the computational problem of computing second order derivatives or the trace of Jacobian during the training process.
+
+The critical advance was made by Vincent in 2011 which he called denoised score matchin or DSM.
+
+
+
+### Training Using Score Matching and Denoised Score Matching (DSM)
+
 
 
 
 ### Training Using MCMC Sampling
 
-
-
-### Training Using Score Matching and Denoised Score Matching (DSM)
 
 
 
