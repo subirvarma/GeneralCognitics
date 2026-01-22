@@ -181,6 +181,8 @@ This leads to the idea of a context $c$ which controls the language output by co
 These speculations lead to the idea that we can create a model of the brain by creating a dense interconnect network whose energy function corresponds to a transformer. But what does this interconnect pattern look like? This seems to be an open question at present, but it is not an insurmountable one, and I expect to see progress in this area in the coming  years.
 Clearly the interactions are more complex than the two node interactions in the SK model, and involve multiple nodes interacting with one another, and thus closer to the P-Spin or PSM type models described in Part 1. Are these more complex interactions biologically plausible? Interactions between biological neurons seem to be of the two node type, however one way to reduce higher node interactions to two node interactions is by introducing hidden nodes into the model, as first pointed out by Krotov and Hopfied. 
 
+After all this speculation, lets get down to the nuts and bolts of how modern EBMs work, and we will start with Langevin sampling followed by training algorithms.
+
 ## MCMC Sampling Using the Langevin Equation
 
 Early EBMs from the 1980s, such as the Boltzmann Machine, feature relatively simple energy functions
