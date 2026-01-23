@@ -227,15 +227,52 @@ $E(x_1,...,x_N)\approx E_W(x_1,...,x_N)$. This would seem to be a straightforwar
 that is not the case. For Langevin sampling we don't need $E_W$, but do need the score function, so perhaps we should be seeking the approximation
 ${\partial E_W\over{\partial x_i}}\approx {\partial E\over{\partial x_i}}$. This results in the problem of choosing the $W$ to minimize the score matching error given by 
 
-$$ L_{SM} = {1\over 2} E_{p(x)}[\vert\vert\nabla_x p_W(X) - \nabla_x \log p(X)\vert\vert]_2^2  $$
+$$ L_{SM}(W) = {1\over 2} E_{p(X)}\vert\vert\nabla_x \log p_W(X) - \nabla_x \log p(X)\vert\vert_2^2  $$
 
 where $X=(x_1,...,x_N)$. This approach can be made to work, as first pointed out by Hyvarinen and Dayan, but however runs into the computational problem of computing second order derivatives or the trace of Jacobian during the training process.
 
-The critical advance was made by Vincent in 2011 which he called denoised score matchin or DSM.
+The critical advance was made by Vincent in 2011 which he called denoised score matchin or DSM and the critical idea was that of introducing noise into the training process. Vincent noted that the problem with minimizing $L_{SM}$ is due to the intractibility of $\nabla_x\log p(X)$. He proposed injecting noise into the data samplex $X$ via a known conditional distribution $p_\sigma(X'\vert X)$ with scale $\sigma$. We then try to approximate the score of the noisy samples by minimizing the loss function
+
+$$ L_{SM}(W,\sigma) = {1\over 2} E_{p(X')}\vert\vert\nabla_{X'} \log p_W(X',\sigma) - \nabla_{X'} \log p_{\sigma}(X')\vert\vert_2^2  $$
+
+where
+
+$$ p_{sigma}(X') = \int p_{sigma}(X'\vert X) p(X) dx $$
+
+Vincent shows that even though $\nabla_x \log p_{\sigma}(X')$ is intractable, it can be replaced by a tractable objevtive by conditioning on the distribution $p(X)$ of the original data samples, which results in the Denoising Score Matching (DSM) loss given by
+
+$$ L_{DSM}(W,\sigma) = {1\over 2} E_{p(X),p(X')}\vert\vert\nabla_{X'} \log p_W(X',\sigma) - \nabla_{X'} \log p_{\sigma}(X'\vert X)\vert\vert_2^2  $$
+
+It can be shown that the value of $W$ that minimizes $L_{DSM}$ satisfies the equation
+
+$$ \log p_W(X',\sigma) = \nabla_{X'} \log p_{\sigma}(X') $$
+
+which the same $W$ that also minimizes $L_{SM}$. For the special case when $p_{\sigma}(X'\vert X)$ is Gaussian noise with variance $\sigma^2$ so that
+
+$$ X' = X + \sigma\epsilon $$
+
+where $\epsilon$ is distributed according to $N(0,I)$$, so that
+
+$$ p_{\sigma}(X'\vert X) = N(X'; X, \sigma^2 I)$$
+
+where $I$ is the identity matrix. It can be shown that
+
+$$ \nabla_{X'}\log p_{\sigma}(X'\vert X) = {X-X'\over{\sigma}} $$
+
+thus making the minimization of $L_{DSM}(W,\sigma)$ computationally feasible. The DSM loss simplifies to
+
+$$ L_{DSM}(W,\sigma) = {1\over 2} E_{p(X),p(X')}\vert\vert\nabla_{X'} \log p_W(X',\sigma) - {X-X'\over{\sigma}}\\vert\vert_2^2  $$
+
+$$ = {1\over 2} E_{p(X),\epsilon}\vert\vert\nabla_{X+\sigma\epsilon} \log p_W(X+\sigma\epsilon,\sigma) - {\epsilon\over{\sigma}}\\vert\vert_2^2
+
+Estimating $W$ my minimizing $L_{DSM}$ is a straightforward regression problem. The final step is to make the noise level $\sigma$ go to zero, so that
+
+$$ \nabla_{X'} \log p_W(X') \approx \nabla_{X} \log p(X)  $$
+
+and the two score functions match.
 
 
-
-### Training Using Score Matching and Denoised Score Matching (DSM)
+### Noise Controlled Score Matching (NCSM)
 
 
 
