@@ -241,9 +241,9 @@ $$ p_{sigma}(X') = \int p_{sigma}(X'\vert X) p(X) dx $$
 
 Vincent shows that even though $\nabla_x \log p_{\sigma}(X')$ is intractable, it can be replaced by a tractable objevtive by conditioning on the distribution $p(X)$ of the original data samples, which results in the Denoising Score Matching (DSM) loss given by
 
-$$ L_{DSM}(W,\sigma) = {1\over 2} E_{p(X),p(X')}\vert\vert\nabla_{X'} \log p_W(X',\sigma) - \nabla_{X'} \log p_{\sigma}(X'\vert X)\vert\vert_2^2  $$
+$$ L_{DSM}(W,\sigma) = {1\over 2} E_{p(X),p(X'\vert X)}\vert\vert\nabla_{X'} \log p_W(X',\sigma) - \nabla_{X'} \log p_{\sigma}(X'\vert X)\vert\vert_2^2  $$
 
-It can be shown that the value of $W$ that minimizes $L_{DSM}$ satisfies the equation
+Vinvent showed that the value of $W$ that minimizes $L_{DSM}$ satisfies the equation
 
 $$ \log p_W(X',\sigma) = \nabla_{X'} \log p_{\sigma}(X') $$
 
@@ -273,6 +273,34 @@ and the two score functions match.
 
 
 ### Noise Controlled Score Matching (NCSM)
+
+![](https://subirvarma.github.io/GeneralCognitics/images/stat61.png) 
+
+Figure 2: Illustration of NCSM
+
+The DSM algorithm has some shortcomings, in complex high dimensional energy spaces ith lots of saddle points where the score function is close to zero, the Langevin equation can stuck in sub-optimal regions. Even if it eventually manages to get out, it can take a long time to converge. The solution to this problem was proposed by Song and Ermon, and is basically a version of the simulated annealing algorithm that was described in Part 1. Recall that simulated annealing worked by starting the optimization at a high temperature so that the iteration had enough energy to jump out of shallow local minima and saddle points, and then gradually reducing the temperature to allow it explore deeper regions with larger valleys. Song and Ermon proposed a similar mechanism for DSM, where the noise was varied not through temperature, but by varying the variance $\sigma$.
+
+The NCSM algorithm is illustrated in the above figure. During training noise is injected at multiple levels $\sigma_1,...,\sigma_L$, where $\sigma_1<\sigma_2<...\sigma_L$, so that we end up with $L-1$ DSM models with corresponding score function models $\nabla_{X'} \log p_{W}(X',\sigma_1),...,\nabla_{X'} \log p_{W}(X',\sigma_L)$. Note that the same set set of parameters $W$ are used at each noise level.
+The NCSM objective is given by
+
+$$ L_{NCSM}(W) = \sum_{i=1}^L \lambda(\sigma_i) L_{DSM}(W,\sigma_i)  $$
+
+where
+
+$$ L_{DSM}(W,\sigma) = {1\over{2}}E_{P(X),P(X'\vert X)}[\vert\vert \nabla_{W}(X',\sigma) - {X-X'\over{\sigma^2}}\vert\vert^2_2 $$
+
+where $\lambda(\sigma_i)$ is a weighing function for each noise level. Minimization leads to a score model $s^{*}(X,\sigma)$ that can be used at at each noise level to recover the true score $\nabla_X\log p_{\sigma}(X)$ for all $\sigma\in\{\sigma_i}_{i=1}^L $.
+
+During the inference process, we start with a pure random sample $X_0$ distributed according to $N(0,I)$, and then Langevin iteration is applied successively at each noise level $\sigma_L$ to sample from the distribution $p_{Wi}(X'.sigma_i), i=L,L-1,...,1$. At each level the algorithm is itearated $K$ times, and the output from level $\sigma_l$ is used to initialize the next lower level $\sigma_{l-1}$. The iteration at the l^{th}$ level is given by
+
+$$ X_{n+1} = X_n + \eta_l \nabla_{X'}(X_n,\sigma_l) + sqrt{2\eta}\epsilon_n $$
+
+The complete inference algorithm is given below (from Song and Ermon)
+
+![](https://subirvarma.github.io/GeneralCognitics/images/stat62.png) 
+
+Figure 2: Illustration of NCSM
+
 
 
 
