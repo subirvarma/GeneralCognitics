@@ -263,7 +263,7 @@ thus making the minimization of $L_{DSM}(W,\sigma)$ computationally feasible. Th
 
 $$ L_{DSM}(W,\sigma) = {1\over 2} E_{p(X),p(X')}\vert\vert\nabla_{X'} \log p_W(X',\sigma) - {X-X'\over{\sigma}}\\vert\vert_2^2  $$
 
-$$ = {1\over 2} E_{p(X),\epsilon}\vert\vert\nabla_{X+\sigma\epsilon} \log p_W(X+\sigma\epsilon,\sigma) - {\epsilon\over{\sigma}}\\vert\vert_2^2
+$$ = {1\over 2} E_{p(X),\epsilon}\vert\vert\nabla_{X+\sigma\epsilon} \log p_W(X+\sigma\epsilon,\sigma) - {\epsilon\over{\sigma}}\\vert\vert_2^2  $$
 
 Estimating $W$ my minimizing $L_{DSM}$ is a straightforward regression problem. The final step is to make the noise level $\sigma$ go to zero, so that
 
