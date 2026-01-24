@@ -272,15 +272,15 @@ $$ \nabla_{X'} \log p_W(X') \approx \nabla_{X} \log p(X)  $$
 and the two score functions match.
 
 
-### Noise Controlled Score Matching (NCSM)
+### Noise Conditional Score Networks (NCSN)
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat61.png) 
 
-Figure 2: Illustration of NCSM
+Figure 2: Illustration of NCSN
 
 The DSM algorithm has some shortcomings, in complex high dimensional energy spaces ith lots of saddle points where the score function is close to zero, the Langevin equation can stuck in sub-optimal regions. Even if it eventually manages to get out, it can take a long time to converge. The solution to this problem was proposed by Song and Ermon, and is basically a version of the simulated annealing algorithm that was described in Part 1. Recall that simulated annealing worked by starting the optimization at a high temperature so that the iteration had enough energy to jump out of shallow local minima and saddle points, and then gradually reducing the temperature to allow it explore deeper regions with larger valleys. Song and Ermon proposed a similar mechanism for DSM, where the noise was varied not through temperature, but by varying the variance $\sigma$.
 
-The NCSM algorithm is illustrated in the above figure. During training noise is injected at multiple levels $\sigma_1,...,\sigma_L$, where $\sigma_1<\sigma_2<...\sigma_L$, so that we end up with $L-1$ DSM models with corresponding score function models $\nabla_{X'} \log p_{W}(X',\sigma_1),...,\nabla_{X'} \log p_{W}(X',\sigma_L)$. Note that the same set set of parameters $W$ are used at each noise level.
+The NCSN algorithm is illustrated in the above figure. During training noise is injected at multiple levels $\sigma_1,...,\sigma_L$, where $\sigma_1<\sigma_2<...\sigma_L$, so that we end up with $L-1$ DSM models with corresponding score function models $\nabla_{X'} \log p_{W}(X',\sigma_1),...,\nabla_{X'} \log p_{W}(X',\sigma_L)$. Note that the same set set of parameters $W$ are used at each noise level.
 The NCSM objective is given by
 
 $$ L_{NCSM}(W) = \sum_{i=1}^L \lambda(\sigma_i) L_{DSM}(W,\sigma_i)  $$
@@ -299,7 +299,7 @@ The complete inference algorithm is given below (from Song and Ermon)
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat62.png) 
 
-Figure 2: Illustration of NCSM
+Figure 2: Illustration of NCSN
 
 
 
