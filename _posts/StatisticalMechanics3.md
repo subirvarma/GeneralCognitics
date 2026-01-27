@@ -23,16 +23,18 @@ Figure 1: The energy landscape in an image generation EBM
 The EBM approach to generative modeling also enables us to form an intuitive picture of how generative ANNs work and here is a high level description that will be elaborated upon later.
 The probability distribution underlying real world data such as images or text can be approximated by the Boltzmann distribution as
 modeled by a spin glass type EBM, with nodes with state $(x_1,...,x_N)$ in the model interacting with each other using a sophisticated energy function $E_W(x_1,...,x_N)$ where $W$ represents the parameters of the model. 
-All possible images (or text) are arranged in the landscape of this energy function, in which the bottom of valleys corresponds to images that make sense to us, hence these have lower energy than images that don't make any sense (see figure 1). The process of generation consists of starting from an initial state in the state space (which may look like noise to us), and then navigating the energy landscape until we arrive at a minima, and at this point the configuration looks like an intelligable image. The process of finding the minima is a sampling operation using Langevin sampling, which is a generalization of the Gibbs sampling used for Boltzmann machines. The sampling is made efficient by using an idea that is related to that of simulated annealing that we came across in Part 1, and works by introducing noise at various levels of intensity and gradually reducing it as we approach the minima. 
+All possible images (or text) are arranged in the landscape of this energy function, in which the bottom of valleys corresponds to images that make sense to us, hence these have lower energy than images that don't make any sense (see figure 1). The process of generation consists of starting from an initial state in the state space (which may look like noise to us), and then navigating the energy landscape until we arrive at a minima, and at this point the configuration looks like an intelligible image. The process of finding the minima is a sampling operation using Langevin sampling, which is a generalization of the Gibbs sampling used for Boltzmann machines. The sampling is made efficient by using an idea that is related to that of simulated annealing that we came across in Part 1, and works by introducing noise at various levels of intensity and gradually reducing it as we approach the minima. 
 
 ## Introduction
 
 All of modern Generative AI systems, such as LLMs for generating text and diffusion models for generating images, are based on the idea of sampling from a probability distribution that approximates the statistics of the training data. Hinton and Sejnowski were the first ones to realize the power of this idea, and showed how to obtain an EBM model for the probability distribution by choosing the interaction strengths in a Sherrington-Kirkpatrich type spin glass model, that they called a Boltzmann machine. These systems worked well, but failed to scale up and also suffered from long convergence times. On the other hand they had the benefit that they could serve as plausible models for biological neural networks. 
 So the question arises whether Boltzmann machine type sampling based EBM models can scale up to node sizes that are comparable to non-EBM based modern generative ANNs and with comparable or better performance, while being faster and more energy efficient. We have made a good deal of progress in the last decade or so towards this goal, and this is described in this article.
 
-Boltzmann machine based EBM models entered a winter phase following the success of backprop driven neural network models, heralded by the AlexNet model of 2012, and more recently with the LLM models from OpenAI and others.
+Boltzmann machine based EBM models entered a winter phase following the success of backprop driven neural network models, heralded by the AlexNet model of 2012 (which also came out of Hinton'e research group), and more recently with the LLM models from OpenAI and others.
 However beginning in 2019 there has been a renewed interest in EBMs, led by research coming from academia, such as by Stefano Ermon's group at Stanford University, which has led to considerable progress in the
-modeliing capability of EBMs. The original Boltzmann Machines never became commercially viable due to a couple of problems:
+modeliing capability of EBMs. 
+
+The original Boltzmann Machines never became commercially viable due to a couple of problems:
 
 - They were not able to scale up to beyond a few hundred nodes since the training process became too time consuming. This was due to the fact that the sampling algorithm was not able to handle multi-model distributions very well. It took an excessive amount of time to move between valleys in the energy landscape during the sampling process.
 - The Boltzmann Machine was limited to the quadratic energy function with per node state values of 0 and 1 (or -1 and 1). In order to compete with modern neural networks there was a need to extend it to more general energy functions and node values that are real numbers.
@@ -90,11 +92,11 @@ Figure 1: Computing the energy functions for EBMs
 The original Ising model for paramagnetism featured a simple energy function, shown in part (a) of the above figure. The interaction strength between nodes was uniform across the entire network, and this resulted in an energy landscape with a couple of minima corresponding to net magnetization of the system. Sherrington and Kirkpatrick modified this model by making the interaction strengths random, and also allowed each node to interact with every other node in the system, shown in part (b). This led to a complex energy landscape with a large number of minima that scaled up with the number of nodes.
 The SK model was subsequently used by Hopfield and Hinton to create the first computational and generative models, namely the Hopfield network and the Boltzmann machine, as described in Part 2 of this article series. 
 
-A way for EBMs to transition to the modern era is shown in the lower part of the figure. Part (c) shows an energy function that is described by convolutional neural network or CNN which were originally introduced as a way to process images. Part (d) of the figure shows an EBM that uses the transformer network for computing energy functions. Transformers are another powerful way to model energy functions, traditional auto-regressive LLMs use them as a way to sample from conditional probability distributions. 
-Note that neither of the EBMs in the lower part of the figure show inter-node interaction strengths, presumably these exist but are much more complex than the ones in the upper part of the figure. Indeed the modern theory of EBMs is based entirely on the energy functions, which can be as complex as we wish, as long as they can be represented by a neural network.
-
-Note that in the original EBMs shown in parts (a) and (b), the energy function was parametrized by the interaction strengths between nodes. 
-On the other hand, if we use either a CNN or transformer (or any other ANN) to model the energy function, then the energy function is parametrized by the weights in the ANN. 
+A way for EBMs to transition to the modern era is shown in the lower part of the figure. Part (c) shows an energy function that is described by convolutional neural network or CNN which were originally introduced as a way to process images. Part (d) of the figure shows an EBM that uses the transformer network for computing energy functions. Transformers are a powerful way to model energy functions, traditional auto-regressive LLMs use them as a way to sample from conditional probability distributions. 
+Note that neither of the EBMs in the lower part of the figure show inter-node interaction strengths, presumably these exist but are much more complex than the ones in the upper part of the figure. 
+In the original EBMs shown in parts (a) and (b), the energy function was parametrized by the interaction strengths between nodes, 
+on the other hand, if we use either a CNN or transformer (or any other ANN) to model the energy function, then the energy function is parametrized by the weights in the ANN. 
+Indeed the modern theory of EBMs is based entirely on the energy functions, which can be as complex as we wish, as long as they can be represented by a neural network.
 
 Whether we use inter-node interactions or we use a ANN to model the energy function, in either case the probability of the system being in state $(x_1,x_2,...,x_N)$ is given by
 
@@ -116,10 +118,11 @@ The new design raises the following questions:
 - How can we sample from these networks, since Gibbs sampling clearly cannot be used here.
 - How do we train these networks? Do Contrastive Divergence (CD) type algorithms still work?
 
-The first question is answered in the next subsection in which we introduce a powerful MCMC type sampling algorithm called Langevin sampling. The answer to the training
-question is more involved and occupies the following sections. Not only do we have to come up with training schema that applies to more complex energy landscapes, but the new algorithm also has to avoid the issues that plagued the older Boltzmann Machine system, namely that they and related systems could not be scaled beyond a few thousand nodes since the computational cost of sampling became excessive. This problem has to do with the difficulty in sampling from a multi-model landscapes, as illustrated in figure 2.
+The first question is answered in the next section in which we introduce a powerful MCMC type sampling algorithm called Langevin sampling. The answer to the training
+question is more involved and occupies the following sections. 
+The problem that we need to solve is that of choosing the parameters $W$ such that the probability distribution $p_W(x_1,x_2,...,x_N)$ given by the model is close to the training data distribution $p(x_1,x_2,...,x_N)$. 
+Not only do we have to come up with training schema that applies to more complex energy landscapes, but the new algorithm also has to avoid the issues that plagued the older Boltzmann Machine system, namely that they and related systems could not be scaled beyond a few thousand nodes since the computational cost of sampling became excessive. This problem has to do with the difficulty in sampling from a multi-model landscapes, as illustrated in figure 1.
 
-The problem that we need to solve is that of choosing the parameters $W$ such that the probability distribution $p_W(x_1,x_2,...,x_N)$ is close to the training daTa distribution $p(x_1,x_2,...,x_N)$. But before we get into that, lets talk about how we can sample from these models.
 
 ### Using EBMs to Generate Images
 
@@ -129,10 +132,10 @@ Figure 2: Image generation using EBMs
 
 The above figure gives a high level overview of how EBMs can be used to generate images. In this case the nodes in the EBM correspond to pixels in the image. 
 Given a training data distribution consisting of a bunch of images, we will assume that the pixels in an image follow a Boltzmann distribution
-$p(x_1,...,x_N)={e^-{E(x_1,...,x_N)}\over{Z}}$ for some unknown energy function $E(x_1,...,x_N)$. We can consider that the pixels in the image are 'interacting' with each other, which results in the interaction energy $E(x_1,...,x_N)$, and ultimately the interactions settle down to an equilibrium in which the distributon of the pixels is given by the Boltzmann distribution. Thus the equilibrium state, which is that of lowest energy, also corresponds to states that result in images that look like those from the training dataset.
+$p(x_1,...,x_N)={e^{-E(x_1,...,x_N)}\over{Z}}$ for some unknown energy function $E(x_1,...,x_N)$. We can consider that the pixels in the image are 'interacting' with each other, which results in the interaction energy $E(x_1,...,x_N)$, and ultimately the interactions settle down to an equilibrium in which the distributon of the pixels is given by the Boltzmann distribution. Thus the equilibrium state, which is that of lowest energy, also corresponds to states that result in images that look like those from the training dataset.
 
 The right hand side of the figure shows an EBM model with energy function $E_W(x_1,...,x_N)$, and if we can train the model so that $E_W(x_1,...,x_N)\approx E(x_1,...,x_N)$, then the model should be able to generate images by sampling, and these images should look like they came from the training dataset. It is easier to approximate the score functions instead,
-defines as ${\partial E_W\over{\partial x_i}}\approx {\partial E\over{\partial x_i}}$, and we will show later that we can sample from the model from a knowledge of the score function alone. Image generation using EBMs is based on this idea of training the model so that it approximates the score function of the training data, and new images are generated by sampling from the model until it settles into an energy minima.
+defined as ${\partial E_W\over{\partial x_i}}\approx {\partial E\over{\partial x_i}}$, and we will show later that we can sample from the model from a knowledge of the score function alone. Image generation using EBMs is based on this idea of training the model so that it approximates the score function of the training data, and new images are generated by sampling from the model until it settles into an energy minima.
 
 ### Text to Image Generation
 
@@ -146,28 +149,29 @@ This is the province of text to image models which turn a textual description in
 
 These models can be understood as minimzation of the energy function $E_{W}(x_1,...,x_N, c)$ where the variable $c$ is the latent vector representing the textual description.  During inference sample images are generated by starting from a text description $c$ and a random state $(x_1,...,x_N)$, and then using the multistage sampling process to find the configuration that has the minimum energy. Each value of the text $c$ can led to multiple possible generated images, depending upon our choice of the initial random state configuration. 
 
-For a given context $c$, the energy $E_W(x_1,...,x_N)$ forms a function with multiple minima, such that each minima corresponds to images similar to those in the training set, just as before. However the presence of the context means that all these images are constrained by it. For example if the context is "Images of dogs jumping over a fence" then the energy landscape with be limited to state configurations that correspond to this text.
+For a given context $c$, the energy $E_W(x_1,...,x_N)$ forms a function with multiple minima, such that each minima corresponds to images similar to those in the training set, just as before (see above figure). However the presence of the context means that all these images are constrained by it. For example if the context is "Images of dogs jumping over a fence" then the energy landscape with be limited to state configurations that correspond to this text.
 
 
 ### Generative EBMs as Models for Biological Brains
 
 This section consists of some speculation on my part on the subject whether the recent progress in EBMs can shed any light on the processing that goes on in our brains.
-Both our brains and the latest generation of ANNs seem to be doing similar things, but effrts to find ANN type mechanisms in the brain have not yielded much success so far.
-The brain itself has billions of neurons with trillions of connections between them, which is collcetively referred to as the connectome. There are efforts underway to map the connectome to see whether it can offer some insight, but given the enormity of the task, the progress has been very slow. There has been one significant success though: Around 1960 the neuroscientists Hubel and Wiesel were able to map the circuitry that led from a cat's eye to its neural cortex, and twenty years later this work served as the inspiration for the design of convolutional neural networks or CNNs. However no such neural structures have been found that are similar to the transformer architecture, and nor is there any evidence that the brain uses a backprop like algorithm for training its neurons.
+Both our brains and the latest generation of ANNs seem to be doing similar things, but efforts to find ANN type mechanisms in the brain have not yielded much success so far.
+The brain itself has billions of neurons with trillions of connections between them, which is collectively referred to as the connectome. There are efforts underway to map the connectome to see whether it can offer some insight, but given the enormity of the task, the progress has been very slow. There has been one significant success though: Around 1960 the neuroscientists Hubel and Wiesel were able to map the circuitry that led from a cat's eye to its neural cortex, and twenty years later this work served as the inspiration for the design of convolutional neural networks or CNNs. However no such neural structures have been found that are similar to the transformer architecture, and nor is there any evidence that the brain uses a backprop like algorithm for training its neurons.
 
-In my opinion looking for signs of transformers or backprop in the brain is probably not the right way to approach the problem. It is more likely that the brain operates using EBM principles since these are firmly grounded on the physics of how a large number of nodes can interact with one another and create emergent behaviors. The interconnect topolgy between neurons is exteremely complex and it is quite likely that its explanation will lie outside human comprehension for the forseable future, However EBM theory tells us that what is important is not the interconnect toplogy, but the resulting energy function that results from the interactions. Indeed the properties of the energy function determine the information stored in the EBM and how it can retrieved. So perhaps this provides a cue that instead of trying to exactly map the connectome, we should be studying the brain at the level of its energy function instead. Even more interesting is the speculation that transformers don't serve as a model for the connectome, but instead are really models for the energy function that emerges from the connectome. 
+In my opinion looking for signs of transformers or backprop in the brain is probably not the right way to approach the problem. It is more likely that the brain operates using EBM principles since these are firmly grounded on the physics of how a large number of nodes can interact with one another and create emergent behaviors. The interconnect topology between neurons is exteremely complex and it is quite likely that its explanation will lie outside human comprehension for the forseable future. However EBM theory tells us that what is important is not the interconnect toplogy, but the resulting energy function that results from the interactions. Indeed the properties of the energy function determine the information stored in the EBM and how it can retrieved. So perhaps this provides a clue that instead of trying to exactly map the connectome, we should be studying the brain at the level of its energy function instead. Even more interesting is the speculation that transformers don't serve as a model for the connectome, but instead are really models for the energy function that emerges from the connectome. 
 
-But what about training, since there is no evidence of backprop in the brain? It is quite likely that training happens using a sampling type of algorithm of the type that Hinton used for Boltzmann machines. These algorithms can be connected back to the synaptic learning rule that Macauley and Pitts proposed back in the 1940s. If this indeed were to be the case, this would also explain why our brains are much more energy efficient than the current generation of ANNs, since thermodynamic based sampling can exploit the physics of the substrate, and thus can be faster as well as energy efficient.
+But what about training, since there is no evidence of backprop in the brain? It is quite likely that training happens using a sampling type of algorithm of the type that Hinton used for Boltzmann machines. These algorithms can be connected back to the synaptic learning rule that McCulloch and Pitts proposed back in the 1940s. If this indeed were to be the case, this would also explain why our brains are much more energy efficient than the current generation of ANNs, since thermodynamic based sampling can exploit the physics of the substrate, and thus can be faster as well as energy efficient.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat60.png) 
 
 Figure 2: A Model for Biological Brains 
 
 With these ideas in mind, the above figure shows a proposed architecture for part of the brain that results in visual images that we see.
-The image that see in front of us does not really exist in reality, in fact it is internally generated by our mind (for more on this topic read my article [What would Kant think of LLMs](https://subirvarma.github.io/GeneralCognitics/2024/07/02/Kant-and-LLMs.html). I am going to assume that there is a set of neurons in our brain whose state $(x_1,...,x_N)$ corresponds to an image that we see, lets call them the vision neurons. The process by which the vision neuron state actually gets converted into an image is a deep mystery into which there is no insight at the present time, also called *the hard problem of consciousness*. 
+The image that see in front of us does not really exist in reality, in fact it is internally generated by our mind (for more on this topic read my article [What would Kant think of LLMs](https://subirvarma.github.io/GeneralCognitics/2024/07/02/Kant-and-LLMs.html)). I am going to assume that there is a set of neurons in our brain whose state $(x_1,...,x_N)$ corresponds to an image that we see, lets call them the vision neurons. The process by which the vision neuron state actually gets converted into an image is a deep mystery into which there is no insight at the present time, also called *the hard problem of consciousness*. 
 I am proposing that the vision neurons have a dense interconnection architecture of the spin glass type, and furthermore the multiple minima of its resulting energy function $E_W(x_1,...,x_N)$ correspond to states of reality in the external world. 
+
 But how does the brain correlate the external reality with the state of the vision neurons, in other words how does it make sure that the image that it generates bears some correspondence to what is actually happening in front of us? 
-A possible mechanism by which this is done is as follows, this is inpired by the text to image models discussed in the previous section: The light impinging on our retina leads to neuronal signals that are processed using the CNN like structure that Hubel and Wiesel discovered. Thjis results in the signal getting converted into a configuration of neurons, lets call it the context $c$. These context nheurons then interact with the vision neurons to create the energy function $E_W(x_1,...,x_N,c)$, and the resulting minima of this energy function results in a configuatrion of vision neurons that correspond to what we see. Hence in some sense most of the informtion in the image that we see is already strored in the vision neurons of our brain, the sparse signals coming to our eyes merely serve as a pointer to choose the correct configuration.
+A possible mechanism by which this is done is as follows, this is inpired by the text to image models discussed in the previous section: The light impinging on our retina leads to neuronal signals that are processed using the CNN like structure that Hubel and Wiesel discovered. This results in the signal getting converted into a configuration of neurons, lets call it the context $c$. These context neurons then interact with the vision neurons to create the energy function $E_W(x_1,...,x_N,c)$, and the resulting minima of this energy function results in a configuatrion of vision neurons that correspond to what we see. Hence in some sense most of the information in the image that we see is already strored in the vision neurons of our brain, the sparse signals coming to our eyes merely serve as a pointer to choose the correct configuration.
 
 This mechanism also serves as a way in which we can conjure up images even with our eyes closed.  There are portions of our brain that store memories, mostt likely in the hippocampus. The neural configurations of these memories can also serve as the context vector $c$ that triggers the vision neurons to create images for us. 
 
@@ -179,7 +183,7 @@ This leads to the idea of a context $c$ which controls the language output by co
 - The context can be just pure thought which may be non-verbal in nature. Clearly there have been cases in which a child bought up in the wild without access to language is nevertheless able to think and carry out intelligent actions.
 
 These speculations lead to the idea that we can create a model of the brain by creating a dense interconnect network whose energy function corresponds to a transformer. But what does this interconnect pattern look like? This seems to be an open question at present, but it is not an insurmountable one, and I expect to see progress in this area in the coming  years.
-Clearly the interactions are more complex than the two node interactions in the SK model, and involve multiple nodes interacting with one another, and thus closer to the P-Spin or PSM type models described in Part 1. Are these more complex interactions biologically plausible? Interactions between biological neurons seem to be of the two node type, however one way to reduce higher node interactions to two node interactions is by introducing hidden nodes into the model, as first pointed out by Krotov and Hopfied. 
+Clearly the interactions are more complex than the two node interactions in a spin-glass type model, and involve multiple nodes interacting with one another, and thus closer to the P-Spin or PSM type models described in Part 1. Are these more complex interactions biologically plausible? Interactions between biological neurons seem to be of the two node type, however one way to reduce higher node interactions to two node interactions is by introducing hidden nodes into the model, as first pointed out by Krotov and Hopfied. 
 
 After all this speculation, lets get down to the nuts and bolts of how modern EBMs work, and we will start with Langevin sampling followed by training algorithms.
 
@@ -197,61 +201,69 @@ where $h_k = \sum w_{ki}\sigma_i + b_k$.
 Repeated sampling results in the network state gradually moving to an equilibrium configuration which corresponds to a local minima for the energy function.
 Gibbs sampling only works if we are able to compute this conditional probability, if the energy function is modeled by an ANN then clearly this procedure no longer holds. 
 
-The discrete time Langevin diffusion update is given by
+The discrete time Langevin equation is given by the iteration
+
+$$ x^i_{n+1} = x^i_n -\eta {\partial \log p_W(x^1,_n,...,x^N_n)\over{\partial x^i_n}} +\sqrt{2\eta}\epsilon_n,\ \ n = 0,1,2,...  $$
+
+Using vector notation this can also be written as
 
 $$ X_{n+1} = X_n -\eta \nabla_x \log p_W(X) +\sqrt{2\eta}\epsilon_n,\ \ n = 0,1,2,...  $$
 
-where $X_n = (x^n_1,...,x^n_N)$ is the state vector at the $n^{th}$ step, 
-$X_0$ is usually initialized from the Gaussian distribution, $\eta>0$ is the step size and the noise $\epsilon_n$ is distributed according to $N(0,I)$. It can be shown that in equilibrium, the disttribution of $X_n$ converges to $p_W(X)$ as $n\rightarrow\infty$ exponentially fast. Since we want the distribution $p_W(X)$ to converge to the Boltzmann distribution, lets substitute this into the equation, which results in
+where $X_n = (x^1_n,...,x^N_n$ is the state vector and $\nabla = ({\partial\over{\partial x^1_n}},...,{\partial\over{\partial x^N_n}}$ is the differential operator,  at the $n^{th}$ step. 
+$X_0$ is usually initialized from the Gaussian distribution, $\eta>0$ is the step size and the noise vector $\epsilon_n$ is distributed according to $N(0,I)$. It can be shown that in equilibrium, the disttribution of $X_n$ converges to $p_W(X)$  exponentially fast as $n\rightarrow\infty$. Since we want the distribution $p_W(X)$ to converge to the Boltzmann distribution, lets substitute this into the equation, which results in
 
 $$ X_{n+1} = X_n -\eta \nabla_x E_W(X) +\sqrt{2\eta}\epsilon_n,\ \ n = 0,1,2,...  $$
 
-The first two terms on the RHS of this equation are just the Newton method for finding the vector $X$ at which the function $E_W(X)$ is minimized (or equivalently the probability $p_W(X0$ is maximized), while the third term adds some noise to the process. Hence the overall effect is that of moving the system state to regions of higher probability, with the noise term enables the iteration to ocassionally jump out of local minima so that there is a greater probability that the iteration ends near a deeper minima.
+The first two terms on the RHS of this equation are just the Newton method for finding the vector $X$ at which the function $E_W(X)$ is minimized (or equivalently the probability $p_W(X)$ is maximized), while the third term adds some noise to the process. Hence the overall effect is that of moving the system state to regions of higher probability, while the noise term enables the iteration to ocassionally jump out of local minima so that there is a greater probability that the iteration ends near a deeper minima.
 
-The beauty of the Langevin diffusion is that enables us to generate samples from the distribution $p_W(X)$ without having to explicitly compute the partition function $Z$ or even the energy function $E$, all that we need are estimates of the score function ${\partial E\over{\partial x_i}}$. This frees us from the necessity of relating the energy function back to the inter-node interactions and enables us to sample from arbitrarily complex energy functions. Although not very well known, the Langevin diffusion is probably the most important equation in the modern theory of generative models.
+The beauty of the Langevin diffusion is that enables us to generate samples from the distribution $p_W(X)$ without having to explicitly compute the partition function $Z$ or even the energy function $E$, all that we need are estimates of the score function ${\partial E\over{\partial x_i}}$. This frees us from the necessity of relating the energy function back to the inter-node interactions and enables us to sample from arbitrarily complex energy functions. Note that unlike the Gibbs equation the Langevin also applies to the case the states $x^i_n$ are any real nunber.
+Although not very well known, the Langevin diffusion is probably the most important equation in the modern theory of generative models.
 
 ## Training EBMs with Complex Energy Functions
 
-Given a training dataset consisting of a bunch of images, we will start with the problem of training a model that generates new images that look similar to those in the training set. We will assume that the distribution of pixels in the training dataset is given by the (unknown) Boltzmann distribution
+Given a training dataset consisting of a collection of images, we will start with the problem of training a model that generates new images that look similar to those in the training set. We will assume that the distribution of pixels in the training dataset is given by the (unknown) Boltzmann distribution
 
 $$ p(x_1,x_2,...,x_N) = {e^{-E(x_1,...,x_N)}\over{Z}} $$
 
-Our EBM model in turn in equilibrium has a distribution given by its own energy function
+Our EBM model in turn, has an equilibrium distribution given by its own energy function
 
 $$ p_W(x_1,x_2,...,x_N) = {e^{-E_W(x_1,...,x_N)}\over{Z}} $$
 
 In order to make the generated images similar to those in the training set, we want to choose the model parameters $W$ so that
-$ p(x_1,x_2,...,x_N)\approx p_W(x_1,x_2,...,x_N)$. This was the approach taken by Hinton and Sejnowski in their training algorithm for the Boltzmann machines, and they showed that the problem reduces to finding the maximum likelihood estimates of $W$. As pointed out earlier this approach runs into the problem of estimating the partition function $Z$ which in general is a difficult one to solve.
-We will will pursue this approach in the next section, but for now we we will describe a more modern approach which avoids the estimation of $Z$ and is based on approximating the energy function so that
+$p(x_1,x_2,...,x_N)\approx p_W(x_1,x_2,...,x_N)$. This was the approach taken by Hinton and Sejnowski in their training algorithm for the Boltzmann machines, and they showed that the problem reduces to finding the maximum likelihood estimates of $W$. This approach runs into the problem of estimating the partition function $Z$ which in general is a difficult one to solve.
+We will pursue this approach in the next section, but for now we we will describe a more modern approach which avoids the estimation of $Z$ and is based on approximating the energy function so that
 $E(x_1,...,x_N)\approx E_W(x_1,...,x_N)$. This would seem to be a straightforward application of supervised learning if we knew $E(x_1,...,x_N)$, unfortunately
 that is not the case. For Langevin sampling we don't need $E_W$, but do need the score function, so perhaps we should be seeking the approximation
-${\partial E_W\over{\partial x_i}}\approx {\partial E\over{\partial x_i}}$. This results in the problem of choosing the $W$ to minimize the score matching error given by 
+${\partial E_W\over{\partial x_i}}\approx {\partial E\over{\partial x_i}}$. This results in the problem of choosing the $W$ to minimize the score matching error, also called the Fischer divergence, given by 
 
-$$ L_{SM}(W) = {1\over 2} E_{p(X)}\vert\vert\nabla_x \log p_W(X) - \nabla_x \log p(X)\vert\vert_2^2  $$
+$$ L_{SM}(W) = {1\over 2} E_{p(X)}\vert\vert\nabla_x \log s_W(X) - \nabla_x \log p(X)\vert\vert_2^2  $$
 
-where $X=(x_1,...,x_N)$. This approach can be made to work, as first pointed out by Hyvarinen and Dayan, but however runs into the computational problem of computing second order derivatives or the trace of Jacobian during the training process.
+where $X=(x^1,...,x^N)$ and the score given by $s_W(X) = \nabla_x p_W(X)$$. 
+This approach can be made to work, as first pointed out by Hyvarinen and Dayan, but however runs into the computational problem of computing second order derivatives or the trace of Jacobian during the training process.
 
 The critical advance was made by Vincent in 2011 which he called denoised score matchin or DSM and the critical idea was that of introducing noise into the training process. Vincent noted that the problem with minimizing $L_{SM}$ is due to the intractibility of $\nabla_x\log p(X)$. He proposed injecting noise into the data samplex $X$ via a known conditional distribution $p_\sigma(X'\vert X)$ with scale $\sigma$. We then try to approximate the score of the noisy samples by minimizing the loss function
 
-$$ L_{SM}(W,\sigma) = {1\over 2} E_{p(X')}\vert\vert\nabla_{X'} \log p_W(X',\sigma) - \nabla_{X'} \log p_{\sigma}(X')\vert\vert_2^2  $$
+$$ L_{SM}(W,\sigma) = {1\over 2} E_{p(X')}\vert\vert\ s_W(X';\sigma) - \nabla_{X'} \log p_{\sigma}(X')\vert\vert_2^2  $$
 
-where
+where the distribution of the noisy sample is given by
 
-$$ p_{sigma}(X') = \int p_{sigma}(X'\vert X) p(X) dx $$
+$$ p_{\sigma}(X') = \int p_{\sigma}(X'\vert X) p(X) dx $$
 
-Vincent shows that even though $\nabla_x \log p_{\sigma}(X')$ is intractable, it can be replaced by a tractable objevtive by conditioning on the distribution $p(X)$ of the original data samples, which results in the Denoising Score Matching (DSM) loss given by
+Vincent showed that even though $\nabla_{X'} \log p_{\sigma}(X')$ is intractable, it can be replaced by a tractable objective by conditioning on the distribution $p(X)$ of the original data samples, which results in the Denoising Score Matching (DSM) loss given by
 
-$$ L_{DSM}(W,\sigma) = {1\over 2} E_{p(X),p(X'\vert X)}\vert\vert\nabla_{X'} \log p_W(X',\sigma) - \nabla_{X'} \log p_{\sigma}(X'\vert X)\vert\vert_2^2  $$
+$$ L_{DSM}(W,\sigma) = {1\over 2} E_{p(X),p(X'\vert X)}\vert\vert s_W(X';\sigma) - \nabla_{X'} \log p_{\sigma}(X'\vert X)\vert\vert_2^2  $$
 
-Vinvent showed that the value of $W$ that minimizes $L_{DSM}$ satisfies the equation
+Vincent showed that the value of $s_W$ that minimizes $L_{DSM}$ satisfies the equation
 
-$$ \log p_W(X',\sigma) = \nabla_{X'} \log p_{\sigma}(X') $$
+$$ s^*(X';\sigma) = \nabla_{X'} \log p_{\sigma}(X') $$
 
-which the same $W$ that also minimizes $L_{SM}$. For the special case when $p_{\sigma}(X'\vert X)$ is Gaussian noise with variance $\sigma^2$ so that
+which the same $W$ that also minimizes $L_{SM}$. When the noise level $\sigma$ is small $s^*(X';\sigma) \approx \nabla_{X} \log p_{\sigma}(X)$, so that taking a small step along the noisy score direction $s^*(X';\sigma)$ moves a noisy sample in roughly the same direction as a clean sample, which is the intuition behind why this technique works.
+
+For the special case when $p_{\sigma}(X'\vert X)$ is Gaussian noise with variance $\sigma^2$ so that
 
 $$ X' = X + \sigma\epsilon $$
 
-where $\epsilon$ is distributed according to $N(0,I)$$, so that
+where the noise vector $\epsilon$ is distributed according to $N(0,I)$$, so that
 
 $$ p_{\sigma}(X'\vert X) = N(X'; X, \sigma^2 I)$$
 
@@ -261,9 +273,9 @@ $$ \nabla_{X'}\log p_{\sigma}(X'\vert X) = {X-X'\over{\sigma}} $$
 
 thus making the minimization of $L_{DSM}(W,\sigma)$ computationally feasible. The DSM loss simplifies to
 
-$$ L_{DSM}(W,\sigma) = {1\over 2} E_{p(X),p(X')}\vert\vert\nabla_{X'} \log p_W(X',\sigma) - {X-X'\over{\sigma}}\\vert\vert_2^2  $$
+$$ L_{DSM}(W,\sigma) = {1\over 2} E_{p(X),p(X')}\vert\vert s_W(X';\sigma) - {X-X'\over{\sigma}}\\vert\vert_2^2  $$
 
-$$ = {1\over 2} E_{p(X),\epsilon}\vert\vert\nabla_{X+\sigma\epsilon} \log p_W(X+\sigma\epsilon,\sigma) - {\epsilon\over{\sigma}}\\vert\vert_2^2  $$
+$$ = {1\over 2} E_{p(X),\epsilon}\vert\vert s_W(X+\sigma\epsilon;\sigma) + {\epsilon\over{\sigma}}\\vert\vert_2^2  $$
 
 Estimating $W$ my minimizing $L_{DSM}$ is a straightforward regression problem. The final step is to make the noise level $\sigma$ go to zero, so that
 
@@ -271,39 +283,35 @@ $$ \nabla_{X'} \log p_W(X') \approx \nabla_{X} \log p(X)  $$
 
 and the two score functions match.
 
-
 ### Noise Conditional Score Networks (NCSN)
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat61.png) 
 
-Figure 2: Illustration of NCSN
+Figure 2: Illustration of a NCSN
 
-The DSM algorithm has some shortcomings, in complex high dimensional energy spaces ith lots of saddle points where the score function is close to zero, the Langevin equation can stuck in sub-optimal regions. Even if it eventually manages to get out, it can take a long time to converge. The solution to this problem was proposed by Song and Ermon, and is basically a version of the simulated annealing algorithm that was described in Part 1. Recall that simulated annealing worked by starting the optimization at a high temperature so that the iteration had enough energy to jump out of shallow local minima and saddle points, and then gradually reducing the temperature to allow it explore deeper regions with larger valleys. Song and Ermon proposed a similar mechanism for DSM, where the noise was varied not through temperature, but by varying the variance $\sigma$.
+The DSM algorithm has some shortcomings; in complex high dimensional energy spaces with lots of saddle points where the score function is close to zero, the Langevin iteratiom can stuck in sub-optimal regions. Even if it eventually manages to get out, it can take a long time to converge. The solution to this problem was proposed by Song and Ermon, and is basically a version of the simulated annealing algorithm that was described in Part 1. Recall that simulated annealing worked by starting the optimization at a high temperature so that the iteration had enough energy to jump out of shallow local minima and saddle points, and then gradually reducing the temperature to allow it explore deeper regions within larger valleys. Song and Ermon proposed a similar mechanism for DSM, where the noise was varied not through temperature, but by varying the variance $\sigma$.
 
-The NCSN algorithm is illustrated in the above figure. During training noise is injected at multiple levels $\sigma_1,...,\sigma_L$, where $\sigma_1<\sigma_2<...\sigma_L$, so that we end up with $L-1$ DSM models with corresponding score function models $\nabla_{X'} \log p_{W}(X',\sigma_1),...,\nabla_{X'} \log p_{W}(X',\sigma_L)$. Note that the same set set of parameters $W$ are used at each noise level.
+The NCSN algorithm is illustrated in the above figure. During training noise is injected at multiple levels $\sigma_1,...,\sigma_L$, where $\sigma_1<\sigma_2<...\sigma_L$, and the idea is to train a
+score model $s_W(X,\sigma)$ that works for all $\sigma\in {\sigma_1,...,\sigma_L}$.
 The NCSM objective is given by
 
 $$ L_{NCSM}(W) = \sum_{i=1}^L \lambda(\sigma_i) L_{DSM}(W,\sigma_i)  $$
 
 where
 
-$$ L_{DSM}(W,\sigma) = {1\over{2}}E_{P(X),P(X'\vert X)}[\vert\vert \nabla_{W}(X',\sigma) - {X-X'\over{\sigma^2}}\vert\vert^2_2 $$
+$$ L_{DSM}(W,\sigma) = {1\over{2}}E_{P(X),P(X'\vert X)}[\vert\vert s_W(X',\sigma) - {X-X'\over{\sigma^2}}\vert\vert^2_2 $$
 
 where $\lambda(\sigma_i)$ is a weighing function for each noise level. Minimization leads to a score model $s^{*}(X,\sigma)$ that can be used at at each noise level to recover the true score $\nabla_X\log p_{\sigma}(X)$ for all $\sigma\in\{\sigma_i}_{i=1}^L $.
 
-During the inference process, we start with a pure random sample $X_0$ distributed according to $N(0,I)$, and then Langevin iteration is applied successively at each noise level $\sigma_L$ to sample from the distribution $p_{Wi}(X'.sigma_i), i=L,L-1,...,1$. At each level the algorithm is itearated $K$ times, and the output from level $\sigma_l$ is used to initialize the next lower level $\sigma_{l-1}$. The iteration at the l^{th}$ level is given by
+During the inference process, we start with a pure random sample $X_0$ distributed according to $N(0,I)$, and then Langevin iteration is applied successively at each noise level $\sigma_l$ to sample from the distribution $p_{W}(X';sigma_l), l=L,L-1,...,1$. At each level the algorithm is iterated $K$ times, and the output from level $\sigma_l$ is used to initialize the next lower level $\sigma_{l-1}$. The iteration at the l^{th}$ level is given by
 
-$$ X_{n+1} = X_n + \eta_l \nabla_{X'}(X_n,\sigma_l) + sqrt{2\eta}\epsilon_n $$
+$$ X_{n+1} = X_n + \eta_l s_W(X_n,\sigma_l) + \sqrt{2\eta}\epsilon_n $$
 
 The complete inference algorithm is given below (from Song and Ermon)
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat62.png) 
 
 Figure 2: Illustration of NCSN
-
-
-
-
 
 ### Training Using MCMC Sampling
 
