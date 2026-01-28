@@ -307,19 +307,68 @@ During the inference process, we start with a pure random sample $X_0$ distribut
 
 $$ X_{n+1} = X_n + \eta_l s_W(X_n,\sigma_l) + \sqrt{2\eta}\epsilon_n $$
 
+![](https://subirvarma.github.io/GeneralCognitics/images/stat63.png) 
+
+Figure 2: A single step of the denoising process using Langevin sampling using the score estimate
+
+A single step of the de-noising process is ilustrated above.
 The complete inference algorithm is given below (from Song and Ermon)
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat62.png) 
 
 Figure 2: Illustration of NCSN
 
-### Training Using MCMC Sampling
+## Training Using MCMC Sampling
 
+The score based technique described in the previous section was able to generate images which are currently the state of the art in the field. However it does come with issue that it uses feedforward ANNs such as CNNs and transformers as function approximators in order to do this. This contrasts with the earlier Boltzmann machine based image generation models whose operation was entirely based on the sampling operation. 
+It would be nice if there was a way to equal the performance of the score based technique, while basing it entirely on Langevin or Gibbs sampling type operations, and without the use of feedforward ANNs.
+This will open the door to avoiding the backprop algorithm for training, and potentially much more energy efficient systems. It also brings us one step closer to modeling the brain, since both it and sampling based models obey the principles of free energy minimization from thermodynamics.
 
+### The Maximum Likelihood (MLE) Algorithm
 
+As before let $p(X)$ and $p_W(X)$ be the probability distributions for the training examples and the model repectively. Since it is an EBM, we can write $p_W(X0$ as
 
-### NCSN: A Multi-Stage DSM Training Algorithm
+$$ p_W(X) = {e^{E_W(X)}\over Z_W}$$
 
+where $X$ is a vector $X=(x^1,...,x^N)$ and the partition function is given by $Z_W = \int e^{E_W(X)} dX$ as usual. 
+Assuming we are given $m$ training samples $X_1,...,X_M$, 
+in order to learn this model using MLE, we have to maximize the log-likelihood function given by
+
+$$ L(W) = {1\over M}\sum_{i=1}^M \log p_W(X_i) = E_{p(X)}[\log p_W(X)]  $$
+
+This can be written as
+
+$$ L(W) =  -{1\over M}\sum_{i=1}^M E_W(X_i) - \log Z_W $$
+
+The maximization can be done by using the gradient ascent algorithm, but in order to do this we need to estimate $\nabla_W L(W)$ which can be done using the following steps.
+First differentiation $p_W(X)$ leads to
+
+$$ \nabla_W\log p_W(X) = \nabla_W E_W(X) - \nabla_W \log Z_W $$
+
+It can be shown that
+
+$$ \nabla_W \log Z_W = E_{p(X)}[-\nabla_W E_W(X)] $$ 
+
+so that
+
+$$ \nabla_W\log p_W(X) = \nabla_W E_W(X) + E_{p(X)}[-\nabla_W E_W(X)]  $$
+
+It follows that
+
+$$ \nabla_W L(W) = -E_{p(X)}[\nabla_W E_W(X)] +  E_{p_W(X)}[-\nabla_W E_W(X)] $$
+
+The first term decreases the energy for data points that belong to the training set, while the second term increases the energy for data samples that are generated from from the model. 
+This is basically a rederivation of the Boltzmann machine training algorithm, with the exception that $E_W(X)$ is restricted to be quadratic and also $X$ is no longer to the values 0 and 1.
+This technique hinges on getting samples from the model which are distributed according to $p_W(X)$ and since we can no longer use Gibbs sampling, we resort to using Langevin sampling instead
+
+$$ X_{n+1} = X_n - {\eta\over 2}\nabla_W E_W(X_n) +\sqrt{\eta}\epsilon _n $$
+
+where $\epsilon_n$ is drawn from a normal distribution $N(0,I)$. 
+
+This algorithm suffers from the same issues that plagued the Boltzmann machine and led to long sampling times thus limiting its scalability to few hundred nodes at most.
+Gap, Song et.al. proposed a way to get around this problam, and this is covered in the next section.
+
+### The Diffusion Recovery Likelihood (DRL) Algorithm
 
 
 
