@@ -370,8 +370,36 @@ Gap, Song et.al. proposed a way to get around this problam, and this is covered 
 
 ### The Diffusion Recovery Likelihood (DRL) Algorithm
 
+The DRL method is also used on the idea of injectine noise at various levels, just as for the NCSN algorithm used with score matching. 
+Before we describe this, lets look at MLE for the case when the data samples $X_i$ are perturbed by Gaussian noise so that
 
+$$  X' = X + \sigma\epsilon $$
 
+where as before $\epsilon$ is distributed according to $N(0,I)$. If $p(X)$ follows the Boltzmann distribution, then using Bayes rule it can be shown that the conditional probability $p(X\vert X')$ is distributed according to
+
+$$ p(X\vert X') = {1\over Z'_W} e^{-E_W(X) - {1\over{2\sigma^2}}\vert\vert X'-X\vert\vert} $$
+
+where $Z_W = \int e^{-E_W(X) - {1\over{2\sigma^2}}\vert\vert X'-X\vert\vert} dX$ is the partition function for the conditional EBM. The extra quadratic term makes the resulting energy landscape to be localized around $X'$, thus making it less multi-modal and easier to sample from. When $\sigma$ is small, the conditional distribution is approximately single mode Gaussian.
+
+We can define a maximum likelihood function $J(W)$ for the conditional distribution, given by
+
+$$ J(W) = {1\over M}\sum_{i=1}^M \log p_W(X_i\vert X'_i) $$
+
+and the objective is to recover the clean sample $X_i$ from the noisy sample $X'_i$ by maximizing this likelihood. It can be shown that the corresponding Langevin sampling is given by
+
+$$ X_{n+1} = X_n - {\eta\over 2}[[\nabla_W E_W(X_n) + {1\over{2\sigma^2}}\vert\vert X'_n-X_n\vert\vert] +\sqrt{\eta}\epsilon _n $$
+
+It can be shown that given enough data, maximizing $J(W)$ leads to unbiased estimates of the parameters $W$ (see Appendix A2 in Gao, Song et.al, for a proof).
+
+Since the recovery likelihood method described above works well only well the noise level $\sigma$ is small, we can use the same trick as in the NCSN algorithm, and learn a sequence of recovery likelihoods, each of which has a small noise level. In order to do this, a data sample $X(0)$ is perturbed in a sequence of steps to create noisy samples $X(1),...,X(T)$ given by
+
+$$ X(t+1) = \sqrt{1-\sigma^2_{t+1} X(t) + \sigma_{t+1}\epsilon_{t+1},\ \ t=0,1,...,T-1 $$
+
+Defining $Y(t) = \sqrt{1-\sigma^2_{t+1}} X(t)$, we get a sequence of conditional EBMs
+
+$$ p(Y(t)\vert X(t+1)) = {1\over{Z'_W(X(t+1))}} e^{-E_W(Y(t),t) - {1\over{2\sigma^2_{t+1}}\vert\vert X(t+1)-Y(t)\vert\vert}\ \ t=0,1,...T-1 $$
+
+where $E_W(Y(t),t)$ is defined by an ANN conditioned on $t$. We then follow the conditional probability recovery algorithm that was just described, which results in the DRL algorithm.
 
 ## Implementation of  Boltzmann Machines
 
