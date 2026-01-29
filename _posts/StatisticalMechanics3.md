@@ -393,13 +393,22 @@ It can be shown that given enough data, maximizing $J(W)$ leads to unbiased esti
 
 Since the recovery likelihood method described above works well only well the noise level $\sigma$ is small, we can use the same trick as in the NCSN algorithm, and learn a sequence of recovery likelihoods, each of which has a small noise level. In order to do this, a data sample $X(0)$ is perturbed in a sequence of steps to create noisy samples $X(1),...,X(T)$ given by
 
-$$ X(t+1) = \sqrt{1-\sigma^2_{t+1} X(t) + \sigma_{t+1}\epsilon_{t+1},\ \ t=0,1,...,T-1 $$
+$$ X(t+1) = \sqrt{1-\sigma^2(t+1)} X(t) + \sigma(t+1)\epsilon_{t+1},\ \ t=0,1,...,T-1 $$
 
-Defining $Y(t) = \sqrt{1-\sigma^2_{t+1}} X(t)$, we get a sequence of conditional EBMs
+Defining $Y(t) = \sqrt{1-\sigma^2(t+1)} X(t)$, we get a sequence of conditional EBMs
 
-$$ p(Y(t)\vert X(t+1)) = {1\over{Z'_W(X(t+1))}} e^{-E_W(Y(t),t) - {1\over{2\sigma^2_{t+1}}\vert\vert X(t+1)-Y(t)\vert\vert}\ \ t=0,1,...T-1 $$
+$$ p(Y(t)\vert X(t+1)) = {1\over{Z'_W(X(t+1),t)}} e^{-E_W(Y(t),t) -{1\over{2\sigma^2(t)}} \vert\vert X(t+1)-Y(t)\vert\vert^2}\ \ \ \ t=0,1,...T-1 $$
 
-where $E_W(Y(t),t)$ is defined by an ANN conditioned on $t$. We then follow the conditional probability recovery algorithm that was just described, which results in the DRL algorithm.
+where $E_W(Y(t),t)$ is defined by an ANN conditioned on $t$. The corresponding Langevin dynamics are given by
+
+$$ Y^{r+1}(t) = Y^r(t) - {\eta\over 2}[[\nabla_W E_W(Y^r(t),t) + {1\over{\sigma^2(t)}}\vert\vert X(t+1)-Y^r(t)\vert\vert] +\sqrt{\eta}\epsilon _n $$
+
+We then follow the conditional probability recovery algorithm that was just described, which results in the DRL algorithm.
+
+![](https://subirvarma.github.io/GeneralCognitics/images/stat64.png) 
+
+Figure 2: Illustration of NCSN
+
 
 ## Implementation of  Boltzmann Machines
 
