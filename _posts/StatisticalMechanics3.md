@@ -355,15 +355,19 @@ $$ \nabla_W\log p_W(X) = \nabla_W E_W(X) + E_{p(X)}[-\nabla_W E_W(X)]  $$
 
 It follows that
 
-$$ \nabla_W L(W) = -E_{p(X)}[\nabla_W E_W(X)] +  E_{p_W(X)}[-\nabla_W E_W(X)] $$
+$$ \nabla_W L(W) = -E_{p(X)}[\nabla_W E_W(X)] +  E_{p_W(X)}[\nabla_W E_W(X)] $$
 
 The first term decreases the energy for data points that belong to the training set, while the second term increases the energy for data samples that are generated from from the model. 
 This is basically a rederivation of the Boltzmann machine training algorithm, with the exception that $E_W(X)$ is restricted to be quadratic and also $X$ is no longer to the values 0 and 1.
-This technique hinges on getting samples from the model which are distributed according to $p_W(X)$ and since we can no longer use Gibbs sampling, we resort to using Langevin sampling instead
+In the Boltmann machine case the derivative simplifies to the average correlation between nodes, which can be understood to be a type of Hebbian learning, thus making is biologically plausible.
+For the case when $E_W(X)$ is a expressed by a ANN such a transformer or a CNN, this derivative can be computed using the backprop algorithm.
+Note that unlike for the score matching algorithm, we are tryingto estimate the parameters of the energy function $E_W(X)$ directly, rather than the score $\nabla_W E_W(X)$.
+
+This MLE based technique hinges on getting samples from the model which are distributed according to $p_W(X)$ and since we can no longer use Gibbs sampling, we resort to using Langevin sampling instead
 
 $$ X_{n+1} = X_n - {\eta\over 2}\nabla_W E_W(X_n) +\sqrt{\eta}\epsilon _n $$
 
-where $\epsilon_n$ is drawn from a normal distribution $N(0,I)$. 
+where $\epsilon_n$ is drawn from a normal distribution $N(0,I)$. The gradient $\nabla_W E_W(X)$ can be computed using backprop for ANN based energy functions.
 
 This algorithm suffers from the same issues that plagued the Boltzmann machine and led to long sampling times thus limiting its scalability to few hundred nodes at most.
 Gap, Song et.al. proposed a way to get around this problam, and this is covered in the next section.
@@ -377,7 +381,7 @@ $$  X' = X + \sigma\epsilon $$
 
 where as before $\epsilon$ is distributed according to $N(0,I)$. If $p(X)$ follows the Boltzmann distribution, then using Bayes rule it can be shown that the conditional probability $p(X\vert X')$ is distributed according to
 
-$$ p(X\vert X') = {1\over Z'_W} e^{-E_W(X) - {1\over{2\sigma^2}}\vert\vert X'-X\vert\vert} $$
+$$ p(X\vert X') = {1\over Z'_W} e^{-E_W(X) - {1\over{2\sigma^2}}\vert\vert X'-X\vert\vert^2} $$
 
 where $Z_W = \int e^{-E_W(X) - {1\over{2\sigma^2}}\vert\vert X'-X\vert\vert} dX$ is the partition function for the conditional EBM. The extra quadratic term makes the resulting energy landscape to be localized around $X'$, thus making it less multi-modal and easier to sample from. When $\sigma$ is small, the conditional distribution is approximately single mode Gaussian.
 
@@ -387,7 +391,7 @@ $$ J(W) = {1\over M}\sum_{i=1}^M \log p_W(X_i\vert X'_i) $$
 
 and the objective is to recover the clean sample $X_i$ from the noisy sample $X'_i$ by maximizing this likelihood. It can be shown that the corresponding Langevin sampling is given by
 
-$$ X_{n+1} = X_n - {\eta\over 2}[[\nabla_W E_W(X_n) + {1\over{2\sigma^2}}\vert\vert X'_n-X_n\vert\vert] +\sqrt{\eta}\epsilon _n $$
+$$ X_{n+1} = X_n - {\eta\over 2}[[\nabla_W E_W(X_n) + {1\over{\sigma^2}}\vert\vert X'_n-X_n\vert\vert^2] +\sqrt{\eta}\epsilon _n $$
 
 It can be shown that given enough data, maximizing $J(W)$ leads to unbiased estimates of the parameters $W$ (see Appendix A2 in Gao, Song et.al, for a proof).
 
@@ -399,18 +403,18 @@ Defining $Y(t) = \sqrt{1-\sigma^2(t+1)} X(t)$, we get a sequence of conditional 
 
 $$ p(Y(t)\vert X(t+1)) = {1\over{Z'_W(X(t+1),t)}} e^{-E_W(Y(t),t) -{1\over{2\sigma^2(t)}} \vert\vert X(t+1)-Y(t)\vert\vert^2}\ \ \ \ t=0,1,...T-1 $$
 
-where $E_W(Y(t),t)$ is defined by an ANN conditioned on $t$. The corresponding Langevin dynamics are given by
+where $E_W(Y(t),t)$ is defined by an ANN conditioned on $t$. The corresponding Langevin sampling of the conditional distribution is given by
 
-$$ Y^{r+1}(t) = Y^r(t) - {\eta\over 2}[[\nabla_W E_W(Y^r(t),t) + {1\over{\sigma^2(t)}}\vert\vert X(t+1)-Y^r(t)\vert\vert] +\sqrt{\eta}\epsilon _n $$
+$$ Y^{r+1}(t) = Y^r(t) - {\eta\over 2}[[\nabla_W E_W(Y^r(t),t) + {1\over{\sigma^2(t)}}\vert\vert X(t+1)-Y^r(t)\vert\vert^2] +\sqrt{\eta}\epsilon _n,$$
 
 We then follow the conditional probability recovery algorithm that was just described, which results in the DRL algorithm.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat64.png) 
 
-Figure 2: Illustration of NCSN
+Figure 2: Illustration of DRL
 
 
-## Implementation of  Boltzmann Machines
+## Implementation of  DRL Algorithm with Boltzmann Machines: The Extropic System
 
 
 
