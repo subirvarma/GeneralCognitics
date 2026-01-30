@@ -405,13 +405,13 @@ $$ p(Y(t)\vert X(t+1)) = {1\over{Z'_W(X(t+1),t)}} e^{-E_W(Y(t),t) -{1\over{2\sig
 
 where $E_W(Y(t),t)$ is defined by an ANN conditioned on $t$. The corresponding Langevin sampling of the conditional distribution is given by
 
-$$ Y^{r+1}(t) = Y^r(t) - {\eta\over 2}[[\nabla_W E_W(Y^r(t),t) + {1\over{\sigma^2(t)}}\vert\vert X(t+1)-Y^r(t)\vert\vert^2] +\sqrt{\eta}\epsilon _n,$$
+$$ Y^{r+1}(t) = Y^r(t) - {\eta\over 2}[[\nabla_W E_W(Y^r(t),t) -  {1\over{\sigma^2(t)}}\vert\vert X(t+1)-Y^r(t)\vert\vert^2] +\sqrt{\eta}\epsilon _n,$$
 
 We then follow the conditional probability recovery algorithm that was just described, which results in the DRL algorithm.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat64.png) 
 
-Figure 2: Illustration of DRL
+Figure 2: DRL Training and Inference algorithms
 
 
 ## Implementation of  DRL Algorithm with Boltzmann Machines: The Extropic System
