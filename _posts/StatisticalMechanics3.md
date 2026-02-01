@@ -365,7 +365,7 @@ Note that unlike for the score matching algorithm, we are tryingto estimate the 
 
 This MLE based technique hinges on getting samples from the model which are distributed according to $p_W(X)$ and since we can no longer use Gibbs sampling, we resort to using Langevin sampling instead
 
-$$ X_{n+1} = X_n - {\eta\over 2}\nabla_W E_W(X_n) +\sqrt{\eta}\epsilon _n $$
+$$ X_{n+1} = X_n - {\eta\over 2}\nabla_W E_X(X_n) +\sqrt{\eta}\epsilon _n $$
 
 where $\epsilon_n$ is drawn from a normal distribution $N(0,I)$. The gradient $\nabla_W E_W(X)$ can be computed using backprop for ANN based energy functions.
 
@@ -391,7 +391,7 @@ $$ J(W) = {1\over M}\sum_{i=1}^M \log p_W(X_i\vert X'_i) $$
 
 and the objective is to recover the clean sample $X_i$ from the noisy sample $X'_i$ by maximizing this likelihood. It can be shown that the corresponding Langevin sampling is given by
 
-$$ X_{n+1} = X_n - {\eta\over 2}[[\nabla_W E_W(X_n) + {1\over{\sigma^2}}\vert\vert X'_n-X_n\vert\vert^2] +\sqrt{\eta}\epsilon _n $$
+$$ X_{n+1} = X_n - {\eta\over 2}[[\nabla_X E_W(X_n) + {1\over{\sigma^2}}\vert\vert X'_n-X_n\vert\vert^2] +\sqrt{\eta}\epsilon _n $$
 
 It can be shown that given enough data, maximizing $J(W)$ leads to unbiased estimates of the parameters $W$ (see Appendix A2 in Gao, Song et.al, for a proof).
 
@@ -405,7 +405,7 @@ $$ p(Y(t)\vert X(t+1)) = {1\over{Z'_W(X(t+1),t)}} e^{-E_W(Y(t),t) -{1\over{2\sig
 
 where $E_W(Y(t),t)$ is defined by an ANN conditioned on $t$. The corresponding Langevin sampling of the conditional distribution is given by
 
-$$ Y^{r+1}(t) = Y^r(t) - {\eta\over 2}[[\nabla_W E_W(Y^r(t),t) -  {1\over{\sigma^2(t)}}\vert\vert X(t+1)-Y^r(t)\vert\vert^2] +\sqrt{\eta}\epsilon _n,$$
+$$ Y^{r+1}(t) = Y^r(t) - {\eta\over 2}[[\nabla_Y E_W(Y^r(t),t) -  {1\over{\sigma^2(t)}}\vert\vert X(t+1)-Y^r(t)\vert\vert^2] +\sqrt{\eta}\epsilon _n,$$
 
 We then follow the conditional probability recovery algorithm that was just described, which results in the DRL algorithm.
 
