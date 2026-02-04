@@ -363,6 +363,14 @@ In the Boltmann machine case the derivative simplifies to the average correlatio
 For the case when $E_W(X)$ is a expressed by a ANN such a transformer or a CNN, this derivative can be computed using the backprop algorithm.
 Note that unlike for the score matching algorithm, we are tryingto estimate the parameters of the energy function $E_W(X)$ directly, rather than the score $\nabla_W E_W(X)$.
 
+Recall that in Part 2 we showed that for the Boltzmann machine the gradient for the loss function is given by
+
+$$ {\partial L(W)\over{\partial w_{ij}}}  = \beta (<\sigma_i\sigma_j>_{data} - <\sigma_i\sigma_j>_{model}) $$
+
+This is a special case for the more general equation above, and can be recovered by noting that the energy function for the Boltzmann machine is given by
+
+$$  E = -\sum_{i}\sum_{j\lt i}w_{ij}\sigma_i\sigma_j - \sigma_{i}\sigma_i b_i $$
+
 This MLE based technique hinges on getting samples from the model which are distributed according to $p_W(X)$ and since we can no longer use Gibbs sampling, we resort to using Langevin sampling instead
 
 $$ X_{n+1} = X_n - {\eta\over 2}\nabla_W E_X(X_n) +\sqrt{\eta}\epsilon _n $$
@@ -403,7 +411,15 @@ Defining $Y(t) = \sqrt{1-\sigma^2(t+1)} X(t)$, we get a sequence of conditional 
 
 $$ p(Y(t)\vert X(t+1)) = {1\over{Z'_W(X(t+1),t)}} e^{-E_W(Y(t),t) -{1\over{2\sigma^2(t)}} \vert\vert X(t+1)-Y(t)\vert\vert^2}\ \ \ \ t=0,1,...T-1 $$
 
-where $E_W(Y(t),t)$ is defined by an ANN conditioned on $t$. The corresponding Langevin sampling of the conditional distribution is given by
+where $E_W(Y(t),t)$ is defined by an ANN conditioned on $t$. 
+
+The expression for the gradient of the loss function becomes
+
+$$ \nabla_W L(W) = -E_{p(Y\vert X)}[\nabla_W E_W(Y)] +  E_{p_W(Y\vert X)}[\nabla_W E_W(Y)] $$
+
+The $Y$ sample is drawn from the training data for the first expectation, while it is drawn from the distribution defined by the model with parameters $W$, for the second expectation. In both cases the distribution from which $Y$ is drawn is a conditional distribution, given some value $X$.
+
+The corresponding Langevin sampling of the conditional distribution is given by
 
 $$ Y^{r+1}(t) = Y^r(t) - {\eta\over 2}[[\nabla_Y E_W(Y^r(t),t) -  {1\over{\sigma^2(t)}}\vert\vert X(t+1)-Y^r(t)\vert\vert^2] +\sqrt{\eta}\epsilon _n,$$
 
@@ -413,8 +429,24 @@ We then follow the conditional probability recovery algorithm that was just desc
 
 Figure 2: DRL Training and Inference algorithms
 
+The DRL algorithm can be applied to the Boltzmann machine as well, this is discussed in the next section.
 
-## Making Boltzmann Machines: The Extropic System
+## Hardware Implementation of EBMs
+
+We have shown that EBMs can be used to implement state of the art generative models, and this leads to the question of whether there is any particuler benefit in using them (vs traditional generative models).
+Sara Hooker, an inginner at Google, published an interesting essay [The Hardware Lottery](https://arxiv.org/abs/2009.06489) a few years ago in which she pointed out the most dominant architecture at any point in time is a result of synergy between available hardware and the software that gets written to use it. This is particularly true in AI systems as recent history shows. Until about 2010 deep learning was one of the many approaches to AI, and it was not clear whic approach would win out. In 2012, Hinton's team showed that Praphical Processing Units or GPUs are very well suited for the backprop algorithm, and as a result it became possible to scale up the size of systems that could be trained using backprop by orders of magnitudes, thus resulting in the current AI wave. 
+Unfortunately GPUs do not result in the same compute acceleration when used for EBMs, since the basic operation in EBMs is sampling. As we have seen for the case of Boltzmann machines, state updates using sampling is an inherently serial node by node update, which cannot be parallelized when implmented on traditional hardware (unless we resort to architectures such as the Restricted Boltzmann machine or RBM).
+
+Then the question arises if we can design an equivalent of a GPU for EBMs, i.e., an hardware architecture that is specialized to accelerate sampling, and thus enable us to scale EBMs to a large number of nodes.
+We will look at a few approaches for doing this that is beinng pursued by start-ups and university labs. This field is in its enfancy, and current systems still have a long way to go before they can approach the performance of non-EBM systems. 
+
+Is there any benefit of pursuing this line of work vs just sticking to GPU based systems? The holy grail is a potetntial decrease in energy consumption. GPU based systems are very energy intensive, and  it is often pointed out that biological EBM systems, such the brain, are able to do equivalent work with much lower power consumption. If the new EBM hardware implementations are able to approach state of the art performance with much lower energy consumption, then this will constitute a genuine advancement.
+
+### Implentations of Boltzmann Machines: The Extropic System
+
+
+
+
 
 
 
@@ -422,8 +454,6 @@ Figure 2: DRL Training and Inference algorithms
 
 Probabilistic bits
 
-
-### Multistage P-Bit Implemntation: Extropic
 
 
 
