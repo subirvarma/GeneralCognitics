@@ -414,7 +414,7 @@ We then follow the conditional probability recovery algorithm that was just desc
 Figure 2: DRL Training and Inference algorithms
 
 
-## Implementation of  DRL Algorithm with Boltzmann Machines: The Extropic System
+## Making Boltzmann Machines: The Extropic System
 
 
 
