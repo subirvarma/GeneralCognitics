@@ -484,18 +484,15 @@ Extropic estimates that they can fit 1000X1000 grid of these nodes within a 6mm 
 
 The p-bit based approach to Boltzmann machine is the outcome of (ongoing work) at Purdue nd UCSB, and good overview can be found in this [paper](https://arxiv.org/abs/2302.06457).
 The overall objective of this project is the sme as that for the Extropic system, the main difference being the technology that the p-bit group is pursuing to imlement the system in hardware.
-As opposed to CMOS, the p-bit implentation Magnetc Tunnel Junction (MTJ) technology which is based on the same process used for fabricating MRAMs.
+As opposed to CMOS, the p-bit implentation Magnetc Tunnel Junction (MTJ) technology which is also used for in MRAMs (which are a new kind of dense nonvolatile memory being deployed at major semiconductor fabs).
+Hence it may be possible to build dense arrays of p-bits using the same process used for building MRAMs, this work is still ongoing.
+Using this technology it may be possible to build a Boltzmann machine in which all the nodes can update their state completely asynchronously, thus avoiding the use of RBMs.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat68.png) 
 
 Figure 2: A hybrid computer scheme with  probabilistic and classical computers
 
-
-
-
-
-
-
+A hybrid computer featuring both probabilistic (Boltzmann machine) and classical parts is shown in the above figure. The Boltzmann machine is used to do fast and efficient sampling, while other paertgs of the training algorithm, such as the contrastive divergence calculations are carried out by the classical computer.
 
 ## Implemntation of the Langevin Equation: Normal Computing
 
