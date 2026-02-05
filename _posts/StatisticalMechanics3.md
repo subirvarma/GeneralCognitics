@@ -473,13 +473,26 @@ The system is trained by by introducing noise at multiple levels, and then tryin
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat67.png) 
 
-Figure 2: Inter-node Connections
+Figure 2: Random Number Generator and Node Implementation
 
+Extropic's implementation of the Boltzmann machine is based on a Random Number Generator (RNG) in CMOS. This was built by leveraging the shot-noise dynamics of sub-threshold transistors, and resulted in a sigmoidal response to a control voltage as shown in part (a) of the above figure. The output voltage, examples of which are shown in the inset diagram in part (a), is periodically sampled to generate the random number stream. 
 
+Extropic is in the process of integrating its RNG with other components to create a single node of the Boltzmann machine, a schematic of which is shown in part (b) of the figure. Each node has a set of inputs from the neighboring nodes which is combined to produce a control signal that is used to bias the RNG circuit. The RNG is then sampled to produce a 0 or 1, that is in turn fed into the neighboring nodes.
+Extropic estimates that they can fit 1000X1000 grid of these nodes within a 6mm x 6mm chip.
 
 ### Other Boltzmann Machine Implementations: P-Bit Based Systems (UCSB, Purdue)
 
-Probabilistic bits
+The p-bit based approach to Boltzmann machine is the outcome of (ongoing work) at Purdue nd UCSB, and good overview can be found in this [paper](https://arxiv.org/abs/2302.06457).
+The overall objective of this project is the sme as that for the Extropic system, the main difference being the technology that the p-bit group is pursuing to imlement the system in hardware.
+As opposed to CMOS, the p-bit implentation Magnetc Tunnel Junction (MTJ) technology which is based on the same process used for fabricating MRAMs.
+
+![](https://subirvarma.github.io/GeneralCognitics/images/stat68.png) 
+
+Figure 2: A hybrid computer scheme with  probabilistic and classical computers
+
+
+
+
 
 
 
