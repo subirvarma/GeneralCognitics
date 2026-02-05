@@ -417,7 +417,12 @@ The expression for the gradient of the loss function becomes
 
 $$ \nabla_W L(W) = -E_{p(Y\vert X)}[\nabla_W E_W(Y)] +  E_{p_W(Y\vert X)}[\nabla_W E_W(Y)] $$
 
+which then gets plugged into the following iteration to estimate the model weights
+
+$$ w_{ij}  \leftarrow w_{ij} + \eta {\partial L(W)\over{\partial w_{ij}}}   $$
+
 The $Y$ sample is drawn from the training data for the first expectation, while it is drawn from the distribution defined by the model with parameters $W$, for the second expectation. In both cases the distribution from which $Y$ is drawn is a conditional distribution, given some value $X$.
+Note that the DRL training algorithm does not involve the use of the backprop algorithm, indeed for the case of Boltzmann machines, it reduces to the Hebbian learniong rule. This makes it somewaht of a rarrity in the modern world of AI systems, and laso increases the possibility that the brain emplyoyes something similar (especially since no evidence of backprop has been found in the brain).
 
 The corresponding Langevin sampling of the conditional distribution is given by
 
@@ -433,9 +438,30 @@ Figure 2: DRL Training and Inference algorithms
 
 Figure 2: Illustrating a single stage of the DRL algorithm
 
+The above figure summarizes a single stage of the DRL algorithm. Note that in this case we are explicitly computing the energy function and then differentiating it to do the Langevin sampling.
 
+### Conditional Generation Models
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat70.png) 
+
+Figure 2: Context dependent DRL algorithm, with context $c$
+
+The image generation proocess can be conditioned on other latent variables, and this results in a very important class of EBMs. For example text to image models fall into this class, and indeed all important
+applications of generative models involve some type of conditional generation. Even LLMs can be considered to be a type of conditional EBM model, in which the next chunk of generated text is conditional to the
+previously generated chunk. In Part 4 of this series of articles we will see of world models used in reinforcement learning based control problems, involve prediction of the next system state, which can be considered to be a generative problem conditioned on the current state and the action taken by the agent.
+
+With context dependence the objective is tom aximize the log likelihood of the conditional distribution
+
+$$ L(W) = {1\over M}\sum_{i=1}^M \log p_W(X_i\vert c) = E_{p(X)}[\log p_W(X\vert c)]  $$
+
+where $c$ is the context vector. The expression of the gradient for this function becomes
+
+$$ \nabla_W L(W) = -E_{p(Y\vert X)}[\nabla_W E_W(Y)] +  E_{p_W(Y\vert X)}[\nabla_W E_W(Y)] $$
+
+The above figure a single stage $t$ of the DLR de-noising process, and we can see that the main difference from the un-conditional case is the presence of an additional input $c$, and the energy function that the model computes is now $E_W(X,t,c)$. The best way for introducing this conditioning has been found to be transformer based energy models. In this case the conditioning is done by
+using the operation of cross attention in the transformer stack, key and value (KV) pair coming from $c$, and the query (Q) coming from the lower layer of the transformer stack.
+
+![](https://subirvarma.github.io/GeneralCognitics/images/stat71.png) 
 
 Figure 2: Context dependent DRL algorithm, with context $c$
 
