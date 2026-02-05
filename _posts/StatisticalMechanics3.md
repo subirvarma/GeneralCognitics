@@ -442,12 +442,34 @@ We will look at a few approaches for doing this that is beinng pursued by start-
 
 Is there any benefit of pursuing this line of work vs just sticking to GPU based systems? The holy grail is a potetntial decrease in energy consumption. GPU based systems are very energy intensive, and  it is often pointed out that biological EBM systems, such the brain, are able to do equivalent work with much lower power consumption. If the new EBM hardware implementations are able to approach state of the art performance with much lower energy consumption, then this will constitute a genuine advancement.
 
-### Implentations of Boltzmann Machines: The Extropic System
+### Scaling Up Boltzmann Machines: The Extropic System
 
+![](https://subirvarma.github.io/GeneralCognitics/images/stat65.png) 
 
+Figure 2: The Extropic Implementation for Boltzmann Machines
 
+Extropic is a well funded start-up, founded by ex-members of Google Brain. Their initial design, which they announced in October 2025, had several new ideas for scaling up Boltzmann machines.
+They point out in their paper that there are two main challenges with scaling up Boltzmann machines:
 
+1) Algorithmic problem: The usual way of training Boltzmann machines using the equation
 
+$$ {\partial L(W)\over{\partial w_{ij}}}  = \beta (<\sigma_i\sigma_j>_{data} - <\sigma_i\sigma_j>_{model}) $$
+
+runs into the problem of excessively long mixing times, where the Gibbs sampling procedure takes a long time to converge. This is an algorithmic issue and would persist even if the samplin were to be made more efficient using hardware. Fortunately this problem can be addressed using the DRL algorithm as we pointed in the previous section, by using a multistage architecture, where each stage tries to recover a de-noised version using a conditional Boltzmann probability distribution, with the gradient computed using
+
+$$ {\partial L(W)\over{\partial w_{ij}}}  = \beta (<\sigma_i\sigma_j>_{p(\sigma(t)\vert\sigma(t+1))} - <\sigma_i\sigma_j>_{p_W(\sigma(t)\vert\sigma(t+1))}) $$
+
+This results in a multi-stage sampling operation (see above figure), 
+where at each stage the system recovers a conditional probability distribution that is much easier to sample from. The top part of the figure shows their proposed hardware implementation, with multiple Boltzmann machines chained together in a serial fashion (for the backword flow of the DRL algorithm). Hence each of the hardware units is used to sample from a conditional Boltzmann distribution, where the conditioning is based on the output of the sampling in the prior stage. The states in the Boltzmann machine are color coded, with the orange corresponding to the hidden nodes, green corresponding to output nodes for the stage and blue corresponding the output nodes from the prior state. 
+The bottom part of the figure shows details of a Boltzmann machine in one of the stages, once again showing the three kinds of nodes.
+
+![](https://subirvarma.github.io/GeneralCognitics/images/stat66.png) 
+
+Figure 2: Inter-node Connections
+
+The above figure goes into more detail about how the node interconnections are done. The system allows for both nearest neighbor as well as long range connections that can specified by the user, an exsmple of which is shown on the left hand side. In order to do the denoising the output from the prior stage, shown in blue, is fed into the output nodes for the current stage, shown in green, and these nodes are also interconnected with the hidden nodes shown in orange. The goal of the Extropic architecture is to have an arbitrary inter-connection pattern and still be able to sample efficiently. The current implementation is not quite there yer, since they simulated the system in software using a restricted Boltzmann machine type architecture (which allows for efficient Gibbs sampling in software). 
+
+The system is trained by by introducing noise at multiple levels, and then trying to recover the de-noised system from the noisy state. If the state is continuous, noise is introduced a Gaussian distribution as we have seen, but now we will have to use a discrete noise equivalent. 
 
 
 ### P-Bit Based Systems: UCSB, Purdue
