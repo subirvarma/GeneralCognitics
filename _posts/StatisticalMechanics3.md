@@ -425,9 +425,22 @@ $$ Y^{r+1}(t) = Y^r(t) - {\eta\over 2}[[\nabla_Y E_W(Y^r(t),t) -  {1\over{\sigma
 
 We then follow the conditional probability recovery algorithm that was just described, which results in the DRL algorithm.
 
+![](https://subirvarma.github.io/GeneralCognitics/images/stat69.png) 
+
+Figure 2: Illustrating a single stage of the DRL algorithm
+
+
+
+![](https://subirvarma.github.io/GeneralCognitics/images/stat70.png) 
+
+Figure 2: Context dependent DRL algorithm, with context $c$
+
+
+
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat64.png) 
 
 Figure 2: DRL Training and Inference algorithms
+
 
 The DRL algorithm can be applied to the Boltzmann machine as well, this is discussed in the next section.
 
