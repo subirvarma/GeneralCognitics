@@ -13,7 +13,7 @@ carry out the same tasks, and more, as ANNs, but are able to do so with much low
 
 The field of Energy Based Models provides a possible path to answering these questions. In this article we will show that generative models, the class to which LLMs and image generation models belong, can be recast as EBMs (we will refer to them as generative EBMs), in fact as a more sophisticated version of the Boltzmann machines that we encountered in Part 2. This connects generative models to concepts from thermodynamics and the idea of energy minimization that we discussed in Parts 1 and 2. More importantly this creates a possible path by which modern generative ANNs can be connected to the operation of biological brains. 
 
-In all likelihood biological brains operate using thermodynamic principles and it is not inconcievable that their architecture and that of generative EBMs share common principles of operation since the same physics underlies both (this is not unlike the fact that both birds and airplanes are able to fly using the Bernoulli's principle from physics, but they use different mechanisms). 
+In all likelihood brains operate using thermodynamic principles and it is not inconcievable that their architecture and that of generative EBMs share common principles of operation since the same physics underlies both (this is not unlike the fact that both birds and airplanes are able to fly using the Bernoulli's principle from physics, but they use different mechanisms). 
 But how does this knowledge help us? One way in which it can is by helping us find more energy efficient ways of running ANNs and hopefully approach the energy efficiency of biological brains. Current ANNs run on GPUs that are not optimized for thermodynamic operations such as  sampling. However there are new ideas coming up in this area, and several companies are implementing chips that are much more efficient in this area and will be describd in this article.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat52.png) 
@@ -21,20 +21,27 @@ But how does this knowledge help us? One way in which it can is by helping us fi
 Figure 1: The energy landscape in an image generation EBM
 
 The EBM approach to generative modeling also enables us to form an intuitive picture of how generative ANNs work and here is a high level description that will be elaborated upon later.
-The probability distribution underlying real world data such as images or text can be approximated by the Boltzmann distribution as
-modeled by a spin glass type EBM, with nodes with state $(x_1,...,x_N)$ in the model interacting with each other using a sophisticated energy function $E_W(x_1,...,x_N)$ where $W$ represents the parameters of the model. 
+The probability distribution underlying real world data such as images or text can be approximated by the Boltzmann distribution and 
+as we saw in Parts 1 and 2, the equilibrium distribution for a spin glass type EBM is also a Boltzmann distribution. If these two distributions can be engineerd to be close to each other, then the EBM can potentially be used to generate new images by sampling from it.
+If there are $N$ nodes in the spin glass EBM described by the state vector $(x_1,...,x_N)$, then the energy for this system can be modeled by a function $E_W(x_1,...,x_N)$, where $W$ represents the parameters of the energy function.
 All possible images (or text) are arranged in the landscape of this energy function, in which the bottom of valleys corresponds to images that make sense to us, hence these have lower energy than images that don't make any sense (see figure 1). The process of generation consists of starting from an initial state in the state space (which may look like noise to us), and then navigating the energy landscape until we arrive at a minima, and at this point the configuration looks like an intelligible image. The process of finding the minima is a sampling operation using Langevin sampling, which is a generalization of the Gibbs sampling used for Boltzmann machines. The sampling is made efficient by using an idea that is related to that of simulated annealing that we came across in Part 1, and works by introducing noise at various levels of intensity and gradually reducing it as we approach the minima. 
+
+If you recall the design of Boltzmann machines in Part 2, the above description looks very similar, but there are a few differeces:
+
+- The state space in a Boltzmann machine is made up of binaries 1 or 0, while in modern EBMs it can be real number $x$.
+-  Boltzmann machines feature a simple quadratic energy function, whereas in modern EBMs it can be an arbitrarily complex function $E_W(x_1,...,x_N)$ which is modeled by an ANN.
+-  Generation is done by sampling in both cases, however the Gibbs sampling used in Boltzmann machines cannot be used if the energy function does not have the quadratic form. Instead a more powerful sampling algorithm, namely Langevin sampling, is used.
 
 ## Introduction
 
-All of modern Generative AI systems, such as LLMs for generating text and diffusion models for generating images, are based on the idea of sampling from a probability distribution that approximates the statistics of the training data. Hinton and Sejnowski were the first ones to realize the power of this idea, and showed how to obtain an EBM model for the probability distribution by choosing the interaction strengths in a Sherrington-Kirkpatrich type spin glass model, that they called a Boltzmann machine. These systems worked well, but failed to scale up and also suffered from long convergence times. On the other hand they had the benefit that they could serve as plausible models for biological neural networks. 
-So the question arises whether Boltzmann machine type sampling based EBM models can scale up to node sizes that are comparable to non-EBM based modern generative ANNs and with comparable or better performance, while being faster and more energy efficient. We have made a good deal of progress in the last decade or so towards this goal, and this is described in this article.
+All of modern generative AI systems, such as LLMs for generating text and diffusion models for generating images, are based on the idea of sampling from a probability distribution that approximates the statistics of the training data. Hinton and Sejnowski were the first ones to realize the power of this idea, and showed how to obtain an EBM model for the probability distribution by choosing the interaction strengths in a Sherrington-Kirkpatrich type spin glass model, that they called a Boltzmann machine. These systems worked well, but failed to scale up and also suffered from long convergence times. On the other hand they had the benefit that they could serve as plausible models for biological neural networks. 
+So the question arises whether Boltzmann machine type EBM models can scale up to sizes that are comparable to non-EBM based modern generative ANNs and with comparable or better performance, while being faster and more energy efficient. We have made a good deal of progress in the last decade or so towards this goal, and this is described in this article.
 
-Boltzmann machine based EBM models entered a winter phase following the success of backprop driven neural network models, heralded by the AlexNet model of 2012 (which also came out of Hinton'e research group), and more recently with the LLM models from OpenAI and others.
+Boltzmann machine based EBM models entered a winter phase following the success of backprop driven ANNs, heralded by the AlexNet model of 2012 (which also came out of Hinton'e research group), and more recently with the LLM models from OpenAI and others.
 However beginning in 2019 there has been a renewed interest in EBMs, led by research coming from academia, such as by Stefano Ermon's group at Stanford University, which has led to considerable progress in the
 modeliing capability of EBMs. 
 
-The original Boltzmann Machines never became commercially viable due to a couple of problems:
+The original Boltzmann machines never became commercially viable due to a couple of problems:
 
 - They were not able to scale up to beyond a few hundred nodes since the training process became too time consuming. This was due to the fact that the sampling algorithm was not able to handle multi-model distributions very well. It took an excessive amount of time to move between valleys in the energy landscape during the sampling process.
 - The Boltzmann Machine was limited to the quadratic energy function with per node state values of 0 and 1 (or -1 and 1). In order to compete with modern neural networks there was a need to extend it to more general energy functions and node values that are real numbers.
@@ -87,7 +94,7 @@ There is another branch in modern EBM work called Thermodynamic Computing  which
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat54.png) 
 
-Figure 1: Computing the energy functions for EBMs
+Figure 2: Computing the energy functions for EBMs
 
 The original Ising model for paramagnetism featured a simple energy function, shown in part (a) of the above figure. The interaction strength between nodes was uniform across the entire network, and this resulted in an energy landscape with a couple of minima corresponding to net magnetization of the system. Sherrington and Kirkpatrick modified this model by making the interaction strengths random, and also allowed each node to interact with every other node in the system, shown in part (b). This led to a complex energy landscape with a large number of minima that scaled up with the number of nodes.
 The SK model was subsequently used by Hopfield and Hinton to create the first computational and generative models, namely the Hopfield network and the Boltzmann machine, as described in Part 2 of this article series. 
@@ -128,7 +135,7 @@ Not only do we have to come up with training schema that applies to more complex
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat56.png) 
 
-Figure 2: Image generation using EBMs
+Figure 3: Image generation using EBMs
 
 The above figure gives a high level overview of how EBMs can be used to generate images. In this case the nodes in the EBM correspond to pixels in the image. 
 Given a training data distribution consisting of a bunch of images, we will assume that the pixels in an image follow a Boltzmann distribution
@@ -141,7 +148,7 @@ defined as ${\partial E_W\over{\partial x_i}}\approx {\partial E\over{\partial x
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat58.png) 
 
-Figure 2: Variation of energy functions depending on the textual context 
+Figure 4: Variation of energy functions depending on the textual context 
 
 Hence the process of generation is like a ball rolling downhill in a hilly landscape, but how does it find the right valley to settle into?
 In other words, how can we specify what image to generate? 
@@ -164,7 +171,7 @@ But what about training, since there is no evidence of backprop in the brain? It
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat60.png) 
 
-Figure 2: A Model for Biological Brains 
+Figure 5: A Model for Biological Brains 
 
 With these ideas in mind, the above figure shows a proposed architecture for part of the brain that results in visual images that we see.
 The image that see in front of us does not really exist in reality, in fact it is internally generated by our mind (for more on this topic read my article [What would Kant think of LLMs](https://subirvarma.github.io/GeneralCognitics/2024/07/02/Kant-and-LLMs.html)). I am going to assume that there is a set of neurons in our brain whose state $(x_1,...,x_N)$ corresponds to an image that we see, lets call them the vision neurons. The process by which the vision neuron state actually gets converted into an image is a deep mystery into which there is no insight at the present time, also called *the hard problem of consciousness*. 
@@ -287,7 +294,7 @@ and the two score functions match.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat61.png) 
 
-Figure 2: Illustration of a NCSN
+Figure 6: Illustration of a NCSN
 
 The DSM algorithm has some shortcomings; in complex high dimensional energy spaces with lots of saddle points where the score function is close to zero, the Langevin iteratiom can stuck in sub-optimal regions. Even if it eventually manages to get out, it can take a long time to converge. The solution to this problem was proposed by Song and Ermon, and is basically a version of the simulated annealing algorithm that was described in Part 1. Recall that simulated annealing worked by starting the optimization at a high temperature so that the iteration had enough energy to jump out of shallow local minima and saddle points, and then gradually reducing the temperature to allow it explore deeper regions within larger valleys. Song and Ermon proposed a similar mechanism for DSM, where the noise was varied not through temperature, but by varying the variance $\sigma$.
 
@@ -309,14 +316,13 @@ $$ X_{n+1} = X_n + \eta_l s_W(X_n,\sigma_l) + \sqrt{2\eta}\epsilon_n $$
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat63.png) 
 
-Figure 2: A single step of the denoising process using Langevin sampling using the score estimate
+Figure 7: A single step of the denoising process using Langevin sampling using the score estimate
 
 A single step of the de-noising process is ilustrated above.
 The complete inference algorithm is given below (from Song and Ermon)
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat62.png) 
 
-Figure 2: Illustration of NCSN
 
 ## Training Using MCMC Sampling
 
@@ -432,11 +438,10 @@ We then follow the conditional probability recovery algorithm that was just desc
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat64.png) 
 
-Figure 2: DRL Training and Inference algorithms
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat69.png) 
 
-Figure 2: Illustrating a single stage of the DRL algorithm
+Figure 8: Illustrating a single stage of the DRL algorithm
 
 The above figure summarizes a single stage of the DRL algorithm. Note that in this case we are explicitly computing the energy function and then differentiating it to do the Langevin sampling.
 
@@ -444,7 +449,7 @@ The above figure summarizes a single stage of the DRL algorithm. Note that in th
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat70.png) 
 
-Figure 2: Context dependent DRL algorithm, with context $c$
+Figure 9: Context dependent DRL algorithm, with context $c$
 
 The image generation proocess can be conditioned on other latent variables, and this results in a very important class of EBMs. For example text to image models fall into this class, and indeed all important
 applications of generative models involve some type of conditional generation. Even LLMs can be considered to be a type of conditional EBM model, in which the next chunk of generated text is conditional to the
@@ -465,7 +470,7 @@ The energy landscape $E(X,t,c)$ for the conditional generation process is a func
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat71.png) 
 
-Figure 2: Context dependent DRL algorithm, with context $c$
+Figure 10: 
 
 An example of conditional text to image generation using diffusions is shown in the above figure. We can see that the context is input in each sage of the de-noising pipeline.
 
@@ -486,7 +491,7 @@ Is there any benefit of pursuing this line of work vs just sticking to GPU based
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat65.png) 
 
-Figure 2: The Extropic Implementation for Boltzmann Machines
+Figure 11: The Extropic Implementation for Boltzmann Machines
 
 Extropic is a well funded start-up, founded by ex-members of Google Brain. Their initial design, which they announced in October 2025, had several new ideas for scaling up Boltzmann machines.
 They point out in their [research report](https://arxiv.org/abs/2510.23972) that there are two main challenges with scaling up Boltzmann machines:
@@ -505,7 +510,7 @@ The bottom part of the figure shows details of a Boltzmann machine in one of the
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat66.png) 
 
-Figure 2: Inter-node Connections
+Figure 12: Inter-node Connections
 
 The above figure goes into more detail about how the node interconnections are done. The system allows for both nearest neighbor as well as long range connections that can specified by the user, an exsmple of which is shown on the left hand side. In order to do the denoising the output from the prior stage, shown in blue, is fed into the output nodes for the current stage, shown in green, and these nodes are also interconnected with the hidden nodes shown in orange. The goal of the Extropic architecture is to have an arbitrary inter-connection pattern and still be able to sample efficiently. The current implementation is not quite there yer, since they simulated the system in software using a restricted Boltzmann machine type architecture (which allows for efficient Gibbs sampling in software). 
 
@@ -513,7 +518,7 @@ The system is trained by by introducing noise at multiple levels, and then tryin
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat67.png) 
 
-Figure 2: Random Number Generator and Node Implementation
+Figure 13: Random Number Generator and Node Implementation
 
 Extropic's implementation of the Boltzmann machine is based on a Random Number Generator (RNG) in CMOS. This was built by leveraging the shot-noise dynamics of sub-threshold transistors, and resulted in a sigmoidal response to a control voltage as shown in part (a) of the above figure. The output voltage, examples of which are shown in the inset diagram in part (a), is periodically sampled to generate the random number stream. 
 
