@@ -1,9 +1,9 @@
 ---
 layout: default
-title: "Energy Based Models Part 3: Recent Developments"
+title: "Energy Based Models Part 3: Generative AI Using EBMs"
 ---
 
-# Energy Based Models Part 3: Recent Developments
+# Energy Based Models Part 3: Generative AI Using EBMs
 
 ## Abstract
 
@@ -21,13 +21,15 @@ But how does this knowledge help us? One way in which it can is by helping us fi
 Figure 1: The energy landscape in an image generation EBM
 
 The EBM approach to generative modeling also enables us to form an intuitive picture of how the generative process works and here is a high level description that will be elaborated upon later.
-The probability distribution underlying real world data such as images or text can be approximated by the Boltzmann distribution and the equilibrium distribution for a spin glass type EBM is also a Boltzmann distribution (as we saw in Parts 1 and 2). If these two distributions can be engineerd to be close to each other, then the EBM can potentially be used to generate new images by sampling from it.
-If there are $N$ nodes in the spin glass EBM described by the state vector $(x_1,...,x_N)$, then the energy for this system can be modeled by a function $E_W(x_1,...,x_N)$, where $W$ represents the learnable parameters of this function.
-All possible images (or text) are arranged in the landscape of this energy function, in which the bottom of valleys corresponds to images that make sense to us, hence these have lower energy than images that don't make any sense (see figure 1). The process of generation consists of starting from an initial state in the state space (which may look like noise to us), and then navigating the energy landscape until we arrive at a minima, and at this point the configuration looks like an intelligible image. The process of finding the minima is a sampling operation using Langevin sampling, which is a generalization of the Gibbs sampling used for Boltzmann machines. The sampling is made efficient by using an idea that is related to that of simulated annealing that we came across in Part 1, and works by introducing noise at various levels of intensity and gradually reducing it as we approach the minima. 
+
+- Assuming that there are $N$ nodes $X=(x_1,...,x_N)$ in a generative EBM used to generate images, such $X$ correponds to an image and $x_i$ is the $i^{th}$ pixel value. The energy for this system is modeled by a function $E_W(x_1,...,x_N)$, where $W$ represents the learnable parameters of this function.
+Once the model has been trained, images are arranged in the landscape of this energy function, in which the bottom of valleys corresponds to images that are similar to thise in the training set, hence these have lower energy than images that don't make any sense (see figure 1).
+- The process of generation consists of starting from an initial state in the state space (which may look like noise to us), and then navigating the energy landscape until we arrive at a minima, and at this point the configuration looks like an intelligible image.
+- The process of finding the minima is a sampling operation using Langevin sampling, which is a generalization of the Gibbs sampling used for Boltzmann machines. The sampling is made efficient by using an idea that is related to that of simulated annealing that we came across in Part 1, and works by introducing noise at various levels of intensity and gradually reducing it as we approach the minima. 
 
 If you recall the design of Boltzmann machines in Part 2, the above description looks very similar, but there are a few differeces:
 
-- The state space in a Boltzmann machine is made up of binaries 1 or 0, while in modern EBMs it can be real number $x$.
+- The state space in a Boltzmann machine is made up of binaries 1 or 0, while in modern EBMs it can be a real number $x$.
 -  Boltzmann machines feature a simple quadratic energy function, whereas in modern EBMs it can be an arbitrarily complex function $E_W(x_1,...,x_N)$ which is modeled by an ANN.
 -  Generation is done by sampling in both cases, however the Gibbs sampling used in Boltzmann machines cannot be used if the energy function does not have the quadratic form. Instead a more powerful sampling algorithm, namely Langevin sampling, is used.
 
