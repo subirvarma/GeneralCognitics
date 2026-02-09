@@ -70,7 +70,7 @@ In order to design modern EBMs there are two problems that have to be solved:
 - How to sample from these models since the Gibbs sampling used in classical Boltzmann machines only applies for quadratic energy functions.
 - How to train these models, since Hinton's algorithm for training the Boltzmann machines cannot be used anymore.
 
-The first issue was resolved with the discovery of Langevin based Markov Chain (MCMC) sampling. This algorithm can be applied if we know the energy function $E_W$ or the score function ${\partial E_W\over{\partial x_i}}$ for the model. Furthermore the system state can be a real number (as opposed to binary numbers in the Boltzmann machine).
+The first issue was resolved with the discovery of Langevin based Markov Chain Monte Carlo (MCMC) sampling. This algorithm can be applied if we know the energy function $E_W$ or the score function ${\partial E_W\over{\partial x_i}}$ for the model. Furthermore the system state can be a real number (as opposed to binary numbers in the Boltzmann machine).
 The sampling operation causes the state to converge to values distributed according to a specified probability distribution which in this case is the Boltzmann distrbution $p_W$.
 The origins of Langevin sampling lie in the theory of stochastic differential equations, and I touched upon this topic in [my article on Brownian Motion](https://subirvarma.github.io/GeneralCognitics/2025/05/23/TamingRandomness.html). 
 Once we use Langevin sampling, it becomes possible to handle energy functions that are more complex than quadratic, indeed it becomes possible use arbitrarily complex energy functions such as those modeled by CNNs and transformers.
@@ -99,6 +99,7 @@ The SK model was subsequently used by Hopfield and Hinton to create the first co
 
 A way for EBMs to transition to the modern era is shown in the lower part of the figure. Part (c) shows an energy function that is described by convolutional neural network or CNN which were originally introduced as a way to process images. Part (d) of the figure shows an EBM that uses the transformer network for computing energy functions. Transformers are a powerful way to model energy functions, traditional auto-regressive LLMs use them as a way to sample from conditional probability distributions. 
 Note that neither of the EBMs in the lower part of the figure show inter-node interaction strengths, presumably these exist but are much more complex than the ones in the upper part of the figure. 
+
 In the original EBMs shown in parts (a) and (b), the energy function was parametrized by the interaction strengths between nodes, 
 on the other hand, if we use either a CNN or transformer (or any other ANN) to model the energy function, then the energy function is parametrized by the weights in the ANN. 
 Indeed the modern theory of EBMs is based entirely on the energy functions, which can be as complex as we wish, as long as they can be represented by a neural network.
