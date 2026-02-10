@@ -193,7 +193,7 @@ Clearly the interactions are more complex than the two node interactions in a sp
 
 After all this speculation, lets get down to the nuts and bolts of how modern EBMs work, and we will start with Langevin sampling followed by training algorithms.
 
-## MCMC Sampling Using the Langevin Equation
+## MCMC Sampling Using Langevin Dynamics
 
 Early EBMs from the 1980s, such as the Boltzmann Machine, feature relatively simple energy functions
 
@@ -205,9 +205,10 @@ $$ p(\sigma_k = 1\vert \sigma_1,..,\sigma_{k-1},\sigma_{k+1},...,\sigma_N) = p_k
 
 where $h_k = \sum w_{ki}\sigma_i + b_k$. 
 Repeated sampling results in the network state gradually moving to an equilibrium configuration which corresponds to a local minima for the energy function.
-Gibbs sampling only works if we are able to compute this conditional probability, if the energy function is modeled by an ANN then clearly this procedure no longer holds. 
+Gibbs sampling only works if we are able to compute this conditional probability, if the energy function is modeled by an ANN (such as those in the lower part of Figure 2) then clearly this procedure no longer holds. 
 
-The discrete time Langevin equation is given by the iteration
+Fortunately there is a way to sample from an EBM without knowing the inter-connection strengths between its nodes, and this is given by the iteration of the Langevin dynamics.
+The discrete time version of Langevin dynamics is given by the iteration
 
 $$ x^i_{n+1} = x^i_n -\eta {\partial \log p_W(x^1,_n,...,x^N_n)\over{\partial x^i_n}} +\sqrt{2\eta}\epsilon_n,\ \ n = 0,1,2,...  $$
 
@@ -215,25 +216,25 @@ Using vector notation this can also be written as
 
 $$ X_{n+1} = X_n -\eta \nabla_x \log p_W(X) +\sqrt{2\eta}\epsilon_n,\ \ n = 0,1,2,...  $$
 
-where $X_n = (x^1_n,...,x^N_n$ is the state vector and $\nabla = ({\partial\over{\partial x^1_n}},...,{\partial\over{\partial x^N_n}}$ is the differential operator,  at the $n^{th}$ step. 
-$X_0$ is usually initialized from the Gaussian distribution, $\eta>0$ is the step size and the noise vector $\epsilon_n$ is distributed according to $N(0,I)$. It can be shown that in equilibrium, the disttribution of $X_n$ converges to $p_W(X)$  exponentially fast as $n\rightarrow\infty$. Since we want the distribution $p_W(X)$ to converge to the Boltzmann distribution, lets substitute this into the equation, which results in
+where $X_n = (x^1_n,...,x^N_n)$ is the state vector and $\nabla = ({\partial\over{\partial x^1_n}},...,{\partial\over{\partial x^N_n}})$ is the differential operator. 
+$X_0$ is usually initialized from the Gaussian distribution, $\eta>0$ is the step size and the noise vector $\epsilon_n$ is distributed according to the Gaussian $N(0,I)$. It can be shown that in equilibrium, the disttribution of $X_n$ converges to $p_W(X)$  exponentially fast as $n\rightarrow\infty$ (see [Roberts and Tweedie](https://projecteuclid.org/journals/bernoulli/volume-2/issue-4/Exponential-convergence-of-Langevin-distributions-and-their-discrete-approximations/bj/1178291835.full) for a proof). Since in EBMs we want the distribution $p_W(X)$ to converge to the Boltzmann distribution, substituting $p_W(X) = {e^{-E_W(X)}\over Z_W}$ results in
 
 $$ X_{n+1} = X_n -\eta \nabla_x E_W(X) +\sqrt{2\eta}\epsilon_n,\ \ n = 0,1,2,...  $$
 
-The first two terms on the RHS of this equation are just the Newton method for finding the vector $X$ at which the function $E_W(X)$ is minimized (or equivalently the probability $p_W(X)$ is maximized), while the third term adds some noise to the process. Hence the overall effect is that of moving the system state to regions of higher probability, while the noise term enables the iteration to ocassionally jump out of local minima so that there is a greater probability that the iteration ends near a deeper minima.
+The first two terms on the RHS of this equation are just the Newton method for finding the vector $X$ at which the function $E_W(X)$ is minimized (or equivalently the probability $p_W(X)$ is maximized), while the third term adds some noise to the process. Hence the overall effect is that of moving the system state to regions of higher probability, while the noise term enables the iteration to ocassionally jump out of local minima so that there is a greater probability that the iteration ends near a deeper minima. This equation is also sometimes referred to as the Langevin diffusion, especially for its continuous time version.
 
-The beauty of the Langevin diffusion is that enables us to generate samples from the distribution $p_W(X)$ without having to explicitly compute the partition function $Z$ or even the energy function $E$, all that we need are estimates of the score function ${\partial E\over{\partial x_i}}$. This frees us from the necessity of relating the energy function back to the inter-node interactions and enables us to sample from arbitrarily complex energy functions. Note that unlike the Gibbs equation the Langevin also applies to the case the states $x^i_n$ are any real nunber.
-Although not very well known, the Langevin diffusion is probably the most important equation in the modern theory of generative models.
+The beauty of the Langevin diffusion is that enables us to generate samples from the distribution $p_W(X)$ without having to explicitly compute the partition function $Z$ or even the energy function $E$, all that we need are estimates of the score function $\nabla_x E_W(X)$. This frees us from the necessity of relating the energy function back to the inter-node interactions and enables sampling from arbitrarily complex energy functions. Note that unlike the Gibbs equation the Langevin equation can also be used for the case when the state $X_n$ is a collection of real numbers.
+Although not very well known yet, the Langevin diffusion is probably the most important equation in the modern theory of generative models.
 
-## Training EBMs with Complex Energy Functions
+## Training EBMs Using Score Functions
 
-Given a training dataset consisting of a collection of images, we will start with the problem of training a model that generates new images that look similar to those in the training set. We will assume that the distribution of pixels in the training dataset is given by the (unknown) Boltzmann distribution
+Given a training dataset consisting of a collection of images, we will start with the problem of training an EBM model that generates new images that look similar to those in the training set. We will assume that the distribution of pixels in the training dataset is given by the (unknown) Boltzmann distribution with energy function $E$
 
 $$ p(x_1,x_2,...,x_N) = {e^{-E(x_1,...,x_N)}\over{Z}} $$
 
-Our EBM model in turn, has an equilibrium distribution given by its own energy function
+Our EBM model in turn, has an equilibrium distribution given by its own energy function $E_W$
 
-$$ p_W(x_1,x_2,...,x_N) = {e^{-E_W(x_1,...,x_N)}\over{Z}} $$
+$$ p_W(x_1,x_2,...,x_N) = {e^{-E_W(x_1,...,x_N)}\over{Z_W}} $$
 
 In order to make the generated images similar to those in the training set, we want to choose the model parameters $W$ so that
 $p(x_1,x_2,...,x_N)\approx p_W(x_1,x_2,...,x_N)$. This was the approach taken by Hinton and Sejnowski in their training algorithm for the Boltzmann machines, and they showed that the problem reduces to finding the maximum likelihood estimates of $W$. This approach runs into the problem of estimating the partition function $Z$ which in general is a difficult one to solve.
