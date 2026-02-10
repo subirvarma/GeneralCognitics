@@ -228,29 +228,27 @@ Although not very well known yet, the Langevin diffusion is probably the most im
 
 ## Training EBMs Using Score Functions
 
-Given a training dataset consisting of a collection of images, we will start with the problem of training an EBM model that generates new images that look similar to those in the training set. We will assume that the distribution of pixels in the training dataset is given by the (unknown) Boltzmann distribution with energy function $E$
+Given a training dataset consisting of a collection of images, we will start with the problem of training an EBM model that generates new images that look similar to those in the training set. We will assume that the distribution of pixels in the training dataset is given by the Boltzmann distribution with an unknown energy function $E$
 
 $$ p(x_1,x_2,...,x_N) = {e^{-E(x_1,...,x_N)}\over{Z}} $$
 
-Our EBM model in turn, has an equilibrium distribution given by its own energy function $E_W$
+Our EBM model in turn, has an equilibrium distribution given by its own energy function $E_W$ parametrized by its weights $W$
 
 $$ p_W(x_1,x_2,...,x_N) = {e^{-E_W(x_1,...,x_N)}\over{Z_W}} $$
 
 In order to make the generated images similar to those in the training set, we want to choose the model parameters $W$ so that
-$p(x_1,x_2,...,x_N)\approx p_W(x_1,x_2,...,x_N)$. This was the approach taken by Hinton and Sejnowski in their training algorithm for the Boltzmann machines, and they showed that the problem reduces to finding the maximum likelihood estimates of $W$. This approach runs into the problem of estimating the partition function $Z$ which in general is a difficult one to solve.
-We will pursue this approach in the next section, but for now we we will describe a more modern approach which avoids the estimation of $Z$ and is based on approximating the energy function so that
-$E(x_1,...,x_N)\approx E_W(x_1,...,x_N)$. This would seem to be a straightforward application of supervised learning if we knew $E(x_1,...,x_N)$, unfortunately
-that is not the case. For Langevin sampling we don't need $E_W$, but do need the score function, so perhaps we should be seeking the approximation
-${\partial E_W\over{\partial x_i}}\approx {\partial E\over{\partial x_i}}$. This results in the problem of choosing the $W$ to minimize the score matching error, also called the Fischer divergence, given by 
+$p(x_1,x_2,...,x_N)\approx p_W(x_1,x_2,...,x_N)$. This was the approach taken by Hinton and Sejnowski in their training algorithm for the Boltzmann machines, and they showed that the problem reduces to finding the maximum likelihood estimates of $W$. We will pursue this approach in the next section, but we will start with a simpler algorithm that is based on estimating the score function $\nabla_x E_W(x)$.
+This results in the problem of choosing $W$ to minimize the score matching error, also called the Fischer divergence, given by 
 
-$$ L_{SM}(W) = {1\over 2} E_{p(X)}\vert\vert\nabla_x \log s_W(X) - \nabla_x \log p(X)\vert\vert_2^2  $$
+$$ L_{SM}(W) = {1\over 2}\sum_{i=1}^N E_{p(X)} ({\partial\log\ s_W\over{\partial x_i}} -  {\partial\log\ p_W\over{\partial x_i}})^2  =   {1\over 2} E_{p(X)}\vert\vert\nabla_x \log\ s_W(X) - \nabla_x \log\ p(X)\vert\vert_2^2  $$
 
-where $X=(x^1,...,x^N)$ and the score given by $s_W(X) = \nabla_x p_W(X)$$. 
-This approach can be made to work, as first pointed out by Hyvarinen and Dayan, but however runs into the computational problem of computing second order derivatives or the trace of Jacobian during the training process.
+where the score given by $s_W(X) = \nabla_x p_W(X)$. 
+This approach can be made to work, as first pointed out by [Hyvarinen](https://jmlr.org/papers/volume6/hyvarinen05a/hyvarinen05a.pdf), but however runs into the computational problem of computing second order derivatives or the trace of Jacobian during the training process.
 
-The critical advance was made by Vincent in 2011 which he called denoised score matchin or DSM and the critical idea was that of introducing noise into the training process. Vincent noted that the problem with minimizing $L_{SM}$ is due to the intractibility of $\nabla_x\log p(X)$. He proposed injecting noise into the data samplex $X$ via a known conditional distribution $p_\sigma(X'\vert X)$ with scale $\sigma$. We then try to approximate the score of the noisy samples by minimizing the loss function
+The big advance was made by [Vincent](https://www.iro.umontreal.ca/~vincentp/Publications/smdae_techreport.pdf) in 2011 which he called denoised score matching or DSM and the critical idea was that of introducing noise into the training process. Vincent noted that the problem with minimizing $L_{SM}(W)$ is due to the intractibility of $\nabla_x\log p(X)$. He proposed injecting noise into the data samplex $X$ via a known conditional distribution $p_\sigma(X'\vert X)$ with scale $\sigma$. 
+We then choose the model parameters $W$ so as to approximate the score of the noisy samples, by minimizing the loss function
 
-$$ L_{SM}(W,\sigma) = {1\over 2} E_{p(X')}\vert\vert\ s_W(X';\sigma) - \nabla_{X'} \log p_{\sigma}(X')\vert\vert_2^2  $$
+$$ L_{SM}(W,\sigma) = {1\over 2} E_{p(X')}\vert\vert\ s_W(X';\sigma) - \nabla_{X'} \log\ p_{\sigma}(X')\vert\vert_2^2  $$
 
 where the distribution of the noisy sample is given by
 
@@ -258,33 +256,33 @@ $$ p_{\sigma}(X') = \int p_{\sigma}(X'\vert X) p(X) dx $$
 
 Vincent showed that even though $\nabla_{X'} \log p_{\sigma}(X')$ is intractable, it can be replaced by a tractable objective by conditioning on the distribution $p(X)$ of the original data samples, which results in the Denoising Score Matching (DSM) loss given by
 
-$$ L_{DSM}(W,\sigma) = {1\over 2} E_{p(X),p(X'\vert X)}\vert\vert s_W(X';\sigma) - \nabla_{X'} \log p_{\sigma}(X'\vert X)\vert\vert_2^2  $$
+$$ L_{DSM}(W,\sigma) = {1\over 2} E_{p(X),p(X'\vert X)}\vert\vert s_W(X';\sigma) - \nabla_{X'} \log\ p_{\sigma}(X'\vert X)\vert\vert_2^2  $$
 
-Vincent showed that the value of $s_W$ that minimizes $L_{DSM}$ satisfies the equation
+It can be shown that the value of $W$ that minimizes $L_{DSM}(W,\sigma)$ results in the the equation
 
 $$ s^*(X';\sigma) = \nabla_{X'} \log p_{\sigma}(X') $$
 
-which the same $W$ that also minimizes $L_{SM}$. When the noise level $\sigma$ is small $s^*(X';\sigma) \approx \nabla_{X} \log p_{\sigma}(X)$, so that taking a small step along the noisy score direction $s^*(X';\sigma)$ moves a noisy sample in roughly the same direction as a clean sample, which is the intuition behind why this technique works.
+and this is the same $W$ that minimizes $L_{SM}(W,\sigma)$. When the noise level $\sigma$ is small, $s^*(X';\sigma)\approx \nabla_{X} \log p_{\sigma}(X)$, so that taking a small step along the noisy score direction $s^*(X';\sigma)$ moves a noisy sample in roughly the same direction as a clean sample, which is the intuition behind why this technique works.
 
-For the special case when $p_{\sigma}(X'\vert X)$ is Gaussian noise with variance $\sigma^2$ so that
+For the special case when $p_{\sigma}(X'\vert X)$ is Gaussian with variance $\sigma^2$ so that
 
 $$ X' = X + \sigma\epsilon $$
 
-where the noise vector $\epsilon$ is distributed according to $N(0,I)$$, so that
+and the noise vector $\epsilon$ is distributed according to $N(0,I)$, so that
 
 $$ p_{\sigma}(X'\vert X) = N(X'; X, \sigma^2 I)$$
 
-where $I$ is the identity matrix. It can be shown that
+where $I$ is the identity matrix. It can be shown that the conditional score assumes the simple form
 
 $$ \nabla_{X'}\log p_{\sigma}(X'\vert X) = {X-X'\over{\sigma}} $$
 
 thus making the minimization of $L_{DSM}(W,\sigma)$ computationally feasible. The DSM loss simplifies to
 
-$$ L_{DSM}(W,\sigma) = {1\over 2} E_{p(X),p(X')}\vert\vert s_W(X';\sigma) - {X-X'\over{\sigma}}\\vert\vert_2^2  $$
+$$ L_{DSM}(W,\sigma) = {1\over 2} E_{p(X),p(X'\vert X)}\vert\vert s_W(X';\sigma) - {X-X'\over{\sigma}}\\vert\vert_2^2  $$
 
 $$ = {1\over 2} E_{p(X),\epsilon}\vert\vert s_W(X+\sigma\epsilon;\sigma) + {\epsilon\over{\sigma}}\\vert\vert_2^2  $$
 
-Estimating $W$ my minimizing $L_{DSM}$ is a straightforward regression problem. The final step is to make the noise level $\sigma$ go to zero, so that
+Estimating $W$ by minimizing $L_{DSM}(W,\sigma)$ is a straightforward regression problem. The final step is to make the noise level $\sigma$ go to zero, so that
 
 $$ \nabla_{X'} \log p_W(X') \approx \nabla_{X} \log p(X)  $$
 
@@ -296,23 +294,23 @@ and the two score functions match.
 
 Figure 6: Illustration of a NCSN
 
-The DSM algorithm has some shortcomings; in complex high dimensional energy spaces with lots of saddle points where the score function is close to zero, the Langevin iteratiom can stuck in sub-optimal regions. Even if it eventually manages to get out, it can take a long time to converge. The solution to this problem was proposed by Song and Ermon, and is basically a version of the simulated annealing algorithm that was described in Part 1. Recall that simulated annealing worked by starting the optimization at a high temperature so that the iteration had enough energy to jump out of shallow local minima and saddle points, and then gradually reducing the temperature to allow it explore deeper regions within larger valleys. Song and Ermon proposed a similar mechanism for DSM, where the noise was varied not through temperature, but by varying the variance $\sigma$.
+The DSM algorithm has some shortcomings; in complex high dimensional energy spaces with lots of saddle points where the score function is close to zero, the Langevin iteration can stuck in sub-optimal regions. Even if it eventually manages to get out, it can take a long time to converge. The solution to this problem was proposed by [Song and Ermon](https://arxiv.org/abs/1907.05600), and is basically a version of the simulated annealing algorithm that was described in Part 1. Recall that simulated annealing worked by starting the optimization at a high temperature so that the iteration had enough energy to jump out of shallow local minima and saddle points, and then gradually reducing the temperature to allow it explore deeper regions within larger valleys. Song and Ermon proposed a similar mechanism for DSM, which they called Noise Conditioned Score Networks (NCSN), where the noise was varied not through temperature, but by varying the variance $\sigma$.
 
-The NCSN algorithm is illustrated in the above figure. During training noise is injected at multiple levels $\sigma_1,...,\sigma_L$, where $\sigma_1<\sigma_2<...\sigma_L$, and the idea is to train a
+The NCSN algorithm is illustrated in the above figure. During training, noise is injected at multiple levels $\sigma_1,...,\sigma_L$, where $\sigma_1<\sigma_2<...\sigma_L$, and the idea is to train a
 score model $s_W(X,\sigma)$ that works for all $\sigma\in {\sigma_1,...,\sigma_L}$.
-The NCSM objective is given by
+The NCSN objective is given by
 
-$$ L_{NCSM}(W) = \sum_{i=1}^L \lambda(\sigma_i) L_{DSM}(W,\sigma_i)  $$
+$$ L_{NCSN}(W) = \sum_{i=1}^L \lambda(\sigma_i) L_{DSM}(W,\sigma_i)  $$
 
 where
 
 $$ L_{DSM}(W,\sigma) = {1\over{2}}E_{P(X),P(X'\vert X)}[\vert\vert s_W(X',\sigma) - {X-X'\over{\sigma^2}}\vert\vert^2_2 $$
 
-where $\lambda(\sigma_i)$ is a weighing function for each noise level. Minimization leads to a score model $s^{*}(X,\sigma)$ that can be used at at each noise level to recover the true score $\nabla_X\log p_{\sigma}(X)$ for all $\sigma\in\{\sigma_i}_{i=1}^L $.
+where $\lambda(\sigma_i)$ is a weighing function for each noise level. Minimization leads to a score model $s^{*}(X,\sigma)$ that can be used at at each noise level to recover the true score $\nabla_X\log p_{\sigma}(X)$ for all $\sigma\in {\sigma_1,...,\sigma_L}$.
 
-During the inference process, we start with a pure random sample $X_0$ distributed according to $N(0,I)$, and then Langevin iteration is applied successively at each noise level $\sigma_l$ to sample from the distribution $p_{W}(X';sigma_l), l=L,L-1,...,1$. At each level the algorithm is iterated $K$ times, and the output from level $\sigma_l$ is used to initialize the next lower level $\sigma_{l-1}$. The iteration at the l^{th}$ level is given by
+During the inference process, we start with a pure random sample $X_0$ distributed according to $N(0,I)$, and then the Langevin iteration is applied successively at each noise level $\sigma_l$ (starting from the largest $\sigma_L$) to sample from the distribution $p_{W}(X';\sigma_l), l=L,L-1,...,1$. At each level the algorithm is iterated $K$ times, and the output from level $\sigma_l$ is used to initialize the next lower level $\sigma_{l-1}$. The iteration at the $l^{th}$ level is given by
 
-$$ X_{n+1} = X_n + \eta_l s_W(X_n,\sigma_l) + \sqrt{2\eta}\epsilon_n $$
+$$ X_{n+1} = X_n - \eta_l s_W(X_n,\sigma_l) + \sqrt{2\eta_l}\epsilon_n $$
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat63.png) 
 
@@ -324,19 +322,20 @@ The complete inference algorithm is given below (from Song and Ermon)
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat62.png) 
 
 
-## Training Using MCMC Sampling
+## Training Using Maximum Likelihood Algorithm
 
-The score based technique described in the previous section was able to generate images which are currently the state of the art in the field. However it does come with issue that it uses feedforward ANNs such as CNNs and transformers as function approximators in order to do this. This contrasts with the earlier Boltzmann machine based image generation models whose operation was entirely based on the sampling operation. 
-It would be nice if there was a way to equal the performance of the score based technique, while basing it entirely on Langevin or Gibbs sampling type operations, and without the use of feedforward ANNs.
-This will open the door to avoiding the backprop algorithm for training, and potentially much more energy efficient systems. It also brings us one step closer to modeling the brain, since both it and sampling based models obey the principles of free energy minimization from thermodynamics.
+The score based technique described in the previous section was able to generate images which are currently the state of the art in the field. However it does come with issue that it uses regression to estimate the score function, and this requires the use of the backprop algorithm.
+This contrasts with the earlier Boltzmann machine based image generation models whose operation was entirely based on the sampling operation. 
+It would be nice if there was a way to equal the performance of the score based technique, while basing it entirely on Langevin or Gibbs sampling type operations, and without the use of backprop.
+It also brings us one step closer to a more energy efficient generative model, if the sampling operation can be implemented in an energy efficient manner.
 
 ### The Maximum Likelihood (MLE) Algorithm
 
-As before let $p(X)$ and $p_W(X)$ be the probability distributions for the training examples and the model repectively. Since it is an EBM, we can write $p_W(X0$ as
+As before let $p(X)$ and $p_W(X)$ be the probability distributions for the training examples and the model repectively. Since it is an EBM, we can write $p_W(X)$ as
 
-$$ p_W(X) = {e^{E_W(X)}\over Z_W}$$
+$$ p_W(X) = {e^{-E_W(X)}\over Z_W}$$
 
-where $X$ is a vector $X=(x^1,...,x^N)$ and the partition function is given by $Z_W = \int e^{E_W(X)} dX$ as usual. 
+where $X$ is a vector $X=(x^1,...,x^N)$ and the partition function is given by $Z_W = \int e^{-E_W(X)} dX$ as usual. 
 Assuming we are given $m$ training samples $X_1,...,X_M$, 
 in order to learn this model using MLE, we have to maximize the log-likelihood function given by
 
