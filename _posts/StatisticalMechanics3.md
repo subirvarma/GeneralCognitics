@@ -14,7 +14,7 @@ function as generative models, which brings us one step closer in this quest.
 When I started writing this series of articles, the initial system that I described was the Ising model for magnetism, and how
 phase changes in the material could be used to explain its properties. We looked at other models with more complex node interactions called spin glasses, and this led to the discovery that they also exhibit
 phases, but they many many more phases compared to magnets. In the present article we will see that the process of generating images can be considered to be type of phase change created by the interactions
-of hundreds of thousands of individual nodes working together. But the law that governs these phases is the same one that we encountered when studying magnetism, which is to say the principle of
+of hundreds of thousands of individual nodes interacting with each other. But the law that governs these phases is the same one that we encountered when studying magnetism, which is to say the principle of
 minimization of energy.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat52.png) 
