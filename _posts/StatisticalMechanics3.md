@@ -444,14 +444,14 @@ $$ p(Y(t)\vert X(t+1)) = {1\over{Z'_W(X(t+1),t)}} e^{-E_W(Y(t),t) -{1\over{2\sig
 where $E_W(Y(t),t)$ is defined by an ANN with parameters $W$ which is conditioned on $t$. 
 The corresponding Langevin sampling of the conditional distribution is given by
 
-$$ Y__{n+1}(t) = Y_n(t) - \eta[[\nabla_Y E_W(Y_n(t),t) -  {1\over{\sigma^2(t)}} (X(t+1)-Y_n(t))] +\sqrt{2\eta}\epsilon _n,$$
+$$ Y_{n+1}(t) = Y_n(t) - \eta[\nabla_Y E_W(Y_n(t),t) -  {1\over{\sigma^2(t)}} (X(t+1)-Y_n(t))] +\sqrt{2\eta}\epsilon _n,$$
 
-The expression for the gradient of the loss function becomes
+Once we have a sample from the conditional distribution $p_W(Y\vert X(t+1))$, it is plugged into the expression for the gradient of the loss function
 
-$$ \nabla_W L(W,t) = -E_{p(Y\vert X)}[\nabla_W E_W(Y,t)] +  E_{p_W(Y\vert X)}[\nabla_W E_W(Y,t)] $$
+$$ \nabla_W L(W,t) = -E_{p(Y\vert X(t+1))}[\nabla_W E_W(Y,t)] +  E_{p_W(Y\vert X(t+1))}[\nabla_W E_W(Y,t)] $$
 
 which then gets plugged into $W\leftarrow W + \eta \nabla_W L(W,t)$  to estimate the model weights.
-Given $X$, the $Y$ sample is drawn from the training data for the first expectation, while it is drawn from the conditional distribution $p_W(Y\vert X)$ defined by the model with parameters $W$ using the Langevin samplin equation given above, for the second expectation. 
+Given $X(t+1)$, the $Y$ sample is drawn from the training data for the first expectation, while it is drawn from the conditional distribution $p_W(Y\vert X(t+1))$ defined by the model with parameters $W$ using the Langevin samplin equation given above, for the second expectation. 
 
 Note that the DRL training algorithm does not involve the use of the backprop algorithm, and the learning happend by way of sampling.
 This makes it somewhat of a rarity in the modern world of AI systems, and also increases the possibility that the brain emplyoyes something similar (especially since no evidence of backprop has been found in the brain).
