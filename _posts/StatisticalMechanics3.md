@@ -559,9 +559,9 @@ As opposed to CMOS, the p-bit implentation uses Magnetic Tunnel Junction (MTJ) t
 Hence it may be possible to build dense arrays of p-bits using the same process used for building MRAMs, this work is still ongoing.
 Using this technology it may be possible to build a Boltzmann machine in which all the nodes can update their state completely asynchronously, thus avoiding the use of RBMs.
 
-![](https://subirvarma.github.io/GeneralCognitics/images/stat68.png) 
+![](https://subirvarma.github.io/GeneralCognitics/images/stat72.png) 
 
-Figure 2: A hybrid computer scheme with probabilistic and classical computers
+Figure 14: A hybrid computer scheme with probabilistic and classical computers
 
 A hybrid computer featuring both probabilistic (Boltzmann machine) and classical parts is shown in the above figure. The Boltzmann machine is used to do fast and efficient sampling, while other parts of the training algorithm, such as the contrastive divergence calculations are carried out by the classical computer.
 
