@@ -565,6 +565,5 @@ Figure 14: A hybrid computer scheme with probabilistic and classical computers
 
 A hybrid computer featuring both probabilistic (Boltzmann machine) and classical parts is shown in the above figure. The Boltzmann machine is used to do fast and efficient sampling, while other parts of the training algorithm, such as the contrastive divergence calculations are carried out by the classical computer.
 
-## Implemntation of the Langevin Equation: Normal Computing
-
-Analog circuitry
+Since both Extropic and p-bit systems are mainly focused on building Boltzmann machines with binary 1 or 0 nodes values, what about systems of the type that we spent most of this article discussing? These involve continuous states, and require the use of Langevin sampling. Normal Computing is another startup that is building devices that can simulate the Langevin equation. More details about their system can be found 
+[here](https://arxiv.org/abs/2312.04836).
