@@ -9,7 +9,7 @@ title: "Energy Based Models Part 3: Generative AI Using EBMs"
 
 Modern generative artificial neural networks such as LLMs show signs of human like intelligence. Can their operation be tied back to principles of physics, in particular thermodynamics?
 If so, it will provide a palusible picture of how the brain works, since it too presumably functions using natural laws. In this article we will show that Energy Based Models (EBMs) can be made to
-function as generative models which can be used to create images or language, and also be used for reasoning, which brings us one step closer to understanding how the brain works.
+function as generative models, which brings us one step closer in this quest.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat52.png) 
 
@@ -17,8 +17,8 @@ Figure 1: The energy landscape in an image generation EBM
 
 The EBM approach to generative modeling is based on on the physical principle of minimization of energy, and here is a high level description:
 
-- Assuming that there are $N$ nodes $X=(x_1,...,x_N)$ in a generative EBM used to generate images, such $X$ correponds to an image and $x_i$ is the $i^{th}$ pixel value. The energy for this system is modeled by a function $E_W(x_1,...,x_N)$, where $W$ represents its learnable parameters.
-Once the model has been trained, images are arranged in the landscape of this energy function, in which the bottom of valleys corresponds to images that are similar to thise in the training set, hence these have lower energy than images that don't make any sense (see figure 1).
+- Assuming that there are $N$ nodes $X=(x_1,...,x_N)$ in a generative EBM used to generate images, such that $X$ correponds to an image and $x_i$ is the $i^{th}$ pixel value. The energy for this system is modeled by a function $E_W(x_1,...,x_N)$, where $W$ represents its learnable parameters.
+Once the model has been trained, images are arranged in the landscape of this energy function, in which the bottom of valleys corresponds to images that are similar to those in the training set (see figure 1).
 - The process of generation consists of starting from an initial state in the state space (which may look like noise to us), and then traversing the energy landscape until the system arrives at a minima, and at this point the configuration looks like an intelligible image.
 
 If you recall the design of Boltzmann machines in Part 2, the above description looks very similar, but there are a few differeces. 
@@ -28,9 +28,9 @@ If you recall the design of Boltzmann machines in Part 2, the above description 
 -  Generation is done by sampling in both cases, however the Gibbs sampling used in Boltzmann machines cannot be used if the energy function does not have the quadratic form. Instead a more powerful sampling algorithm, namely Langevin sampling, is used.
 
 In all likelihood biological brains operate using thermodynamic principles and it is not inconcievable that their architecture and that of generative EBMs share common principles of operation since the same physics underlies both (this is not unlike the fact that both birds and airplanes are able to fly using the Bernoulli's principle from physics, but they use different mechanisms). 
-However brains are architected very differently compared to modern networks such as the transformer that is used in LLMs, in particular they have an extensive amount of feedback connections, in contrast to transformers that use a feed-forward type architecture. The EBM approach to generative modeling gets around this conundrum by proposing that the transformer could be a model for the energy function of the the brains neural network, rather than for its inter-connection toplology. This bypasses the problem of figuring out the interconnection architecture of biological brains, in which there has been limited progress, and shifts the focus to minimization of the energy function, which is based on thermodynamics, and underlies the operation of both brains and our EBM models.
+However brains are architected very differently compared to modern artificial neural networks (ANNS) such as the transformer, in particular they have an extensive amount of feedback connections. In contrast, transformers use a feed-forward type architecture, and this is also true for other ANNs such convolutional neural networks or CNNs. The EBM approach to generative modeling gets around this conundrum by proposing that the transformer could be a model for the energy function of the the brains neural network, rather than for its inter-connection topology. This bypasses the problem of figuring out the interconnection architecture of biological brains, in which there has been limited progress, and shifts the focus to the principle of minimization of the energy function, which is based on thermodynamics, and underlies the operation of both brains and EBM models.
 
-The EBM approach to generative modeling also provides insight into the question of how brains are able to operate using much lower energy compared to LLMs. The parallelism in modern artificial neural networks is a good match for implementation on GPUs, which are responsible for all that energy consumption. The basic operation in EBMs on the other hand is sampling which is not a good fit for GPUs. However the sampling operation can be made much more efficient by exploiting the physical properties of the substrate on which the system is built, and this is presumably what our brains are doing.
+The EBM approach to generative modeling also provides insight into the question of how brains are able to operate using much lower energy compared to LLMs. The parallelism in modern ANNs is a good match for implementation on GPUs, which are responsible for all that energy consumption. The basic operation in EBMs on the other hand is sampling which is not a good fit for GPUs. However the sampling operation can be made much more efficient by exploiting the physical properties of the substrate on which the system is built, and this is presumably what our brains are doing.
 Towards the end of the article I will describe some efforts underway to create devices that are able to sample in an energy efficient manner.
 
 ## Introduction
@@ -53,7 +53,7 @@ Recall that if $E_W$ is the energy function for the model, then its Boltzmann di
 $$  p_W(x_1,...,x_N) = {e^{-E_W(x_1,...,x_N)}\over{Z_W}} $$
 
 where $Z_W$ is the partition function, and in general getting an estimate for it is a challenging problem.
-Hinton's original design for training the Boltzmann machine got around this by sampling from $p_W$, which can be done without knowing $Z_W$. Unfortunately this algorithm was not able to scale up beyond a few hundred nodes since the sampling took too long for complex multi-modal distributions.
+Hinton's original design for training the Boltzmann machine got around this by sampling from $p_W$, which can be done without knowing $Z_W$, but unfortunately this algorithm was not able to scale up.
 Modern EBMs solve this problem by borrowing an idea that was used in the simulated annealing algorithm, i.e., introducing noise into the system and then gradually reducing it as the sampling progresses.
 
 It was also discovered recently that there is a way to sample from EBMs based on estimating the gradient of the energy function ${\partial E_W\over{\partial x_i}}$, also called the score function. This allows us to generate samples from the probability distibution $p_W(x_1,...,x_N)$ without knowing what its energy function $E_W$ is. 
@@ -61,7 +61,7 @@ This fundamental idea was discovered by several people around the turn of the mi
 
 In order to fully exploit these ideas, we also need to generalize beyond the quadratic energy functions used in Boltzmann machines.
 ANNs are well suited for this task, since they provide us with a way to to model arbitrarily complex functions. Thus the energy function $E_W(x_1,...,x_N)$ is now a neural network and the
-parameters $W$ of the ANN play the role of interaction strengths in the original Boltzmann machine and moreover they can be estimated by using the powerful backprop algorithm.
+parameters $W$ of the ANN play the role of interaction strengths in the original Boltzmann machine.
 Using this idea it becomes possible to replace the quadratic energy function in the Boltzmann machine, with an ANN which can potentially have hundreds of thousands of parameters and this results in an enormous increase in the modeling power of the resulting EBM. This also enables modern EBMs to piggyback on the advances in ANNs in recent years with powerful models such as convolutional neural networks (CNNs) and transformers used to model $E_W$.
 
 In order to design modern EBMs there are two problems that have to be solved:
@@ -69,7 +69,7 @@ In order to design modern EBMs there are two problems that have to be solved:
 - How to sample from these models since the Gibbs sampling used in classical Boltzmann machines only applies for quadratic energy functions.
 - How to train these models, since Hinton's algorithm for training the Boltzmann machines cannot be used anymore.
 
-The first issue was resolved with the discovery of Langevin based Markov Chain Monte Carlo (MCMC) sampling. This algorithm can be applied if we know the energy function $E_W$ or the score function ${\partial E_W\over{\partial x_i}}$ for the model. Furthermore the system state can be a real number (as opposed to binary numbers in the Boltzmann machine).
+The first issue was resolved with the discovery of Langevin based Markov Chain Monte Carlo (MCMC) sampling. This algorithm can be used if we know the energy function $E_W$ or the score function ${\partial E_W\over{\partial x_i}}$ for the model. Furthermore the system state can be a real number (as opposed to binary numbers in the Boltzmann machine).
 The sampling operation causes the state to converge to values distributed according to a specified probability distribution which in this case is the Boltzmann distrbution $p_W$.
 The origins of Langevin sampling lie in the theory of stochastic differential equations, and I touched upon this topic in [my article on Brownian Motion](https://subirvarma.github.io/GeneralCognitics/2025/05/23/TamingRandomness.html). 
 Once we use Langevin sampling, it becomes possible to handle energy functions that are more complex than quadratic, indeed it becomes possible use arbitrarily complex energy functions such as those modeled by CNNs and transformers.
@@ -82,9 +82,9 @@ All these advances in EBM models are impressive, but is there any fundamental be
 the physical properties of the hardware substrate on which these systems are built then it can potentially lead to huge savings in energy consumption. There are a number of efforts underway in this direction and we will describe a a few of them towards the end of this article.
 These systems are still in the research phase and they have a long way to go until they can approach the performance of digitally implemented EBM systems.
 
-The holy grail of modern generative systems are LLMs, and the question arises whether EBMs can be used to implement LLMs. The current generation of LLMs are based on auto-regressive sampling using transformers, and generate one word at a time. It turns out that that EBMs can also be used to generate language in a more holistic manner and there also has been progress in building reasoning models using EBMs. These topic are covered in Part 4, we will focus on image generation in this article.
+The holy grail of modern generative systems are LLMs, and the question arises whether EBMs can be used to implement LLMs. The current generation of LLMs are based on auto-regressive sampling using transformers, and generate one word at a time. It turns out that that EBMs can also be used to generate language in a more holistic manner and there also has been progress in building reasoning models using EBMs. This topic is covered in Part 4, we will focus on image generation in this article.
 
-There is another branch in modern EBM work called [Thermodynamic Computing](https://arxiv.org/abs/1911.01968)  which derives its inspiration from the original Hopfield network as opposed to the Boltzmann machine. Recall that the Hopfield network generated specific state configurations in equilibrium, as opposed to sampling from the distribution of the equilibrium configurations. This implies that it can potentially be used as a computational tool. This was actually pointed out by Hopfield himself, who showed how combinatorial optimization problems such as the Travelling Salesman Problem can be mapped on to and solved using the Hopfield network. This work has been updated by research groups at [Purdue University and UCSB](https://arxiv.org/abs/2510.23972), who have shown how Hopfield networks can be scaled to much larger sizes, using both theoretical advances such as more efficient sampling techniques, as well new hardware devices that can implemenent this sampling more efficiently. This work is also in its research phase at the present time, and its main driver has been to serve as an alternative to quantum computers for implementing probabilistic algorithms.
+There is another branch in modern EBM theory called [Thermodynamic Computing](https://arxiv.org/abs/1911.01968)  which derives its inspiration from the original Hopfield network as opposed to the Boltzmann machine. Recall that the Hopfield network generated specific state configurations in equilibrium, as opposed to sampling from the distribution of the equilibrium configurations. This implies that it can potentially be used as a computational tool. This was actually pointed out by Hopfield himself, who showed how combinatorial optimization problems such as the Travelling Salesman Problem can be mapped on to and solved using the Hopfield network. This work has been updated by research groups at [Purdue University and UCSB](https://arxiv.org/abs/2510.23972), who have shown how Hopfield networks can be scaled to much larger sizes, using both theoretical advances such as more efficient sampling techniques, as well new hardware devices that can implemenent this sampling more efficiently. This work is also in its research phase at the present time, and its main driver has been to serve as an alternative to quantum computers for implementing probabilistic algorithms.
 
 ## EBMs with ANN Based Energy Functions
 
@@ -111,7 +111,7 @@ $$ p_W(x_1,x_2,...,x_N) = {e^{-E_W(x_1,...,x_N)}\over{Z_W}} $$
 
 where $Z_W$ as usual is the partition function
 
-$$ Z_W = \sum_{x_1,...,x_N} e^{-E_W(x_1,...,x_N)}  $$
+$$ Z_W = \int_{x_1,...,x_N} e^{-E_W(x_1,...,x_N)} dx_1...dx_N  $$
 
 Note that unlike the Boltzmann machine, the state variables $(x_1,...,x_N)$ are no longer restricted to $+1,-1$ but can take on any real value.
 
@@ -123,17 +123,17 @@ In the next two subsections we give high level overviews of how EBMs can be be u
 
 Figure 3: Image generation using EBMs
 
-The above figure gives a high level overview of how EBMs can be used to generate images. In this case the nodes in the EBM correspond to pixels in the image. 
-Given a training data distribution consisting of a bunch of images, we will assume that the pixels in an image follow a Boltzmann distribution
+The above figure gives a high level overview of how EBMs can be used to generate images. Note that the nodes in the EBM correspond to pixels in the image. 
+Given training data consisting of a bunch of images, we will assume that the pixels in an image follow a Boltzmann distribution
 $p(x_1,...,x_N)={e^{-E(x_1,...,x_N)}\over{Z}}$ for some unknown energy function $E(x_1,...,x_N)$. 
 
 The right hand side of the figure shows an EBM model with energy function $E_W(x_1,...,x_N)$, with corresponding Boltzmann distribution $p_W(x_1,...,x_N)={e^{-E(_Wx_1,...,x_N)}\over{Z_W}}$. 
 We can consider that the nodes in the EBM model are interacting with each other, which results in the interaction energy $E_W(x_1,...,x_N)$, and ultimately the interactions settle down to an equilibrium in which the distributon of the pixels is given by the Boltzmann distribution. Thus the equilibrium state, which is that of lowest energy, also corresponds to states that result in images that look like those from the training dataset.
-During inference sample images are generated by starting from a random state $(x_1,...,x_N)$ (which look like noise), and then using the sampling process to find the configuration that has the minimum energy.
+During inference, sample images are generated by starting from a random state $(x_1,...,x_N)$ (which look like noise), and then using the sampling process to find the configuration that has the minimum energy.
 The model is considered to be trained if these sample images are similar to those in the training dataset. Sampling essentially results in finding a local
 minima of the energy function $E_W$, and its trajectory can be considered to similar to that of a particle moving in a force field with energy $E_W$.
 
-Later in this article ee will describe two ways by which the EBM model can trained:
+Later in this article we will describe two ways by which the EBM model can be trained:
 
 - The maximum likelihood (MLE) algorithm chooses the parameters $W$ such that $p(x_1,...,x_N)\approx p_W(x_1,...,x_N)$ and this is basically the algorithm that Hinton used to train the Boltzmann machine. The modern more powerful version of the MLE algorithm that will be described in this article is called [Diffusion Recovery Likelihood](https://arxiv.org/abs/2012.08125) or DRL algorithm.
 
@@ -150,11 +150,11 @@ The process of image generation using an EBM is like a ball rolling downhill in 
 In other words, how can we specify what image to generate? 
 This is the province of text to image models which turn a textual description into the corresponding image. Image to image models or text to text models (also called LLMs) also fall into this class, hence it constitutes a very important class of AI models. 
 
-The image generation process in these models can be understood as sampling that minimizes the energy function $E_{W}(x_1,...,x_N, c)$ where the variable $c$ is the latent vector representing the textual description.  During inference sample images are generated by starting from a text description $c$ and a random state $(x_1,...,x_N)$, and then using the sampling process to find the configuration that has the minimum energy for the given value of $c$. Each value of the text $c$ can led to multiple possible generated images, depending upon our choice of the initial random state configuration. 
+The image generation process in these models can be understood as sampling that minimizes the energy function $E_{W}(x_1,...,x_N, c)$ where the variable $c$ is the latent vector representing the textual description.  During inference, sample images are generated by starting from a text description $c$ and a random state $(x_1,...,x_N)$, and then using the sampling process to find the configuration that has the minimum energy for the given value of $c$. Each value of the text $c$ can led to multiple possible generated images, depending upon our choice of the initial random state configuration. 
 Using the probabilistic point of view, this can be understood as matching the conditional probability $p(x_1,...,x_N\vert c)$ of the training data with the conditional probability
 $p_W(x_1,...,x_N\vert c)$ computed by the EBM model.
 
-For a given context $c$, the energy $E_W(x_1,...,x_N)$ forms a function with multiple minima, such that each minima corresponds to images similar to those in the training set, just as before (see above figure). However the presence of the context means that all these images are constrained by it. For example if the context is "Images of dogs jumping over a fence" then the energy landscape with be limited to state configurations that correspond to this text.
+For a given context $c$, the energy $E_W(x_1,...,x_N,c)$ forms a function with multiple minima, such that each minima corresponds to images similar to those in the training set, just as before (see above figure). However the presence of the context means that all these images are constrained by it. For example if the context is "Images of dogs jumping over a fence" then the energy landscape with be limited to state configurations that correspond to this text.
 
 
 ### Generative EBMs as Models for Biological Brains
@@ -165,7 +165,7 @@ The brain itself has billions of neurons with trillions of connections between t
 
 In my opinion looking for signs of transformers or backprop in the brain is probably not the right way to approach the problem. It is more likely that the brain operates using EBM principles since these are firmly grounded on the physics of how a large number of nodes can interact with one another and create emergent behaviors (for more information on this topic please see Karl Friston's work on the [Free Energy Principle](https://www.fil.ion.ucl.ac.uk/~karl/NRN.pdf)). The interconnect topology between neurons is exteremely complex and it is quite likely that its explanation will lie outside human comprehension for the forseable future. However EBM theory tells us that what is important is not the interconnect toplogy, but the resulting energy function that results from the interactions. Indeed the properties of the energy function determine the information stored in the EBM and how it can retrieved. So perhaps this provides a clue that instead of trying to exactly map the connectome, we should be studying the brain at the level of its energy function instead. Even more interesting is the speculation that transformers don't serve as a model for the connectome, but instead are really models for the energy function that emerges from the connectome. 
 
-But what about training, since there is no evidence of backprop in the brain? It is quite likely that training happens using a sampling type of algorithm of the type that EBMs are based on. These algorithms can be connected back to the synaptic learning rule that McCulloch and Pitts proposed back in the 1940s. If this indeed were to be the case, this would also explain why our brains are much more energy efficient than the current generation of ANNs, since thermodynamic based sampling can exploit the physics of the substrate, and thus can be faster as well as energy efficient.
+But what about training, since there is no evidence of backprop in the brain? It is quite likely that training happens using a sampling type of algorithm of the type that EBMs use. These algorithms can be connected back to the synaptic learning rule that McCulloch and Pitts proposed back in the 1940s. If this indeed were to be the case, this would also explain why our brains are much more energy efficient than the current generation of ANNs, since thermodynamic based sampling can exploit the physics of the substrate, and thus can be faster as well as energy efficient.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat60.png) 
 
@@ -222,9 +222,9 @@ $X_0$ is usually initialized from the Gaussian distribution, $\eta>0$ is the ste
 $$ X_{n+1} = X_n -\eta \nabla_x E_W(X) +\sqrt{2\eta}\epsilon_n,\ \ n = 0,1,2,...  $$
 
 Note that by taking the derivative $\nabla_x p_W(X)$, the dependence on $Z_W$ goes away in the Langevin equation!
-The first two terms on the RHS of this equation are just the Newton method for finding the vector $X$ at which the function $E_W(X)$ is minimized (or equivalently the probability $p_W(X)$ is maximized), while the third term adds some noise to the process. Hence the overall effect is that of moving the system state to regions of higher probability, while the noise term enables the iteration to ocassionally jump out of local minima so that there is a greater probability that the iteration ends near a deeper minima. This equation is also sometimes referred to as the Langevin diffusion, especially for its continuous time version.
+The first two terms on the RHS of this equation are just the Newton method for finding the vector $X$ at which the function $E_W(X)$ is minimized (or equivalently the probability $p_W(X)$ is maximized), while the third term adds some noise to the process. Hence the overall effect is that of moving the system state to regions of lower energy (and higher probability), while the noise term enables the iteration to ocassionally jump out of local minima so that there is a greater probability that the iteration ends near a deeper minima. This equation is also sometimes referred to as the Langevin diffusion, especially for its continuous time version.
 
-The beauty of the Langevin diffusion is that enables us to generate samples from the distribution $p_W(X)$ without having to explicitly compute the partition function $Z$ or even the energy function $E$, all that we need are estimates of the score function $\nabla_x E_W(X)$. This frees us from the necessity of relating the energy function back to the inter-node interactions and enables sampling from arbitrarily complex energy functions. Note that unlike the Gibbs equation the Langevin equation can also be used for the case when the state $X_n$ is a collection of real numbers.
+The beauty of the Langevin diffusion is that enables us to generate samples from the distribution $p_W(X)$ without having to explicitly compute the partition function $Z_W$ or even the energy function $E_W$, all that we need are estimates of the score function $\nabla_x E_W(X)$. This frees us from the necessity of relating the energy function back to the inter-node interactions and enables sampling from arbitrarily complex energy functions. Note that unlike the Gibbs equation the Langevin equation can also be used for the case when the state $X_n$ is a collection of real numbers.
 Although not very well known yet, the Langevin diffusion is probably the most important equation in the modern theory of generative models.
 
 ## Training EBMs Using Score Functions
@@ -233,7 +233,7 @@ Given a training dataset consisting of a collection of images, we will start wit
 
 $$ p(x_1,x_2,...,x_N) = {e^{-E(x_1,...,x_N)}\over{Z}} $$
 
-Our EBM model in turn, has an equilibrium distribution given by its own energy function $E_W$ parametrized by its weights $W$
+Our EBM model in turn, has an equilibrium distribution given by its own energy function $E_W$ parametrized by weights $W$, given by
 
 $$ p_W(x_1,x_2,...,x_N) = {e^{-E_W(x_1,...,x_N)}\over{Z_W}} $$
 
