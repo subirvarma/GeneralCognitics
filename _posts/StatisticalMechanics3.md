@@ -302,7 +302,7 @@ and the two score functions match.
 
 Figure 6: Illustration of a NCSN
 
-The DSM algorithm has some shortcomings; in complex high dimensional energy spaces with lots of saddle points where the score function is close to zero, the Langevin iteration can stuck in sub-optimal regions. Even if it eventually manages to get out, it can take a long time to converge. The solution to this problem was proposed by [Song and Ermon](https://arxiv.org/abs/1907.05600), and is basically a version of the simulated annealing algorithm that was described in Part 1. Recall that simulated annealing worked by starting the optimization at a high temperature so that the iteration had enough energy to jump out of shallow local minima and saddle points, and then gradually reducing the temperature to allow it explore deeper regions within larger valleys. Song and Ermon proposed a similar mechanism for DSM, which they called Noise Conditioned Score Networks (NCSN), where the noise was varied not through temperature, but by varying the variance $\sigma$.
+The DSM algorithm has some shortcomings; in complex high dimensional energy spaces with lots of saddle points where the score function is close to zero, the Langevin iteration can stuck in sub-optimal regions. Even if it eventually manages to get out, it can take a long time to converge. The solution to this problem was proposed by [Song and Ermon](https://arxiv.org/abs/1907.05600), and is basically a version of the simulated annealing algorithm that was described in Part 1. Recall that simulated annealing worked by starting the optimization at a high temperature so that the iteration had enough energy to jump out of shallow local minima and saddle points, and then gradually reducing the temperature to allow it explore deeper regions within larger valleys. Song and Ermon proposed a similar mechanism for DSM, which they called Noise Conditioned Score Networks (NCSN), where the noise was varied not through temperature, but by varying the variance $\sigma$ used in the DSM algorithm.
 
 The NCSN algorithm is illustrated in the above figure. During training, noise is injected at multiple levels $\sigma_1,...,\sigma_L$, where $\sigma_1<\sigma_2<...\sigma_L$, and the idea is to train a
 score model $s_W(X,\sigma)$ that works for all $\sigma\in {\sigma_1,...,\sigma_L}$.
@@ -384,7 +384,7 @@ For the case when $E_W(X)$ is a expressed by an ANN such a transformer or a CNN,
 
 The MLE based technique hinges on getting samples from the model which are distributed according to $p_W(X)$ and since we can no longer use Gibbs sampling, we resort to using Langevin sampling instead
 
-$$ X_{n+1} = X_n - \eta\nabla_X E_X(X_n) +\sqrt{2\eta}\epsilon _n $$
+$$ X_{n+1} = X_n - \eta\nabla_X E_W(X_n) +\sqrt{2\eta}\epsilon _n $$
 
 where $\epsilon_n$ is drawn from a normal distribution $N(0,I)$. The gradient $\nabla_X E_W(X)$ can be computed using automatic differentiators.
 
@@ -425,11 +425,11 @@ and the objective is to recover the clean sample $X_i$ from the noisy sample $X'
 
 $$ X_{n+1} = X_n - {\eta}[[\nabla_X E_W(X_n) - {1\over{\sigma^2}}(X'_n-X_n)] +\sqrt{2\eta}\epsilon _n $$
 
-When this iteration converges the resulting $X$ value will be distributed according to $p_W(X\vert X')$. The model is then updated according to $W\leftarrow W + \nabla_W_W L(W)$, where the gradient is given by
+When this iteration converges the resulting $X$ value will be distributed according to $p_W(X\vert X')$. Note that the term ${1\over{\sigma^2}}(X'_n-X_n)$ does not appear in this equation since its derivative with respect to $W$ is zero.
+
+The model is then updated according to $W\leftarrow W + \nabla_W L(W)$, where the gradient is given by
 
 $$ \nabla_W L(W) = -E_{p(X\vert X')}[\nabla_W E_W(X)] +  E_{p_W(X\vert X')}[\nabla_W E_W(X)] $$
-
-Note that the term ${1\over{\sigma^2}}(X'_n-X_n)$ does not appear in this equation since it is not a function of $W$.
 
 It can be shown that given enough data, maximizing $J(W)$ leads to unbiased estimates of the parameters $W$ (see Appendix A2 in [Gao, Song et.al.  ](https://arxiv.org/abs/2012.08125) for a proof).
 
@@ -444,7 +444,7 @@ $$ p(Y(t)\vert X(t+1)) = {1\over{Z'_W(X(t+1),t)}} e^{-E_W(Y(t),t) -{1\over{2\sig
 where $E_W(Y(t),t)$ is defined by an ANN with parameters $W$ which is conditioned on $t$. 
 The corresponding Langevin sampling of the conditional distribution is given by
 
-$$ Y^{r+1}(t) = Y^r(t) - \eta[[\nabla_Y E_W(Y^r(t),t) -  {1\over{\sigma^2(t)}} (X(t+1)-Y^r(t))] +\sqrt{2\eta}\epsilon _n,$$
+$$ Y__{n+1}(t) = Y_n(t) - \eta[[\nabla_Y E_W(Y_n(t),t) -  {1\over{\sigma^2(t)}} (X(t+1)-Y_n(t))] +\sqrt{2\eta}\epsilon _n,$$
 
 The expression for the gradient of the loss function becomes
 
