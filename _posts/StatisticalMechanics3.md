@@ -244,6 +244,7 @@ This results in the problem of choosing $W$ to minimize the score matching error
 $$ L_{SM}(W) = {1\over 2}\sum_{i=1}^N E_{p(X)} ({\partial\log\ p_W\over{\partial x_i}} -  {\partial\log\ p\over{\partial x_i}})^2  =   {1\over 2} E_{p(X)}\vert\vert\  s_W(X) - \nabla_x \log\ p(X)\vert\vert_2^2  $$
 
 where the score given by $s_W(X) = \nabla_x p_W(X)$. 
+Note that we are using an ANN with parameters $W$ to model the score function directly, thus bypassing the need to model the energy function.
 This approach can be made to work, as first pointed out by [Hyvarinen](https://jmlr.org/papers/volume6/hyvarinen05a/hyvarinen05a.pdf), but however runs into the problem of computing second order derivatives or the trace of Jacobian during the training process.
 
 The big advance was made by [Vincent](https://www.iro.umontreal.ca/~vincentp/Publications/smdae_techreport.pdf) in 2011 which he called denoised score matching or DSM and the critical idea was that of introducing noise into the training process. Vincent noted that the problem with minimizing $L_{SM}(W)$ is due to the intractibility of $\nabla_x\log p(X)$. He proposed injecting noise into the data samplex $X$ via a known conditional distribution $p_\sigma(X'\vert X)$ with scale $\sigma$. 
@@ -263,7 +264,13 @@ It can be shown that the value of $W$ that minimizes $L_{DSM}(W,\sigma)$ results
 
 $$ s^*(X';\sigma) = \nabla_{X'} \log p_{\sigma}(X') $$
 
-and this is the same $W$ that minimizes $L_{SM}(W,\sigma)$. When the noise level $\sigma$ is small, $s^*(X';\sigma)$ is approximately equal to $\nabla_{X} \log p_{\sigma}(X)$, so that taking a small step along the noisy score direction $s^*(X';\sigma)$ moves a noisy sample in roughly the same direction as a clean sample, which is the intuition behind why this technique works.
+and this is the same $W$ that minimizes $L_{SM}(W,\sigma)$. 
+
+When the noise level $\sigma$ is small, 
+
+$$   s^*(X',\sigma)\approx \nabla_{X} \log p_{\sigma}(X)  $$
+
+so that taking a small step along the noisy score direction $s^*(X';\sigma)$ moves a noisy sample in roughly the same direction as a clean sample, which is the intuition behind why this technique works.
 
 For the special case when $p_{\sigma}(X'\vert X)$ is Gaussian with variance $\sigma^2$ so that
 
