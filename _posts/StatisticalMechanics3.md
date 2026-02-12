@@ -229,7 +229,7 @@ Although not very well known yet, the Langevin diffusion is probably the most im
 
 ## Training EBMs Using Score Functions
 
-Given a training dataset consisting of a collection of images, we will start with the problem of training an EBM model that generates new images that look similar to those in the training set. We will assume that the distribution of pixels in the training dataset is given by the Boltzmann distribution with an unknown energy function $E$
+Given a training dataset consisting of a collection of images, we will start with the problem of training an EBM model that generates new images that look similar to those in the training set. We will assume that the distribution of image pixels in the training dataset is given by the Boltzmann distribution with an unknown energy function $E$
 
 $$ p(x_1,x_2,...,x_N) = {e^{-E(x_1,...,x_N)}\over{Z}} $$
 
@@ -241,10 +241,10 @@ In order to make the generated images similar to those in the training set, we w
 $p(x_1,x_2,...,x_N)\approx p_W(x_1,x_2,...,x_N)$. This was the approach taken by Hinton and Sejnowski in their training algorithm for the Boltzmann machines, and they showed that the problem reduces to finding the maximum likelihood estimates of $W$. We will pursue this approach in the next section, but we will start with a simpler algorithm that is based on estimating the score function $\nabla_x E_W(x)$.
 This results in the problem of choosing $W$ to minimize the score matching error, also called the Fischer divergence, given by 
 
-$$ L_{SM}(W) = {1\over 2}\sum_{i=1}^N E_{p(X)} ({\partial\log\ s_W\over{\partial x_i}} -  {\partial\log\ p_W\over{\partial x_i}})^2  =   {1\over 2} E_{p(X)}\vert\vert\nabla_x \log\ s_W(X) - \nabla_x \log\ p(X)\vert\vert_2^2  $$
+$$ L_{SM}(W) = {1\over 2}\sum_{i=1}^N E_{p(X)} ({\partial\log\ p_W\over{\partial x_i}} -  {\partial\log\ p\over{\partial x_i}})^2  =   {1\over 2} E_{p(X)}\vert\vert\  s_W(X) - \nabla_x \log\ p(X)\vert\vert_2^2  $$
 
 where the score given by $s_W(X) = \nabla_x p_W(X)$. 
-This approach can be made to work, as first pointed out by [Hyvarinen](https://jmlr.org/papers/volume6/hyvarinen05a/hyvarinen05a.pdf), but however runs into the computational problem of computing second order derivatives or the trace of Jacobian during the training process.
+This approach can be made to work, as first pointed out by [Hyvarinen](https://jmlr.org/papers/volume6/hyvarinen05a/hyvarinen05a.pdf), but however runs into the problem of computing second order derivatives or the trace of Jacobian during the training process.
 
 The big advance was made by [Vincent](https://www.iro.umontreal.ca/~vincentp/Publications/smdae_techreport.pdf) in 2011 which he called denoised score matching or DSM and the critical idea was that of introducing noise into the training process. Vincent noted that the problem with minimizing $L_{SM}(W)$ is due to the intractibility of $\nabla_x\log p(X)$. He proposed injecting noise into the data samplex $X$ via a known conditional distribution $p_\sigma(X'\vert X)$ with scale $\sigma$. 
 We then choose the model parameters $W$ so as to approximate the score of the noisy samples, by minimizing the loss function
@@ -263,7 +263,7 @@ It can be shown that the value of $W$ that minimizes $L_{DSM}(W,\sigma)$ results
 
 $$ s^*(X';\sigma) = \nabla_{X'} \log p_{\sigma}(X') $$
 
-and this is the same $W$ that minimizes $L_{SM}(W,\sigma)$. When the noise level $\sigma$ is small, $s^*(X';\sigma)\approx \nabla_{X} \log p_{\sigma}(X)$, so that taking a small step along the noisy score direction $s^*(X';\sigma)$ moves a noisy sample in roughly the same direction as a clean sample, which is the intuition behind why this technique works.
+and this is the same $W$ that minimizes $L_{SM}(W,\sigma)$. When the noise level $\sigma$ is small, $s^*(X';\sigma)$ is approximately equal to $\nabla_{X} \log p_{\sigma}(X)$, so that taking a small step along the noisy score direction $s^*(X';\sigma)$ moves a noisy sample in roughly the same direction as a clean sample, which is the intuition behind why this technique works.
 
 For the special case when $p_{\sigma}(X'\vert X)$ is Gaussian with variance $\sigma^2$ so that
 
