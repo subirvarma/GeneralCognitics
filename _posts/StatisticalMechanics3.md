@@ -8,20 +8,18 @@ title: "Energy Based Models Part 3: Generative AI Using EBMs"
 ## Abstract
 
 Modern generative artificial neural networks such as LLMs show signs of human like intelligence. Can their operation be tied back to principles of physics, in particular thermodynamics?
-If so, it will provide a plausible picture of how the brain works, since it too presumably functions using natural laws. In this article we will show that Energy Based Models (EBMs) can be made to
+If so, it will provide a plausible picture of how the brain works, since it too presumably functions using natural laws. In this article we will discuss how Energy Based Models (EBMs) can be made to
 function as generative models, which brings us one step closer in this quest. 
 
 When I started writing this series of articles, the initial system that I described was the Ising model for magnetism, and how
 phase changes in the material could be used to explain its properties. We looked at other models with more complex node interactions called spin glasses, and this led to the discovery that they also exhibit
-phases, but they many many more phases compared to magnets. In the present article we will see that the process of generating images can be considered to be type of phase change created by the interactions
+phases, but they have many more phases compared to magnets. In the present article we will see that the process of generating images can be considered to be type of phase change created by the interactions
 of hundreds of thousands of individual nodes interacting with each other. But the law that governs these phases is the same one that we encountered when studying magnetism, which is to say the principle of
-minimization of energy.
+minimization of energy, and here is a high level description:
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat52.png) 
 
 Figure 1: The energy landscape in an image generation EBM
-
-The EBM approach to generative modeling is based on the physical principle of minimization of energy, and here is a high level description:
 
 - Assuming that there are $N$ nodes $X=(x_1,...,x_N)$ in a generative EBM used to generate images, such that $X$ corresponds to an image and $x_i$ is the $i^{th}$ pixel value. The energy for this system is modeled by a function $E_W(x_1,...,x_N)$, where $W$ represents its learnable parameters.
 Once the model has been trained, images are arranged in the landscape of this energy function, in which the bottom of valleys corresponds to images that are similar to those in the training set (see figure 1).
