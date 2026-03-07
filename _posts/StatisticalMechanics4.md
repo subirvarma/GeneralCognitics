@@ -52,21 +52,31 @@ The image EBM and the thought EBM are connected. For instance we can generate an
 Thoughts can exist independent of language. Hence people who haven’t learn a language, or infants who haven’t learnt how to speak, can still have thoughts that they can use to go about their lives. Presumably this is true for animals too. 
 The fundamental phenomenon that generates both images and thoughts is the neural configuration. In the case of vision, Our consciousness translates this configuration into images that we see, while in the case of language, our consciousness translates the configuration into words. 
 
-## The Reinforcement Learning Framework
+## The Reinforcement Learning Framework for Decision Making
+
+In Part 3 I talked about models for perception, but did not incorporate agents taking actions into this framework. Before getting into models for the brain. The category of AI models that are used to model agents and actions, is called Reinforcement Learning or RL. 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/agent1.png) 
 
-Figure 2: The Reinforcement Learning Control Framework: An Agent Acting in the Real World
+Figure 1: The Reinforcement Learning Control Framework: An Agent Acting in the Real World
+
+The RL framework is shown above and it shows an agent operation in the real world. Assuming it action $A_t$ at time $t$ based on environemnatl state $O_t$, this results in a change in its environment. The new environemntal state $O_{t+1}$ is then comminicated back to the agent, along with an option reward signal $R_t$. The reward signal tells the agent whether the action resulted in a positive outcome (or not). The agent then takes the next action $A_{t+1}$ and the loop goes through another cycle. RL is focused on chooseing the actions sequence $A_1,...,A_t$$ so as to maximixe the total reward over the lifetime of the agent.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/agent2.png) 
 
-Figure 3: Model Based Control in Reinforcement Learning: An Agent Planning its Actions Based on an Internal Model
+Figure 2: Model Based Control in Reinforcement Learning: An Agent Planning its Actions Based on an Internal Model
+
+The RL framework shown in figure 1 leaves open the problem of how the agent figures out what action to take for a given state of the environment. But what if the agent possesed a model for trhe enviroment that allowed it to predict the state state (and reward), as a function of the prior state and the action it took. This scenario is shown in figure 2, in which I have replaced the real world, by a model for the real world. This model allows the agent to try out various scenarios and sequences of actions, without actually taking any action in the real world, which is also called planning. Potentially this can enable it to figure out the best action for any given state of the environment. This is more fleshed out in figure 3.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/Agent31.png) 
 
-Figure 4: Integration of Planning and Acting: Agent used its Internal Model to take better actions in the Real World
+Figure 3: Integration of Planning and Acting: Agent used its Internal Model to take better actions in the Real World
 
-## A Model for the Brain
+The above figure is similar to figure 1, except that now the agent has a 'brain' that contains a model for the world. Using this model the agent generated multiple scenarios driven by sequences of actions, and then chooses the scenario that has the best outcome in terms of the total reward received. It then cariies out the first action the sequence, which changes the environment state. The agent then incorporates the new information into its model, and then repeates the process. This model underlies the famous Go playing model AlphaGo from DeepMind from a few years ago. This framework shows how critical the world model is for this system to work.
+
+So far we I haven't talked abouit how to build a world model, and the question arises whether it can be built using an Artificial Neural Network (ANN), or more specifically an EBM. If the latter can be demonstrated, then this provides a model for how the brain operates, since in all likelihood the brain is an EBM consisting of biological neurons, as described in Part 3.
+
+## A Decision Making Framework for the Brain
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat60.png) 
 
