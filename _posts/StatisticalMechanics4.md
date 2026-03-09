@@ -23,10 +23,10 @@ title: "Energy Based Models Part 4: World Models and LLMs Using EBMs"
 A common motif that we pursued in [Part 3](https://github.com/subirvarma/GeneralCognitics/blob/main/_posts/2026-02-13-statmech3.md) was to come up with EBM models that serve as as biologically plausible models for the brain.
 In particular we looked at EBMs that can be used to generate images, and connected these to our visual perception.
 But what about other aspects of the brain? The brain can also generate video, for example when we are imagining some scenario in our minds. Can EBMs also serve as video generators? We will show that this is indeed the case. 
-Video generation is a very important skill since it is connected to knowledge of how the world works, for example when something is dropped it will fall to the ground, in other words it should be a predictive model. Hence, in order to generate video the model should have a knowledge of physics as well as common sense notions of how things evolves in time. This is commonly known as a world model
+Video generation is a very important skill since it is connected to knowledge of how the world works, for example when something is dropped it will fall to the ground, in other words it should be a predictive model. Hence, in order to generate video the model should have a knowledge of physics as well as common sense notions of how things evolve in time. This is commonly known as a world model
 and video generation is closely tied to the problem of creating a world model. 
 
-Once we have a world model which is able to generate video scenarios, this opens up the possibility of using it to do planning. For example if we wan’t to accomplish a task then we can try out various scenarios mentally to figure out which sequence of actions would result in a successful outcome. 
+Once we have a world model which is able to generate video scenarios, this opens up the possibility of using it to do planning. For example if we want to accomplish a task then we can try out various scenarios mentally to figure out which sequence of actions would result in a successful outcome. 
 This leads us to the science of reinforcement learning, whose objective is to find the optimal set of actions that would result in success for a task. RL has been somewhat hobbled in its application to robotics due to the absence of a world model that the robot could use to plan its actions. 
 Using EBM generated world models in robotics is currently at the cutting edge of research.
 
@@ -34,8 +34,8 @@ Another activity that our brain does is language generation. LLMs that do this a
 But can EBMs be used to generate language?
 This field is still in its research phase, though there is a company called [Inception labs](https://www.inceptionlabs.ai/) that was recently founded to commercialize EBM based LLMs. 
 If successful, EBM LLMs will have several advantages over the traditional autoregressive LLMs. The latter generate one word at a time which limits their speed of generation and also increases energy consumption. 
-EBM based LLMs on the other hand are able to generate multiple words or even sentences in each step ahich can speed up generation and at a lower energy costs. This solves another problem that autoregressive models have, which is that a word generated cannot be erased. 
-When we speak we typically don’t generate words one at a time. We have a thought that we then try to express in language. 
+EBM based LLMs on the other hand are able to generate multiple words or even sentences in each step which can speed up generation and at a lower energy costs. This solves another problem that autoregressive models have, which is that a word generated cannot be erased. 
+When we speak we typically don’t generate words one at a time. We have a thought that we then try to express in language and
 EBM based LLMs are closer to this way of operating. This shifts the focus to thinking of EBM based LLMs as thought generators, with language only serving as a way those thoughts are communicated to the outside rites. This also gets around the critique that is leveled at auto regressive EBMs that are like stochastic parrots since they only think one word at a time. 
 
 Hence we can regard thoughts as the fundamental unit just as images are a fundamental unit. Just as a succession of images results in a video scenario, a succession of thoughts results in an argument. This leads the way to models that are able to generate thoughts in an auto regressive manner, with one thought following the other. 
@@ -54,27 +54,29 @@ The fundamental phenomenon that generates both images and thoughts is the neural
 
 ## The Reinforcement Learning Framework for Decision Making
 
-In Part 3 I talked about models for perception, but did not incorporate agents taking actions into this framework. Before getting into models for the brain. The category of AI models that are used to model agents and actions, is called Reinforcement Learning or RL. 
+If we adopt the viewpoint of an autonomous agent, such as a human being, then we also have to introduce the concept of an action. Actions are ways in which the agent can influence the external world thus enabling it to achieve its objectives. There is a branch of AI called reinforcement learning that builds models for agentic actions and decision making, and I am going to briefly introduce that next.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/agent1.png) 
 
 Figure 1: The Reinforcement Learning Control Framework: An Agent Acting in the Real World
 
-The RL framework is shown above and it shows an agent operation in the real world. Assuming it action $A_t$ at time $t$ based on environemnatl state $O_t$, this results in a change in its environment. The new environemntal state $O_{t+1}$ is then comminicated back to the agent, along with an option reward signal $R_t$. The reward signal tells the agent whether the action resulted in a positive outcome (or not). The agent then takes the next action $A_{t+1}$ and the loop goes through another cycle. RL is focused on chooseing the actions sequence $A_1,...,A_t$$ so as to maximixe the total reward over the lifetime of the agent.
+The RL framework is shown above and it shows an agent operation in the real world. Assuming it takes action $A_t$ at time $t$ based on environmental state $O_t$, and this results in a change in its environment. The new environemntal state $O_{t+1}$ is then communicated back to the agent, along with an option reward signal $R_t$. The reward signal tells the agent whether the action resulted in a positive outcome (or not). The agent then takes the next action $A_{t+1}$ and the loop goes through another cycle. RL is focused on choosing the actions sequence $A_1,...,A_t$ so as to maximixe the total reward over the lifetime of the agent.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/agent2.png) 
 
 Figure 2: Model Based Control in Reinforcement Learning: An Agent Planning its Actions Based on an Internal Model
 
-The RL framework shown in figure 1 leaves open the problem of how the agent figures out what action to take for a given state of the environment. But what if the agent possesed a model for trhe enviroment that allowed it to predict the state state (and reward), as a function of the prior state and the action it took. This scenario is shown in figure 2, in which I have replaced the real world, by a model for the real world. This model allows the agent to try out various scenarios and sequences of actions, without actually taking any action in the real world, which is also called planning. Potentially this can enable it to figure out the best action for any given state of the environment. This is more fleshed out in figure 3.
+The RL framework shown in figure 1 leaves open the problem of how the agent figures out what action to take for a given state of the environment. But what if the agent possesed a model for trhe enviroment that allowed it to predict the state (and reward), as a function of the prior state and the action it took. This scenario is shown in figure 2, in which I have replaced the real world, by a model for the real world. This model allows the agent to try out various scenarios and sequences of actions, without actually taking any action in the real world, which is also called planning. Potentially this can enable it to figure out the best action for a given state of the environment and this is more fleshed out in figure 3.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/Agent31.png) 
 
 Figure 3: Integration of Planning and Acting: Agent used its Internal Model to take better actions in the Real World
 
-The above figure is similar to figure 1, except that now the agent has a 'brain' that contains a model for the world. Using this model the agent generated multiple scenarios driven by sequences of actions, and then chooses the scenario that has the best outcome in terms of the total reward received. It then cariies out the first action the sequence, which changes the environment state. The agent then incorporates the new information into its model, and then repeates the process. This model underlies the famous Go playing model AlphaGo from DeepMind from a few years ago. This framework shows how critical the world model is for this system to work.
+The above figure is similar to figure 1, except that now the agent has a 'brain' that contains a model for the world. Using this model the agent generates multiple scenarios driven by sequences of actions, and then chooses the scenario that has the best outcome in terms of the total reward received. It then carries out the first action the sequence, which changes the environment state. The agent then incorporates the new information into its model, and then repeats the process. This model underlies the famous Go playing program AlphaGo from DeepMind from a few years ago. This framework shows how critical the world model is for this system to work.
 
 So far we I haven't talked abouit how to build a world model, and the question arises whether it can be built using an Artificial Neural Network (ANN), or more specifically an EBM. If the latter can be demonstrated, then this provides a model for how the brain operates, since in all likelihood the brain is an EBM consisting of biological neurons, as described in Part 3.
+
+All living organisms, even plants, are thought to possess a model for their environment. These models vary in their level of sophistication depending upon the neural capacity of the organism, but in general contain enough information to enable the organism to carry out its day to day activities. For example single celled bacteria such as *E. Coli* sense their environment through sensors on their cell wall, and can move in the direction of food sources by using their flagellum. Theirs is a pretty rudimentary model of the environment, and doesn't even require neurons, but is sufficient for their purposes. As we move up the evolutionary ladder, the models become more sophisticated, and enable the animal to predict the state of the world several steps into the future. Humans have taken this capability to the extreme, our predictive powers extent all the wy to the death of the sun in a few billion years from now.
 
 ## A Decision Making Framework for the Brain
 
