@@ -33,10 +33,10 @@ This opens the way to model other aspects of the brain using EBMs.
 The brain can clearly generate video, which is nothing more than a succession of images, for example when we are imagining some scenario in our minds.
 Video generation is a very important skill since it is connected to knowledge of how the world works, for example when something is dropped it will fall to the ground, in other words it should be a predictive model. Hence, in order to generate video the model should have a common sense notions of how things evolve in time. This is commonly known as a world model
 and video generation is closely tied to the problem of creating a world model. But video generation is not done in a vaccuum, but is closely tied to actions that we can take in the real world. Hence the world model should be able to generate the next image as a function of the current image as well as any action that we take.
-
 Once we have a world model which is able to generate a succession of images conditioned on actions, this opens up the possibility of using it to do planning. For example if we want to accomplish a task then we can try out various scenarios mentally to figure out which sequence of actions would result in a successful outcome. 
-This leads us to the science of reinforcement learning, whose objective is to find the optimal set of actions that would result in success for a task. RL has been somewhat hobbled in its application to robotics due to the absence of a world model that the robot could use to plan its actions. 
-Using EBM generated world models in robotics is currently at the cutting edge of research.
+
+What I described in the prior paragraph was the neuro-scientific approach to systems that are able to model the world that enable them to take actions and achieve objectives. There is another way to
+approach this problem, and this is by using a branch of AI called reinforcement learning or RL. The objective or RL is to find the optimal set of actions that would result in success for a task, which is defined as maximization of a scalar reward value. RL has been somewhat hobbled in its application to robotics due to the absence of a world model that the robot could use to plan its actions. Using EBM generated world models in robotics is currently at the cutting edge of research. 
 
 Another activity that our brain does is language generation. LLMs that do this are the first AI models that leapt from the lab to the outside world and are currently more or less driving investment activity in the world economy. 
 But can EBMs be used to generate language?
@@ -62,7 +62,7 @@ The fundamental phenomenon that generates both images and thoughts is the neural
 
 ## The Reinforcement Learning Framework for Decision Making
 
-We are going to adopt the viewpoint of an autonomous agent which is taking actions in the real world. Actions are ways in which the agent can influence the external world thus enabling it to achieve its objectives. There is a branch of AI called reinforcement learning that builds models for agentic actions and decision making, and I am going to briefly introduce that next.
+As mentioned in the introduction, there are two approaches to the problem of modeling autonomous agents that take actions in the real world namely the reinforcement learning point of view or the neuro-scientific point of view. I am going to talk about RL in this section, while the enext section is on models from neuroscience.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/agent1.png) 
 
