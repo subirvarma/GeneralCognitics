@@ -20,8 +20,21 @@ title: "Models for Sentience Using EBMs"
 
 ## Introduction
 
-Modern artificial neural networks (ANNs) such as transformers are purely mathematical functions, that transform inputs into outputs. Since there is no evidence that anything like it exsits in animal brains, my objective in this series of articles is to connect the process of generation, whether images or language, to princples of physics, more specifically thermodynamics. In [Part 3](https://github.com/subirvarma/GeneralCognitics/blob/main/_posts/2026-02-13-statmech3.md) I talked about how ANNs are really models for the energy function of a biological neural network, and this in turn arises as a result of interactions between neurons, very much like in a spin glass model from physics. The topology of the inter-connections, called the connectome, is too complex to comprehend even using the latest advances. However the energy function is easier to imitate using ANNs, and this is precisely what our generative models do.
-Thus when our models generate images, they does so by by a process of energy minimization. But real brains do much more than image generation, they enable us to plan hypothetical scenarios, as well as take actions in the real world. It is this set of capabilities that I will focus on in this article, namley how EBMs models can be used to do these operations.
+Modern artificial neural networks (ANNs) such as transformers are purely mathematical functions, that transform inputs into outputs. Since there is no evidence that anything like it exsits in biological brains, my objective in this series of articles is to point out that there are alternative AI models that are based on the princples of physics, more specifically thermodynamics, and these are more plausible models for the brain.
+In [Part 3](https://github.com/subirvarma/GeneralCognitics/blob/main/_posts/2026-02-13-statmech3.md) I discussed generative AI models whose operation is driven by their energy function.
+I pointed out that traditional ANNs can serve as models for the energy function, and this in turn arises as a result of interactions between nodes, very much like in a spin glass model from physics. However, unlike for spon glasses, we ignored the interconnection topology, and by focusing on the energy function instead, the analysis of the system was simplified.
+
+Can such a system serve as a model for the brain?
+The topology of the inter-connections in brains, called the connectome, is too complex to comprehend even using the latest advances. However if the functioning of the brain is determined by its energy function, and furthermore if ANNs such as transformers can serve as good models for the brain's energy function, then it provides an alternative way by which the latest advanves in ANNs can be used to build models for the brain.
+We started down this path in Part 3 by showing how EBM based models can be used to generate images by a process of energy minimization, and in this article we will use it to create a model for perception in brains.
+But brains do much more than perception, they enable us to plan hypothetical scenarios, as well as take actions in the real world. It is this set of capabilities that I will focus on in this article, namley how EBMs models can be used to do these operations.
+
+There have been several different ways in which scientists have sought to model the brain:
+
+- Active Inference
+- Predictive Processing
+
+These theories are baswed on the fundamental idea that in order to survive, living creatures need to create a model for their environment within themselves.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat60.png) 
 
