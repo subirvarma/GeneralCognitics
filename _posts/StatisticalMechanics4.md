@@ -20,24 +20,31 @@ title: "Models for Sentience Using EBMs"
 
 ## Introduction
 
-Modern artificial neural networks (ANNs) such as transformers are purely mathematical functions, that transform inputs into outputs. Since there is no evidence that anything like it exsits in biological brains, my objective in this series of articles is to point out that there are alternative AI models that are based on the princples of physics, more specifically thermodynamics, and these are more plausible models for the brain.
+Modern artificial neural networks (ANNs) such as transformers are purely mathematical functions, that transform inputs into outputs. Since there is no evidence that anything like it exists in biological brains, my objective in this series of articles is to point out that there are alternative AI models that are based on the princples of physics, more specifically thermodynamics, and these are more plausible models for the brain.
 In [Part 3](https://github.com/subirvarma/GeneralCognitics/blob/main/_posts/2026-02-13-statmech3.md) I discussed generative AI models whose operation is driven by their energy function.
-I pointed out that traditional ANNs can serve as models for the energy function, and this in turn arises as a result of interactions between nodes, very much like in a spin glass model from physics. However, unlike for spon glasses, we ignored the interconnection topology, and by focusing on the energy function instead, the analysis of the system was simplified.
+I pointed out that traditional ANNs can serve as models for the energy function, and this in turn arises as a result of interactions between nodes, very much like in a spin glass model from physics. However, unlike for spin glasses, we ignored the interconnection topology, and by focusing on the energy function instead, the analysis of the system was simplified.
 
 Can such a system serve as a model for the brain?
 The topology of the inter-connections in brains, called the connectome, is too complex to comprehend even using the latest advances. However if the functioning of the brain is determined by its energy function, and furthermore if ANNs such as transformers can serve as good models for the brain's energy function, then it provides an alternative way by which the latest advanves in ANNs can be used to build models for the brain.
 We started down this path in Part 3 by showing how EBM based models can be used to generate images by a process of energy minimization, and in this article we will use it to create a model for perception in brains.
-But brains do much more than perception, they enable us to plan hypothetical scenarios, as well as take actions in the real world. It is this set of capabilities that I will focus on in this article, namley how EBMs models can be used to do these operations.
+But brains do much more than perception, they enable us to plan hypothetical scenarios, as well as take actions in the real world. It is this set of capabilities that I will focus on in this article, namely how EBMs models can be used to do these operations.
 
-There have been several different ways in which scientists have sought to model the brain:
+
+These theories are based on the fundamental idea that in order to survive, living creatures need to create a model for their environment within themselves. Consider the simplest kind of life, such as a uni-cellular creatures such as bacteria. In order to survive their insides are cordoned off from the environment by means of a cell wall (in neuroscience this is referred to as a Markov Blanket) . However they need informtion about the outside world in order to feed themselves for example, and this is obtained by means of sensors on their cell walls. The information from these sensors allows them to move around and get closer to food sources, and this serves as a simple example of a environment model.
+
+Higher animals such as ourselves face the same problem since our brains are enclosed in the darkness of our skulls, and thee need to figure out what is happening in the external world. This they do by building a model for the world with the help of signals that are coming in through the sensory organs and when we open our eyes, it is this model that we see in front of us, it is internally generated. It is connected to the actual world out there, but the specific perception model that we use has been designed to help us survive in the world. Different creatures build their own models, and in general the sophistication increases with larger brain sizes. **Hence perception is an act of inference,** i.e., our brains are making a best guess (or inference) of what the external world looks like by using the sparse signals coming in from the sense organs. 
+
+There is a theory of how the brain goes about building its internal model of the environment, known as the Bayesian brain hypothesis. Within this framework, there a couple of popular theories about the specifics of this works, namely
 
 - Active Inference
 - Predictive Processing
 
-These theories are based on the fundamental idea that in order to survive, living creatures need to create a model for their environment within themselves. Consider the simplest kind of life, such as a uni-cellular creatures such as bacteria. In order to survive their insides are cordoned off from the environment by means of a cell wall (in neuroscience this is referred to as a Markov Blanket, . However they need informtion about the outside world in order to feed themselves for example, and this is obtained by means of sensors on their cell walls. The information from these sensors allows them to move around and get closer to food sources, and this serves as a simple example of a environment model.
-Higher animals such as ourselves face the same problem since our brains are enclosed in the drakness of our skulls, and they need to figure out what is happening in the external world. This they do by building a model for the world with the help of signals that are coming in through the sensory organs. When we open our eyes, it is this model that we see in front of us, it is internally generated. It is connected to the actual world out there, but the specific model that we have has been designed to help us survive in the world. Different creatures build their own models, and in general the sophistication increases with larger brain sizes.
-These models are not just modeling the state of the world as it exists at any instant, but they also do prediction, i.e., forecast what the world might look like in the future. How far into the future the preduction is done depends on the animal in question, humans excel at this, while most other animals can predict at most a few steps into the future.
-Prediction is a fundamental aspect of these models and both Active Inference and Predictive Processing put it at the heart of their theory, by connecting predictions not just to perception, but also to action. They do this by proposing that brains predict the perceptual consequence of an action internally, and then the muscles carry out the action to make the prediction come true.
+We will get into details of these theories in the next section.
+
+These models are not just modeling the state of the world as it exists at any instant, but they also do prediction, i.e., forecast what the world might look like in the future. How far into the future the prediction is done depends on the animal in question, humans excel at this and can do long term prediction, while most other animals can predict at most a few steps into the future.
+Prediction is a fundamental aspect of these models and both Active Inference and Predictive Processing put it at the heart of their theory, by connecting predictions not just to perception, but also to action. 
+Broadly speaking, action is defined as the way in which living creatures are able to change their environment in order to facilitate goals.
+They do this by proposing that brains predict the perceptual consequence of an action internally, and then the muscles carry out the action to make the prediction come true.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat60.png) 
 
@@ -54,7 +61,13 @@ Once we have a world model which is able to generate a succession of images cond
 What I described in the prior paragraph was the neuro-scientific approach to systems that are able to model the world that enable them to take actions and achieve objectives. There is another way to
 approach this problem, and this is by using a branch of AI called reinforcement learning or RL. The objective or RL is to find the optimal set of actions that would result in success for a task, which is defined as maximization of a scalar reward value. RL has been somewhat hobbled in its application to robotics due to the absence of a world model that the robot could use to plan its actions. Using EBM generated world models in robotics is currently at the cutting edge of research. 
 
-## Active Inference\Predictive Processing Frameworks
+## The Bayesian Brain: Active Inference/Predictive Processing Frameworks
+
+![](https://subirvarma.github.io/GeneralCognitics/images/stat75.png) 
+
+Figure 2: Inferring a Model for the External World Using Bayesian Statistics
+
+
 
 
 
