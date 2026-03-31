@@ -67,6 +67,10 @@ approach this problem, and this is by using a branch of AI called reinforcement 
 
 Figure 2: Inferring a Model for the External World Using Bayesian Statistics
 
+Figure 2 shows the framework used in Active Inference theory. The vextor $x^*$ represents the external world to which the organism does not have direct access. The vector $y$ are the sensory neurons in the organism's cortex to which the organism does have access. Hence the external world has an unknown generative model that produce sensation $y$ in the organism. The organism tries to model the external world using its neurons, and this is summarized in the vector $x$ on the left, lets denote this by $p(x)$. Assuming that $p(x)$ is a good representation of the external world, the organism is then able to internally generate sensations $y$ using this model.
+
+This system can be analyzed using Bayesian statistics as follows: 
+
 
 
 
