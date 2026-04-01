@@ -73,47 +73,31 @@ This system can be analyzed using Bayesian statistics as follows: We will refer 
 
 $$  p(x|y) = {p(y|x)p(x)\over{p(y)}}   $$
 
-The problem in applying this formula is that $p(y)$ in general is a highly complex distribution and not known in advance. Fortunately there exists a variational approach to solving this problem which works by reducing the problem to that of minimization, and works as follows: Define the Variational Free Energy (VFE) for the system as
+The problem in applying this formula is that $p(y)$ in general is a highly complex distribution and not known in advance. Fortunately there exists a variational approach to solving this problem which works by reducing the problem to that of minimization, and works as follows: 
 
-$$ VFE = E_{Q_{theta}(x|y)} \log[{p(x,y)\over{{Q_{theta}}(x|y)}}]  $$
+Assume that we can approximate $p(x|y)$ by the distribution $Q_{\theta}(x|y)$, where $\theta$ are the parameters of a neural network.
+Define the Variational Free Energy (VFE) for the system as
+
+$$ VFE(Q,y) = E_{Q_{\theta}(x|y)} \log {Q_{\theta}(x|y)\over{p(x,y)}} $$
 
 This can be written as
 
-$$ VFE = E_{Q_{theta}}(x|y)[\log[{p(x|y) - \log p(y)] - E_{Q_{theta}}(x|y)\log Q_{theta}(x|y)}  $$
+$$  VFE(Q,y) = E_{Q_{\theta}(x|y)}\log Q_{\theta}(x|y) - E_{Q_{\theta}(x|y)}\log p(x|y) - E_{Q_{\theta}(x|y)} \log p(y) $$
 
-$$ = E_{Q_{theta}}(x|y)[\log p(x|y) - \log Q_{\theta}(x|y)] - \log p(y)  $$
+$$      = E_{Q_{\theta}(x|y)}(\log Q_{\theta}(x|y) - \log p(x|y)) - \log p(y) $$
 
-$$ = - D_{KL}{Q_{\theta}(x|y) || p(x|y)} - \log p(y)  $$
+$$      = D_{KL}(Q_{\theta}(x|y)||p(x|y)) - \log p(y) $$
 
+Note that $Q_{\theta}(x|y)$ is the organism's approximate model for its environment (given sensory data $y$), while $p(x|y)$ is the exact model. Hence if the organism tries to minimize the VFE, then
+this results in the approximate model being closer to the best possible model. Hence by minimizing its VFE, the organism is performing inferring the state of the environment $x^{*}$, while knowing only the
+sensory data $y$.
 
+Karl Friston pointed out that there are two ways to minimize the VFE:
 
+- Assuming that the external environment is fixed, i.e., the sensory data $y$ is also fixed, then the VFE can be reduced by getting hold of a better internal model $Q_{\theta}(x|y)$ of the environment.
+- If the external environment is allowed to change, then the organism can reduce its VFE by changing the environment so that $-\log p(y)$ is reduced. The organism does so by taking actions and this is known as **Active Inference**.
 
-
-
-Assume that we can approximate $p(x|y)$ by the distribution $Q_{\theta}(x|y)$, where $\theta$ are the parameters of a neural network. We can write Bayes Rule as
-
-$$ \log p(x,y) = \log p(y) + \log p(x|y) $$
-
-so that
-
-$$ E_{p(x|y)} \log p(x,y) = \log p(y) + E_{p(x|y)} \log p(x|y) $$
-
-so that
-
-$$ E_{p(x|y)} \log p(x,y) - E_{Q(x)} Q(x) = \log p(y) + E_{p(x|y)} \log p(x|y) - E_{Q(x)} Q(x) $$
-
-
-We now replace $p(x|y)$ by its approximation $Q_{\theta}(x|y)$ so that
-
-$$ E_{Q_{\theta}(x|y)} \log p(x,y) = \log p(y) + E_{Q_{\theta}(x|y)} \log Q_{\theta}(x|y) $$
-
-Note that by definition the KL distance between $p(x|y)$ and $Q_{\theta}(x|y)$ is given by
-
-$$ D_{KL}(Q_{\theta}(x|y) || p(x|y)) = E_{Q_{theta}(x|y)}(\log Q_{\theta}(x|y) - \log p(x|y)) $$
-
-We can write
-
-$$ D_{KL}(Q_{\theta}(x|y) || p(x|y)) = E_{Q_{theta}(x|y)}(\log Q_{\theta}(x|y) - \log p(x|y)) $$
+In the first case the organism changes its internal model $Q_{\theta}$ to reduce the VFE, while in the second case the organism changes its environment to reduce the VFE.
 
 
 
