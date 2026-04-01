@@ -67,9 +67,55 @@ approach this problem, and this is by using a branch of AI called reinforcement 
 
 Figure 2: Inferring a Model for the External World Using Bayesian Statistics
 
-Figure 2 shows the framework used in Active Inference theory. The vextor $x^*$ represents the external world to which the organism does not have direct access. The vector $y$ are the sensory neurons in the organism's cortex to which the organism does have access. Hence the external world has an unknown generative model that produce sensation $y$ in the organism. The organism tries to model the external world using its neurons, and this is summarized in the vector $x$ on the left, lets denote this by $p(x)$. Assuming that $p(x)$ is a good representation of the external world, the organism is then able to internally generate sensations $y$ using this model.
+Figure 2 shows the framework used in Active Inference theory. The vextor $x^*$ represents the external world to which the organism does not have direct access. The vector $y$ are the sensory neurons in the organism's cortex to which the organism does have access. Hence the external world has an unknown generative model that produce sensation $y$ in the organism. The organism tries to model the external world using its neurons, and this is summarized in the vector $x$ on the left, lets denote this by $p(x)$. Assuming that $p(x)$ is a good representation of the external world, the organism is then able to internally generate sensations $y$ using this model. Note that the organism does not have direct access to the $x$ either, so it is also a hidden state, however it does have access to the sensations $y$ generates by $x$.
 
-This system can be analyzed using Bayesian statistics as follows: 
+This system can be analyzed using Bayesian statistics as follows: We will refer to $p(x)$ as the prior (or existing) model for the brain. If the organism is subjected to sensations $y$, then this results in a change in its model, and it is now given by the posterior $p(x|y)$. The objective of the Bayesian statistics is to compute $p(x|y)$, and this is given by Bayes Rule
+
+$$  p(x|y) = {p(y|x)p(x)\over{p(y)}}   $$
+
+The problem in applying this formula is that $p(y)$ in general is a highly complex distribution and not known in advance. Fortunately there exists a variational approach to solving this problem which works by reducing the problem to that of minimization, and works as follows: Define the Variational Free Energy (VFE) for the system as
+
+$$ VFE = E_{Q_{theta}(x|y)} \log[{p(x,y)\over{{Q_{theta}}(x|y)}}]  $$
+
+This can be written as
+
+$$ VFE = E_{Q_{theta}}(x|y)[\log[{p(x|y) - \log p(y)] - E_{Q_{theta}}(x|y)\log Q_{theta}(x|y)}  $$
+
+$$ = E_{Q_{theta}}(x|y)[\log p(x|y) - \log Q_{\theta}(x|y)] - \log p(y)  $$
+
+$$ = - D_{KL}{Q_{\theta}(x|y) || p(x|y)} - \log p(y)  $$
+
+
+
+
+
+
+Assume that we can approximate $p(x|y)$ by the distribution $Q_{\theta}(x|y)$, where $\theta$ are the parameters of a neural network. We can write Bayes Rule as
+
+$$ \log p(x,y) = \log p(y) + \log p(x|y) $$
+
+so that
+
+$$ E_{p(x|y)} \log p(x,y) = \log p(y) + E_{p(x|y)} \log p(x|y) $$
+
+so that
+
+$$ E_{p(x|y)} \log p(x,y) - E_{Q(x)} Q(x) = \log p(y) + E_{p(x|y)} \log p(x|y) - E_{Q(x)} Q(x) $$
+
+
+We now replace $p(x|y)$ by its approximation $Q_{\theta}(x|y)$ so that
+
+$$ E_{Q_{\theta}(x|y)} \log p(x,y) = \log p(y) + E_{Q_{\theta}(x|y)} \log Q_{\theta}(x|y) $$
+
+Note that by definition the KL distance between $p(x|y)$ and $Q_{\theta}(x|y)$ is given by
+
+$$ D_{KL}(Q_{\theta}(x|y) || p(x|y)) = E_{Q_{theta}(x|y)}(\log Q_{\theta}(x|y) - \log p(x|y)) $$
+
+We can write
+
+$$ D_{KL}(Q_{\theta}(x|y) || p(x|y)) = E_{Q_{theta}(x|y)}(\log Q_{\theta}(x|y) - \log p(x|y)) $$
+
+
 
 
 
