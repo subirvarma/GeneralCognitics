@@ -42,6 +42,9 @@ Prediction is a fundamental aspect of these models and both Active Inference and
 Broadly speaking, action is defined as the way in which living creatures are able to change their environment in order to facilitate goals.
 They do this by proposing that brains predict the perceptual consequence of an action internally, and then the muscles carry out the action to make the prediction come true.
 
+In this article I am going to talk about a machine learning based model for the brain that is also based on the predictive processing framework. However unlike Active Inference, this model traces its roots to the Boltzmann Machine, and its recent generalization to diffusion models that was discused in Part 3. It proposes that the brain's model for the environment is captured in the interconnection strengths between neurons in the brain's perception center. EBMs offer a convenient way in which the information processing within these neurons that leads to image generation can be captured by the principle of minimization of energy.
+The Active Inference theory is also based on the minimization of energy, however the energy that it refers to is a probabilistic quantity that is called Variational Free Energy or VFE. The energy in diffusion models on the other hand is directly created due to the interaction netween neurons and hence has a physical basis not just a probabilistic one.
+
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat60.png) 
 
 Figure 1: A Model for Perception 
