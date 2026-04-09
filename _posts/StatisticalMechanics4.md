@@ -60,13 +60,14 @@ Once we have a world model which is able to generate a succession of images cond
 What I described in the prior paragraph was the neuro-scientific approach to systems that are able to model the world that enable them to take actions and achieve objectives. There is another way to
 approach this problem, and this is by using a branch of AI called reinforcement learning or RL. The objective or RL is to find the optimal set of actions that would result in success for a task, which is defined as maximization of a scalar reward value. RL has been somewhat hobbled in its application to robotics due to the absence of a world model that the robot could use to plan its actions. Using EBM generated world models in robotics is currently at the cutting edge of research. 
 
-## The Bayesian Brain: Active Inference/Predictive Processing Frameworks
+## The Bayesian Brain: Active Inference Theory
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat75.png) 
 
 Figure 2: Inferring a Model for the External World Using Bayesian Statistics
 
-Figure 2 shows the framework used in Active Inference theory. The vextor $x^*$ represents the external world to which the organism does not have direct access. The vector $y$ are the sensory neurons in the organism's cortex to which the organism does have access. Hence the external world has an unknown generative model that produce sensation $y$ in the organism. The organism tries to model the external world using its neurons, and this is summarized in the vector $x$ on the left, lets denote this by $p(x)$. Assuming that $p(x)$ is a good representation of the external world, the organism is then able to internally generate sensations $y$ using this model. Note that the organism does not have direct access to the $x$ either, so it is also a hidden state, however it does have access to the sensations $y$ generates by $x$.
+Figure 2 shows the framework used in Active Inference theory. The vextor $x^*$ represents the external world to which the organism does not have direct access. The vector $y$ are the sensory neurons in the organism's cortex to which the organism does have access. Hence the external world has an unknown generative model that produce sensation $y$ in the organism. The organism creates an inference about the causes of sensation $y$, and this is summarized in the vector $x$ on the left and is probabilistically captured by the conditional distribution $p(x|y)$. Assuming an inference $x$, the organism internally generates sensations $y$ using this model as modeled by the conditional distribution $p(y|x)$. If the generated $y$ is different than the original sensation that came in through the senses, then the organism changes its inference $x$ so that the two match. Mathematically this is accomplished by the minimization of a probabilistic quantity, namely the VFE.
+Note that the organism does not have direct access to the $x$ either, so it is also a hidden state, however it does have access to the sensations $y$ generates by $x$.
 
 This system can be analyzed using Bayesian statistics as follows: We will refer to $p(x)$ as the prior (or existing) model for the brain. If the organism is subjected to sensations $y$, then this results in a change in its model, and it is now given by the posterior $p(x|y)$. The objective of the Bayesian statistics is to compute $p(x|y)$, and this is given by Bayes Rule
 
@@ -97,6 +98,8 @@ Karl Friston pointed out that there are two ways to minimize the VFE:
 - If the external environment is allowed to change, then the organism can reduce its VFE by changing the environment so that $-\log p(y)$ is reduced. The organism does so by taking actions and this is known as **Active Inference**.
 
 In the first case the organism changes its internal model $Q_{\theta}$ to reduce the VFE, while in the second case the organism changes its environment to reduce the VFE.
+
+## The Predictive Processing Framework
 
 
 
