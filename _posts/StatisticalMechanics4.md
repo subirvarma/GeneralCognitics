@@ -103,12 +103,7 @@ In the first case the organism changes its internal model $Q_{\theta}$ to reduce
 
 
 
-
-
-
-
-## Implementation of Active Inference using EBMs
-
+## A Model for Perception Using EBMS based on Diffusion
 
 
 
