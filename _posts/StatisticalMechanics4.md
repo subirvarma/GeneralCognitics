@@ -103,7 +103,7 @@ In the first case the organism changes its internal model $Q_{\theta}$ to reduce
 
 
 
-## A Model for Perception Using EBMS based on Diffusion
+## A Model for Perception Using Diffusion based EBMs
 
 
 
