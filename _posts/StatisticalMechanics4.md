@@ -1,9 +1,9 @@
 ---
 layout: default
-title: "Models for Sentience Using EBMs"
+title: "Models in Neuroscience Using EBMs"
 ---
 
-# Models for Sentience Using EBMs
+# Models in Neuroscience Using EBMs
 
 **Contents**     
 
@@ -90,7 +90,14 @@ This architecture allows our perceptions to be influenced by not just what is ha
 
 Figure 2: A model for action generation in the brain
 
+The predictive processing frameowrk can be used to describe not just perception but also the generation of actions. In order to survive in the world, organisms are not just predicting the what the environment looks like, but they actively change the environment by taking actions. Hence there are two ways to reduce the error signl between the pbrain's prediction and the sensory data:
 
+- By Changing the prediction itself so that is conforms to the environment, as described above.
+- Or, by changing the environment so that it conforms to the prediction, and this is done by taking actions.
+
+The latter mechanism is illustrated in the above figure
+
+Hence in principle the generation of signals from the brain to the muscles are from a part of the brain called the mortor cortex, and it has been known for a long time that the motor and sensory cotices share a similar structure, and this theory explains why this is the case.
 
 
 
