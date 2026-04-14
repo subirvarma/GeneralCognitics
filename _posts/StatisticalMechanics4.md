@@ -90,14 +90,16 @@ This architecture allows our perceptions to be influenced by not just what is ha
 
 Figure 2: A model for action generation in the brain
 
-The predictive processing frameowrk can be used to describe not just perception but also the generation of actions. In order to survive in the world, organisms are not just predicting the what the environment looks like, but they actively change the environment by taking actions. Hence there are two ways to reduce the error signl between the pbrain's prediction and the sensory data:
+The predictive processing frameowrk can be used to describe not just perception but also the generation of actions. In order to survive in the world, organisms are not just predicting the what the environment looks like, but they actively change the environment by taking actions. Hence there are two ways to reduce the error signal between the brain's prediction and the sensory data:
 
 - By Changing the prediction itself so that is conforms to the environment, as described above.
 - Or, by changing the environment so that it conforms to the prediction, and this is done by taking actions.
 
-The latter mechanism is illustrated in the above figure
+The latter mechanism is illustrated in the above figure. As shown, the new prediction $y_{n+1}$ is determined not just by the prior prediction $y_n$ and the error signal $\epsilon_n$, but also the effects of the action $a_n$ that we are planning to take. Hence $y_{n+1}$ takes into account the result of the action on the environment. But note that the action hasn't been taken yet, as a result the next sensory signal $c_{n+1}$ will not agree with the prediction $y_{n+1]$. In order to remedy this, the error $\epsilon_{n+1} = y_{n+1} - c_{n+1}$ is fed into the brain's motor cortex, which in turn generated the signals required for the muscles to move and bring about the action.
+You might ask why isn't the error signal fed back into the visual cortex to change the prediction as was described for visual perception. It is though that the brain suppresses this error signal, as a result of which the only way to bring the perceptions in agreement with the sensory data is by changing the environment through action.
 
-Hence in principle the generation of signals from the brain to the muscles are from a part of the brain called the mortor cortex, and it has been known for a long time that the motor and sensory cotices share a similar structure, and this theory explains why this is the case.
+
+It has been known for a long time that the motor and sensory cortices share a similar structure, and this theory explains why this is the case.
 
 
 
