@@ -26,8 +26,8 @@ I pointed out that traditional ANNs can serve as models for the energy function,
 
 Can such a system serve as a model for the brain?
 The topology of the inter-connections in brains, called the connectome, is too complex to comprehend even using the latest advances. However if the functioning of the brain is determined by its energy function, and furthermore if ANNs such as transformers can serve as good models for the brain's energy function, then it provides an alternative way by which the latest advances in ANNs can be used to build models for the brain.
-We started down this path in Part 3 by showing how EBM based models can be used to generate images by a process of energy minimization, and in this article we will use it to create a model for perception in brains.
-But brains do much more than perception, they enable us to plan hypothetical scenarios, as well as take actions in the real world. It is this set of capabilities that I will focus on in this article, namely how EBMs models can be used to do these operations.
+We started down this path in [Part 3](https://subirvarma.github.io/GeneralCognitics/2026/02/13/statmech3.html) by showing how EBM based models can be used to generate images by a process of energy minimization, and in this article we will use it to create a model for perception in brains.
+But brains do much more than perception, they enable us to plan hypothetical scenarios, as well as take actions in the real world. We will see that these capabilities are intimately tied to perception so that EBMs models can be used to do these operations as well.
 
 These theories are based on the fundamental idea that in order to survive, living creatures need to create a model for their environment within themselves. Consider the simplest kind of life, such as a uni-cellular creatures such as bacteria. Their insides are cordoned off from the environment by means of a cell wall (in neuroscience this is referred to as a Markov Blanket) . However in order to survive they need informtion about the outside world in order to feed themselves for example, and this is obtained by means of sensors on their cell walls. The information from these sensors gets converted into a model that the creature uses to move around and get closer to food sources, and this serves as a simple example of a environment model.
 
@@ -98,7 +98,7 @@ The latter mechanism is illustrated in the above figure. As shown, the new predi
 You might ask why isn't the error signal fed back into the visual cortex to change the prediction as was described for visual perception. It is though that the brain suppresses this error signal, as a result of which the only way to bring the perceptions in agreement with the sensory data is by changing the environment through action.
 It has been known for a long time that the motor and sensory cortices share a similar structure, and this theory explains why this is the case.
 
-So far we have hypothsized the presence of two important cortical areas, namelt those associated with vision and action. In a later section we will introduce another important cortical area associated with the generation of language, and this will connect this model to Large Language Models or LLMs.
+So far we have hypothsized the presence of two important cortical areas, namely those associated with vision and action. In a later section we will introduce another important cortical area associated with the generation of language, and this will connect this model to Large Language Models or LLMs.
 
 Central to the description given so far are probability distributions of the form $p(y_{n+1}|y_n, a_n)$ which captures the evolution of the predictions depending upon the actions that the organism is taking. These is referred to as a World Model, since it serves as the organism's internal model of how the world evolves as it takes various actions. In order to survive and reproduce, all organisms need a world model, and its sophistication varies depending upon the organism. This model generates moment by moment predictions and is constantly working, even when we are sleeping. This requires a lot of energy, and accounts for the fact that the brain accounts for a large portion of the energy expended by the body. Later in this article we will connect this probability distribution to the energy arising from the interconnection between neurons in the model, and then show how the system generates new predictions by a process of minimizing the interaction energy. The minimization is done in a gradual manner as in simulated annealing, by using diffusion models.
 
@@ -111,7 +111,7 @@ Andy Clark points out in book that certain mental health issues can be explained
 
 - Autism spectrum disorders: This can be caused due to over weighing of incoming sensory data. People with autism experience the world in its full sensory splendor, however they are not able to put the sensations within a proper context, i.e., they are not able to spot the forest for the trees. They tend to be overwhelmed by a lot of sensory data such as loud sounds or social situations and tend to avoid them.
 - Schizophrenia is though to be a result of the brain assigning too much weight to the error signal, i.e., the mismatch between its predictions and sensory daya. As result is mistakenly gives a lot of weight to data that may be purely co-incidental for example with no deep significance. This gradually changes the brains internal model and leads to false predictions and beliefs.
-- Studies have shown that PTSD is extremely well correlated with unusually large increases in the precision weighing of the prediction erro signal in response to unexpectedly negative outcomes.
+- Studies have shown that PTSD is extremely well correlated with unusually large increases in the precision weighing of the prediction error signal in response to unexpectedly negative outcomes.
 - Depression can be caused due to overweighted expectations and underweghted new information. This results in a semi-permanent lock-in of the existing world model, leading us to continue with depresive behaviors.
 
 ## The Bayesian Brain: The Active Inference Theory for the Brain
@@ -152,22 +152,27 @@ Here $D_{KL}(Q_{\theta}(x|y)||p(x|y))$ is the Kullback-Liebler divergence betwee
 Since $Q_{\theta}(x|y)$ is the organism's approximate model for its environment (given sensory data $y$), while $p(x|y)$ is the exact model. If the organism tries to minimize the VFE, then
 this is the same as minimizing the KL divergence and this results in the approximate model being closer to the best possible model. Hence by minimizing its VFE, the organism is inferring a best model for the environment $x^{*}$, while knowing only the sensory data $y$.
 
-The perception neurons $y$ change over time as the state of the hidden state neurons and the perception signals from the environment change. This is captured using the distribution $p(y_{n+1}|y_n,c)$ in the Predictive Processing model, while the Active Inference model uses a two state process in which the internal states $x$ of the brain changes first and this is followed by a new perception $y$.
+The state of the perception neurons $y$ change over time as the state of the hidden state neurons and the perception signals from the environment change. This is captured using the distribution $p(y_{n+1}|y_n,c)$ in the Predictive Processing model, while the Active Inference model uses a two state process in which the internal states $x$ of the brain changes first and this is followed by a new perception $y$.
 
 Karl Friston pointed out that there are two ways to minimize the VFE:
 
 - Assuming that the external environment is fixed, i.e., the sensory data $y$ is also fixed, then the VFE can be reduced by getting hold of a better internal model $Q_{\theta}(x|y)$ of the environment.
 - If the external environment is allowed to change, then the organism can reduce its VFE by changing the environment so that $-\log p(y)$ is reduced. The organism does so by taking actions and this is known as **Active Inference**.
 
-In the first case the organism changes its internal model $Q_{\theta}$ to reduce the VFE, while in the second case the organism changes its environment to reduce the VFE.
+In the first case the organism changes its internal model $Q_{\theta}$ to reduce the VFE, while in the second case the organism changes its environment $x^{*}$ (which changes the perception signals $y$) to reduce the VFE. 
+
+The Active Inference framework is based on the minimization of a probabilistic quantity, namely the VFE. On the other hand we will see that the Predictive Processing framework is also based on the minimization of energy, but in this case the energy is an explicit thermodynamic quantity generated by the interaction between neurons.
 
 ## Models for Planning
 
-We will describe two approaches to the problem of planning, namely the reinforcement learning or RL framework and the neuro-scientific theory of planning proposed Karl Friston.
-The RL framework is based on the idea that there is a reward associated with the completion of tasks, and organisms take a sequence of actions required to complete the task so as to maximize the reward. 
-Individuaf actions themselves are solely a function os the state that the organism is in, and an optimal policy is one that chooses this mapping to maximize the reward.
+All organisms have a model for the the environment along the lines that was described in the previous section. This enables them to react to changes in the environment, obtain food, reproduce etc. However higher organisms also have have the ability to carry out a sequence of actions in order to accomplish a task. The process by which they arrive at the right action sequence to use such that it results in success, is called planning. 
+Solving the planning problem is tied to that of perception, since if the organism can use its world model to internally generate a sequence of actions and infer how the environment will react to them, before actually carrying out the actions.
 
-The Friston theory, also called the Active Inference framework does not use rewards. Instead it posits that an organism starts with an image of what the completed task looks like, and then decomposes it
+We will describe two approaches to the problem of planning, namely the reinforcement learning or RL framework and the neuro-scientific theory of planning proposed by Karl Friston.
+The RL framework is based on the idea that there is a reward associated with the completion of tasks, and organisms take a sequence of actions required to complete the task so as to maximize the reward. 
+Individual actions themselves are solely a function of the state that the organism is in, and an optimal policy is one that chooses this mapping to maximize the reward.
+
+The Friston theory, which is aprt of the Active Inference framework, does not use rewards. Instead it posits that an organism starts with an image of what the completed task looks like, and then decomposes it
 into a sequence of images that get it to the desired end point. The actions themselves are determined automatically by the predictive processing framework as described in the previous section.
 
 
@@ -177,50 +182,25 @@ into a sequence of images that get it to the desired end point. The actions them
 
 Figure 2: The Reinforcement Learning Control Framework: An Agent Acting in the Real World
 
-The RL framework is shown above and it shows an agent operation in the real world. Assuming it takes action $A_t$ at time $t$ based on environmental state $O_t$, and this results in a change in its environment. The new environemntal state $O_{t+1}$ is then communicated back to the agent, along with an option reward signal $R_t$. The reward signal tells the agent whether the action resulted in a positive outcome (or not). The agent then takes the next action $A_{t+1}$ and the loop goes through another cycle. RL is focused on choosing the actions sequence $A_1,...,A_t$ so as to maximixe the total reward over the lifetime of the agent.
+The RL framework is shown above and it shows an organism operating in an environment. Assuming it takes action $A_n$ at time $n$ based on environmental state $O_n$, and this results in a change in its environment. The new environemntal state $O_{n+1}$ is then perceived by the agent, along with an option reward signal $R_n$. The reward signal tells the agent whether the action resulted in a positive outcome (or not). The agent then takes the next action $A_{n+1}$ and the loop goes through another cycle. RL is focused on choosing the actions sequence $A_1,...,A_n$ so as to maximixe the total reward over the lifetime of the agent.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/agent2.png) 
 
 Figure 3: Model Based Control in Reinforcement Learning: An Agent Planning its Actions Based on an Internal Model
 
-The RL framework shown in figure 2 leaves open the problem of how the agent figures out what action to take for a given state of the environment. But what if the agent posseses a model for trhe enviroment that allows it to predict the next state (and reward), as a function of the prior state and the action it took. This scenario is shown in figure 2, in which I have replaced the real world, by a model for the real world. This model allows the agent to try out various scenarios and sequences of actions, without actually taking any action in the real world, which is also called planning. Potentially this can enable it to figure out the best action for a given state of the environment and this is more fleshed out in figure 3.
+The RL framework shown in figure 2 leaves open the problem of how the agent figures out what action to take for a given state of the environment. But what if the agent posseses a model for the enviroment that allows it to predict the next state (and reward), as a function of the prior state and the action it took. This scenario is shown in figure 2, in which I have replaced the real world, by a model for the real world. This model allows the agent to try out various scenarios and sequences of actions, without actually taking any action in the real world, which is also called planning. Potentially this can enable it to figure out the best action for a given state of the environment and this is more fleshed out in figure 3.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/Agent31.png) 
 
 Figure 4: Integration of Planning and Acting: Agent used its Internal Model to take better actions in the Real World
 
-The above figure is similar to figure 2, except that now the agent has a 'brain' that contains a model for the world. Using this model the agent generates multiple scenarios driven by sequences of actions, and then chooses the scenario that has the best outcome in terms of the total reward received. It then carries out the first action the sequence, which changes the environment state. The agent then incorporates the new information into its model, and then repeats the process. This model underlies the famous Go playing program AlphaGo from DeepMind from a few years ago. This framework shows how critical the world model is for this system to work.
+The above figure is similar to figure 2, except that now the agent has a 'brain' that contains a model for the world. Using this model the agent generates multiple scenarios driven by sequences of actions, and then chooses the scenario that has the best outcome in terms of the total reward received. It then carries out the first action in the sequence, which changes the environment state. The agent then incorporates the new information into its model, and then repeats the process. This model underlies the famous Go playing program AlphaGo from DeepMind from a few years ago. This framework shows how critical the world model is for this system to work.
 
-So far we I haven't talked about how to build a world model, and the question arises whether it can be built using ANNs, or more specifically an EBM. If the latter can be demonstrated, then this provides a model for how the brain operates, since in all likelihood the brain is an EBM consisting of biological neurons, as described in Part 3.
+*So far we I haven't talked about how to build a world model, and the question arises whether it can be built using ANNs, or more specifically an EBM. If the latter can be demonstrated, then this provides a model for how the brain operates, since in all likelihood the brain is an EBM consisting of biological neurons, as described in Part 3.*
 
-All living organisms, even plants, are thought to possess a model for their environment. These models vary in their level of sophistication depending upon the neural capacity of the organism, but in general contain enough information to enable the organism to carry out its day to day activities. For example single celled bacteria such as *E. Coli* sense their environment through sensors on their cell wall, and can move in the direction of food sources by using their flagellum. Theirs is a pretty rudimentary model of the environment, and doesn't even require neurons, but is sufficient for their purposes. As we move up the evolutionary ladder, the models become more sophisticated, and enable the animal to predict the state of the world several steps into the future. Humans have taken this capability to the extreme, our predictive powers extent all the wy to the death of the sun in a few billion years from now.
+*All living organisms, even plants, are thought to possess a model for their environment. These models vary in their level of sophistication depending upon the neural capacity of the organism, but in general contain enough information to enable the organism to carry out its day to day activities. For example single celled bacteria such as *E. Coli* sense their environment through sensors on their cell wall, and can move in the direction of food sources by using their flagellum. Theirs is a pretty rudimentary model of the environment, and doesn't even require neurons, but is sufficient for their purposes. As we move up the evolutionary ladder, the models become more sophisticated, and enable the animal to predict the state of the world several steps into the future. Humans have taken this capability to the extreme, our predictive powers extent all the wy to the death of the sun in a few billion years from now.*
 
-## A Systems Architecture for the Brain
-
-The brain architecture described here is based on the work of the neuro-scientists Karl Friston and Andy Clark on predictive models for the brain. This is an EBM based model for the planning based perception-action framework shown in figure 4. Animals can broadly be classified into two categories: Type 1 are those whose actions are purely a function of what they are experiencing or perceiving at the moment, while type 2 are those who have the ability to plan ahead, so that their actions are governed by the task that they are trying accomplish. 
-
-![](https://subirvarma.github.io/GeneralCognitics/images/stat73.png) 
-
-Figure 5: A Model for the Brain for Type 1 animals: Short Term Action Generation 
-
-The model shown in figure 5 is for the brain of type 1 animals and this includes all animals except for mammals and birds which are of type 2. The functions of the blocks shown in the model are as follows:
-
-- World Model: This system takes in the current action $A_n$ and the perception state $X_n$, and generates a prediction for what the next state ${\hat X}_{n+1}$ should be.
-- Perception Generator: This system takes the prediction ${\hat X_{n+1}}$ and the signal $c_{n+1}$ coming from the senses, and generates the next perception $X_{n+1}$. The EBM implementation of this module was described in [Part 3](https://github.com/subirvarma/GeneralCognitics/blob/main/_posts/2026-02-13-statmech3.md).
-- Actor: This model uses the difference between the prediction ${\hat X_{n+1}}$ and the perception $X_{n+1}$ and uses it to generate the next action $A_{n+1}$. Its function to bring the state of the world to the point where the prediction agrees with reality.
-
-![](https://subirvarma.github.io/GeneralCognitics/images/stat74.png) 
-
-Figure 6: A Model for the Brain for Type 2 animals: Planning based Action Generation
-
-There is a video prediction model in our brains that is contantly predicting the next frame that we are going to see. The actual image is generated by combining this information with the information
-in sensory signals coming from the eyes (see figure 1).
-
-
-
-Video prediction is also critical to building world models. As the name implies these are internal models of how the world evolves with time, and also how to raects to various events taking place,
-and this includes the actions that we are taking. To understand this we will use the reinforcement learning framework shown in figure 2.
-
+## The Expected Free Enegy Framework for Planning
 
 
 
@@ -265,5 +245,31 @@ The fundamental phenomenon that generates both images and thoughts is the neural
 
 
 ## World Models: Incorporation of Actions into Video Generation Models
+
+## A Systems Architecture for the Brain
+
+The brain architecture described here is based on the work of the neuro-scientists Karl Friston and Andy Clark on predictive models for the brain. This is an EBM based model for the planning based perception-action framework shown in figure 4. Animals can broadly be classified into two categories: Type 1 are those whose actions are purely a function of what they are experiencing or perceiving at the moment, while type 2 are those who have the ability to plan ahead, so that their actions are governed by the task that they are trying accomplish. 
+
+![](https://subirvarma.github.io/GeneralCognitics/images/stat73.png) 
+
+Figure 5: A Model for the Brain for Type 1 animals: Short Term Action Generation 
+
+The model shown in figure 5 is for the brain of type 1 animals and this includes all animals except for mammals and birds which are of type 2. The functions of the blocks shown in the model are as follows:
+
+- World Model: This system takes in the current action $A_n$ and the perception state $X_n$, and generates a prediction for what the next state ${\hat X}_{n+1}$ should be.
+- Perception Generator: This system takes the prediction ${\hat X_{n+1}}$ and the signal $c_{n+1}$ coming from the senses, and generates the next perception $X_{n+1}$. The EBM implementation of this module was described in [Part 3](https://github.com/subirvarma/GeneralCognitics/blob/main/_posts/2026-02-13-statmech3.md).
+- Actor: This model uses the difference between the prediction ${\hat X_{n+1}}$ and the perception $X_{n+1}$ and uses it to generate the next action $A_{n+1}$. Its function to bring the state of the world to the point where the prediction agrees with reality.
+
+![](https://subirvarma.github.io/GeneralCognitics/images/stat74.png) 
+
+Figure 6: A Model for the Brain for Type 2 animals: Planning based Action Generation
+
+There is a video prediction model in our brains that is contantly predicting the next frame that we are going to see. The actual image is generated by combining this information with the information
+in sensory signals coming from the eyes (see figure 1).
+
+
+
+Video prediction is also critical to building world models. As the name implies these are internal models of how the world evolves with time, and also how to raects to various events taking place,
+and this includes the actions that we are taking. To understand this we will use the reinforcement learning framework shown in figure 2.
 
 
