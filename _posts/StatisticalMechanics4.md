@@ -113,20 +113,23 @@ Andy Clark points out in book that certain mental health issues can be explained
 - Schizophrenia is though to be a result of the brain assigning too much weight to the error signal, i.e., the mismatch between its predictions and sensory daya. As result is mistakenly gives a lot of weight to data that may be purely co-incidental for example with no deep significance. This gradually changes the brains internal model and leads to false predictions and beliefs.
 - Studies have shown that PTSD is extremely well correlated with unusually large increases in the precision weighing of the prediction erro signal in response to unexpectedly negative outcomes.
 - Depression can be caused due to overweighted expectations and underweghted new information. This results in a semi-permanent lock-in of the existing world model, leading us to continue with depresive behaviors.
-- Anxiety
 
+## The Bayesian Brain: The Active Inference Theory for the Brain
 
-
-## The Bayesian Brain: Active Inference Theory
+The name most closely associated with the [Active Interference theory](https://www.amazon.com/Active-Inference-Energy-Principle-Behavior/dp/0262553996)  for the brain is that of the prominent neuroscientist Karl Friston.
+This theory models the brain using the theory of Bayesian statistics, and is closely related to the Predictive Processing model. It is also proposes that perception is internally generated using the signals coming in through our sensory organs, but it explicitly seeks to model the hidden states in the brain that generate our perception.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat75.png) 
 
 Figure 2: Inferring a Model for the External World Using Bayesian Statistics
 
-Figure 2 shows the framework used in Active Inference theory. The vextor $x^*$ represents the external world to which the organism does not have direct access. The vector $y$ are the sensory neurons in the organism's cortex to which the organism does have access. Hence the external world has an unknown generative model that produce sensation $y$ in the organism. The organism creates an inference about the causes of sensation $y$, and this is summarized in the vector $x$ on the left and is probabilistically captured by the conditional distribution $p(x|y)$. Assuming an inference $x$, the organism internally generates sensations $y$ using this model as modeled by the conditional distribution $p(y|x)$. If the generated $y$ is different than the original sensation that came in through the senses, then the organism changes its inference $x$ so that the two match. Mathematically this is accomplished by the minimization of a probabilistic quantity, namely the VFE.
+Figure 2 shows the mathematical framework used in Active Inference theory. The vextor $x^*$ represents the external world to which the organism does not have direct access. The vector $y$ are the sensory neurons in the organism's cortex to which the organism does have access. Hence the external world has an unknown generative model that produce sensation $y$ in the organism. The organism creates an inference about the causes of sensation $y$, and this is summarized in the vector $x$ on the left and is probabilistically captured by the conditional distribution $p(x|y)$. Assuming an inference $x$, also called the hidden states, the organism internally generates a perception $y$ using this model as this is captured by the conditional distribution $p(y|x)$. If the generated $y$ is different than the original sensation that came in through the senses, then the organism changes its inference $x$ so that the two match. Mathematically this by the accomplished by the minimization of a probabilistic quantity, called the variational free energy or VFE.
 Note that the organism does not have direct access to the $x$ either, so it is also a hidden state, however it does have access to the sensations $y$ generates by $x$.
 
-This system can be analyzed using Bayesian statistics as follows: We will refer to $p(x)$ as the prior (or existing) model for the brain. If the organism is subjected to sensations $y$, then this results in a change in its model, and it is now given by the posterior $p(x|y)$. The objective of the Bayesian statistics is to compute $p(x|y)$, and this is given by Bayes Rule
+The presence of the hidden state $x$ differentiates the Active Inference and Predictive Processing frameworks. While it is used explicitly in Active Inference, the Predictive Processing framework models the perception neurons $y$ directly without using hidden states. The hidden states in the Active Inference framework represents the state of the (non-perception) neurons in the brain that are responsible for creating the world model that the perception neurons depend upon. The Predictive Processing framework is able to get by without using hidden states, since it models the time evolution of the perception neurons using the distribution $p(y_{n+1}|y_n,c)$ directly, without theorizing what is causing the changes. The difference can be understood in terms of the 2-layer Boltzmann machine that we encountered in [Part 2](https://subirvarma.github.io/GeneralCognitics/2025/11/24/statmech2.html) (see figure 7 in Part 2), which has also explicitly models the hidden states. However it is possible to talk about a Boltzmann machine with no hidden states, as long as we are willing to accept more complex energy functions than the simple quadratic functions used there. This is precisely what is done in EBMs using Diffusion Models as discussed in [Part 3](https://subirvarma.github.io/GeneralCognitics/2026/02/13/statmech3.html). Hence in some sense the difference between the Active Inference model and the Preditive Processing model is the same as the difference between EBMs based on hierarchical Boltzmann machines and those based on diffusions.
+
+Lets now get into the nuts and bolts of the Active Inference framework.
+This system can be analyzed using Bayesian statistics as follows: We will refer to the probability $p(x)$ as the prior (or existing) model for the brain. If the organism is subjected to sensations $y$, then this results in a change in its model, and it is now given by the posterior probability $p(x|y)$. The objective of the Bayesian statistics is to compute $p(x|y)$, and this is given by Bayes Rule
 
 $$  p(x|y) = {p(y|x)p(x)\over{p(y)}}   $$
 
@@ -145,9 +148,11 @@ $$      = E_{Q_{\theta}(x|y)}(\log Q_{\theta}(x|y) - \log p(x|y)) - \log p(y) $$
 
 $$      = D_{KL}(Q_{\theta}(x|y)||p(x|y)) - \log p(y) $$
 
-Note that $Q_{\theta}(x|y)$ is the organism's approximate model for its environment (given sensory data $y$), while $p(x|y)$ is the exact model. Hence if the organism tries to minimize the VFE, then
-this results in the approximate model being closer to the best possible model. Hence by minimizing its VFE, the organism is performing inferring the state of the environment $x^{*}$, while knowing only the
-sensory data $y$.
+Here $D_{KL}(Q_{\theta}(x|y)||p(x|y))$ is the Kullback-Liebler divergence between the two distributions, and it functions as measure of far apart they are.
+Since $Q_{\theta}(x|y)$ is the organism's approximate model for its environment (given sensory data $y$), while $p(x|y)$ is the exact model. If the organism tries to minimize the VFE, then
+this is the same as minimizing the KL divergence and this results in the approximate model being closer to the best possible model. Hence by minimizing its VFE, the organism is inferring a best model for the environment $x^{*}$, while knowing only the sensory data $y$.
+
+The perception neurons $y$ change over time as the state of the hidden state neurons and the perception signals from the environment change. This is captured using the distribution $p(y_{n+1}|y_n,c)$ in the Predictive Processing model, while the Active Inference model uses a two state process in which the internal states $x$ of the brain changes first and this is followed by a new perception $y$.
 
 Karl Friston pointed out that there are two ways to minimize the VFE:
 
@@ -156,14 +161,17 @@ Karl Friston pointed out that there are two ways to minimize the VFE:
 
 In the first case the organism changes its internal model $Q_{\theta}$ to reduce the VFE, while in the second case the organism changes its environment to reduce the VFE.
 
+## Models for Planning
 
-## A Model for Perception Using Diffusion based EBMs
+We will describe two approaches to the problem of planning, namely the reinforcement learning or RL framework and the neuro-scientific theory of planning proposed Karl Friston.
+The RL framework is based on the idea that there is a reward associated with the completion of tasks, and organisms take a sequence of actions required to complete the task so as to maximize the reward. 
+Individuaf actions themselves are solely a function os the state that the organism is in, and an optimal policy is one that chooses this mapping to maximize the reward.
+
+The Friston theory, also called the Active Inference framework does not use rewards. Instead it posits that an organism starts with an image of what the completed task looks like, and then decomposes it
+into a sequence of images that get it to the desired end point. The actions themselves are determined automatically by the predictive processing framework as described in the previous section.
 
 
-
-## The Reinforcement Learning Framework for Decision Making
-
-As mentioned in the introduction, there are two approaches to the problem of modeling autonomous agents that take actions in the real world namely the reinforcement learning point of view or the neuro-scientific point of view. I am going to talk about RL in this section, while the next section is on models from neuroscience.
+## The Reinforcement Learning Framework for Planning
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/agent1.png) 
 
@@ -212,6 +220,12 @@ in sensory signals coming from the eyes (see figure 1).
 
 Video prediction is also critical to building world models. As the name implies these are internal models of how the world evolves with time, and also how to raects to various events taking place,
 and this includes the actions that we are taking. To understand this we will use the reinforcement learning framework shown in figure 2.
+
+
+
+
+## A Model for Perception Using Diffusion based EBMs
+
 
 ##  Video Generation
 
