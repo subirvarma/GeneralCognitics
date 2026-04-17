@@ -126,8 +126,8 @@ Figure 2: Inferring a Model for the External World Using Bayesian Statistics
 Figure 2 shows the mathematical framework used in Active Inference theory. The vextor $x^*$ represents the external world to which the organism does not have direct access. The vector $y$ are the sensory neurons in the organism's cortex to which the organism does have access. Hence the external world has an unknown generative model that produce sensation $y$ in the organism. The organism creates an inference about the causes of sensation $y$, and this is summarized in the vector $x$ on the left and is probabilistically captured by the conditional distribution $p(x|y)$. Assuming an inference $x$, also called the hidden states, the organism internally generates a perception $y$ using this model as this is captured by the conditional distribution $p(y|x)$. If the generated $y$ is different than the original sensation that came in through the senses, then the organism changes its inference $x$ so that the two match. Mathematically this by the accomplished by the minimization of a probabilistic quantity, called the variational free energy or VFE.
 Note that the organism does not have direct access to the $x$ either, so it is also a hidden state, however it does have access to the sensations $y$ generates by $x$.
 
-The presence of the hidden state $x$ differentiates the Active Inference and Predictive Processing frameworks. While it is used explicitly in Active Inference, the Predictive Processing framework models the perception neurons $y$ directly without using hidden states. The hidden states in the Active Inference framework represents the state of the (non-perception) neurons in the brain that are responsible for creating the world model that the perception neurons depend upon. The Predictive Processing framework is able to get by without using hidden states, since it models the time evolution of the perception neurons directly by using the distribution $p(y_{n+1}|y_n,c)$, without theorizing what is causing the changes. The difference can be understood in terms of the 2-layer Boltzmann machine that we encountered in [Part 2](https://subirvarma.github.io/GeneralCognitics/2025/11/24/statmech2.html) (see figure 7 in Part 2), which has also explicitly models the hidden states. However it is possible to talk about an EBM with no hidden states, as long as we are willing to accept more complex energy functions than the simple quadratic functions used in the Boltzmann machine. This is precisely what is done in EBMs using Diffusion Models as discussed in [Part 3](https://subirvarma.github.io/GeneralCognitics/2026/02/13/statmech3.html). 
-Hinton's reserach group Univ. of Toronto actually proposed a generative model calld the [Helmholtz Machine](https://www.cs.toronto.edu/~hinton/absps/helmholtz.pdf) in 1994, whose design is precisely that of shown in figure 2. The original work was hamstrung by the fact that they limited themslves to using sinple feedforward neural networks to model the probability distributions, This was corrected in 2014 by Welling and Kingma, when they came up the Variational Auto Encoder or VAE architecture. This was basically the Helmholtz machine in which the distributions where now modeled using state of the art convolutional neural networks or CNNs, and this was able to do a much better job of generating realistic images (also changed the training algorithm to SGD from wake-sleep). 
+The presence of the hidden state $x$ differentiates the Active Inference and Predictive Processing frameworks. While it is used explicitly in Active Inference, the Predictive Processing framework models the perception neurons $y$ directly without using hidden states. The hidden states in the Active Inference framework represents the state of the (non-perception) neurons in the brain that are responsible for creating the world model that the perception neurons depend upon. The Predictive Processing framework is able to get by without using hidden states, since it models the time evolution of the perception neurons directly by using the distribution $p(y_{n+1}|y_n,c)$, without theorizing what is causing the changes. The difference can be understood in terms of the 2-layer Boltzmann machine that we encountered in [Part 2](https://subirvarma.github.io/GeneralCognitics/2025/11/24/statmech2.html) (see figure 7 in Part 2), which also explicitly models the hidden states. However it is possible to talk about an EBM with no hidden states, as long as we are willing to accept more complex energy functions than the simple quadratic functions used in the Boltzmann machine. This is precisely what is done in EBMs using Diffusion Models as discussed in [Part 3](https://subirvarma.github.io/GeneralCognitics/2026/02/13/statmech3.html). 
+Hinton's research group at the Univ. of Toronto actually proposed a generative model calld the [Helmholtz Machine](https://www.cs.toronto.edu/~hinton/absps/helmholtz.pdf) in 1994, whose architecture is precisely that shown in figure 2. The original work was hamstrung by the fact that they limited themslves to using simple feedforward neural networks in their model. This was corrected in 2014 by [Welling and Kingma](https://arxiv.org/pdf/1906.02691), when they came up the Variational Auto Encoder or VAE architecture. This was basically the Helmholtz machine in which the distributions were now modeled using state of the art convolutional neural networks or CNNs, and this was able to do a much better job of generating realistic images (they also changed the training algorithm to stochastic gradient descent from Hinton's wake-sleep algorithm). 
 Hence in some sense the difference between the Active Inference model and the Preditive Processing model is the same as the difference between generation based on VAEs and those based on diffusions. 
 
 **Rewrite above paragraph**
@@ -169,44 +169,54 @@ The Active Inference framework is based on the minimization of a probabilistic q
 
 ## Models for Planning
 
-All organisms have a model for the the environment along the lines that was described in the previous section. This enables them to react to changes in the environment, obtain food, reproduce etc. However higher organisms also have have the ability to carry out a sequence of actions in order to accomplish a task. The process by which they arrive at the right action sequence to use such that it results in success, is called planning. 
-Solving the planning problem is tied to that of perception, since if the organism can use its world model to internally generate a sequence of actions and infer how the environment will react to them, before actually carrying out the actions.
+All organisms have a model for the the environment along the lines that was described in the previous section. This enables them to react to changes in the environment, obtain food, reproduce etc. However higher organisms also have have the ability to carry out a sequence of actions in order to accomplish a task. The process by which they arrive at the right action sequence to use such that it results in success, is called planning. But how do they arrive at this sequence in advance of actually carrying out the actions?
+Solving the planning problem is tied to that of perception, since if the organism can use its world model to internally generate a sequence of actions and infer how the environment will react to them, then it can infer in advance whether the action sequence will be effective or not.
 
 We will describe two approaches to the problem of planning, namely the reinforcement learning or RL framework and the neuro-scientific theory of planning proposed by Karl Friston.
-The RL framework is based on the idea that there is a reward associated with the completion of tasks, and organisms take a sequence of actions required to complete the task so as to maximize the reward. 
-Individual actions themselves are solely a function of the state that the organism is in, and an optimal policy is one that chooses this mapping to maximize the reward.
+The RL framework is based on the idea that there is a reward associated with the completion of tasks, and organisms take the sequence of actions which results in the maximization of the reward. 
 
-The Friston theory, which is aprt of the Active Inference framework, does not use rewards. Instead it posits that an organism starts with an image of what the completed task looks like, and then decomposes it
+The Friston theory, which is part of the Active Inference framework, does not use rewards. Instead it posits that an organism starts with an image of what the completed task looks like, and then decomposes it
 into a sequence of images that get it to the desired end point. The actions themselves are determined automatically by the predictive processing framework as described in the previous section.
 
 
-## The Reinforcement Learning Framework for Planning
+### The Reinforcement Learning Framework for Planning
 
-![](https://subirvarma.github.io/GeneralCognitics/images/agent1.png) 
+![](https://subirvarma.github.io/GeneralCognitics/images/stat79.png) 
 
 Figure 2: The Reinforcement Learning Control Framework: An Agent Acting in the Real World
 
-The RL framework is shown above and it shows an organism operating in an environment. Assuming it takes action $A_n$ at time $n$ based on environmental state $O_n$, and this results in a change in its environment. The new environemntal state $O_{n+1}$ is then perceived by the agent, along with an option reward signal $R_n$. The reward signal tells the agent whether the action resulted in a positive outcome (or not). The agent then takes the next action $A_{n+1}$ and the loop goes through another cycle. RL is focused on choosing the actions sequence $A_1,...,A_n$ so as to maximixe the total reward over the lifetime of the agent.
+The RL framework is shown in part (a) of the above figure and it shows an organism operating in an external environment. Assuming that it takes action $A_n$ at time $n$ based on its internal perception of the environmental state $O_n$, and the action results in a change in its perception to $O_{n+1}$ and also an (optional) reward signal $R_n$. The reward signal tells the agent whether the action resulted in a positive outcome (or not). The agent then takes the next action $A_{n+1}$ taking $O_{n+1}$ into account, and the loop goes through another cycle. RL is focused on choosing the actions sequence $A_1,...,A_n$ so as to maximixe the total reward obtained during the completion of a task that the agent set out to do.
 
-![](https://subirvarma.github.io/GeneralCognitics/images/agent2.png) 
+The RL framework shown in part (a)leaves open the problem of how the agent figures out what action to take for a given percepion state. But what if the agent posseses a model for the enviroment that allows it to predict the next perception state (and reward), as a function of the prior state and the action it took. This scenario is shown in part (b), in which I have replaced the environment by the agent's model for the environment. This model allows the agent to try out various scenarios and sequences of actions, without actually taking any action in the real world, an this is called planning. 
+
+![](https://subirvarma.github.io/GeneralCognitics/images/stat78.png) 
 
 Figure 3: Model Based Control in Reinforcement Learning: An Agent Planning its Actions Based on an Internal Model
 
-The RL framework shown in figure 2 leaves open the problem of how the agent figures out what action to take for a given state of the environment. But what if the agent posseses a model for the enviroment that allows it to predict the next state (and reward), as a function of the prior state and the action it took. This scenario is shown in figure 2, in which I have replaced the real world, by a model for the real world. This model allows the agent to try out various scenarios and sequences of actions, without actually taking any action in the real world, which is also called planning. Potentially this can enable it to figure out the best action for a given state of the environment and this is more fleshed out in figure 3.
+Part (a) of the above figure shows an example rollout of the perception-action states in the organism, starting from some initial state $s_1$. The organism can potentially take one of two actions $a_1$ or $a_2$ from this state, and assuming it takes action $a_1$, it can potentially end in state $s_2$ or state $s_3$. The state that it actually transitions is controlled by the conditional probabilities $p(s_2|s_1,a_1), p(s_3|s_1,a_2)$. 
+Once this transition takes place, the organism then takes its next action and the whole process repeats.
 
-![](https://subirvarma.github.io/GeneralCognitics/images/Agent31.png) 
+Part (b) of the figure shows a sequence of possible rollouts of the perception-action sequence, from a starting state $s_t$. An individual rollout is one path through this graph, and an example is ahded in red.
+A rollout terminates when the organism reaches the end state labeled T. 
+
+These figures show the centrality of the distribution $p(s_{n+1}|s_n,a_n)$ to the RL framework. This distribution is what we referred to as the world model in the previous section.
+If the organism learns this world model and captures its within its neural network, then it has the capability to do these rollouts in its mental space without actually taking any action in the real world.
+
+![](https://subirvarma.github.io/GeneralCognitics/images/stat80.png) 
 
 Figure 4: Integration of Planning and Acting: Agent used its Internal Model to take better actions in the Real World
 
-The above figure is similar to figure 2, except that now the agent has a 'brain' that contains a model for the world. Using this model the agent generates multiple scenarios driven by sequences of actions, and then chooses the scenario that has the best outcome in terms of the total reward received. It then carries out the first action in the sequence, which changes the environment state. The agent then incorporates the new information into its model, and then repeats the process. This model underlies the famous Go playing program AlphaGo from DeepMind from a few years ago. This framework shows how critical the world model is for this system to work.
+But how does the organism use its knowledge of of the world model and ability to do hypothetical rollouts to actually take actions that achieve a task objective? 
+One way in which it can do so is illustrated in the above figure.
+This is similar to figure 2, except that now the agent has a 'brain' that contains a model for the world. Using this model the agent generates multiple scenarios driven by sequences of actions, and then chooses the scenario that has the best outcome in terms of the total reward received. It then carries out the first action in the sequence, which changes the environment state. The agent then incorporates the new information into its model, and then repeats the process. This model underlies the famous Go playing program AlphaGo from DeepMind from a few years ago. This framework shows how critical the world model is for this system to work.
 
 *So far we I haven't talked about how to build a world model, and the question arises whether it can be built using ANNs, or more specifically an EBM. If the latter can be demonstrated, then this provides a model for how the brain operates, since in all likelihood the brain is an EBM consisting of biological neurons, as described in Part 3.*
 
 *All living organisms, even plants, are thought to possess a model for their environment. These models vary in their level of sophistication depending upon the neural capacity of the organism, but in general contain enough information to enable the organism to carry out its day to day activities. For example single celled bacteria such as *E. Coli* sense their environment through sensors on their cell wall, and can move in the direction of food sources by using their flagellum. Theirs is a pretty rudimentary model of the environment, and doesn't even require neurons, but is sufficient for their purposes. As we move up the evolutionary ladder, the models become more sophisticated, and enable the animal to predict the state of the world several steps into the future. Humans have taken this capability to the extreme, our predictive powers extent all the wy to the death of the sun in a few billion years from now.*
 
-## The Expected Free Enegy Framework for Planning
+### The Expected Free Enegy Framework for Planning
 
-
+TBD
 
 ## A Model for Perception Using Diffusion based EBMs
 
@@ -220,6 +230,8 @@ The above figure is similar to figure 2, except that now the agent has a 'brain'
 
 
 ### Autoregressive Video Generation
+
+
 
 ## Language Generation
 
