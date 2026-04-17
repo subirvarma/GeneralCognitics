@@ -218,7 +218,10 @@ This is similar to figure 2, except that now the agent has a 'brain' that contai
 
 TBD
 
-## A Model for Perception Using Diffusion based EBMs
+## Building World Models Using EBMs
+
+We saw that both the perception and planning abilities in living organisms is crtically dependent on their ability to build a world model, as captured by the distribution $p(y_{n+1}|y_n, a_n)$.
+In this section we will show EBMs can be used to capture this distribution, and thereby serve a way in which world models can be built in robots.
 
 
 ##  Video Generation
