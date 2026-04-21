@@ -220,22 +220,25 @@ TBD
 ## Building World Models Using EBMs
 
 We saw that both the perception and planning abilities in living organisms is crtically dependent on their ability to build a world model, as captured by the distribution $p(y_{n+1}|y_n, a_n)$.
-In this section we will show EBMs can be used to capture this distribution, and thereby serve a way in which world models can be built in robots.
+In this section we will show EBMs can be used to model this distribution, and thereby serve a way in which world models can be built in robots.
 The Predictive Procesing framework is explicitly based on this distribution, and we will show that its implementation is a natural with diffusion models, and hence this is the approach that we will pursue. 
 The Active Inference framework on the other hand requires two generations: Generation of the hidden state followed by the generation of the perceptual state, which makes it a more involved process.
 As we mentioned earlier, diffusion models are able to sample from the distribution $p(y_{n+1}|y_n,c)$ without explicitly modeling the hidden state. The concept of a hidden state can be extracted from the
 results of the model, but by focusing on the energy function, we are able to bypass its explicit generation.
 
-
-##  Video Generation
-
-
-
-### Video Clip Generation
-
-
-
 ### Autoregressive Video Generation
+
+The class of models that are closest to our description of world models, is called autoregressive video generation. We say how EBMs can be used to generate images in [Part 3](https://subirvarma.github.io/GeneralCognitics/2026/02/13/statmech3.html). We associated the state of a netowrk of interacting nodes with an energy level, and the process of image generation was that of finding an equilibrium state for this network at which the energy is at a minimum. The diffusion based image generation was then associated of arriving at a minimum energy value, through a gradual process which is similar to the similated annealing algorithm.
+The probability distribution $E(x_1,...,x_N)$ for a network state $x(_1,...,x_N)$ is given by the Boltzmann distribution
+
+$$ p(x_1,...,x_N) = {e^{-E(x_1,...,x_N)\over Z}}  $$
+
+If this methodology can be extended to compute the conditional distribution $p(x_1,...,x_N|y_1,...,y_N)$ then this provides a straighforward way to generate a sequence of images (i.e. a video) by conditioning on already generated images. Furthermore conditioning on anothaer variable $a$ leads to $p(x_1,...,x_N|y_1,...,y_N, a)$ leads to the model for perception and action that were discussed in the previous section. We will look at a few models that have been proposed to do this.
+
+
+
+
+
 
 
 
