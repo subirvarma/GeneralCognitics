@@ -236,7 +236,20 @@ $$ p(x_1,...,x_N) = {e^{-E(x_1,...,x_N)\over Z}}  $$
 If this methodology can be extended to compute the conditional distribution $p(x_1,...,x_N|y_1,...,y_N)$ then this provides a straighforward way to generate a sequence of images (i.e. a video) by conditioning on already generated images. Furthermore conditioning on anothaer variable $a$ leads to $p(x_1,...,x_N|y_1,...,y_N, a)$ leads to the model for perception and action that were discussed in the previous section. We will look at a few models that have been proposed to do this.
 
 
+![](https://subirvarma.github.io/GeneralCognitics/images/stat81.png) 
 
+Figure 5: UniSIM Model 
+
+
+![](https://subirvarma.github.io/GeneralCognitics/images/stat82.png) 
+
+Figure 5: Diamond Model
+
+
+### Video Diffusion Models
+
+
+### Conditioning Techniques
 
 
 
