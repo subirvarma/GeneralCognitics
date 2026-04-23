@@ -226,6 +226,37 @@ The Active Inference framework on the other hand requires two generations: Gener
 As we mentioned earlier, diffusion models are able to sample from the distribution $p(y_{n+1}|y_n,c)$ without explicitly modeling the hidden state. The concept of a hidden state can be extracted from the
 results of the model, but by focusing on the energy function, we are able to bypass its explicit generation.
 
+
+![](https://subirvarma.github.io/GeneralCognitics/images/stat83.png) 
+
+Figure 5: Modeling the Energy Function of a collection of interacting nodes using a Transformer based Artificial Neural Network
+
+
+![](https://subirvarma.github.io/GeneralCognitics/images/stat84.png) 
+
+Figure 5: Modeling Predictive Perception in animal brains by means of minimization of the Energy Function. The minimization is carried out over L stages, with $N_L$ step Langevin Sampling used to do minimization at each stage
+
+
+![](https://subirvarma.github.io/GeneralCognitics/images/stat85.png) 
+
+Figure 5: Modeling Predictive Perception coupled with Action in animal brains by means of minimization of the Energy Function. The minimization is carried out over L stages, with $N_L$ step Langevin Sampling used to do minimization at each stage
+
+
+![](https://subirvarma.github.io/GeneralCognitics/images/stat86.png) 
+
+Figure 5: Illustration of a single step of Langevin Sampling 
+
+
+![](https://subirvarma.github.io/GeneralCognitics/images/stat88.png) 
+
+Figure 5: The ViT method of turning an image into a sequence of patches
+
+
+![](https://subirvarma.github.io/GeneralCognitics/images/stat87.png) 
+
+Figure 5: Transformer Model for the Energy Function on the left hand side. The three figures on the right illustrate techniques for conditioning the energy computation on other variables.
+
+
 ### Autoregressive Video Generation
 
 The class of models that are closest to our description of world models, is called autoregressive video generation. We say how EBMs can be used to generate images in [Part 3](https://subirvarma.github.io/GeneralCognitics/2026/02/13/statmech3.html). We associated the state of a netowrk of interacting nodes with an energy level, and the process of image generation was that of finding an equilibrium state for this network at which the energy is at a minimum. The diffusion based image generation was then associated of arriving at a minimum energy value, through a gradual process which is similar to the similated annealing algorithm.
