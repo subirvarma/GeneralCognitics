@@ -252,11 +252,13 @@ The figure also shows how the system can be used to sample from conditional dist
 
 $$  p_W(Y|Y_n,c) = {exp^{-E(Y,Y_n,c)}\over Z_W} $$
 
+We have approached the process of generation using the language of annealing based energy minimization. However these types of algorithms are more commonly referred to as de-noising algorithms, and the reason for this can be seen in the figure. We start off with a random state $Y_T$ which looks like pure noise, and then gradually as the optimization progresses, a more legible image emerges. The image become sharper in the later stages of the optimization as shown. The de-noising perspective can be formalized to create an alternative method of sampling from a distribution, called Denoising Diffusion Probabilistic Models or [DDPM](https://arxiv.org/abs/2006.11239).
+
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat85.png) 
 
 Figure 5: Modeling Predictive Perception coupled with Action in animal brains by means of minimization of the Energy Function. The minimization is carried out over L stages, with $N_L$ step Langevin Sampling used to do minimization at each stage
 
-Incorporation od actions into the framework in needed to carry out motor control in organisms, and also for doing planning, as explained in the prior sections. This can also be incorporated into the generation model by conditioning the probability distribution on both perception and action, as shown in the above figure.
+Incorporation of actions into the framework in needed to carry out motor control in organisms, and also for doing planning, as explained in the prior sections. This can also be incorporated into the generation model by conditioning the probability distribution on both perception and action, as shown in the above figure.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat86.png) 
 
@@ -273,12 +275,14 @@ In this equation $\sigma(t)$ is the variance of the noise injected into the opti
 Figure 5: The ViT method of turning an image into a sequence of patches
 
 
+
+
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat87.png) 
 
 Figure 5: Transformer Model for the Energy Function on the left hand side. The three figures on the right illustrate techniques for conditioning the energy computation on other variables.
 
 
-### Autoregressive Video Generation
+### Some Example of World Models
 
 The class of models that are closest to our description of world models, is called autoregressive video generation. We say how EBMs can be used to generate images in [Part 3](https://subirvarma.github.io/GeneralCognitics/2026/02/13/statmech3.html). We associated the state of a netowrk of interacting nodes with an energy level, and the process of image generation was that of finding an equilibrium state for this network at which the energy is at a minimum. The diffusion based image generation was then associated of arriving at a minimum energy value, through a gradual process which is similar to the similated annealing algorithm.
 The probability distribution $E(x_1,...,x_N)$ for a network state $x(_1,...,x_N)$ is given by the Boltzmann distribution
@@ -297,11 +301,6 @@ Figure 5: UniSIM Model
 
 Figure 5: Diamond Model
 
-
-### Video Diffusion Models
-
-
-### Conditioning Techniques
 
 
 
