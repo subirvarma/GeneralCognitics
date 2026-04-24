@@ -219,33 +219,54 @@ TBD
 
 ## Building World Models Using EBMs
 
-We saw that both the perception and planning abilities in living organisms is crtically dependent on their ability to build a world model, as captured by the distribution $p(y_{n+1}|y_n, a_n)$.
-In this section we will show EBMs can be used to model this distribution, and thereby serve a way in which world models can be built in robots.
-The Predictive Procesing framework is explicitly based on this distribution, and we will show that its implementation is a natural with diffusion models, and hence this is the approach that we will pursue. 
+The Predictice Processing framework tells us that both the perception and planning abilities in living organisms is crtically dependent on their ability to build a world model, as captured by the distribution $p(y_{n+1}|y_n, a_n)$.
+In this section I will show EBMs can be used to model this distribution, and thereby serve a way in which world models can be built in robots.
+As we saw in [Part 3](https://subirvarma.github.io/GeneralCognitics/2026/02/13/statmech3.html), EBMs can be implemented using diffusion models and this is the approach that we will pursue. 
+
 The Active Inference framework on the other hand requires two generations: Generation of the hidden state followed by the generation of the perceptual state, which makes it a more involved process.
 As we mentioned earlier, diffusion models are able to sample from the distribution $p(y_{n+1}|y_n,c)$ without explicitly modeling the hidden state. The concept of a hidden state can be extracted from the
 results of the model, but by focusing on the energy function, we are able to bypass its explicit generation.
 
+I am going to do a step by step illustration of how EBMs are used to model probability distributions ad the resulting sampling process. Some of this is a repetitition of the material in Part 3.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat83.png) 
 
 Figure 5: Modeling the Energy Function of a collection of interacting nodes using a Transformer based Artificial Neural Network
 
+The basic premis of EBMs is that a complex probability distribution can be modeled using a system of interacting nodes. The probability distribution is connected to the energy for the system as captured by the Boltzmann distribution (when the system is in equilibrium)
+
+$$ P(y_1,...,y_N) = {\exp^{-E(y_1,...,y_N)}\over Z} $$
+
+where $(y_1,...,y_N)$ is the system state, $E(y_1,...,y_N)$ is the corresponding energy and Z is the partition function. When the system is initialized from a non-equilibrium state, its nodes interaction with one another, and gradually the interactions cause the energy to decrease until equilibrium is reached at which point the above equation is satified.
+The main premis of EBMs is that we need not worry about the details of how the nodes are interacting with one another, and instead focus on the energy function $E(x_1,...,x_n)$. If we are able to model the energy function using an artificial neural network based function approximator, such as a transformer (see above figure), then this would enable us to generate samples using the model that follow the same distribution as the training data. 
+
+In the context of using this idea to model biological brains, focusing on the energy function as opposed to the interconnection between neurons (called the connectome), enables us to bypass the intractable problem to figuring out the connectome, with the more tractable one of approximating the brain's energy function using a function approximator.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat84.png) 
 
 Figure 5: Modeling Predictive Perception in animal brains by means of minimization of the Energy Function. The minimization is carried out over L stages, with $N_L$ step Langevin Sampling used to do minimization at each stage
 
+Once we have a good model for the energy function, say $E_W(y_1,...,y_N)$, where $W$ are the parameters for the function, then the next step is to generate samples using it, and this process is illustrated in the above figure. The main idea behind this algorithm, called the diffusion model, is the basically the same as for the simulated annealing method for function optimization from [Part 1](https://subirvarma.github.io/GeneralCognitics/2025/11/24/statmech1.html). Starting from an initial non-equilibrium state, the algorithm enables us to gradually transition to states of lower energy using a recursing algorithm called Langevin dynamics. However this cannot be done in a single step, otherwise the iteration will get stuck in non-optimal local minima or saddle points. One way to avoid this is by introducing some noise into the process, starting from a high level and gradually decreasing it (this is similar to starting from a high temperature and gradually decreasing it in simulated annealing). This leads to a multistage optimisation as shown in the above figure with the noise levels decreasing from right to left, as the optimisation proceeds. At each stage of the noise level, Langevin dynamcis is used to do a few steps of optimisation as shown.
+
+The figure also shows how the system can be used to sample from conditional distributions of the form $Y_{n+1} ~ p(Y|Y_n,c)$, which is the key to modeling perception in living organisms according to the Predictive Processing theory. Incorporating these results in the expanded energy function $E_W(Y,Y_n,c)$ which can be modeled by a transformer network with cross attention used to take the conditioning into account so that the conditional probability is given by
+
+$$  p_W(Y|Y_n,c) = {exp^{-E(Y,Y_n,c)}\over Z_W} $$
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat85.png) 
 
 Figure 5: Modeling Predictive Perception coupled with Action in animal brains by means of minimization of the Energy Function. The minimization is carried out over L stages, with $N_L$ step Langevin Sampling used to do minimization at each stage
 
+Incorporation od actions into the framework in needed to carry out motor control in organisms, and also for doing planning, as explained in the prior sections. This can also be incorporated into the generation model by conditioning the probability distribution on both perception and action, as shown in the above figure.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat86.png) 
 
 Figure 5: Illustration of a single step of Langevin Sampling 
 
+A single step of sampling for the $t^{th}$ step of the optimisation using Langevin dynamics is done using the equation
+
+$$ Y_{n+1}(t) = Y_n(t) - \eta[\nabla_Y E_W(Y_n(t),t) -  {1\over{\sigma^2(t)}} (X(t+1)-Y_n(t))] +\sqrt{2\eta}\epsilon _n,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \  $$
+
+In this equation $\sigma(t)$ is the variance of the noise injected into the optimisation, $\eta$ is the step size, $Y_n(t)$ is the state of the system at the $n^{th}$ step of the Langevin iteration, while $X(t+1)$ is the final result of the optimisation at the previous stage (since the optimisation proceeds backwards from stages $T, T-1,...,1,0$). The iteration requires an additional noise injected into the optimisation at each step and this is captured by $\epsilon_n$ which is sampled from the Normal $N(0,1)$ dustribution.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat88.png) 
 
