@@ -274,13 +274,19 @@ In this equation $\sigma(t)$ is the variance of the noise injected into the opti
 
 Figure 5: The ViT method of turning an image into a sequence of patches
 
+Various types of artificial neural networks can be used as function approximators, the one that I am going to focus on is called diffusion transformer or DiT. It was proposed by [Peebles and Xie](https://arxiv.org/abs/2212.09748), who later went on to use the system to build the Sora video generating app at OpenAI. Transformers were originally proposed to model sequence data and are commonly used to build LLMs, but later it was discovered that are as good as convolutional neural networks in processing images as well.
 
-
+The technique used to represent image data in this model goes back to an older model called the vision transformer or [ViT](https://arxiv.org/abs/2010.11929), and is shown in the above figure. The lower part of the figure an image with dimensions $l\times l\time c$, which is divided in $p^2$ equal sized patches with dimensions $p*p$c$. These patches are then converted into vectors and fed into the transformer.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat87.png) 
 
 Figure 5: Transformer Model for the Energy Function on the left hand side. The three figures on the right illustrate techniques for conditioning the energy computation on other variables.
 
+The above figure shows the DiT, as modified to serve as an approximator for energy functions. As in any transformer, it is composed of multiple identical processing blocks as shown in part (a) of the figure, into which the image is fed into after it has been converted into patches. Another input is the optimization stage number $t$, which varies from $T$ down to $0$ as the optimization progresses. The output of the model is the energy function $E(X,t,c)$, which is then differentiated using an automatic differentiator to compute ${\partial E\over{\partial x_i}}$, and this used in the Langvevin equation.
+
+The three figures to the right show different ways in which conditioning can be added to the DiT model. The simplest technique is shown in part (d) of the figure, in this case the conditionaing vectors are simply appended to the sequence for the image. The DiT processing block is composed of self attention module followed by a feedforward module, as is usual in transformers.
+Part (c) shows a popular technique that was actually proposed in the original transformers paper. In this case the conditioning vectors are incorporated into the transformer flow by using a separate cross attention block.
+Part (b) of the figure shows a technique called Adaptive Layer Norm (AdaLN) for doing conditioining. It replaces the standard way of estimating the layer norm parameters $(\gamma,\beta)$ by a modified technique in which they are computed by using a regression on the conditioning vectors.
 
 ### Some Example of World Models
 
