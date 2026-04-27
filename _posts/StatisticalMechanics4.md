@@ -290,12 +290,12 @@ Part (b) of the figure shows a technique called Adaptive Layer Norm (AdaLN) for 
 
 ### Some Example of World Models
 
-![](https://subirvarma.github.io/GeneralCognitics/images/stat81.png) 
+![](https://subirvarma.github.io/GeneralCognitics/images/stat81a.png) 
 
 Figure 5: UniSIM Model 
 
 
-![](https://subirvarma.github.io/GeneralCognitics/images/stat82.png) 
+![](https://subirvarma.github.io/GeneralCognitics/images/stat82a.png) 
 
 Figure 5: Diamond Model
 
