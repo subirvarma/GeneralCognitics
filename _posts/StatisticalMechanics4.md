@@ -233,7 +233,7 @@ I am going to do a step by step illustration of how EBMs are used to model proba
 
 Figure 5: Modeling the Energy Function of a collection of interacting nodes using a Transformer based Artificial Neural Network
 
-The basic premis of EBMs is that a complex probability distribution can be modeled using a system of interacting nodes. The probability distribution is connected to the energy for the system as captured by the Boltzmann distribution (when the system is in equilibrium)
+The basic premis of EBMs is that a complex multi-modal probability distribution can be modeled using a system of interacting nodes. The probability distribution is connected to the energy for the system as captured by the Boltzmann distribution (when the system is in equilibrium)
 
 $$ P(y_1,...,y_N) = {\exp^{-E(y_1,...,y_N)}\over Z} $$
 
@@ -289,14 +289,6 @@ Part (c) shows a popular technique that was actually proposed in the original tr
 Part (b) of the figure shows a technique called Adaptive Layer Norm (AdaLN) for doing conditioining. It replaces the standard way of estimating the layer norm parameters $(\gamma,\beta)$ by a modified technique in which they are computed by using a regression on the conditioning vectors.
 
 ### Some Example of World Models
-
-The class of models that are closest to our description of world models, is called autoregressive video generation. We say how EBMs can be used to generate images in [Part 3](https://subirvarma.github.io/GeneralCognitics/2026/02/13/statmech3.html). We associated the state of a netowrk of interacting nodes with an energy level, and the process of image generation was that of finding an equilibrium state for this network at which the energy is at a minimum. The diffusion based image generation was then associated of arriving at a minimum energy value, through a gradual process which is similar to the similated annealing algorithm.
-The probability distribution $E(x_1,...,x_N)$ for a network state $x(_1,...,x_N)$ is given by the Boltzmann distribution
-
-$$ p(x_1,...,x_N) = {e^{-E(x_1,...,x_N)\over Z}}  $$
-
-If this methodology can be extended to compute the conditional distribution $p(x_1,...,x_N|y_1,...,y_N)$ then this provides a straighforward way to generate a sequence of images (i.e. a video) by conditioning on already generated images. Furthermore conditioning on anothaer variable $a$ leads to $p(x_1,...,x_N|y_1,...,y_N, a)$ leads to the model for perception and action that were discussed in the previous section. We will look at a few models that have been proposed to do this.
-
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat81.png) 
 
