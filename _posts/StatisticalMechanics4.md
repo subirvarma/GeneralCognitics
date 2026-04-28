@@ -260,6 +260,10 @@ Figure 5: Modeling Predictive Perception coupled with Action in animal brains by
 
 Incorporation of actions into the framework in needed to carry out motor control in organisms, and also for doing planning, as explained in the prior sections. This can also be incorporated into the generation model by conditioning the probability distribution on both perception and action, as shown in the above figure.
 
+![](https://subirvarma.github.io/GeneralCognitics/images/stat90.png) 
+
+Figure 5: Illustrating the case in which predictions are done in latent space rather than pixel space. Pixel space to latent space mapping is done using a separate network.
+
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat86.png) 
 
 Figure 5: Illustration of a single step of Langevin Sampling 
