@@ -219,7 +219,7 @@ TBD
 
 ## Building World Models Using EBMs
 
-The Predictice Processing framework tells us that both the perception and planning abilities in living organisms is crtically dependent on their ability to build a world model, as captured by the distribution $p(y_{n+1}|y_n, a_n)$.
+The Predictice Processing framework tells us that both the perception and planning abilities in living organisms is crtically dependent on their ability to build a world model, as captured by the distribution $p(y_{n+1}|y_n, a_n)$. I am going to use a more general distribution $p(y_{n+1}|y_{\le n}, a_n)$, in which the new state is influenced not just by the preceding state, but perhaps other states in the perceptual history.
 In this section I will show EBMs can be used to model this distribution, and thereby serve a way in which world models can be built in robots.
 As we saw in [Part 3](https://subirvarma.github.io/GeneralCognitics/2026/02/13/statmech3.html), EBMs can be implemented using diffusion models and this is the approach that we will pursue. 
 
@@ -248,11 +248,11 @@ Figure 5: Modeling Predictive Perception in animal brains by means of minimizati
 
 Once we have a good model for the energy function, say $E_W(y_1,...,y_N)$, where $W$ are the parameters for the function, then the next step is to generate samples using it, and this process is illustrated in the above figure. The main idea behind this algorithm, called the diffusion model, is the basically the same as for the simulated annealing method for function optimization from [Part 1](https://subirvarma.github.io/GeneralCognitics/2025/11/24/statmech1.html). Starting from an initial non-equilibrium state, the algorithm enables us to gradually transition to states of lower energy using a recursing algorithm called Langevin dynamics. However this cannot be done in a single step, otherwise the iteration will get stuck in non-optimal local minima or saddle points. One way to avoid this is by introducing some noise into the process, starting from a high level and gradually decreasing it (this is similar to starting from a high temperature and gradually decreasing it in simulated annealing). This leads to a multistage optimisation as shown in the above figure with the noise levels decreasing from right to left, as the optimisation proceeds. At each stage of the noise level, Langevin dynamcis is used to do a few steps of optimisation as shown.
 
-The figure also shows how the system can be used to sample from conditional distributions of the form $Y_{n+1} ~ p(Y|Y_n,c)$, which is the key to modeling perception in living organisms according to the Predictive Processing theory. Incorporating these results in the expanded energy function $E_W(Y,Y_n,c)$ which can be modeled by a transformer network with cross attention used to take the conditioning into account so that the conditional probability is given by
+The figure also shows how the system can be used to sample from conditional distributions of the form $p(Y_{n+1}|Y_{\le n},c)$, which is the key to modeling perception in living organisms according to the Predictive Processing theory. Incorporating these results in the expanded energy function $E_W(Y,Y_{\le n},c)$ which can be modeled by a transformer network with cross attention used to take the conditioning into account so that the conditional probability is given by
 
-$$  p_W(Y|Y_n,c) = {exp^{-E(Y,Y_n,c)}\over Z_W} $$
+$$  p_W(Y|Y_{\le n},c) = {exp^{-E(Y,Y_{\le n},c)}\over Z_W} $$
 
-We have approached the process of generation using the language of annealing based energy minimization. However these types of algorithms are more commonly referred to as de-noising algorithms, and the reason for this can be seen in the figure. We start off with a random state $Y_T$ which looks like pure noise, and then gradually as the optimization progresses, a more legible image emerges. The image become sharper in the later stages of the optimization as shown. The de-noising perspective can be formalized to create an alternative method of sampling from a distribution, called Denoising Diffusion Probabilistic Models or [DDPM](https://arxiv.org/abs/2006.11239).
+We have approached the process of generation using the language of annealing based energy minimization. However these types of algorithms are more commonly referred to as de-noising algorithms, and the reason for this can be seen in the figure. We start off with a random state $Y(T)$ which looks like pure noise, and then gradually as the optimization progresses, a more legible image emerges. The image become sharper in the later stages of the optimization as shown. The de-noising perspective can be formalized to create an alternative method of sampling from a distribution, called Denoising Diffusion Probabilistic Models or [DDPM](https://arxiv.org/abs/2006.11239).
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat85.png) 
 
@@ -266,7 +266,7 @@ Figure 5: Illustration of a single step of Langevin Sampling
 
 A single step of sampling for the $t^{th}$ step of the optimisation using Langevin dynamics is done using the equation
 
-$$ Y_{n+1}(t) = Y_n(t) - \eta[\nabla_Y E_W(Y_n(t),t) -  {1\over{\sigma^2(t)}} (X(t+1)-Y_n(t))] +\sqrt{2\eta}\epsilon _n,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \  $$
+$$ Y_{n+1}(t) = Y_n(t) - \eta[\nabla_Y E_W(Y_n(t),t,c) -  {1\over{\sigma^2(t)}} (X(t+1)-Y_n(t))] +\sqrt{2\eta}\epsilon _n,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \  $$
 
 In this equation $\sigma(t)$ is the variance of the noise injected into the optimisation, $\eta$ is the step size, $Y_n(t)$ is the state of the system at the $n^{th}$ step of the Langevin iteration, while $X(t+1)$ is the final result of the optimisation at the previous stage (since the optimisation proceeds backwards from stages $T, T-1,...,1,0$). The iteration requires an additional noise injected into the optimisation at each step and this is captured by $\epsilon_n$ which is sampled from the Normal $N(0,1)$ dustribution.
 
@@ -288,14 +288,27 @@ The three figures to the right show different ways in which conditioning can be 
 Part (c) shows a popular technique that was actually proposed in the original transformers paper. In this case the conditioning vectors are incorporated into the transformer flow by using a separate cross attention block.
 Part (b) of the figure shows a technique called Adaptive Layer Norm (AdaLN) for doing conditioining. It replaces the standard way of estimating the layer norm parameters $(\gamma,\beta)$ by a modified technique in which they are computed by using a regression on the conditioning vectors.
 
+![](https://subirvarma.github.io/GeneralCognitics/images/stat89.png) 
+
+Figure 5: Attention Mechanisms in Space Time Transformers
+
+World models can be designed to generate more than one image frame in a single pass through the diffusion model, in other words each pass through the diffusion results in a video clip rather than a single frame. Such a design helps to ensure temporal integrity of the generated video clip, since each image frame directly influences the frame around it. This is in addition to the inter-frame dependency created due to the conditional distribution $(p_{n+1}|y_{\le n}, c)$ which also helps temporal coherence. Image transformer models that take the temporal dependency into account are called space-time transformers. There are variois ways in which the temporal dependency can be implemented, some examples are shown in the above figure. The colored rectangles are individual elements of the image latent vector that is fed into the transformer.
+The right hand figure shows the usual spatial attention with no temporal attention while the second figure shows only temporal attention with no spatial attention. One popular design is alternating blocks os spatial-only and temporal-only attention blocks in the transformer design.
+
+### Generating Action Sequences in World Models
+
+
+
 ### Some Example of World Models
 
-![](https://subirvarma.github.io/GeneralCognitics/images/stat81a.png) 
+![](https://subirvarma.github.io/GeneralCognitics/images/stat81.png) 
 
 Figure 5: UniSIM Model 
 
 
-![](https://subirvarma.github.io/GeneralCognitics/images/stat82a.png) 
+
+
+![](https://subirvarma.github.io/GeneralCognitics/images/stat82.png) 
 
 Figure 5: Diamond Model
 
