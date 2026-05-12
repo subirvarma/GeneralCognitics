@@ -170,8 +170,8 @@ The presence of the hidden state $x$ differentiates the Active Inference and Pre
 The Predictive Processing framework is able to get by without using hidden states, since it models the time evolution of the perception neurons directly by using the distribution $p_{\theta}(y_{n+1}|y_{\le n},s_n)$, without modeling the internal states that drive this evolution. 
 The modern approach to Active Inference on the other hand uses several models:
 
-- A model for hidden state inference: $q_{\phi}(x_n|s_{\le n})$
-- A model for the dynamics of the hidden state evolution with time and in reponse to actions: p_{\theta}(x_{n+1}|x_n,a_{n+1})$
+- A model for hidden state inference: $q_{\phi}(x_n|o_{\le n})$
+- A model for the dynamics of the hidden state evolution with time and in reponse to actions: $p_{\theta}(x_{n+1}|x_n,a_{n+1})$
 - A model for decoding perceptions from the hidden state: $p_{\psi}(y_n|x_n)$
 
 The first and last of these models correspond to the models used in Friston's framework, while the dynamics model $p_{\theta}$ tells us how the internal belief state evolves with time and in response to actions that the organism is taking. The perception $y_n$ is a function of the latest state $x_n$, which is in contrast to the Predictive Processing model in which it was dependent on the history of $y_{\lt n}$ of prior perceptions. The Active Inference model captures the historical dependence by using the state function $x_n$.
@@ -289,7 +289,7 @@ The Predictive Processing framework generates the next perception $y_{n+1}$ as a
 
 Figure 5: Illustrating the case in which predictions are done in latent space rather than pixel space. Pixel space to latent space mapping is done using a separate network.
 
-
+The Active Inference framework using EBMs is illustrated in the above figure. The external sensory daya is passed through an inference network o generate an internal representation that is then fed into the one step state predictor. The predicted state $x_{n+1}$ is then used to generate the next perception $y_{n+1}$.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat88.png) 
 
@@ -297,7 +297,7 @@ Figure 5: The ViT method of turning an image into a sequence of patches
 
 Various types of artificial neural networks can be used as function approximators, the one that I am going to focus on is called diffusion transformer or DiT. It was proposed by [Peebles and Xie](https://arxiv.org/abs/2212.09748), who later went on to use the system to build the Sora video generating app at OpenAI. Transformers were originally proposed to model sequence data and are commonly used to build LLMs, but later it was discovered that are as good as convolutional neural networks in processing images as well.
 
-The technique used to represent image data in this model goes back to an older model called the vision transformer or [ViT](https://arxiv.org/abs/2010.11929), and is shown in the above figure. The lower part of the figure an image with dimensions $l\times l\time c$, which is divided in $p^2$ equal sized patches with dimensions $p*p$c$. These patches are then converted into vectors and fed into the transformer.
+The technique used to represent image data in this model goes back to an older model called the vision transformer or [ViT](https://arxiv.org/abs/2010.11929), and is shown in the above figure. The lower part of the figure an image with dimensions $l\times l\times c$, which is divided in $p^2$ equal sized patches with dimensions $p^2 c$. These patches are then converted into vectors and fed into the transformer.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat87.png) 
 
