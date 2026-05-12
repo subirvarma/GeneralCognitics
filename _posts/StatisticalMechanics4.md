@@ -322,7 +322,7 @@ The right hand figure shows the usual spatial attention with no temporal attenti
 
 ### Some Example of World Models
 
-![](https://subirvarma.github.io/GeneralCognitics/images/stat81.png) 
+![](https://subirvarma.github.io/GeneralCognitics/images/stat81a.png) 
 
 Figure 5: UniSIM Model 
 
