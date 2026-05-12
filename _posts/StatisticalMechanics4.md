@@ -283,13 +283,13 @@ We have approached the process of generation using the language of annealing bas
 
 Figure 5: Modeling Predictive Perception coupled with Action in animal brains by means of minimization of the Energy Function. The minimization is carried out over L stages, with $N_L$ step Langevin Sampling used to do minimization at each stage
 
-The Predictive Processing framework generates the next perception $y_{n+1}$ as a function a of the previous $K$ perceptions, so that the next state is distributed according to the probability distribution $p_W(y|y_{n-1},...,y_{n-1K},a_n)$. Generation from this type of distribution can be readily incorporated into the EBM model as shown above.
+The Predictive Processing framework generates the next perception $y_{n+1}$ as a function a of the previous $K$ perceptions, so that the next state is distributed according to the probability distribution $p_W(y|y_{n-1},...,y_{n-1K},a_n)$. Generation from this type of distribution can be readily incorporated into the EBM model as shown above. For an example of a diffusion based world model does predictions in the pixel space, as in the Predictive Processing framework, see the [DIAMOND model](https://arxiv.org/abs/2405.12399) from 2024. The world that this system models are from Atari video games. The model is used to train a game playing agent, using the actor-critic algorithm from RL.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat90.png) 
 
 Figure 5: Illustrating the case in which predictions are done in latent space rather than pixel space. Pixel space to latent space mapping is done using a separate network.
 
-The Active Inference framework using EBMs is illustrated in the above figure. The external sensory daya is passed through an inference network o generate an internal representation that is then fed into the one step state predictor. The predicted state $x_{n+1}$ is then used to generate the next perception $y_{n+1}$.
+The Active Inference framework using EBMs is illustrated in the above figure. The external sensory daya is passed through an inference network o generate an internal representation that is then fed into the one step state predictor. The predicted state $x_{n+1}$ is then used to generate the next perception $y_{n+1}$. The [Dreamer v4](https://arxiv.org/abs/2509.24527) is a recent world model proposal that does predictions in latent space.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat88.png) 
 
