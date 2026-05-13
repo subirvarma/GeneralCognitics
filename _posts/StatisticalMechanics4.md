@@ -283,7 +283,16 @@ We have approached the process of generation using the language of annealing bas
 
 Figure 5: Modeling Predictive Perception coupled with Action in animal brains by means of minimization of the Energy Function. The minimization is carried out over L stages, with $N_L$ step Langevin Sampling used to do minimization at each stage
 
-The Predictive Processing framework generates the next perception $y_{n+1}$ as a function a of the previous $K$ perceptions, so that the next state is distributed according to the probability distribution $p_W(y|y_{n-1},...,y_{n-1K},a_n)$. Generation from this type of distribution can be readily incorporated into the EBM model as shown above. For an example of a diffusion based world model does predictions in the pixel space, as in the Predictive Processing framework, see the [DIAMOND model](https://arxiv.org/abs/2405.12399) from 2024. The world that this system models are from Atari video games. The model is used to train a game playing agent, using the actor-critic algorithm from RL.
+The Predictive Processing framework generates the next perception $y_{n+1}$ as a function a of the previous $K$ perceptions, so that the next state is distributed according to the probability distribution $p_W(y|y_{n-1},...,y_{n-1K},a_n)$. Generation from this type of distribution can be readily incorporated into the EBM model as shown above. For an example of a diffusion based world model does predictions in the pixel space, as in the Predictive Processing framework, see the [DIAMOND model](https://arxiv.org/abs/2405.12399) from 2024. The world that this system models are from Atari video games. The model is used to train a game playing agent, using the actor-critic algorithm from RL. 
+
+![](https://subirvarma.github.io/GeneralCognitics/images/stat81.png) 
+
+Figure 5: Inputs and outputs in the UniSIM model
+
+Another model in this category is the [UniSIM model](https://arxiv.org/abs/2310.06114), also from 2024, that can be used to build world models for robotic control. Inputs and outputs in this model are shown in the above figure, the output consists of a sequence of image frames $y_n$ which is the model's prediction of the effect of the action. The input consists of the following:
+
+- The model's previous prediction $y_{n-1}$ which is also a set of image frames. These are concatenated channelwise with the initial noise sample at the start of the diffusion proces to serve as conditional inputs. This conditioning can be extended over several prior output and action values in an auto-regressive manner.
+- The actions can be in one of several formats: (1) $a_1$: A language description, (2) $a_0$: Low level robotic control actions, (3) $a_2$: Actions extracted from camera motions.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat90.png) 
 
@@ -314,29 +323,7 @@ Part (b) of the figure shows a technique called Adaptive Layer Norm (AdaLN) for 
 Figure 5: Attention Mechanisms in Space Time Transformers
 
 World models can be designed to generate more than one image frame in a single pass through the diffusion model, in other words each pass through the diffusion results in a video clip rather than a single frame. Such a design helps to ensure temporal integrity of the generated video clip, since each image frame directly influences the frame around it. This is in addition to the inter-frame dependency created due to the conditional distribution $(p_{n+1}|y_{\le n}, c)$ which also helps temporal coherence. Image transformer models that take the temporal dependency into account are called space-time transformers. There are variois ways in which the temporal dependency can be implemented, some examples are shown in the above figure. The colored rectangles are individual elements of the image latent vector that is fed into the transformer.
-The right hand figure shows the usual spatial attention with no temporal attention while the second figure shows only temporal attention with no spatial attention. One popular design is alternating blocks os spatial-only and temporal-only attention blocks in the transformer design.
-
-### Generating Action Sequences in World Models
-
-
-
-### Some Example of World Models
-
-![](https://subirvarma.github.io/GeneralCognitics/images/stat81a.png) 
-
-Figure 5: UniSIM Model 
-
-
-
-
-![](https://subirvarma.github.io/GeneralCognitics/images/stat82.png) 
-
-Figure 5: Diamond Model
-
-
-
-
-
+The right hand figure shows the usual spatial attention with no temporal attention while the second figure shows only temporal attention with no spatial attention. One popular design is alternating blocks of spatial-only and temporal-only attention blocks in the transformer design.
 
 ## Language Generation
 
@@ -364,32 +351,6 @@ The fundamental phenomenon that generates both images and thoughts is the neural
 
 
 
-
-## World Models: Incorporation of Actions into Video Generation Models
-
-## A Systems Architecture for the Brain
-
-The brain architecture described here is based on the work of the neuro-scientists Karl Friston and Andy Clark on predictive models for the brain. This is an EBM based model for the planning based perception-action framework shown in figure 4. Animals can broadly be classified into two categories: Type 1 are those whose actions are purely a function of what they are experiencing or perceiving at the moment, while type 2 are those who have the ability to plan ahead, so that their actions are governed by the task that they are trying accomplish. 
-
-![](https://subirvarma.github.io/GeneralCognitics/images/stat73.png) 
-
-Figure 5: A Model for the Brain for Type 1 animals: Short Term Action Generation 
-
-The model shown in figure 5 is for the brain of type 1 animals and this includes all animals except for mammals and birds which are of type 2. The functions of the blocks shown in the model are as follows:
-
-- World Model: This system takes in the current action $A_n$ and the perception state $X_n$, and generates a prediction for what the next state ${\hat X}_{n+1}$ should be.
-- Perception Generator: This system takes the prediction ${\hat X_{n+1}}$ and the signal $c_{n+1}$ coming from the senses, and generates the next perception $X_{n+1}$. The EBM implementation of this module was described in [Part 3](https://github.com/subirvarma/GeneralCognitics/blob/main/_posts/2026-02-13-statmech3.md).
-- Actor: This model uses the difference between the prediction ${\hat X_{n+1}}$ and the perception $X_{n+1}$ and uses it to generate the next action $A_{n+1}$. Its function to bring the state of the world to the point where the prediction agrees with reality.
-
-![](https://subirvarma.github.io/GeneralCognitics/images/stat74.png) 
-
-Figure 6: A Model for the Brain for Type 2 animals: Planning based Action Generation
-
-There is a video prediction model in our brains that is contantly predicting the next frame that we are going to see. The actual image is generated by combining this information with the information
-in sensory signals coming from the eyes (see figure 1).
-
-Hinton's research group at the Univ. of Toronto actually proposed a generative model calld the [Helmholtz Machine](https://www.cs.toronto.edu/~hinton/absps/helmholtz.pdf) in 1994, whose architecture is precisely that shown in figure 2. The original work was hamstrung by the fact that they limited themslves to using simple feedforward neural networks in their model. This was corrected in 2014 by [Welling and Kingma](https://arxiv.org/pdf/1906.02691), when they came up the Variational Auto Encoder or VAE architecture. This was basically the Helmholtz machine in which the distributions were now modeled using state of the art convolutional neural networks or CNNs, and this was able to do a much better job of generating realistic images (they also changed the training algorithm to stochastic gradient descent from Hinton's wake-sleep algorithm). 
-Hence in some sense the difference between the Active Inference model and the Preditive Processing model is the same as the difference between generation based on VAEs and that based on diffusions. 
 
 
 
