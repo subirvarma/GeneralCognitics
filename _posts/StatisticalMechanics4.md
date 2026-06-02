@@ -20,7 +20,35 @@ title: "Models in Neuroscience Using EBMs"
 
 ## Introduction
 
-Modern artificial neural networks (ANNs) such as transformers are purely mathematical functions, that transform inputs into outputs. Since there is no evidence that anything like it exists in biological brains, my objective in this series of articles is to point out that there are alternative AI models that are based on the princples of physics, more specifically thermodynamics, and these are more plausible models for the brain.
+In Part 1 of this series of articles I took a deep into the science of statistical menchanics, and how it could be used to analyze a system of interacting particles. We came upon the idea of using the energy (or free enegy) of the system as a way to analyze the dynamics of this system, since starting from an arbitrary state, the interactions cause the energy to decrease until it settles to an equilibrium state of low energy. This enables us to analyze the phase behavior of comlplex systems such as spin glasses.
+In Part 2 I applied these ideas to the analysis of a collection of nodes that could be used to function as an associative memory (the Hopfield Network) or could be used as a generative model (the Boltzmann Machine). Once again the idea of network dynamics governed by the system energy function played a central part. Another crtical idea introduced was the concept of hidden or latent states which enabled the Boltzmann Machine to model more complex energy functions for the visible portion of the state.
+In Part 3 I looked at modern diffusion models and how these could be regarded as modern versions of the Boltzmann Machine. Diffusion models are also based on the idea of a system energy function, but now it is a complex creature that is modeled by artificial neural networks with hundreds of millions of parameters. In the process we moved past the idea of modeling the details of the interactions between the system nodes. The system dynamics can be captured by changes in the energy function value, and when it settles into an equilibrium state then it correspondes to a generated image.
+However unlike the Boltzmann machine, diffusion models don't require the incorporation of hidden states, since the complexity of the energy function is captured by the use of an artificial neural network to model it.
+
+In this article I am going talk about the imlications of these ideas for models of biological brains, i.e., the field of neuroscience. Both brains and modern generative AI systems seem to be doing similar things, i.e., they are both able to create images (our vision system) and generate language. This had resulted in a search for micro circuits in the brain whose inter-connection architecture resembles an artificial neural network such as a transformer. However no such micro circuit has been found.
+We will examine this problem from the perspective of modern diffusion models, and show that a tractable model for the brain can be obtained at the level of energy functions created due to neurons interacting with each other, and once we have this energy function, then the generation of images or language by the brain can be understood as being driven the dynamics of this energy function settling into states of minimum energy.
+Within this framework artificial neural networks such as the transformer are not modeling the details of the micro circuits in the brain, but are instead modeling the brains energy function. The millions of parameters of this energy function can be estimated by examining the output of thye brain namely images and language. Hence trying to find a transformer look alike micro circuit in the brain is a futile exercise. 
+
+As we will see, the mapping between models in neuroscience and EBM based diffusion models becomes:
+
+| **Brain Concept**           |                 **Diffusion/EBM Model Analogue**  |
+| ------------------          |                   -----------------------------   |
+| Connectome interactions     |                Energy function created due to unkown interactions between nodes |
+| Visible Perception neurons  |                  Observable node state vector |
+| Perceptual dynamics         |                       Langevin sampling dynamics |
+| Priors/expectations         |                     Conditional system dynamics  |                          
+| Hidden belief states        |                     Optional emergent interpretation |
+
+This point of view can be seen analogous to the development of statistical mechanics in the 19th century, when physicists simplified the analysis of the system by replacing the details of the interaction between atoms by analysis of the energy function created as a result of these interactions, and the dynamics of the system could be understood to be a result of the energy trying to settle to an equilibrium state.
+
+There are two existing theories in neuroscience that I will talk about in this article, namely the predictive processing framework associated with the phiolospher Andy Clark and the active inference theory associated with the neuroscientist Karl Friston. Clark's exposition of the predictive processing framework is qualititive in nature, and is based on changing dynamical states of the perception neurons in the brain. We will show that this theory has a good correspondence to diffusion/EBM models, and the dynamics of the system can be captured by means of Langevin sampling.
+Friston's theory on the other hand comes with a detailed mathematical framework based on Bayesian statistics and the concept of hidden belief states in the brain (in addition to the perception states). 
+We will see that hidden states are not a necessity when modeling the brain using energy functions, as long as the energy function is complex enough to capture the system dynamics. Hence the hidden states can introduced as explanatory constructs rather than fundamental variables in the theory.
+
+Modern generative AI has been built on the transformer architecture, and these models exhibit a number of properties that are human like in their ability to understand and synthesize images and text data. 
+This raises the question of whether we have discovered something fundamental about the neural circuitry in biological brains that it shares in common with these AI architectures.
+Since no such evidence has been found, my objective in this articles is to point out that perhaps artificial neural networks are not modeling the micro-circuitry of the brain. 
+that there are alternative AI models that are based on the princples of physics, more specifically statistical mechanics and thermodynamics, and these are more plausible models for the brain.
 In [Part 3](https://github.com/subirvarma/GeneralCognitics/blob/main/_posts/2026-02-13-statmech3.md) I discussed generative AI models whose operation is driven by their energy function.
 I pointed out that traditional ANNs can serve as models for the energy function, and this in turn arises as a result of interactions between nodes, very much like in a spin glass model from physics. However, unlike for spin glasses, we ignored the interconnection topology, and by focusing on the energy function instead, the analysis of the system was simplified.
 
