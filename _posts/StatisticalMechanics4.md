@@ -20,14 +20,19 @@ title: "Models in Neuroscience Using EBMs"
 
 ## Introduction
 
-In Part 1 of this series of articles I took a deep into the science of statistical menchanics, and how it could be used to analyze a system of interacting particles. We came upon the idea of using the energy (or free enegy) of the system as a way to analyze the dynamics of this system, since starting from an arbitrary state, the interactions cause the energy to decrease until it settles to an equilibrium state of low energy. This enables us to analyze the phase behavior of comlplex systems such as spin glasses.
-In Part 2 I applied these ideas to the analysis of a collection of nodes that could be used to function as an associative memory (the Hopfield Network) or could be used as a generative model (the Boltzmann Machine). Once again the idea of network dynamics governed by the system energy function played a central part. Another crtical idea introduced was the concept of hidden or latent states which enabled the Boltzmann Machine to model more complex energy functions for the visible portion of the state.
-In Part 3 I looked at modern diffusion models and how these could be regarded as modern versions of the Boltzmann Machine. Diffusion models are also based on the idea of a system energy function, but now it is a complex creature that is modeled by artificial neural networks with hundreds of millions of parameters. In the process we moved past the idea of modeling the details of the interactions between the system nodes. The system dynamics can be captured by changes in the energy function value, and when it settles into an equilibrium state then it correspondes to a generated image.
-However unlike the Boltzmann machine, diffusion models don't require the incorporation of hidden states, since the complexity of the energy function is captured by the use of an artificial neural network to model it.
+In Part 1 of this series of articles I took a deep dive into the science of statistical menchanics, and how it could be used to analyze a system of interacting particles. We came upon the idea of using the energy (or free enegy) of the system as a way to analyze the dynamics of this system, since starting from an arbitrary state, the interactions cause the energy to decrease until it settles to an equilibrium state of low energy. This enables us to analyze the phase behavior of complex systems such as spin glasses.
+In Part 2 I applied these ideas to the analysis of a collection of nodes that could be used to function as an associative memory (the Hopfield Network) or could be used as a generative model (the Boltzmann Machine). Once again the idea of network dynamics governed by the system energy function played a central part. 
+However now the energy funcion was determined by the (training) data whose distribution the network was trying to mirror.
+Another crtical idea introduced was the concept of hidden or latent states which enabled the Boltzmann Machine to model more complex energy functions for the visible portion of the state.
 
-In this article I am going talk about the imlications of these ideas for models of biological brains, i.e., the field of neuroscience. Both brains and modern generative AI systems seem to be doing similar things, i.e., they are both able to create images (our vision system) and generate language. This had resulted in a search for micro circuits in the brain whose inter-connection architecture resembles an artificial neural network such as a transformer. However no such micro circuit has been found.
-We will examine this problem from the perspective of modern diffusion models, and show that a tractable model for the brain can be obtained at the level of energy functions created due to neurons interacting with each other, and once we have this energy function, then the generation of images or language by the brain can be understood as being driven the dynamics of this energy function settling into states of minimum energy.
-Within this framework artificial neural networks such as the transformer are not modeling the details of the micro circuits in the brain, but are instead modeling the brains energy function. The millions of parameters of this energy function can be estimated by examining the output of thye brain namely images and language. Hence trying to find a transformer look alike micro circuit in the brain is a futile exercise. 
+In Part 3 I looked at modern diffusion models and how these could be regarded as modern versions of the Boltzmann Machine. Diffusion models are also based on the idea of a system energy function, but now it is a complex creature that is modeled by artificial neural networks with hundreds of millions of parameters. In the process we moved past the idea of modeling the details of the interactions between the system nodes. The system dynamics can be captured by changes in the energy function value, and it settles into an equilibrium state that is distributed according to the training data.
+However unlike the Boltzmann machine, diffusion models don't require the incorporation of hidden states, since the complexity of the energy function is captured by the use of an artificial neural network.
+
+In this article we will investigate the implications of these ideas for models of biological brains, i.e., the field of neuroscience. Both brains and modern generative AI systems seem to be doing similar things, i.e., they are both able to create images (our vision system) and generate language. This has resulted in a search for micro circuits in the brain whose inter-connection architecture resembles  artificial neural networks such as a transformer. However no such micro circuit has been found.
+We will examine this problem from the perspective of modern EBMs based on diffusions, and show that a plausible top-down model for the brain can be created at the level of energy functions.
+In the brain these energy functions are due to neurons interacting with each other, however in our model for the brain, the energy function can be learnt from data generated by the brain in the form of images or langauge. The important point is that to make our model behave like the brain, all we need to do is to match their energy functions, without worrying about the details of the brain's micro-circuitry. By doing this the model will be able to generate images or language just like the biological brain, and perhaps this is the secret to the success of modern generative AI.
+
+Within this framework artificial neural networks such as the transformer are not modeling the details of the micro circuits in the brain, but are instead modeling the brains energy function. Hence trying to find a transformer look alike micro circuit in the brain is a futile exercise. 
 
 As we will see, the mapping between models in neuroscience and EBM based diffusion models becomes:
 
@@ -39,34 +44,22 @@ As we will see, the mapping between models in neuroscience and EBM based diffusi
 | Priors/expectations         |                     Conditional system dynamics  |                          
 | Hidden belief states        |                     Optional emergent interpretation |
 
-This point of view can be seen analogous to the development of statistical mechanics in the 19th century, when physicists simplified the analysis of the system by replacing the details of the interaction between atoms by analysis of the energy function created as a result of these interactions, and the dynamics of the system could be understood to be a result of the energy trying to settle to an equilibrium state.
+The idea of modeling the brain using energy functions leads to a simplification that is comparable to that achieved by
+replacing Newtonian mechanics with statistical mechanics when analyzing a system with a large number of interacting particles.
+In both cases the dynamics of how the system evolves with time can be obtained from the energy function without worrying about the details of the interactions themselves. In the cae of the brain the minimum energy states corresponds to perception (for vision) or thoughts (for langauge). 
+Hence generative AI systems are imitating the energy function of the brain, not its micro connection architecture.  But the fact that they work so well shows that a model at the level of energy functions is sufficient to create an artificial brain.
 
-There are two existing theories in neuroscience that I will talk about in this article, namely the predictive processing framework associated with the phiolospher Andy Clark and the active inference theory associated with the neuroscientist Karl Friston. Clark's exposition of the predictive processing framework is qualititive in nature, and is based on changing dynamical states of the perception neurons in the brain. We will show that this theory has a good correspondence to diffusion/EBM models, and the dynamics of the system can be captured by means of Langevin sampling.
-Friston's theory on the other hand comes with a detailed mathematical framework based on Bayesian statistics and the concept of hidden belief states in the brain (in addition to the perception states). 
-We will see that hidden states are not a necessity when modeling the brain using energy functions, as long as the energy function is complex enough to capture the system dynamics. Hence the hidden states can introduced as explanatory constructs rather than fundamental variables in the theory.
-
-Modern generative AI has been built on the transformer architecture, and these models exhibit a number of properties that are human like in their ability to understand and synthesize images and text data. 
-This raises the question of whether we have discovered something fundamental about the neural circuitry in biological brains that it shares in common with these AI architectures.
-Since no such evidence has been found, my objective in this articles is to point out that perhaps artificial neural networks are not modeling the micro-circuitry of the brain. 
-that there are alternative AI models that are based on the princples of physics, more specifically statistical mechanics and thermodynamics, and these are more plausible models for the brain.
-In [Part 3](https://github.com/subirvarma/GeneralCognitics/blob/main/_posts/2026-02-13-statmech3.md) I discussed generative AI models whose operation is driven by their energy function.
-I pointed out that traditional ANNs can serve as models for the energy function, and this in turn arises as a result of interactions between nodes, very much like in a spin glass model from physics. However, unlike for spin glasses, we ignored the interconnection topology, and by focusing on the energy function instead, the analysis of the system was simplified.
-
-Can such a system serve as a model for the brain?
-The topology of the inter-connections in brains, called the connectome, is too complex to comprehend even using the latest advances. However if the functioning of the brain is determined by its energy function, and furthermore if ANNs such as transformers can serve as good models for the brain's energy function, then it provides an alternative way by which the latest advances in ANNs can be used to build models for the brain.
-We started down this path in [Part 3](https://subirvarma.github.io/GeneralCognitics/2026/02/13/statmech3.html) by showing how EBM based models can be used to generate images by a process of energy minimization, and in this article we will use it to create a model for perception in brains.
-But brains do much more than perception, they enable us to plan hypothetical scenarios, as well as take actions in the real world. We will see that these capabilities are intimately tied to perception so that EBMs models can be used to do these operations as well.
+You may be wondering whether the problam of estimating the billions of parameters of the energy function is any simpler than the problem of figuring out the brain's connectome. This does look like a formidable problem, but one that has been solved in the past twenty years with the advances in deep learning systems. By using deep learning, we can estimate the energy function parameters by using the brain's output in the form of images and text.
 
 The theories of neuroscience that I am going to discuss are based on the fundamental idea that in order to survive, living creatures need to create a model for their environment within themselves. Consider the simplest kind of life, such as a uni-cellular creatures such as bacteria. Their insides are cordoned off from the environment by means of a cell wall (in neuroscience this is referred to as a Markov Blanket) . However in order to survive they need information about the outside world so that they can feed themselves for example, and this is obtained by means of sensors on their cell walls. The information from these sensors gets converted into a chemical model that the creature uses to move around and get closer to food sources, and this serves as a simple example of a environment model.
 
-Higher animals such as ourselves face the same problem since our brains are enclosed in the darkness of our skulls and needs to figure out what is happening in the external world. It does this by building a model for the world with the help of signals that are coming in through the sensory organs and when we open our eyes, it is the output of this model that we see in front of us, i.e., it is internally generated. The model is connected to the actual world out there, but our perceptions have been designed to help us survive in the world. Different creatures build their own models, and in general the sophistication increases with larger brain sizes. 
+Higher animals such as ourselves face the same problem since our brains are enclosed in the darkness of our skulls and needs to figure out what is happening in the external world. It does this by building a model for the world with the help of signals that are coming in through the sensory organs and when we open our eyes, it is the output of this model that we see in front of us, i.e., the image that we see is internally generated. The model is connected to the actual world out there, but is unique to each creature and been designed to help it survive in the world. Different creatures have their own models, and in general the sophistication increases with larger brain sizes. 
 Hence our brains are making a best guess of what the external world looks like by using the sparse signals coming in from the sense organs and use that information to generate the world that we see.
-combining that information with an internal model of the world.
 There are several theories of how this works, and we will consider a couple of them:
 
 - Predictive Processing: This is a qualitative framework of how the brain works and its main proposal is that the brain's model is predictive. Hence the brain is not just modeling the state of the world as it exists at any instant, but does prediction, i.e., it forecasts what the world might look like in the future. 
 How far into the future the prediction is done depends on the animal in question, humans excel at this and can do long term prediction, while most other animals can predict at most a few steps into the future.
-- Active Inference: This is closely related to the Predictive Processing framework and also proposes that are perceptions are internally generated by the brain in reponse to perceptive signals coming in from outside.
+- Active Inference: This is closely related to the Predictive Processing framework and also proposes that our perceptions are internally generated by the brain in reponse to signals coming in from outside.
 However unlike Predictive Processing, Active Inference models the internal states in the brain that are doing the generation, and it does so by using a
 mathematical framework based on Bayes Rule, and the principle of minimization of variational free energy. 
 
@@ -74,23 +67,17 @@ Prediction is a fundamental aspect of both these models and both Active Inferenc
 Broadly speaking, action is defined as the way in which living creatures are able to change their environment in order to facilitate goals.
 These theories propose that brains predict the perceptual consequence of an action internally, and then the muscles carry out the action to make the prediction come true.
 
-In this article I will connect the predictive processing framework with EBM models of the type that ecountered in [Part 3](https://subirvarma.github.io/GeneralCognitics/2026/02/13/statmech3.html).
-As explained there, these models trace their roots to the Boltzmann Machine, and its recent generalization to diffusion models. The EBM model proposes that the brain's model for the environment is captured 
-In the energy that is generated due to the interactions between neurons. Hovever it ignores that actual interaction strengths, and shows that processes such as perception can be explained by modeling the energy function instead and it ties brain functions such as perception to the principle of minimization of this energy.
+In this article I will connect the predictive processing framework withdiffusion based EBM models of the type that ecountered in [Part 3](https://subirvarma.github.io/GeneralCognitics/2026/02/13/statmech3.html).
+These models trace their roots to the Boltzmann Machine, and its recent generalization to diffusion models. The EBM model proposes that the brain's model for the environment is captured 
+by the energy that is generated due to the interactions between neurons. However it ignores that actual interaction themselves, and shows that processes such as perception can be explained by modeling the energy function instead and it ties brain functions such as perception to the principle of minimization of this energy.
 The Active Inference theory is also based on the minimization of energy, however the energy that it refers to is a probabilistic quantity that is called Variational Free Energy or VFE. The energy in EBM models on the other hand is created due to the interaction netween neurons and hence has a physical basis not just a probabilistic one.
+But brains do much more than perception, they enable us to plan hypothetical scenarios, as well as take actions in the real world. We will see that these capabilities are intimately tied to perception so that EBMs models can be used to do these operations as well.
 
-![](https://subirvarma.github.io/GeneralCognitics/images/stat60.png) 
-
-Figure 1: A Model for Perception 
-
-In [Part 3](https://github.com/subirvarma/GeneralCognitics/blob/main/_posts/2026-02-13-statmech3.md) I talked about how EBM models can be used to generate images. The focus of this article is on the prediction problem and how EBM models can be used to solve this problem. 
-We will see that prediction EBM models work through conditional generatiion of images, such that the prediction of the next image frame is conditioned on the current frame and past frames. This creates an auto-regressive structure which can be used in important tasks such as video or language generation. 
-
-The brain can clearly generate video, which is nothing more than a succession of images, for example when we are imagining some scenario in our minds. Hence it is an important addition to any model for the brain.
+*The brain can clearly generate video, which is nothing more than a succession of images, for example when we are imagining some scenario in our minds. Hence it is an important addition to any model for the brain.
 Using a model to generate video connects it to knowledge of how the world works, for example when something is dropped it will fall to the ground. Hence, in order to generate video the model should have a common sense notions of how things evolve in time which is commonly known as a world model. 
 But video generation is not done in a vaccuum but is closely tied to actions, since an action causes changes to the subsequent images.
 Hence the generation process in world models is conditioned not just on past images, but also on actions that are taken.
-Once we have a world model which is able to generate a succession of images conditioned on actions, this opens up the possibility of using it to do planning. For example if we want to accomplish a task then we can try out various scenarios mentally to figure out which sequence of actions would result in a successful outcome. 
+Once we have a world model which is able to generate a succession of images conditioned on actions, this opens up the possibility of using it to do planning. For example if we want to accomplish a task then we can try out various scenarios mentally to figure out which sequence of actions would result in a successful outcome.*
 
 
 ## The Predictive Processing Framework in Neuroscience
@@ -99,112 +86,56 @@ Once we have a world model which is able to generate a succession of images cond
 
 Figure 2: A model for sensory perception generation in the brain
 
-It has long been hypothesized that a fundamental operation of the brain is prediction (for example see Helmholtz or more recently [the palm pilot guy]). In the last couple of decades this theory has been further refined and a good description can be found in the book ["The Experience Machine: How Our Minds Predict and Shape Reality"](https://www.amazon.com/Experience-Machine-Minds-Predict-Reality/dp/B0B6489ZTB/ref=sr_1_1?adgrpid=183606417542&dib=eyJ2IjoiMSJ9.Fyi9d3PdzMTC53VWX7823DXjmQdLDMFgbQL5bpU2yx77AApTelrS2J7RZW7kevX5c3Iwj8BdMiBCvvIK1s-2aQ.kNY6Xa746RCCEx9tUbrInrqWtuuYDtwDu9jxlEmRXNw&dib_tag=se&hvadid=779664909770&hvdev=c&hvexpln=0&hvlocphy=9031954&hvnetw=g&hvocijid=7989718953734198151--&hvqmt=e&hvrand=7989718953734198151&hvtargid=kwd-2027556117302&hydadcr=22594_13821176_8133&keywords=the+experience+machine+andy+clark&mcid=bd89ac636e0c38d39698b254fe27c1b0&qid=1776120362&sr=8-1) by the neuroscientist and philosopher Andy Clark and our description in this section borrows from his work.
+It has long been hypothesized that a fundamental operation of the brain is prediction (for example see [Helmholtz](https://plato.stanford.edu/entries/hermann-helmholtz/#TheoPerc) or more recently [A Thousand Brains)](https://www.amazon.com/Thousand-Brains-New-Theory-Intelligence/dp/1541675819). In the last couple of decades this theory has been further refined and a good description can be found in the book ["The Experience Machine: How Our Minds Predict and Shape Reality"](https://www.amazon.com/Experience-Machine-Minds-Predict-Reality/dp/B0B6489ZTB/ref=sr_1_1?adgrpid=183606417542&dib=eyJ2IjoiMSJ9.Fyi9d3PdzMTC53VWX7823DXjmQdLDMFgbQL5bpU2yx77AApTelrS2J7RZW7kevX5c3Iwj8BdMiBCvvIK1s-2aQ.kNY6Xa746RCCEx9tUbrInrqWtuuYDtwDu9jxlEmRXNw&dib_tag=se&hvadid=779664909770&hvdev=c&hvexpln=0&hvlocphy=9031954&hvnetw=g&hvocijid=7989718953734198151--&hvqmt=e&hvrand=7989718953734198151&hvtargid=kwd-2027556117302&hydadcr=22594_13821176_8133&keywords=the+experience+machine+andy+clark&mcid=bd89ac636e0c38d39698b254fe27c1b0&qid=1776120362&sr=8-1) by the neuroscientist and philosopher Andy Clark and our description in this section follows his work.
 
-The above figure shows a model for visual perception in the brain. The fundamental hypothesis in this model is that our visual perception of the world is internally generated by our brains. Hence reality is not something that exists 'out there', but instead it is a result of a generative model that the brain runs. There is a good deal of experimental evidence that supports this hypothesis, including the fact that amount of signalling that happens 'top-down' from the interior of the brain towards the periphery where the visual cortex is located is much greater than the signalling that happens "bottom-up" from the sensory organs to the interior. This ability to predict the world is something that we gradually learn from birth onwards. Indeed a good indication that the presence of the sensory signals is not enough for visual perception is the case of people of are born congenitally blind, and then their sight is restored later in life. It has been found that they are not able to 'see' as soon as their eyes begin to function normally, but however if theyr are gradually trained to see, then they acquire this facility. This clearly shows the the bottom up signals from the sensory organs are not sufficient.
+The above figure shows a model for visual perception in the brain. The fundamental hypothesis in this model is that our visual perception of the world is internally generated by our brains. Hence reality is not something that exists 'out there', but instead it is a result of a generative model that the brain runs. There is a good deal of experimental evidence that supports this hypothesis, including the fact that amount of signalling that happens 'top-down' from the interior of the brain towards the periphery where the visual cortex is located is much greater than the signalling that happens "bottom-up" from the sensory organs to the interior. This ability to predict the world is something that we gradually learn from birth onwards. Indeed a good indication that the presence of the sensory signals is not enough for visual perception is the case of people of are born congenitally blind, and then their sight is restored later in life. It has been found that they are not able to 'see' as soon as their eyes begin to function normally, but however if they have to be gradually trained to see. This clearly shows the the bottom up signals from the sensory organs are not sufficient for vision.
 
 The output of $y_{n+1}$ of this generative model at time instant $n+1$  is a function
 of two variables:
 
-- The output $y_n$ of the model at the previous time instant $n$.
-- The error $\epsilon_n = y_n - c_n$ between the previous output $y_n$ and the sensory signals at time $n, c_n$.
+- The output $y_{\le n}$ of the model at the previous time instants.
+- The sensory signal $s_n$ at time $n$. The brain compares its prior prediction $y_n$ to $s_n$, and uses the error $\epsilon_n = y_n - c_n$ for its $y_{n+1}$ estimate.
 
-Hence the brain predicts what we are going to preceive at the next instant on the basis of what it had predicted at the previous instant and the error between its predictions and the signal from the sensory organs. 
+Hence the brain predicts what we are going to preceive at the next instant on the basis of what it had predicted at previous instants and the error between its predictions and the signal from the sensory organs. 
 If the environment is relatively unchanging then the predictions and the sensory data should be close to each other.
 If there is a change in the environment, for example if a new object appears in the field of view, then the brain's prediction and the sensory data are no longer in agreement. In this case the error signal generated by the difference between the two is used  to generate the next prediction, which takes the object's presence into account.
 Thus the raw sensory data is never directly experienced. What we do experience is modulated by our prior experiences and our expectations.
 The amount of weight that the brain gives to the prior prediction vs the error signal depend upon the individual, for example in certain dis-orders such as autism the the sensory signals are over-weighed.
 
-Hence perception is the process of combining the brain's internal model of world, as captured by the conditional distribution $p(y_{n+1}|y_n)$ of how the world evolves with information $c_n$ that is coming through our senses. But where does the internal model $p(y_{n+1}|y_n)$ come from? It is created by a continual process of lesrning that our brains are engaged, from the time we first open our eyes. 
-If we see something that is unexpected, then it means that the event was not part of our existing model. But once the initial observation happens, it is incorporated into the model, the probability of the prediction getting stronger if the event happens frequently. Hence the next time the event is encountered, it is no longer a big surprise.
+Hence perception is the process of combining the brain's internal model of world, as captured by the conditional distribution $p(y_{n+1}|y_{\le n})$ of how the world evolves with information $s_n$ that is coming through our senses. But where does the internal model $p(y_{n+1}|y_{\le n})$ come from? It is created by a continual process of lesrning that our brains are engaged in, from the time we first open our eyes. 
+If we see something that is unexpected, then it means that the event was not part of our existing world model. But once the initial observation happens, it is incorporated into the model and the probability of the prediction getting stronger if the event happens frequently. Hence the next time the event is encountered, it is no longer a big surprise.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat77.png) 
 
 Figure 2: A model for action generation in the brain
 
-The predictive processing frameowrk can be used to describe not just perception but also the generation of actions. In order to survive in the world, organisms are not just predicting the what the environment looks like, but they actively change the environment by taking actions. Hence there are two ways to reduce the error signal between the brain's prediction and the sensory data:
+The predictive processing framework can be used to describe not just perception but also the generation of actions. In order to survive in the world, organisms are not just predicting what the environment looks like, but they actively change the environment by taking actions. Hence there are two ways to reduce the error signal between the brain's prediction and the sensory data:
 
-- By Changing the prediction itself so that is conforms to the environment, as described above.
+- By changing the prediction itself so that it conforms to the environment, as described above.
 - Or, by changing the environment so that it conforms to the prediction, and this is done by taking actions.
 
-The latter mechanism is illustrated in the above figure. As shown, the new prediction $y_{n+1}$ is determined not just by the prior prediction $y_n$ and the error signal $\epsilon_n$, but also the effects of the action $a_n$ that we are planning to take. Hence $y_{n+1}$ takes into account the result of the action on the environment. But note that the action hasn't been taken yet, as a result the next sensory signal $c_{n+1}$ will not agree with the prediction $y_{n+1}$. In order to remedy this, the error $\epsilon_{n+1} = y_{n+1} - c_{n+1}$ is fed into the brain's motor cortex, which in turn generated the signals required for the muscles to move and bring about the action.
-You might ask why isn't the error signal fed back into the visual cortex to change the prediction as was described for visual perception. It is thought that the brain suppresses this error signal, as a result of which the only way to bring the perceptions in agreement with the sensory data is by changing the environment through action.
+The latter mechanism is illustrated in the above figure. As shown, the new prediction $y_{n+1}$ is determined not just by the prior prediction $y_{\le n}$ and the error signal $\epsilon_n$, but also the effects of the action $a_n$ that we are planning to take. Hence $y_{n+1}$ takes into account the result of the action on the environment. But note that the action hasn't been taken yet, as a result the next sensory signal $s_{n+1}$ will not agree with the prediction $y_{n+1}$. In order to remedy this, the error $\epsilon_{n+1} = y_{n+1} - s_{n+1}$ is fed into the brain's motor cortex, which in turn generates the signals required for the muscles to move and bring about the action.
+You might ask why isn't the error signal fed back into the visual cortex to change the prediction as is the case for visual perception. It is thought that the brain suppresses this error signal, as a result of which the only way to bring the perceptions in agreement with the sensory data is by changing the environment through action.
 It has been known for a long time that the motor and sensory cortices share a similar structure, and this theory explains why this is the case.
 
-So far we have hypothesized the presence of two important cortical areas, namely those associated with vision and action. In a later section we will introduce another important cortical area associated with the generation of language, and this will connect this model to Large Language Models or LLMs.
+So far we have hypothesized the presence of two important cortical areas, namely those associated with vision and action. But there is another important cortical area associated with the generation of thought, which connects this type of model to language generation. This will be elaborated upon when we discuss LLMs.
 
-Central to the description of the model is probability distributions of the form $p_{\theta}(y_{n+1}|y_{\le n}, a_n)$ which captures the evolution of the predictions depending upon the actions that the organism is taking. These is referred to as a world model, since it serves as the organism's internal model of how the world evolves as it takes various actions. In order to survive and reproduce, all organisms need a world model, and its sophistication varies depending upon the organism. This model generates moment by moment predictions and is constantly working, even when we are sleeping. This requires a lot of energy, and accounts for the fact that the brain accounts for a large portion of the energy expended by the body. 
-Later in this article we will describe an EBM model for perception that connects this probability distribution to the energy arising from the interconnection between neurons in the model, and then show how the model generates new predictions by a process of minimizing the interaction energy.
+Central to the description of the model is probability distributions of the form $p(y_{n+1}|y_{\le n}, a_n)$ which captures the evolution of the predictions depending upon the actions that the organism is taking. These is referred to as a world model, since it serves as the organism's internal model of how the world evolves as it takes various actions. Note that these predictions are happening in the absence of sensory data, i.e., the organism is imagining the future.
+
+In order to survive and reproduce, all organisms need a world model, and its sophistication varies depending upon the organism. Some organisms are able to predict only a few steps into the future, while others, such as humans, do predictions that can go into the very distant future. This model is used to do planning, by mentally trying out various courses of action that accomplish the task that the organism is engaged in. Hence the predictive model comes in handy not just for perception, but also for generating actions and planning for the future.
+The predictive model is constantly working, even when we are sleeping which requires a lot of energy, and explains why the brain accounts for a large portion of the energy expended by the body. 
 
 This theory explains another mysterious property of of perception: That the world that we see is incredibly rich, with an enormous amount of detail even though the information coming from senses is quite sparse in comparison. How can we reconcile the two facts? Predictive processing theory offers a solution by theorizing that the rich detail that see in front of us is purely internally generated using our world model, with the sensory signal serving as a low bandwidth indicator of changes that have to be incorporated into the predictions from one instance to another. Hence even a very sparse external signal is sufficient to generate our image of the world.
 
-This architecture allows our perceptions to be influenced by not just what is happening in the environment, but also our internal thoughts at the time of perception. Hence when we close our eyes we are still able to 'see' images, but now they are a function of our thoughts at that instant. This is not explicitly shown in the above figure, but we will return to this topic when we discuss planning in the next section. There are of course a number of other influences on our perception, for example a big infuence is emotions. Of course emotions are influenced by perception, but this in turn influences perception. For example if the environment is evolving as we expect, then this induces feelings of calm and happiness. On the other hand if there are un-expected changes happening, then the brain tries to bring its predictions in line with the new sensory data as soon as possible, but this can trigger feelings of anxiety. Hence the objective of a living organism is to be in environments whose evolution matches that of its internal world model, and if its put in an unknown environment then it can result in life threatening situations, like a fish out of water.
-At the same time organisms such as ourselves often seek out novel situations which are not familiar to our world model, and doing so seems to give us pleasure. Hence there is a balance between exploration and exploitation. New exploration helps expand the organisms world model and prpares it to handle situations that would be threatening otherwise. Too much novelty though results in mental exhaustion, while too little results in boredom, so there is a fine balance in between wherethe amount of surprise causes feelings of being "in the zone".
+This architecture allows our perceptions to be influenced by not just what is happening in the environment, but also our internal thoughts at the time of perception. Hence when we close our eyes we are still able to 'see' images, but now they are a function of our thoughts at that instant. There are of course a number of other influences on our perception, for example a big infuence is emotions. Of course emotions are influenced by perception, but this in turn influences perception. For example if the environment is evolving as we expect, then this induces feelings of calm and happiness. On the other hand if there are un-expected changes happening, then the brain tries to bring its predictions in line with the new sensory data as soon as possible, but this can trigger feelings of anxiety. Hence the objective of a living organism is to be in environments whose evolution matches that of its internal world model, and if its put in an unknown environment then it can result in life threatening situations, like a fish out of water.
+At the same time organisms such as ourselves often seek out novel situations which are not familiar to our world model, and doing so seems to give us pleasure. Hence there is a balance between exploration and exploitation. New exploration helps expand the organisms world model and prepares it to handle situations that would be threatening otherwise. Too much novelty though results in mental exhaustion, while too little results in boredom, so there is a fine balance in-between where the amount of surprise causes feelings of being "in the zone".
 
-Andy Clark points out in book that certain mental health issues can be explained as a consequence of this model. He points out that the predictive model not only governs what we 'see', but also is responsible for predicting inner experiences such as pain, pleasure or sadness. An important factor is the relative weighing that the brain provides to its own prediction vs the sensory signal, which is called "precision" in predictive processing theory. Brains are constantly estimating precision and changing the relative weights assigned to the two factors, as a function of how reliable it deems each to be. Problems in the brains precision estimation is now thought to underlie a wide range of psychiatric disorders.
+Andy Clark points out in his book that certain mental health issues can be explained as a consequence of this model. The predictive model not only governs what we 'see', but also is responsible for predicting inner experiences such as pain, pleasure or sadness. An important factor is the relative weighing that the brain provides to its own prediction vs the sensory signal, which is called "precision" in predictive processing theory. Brains are constantly estimating precision and changing the relative weights assigned to the two factors, as a function of how reliable it deems each to be. Problems in the brains precision estimation is now thought to underlie a wide range of psychiatric disorders.
 
 - Autism spectrum disorders: This can be caused due to over weighing of incoming sensory data. People with autism experience the world in its full sensory splendor, however they are not able to put the sensations within a proper context, i.e., they are not able to spot the forest for the trees. They tend to be overwhelmed by a lot of sensory data such as loud sounds or social situations and tend to avoid them.
-- Schizophrenia is though to be a result of the brain assigning too much weight to the error signal, i.e., the mismatch between its predictions and sensory daya. As result is mistakenly gives a lot of weight to data that may be purely co-incidental for example with no deep significance. This gradually changes the brains internal model and leads to false predictions and beliefs.
+- Schizophrenia is though to be a result of the brain assigning too much weight to the error signal, i.e., the mismatch between its predictions and sensory daya. As result it mistakenly gives a lot of weight to data that may be purely co-incidental for example with no deep significance. This gradually changes the brains internal model and leads to false predictions and beliefs.
 - Studies have shown that PTSD is extremely well correlated with unusually large increases in the precision weighing of the prediction error signal in response to unexpectedly negative outcomes.
 - Depression can be caused due to overweighted expectations and underweghted new information. This results in a semi-permanent lock-in of the existing world model, leading us to continue with depresive behaviors.
-
-## The Bayesian Brain: The Active Inference Theory for the Brain
-
-The name most closely associated with the [Active Interference theory](https://www.amazon.com/Active-Inference-Energy-Principle-Behavior/dp/0262553996)  for the brain is that of the prominent neuroscientist Karl Friston.
-This theory models the brain using the theory of Bayesian statistics, and is closely related to the Predictive Processing model. It is also proposes that our perceptions are internally generated, but it also explicitly seeks to model the internal states in the brain that generates this perception using Bayes Rule.
-
-![](https://subirvarma.github.io/GeneralCognitics/images/stat75.png) 
-
-Figure 2: Inferring a Model for the External World Using Bayesian Statistics
-
-Figure 2 shows the mathematical framework used in Active Inference theory. The vextor $x^*$ represents the external world to which the organism does not have direct access. The vector $y$ are the sensory neurons in the organism's cortex to which the organism does have access. Hence the external world has an unknown generative model that produce sensation $y$ in the organism. The organism creates an inference about the causes of sensation $y$, and this is summarized in the vector $x$ on the left and is probabilistically captured by the conditional distribution $p(x|y)$. Assuming an inference $x$, also called the hidden state or belief state, the organism internally generates a perception $y$ and this is captured by the conditional distribution $p(y|x)$. If the generated $y$ is different than the original sensation that came in through the senses, then the organism changes its inference $x$ so that the two match. Mathematically this by the accomplished by the minimization of a probabilistic quantity, called the variational free energy or VFE.
-
-Lets now get into the nuts and bolts of the Active Inference framework.
-This system can be analyzed using Bayesian statistics as follows: We will refer to the probability $p(x)$ as the prior (or existing) model for internal state of the brain. If the organism is subjected to sensations $y$, then this results in a change in its belief $x$ about what caused the sensation, and is given by the posterior probability $p(x|y)$. The objective of the Bayesian Rule is to compute $p(x|y)$, and this is given by 
-
-$$  p(x|y) = {p(y|x)p(x)\over{p(y)}}   $$
-
-The problem in applying this formula is that $p(y)$ in general is a highly complex distribution and not known in advance. Fortunately there exists a variational approach to solving this problem which works by reducing the problem to that of minimization, and works as follows: 
-
-Assume that we can approximate $p(x|y)$ by the distribution $Q_{\theta}(x|y)$, where $\theta$ are the parameters of a neural network.
-Define the Variational Free Energy (VFE) for the system as
-
-$$ VFE(Q,y) = E_{Q_{\theta}(x|y)} \log {Q_{\theta}(x|y)\over{p(x,y)}} $$
-
-This can be written as
-
-$$  VFE(Q,y) = E_{Q_{\theta}(x|y)}\log Q_{\theta}(x|y) - E_{Q_{\theta}(x|y)}\log p(x|y) - E_{Q_{\theta}(x|y)} \log p(y) $$
-
-$$      = E_{Q_{\theta}(x|y)}(\log Q_{\theta}(x|y) - \log p(x|y)) - \log p(y) $$
-
-$$      = D_{KL}(Q_{\theta}(x|y)||p(x|y)) - \log p(y) $$
-
-Here $D_{KL}(Q_{\theta}(x|y)||p(x|y))$ is the Kullback-Liebler divergence between the two distributions, and it functions as measure of how far apart they are.
-Note that $Q_{\theta}(x|y)$ is the organism's belief about the cause for sensation $y$, while $p(x|y)$ is the exact value. If the organism minimizes the VFE, then
-this is the same as minimizing the KL divergence and this results in the organism's belief $x$ being closer to the state of the external world that generated $y$. Hence by minimizing its VFE, the organism is inferring a best estimate for the state of the environment $x^{*}$, while knowing only the sensory data $y$. Once it has an estimate $x$, it generates a perception $y$ using the distribution $p(y|x)$.
-
-Karl Friston pointed out that there are two ways to minimize the VFE:
-
-- Assuming that the external environment is fixed, i.e., the sensory data $y$ is also fixed, then the VFE can be reduced by getting hold of a better internal model $Q_{\theta}(x|y)$ of the environment.
-- If the external environment is allowed to change, then the organism can reduce its VFE by changing the environment so that $-\log p(y)$ is reduced. The organism does so by taking actions and this is known as **Active Inference**.
-
-In the first case the organism changes its internal belief $x$ to reduce the VFE, while in the second case the organism changes its environment $x^{*}$ (which changes the perception signals $y$) to reduce the VFE. 
-
-![](https://subirvarma.github.io/GeneralCognitics/images/stat91.png) 
-
-Figure 2: Inferring a Model for the External World Using Bayesian Statistics
-
-The presence of the hidden state $x$ differentiates the Active Inference and Predictive Processing frameworks. 
-The Predictive Processing framework is able to get by without using hidden states, since it models the time evolution of the perception neurons directly by using the distribution $p_{\theta}(y_{n+1}|y_{\le n},s_n)$, without modeling the internal states that drive this evolution. 
-The modern approach to Active Inference on the other hand uses several models:
-
-- A model for hidden state inference: $q_{\phi}(x_n|o_{\le n})$
-- A model for the dynamics of the hidden state evolution with time and in reponse to actions: $p_{\theta}(x_{n+1}|x_n,a_{n+1})$
-- A model for decoding perceptions from the hidden state: $p_{\psi}(y_n|x_n)$
-
-The first and last of these models correspond to the models used in Friston's framework, while the dynamics model $p_{\theta}$ tells us how the internal belief state evolves with time and in response to actions that the organism is taking. The perception $y_n$ is a function of the latest state $x_n$, which is in contrast to the Predictive Processing model in which it was dependent on the history of $y_{\lt n}$ of prior perceptions. The Active Inference model captures the historical dependence by using the state function $x_n$.
-
-The original Active Inference framework is based on the minimization of a probabilistic quantity, namely the VFE. However we will see that it can be re-cast in the language of EBMs, so that its operation can be understood to be as a result of minimization of the interaction energy between neuons which makes the model closer to the operation of biological brains.
 
 ## Models for Planning
 
@@ -352,6 +283,64 @@ Figure 5: Attention Mechanisms in Space Time Transformers
 
 World models can be designed to generate more than one image frame in a single pass through the diffusion model, in other words each pass through the diffusion results in a video clip rather than a single frame. Such a design helps to ensure temporal integrity of the generated video clip, since each image frame directly influences the frame around it. This is in addition to the inter-frame dependency created due to the conditional distribution $(p_{n+1}|y_{\le n}, c)$ which also helps temporal coherence. Image transformer models that take the temporal dependency into account are called space-time transformers. There are various ways in which the temporal dependency can be implemented, some examples are shown in the above figure. The colored rectangles are individual elements of the image latent vector that is fed into the transformer.
 The right hand figure shows the usual spatial attention with no temporal attention while the second figure shows only temporal attention with no spatial attention. One popular design is alternating blocks of spatial-only and temporal-only attention blocks in the transformer design.
+
+## The Bayesian Brain: The Active Inference Theory for the Brain
+
+The name most closely associated with the [Active Interference theory](https://www.amazon.com/Active-Inference-Energy-Principle-Behavior/dp/0262553996)  for the brain is that of the prominent neuroscientist Karl Friston.
+This theory models the brain using the theory of Bayesian statistics, and is closely related to the Predictive Processing model. It is also proposes that our perceptions are internally generated, but it also explicitly seeks to model the internal states in the brain that generates this perception using Bayes Rule.
+
+![](https://subirvarma.github.io/GeneralCognitics/images/stat75.png) 
+
+Figure 2: Inferring a Model for the External World Using Bayesian Statistics
+
+Figure 2 shows the mathematical framework used in Active Inference theory. The vextor $x^*$ represents the external world to which the organism does not have direct access. The vector $y$ are the sensory neurons in the organism's cortex to which the organism does have access. Hence the external world has an unknown generative model that produce sensation $y$ in the organism. The organism creates an inference about the causes of sensation $y$, and this is summarized in the vector $x$ on the left and is probabilistically captured by the conditional distribution $p(x|y)$. Assuming an inference $x$, also called the hidden state or belief state, the organism internally generates a perception $y$ and this is captured by the conditional distribution $p(y|x)$. If the generated $y$ is different than the original sensation that came in through the senses, then the organism changes its inference $x$ so that the two match. Mathematically this by the accomplished by the minimization of a probabilistic quantity, called the variational free energy or VFE.
+
+Lets now get into the nuts and bolts of the Active Inference framework.
+This system can be analyzed using Bayesian statistics as follows: We will refer to the probability $p(x)$ as the prior (or existing) model for internal state of the brain. If the organism is subjected to sensations $y$, then this results in a change in its belief $x$ about what caused the sensation, and is given by the posterior probability $p(x|y)$. The objective of the Bayesian Rule is to compute $p(x|y)$, and this is given by 
+
+$$  p(x|y) = {p(y|x)p(x)\over{p(y)}}   $$
+
+The problem in applying this formula is that $p(y)$ in general is a highly complex distribution and not known in advance. Fortunately there exists a variational approach to solving this problem which works by reducing the problem to that of minimization, and works as follows: 
+
+Assume that we can approximate $p(x|y)$ by the distribution $Q_{\theta}(x|y)$, where $\theta$ are the parameters of a model.
+Define the Variational Free Energy (VFE) for the system as
+
+$$ VFE(Q,y) = E_{Q_{\theta}(x|y)} \log {Q_{\theta}(x|y)\over{p(x,y)}} $$
+
+This can be written as
+
+$$  VFE(Q,y) = E_{Q_{\theta}(x|y)}\log Q_{\theta}(x|y) - E_{Q_{\theta}(x|y)}\log p(x|y) - E_{Q_{\theta}(x|y)} \log p(y) $$
+
+$$      = E_{Q_{\theta}(x|y)}(\log Q_{\theta}(x|y) - \log p(x|y)) - \log p(y) $$
+
+$$      = D_{KL}(Q_{\theta}(x|y)||p(x|y)) - \log p(y) $$
+
+Here $D_{KL}(Q_{\theta}(x|y)||p(x|y))$ is the Kullback-Liebler divergence between the two distributions, and it functions as measure of how far apart they are.
+Note that $Q_{\theta}(x|y)$ is the organism's belief about the cause for sensation $y$, while $p(x|y)$ is the exact value. If the organism minimizes the VFE, then
+this is the same as minimizing the KL divergence and this results in the organism's belief $x$ being closer to the state of the external world that generated $y$. Hence by minimizing its VFE, the organism is inferring a best estimate for the state of the environment $x^{*}$, while knowing only the sensory data $y$. Once it has an estimate $x$, it generates a perception $y$ using the distribution $p(y|x)$.
+
+Karl Friston pointed out that there are two ways to minimize the VFE:
+
+- Assuming that the external environment is fixed, i.e., the sensory data $y$ is also fixed, then the VFE can be reduced by getting hold of a better internal model $Q_{\theta}(x|y)$ of the environment.
+- If the external environment is allowed to change, then the organism can reduce its VFE by changing the environment so that $-\log p(y)$ is reduced. The organism does so by taking actions and this is known as **Active Inference**.
+
+In the first case the organism changes its internal belief $x$ to reduce the VFE, while in the second case the organism changes its environment $x^{*}$ (which changes the perception signals $y$) to reduce the VFE. 
+
+![](https://subirvarma.github.io/GeneralCognitics/images/stat91.png) 
+
+Figure 2: Inferring a Model for the External World Using Bayesian Statistics
+
+The presence of the hidden state $x$ differentiates the Active Inference and Predictive Processing frameworks. 
+The Predictive Processing framework is able to get by without using hidden states, since it models the time evolution of the perception neurons directly by using the distribution $p_{\theta}(y_{n+1}|y_{\le n},s_n)$, without modeling the internal states that drive this evolution. 
+The modern approach to Active Inference on the other hand uses several models:
+
+- A model for hidden state inference: $q_{\phi}(x_n|o_{\le n})$
+- A model for the dynamics of the hidden state evolution with time and in reponse to actions: $p_{\theta}(x_{n+1}|x_n,a_{n+1})$
+- A model for decoding perceptions from the hidden state: $p_{\psi}(y_n|x_n)$
+
+The first and last of these models correspond to the models used in Friston's framework, while the dynamics model $p_{\theta}$ tells us how the internal belief state evolves with time and in response to actions that the organism is taking. The perception $y_n$ is a function of the latest state $x_n$, which is in contrast to the Predictive Processing model in which it was dependent on the history of $y_{\lt n}$ of prior perceptions. The Active Inference model captures the historical dependence by using the state $x_n$ which captures the historical dependence.
+
+The original Active Inference framework is based on the minimization of a probabilistic quantity, namely the VFE. However we will see that it can be re-cast in the language of EBMs, so that its operation can be understood to be as a result of minimization of the interaction energy between neuons which makes the model closer to the operation of biological brains.
 
 ## Language Generation
 
