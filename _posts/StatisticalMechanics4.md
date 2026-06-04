@@ -412,11 +412,24 @@ The Boltzmann machine has both visible and hidden nodes as shown in the above fi
 
 Figure 7: The Helmholtz Machine
 
-In order to overcome the limitations of the Boltzmann machine, [Hinton, Dayan and Neal](https://www.cs.toronto.edu/~fritz/absps/helmholtz.pdf) came up with the Helmholtz machine in 1994 and this launched the current era of auto-encoders.
+In order to overcome the limitations of the Boltzmann machine, [Hinton, Dayan and Neal](https://www.cs.toronto.edu/~fritz/absps/helmholtz.pdf) came up with the Helmholtz machine in 1994 and this launched the current era of auto-encoders. Justb like the Boltzmann machine it has visible or feature nodes as well as hidden nodes that can represent the latent representation. However unlike the Boltzmann amchine, all inter-node connections are uni-directional. Once the network has been trained, it generates latent representations by sending a signal upwards (in the above figure), which passes through more than one layer of nodes, two are shown in the picture. The final layer contains the latent representation. In order to generate new data, we start with a a latent represnetation, and then the signal downwards until it gets to the visible nodes. Since this design does not involve sampling, it can be made much more efficient than the Boltzmann machine. In order to train this system, they replaced maximum likelihood criteria with one based on minimizing the VFE, the math is exactly the same as was described for Friston's Active Inference model.
+The called the algorithm they came up with to train the system the Wake-Sleep algorithm.
+  
+**The Variational Auto Encoder (VAE)**
 
-- Recall that in principle a Boltzmann machine could be 
-- The Variational Auto Encoder
-- Predictive Coding
+![](https://subirvarma.github.io/GeneralCognitics/images/stat98.png) 
+
+Figure 7: The Variation Auto-Encoder (VAE)
+
+This brings us to the current generation of auto-encoders, and the VAE, which is still state of the art in this area. The VAE uses the same mathematical framework of minimizing the VFE as the Helmholtz machine, however it uses a clever way to use backprop to train the model. This allowed the model to scale up and handle inputs consisting of hundreds of thousands of nodes, which has enabled to serve as a generator for photo-realistic images. The Dreamer V4 model that I mentioned earlier uses a pre-trained VAE to serve as its auto-encoder. The VAE is certainly attractive for generating latent representations for images in machine learning models, however the use of backprop in its training makes it a less likely candidate for how the brain operates.
+
+**Predictive Coding**
+
+![](https://subirvarma.github.io/GeneralCognitics/images/stat99.png) 
+
+Figure 7: The Predictive Coding Framework
+
+This was proposed by [Rao and Ballard](https://www.nature.com/articles/nn0199_79) as a way to generate latent represents in our visual cortex, hence the authors had biological plausibility as their main critera.
 
 ## Language Generation
 
