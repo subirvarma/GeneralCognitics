@@ -423,13 +423,57 @@ Figure 7: The Variation Auto-Encoder (VAE)
 
 This brings us to the current generation of auto-encoders, and the VAE, which is still state of the art in this area. The VAE uses the same mathematical framework of minimizing the VFE as the Helmholtz machine, however it uses a clever way to use backprop to train the model. This allowed the model to scale up and handle inputs consisting of hundreds of thousands of nodes, which has enabled to serve as a generator for photo-realistic images. The Dreamer V4 model that I mentioned earlier uses a pre-trained VAE to serve as its auto-encoder. The VAE is certainly attractive for generating latent representations for images in machine learning models, however the use of backprop in its training makes it a less likely candidate for how the brain operates.
 
-**Predictive Coding**
+### Predictive Coding
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat99.png) 
 
 Figure 7: The Predictive Coding Framework
 
 This was proposed by [Rao and Ballard](https://www.nature.com/articles/nn0199_79) as a way to generate latent represents in our visual cortex, hence the authors had biological plausibility as their main critera.
+Suppose the visual system receives an image I. The goal is not merely to encode pixels. The goal is to infer the hidden causes of the image:
+Rao and Ballard proposed that the cortex maintains a hierarchical generative model:
+
+$$  r_2  \rightarrow r_1 \rightarrow I $$
+
+I is the sensory input, such as retinal or LGN activity, $r_1$ is a representation at a lower cortical level, such as V1-like features, $r_2$ is a representation at a higher cortical level, such as more abstract visual causes and higher levels try to predict the activity of lower levels. Hence the model has a top-down generative pathway and a bottom-up error pathway.
+
+At each level, the representation at a higher level predicts the representation below it, so that
+
+$$ {\hat r}_{l-1} = f(r_l) $$
+
+Here $r_l$ is the latent representatopn at level $l$, $f_l$ is a learnt generative mapping and {hat $r_{l-1}$ is the oredicted activity at the lower level. The actual lower-level activity is $r_{l-1}$, so the prediction error is 
+
+$$ e_{l-1} = r_{l-1} - f_l(r_l)  $$
+
+and the system tries to minimize this error. At the sensory level 
+
+$$ e_0 = I - f_1(r_1) $$
+
+Each of the representations $r_l$ changes so as to reduce the total error. The update for $r_$ depends upon the bottom-up error error from level $l-1$ as well as the top-down error in its own value (as predicted by the level above it. The whole hierarchy settles into a state where predictions and observations agree as much as possible.
+
+The Predictive Coding algorithm can be derived from Bayes as follows: Suppose sensory input $x$ is caused by hidden variables $z$, the Baye's rule gives
+
+$$ p(z|x) = {p(x|z)p(z)\over{p(x)}} $$
+
+For a given value of $x$ the denomenator is a constant so that
+
+$$ \log p(z|x) = \log p(x|z) + \log p(z) + constant $$
+
+The best preiction $z^*$ is given by
+
+$$  z^* = \argmax_z}[\log p(x|z) + \log p(z)]  $$
+
+Assume
+
+$$ x= 
+
+This is known as maximum a posteriori or MAP inference. It differs from the inference made in the VAE model in the following respects:
+
+- The VAE model does inference using a single pass of a feed-forward network, whose parameters have been optimized using a training process. The predictive coding model does inference in a iterative fashion, where the value of the latents are adjusted over multiple steps until the final prediction is a good match to the observation. This is very much like how an EBM operates since in this case too the nodes in an EBM adjust their values until the energy function is minimized. The predictive coding system uses an error function instead of an energy function, but the idea of multi-step iteration is the same.
+- Unlike the VAE model, all updates in the predictive coding model are local in nature, hence more biologically plausible.
+- The VAE model gives a distribution for the latent using the ELBO algorithm, while predictive coding gives a point estimate for the latent. In practice even for VAE, we usually assume that the distribution is normally distributed, so that the estimate boils down to obtaining the mean and variance.
+
+
 
 ## Language Generation
 
