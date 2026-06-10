@@ -465,13 +465,71 @@ $$  z^* = \argmax_z}[\log p(x|z) + \log p(z)]  $$
 
 Assume
 
-$$ x= 
+$$ x = f(z) + \epsilon\ \ \ where\ \ \ \epsilon ~ N(0,\Sigma_x) $$
+
+Then
+
+$$  p(x|z) = N(x; f(z),\Sigma_x) $$
+
+so that
+
+$$ -\log p(x|z) = {1\over 2}(x - f(z))^T \Sigma_x^{-1} (x - f(z)) $$
+
+If we define rhe prediction error $\epsilon_x = x - f(z)$, then the negative log posterior is given by
+
+$$ -\log p(x|z) = {1\over 2}\epsilon_x^T\sigmna_x^{-1}\epslon_x $$
+
+So minimizing negative log likelihood is literally minimizing precision-weighted prediction error.
+
+Here, $\Sigma_x^{-1}$ is the precision matrix. In Bayesian predictive coding, errors are not all treated equally; errors with higher expected reliability get more weight.
+Assume that the latent variable $z$ also has a Gaussian prior $z~N(\mu_z,\Sigma_z)$, then
+
+$$ -\log p(z) = {1\over 2}(z - \mu_z)^T \Sigma_z^{-1} (z - \mu_z) $$
+
+Defining $\epsilon_z = z - \mu_z$, it follows that the negative log posterior $E(z)$ is given by
+
+$$  E(z) = {1\over 2}\epsilon_x^T\sigmna_x^{-1}\epslon_x  + {1\over 2}\epsilin_z^T \Sigma_z^{-1} \epsilon_z  $$
+
+The system can infer $z$ by minimizing $E(z)$ by using gradient descent
+
+$$  z  \leftarrow z - \eta {\partial E\over{\partial z}} $$
+
+Using the above expression for $E(z)$, it follows that
+
+$$ {\partial E\over{\partial z}} = {\partial f\over{\partial z}}^T \Pi_x\epsilon_x - \Pi_z\epsilon_z $$
+
+This shows that the latent representation $z$ is adjusted by two competing forces, i.e., the bottom-up ensory error - the top-down prior error. The first term pulls $z$ to better explain the sensory input, while the second term pulls $z$ towards its prior expectetion.
+
+This analysis can be extended to multiple representation levels $z_3\rightarrow z_2\rightarrow z_1\rightarrow x$ such that each level predicts the level below
+
+$$  z_{l-1} = f_l(z_l) + \epsilon_l\ \ \ with\ \ \ \epsilon_l ~ N(0,\Sigma_l) $$
+
+and the system tries to minimize the full negative log posterior 
+
+$$ E = \Sigma_l {1\over 2} \epsilon_{l-1}^T\Pi_{l-1}\epsilon_{l-1}\ \ \ where\ \ \ \Pi_l = \Sigma_l^{-1} $$
+
+Each latent state is updated to minimize this total 'energy' using gradient descent. Since $z_l$ appears in two places, it update has two components:
+
+1. It is predicted by the level above
+
+$$  \epsilon_l = z_l - f_{l+1}(z_{l+1} $$
+
+2. It predicts the level below
+
+$$  \epsilon_{l-1} = z_{l-1} - f_l(z_l $$
+
+so that 
+
+$$ {\partial E\over{\partial z}} = {\partial f_l\over{\partial z_l}^T \Pi_{l-1}\epsilon_{l-1} - \Pi_l\epsilon_l $$
+
+and this is the canonical predictive coding update. In words: A representation at one level changes to reduce the error in the level below, while also staying consistent with the prediction coming from the level above.
 
 This is known as maximum a posteriori or MAP inference. It differs from the inference made in the VAE model in the following respects:
 
 - The VAE model does inference using a single pass of a feed-forward network, whose parameters have been optimized using a training process. The predictive coding model does inference in a iterative fashion, where the value of the latents are adjusted over multiple steps until the final prediction is a good match to the observation. This is very much like how an EBM operates since in this case too the nodes in an EBM adjust their values until the energy function is minimized. The predictive coding system uses an error function instead of an energy function, but the idea of multi-step iteration is the same.
+- In predictive coding, the network is recurrent. Activity does not simply pass once from input to output. Instead, units keep updating each other until the system reaches a relatively stable state.
 - Unlike the VAE model, all updates in the predictive coding model are local in nature, hence more biologically plausible.
-- The VAE model gives a distribution for the latent using the ELBO algorithm, while predictive coding gives a point estimate for the latent. In practice even for VAE, we usually assume that the distribution is normally distributed, so that the estimate boils down to obtaining the mean and variance.
+- The VAE model gives a distribution for the latent by minimizing the VFE, while predictive coding gives a point estimate for the latent. In practice even for VAE, we usually assume that the distribution is normally distributed, so that the estimate boils down to obtaining the mean and variance.
 
 
 
