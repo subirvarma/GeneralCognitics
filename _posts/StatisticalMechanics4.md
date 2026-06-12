@@ -441,7 +441,7 @@ At each level, the representation at a higher level predicts the representation 
 
 $$ {\hat r}_{l-1} = f(r_l) $$
 
-Here $r_l$ is the latent representatopn at level $l$, $f_l$ is a learnt generative mapping and {hat $r_{l-1}$ is the oredicted activity at the lower level. The actual lower-level activity is $r_{l-1}$, so the prediction error is 
+Here $r_l$ is the latent representatopn at level $l$, $f_l$ is a learnt generative mapping and ${\hat r_{l-1}}$ is the predicted activity at the lower level. The actual lower-level activity is $r_{l-1}$, so the prediction error is 
 
 $$ e_{l-1} = r_{l-1} - f_l(r_l)  $$
 
@@ -449,7 +449,7 @@ and the system tries to minimize this error. At the sensory level
 
 $$ e_0 = I - f_1(r_1) $$
 
-Each of the representations $r_l$ changes so as to reduce the total error. The update for $r_$ depends upon the bottom-up error error from level $l-1$ as well as the top-down error in its own value (as predicted by the level above it. The whole hierarchy settles into a state where predictions and observations agree as much as possible.
+Each of the representations $r_l$ changes so as to reduce the total error. The update for $r_l$ depends upon the bottom-up error error from level $l-1$ as well as the top-down error in its own value (as predicted by the level above it. The whole hierarchy settles into a state where predictions and observations agree as much as possible.
 
 The Predictive Coding algorithm can be derived from Bayes as follows: Suppose sensory input $x$ is caused by hidden variables $z$, the Baye's rule gives
 
@@ -461,7 +461,7 @@ $$ \log p(z|x) = \log p(x|z) + \log p(z) + constant $$
 
 The best preiction $z^*$ is given by
 
-$$  z^* = \argmax_z}[\log p(x|z) + \log p(z)]  $$
+$$  z^* = argmax_z[\log p(x|z) + \log p(z)]  $$
 
 Assume
 
@@ -477,18 +477,18 @@ $$ -\log p(x|z) = {1\over 2}(x - f(z))^T \Sigma_x^{-1} (x - f(z)) $$
 
 If we define rhe prediction error $\epsilon_x = x - f(z)$, then the negative log posterior is given by
 
-$$ -\log p(x|z) = {1\over 2}\epsilon_x^T\sigmna_x^{-1}\epslon_x $$
+$$ -\log p(x|z) = {1\over 2}\epsilon_x^T\sigma_x^{-1}\epsilon_x $$
 
 So minimizing negative log likelihood is literally minimizing precision-weighted prediction error.
 
 Here, $\Sigma_x^{-1}$ is the precision matrix. In Bayesian predictive coding, errors are not all treated equally; errors with higher expected reliability get more weight.
-Assume that the latent variable $z$ also has a Gaussian prior $z~N(\mu_z,\Sigma_z)$, then
+Assume that the latent variable $z$ also has a Gaussian prior $z$ distributed as $N(\mu_z,\Sigma_z)$, then
 
 $$ -\log p(z) = {1\over 2}(z - \mu_z)^T \Sigma_z^{-1} (z - \mu_z) $$
 
 Defining $\epsilon_z = z - \mu_z$, it follows that the negative log posterior $E(z)$ is given by
 
-$$  E(z) = {1\over 2}\epsilon_x^T\sigmna_x^{-1}\epslon_x  + {1\over 2}\epsilin_z^T \Sigma_z^{-1} \epsilon_z  $$
+$$  E(z) = {1\over 2}\epsilon_x^T\sigma_x^{-1}\epsilon_x  + {1\over 2}\epsilon_z^T \Sigma_z^{-1} \epsilon_z  $$
 
 The system can infer $z$ by minimizing $E(z)$ by using gradient descent
 
@@ -520,9 +520,11 @@ $$  \epsilon_{l-1} = z_{l-1} - f_l(z_l $$
 
 so that 
 
-$$ {\partial E\over{\partial z}} = {\partial f_l\over{\partial z_l}^T \Pi_{l-1}\epsilon_{l-1} - \Pi_l\epsilon_l $$
+$$ {\partial E\over{\partial z}} = {\partial f_l\over{\partial z_l}}^T \Pi_{l-1}\epsilon_{l-1} - \Pi_l\epsilon_l $$
 
 and this is the canonical predictive coding update. In words: A representation at one level changes to reduce the error in the level below, while also staying consistent with the prediction coming from the level above.
+
+**Estimation of network parameters**
 
 This is known as maximum a posteriori or MAP inference. It differs from the inference made in the VAE model in the following respects:
 
@@ -530,6 +532,37 @@ This is known as maximum a posteriori or MAP inference. It differs from the infe
 - In predictive coding, the network is recurrent. Activity does not simply pass once from input to output. Instead, units keep updating each other until the system reaches a relatively stable state.
 - Unlike the VAE model, all updates in the predictive coding model are local in nature, hence more biologically plausible.
 - The VAE model gives a distribution for the latent by minimizing the VFE, while predictive coding gives a point estimate for the latent. In practice even for VAE, we usually assume that the distribution is normally distributed, so that the estimate boils down to obtaining the mean and variance.
+
+### Models with Inference, Prediction and Generation
+
+The Predictive Coding framework takes care of the inference and generation processes,and it does it in a way that is biologically plausible, since these operations can be implemented using only local connections between neurons. However, it does not incorporate prediction, which we saw earlier is an essential ingredient in building a model for the brain. There have been some attempts to add prediction to the model, and a couple of these are the [Temporal Predictive Coding](https://pmc.ncbi.nlm.nih.gov/articles/PMC11008833/pdf/pcbi.1011183.pdf) framework and the work by [Jiang and Rao](https://arxiv.org/pdf/2112.10048). 
+
+![](https://subirvarma.github.io/GeneralCognitics/images/stat100.png) 
+
+Figure 7: The Temporal Predictive Coding Framework
+
+The Temporal Predictive Coding framework is shown in the above figure. Recall that in the Predictive Processing model, the latent state of the system was determined solely by how well the generated image matched the sensory signal. Temporal Predictive Coding on the other hand the latent state is determined jointly by the state prediction error and the image generation error.
+As in the original Predictive Coding, the model uses simple linear models for both the prediction an generation operations, given by:
+
+$$  x_k = Af(x_{k-1}) + Bu_k +\omega_x  $$
+
+$$  y_k = Cf(x_k) + \omega_y $$
+
+In the prediction model $x_k$ is the system state at the $k^{th}$ step, $u_k$ is an additional input that influences the next state, such as any action taken and $\omega_x$ is noise distributed accourding $N(0,\Sigma_x)$. Generation of image $y_k$ is done using the second equation with the noise $\omega_y$ distributed as per $N(0,\Sigma_y)$. The system objective is to obtain a good estimate for the state $x_k$, and it does so by minimizing the error function 
+
+$$ F_k = {1\over 2}(s_k - Cf(x_k))^T \Sigma_y^{-1} (s_k - Cf(x_k)) + {1\over 2}(x_k - Af({\hat x_{k-1}}) - B u_k)\Sigma_x^{-1}(x_k - Af({\hat x_{k-1}}) - B u_k) $$
+
+The first term minimizes the generation error given the sensory signal $s_k$, while the second term minimizes the prediction error. 
+Assume that the best estimate at the $k^{th}$ step is given ${\hat x_k}$, then the predicted value for the next step is given by ${\hat x_{k+1}} = Af({\hat x_k}) + Bu_k$ and this serves as the initial value for prediction. However once the generation error is taken into account, this value is no longer the minimum, and the algorithm iterates a few times using the gradient descent equation
+
+$$  {\hat x_{k+1}} \leftarrow {\hat x_k} - \eta{\partial F_k\over{\partial x_k}} $$
+
+The authors showed that that the gradient descent equation can be implemented usinly local connections in a neural network. They also assumed that new sensory data $s_k$ arrives at a lower rate than the time required for the state optmization to settle down to a minimum. The parameters of the matrices A, B and C can also be estmated using gradient descent. Assuming that these matrices are implemented using synaptic strengths which change slowly, while the state variables are mapped to neural firing rates, which change quickly.
+
+![](https://subirvarma.github.io/GeneralCognitics/images/stat102.png) 
+
+Figure 7: The Temporal + Predictive Coding Framework
+
 
 
 
