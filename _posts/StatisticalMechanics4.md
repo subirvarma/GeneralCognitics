@@ -533,15 +533,15 @@ This is known as maximum a posteriori or MAP inference. It differs from the infe
 - Unlike the VAE model, all updates in the predictive coding model are local in nature, hence more biologically plausible.
 - The VAE model gives a distribution for the latent by minimizing the VFE, while predictive coding gives a point estimate for the latent. In practice even for VAE, we usually assume that the distribution is normally distributed, so that the estimate boils down to obtaining the mean and variance.
 
-### Models with Inference, Prediction and Generation
+### Models with Inference, Prediction and Generation: Temporal Predictive Coding
 
-The Predictive Coding framework takes care of the inference and generation processes,and it does it in a way that is biologically plausible, since these operations can be implemented using only local connections between neurons. However, it does not incorporate prediction, which we saw earlier is an essential ingredient in building a model for the brain. There have been some attempts to add prediction to the model, and a couple of these are the [Temporal Predictive Coding](https://pmc.ncbi.nlm.nih.gov/articles/PMC11008833/pdf/pcbi.1011183.pdf) framework and the work by [Jiang and Rao](https://arxiv.org/pdf/2112.10048). 
+The Predictive Coding framework takes care of the inference and generation processes,and it does it in a way that is biologically plausible, since these operations can be implemented using only local connections between neurons. However, it does not incorporate temporal prediction, which we saw earlier is an essential ingredient in building a model for the brain. There have been some attempts to add temporal prediction to the model, and a couple of these are the [Temporal Predictive Coding](https://pmc.ncbi.nlm.nih.gov/articles/PMC11008833/pdf/pcbi.1011183.pdf) framework and the work by [Jiang and Rao](https://arxiv.org/pdf/2112.10048). 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat100.png) 
 
 Figure 7: The Temporal Predictive Coding Framework
 
-The Temporal Predictive Coding framework is shown in the above figure. Recall that in the Predictive Processing model, the latent state of the system was determined solely by how well the generated image matched the sensory signal. Temporal Predictive Coding on the other hand the latent state is determined jointly by the state prediction error and the image generation error.
+The Temporal Predictive Coding framework is shown in the above figure. Recall that in the Predictive Processing model, the latent state of the system was determined solely by how well the generated image matched the sensory signal. In Temporal Predictive Coding on the other hand, the latent state is determined jointly by the temporal state prediction error and the image generation error.
 As in the original Predictive Coding, the model uses simple linear models for both the prediction an generation operations, given by:
 
 $$  x_k = Af(x_{k-1}) + Bu_k +\omega_x  $$
@@ -552,17 +552,56 @@ In the prediction model $x_k$ is the system state at the $k^{th}$ step, $u_k$ is
 
 $$ F_k = {1\over 2}(s_k - Cf(x_k))^T \Sigma_y^{-1} (s_k - Cf(x_k)) + {1\over 2}(x_k - Af({\hat x_{k-1}}) - B u_k)\Sigma_x^{-1}(x_k - Af({\hat x_{k-1}}) - B u_k) $$
 
-The first term minimizes the generation error given the sensory signal $s_k$, while the second term minimizes the prediction error. 
-Assume that the best estimate at the $k^{th}$ step is given ${\hat x_k}$, then the predicted value for the next step is given by ${\hat x_{k+1}} = Af({\hat x_k}) + Bu_k$ and this serves as the initial value for prediction. However once the generation error is taken into account, this value is no longer the minimum, and the algorithm iterates a few times using the gradient descent equation
+The first term minimizes the generation error given the sensory signal $s_k$, while the second term minimizes the temporal prediction error. 
+Assume that the best estimate at the $k^{th}$ step is given by ${\hat x_k}$, then the predicted value for the next step is given by ${\hat x_{k+1}} = Af({\hat x_k}) + Bu_{k+1}$ and this serves as the initial value for the prediction. However once the generation error is taken into account, this value is no longer the minimum, and the algorithm iterates a few times using the gradient descent equation
 
 $$  {\hat x_{k+1}} \leftarrow {\hat x_k} - \eta{\partial F_k\over{\partial x_k}} $$
 
 The authors showed that that the gradient descent equation can be implemented using only local connections in a neural network. They also assumed that new sensory data $s_k$ arrives at a lower rate than the time required for the state optmization to settle down to a minimum. The parameters of the matrices A, B and C can also be estmated using gradient descent. Assuming that these matrices are implemented using synaptic strengths which change slowly, while the state variables are mapped to neural firing rates, which change quickly.
 
+### Proposed Model for Diffusion based Temporal Predictive Coding (DTPC)
+
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat102.png) 
 
-Figure 7: The Temporal + Predictive Coding Framework
+Figure 7: Diffusion based Tempora Predictive Coding (DTPC) Framework
 
+This is a proposed model for Temporal Predictice Coding that uses diffusion based EBMs for the prediction part (see above figure). The model operates as follows:
+
+- A stream of external sensory data arrives at discrete time instants indexed by $n$. The sensory data is processed by the Predictice Coding algorithm involving inference and generation as described earlier. This results in a high level latent state $z_n$ at time $n$. Note that the inference/generation process may involve multiple stages, as in the original Predictive Coding proposal.
+- The latent state $z_n$ is fed into a diffusion/EBM model, and this results in a prediction $x_{n+1} = g(z_n,u_{n+1})$. Here the sequence $u_n$ stands for other factors that influence the prediction, such as actions that the organism wants to take.
+- The prediction $x_{n+1}$ serves as the initial estimate for the next latent state $z_{n+1}$ at time $n+1$. Note that we are assuming that the time required to generate the prediction $x_{n+1}$ is less then the time between successive sensory inputs.
+- As a result of the new sensory data $s_{n+1}$, the latent $z_{n+1}$ undergoes changes in a recursive manner until it settles down to a new final state, and this is then used for the next prediction $x_{n+2}$.
+
+The DTPC model has a big benefit compared to the Temporal Predictice Coding (TPC) model: The use of diffusion/EBMs in DTPC enables it to generate much more complex latent predictions as compared to the TPC model that uses a simple linear predictor. More complex latent predictions are needed to generate the rich image of the wprld that wee in front of us. The DTPC model also allows the use of multiple inference/generation stages. This was not allowed in the original TPC model, and doing so leads to a large incraese in the model complexity.
+
+The DTPC model also allows for a system in which a single set of neurons are being continuously modified, alternating with modification due to new sensory data followed by modifications due to the prediction operation. Since all of the operations, including inference, generation and prediction are based on an iterative process of energy minimization, they are biologically plausible.
+
+![](https://subirvarma.github.io/GeneralCognitics/images/stat103.png) 
+
+Figure 7: Using the DTPC framework to do Planning
+
+The DTPC framework can also be used to do planning as shown in the above figure. In this case there is no sensory data coming into the brain, hence only the prediction and generation processes
+are used. The prediction process can be conditioned on actions, thus allowing the system to plan out a sequence of actions to accomplish a task.
+
+*Finding diffusion parameters for the DTPC model*
+
+## Contrasting the Diffusion based Predictive Processing (DPP) and Diffusion based Temoral Predictive Processing (DTPC) Models
+
+![](https://subirvarma.github.io/GeneralCognitics/images/stat103.png) 
+
+Figure 7: The Diffusion based Predictive Processing (DPP) Framework
+
+The Diffusion based Predictive Processing (DPP) framework from a few sections before is summarized in the figure above. There is a single prediction block, implemented using a diffusion/EBM, that directly predicts the next sensory perception base on the prior $K$ perceptions as well as action $u$ and the latest sensory data $s$.
+The DTPC framework on the other hand differs from this in the following respects:
+
+- The history of the system is captured in DTPC using the latent state $x_n$. Since DPP does not have a latent state, the only way it can capture the historical dependence is by explicitly conditioning the new generation on the past $K$ generations.
+- By avoiding the use of a latent state, the DPP system is also able to avoid the use of explicit inference and generation engines. Hence only a prediction module is needed.
+
+Are there any benefits to incorporating a latent state in the model? It simplifies the predictin process by providing a single summary of all that has happened in the past. But this comes at the cost of maintaining a separate inference and generation modules. The DPP model on the other hand does not need these two modules, but on the other hand it is quite likely that the generation circuitry itself is more complex. Also as pointed out in an earlier section, a DPP model can be decomposed into an equivalent model with hidden states, but with a simoler interconnection toplogy.
+
+### Relationship with Auto-Regressive Image Generation
+
+It has been shown that image generation can be done on a pixel by pixel basis. In fact if you look at the above figure, we can regard the $y_n$ not as a whole image, but just single pixel in an image. When used in th sway, the DPP model is not generating successive images, but is instead generating the pixels in a single image one by one. What about the model? This is no longer a diffusion model but instead can be imoplemented using a transformer. The end result is the same in both cases even though for the diffusion case the system gradually settles in a energy minimum wherits pixels satisfy the image distribution, while in the AR case, the system assumes that it is already at the minimum with the desired distribution, and then proceeds to generate the pixels according to that distribution. Hence both DPP model and the AR model capture the image distribution, but in different ways.
 
 
 
