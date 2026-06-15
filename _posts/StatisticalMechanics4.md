@@ -557,7 +557,7 @@ Assume that the best estimate at the $k^{th}$ step is given ${\hat x_k}$, then t
 
 $$  {\hat x_{k+1}} \leftarrow {\hat x_k} - \eta{\partial F_k\over{\partial x_k}} $$
 
-The authors showed that that the gradient descent equation can be implemented usinly local connections in a neural network. They also assumed that new sensory data $s_k$ arrives at a lower rate than the time required for the state optmization to settle down to a minimum. The parameters of the matrices A, B and C can also be estmated using gradient descent. Assuming that these matrices are implemented using synaptic strengths which change slowly, while the state variables are mapped to neural firing rates, which change quickly.
+The authors showed that that the gradient descent equation can be implemented using only local connections in a neural network. They also assumed that new sensory data $s_k$ arrives at a lower rate than the time required for the state optmization to settle down to a minimum. The parameters of the matrices A, B and C can also be estmated using gradient descent. Assuming that these matrices are implemented using synaptic strengths which change slowly, while the state variables are mapped to neural firing rates, which change quickly.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat102.png) 
 
