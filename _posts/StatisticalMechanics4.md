@@ -541,7 +541,7 @@ The Predictive Coding framework takes care of the inference and generation proce
 
 Figure 7: The Temporal Predictive Coding Framework
 
-The Temporal Predictive Coding framework is shown in the above figure. Recall that in the Predictive Processing model, the latent state of the system was determined solely by how well the generated image matched the sensory signal. In Temporal Predictive Coding on the other hand, the latent state is determined jointly by the temporal state prediction error and the image generation error.
+The Temporal Predictive Coding (TPC) framework is shown in the above figure. Recall that in the Predictive Coding model, the latent state of the system was determined solely by how well the generated image matched the sensory signal. In TPC on the other hand, the latent state is determined jointly by the temporal state prediction error and the image generation error. TPC uses only a single stage of the inference/generation pipeline.
 As in the original Predictive Coding, the model uses simple linear models for both the prediction an generation operations, given by:
 
 $$  x_k = Af(x_{k-1}) + Bu_k +\omega_x  $$
@@ -567,12 +567,12 @@ Figure 7: Diffusion based Tempora Predictive Coding (DTPC) Framework
 
 This is a proposed model for Temporal Predictice Coding that uses diffusion based EBMs for the prediction part (see above figure). The model operates as follows:
 
-- A stream of external sensory data arrives at discrete time instants indexed by $n$. The sensory data is processed by the Predictice Coding algorithm involving inference and generation as described earlier. This results in a high level latent state $z_n$ at time $n$. Note that the inference/generation process may involve multiple stages, as in the original Predictive Coding proposal.
-- The latent state $z_n$ is fed into a diffusion/EBM model, and this results in a prediction $x_{n+1} = g(z_n,u_{n+1})$. Here the sequence $u_n$ stands for other factors that influence the prediction, such as actions that the organism wants to take.
+- A stream of external sensory data arrives at discrete time instants indexed by $n$. The sensory data is processed by the Predictive Coding algorithm involving inference and generation as described earlier. This results in a high level latent state $z_n$ at time $n$. Note that the inference/generation process may involve multiple stages, as in the original Predictive Coding proposal.
+- The latent state $z_n$ is fed into a diffusion/EBM model, and this results in a prediction $x_{n+1} = g(z_n,u_{n+1})$. Here the sequence $u_n$ stands for other factors that influence the prediction, such as actions that the organism plans to take.
 - The prediction $x_{n+1}$ serves as the initial estimate for the next latent state $z_{n+1}$ at time $n+1$. Note that we are assuming that the time required to generate the prediction $x_{n+1}$ is less then the time between successive sensory inputs.
 - As a result of the new sensory data $s_{n+1}$, the latent $z_{n+1}$ undergoes changes in a recursive manner until it settles down to a new final state, and this is then used for the next prediction $x_{n+2}$.
 
-The DTPC model has a big benefit compared to the Temporal Predictice Coding (TPC) model: The use of diffusion/EBMs in DTPC enables it to generate much more complex latent predictions as compared to the TPC model that uses a simple linear predictor. More complex latent predictions are needed to generate the rich image of the wprld that wee in front of us. The DTPC model also allows the use of multiple inference/generation stages. This was not allowed in the original TPC model, and doing so leads to a large incraese in the model complexity.
+The DTPC model has a big benefit compared to the Temporal Predictice Coding (TPC) model: The use of diffusion/EBMs in DTPC enables it to generate much more complex latent predictions as compared to the TPC model that uses a simple linear predictor. More complex latent predictions are needed to generate the rich image of the wprld that wee in front of us. The DTPC model also allows the use of multiple inference/generation stages. This was not allowed in the original TPC model since doing so leads to a large incraese in the model complexity.
 
 The DTPC model also allows for a system in which a single set of neurons are being continuously modified, alternating with modification due to new sensory data followed by modifications due to the prediction operation. Since all of the operations, including inference, generation and prediction are based on an iterative process of energy minimization, they are biologically plausible.
 
@@ -585,19 +585,48 @@ are used. The prediction process can be conditioned on actions, thus allowing th
 
 *Finding diffusion parameters for the DTPC model*
 
-## Contrasting the Diffusion based Predictive Processing (DPP) and Diffusion based Temoral Predictive Processing (DTPC) Models
+## Contrasting Diffusion based Predictive Processing (DPP) and Diffusion based Temoral Predictive Processing (DTPC) Models
 
-![](https://subirvarma.github.io/GeneralCognitics/images/stat103.png) 
+![](https://subirvarma.github.io/GeneralCognitics/images/stat104.png) 
 
 Figure 7: The Diffusion based Predictive Processing (DPP) Framework
 
 The Diffusion based Predictive Processing (DPP) framework from a few sections before is summarized in the figure above. There is a single prediction block, implemented using a diffusion/EBM, that directly predicts the next sensory perception base on the prior $K$ perceptions as well as action $u$ and the latest sensory data $s$.
 The DTPC framework on the other hand differs from this in the following respects:
 
-- The history of the system is captured in DTPC using the latent state $x_n$. Since DPP does not have a latent state, the only way it can capture the historical dependence is by explicitly conditioning the new generation on the past $K$ generations.
+- The history of the system is captured in DTPC using the latent state $x_n$. In contrast, since DPP does not use latent states, the only way it can capture the historical dependence is by explicitly conditioning the new generation on the past $K$ generations.
 - By avoiding the use of a latent state, the DPP system is also able to avoid the use of explicit inference and generation engines. Hence only a prediction module is needed.
 
-Are there any benefits to incorporating a latent state in the model? It simplifies the predictin process by providing a single summary of all that has happened in the past. But this comes at the cost of maintaining a separate inference and generation modules. The DPP model on the other hand does not need these two modules, but on the other hand it is quite likely that the generation circuitry itself is more complex. Also as pointed out in an earlier section, a DPP model can be decomposed into an equivalent model with hidden states, but with a simoler interconnection toplogy.
+Are there any benefits to incorporating a latent state in the DTPC model? It simplifies the prediction process by providing a summary of all that has happened in the past. But this comes at the cost of maintaining separate inference and generation modules. The DPP model on the other hand does not need these two modules, but on the other hand it is quite likely that the combined inference+prediction+generation circuitry is more complex. Also as pointed out in an earlier section, a DPP model can be decomposed into an equivalent model with hidden states, but with a simpler interconnection toplogy.
+
+## Equivalence between Models
+
+An open problem in the field of AI is the connection between auto-regressive models such as LLMs and preocesses that take place within a brain. We will consider LLMs in the next section, but it turns out that images can also be generated on a pixel-by-pixel basis by an autoregressive model such as a transformer, so we will examine the connection this type of image generation and processes in the brain.
+We will do this by pointing a number of equivalences between models. Model A is equivalent to Model B, if they are indistinguishable from the input-output point of view, i.e., if they receive the same input then they generate the same output. Model equivalence is quite in other branches of science such as physics. For example laws of motion can be cast either in the Newtonian form in terms of acceleration and forces, or they can be regarded as outcomes of minimum action principles such as the one due to Lagrange. Physicists whichever model is most convenient to use when solving a problem.
+I am going to argue that our advances in AI in last two decades has been due to our ability to come up with artificial neural networks that are equivalent to the neuronal circuitry in the brain, even though topologically they loook very different.
+
+![](https://subirvarma.github.io/GeneralCognitics/images/stat105.png) 
+
+Figure 7: Equivalence between a system with complex interconnect toplogy and a diffusion/EBM model
+
+We will start with the equivalence between a system of nodes that are connected together using a complex interconnection topology (system A), and a diffusion/EBM model (system B). System A is a model for the brain, in which the interconnect toplogy, called the connectome, is not very well understood. The nodes in this toplogy interact with one another through these connections, and in general the operation of the system is driven by the second law of thermodynamics, i.e., if the external sensory data cause the system to go out of equilibrium, then the nodes in the system try to get back to equilibrium by changing their state, and this corresponds to the process of cognition in our brains.
+
+Diffusion/EBM models also feature a set of nodes whose state is changing in time, but in this case the state changes are driven not by inter-node interactions, but by changes in the systems energy function that is modeled separately. Essentially system B is trying to mimic system A by using the same energy function, without bothering about the details of how the interconnect topology actually genertaes the energy function. As long as the energy functions match, the two systems will behave similarly, i.e., their setlling equilibriun states will match. This is precisely what diffusion/EBM models do. The energy functions are matched by using the output of the brain, in the form of images, to train the diffusion/EBM model. The parameters in model A correspond to the interconnect strengths between nodes, while the parameters in model B are the weights of the neural network that is used to model the energy function.
+
+![](https://subirvarma.github.io/GeneralCognitics/images/stat106.png) 
+
+Figure 7: Equivalence between a diffusion/EBM based Temporal Predictive Coding and Predictive Processing
+
+Diffusion/EBM models of the type in system B can be used to build models for perception, prediction and planning, and a model of this type called the diffusion based temporal predictive coding (DTPC) model is shown above in part (c). This model combines diffusion/EBM model which is used for prediction, with predictive coding model that is used for inference and generation. The biological plausibility of this system is still intact, since both diffusion/EBM model and the predictive coding model work through a process of minimizing energy functions.
+The DTPC model explicitly models the hidden or latent states in the system, and this is how the model keeps track of the history of past sensory data that have been impinging on the system.
+However this a way to build an equivalent diffusion/EBM model, shown in part (d), that can also model inference, prediction and generation, but without using latent states. In this case the sensory data goes into the model, and the model generates the next perception state by combining it with its history and other factors such as actions.
+There are examples of both types in the current literature on video generation using neural networks. The lack of latent states makes model D less biologically plausible since clearly the brain's design incorporates ways to keep track of the history of sensory data. Henever the end result is the same, so if there are situations in which it is easier to model a system without using latent states, then we can do so with the assurance that our results will be indistuishable from the model that models them.
+
+![](https://subirvarma.github.io/GeneralCognitics/images/stat107.png) 
+
+Figure 7: Equivalence between a model that generates a whole image per time step vs a model that generates a single pixel per time step
+
+
 
 ### Relationship with Auto-Regressive Image Generation
 
