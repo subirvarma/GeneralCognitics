@@ -626,11 +626,27 @@ There are examples of both types in the current literature on video generation u
 
 Figure 7: Equivalence between a model that generates a whole image per time step vs a model that generates a single pixel per time step
 
+We are now going to take the Predictive Processing model and pus it to its extreme: The model predicts an inage frame at atime as shown in figure 7(a). But what if it predicts just one pixel at a time, in figure 7(b)? It turns out that this system works perfectly well and is able to produce perfectly good images. In fact Imagen-1 frpm OpenAI, which was one of the first widely available image generators, worked in precisely this fashion. But is figure 7(b) still a diffusion/EBM model?
+Recall that the Boltzmann distribution says
 
+$$ p(y_{n+1}|y_n,y_{n-1},...,y_{n-K}) = {e^{-E(y_{n+1},y_n,...,y_{n-K})}\over {Z}} $$
+
+which can also be written as
+
+$$   E(y_{n+1},y_n,...,y_{n-K}) = \log p(y_{n+1}|y_n,y_{n-1},...,y_{n-K}) - \log Z $$
+
+In the usual diffusion model such figure 7(a), each of the $y_n$'s consists of a large number of nodes, and the diffusion process is basically a way in which we can jointly find a minimum for the energy for this system, and at the minimum the conditional probability $p(y_{n+1}|y_n,y_{n-1},...,y_{n-K})$ is at a maximum, as per the above equation.
+On the other hand if $y_n$ is just a single node then clearly the Boltzmann distribution continues to hold, but now we are trying to minimize the energy of a single node, conditioned on specified values for some of the other nodes whose values have already been determined. But this equivalent to finding the value of $p_{n+1}$ that maximizes the conditional distribution $p(y_{n+1}|y_n,y_{n-1},...,y_{n-K})$.
+Assuming we are using a transformer to model the energy function, then when we get to a system that generates a single picel at time, the system becomes the traditional decoder only transformer model, such as the GPT series.
+
+If we follows the chain of equivalences, then it follows that an auto-regressive transformer is a perfectly good model for the brain, as far as generating images (or perception) is concerned.
+It is not working exactly as the brain does, in fact the diffusion based temporal predictive coding model is probably how the brain works. However, if we look at the two systems from the input-output point of view, then they are equivalent. This supports my thesis stated at the start of this article, that modern neural networkds such as the transformer don't model the neural circuitry of the brain, instead they are models for the energy function of the brain. Any good function approximator will serve this function, and even though transformers are the best approximators we know of today, better ones will be found in the future.
+
+This discussion has been in the context of image generation or perception, what about language generation?  This is discussed in the next section.
 
 ### Relationship with Auto-Regressive Image Generation
 
-It has been shown that image generation can be done on a pixel by pixel basis. In fact if you look at the above figure, we can regard the $y_n$ not as a whole image, but just single pixel in an image. When used in th sway, the DPP model is not generating successive images, but is instead generating the pixels in a single image one by one. What about the model? This is no longer a diffusion model but instead can be imoplemented using a transformer. The end result is the same in both cases even though for the diffusion case the system gradually settles in a energy minimum wherits pixels satisfy the image distribution, while in the AR case, the system assumes that it is already at the minimum with the desired distribution, and then proceeds to generate the pixels according to that distribution. Hence both DPP model and the AR model capture the image distribution, but in different ways.
+It has been shown that image generation can be done on a pixel by pixel basis. In fact if you look at the above figure, we can regard the $y_n$ not as a whole image, but just single pixel in an image. When used in th sway, the DPP model is not generating successive images, but is instead generating the pixels in a single image one by one. What about the model? This is no longer a diffusion model but instead can be imoplemented using a transformer. The end result is the same in both cases even though for the diffusion case the system gradually settles in a energy minimum wherits pixels satisfy the image distribution, while in the AR case, the system assumes that it is already at the minimum with the desired distribution, and then proceeds to generate the pixels according to that distribution. Thus both DPP model and the AR model capture the image distribution, but in different ways.
 
 
 
