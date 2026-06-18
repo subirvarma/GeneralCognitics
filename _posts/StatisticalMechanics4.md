@@ -429,7 +429,7 @@ This brings us to the current generation of auto-encoders, and the VAE, which is
 
 Figure 7: The Predictive Coding Framework
 
-This was proposed by [Rao and Ballard](https://www.nature.com/articles/nn0199_79) as a way to generate latent represents in our visual cortex, hence the authors had biological plausibility as their main critera.
+This was proposed by [Rao and Ballard](https://www.cs.utexas.edu/~dana/Rao.pdf)) as a way to generate latent represents in our visual cortex, hence the authors had biological plausibility as their main critera.
 Suppose the visual system receives an image I. The goal is not merely to encode pixels. The goal is to infer the hidden causes of the image:
 Rao and Ballard proposed that the cortex maintains a hierarchical generative model:
 
@@ -652,6 +652,8 @@ It has been shown that image generation can be done on a pixel by pixel basis. I
 
 ## Language Generation
 
+
+
 Another activity that our brain does is language generation. LLMs that do this are the first AI models that leapt from the lab to the outside world and are currently more or less driving investment activity in the world economy. 
 But can EBMs be used to generate language?
 This field is still in its research phase, though there is a company called [Inception labs](https://www.inceptionlabs.ai/) that was recently founded to commercialize EBM based LLMs. 
@@ -673,6 +675,12 @@ They are guided to which particular thought to turn into words by several factor
 The image EBM and the thought EBM are connected. For instance we can generate an image that corresponds to a description expressed as a thought. When we read a book or listen to someone speak, the stream of thoughts can lead to a succession of images in our head. Conversely we can generate a thought that corresponds to an image, or to a succession of images, which is something that we humans do all the time when we describe a scene in words. We will see how EBMs can be used to replicate these skills. 
 Thoughts can exist independent of language. Hence people who haven’t learn a language, or infants who haven’t learnt how to speak, can still have thoughts that they can use to go about their lives. Presumably this is true for animals too. 
 The fundamental phenomenon that generates both images and thoughts is the neural configuration. In the case of vision, Our consciousness translates this configuration into images that we see, while in the case of language, our consciousness translates the configuration into words. 
+
+The question arises: Why are thoughts expressed on a word by word basis by humans, while images are are perceived as a whole, not on a pixel by pixel basis?
+One would think that it would be much more efficient t grasp the essence of a thought by grasping it as a symbol rather than as a set of words.
+This idea actually has been pursued by science fiction writers: For example the aliens in the move *Arrival* use a language in whch thoughts are expressed as symbols.
+This obvoiusly has a lot of benefits, among them increasing the speed of communication, and graspinga though with both past and future aspects of it simultaneously vs hearng it unfurl
+on a word by word basis. It is not inconcievable that as human evolution progresses, our species will also develop some such language.
 
 
 
