@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Models in Neuroscience Using EBMs"
+title: " Brain Models for Perception and Language: Inference, Generation, Prediction"
 ---
 
 # Models in Neuroscience Using EBMs
