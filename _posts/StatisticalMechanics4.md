@@ -3,7 +3,7 @@ layout: default
 title: " Brain Models for Perception and Language: Inference, Generation, Prediction"
 ---
 
-# Models in Neuroscience Using EBMs
+# Brain Models for Perception and Language: Inference, Generation, Prediction
 
 **Contents**     
 
