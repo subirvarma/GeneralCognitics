@@ -626,51 +626,73 @@ There are examples of both types in the current literature on video generation u
 
 Figure 7: Equivalence between a model that generates a whole image per time step vs a model that generates a single pixel per time step
 
-We are now going to take the Predictive Processing model and pus it to its extreme: The model predicts an inage frame at atime as shown in figure 7(a). But what if it predicts just one pixel at a time, in figure 7(b)? It turns out that this system works perfectly well and is able to produce perfectly good images. In fact Imagen-1 frpm OpenAI, which was one of the first widely available image generators, worked in precisely this fashion. But is figure 7(b) still a diffusion/EBM model?
-Recall that the Boltzmann distribution says
+We are now going to take the Predictive Processing model and push it to its extreme: The model predicts an image frame at a time as shown in figure 7(a). But what if it predicts just one pixel at a time, in figure 7(b)? It turns out that this system works perfectly well and is able to produce perfectly good images. In fact [Imagen-1](https://cdn.openai.com/papers/Generative_Pretraining_from_Pixels_V2.pdf) from OpenAI, which was one of the first widely available image generators, worked in precisely this fashion. But can it still be regarded as a diffusion/EBM model?
+Recall that the pixels in an image are distributed according to the Boltzmann distribution (at a point where the probability is maximized or equivalently the energy is minimized)
 
-$$ p(y_{n+1}|y_n,y_{n-1},...,y_{n-K}) = {e^{-E(y_{n+1},y_n,...,y_{n-K})}\over {Z}} $$
+$$ p(y_{n+1},y_n,y_{n-1},...,y_{n-K}) = {e^{-E(y_{n+1},y_n,...,y_{n-K})}\over {Z}} $$
 
-which can also be written as
+For the case when we are generating one pixel at time, the expression is given by
+
+$$ p(y_{n+1}|Y_n,Y_{n-1},...,Y_{n-K}) = {e^{-E(y_{n+1},Y_n,...,Y_{n-K})}\over {Z}} $$
+
+where the capitalized $Y$ indicates that their values are fixed. It is more convenient to the maximum of $p(y_{n+1}|Y_n,Y_{n-1},...,Y_{n-K})$ than the minimum of $E(y_{n+1},Y_n,...,Y_{n-K})$, and this precisely what these systems do. In fact using the transformer architecture, the system is trained to compute this conditional probability over the (discrete) set of pixels, and then simply choose the pixel value at which the probability is at a maximum. The reader may be rightly wondering that finding the individual maximum probability values and putting the whole image together as $(y_1^{max},...,y_N^{max})$ is not the same as finding maximum for the vector as a whole $(y_1,...,y_N)^{max}$. This is a valid objection and pixel by pixel models (and modern LLM models as we will encounter in the next section) get around this problem by techniques such as beam search. This works by keeping track two or more possible minima values as the generation progresses, and then making the decision which is the best optimum point by computing their joint probabilities.
+
+Hence the difference the diffusion model and the pixel-by-pixel model can both be regarded as EBMs, but using different ways of minimizing their energy functions:
+
+- The diffusion model does minimization by doing a joint minimization over all the nodes using the Langevin sampling method. During this, all the nodes continue to change their values until the minimum is reached.
+- The pixel by pixel model on the other hand samples at a single node a time, while assuming that the remaining nodes are already at their minimum values. Hence once the minimuum for a node is computed, it is fixed while the minimum of the remaning nodes is handled next. 
+
+Hence the Langevin based minimization descends down the energy landscape until it gets to a minimum, while the pixel by pixel assumes that system is already at a minimum point and then proceeds to find the node values one at a time. But at the heart thay can both be regarded as EBM methods.
+
+In the diffusion model we used the transformer as a function approximator to model the energy function, while in the pixel by pixel model the transformer can be used, again as a function approximator, to model the conditional probabilities. Since
 
 $$   E(y_{n+1},y_n,...,y_{n-K}) = \log p(y_{n+1}|y_n,y_{n-1},...,y_{n-K}) - \log Z $$
 
+it follows that the minimum of the energy functiona and the maximum of the probability distribution at the same data point.
+
 In the usual diffusion model such figure 7(a), each of the $y_n$'s consists of a large number of nodes, and the diffusion process is basically a way in which we can jointly find a minimum for the energy for this system, and at the minimum the conditional probability $p(y_{n+1}|y_n,y_{n-1},...,y_{n-K})$ is at a maximum, as per the above equation.
 On the other hand if $y_n$ is just a single node then clearly the Boltzmann distribution continues to hold, but now we are trying to minimize the energy of a single node, conditioned on specified values for some of the other nodes whose values have already been determined. But this equivalent to finding the value of $p_{n+1}$ that maximizes the conditional distribution $p(y_{n+1}|y_n,y_{n-1},...,y_{n-K})$.
-Assuming we are using a transformer to model the energy function, then when we get to a system that generates a single picel at time, the system becomes the traditional decoder only transformer model, such as the GPT series.
 
 If we follows the chain of equivalences, then it follows that an auto-regressive transformer is a perfectly good model for the brain, as far as generating images (or perception) is concerned.
 It is not working exactly as the brain does, in fact the diffusion based temporal predictive coding model is probably how the brain works. However, if we look at the two systems from the input-output point of view, then they are equivalent. This supports my thesis stated at the start of this article, that modern neural networkds such as the transformer don't model the neural circuitry of the brain, instead they are models for the energy function of the brain. Any good function approximator will serve this function, and even though transformers are the best approximators we know of today, better ones will be found in the future.
 
 This discussion has been in the context of image generation or perception, what about language generation?  This is discussed in the next section.
 
-### Relationship with Auto-Regressive Image Generation
-
-It has been shown that image generation can be done on a pixel by pixel basis. In fact if you look at the above figure, we can regard the $y_n$ not as a whole image, but just single pixel in an image. When used in th sway, the DPP model is not generating successive images, but is instead generating the pixels in a single image one by one. What about the model? This is no longer a diffusion model but instead can be imoplemented using a transformer. The end result is the same in both cases even though for the diffusion case the system gradually settles in a energy minimum wherits pixels satisfy the image distribution, while in the AR case, the system assumes that it is already at the minimum with the desired distribution, and then proceeds to generate the pixels according to that distribution. Thus both DPP model and the AR model capture the image distribution, but in different ways.
-
-
-
 ## Language Generation
 
+![](https://subirvarma.github.io/GeneralCognitics/images/stat110.png) 
 
+Figure 7: Language generation using a diffusion model
 
 Another activity that our brain does is language generation. LLMs that do this are the first AI models that leapt from the lab to the outside world and are currently more or less driving investment activity in the world economy. 
 But can EBMs be used to generate language?
 This field is still in its research phase, though there is a company called [Inception labs](https://www.inceptionlabs.ai/) that was recently founded to commercialize EBM based LLMs. 
 If successful, EBM LLMs will have several advantages over the traditional autoregressive LLMs. The latter generate one word at a time which limits their speed of generation and also increases energy consumption. 
 EBM based LLMs on the other hand are able to generate multiple words or even sentences in each step which can speed up generation and at a lower energy costs. This solves another problem that autoregressive models have, which is that a word generated cannot be erased. 
+
+But AR LLMs do generation one word at a time, not a thought at a time. How are they equivalent to EBMs which generate at the level of thoughts. 
+We will try to resolve this conundrum by examining the energy landscape of thought EBMs. The bottom of the valleys in this landscape corresponds to coherent thoughts, just as the bottom of the valleys of image EBMs corresponds to coherent images. 
+When we generate language using thought EBMs we are sampling the system until it settles to a valley bottom and that is the output thought. AR LLMs can also be regarded as seeking a configuration that is at the bottom of the valley, but they assume that we are already at a valley bottom, and then generate words that correspond to the thought at that bottom.
+They are guided to which particular thought to turn into words by several factors: 1) The prefix that we use. This serves as a conditional probability that shapes the landscape. Moreover in LLMs that do reasoning, the prefix is augmented with already generated words, which changes the energy landscape while the generation is going on. 2) post training based on RL which guides the particular energy bottom that the LLM settles into. Since in general, given a prefix, there are several minima that can be chosen. Schemes such as RLHF guide the generation to a minima that satisfies properties that humans find 
+more acceptable.
+
 When we speak we typically don’t generate words one at a time. We have a thought that we then try to express in language and
-EBM based LLMs are closer to this way of operating. This shifts the focus to thinking of EBM based LLMs as thought generators, with language only serving as a way those thoughts are communicated to the outside rites. This also gets around the critique that is leveled at auto regressive EBMs that are like stochastic parrots since they only think one word at a time. 
+EBM based LLMs are closer to this way of operating. This shifts the focus to thinking of EBM based LLMs as thought generators, with language only serving as a way those thoughts are communicated to the outside rites. This also gets around the critique that is leveled at auto regressive LLMs that are like stochastic parrots since they only think one word at a time. 
 
 Hence we can regard thoughts as the fundamental unit just as images are a fundamental unit. Just as a succession of images results in a video scenario, a succession of thoughts results in an argument. This leads the way to models that are able to generate thoughts in an auto regressive manner, with one thought following the other. 
 We will see that the EBM framework that we developed for generating video can also be used to generate a succession of thoughts auto regressively. 
 We can choose the thoughts to lead to some objective and this is the basis of human endeavors such as math, science or even writing or debating  in general. 
 Once again RL can be applied to find the optimal series of thoughts and this is indeed how the latest generation of AR LLMs have achieved their level of intelligence at tasks such as math, game playing and code generation.
 
-But AR LLMs do generation one word at a time, not a thought at a time. How are they equivalent to EBMs which generate at the level of thoughts. 
-We will try to resolve this conundrum by examining the energy landscape of thought EBMs. The bottom of the valleys in this landscape corresponds to coherent thoughts, just as the bottom of the valleys of image EBMs corresponds to coherent images. 
-When we generate language using thought EBMs we are sampling the system until it settles to a valley bottom and that is the output thought. AR LLMs can also be regarded as seeking a configuration that is at the bottom of the valley, but they assume that we are already at a valley bottom, and then generate words that correspond to the thought at that bottom.
-They are guided to which particular thought to turn into words by several factors: 1) The prefix that we use. This serves as a conditional probability that shapes the landscape. Moreover in LLMs that do reasoning, the prefix is augmented with already generated words, which changes the energy landscape while the generation is going on. 2) post training based on RL which guides the particular energy bottom that the LLM settles into. Since in general, given a prefix, there are several minima that can be chosen. Schemes such as RLHF guide the generation to a minima that satisfies properties that humans find more acceptable.
+![](https://subirvarma.github.io/GeneralCognitics/images/stat108.png) 
+
+Figure 7: Equivalence between diffusion language models using continuous latent states and those that generate words without using latent states
+
+![](https://subirvarma.github.io/GeneralCognitics/images/stat109.png) 
+
+Figure 7: Equivalence between the discrete diffusion based language model and auto regressive language models (LLMs)
+
+
 
 The image EBM and the thought EBM are connected. For instance we can generate an image that corresponds to a description expressed as a thought. When we read a book or listen to someone speak, the stream of thoughts can lead to a succession of images in our head. Conversely we can generate a thought that corresponds to an image, or to a succession of images, which is something that we humans do all the time when we describe a scene in words. We will see how EBMs can be used to replicate these skills. 
 Thoughts can exist independent of language. Hence people who haven’t learn a language, or infants who haven’t learnt how to speak, can still have thoughts that they can use to go about their lives. Presumably this is true for animals too. 
