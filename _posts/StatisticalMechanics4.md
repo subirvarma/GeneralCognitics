@@ -622,7 +622,7 @@ The DTPC model explicitly models the hidden or latent states in the system, and 
 However this a way to build an equivalent diffusion/EBM model, shown in part (d), that can also model inference, prediction and generation, but without using latent states. In this case the sensory data goes into the model, and the model generates the next perception state by combining it with its history and other factors such as actions.
 There are examples of both types in the current literature on video generation using neural networks. The lack of latent states makes model D less biologically plausible since clearly the brain's design incorporates ways to keep track of the history of sensory data. Henever the end result is the same, so if there are situations in which it is easier to model a system without using latent states, then we can do so with the assurance that our results will be indistuishable from the model that models them.
 
-![](https://subirvarma.github.io/GeneralCognitics/images/stat107.png) 
+![](https://subirvarma.github.io/GeneralCognitics/images/stat111.png) 
 
 Figure 7: Equivalence between a model that generates a whole image per time step vs a model that generates a single pixel per time step
 
