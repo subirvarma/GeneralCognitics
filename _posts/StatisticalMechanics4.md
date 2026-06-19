@@ -660,15 +660,38 @@ This discussion has been in the context of image generation or perception, what 
 
 ## Language Generation
 
+Another activity that our brain does is language understanding and generation. LLMs that do this are the first AI models that leapt from the lab to the outside world and are currently more or less driving investment activity in the world economy. 
+But can diffusion based EBMs be used to generate language?
+This field is still in its research phase, though there is a company called [Inception labs](https://www.inceptionlabs.ai/) that was recently founded to commercialize diffusion based LLMs. 
+If successful, diffusion LLMs will have several advantages over the traditional autoregressive LLMs. The latter generate one word at a time which limits their speed of generation and also increases energy consumption. 
+EBM based LLMs on the other hand are able to generate multiple words or even sentences in each step which can speed up generation and at a lower energy costs. This solves another problem that autoregressive models have, which is that a word generated cannot be erased. 
+
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat110.png) 
 
-Figure 7: Language generation using a diffusion model
+Figure 7: Model for Language generation in the brain using a diffusion model
 
-Another activity that our brain does is language generation. LLMs that do this are the first AI models that leapt from the lab to the outside world and are currently more or less driving investment activity in the world economy. 
-But can EBMs be used to generate language?
-This field is still in its research phase, though there is a company called [Inception labs](https://www.inceptionlabs.ai/) that was recently founded to commercialize EBM based LLMs. 
-If successful, EBM LLMs will have several advantages over the traditional autoregressive LLMs. The latter generate one word at a time which limits their speed of generation and also increases energy consumption. 
-EBM based LLMs on the other hand are able to generate multiple words or even sentences in each step which can speed up generation and at a lower energy costs. This solves another problem that autoregressive models have, which is that a word generated cannot be erased. 
+The above figure shows a block diagram for a diffusion based LLM. I am hypothesizing that language is distinct from thought, i.e., animals or even even young children who haven't learnt to speak, have thoughts, and humans use language to convert these thoughts into a form that can be communicated to others. Hence thoughts serve as a latent state for the model.
+The model itself has the same three basic functions that were part of the perception model, i.e.
+
+- An inference module to convert the string of words into a latent vector or thought.
+- A prediction module that combines the new thought information with a pre-existing though state from the previous instant, and predicts a new thought state.
+- A generation module that converts the new thought state into words.
+
+Recall that for vision we had the Predictive Coding model for the inference and generation operations which was biologically plausible. However no such biologically plausible model exists for the corresponding operations in the langauge model. This is an open reserach problem, some of the recent papers in this area include the [LD4LG](https://arxiv.org/abs/2212.09462) model and the [TextLDM](https://arxiv.org/html/2605.07748v1) model. These models use ML encoder decoder designs for inference and generation, but unfortunately these designs, like VAE encoder-decoder, are not biologically plausible. Hence an equivalent for the Predictive Coding framework for language is an open problem for now.
+
+Once the inference or encoder module has produced a thought vector, this is then fed into the prediction module to predict the next thought. The prediction module combines the new though with the existing thought state to generate the next thought.
+This operation can very well be modeled using a diffusion/EBM of the type we saw for vision. If we denote the inferred thought vector at time n as $u_n$, and if the sequence $z_n$ represents the thought states, then the prediction operation boils down to finding the vector $z_{n+1}$ at which the conditional probability $p_(z|z_n,u_n)$ is maximized. Using the Boltzmann distribution this equivalent to
+finding $z$ that minimizes the energy function $E_{\theta}(z;z_n,u_n)$ and this can be done by Langevin sampling.
+
+Once we have a new though state $z_{n+1}$, the generator or decoder module can then convert back into a sequence of words. In the LD4LG model thais was implemented using a tradtional transformer architecture. The reader might wonder why the model goes through the trouble of doing this three stage operation if at the end it still relies on the transformer to generate the final output. This goes back to the open issue of discovering a biologically plausible generation module. What this model makes explicit is the important role played by the prediction module in language generation. As we will see later in this section, it is likely that transformer based LLMs also do all of these three operations of inference, prediction and generation, but implicitly in a way that is not visible to us. Some evidence for this was actually presented by the OpenAI team that worked on transformer based image generation (see the paper [Generative pre-traning from pixels](https://cdn.openai.com/papers/Generative_Pretraining_from_Pixels_V2.pdf)). Since the diffusion model explicitly separated the prediction part from the other two parts, it provides us with insights into how modern LLMs work.
+
+LLMs work by auto-regressively generating one word at a time, and it has been a big mystery whether they are just 'stochastic parrots' or do they have a deep understanding the language they are dealing with.
+If we can show that auto-regressive LLMs are equivalent to the diffusion model in the figure above, then it goes some ways in understanding this issue, since the diffusion model does explitly model the knowledge base of the brain which is figuring out what to say next. The picture that we have is similar to what was presented for image prediction: All possible predictions correspond to to minima of the thought energy function. The specific thought that is chosen for ouput is the minima of an energy function obtained by freezing the values of the input $u_{n}$ and the prior though state $z_n$. Of course there are multiple possible minima,a nd the specific one chosen has  a degree of randomnes attached to it, but is influenced by the starting state which can be set to the prior state $z_n$.
+This model is basically saying that all possible thoughts are generated as the energy minima in our brain, and language works by choosing the specific minima as a function of the information coming into the brain.
+
+Note the following:
+
+- In contrast to the diffusion model for visual perception, this model does not handle the process by which sound waves impinge on the year drum and get converted into brain states. This part is presumably similar to vision, with the brain using prediction of expected sound as the perception signal that we hear. There is another part of the brain that converts the sound into discrete words, and this is the level at which our model works. The model starts from the input words, infers their meaning and the generates the next set of words.
 
 But AR LLMs do generation one word at a time, not a thought at a time. How are they equivalent to EBMs which generate at the level of thoughts. 
 We will try to resolve this conundrum by examining the energy landscape of thought EBMs. The bottom of the valleys in this landscape corresponds to coherent thoughts, just as the bottom of the valleys of image EBMs corresponds to coherent images. 
