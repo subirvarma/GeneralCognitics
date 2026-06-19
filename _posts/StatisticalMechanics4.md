@@ -1,9 +1,9 @@
 ---
 layout: default
-title: " Brain Models for Perception and Language: Inference, Generation, Prediction"
+title: " Models for Perception and Language in the Brain: Inference, Generation, Prediction"
 ---
 
-# Brain Models for Perception and Language: Inference, Generation, Prediction
+# Models for Perception and Language in the Brain: Inference, Generation, Prediction
 
 **Contents**     
 
