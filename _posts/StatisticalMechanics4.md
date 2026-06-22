@@ -20,65 +20,64 @@ title: " Models for Perception and Language in the Brain: Inference, Generation,
 
 ## Introduction
 
-In Part 1 of this series of articles I took a deep dive into the science of statistical menchanics, and how it could be used to analyze a system of interacting particles. We came upon the idea of using the energy (or free enegy) of the system as a way to analyze the dynamics of this system, since starting from an arbitrary state, the interactions cause the energy to decrease until it settles to an equilibrium state of low energy. This enables us to analyze the phase behavior of complex systems such as spin glasses.
-In Part 2 I applied these ideas to the analysis of a collection of nodes that could be used to function as an associative memory (the Hopfield Network) or could be used as a generative model (the Boltzmann Machine). Once again the idea of network dynamics governed by the system energy function played a central part. 
+In Part 1 of this series of articles I took a deep dive into the science of statistical mechanics, and how it could be used to analyze a system of interacting nodes. We came upon the idea of using the energy (or free enegy) of the system as a way to analyze the dynamics of this system, since starting from an arbitrary state, the interactions cause the energy to decrease until it settles to an equilibrium state of low energy. This enabled us to analyze the phase change behavior of complex systems called spin glasses.
+In Part 2 I applied these ideas to the analysis of a collection of nodes that could be used to function as an associative memory (the Hopfield Network) or could be used as a generative model (the Boltzmann Machine) and once again the idea of network dynamics governed by the energy function played a central part. 
 However now the energy funcion was determined by the (training) data whose distribution the network was trying to mirror.
-Another crtical idea introduced was the concept of hidden or latent states which enabled the Boltzmann Machine to model more complex energy functions for the visible portion of the state.
+Another crtical idea introduced was the concept of hidden or latent states which enabled the Boltzmann Machine to model complex energy functions.
 
-In Part 3 I looked at modern diffusion models and how these could be regarded as modern versions of the Boltzmann Machine. Diffusion models are also based on the idea of a system energy function, but now it is a complex creature that is modeled by artificial neural networks with hundreds of millions of parameters. In the process we moved past the idea of modeling the details of the interactions between the system nodes. The system dynamics can be captured by changes in the energy function value, and it settles into an equilibrium state that is distributed according to the training data.
-However unlike the Boltzmann machine, diffusion models don't require the incorporation of hidden states, since the complexity of the energy function is captured by the use of an artificial neural network.
+In Part 3 I looked at modern diffusion models and how these could be regarded as more advanced versions of the Boltzmann Machine. Diffusion models are also based on the idea of an energy function, but now it is a complex creature that is modeled by artificial neural networks with hundreds of millions of parameters. In the process we moved past the idea of modeling the details of the interactions between the system nodes. Instead the system dynamics are be captured by changes in the energy function value as it settles into an equilibrium state that is distributed according to the training data.
+However unlike the Boltzmann machine, diffusion models don't require the incorporation of hidden states, since artificial neural networks such as transformers are sufficient to capure the complexity of the energy function.
+I am going to use the term Energy based Models or EBMs for all the models whose operation can be understood by modeling their energy function. This ranges from the simple Isis model for magnetism from a hundred years ago, to the latest diffusion models in AI.
 
-In this article we will investigate the implications of these ideas for models of biological brains, i.e., the field of neuroscience. Both brains and modern generative AI systems seem to be doing similar things, i.e., they are both able to create images (our vision system) and generate language. This has resulted in a search for micro circuits in the brain whose inter-connection architecture resembles  artificial neural networks such as a transformer. However no such micro circuit has been found.
-We will examine this problem from the perspective of modern EBMs based on diffusions, and show that a plausible top-down model for the brain can be created at the level of energy functions.
-In the brain these energy functions are due to neurons interacting with each other, however in our model for the brain, the energy function can be learnt from data generated by the brain in the form of images or langauge. The important point is that to make our model behave like the brain, all we need to do is to match their energy functions, without worrying about the details of the brain's micro-circuitry. By doing this the model will be able to generate images or language just like the biological brain, and perhaps this is the secret to the success of modern generative AI.
-
+In this article we will investigate the implications of these ideas for models of biological brains, i.e., the field of neuroscience. Both brains and modern generative AI systems seem to be doing similar things, i.e., they are both able to create images and generate language. This has resulted in a search for micro circuits in the brain whose inter-connection architecture resembles  artificial neural networks such as the transformer. However no such micro circuit has been found.
+We will examine this problem from the perspective of modern EBMs based on diffusions, and show that a plausible top-down model for the brain can be created which is based on the idea of minimizing energy functions.
+In the brain energy is generated due to neurons interacting with one another, however in our model for the brain we ignore these interactions, and instead learn the energy function directly
+by using the data generated by the brain in the form of images or langauge. The important point is that to make our model behave like the brain, all we need to do is to match their energy functions, without worrying about the details of the brain's micro-circuitry. By doing this, the model is able to generate images or language just like the biological brain, and perhaps this is the secret to the success of modern generative AI.
 Within this framework artificial neural networks such as the transformer are not modeling the details of the micro circuits in the brain, but are instead modeling the brains energy function. Hence trying to find a transformer look alike micro circuit in the brain is a futile exercise. 
 
-As we will see, the mapping between models in neuroscience and EBM based diffusion models becomes:
+The correspondence between models in neuroscience and EBM based models is given by:
 
 | **Brain Concept**           |                 **Diffusion/EBM Model Analogue**  |
 | ------------------          |                   -----------------------------   |
-| Connectome interactions     |                Energy function created due to unkown interactions between nodes |
-| Visible Perception neurons  |                  Observable node state vector |
-| Perceptual dynamics         |                       Langevin sampling dynamics |
-| Priors/expectations         |                     Conditional system dynamics  |                          
-| Hidden belief states        |                     Optional emergent interpretation |
+| Energy function created due to Connectome interactions     |                Energy function inferred from training data |
+| Energy minimization driven by 2nd law of thermodynamics         |                      Energy minimization driven by Langevin sampling dynamics |
 
 The idea of modeling the brain using energy functions leads to a simplification that is comparable to that achieved by
 replacing Newtonian mechanics with statistical mechanics when analyzing a system with a large number of interacting particles.
-In both cases the dynamics of how the system evolves with time can be obtained from the energy function without worrying about the details of the interactions themselves. In the cae of the brain the minimum energy states corresponds to perception (for vision) or thoughts (for langauge). 
+In both diffusion EBMs and statistical mechanics the equilibrium behavior of the system can be obtained from the energy function without worrying about the behavior of each individual node. In the cae of the brain the minimum energy states corresponds to perception (for vision) or thoughts (for langauge). 
 Hence generative AI systems are imitating the energy function of the brain, not its micro connection architecture.  But the fact that they work so well shows that a model at the level of energy functions is sufficient to create an artificial brain.
 
-You may be wondering whether the problam of estimating the billions of parameters of the energy function is any simpler than the problem of figuring out the brain's connectome. This does look like a formidable problem, but one that has been solved in the past twenty years with the advances in deep learning systems. By using deep learning, we can estimate the energy function parameters by using the brain's output in the form of images and text.
+You may be wondering whether the problam of estimating the billions of parameters of the energy function is any simpler than the problem of figuring out the brain's connectome. This does look like a formidable problem, but one that has been solved in the past twenty years with the advances in deep learning systems. By using deep learning, we can estimate the parameters of the energy function by using the brain's output in the form of images and text.
 
 The theories of neuroscience that I am going to discuss are based on the fundamental idea that in order to survive, living creatures need to create a model for their environment within themselves. Consider the simplest kind of life, such as a uni-cellular creatures such as bacteria. Their insides are cordoned off from the environment by means of a cell wall (in neuroscience this is referred to as a Markov Blanket) . However in order to survive they need information about the outside world so that they can feed themselves for example, and this is obtained by means of sensors on their cell walls. The information from these sensors gets converted into a chemical model that the creature uses to move around and get closer to food sources, and this serves as a simple example of a environment model.
 
-Higher animals such as ourselves face the same problem since our brains are enclosed in the darkness of our skulls and needs to figure out what is happening in the external world. It does this by building a model for the world with the help of signals that are coming in through the sensory organs and when we open our eyes, it is the output of this model that we see in front of us, i.e., the image that we see is internally generated. The model is connected to the actual world out there, but is unique to each creature and been designed to help it survive in the world. Different creatures have their own models, and in general the sophistication increases with larger brain sizes. 
-Hence our brains are making a best guess of what the external world looks like by using the sparse signals coming in from the sense organs and use that information to generate the world that we see.
+Higher animals such as ourselves face the same problem since our brain is enclosed in the darkness of our skulls and need to figure out what is happening in the external world. It does this by building a model for the world with the help of signals that are coming in through the sensory organs, it is the output of this model that we see when we open our eyes, i.e., the image that we see is internally generated by the brain. The model is connected to the actual world out there, but is unique to each creature and been designed to help it survive in the world. Different creatures have their own models, and in general the sophistication increases with larger brain sizes. 
+Hence our brains are making a best guess of what the external world looks like by using the sparse signals coming in from the sense organs and they use that information to generate the world that we see.
 There are several theories of how this works, and we will consider a couple of them:
 
 - Predictive Processing: This is a qualitative framework of how the brain works and its main proposal is that the brain's model is predictive. Hence the brain is not just modeling the state of the world as it exists at any instant, but does prediction, i.e., it forecasts what the world might look like in the future. 
 How far into the future the prediction is done depends on the animal in question, humans excel at this and can do long term prediction, while most other animals can predict at most a few steps into the future.
-- Active Inference: This is closely related to the Predictive Processing framework and also proposes that our perceptions are internally generated by the brain in reponse to signals coming in from outside.
+- Active Inference: This is closely related to the Predictive Processing framework and also proposes that our perceptions are internally generated by the brain in response to signals coming in from outside.
 However unlike Predictive Processing, Active Inference models the internal states in the brain that are doing the generation, and it does so by using a
-mathematical framework based on Bayes Rule, and the principle of minimization of variational free energy. 
+mathematical framework based on Bayes Rule, and the principle of minimization of variational free energy. This framework splits up the process of perception into three parts, namely inference of the internal state based on information coming from the senses, followed by prediction of the next state and then finally generation of the next state. Inference results in a latent state representation that the brain uses internally for prediction as well as for storing information.
 
-Prediction is a fundamental aspect of both these models and both Active Inference and Predictive Processing put it at the heart of their theory, by connecting predictions not just to perception, but also to action. 
+The basic difference between these models is Predictive Procesing does not attempt to model the brain's internal states.
+However prediction is an important aspect of both these models and both Active Inference and Predictive Processing put it at the heart of their theory, by connecting predictions not just to perception, but also to action. 
 Broadly speaking, action is defined as the way in which living creatures are able to change their environment in order to facilitate goals.
 These theories propose that brains predict the perceptual consequence of an action internally, and then the muscles carry out the action to make the prediction come true.
 
-In this article I will connect the predictive processing framework withdiffusion based EBM models of the type that ecountered in [Part 3](https://subirvarma.github.io/GeneralCognitics/2026/02/13/statmech3.html).
+![](https://subirvarma.github.io/GeneralCognitics/images/stat112.png) 
+
+Figure 2: Equivalent models for sensory perception generation in the brain
+
+In this article I will model both these frameworks with EBM models of the type that we ecountered in [Part 3](https://subirvarma.github.io/GeneralCognitics/2026/02/13/statmech3.html).
+
+
+
 These models trace their roots to the Boltzmann Machine, and its recent generalization to diffusion models. The EBM model proposes that the brain's model for the environment is captured 
 by the energy that is generated due to the interactions between neurons. However it ignores that actual interaction themselves, and shows that processes such as perception can be explained by modeling the energy function instead and it ties brain functions such as perception to the principle of minimization of this energy.
 The Active Inference theory is also based on the minimization of energy, however the energy that it refers to is a probabilistic quantity that is called Variational Free Energy or VFE. The energy in EBM models on the other hand is created due to the interaction netween neurons and hence has a physical basis not just a probabilistic one.
 But brains do much more than perception, they enable us to plan hypothetical scenarios, as well as take actions in the real world. We will see that these capabilities are intimately tied to perception so that EBMs models can be used to do these operations as well.
-
-*The brain can clearly generate video, which is nothing more than a succession of images, for example when we are imagining some scenario in our minds. Hence it is an important addition to any model for the brain.
-Using a model to generate video connects it to knowledge of how the world works, for example when something is dropped it will fall to the ground. Hence, in order to generate video the model should have a common sense notions of how things evolve in time which is commonly known as a world model. 
-But video generation is not done in a vaccuum but is closely tied to actions, since an action causes changes to the subsequent images.
-Hence the generation process in world models is conditioned not just on past images, but also on actions that are taken.
-Once we have a world model which is able to generate a succession of images conditioned on actions, this opens up the possibility of using it to do planning. For example if we want to accomplish a task then we can try out various scenarios mentally to figure out which sequence of actions would result in a successful outcome.*
-
 
 ## The Predictive Processing Framework in Neuroscience
 
