@@ -189,7 +189,7 @@ The tea making scenario also points towards a way in which planning can be combi
 organism can use its world model and ability to do hypothetical rollouts to take actions that achieve a task objective.
 Using its world model the agent generates multiple scenarios driven by sequences of actions, and then chooses the scenario that leads to success. It then carries out the first action in the sequence, and this changes the environment state. The organism then incorporates the new information into its model, and then repeats the process. If it ends up in an undesirable state then it backtracks to the previous state and chooses some other action. Hence as the organism takes actions and encounters new states, it constantly modifies its plans and its world model by taking the new information into account. This type of algorithm goes by the name of model predictive control or MPC in control theory.
 
-## A Framework for Predictive Processing using Internal States and Latent Representations
+## Predictive Processing using Internal States and Latent Representations
 
 The name most closely associated with the [Active Interference theory](https://www.amazon.com/Active-Inference-Energy-Principle-Behavior/dp/0262553996)  for the brain is that of the prominent neuroscientist Karl Friston.
 This theory models the brain using Bayesian statistics, and is closely related to the Predictive Processing model. It is also proposes that our perceptions are internally generated, but it also explicitly seeks to model the hidden states in the brain that generates this perception using Bayes Rule.
