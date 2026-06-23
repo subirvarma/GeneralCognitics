@@ -80,7 +80,7 @@ However we should not be looking for transformer equivalents in the brain. If we
 
 In practical situations auto-regressive models work better in some cases, such as in language generation, and I will cover this in the next article. For images on the other hand, auto-regressive generation is at a significant dis-advantage since the model has to be run hundreds of thousands of time to generate a single image.
 
-## The Predictive Processing Framework in Neuroscience
+## The Predictive Processing Framework in Computational Neuroscience
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat76.png) 
 
