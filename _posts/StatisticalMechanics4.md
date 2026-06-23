@@ -196,14 +196,15 @@ Using its world model the agent generates multiple scenarios driven by sequences
 
 ## Predictive Processing using Internal States and Latent Representations
 
-The name most closely associated with the [Active Interference theory](https://www.amazon.com/Active-Inference-Energy-Principle-Behavior/dp/0262553996)  for the brain is that of the prominent neuroscientist Karl Friston.
-This theory models the brain using Bayesian statistics, and is closely related to the Predictive Processing model. It is also proposes that our perceptions are internally generated, but it also explicitly seeks to model the hidden states in the brain that generates this perception using Bayes Rule.
+The best known model in neuroscience that seeks to model the brain's internal states is the [Active Inference](https://www.amazon.com/Active-Inference-Energy-Principle-Behavior/dp/0262553996) model and the
+name most closely associated with the Active Interference is that of the prominent neuroscientist Karl Friston.
+It is also proposes that our perceptions are internally generated, and it seeks to model the distribution of the hidden states in the brain that generates this perception using Bayes Rule.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat75.png) 
 
 Figure 2: Inferring a Model for the External World Using Bayesian Statistics
 
-Figure 2 shows the mathematical framework used in Active Inference theory. The vextor $x^*$ represents the external world to which the organism does not have direct access. The vector $y$ are the sensory neurons in the organism's cortex to which the organism does have access. Hence the external world has an unknown generative model that produce sensation $y$ in the organism. The organism creates an inference about the causes of sensation $y$, and this is summarized in the vector $x$ on the left and is probabilistically captured by the conditional distribution $p(x|y)$. Assuming an inference $x$, also called the hidden state or belief state, the organism internally generates a perception $y$ and this is captured by the conditional distribution $p(y|x)$. If the generated $y$ is different than the original sensation that came in through the senses, then the organism changes its inference $x$ so that the two match. Mathematically this by the accomplished by the minimization of a probabilistic quantity, called the variational free energy or VFE.
+Figure 2 shows the mathematical framework used in Active Inference theory. The vextor $x^*$ represents the external world to which the organism does not have direct access. The vector $y$ are the sensory neurons in the organism's cortex to which the organism does have access. Hence the external world has an unknown generative model that produce sensation $y$ in the organism. The organism creates an inference about the causes of sensation $y$, and this is summarized by the vector $x$ on the left and is probabilistically captured by the conditional distribution $p(x|y)$. Assuming an inference $x$, also called the hidden state or belief state, the organism internally generates a perception $y$ and this is captured by the conditional distribution $p(y|x)$. If the generated $y$ is different than the original sensation that came in through the senses, then the organism changes its inference $x$ so that the two match. Mathematically this by the accomplished by the minimization of a probabilistic quantity, called the variational free energy or VFE.
 
 Lets now get into the nuts and bolts of the Active Inference framework.
 This system can be analyzed using Bayesian statistics as follows: We will refer to the probability $p(x)$ as the prior (or existing) model for internal state of the brain. If the organism is subjected to sensations $y$, then this results in a change in its belief $x$ about what caused the sensation, and is given by the posterior probability $p(x|y)$. The objective of the Bayes Rule is to estimate $p(x|y)$, and this is given by 
@@ -234,26 +235,26 @@ Karl Friston pointed out that there are two ways to minimize the VFE:
 - Assuming that the external environment is fixed, i.e., the sensory data $y$ is also fixed, then the VFE can be reduced by getting hold of a better internal model $Q_{\theta}(x|y)$ of the environment.
 - If the external environment is allowed to change, then the organism can reduce its VFE by changing the environment so that $-\log p(y)$ is reduced. The organism does so by taking actions and this is known as **Active Inference**.
 
-In the first case the organism changes its internal belief $x$ to reduce the VFE, while in the second case the organism changes its environment $x^{*}$ (which changes the perception signals $y$) to reduce the VFE. 
+In the first case the organism changes its internal belief distribution $Q_{\theta}(x|y)$ to reduce the VFE, while in the second case the organism changes its model for the environment $p(y)$ (which changes the perception signals $y$) to reduce the VFE. 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat91.png) 
 
 Figure 2: Inferring a Model for the External World Using Bayesian Statistics
 
-The presence of the hidden state $x$ differentiates the Active Inference and Predictive Processing frameworks. 
-The Predictive Processing framework is able to get by without using hidden states, since it models the time evolution of the perception neurons directly by using the distribution $p_{\theta}(y_{n+1}|y_{\le n},s_n)$, without modeling the internal states that drive this evolution. 
+The presence of the hidden state $x$ differentiates the Active Inference from the theory described in the previous section, which I am going to refer to as DIrect Predictive Processing or DPP. 
+DPP is able to get by without using hidden states, since it models the time evolution of the perception neurons directly by using the distribution $p_{\theta}(y_{n+1}|y_{\le n},s_n)$, without modeling the internal states that drive this evolution. 
 The modern approach to Active Inference on the other hand uses several models:
 
 - A model for hidden state inference: $q_{\phi}(x_n|o_{\le n})$
 - A model for the dynamics of the hidden state evolution with time and in reponse to actions: $p_{\theta}(x_{n+1}|x_n,a_{n+1})$
 - A model for decoding perceptions from the hidden state: $p_{\psi}(y_n|x_n)$
 
-The first and last of these models correspond to the models used in Friston's framework, while the dynamics model $p_{\theta}$ tells us how the internal belief state evolves with time and in response to actions that the organism is taking and is equivalent to the world model that was discussed in the prior section. The perception $y_n$ is a function of the latest state $x_n$, which is in contrast to the Predictive Processing model in which it was dependent on the history of $y_{\lt n}$ of prior perceptions. The Active Inference model captures the historical dependence by using the state $x_n$ which keeps track of the history.
-This big addition in comparison to Predictive Processing, is the necessity of estimateg the inference model $q_{\phi}(x_n|o_{\le n})$ and the generation model $p_{\psi}(y_n|x_n)$. Unlike the world model, these don't predict the future evolution of the state, but instead seek to transform one state to another.
+The first and last of these models correspond to the models used in Friston's framework, while the dynamics model $p_{\theta}$ tells us how the internal belief state evolves with time and in response to actions that the organism is taking and is equivalent to the world model that was discussed in the prior section. The perception $y_n$ is a function of the latest state $x_n$, which is in contrast to the DPP model in which it was dependent on the history of $y_{\lt n}$ of prior perceptions. The Active Inference model on the other hand captures the historical dependence by using the state $x_n$ which keeps track of the history.
+This big addition in comparison to the DPP model is the necessity of estimateg the inference model $q_{\phi}(x_n|o_{\le n})$ and the generation model $p_{\psi}(y_n|x_n)$. Unlike the world model, these don't predict the future evolution of the state, but instead seek to transform one state to another.
 
-The original Active Inference framework is based on the minimization of a probabilistic quantity, namely the VFE. The question arises if it can be re-cast in the language of EBMs, so that its operation can be understood to be as a result of minimization of the interaction energy between nodes. This is discussed in the next section.
+The original Active Inference framework is based on the minimization of a probabilistic quantity, namely the VFE. The question arises if it can be re-cast in the language of EBMs, so that its operation can be understood to be as a result of minimization of the interaction energy between nodes. This is discussed in the following sections, but first we will show how EBMs can be used to model DPP systems.
 
-## Models for Predictive Processing Using EBM/Diffusions and Without the Use of Latent Representations
+## Models for Direct Predictive Processing Using EBM/Diffusions and Without the Use of Latent Representations
 
 The Predictive Processing framework tells us that both perception and planning abilities in living organisms is crtically dependent on their ability to build a world model, as captured by the conditional probability distribution $p(y_{n+1}|y_{\le n}, a_n)$. 
 In this section I will show EBMs can be used to model this distribution, and thereby serve a way in which world models can be built in robots.
