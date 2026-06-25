@@ -1,9 +1,9 @@
 ---
 layout: default
-title: " Models for Perception in the Brain: Inference, Generation, Prediction"
+title: " Models for Perception in the Brain: Inference, Prediction, Generation"
 ---
 
-# Models for Perception in the Brain: Inference, Generation, Prediction
+# Models for Perception in the Brain: Inference, Prediction, Generation
 
 **Contents**     
 
@@ -25,18 +25,19 @@ title: " Models for Perception in the Brain: Inference, Generation, Prediction"
 
 ## Introduction
 
-In Part 1 of this series of articles I took a deep dive into the science of statistical mechanics, and how it could be used to analyze a system of interacting nodes. We came upon the idea of using the energy (or free enegy) of the system as a way to analyze the dynamics of this system, since starting from an arbitrary state, the interactions cause the energy to decrease until it settles to an equilibrium state of low energy. This enabled us to analyze the phase change behavior of complex systems called spin glasses.
+In Part 1 of this series of articles I took a deep dive into the science of statistical mechanics, and how it could be used to analyze a system of interacting nodes. We came upon the idea of using the energy (or free enegy) of the system as a way to analyze the equilibrium behavior of this system, since starting from an arbitrary state, the interactions cause the energy to decrease until it settles to an equilibrium state of low energy. This enabled us to analyze the phase change behavior of complex systems called spin glasses.
 In Part 2 I applied these ideas to the analysis of a collection of nodes that could be used to function as an associative memory (the Hopfield Network) or could be used as a generative model (the Boltzmann Machine) and once again the idea of network dynamics governed by the energy function played a central part. 
 However now the energy funcion was determined by the (training) data whose distribution the network was trying to mirror.
 Another crtical idea introduced was the concept of hidden or latent states which enabled the Boltzmann Machine to model complex energy functions.
 
-In Part 3 I looked at modern diffusion models and how these could be regarded as more advanced versions of the Boltzmann Machine. Diffusion models are also based on the idea of an energy function, but now it is a complex creature that is modeled by artificial neural networks with hundreds of millions of parameters. In the process we moved past the idea of modeling the details of the interactions between the system nodes. Instead the system dynamics are be captured by changes in the energy function value as it settles into an equilibrium state that is distributed according to the training data.
-However unlike the Boltzmann machine, diffusion models don't require the incorporation of hidden states, since artificial neural networks such as transformers are sufficient to capure the complexity of the energy function.
-I am going to use the term Energy based Models or EBMs for all the models whose operation can be understood by modeling their energy function. This ranges from the simple Isis model for magnetism from a hundred years ago, to the latest diffusion models in AI.
+In Part 3 I looked at diffusion models in AI and how these could be regarded as more advanced versions of the Boltzmann Machine. Diffusion models are also based on the idea of an energy function, but now it is a complex creature that is modeled by artificial neural networks with hundreds of millions of parameters. In the process we moved past the idea of modeling the details of the interactions between the system nodes. Instead the system dynamics are be captured by changes in the value of the energy function as it settles into an equilibrium state.
+However unlike the Boltzmann machine, diffusion models don't require the incorporation of hidden states, since the use modern artificial neural networks such as transformers as function approximators is sufficient to capure the complexity of the energy function.
+I am going to use the term Energy based Models or EBMs for all the models whose behavior can be understood by modeling their energy function. This ranges from the simple Isis model for magnetism from a hundred years ago, to the latest diffusion models in AI.
 
-In this article we will investigate the implications of these ideas for models of biological brains, i.e., the field of neuroscience. Both brains and modern generative AI systems seem to be doing similar things, i.e., they are both able to create images and generate language. This has resulted in a search for micro circuits in the brain whose inter-connection architecture resembles  artificial neural networks such as the transformer. However no such micro circuit has been found.
-We will examine this problem from the perspective of modern EBMs based on diffusions, and show that a plausible top-down model for the brain can be created which is based on the idea of minimizing energy functions.
-In the brain energy is generated due to neurons interacting with one another, however in our model for the brain we ignore these interactions, and instead learn the energy function directly
+In this article we will investigate the implications of these ideas for models of biological brains, i.e., the field of computational neuroscience. Both brains and modern generative AI systems seem to be doing similar things, i.e., they are both able to create images and generate language. This has resulted in a search for micro circuits in the brain whose inter-connection architecture resembles  artificial neural networks such as the transformer. However no such micro circuit has been found.
+We will examine this problem from the perspective of diffusion based EBMs, and show that a plausible top-down model for the brain can be created based on the idea of minimizing energy functions.
+
+Energy in the brain is generated due to neurons interacting with one another through their synapses. However in our model for the brain we ignore these interactions, and instead learn the energy function directly
 by using the data generated by the brain in the form of images or langauge. The important point is that to make our model behave like the brain, all we need to do is to match their energy functions, without worrying about the details of the brain's micro-circuitry. By doing this, the model is able to generate images or language just like the biological brain, and perhaps this is the secret to the success of modern generative AI.
 Within this framework artificial neural networks such as the transformer are not modeling the details of the micro circuits in the brain, but are instead modeling the brains energy function. Hence trying to find a transformer look alike micro circuit in the brain is a futile exercise. 
 
@@ -50,30 +51,31 @@ The correspondence between models in neuroscience and EBM based models is given 
 The idea of modeling the brain using energy functions leads to a simplification that is comparable to that achieved by
 replacing Newtonian mechanics with statistical mechanics when analyzing a system with a large number of interacting particles.
 In both diffusion EBMs and statistical mechanics the equilibrium behavior of the system can be obtained from the energy function without worrying about the behavior of each individual node. In the cae of the brain the minimum energy states corresponds to perception (for vision) or thoughts (for langauge). 
-Hence generative AI systems are imitating the energy function of the brain, not its micro connection architecture.  But the fact that they work so well shows that a model at the level of energy functions is sufficient to create an artificial brain.
+Hence generative AI systems are imitating the energy function of the brain, not its micro connection architecture.  But the fact that they work so well shows that a model at the level of energy functions is sufficient to create an artificial brain and powerful training algorithms such as backprop.
 
 You may be wondering whether the problam of estimating the billions of parameters of the energy function is any simpler than the problem of figuring out the brain's connectome. This does look like a formidable problem, but one that has been solved in the past twenty years with the advances in deep learning systems. By using deep learning, we can estimate the parameters of the energy function by using the brain's output in the form of images and text.
 
-The theories of neuroscience that I am going to discuss are based on the fundamental idea that in order to survive, living creatures need to create a model for their environment within themselves. Consider the simplest kind of life, such as a uni-cellular creatures such as bacteria. Their insides are cordoned off from the environment by means of a cell wall (in neuroscience this is referred to as a Markov Blanket) . However in order to survive they need information about the outside world so that they can feed themselves for example, and this is obtained by means of sensors on their cell walls. The information from these sensors gets converted into a chemical model that the creature uses to move around and get closer to food sources, and this serves as a simple example of a environment model.
+The theories of neuroscience that I am going to discuss are based on the fundamental idea that in order to survive, living creatures need to create a model for their environment within themselves. Consider the simplest kind of life, such as a uni-cellular creatures such as bacteria. Their insides are cordoned off from the environment by means of a cell wall (in neuroscience this is referred to as a Markov Blanket) . However in order to survive they need information about the outside world so that they can feed themselves, and this is obtained by means of sensors on their cell walls. The information from these sensors gets converted into a chemical model that the creature uses to move around and get closer to food sources, and this serves as a simple example of a environment model.
 
-Higher animals such as ourselves face the same problem since our brain is enclosed in the darkness of our skulls and need to figure out what is happening in the external world. It does this by building a model for the world with the help of signals that are coming in through the sensory organs, it is the output of this model that we see when we open our eyes, i.e., the image that we see is internally generated by the brain. The model is connected to the actual world out there, but is unique to each creature and been designed to help it survive in the world. Different creatures have their own models, and in general the sophistication increases with larger brain sizes. 
+Higher animals such as ourselves face the same problem since our brain is enclosed in the darkness of our skulls and need to figure out what is happening in the external world. It does this by building a model for the world with the help of signals that are coming in through the sensory organs, and it is the output of this model that we see when we open our eyes, i.e., the image that we see is not something that exists 'out there', but is internally generated by the brain. The model is unique to each creature and is designed to help it survive in the world. In general the sophistication of the model increases with larger brain sizes. 
+
 Hence our brains are making a best guess of what the external world looks like by using the sparse signals coming in from the sense organs and they use that information to generate the world that we see.
-There are several theories of how this works, and we will consider a couple of them:
-
-- Predictive Processing: This is a qualitative framework of how the brain works and its main proposal is that the brain's model is predictive. Hence the brain is not just modeling the state of the world as it exists at any instant, but does prediction, i.e., it forecasts what the world might look like in the future. 
+There are several theories of how this works, and the one we will consider in this article is called Predictive Processing: 
+This is a qualitative framework of how the brain works and its main proposal is that the brain's model is predictive. Hence the brain is not just modeling the state of the world as it exists at any instant, but does prediction, i.e., it forecasts what the world might look like in the future. 
 How far into the future the prediction is done depends on the animal in question, humans excel at this and can do long term prediction, while most other animals can predict at most a few steps into the future.
-- Active Inference: This is closely related to the Predictive Processing framework and also proposes that our perceptions are internally generated by the brain in response to signals coming in from outside.
-However unlike Predictive Processing, Active Inference models the internal states in the brain that are doing the generation, and it does so by using a
-mathematical framework based on Bayes Rule, and the principle of minimization of variational free energy. This framework splits up the process of perception into three parts, namely inference of the internal state based on information coming from the senses, followed by prediction of the next state and then finally generation of the next state. Inference results in a latent state representation that the brain uses internally for prediction as well as for storing information.
 
-The basic difference between these models is Predictive Procesing does not attempt to model the brain's internal states.
-However prediction is an important aspect of both these models and both Active Inference and Predictive Processing put it at the heart of their theory, by connecting predictions not just to perception, but also to action. 
+Within the Predictive Processing framework, models can be built with or without the use of internal states in the brain, also called hidden or belief states, and we will consider both types.
+The most prominent of the models incorporating hidden states is called the Active Inference framework.
+Active Inference models the internal states in the brain by using a
+mathematical framework based on Bayes Rule, and the principle of minimization of variational free energy. This framework splits up the process of perception into three parts, namely inference of the internal state based on information coming from the senses, followed by prediction of the next state and then finally generation of the next state. Inference results in a latent state representation that the brain uses internally for making the next prediction.
+
+The Predictive Processing framework connects predictions not just to perception, but also to action. 
 Broadly speaking, action is defined as the way in which living creatures are able to change their environment in order to facilitate goals.
-These theories propose that brains predict the perceptual consequence of an action internally, and then the muscles carry out the action to make the prediction come true.
+This theory proposes that brains predict the perceptual consequence of an action internally, and then the muscles carry out the action to make the prediction come true.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat112.png) 
 
-Figure 1: Equivalent models for sensory perception generation in the brain
+Figure 1: Equivalent models for sensory perception in the brain
 
 Part (a) of figure 1 shows a model for perception, using the three operations of inference, prediction and generation. I will show that all of these three modules can be modeled using the principle of energy minimization. Input sensory data is converted into a latent space representation using the inference module, and this is converted into a system state by combining it with the previous state.
 The prediction module then does its job using this representation. Finally the generation module converts the latent space representation back into pixel space.
@@ -112,7 +114,7 @@ If we see something that is unexpected, then it means that the event was not par
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat77.png) 
 
-Figure 2: A model for action generation in the brain
+Figure 3: A model for action generation in the brain
 
 I am going to refer to this framework as Direct Predictive Processing or DPP, in order to distinguish it from the latent variable based Predictive Processing framework that is described in the following section.
 
@@ -158,7 +160,7 @@ The Friston theory, which is part of the Active Inference framework, does not us
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat79.png) 
 
-Figure 2: The Reinforcement Learning Control Framework: An Agent Acting in the Real World
+Figure 4: The Reinforcement Learning Control Framework: An Agent Acting in the Real World
 
 The RL framework is shown in part (a) of the above figure and it shows an organism operating in an external environment. 
 Fundamental to this framework is the concept of the agent state $s_n$, which is defined as the information that an agent needs to take an action.
@@ -170,7 +172,7 @@ The RL framework shown in part (a) leaves open the problem of how the agent figu
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat78.png) 
 
-Figure 3: Model Based Control in Reinforcement Learning: An Agent Planning its actions Based on an internal model
+Figure 5: Model Based Control in Reinforcement Learning: An Agent Planning its actions Based on an internal model
 
 Part (a) of the above figure shows an example rollout of the perception-action states during planning, starting from some initial state $s_1$. The organism can potentially take one of two actions $a_1$ or $a_2$ from this state, and assuming it takes action $a_1$, it can potentially transition to state $s_2$ or state $s_3$. The state that it actually transitions to is controlled by the conditional probabilities $p(s_2|s_1,a_1)$ and $p(s_3|s_1,a_2)$ which constitute the organism's world model.
 Once this transition takes place, the organism then takes its next potential action and the whole process repeats.
@@ -190,7 +192,7 @@ If the organism learns this world model and captures its within its neural netwo
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat80.png) 
 
-Figure 4: Integration of Planning and Acting: Agent used its Internal Model to take better actions in the Real World
+Figure 6: Integration of Planning and Acting: Agent used its Internal Model to take better actions in the Real World
 
 The tea making scenario also points towards a way in which planning can be combined with taking actions in the real world. The above figure shows a way by which an 
 organism can use its world model and ability to do hypothetical rollouts to take actions that achieve a task objective.
@@ -204,7 +206,7 @@ It is also proposes that our perceptions are internally generated, and it seeks 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat75.png) 
 
-Figure 2: Inferring a Model for the External World Using Bayesian Statistics
+Figure 7: Inferring a Model for the External World Using Bayesian Statistics
 
 Figure 2 shows the mathematical framework used in Active Inference theory. The vextor $x^*$ represents the external world to which the organism does not have direct access. The vector $y$ are the sensory neurons in the organism's cortex to which the organism does have access. Hence the external world has an unknown generative model that produce sensation $y$ in the organism. The organism creates an inference about the causes of sensation $y$, and this is summarized by the vector $x$ on the left and is probabilistically captured by the conditional distribution $p(x|y)$. Assuming an inference $x$, also called the hidden state or belief state, the organism internally generates a perception $y$ and this is captured by the conditional distribution $p(y|x)$. If the generated $y$ is different than the original sensation that came in through the senses, then the organism changes its inference $x$ so that the two match. Mathematically this by the accomplished by the minimization of a probabilistic quantity, called the variational free energy or VFE.
 
@@ -241,7 +243,7 @@ In the first case the organism changes its internal belief distribution $Q_{\the
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat91.png) 
 
-Figure 2: Inferring a Model for the External World Using Bayesian Statistics
+Figure 8: Inferring a Model for the External World Using Bayesian Statistics
 
 The presence of the hidden state $x$ differentiates the Active Inference from the theory described in the previous section, which I am going to refer to as DIrect Predictive Processing or DPP. 
 DPP is able to get by without using hidden states, since it models the time evolution of the perception neurons directly by using the distribution $p_{\theta}(y_{n+1}|y_{\le n},s_n)$, without modeling the internal states that drive this evolution. 
@@ -266,7 +268,7 @@ I am going to do a step by step illustration of how EBMs can be used to model co
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat83.png) 
 
-Figure 5: Modeling the Energy Function of a collection of interacting nodes using a Transformer based Artificial Neural Network
+Figure 9: Modeling the Energy Function of a collection of interacting nodes using a Transformer based Artificial Neural Network
 
 The basic premis of EBMs is that the state of a system that follows a complex multi-modal probability distribution can be generated by using a system of interacting nodes. We will use the notation $(x_1,...,x_N)$ for the state $y$ of this system, where $x_i$ is the state of the $i^{th}$ node. 
 When the system is in equilibrium the probability distribution of the state $(x_1,...,x_N)$ is connected to the energy for the system as captured by the Boltzmann distribution 
@@ -286,13 +288,13 @@ Focusing on the energy function as opposed to the interconnection between neuron
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat84.png) 
 
-Figure 5: Modeling Predictive Perception in animal brains by means of minimization of the Energy Function. The minimization is carried out over L stages, with $N_L$ step Langevin Sampling used to do minimization at each stage
+Figure 10: Modeling Predictive Perception in animal brains by means of minimization of the Energy Function. The minimization is carried out over L stages, with $N_L$ step Langevin Sampling used to do minimization at each stage
 
 Once we have a good model for the energy function, say $E_W(x_1,...,x_N)$, where $W$ are the parameters for the model, then the next step is to generate samples using it, and this process is illustrated in the above figure. The main idea behind this algorithm, called the diffusion model, is basically the same as for the simulated annealing method for function optimization from [Part 1](https://subirvarma.github.io/GeneralCognitics/2025/11/24/statmech1.html). Starting from an initial non-equilibrium state, the algorithm enables us to gradually transition to states of lower energy using a recursing sampling algorithm called Langevin dynamics. However this cannot be done in a single step, otherwise the iteration will get stuck in non-optimal local minima or saddle points. One way to avoid this is by introducing some noise into the process, starting from a high level and gradually decreasing it (this is similar to starting from a high temperature and gradually decreasing it in simulated annealing). This leads to a multistage optimisation as shown in the above figure with the noise levels decreasing from right to left, as the optimisation proceeds. At each stage of the noise level, Langevin sampling is used to do a few steps of optimisation.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat86.png) 
 
-Figure 5: Illustration of a single step of Langevin Sampling 
+Figure 11: Illustration of a single step of Langevin Sampling 
 
 A single step of sampling for the $t^{th}$ step of the optimisation is done using the equation
 
@@ -308,13 +310,13 @@ We have approached the process of generation using the language of annealing bas
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat85.png) 
 
-Figure 5: Modeling Predictive Perception coupled with Action in animal brains by means of minimization of the Energy Function. The minimization is carried out over L stages, with $N_L$ step Langevin Sampling used to do minimization at each stage
+Figure 12: Modeling Predictive Perception coupled with Action in animal brains by means of minimization of the Energy Function. The minimization is carried out over L stages, with $N_L$ step Langevin Sampling used to do minimization at each stage
 
 The DPP framework generates the next perception $y_{n+1}$ as a function a of the previous $K$ perceptions, so that the next state is distributed according to the probability distribution $p_W(y|y_{n-1},...,y_{n-K},a_n)$. Generation from this type of distribution can be readily incorporated into the EBM model as shown above. For an example of a diffusion based world model does predictions in the pixel space, as in the DPP framework, see the [DIAMOND model](https://arxiv.org/abs/2405.12399) from 2024. The world that this system models are from Atari video games. The model is used to train a game playing agent, using the actor-critic algorithm from RL. 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat81.png) 
 
-Figure 5: Inputs and outputs in the UniSIM model
+Figure 13: Inputs and outputs in the UniSIM model
 
 Another model in this category is the [UniSIM model](https://arxiv.org/abs/2310.06114), also from 2024, that can be used to build world models for robotic control. Inputs and outputs in this model are shown in the above figure, the output consists of a sequence of image frames $y_n$ which is the model's prediction of the effect of the action. The input consists of the following:
 
@@ -338,7 +340,7 @@ The main lesson to be drawn from this diffuson/EBM model for the brain, is that 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat88.png) 
 
-Figure 5: The ViT method of turning an image into a sequence of patches
+Figure 14: The ViT method of turning an image into a sequence of patches
 
 Various types of artificial neural networks can be used as function approximators for diffusion EBMs, the one that I am going to focus on is called diffusion transformer or DiT. It was proposed by [Peebles and Xie](https://arxiv.org/abs/2212.09748), who later went on to use the system to build the Sora video generating app at OpenAI. Transformers were originally proposed to model sequence data and are commonly used to build LLMs, but later it was discovered that are as good as convolutional neural networks in processing images as well.
 
@@ -346,7 +348,7 @@ The technique used to represent image data in this model goes back to an older m
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat87.png) 
 
-Figure 5: Transformer Model for the Energy Function on the left hand side. The three figures on the right illustrate techniques for conditioning the energy computation on other variables.
+Figure 15: Transformer Model for the Energy Function on the left hand side. The three figures on the right illustrate techniques for conditioning the energy computation on other variables.
 
 The above figure shows the DiT, as modified to serve as an approximator for energy functions. As in any transformer, it is composed of multiple identical processing blocks as shown in part (a) of the figure, into which the image is fed into after it has been converted into patches. Another input is the optimization stage number $t$, which varies from $T$ down to $0$ as the optimization progresses. The output of the model is the energy function $E(X,t,c)$, which is then differentiated using an automatic differentiator to compute ${\partial E\over{\partial x_i}}$, and this used in the Langvevin equation.
 
@@ -356,7 +358,7 @@ Part (b) of the figure shows a technique called Adaptive Layer Norm (AdaLN) for 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat89.png) 
 
-Figure 5: Attention Mechanisms in Space Time Transformers
+Figure 16: Attention Mechanisms in Space Time Transformers
 
 World models can be designed to generate more than one image frame in a single pass through the diffusion model, in other words each pass through the diffusion results in a video clip rather than a single frame. Such a design helps to ensure temporal integrity of the generated video clip, since each image frame directly influences the frame around it. This is in addition to the inter-frame dependency created due to the conditional distribution $(p_{n+1}|y_{\le n}, c)$ which also helps temporal coherence. Image transformer models that take the temporal dependency into account are called space-time transformers. There are various ways in which the temporal dependency can be implemented, some examples are shown in the above figure. The colored rectangles are individual elements of the image latent vector that is fed into the transformer.
 The right hand figure shows the usual spatial attention with no temporal attention while the second figure shows only temporal attention with no spatial attention. One popular design is alternating blocks of spatial-only and temporal-only attention blocks in the transformer design.
@@ -366,7 +368,7 @@ The right hand figure shows the usual spatial attention with no temporal attenti
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat94.png) 
 
-Figure 4: Variation of energy functions depending on conditioning
+Figure 17: Variation of energy functions depending on conditioning
 
 We can get some intuition on how the brain works by investigating changes in its energy landscape with time. Assume that the current perception is captured by $y_n$, then this corresponds to to a particular minima of the energy landscape given by $E(y_n, y_{n-1}=y, a_{n-1}=a)$ with corresponding probability given by $p(y_n|y,a)$. Assume that the system has settled at the minima $y_n=y'$, and then the organism takes the next action $a_n=a'$ (or receives the the next sensory data). Then the energy landscape transitions to $E(y_{n+1},y', a')$, and the current state $y_{n+1}=y'$ is no longer at a
 minima. The system then travels down the energy landscape until it arrives at the next minima $y''$ and this become the next perception. This process is illustrated in the above figure, which shows a sequence of energy landscape cross sections. The particular cross section at time $n$ is chosen depending upon the previous perception $y_n$ and the action $a_n$. 
@@ -376,7 +378,7 @@ Hence the energy landscape of the perception neurons in the brain can be conside
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat95.png) 
 
-Figure 4: Variation of energy functions depending on conditioning
+Figure 18: Variation of energy functions depending on conditioning
 
 If we know the energy function for the brain, what are the implications on the micro-architecture of the brain, i.e., the connectome?
 Some insight into the problem can be obtained by looking at the development of Hopfield Networks. As described in [Part 2](https://subirvarma.github.io/GeneralCognitics/2025/11/24/statmech2.html), Hopfield networks were designed to serve as associative memories rather than for capturing the distribution of a training dataset as in Boltzmann machines. However they work using similar principles of mnimizing energy functions, so their design is relevant here. The initial design for the Hopfield network involved pairwise interactions between nodes in a fully connected spin glass type network, and is shown on the left hand side of the above figure. This design was biologically plausible since neuron interactions in the brain are known to be of the two-node type.
@@ -386,7 +388,7 @@ With our EBM/diffusion models we are in a similar situation as the new Hopfield 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat96.png) 
 
-Figure 4: Variation of energy functions depending on conditioning
+Figure 19: Variation of energy functions depending on conditioning
 
 Based on this insight, a way to make EBM/diffusion models biologically plausible is by creating an equivalent network which has both perception and hidden nodes, such that the energy function of the perception nodes is the same as given by the EBM/diffusion model. 
 There can be a rich interconnection of perception and hidden nodes among themselves and also between them, but all interactions should be of the two node type. This results in a design of the type shown in the above figure, in which the system has masses of hidden nodes interacting with the perception nodes. The problem of converting an energy function described by a transformer or a CNN into the equivalent interconenction topology featuring only two node interactions is currently still in the reserach stage.
@@ -399,7 +401,7 @@ I will discuss this issue after describing the Friston model.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat90.png) 
 
-Figure 5: Illustrating the case in which predictions are done in latent space rather than pixel space. Pixel space to latent space mapping is done using a separate network.
+Figure 20: Illustrating the case in which predictions are done in latent space rather than pixel space. Pixel space to latent space mapping is done using a separate network.
 
 The Active Inference framework using EBMs is illustrated in the above figure. The external sensory data is passed through an inference network to generate an internal representation that is then fed into the one step state predictor. The predicted state $x_{n+1}$ is then used to generate the next perception $y_{n+1}$. The [Dreamer v4](https://arxiv.org/abs/2509.24527) is a recent world model proposal that does predictions in latent space.
 
@@ -411,7 +413,7 @@ So the question is: Are there biologically plausible models for the auto-encoder
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat32.png) 
 
-Figure 7: Boltzmann machine with hidden nodes
+Figure 21: Boltzmann machine with hidden nodes
 
 The Boltzmann machine has both visible and hidden nodes as shown in the above figure. Once the model has beeen trained, the hidden nodes serve as a latent representation for the data in the visible nodes. However the process required to do this requires serial node-by-node Gibbs sampling which is quite compute intensive on digital architectures, and has restricted the size of feasible Boltzmann machines to a few thousand nodes at most. However the brain does not have this problem since it can implement sampling as a massively parallel operation, hence sampling is not nevessarily a problem for the biological version of the Boltzmann machine. However a more serious problem with the Boltzmann machine is that its node state is restricted to binary values (0 and 1 or +1 and -1), which is a serious limitation when modeling the brain.
 
@@ -419,7 +421,7 @@ The Boltzmann machine has both visible and hidden nodes as shown in the above fi
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat97.png) 
 
-Figure 7: The Helmholtz Machine
+Figure 22: The Helmholtz Machine
 
 In order to overcome the limitations of the Boltzmann machine, [Hinton, Dayan and Neal](https://www.cs.toronto.edu/~fritz/absps/helmholtz.pdf) came up with the Helmholtz machine in 1994 and this launched the current era of auto-encoders. Just like the Boltzmann machine it has visible or feature nodes as well as hidden nodes that can model the latent representation. However unlike the Boltzmann machine, all inter-node connections are uni-directional. Once the network has been trained, it generates latent representations by sending a signal upwards (in the above figure), which passes through one or more layers of nodes, two are shown in the picture. The final layer contains the latent representation. In order to generate new data, we start with a a latent represnetation, and then the signal propagates downwards until it gets to the visible nodes. Since this design does not involve sampling, it can be made much more efficient than the Boltzmann machine. In order to train this system, they replaced maximum likelihood criteria with one based on minimizing the VFE, the math is exactly the same as was described for Friston's Active Inference model.
 They called the algorithm they came up with to train the system the Wake-Sleep algorithm.
@@ -428,7 +430,7 @@ They called the algorithm they came up with to train the system the Wake-Sleep a
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat98.png) 
 
-Figure 7: The Variation Auto-Encoder (VAE)
+Figure 23: The Variation Auto-Encoder (VAE)
 
 This brings us to the current generation of auto-encoders, and the VAE, which is still state of the art in this area. The VAE uses the same mathematical framework of minimizing the VFE as the Helmholtz machine, however it uses a clever way to use backprop to train the model. This allows the model to scale up and handle inputs consisting of hundreds of thousands of nodes, which has enabled to serve as a generator for photo-realistic images. The Dreamer V4 model that I mentioned earlier uses a pre-trained VAE to serve as its auto-encoder. The VAE is certainly attractive for generating latent representations for images in machine learning models, however the use of backprop in its training makes it a less likely candidate for how the brain operates.
 
@@ -436,7 +438,7 @@ This brings us to the current generation of auto-encoders, and the VAE, which is
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat99.png) 
 
-Figure 7: The Predictive Coding Framework
+Figure 24: The Predictive Coding Framework
 
 This model was proposed by [Rao and Ballard](https://www.cs.utexas.edu/~dana/Rao.pdf) as a way to generate latent represents in our visual cortex, hence the authors had biological plausibility as their main critera.
 Suppose the visual system receives an image I. The goal is not merely to encode pixels but also to infer the hidden causes of the image:
@@ -552,7 +554,7 @@ The Predictive Coding framework takes care of the inference and generation proce
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat100.png) 
 
-Figure 7: The Temporal Predictive Coding Framework
+Figure 25: The Temporal Predictive Coding Framework
 
 The Temporal Predictive Coding (TPC) framework is shown in the above figure. Recall that in the Predictive Coding model, the latent state of the system was determined solely by how well the generated image matched the sensory signal. In TPC on the other hand, the latent state is determined jointly by the temporal state prediction error and the image generation error. TPC uses only a single stage of the inference/generation pipeline.
 As in the original Predictive Coding, the model uses simple linear models for both the prediction an generation operations, given by:
@@ -576,7 +578,7 @@ The authors showed that that the gradient descent equation can be implemented us
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat102.png) 
 
-Figure 7: Diffusion based Tempora Predictive Coding (DTPC) Framework
+Figure 26: Diffusion based Tempora Predictive Coding (DTPC) Framework
 
 This is a proposed model for Temporal Predictice Coding that uses diffusion based EBMs for the prediction part (see above figure). The model operates as follows:
 
@@ -591,7 +593,7 @@ The DTPC model also allows for a system in which a single set of neurons are bei
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat103.png) 
 
-Figure 7: Using the DTPC framework to do Planning
+Figure 27: Using the DTPC framework to do Planning
 
 The DTPC framework can also be used to do planning as shown in the above figure. In this case there is no sensory data coming into the system, hence only the prediction and generation processes
 are used. The prediction process can be conditioned on actions, thus allowing the system to plan out a sequence of actions to accomplish a task.
@@ -602,7 +604,7 @@ are used. The prediction process can be conditioned on actions, thus allowing th
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat104.png) 
 
-Figure 7: The Diffusion based Direct Predictive Processing (DDPP) Framework
+Figure 28: The Diffusion based Direct Predictive Processing (DDPP) Framework
 
 The Diffusion based Direct Predictive Processing (DDPP) framework from a few sections before is summarized in the figure above. 
 
@@ -634,7 +636,7 @@ I am going to argue that our advances in generative AI in last two decades has b
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat105.png) 
 
-Figure 7: Equivalence between a system with complex interconnect toplogy and a diffusion/EBM model
+Figure 29: Equivalence between a system with complex interconnect toplogy and a diffusion/EBM model
 
 We will start with the equivalence between a system of nodes that are connected together using a complex interconnection topology (system A), and a diffusion/EBM model (system B). System A is a model for the brain, in which the interconnect toplogy, called the connectome, is not very well understood. The nodes in this toplogy interact with one another through these connections, and in general the operation of the system is driven by the second law of thermodynamics, i.e., if the external sensory data cause the system to go out of equilibrium, then the nodes in the system try to get back to equilibrium by changing their state so as to minimze the energy function, and this corresponds to the process of cognition in our brains.
 
@@ -642,7 +644,7 @@ Diffusion/EBM models also feature a set of nodes whose state is changing in time
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat106.png) 
 
-Figure 7: Equivalence between a diffusion/EBM based Temporal Predictive Coding and Predictive Processing
+Figure 30: Equivalence between a diffusion/EBM based Temporal Predictive Coding and Predictive Processing
 
 As we have seen, diffusion/EBM models of the type in system B can be used to build models for perception, prediction and planning, and one such model, namely the  DTPC model is shown above in part (c). This model combines a diffusion/EBM model which is used for prediction, with Predictive Coding model that is used for inference and generation. 
 The model remains biologically plausible, since both diffusion/EBM model and the Predictive Coding model work through a process of minimizing energy functions.
@@ -655,7 +657,7 @@ There are examples of both types in the current literature on video generation u
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat111.png) 
 
-Figure 7: Equivalence between a model that generates a whole image per time step vs a model that generates a single pixel per time step
+Figure 31: Equivalence between a model that generates a whole image per time step vs a model that generates a single pixel per time step
 
 We are now going to take the Diffusion base Direct Predictive (DDPP) Processing model and push it to its extreme: The DDDP model predicts an image frame at a time as shown in figure 7(a). But what if it does prediction just one pixel at a time, as in figure 7(b)? It turns out that this system works perfectly well and is able to produce perfectly good images. In fact [Imagen-1](https://cdn.openai.com/papers/Generative_Pretraining_from_Pixels_V2.pdf) from OpenAI, which was one of the first widely available image generators, worked in precisely this fashion. But can it still be regarded as a diffusion/EBM model?
 Recall that the pixels in an image are distributed according to the Boltzmann distribution (at points where the probability is maximized or equivalently the energy is minimized)
@@ -699,7 +701,7 @@ EBM based LLMs on the other hand are able to generate multiple words or even sen
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat110.png) 
 
-Figure 7: Model for Language generation in the brain using a diffusion model
+Figure 32: Model for Language generation in the brain using a diffusion model
 
 How can diffusion based EBMs be used to generate language?
 The above figure shows a block diagram for a diffusion based LLM. I am hypothesizing that language is distinct from thought, i.e., animals or even even young children who haven't learnt to speak, have thoughts, and humans use language to convert these thoughts into a form that can be communicated to others. As shown, thoughts serve as a latent state for the model and
@@ -739,16 +741,14 @@ Once again RL can be applied to find the optimal series of thoughts and this is 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat108.png) 
 
-Figure 7: Equivalence between diffusion language models using continuous latent states and those that generate words without using latent states
+Figure 33: Equivalence between diffusion language models using continuous latent states and those that generate words without using latent states
 
 In the case of perception we noted the equivalence between diffusion/EBM models that use latent representations and those that work without.
 Exactly the same distinction exists in language models as well. The first model that I presented used latent though states, but there is an equivalent diffusion model that works directly from input word prefix to output words, without any intervening latent states. This model is illustrated in part (b) of the above figure: The set of words $y_{n+1}$ are generated based on the history of previous generations $y_{\le n}$, and a new word prefix $x_n$ that came in at this step. These models are referred to as Discrete Diffusion Language Models, and one of the first such model was [D3PM](https://arxiv.org/abs/2107.03006) from Google Deepmind.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat109.png) 
 
-Figure 7: Equivalence between the discrete diffusion based language model and auto regressive language models (LLMs)
-
-
+Figure 34: Equivalence between the discrete diffusion based language model and auto regressive language models (LLMs)
 
 The image EBM and the thought EBM are connected. For instance we can generate an image that corresponds to a description expressed as a thought. When we read a book or listen to someone speak, the stream of thoughts can lead to a succession of images in our head. Conversely we can generate a thought that corresponds to an image, or to a succession of images, which is something that we humans do all the time when we describe a scene in words. We will see how EBMs can be used to replicate these skills. 
 Thoughts can exist independent of language. Hence people who haven’t learn a language, or infants who haven’t learnt how to speak, can still have thoughts that they can use to go about their lives. Presumably this is true for animals too. 
