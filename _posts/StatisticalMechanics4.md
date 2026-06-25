@@ -395,19 +395,17 @@ There is actually a model for the brain that was proposed by Karl Friston that i
 But the question arises whether hidden nodes are strictly necessary from the modeling point of view, or EBM/diffusion models without hidden nodes are sufficient to mimic the brain.
 I will discuss this issue after describing the Friston model.
 
-## Models for Predictive Processing Using EBM/Diffusions and With the Use of Latent Representations
+## Models for Latent Variable based Predictive Processing (LPP) Using EBM/Diffusions 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat90.png) 
 
 Figure 5: Illustrating the case in which predictions are done in latent space rather than pixel space. Pixel space to latent space mapping is done using a separate network.
 
-The best known example of a model for perception that incorporates hidden nodes is the Active Inference framework due to Karl Friston.
-
 The Active Inference framework using EBMs is illustrated in the above figure. The external sensory data is passed through an inference network to generate an internal representation that is then fed into the one step state predictor. The predicted state $x_{n+1}$ is then used to generate the next perception $y_{n+1}$. The [Dreamer v4](https://arxiv.org/abs/2509.24527) is a recent world model proposal that does predictions in latent space.
 
-The prediction part of this model, i.e., the distribution $p_{\theta}(x_{n+1}|x_n,c_n,a_n)$ is clearly the same structure that we encountered in the Predictive Processing framework, and hence can be implemented with EBM/diffusion models. But what about the inference and generation steps, also known as an auto-encoder. Note that EBM/diffusion model has to be trained using the latent state $x_n$, in other words both the input $x_n$ and the output $x_{n+1}$ need to be known in advance as part of the training dataset. This means that the auto-encoder is trained in advance of the EBM/diffusion model, and then the finished model gets plugged into the ened-to-end model to train the EBM/diffusion part of the model.
+The prediction part of this model, i.e., the distribution $p_{\theta}(x_{n+1}|x_n,c_n,a_n)$ is clearly the same structure that we encountered in the Direct Predictive Processing framework, and hence can be implemented with EBM/diffusion models. But what about the inference and generation steps, also known as an auto-encoder? Note that EBM/diffusion model has to be trained using the latent state $x_n$, in other words both the input $x_n$ and the output $x_{n+1}$ need to be known in advance as part of the training dataset. This means that the auto-encoder is trained in advance of the EBM/diffusion model, and then the finished model gets plugged into the end-to-end model to train the EBM/diffusion part of the model.
 
-So the question is: Are there biologically plausible models for the auto-encoder? Friston'e work establishes a mathematical framework for the auto-encoder, which is based on minimizing the VFE for the system. There have been several different implementations, among them:
+So the question is: Are there biologically plausible models for the auto-encoder? Friston'e work establishes a mathematical framework for the auto-encoder, which is based on minimizing the Variational Free Energy or VFE for the system. There have been several different implementations, among them:
 
 **The Boltzmann Machine**
 
@@ -415,7 +413,7 @@ So the question is: Are there biologically plausible models for the auto-encoder
 
 Figure 7: Boltzmann machine with hidden nodes
 
-The Boltzmann machine has both visible and hidden nodes as shown in the above figure. Once the model has beeen trained, the hidden nodes serve as a latent representation for the data in the visible nodes. However the process required to do this requires serial node-by-node Gibbs sampling which is quite compute intensive on digital architectures, and has restricted the size of feasible Boltzmann machines to a few thousand nodes at most. However the brain does not have this problem since it can implement sampling as a massively parallel operation, hence a Boltzmann machine type operation is definitely a candidate for the brain. The other issue with the Boltzmann machine is that its node state is restricted to 0 and 1, which is a serious limitation when modeling the brain.
+The Boltzmann machine has both visible and hidden nodes as shown in the above figure. Once the model has beeen trained, the hidden nodes serve as a latent representation for the data in the visible nodes. However the process required to do this requires serial node-by-node Gibbs sampling which is quite compute intensive on digital architectures, and has restricted the size of feasible Boltzmann machines to a few thousand nodes at most. However the brain does not have this problem since it can implement sampling as a massively parallel operation, hence sampling is not nevessarily a problem for the biological version of the Boltzmann machine. However a more serious problem with the Boltzmann machine is that its node state is restricted to binary values (0 and 1 or +1 and -1), which is a serious limitation when modeling the brain.
 
 **The Helmholtz Machine**
 
@@ -423,8 +421,8 @@ The Boltzmann machine has both visible and hidden nodes as shown in the above fi
 
 Figure 7: The Helmholtz Machine
 
-In order to overcome the limitations of the Boltzmann machine, [Hinton, Dayan and Neal](https://www.cs.toronto.edu/~fritz/absps/helmholtz.pdf) came up with the Helmholtz machine in 1994 and this launched the current era of auto-encoders. Justb like the Boltzmann machine it has visible or feature nodes as well as hidden nodes that can represent the latent representation. However unlike the Boltzmann amchine, all inter-node connections are uni-directional. Once the network has been trained, it generates latent representations by sending a signal upwards (in the above figure), which passes through more than one layer of nodes, two are shown in the picture. The final layer contains the latent representation. In order to generate new data, we start with a a latent represnetation, and then the signal downwards until it gets to the visible nodes. Since this design does not involve sampling, it can be made much more efficient than the Boltzmann machine. In order to train this system, they replaced maximum likelihood criteria with one based on minimizing the VFE, the math is exactly the same as was described for Friston's Active Inference model.
-The called the algorithm they came up with to train the system the Wake-Sleep algorithm.
+In order to overcome the limitations of the Boltzmann machine, [Hinton, Dayan and Neal](https://www.cs.toronto.edu/~fritz/absps/helmholtz.pdf) came up with the Helmholtz machine in 1994 and this launched the current era of auto-encoders. Just like the Boltzmann machine it has visible or feature nodes as well as hidden nodes that can model the latent representation. However unlike the Boltzmann machine, all inter-node connections are uni-directional. Once the network has been trained, it generates latent representations by sending a signal upwards (in the above figure), which passes through one or more layers of nodes, two are shown in the picture. The final layer contains the latent representation. In order to generate new data, we start with a a latent represnetation, and then the signal propagates downwards until it gets to the visible nodes. Since this design does not involve sampling, it can be made much more efficient than the Boltzmann machine. In order to train this system, they replaced maximum likelihood criteria with one based on minimizing the VFE, the math is exactly the same as was described for Friston's Active Inference model.
+They called the algorithm they came up with to train the system the Wake-Sleep algorithm.
   
 **The Variational Auto Encoder (VAE)**
 
@@ -432,7 +430,7 @@ The called the algorithm they came up with to train the system the Wake-Sleep al
 
 Figure 7: The Variation Auto-Encoder (VAE)
 
-This brings us to the current generation of auto-encoders, and the VAE, which is still state of the art in this area. The VAE uses the same mathematical framework of minimizing the VFE as the Helmholtz machine, however it uses a clever way to use backprop to train the model. This allowed the model to scale up and handle inputs consisting of hundreds of thousands of nodes, which has enabled to serve as a generator for photo-realistic images. The Dreamer V4 model that I mentioned earlier uses a pre-trained VAE to serve as its auto-encoder. The VAE is certainly attractive for generating latent representations for images in machine learning models, however the use of backprop in its training makes it a less likely candidate for how the brain operates.
+This brings us to the current generation of auto-encoders, and the VAE, which is still state of the art in this area. The VAE uses the same mathematical framework of minimizing the VFE as the Helmholtz machine, however it uses a clever way to use backprop to train the model. This allows the model to scale up and handle inputs consisting of hundreds of thousands of nodes, which has enabled to serve as a generator for photo-realistic images. The Dreamer V4 model that I mentioned earlier uses a pre-trained VAE to serve as its auto-encoder. The VAE is certainly attractive for generating latent representations for images in machine learning models, however the use of backprop in its training makes it a less likely candidate for how the brain operates.
 
 ### Predictive Coding
 
@@ -440,14 +438,15 @@ This brings us to the current generation of auto-encoders, and the VAE, which is
 
 Figure 7: The Predictive Coding Framework
 
-This was proposed by [Rao and Ballard](https://www.cs.utexas.edu/~dana/Rao.pdf)) as a way to generate latent represents in our visual cortex, hence the authors had biological plausibility as their main critera.
-Suppose the visual system receives an image I. The goal is not merely to encode pixels. The goal is to infer the hidden causes of the image:
+This model was proposed by [Rao and Ballard](https://www.cs.utexas.edu/~dana/Rao.pdf) as a way to generate latent represents in our visual cortex, hence the authors had biological plausibility as their main critera.
+Suppose the visual system receives an image I. The goal is not merely to encode pixels but also to infer the hidden causes of the image:
 Rao and Ballard proposed that the cortex maintains a hierarchical generative model:
 
 $$  r_2  \rightarrow r_1 \rightarrow I $$
 
-I is the sensory input, such as retinal or LGN activity, $r_1$ is a representation at a lower cortical level, such as V1-like features, $r_2$ is a representation at a higher cortical level, such as more abstract visual causes and higher levels try to predict the activity of lower levels. Hence the model has a top-down generative pathway and a bottom-up error pathway.
+I is the sensory output such as retinal or LGN activity, $r_1$ is a representation at a lower cortical level such as V1-like features, $r_2$ is a representation at a higher cortical level such as more abstract visual causes and higher levels try to predict the activity of lower levels. 
 
+The model has a top-down generative pathway and a bottom-up error pathway.
 At each level, the representation at a higher level predicts the representation below it, so that
 
 $$ {\hat r}_{l-1} = f(r_l) $$
@@ -456,27 +455,29 @@ Here $r_l$ is the latent representatopn at level $l$, $f_l$ is a learnt generati
 
 $$ e_{l-1} = r_{l-1} - f_l(r_l)  $$
 
-and the system tries to minimize this error. At the sensory level 
+and the system tries to minimize this error. The sensory level output is given by
 
 $$ e_0 = I - f_1(r_1) $$
 
-Each of the representations $r_l$ changes so as to reduce the total error. The update for $r_l$ depends upon the bottom-up error error from level $l-1$ as well as the top-down error in its own value (as predicted by the level above it. The whole hierarchy settles into a state where predictions and observations agree as much as possible.
+Each of the representations $r_l$ changes so as to reduce the total error. The update for $r_l$ depends upon the bottom-up error error from level $l-1$ (i.e., how well it was able to predict the lower level), as well as the top-down error in its own value as predicted by the level above it. The whole hierarchy settles into a state where predictions and observations agree as much as possible.
 
-The Predictive Coding algorithm can be derived from Bayes as follows: Suppose sensory input $x$ is caused by hidden variables $z$, the Baye's rule gives
+The Predictive Coding algorithm can be derived from Bayes Rule as follows: Suppose sensory input $x$ is caused by hidden variables $z$, the Bayes rule gives
 
 $$ p(z|x) = {p(x|z)p(z)\over{p(x)}} $$
 
-For a given value of $x$ the denomenator is a constant so that
+For a given value of $x$ the denominator is a constant so that
 
 $$ \log p(z|x) = \log p(x|z) + \log p(z) + constant $$
 
-The best preiction $z^*$ is given by
+The best prediction $z^*$ is given by
 
 $$  z^* = argmax_z[\log p(x|z) + \log p(z)]  $$
 
-Assume
+Assume that
 
-$$ x = f(z) + \epsilon\ \ \ where\ \ \ \epsilon ~ N(0,\Sigma_x) $$
+$$ x = f(z) + \epsilon $$
+
+where $f(.)$ is the generative function and $\epsilon$ is distributed according to the Gaussain distribution $N(0,\Sigma_x)$.
 
 Then
 
@@ -484,22 +485,22 @@ $$  p(x|z) = N(x; f(z),\Sigma_x) $$
 
 so that
 
-$$ -\log p(x|z) = {1\over 2}(x - f(z))^T \Sigma_x^{-1} (x - f(z)) $$
+$$ -\log p(x|z) = {1\over 2}(x - f(z))^T \Sigma_x^{-1} (x - f(z)) - \log p(z) $$
 
 If we define rhe prediction error $\epsilon_x = x - f(z)$, then the negative log posterior is given by
 
-$$ -\log p(x|z) = {1\over 2}\epsilon_x^T\sigma_x^{-1}\epsilon_x $$
+$$ -\log p(x|z) = {1\over 2}\epsilon_x^T\Sigma_x^{-1}\epsilon_x - \log p(z) $$
 
 So minimizing negative log likelihood is literally minimizing precision-weighted prediction error.
 
-Here, $\Sigma_x^{-1}$ is the precision matrix. In Bayesian predictive coding, errors are not all treated equally; errors with higher expected reliability get more weight.
+Here, $\Sigma_x^{-1}$ is called the precision matrix. It quantifies the fact that in in Bayesian predictive coding, not all errors are treated equally; errors with higher expected precision values get more weight.
 Assume that the latent variable $z$ also has a Gaussian prior $z$ distributed as $N(\mu_z,\Sigma_z)$, then
 
 $$ -\log p(z) = {1\over 2}(z - \mu_z)^T \Sigma_z^{-1} (z - \mu_z) $$
 
 Defining $\epsilon_z = z - \mu_z$, it follows that the negative log posterior $E(z)$ is given by
 
-$$  E(z) = {1\over 2}\epsilon_x^T\sigma_x^{-1}\epsilon_x  + {1\over 2}\epsilon_z^T \Sigma_z^{-1} \epsilon_z  $$
+$$  E(z) = {1\over 2}\epsilon_x^T\Sigma_x^{-1}\epsilon_x  + {1\over 2}\epsilon_z^T \Sigma_z^{-1} \epsilon_z  $$
 
 The system can infer $z$ by minimizing $E(z)$ by using gradient descent
 
@@ -509,42 +510,43 @@ Using the above expression for $E(z)$, it follows that
 
 $$ {\partial E\over{\partial z}} = {\partial f\over{\partial z}}^T \Pi_x\epsilon_x - \Pi_z\epsilon_z $$
 
-This shows that the latent representation $z$ is adjusted by two competing forces, i.e., the bottom-up ensory error - the top-down prior error. The first term pulls $z$ to better explain the sensory input, while the second term pulls $z$ towards its prior expectetion.
+This shows that the latent representation $z$ is adjusted by two competing forces, i.e., the bottom-up sensory error  and the top-down prior error. The first term pulls $z$ to better explain the sensory input, while the second term pulls $z$ towards its prior expectetion.
 
 This analysis can be extended to multiple representation levels $z_3\rightarrow z_2\rightarrow z_1\rightarrow x$ such that each level predicts the level below
 
-$$  z_{l-1} = f_l(z_l) + \epsilon_l\ \ \ with\ \ \ \epsilon_l ~ N(0,\Sigma_l) $$
+$$  z_{l-1} = f_l(z_l) + \epsilon_l  $$
 
+where $\epsilon_l$ is distributed according to the Gaussain distribution $N(0,\Sigma_l)$.
 and the system tries to minimize the full negative log posterior 
 
-$$ E = \Sigma_l {1\over 2} \epsilon_{l-1}^T\Pi_{l-1}\epsilon_{l-1}\ \ \ where\ \ \ \Pi_l = \Sigma_l^{-1} $$
+$$ E = \sum_l {1\over 2} \epsilon_{l-1}^T\Pi_{l-1}\epsilon_{l-1}\ \ \ where\ \ \ \Pi_l = \Sigma_l^{-1} $$
 
-Each latent state is updated to minimize this total 'energy' using gradient descent. Since $z_l$ appears in two places, it update has two components:
+Each latent state is updated to minimize this total 'energy' using gradient descent. Since $z_l$ appears in two places, its update has two components:
 
-1. It is predicted by the level above
+1. It is predicted by the level above, with error given by
 
-$$  \epsilon_l = z_l - f_{l+1}(z_{l+1} $$
+$$  \epsilon_l = z_l - f_{l+1}(z_{l+1}) $$
 
-2. It predicts the level below
+2. It predicts the level below, with error given by
 
-$$  \epsilon_{l-1} = z_{l-1} - f_l(z_l $$
+$$  \epsilon_{l-1} = z_{l-1} - f_l(z_l) $$
 
 so that 
 
 $$ {\partial E\over{\partial z}} = {\partial f_l\over{\partial z_l}}^T \Pi_{l-1}\epsilon_{l-1} - \Pi_l\epsilon_l $$
 
-and this is the canonical predictive coding update. In words: A representation at one level changes to reduce the error in the level below, while also staying consistent with the prediction coming from the level above.
-
-**Estimation of network parameters**
-
+and this is the canonical Predictive Coding update. In words: A representation at one level changes to reduce the error in the level below, while also staying consistent with the prediction coming from the level above.
 This is known as maximum a posteriori or MAP inference. It differs from the inference made in the VAE model in the following respects:
 
-- The VAE model does inference using a single pass of a feed-forward network, whose parameters have been optimized using a training process. The predictive coding model does inference in a iterative fashion, where the value of the latents are adjusted over multiple steps until the final prediction is a good match to the observation. This is very much like how an EBM operates since in this case too the nodes in an EBM adjust their values until the energy function is minimized. The predictive coding system uses an error function instead of an energy function, but the idea of multi-step iteration is the same.
-- In predictive coding, the network is recurrent. Activity does not simply pass once from input to output. Instead, units keep updating each other until the system reaches a relatively stable state.
-- Unlike the VAE model, all updates in the predictive coding model are local in nature, hence more biologically plausible.
-- The VAE model gives a distribution for the latent by minimizing the VFE, while predictive coding gives a point estimate for the latent. In practice even for VAE, we usually assume that the distribution is normally distributed, so that the estimate boils down to obtaining the mean and variance.
+- The VAE model does inference using a single pass of a feed-forward network, whose parameters have been optimized using a training process. The Predictive Coding model does inference in a iterative fashion, where the value of the latents are adjusted over multiple steps until the final prediction is a good match to the observation. This is very much like how an EBM operates since in this case too the nodes in an EBM adjust their values until the energy function is minimized. The predictive coding system uses an error function instead of an energy function, but the idea of multi-step iteration is the same.
+- In Predictive Coding, the network is recurrent. Activity does not simply pass once from input to output. Instead, units keep updating each other until the system reaches a relatively stable state.
+- Unlike the VAE model, all updates in the Predictive Coding model are local in nature, hence more biologically plausible.
+- The VAE model gives a distribution for the latent by minimizing the VFE, while Predictive Coding gives a point estimate for the latent. In practice even for VAE, we usually assume that the distribution is normally distributed, so that the estimate boils down to obtaining the mean and variance.
 
-### Models with Inference, Prediction and Generation: Temporal Predictive Coding
+The parameters in Predictive Coding can be updated while the network is operating, hence it does not require a separate training process.
+**Estimation of network parameters**
+
+## Models with Inference, Prediction and Generation: Temporal Predictive Coding
 
 The Predictive Coding framework takes care of the inference and generation processes,and it does it in a way that is biologically plausible, since these operations can be implemented using only local connections between neurons. However, it does not incorporate temporal prediction, which we saw earlier is an essential ingredient in building a model for the brain. There have been some attempts to add temporal prediction to the model, and a couple of these are the [Temporal Predictive Coding](https://pmc.ncbi.nlm.nih.gov/articles/PMC11008833/pdf/pcbi.1011183.pdf) framework and the work by [Jiang and Rao](https://arxiv.org/pdf/2112.10048). 
 
@@ -583,7 +585,7 @@ This is a proposed model for Temporal Predictice Coding that uses diffusion base
 - The prediction $x_{n+1}$ serves as the initial estimate for the next latent state $z_{n+1}$ at time $n+1$. Note that we are assuming that the time required to generate the prediction $x_{n+1}$ is less then the time between successive sensory inputs.
 - As a result of the new sensory data $s_{n+1}$, the latent $z_{n+1}$ undergoes changes in a recursive manner until it settles down to a new final state, and this is then used for the next prediction $x_{n+2}$.
 
-The DTPC model has a big benefit compared to the Temporal Predictice Coding (TPC) model: The use of diffusion/EBMs in DTPC enables it to generate much more complex latent predictions as compared to the TPC model that uses a simple linear predictor. More complex latent predictions are needed to generate the rich image of the wprld that wee in front of us. The DTPC model also allows the use of multiple inference/generation stages. This was not allowed in the original TPC model since doing so leads to a large incraese in the model complexity.
+The DTPC model has a big benefit compared to the Temporal Predictice Coding (TPC) model: The use of diffusion/EBMs in DTPC enables it to generate much more complex latent predictions as compared to the TPC model that uses a simple linear predictor. More complex latent predictions are needed to generate the rich image of the wprld that we see in front of us. The DTPC model also allows the use of multiple inference/generation stages. This was not allowed in the original TPC model since doing so leads to a large incraese in the model complexity.
 
 The DTPC model also allows for a system in which a single set of neurons are being continuously modified, alternating with modification due to new sensory data followed by modifications due to the prediction operation. Since all of the operations, including inference, generation and prediction are based on an iterative process of energy minimization, they are biologically plausible.
 
@@ -591,81 +593,99 @@ The DTPC model also allows for a system in which a single set of neurons are bei
 
 Figure 7: Using the DTPC framework to do Planning
 
-The DTPC framework can also be used to do planning as shown in the above figure. In this case there is no sensory data coming into the brain, hence only the prediction and generation processes
+The DTPC framework can also be used to do planning as shown in the above figure. In this case there is no sensory data coming into the system, hence only the prediction and generation processes
 are used. The prediction process can be conditioned on actions, thus allowing the system to plan out a sequence of actions to accomplish a task.
 
 *Finding diffusion parameters for the DTPC model*
 
-## Contrasting Diffusion based Predictive Processing (DPP) and Diffusion based Temoral Predictive Processing (DTPC) Models
+## Contrasting Diffusion based Predictive Processing (DDPP) and Diffusion based Temoral Predictive Coding (DTPC) Models
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat104.png) 
 
-Figure 7: The Diffusion based Predictive Processing (DPP) Framework
+Figure 7: The Diffusion based Direct Predictive Processing (DDPP) Framework
 
-The Diffusion based Predictive Processing (DPP) framework from a few sections before is summarized in the figure above. There is a single prediction block, implemented using a diffusion/EBM, that directly predicts the next sensory perception base on the prior $K$ perceptions as well as action $u$ and the latest sensory data $s$.
-The DTPC framework on the other hand differs from this in the following respects:
+The Diffusion based Direct Predictive Processing (DDPP) framework from a few sections before is summarized in the figure above. 
 
-- The history of the system is captured in DTPC using the latent state $x_n$. In contrast, since DPP does not use latent states, the only way it can capture the historical dependence is by explicitly conditioning the new generation on the past $K$ generations.
-- By avoiding the use of a latent state, the DPP system is also able to avoid the use of explicit inference and generation engines. Hence only a prediction module is needed.
+Note: The standard nomenclature in this field is somewhat confusing, Predictive Processing is a general framework in neuroscience, while Predictive Coding is a particular algorithm used for inference and generation within the space of latent variable based Predictive Coding models.
 
-Are there any benefits to incorporating a latent state in the DTPC model? It simplifies the prediction process by providing a summary of all that has happened in the past. But this comes at the cost of maintaining separate inference and generation modules. The DPP model on the other hand does not need these two modules, but on the other hand it is quite likely that the combined inference+prediction+generation circuitry is more complex. Also as pointed out in an earlier section, a DPP model can be decomposed into an equivalent model with hidden states, but with a simpler interconnection toplogy.
+There is a single prediction block in DDPP, implemented using a diffusion/EBM, that directly predicts the next sensory perception based on the prior $K$ perceptions as well as action $u$ and the latest sensory data $s$.
+The DTPC model on the other hand differs from this in the following respects:
+
+- The history of the system is captured in DTPC using the latent state $x_n$. In contrast, since DDPP does not use latent states, the only way it can capture the historical dependence is by explicitly conditioning the new generation on the past $K$ generations.
+- By avoiding the use of a latent state, the DDPP system is also able to avoid the use of explicit inference and generation engines. Hence only a prediction module is needed.
+
+Are there any benefits to incorporating a latent state, as in the DTPC model? It enables the model to keep track of the history by using its own internal record keeping, and hence may work better in some cases. However this comes at the cost of maintaining separate inference and generation modules. 
+The DDPP model on the other hand does not need these two modules, but it is quite likely that it is implicitly doing these operations internally even though it is not visble to us, which results in a more complex system. 
+
+Modern generative AI systems use both these designs. For the case of image and video generation the DTPC architecture works out to be more efficient from the implementation point of view, while for language generation DDDP systems pre-dominate in the form of Large Language Models or LLMs. The latter topic will be explored in detail in the next section.
+
+But what about Nature, which of these alternatives do biological brains use?
+It is quite likely that they lean towards the DTPC design since there is evidence of inference and generation circuits in the brain as pointed out by the Predictive Coding work.
 
 ## Equivalence between Models
 
-An open problem in the field of AI is the connection between auto-regressive models such as LLMs and preocesses that take place within a brain. We will consider LLMs in the next section, but it turns out that images can also be generated on a pixel-by-pixel basis by an autoregressive model such as a transformer, so we will examine the connection this type of image generation and processes in the brain.
-We will do this by pointing a number of equivalences between models. Model A is equivalent to Model B, if they are indistinguishable from the input-output point of view, i.e., if they receive the same input then they generate the same output. Model equivalence is quite in other branches of science such as physics. For example laws of motion can be cast either in the Newtonian form in terms of acceleration and forces, or they can be regarded as outcomes of minimum action principles such as the one due to Lagrange. Physicists whichever model is most convenient to use when solving a problem.
-I am going to argue that our advances in AI in last two decades has been due to our ability to come up with artificial neural networks that are equivalent to the neuronal circuitry in the brain, even though topologically they loook very different.
+An open problem in the field of AI is the connection between auto-regressive models such as LLMs and processes that take place within a brain. We will consider LLMs in the next section, but it turns out that images can also be generated on a pixel-by-pixel basis by an autoregressive model such as a transformer, so we will examine the connection this type of image generation and processes in the brain.
+We will do this by pointing a number of equivalences between models. We will use the following definition:
+
+**Definition:** Model A is equivalent to Model B, if they have the same energy function.
+
+Model equivalence is quite common in other branches of science such as physics. For example the laws of motion can be cast either in the Newtonian form in terms of acceleration and forces, or they can be regarded as outcomes of minimum action principles such as the one due to Lagrange. Physicists use whichever model is most convenient to use when solving a problem.
+I am going to argue that our advances in generative AI in last two decades has been due to our ability to come up with artificial neural networks that are equivalent to the neuronal circuitry in the brain, even though topologically they are very different.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat105.png) 
 
 Figure 7: Equivalence between a system with complex interconnect toplogy and a diffusion/EBM model
 
-We will start with the equivalence between a system of nodes that are connected together using a complex interconnection topology (system A), and a diffusion/EBM model (system B). System A is a model for the brain, in which the interconnect toplogy, called the connectome, is not very well understood. The nodes in this toplogy interact with one another through these connections, and in general the operation of the system is driven by the second law of thermodynamics, i.e., if the external sensory data cause the system to go out of equilibrium, then the nodes in the system try to get back to equilibrium by changing their state, and this corresponds to the process of cognition in our brains.
+We will start with the equivalence between a system of nodes that are connected together using a complex interconnection topology (system A), and a diffusion/EBM model (system B). System A is a model for the brain, in which the interconnect toplogy, called the connectome, is not very well understood. The nodes in this toplogy interact with one another through these connections, and in general the operation of the system is driven by the second law of thermodynamics, i.e., if the external sensory data cause the system to go out of equilibrium, then the nodes in the system try to get back to equilibrium by changing their state so as to minimze the energy function, and this corresponds to the process of cognition in our brains.
 
-Diffusion/EBM models also feature a set of nodes whose state is changing in time, but in this case the state changes are driven not by inter-node interactions, but by changes in the systems energy function that is modeled separately. Essentially system B is trying to mimic system A by using the same energy function, without bothering about the details of how the interconnect topology actually genertaes the energy function. As long as the energy functions match, the two systems will behave similarly, i.e., their setlling equilibriun states will match. This is precisely what diffusion/EBM models do. The energy functions are matched by using the output of the brain, in the form of images, to train the diffusion/EBM model. The parameters in model A correspond to the interconnect strengths between nodes, while the parameters in model B are the weights of the neural network that is used to model the energy function.
+Diffusion/EBM models also feature a set of nodes whose state is changing in time, but in this case the state changes are driven not by inter-node interactions, but by changes in the systems energy function that is modeled separately. Essentially system B is trying to mimic system A by using the same energy function, without bothering about the details of how the interconnect topology actually generates the energy function. As long as the energy functions match, the two systems will behave similarly, i.e., their settling equilibrium states will match. This is precisely what diffusion/EBM models do. The energy functions are matched by using the output of the brain, in the form of images, to train the diffusion/EBM model. The parameters in model A correspond to the interconnect strengths between nodes, while the parameters in model B are the weights of the neural network that is used to model the energy function.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat106.png) 
 
 Figure 7: Equivalence between a diffusion/EBM based Temporal Predictive Coding and Predictive Processing
 
-Diffusion/EBM models of the type in system B can be used to build models for perception, prediction and planning, and a model of this type called the diffusion based temporal predictive coding (DTPC) model is shown above in part (c). This model combines diffusion/EBM model which is used for prediction, with predictive coding model that is used for inference and generation. The biological plausibility of this system is still intact, since both diffusion/EBM model and the predictive coding model work through a process of minimizing energy functions.
+As we have seen, diffusion/EBM models of the type in system B can be used to build models for perception, prediction and planning, and one such model, namely the  DTPC model is shown above in part (c). This model combines a diffusion/EBM model which is used for prediction, with Predictive Coding model that is used for inference and generation. 
+The model remains biologically plausible, since both diffusion/EBM model and the Predictive Coding model work through a process of minimizing energy functions.
+
 The DTPC model explicitly models the hidden or latent states in the system, and this is how the model keeps track of the history of past sensory data that have been impinging on the system.
-However this a way to build an equivalent diffusion/EBM model, shown in part (d), that can also model inference, prediction and generation, but without using latent states. In this case the sensory data goes into the model, and the model generates the next perception state by combining it with its history and other factors such as actions.
-There are examples of both types in the current literature on video generation using neural networks. The lack of latent states makes model D less biologically plausible since clearly the brain's design incorporates ways to keep track of the history of sensory data. Henever the end result is the same, so if there are situations in which it is easier to model a system without using latent states, then we can do so with the assurance that our results will be indistuishable from the model that models them.
+However there is a way to build an equivalent diffusion/EBM model, shown in part (d), that can also model inference, prediction and generation, but without using latent states. 
+In this case the sensory data goes into the model, and the model generates the next perception state by combining it with its history and other factors such as actions.
+
+There are examples of both types in the current literature on video generation using neural networks. Model D is also biologically plausible since it is an EBM model based on the principle of energy minimization and it can serve as a perfectly good model for perception. Even though model D does not explicitly model the inference, prediction and generation functions, it is certainly carrying them out implicitly under the covers.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat111.png) 
 
 Figure 7: Equivalence between a model that generates a whole image per time step vs a model that generates a single pixel per time step
 
-We are now going to take the Predictive Processing model and push it to its extreme: The model predicts an image frame at a time as shown in figure 7(a). But what if it predicts just one pixel at a time, in figure 7(b)? It turns out that this system works perfectly well and is able to produce perfectly good images. In fact [Imagen-1](https://cdn.openai.com/papers/Generative_Pretraining_from_Pixels_V2.pdf) from OpenAI, which was one of the first widely available image generators, worked in precisely this fashion. But can it still be regarded as a diffusion/EBM model?
-Recall that the pixels in an image are distributed according to the Boltzmann distribution (at a point where the probability is maximized or equivalently the energy is minimized)
-
-$$ p(y_{n+1},y_n,y_{n-1},...,y_{n-K}) = {e^{-E(y_{n+1},y_n,...,y_{n-K})}\over {Z}} $$
-
-For the case when we are generating one pixel at time, the expression is given by
+We are now going to take the Diffusion base Direct Predictive (DDPP) Processing model and push it to its extreme: The DDDP model predicts an image frame at a time as shown in figure 7(a). But what if it does prediction just one pixel at a time, as in figure 7(b)? It turns out that this system works perfectly well and is able to produce perfectly good images. In fact [Imagen-1](https://cdn.openai.com/papers/Generative_Pretraining_from_Pixels_V2.pdf) from OpenAI, which was one of the first widely available image generators, worked in precisely this fashion. But can it still be regarded as a diffusion/EBM model?
+Recall that the pixels in an image are distributed according to the Boltzmann distribution (at points where the probability is maximized or equivalently the energy is minimized)
 
 $$ p(y_{n+1}|Y_n,Y_{n-1},...,Y_{n-K}) = {e^{-E(y_{n+1},Y_n,...,Y_{n-K})}\over {Z}} $$
 
-where the capitalized $Y$ indicates that their values are fixed. It is more convenient to the maximum of $p(y_{n+1}|Y_n,Y_{n-1},...,Y_{n-K})$ than the minimum of $E(y_{n+1},Y_n,...,Y_{n-K})$, and this precisely what these systems do. In fact using the transformer architecture, the system is trained to compute this conditional probability over the (discrete) set of pixels, and then simply choose the pixel value at which the probability is at a maximum. The reader may be rightly wondering that finding the individual maximum probability values and putting the whole image together as $(y_1^{max},...,y_N^{max})$ is not the same as finding maximum for the vector as a whole $(y_1,...,y_N)^{max}$. This is a valid objection and pixel by pixel models (and modern LLM models as we will encounter in the next section) get around this problem by techniques such as beam search. This works by keeping track two or more possible minima values as the generation progresses, and then making the decision which is the best optimum point by computing their joint probabilities.
+where the capitalized $Y$ indicates that their values are fixed. 
+For the case when the model generates one pixel at time, the expression is given by
 
-Hence the difference the diffusion model and the pixel-by-pixel model can both be regarded as EBMs, but using different ways of minimizing their energy functions:
+$$ p(yy_{n+1}|YY_n,YY_{n-1},...,YY_{n-K}) = {e^{-E(yy_{n+1},YY_n,...,YY_{n-K})}\over {Z}} $$
 
-- The diffusion model does minimization by doing a joint minimization over all the nodes using the Langevin sampling method. During this, all the nodes continue to change their values until the minimum is reached.
-- The pixel by pixel model on the other hand samples at a single node a time, while assuming that the remaining nodes are already at their minimum values. Hence once the minimuum for a node is computed, it is fixed while the minimum of the remaning nodes is handled next. 
+where the notation $yy$ denotes a pixel vs $y$ that denotes an entire image.
+In the DDPP model the transformer is used as a function approximator to model the energy function, while in the pixel by pixel model the transformer is used once again as a function approximator, to model the conditional probability instead. Since
 
-Hence the Langevin based minimization descends down the energy landscape until it gets to a minimum, while the pixel by pixel assumes that system is already at a minimum point and then proceeds to find the node values one at a time. But at the heart thay can both be regarded as EBM methods.
-
-In the diffusion model we used the transformer as a function approximator to model the energy function, while in the pixel by pixel model the transformer can be used, again as a function approximator, to model the conditional probabilities. Since
-
-$$   E(y_{n+1},y_n,...,y_{n-K}) = \log p(y_{n+1}|y_n,y_{n-1},...,y_{n-K}) - \log Z $$
+$$   E(y_{n+1},y_n,...,y_{n-K}) = -\log p(y_{n+1},y_n,y_{n-1},...,y_{n-K}) + \log Z $$
 
 it follows that the minimum of the energy functiona and the maximum of the probability distribution at the same data point.
 
-In the usual diffusion model such figure 7(a), each of the $y_n$'s consists of a large number of nodes, and the diffusion process is basically a way in which we can jointly find a minimum for the energy for this system, and at the minimum the conditional probability $p(y_{n+1}|y_n,y_{n-1},...,y_{n-K})$ is at a maximum, as per the above equation.
-On the other hand if $y_n$ is just a single node then clearly the Boltzmann distribution continues to hold, but now we are trying to minimize the energy of a single node, conditioned on specified values for some of the other nodes whose values have already been determined. But this equivalent to finding the value of $p_{n+1}$ that maximizes the conditional distribution $p(y_{n+1}|y_n,y_{n-1},...,y_{n-K})$.
+It is more convenient to fine the maximum of $p(yy_{n+1}|YY_n,YY_{n-1},...,YY_{n-K})$ than to find the minimum of $E(yy_{n+1},YY_n,...,YY_{n-K})$, and this precisely what auto regressive systems do. 
+In auto regressive architectures such as the transformer, the system is trained to compute this conditional distribution over the (discrete) set of pixels, and then simply chooses the pixel value at which the probability is at a maximum. The reader may be rightly be wondering that finding the per-pixel individual maximum probability values and putting the whole image together as $(yy_1^{max},...,yy_N^{max})$ is not the same as finding the point $(yy_1,...,yy_N)^{max}$ at which the joint probability $p(yy_1,...,yy_N)$ is maximized for the image vector as a whole. This is a valid objection and pixel by pixel models (and modern LLM models) get around this problem by techniques such as beam search. This works by keeping track two or more possible minima values as the generation progresses, and then making the decision which is the best optimum point by computing their joint probabilities.
 
-If we follows the chain of equivalences, then it follows that an auto-regressive transformer is a perfectly good model for the brain, as far as generating images (or perception) is concerned.
-It is not working exactly as the brain does, in fact the diffusion based temporal predictive coding model is probably how the brain works. However, if we look at the two systems from the input-output point of view, then they are equivalent. This supports my thesis stated at the start of this article, that modern neural networkds such as the transformer don't model the neural circuitry of the brain, instead they are models for the energy function of the brain. Any good function approximator will serve this function, and even though transformers are the best approximators we know of today, better ones will be found in the future.
+Hence the DDPP model and the pixel-by-pixel model can both be regarded as EBMs, but using different ways of minimizing their energy functions:
+
+- The DDPP model finds the minimum energy value by doing a joint minimization over all the nodes using the Langevin sampling method. During this, all the nodes interact with one another and continue to change their values until the minimum is reached.
+- The pixel by pixel model on the other hand samples at a single node a time, while assuming that the values of the already sampled nodes are fixed at their minimum values. Hence once the minimuum for a node is computed, it is fixed at that value and the minimum of the next node is computed next. 
+
+Hence the Langevin sampling based energy minimization descends down the energy landscape until it gets to a minimum, while the pixel by pixel assumes that system is already at a minimum  energy point and then proceeds to find the pixel values auto regressively one at a time. But they work by using the principle of energy minimization.
+
+If we follows the chain of equivalences, then it follows that an auto-regressive pixel by pixel generation is a perfectly good model for the brain as far as generating images (or perception) is concerned.
+It is not working exactly as the brain does, in fact the DDPC (or the DTPC model) is probably how the brain works. However, if we look at the two systems from the input-output point of view, then they are equivalent. This supports my thesis stated at the start of this article, that modern neural networkds such as the transformer don't model the neural circuitry of the brain, instead they are excellent models for the energy function of the brain. Any good function approximator will serve this function, and even though transformers are the best approximators we know of today, better ones will be found in the future.
 
 This discussion has been in the context of image generation or perception, what about language generation?  This is discussed in the next section.
 
