@@ -394,10 +394,11 @@ With our EBM/diffusion models we are in a similar situation as the new Hopfield 
 
 Figure 19: Variation of energy functions depending on conditioning
 
-Based on this insight, a way to make EBM/diffusion models biologically plausible is by creating an equivalent network which has both perception and hidden nodes, such that the energy function of the perception nodes is the same as given by the EBM/diffusion model. 
+Based on this insight, a way to make EBM/diffusion models biologically plausible is by creating an equivalent network which has both visible and hidden nodes, such that the energy function of the visible nodes is the same as given by the EBM/diffusion model. 
 There can be a rich interconnection of perception and hidden nodes among themselves and also between them, but all interactions should be of the two node type. This results in a design of the type shown in the above figure, in which the system has masses of hidden nodes interacting with the perception nodes. The problem of converting an energy function described by a transformer or a CNN into the equivalent interconenction topology featuring only two node interactions is currently an open one.
 
-Henec even though we started by not using hidden or latent states in our model for perception, this shows that are equivalent models incorporating hidden states whose visible state energy function is the same, and which has a simpler inter-connect toplogy.
+Hence even though we started by not using hidden or latent states in our model for perception, this shows that are equivalent models incorporating hidden states, which have simpler inter-connect toplogy.
+In the next section we present models for perception that explicitly incorporate hidden states.
 
 ## Models for Latent Variable based Predictive Processing (LPP) Using EBM/Diffusions 
 
@@ -405,11 +406,12 @@ Henec even though we started by not using hidden or latent states in our model f
 
 Figure 20: Illustrating the case in which predictions are done in latent space rather than pixel space. Pixel space to latent space mapping is done using a separate network.
 
-The Active Inference framework using EBMs is illustrated in the above figure. The external sensory data is passed through an inference network to generate an internal representation that is then fed into the one step state predictor. The predicted state $x_{n+1}$ is then used to generate the next perception $y_{n+1}$. The [Dreamer v4](https://arxiv.org/abs/2509.24527) is a recent world model proposal that does predictions in latent space.
+The above figure shows a system that has modules for prediction, as well as for inference and generation and serves as a model for the Active Inference framwork described earlier. 
+The external sensory data $s_n$ is passed through an inference network $q_{\phi}(x_n|s_n)$ to generate an internal representation $x_n$ that is then fed into the one step state predictor. The predicted state $x_{n+1}$ is then used to generate the next perception $y_{n+1}$ using the generator module $p_{\psi}(y_{n+1}|x_{n+1}). The [Dreamer v4](https://arxiv.org/abs/2509.24527) is a recent world model proposal that that uses this architecture and does predictions in latent space.
 
-The prediction part of this model, i.e., the distribution $p_{\theta}(x_{n+1}|x_n,c_n,a_n)$ is clearly the same structure that we encountered in the Direct Predictive Processing framework, and hence can be implemented with EBM/diffusion models. But what about the inference and generation steps, also known as an auto-encoder? Note that EBM/diffusion model has to be trained using the latent state $x_n$, in other words both the input $x_n$ and the output $x_{n+1}$ need to be known in advance as part of the training dataset. This means that the auto-encoder is trained in advance of the EBM/diffusion model, and then the finished model gets plugged into the end-to-end model to train the EBM/diffusion part of the model.
+The prediction part of this model, i.e., the distribution $p_{\theta}(x_{n+1}|x_n,s_n,a_n)$ is clearly the same structure that we encountered in the Direct Predictive Processing framework, and hence can be implemented with EBM/diffusion models. But what about the inference and generation modules, which are collectively called an auto-encoder? Note that EBM/diffusion model has to be trained using the latent state $x_n$, in other words both the input $x_n$ and the output $x_{n+1}$ need to be known in advance as part of the training dataset. This means that the auto-encoder has to be trained in advance of the EBM/diffusion model, and then the finished model gets plugged into the end-to-end model to train the EBM/diffusion part of the model. This is clearly an issue for biological plausibility, a model in which all three modules can be trained together would be preferable.
 
-So the question is: Are there biologically plausible models for the auto-encoder? Friston'e work establishes a mathematical framework for the auto-encoder, which is based on minimizing the Variational Free Energy or VFE for the system. There have been several different implementations, among them:
+It was recognized in the early days of AI that finding latent representations for image or textual data, i.e. auto-enoder, is a critical problem, and the are have been several landmark models over the years that have move the state of the art forward, and we discuss a few next.
 
 **The Boltzmann Machine**
 
@@ -417,7 +419,7 @@ So the question is: Are there biologically plausible models for the auto-encoder
 
 Figure 21: Boltzmann machine with hidden nodes
 
-The Boltzmann machine has both visible and hidden nodes as shown in the above figure. Once the model has beeen trained, the hidden nodes serve as a latent representation for the data in the visible nodes. However the process required to do this requires serial node-by-node Gibbs sampling which is quite compute intensive on digital architectures, and has restricted the size of feasible Boltzmann machines to a few thousand nodes at most. However the brain does not have this problem since it can implement sampling as a massively parallel operation, hence sampling is not nevessarily a problem for the biological version of the Boltzmann machine. However a more serious problem with the Boltzmann machine is that its node state is restricted to binary values (0 and 1 or +1 and -1), which is a serious limitation when modeling the brain.
+The [Boltzmann machine](https://en.wikipedia.org/wiki/Boltzmann_machine) has both visible and hidden nodes as shown in the above figure. Once the model has beeen trained, the hidden nodes serve as a latent representation for the data in the visible nodes. However the process required to do this requires serial node-by-node Gibbs sampling, and the duration of time needed for the network to settle into an equilibrieum state has restricted the size of feasible Boltzmann machines to a few thousand nodes at most. Another problem with the Boltzmann machine is that its node state is restricted to binary values (0 and 1 or +1 and -1), which is a serious limitation when modeling the brain.
 
 **The Helmholtz Machine**
 
@@ -425,16 +427,20 @@ The Boltzmann machine has both visible and hidden nodes as shown in the above fi
 
 Figure 22: The Helmholtz Machine
 
-In order to overcome the limitations of the Boltzmann machine, [Hinton, Dayan and Neal](https://www.cs.toronto.edu/~fritz/absps/helmholtz.pdf) came up with the Helmholtz machine in 1994 and this launched the current era of auto-encoders. Just like the Boltzmann machine it has visible or feature nodes as well as hidden nodes that can model the latent representation. However unlike the Boltzmann machine, all inter-node connections are uni-directional. Once the network has been trained, it generates latent representations by sending a signal upwards (in the above figure), which passes through one or more layers of nodes, two are shown in the picture. The final layer contains the latent representation. In order to generate new data, we start with a a latent represnetation, and then the signal propagates downwards until it gets to the visible nodes. Since this design does not involve sampling, it can be made much more efficient than the Boltzmann machine. In order to train this system, they replaced maximum likelihood criteria with one based on minimizing the VFE, the math is exactly the same as was described for Friston's Active Inference model.
+In order to overcome the limitations of the Boltzmann machine, [Hinton, Dayan and Neal](https://www.cs.toronto.edu/~fritz/absps/helmholtz.pdf) came up with the Helmholtz machine in 1994 and this launched the current era of auto-encoders. Just like the Boltzmann machine it has visible or feature nodes as well as hidden nodes that can model the latent representation. However unlike the Boltzmann machine, all inter-node connections are uni-directional. Once the network has been trained, it generates latent representations by sending a signal upwards (in the above figure), which passes through one or more layers of nodes, two are shown in the picture. The final layer contains the latent representation. In order to generate new data, we start with a a latent represnetation, and then the signal propagates downwards until it gets to the visible nodes. Since this design does not involve sampling, it can be made much more efficient than the Boltzmann machine. In order to train this system, they replaced maximum likelihood criteria with one based on minimizing the VFE, the math is exactly the same as was described for Friston's Active Inference framework.
 They called the algorithm they came up with to train the system the Wake-Sleep algorithm.
   
 **The Variational Auto Encoder (VAE)**
+
+Friston'e work establishes a mathematical framework for the auto-encoder, which is based on minimizing the Variational Free Energy or VFE for the system. There have been several different implementations, among them:
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat98.png) 
 
 Figure 23: The Variation Auto-Encoder (VAE)
 
-This brings us to the current generation of auto-encoders, and the VAE, which is still state of the art in this area. The VAE uses the same mathematical framework of minimizing the VFE as the Helmholtz machine, however it uses a clever way to use backprop to train the model. This allows the model to scale up and handle inputs consisting of hundreds of thousands of nodes, which has enabled to serve as a generator for photo-realistic images. The Dreamer V4 model that I mentioned earlier uses a pre-trained VAE to serve as its auto-encoder. The VAE is certainly attractive for generating latent representations for images in machine learning models, however the use of backprop in its training makes it a less likely candidate for how the brain operates.
+This brings us to the current generation of auto-encoders, and the VAE, which is still state of the art in this area. The VAE uses the same mathematical framework of minimizing the VFE as the Helmholtz machine, however it uses a clever way to use backprop to train the model. This allows the model to scale up and handle inputs consisting of hundreds of thousands of pixels, which has enabled it to serve as a generator for photo-realistic images. The Dreamer V4 model that I mentioned earlier uses a pre-trained VAE to serve as its auto-encoder. The VAE is certainly attractive for generating latent representations for images in machine learning models, however the use of backprop in its training makes it a less likely candidate for how the brain operates. 
+This brings us to the Predictive Coding auto-encoder model, whose operation has been connected to observations in brains, and currently serves as our best model for how the brain does auto-encoding.
+This is described next.
 
 ### Predictive Coding
 
@@ -446,101 +452,100 @@ This model was proposed by [Rao and Ballard](https://www.cs.utexas.edu/~dana/Rao
 Suppose the visual system receives an image I. The goal is not merely to encode pixels but also to infer the hidden causes of the image:
 Rao and Ballard proposed that the cortex maintains a hierarchical generative model:
 
-$$  r_2  \rightarrow r_1 \rightarrow I $$
+$$  x_2  \rightarrow x_1 \rightarrow y $$
 
-I is the sensory output such as retinal or LGN activity, $r_1$ is a representation at a lower cortical level such as V1-like features, $r_2$ is a representation at a higher cortical level such as more abstract visual causes and higher levels try to predict the activity of lower levels. 
+y is the sensory output such as retinal or LGN activity, $x_1$ is a representation at a lower cortical level such as V1-like features, $x_2$ is a representation at a higher cortical level such as more abstract visual causes and higher levels try to predict the activity of lower levels. 
 
 The model has a top-down generative pathway and a bottom-up error pathway.
 At each level, the representation at a higher level predicts the representation below it, so that
 
-$$ {\hat r}_{l-1} = f(r_l) $$
+$$ {\hat x}_{l-1} = f(x_l) $$
 
-Here $r_l$ is the latent representatopn at level $l$, $f_l$ is a learnt generative mapping and ${\hat r_{l-1}}$ is the predicted activity at the lower level. The actual lower-level activity is $r_{l-1}$, so the prediction error is 
+Here $x_l$ is the latent representatopn at level $l$, $f_l$ is a learnt generative mapping and ${\hat x_{l-1}}$ is the predicted activity at the lower level. The actual lower-level activity is $x_{l-1}$, so the prediction error is 
 
-$$ e_{l-1} = r_{l-1} - f_l(r_l)  $$
+$$ e_{l-1} = x_{l-1} - f_l(_l)  $$
 
-and the system tries to minimize this error. The sensory level output is given by
+and the system tries to minimize this error. The sensory level output error is given by
 
-$$ e_0 = I - f_1(r_1) $$
+$$ e_0 = y - f_1(x_1) $$x
 
-Each of the representations $r_l$ changes so as to reduce the total error. The update for $r_l$ depends upon the bottom-up error error from level $l-1$ (i.e., how well it was able to predict the lower level), as well as the top-down error in its own value as predicted by the level above it. The whole hierarchy settles into a state where predictions and observations agree as much as possible.
+Each of the representations $x_l$ changes so as to reduce the total error. The update for $x_l$ depends upon the bottom-up error error from level $l-1$ (i.e., how well it was able to predict the lower level), as well as the top-down error in its own value as predicted by the level above it. The whole hierarchy iteratively settles into a state where predictions and observations agree as much as possible.
 
-The Predictive Coding algorithm can be derived from Bayes Rule as follows: Suppose sensory input $x$ is caused by hidden variables $z$, the Bayes rule gives
+The Predictive Coding algorithm can be derived from Bayes Rule as follows: Consider a system with just a single level of latent representation.
+If sensory input $y$ is caused by hidden variables $x$, Bayes rule gives
 
-$$ p(z|x) = {p(x|z)p(z)\over{p(x)}} $$
+$$ p(x|y) = {p(y|x)p(x)\over{p(y)}} $$
 
-For a given value of $x$ the denominator is a constant so that
+For a given value of $y$ the denominator is a constant so that
 
-$$ \log p(z|x) = \log p(x|z) + \log p(z) + constant $$
+$$ \log p(x|y) = \log p(y|x) + \log p(x) + constant $$
 
-The best prediction $z^*$ is given by
+The best prediction $x^*$ is given by
 
-$$  z^* = argmax_z[\log p(x|z) + \log p(z)]  $$
+$$  x^* = argmax_x[\log p(y|x) + \log p(x)]  $$
 
 Assume that
 
-$$ x = f(z) + \epsilon $$
+$$ y = f(x) + \epsilon $$
 
-where $f(.)$ is the generative function and $\epsilon$ is distributed according to the Gaussain distribution $N(0,\Sigma_x)$.
-
+where $f(.)$ is the generative function and $\epsilon$ is distributed according to the multi-variate Gaussian distribution $N(0,\Sigma_y)$. 
 Then
 
-$$  p(x|z) = N(x; f(z),\Sigma_x) $$
+$$  p(y|x) = N(y; f(x),\Sigma_y) $$
 
 so that
 
-$$ -\log p(x|z) = {1\over 2}(x - f(z))^T \Sigma_x^{-1} (x - f(z)) - \log p(z) $$
+$$ -\log p(y|x) = {1\over 2}(y - f(x))^T \Sigma_y^{-1} (y - f(x)) - \log p(x) $$
 
-If we define rhe prediction error $\epsilon_x = x - f(z)$, then the negative log posterior is given by
+If we define rhe prediction error $\epsilon_y = y - f(x)$, then the negative log posterior is given by
 
-$$ -\log p(x|z) = {1\over 2}\epsilon_x^T\Sigma_x^{-1}\epsilon_x - \log p(z) $$
+$$ -\log p(y|x) = {1\over 2}\epsilon_y^T\Sigma_y^{-1}\epsilon_x - \log p(x) $$
 
-So minimizing negative log likelihood is literally minimizing precision-weighted prediction error.
+Here, $\Pi_y = \Sigma_y^{-1}$ is called the precision matrix. It quantifies the fact that in in Bayesian predictive coding, not all errors are treated equally; errors with higher expected precision values get more weight. So minimizing negative log likelihood is literally minimizing precision-weighted prediction error.
 
-Here, $\Sigma_x^{-1}$ is called the precision matrix. It quantifies the fact that in in Bayesian predictive coding, not all errors are treated equally; errors with higher expected precision values get more weight.
-Assume that the latent variable $z$ also has a Gaussian prior $z$ distributed as $N(\mu_z,\Sigma_z)$, then
+Assume that the latent variable $x$ also has a Gaussian prior $x$ distributed as $N(\mu_x,\Sigma_x)$, then
 
-$$ -\log p(z) = {1\over 2}(z - \mu_z)^T \Sigma_z^{-1} (z - \mu_z) $$
+$$ -\log p(x) = {1\over 2}(x - \mu_x)^T \Sigma_x^{-1} (x - \mu_x) $$
 
-Defining $\epsilon_z = z - \mu_z$, it follows that the negative log posterior $E(z)$ is given by
+Defining $\epsilon_x = x - \mu_x$, it follows that the negative log posterior $E(x) = -\log p(y|x)$ is given by
 
-$$  E(z) = {1\over 2}\epsilon_x^T\Sigma_x^{-1}\epsilon_x  + {1\over 2}\epsilon_z^T \Sigma_z^{-1} \epsilon_z  $$
+$$  E(x) = {1\over 2}\epsilon_y^T\Sigma_y^{-1}\epsilon_y  + {1\over 2}\epsilon_x^T \Sigma_x^{-1} \epsilon_x  $$
 
-The system can infer $z$ by minimizing $E(z)$ by using gradient descent
+The system can infer $x$ by minimizing $E(x)$ by using gradient descent
 
-$$  z  \leftarrow z - \eta {\partial E\over{\partial z}} $$
+$$  x  \leftarrow x - \eta {\partial E\over{\partial x}} $$
 
-Using the above expression for $E(z)$, it follows that
+Using the above expression for $E(x)$, it follows that
 
-$$ {\partial E\over{\partial z}} = {\partial f\over{\partial z}}^T \Pi_x\epsilon_x - \Pi_z\epsilon_z $$
+$$ {\partial E\over{\partial x}} = {\partial f\over{\partial x}}^T \Pi_y\epsilon_y - \Pi_x\epsilon_x $$
 
-This shows that the latent representation $z$ is adjusted by two competing forces, i.e., the bottom-up sensory error  and the top-down prior error. The first term pulls $z$ to better explain the sensory input, while the second term pulls $z$ towards its prior expectetion.
+This shows that the latent representation $x$ is adjusted by two competing forces, i.e., the bottom-up sensory error  and the top-down prior error. The first term pulls $x$ to better explain the sensory input, while the second term pulls $z$ towards its prior expectetion.
 
-This analysis can be extended to multiple representation levels $z_3\rightarrow z_2\rightarrow z_1\rightarrow x$ such that each level predicts the level below
+This analysis can be extended to multiple representation levels $x_3\rightarrow x_2\rightarrow x_1\rightarrow y$ such that each level predicts the level below
 
-$$  z_{l-1} = f_l(z_l) + \epsilon_l  $$
+$$  x_{l-1} = f_l(x_l) + \epsilon_l  $$
 
 where $\epsilon_l$ is distributed according to the Gaussain distribution $N(0,\Sigma_l)$.
 and the system tries to minimize the full negative log posterior 
 
 $$ E = \sum_l {1\over 2} \epsilon_{l-1}^T\Pi_{l-1}\epsilon_{l-1}\ \ \ where\ \ \ \Pi_l = \Sigma_l^{-1} $$
 
-Each latent state is updated to minimize this total 'energy' using gradient descent. Since $z_l$ appears in two places, its update has two components:
+Each latent state is updated to minimize this total 'energy' using gradient descent. Since $x_l$ appears in two places, its update has two components:
 
 1. It is predicted by the level above, with error given by
 
-$$  \epsilon_l = z_l - f_{l+1}(z_{l+1}) $$
+$$  \epsilon_l = x_l - f_{l+1}(x_{l+1}) $$
 
 2. It predicts the level below, with error given by
 
-$$  \epsilon_{l-1} = z_{l-1} - f_l(z_l) $$
+$$  \epsilon_{l-1} = x_{l-1} - f_l(x_l) $$
 
 so that 
 
-$$ {\partial E\over{\partial z}} = {\partial f_l\over{\partial z_l}}^T \Pi_{l-1}\epsilon_{l-1} - \Pi_l\epsilon_l $$
+$$ {\partial E\over{\partial x}} = {\partial f_l\over{\partial x_l}}^T \Pi_{l-1}\epsilon_{l-1} - \Pi_l\epsilon_l $$
 
 and this is the canonical Predictive Coding update. In words: A representation at one level changes to reduce the error in the level below, while also staying consistent with the prediction coming from the level above.
-This is known as maximum a posteriori or MAP inference. It differs from the inference made in the VAE model in the following respects:
+This is known as maximum a posteriori or MAP inference. It differs from the minimum Variational Free Energy inference made in the VAE model (and the Active Inference framework) in the following respects:
 
 - The VAE model does inference using a single pass of a feed-forward network, whose parameters have been optimized using a training process. The Predictive Coding model does inference in a iterative fashion, where the value of the latents are adjusted over multiple steps until the final prediction is a good match to the observation. This is very much like how an EBM operates since in this case too the nodes in an EBM adjust their values until the energy function is minimized. The predictive coding system uses an error function instead of an energy function, but the idea of multi-step iteration is the same.
 - In Predictive Coding, the network is recurrent. Activity does not simply pass once from input to output. Instead, units keep updating each other until the system reaches a relatively stable state.
@@ -548,6 +553,7 @@ This is known as maximum a posteriori or MAP inference. It differs from the infe
 - The VAE model gives a distribution for the latent by minimizing the VFE, while Predictive Coding gives a point estimate for the latent. In practice even for VAE, we usually assume that the distribution is normally distributed, so that the estimate boils down to obtaining the mean and variance.
 
 The parameters in Predictive Coding can be updated while the network is operating, hence it does not require a separate training process.
+
 **Estimation of network parameters**
 
 ## Models with Inference, Prediction and Generation: Temporal Predictive Coding
