@@ -418,35 +418,10 @@ In Part 3 I described a training procedure for diffusion EBMs also based on maxi
 The main lesson to be drawn from this diffuson/EBM model for the brain, is that it is possible to create a model for a highly complex system like the brain by using the brain's outputs alone and without worrying about the details of its internal structure. If the model is powerful enough, then it is able to re-create this internal structure through the training process. 
 As we saw for the Active Inference framework, it is also possible to explicitly model the internal states of the brain. But either approach works equally well, and choosing one over the other is a matter of implementation efficiency.
 
-
-
-
-
 **Estimation of network parameters, what is the function f?**
 
 
-## Contrasting Diffusion based Predictive Processing (DDPP) and Diffusion based Temporal Predictive Coding (DTPC) Models
 
-![](https://subirvarma.github.io/GeneralCognitics/images/stat115.png) 
-
-Figure 28: The Diffusion based Direct Predictive Processing (DDPP) Framework
-
-The Diffusion based Direct Predictive Processing (DDPP) framework from a few sections earlier is summarized in the figure above. 
-
-Note: The standard nomenclature in this field is somewhat confusing, recall that Predictive Processing is a general framework in neuroscience, while Predictive Coding is a particular algorithm used for inference and generation within the space of latent variable based Predictive Coding models.
-
-There is a single prediction block in DDPP, implemented using a diffusion/EBM, that directly predicts the next sensory perception based on the prior $K$ perceptions as well as action $u_n$ and the latest sensory data $s_n$. The DTPC model on the other hand differs from this in the following respects:
-
-- In DTPC The history of the system is captured using the latent state $x_n$. In contrast, since DDPP does not use latent states, the only way it can capture the historical dependence is by explicitly conditioning the new generation on the past $K$ generations.
-- By avoiding the use of a latent state, the DDPP system is able to avoid the use of explicit inference and generation engines.
-
-Are there any benefits to incorporating a latent state, as in the DTPC model? It enables the model to keep track of the history by using its own internal record keeping, and hence may work better in some cases. However this comes at the cost of having to specify explicit inference and generation modules. 
-Even though DDPP sustem does not have these two modules, however it is implicitly doing these functions internally as alluded to in the above figure. 
-
-Modern generative AI systems use both these types of designs: The DTPC architecture works out to be more efficient from the implementation point of view For the case of image and video generation on digital computers, while for language generation DDPP systems pre-dominate in the form of Large Language Models or LLMs. 
-
-But what about biological systems?
-It is quite likely that they lean towards the DTPC architecture since there is evidence of inference and generation circuits in the brain as pointed out by the Predictive Coding work. Also inference and generation are basic operations that all creatures need, and it is likely that it was implemented first. The prediction module on the other hand varies in sophitication depending upon the animal, and it makes sense for the brain to implement it as a separate module.
 
 ## Planning
 
@@ -597,6 +572,29 @@ If we follows the chain of equivalences, then it follows that an auto-regressive
 It is not working exactly as the brain does, in fact the DDPC (or the DTPC model) is probably how the brain works. However, if we look at the two systems from the input-output point of view, then they are equivalent. This supports my thesis stated at the start of this article, that modern neural networkds such as the transformer don't model the neural circuitry of the brain, instead they are excellent models for the energy function of the brain. Any good function approximator will serve this function, and even though transformers are the best approximators we know of today, better ones will be found in the future.
 
 This discussion has been in the context of image generation or perception, what about language generation?  This is discussed in the next section.
+
+## Contrasting Diffusion based Predictive Processing (DDPP) and Diffusion based Temporal Predictive Coding (DTPC) Models
+
+![](https://subirvarma.github.io/GeneralCognitics/images/stat115.png) 
+
+Figure 28: The Diffusion based Direct Predictive Processing (DDPP) Framework
+
+The Diffusion based Direct Predictive Processing (DDPP) framework from a few sections earlier is summarized in the figure above. 
+
+Note: The standard nomenclature in this field is somewhat confusing, recall that Predictive Processing is a general framework in neuroscience, while Predictive Coding is a particular algorithm used for inference and generation within the space of latent variable based Predictive Coding models.
+
+There is a single prediction block in DDPP, implemented using a diffusion/EBM, that directly predicts the next sensory perception based on the prior $K$ perceptions as well as action $u_n$ and the latest sensory data $s_n$. The DTPC model on the other hand differs from this in the following respects:
+
+- In DTPC The history of the system is captured using the latent state $x_n$. In contrast, since DDPP does not use latent states, the only way it can capture the historical dependence is by explicitly conditioning the new generation on the past $K$ generations.
+- By avoiding the use of a latent state, the DDPP system is able to avoid the use of explicit inference and generation engines.
+
+Are there any benefits to incorporating a latent state, as in the DTPC model? It enables the model to keep track of the history by using its own internal record keeping, and hence may work better in some cases. However this comes at the cost of having to specify explicit inference and generation modules. 
+Even though DDPP sustem does not have these two modules, however it is implicitly doing these functions internally as alluded to in the above figure. 
+
+Modern generative AI systems use both these types of designs: The DTPC architecture works out to be more efficient from the implementation point of view For the case of image and video generation on digital computers, while for language generation DDPP systems pre-dominate in the form of Large Language Models or LLMs. 
+
+But what about biological systems?
+It is quite likely that they lean towards the DTPC architecture since there is evidence of inference and generation circuits in the brain as pointed out by the Predictive Coding work. Also inference and generation are basic operations that all creatures need, and it is likely that it was implemented first. The prediction module on the other hand varies in sophitication depending upon the animal, and it makes sense for the brain to implement it as a separate module.
 
 ### Constantly Changing Energy Landscape Interpretation of the World Model
 
