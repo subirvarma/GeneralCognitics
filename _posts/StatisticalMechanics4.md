@@ -91,7 +91,7 @@ In practice for commercial use, auto regressive models of type (c) work better i
 
 ## The Predictive Processing Framework in Computational Neuroscience
 
-![](https://subirvarma.github.io/GeneralCognitics/images/stat76.png) 
+![](https://subirvarma.github.io/GeneralCognitics/images/stat116.png) 
 
 Figure 2: A model for sensory perception generation in the brain
 
