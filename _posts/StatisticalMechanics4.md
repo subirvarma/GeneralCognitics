@@ -1,9 +1,9 @@
 ---
 layout: default
-title: " Models for Perception in the Brain: Inference, Prediction, Generation"
+title: " Models of the Brain for Perception and Planning"
 ---
 
-# Models for Perception in the Brain: Inference, Prediction, Generation
+# Models of the Brain for Perception and Planning
 
 **Contents**     
 
