@@ -436,6 +436,28 @@ Another model in this category is the [UniSIM model](https://arxiv.org/abs/2310.
 - The model's previous prediction $y_{n-1}$ which is also a set of image frames. These are concatenated channelwise with the initial noise sample at the start of the diffusion proces to serve as conditional inputs. This conditioning can be extended over several prior output and action values in an auto-regressive manner.
 - The actions can be in one of several formats: (1) $a_1$: A language description, (2) $a_0$: Low level robotic control actions, (3) $a_2$: Actions extracted from camera motions.
 
+## Some Comments on the Connectome Architecture
+
+![](https://subirvarma.github.io/GeneralCognitics/images/stat95.png) 
+
+Figure 18: Variation of energy functions depending on conditioning
+
+If we know the energy function for the brain, what are the implications for its micro-architecture, i.e., its connectome?
+Some insight into the problem can be obtained by looking at the development of Hopfield Networks. As described in [Part 2](https://subirvarma.github.io/GeneralCognitics/2025/11/24/statmech2.html), Hopfield networks were designed to serve as associative memories rather than for capturing the distribution of a training dataset as in Boltzmann machines. However they work using similar principles of minimizing energy functions, so their design is relevant here. The initial design for the Hopfield network involved pairwise interactions between nodes in a fully connected spin glass type network, and is shown on the left hand side of the above figure. This design was biologically plausible since neuron interactions in the brain are known to be of the two-node type.
+However later [Hopfield and Krotov](https://arxiv.org/pdf/2008.06996) came up with a design that was able to store many more memory patterns, that this was done by changing the energy function from the simple two node type to a non-linear function of the node and link weights, as shown on the right hand side. They tried to express the new architecture using inter-node interactions, and discovered that the non-linear nature of the energy function resulted in a design that involved multiple modes interacting with each other, as shown on the right hand side which ruled out this system as a model for the brain. 
+
+With our EBM/diffusion models we are in a similar situation as the new Hopfield network, since clearly the complex energy functions that come out of training involve interactions between a large number of nodes if laid out in the form of an inter-connection circuit diagram. However Hopfield and Krotov showed that a modified network consisting of a mixture of visible and hidden nodes could be found such that the energy function for the visible part coincided with a complex non-linear function. Moreover, all connections between nodes in this network were of the two-node type, which made it biologically plausible. The power of incorporating hidden nodes into the model also lay behind the power of the Boltzmann machine, as was discovered by Hinton more than a decade earlier. Boltzmann machines also featured hidden nodes, and Hinton showed that this resulted in an increase in the number of possible data distributions that the visible nodes could represent.
+
+![](https://subirvarma.github.io/GeneralCognitics/images/stat96.png) 
+
+Figure 19: Variation of energy functions depending on conditioning
+
+Based on this insight, a way to make EBM/diffusion models biologically plausible is by creating an equivalent network which has both visible and hidden nodes, such that the energy function of the visible nodes is the same as given by the EBM/diffusion model. 
+There can be a rich interconnection of perception and hidden nodes among themselves and also between them, but all interactions should be of the two node type. This results in a design of the type shown in the above figure, in which the system has masses of hidden nodes interacting with the perception nodes. The problem of converting an energy function described by a transformer or a CNN into the equivalent interconenction topology featuring only two node interactions is currently an open one.
+
+Hence even though we started by not using hidden or latent states in our model for perception, this shows that are equivalent models incorporating hidden states, which have simpler inter-connect toplogy.
+In the next section we present models for perception that explicitly incorporate hidden states.
+
 
 
 ## Equivalence between Models
@@ -525,62 +547,15 @@ It is not working exactly as the brain does, in fact the DDPC (or the DTPC model
 
 This discussion has been in the context of image generation or perception, what about language generation?  This is discussed in the next section.
 
-## Contrasting Diffusion based Predictive Processing (DDPP) and Diffusion based Temporal Predictive Coding (DTPC) Models
-
-![](https://subirvarma.github.io/GeneralCognitics/images/stat115.png) 
-
-Figure 28: The Diffusion based Direct Predictive Processing (DDPP) Framework
-
-The Diffusion based Direct Predictive Processing (DDPP) framework from a few sections earlier is summarized in the figure above. 
-
-Note: The standard nomenclature in this field is somewhat confusing, recall that Predictive Processing is a general framework in neuroscience, while Predictive Coding is a particular algorithm used for inference and generation within the space of latent variable based Predictive Coding models.
-
-There is a single prediction block in DDPP, implemented using a diffusion/EBM, that directly predicts the next sensory perception based on the prior $K$ perceptions as well as action $u_n$ and the latest sensory data $s_n$. The DTPC model on the other hand differs from this in the following respects:
-
-- In DTPC The history of the system is captured using the latent state $x_n$. In contrast, since DDPP does not use latent states, the only way it can capture the historical dependence is by explicitly conditioning the new generation on the past $K$ generations.
-- By avoiding the use of a latent state, the DDPP system is able to avoid the use of explicit inference and generation engines.
-
-Are there any benefits to incorporating a latent state, as in the DTPC model? It enables the model to keep track of the history by using its own internal record keeping, and hence may work better in some cases. However this comes at the cost of having to specify explicit inference and generation modules. 
-Even though DDPP sustem does not have these two modules, however it is implicitly doing these functions internally as alluded to in the above figure. 
-
-Modern generative AI systems use both these types of designs: The DTPC architecture works out to be more efficient from the implementation point of view For the case of image and video generation on digital computers, while for language generation DDPP systems pre-dominate in the form of Large Language Models or LLMs. 
-
-But what about biological systems?
-It is quite likely that they lean towards the DTPC architecture since there is evidence of inference and generation circuits in the brain as pointed out by the Predictive Coding work. Also inference and generation are basic operations that all creatures need, and it is likely that it was implemented first. The prediction module on the other hand varies in sophitication depending upon the animal, and it makes sense for the brain to implement it as a separate module.
-
-### Constantly Changing Energy Landscape Interpretation of the World Model
+## Constantly Changing Energy Landscape Interpretation of the Prediction Model
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat94.png) 
 
 Figure 17: Variation of energy functions depending on conditioning
 
-We can get some intuition on how the brain works by investigating changes in its energy landscape with time. Assume that the latent state in the Predictive Processing model is captured by $x_n$, then this corresponds to to a particular minima of the energy landscape given by $E(x_n, x_{n-1}=x, a_{n-1}=a)$ with corresponding probability given by $p(x_n|x,a)$. Assume that the system has settled at the minima $x_n=x'$, and then the organism receives the the next sensory data $s_{n+1}$. 
-Then the energy landscape transitions to $E(x_{n+1},y', a')$, and the current state $y_{n+1}=y'$ is no longer at a
-minima. The system then travels down the energy landscape until it arrives at the next minima $y''$ and this become the next perception. This process is illustrated in the above figure, which shows a sequence of energy landscape cross sections. The particular cross section at time $n$ is chosen depending upon the previous perception $y_n$ and the action $a_n$. 
-Hence the energy landscape of the perception neurons in the brain can be considered to be constantly changing as new sensory data comes in and/or the organism takes actions. New data causes the neurons to find themselves in a non optimal energy level, which triggers interactions between them to lower the energy, which results in a new perception.
-
-### Some Comments on the Connectome Architecture
-
-![](https://subirvarma.github.io/GeneralCognitics/images/stat95.png) 
-
-Figure 18: Variation of energy functions depending on conditioning
-
-If we know the energy function for the brain, what are the implications for its micro-architecture, i.e., its connectome?
-Some insight into the problem can be obtained by looking at the development of Hopfield Networks. As described in [Part 2](https://subirvarma.github.io/GeneralCognitics/2025/11/24/statmech2.html), Hopfield networks were designed to serve as associative memories rather than for capturing the distribution of a training dataset as in Boltzmann machines. However they work using similar principles of minimizing energy functions, so their design is relevant here. The initial design for the Hopfield network involved pairwise interactions between nodes in a fully connected spin glass type network, and is shown on the left hand side of the above figure. This design was biologically plausible since neuron interactions in the brain are known to be of the two-node type.
-However later [Hopfield and Krotov](https://arxiv.org/pdf/2008.06996) came up with a design that was able to store many more memory patterns, that this was done by changing the energy function from the simple two node type to a non-linear function of the node and link weights, as shown on the right hand side. They tried to express the new architecture using inter-node interactions, and discovered that the non-linear nature of the energy function resulted in a design that involved multiple modes interacting with each other, as shown on the right hand side which ruled out this system as a model for the brain. 
-
-With our EBM/diffusion models we are in a similar situation as the new Hopfield network, since clearly the complex energy functions that come out of training involve interactions between a large number of nodes if laid out in the form of an inter-connection circuit diagram. However Hopfield and Krotov showed that a modified network consisting of a mixture of visible and hidden nodes could be found such that the energy function for the visible part coincided with a complex non-linear function. Moreover, all connections between nodes in this network were of the two-node type, which made it biologically plausible. The power of incorporating hidden nodes into the model also lay behind the power of the Boltzmann machine, as was discovered by Hinton more than a decade earlier. Boltzmann machines also featured hidden nodes, and Hinton showed that this resulted in an increase in the number of possible data distributions that the visible nodes could represent.
-
-![](https://subirvarma.github.io/GeneralCognitics/images/stat96.png) 
-
-Figure 19: Variation of energy functions depending on conditioning
-
-Based on this insight, a way to make EBM/diffusion models biologically plausible is by creating an equivalent network which has both visible and hidden nodes, such that the energy function of the visible nodes is the same as given by the EBM/diffusion model. 
-There can be a rich interconnection of perception and hidden nodes among themselves and also between them, but all interactions should be of the two node type. This results in a design of the type shown in the above figure, in which the system has masses of hidden nodes interacting with the perception nodes. The problem of converting an energy function described by a transformer or a CNN into the equivalent interconenction topology featuring only two node interactions is currently an open one.
-
-Hence even though we started by not using hidden or latent states in our model for perception, this shows that are equivalent models incorporating hidden states, which have simpler inter-connect toplogy.
-In the next section we present models for perception that explicitly incorporate hidden states.
-
+We can get some intuition on how the brain works by investigating changes in the energy landscape with time of the prediction model in the planning phase. Assume that the latent state in the DTPC model after a fresh prediction is given by $x_{n+1}=x'$, then this corresponds to to a particular minima of the energy landscape given by $E(x', x_n=x, a_n=a)$ with corresponding probability given by $p(x'|x,a)$. At the next step When the organism carries out its next action $a_{n+1}=a''$ then its energy landscape transitions to $E(x',x', a'')$, and the current state $x'$ is no longer at a
+minima. The system then travels down the energy landscape until it arrives at the next minima $x''$ and this generates the next perception. This process is illustrated in the above figure, which shows a sequence of energy landscape cross sections. The particular cross section at time $n$ is chosen depending upon the previous state $s_n$ and action $a_n$. 
+Hence the energy landscape of the perception neurons in the brain can be considered to be constantly changing as new actions are taken which causes the neurons to find themselves in a non optimal energy level, which triggers interactions between them to lower the energy, which results in a new state.
 
 ## Language Generation
 
@@ -809,6 +784,29 @@ Figure 16: Attention Mechanisms in Space Time Transformers
 
 Diffusion/EBM models can be designed to generate more than one image frame in a single pass through the model, in other words each pass through the model results in a video clip rather than a single frame. Such a design helps to ensure temporal integrity of the generated video clip, since each image frame directly influences the frame around it. This is in addition to the inter-frame dependency created due to the conditional distribution $(p_{n+1}|y_{\le n}, c)$ which also helps temporal coherence. Image transformer models that take the temporal dependency into account are called [space-time transformers](https://arxiv.org/abs/2001.02908). There are various ways in which the temporal dependency can be implemented, some examples of which are shown in the above figure. The colored rectangles in each row are individual elements of the image latent vector that is fed into the transformer, while a sequence of image frames is captured using the vertical axis.
 The left hand figure shows the usual spatial attention with no temporal attention while the second figure shows only temporal attention with no spatial attention. One popular design is alternating blocks of spatial-only and temporal-only attention blocks in the transformer design.
+
+## Appendix E: Contrasting Diffusion based Predictive Processing (DDPP) and Diffusion based Temporal Predictive Coding (DTPC) Models
+
+![](https://subirvarma.github.io/GeneralCognitics/images/stat115.png) 
+
+Figure 28: The Diffusion based Direct Predictive Processing (DDPP) Framework
+
+The Diffusion based Direct Predictive Processing (DDPP) framework from a few sections earlier is summarized in the figure above. 
+
+Note: The standard nomenclature in this field is somewhat confusing, recall that Predictive Processing is a general framework in neuroscience, while Predictive Coding is a particular algorithm used for inference and generation within the space of latent variable based Predictive Coding models.
+
+There is a single prediction block in DDPP, implemented using a diffusion/EBM, that directly predicts the next sensory perception based on the prior $K$ perceptions as well as action $u_n$ and the latest sensory data $s_n$. The DTPC model on the other hand differs from this in the following respects:
+
+- In DTPC The history of the system is captured using the latent state $x_n$. In contrast, since DDPP does not use latent states, the only way it can capture the historical dependence is by explicitly conditioning the new generation on the past $K$ generations.
+- By avoiding the use of a latent state, the DDPP system is able to avoid the use of explicit inference and generation engines.
+
+Are there any benefits to incorporating a latent state, as in the DTPC model? It enables the model to keep track of the history by using its own internal record keeping, and hence may work better in some cases. However this comes at the cost of having to specify explicit inference and generation modules. 
+Even though DDPP sustem does not have these two modules, however it is implicitly doing these functions internally as alluded to in the above figure. 
+
+Modern generative AI systems use both these types of designs: The DTPC architecture works out to be more efficient from the implementation point of view For the case of image and video generation on digital computers, while for language generation DDPP systems pre-dominate in the form of Large Language Models or LLMs. 
+
+But what about biological systems?
+It is quite likely that they lean towards the DTPC architecture since there is evidence of inference and generation circuits in the brain as pointed out by the Predictive Coding work. Also inference and generation are basic operations that all creatures need, and it is likely that it was implemented first. The prediction module on the other hand varies in sophitication depending upon the animal, and it makes sense for the brain to implement it as a separate module.
 
 
 
