@@ -476,32 +476,24 @@ I am going to argue that our advances in generative AI in last two decades have 
 
 Figure 29: Equivalence between a system with complex interconnect toplogy and a diffusion/EBM model
 
-We will start with the equivalence between a system of nodes, such as neurons in the brain, that are directly connected to each other (system A), and diffusion/EBM systems whose inter-connect topology is not known, but whose energy function can be inferred using measurements (system B).
+We will start with the equivalence between a system of nodes, such as neurons in the brain, that are directly connected to each other (system A), and diffusion/EBM systems whose inter-connect topology is not known, but whose energy function can be inferred by using the output of system A (system B).
 
 The behavior of the system A is driven by the second law of thermodynamics, i.e., it tries to settle into an equilibrium state with minimum (free) energy (or equivalently maximum entropy), and this process is driven by direct signalling between nodes.
 System B also features a set of nodes whose state is changing in time, but in this case the state changes are driven not by inter-node interactions, but by seeking out states of lower energy, as modeled by the energy function. 
-Essentially system B is mimicing system A by adopting the same energy function, without bothering about the details of how the interconnect topology actually generates the energy function in system A. As long as the energy functions match, the two systems will the same equilibrium behavior and this is precisely what diffusion/EBM models do. 
+Essentially system B is mimicing system A by adopting the same energy function, without bothering about the details of how the interconnect topology actually generates the energy function in system A. As long as the energy functions match, the two systems will exhibit the same equilibrium behavior and this is precisely what diffusion/EBM models do. 
 The two energy functions are matched by using the output of system A, in the form of images or text, to train the diffusion/EBM model. The parameters in system A correspond to the interconnect strengths between nodes, while the parameters in system B are the weights of the neural network that is used to model the energy function.
 
-![](https://subirvarma.github.io/GeneralCognitics/images/stat106.png) 
+![](https://subirvarma.github.io/GeneralCognitics/images/stat120.png) 
 
 Figure 30: Equivalence between a diffusion/EBM based Temporal Predictive Coding and Predictive Processing
 
-We have seen how diffusion/EBM models of the system B type can be used to build models for perception, and one such model, namely the  diffusion based temporal Predictive Coding or DTPC model, is shown above in figure 30(a). This model combines a diffusion/EBM model which is used for prediction, with the Predictive Coding model that is used for inference and generation. 
-The model remains biologically plausible, since both diffusion/EBM model and the Predictive Coding model work through a process of minimizing energy functions.
+Planning models of types 1,2 and 3 are illustrated in the above figure. The top figure shows the case when the prediction module is in latent space, and there is a separate generation module. This corresponds to the DTPC model that was discussed earlier, and was used to mirror these processes in the brain. Both the prediction and generation modules are EBMs, hence can be implemented using direct connections netween nodes.
+This model explicitly models the hidden or latent states in the system, and how it evolves with time.
+However there is a way to build an equivalent diffusion/EBM model, but without using latent states, as shown in the middle figure,. 
+In this case the model generates the next image by using the history of past generated images and other factors such as actions. It combines the prediction and generation functions into a single EBM/diffusion block and hence in some sense is a conceptually simpler system then the one based on latents.
+A prominent world model that works in this fashion is the DIAMOND model.
 
-The DTPC model explicitly models the hidden or latent states in the system, and this is how the model keeps track of the history of past sensory data that have been impinging on the system.
-However there is a way to build an equivalent diffusion/EBM model, shown in part figure 30(b), that can also model inference, prediction and generation, but without using latent states, and this is the direct diffusion based Predictive Processing or DDPP model. 
-In this case the sensory data goes into the model, and the model generates the next perception state by combining it with the history of past perceptions and other factors such as actions.
-
-From the input-output point of view, both the DTPC and DDPP models are carrying out similar functions.
-The DDPP model is also biologically plausible since it is a diffusion/EBM system based on the principle of energy minimization. Even though it does not explicitly model the inference, prediction and generation functions, it is certainly carrying them out implicitly under the covers.
-
-![](https://subirvarma.github.io/GeneralCognitics/images/stat111.png) 
-
-Figure 31: Equivalence between a model that generates a whole image per time step vs a model that generates a single pixel per time step
-
-We are now going to take the DDPP model and push it to its extreme: The DDDP model generates images a frame at a time as shown in figure 31(a), in other words all the pixels are generated jointly. But what if generation is done just one pixel at a time using a transformer model, as in figure 31(b)? It turns out that this system works perfectly well and is able to produce perfectly good images. In fact [Imagen-1](https://cdn.openai.com/papers/Generative_Pretraining_from_Pixels_V2.pdf) from OpenAI, which was one of the first widely available image generators, worked in precisely this fashion. But can it still be regarded as a diffusion/EBM model?
+We are now going to take the model in part (B) and push it to its extreme: The model in Part (B) generates images a frame at a time, in other words all the pixels are generated jointly. But what if generation is done just one pixel at a time using a transformer model, as in Part (C)? It turns out that this system works perfectly well and is able to produce perfectly good images. In fact [Imagen-1](https://cdn.openai.com/papers/Generative_Pretraining_from_Pixels_V2.pdf) from OpenAI, which was one of the first widely available image generators, worked in precisely this fashion. But can it still be regarded as a diffusion/EBM model?
 
 Recall that the pixels in an image are distributed according to the Boltzmann distribution (at points where the probability is maximized or equivalently the energy is minimized)
 
@@ -522,15 +514,15 @@ it follows that the minimum of the energy functiona and the maximum of the proba
 It is more convenient to fine the maximum of $p(yy_{n+1}|YY_n,YY_{n-1},...,YY_{n-K})$ than to find the minimum of $E(yy_{n+1},YY_n,...,YY_{n-K})$, and this precisely what auto regressive systems do. 
 In auto regressive architectures such as the transformer, the system is trained to compute this conditional distribution over the (discrete) set of pixels, and then simply chooses the pixel value at which the probability is at a maximum. The reader may be rightly be wondering that finding the per-pixel individual maximum probability values and putting the whole image together as $(yy_1^{max},...,yy_N^{max})$ is not the same as finding the point $(yy_1,...,yy_N)^{max}$ at which the joint probability $p(yy_1,...,yy_N)$ is maximized for the image vector as a whole. This is a valid objection and pixel by pixel models (and modern LLM models) get around this problem by techniques such as beam search. This works by keeping track two or more possible minima values as the generation progresses, and then making the decision which is the best optimum point by computing their joint probabilities.
 
-Hence the DDPP model and the pixel-by-pixel model can both be regarded as EBMs, but using different ways of minimizing their energy functions:
+Hence (B) and (C) models can both be regarded as EBMs, but using different ways of minimizing their energy functions:
 
-- The DDPP model finds the minimum energy value by doing a joint minimization over all the nodes using the Langevin sampling method. During this, all the nodes interact with one another and continue to change their values until the minimum is reached.
+- The (B) model finds the minimum energy value by doing a joint minimization over all the nodes using the Langevin sampling method. During this, all the nodes interact with one another and continue to change their values until the minimum is reached.
 - The pixel by pixel model on the other hand samples at a single node a time, while assuming that the values of the already sampled nodes are fixed at their minimum values. Hence once the minimuum for a node is computed, it is fixed at that value and the minimum of the next node is computed next. 
 
 Hence the Langevin sampling based energy minimization descends down the energy landscape until it gets to a minimum, while the pixel by pixel assumes that system is already at a minimum  energy point and then proceeds to find the pixel values auto regressively one at a time. But they work by using the principle of energy minimization.
 
 If we follows the chain of equivalences, then it follows that an auto-regressive pixel by pixel generation is a perfectly good model for the brain as far as generating images (or perception) is concerned.
-It is not working exactly as the brain does, in fact the DDPC (or the DTPC model) is probably how the brain works. However, if we look at the two systems from the input-output point of view, then they are equivalent. This supports my thesis stated at the start of this article, that modern neural networkds such as the transformer don't model the neural circuitry of the brain, instead they are excellent models for the energy function of the brain. Any good function approximator will serve this function, and even though transformers are the best approximators we know of today, better ones will be found in the future.
+This supports my thesis stated at the start of this article, that modern neural networkds such as the transformer don't model the neural circuitry of the brain, instead they are excellent models for the energy function of the brain. Any good function approximator will serve this function, and even though transformers are the best approximators we know of today, better ones will be found in the future.
 
 This discussion has been in the context of image generation or perception, what about language generation?  This is discussed in the next section.
 
