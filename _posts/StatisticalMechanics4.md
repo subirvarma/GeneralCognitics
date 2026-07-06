@@ -363,17 +363,30 @@ As we saw for the Active Inference framework, it is also possible to explicitly 
 During the perception process described in the previous section, the prediction module is constantly getting trained as organism's go about their life, by making of the ground truth data coming out of the inference module. The preeiction module was originally designed to predict the next instant of what the world is going to look like, but in higher animals such as humans, it performs a very important additional function, i.e., that of planning. During perception the brain is running closed loop, since its predictions are contantly being verified by real data. In contrast planning can be considered to be a process during which the prediction module runs open loop. In other words it generates a sequence of predictions, modulated by poetantial actions that the organism is planning to take. Based on this, the organism can decide whether a particular sequence of actions is good enough to accomplish some task.
 The process by which they arrive at the right action sequence to use such that it results in success, is called planning. 
 
-We will describe an approach to the problem of planning as given by the reinforcement learning or RL framework.
-The RL framework is based on the idea that there is a reward associated with the completion of tasks, and organisms take the sequence of actions which results in the maximization of the reward. 
-There is an alternative theory of planning due to Karl Friston that is based on the minimization of expected variational free energy.
-The Friston theory, which is part of the Active Inference framework, does not use rewards. Instead it posits that an organism starts with an image of what the completed task looks like, and then decomposes it into a sequence of images that get it to the desired end point. The actions themselves are determined automatically by the predictive processing framework as described in the prior section.
-
-![](https://subirvarma.github.io/GeneralCognitics/images/stat114.png) 
+![](https://subirvarma.github.io/GeneralCognitics/images/stat118.png) 
 
 Figure 27: Using the DTPC framework to do Planning
 
 The DTPC framework can be used to do planning as shown in the above figure. In this case there is no sensory data coming into the system, hence only the prediction and generation processes
 are needed. The prediction process can be conditioned on actions, thus allowing the system to plan out a sequence of actions to accomplish a task.
+
+The pure prediction process of the type shown above brings us to the realm of of our current generation of generative models, which do all their work as predictive models.
+
+![](https://subirvarma.github.io/GeneralCognitics/images/stat119.png) 
+
+Figure 27:  (from [1](https://arxiv.org/pdf/2606.12987))
+
+[This paper](https://arxiv.org/pdf/2606.12987) is a recent world model proposal that that uses this architecture and does predictions in latent space.
+
+
+
+We will describe an approach to the problem of planning as given by the reinforcement learning or RL framework.
+The RL framework is based on the idea that there is a reward associated with the completion of tasks, and organisms take the sequence of actions which results in the maximization of the reward. 
+There is an alternative theory of planning due to Karl Friston that is based on the minimization of expected variational free energy.
+The Friston theory, which is part of the Active Inference framework, does not use rewards. Instead it posits that an organism starts with an image of what the completed task looks like, and then decomposes it into a sequence of images that get it to the desired end point. The actions themselves are determined automatically by the predictive processing framework as described in the prior section.
+
+
+
 
 The [Dreamer v4](https://arxiv.org/abs/2509.24527) is a recent world model proposal that that uses this architecture and does predictions in latent space.
 
