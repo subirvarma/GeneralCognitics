@@ -360,8 +360,8 @@ As we saw for the Active Inference framework, it is also possible to explicitly 
 
 ## Planning
 
-During the perception process described in the previous section, the prediction module is constantly getting trained as organism's go about their life, by making of the ground truth data coming out of the inference module. The preeiction module was originally designed to predict the next instant of what the world is going to look like, but in higher animals such as humans, it performs a very important additional function, i.e., that of planning. During perception the brain is running closed loop, since its predictions are contantly being verified by real data. In contrast planning can be considered to be a process during which the prediction module runs open loop. In other words it generates a sequence of predictions, modulated by poetantial actions that the organism is planning to take. Based on this, the organism can decide whether a particular sequence of actions is good enough to accomplish some task.
-The process by which they arrive at the right action sequence to use such that it results in success, is called planning. 
+During the perception process described in the previous section, the prediction module is constantly getting trained as organisms go about their life, by making of the ground truth data coming out of the inference module. The prediction module was originally designed to predict the next instant of what the world is going to look like, but in higher animals such as humans, it performs a very important additional function, i.e., that of planning. During perception the brain is running closed loop, since its predictions are contantly being verified by real data. In contrast planning can be considered to be a process during which the prediction module runs open loop. In other words it generates a sequence of predictions, modulated by potetantial actions that the organism is planning to take. Based on this, the organism can decide whether a particular sequence of actions is good enough to accomplish some task.
+The process by which it arrives at the right action sequence such that it results in success, is called planning. 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat118.png) 
 
@@ -371,25 +371,12 @@ The DTPC framework can be used to do planning as shown in the above figure. In t
 are needed. The prediction process can be conditioned on actions, thus allowing the system to plan out a sequence of actions to accomplish a task.
 
 The pure prediction process of the type shown above brings us to the realm of of our current generation of generative models, which do all their work as predictive models.
-
-![](https://subirvarma.github.io/GeneralCognitics/images/stat119.png) 
-
-Figure 27:  (from [1](https://arxiv.org/pdf/2606.12987))
-
-[This paper](https://arxiv.org/pdf/2606.12987) is a recent world model proposal that that uses this architecture and does predictions in latent space.
-
-
+Please see [Nilaksh et.al.](https://arxiv.org/abs/2605.06388) for a recent work on diffusion based world models that do predictions in latent space.
 
 We will describe an approach to the problem of planning as given by the reinforcement learning or RL framework.
 The RL framework is based on the idea that there is a reward associated with the completion of tasks, and organisms take the sequence of actions which results in the maximization of the reward. 
 There is an alternative theory of planning due to Karl Friston that is based on the minimization of expected variational free energy.
 The Friston theory, which is part of the Active Inference framework, does not use rewards. Instead it posits that an organism starts with an image of what the completed task looks like, and then decomposes it into a sequence of images that get it to the desired end point. The actions themselves are determined automatically by the predictive processing framework as described in the prior section.
-
-
-
-
-The [Dreamer v4](https://arxiv.org/abs/2509.24527) is a recent world model proposal that that uses this architecture and does predictions in latent space.
-
 
 ### The Reinforcement Learning Framework for Planning
 
@@ -397,12 +384,10 @@ The [Dreamer v4](https://arxiv.org/abs/2509.24527) is a recent world model propo
 
 Figure 4: The Reinforcement Learning Control Framework: An Agent Acting in the Real World
 
-The RL framework is shown in part (a) of the above figure and it shows an organism operating in an external environment. 
-Fundamental to this framework is the concept of the agent state $z_n$, which is defined as the information that an agent needs to take an action.
+The RL framework for an agent operating in a real world environment is shown in part (a) of the above figure. 
+Fundamental to this framework is the concept of the agent state $x_n$, which is defined as the information that an agent needs to take an action.
 Assume that it takes action $a_n$ at time $n$ based on its current state $x_n$, and the action results in a change to the environment that is recorded by the agent as an observation $o_n$. The observation results in a change in its state to $x_{n+1}$ and also an (optional) reward signal $r_n$. 
 The reward signal tells the agent whether the action resulted in a positive outcome (or not). The agent then takes the next action $a_{n+1}$ taking $x_{n+1}$ into account, and the loop goes through another cycle. RL is focused on choosing the action sequence $a_1,...,a_N$ so as to maximixe the total reward obtained during the completion of the task that the agent set out to do.
-
-*The state $s_n$ depends on the specific agent model that is being used. For example in the Predictive Processing framework $z_n$ is given by the most recent $K$ perceptions $y_n,y_{n-1},...,y_{n-K}$, while in the Active Inference model (described in a later section) $z_n=x_n$ since by definition $x_n$ is a summary of the organism's belief about the environment at time $n$.*
 
 The RL framework shown in part (a) leaves open the problem of how the agent figures out what action to take for a given state. But what if the agent posseses a model for the enviroment that allows it to predict the next  state (and reward), as a function of the prior state and the action it took. This scenario is shown in part (b), in which I have replaced the environment by the agent's model for the environment. This model allows the agent to try out various scenarios and sequences of actions, without actually taking any action in the real world, and this is called planning. 
 
@@ -410,10 +395,10 @@ The RL framework shown in part (a) leaves open the problem of how the agent figu
 
 Figure 5: Model Based Control in Reinforcement Learning: An Agent Planning its actions Based on an internal model
 
-Part (a) of the above figure shows an example rollout of the perception-action states during planning, starting from some initial state $z_1$. The organism can potentially take one of two actions $a_1$ or $a_2$ from this state, and assuming it takes action $a_1$, it can potentially transition to state $z_2$ or state $z_3$. The state that it actually transitions to is controlled by the conditional probabilities $p(z_2|z_1,a_1)$ and $p(z_3|z_1,a_2)$ which constitute the organism's world model.
+Part (a) of the above figure shows an example rollout of the perception-action states during planning, starting from some initial state $x_1$. The organism can potentially take one of two actions $a_1$ or $a_2$ from this state, and assuming it takes action $a_1$, it can potentially transition to state $x_2$ or state $x_3$. The state that it actually transitions to is controlled by the conditional probabilities $p(x_2|x_1,a_1)$ and $p(x_3|x_1,a_2)$ which constitute the organism's world model.
 Once this transition takes place, the organism then takes its next potential action and the whole process repeats.
 
-Part (b) of the figure shows a sequence of possible rollouts of the perception-action planning sequence, from a starting state $z_1$. An individual rollout is one path through this graph, and an example is shaded in red. A rollout terminates when the organism reaches the end state labeled T. 
+Part (b) of the figure shows a sequence of possible rollouts of the perception-action planning sequence, from a starting state $x_1$. An individual rollout is one path through this graph, and an example is shaded in red. A rollout terminates when the organism reaches the end state labeled T. 
 This kind of decision tree that starts from the current state and then charts out various hypothetical scenarios is a type of tree search.
 Within the RL literature there is a specific algorithm called Monte Carlo Tree Search or MCTS that has been popularized as a result of the Alpha Zero family of game playing models from Deep Mind.
 In games such as chess or Go there can potentially be thousands of possible actions that can be taken from each state of the game board, and as a result MCTS uses a measure of how 'good' a state is in terms of rewards or value that will acrrue if the game ends up in a particular state. Hence the choice of action boils down to choosing one that results in a state with a higher value function.
@@ -423,7 +408,7 @@ For example consider the following scenario: I am in my living room and decide t
 But suppose I am in a friend's home, and all this information is not available to me. Then I will have a less precise plan. At a high level the plan would still be make my way to the kitchen, and then search for the tea and mugs, but when I make this plan I don't know whether I should be turning left or right to get to the kitchen. The only way to resolve the issue is by putting the plan into action and trying out both the possibilities. If I make the wrong choice then the resulting state, lets say the bedroom, does not match my expectation of a kitchen, in which case I retrace my steps and try out the other direction.
 This sort of daily planning that we do in our lives is considerably simpler than the sophisticated MCTS type tree searches used in Alpha Zero. Morever we have the addiitonal advantage of knowledge accumulated during the course of our lives that we bring to bear in figuring out what action to take.
 
-This discussion shows the centrality of the conditional distribution $p(z_{n+1}|z_n,a_n)$ to the RL framework. Within the context of perception, this distribution is what we referred to as the world model in the previous section.
+This discussion shows the centrality of the conditional distribution $p(x_{n+1}|x_n,a_n)$ to the RL framework. Within the context of perception, this distribution is what we referred to as the world model in the previous section.
 If the organism learns this world model and captures its within its neural network, then it has the capability to do these rollouts in its mental space without actually taking any action in the real world.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat80.png) 
@@ -475,27 +460,16 @@ In the next section we present models for perception that explicitly incorporate
 
 ## Equivalence between Models
 
-![](https://subirvarma.github.io/GeneralCognitics/images/stat112.png) 
+One of the mysteries in AI is the ability of auto regressive models such as LLMs to mimic the brain. In order to gain some insight into this problem, we will show that For the special case of models that do planning (i.e. prediction and generation), the following three classes of models can all be regarded as EBMs:
 
-Figure 1: Equivalent models for sensory perception in the brain
+1. EBM Models that operate using latent representations. The DTPC planning model presented in the previous section belongs to this class.
+2. EBM models that operate at the pixel level. and generate all the pixels in the image in parallel.
+3. EBM models that operate at the pixel level, and do generation auto regressively one pixel at a time. LLMs are a special case of thus typeos  model in which the output corresponds to words rather than pixels.
 
-- Part (a) of figure 1 shows the Predictive Processing type model, which uses the three operations of inference, prediction and generation, and these three modules can be modeled using EBMs.
-- Part (b) of the figure another system in which the internal latent state is not explicitly modeled, instead the model converts input pixels directly into output pixels, while also making use of previous predictions. This system can be modeled by a single EBM module which implicitly handles all the three operations of inference, prediction and generation in a way that is not visible externally. From the input-output point of view, models (a) and (b) are equivalent.
-- The EBM in Model (b) use Langevin sampling to do the energy minimization, and this results in a parallel prediction/generation of all pixels. However it turns out that model (b) can also be implemented by doing auto regressive pixel-by-pixel generation and this is shown in part (c). We will show that auto regressive generation also effectively leads to an output whose energy lies at a minimum, so it can also be regarded as an EBM model which is equivalent to model (b).
+Both type 1 and type 2 models work by a process of energy minimization, but by using different energy functions. Type 3 models use energy functions that also operates at the pixel level as for type 2 models, however they use a different sampling scheme. Whereas type 2 models use Langevin sampling which allows them to optimize all their nodes together, type 3 models sample one node at time.
 
-If we follow the chain of models from (a) to (b) to (c), it follows that process of perception in the brain can be modeled using auto-regressive models. However the details of pixel-by-pixel generation in model (c) is very different than the full scale inference/prediction/generation pipeline in model (a). Biological brains probably implement these operations in a way that is modeled in (a), while we have discovered an equivalent way of doing so by using auto regressive transformer models. 
-However we should not be looking for transformer equivalents in the brain. If the correspondence between models (a), (b) and (c) holds, then it follows that the transformer is equivalent to a system of interacting nodes working according to the principle of energy minimization, then this problem becomes moot, and the main purpose of this article is to show that this is indeed the case.
+When building world models using artificial neural networks, we have the choice of using any one of these types of models. In general pixel based generation in type 2 model is more compute intensive than operating in the latent space, while type 3 models are the most compute intensive of the three since the model multiple times to generate an entire image. But from the theory point of view, since all three types work througn the principle of energy minimization and result in similar outputs, they can be considered to be equivalent in some sense. Since the brain is also a type of EBM in which energy is due to interactions between neurons, this establishes a connection between the operation of the brain and auto regressive models. This is particularly important for the case of language generation, since LLMs are often portrayed as 'sochastic parrots'. However if they are effectively working at the level of internal latent representations, as do models of type 1 and 2, then that makes their effectiveness less surprising.
 
-In practice for commercial use, auto regressive models of type (c) work better in some cases, such as in language generation, and I will cover this in the next article. For image generation on the other hand, auto regressive generation is at a significant dis-advantage since the model has to be run hundreds of thousands of time to generate a single image, so diffusion models of types (a) or (b) are used instead.
-
-One of the mysteries in AI is the ability of auto regressive models such as LLMs to mimic the brain.
-We will consider LLMs in the next section, but it turns out that images can also be generated on a pixel-by-pixel basis by an autoregressive model such as a transformer, so we will examine the connection this type of image generation and models for perception in the brain such as the DDPP and DTPC models from the prior sections. We will show that auto regressive models are a special case of DDPP models, since both work through the process of energy minimization.
-
-*We will do this by pointing a number of equivalences between models. We will use the following definition:*
-
-*Definition: Model A is equivalent to Model B, if they have the same energy function.*
-
-Equivalence between models is quite common in other branches of science such as physics. For example the laws of motion can be cast either in the Newtonian form in terms of acceleration and forces, or they can be regarded as outcomes of minimum action principles such as the one due to Lagrange. Physicists use whichever model is most convenient to solve the problem at hand.
 I am going to argue that our advances in generative AI in last two decades have been due to our ability to come up with artificial neural networks that are equivalent to the neuronal circuitry in the brain, even though architecturally they are very different.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat105.png) 
@@ -559,6 +533,19 @@ If we follows the chain of equivalences, then it follows that an auto-regressive
 It is not working exactly as the brain does, in fact the DDPC (or the DTPC model) is probably how the brain works. However, if we look at the two systems from the input-output point of view, then they are equivalent. This supports my thesis stated at the start of this article, that modern neural networkds such as the transformer don't model the neural circuitry of the brain, instead they are excellent models for the energy function of the brain. Any good function approximator will serve this function, and even though transformers are the best approximators we know of today, better ones will be found in the future.
 
 This discussion has been in the context of image generation or perception, what about language generation?  This is discussed in the next section.
+
+![](https://subirvarma.github.io/GeneralCognitics/images/stat112.png) 
+
+Figure 1: Equivalent models for sensory perception in the brain
+
+- Part (a) of figure 1 shows the Predictive Processing type model, which uses the three operations of inference, prediction and generation, and these three modules can be modeled using EBMs.
+- Part (b) of the figure another system in which the internal latent state is not explicitly modeled, instead the model converts input pixels directly into output pixels, while also making use of previous predictions. This system can be modeled by a single EBM module which implicitly handles all the three operations of inference, prediction and generation in a way that is not visible externally. From the input-output point of view, models (a) and (b) are equivalent.
+- The EBM in Model (b) use Langevin sampling to do the energy minimization, and this results in a parallel prediction/generation of all pixels. However it turns out that model (b) can also be implemented by doing auto regressive pixel-by-pixel generation and this is shown in part (c). We will show that auto regressive generation also effectively leads to an output whose energy lies at a minimum, so it can also be regarded as an EBM model which is equivalent to model (b).
+
+If we follow the chain of models from (a) to (b) to (c), it follows that process of perception in the brain can be modeled using auto-regressive models. However the details of pixel-by-pixel generation in model (c) is very different than the full scale inference/prediction/generation pipeline in model (a). Biological brains probably implement these operations in a way that is modeled in (a), while we have discovered an equivalent way of doing so by using auto regressive transformer models. 
+However we should not be looking for transformer equivalents in the brain. If the correspondence between models (a), (b) and (c) holds, then it follows that the transformer is equivalent to a system of interacting nodes working according to the principle of energy minimization, then this problem becomes moot, and the main purpose of this article is to show that this is indeed the case.
+
+In practice for commercial use, auto regressive models of type (c) work better in some cases, such as in language generation, and I will cover this in the next article. For image generation on the other hand, auto regressive generation is at a significant dis-advantage since the model has to be run hundreds of thousands of time to generate a single image, so diffusion models of types (a) or (b) are used instead.
 
 ## Constantly Changing Energy Landscape Interpretation of the Prediction Model
 
