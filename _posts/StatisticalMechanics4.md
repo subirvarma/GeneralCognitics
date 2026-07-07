@@ -412,21 +412,6 @@ The tea making scenario also points towards a way in which planning can be combi
 organism can use its world model and ability to do hypothetical rollouts to take actions that achieve a task objective.
 Using its world model the agent generates multiple scenarios driven by sequences of actions, and then chooses the scenario that leads to success. It then carries out the first action in the sequence, and this changes the environment state. The organism then incorporates the new information into its model, and then repeats the process. If it ends up in an undesirable state then it backtracks to the previous state and chooses some other action. Hence as the organism takes actions and encounters new states, it constantly modifies its plans and its world model by taking the new information into account. This type of algorithm goes by the name of model predictive control or MPC in control theory.
 
-![](https://subirvarma.github.io/GeneralCognitics/images/stat85.png) 
-
-Figure 12: Modeling Predictive Perception coupled with Action in animal brains by means of minimization of the Energy Function. The minimization is carried out over L stages, with $N_L$ step Langevin Sampling used to do minimization at each stage
-
-The DPP framework generates the next perception $y_{n+1}$ as a function a of the previous $K$ perceptions, so that the next state is distributed according to the probability distribution $p_W(y|y_{n-1},...,y_{n-K},a_n)$. Generation from this type of distribution can be readily incorporated into the EBM model as shown above. For an example of a diffusion based world model does predictions in the pixel space, as in the DPP framework, see the [DIAMOND model](https://arxiv.org/abs/2405.12399) from 2024. The world that this system models are from Atari video games. The model is used to train a game playing agent, using the actor-critic algorithm from RL. 
-
-![](https://subirvarma.github.io/GeneralCognitics/images/stat81.png) 
-
-Figure 13: Inputs and outputs in the UniSIM model
-
-Another model in this category is the [UniSIM model](https://arxiv.org/abs/2310.06114), also from 2024, that can be used to build world models for robotic control. Inputs and outputs in this model are shown in the above figure, the output consists of a sequence of image frames $y_n$ which is the model's prediction of the effect of robotic actions. The input consists of the following:
-
-- The model's previous prediction $y_{n-1}$ which is also a set of image frames. These are concatenated channelwise with the initial noise sample at the start of the diffusion proces to serve as conditional inputs. This conditioning can be extended over several prior output and action values in an auto-regressive manner.
-- The actions can be in one of several formats: (1) $a_1$: A language description, (2) $a_0$: Low level robotic control actions, (3) $a_2$: Actions extracted from camera motions.
-
 ## Some Comments on the Connectome Architecture
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat95.png) 
@@ -448,8 +433,6 @@ There can be a rich interconnection of perception and hidden nodes among themsel
 
 Hence even though we started by not using hidden or latent states in our model for perception, this shows that are equivalent models incorporating hidden states, which have simpler inter-connect toplogy.
 In the next section we present models for perception that explicitly incorporate hidden states.
-
-
 
 ## Equivalence between Models
 
@@ -484,7 +467,21 @@ Planning models of types 1,2 and 3 are illustrated in the above figure. The top 
 This model explicitly models the hidden or latent states in the system, and how it evolves with time.
 However there is a way to build an equivalent diffusion/EBM model, but without using latent states, as shown in the middle figure,. 
 In this case the model generates the next image by using the history of past generated images and other factors such as actions. It combines the prediction and generation functions into a single EBM/diffusion block and hence in some sense is a conceptually simpler system then the one based on latents.
-A prominent world model that works in this fashion is the DIAMOND model.
+
+![](https://subirvarma.github.io/GeneralCognitics/images/stat85.png) 
+
+Figure 12: Modeling Predictive Perception coupled with Action in animal brains by means of minimization of the Energy Function. The minimization is carried out over L stages, with $N_L$ step Langevin Sampling used to do minimization at each stage
+
+The DPP framework generates the next perception $y_{n+1}$ as a function a of the previous $K$ perceptions, so that the next state is distributed according to the probability distribution $p_W(y|y_{n-1},...,y_{n-K},a_n)$. Generation from this type of distribution can be readily incorporated into the EBM model as shown above. For an example of a diffusion based world model does predictions in the pixel space, as in the DPP framework, see the [DIAMOND model](https://arxiv.org/abs/2405.12399) from 2024. The world that this system models are from Atari video games. The model is used to train a game playing agent, using the actor-critic algorithm from RL. 
+
+![](https://subirvarma.github.io/GeneralCognitics/images/stat81.png) 
+
+Figure 13: Inputs and outputs in the UniSIM model
+
+Another model in this category is the [UniSIM model](https://arxiv.org/abs/2310.06114), also from 2024, that can be used to build world models for robotic control. Inputs and outputs in this model are shown in the above figure, the output consists of a sequence of image frames $y_n$ which is the model's prediction of the effect of robotic actions. The input consists of the following:
+
+- The model's previous prediction $y_{n-1}$ which is also a set of image frames. These are concatenated channelwise with the initial noise sample at the start of the diffusion proces to serve as conditional inputs. This conditioning can be extended over several prior output and action values in an auto-regressive manner.
+- The actions can be in one of several formats: (1) $a_1$: A language description, (2) $a_0$: Low level robotic control actions, (3) $a_2$: Actions extracted from camera motions.
 
 We are now going to take the model in part (B) and push it to its extreme: The model in Part (B) generates images a frame at a time, in other words all the pixels are generated jointly. But what if generation is done just one pixel at a time using a transformer model, as in Part (C)? It turns out that this system works perfectly well and is able to produce perfectly good images. In fact [Imagen-1](https://cdn.openai.com/papers/Generative_Pretraining_from_Pixels_V2.pdf) from OpenAI, which was one of the first widely available image generators, worked in precisely this fashion. But can it still be regarded as a diffusion/EBM model?
 
