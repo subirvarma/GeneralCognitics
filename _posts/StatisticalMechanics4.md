@@ -9,19 +9,12 @@ title: " Models of the Brain for Perception and Planning"
 
 - Introduction
 - The Predictive Processing Framework in Computational Neuroscience
+- Diffusion/EBM based Temporal Predictive Coding
+- Implementing the Inference and Generation Modules: Predictive Coding
+- Implementing the Prediction Module using EBM/Diffusions
 - Planning in the Brain
   - The Reinforcement Learning Framework for Planning
-- Predictive Processing Using Internal States and Latent Representations
-- Models for Predictiction Using EBMs/Diffusions 
-  - Some Implementations Details for EBM Models
-  - An Energy Landscape in Constant Flux
-  - Comments on the Connectome Architecture
-- Models for Predictive Processing Using EBMs/Diffusions and With the Use of Latent Representations
-  - Predictive Coding Theory
-  - Temporal Predictive Coding: Inference, Prediction and Generation
-  - Diffusion based Temporal Predictive Coding
-- Contrasting Predictive Processing without Latent Representations and Diffusion based Temporal Predictive Coding 
-- Equivalenve between Models
+- Equivalence between Models
 
 ## Introduction
 
