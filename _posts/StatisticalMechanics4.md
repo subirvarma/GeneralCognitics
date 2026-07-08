@@ -126,7 +126,7 @@ Andy Clark points out in his book that certain mental health issues can be expla
 
 ## Diffusion based Temporal Predictive Coding (DTPC)
 
-In this section I am going put some flesh to the Predctive Processing model that was shown in figure 1. I will start with a model for the inference and generation modules (since it turns out that they go together) and follow it up with a model for the prediction. The prediction module is based on diffusion based EBMs of the type we encountered in [Part 3](https://subirvarma.github.io/GeneralCognitics/2026/02/13/statmech3.html). The inference and generation modules are based on the theory of [Predictive Coding](https://homes.cs.washington.edu/~rao/predcoding2011.pdf) due to Rao and Ballard. All of these modules work using the princimle of energy minimization hence are biologically plausible.
+In this section I am going supply additional details about the Predctive Processing model as  shown in figure 3. I will start with a model for the inference and generation modules (since it turns out that they are related) and follow it up with a model for the prediction. The prediction module is based on diffusion based EBMs of the type we encountered in [Part 3](https://subirvarma.github.io/GeneralCognitics/2026/02/13/statmech3.html). The inference and generation modules are based on the theory of [Predictive Coding](https://homes.cs.washington.edu/~rao/predcoding2011.pdf) due to Rao and Ballard. All of these modules work using the princimle of energy minimization which increases their biologically plausibility.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat102.png) 
 
@@ -134,13 +134,14 @@ Figure 3: Diffusion based Temporal Predictive Coding (DTPC) Framework
 
 The figure above shows the proposed model that I am going to call Diffusion based Temporal Predictive Coding or DTPC. 
 The prediction part of this model, i.e., the distribution $g_{\theta}$ is implemented with EBM/diffusion models so that the prediction of $x_{n+1}$ is done by using a process of sampling. 
-On the other hand the inference and generation models are implemented by using n iterative process of error minimization. If it can be shown that all of these operations can be implemented using signalling between adjacent neurons, then it makes them biologically plausible.
+On the other hand the inference and generation models are implemented by using an iterative process of error minimization. If it can be shown that all of these operations can be implemented using signalling between adjacent neurons, then it makes them biologically plausible.
 
 The model operates as follows:
 
-- A stream of external sensory data $s_n$ arrives at discrete time instants indexed by $n$. The sensory data is processed by the Predictive Coding algorithm that handles both inference and generation. This results in a high level latent state $z_n$ at time $n$. The Predictice Coding algorithm allows for multiple stages of inference and generation.
-- The latent state $z_n$ is fed into a world model built using a diffusion base EBM, and this results in a prediction $x_{n+1} which is sampled from the distribution $g_{\theta}(x|z_n,u_{n+1})$.  Here the sequence $u_n$ stands for other factors that influence the prediction, such as actions that the organism plans to take.
-- The prediction $x_{n+1}$ serves as the initial estimate for the next latent state $z_{n+1}$ at time $n+1$. At the same time the generative model converts $x_{n+1}$ into $y_{n+1} = p_{\psi}(x_{n+1}$, and this serves as the organism's perception signal at time $n+1$.
+- A stream of external sensory data $s_n$ arrives at discrete time instants indexed by $n$. It is processed by the Predictive Coding algorithmd and this results in a high level latent state $z_n$ at time $n$. 
+- The latent state $z_n$ is fed into a prediction module built using a diffusion base EBM, and as a result the latent state changes to $x_{n+1}. The prediction is implemented by sampling from the distribution $g_{\theta}(x|z_n,u_{n+1})$.  Here the sequence $u_n$ stands for other factors that influence the prediction, such as actions that the organism plans to take.
+- The generative model converts the state $x_{n+1}$ into a perception $y_{n+1}$, and this serves as the organism's perception signal at time $n+1$.
+- The state $x_{n+1}$ also serves as the initial estimate for the next latent state $z_{n+1}$ at time $n+1$.
 Note that we are assuming that the time required to generate the prediction $x_{n+1}$ is less then the time between successive sensory inputs.
 - As a result of the new sensory data $s_{n+1}$, the latent $z_{n+1}$ undergoes changes in a recursive manner from its initial value $x_{n+1}$, until it settles down to a new final state, and this is then used for the next prediction $x_{n+2}$.
 
