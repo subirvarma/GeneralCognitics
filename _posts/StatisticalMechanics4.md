@@ -394,6 +394,19 @@ Another aspect on the biological plausibility issue is the learning process for 
 The main lesson to be drawn from this diffuson/EBM model for the brain, is that it is possible to create a model for a highly complex system like the brain by using the brain's outputs alone and without worrying about the details of its internal structure. If the model is powerful enough, then it is able to re-create this internal structure through the training process. 
 As we saw for the Active Inference framework, it is also possible to explicitly model the internal states of the brain. But either approach works equally well, and choosing one over the other is a matter of implementation efficiency.
 
+## Are Latent States Necessary? An Alternative Model for Perception
+
+![](https://subirvarma.github.io/GeneralCognitics/images/stat124.png) 
+
+Figure 27: The Direct Predictive Processing Model
+
+The DTPC model does prediction in latent space, while the inference/generation modules are used to convert between the latent and pixel spaces. But does the model neeed to handle the process of conversion into latent space? Why not do prediction in pixel space directly?
+This can certainly be done and the resulting model that I am going to call Direct Diffusion based Predictive Processing or DDPP is shown in the above figure. The model predcits the next perception $y_{n+1}$ by sampling from the probability distribution $p_W(y|y_n.u_{n+1},s_n)$, where $y_n$ was the previous prediction, $u_{n+1}$ is the action that the organism plans to take and $s_n$ is the sensory data at the previous instant. This system can be implemented using a diffusion model just like we did for the prediction module in the DTPC model.
+With this model we are not making any assumtions about the internal operations of the brain, and modeling its operation purely based on sensory inputs and its perceptual output. Morever since the model is an EBM, new predictions can be generated from the model by sampling from it as it settles into a state of minimum energy.
+
+The model parameters can be learnt in a fashion similar to that for the DTPC prediction module, by using maximum likelihood estimation. The signals required for training are models own prediction $y_{n+1}$ for the $(n+1)^{rst}$ state, as well as the ground truth data $s_{n+1}$ for that time, and both of these are readiliy available. As for the DTPC model, if the inetr-connection topology is known, then this reduces to a Hebbian type larning rule. If not known, then we can work directly in the energy model space, and use algorithms such Diffusion Recovery Likelihhod or DRL.
+
+
 ## Planning
 
 During the perception process described in the previous section, the prediction module is constantly getting trained as organisms go about their life, by making of the ground truth data coming out of the inference module. The prediction module was originally designed to predict the next instant of what the world is going to look like, but in higher animals such as humans, it performs a very important additional function, i.e., that of planning. During perception the brain is running closed loop, since its predictions are contantly being verified by real data. In contrast planning can be considered to be a process during which the prediction module runs open loop. In other words it generates a sequence of predictions, modulated by potetantial actions that the organism is planning to take. Based on this, the organism can decide whether a particular sequence of actions is good enough to accomplish some task.
