@@ -126,29 +126,26 @@ Andy Clark points out in his book that certain mental health issues can be expla
 
 ## Diffusion based Temporal Predictive Coding (DTPC)
 
-In this section I am going supply additional details about the Predctive Processing model as  shown in figure 3. I will start with a model for the inference and generation modules (since it turns out that they are related) and follow it up with a model for the prediction. The prediction module is based on diffusion based EBMs of the type we encountered in [Part 3](https://subirvarma.github.io/GeneralCognitics/2026/02/13/statmech3.html). The inference and generation modules are based on the theory of [Predictive Coding](https://homes.cs.washington.edu/~rao/predcoding2011.pdf) due to Rao and Ballard. All of these modules work using the princimle of energy minimization which increases their biologically plausibility.
+In this section I am going supply additional details about the Predictive Processing model and this is  shown in figure 3. I will start with a model for the inference and generation modules (since it turns out that they are related) and follow it up with a model for prediction. The prediction module is based on diffusion based EBMs of the type we encountered in [Part 3](https://subirvarma.github.io/GeneralCognitics/2026/02/13/statmech3.html). The inference and generation modules on the other hand are based on the theory of [Predictive Coding](https://homes.cs.washington.edu/~rao/predcoding2011.pdf) due to Rao and Ballard. All of these modules work using the principle of energy minimization which increases their biological plausibility.
+There can be some confusion created due to the differing use of the word 'predictive' in both Predictive Processsing and Predictive Coding. In Predictive Processing it denotes a preeiction in time of the next state, while in Predictive Coding it denotes an inference (or prediction) of the state based on sensory data. The DTPC model incorporates Predictive Coding as part of the overall Predictive Processing framework.
 
-![](https://subirvarma.github.io/GeneralCognitics/images/stat102.png) 
+![](https://subirvarma.github.io/GeneralCognitics/images/stat121.png) 
 
 Figure 3: Diffusion based Temporal Predictive Coding (DTPC) Framework
 
-The figure above shows the proposed model that I am going to call Diffusion based Temporal Predictive Coding or DTPC. 
-The prediction part of this model, i.e., the distribution $g_{\theta}$ is implemented with EBM/diffusion models so that the prediction of $x_{n+1}$ is done by using a process of sampling. 
-On the other hand the inference and generation models are implemented by using an iterative process of error minimization. If it can be shown that all of these operations can be implemented using signalling between adjacent neurons, then it makes them biologically plausible.
-
+The figure above shows the proposed model which I am going to call Diffusion based Temporal Predictive Coding or DTPC. 
 The model operates as follows:
 
 - A stream of external sensory data $s_n$ arrives at discrete time instants indexed by $n$. It is processed by the Predictive Coding algorithmd and this results in a high level latent state $z_n$ at time $n$. 
-- The latent state $z_n$ is fed into a prediction module built using a diffusion base EBM, and as a result the latent state changes to $x_{n+1}. The prediction is implemented by sampling from the distribution $g_{\theta}(x|z_n,u_{n+1})$.  Here the sequence $u_n$ stands for other factors that influence the prediction, such as actions that the organism plans to take.
-- The generative model converts the state $x_{n+1}$ into a perception $y_{n+1}$, and this serves as the organism's perception signal at time $n+1$.
-- The state $x_{n+1}$ also serves as the initial estimate for the next latent state $z_{n+1}$ at time $n+1$.
+- The latent state $z_n$ is fed into a prediction module built using a diffusion base EBM, and as a result the latent state changes to $x_{n+1}. The prediction is implemented by sampling from the distribution $p_{\theta}(x|z_n,u_{n+1})$.  The sequence $u_n$ stands for other factors that influence the prediction, such as actions that the organism plans to take.
+- The generative model converts the state $x_{n+1}$ into a perception $y_{n+1} = p_{\psi}(z_{n+1})$, and this serves as the organism's perception signal at time $n+1$.
+- The state $x_{n+1}$ also serves as the initial estimate for the next latent state $z_{n+1}$ at time $n+1$. As a result of new sensory data $s_{n+1}$, the latent $z_{n+1}$ undergoes changes in a recursive manner from its initial value $x_{n+1}$, until it settles down to a new final state $q_{\phi}(x_n,s_n)$, and this is serves as input into the prediction module for the next prediction $x_{n+2}$.
+
 Note that we are assuming that the time required to generate the prediction $x_{n+1}$ is less then the time between successive sensory inputs.
-- As a result of the new sensory data $s_{n+1}$, the latent $z_{n+1}$ undergoes changes in a recursive manner from its initial value $x_{n+1}$, until it settles down to a new final state, and this is then used for the next prediction $x_{n+2}$.
+This DTPC design handles not just perception, but in parallel does training of all the three modules $q_{\phi}, p_{theta}, p_{\psi}$ as new sensory data comes in. Hence in some sense its operation can be likened to the training process used in artificial neural network based world models since its parameters are updated in response to new sensory data. But at the same time  it also serves as a perception system in the brain through the output sequence $y_n$.
 
-This DTPC design handles not just perception, but in parallel does training of all the three modules $q_{\phi}, g_{theta}, p_{\psi}$ as new data comes in. Hence in some sense its operation can be likened to the training process used in artificial neural network based world models since the model is constantly updtaing its parameters in response to new data. But at the same time since the output of the model is being modified by new sensory data, it also serves as a perception system in the brain.
-
-Note that DTPC uses the simple linear inference and generation modules, as in the original Predictive Coding work. However if most of the heavy lifting in the inference/prediction/generation pipeline is done by the diffusion based prediction module, then perhaps relatively less sophisticated inference/generation modules are sufficient.
-The DTPC model also allows for a system in which a single set of neurons are being continuously modified, alternating with modification due to new sensory data followed by modifications due to the prediction operation. Since all of the operations, including inference, generation and prediction are based on an iterative process of energy minimization, they are biologically plausible.
+The DTPC system uses relatively simple Predictive Coding based modules for the inference and generation parts, while the prediction part uses the more sophisticted diffusion module.
+If it can be shown that all of the three modules can be implemented using an iterative process of energy minimization using only local interactions between nodes, then that makes it biologically plausible.
 
 ## Implementing the Inference and Generation Modules: Predictive Coding
 
@@ -156,198 +153,243 @@ The DTPC model also allows for a system in which a single set of neurons are bei
 
 Figure 24: The Predictive Coding Framework
 
-This model was proposed by [Rao and Ballard](https://www.cs.utexas.edu/~dana/Rao.pdf) as a way to generate latent representations in our visual cortex, hence the authors had biological plausibility as their main critera.
-The goal is not merely to encode pixels but also to infer the hidden causes of the image:
+This model was proposed by [Rao and Ballard](https://www.cs.utexas.edu/~dana/Rao.pdf) as a way to generate latent representations in our visual system, hence the authors had biological plausibility as their main critera.
+The goal was not merely to encode pixels but also to infer the hidden causes of the image:
 Rao and Ballard proposed that the cortex maintains a hierarchical generative model:
 
-$$  x_2  \rightarrow x_1 \rightarrow y $$
+$$  z(2)  \rightarrow z(1) \rightarrow y $$
 
-y is the sensory output such as retinal or LGN activity, $x_1$ is a representation at a lower cortical level such as V1-like features, $x_2$ is a representation at a higher cortical level such as more abstract visual causes and higher levels try to predict the activity of lower levels. 
+y is the sensory output such as retinal or LGN activity, $z(1)$ is a representation at a lower cortical level such as V1-like features in the brain, $z(2)$ is a representation at a higher cortical level such as more abstract visual causes and higher levels try to predict the activity of lower levels. I have left out the time subscript $n$ in the notation since I am assuming that all the steps in the inference phase happen at the same time instant $n$. For a system with two levels, the higher level $z(2)$ is the same as the state $z_n$ from the previous section.
 
 The model has a top-down generative pathway and a bottom-up error pathway.
 At each level, the representation at a higher level predicts the representation below it, so that
 
-$$ {\hat x}_{l-1} = f(x_l) $$
+$$ {\hat z}(l-1) = f_l(z(l)) $$
 
-Here $x_l$ is the latent representatopn at level $l$, $f_l$ is a learnt generative mapping and ${\hat x_{l-1}}$ is the predicted activity at the lower level. The actual lower-level activity is $x_{l-1}$, so the prediction error is 
+Here $z(l)$ is the latent representatopn at level $l$, $f_l$ is a learnt generative mapping and ${\hat z(l-1)}$ is the predicted activity at the lower level. The actual lower-level activity is $z(l-1)$, so the prediction error is 
 
-$$ e_{l-1} = x_{l-1} - f_l(_l)  $$
+$$ e_{l-1} = z(l-1) - f_l(z(l))  $$
 
 and the system tries to minimize this error. The sensory level output error is given by
 
-$$ e_0 = I - f_1(x_1) $$
+$$ e_0 = s - f_1(x(1)) $$
 
-where I is the sensory data input into the visual system. 
+where $s$ is the sensory data input into the visual system. 
 
-Each of the representations $x_l$ changes so as to reduce the total error. The update for $x_l$ depends upon the bottom-up error error from level $l-1$ (i.e., how well it was able to predict the lower level), as well as the top-down error in its own value as predicted by the level above it. The whole hierarchy iteratively settles into a state where predictions and observations agree as much as possible.
+Each of the representations $z(l)$ changes so as to reduce the total error. The update for $z(l)$ depends upon the bottom-up error error from level $l-1$ (i.e., how well it was able to predict the lower level), as well as the top-down error in its own value as predicted by the level above it. The whole hierarchy iteratively settles into a state where predictions and observations agree as much as possible.
 
 The Predictive Coding algorithm can be derived from Bayes Rule as follows: Consider a system with just a single level of latent representation.
-If sensory input $y$ is caused by hidden variables $x$, Bayes rule gives
+If sensory outut $y$ is caused by hidden variables $z$, Bayes rule gives
 
-$$ p(x|y) = {p(y|x)p(x)\over{p(y)}} $$
+$$ p(z|y) = {p(y|z)p(z)\over{p(y)}} $$
 
 For a given value of $y$ the denominator is a constant so that
 
-$$ \log p(x|y) = \log p(y|x) + \log p(x) + constant $$
+$$ \log p(z|y) = \log p(y|z) + \log p(z) + constant $$
 
-The best prediction $x^*$ is given by
+The best prediction $z^*$ is given by
 
-$$  x^* = argmax_x[\log p(y|x) + \log p(x)]  $$
+$$  z^* = argmax_z[\log p(y|z) + \log p(z)]  $$
 
-Assume that
+This is known as maximum a posteriori or MAP inference. Assume that
 
-$$ y = f(x) + \epsilon $$
+$$ y = f(z) + \epsilon $$
 
 where $f(.)$ is the generative function and $\epsilon$ is distributed according to the multi-variate Gaussian distribution $N(0,\Sigma_y)$. 
 Then
 
-$$  p(y|x) = N(y; f(x),\Sigma_y) $$
+$$  p(y|z) = N(y; f(z),\Sigma_y) $$
 
 so that
 
-$$ -\log p(y|x) = {1\over 2}(y - f(x))^T \Sigma_y^{-1} (y - f(x)) - \log p(x) $$
+$$ -\log p(y|z) = {1\over 2}(y - f(z))^T \Sigma_y^{-1} (y - f(z)) - \log p(z) $$
 
-If we define rhe prediction error $\epsilon_y = y - f(x)$, then the negative log posterior is given by
+If we define the prediction error $\epsilon_y = y - f(z)$, then the negative log posterior is given by
 
-$$ -\log p(y|x) = {1\over 2}\epsilon_y^T\Sigma_y^{-1}\epsilon_x - \log p(x) $$
+$$ -\log p(y|z) = {1\over 2}\epsilon_y^T\Sigma_y^{-1}\epsilon_y - \log p(z) $$
 
 Here, $\Pi_y = \Sigma_y^{-1}$ is called the precision matrix. It quantifies the fact that in in Bayesian predictive coding, not all errors are treated equally; errors with higher expected precision values get more weight. So minimizing negative log likelihood is literally minimizing precision-weighted prediction error.
 
-Assume that the latent variable $x$ also has a Gaussian prior $x$ distributed as $N(\mu_x,\Sigma_x)$, then
+Assume that the latent variable $z$ also has a Gaussian prior distributed as $N(\mu_z,\Sigma_z)$, then
 
-$$ -\log p(x) = {1\over 2}(x - \mu_x)^T \Sigma_x^{-1} (x - \mu_x) $$
+$$ -\log p(z) = {1\over 2}(z - \mu_z)^T \Sigma_z^{-1} (z - \mu_z) $$
 
-Defining $\epsilon_x = x - \mu_x$, it follows that the negative log posterior $E(x) = -\log p(y|x)$ is given by
+Defining $\epsilon_z = z - \mu_z$, it follows that the negative log posterior $E(z) = -\log p(y|z)$ is given by
 
-$$  E(x) = {1\over 2}\epsilon_y^T\Sigma_y^{-1}\epsilon_y  + {1\over 2}\epsilon_x^T \Sigma_x^{-1} \epsilon_x  $$
+$$  E(z) = {1\over 2}\epsilon_y^T\Sigma_y^{-1}\epsilon_y  + {1\over 2}\epsilon_z^T \Sigma_z^{-1} \epsilon_z  $$
 
-The system can infer $x$ by minimizing $E(x)$ by using gradient descent
+The system can infer $z$ by minimizing $E(z)$ by using gradient descent
 
-$$  x  \leftarrow x - \eta {\partial E\over{\partial x}} $$
+$$  z  \leftarrow z - \eta {\partial E\over{\partial z}} $$
 
-Using the above expression for $E(x)$, it follows that
+Using the above expression for $E(z)$, it follows that
 
-$$ {\partial E\over{\partial x}} = {\partial f\over{\partial x}}^T \Pi_y\epsilon_y - \Pi_x\epsilon_x $$
+$$ -{\partial E\over{\partial z}} = {\partial f\over{\partial y}}^T \Pi_y\epsilon_y + \Pi_z\epsilon_z $$
 
-This shows that the latent representation $x$ is adjusted by two competing forces, i.e., the bottom-up sensory error  and the top-down prior error. The first term pulls $x$ to better explain the sensory input, while the second term pulls $z$ towards its prior expectetion.
+This shows that the latent representation $z$ is adjusted by two competing forces, i.e., the bottom-up sensory error $\epsilon_y$  and the top-down prior error $\epsilon_z$. The first term pulls $z$ to better explain the sensory input $y$, while the second term pulls $z$ towards its prior expectetion.
 
 If we assume a simple linear model as in the original paper, then
 
-$$ y = Wx + \epsilon $$
+$$ y = Wz + \epsilon $$
 
 where matrix $W$ contains the parameters of the model. In this case the error gradient becomes
 
-$$ {\partial E\over{\partial x}} = W^T \Pi_y\epsilon_y - \Pi_x\epsilon_x $$
-
-**Learning the Model Parameters**
-
-The model parameters can also be learnt using gradient descent. In order to do so we need to compute the gradient ${\partial E\over{\partial W}}$, and this given by
-
-$$ {\partial E\over{\partial W}} = \Pi_y (y - Wx) x^T $$
-
-This is a local learning rule of the Hebbian type since the synaptic change depends on the presynaptic latent activity $x$ and the postsynaptic prediction error $y-Wx$.
-Hence the prediction error can be reduced either by making a better prediction, ot by changing the preeiction model itself. It is thought that the rate of synaptic
-changes in the brain is much lower than the rate with which the brain makes inferences.
-The brain encodes parameters by setting the strengths of its synaptic connections, while neuron state is encoded by the firing rate of the neuron.
+$$ -{\partial E\over{\partial z}} = W^T \Pi_y\epsilon_y + \Pi_z\epsilon_z $$
 
 **Extention to a Multi-Level System**
 
-This analysis can be extended to multiple representation levels $x_3\rightarrow x_2\rightarrow x_1\rightarrow y$ such that each level predicts the level below
+This analysis can be extended to multiple representation levels $z(3)\rightarrow z(2)\rightarrow z(1)\rightarrow y$ such that each level predicts the level below
 
-$$  x_{l-1} = f_l(x_l) + \epsilon_l  $$
+$$  z(l-1) = f_l(z(l)) + \epsilon_l  $$
 
 where $\epsilon_l$ is distributed according to the Gaussain distribution $N(0,\Sigma_l)$.
 and the system tries to minimize the full negative log posterior 
 
 $$ E = \sum_l {1\over 2} \epsilon_{l-1}^T\Pi_{l-1}\epsilon_{l-1}\ \ \ where\ \ \ \Pi_l = \Sigma_l^{-1} $$
 
-Each latent state is updated to minimize this total 'energy' using gradient descent. Since $x_l$ appears in two places, its update has two components:
+Each latent state is updated to minimize this total 'energy' using gradient descent. Since $z(l)$ appears in two places, its update has two components:
 
 1. It is predicted by the level above, with error given by
 
-$$  \epsilon_l = x_l - f_{l+1}(x_{l+1}) $$
+$$  \epsilon_l = z(l) - f_{l+1}(z(l+1)) $$
 
 2. It predicts the level below, with error given by
 
-$$  \epsilon_{l-1} = x_{l-1} - f_l(x_l) $$
+$$  \epsilon_{l-1} = z(l-1) - f_l(z(l)) $$
 
 so that 
 
-$$ {\partial E\over{\partial x}} = {\partial f_l\over{\partial x_l}}^T \Pi_{l-1}\epsilon_{l-1} - \Pi_l\epsilon_l $$
+$$ -{\partial E\over{\partial z(l}} = {\partial f_l\over{\partial x_l}}^T \Pi_{l-1}\epsilon_{l-1} + \Pi_l\epsilon_l $$
 
-and this is the canonical Predictive Coding update. In words: A representation at one level changes to reduce the error in the level below, while also staying consistent with the prediction coming from the level above.
-This is known as maximum a posteriori or MAP inference. It differs from the minimum Variational Free Energy inference made in the VAE model (and the Active Inference framework) in the following respects:
+and this is the canonical Predictive Coding update. In words: A representation at one level changes to reduce the error in the level below, while also staying consistent with the prediction coming from the level above. The inference at the very top level is then fed into the temporal prediction module.
+Note that the information required to make changes in the states $z(l)$ at each level is available locally, which makes this mechanism biologically plausible. 
+The error $E$ can be regarded as an energy function for this system, and its minimization is an iterative process with the signals flowing up and down the levels a few times, until converegence happens.
 
-- The VAE model does inference using a single pass of a feed-forward network, whose parameters have been optimized using a training process. The Predictive Coding model does inference in a iterative fashion, where the value of the latents are adjusted over multiple steps until the final prediction is a good match to the observation. This is very much like how an EBM operates since in this case too the nodes in an EBM adjust their values until the energy function is minimized. The predictive coding system uses an error function instead of an energy function, but the idea of multi-step iteration is the same.
-- In Predictive Coding, the network is recurrent. Activity does not simply pass once from input to output. Instead, units keep updating each other until the system reaches a relatively stable state.
-- Unlike the VAE model, all updates in the Predictive Coding model are local in nature, hence more biologically plausible.
-- The VAE model gives a distribution for the latent by minimizing the VFE, while Predictive Coding gives a point estimate for the latent. In practice even for VAE, we usually assume that the distribution is normally distributed, so that the estimate boils down to obtaining the mean and variance.
+**Learning the Model Parameters**
 
 The parameters in Predictive Coding can be updated while the network is operating, hence it does not require a separate training process.
+They can also be learnt using gradient descent. Assume a simple linear model $z(l) = W_l z(l-1) + \epsilon$, where the the Gaussian noise is common to all levels and is given by $N(0,\Sigma)$.
+The gradient ${\partial E\over{\partial W_l}}$, and this given by
+
+$$ -{\partial E\over{\partial W_l}} = \Pi (z(l-1) - Wz(l)) z(l)^T $$
+
+This is a local learning rule of the Hebbian type since the change in synaptic weights depends on the presynaptic latent activity $z(l)$ and the postsynaptic prediction error $z(l-1)-Wz(l)$.
+Hence the prediction error can be reduced either by making a better prediction (by changing $z(l)$, or by changing the prediction model itself (by changing $W$). It is thought that the rate of synaptic
+changes in the brain is much lower than the rate with which the brain makes inferences.
+The brain encodes parameters by setting the strengths of its synaptic connections, while neuron state is encoded by the firing rate of the neuron.
 
 ### Model for Prediction Using EBM/Diffusions
 
-We now move on to the problem of modeling the prediction module in the DTPC model. If the prediction module is sufficiently sophisticated, then the model can get by using relatively simple inference-generation modules that were discussed in the prior section.
-The reader may recall the world model generates predictions by sampling from the probability distribution $q_{\theta}(x_{n+1}|z_n, a_n)$
-The vector $x_n=(x_n(1),...,x_n(N))$ represents the state of the N neurons in the brain that implement the world model such that $x(i)$ is the state of the $i^{th}$ neuron, $z_n$ is the prior state that reflects the latest sensory data, while $a_n$ represents actions that the organism is planning to takes.
-This is obviously has to be an extremely complex distribution function if it is to model the richness of the world.
-Fortunately EBMs can be used to model complex distributions and generate samples from it.
+We now move on to the problem of modeling the prediction module in the DTPC model. If the prediction module is sufficiently sophisticated, then the DTPC model can get by using relatively simple inference-generation modules of the type discussed in the prior section.
+The prediction module generates a new sample $x_{n+1]$ by sampling from the probability distribution $p_{\theta}(x|z_n, u_{n+1})$
+In this expression the vector $x_n=(x_n^1,...,x_n^N)$ represents the internal state of the system at time $n$, such that $x_n^i$ is the state of the $i^{th}$ neuron, $z_n$ is the prior state that reflects the latest sensory data, while $u_n$ represents actions that the organism is planning to takes.
+This obviously has to be a complex multimodal distribution function if it is to capture the richness of the world. Fortunately EBMs can be used to model complex distributions and generate samples from it.
 As we saw in [Part 3](https://subirvarma.github.io/GeneralCognitics/2026/02/13/statmech3.html), EBMs can be implemented using diffusion models and this is the approach that we will pursue. 
 
 I am going to do a step by step illustration of how EBMs can be used to model conditional probability distributions and the resulting sampling process. 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat83.png) 
 
-Figure 9: Modeling the Energy Function of a collection of interacting nodes using a Transformer based Artificial Neural Network
+Figure 5: Modeling the Energy Function of a collection of interacting nodes using a Transformer based Artificial Neural Network
 
 The basic premis of EBMs is that samples from the complex multi-modal probability distribution for the system state can be generated by using a system of interacting nodes, and allowing the system to settle to an equilibrium state of minimum energy.
-When the system reaches equilibrium, the probability distribution of the state $(x(1),...,x(N))$ is connected to the energy of the system by the Boltzmann distribution 
+When the system reaches equilibrium, the probability distribution of the state $(x^1,...,x^N)$ is connected to the energy of the system by the Boltzmann distribution 
 
-$$ p(x(1),...,x(N)) = {\exp^{-E(x(1),...,x(N))}\over Z} $$
+$$ p(x^1,...,x^N) = {\exp^{-E (x^1,...,x^N)}\over Z} $$
 
-where $E(x(1),...,x(N))$ is the energy for the state (please see [Part 1](https://subirvarma.github.io/GeneralCognitics/2025/11/24/statmech1.html) for a derivation of this equation.
+where $E(x^1,...,x^N)$ is the energy for the state (please see [Part 1](https://subirvarma.github.io/GeneralCognitics/2025/11/24/statmech1.html) for a derivation of this equation.
 
 When the system is initialized from a non-equilibrium state, its nodes interact with one another, and gradually the interactions cause the energy to decrease until equilibrium is reached at which point the probability distribution of the system state is given by this equation.
 In the context of using this idea to model the prediction process in brains: 
-I am hypothesizing that there is a set of neurons $(x(1),...,x(N))$ in the brain whose equilibrium state changes in reponse to sensory data followed by another change that reflects the brain's prediction for the next state.
-If the prediction and the latest sensory data do not match, then this causes these neurons to transition to a non-equilibrium state. They subsequently interact with each other and settle into a new equilibrium state that takes the new sensory data into account as part of the inference process. This is then followed by the next preeiction and the cycle repeats.
+I am hypothesizing that there is a set of neurons $(x^1,...,x^N)$ in the brain whose equilibrium state changes in reponse to sensory data followed by another change that reflects the brain's prediction of the next state.
+If the prediction and the latest sensory data do not match, then this causes these neurons to transition to a non-equilibrium state. They subsequently interact with each other and settle into a new equilibrium state that takes the new sensory data into account as part of the inference process. This is then followed by the next prediction and the cycle repeats.
 
 The advantage of modeling the prediction module using EBMs is that we need not worry about the details of how the nodes interact with one another, and instead focus on the energy function $E(x(1),...,x(N))$. If we are able to model the brain's energy function using an artificial neural network based function approximator such as a transformer (see above figure), then this enables us to generate samples from the model that follow the same distribution as the data generated by the brain. This is similar to the idea of using Statistical Mechanics to model  systems containing millions of interacting nodes. In both cases we ignore the behavior of individual nodes and their interactions and focus on the macro behavior of the collection by directly modeling the system energy function.
 
 To summarize, focusing on the energy function as opposed to the interconnection between neurons (called the connectome), enables us to bypass the intractable problem to figuring out the connectome topology, with the more tractable one of approximating the brain's energy function using a function approximator.
 
-![](https://subirvarma.github.io/GeneralCognitics/images/stat84.png) 
+![](https://subirvarma.github.io/GeneralCognitics/images/stat122.png) 
 
 Figure 10: Modeling Predictive Perception in animal brains by means of minimization of the Energy Function. The minimization is carried out over L stages, with $N_L$ step Langevin Sampling used to do minimization at each stage
 
-Once we have a good model for the energy function, say $E_W(x(1),...,x(N))$, where $W$ are the parameters for the model, then the next step is to generate samples from it, and this process is illustrated in the above figure. The main idea behind this algorithm, called the diffusion model, is basically the same as for the simulated annealing method for finding a good equilibrium state (see  [Part 1](https://subirvarma.github.io/GeneralCognitics/2025/11/24/statmech1.html)). Starting from an initial non-equilibrium state, the algorithm enables us to gradually transition to states of lower energy using a recursing sampling algorithm called Langevin dynamics. However this cannot be done in a single step, otherwise the iteration will get stuck in non-optimal local minima or saddle points. One way to avoid this is by introducing some noise into the process, starting from a high noise level and then gradually decreasing it (this is similar to starting from a high temperature and gradually decreasing it in simulated annealing). This leads to a multistage optimisation procedure as shown in the above figure with the noise levels decreasing from right to left, as the optimisation proceeds. At each stage of the noise level, Langevin sampling is used to do a few steps of the optimisation. Gradually the system reaches lower and lower energy states, and as a result the generated image becomes clearer.
+Once we have a good model for the energy function, say $E_W(x^1,...,x^N)$, where $W$ are the parameters for the model, then the next step is to generate samples from it, and this process is illustrated in the above figure. The main idea behind this algorithm, called the diffusion model, is basically the same as for the simulated annealing method for finding a good equilibrium state in statistical mechanics (see  [Part 1](https://subirvarma.github.io/GeneralCognitics/2025/11/24/statmech1.html)). Starting from an initial non-equilibrium state, the algorithm enables us to gradually transition to states of lower energy using a recursing sampling algorithm called Langevin dynamics. However this cannot be done in a single step, otherwise the iteration will get stuck in non-optimal local minima or saddle points. One way to avoid this is by introducing some noise into the process, starting from a high noise level and then gradually decreasing it (this is similar to starting from a high temperature and gradually decreasing it in simulated annealing). This leads to a multistage optimisation procedure as shown in the above figure with the noise levels decreasing from right to left, as the optimisation proceeds. At each stage of the noise level, Langevin sampling is used to do a few steps of the optimisation. Gradually the system reaches lower and lower energy states, and as a result the generated image becomes clearer.
 
-![](https://subirvarma.github.io/GeneralCognitics/images/stat86.png) 
+![](https://subirvarma.github.io/GeneralCognitics/images/stat123.png) 
 
 Figure 11: Illustration of a single step of Langevin Sampling 
 
 A single step of sampling for the $t^{th}$ stage of the optimisation is done using the Langevin equation given below and this also illustrated in the above figure:
 
-$$ x^{m+1}(t) = x^m(t) - \eta[\nabla_X E_W(x^m(t),t,c) -  {1\over{\sigma^2(t)}} (Z(t+1)-x^m(t))] +\sqrt{2\eta}\epsilon _n,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \  $$
+$$ x(t,k+1) = x(t,k) - \eta[\nabla_X E_W(x(t,k),t,x_n,u_{n+1}) -  {1\over{\sigma^2(t)}} (x(t+1,K)-x_n(t,k))] +\sqrt{2\eta}\epsilon _n,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \  $$
 
-In this equation $\sigma(t)$ is the variance of the noise injected into the optimisation, $\eta$ is the step size, $x^m(t)$ is the state of the system at the $m^{th}$ step of the Langevin iteration, while $Z(t+1)$ is the final result of the optimisation at the previous stage (since the optimisation proceeds backwards from stages $t = T, T-1,...,1,0$). The iteration requires an additional noise injected into the optimisation at each step and this is captured by $\epsilon_n$ which is sampled from the Normal distribution $N(0,I)$. This equation is derived and discussed in detail in [Part 3](https://subirvarma.github.io/GeneralCognitics/2026/02/13/statmech3.html).
+In this equation $\sigma(t)$ is the variance of the noise injected into the optimisation, $\eta$ is the step size, $x(t,k)$ is the state of the system at state $t$ of the diffusion process and the $k^{th}$ step of the Langevin iteration, while $x(t+1,K)$ is the final result of the Langevin iteration after $K$ steps at the previous stage $t+1$. The optimisation starts from state of pure noise $X(T)$ and proceeds backwards from stages $t = T, T-1,...,1,0$. The iteration requires an additional noise injected into the optimisation at each step and this is captured by $\epsilon_n$ which is sampled from the Normal distribution $N(0,I)$. This equation is derived and discussed in detail in [Part 3](https://subirvarma.github.io/GeneralCognitics/2026/02/13/statmech3.html).
 
-The figure also shows how the system can be used to sample from conditional distributions of the form $p(x_{n+1}|x_n,a_n)$, which is the key to modeling perception and planning in living organisms in the Predictive Processing framework. Incorporation of conditioning in the model results in the expanded energy function $E_W(x_{n+1},x_n,a_n)$ in which the values of the prior latent state $x_{n}$ and action $a_n$ are fixed, while the predicted state $x_{n+1}$ is allowed to evolve until the energy minimum is reached. The energy function $E_W$ can be modeled by a transformer network, with cross attention used to take the conditioning into account so that the conditional probability for $x_{n+1}$ is given by
+The figure also shows how the system can be used to sample from conditional distributions of the form $p_{\theta}(x|x_n,u_{n+1})$, which is the key to modeling perception and planning in living organisms in the Predictive Processing framework. Incorporation of conditioning in the model results in the expanded energy function $E_W(x,x_n,u_{n+1})$ in which the values of the prior latent state $x_{n}$ and action $u_{n+1}$ are fixed, while the predicted state $x_{n+1}$ is allowed to evolve until the energy minimum is reached. The energy function $E_W$ can be modeled by a diffusion transformer or DiT network, with cross attention used to take the conditioning into account so that the conditional probability for $x_{n+1}$ is given by
 
-$$  p_W(x|x_n,a_n) = {exp^{-E_W(x,x_n,a_n)}\over Z_W} $$
+$$  p_W(x|x_n,u_{n+1}) = {exp^{-E_W(x,x_n,u_{n+1})}\over Z_W} $$
 
-We have approached the process of generation using the language of annealing based energy minimization. However there is an equivalent description of these types of algorithms which more commonly referred to as de-noising algorithms, and the reason for this can be seen in figure 10. We start off with a random state $x(T)$ which looks like pure noise, and then gradually as the optimization progresses, a more legible image emerges. The image become sharper in the later stages of the optimization as shown. The de-noising perspective can be formalized to create an alternative method of sampling from a distribution, called Denoising Diffusion Probabilistic Models or [DDPM](https://arxiv.org/abs/2006.11239). This algorithm is preferred over the sampling based method for doing image generation, and the reason for that is due to something called the [Hardware Lottery](https://arxiv.org/abs/2009.06489). Simply put, this says that algorithms that are better suited to the dominant von Neuman architecture for digital computers will win out over alternatives, and since DDPM can be implemented using backprop and feedforward networks that can be optimized for GPUs, it can be implemented more cheaply than alternatives. Unfortunately the von Neumann architecture does not work very well for sampling which can only be implemented on a serial node by node basis.
+We have approached the process of generation using the language of annealing based energy minimization. However there is an equivalent description of these types of algorithms which more commonly referred to as de-noising algorithms, and the reason for this can be seen in figure 7. We start off with a random state $x_n(T)$ which looks like pure noise, and then gradually as the optimization progresses, a more legible image emerges. The image become sharper in the later stages of the optimization as shown. The de-noising perspective can be formalized to create an alternative method of sampling from a distribution, called Denoising Diffusion Probabilistic Models or [DDPM](https://arxiv.org/abs/2006.11239). This algorithm is preferred over the sampling based method for doing image generation, and the reason for that is due to something called the [Hardware Lottery](https://arxiv.org/abs/2009.06489). Simply put, this says that algorithms that are better suited to the dominant von Neuman architecture for digital computers will win out over alternatives, and since DDPM can be implemented using backprop and feedforward networks that can be optimized for GPUs, it can be implemented more cheaply than alternatives. Unfortunately the von Neumann architecture does not work very well for sampling which can only be implemented on a serial node by node basis.
 
 For sampling based EBM/diffusion systems to be be more competetive requires a fundamental re-think for the hardware on which it is implemented. The brain shows that if a sampling type algorithm is implemented on a biological substrate, then it can be made to work with superior performance and lower power consumption. To imitate this in man-made systems requires that we move away from the von Neumann architecture to one that is optimized for sampling using the properties of the substrate on which it is biult. This would be an example of an analog computer, and there are some early efforts underway in this direction, for example see the last section in [Part 3](https://subirvarma.github.io/GeneralCognitics/2026/02/13/statmech3.html).
 
-How biologically plausible is this model, in other words are their biological mechanisms than can implement the various structures in the diffusion/EBM model? It is known that there is a set of neurons in the brain whose state results in visual perceptions. The process by which the state gets translated into the rich multicolor panaroma that we see is still mysterious and is called the [Hard Problem of Consciousness](https://en.wikipedia.org/wiki/Hard_problem_of_consciousness), and the EBM model does not make any claims that it solves this problem. The perception neurons are connected to each other and to other neurons in other parts brain using circuits whose architecture remains largely unknown. In particular they are connected to neurons that represent prior perceptions, sensory data etc. Lets assume that the perceptions neurons have settled into an equibrium state, and then new sensory data comes in. This causes the neurons to be in a non-equilibrium state, and this results in signals between them which gradually cause them to transition to a new equilibrium state that corresponds to the new perception. This transition is governed by the signalling between the neurons, and this is simulated in the EBM/diffusion model by using Langevin sampling of the energy model. 
+### Training the Diffusion Model
+
+The preediction module does its job by sampling from the probability distribution $p_W(x|z_n,u_{n+1})$, where $W$ are the parameters of the distribution.
+As mentioned earlier, the quality of predictions improves if we have a better model and thus it constitutes a longer term mechanism to reduce the prediction error, with the immediate error reduction happening using the output of the inference module. But how does the module learn these parameters? Fortunately the prediction immediately gets access to the ground trutch $z_{n+1}$ soon after it makes its prediction $x_{n+1}$, and this information can be used to learn $W$. We are going to use maximum likelihood or MLE theory to do the estimation, in the following steps.
+
+Let $p(x|z_n,u_{n+1})$ be the probability distributions for the ideal model of state $x_n$ evolution  and let $p_W(x|z_n,u_{n+1})$ be the corresponding probability as given by the model.
+Since it is an EBM model, we can write $p_W(x|z_n,u_{n+1})$ as
+
+$$ p_W(x|z_n,u_{n+1}) = {e^{-E_W(x;z_n,u_{n+1})}\over Z_W} $$
+
+where the partition function is given by $Z_W = \int e^{-E_W(X)} dX$ as usual. 
+Assuming we are given $M$ ground truth samples $(x(1),z(1),u(1)),...,(x(M),z(M),u(M))$ from this probability distribution, 
+in order to learn this model using MLE, we have to maximize the log-likelihood function given by
+
+$$ L(W) = {1\over M}\sum_{i=1}^M \log p_W(x(i)|z(i),u(i))  = E_{p(x|z,u)}[\log p_W(x(i)|z(i),u(i))]  $$
+
+This can be written as
+
+$$ L(W) =  -{1\over M}\sum_{i=1}^M E_W(x(i);z(i),u(i))- \log Z_W $$
+
+The maximization can be done by using the gradient ascent algorithm, 
+$w_i \leftarrow w_i + {\partial L(W)\over{\partial w_i}}, i =1,...,P$, which can be written in vector form as
+
+$$ W\leftarrow W + \nabla_W L(W) $$
+
+but in order to do this we need to estimate $\nabla_W L(W)$ which can be shown to be equal to (see [Part 3](https://subirvarma.github.io/GeneralCognitics/2026/02/13/statmech3.html) for details),
+
+$$ \nabla_W L(W) = E_{p(X)}[\nabla\log p_W(X)]   = -E_{p(x|z,u)}[\nabla_W E_W(x;z,u)] +  E_{p_W(x|z,u)}[\nabla_W E_W(x;z,u)] $$
+
+The first term in the derivative is evaluated by using samples $(x,z,u)$ from the ground truth dataset which are distributed according to $p(x|z,u)$, while the second term is evaluated by using samples 
+$(x,z,u)$ generated by the model, which are distributed according to $p_W(x|z,u)$. Fortunately both of these types of samples are generated by the DTPC model during rhe course of its operation,
+The predictions $x_n$ provide the model generated samples, while the inferences $z_n$ provide the ground truth samples. These can be plugged into the $\nabla E_W$ model to generate the gradient.
+
+For the case when $E_W(X)$ is a expressed by an artificial neural network such a transformer or a CNN, this derivative can be computed using automatic differentiators.
+Recall that in Part 2 we showed that for the Boltzmann machine the gradient for the loss function is given by the Hebbian learning rule
+
+$$ {\partial L(W)\over{\partial w_{ij}}}  = \beta (<\sigma_i\sigma_j>_{data} - <\sigma_i\sigma_j>_{model}) $$
+
+This is a special case for the more general equation, when the energy function is given by
+
+$$  E = -\sum_{i}\sum_{j\lt i}w_{ij}\sigma_i\sigma_j - \sum_{i}\sigma_{i} b_i $$
+
+Since the neural network in the brain can be modeled by a Boltzmann Machine like interconnections between neurons, this provides some insight into how learning happens in the brain. For the case when the energy function is modeled by an artificial neural network such as a transformer, we can use the diffusion model to learn the parameters. There is an algorithm called Diffusion Recoevery Likelihhod that has been proposed for this, and is covered in [Part 3](https://subirvarma.github.io/GeneralCognitics/2026/02/13/statmech3.html).
+
+### Biological Plausibility
+
+How biologically plausible is this model, in other words are their biological mechanisms that can implement the various structures in the DTPC model? 
+Recall that the DTPC model contains two main structures, namely the inference/generation module and the prediction module.
+
+- There is a fair of evidence that has been colleceted for the biological plausibility of the inference/generation module. In fact Rao and Ballard, the originators of the Predictive Coding model that is used for this module, come from the neuroscience communinity. They showed that both the inference operation as well as the learning of the model parameters (which can be likened to changing the synaptic weights) canbe accomplished in the model by using a minimum energy principle requiring only local communications between nodes.
+- This article proposes an EBM model for the prediction module, which can be implemented using a diffusion model with Langevin sampling. It is quite plausible that the prediction module in the brain also uses minimum energy principles, but since we don't know the brain's connectome architecture, we took the path of modeling the brain's energy function directly using artificial neural networks. The latter simulates the process of gradual energy minimization that results in a new prediction. The model does Langevin sampling on its state space, while the brain does direct signalling between neurons, but both end up in the same equilibrium state of minimum energy. The EBM/diffusion model gets there by using a model for the brain's energy function, while bypassing the need to model the details of its interconnection architecture.
+
+It is known that there is a set of neurons in the brain whose state results in visual perceptions. The process by which the state gets translated into the rich multicolor panaroma that we see is still mysterious and is called the [Hard Problem of Consciousness](https://en.wikipedia.org/wiki/Hard_problem_of_consciousness), and the DTPC model does not make any claims that it solves this problem. The perception neurons are connected to each other and to other neurons in other parts brain using circuits whose architecture remains largely unknown. In particular they are connected to neurons that represent prior perceptions, sensory data etc. Lets assume that the perceptions neurons have settled into an equibrium state, and then new sensory data comes in. This causes the neurons to be in a non-equilibrium state, and this results in signals between them which gradually cause them to transition to a new equilibrium state that corresponds to the new perception. This transition is governed by the signalling between the neurons, and this is simulated in the EBM/diffusion model by using Langevin sampling of the energy model. 
 
 To summarize: The model does Langevin sampling on its state space, while the brain does direct signalling between neurons, but both end up in the same equilibrium state of minimum energy. The EBM/diffusion model gets there by using a model for the brain's energy function, while bypassing the need to model the details of its interconnection architecture.
 What about the gradual de-noising process? There are probably mechanisms in the brain that operate like the simulated annealing process, which allow it to get to equilibrium in a gradual fashion and thus avoid local non optimal mnima.
 
-Another aspect on the biological plausibility issue is the training process. Diffusion models have a number of training algorithms at their disposal based on backprop such DDPM or the [score function](https://arxiv.org/abs/2011.13456) technique, however evidence for backprop has not been found in brains. The training process in brains involves changes in the synapse strengths using local mechanisms such as the Hebb's rule. 
-The first EBM models such as the Boltzmann machine were trained in a similar local fashion by using [maximum likelihood]((https://www.cs.toronto.edu/~fritz/absps/pdp7.pdf)) based training, and this results in weight updates that use only local information, quite similar to the Hebb's rule. 
-In Part 3 I described a training procedure for diffusion EBMs also based on maximum likelihood called the [Diffusion Recovery Likelihood](https://arxiv.org/abs/2012.08125) algorithm, that can be implemented by using Langevin sampling, which makes it biologically plausible.
+Another aspect on the biological plausibility issue is the learning process for the synaptic connections in the prediction module. In the previous section I showed that the maximum likelihood estimation for the model parameters results in an algorithm that can be implmented using direct signalling between neighboring neurons, for the case when the inter-connection architecture is specified.
 
 The main lesson to be drawn from this diffuson/EBM model for the brain, is that it is possible to create a model for a highly complex system like the brain by using the brain's outputs alone and without worrying about the details of its internal structure. If the model is powerful enough, then it is able to re-create this internal structure through the training process. 
 As we saw for the Active Inference framework, it is also possible to explicitly model the internal states of the brain. But either approach works equally well, and choosing one over the other is a matter of implementation efficiency.
@@ -790,6 +832,17 @@ Modern generative AI systems use both these types of designs: The DTPC architect
 
 But what about biological systems?
 It is quite likely that they lean towards the DTPC architecture since there is evidence of inference and generation circuits in the brain as pointed out by the Predictive Coding work. Also inference and generation are basic operations that all creatures need, and it is likely that it was implemented first. The prediction module on the other hand varies in sophitication depending upon the animal, and it makes sense for the brain to implement it as a separate module.
+
+## Appendix
+
+It differs from the minimum Variational Free Energy inference made in the VAE model (and the Active Inference framework) in the following respects:
+
+- The VAE model does inference using a single pass of a feed-forward network, whose parameters have been optimized using a training process. The Predictive Coding model does inference in a iterative fashion, where the value of the latents are adjusted over multiple steps until the final prediction is a good match to the observation. This is very much like how an EBM operates since in this case too the nodes in an EBM adjust their values until the energy function is minimized. The predictive coding system uses an error function instead of an energy function, but the idea of multi-step iteration is the same.
+- In Predictive Coding, the network is recurrent. Activity does not simply pass once from input to output. Instead, units keep updating each other until the system reaches a relatively stable state.
+- Unlike the VAE model, all updates in the Predictive Coding model are local in nature, hence more biologically plausible.
+- The VAE model gives a distribution for the latent by minimizing the VFE, while Predictive Coding gives a point estimate for the latent. In practice even for VAE, we usually assume that the distribution is normally distributed, so that the estimate boils down to obtaining the mean and variance.Appendix
+
+
 
 
 
