@@ -404,8 +404,16 @@ The DTPC model does prediction in latent space, while the inference/generation m
 This can certainly be done and the resulting model that I am going to call Direct Diffusion based Predictive Processing or DDPP is shown in the above figure. The model predcits the next perception $y_{n+1}$ by sampling from the probability distribution $p_W(y|y_n.u_{n+1},s_n)$, where $y_n$ was the previous prediction, $u_{n+1}$ is the action that the organism plans to take and $s_n$ is the sensory data at the previous instant. This system can be implemented using a diffusion model just like we did for the prediction module in the DTPC model.
 With this model we are not making any assumtions about the internal operations of the brain, and modeling its operation purely based on sensory inputs and its perceptual output. Morever since the model is an EBM, new predictions can be generated from the model by sampling from it as it settles into a state of minimum energy.
 
-The model parameters can be learnt in a fashion similar to that for the DTPC prediction module, by using maximum likelihood estimation. The signals required for training are models own prediction $y_{n+1}$ for the $(n+1)^{rst}$ state, as well as the ground truth data $s_{n+1}$ for that time, and both of these are readiliy available. As for the DTPC model, if the inetr-connection topology is known, then this reduces to a Hebbian type larning rule. If not known, then we can work directly in the energy model space, and use algorithms such Diffusion Recovery Likelihhod or DRL.
+The model parameters can be learnt in a fashion similar to that for the DTPC prediction module, by using maximum likelihood estimation. The signals required for training are models own prediction $y_{n+1}$ for the $(n+1)^{rst}$ state, as well as the ground truth data $s_{n+1}$ for that time, and both of these are readiliy available. As for the DTPC model, if the inter-connection topology is known, then this reduces to a Hebbian type larning rule. If not known, then we can work directly in the energy model space, and use algorithms such Diffusion Recovery Likelihhod or DRL.
 
+### Constantly Changing Energy Landscape Interpretation of the DDPP Model
+
+![](https://subirvarma.github.io/GeneralCognitics/images/stat125.png) 
+
+Figure 17: Illustrates the Changing Energy Landscape as New Sensory Data Arrives and New Actions are taken
+
+We can get some intuition on how the brain works by investigating changes in the energy landscape with time of the prediction model in the planning phase. Assume that the state of the DDPP model after a fresh prediction is given by $y_{n+1}=y'$, then this corresponds to to a particular minima of the energy landscape given by $E(y'; y_n=y, u_{n+1}=u, s_n=s)$ with corresponding probability given by $p(y'|y,u,s)$. At the next instant When the organism receives its next perception $s_{n+1}=s'$ and proposes another action $u_{n+2}=u'$ then its energy landscape transitions to $E(y';y',u',s')$, and the current state $y'$ is no longer at a minima. The system then travels down the energy landscape until it arrives at the next minima $y''$ and this generates the next perception. This process is illustrated in the above figure, which shows a sequence of energy landscape cross sections. The particular cross section at time $n$ is chosen depending upon the previous state $y_n$, the current perception $s_n$ and the proposed action $u_{n+1}$. 
+Hence the energy landscape of the perception neurons in the brain can be considered to be constantly changing as new actions are proposed and new sensory data arrives,  which causes the neurons to find themselves in a non optimal energy level, which triggers interactions between them to lower the energy, which results in a new perception.
 
 ## Planning
 
@@ -584,16 +592,6 @@ If we follow the chain of models from (a) to (b) to (c), it follows that process
 However we should not be looking for transformer equivalents in the brain. If the correspondence between models (a), (b) and (c) holds, then it follows that the transformer is equivalent to a system of interacting nodes working according to the principle of energy minimization, then this problem becomes moot, and the main purpose of this article is to show that this is indeed the case.
 
 In practice for commercial use, auto regressive models of type (c) work better in some cases, such as in language generation, and I will cover this in the next article. For image generation on the other hand, auto regressive generation is at a significant dis-advantage since the model has to be run hundreds of thousands of time to generate a single image, so diffusion models of types (a) or (b) are used instead.
-
-## Constantly Changing Energy Landscape Interpretation of the Prediction Model
-
-![](https://subirvarma.github.io/GeneralCognitics/images/stat94.png) 
-
-Figure 17: Variation of energy functions depending on conditioning
-
-We can get some intuition on how the brain works by investigating changes in the energy landscape with time of the prediction model in the planning phase. Assume that the latent state in the DTPC model after a fresh prediction is given by $x_{n+1}=x'$, then this corresponds to to a particular minima of the energy landscape given by $E(x', x_n=x, a_n=a)$ with corresponding probability given by $p(x'|x,a)$. At the next step When the organism carries out its next action $a_{n+1}=a''$ then its energy landscape transitions to $E(x',x', a'')$, and the current state $x'$ is no longer at a
-minima. The system then travels down the energy landscape until it arrives at the next minima $x''$ and this generates the next perception. This process is illustrated in the above figure, which shows a sequence of energy landscape cross sections. The particular cross section at time $n$ is chosen depending upon the previous state $s_n$ and action $a_n$. 
-Hence the energy landscape of the perception neurons in the brain can be considered to be constantly changing as new actions are taken which causes the neurons to find themselves in a non optimal energy level, which triggers interactions between them to lower the energy, which results in a new state.
 
 ## Language Generation
 
