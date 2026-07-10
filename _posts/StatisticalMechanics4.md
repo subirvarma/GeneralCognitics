@@ -281,7 +281,7 @@ The brain encodes parameters by setting the strengths of its synaptic connection
 ### Model for Prediction Using EBM/Diffusions
 
 We now move on to the problem of modeling the prediction module in the DTPC model. If the prediction module is sufficiently sophisticated, then the DTPC model can get by using relatively simple inference-generation modules of the type discussed in the prior section.
-The prediction module generates a new sample $x_{n+1]$ by sampling from the probability distribution $p_{\theta}(x|z_n, u_{n+1})$
+The prediction module generates a new sample $x_{n+1}$ by sampling from the probability distribution $p_{\theta}(x|z_n, u_{n+1})$
 In this expression the vector $x_n=(x_n^1,...,x_n^N)$ represents the internal state of the system at time $n$, such that $x_n^i$ is the state of the $i^{th}$ neuron, $z_n$ is the prior state that reflects the latest sensory data, while $u_n$ represents actions that the organism is planning to takes.
 This obviously has to be a complex multimodal distribution function if it is to capture the richness of the world. Fortunately EBMs can be used to model complex distributions and generate samples from it.
 As we saw in [Part 3](https://subirvarma.github.io/GeneralCognitics/2026/02/13/statmech3.html), EBMs can be implemented using diffusion models and this is the approach that we will pursue. 
@@ -406,14 +406,53 @@ With this model we are not making any assumtions about the internal operations o
 
 The model parameters can be learnt in a fashion similar to that for the DTPC prediction module, by using maximum likelihood estimation. The signals required for training are models own prediction $y_{n+1}$ for the $(n+1)^{rst}$ state, as well as the ground truth data $s_{n+1}$ for that time, and both of these are readiliy available. As for the DTPC model, if the inter-connection topology is known, then this reduces to a Hebbian type larning rule. If not known, then we can work directly in the energy model space, and use algorithms such Diffusion Recovery Likelihhod or DRL.
 
-### Constantly Changing Energy Landscape Interpretation of the DDPP Model
-
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat125.png) 
 
 Figure 17: Illustrates the Changing Energy Landscape as New Sensory Data Arrives and New Actions are taken
 
 We can get some intuition on how the brain works by investigating changes in the energy landscape with time of the prediction model in the planning phase. Assume that the state of the DDPP model after a fresh prediction is given by $y_{n+1}=y'$, then this corresponds to to a particular minima of the energy landscape given by $E(y'; y_n=y, u_{n+1}=u, s_n=s)$ with corresponding probability given by $p(y'|y,u,s)$. At the next instant When the organism receives its next perception $s_{n+1}=s'$ and proposes another action $u_{n+2}=u'$ then its energy landscape transitions to $E(y';y',u',s')$, and the current state $y'$ is no longer at a minima. The system then travels down the energy landscape until it arrives at the next minima $y''$ and this generates the next perception. This process is illustrated in the above figure, which shows a sequence of energy landscape cross sections. The particular cross section at time $n$ is chosen depending upon the previous state $y_n$, the current perception $s_n$ and the proposed action $u_{n+1}$. 
 Hence the energy landscape of the perception neurons in the brain can be considered to be constantly changing as new actions are proposed and new sensory data arrives,  which causes the neurons to find themselves in a non optimal energy level, which triggers interactions between them to lower the energy, which results in a new perception.
+
+Hence diffusion based EBM models enable us to model the effective energy landsacpe of perception without committing to an explicit mechanistic decomposition into latent causes or synaptic interaction terms.
+The resulting energy landscape in the DDPP model has to absorb all the explnatory structure directly without the use latent states. Diffusion models make this tractable because they do not require us to hyand-specify the connectome interaction terms, by learning the effective energy function. Latent states are one way to factorize complexity, while EBM based diffusion models provide another route. This idea has been implicit in energy based modeling, theough rarely discussed in neuro-scientific terms.
+
+The mapping becomes:
+
+| **Brain Concept**           |                 **Diffusion/EBM Model Analogue**  |
+| ------------------          |                   -----------------------------   |
+| Energy function created due to Connectome interactions     |               Unknown microscopic energy terms |
+| Perception  neurons         |                      Observabe state $y_n$|
+| Perceptual dynamics        |         Learnt energy landscape   |
+| Priors/expectations         |         Attractor structure of energy landscape   |
+| Perception update           |        Stochastic de-noising/Langevin-like flow    |
+| Hidden causes               |        Optional emergent interpretation  |
+
+In some sense cortical perceptual dynamics can be understood as diffusion over perceptual state space. The neuroscience literature has not yet fully absorbed the conceptual implications of diffusion models. Most neuroscientists still think interms of Predictive Coding, Bayesian inference, latent causes and generative models, rather than interms of energy landscapes and stochastic flows.
+Existing theories in neuroscience ask: What internal variables is the brain represenenting? The DDPP model on the other hand asks: Can we bypass the representation question and directly model the observed dynamics of perceptual states? This is analogoues to statistical mechanics, since physicists do not usually model every molecular interaction, instead they model the effective free energy. Likewise in the chain
+
+$$ connectome\ \ \ --> \ \ \ Energy\ \ \ Function\ \ \ \--> \ \ \ Perceptual\ \ \ \ Dynamics\ \ \ $$
+
+the connectome becomes analogous to microscopic molecular interactions and the gradient of the learnt diffusion energy model becomes analogous to an effective thermodynamic field.
+
+This point of view also sehds some light on the success of modern deep learning systems such as transformers. One can view the auto regressive generation by transformers as a pixel by pixel (or word by word) generation of optimal point in the energy landscape of images (or language), this is explained in more detail in a letr section. Hence transformers capture the effective dynamical law of how images or language is generated, but at a much higher level of the energy landscape. It is learning part of an effective energy loandscape over cognitive states. The attention mechanism can then be viewed as a parametrization of this landscape, not as literal cortical circuit.
+
+This close to how many physicists think. They are generally comfortable with the idera that many micrscopic realizations lead to the same macroscopic dynamics. For example water, liquid nitrogen or liquid helium have very different microscopic constituents, yet their large scale behavior is described by the same equations. Similarly it is concievable that transformers, recurrent networks or cortical circuits all approximate the same cognitive dynamics. If this analogy holds then modern AI architectures may e valuable not because they resemble cortical circuits, but because they provide increasingly powerful parametrizations of effective cognitive dynamics. Viewed this way, a transformer is less like a model neuron and more like an equation in physics; a compact description of large scale behavior that does not reveal the microscopic implementation.
+
+LLMs trained on text are able to energy landscape of thought states, not thought directly. But if the landscape is rich enough, then the model can recover much of the structure of the hidden dynamics, just as one can infer properties of a physical system from its observable outputs.
+This also explains why language models can seem to be surprisingly cognitive without having direct access to embodied perceptal states. Their training enables them to recover the energy landscape and thought dynamics of human latent cognition.
+
+Thus one of the central lessaons from the success of modern neural networks is that the operation of a system with very complex internal structure can be effectively modeled from the output alone.
+The model is able to recover substantial structure of a hidden system from its observable boundary behavior. In the case of LLMs training on text does not expose the underlying human cognitive state directly, but it exposes an enormous number of projections from it. Wih enough difverse projections, and a model such as a transformer that has enough parameters to capture them, the model can infer a usable approximation to the latent geometry. Thus rich output statistics can identify latent structure, not perfectly, but well enough to support predictions, abastarcion, analogy and coherent discourse. Thyey are not necessarily mechanistic replicas of the systems they model, but they are effective theories learnd from observable behavior. So for brains, we have the correspondence
+
+| **Brain Concept**           |                 **Diffusion/EBM Model Analogue**  |
+| ------------------          |                   -----------------------------   |
+| Connectome     |               Microscopic implementation |
+| Cognition      |               Latent dynamical manifold    |
+|Speech/text/action   |          Observable projections       |
+|  LLMs               |          Learnt effective model of those projections |
+
+Thus projections contain more recoverable structure than many people expected.
+
 
 ## Planning
 
