@@ -454,7 +454,9 @@ This leads to the correspondence
 |Speech/text/action   |          Observable projections       |
 |  LLMs               |          Learnt effective model of those projections |
 
-Thus projections contain more recoverable structure than many people expected.
+Thus projections contain more recoverable structure than many people expected. 
+
+Another perspective into this can be obtained through the use of the concept of duality from mathematics. Many otherwise intractable problems are solved by translating the staement of the problem into a dual space in which the solution becomes easier to obtain. Similarly the parameters and inter-connection architecture of a transformer can be considered to be dual to the weights of the synaptic connections and the micro-architecture of the connectome, so that the problem of modeling the cognitive states in the brain becomes much simpler in the former case.
 
 
 ## Planning
