@@ -456,8 +456,7 @@ This leads to the correspondence
 
 Thus projections contain more recoverable structure than many people expected. 
 
-Another perspective into this can be obtained through the use of the concept of duality from mathematics. Many otherwise intractable problems are solved by translating the staement of the problem into a dual space in which the solution becomes easier to obtain. Similarly the parameters and inter-connection architecture of a transformer can be considered to be dual to the weights of the synaptic connections and the micro-architecture of the connectome, so that the problem of modeling the cognitive states in the brain becomes much simpler in the former case.
-
+Another perspective into this can be obtained through the use of the concept of duality from mathematics. Many otherwise intractable problems are solved by translating the staement of the problem into a dual space in which the solution becomes easier to obtain. Given a set of neurons $(x^1,...,x^N)$, an equilibrium state can be obtained by solving the primal problem of minimizing $E_{\theta}(x_1,...,x_N)$ where $\theta$ are the synaptic strengths, or by solving the dual problem of minimizing $E_W(x_1,...,x_N)$ wjere $W$ are the parameters of the approximating artificial neural network. The primal problem is difficult to solve since we have very little information about the brain's connectome. On the other hand we have discovered several powerful artificial neural networks which closely approximate the brain's energy function, and in this space the problem of finding the equilibrium state becomes much easier.
 
 ## Planning
 
