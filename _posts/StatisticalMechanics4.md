@@ -518,98 +518,57 @@ Figure 14: Integration of Planning and Acting: Agent used its internal model to 
 
 There is another framework called Model Predictive Control or MPC that can be used to do planning. In this case, rather than planning a whole sequence of actions and then following it up with implementing them, the agent goes ahead and carries out the first action in the planned sequence. This results in a change in the environemnt, and this new information is then incorporated into the agent state. If it ends up in an undesirable state then it backtracks to the previous state and chooses some other action. Hence as the agent takes actions and encounters new states, it constantly modifies its plans and its world model by taking the new information into account. MPC is illustrated in the above figure, which shows an agent using tree search to plan out a sequence of actions, followed by execution of the first action in the sequence.
 
-
-## Some Comments on the Connectome Architecture
+## Implications for the Micro-Architecture of EBM Models
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat95.png) 
 
 Figure 18: Variation of energy functions depending on conditioning
 
-If we know the energy function for the brain, what are the implications for its micro-architecture, i.e., its connectome?
+EBM models are based on learnt energy function $E_W(x_1,...,x_N)$ for a system of $N$ nodes. Can we make any insight into the inter-connection micro-architecture that results in this energy function?
 Some insight into the problem can be obtained by looking at the development of Hopfield Networks. As described in [Part 2](https://subirvarma.github.io/GeneralCognitics/2025/11/24/statmech2.html), Hopfield networks were designed to serve as associative memories rather than for capturing the distribution of a training dataset as in Boltzmann machines. However they work using similar principles of minimizing energy functions, so their design is relevant here. The initial design for the Hopfield network involved pairwise interactions between nodes in a fully connected spin glass type network, and is shown on the left hand side of the above figure. This design was biologically plausible since neuron interactions in the brain are known to be of the two-node type.
-However later [Hopfield and Krotov](https://arxiv.org/pdf/2008.06996) came up with a design that was able to store many more memory patterns, that this was done by changing the energy function from the simple two node type to a non-linear function of the node and link weights, as shown on the right hand side. They tried to express the new architecture using inter-node interactions, and discovered that the non-linear nature of the energy function resulted in a design that involved multiple modes interacting with each other, as shown on the right hand side which ruled out this system as a model for the brain. 
+However later [Hopfield and Krotov](https://arxiv.org/pdf/2008.06996) came up with a design that was able to store many more memory patterns, that this was done by changing the energy function from the simple two node type to a non-linear function of the node and link weights, as shown on the right hand side. They tried to express the new architecture using inter-node interactions, and discovered that the non-linear nature of the energy function resulted in a design that involved multiple modes interacting with each other, as shown on the right hand side and this ruled out this system as a model for the brain. 
 
-With our EBM/diffusion models we are in a similar situation as the new Hopfield network, since clearly the complex energy functions that come out of training involve interactions between a large number of nodes if laid out in the form of an inter-connection circuit diagram. However Hopfield and Krotov showed that a modified network consisting of a mixture of visible and hidden nodes could be found such that the energy function for the visible part coincided with a complex non-linear function. Moreover, all connections between nodes in this network were of the two-node type, which made it biologically plausible. The power of incorporating hidden nodes into the model also lay behind the power of the Boltzmann machine, as was discovered by Hinton more than a decade earlier. Boltzmann machines also featured hidden nodes, and Hinton showed that this resulted in an increase in the number of possible data distributions that the visible nodes could represent.
+With our EBM/diffusion models we are in a similar situation as the new Hopfield network, since clearly the complex energy functions that come out of training involve interactions between a large number of nodes if laid out in the form of an inter-connection diagram. However Hopfield and Krotov showed that a modified network consisting of a mixture of visible and hidden nodes could be found such that the energy function for the visible part coincided with a complex non-linear function. Moreover, all connections between nodes in this network were of the two-node type, which made it biologically plausible. The power of incorporating hidden nodes into the model also lay behind the power of the Boltzmann machine, as was discovered by Hinton more than a decade earlier. Boltzmann machines also featured hidden nodes, and Hinton et.al. showed that this resulted in an increase in the number of possible data distributions that the visible nodes could represent.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat96.png) 
 
 Figure 19: Variation of energy functions depending on conditioning
 
-Based on this insight, a way to make EBM/diffusion models biologically plausible is by creating an equivalent network which has both visible and hidden nodes, such that the energy function of the visible nodes is the same as given by the EBM/diffusion model. 
-There can be a rich interconnection of perception and hidden nodes among themselves and also between them, but all interactions should be of the two node type. This results in a design of the type shown in the above figure, in which the system has masses of hidden nodes interacting with the perception nodes. The problem of converting an energy function described by a transformer or a CNN into the equivalent interconenction topology featuring only two node interactions is currently an open one.
-
-Hence even though we started by not using hidden or latent states in our model for perception, this shows that are equivalent models incorporating hidden states, which have simpler inter-connect toplogy.
-In the next section we present models for perception that explicitly incorporate hidden states.
+Based on this insight, a way to make EBM models biologically plausible is by creating an equivalent network which has both visible and hidden nodes connected using two node interactions, such that the energy function of the visible nodes is the same as given by the EBM model. 
+This results in a design of the type shown in the above figure, in which the system has a number of hidden nodes interacting with the perception nodes. The problem of converting an energy function described by a transformer or a CNN into the equivalent interconenction topology featuring only two node interactions is currently an open one.
+This type of architecture is compatible with what we know of the brain's connectome, since the visible neurons are where conscious processing is done, while a lot of processing happens in hidden neurons to which we don't have any conscious access to,
 
 ## Equivalence between Models
 
-One of the mysteries in AI is the ability of auto regressive models such as LLMs to mimic the brain. In order to gain some insight into this problem, we will show that For the special case of models that do planning (i.e. prediction and generation), the following three classes of models can all be regarded as EBMs:
+One of the mysteries in AI is the ability of auto regressive models such as LLMs to mimic the brain. In order to gain some insight into this problem, we will show that the following three classes of models can all be regarded as EBMs:
 
-1. EBM Models that operate using latent representations. The DTPC planning model presented in the previous section belongs to this class.
-2. EBM models that operate at the pixel level. and generate all the pixels in the image in parallel.
-3. EBM models that operate at the pixel level, and do generation auto regressively one pixel at a time. LLMs are a special case of thus typeos  model in which the output corresponds to words rather than pixels.
+1. EBM Models that operate using latent representations. The ETPC planning model presented in the previous section belongs to this class.
+2. EBM models that operate at the pixel level. such as the DEPP model.
+3. EBM models that operate at the pixel level, and do generation auto regressively one pixel at a time. LLMs are a special case of thus types  model in which the output corresponds to words rather than pixels.
 
-Both type 1 and type 2 models work by a process of energy minimization, but by using different energy functions. Type 3 models use energy functions that also operates at the pixel level as for type 2 models, however they use a different sampling scheme. Whereas type 2 models use Langevin sampling which allows them to optimize all their nodes together, type 3 models sample one node at time.
-
-When building world models using artificial neural networks, we have the choice of using any one of these types of models. In general pixel based generation in type 2 model is more compute intensive than operating in the latent space, while type 3 models are the most compute intensive of the three since the model multiple times to generate an entire image. But from the theory point of view, since all three types work througn the principle of energy minimization and result in similar outputs, they can be considered to be equivalent in some sense. Since the brain is also a type of EBM in which energy is due to interactions between neurons, this establishes a connection between the operation of the brain and auto regressive models. This is particularly important for the case of language generation, since LLMs are often portrayed as 'sochastic parrots'. However if they are effectively working at the level of internal latent representations, as do models of type 1 and 2, then that makes their effectiveness less surprising.
-
-I am going to argue that our advances in generative AI in last two decades have been due to our ability to come up with artificial neural networks that are equivalent to the neuronal circuitry in the brain, even though architecturally they are very different.
-
-![](https://subirvarma.github.io/GeneralCognitics/images/stat105.png) 
-
-Figure 29: Equivalence between a system with complex interconnect toplogy and a diffusion/EBM model
-
-We will start with the equivalence between a system of nodes, such as neurons in the brain, that are directly connected to each other (system A), and diffusion/EBM systems whose inter-connect topology is not known, but whose energy function can be inferred by using the output of system A (system B).
-
-The behavior of the system A is driven by the second law of thermodynamics, i.e., it tries to settle into an equilibrium state with minimum (free) energy (or equivalently maximum entropy), and this process is driven by direct signalling between nodes.
-System B also features a set of nodes whose state is changing in time, but in this case the state changes are driven not by inter-node interactions, but by seeking out states of lower energy, as modeled by the energy function. 
-Essentially system B is mimicing system A by adopting the same energy function, without bothering about the details of how the interconnect topology actually generates the energy function in system A. As long as the energy functions match, the two systems will exhibit the same equilibrium behavior and this is precisely what diffusion/EBM models do. 
-The two energy functions are matched by using the output of system A, in the form of images or text, to train the diffusion/EBM model. The parameters in system A correspond to the interconnect strengths between nodes, while the parameters in system B are the weights of the neural network that is used to model the energy function.
+Both type 1 and type 2 models work using an explicit energy function, while it can be shown that type 3 models can also be regarded as EBMs, but utilizing a different type of sampling methodology.
+Since the brain can be modeled using type 1 (ETPC) or type 2 (DEPP) models, this establishes a connection between the operation of the brain and auto regressive models. This is particularly important for the case of language generation, since LLMs are often portrayed as 'sochastic parrots'. However if they are effectively EBM models, then it follows that they have an internal equivalent of a preeiction module that operates at the level of cognitive thoughts (as in type 1 models such as ETPC), while auto regression is used in the generative part of the model.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat120.png) 
 
 Figure 30: Equivalence between a diffusion/EBM based Temporal Predictive Coding and Predictive Processing
 
-Planning models of types 1,2 and 3 are illustrated in the above figure. The top figure shows the case when the prediction module is in latent space, and there is a separate generation module. This corresponds to the DTPC model that was discussed earlier, and was used to mirror these processes in the brain. Both the prediction and generation modules are EBMs, hence can be implemented using direct connections netween nodes.
-This model explicitly models the hidden or latent states in the system, and how it evolves with time.
-However there is a way to build an equivalent diffusion/EBM model, but without using latent states, as shown in the middle figure,. 
-In this case the model generates the next image by using the history of past generated images and other factors such as actions. It combines the prediction and generation functions into a single EBM/diffusion block and hence in some sense is a conceptually simpler system then the one based on latents.
+EBM models of types 1,2 and 3 are illustrated in the above figure (for the simpler case when they are operating in the planning mode). The prediction module in a type 1 model is in latent space, and there is a separate generation module, and this corresponds to the ETPC model. 
+The prediction and generation modules are combined in the DEPP model, and this shown in the middle figure. Both the ETPC and DEPP models do generation an image at atime. 
+The auto regressive model in bottom figure can be considered to be a special case of the DEPP model, which does generation one pixel at a time.
+It turns out that this system works perfectly well and is able to produce perfectly good images. In fact [Imagen-1](https://cdn.openai.com/papers/Generative_Pretraining_from_Pixels_V2.pdf) from OpenAI, which was one of the first widely available image generators, worked in precisely this fashion.
 
-![](https://subirvarma.github.io/GeneralCognitics/images/stat85.png) 
+Recall that the pixels in an image are distributed according to the Boltzmann distribution (at points where the probability is maximized or equivalently the energy is minimized). In the DEPP model for example the probability distribution is given by
 
-Figure 12: Modeling Predictive Perception coupled with Action in animal brains by means of minimization of the Energy Function. The minimization is carried out over L stages, with $N_L$ step Langevin Sampling used to do minimization at each stage
+$$ p_W(y_{n+1}=y|y_n) = {e^{-E_W(y,y_n})}\over {Z}} $$
+ 
+For the case when the model generates images one pixel at time, the probability distribution is given by
 
-The DPP framework generates the next perception $y_{n+1}$ as a function a of the previous $K$ perceptions, so that the next state is distributed according to the probability distribution $p_W(y|y_{n-1},...,y_{n-K},a_n)$. Generation from this type of distribution can be readily incorporated into the EBM model as shown above. For an example of a diffusion based world model does predictions in the pixel space, as in the DPP framework, see the [DIAMOND model](https://arxiv.org/abs/2405.12399) from 2024. The world that this system models are from Atari video games. The model is used to train a game playing agent, using the actor-critic algorithm from RL. 
+$$ p_W(y_{n+1}^{k+1}=y|y_n, y_{n+1}^1,...,y_{n+1}^k) = {e^{-E_W( y,y_n,y_{n+1}^1,...,y_{n+1}^k)}\over {Z}} $$
 
-![](https://subirvarma.github.io/GeneralCognitics/images/stat81.png) 
-
-Figure 13: Inputs and outputs in the UniSIM model
-
-Another model in this category is the [UniSIM model](https://arxiv.org/abs/2310.06114), also from 2024, that can be used to build world models for robotic control. Inputs and outputs in this model are shown in the above figure, the output consists of a sequence of image frames $y_n$ which is the model's prediction of the effect of robotic actions. The input consists of the following:
-
-- The model's previous prediction $y_{n-1}$ which is also a set of image frames. These are concatenated channelwise with the initial noise sample at the start of the diffusion proces to serve as conditional inputs. This conditioning can be extended over several prior output and action values in an auto-regressive manner.
-- The actions can be in one of several formats: (1) $a_1$: A language description, (2) $a_0$: Low level robotic control actions, (3) $a_2$: Actions extracted from camera motions.
-
-We are now going to take the model in part (B) and push it to its extreme: The model in Part (B) generates images a frame at a time, in other words all the pixels are generated jointly. But what if generation is done just one pixel at a time using a transformer model, as in Part (C)? It turns out that this system works perfectly well and is able to produce perfectly good images. In fact [Imagen-1](https://cdn.openai.com/papers/Generative_Pretraining_from_Pixels_V2.pdf) from OpenAI, which was one of the first widely available image generators, worked in precisely this fashion. But can it still be regarded as a diffusion/EBM model?
-
-Recall that the pixels in an image are distributed according to the Boltzmann distribution (at points where the probability is maximized or equivalently the energy is minimized)
-
-$$ p(y_{n+1}|Y_n,Y_{n-1},...,Y_{n-K}) = {e^{-E(y_{n+1},Y_n,...,Y_{n-K})}\over {Z}} $$
-
-where the capitalized $Y$ indicates that their values are fixed. 
-For the case when the model generates one pixel at time, the expression is given by
-
-$$ p(yy_{n+1}|YY_n,YY_{n-1},...,YY_{n-K}) = {e^{-E(yy_{n+1},YY_n,...,YY_{n-K})}\over {Z}} $$
-
-where the notation $yy$ denotes a pixel vs $y$ that denotes an entire image.
-In the DDPP model the transformer is used as a function approximator to model the energy function, while in the pixel by pixel model the transformer is used once again as a function approximator, to model the conditional probability instead. Since
-
-$$   E(y_{n+1},y_n,...,y_{n-K}) = -\log p(y_{n+1},y_n,y_{n-1},...,y_{n-K}) + \log Z $$
-
-it follows that the minimum of the energy functiona and the maximum of the probability distribution at the same data point.
-
-It is more convenient to fine the maximum of $p(yy_{n+1}|YY_n,YY_{n-1},...,YY_{n-K})$ than to find the minimum of $E(yy_{n+1},YY_n,...,YY_{n-K})$, and this precisely what auto regressive systems do. 
-In auto regressive architectures such as the transformer, the system is trained to compute this conditional distribution over the (discrete) set of pixels, and then simply chooses the pixel value at which the probability is at a maximum. The reader may be rightly be wondering that finding the per-pixel individual maximum probability values and putting the whole image together as $(yy_1^{max},...,yy_N^{max})$ is not the same as finding the point $(yy_1,...,yy_N)^{max}$ at which the joint probability $p(yy_1,...,yy_N)$ is maximized for the image vector as a whole. This is a valid objection and pixel by pixel models (and modern LLM models) get around this problem by techniques such as beam search. This works by keeping track two or more possible minima values as the generation progresses, and then making the decision which is the best optimum point by computing their joint probabilities.
+where the notation $y^k_n$ denotes the $k^{th}$ pixel in the $n^{th}$ image.
+Auto regressive systems generate pixels by finding the (discrete) pixel value $y$ that maximizes this probability, and this is equivalent to finding $y$ that minimizes the energy $E_W$.
+But note that finding the per-pixel individual maximum probability values and putting the whole image together as $(y_1^{max},...,y_N^{max})$ is not the same as finding the point $(y_1,...,y_N)^{max}$ at which the joint probability $p(y_1,...,y_N)$ is maximized for the image as a whole. Auto regressive model get around this problem by techniques such as beam search. This works by keeping track two or more possible minima values as the generation progresses, and then making the decision which is the best optimum point by computing their joint probabilities.
 
 Hence (B) and (C) models can both be regarded as EBMs, but using different ways of minimizing their energy functions:
 
@@ -895,6 +854,19 @@ It differs from the minimum Variational Free Energy inference made in the VAE mo
 - In Predictive Coding, the network is recurrent. Activity does not simply pass once from input to output. Instead, units keep updating each other until the system reaches a relatively stable state.
 - Unlike the VAE model, all updates in the Predictive Coding model are local in nature, hence more biologically plausible.
 - The VAE model gives a distribution for the latent by minimizing the VFE, while Predictive Coding gives a point estimate for the latent. In practice even for VAE, we usually assume that the distribution is normally distributed, so that the estimate boils down to obtaining the mean and variance.Appendix
+
+![](https://subirvarma.github.io/GeneralCognitics/images/stat105.png) 
+
+Figure 29: Equivalence between a system with complex interconnect toplogy and a diffusion/EBM model
+
+We will start with the equivalence between a system of nodes, such as neurons in the brain, that are directly connected to each other (system A), and diffusion/EBM systems whose inter-connect topology is not known, but whose energy function can be inferred by using the output of system A (system B).
+
+The behavior of the system A is driven by the second law of thermodynamics, i.e., it tries to settle into an equilibrium state with minimum (free) energy (or equivalently maximum entropy), and this process is driven by direct signalling between nodes.
+System B also features a set of nodes whose state is changing in time, but in this case the state changes are driven not by inter-node interactions, but by seeking out states of lower energy, as modeled by the energy function. 
+Essentially system B is mimicing system A by adopting the same energy function, without bothering about the details of how the interconnect topology actually generates the energy function in system A. As long as the energy functions match, the two systems will exhibit the same equilibrium behavior and this is precisely what diffusion/EBM models do. 
+The two energy functions are matched by using the output of system A, in the form of images or text, to train the diffusion/EBM model. The parameters in system A correspond to the interconnect strengths between nodes, while the parameters in system B are the weights of the neural network that is used to model the energy function.
+
+
 
 
 
