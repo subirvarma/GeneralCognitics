@@ -460,21 +460,24 @@ Another perspective into this can be obtained through the use of the concept of 
 
 ## Planning
 
-During the perception process described in the previous section, the prediction module is constantly getting trained as organisms go about their life, by making of the ground truth data coming out of the inference module. The prediction module was originally designed to predict the next instant of what the world is going to look like, but in higher animals such as humans, it performs a very important additional function, i.e., that of planning. During perception the brain is running closed loop, since its predictions are contantly being verified by real data. In contrast planning can be considered to be a process during which the prediction module runs open loop. In other words it generates a sequence of predictions, modulated by potetantial actions that the organism is planning to take. Based on this, the organism can decide whether a particular sequence of actions is good enough to accomplish some task.
+During the perception process described in the previous section, the prediction module is constantly getting trained as organisms go about their life, by making use of the ground truth data coming out of the inference module in the ETPP case, or the sensory data directly for DEPP. The prediction module was originally designed to predict the next instant of what the world is going to look like, but in higher animals such as humans, it performs a very important additional function, i.e., that of planning. During perception the brain is running closed loop, since its predictions are contantly being verified by real data. In contrast planning can be considered to be a process during which the prediction module runs open loop. In other words it generates a sequence of predictions, modulated by potential actions that the organism is planning to take. Based on this, the organism can decide whether a particular sequence of actions is good enough to accomplish some task.
 The process by which it arrives at the right action sequence such that it results in success, is called planning. 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat118.png) 
 
-Figure 27: Using the DTPC framework to do Planning
+Figure 10: Using the ETPC framework to do Planning
 
-The DTPC framework can be used to do planning as shown in the above figure. In this case there is no sensory data coming into the system, hence only the prediction and generation processes
-are needed. The prediction process can be conditioned on actions, thus allowing the system to plan out a sequence of actions to accomplish a task.
+The ETPC framework can be used to do planning as shown in the above figure. In this case there is no sensory data coming into the system, hence only the prediction and generation modules
+are needed. The prediction process can be conditioned on actions, thus allowing the system to plan out a sequence of actions to accomplish a task. For an example of ETPC type world model that does predictions in latent space, please see [Nilaksh et.al.](https://arxiv.org/abs/2605.06388).
 
-The pure prediction process of the type shown above brings us to the realm of of our current generation of generative models, which do all their work as predictive models.
-Please see [Nilaksh et.al.](https://arxiv.org/abs/2605.06388) for a recent work on diffusion based world models that do predictions in latent space.
+![](https://subirvarma.github.io/GeneralCognitics/images/stat128.png) 
+
+Figure 11: Using the DEPP framework to do Planning
+
+Alternatively the DEPP framework can be used to do planning, in this case the preeiction module also does the generation function as shown above, and an example of a world model that operates along these lines is the [DIAMOND model](https://arxiv.org/abs/2405.12399). Current world models have not settled on which of these two frameworks, with or without latents, is the better one. The latent free proponents point out that deciding on actions is easier in the latent free case, since the action generation system has access to the fine pixel level details of the generated image, which make it easier for it to make decisions.
 
 We will describe an approach to the problem of planning as given by the reinforcement learning or RL framework.
-The RL framework is based on the idea that there is a reward associated with the completion of tasks, and organisms take the sequence of actions which results in the maximization of the reward. 
+This framework is based on the idea that there is a reward associated with the completion of tasks, and organisms take the sequence of actions which results in the maximization of the reward. 
 There is an alternative theory of planning due to Karl Friston that is based on the minimization of expected variational free energy.
 The Friston theory, which is part of the Active Inference framework, does not use rewards. Instead it posits that an organism starts with an image of what the completed task looks like, and then decomposes it into a sequence of images that get it to the desired end point. The actions themselves are determined automatically by the predictive processing framework as described in the prior section.
 
@@ -482,42 +485,39 @@ The Friston theory, which is part of the Active Inference framework, does not us
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat79.png) 
 
-Figure 4: The Reinforcement Learning Control Framework: An Agent Acting in the Real World
+Figure 12: The Reinforcement Learning Control Framework: An Agent Acting in the Real World
 
-The RL framework for an agent operating in a real world environment is shown in part (a) of the above figure. 
+We will start with the RL framework for the non-planning case and this is shown in part (a) of the above figure. 
 Fundamental to this framework is the concept of the agent state $x_n$, which is defined as the information that an agent needs to take an action.
-Assume that it takes action $a_n$ at time $n$ based on its current state $x_n$, and the action results in a change to the environment that is recorded by the agent as an observation $o_n$. The observation results in a change in its state to $x_{n+1}$ and also an (optional) reward signal $r_n$. 
-The reward signal tells the agent whether the action resulted in a positive outcome (or not). The agent then takes the next action $a_{n+1}$ taking $x_{n+1}$ into account, and the loop goes through another cycle. RL is focused on choosing the action sequence $a_1,...,a_N$ so as to maximixe the total reward obtained during the completion of the task that the agent set out to do.
+Assume that it takes action $u_n$ at time $n$ based on its current state $x_n$, and the action results in a change to the environment that is recorded by the agent as an observation $s_n$. The observation results in a change in its state to $x_{n+1}$ and also an (optional) reward signal $r_n$. 
+The reward signal tells the agent whether the action resulted in a positive outcome (or not). The agent then takes the next action $u_{n+1}$ taking $x_{n+1}$ into account, and the loop goes through another cycle. RL is focused on choosing the action sequence $u_1,...,u_N$ so as to maximixe the total reward obtained during the completion of the task that the agent set out to do.
 
 The RL framework shown in part (a) leaves open the problem of how the agent figures out what action to take for a given state. But what if the agent posseses a model for the enviroment that allows it to predict the next  state (and reward), as a function of the prior state and the action it took. This scenario is shown in part (b), in which I have replaced the environment by the agent's model for the environment. This model allows the agent to try out various scenarios and sequences of actions, without actually taking any action in the real world, and this is called planning. 
 
-![](https://subirvarma.github.io/GeneralCognitics/images/stat78.png) 
+![](https://subirvarma.github.io/GeneralCognitics/images/stat129.png) 
 
-Figure 5: Model Based Control in Reinforcement Learning: An Agent Planning its actions Based on an internal model
+Figure 13: Model Based Control in Reinforcement Learning: An Agent Planning its actions Based on an internal model
 
-Part (a) of the above figure shows an example rollout of the perception-action states during planning, starting from some initial state $x_1$. The organism can potentially take one of two actions $a_1$ or $a_2$ from this state, and assuming it takes action $a_1$, it can potentially transition to state $x_2$ or state $x_3$. The state that it actually transitions to is controlled by the conditional probabilities $p(x_2|x_1,a_1)$ and $p(x_3|x_1,a_2)$ which constitute the organism's world model.
+Part (a) of the above figure shows an example rollout of the perception-action states during planning, starting from some initial state $x_1$. The agent can potentially take one of two actions $u_1$ or $u_2$ from this state, and assuming it takes action $u_1$, it can potentially transition to state $x_2$ or back to state $x_1$. The state that it actually transitions to is controlled by the conditional probabilities $p(x_2|x_1,u_1)$ and $p(x_1|x_1,u_1)$ which constitute the organism's world model.
 Once this transition takes place, the organism then takes its next potential action and the whole process repeats.
 
 Part (b) of the figure shows a sequence of possible rollouts of the perception-action planning sequence, from a starting state $x_1$. An individual rollout is one path through this graph, and an example is shaded in red. A rollout terminates when the organism reaches the end state labeled T. 
 This kind of decision tree that starts from the current state and then charts out various hypothetical scenarios is a type of tree search.
-Within the RL literature there is a specific algorithm called Monte Carlo Tree Search or MCTS that has been popularized as a result of the Alpha Zero family of game playing models from Deep Mind.
-In games such as chess or Go there can potentially be thousands of possible actions that can be taken from each state of the game board, and as a result MCTS uses a measure of how 'good' a state is in terms of rewards or value that will acrrue if the game ends up in a particular state. Hence the choice of action boils down to choosing one that results in a state with a higher value function.
+Within the RL literature there is a specific algorithm called Monte Carlo Tree Search or MCTS that has been popularized as a result of the [AlphaZero](https://arxiv.org/abs/1712.01815) family of game playing models from DeepMind.
+In games such as chess or Go there can potentially be thousands of possible actions that can be taken from each state of the game board, and as a result MCTS uses a measure of how 'good' a state is in terms of rewards or value that will acrrue over timw. Hence the choice of action boils down to choosing the action that results in a state with a higher value function.
 
-It is unlikely that organisms do an explicit value function calculation when trying to choose between states, however they do have some idea of whether taking a particular action will result success of their longer term goal.
-For example consider the following scenario: I am in my living room and decide to make a cup of tea. If I am in my house then I precisely know how to get to the kitchen, I also know where the tea bags and mugs are, so I can take actions to retrieve them. This basically charts a path through the decision tree, which is facilitated based on my previous experience in doing this task.
-But suppose I am in a friend's home, and all this information is not available to me. Then I will have a less precise plan. At a high level the plan would still be make my way to the kitchen, and then search for the tea and mugs, but when I make this plan I don't know whether I should be turning left or right to get to the kitchen. The only way to resolve the issue is by putting the plan into action and trying out both the possibilities. If I make the wrong choice then the resulting state, lets say the bedroom, does not match my expectation of a kitchen, in which case I retrace my steps and try out the other direction.
-This sort of daily planning that we do in our lives is considerably simpler than the sophisticated MCTS type tree searches used in Alpha Zero. Morever we have the addiitonal advantage of knowledge accumulated during the course of our lives that we bring to bear in figuring out what action to take.
+It is unlikely that organisms do an explicit value function calculation when trying to choose between states, however they do have some idea of whether taking a particular action will result success of their longer term goal. This sort of daily planning that we do in our lives is considerably simpler than the sophisticated MCTS type tree searches used in Alpha Zero. Morever we have the addiitonal advantage of knowledge accumulated during the course of our lives that we bring to bear in figuring out what action to take.
 
-This discussion shows the centrality of the conditional distribution $p(x_{n+1}|x_n,a_n)$ to the RL framework. Within the context of perception, this distribution is what we referred to as the world model in the previous section.
-If the organism learns this world model and captures its within its neural network, then it has the capability to do these rollouts in its mental space without actually taking any action in the real world.
+This discussion shows the centrality of the conditional distribution $p(x_{n+1}|x_n,u_{n+1})$, or the prediction model, to the RL framework. 
+If the agent learns this world model and captures its within its neural network, then it has the capability to do these rollouts in its mental space without actually taking any action in the real world.
+Both the ETPC and DEPP frameworks allow the agent to train its prediction model by making use of the ground truth data collected during the course of the perception process. Once the model has been trained it can be deployed in open-loop fashion to do planning.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat80.png) 
 
-Figure 6: Integration of Planning and Acting: Agent used its Internal Model to take better actions in the Real World
+Figure 14: Integration of Planning and Acting: Agent used its internal model to take better actions 
 
-The tea making scenario also points towards a way in which planning can be combined with taking actions in the real world. The above figure shows a way by which an 
-organism can use its world model and ability to do hypothetical rollouts to take actions that achieve a task objective.
-Using its world model the agent generates multiple scenarios driven by sequences of actions, and then chooses the scenario that leads to success. It then carries out the first action in the sequence, and this changes the environment state. The organism then incorporates the new information into its model, and then repeats the process. If it ends up in an undesirable state then it backtracks to the previous state and chooses some other action. Hence as the organism takes actions and encounters new states, it constantly modifies its plans and its world model by taking the new information into account. This type of algorithm goes by the name of model predictive control or MPC in control theory.
+There is another framework called Model Predictive Control or MPC that can be used to do planning. In this case, rather than planning a whole sequence of actions and then following it up with implementing them, the agent goes ahead and carries out the first action in the planned sequence. This results in a change in the environemnt, and this new information is then incorporated into the agent state. If it ends up in an undesirable state then it backtracks to the previous state and chooses some other action. Hence as the agent takes actions and encounters new states, it constantly modifies its plans and its world model by taking the new information into account. MPC is illustrated in the above figure, which shows an agent using tree search to plan out a sequence of actions, followed by execution of the first action in the sequence.
+
 
 ## Some Comments on the Connectome Architecture
 
