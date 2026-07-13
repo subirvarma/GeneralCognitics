@@ -18,7 +18,6 @@ title: " Models of the Brain for Perception and Planning"
 - Planning 
   - The Reinforcement Learning Framework for Planning
 - Micro-architecture of Energy based Models
-- Equivalence between Models
 
 ## Introduction
 
