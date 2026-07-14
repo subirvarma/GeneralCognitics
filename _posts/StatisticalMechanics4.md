@@ -1,9 +1,9 @@
 ---
 layout: default
-title: " Generative AI as an Effective Theory of Cognition"
+title: " Generative AI as an Effective Theory of Cognitive Dynamics"
 ---
 
-# Generative AI as an Effective Theory of Cognition
+# Generative AI as an Effective Theory of Cognitive Dynamics
 
 **Contents**     
 
@@ -23,37 +23,35 @@ title: " Generative AI as an Effective Theory of Cognition"
 
 Recent advances in generative artificial intelligence have led to remarkable progress in modeling human perception, language, and reasoning. Models such as transformers and diffusion models exhibit behaviors that, while not equivalent to human cognition, increasingly resemble aspects of human thought. This success has naturally prompted attempts to relate these architectures to biological neural circuits. In particular, researchers have sought neural correlates of attention mechanisms, transformer architectures, and diffusion processes within the cortex.
 
-This paper argues that such comparisons may be taking place at the wrong level of description. We hypothesize that modern generative neural networks should be understood not as mechanistic models of neural implementation, but as effective theories of cognitive dynamics.
+This paper argues that such comparisons may be taking place at the wrong level of description. We hypothesize that modern generative neural networks should be understood not as mechanistic models of neural implementation, but as **effective theories of cognitive dynamics operating at the level of learned energy landscapes**. In this view, cognition is understood as the temporal evolution of perceptual and cognitive states through a learned energy landscape, rather than as the direct consequence of an explicitly modeled neural circuitry.
 
-The history of physics provides a useful analogy. 
-Thermodynamics provides an effective description of macroscopic matter without explicitly modeling every molecular interaction. 
-Statistical mechanics explains why such effective descriptions are possible: the collective effects of microscopic molecular interactions can be summarized by a free-energy function that governs the macroscopic dynamics of the system.
-Thermodynamics is therefore not a model of molecular structure, but an effective theory of its observable behavior.
-This distinction between mechanistic and effective models is common throughout physics but has received comparatively little attention in computational neuroscience, where advances in AI are often interpreted in terms of architectural similarities to biological neural circuits.
+The history of physics provides a useful analogy. Thermodynamics provides an effective description of macroscopic matter without explicitly modeling every molecular interaction. Statistical mechanics explains why such effective descriptions are possible: the collective effects of microscopic molecular interactions can be summarized by a free-energy function that governs the macroscopic dynamics of the system. Thermodynamics is therefore not a model of molecular structure, but an effective theory of its observable behavior. This distinction between mechanistic and effective theories is common throughout physics but has received comparatively little attention in computational neuroscience, where advances in AI are often interpreted in terms of architectural similarities to biological neural circuits.
 
-![](https://subirvarma.github.io/GeneralCognitics/images/stat130.png) 
+![](https://subirvarma.github.io/GeneralCognitics/images/stat134.png)
 
-Figure 1: Proposed analogy between statistical mechanics and generative AI. Just as statistical mechanics provides an effective description of macroscopic matter without explicitly modeling every molecular interaction, modern generative neural networks may provide effective descriptions of cognitive dynamics without modeling the underlying neural circuitry.
+**Figure 1:** Proposed analogy between statistical mechanics and generative AI. Just as statistical mechanics explains why thermodynamics provides an effective description of macroscopic matter without explicitly modeling every molecular interaction, modern generative neural networks may provide effective descriptions of cognitive dynamics without modeling the underlying neural circuitry.
 
-We propose that modern generative neural networks should be interpreted in a similar manner. Rather than viewing transformers or diffusion models as candidate models of the brain's circuitry, we suggest viewing them as *effective theories of cognitive dynamics*. Their parameters should not be expected to correspond directly to neurons, synapses, or cortical microcircuits. Instead, they may be regarded as learning an effective energy landscape that captures the observable evolution of perception and thought. The underlying biological implementation—encoded in the brain's connectome and cellular physiology—remains hidden, just as microscopic molecular interactions remain hidden within thermodynamic descriptions.
+Throughout this paper we distinguish three levels of scientific description. At the microscopic level lies the brain's connectome and neuronal circuitry. At an intermediate level lie the hidden cognitive dynamics responsible for perception and thought. At the macroscopic level lie observable behaviors such as perception, language, and action. The central thesis of this paper is that modern generative AI operates primarily at this highest level, learning effective dynamical laws governing observable cognitive behavior without explicitly modeling the lower levels.
+
+We propose that modern generative neural networks should be interpreted in this spirit. Rather than viewing transformers or diffusion models as candidate models of the brain's circuitry, we suggest viewing them as *effective theories of cognitive dynamics*. Their parameters should not be expected to correspond directly to neurons, synapses, or cortical microcircuits. Instead, they may be regarded as learning an effective energy landscape governing the evolution of perceptual and cognitive states. The underlying biological implementation—encoded in the brain's connectome and cellular physiology—remains hidden, just as microscopic molecular interactions remain hidden within thermodynamic descriptions.
 
 This perspective has several consequences. First, it suggests that searching for direct anatomical counterparts of transformer blocks or diffusion networks may be misguided. Different microscopic implementations can generate remarkably similar macroscopic dynamics, a phenomenon familiar throughout statistical physics. Second, it provides a natural explanation for the success of modern generative AI. These models need not recover the brain's internal circuitry in order to reproduce important aspects of cognitive behavior; they need only learn the effective dynamical laws governing its observable outputs.
 
-Building upon the predictive processing framework of Clark and the predictive coding formulations of Rao, Ballard, and Friston, we develop an alternative interpretation of perception based on energy-based dynamics. Rather than treating latent causes as the fundamental objects of inference, we explore the possibility that perceptual and cognitive states themselves evolve according to a learned energy landscape. Diffusion models provide a natural mathematical framework for describing such dynamics, allowing effective energy functions to be learned directly from observable behavior without requiring an explicit model of the underlying neuronal interactions.
+Building upon the predictive processing framework of Clark and the predictive coding formulations of Rao, Ballard, and Friston, we develop an alternative interpretation of perception based on energy-based dynamics. Rather than treating latent causes as indispensable components of a computational theory, we explore the possibility that perceptual and cognitive states themselves evolve according to a learned energy landscape. Diffusion models provide a natural mathematical framework for describing such dynamics, allowing effective energy functions to be learned directly from observable behavior without requiring an explicit model of the underlying neuronal interactions.
 
-The aim of this paper is not to argue that the brain literally implements a diffusion model or a transformer architecture. Rather, we argue that modern generative neural networks offer a new class of effective theories for cognition, analogous to the role played by statistical mechanics in physics. Viewed from this perspective, recent developments in generative AI suggest a shift in emphasis for computational neuroscience—from searching for detailed mechanistic replicas of neural circuitry toward identifying the effective dynamical principles that govern cognition.
+The aim of this paper is not to argue that the brain literally implements a diffusion model or a transformer architecture. Rather, we argue that modern generative neural networks constitute a new class of effective theories for cognition, analogous to the role played by thermodynamics in physics. Viewed from this perspective, recent developments in generative AI suggest a shift in emphasis for computational neuroscience—from searching for detailed mechanistic replicas of neural circuitry toward identifying the effective dynamical principles governing cognition.
 
-Predictive processing provides the natural computational framework within which this proposal can be formulated. On this view, perception is not a passive reconstruction of sensory input. The brain continuously generates expectations about the state of the world and revises them in response to incoming sensory evidence. Perception therefore reflects an interaction between internally generated predictions and signals produced by the environment.
+Predictive processing provides the natural computational framework within which this proposal can be formulated. In this view, perception is not a passive reconstruction of sensory input. The brain continuously generates expectations about the state of the world and revises them in response to incoming sensory evidence. Perception therefore reflects an interaction between internally generated predictions and signals produced by the environment.
 
-An important feature of this framework is its temporal character. The organism must not only estimate the present state of its environment, but also anticipate how that state is likely to evolve. Such predictions can guide perception, action, and—when extended over longer horizons—planning. The central question considered here is whether these predictive dynamics can be modeled directly as motion through a learned energy landscape, without requiring a detailed model of the neuronal circuitry that implements them.
+An important feature of this framework is its temporal character. The organism must not only estimate the present state of its environment, but also anticipate how that state is likely to evolve. Such predictions can guide perception, action, and—when extended over longer horizons—planning. The central question considered here is whether these predictive dynamics can be modeled directly as motion through a learned energy landscape, without requiring an explicit model of the neuronal circuitry that implements them.
 
-We develop two energy-based formulations of this idea. The first, Latent Energy-Based Predictive Processing (LEPP), separates perception into three operations: inference of a latent state from sensory evidence, prediction of its subsequent state, and generation of a percept from that prediction. The second, Direct Energy-Based Predictive Processing (DEPP), dispenses with an explicitly specified latent-cause architecture and instead models the evolution of perceptual states directly through a learned energy function. The comparison between these models allows us to ask whether latent causes are necessary components of a computational theory or merely one possible factorization of a more general effective dynamics.
+To explore this question we develop two complementary energy-based formulations of predictive processing. The first, **Latent Energy-Based Predictive Processing (LEPP)**, retains the latent-state representation of classical predictive processing while reformulating both inference and temporal prediction as processes of energy minimization. The second, **Direct Energy-Based Predictive Processing (DEPP)**, dispenses with an explicitly specified latent-state architecture and instead models the evolution of perceptual states directly through a learned energy function. The comparison between these models allows us to distinguish between mechanistic and effective theories of cognition and to ask whether explicit latent representations are essential components of an effective computational theory.
 
 The next section summarizes the predictive-processing framework and clarifies the distinctions among perceptual inference, temporal prediction, action, and planning that will be used throughout the article.
 
 ## The Predictive Processing Framework in Computational Neuroscience
 
-Predictive processing has emerged as one of the leading theoretical frameworks in contemporary computational neuroscience. Although its roots can be traced to Helmholtz's theory of unconscious inference, modern formulations by Rao and Ballard, Friston, Clark, and others have developed it into a quantitative framework for understanding perception, action, and learning.
+Predictive processing has emerged as one of the leading theoretical frameworks in contemporary computational neuroscience. Although its roots can be traced to Helmholtz's theory of unconscious inference, modern formulations by [Rao and Ballard](https://homes.cs.washington.edu/~rao/predcoding2011.pdf), [Friston](https://direct.mit.edu/books/oa-monograph/5299/Active-InferenceThe-Free-Energy-Principle-in-Mind), [Clark](https://www.amazon.com/Experience-Machine-Minds-Predict-Reality/dp/B0B6489ZTB/ref=sr_1_1?adgrpid=183606417542&dib=eyJ2IjoiMSJ9.Fyi9d3PdzMTC53VWX7823DXjmQdLDMFgbQL5bpU2yx77AApTelrS2J7RZW7kevX5c3Iwj8BdMiBCvvIK1s-2aQ.kNY6Xa746RCCEx9tUbrInrqWtuuYDtwDu9jxlEmRXNw&dib_tag=se&hvadid=779664909770&hvdev=c&hvexpln=0&hvlocphy=9031954&hvnetw=g&hvocijid=7989718953734198151--&hvqmt=e&hvrand=7989718953734198151&hvtargid=kwd-2027556117302&hydadcr=22594_13821176_8133&keywords=the+experience+machine+andy+clark&mcid=bd89ac636e0c38d39698b254fe27c1b0&qid=1776120362&sr=8-1), and others have developed it into a quantitative framework for understanding perception, action, and learning.
 It proposes that perception is fundamentally an active process of prediction rather than a passive registration of sensory signals.
 
 The central insight is that an organism has direct access only to sensory signals generated at its sensory surfaces. These signals are noisy, incomplete, and inherently ambiguous. The computational problem facing the brain is therefore to construct a coherent estimate of the external world from this limited information. Predictive processing proposes that this is achieved by continuously combining internally generated predictions with incoming sensory evidence. Perception is therefore not a direct copy of the sensory input, but the result of an ongoing interaction between expectation and observation.
@@ -72,100 +70,113 @@ An important implication of predictive processing is that much of what we percei
 
 Predictive processing has also been extended beyond perception. The same internal model that predicts future sensory states can be used to evaluate the consequences of potential actions. During planning, the model is effectively run "open loop," allowing future scenarios to be simulated without requiring new sensory input. More generally, actions themselves can be viewed as another mechanism for reducing prediction error, either by changing the organism's internal model or by changing the external world so that it conforms more closely to the organism's predictions.
 
-Although predictive processing has proved remarkably successful as a computational framework, an important modeling question remains. Most current formulations assume that the brain maintains latent internal variables representing the hidden causes responsible for sensory input. These latent variables are inferred from sensory evidence, evolved forward in time, and finally transformed into perceptual experience.
+Although predictive processing has proved remarkably successful as a computational framework, an important modeling question remains. Most existing formulations assume that perception proceeds by inferring latent variables representing the hidden causes responsible for sensory observations. These latent states are updated from sensory evidence, evolved forward in time, and subsequently transformed into perceptual experience.
 
-The motivation for introducing latent causes is that sensory input is both incomplete and ambiguous. Many different external situations can produce similar sensory signals, and the brain therefore seeks a representation that captures the underlying causes responsible for those observations. Latent variables provide one mathematical framework for representing these hidden causes. Classical predictive processing therefore formulates perception as inference over latent states rather than directly over sensory observations.
+The motivation for introducing latent variables is clear. Sensory observations are incomplete, noisy, and inherently ambiguous. Many different external situations can produce similar sensory signals, and the brain therefore benefits from constructing an internal representation that captures the hidden causes responsible for those observations. Classical predictive processing formulates perception as inference over these latent states.
 
-The present work asks whether this intermediate representation is fundamentally necessary. Instead of explicitly modeling latent causes, we investigate whether the observable dynamics of perception can be described directly by a learned energy landscape. From the perspective developed in the Introduction, these two alternatives correspond to different effective theories of cognition. The first retains the latent-state representation of classical predictive processing, while the second models perceptual dynamics directly. 
-This distinction can be viewed as analogous to the distinction between microscopic and macroscopic descriptions in statistical physics. Classical predictive processing seeks to model the hidden causes underlying perception. The approach developed in this paper instead asks whether the observable evolution of perceptual states themselves admits an effective dynamical description, analogous to the role played by thermodynamics in physics.
+The present work asks whether this latent representation is indispensable for an effective computational theory of perception. Rather than questioning the existence or usefulness of latent cognitive states, we ask a different question: **must they be represented explicitly within the computational model itself?** Modern energy-based generative models suggest that, in many cases, the observable dynamics of a system can be learned directly without explicitly modeling every intermediate variable responsible for those dynamics.
 
-The remainder of this paper explores two alternative energy-based formulations of this computational framework.
+This distinction is best understood as a hierarchy of effective theories rather than as a contrast between mechanistic and effective descriptions. Both approaches developed in this paper operate at the level of effective energy landscapes rather than at the level of neuronal circuitry. The difference lies in the choice of state variables over which those energy landscapes are defined.
+
+The first formulation, **Latent Energy-Based Predictive Processing (LEPP)**, retains the latent-state representation of classical predictive processing. It learns an effective energy landscape governing the temporal evolution of latent cognitive states while leaving the underlying neuronal implementation implicit.
+
+The second formulation, **Direct Energy-Based Predictive Processing (DEPP)**, performs one further level of abstraction. Instead of explicitly representing latent cognitive states, it models the evolution of observable perceptual states directly through a learned energy landscape. The latent dynamics are not denied; rather, they become implicit within the learned effective dynamics.
+
+Viewed in this way, LEPP and DEPP should not be regarded as competing theories of perception. Instead, they represent two complementary levels of effective description. LEPP models the evolution of latent cognitive dynamics, whereas DEPP models the observable dynamics emerging from them. Both remain effective descriptions that abstract away from the microscopic neuronal mechanisms responsible for implementing cognition.
+
+The remainder of this paper develops these two complementary formulations. We first construct LEPP by reformulating classical predictive processing entirely within an energy-based framework. We then show how DEPP emerges as a further abstraction, raising the broader question of whether effective theories of cognition can themselves be organized into a hierarchy of increasing levels of abstraction.
 
 ## Latent Energy-Based Predictive Processing (LEPP)
 
-The previous section described predictive processing as a computational framework in which perception arises through the continual interaction between prediction and sensory evidence. The next question is how such a system might be implemented.
+The previous sections argued that modern generative AI should be viewed not as a mechanistic model of neural circuitry, but as an effective theory of cognitive dynamics. The next question is how such an effective theory might be formulated within the predictive-processing framework.
 
-The **Latent Energy-Based Predictive Processing (LEPP)** architecture proposed here provides one possible computational realization of predictive processing. Its purpose is not to replace the classical predictive-processing framework, but to demonstrate that it can be reformulated entirely within an energy-based computational paradigm. LEPP retains the central assumption that perception proceeds through the inference of latent causes from sensory observations, while expressing every stage of the computation as an energy-minimization process.
+The **Latent Energy-Based Predictive Processing (LEPP)** architecture proposed here provides one possible answer. Its purpose is not to replace the classical predictive-processing framework, but to demonstrate that predictive processing can be reformulated entirely within an energy-based computational paradigm. LEPP retains the central assumption that perception proceeds through the inference of latent causes from sensory observations while expressing every stage of the computation as a process of stochastic energy minimization.
+
+Within the hierarchy of effective theories proposed in this paper, LEPP occupies the first level above mechanistic descriptions of neural circuitry. Rather than modeling neurons, synapses, or cortical circuits directly, LEPP models the evolution of **latent cognitive states** through learned energy landscapes. The microscopic biological implementation remains implicit, while the latent cognitive dynamics are represented explicitly.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat133.png)
 
 **Figure 3:** The Latent Energy-Based Predictive Processing (LEPP) architecture.
 
-A central idea of LEPP is that predictive processing naturally decomposes into **three distinct computational problems**, each requiring a different form of computation.
+A central idea underlying LEPP is that predictive processing naturally decomposes into **three interacting computational processes**, each solving a different inference problem.
 
 1. **Latent-state inference:** Estimate the latent state that best explains the current sensory observations.
 
 2. **Temporal prediction:** Predict how that latent state is expected to evolve over time.
 
-3. **Percept generation:** Convert the predicted latent state into the organism's conscious percept.
+3. **Percept generation:** Transform the predicted latent state into the organism's perceptual experience.
 
-Although these three computations solve different problems, they all operate through the common principle of energy minimization. The inference and generation modules are implemented using predictive coding, while temporal prediction is implemented using a diffusion-based energy model. Consequently, the entire predictive-processing cycle can be viewed as a sequence of interacting energy-minimization processes rather than as a system trained through global error backpropagation.
+Although these processes solve different computational problems, they all operate according to the same underlying principle: **stochastic minimization of learned energy functions**. The inference and generation processes are implemented using predictive coding, while temporal prediction is implemented using a diffusion-based energy model. Consequently, the entire predictive-processing cycle becomes a sequence of coupled energy-minimization processes rather than a system trained through global error backpropagation.
 
-An important distinction should be noted. The word *prediction* is used in two different senses within the predictive-processing literature. In **predictive coding**, prediction refers to estimating the latent causes responsible for the current sensory observations. In **predictive processing**, prediction refers to forecasting how the internal state of the organism will evolve over time. LEPP separates these two computations explicitly. Predictive coding performs inference over the current latent state, while the temporal prediction module models its future evolution.
+An important distinction should be noted. The word *prediction* is used in two different senses within the predictive-processing literature. In **predictive coding**, prediction refers to estimating the latent causes responsible for the current sensory observations. In **predictive processing**, prediction refers to forecasting how the organism's internal state is expected to evolve over time. LEPP separates these two computations explicitly. Predictive coding performs inference over the current latent state, while the temporal prediction module models its future evolution.
 
 The operation of LEPP is illustrated in Figure 3.
 
-At time step $n$, a stream of sensory observations $s_n$ is processed by the inference module, producing the latent representation $z_n$. This latent state represents the organism's current estimate of the hidden causes responsible for the incoming sensory data.
+At time step $n$, a stream of sensory observations $s_n$ is processed by the predictive-coding inference module, producing the latent representation $z_n$. This latent state represents the organism's current estimate of the hidden causes responsible for the incoming sensory data.
 
 The inferred latent state is then supplied to the temporal prediction module. Unlike the inference module, whose task is to explain the current sensory observations, the prediction module estimates how the latent representation is expected to evolve before the next sensory observation arrives. Rather than computing a deterministic prediction, the module performs stochastic sampling over a learned energy function
 
-$$ E_W(x;z_n,u_{n+1}), $$
+$$E_W(x;z_n,u_{n+1}),$$
 
-where $u_{n+1}$ denotes contextual variables such as intended actions or other factors influencing future environmental dynamics. The sampling process converges to a predicted latent state $x_{n+1}$ corresponding to a low-energy region of the learned energy landscape.
+where $u_{n+1}$ denotes contextual variables such as intended actions or other factors influencing the future evolution of the environment. The sampling process converges toward a low-energy region of the learned landscape, yielding the predicted latent state $x_{n+1}$.
 
 The predicted latent state is subsequently transformed into the organism's percept through the generative model
 
-$$ y_{n+1}=p_\psi(x_{n+1}), $$
+$$y_{n+1}=p_\psi(x_{n+1}),$$
 
 where $y_{n+1}$ denotes the predicted percept at the next instant.
 
-When the next sensory observations $s_{n+1}$ become available, the predicted latent state $x_{n+1}$ serves as the initial estimate for the next inference cycle. Predictive coding then recursively updates this estimate until it converges to the refined latent state
+When the next sensory observations $s_{n+1}$ become available, the predicted latent state $x_{n+1}$ serves as the initial estimate for the next inference cycle. Predictive coding recursively updates this estimate until it converges to the refined latent state
 
-$$ z_{n+1}=q_\phi(x_{n+1},s_{n+1}), $$
+$$z_{n+1}=q_\phi(x_{n+1},s_{n+1}),$$
 
-which becomes the input to the temporal prediction module for the following prediction cycle.
+which then becomes the input to the temporal prediction module for the following prediction cycle.
 
 The complete computational flow may therefore be summarized as
 
-$$ s_n \rightarrow z_n \rightarrow x_{n+1} \rightarrow y_{n+1}. $$
+$$s_n \rightarrow z_n \rightarrow x_{n+1} \rightarrow y_{n+1}.$$
 
-Each stage solves a distinct computational problem:
+Each stage performs a distinct computational operation.
 
-| Transformation | Computational task | Module |
-|---------------|--------------------|--------|
+| Transformation | Computational Task | Computational Module |
+|---------------|--------------------|----------------------|
 | $s_n \rightarrow z_n$ | Infer the current latent state | Predictive Coding |
 | $z_n \rightarrow x_{n+1}$ | Predict the future latent state | Diffusion-based Energy Model |
 | $x_{n+1} \rightarrow y_{n+1}$ | Generate the predicted percept | Generative Model |
 
-This decomposition is one of the principal features of LEPP. Classical predictive processing often treats perception as a single predictive process. LEPP instead separates **state estimation**, **state evolution**, and **percept generation** into distinct computational modules, allowing each problem to be implemented using the mathematical framework most naturally suited to it.
+Notice, however, that all three transformations are unified by a common computational principle. The inference module minimizes an energy defined over latent states that best explain the current sensory observations. The temporal prediction module minimizes an energy governing the future evolution of those latent states. The generative model transforms the resulting low-energy latent state into perceptual experience. LEPP therefore reformulates the entire predictive-processing loop as a sequence of interacting energy-minimization processes.
+
+Classical presentations of predictive processing often emphasize the overall perception–action loop. LEPP instead decomposes this loop into three computational processes, allowing each to be formulated using the mathematical framework most naturally suited to the task while preserving a common energy-based interpretation.
 
 The model assumes that temporal prediction converges within the interval separating successive sensory observations. Consequently, inference, temporal prediction, perception, and learning proceed continuously and in parallel, producing a continually updated estimate of the organism's environment.
 
 An attractive feature of LEPP is that perception and learning occur simultaneously. Each prediction cycle not only generates the organism's current percept but also provides training signals for all three computational modules. The inference model $q_\phi$, the temporal energy model $E_W$, and the generative model $p_\psi$ are therefore continuously refined as new sensory observations arrive. In this respect LEPP more closely resembles the continual online learning performed by biological nervous systems than the separate training and inference phases characteristic of most artificial neural networks.
 
-The following sections develop these three modules in turn. We begin by showing how predictive coding provides a biologically plausible implementation of the inference and generation modules before turning to the diffusion-based energy model used for temporal prediction.
+The remainder of the LEPP framework develops these three computational processes in turn. We first revisit predictive coding as an energy-based implementation of inference and generation before introducing a diffusion-based energy model for temporal prediction. Together these modules provide a complete energy-based realization of predictive processing while retaining the explicit latent-state representation characteristic of classical predictive processing.
 
 ## Implementing the Inference and Generation Modules: Predictive Coding
 
-The LEPP architecture introduced in the previous section consists of three computational modules: **latent-state inference**, **temporal prediction**, and **percept generation**. In this section we consider the first and third of these modules. We show that they can be naturally implemented using **predictive coding**, originally proposed by Rao and Ballard (1999). Predictive coding provides a biologically plausible mechanism for inferring latent causes from sensory observations using only local neural computations, making it a natural realization of the latent-state inference process assumed by LEPP.
+As discussed in the previous section, the LEPP architecture reformulates predictive processing as **three coupled energy-minimization processes**: latent-state inference, temporal prediction, and percept generation. In this section we consider the first and third of these processes. We show that they can be naturally implemented using **predictive coding**, originally proposed by Rao and Ballard (1999). Viewed from this perspective, predictive coding becomes the inference component of a larger energy-based theory of cognition.
+
+Predictive coding provides a biologically plausible mechanism for inferring latent causes from sensory observations using only local neural computations. It can itself be viewed as an energy-based model whose objective is to minimize a predictive-coding energy function, which we shall denote by $E_{PC}$.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat99.png)
 
-Figure 4: Predictive coding architecture. Higher cortical areas generate top-down predictions of activity in lower areas, while lower areas return bottom-up prediction errors. Perception emerges through iterative reduction of these prediction errors.
+**Figure 4:** Predictive coding architecture. Higher cortical areas generate top-down predictions of activity in lower areas, while lower areas return bottom-up prediction errors. Perception emerges through iterative reduction of these prediction errors.
 
-Predictive coding assumes that the cortex is organized hierarchically. Each cortical level attempts to predict the activity of the level immediately below it. The lower level compares this prediction with its actual activity and sends only the resulting prediction error back upward. Consequently, information flows in two directions through the hierarchy: predictions propagate downward, while prediction errors propagate upward. Through repeated interactions the hierarchy converges to a mutually consistent interpretation of the sensory input.
+Predictive coding assumes that the cortex is organized hierarchically. Each cortical level attempts to predict the activity of the level immediately below. The lower level compares this prediction with its actual activity and sends only the resulting prediction error back upward. Consequently, information flows in two directions through the hierarchy: predictions propagate downward, while prediction errors propagate upward. Through repeated interactions the hierarchy converges to a mutually consistent interpretation of the sensory input.
 
 For a two-level hierarchy, the generative model can be written as
 
-$$ z^{(2)} \rightarrow z^{(1)}\rightarrow y. $$
+$$ z^{(2)} \rightarrow z^{(1)} \rightarrow y. $$
 
 Here $y$ denotes the sensory activity (for example retinal or LGN responses), $z^{(1)}$ represents lower-level cortical features such as V1-like responses, and $z^{(2)}$ represents higher-level latent causes corresponding to more abstract visual structure. Throughout this section the inference process is assumed to occur within a single sensory interval, so the temporal index has been omitted for clarity. The highest-level representation $z^{(2)}$ corresponds to the latent state $z_n$ introduced in the LEPP architecture.
 
 Suppose that level $l$ predicts the activity of the level immediately below according to
 
-$$ \hat z^{(l-1)} = f_l(z^{(l)}), $$
+$$ \hat z^{(l-1)} = f_l(z^{(l)}). $$
 
-where $f_l(\cdot)$ is the learned generative mapping. The prediction error at the lower level is therefore
+The corresponding prediction error is
 
 $$ \epsilon_{l-1} = z^{(l-1)} - f_l(z^{(l)}), $$
 
@@ -177,120 +188,129 @@ where $s$ denotes the sensory input.
 
 The objective of predictive coding is to adjust the latent representations so that these prediction errors are minimized throughout the hierarchy. Each latent representation therefore evolves under the influence of two competing constraints: it must explain the activity of the level below while remaining consistent with the prediction supplied by the level above. Perception corresponds to the equilibrium reached when these competing influences balance.
 
+---
+
 ### Bayesian Interpretation
 
 Predictive coding can be derived directly from Bayesian inference.
 
 For simplicity, consider a single latent representation $z$ generating a sensory observation $y$. Bayes' rule gives
 
-$$ p(z|y) = \frac{p(y|z)p(z)}{p(y)}. $$
+$$ p(z|y)=\frac{p(y|z)p(z)}{p(y)}. $$
 
 Since $p(y)$ is constant with respect to $z$,
 
-$$
-z^* = \arg\max_z \left[\log p(y|z)+\log p(z)\right],  $$
+$$ z^*=\arg\max_z\left[\log p(y|z)+\log p(z)\right], $$
 
 which is the familiar Maximum A Posteriori (MAP) estimate.
 
 Assume the sensory observation is generated according to
 
-$$ y = f(z) + \epsilon, $$
+$$ y=f(z)+\epsilon, $$
 
 where
 
-$$ \epsilon \sim \mathcal N(0,\Sigma_y). $$
+$$ \epsilon\sim\mathcal N(0,\Sigma_y). $$
 
 Then
 
-$$ -\log p(y|z) = {1\over 2} (y-f(z))^T \Sigma_y^{-1} (y-f(z)). $$
+$$ -\log p(y|z)=\frac12(y-f(z))^T\Sigma_y^{-1}(y-f(z)). $$
 
 Defining the sensory prediction error
 
-$$ \epsilon_y = y-f(z), $$
+$$ \epsilon_y=y-f(z), $$
 
 the likelihood term becomes
 
-$$ {1\over 2}\epsilon_y^T\Pi_y\epsilon_y, $$
+$$ \frac12\epsilon_y^T\Pi_y\epsilon_y, $$
 
 where
 
-$$ \Pi_y = \Sigma_y^{-1} $$
+$$ \Pi_y=\Sigma_y^{-1} $$
 
 is the sensory precision matrix.
 
-Similarly, assuming a Gaussian prior
+Similarly, assuming
 
-$$
-z \sim\mathcal N(\mu_z,\Sigma_z), $$
+$$ z\sim\mathcal N(\mu_z,\Sigma_z), $$
 
 the prior contributes
 
-$$ {1\over 2}\epsilon_z^T\Pi_z\epsilon_z,$$
+$$ \frac12\epsilon_z^T\Pi_z\epsilon_z, $$
 
 where
 
-$$ \epsilon_z = z-\mu_z. $$
+$$ \epsilon_z=z-\mu_z. $$
 
 The negative log posterior is therefore
 
-$$ E_{PC}(z) = {1\over 2}\epsilon_y^T\Pi_y\epsilon_y + {1\over 2}\epsilon_z^T\Pi_z\epsilon_z. $$
+$$ E_{PC}(z)=\frac12\epsilon_y^T\Pi_y\epsilon_y+\frac12\epsilon_z^T\Pi_z\epsilon_z. $$
 
-This expression has a natural interpretation as an **energy function**. Inferring the latent representation is therefore equivalent to minimizing this energy.
+This expression has a natural interpretation as an **energy function**. Bayesian inference therefore becomes mathematically equivalent to minimizing the predictive-coding energy $E_{PC}$. Bayesian inference and energy minimization are thus not competing computational principles but two complementary descriptions of the same optimization problem.
+
+---
 
 ### Local Energy Minimization
 
 The latent representation is updated according to
 
-$$ z \leftarrow z - \eta\frac{\partial E_{PC}}{\partial z}, $$
+$$ z\leftarrow z-\eta\frac{\partial E_{PC}}{\partial z}, $$
 
 giving
 
-$$ - \frac{\partial E_{PC}}{\partial z} = \left(\frac{\partial f}{\partial z}\right)^T\Pi_y\epsilon_y + \Pi_z\epsilon_z.  $$
+$$ -\frac{\partial E_{PC}}{\partial z}=\left(\frac{\partial f}{\partial z}\right)^T\Pi_y\epsilon_y+\Pi_z\epsilon_z. $$
 
 The first term is driven by bottom-up sensory prediction error and encourages the latent state to better explain the observations. The second term is driven by top-down expectations encoded by the prior.
 
-Although this resembles ordinary gradient descent, an important feature of predictive coding is that the required information is entirely local. Each cortical area requires only its own activity, the prediction arriving from the level above, and the prediction error arriving from the level below. The global optimization therefore decomposes into a collection of local computations that can plausibly be implemented by recurrent cortical circuitry.
+Although this resembles ordinary gradient descent, an important feature of predictive coding is that the required information is entirely local. Each cortical area requires only its own activity together with the prediction arriving from the level above and the prediction error arriving from the level below. The global optimization therefore decomposes into a collection of local computations that can plausibly be implemented by recurrent cortical circuitry.
+
+This locality is one of the principal reasons predictive coding has been regarded as biologically plausible. The cortex need not implement global error backpropagation; instead each cortical area performs a local energy-minimization computation using only information available from neighboring levels of the hierarchy.
 
 For the linear model originally considered by Rao and Ballard,
 
-$$ y = Wz + \epsilon, $$
+$$ y=Wz+\epsilon, $$
 
 the update simplifies to
 
-$$ - \frac{\partial E_{PC}}{\partial z} = W^T\Pi_y\epsilon_y + \Pi_z\epsilon_z. $$
+$$ -\frac{\partial E_{PC}}{\partial z}=W^T\Pi_y\epsilon_y+\Pi_z\epsilon_z. $$
+
+---
 
 ### Extension to Hierarchical Representations
 
 The same derivation extends naturally to multiple cortical levels
 
-$$ z^{(L)} \rightarrow\cdots\rightarrow z^{(2)}\rightarrow z^{(1)}\rightarrow y. $$
+$$ z^{(L)}\rightarrow\cdots\rightarrow z^{(2)}\rightarrow z^{(1)}\rightarrow y. $$
 
 Each level predicts the activity below according to
 
-$$ z^{(l-1)} = f_l(z^{(l)}) + \epsilon_l, $$
+$$ z^{(l-1)}=f_l(z^{(l)})+\epsilon_l, $$
 
-and the complete energy becomes
+and the complete predictive-coding energy becomes
 
-$$
-E_{PC} = \sum_l {1\over 2}\epsilon_{l-1}^T\Pi_{l-1}\epsilon_{l-1}. $$
+$$ E_{PC}=\sum_l\frac12\epsilon_{l-1}^T\Pi_{l-1}\epsilon_{l-1}. $$
 
 Every latent representation participates in two prediction relationships: it is predicted by the level above while simultaneously predicting the level below. Consequently, each latent state is updated using both top-down and bottom-up prediction errors until the hierarchy converges to a consistent explanation of the sensory input.
 
+---
+
 ### Learning the Generative Model
 
-Predictive coding performs not only inference but also continual learning.
+Predictive coding naturally unifies inference and learning within the same dynamical system.
 
-The latent representations correspond to neuronal activity, while the parameters of the generative mappings are encoded in synaptic strengths. During perception the latent representations rapidly change to minimize prediction error. At the same time, synaptic weights evolve more slowly according to local Hebbian-style learning rules. For the linear model the weight update is
+The latent representations correspond to neuronal activity, while the parameters of the generative mappings are encoded in synaptic strengths. During perception the latent representations rapidly change to minimize prediction error, while synaptic weights evolve more slowly according to local Hebbian-style learning rules. For the linear model the weight update is
 
-$$ -\frac{\partial E_{PC}}{\partial W_l} = \Pi\left(z^{(l-1)} - W_lz^{(l)}\right)z^{(l)T}.$$
+$$ -\frac{\partial E_{PC}}{\partial W_l}=\Pi\left(z^{(l-1)}-W_lz^{(l)}\right)z^{(l)T}. $$
 
-The change in each synapse depends only on locally available quantities: presynaptic activity and postsynaptic prediction error. Consequently, inference and learning occur simultaneously during normal operation of the network rather than as separate phases.
+The change in each synapse depends only on locally available quantities: presynaptic activity and postsynaptic prediction error. Consequently, inference and learning occur simultaneously during normal operation of the network rather than as separate training and inference phases.
+
+---
 
 ### Role within LEPP
 
-Predictive coding therefore provides a biologically plausible implementation of the inference and percept-generation components of the LEPP architecture. Bayesian inference is reformulated as the minimization of a local energy function, allowing latent representations to emerge through recurrent interactions within the cortical hierarchy.
+Predictive coding therefore provides a biologically plausible implementation of the inference and percept-generation components of the LEPP architecture. Within the hierarchy of effective theories developed in this paper, predictive coding supplies the inference engine that enables LEPP to represent latent cognitive dynamics explicitly.
 
-An important limitation, however, is that predictive coding is fundamentally a model of **state inference**. It explains how the brain estimates the latent state responsible for current sensory observations, but it does not specify how those latent states evolve over time. Within the LEPP architecture this second problem is solved by the temporal prediction module, which we develop in the next section using diffusion-based energy models.
+An important limitation, however, is that predictive coding fundamentally addresses only **one of the three computational processes** identified in Figure 3. It explains how the brain infers the latent state responsible for the current sensory observations, but it says relatively little about how those latent states evolve through time. LEPP completes the predictive-processing framework by introducing a separate temporal energy model governing the dynamics of those latent states. It is to this second energy-minimization process that we now turn.
 
 ## Temporal Prediction as Energy Minimization
 
