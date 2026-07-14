@@ -31,6 +31,10 @@ Statistical mechanics explains why such effective descriptions are possible: the
 Thermodynamics is therefore not a model of molecular structure, but an effective theory of its observable behavior.
 This distinction between mechanistic and effective models is common throughout physics but has received comparatively little attention in computational neuroscience, where advances in AI are often interpreted in terms of architectural similarities to biological neural circuits.
 
+![](https://subirvarma.github.io/GeneralCognitics/images/stat130.png) 
+
+Figure 1: Proposed analogy between statistical mechanics and generative AI. Just as statistical mechanics provides an effective description of macroscopic matter without explicitly modeling every molecular interaction, modern generative neural networks may provide effective descriptions of cognitive dynamics without modeling the underlying neural circuitry.
+
 We propose that modern generative neural networks should be interpreted in a similar manner. Rather than viewing transformers or diffusion models as candidate models of the brain's circuitry, we suggest viewing them as *effective theories of cognitive dynamics*. Their parameters should not be expected to correspond directly to neurons, synapses, or cortical microcircuits. Instead, they may be regarded as learning an effective energy landscape that captures the observable evolution of perception and thought. The underlying biological implementation—encoded in the brain's connectome and cellular physiology—remains hidden, just as microscopic molecular interactions remain hidden within thermodynamic descriptions.
 
 This perspective has several consequences. First, it suggests that searching for direct anatomical counterparts of transformer blocks or diffusion networks may be misguided. Different microscopic implementations can generate remarkably similar macroscopic dynamics, a phenomenon familiar throughout statistical physics. Second, it provides a natural explanation for the success of modern generative AI. These models need not recover the brain's internal circuitry in order to reproduce important aspects of cognitive behavior; they need only learn the effective dynamical laws governing its observable outputs.
@@ -43,835 +47,657 @@ Predictive processing provides the natural computational framework within which 
 
 An important feature of this framework is its temporal character. The organism must not only estimate the present state of its environment, but also anticipate how that state is likely to evolve. Such predictions can guide perception, action, and—when extended over longer horizons—planning. The central question considered here is whether these predictive dynamics can be modeled directly as motion through a learned energy landscape, without requiring a detailed model of the neuronal circuitry that implements them.
 
-We develop two energy-based formulations of this idea. The first, Energy-Based Temporal Predictive Processing (ETPC), separates perception into three operations: inference of a latent state from sensory evidence, prediction of its subsequent state, and generation of a percept from that prediction. The second, Direct Energy-Based Predictive Processing (DEPP), dispenses with an explicitly specified latent-cause architecture and instead models the evolution of perceptual states directly through a learned energy function. The comparison between these models allows us to ask whether latent causes are necessary components of a computational theory or merely one possible factorization of a more general effective dynamics.
+We develop two energy-based formulations of this idea. The first, Latent Energy-Based Predictive Processing (LEPP), separates perception into three operations: inference of a latent state from sensory evidence, prediction of its subsequent state, and generation of a percept from that prediction. The second, Direct Energy-Based Predictive Processing (DEPP), dispenses with an explicitly specified latent-cause architecture and instead models the evolution of perceptual states directly through a learned energy function. The comparison between these models allows us to ask whether latent causes are necessary components of a computational theory or merely one possible factorization of a more general effective dynamics.
 
 The next section summarizes the predictive-processing framework and clarifies the distinctions among perceptual inference, temporal prediction, action, and planning that will be used throughout the article.
 
 ## The Predictive Processing Framework in Computational Neuroscience
 
-It has long been hypothesized that a fundamental function that the brain performs is prediction (for example see [Helmholtz](https://plato.stanford.edu/entries/hermann-helmholtz/#TheoPerc) or more recently [A Thousand Brains)](https://www.amazon.com/Thousand-Brains-New-Theory-Intelligence/dp/1541675819). In the last few decades this idea has been formalized into the Predictive Processing theory, and a good description can be found in the book ["The Experience Machine: How Our Minds Predict and Shape Reality"](https://www.amazon.com/Experience-Machine-Minds-Predict-Reality/dp/B0B6489ZTB/ref=sr_1_1?adgrpid=183606417542&dib=eyJ2IjoiMSJ9.Fyi9d3PdzMTC53VWX7823DXjmQdLDMFgbQL5bpU2yx77AApTelrS2J7RZW7kevX5c3Iwj8BdMiBCvvIK1s-2aQ.kNY6Xa746RCCEx9tUbrInrqWtuuYDtwDu9jxlEmRXNw&dib_tag=se&hvadid=779664909770&hvdev=c&hvexpln=0&hvlocphy=9031954&hvnetw=g&hvocijid=7989718953734198151--&hvqmt=e&hvrand=7989718953734198151&hvtargid=kwd-2027556117302&hydadcr=22594_13821176_8133&keywords=the+experience+machine+andy+clark&mcid=bd89ac636e0c38d39698b254fe27c1b0&qid=1776120362&sr=8-1) by the neuroscientist and philosopher Andy Clark.
+Predictive processing has emerged as one of the leading theoretical frameworks in contemporary computational neuroscience. Although its roots can be traced to Helmholtz's theory of unconscious inference, modern formulations by Rao and Ballard, Friston, Clark, and others have developed it into a quantitative framework for understanding perception, action, and learning.
+It proposes that perception is fundamentally an active process of prediction rather than a passive registration of sensory signals.
 
-The chief hypothesis of Predictive Processing when applied to perception, is that the picture of the world we see is internally generated by our brains. Hence reality is not something that exists 'out there', but instead it is a result of a predictive model that the brain runs. There is a good deal of experimental evidence that supports this hypothesis, including the fact that amount of signalling that happens 'top-down' from the interior of the brain towards the periphery where the visual cortex is located is much greater than the signalling that happens 'bottom-up' from the sensory organs to the interior. This ability to predict the world is something that we gradually learn from birth onwards. Indeed a good indication that the presence of the sensory signals is not enough for visual perception is the case of people of are born congenitally blind, and then their sight is restored later in life. It has been found that they are not able to 'see' as soon as their eyes begin to function normally, but they have to be gradually trained to see. This clearly shows the the bottom up signals from the sensory organs are not sufficient for vision.
+The central insight is that an organism has direct access only to sensory signals generated at its sensory surfaces. These signals are noisy, incomplete, and inherently ambiguous. The computational problem facing the brain is therefore to construct a coherent estimate of the external world from this limited information. Predictive processing proposes that this is achieved by continuously combining internally generated predictions with incoming sensory evidence. Perception is therefore not a direct copy of the sensory input, but the result of an ongoing interaction between expectation and observation.
 
-![](https://subirvarma.github.io/GeneralCognitics/images/stat116.png) 
+One consequence of this view is that the predictive model itself must be learned. Evidence for this comes from individuals whose vision is restored after congenital blindness or prolonged congenital cataracts. Although the retina and optic nerve may function normally following treatment, visual perception is initially severely impaired. Object recognition, depth perception, and scene understanding improve only gradually through experience. These observations suggest that retinal input alone is insufficient for mature visual perception. The brain must also acquire an internal model capable of interpreting sensory signals.
 
-Figure 1: A model for sensory perception generation in the brain
+A second consequence is that perception becomes fundamentally temporal. Rather than merely estimating the current state of the world, the brain continuously predicts how the sensory environment will evolve over time. Incoming sensory information is compared with these predictions, and discrepancies are used to update the brain's internal model. When the environment changes only slowly, prediction errors remain small. Unexpected events generate larger prediction errors, forcing the internal model to adapt.
 
-The above figure shows a model for the Predictive Processing framework based on the qualitative description in Clark's book. It operates as follows:
+Figure 2 illustrates a simplified computational model of this process. The organism maintains an internal state that summarizes its current estimate of the world. This state is updated using incoming sensory information, used to predict its future evolution, and finally transformed into the conscious percept experienced by the organism. The prediction generated by this process is continuously compared with new sensory observations, producing an error signal that modifies the internal state and closes the perception loop.
 
-- The brain has an internal state that gets modified by the inference module as a result of new sensory data.
-- The modified state is fed into the prediction module which predicts the next state, and this is then fed into the generation module.
-- The generation module takes the predicted state and converts it into our perception of the world. Consequently this state gets modified by new sensory data, and the cycle continues.
+![](https://subirvarma.github.io/GeneralCognitics/images/stat131.png) 
 
-Hence the brain predicts what we are going to perceive at the next instant on the basis of an internal state that it maintains and this gets converted into a perception in the visual cortex.
-If the environment is relatively unchanging then the predictions and new sensory data should be close to each other.
-If there is a change in the environment, for example if a new object appears in the field of view, then the brain's prediction and new sensory data are no longer in agreement. In this case the error signal generated by the difference between the two changes the brain's internal state, and this new state is used  to generate the next prediction, which takes the object's presence into account.
-Thus the raw sensory data is never directly experienced and what we do experience is modulated by our prior experiences and our expectations, by the prediction module.
-The amount of weight that the brain gives to the prediction vs the new sensory data depend upon the individual, for example in certain dis-orders such as autism the the sensory signals are over-weighed.
+Figure 2: A model for sensory perception generation in the brain
 
-Hence perception is the process of combining the brain's internal model of world, with information that is coming in through our senses. But where does this world model come from? It is created by a continual process of learning that our brains are engaged in, from the time we first open our eyes. 
-The figure above shows that the brain has access to both its prediction of what the world should be, as well as the 'ground-truth' in the form of new sensory data, and the difference between the two can be used as a training signal.
-If we see something that is unexpected, then it means that the event was not part of our existing world model. But once the initial observation happens, it is incorporated into the model through a change in synaptic weights, and the probability of the prediction getting stronger if the event happens frequently. Hence the next time the event is encountered, it is no longer a big surprise.
+An important implication of predictive processing is that much of what we perceive is generated internally rather than directly specified by sensory input. Sensory signals primarily indicate where the current prediction should be modified, while the detailed percept is constructed from the organism's learned internal model. This offers a natural explanation for the richness and continuity of conscious perception despite the relatively sparse and noisy information available from the sensory organs.
 
-![](https://subirvarma.github.io/GeneralCognitics/images/stat117.png) 
+Predictive processing has also been extended beyond perception. The same internal model that predicts future sensory states can be used to evaluate the consequences of potential actions. During planning, the model is effectively run "open loop," allowing future scenarios to be simulated without requiring new sensory input. More generally, actions themselves can be viewed as another mechanism for reducing prediction error, either by changing the organism's internal model or by changing the external world so that it conforms more closely to the organism's predictions.
 
-Figure 2: A model for action generation in the brain
+Although predictive processing has proved remarkably successful as a computational framework, an important modeling question remains. Most current formulations assume that the brain maintains latent internal variables representing the hidden causes responsible for sensory input. These latent variables are inferred from sensory evidence, evolved forward in time, and finally transformed into perceptual experience.
 
-The Predictive Processing framework can be used to describe not just perception but also the generation of actions. In order to survive in the world organisms are not just predicting what the environment looks like, but they actively change the environment by taking actions. There are two ways to reduce the error signal between the brain's prediction and the sensory data:
+The motivation for introducing latent causes is that sensory input is both incomplete and ambiguous. Many different external situations can produce similar sensory signals, and the brain therefore seeks a representation that captures the underlying causes responsible for those observations. Latent variables provide one mathematical framework for representing these hidden causes. Classical predictive processing therefore formulates perception as inference over latent states rather than directly over sensory observations.
 
-- By changing the prediction itself so that it conforms to the environment, as described above.
-- Or, by changing the environment so that it conforms to the prediction, and this is done by taking actions.
+The present work asks whether this intermediate representation is fundamentally necessary. Instead of explicitly modeling latent causes, we investigate whether the observable dynamics of perception can be described directly by a learned energy landscape. From the perspective developed in the Introduction, these two alternatives correspond to different effective theories of cognition. The first retains the latent-state representation of classical predictive processing, while the second models perceptual dynamics directly. 
+This distinction can be viewed as analogous to the distinction between microscopic and macroscopic descriptions in statistical physics. Classical predictive processing seeks to model the hidden causes underlying perception. The approach developed in this paper instead asks whether the observable evolution of perceptual states themselves admits an effective dynamical description, analogous to the role played by thermodynamics in physics.
 
-You might ask why the error signal is not fed back to change the prediction, as is the case for visual perception. It is thought that the brain suppresses this error signal, as a result of which the only way to bring the prediction in agreement with the sensory data is by changing the environment through action.
-It has been known for a long time that the motor and sensory cortices share a similar structure, and this theory explains why this is the case.
+The remainder of this paper explores two alternative energy-based formulations of this computational framework.
 
-The prediction model is also used to do planning, by mentally trying out various courses of action that accomplish the task that the organism is engaged in. No new sensory data arrives while the organism is engaged in planning, instead the world model is run 'open-loop' to generate a series of predictions.
-Hence the predictive model comes in handy not just for perception, but also for generating actions and planning for the future.
-The predictive model is constantly working, even when we are sleeping, which requires a lot of energy, and explains why the brain accounts for a large portion of the energy expended by the body. 
+## Latent Energy-Based Predictive Processing (LEPP)
 
-This theory explains another mysterious property of of perception: That the world that we see is incredibly rich, with an enormous amount of detail even though the information coming from senses is quite sparse in comparison. How can we reconcile the two facts? Predictive Processing theory offers a solution by theorizing that the rich detail that see in front of us is purely internally generated using our world model, with the sensory signal serving as a low bandwidth indicator of changes that have to be incorporated into the predictions from one instance to another. Hence even a very sparse external signal is sufficient to generate our image of the world.
+The previous section described predictive processing as a computational framework in which perception arises through the continual interaction between prediction and sensory evidence. The next question is how such a system might be implemented.
 
-The Predictive Processing framework allows our perceptions to be influenced not just by what is happening in the environment, but also our internal thoughts at the time of perception. Hence when we close our eyes we are still able to 'see' images, but now they are a function of our thoughts at that instant. There are a number of other influences on our perception, for example a big infuence is emotions. Of course emotions are influenced by perception, but they in turn influence perception. For example if the environment is evolving as we expect, then this induces feelings of calm and happiness. On the other hand if there are un-expected changes happening, then the brain tries to bring its predictions in line with the new sensory data as soon as possible, but this can trigger feelings of anxiety. Hence the objective of a living organism is to be in environments whose evolution matches that of its internal world model, and if its put in an unknown environment then it can result in life threatening situations, like a fish out of water.
-At the same time organisms such as ourselves often seek out novel situations which are not familiar to our world model, and doing so seems to give us pleasure. Hence there is a balance between exploration and exploitation. New exploration helps expand the organisms world model and prepares it to handle situations that would be threatening otherwise. Too much novelty though results in mental exhaustion, while too little results in boredom, so there is a fine balance in-between where the amount of surprise causes feelings of being "in the zone".
+The **Latent Energy-Based Predictive Processing (LEPP)** architecture proposed here provides one possible computational realization of predictive processing. Its purpose is not to replace the classical predictive-processing framework, but to demonstrate that it can be reformulated entirely within an energy-based computational paradigm. LEPP retains the central assumption that perception proceeds through the inference of latent causes from sensory observations, while expressing every stage of the computation as an energy-minimization process.
 
-Andy Clark points out in his book that certain mental health issues can be explained as a consequence of this model. The predictive model not only governs what we 'see', but is also responsible for predicting inner experiences such as pain, pleasure or sadness. An important factor is the relative weighing that the brain provides to its own prediction vs the sensory signal, which is called "precision" in Predictive Processing theory. Brains are constantly estimating precision and changing the relative weights assigned to the two factors, as a function of how reliable they seem each to be. Problems in the brains precision estimation is now thought to underlie a wide range of psychiatric disorders such as,
+![](https://subirvarma.github.io/GeneralCognitics/images/stat133.png)
 
-- Autism spectrum disorders: This can be caused due to over weighing of incoming sensory data. People with autism experience the world in its full sensory splendor, however they are not able to put the sensations within a proper context, i.e., they are not able to spot the forest for the trees. They tend to be overwhelmed by a lot of sensory data such as loud sounds or social situations and tend to avoid them.
-- Schizophrenia is though to be a result of the brain assigning too much weight to the error signal, i.e., the mismatch between its predictions and sensory daya. As result it mistakenly gives a lot of weight to data that may be purely co-incidental for example with no deep significance. This gradually changes the brains internal model and leads to false predictions and beliefs.
-- Studies have shown that PTSD is extremely well correlated with unusually large increases in the precision weighing of the prediction error signal in response to unexpectedly negative outcomes.
-- Depression can be caused due to overweighted expectations and underweghted new information. This results in a semi-permanent lock-in of the existing world model, leading us to continue with depresive behaviors.
+**Figure 3:** The Latent Energy-Based Predictive Processing (LEPP) architecture.
 
-## Energy based Temporal Predictive Coding (ETPC)
+A central idea of LEPP is that predictive processing naturally decomposes into **three distinct computational problems**, each requiring a different form of computation.
 
-![](https://subirvarma.github.io/GeneralCognitics/images/stat126.png) 
+1. **Latent-state inference:** Estimate the latent state that best explains the current sensory observations.
 
-Figure 3: Energy based Temporal Predictive Coding (ETPC) Framework
+2. **Temporal prediction:** Predict how that latent state is expected to evolve over time.
 
-Figure 3 shows a proposed model for Predictive Processing, which I am going to refer to as Energy based Temporal Predictive Processing or ETPC.
-I will start with a model for the inference and generation modules (since it turns out that they are related) and follow it up with a model for prediction. The prediction module is based on diffusion based EBMs of the type we encountered in [Part 3](https://subirvarma.github.io/GeneralCognitics/2026/02/13/statmech3.html). The inference and generation modules on the other hand are based on the theory of [Predictive Coding](https://homes.cs.washington.edu/~rao/predcoding2011.pdf) due to Rao and Ballard. All of these modules work using the principle of energy minimization which increases their biological plausibility.
-There can be some confusion created due to the differing use of the word 'predictive' in both Predictive Processsing and Predictive Coding. In Predictive Processing it denotes a prediction in time of the next state, while in Predictive Coding it denotes an inference (or prediction) of of an internal state state based on sensory data. The ETPC model incorporates Predictive Coding as part of the overall Predictive Processing framework.
+3. **Percept generation:** Convert the predicted latent state into the organism's conscious percept.
 
-The ETPC model operates as follows:
+Although these three computations solve different problems, they all operate through the common principle of energy minimization. The inference and generation modules are implemented using predictive coding, while temporal prediction is implemented using a diffusion-based energy model. Consequently, the entire predictive-processing cycle can be viewed as a sequence of interacting energy-minimization processes rather than as a system trained through global error backpropagation.
 
-- A stream of sensory data $s_n$ arrives at discrete instants indexed by $n$. It is processed by the Predictive Coding module and this results in a high level latent state $z_n$ at instant $n$. 
-- The latent state $z_n$ is fed into a prediction module which results in the latent state $x_{n+1}$. The prediction is implemented with stochastic sampling that finds the state tminimizing the energy function $E_{W}(x;z_n,u_{n+1})$.  The sequence $u_n$ stands for other factors that influence the prediction, such as actions that the organism plans to take.
-- The generative model converts the state $x_{n+1}$ into a perception $y_{n+1} = p_{\psi}(z_{n+1})$, and this serves as the organism's perception signal at the instant $n+1$.
-- The state $x_{n+1}$ also serves as the initial estimate for the next latent state $z_{n+1}$ at $n+1$. As a result of new sensory data $s_{n+1}$, the latent $z_{n+1}$ undergoes changes in a recursive manner from its initial value $x_{n+1}$, until it settles down to a final value $q_{\phi}(x_n,s_n)$, and this is serves as input into the prediction module for the next prediction $x_{n+2}$.
+An important distinction should be noted. The word *prediction* is used in two different senses within the predictive-processing literature. In **predictive coding**, prediction refers to estimating the latent causes responsible for the current sensory observations. In **predictive processing**, prediction refers to forecasting how the internal state of the organism will evolve over time. LEPP separates these two computations explicitly. Predictive coding performs inference over the current latent state, while the temporal prediction module models its future evolution.
 
-Note that we are assuming that the time required to generate the prediction $x_{n+1}$ is less then the time between successive sensory inputs.
-This ETPC design handles not just perception, but in parallel does training of all the three modules $q_{\phi}, E_W, p_{\psi}$ to find the parameters $(\phi,W,\psi)$ as new sensory data comes in. Hence in some sense its operation can be likened to the training process used in artificial neural networks. But at the same time  it also serves as a perception system in the brain through the output sequence $y_n$.
+The operation of LEPP is illustrated in Figure 3.
 
-The ETPC system uses relatively simple Predictive Coding based modules for the inference and generation parts, while the prediction part uses the more sophisticted energy based module.
+At time step $n$, a stream of sensory observations $s_n$ is processed by the inference module, producing the latent representation $z_n$. This latent state represents the organism's current estimate of the hidden causes responsible for the incoming sensory data.
+
+The inferred latent state is then supplied to the temporal prediction module. Unlike the inference module, whose task is to explain the current sensory observations, the prediction module estimates how the latent representation is expected to evolve before the next sensory observation arrives. Rather than computing a deterministic prediction, the module performs stochastic sampling over a learned energy function
+
+$$ E_W(x;z_n,u_{n+1}), $$
+
+where $u_{n+1}$ denotes contextual variables such as intended actions or other factors influencing future environmental dynamics. The sampling process converges to a predicted latent state $x_{n+1}$ corresponding to a low-energy region of the learned energy landscape.
+
+The predicted latent state is subsequently transformed into the organism's percept through the generative model
+
+$$ y_{n+1}=p_\psi(x_{n+1}), $$
+
+where $y_{n+1}$ denotes the predicted percept at the next instant.
+
+When the next sensory observations $s_{n+1}$ become available, the predicted latent state $x_{n+1}$ serves as the initial estimate for the next inference cycle. Predictive coding then recursively updates this estimate until it converges to the refined latent state
+
+$$ z_{n+1}=q_\phi(x_{n+1},s_{n+1}), $$
+
+which becomes the input to the temporal prediction module for the following prediction cycle.
+
+The complete computational flow may therefore be summarized as
+
+$$ s_n \rightarrow z_n \rightarrow x_{n+1} \rightarrow y_{n+1}. $$
+
+Each stage solves a distinct computational problem:
+
+| Transformation | Computational task | Module |
+|---------------|--------------------|--------|
+| $s_n \rightarrow z_n$ | Infer the current latent state | Predictive Coding |
+| $z_n \rightarrow x_{n+1}$ | Predict the future latent state | Diffusion-based Energy Model |
+| $x_{n+1} \rightarrow y_{n+1}$ | Generate the predicted percept | Generative Model |
+
+This decomposition is one of the principal features of LEPP. Classical predictive processing often treats perception as a single predictive process. LEPP instead separates **state estimation**, **state evolution**, and **percept generation** into distinct computational modules, allowing each problem to be implemented using the mathematical framework most naturally suited to it.
+
+The model assumes that temporal prediction converges within the interval separating successive sensory observations. Consequently, inference, temporal prediction, perception, and learning proceed continuously and in parallel, producing a continually updated estimate of the organism's environment.
+
+An attractive feature of LEPP is that perception and learning occur simultaneously. Each prediction cycle not only generates the organism's current percept but also provides training signals for all three computational modules. The inference model $q_\phi$, the temporal energy model $E_W$, and the generative model $p_\psi$ are therefore continuously refined as new sensory observations arrive. In this respect LEPP more closely resembles the continual online learning performed by biological nervous systems than the separate training and inference phases characteristic of most artificial neural networks.
+
+The following sections develop these three modules in turn. We begin by showing how predictive coding provides a biologically plausible implementation of the inference and generation modules before turning to the diffusion-based energy model used for temporal prediction.
 
 ## Implementing the Inference and Generation Modules: Predictive Coding
 
-![](https://subirvarma.github.io/GeneralCognitics/images/stat99.png) 
+The LEPP architecture introduced in the previous section consists of three computational modules: **latent-state inference**, **temporal prediction**, and **percept generation**. In this section we consider the first and third of these modules. We show that they can be naturally implemented using **predictive coding**, originally proposed by Rao and Ballard (1999). Predictive coding provides a biologically plausible mechanism for inferring latent causes from sensory observations using only local neural computations, making it a natural realization of the latent-state inference process assumed by LEPP.
 
-Figure 4: The Predictive Coding Model
+![](https://subirvarma.github.io/GeneralCognitics/images/stat99.png)
 
-This well known model was proposed by [Rao and Ballard](https://www.cs.utexas.edu/~dana/Rao.pdf) in 1999 as a way to generate latent representations in our visual system, hence the authors had biological plausibility as their main critera.
-The goal was not merely to encode pixels but also to infer the hidden causes of the image.
-Rao and Ballard proposed that the visual cortex maintains a hierarchical generative model:
+Figure 4: Predictive coding architecture. Higher cortical areas generate top-down predictions of activity in lower areas, while lower areas return bottom-up prediction errors. Perception emerges through iterative reduction of these prediction errors.
 
-$$  z(2)  \rightarrow z(1) \rightarrow y $$
+Predictive coding assumes that the cortex is organized hierarchically. Each cortical level attempts to predict the activity of the level immediately below it. The lower level compares this prediction with its actual activity and sends only the resulting prediction error back upward. Consequently, information flows in two directions through the hierarchy: predictions propagate downward, while prediction errors propagate upward. Through repeated interactions the hierarchy converges to a mutually consistent interpretation of the sensory input.
 
-where y is the sensory output such as retinal or LGN activity, $z(1)$ is a representation at a lower cortical level such as V1-like features in the brain, $z(2)$ is a representation at a higher cortical level such as more abstract visual causes, and higher levels try to predict the activity of lower levels. I have left out the subscript $n$ in the notation since I am assuming that all the steps in the inference phase happen at the same instant $n$. For a system with two levels, the higher level $z(2)$ is the same as the state $z_n$ from the previous section.
+For a two-level hierarchy, the generative model can be written as
 
-The model has a top-down generative pathway and a bottom-up error pathway.
-At each level, the representation at a higher level predicts the representation below it, so that
+$$ z^{(2)} \rightarrow z^{(1)}\rightarrow y. $$
 
-$$ {\hat z}(l-1) = f_l(z(l)) $$
+Here $y$ denotes the sensory activity (for example retinal or LGN responses), $z^{(1)}$ represents lower-level cortical features such as V1-like responses, and $z^{(2)}$ represents higher-level latent causes corresponding to more abstract visual structure. Throughout this section the inference process is assumed to occur within a single sensory interval, so the temporal index has been omitted for clarity. The highest-level representation $z^{(2)}$ corresponds to the latent state $z_n$ introduced in the LEPP architecture.
 
-Here $z(l)$ is the latent representipn at level $l$, $f_l$ is a learnt generative mapping and ${\hat z(l-1)}$ is the predicted activity at the lower level. The actual lower-level activity is $z(l-1)$, so the prediction error is 
+Suppose that level $l$ predicts the activity of the level immediately below according to
 
-$$ e_{l-1} = z(l-1) - f_l(z(l))  $$
+$$ \hat z^{(l-1)} = f_l(z^{(l)}), $$
 
-and the system tries to minimize this error. The sensory level output error is given by
+where $f_l(\cdot)$ is the learned generative mapping. The prediction error at the lower level is therefore
 
-$$ e_0 = s - f_1(z(1)) $$
+$$ \epsilon_{l-1} = z^{(l-1)} - f_l(z^{(l)}), $$
 
-where $s$ is the sensory data input into the visual system. 
+while the sensory prediction error is
 
-Each of the representations $z(l)$ changes so as to reduce the total error. The update for $z(l)$ depends upon the bottom-up error error from level $l-1$ (i.e., how well it was able to predict the lower level), as well as the top-down error in its own value as predicted by the level above it. The whole hierarchy iteratively settles into a state where predictions and observations agree as much as possible.
+$$ \epsilon_0 = s - f_1(z^{(1)}), $$
 
-The Predictive Coding algorithm can be derived from Bayes Rule as follows: Consider a system with just a single level $z$ of latent representation.
-If sensory output $y$ is caused by $z$, then Bayes rule gives
+where $s$ denotes the sensory input.
 
-$$ p(z|y) = {p(y|z)p(z)\over{p(y)}} $$
+The objective of predictive coding is to adjust the latent representations so that these prediction errors are minimized throughout the hierarchy. Each latent representation therefore evolves under the influence of two competing constraints: it must explain the activity of the level below while remaining consistent with the prediction supplied by the level above. Perception corresponds to the equilibrium reached when these competing influences balance.
 
-For a given value of $y$ the denominator is a constant so that
+### Bayesian Interpretation
 
-$$ \log p(z|y) = \log p(y|z) + \log p(z) + constant $$
+Predictive coding can be derived directly from Bayesian inference.
 
-The best prediction $z^*$ is given by
+For simplicity, consider a single latent representation $z$ generating a sensory observation $y$. Bayes' rule gives
 
-$$  z^* = argmax_z[\log p(y|z) + \log p(z)]  $$
+$$ p(z|y) = \frac{p(y|z)p(z)}{p(y)}. $$
 
-This is known as maximum a posteriori or MAP inference. Assume that
+Since $p(y)$ is constant with respect to $z$,
 
-$$ y = f(z) + \epsilon $$
+$$
+z^* = \arg\max_z \left[\log p(y|z)+\log p(z)\right],  $$
 
-where $f(.)$ is the generative function and $\epsilon$ is distributed according to the multi-variate Gaussian distribution $N(0,\Sigma_y)$. 
+which is the familiar Maximum A Posteriori (MAP) estimate.
+
+Assume the sensory observation is generated according to
+
+$$ y = f(z) + \epsilon, $$
+
+where
+
+$$ \epsilon \sim \mathcal N(0,\Sigma_y). $$
+
 Then
 
-$$  p(y|z) = N(y; f(z),\Sigma_y) $$
+$$ -\log p(y|z) = {1\over 2} (y-f(z))^T \Sigma_y^{-1} (y-f(z)). $$
 
-so that
+Defining the sensory prediction error
 
-$$ -\log p(y|z) = {1\over 2}(y - f(z))^T \Sigma_y^{-1} (y - f(z)) $$
+$$ \epsilon_y = y-f(z), $$
 
-If we define the prediction error $\epsilon_y = y - f(z)$, then the negative log posterior is given by
+the likelihood term becomes
 
-$$ -\log p(y|z) = {1\over 2}\epsilon_y^T\Sigma_y^{-1}\epsilon_y  $$
+$$ {1\over 2}\epsilon_y^T\Pi_y\epsilon_y, $$
 
-Here, $\Pi_y = \Sigma_y^{-1}$ is called the precision matrix. It quantifies the fact that in in Bayesian predictive coding, not all errors are treated equally; errors with higher expected precision values get more weight. So minimizing negative log likelihood is literally minimizing precision-weighted prediction error.
+where
 
-Assume that the latent variable $z$ also has a Gaussian prior distributed as $N(\mu_z,\Sigma_z)$, then
+$$ \Pi_y = \Sigma_y^{-1} $$
 
-$$ -\log p(z) = {1\over 2}(z - \mu_z)^T \Sigma_z^{-1} (z - \mu_z) $$
+is the sensory precision matrix.
 
-Defining $\epsilon_z = z - \mu_z$, it follows that the negative log posterior $E(z) = -\log p(z|y)$ is given by
+Similarly, assuming a Gaussian prior
 
-$$  E(z) = {1\over 2}\epsilon_y^T\Sigma_y^{-1}\epsilon_y  + {1\over 2}\epsilon_z^T \Sigma_z^{-1} \epsilon_z  $$
+$$
+z \sim\mathcal N(\mu_z,\Sigma_z), $$
 
-The system can infer $z$ by minimizing $E(z)$ using gradient descent
+the prior contributes
 
-$$  z  \leftarrow z - \eta {\partial E\over{\partial z}} $$
+$$ {1\over 2}\epsilon_z^T\Pi_z\epsilon_z,$$
 
-Using the above expression for $E(z)$, it follows that
+where
 
-$$ -{\partial E\over{\partial z}} = {\partial f\over{\partial y}}^T \Pi_y\epsilon_y + \Pi_z\epsilon_z $$
+$$ \epsilon_z = z-\mu_z. $$
 
-This shows that the latent representation $z$ is adjusted by two competing forces, i.e., the bottom-up sensory error $\epsilon_y$  and the top-down prior error $\epsilon_z$. The first term pulls $z$ to better explain the sensory input $y$, while the second term pulls $z$ towards its prior expectetion.
+The negative log posterior is therefore
 
-If we assume a simple linear model as in the original paper, then
+$$ E_{PC}(z) = {1\over 2}\epsilon_y^T\Pi_y\epsilon_y + {1\over 2}\epsilon_z^T\Pi_z\epsilon_z. $$
 
-$$ y = Wz + \epsilon $$
+This expression has a natural interpretation as an **energy function**. Inferring the latent representation is therefore equivalent to minimizing this energy.
 
-where matrix $W$ contains the parameters of the model. In this case the error gradient becomes
+### Local Energy Minimization
 
-$$ -{\partial E\over{\partial z}} = W^T \Pi_y\epsilon_y + \Pi_z\epsilon_z $$
+The latent representation is updated according to
 
-**Extention to a Multi-Level System**
+$$ z \leftarrow z - \eta\frac{\partial E_{PC}}{\partial z}, $$
 
-This analysis can be extended to multiple latent representation levels $z(3)\rightarrow z(2)\rightarrow z(1)\rightarrow y$ such that each level predicts the level below
+giving
 
-$$  z(l-1) = f_l(z(l)) + \epsilon_l  $$
+$$ - \frac{\partial E_{PC}}{\partial z} = \left(\frac{\partial f}{\partial z}\right)^T\Pi_y\epsilon_y + \Pi_z\epsilon_z.  $$
 
-where $\epsilon_l$ is distributed according to the Gaussain distribution $N(0,\Sigma_l)$.
-and the system tries to minimize the full negative log posterior 
+The first term is driven by bottom-up sensory prediction error and encourages the latent state to better explain the observations. The second term is driven by top-down expectations encoded by the prior.
 
-$$ E = \sum_l {1\over 2} \epsilon_{l-1}^T\Pi_{l-1}\epsilon_{l-1}\ \ \ where\ \ \ \Pi_l = \Sigma_l^{-1} $$
+Although this resembles ordinary gradient descent, an important feature of predictive coding is that the required information is entirely local. Each cortical area requires only its own activity, the prediction arriving from the level above, and the prediction error arriving from the level below. The global optimization therefore decomposes into a collection of local computations that can plausibly be implemented by recurrent cortical circuitry.
 
-Each latent state is updated to minimize this total 'energy' $E$ using gradient descent. Since $z(l)$ appears in two places, its update has two components:
+For the linear model originally considered by Rao and Ballard,
 
-1. It is predicted by the level above, with error given by
+$$ y = Wz + \epsilon, $$
 
-$$  \epsilon_l = z(l) - f_{l+1}(z(l+1)) $$
+the update simplifies to
 
-2. It predicts the level below, with error given by
+$$ - \frac{\partial E_{PC}}{\partial z} = W^T\Pi_y\epsilon_y + \Pi_z\epsilon_z. $$
 
-$$  \epsilon_{l-1} = z(l-1) - f_l(z(l)) $$
+### Extension to Hierarchical Representations
 
-so that 
+The same derivation extends naturally to multiple cortical levels
 
-$$ -{\partial E\over{\partial z(l)}} = {\partial f_l\over{\partial x_l}}^T \Pi_{l-1}\epsilon_{l-1} + \Pi_l\epsilon_l $$
+$$ z^{(L)} \rightarrow\cdots\rightarrow z^{(2)}\rightarrow z^{(1)}\rightarrow y. $$
 
-and this is the canonical Predictive Coding update. In words: A representation at one level changes to reduce the error in the level below, while also staying consistent with the prediction coming from the level above. The inference at the very top level is then fed into the temporal prediction module.
-Note that the information required to make changes in the states $z(l)$ at each level is available locally, which makes this mechanism biologically plausible. 
-The error $E$ can be regarded as an energy function for this system, and its minimization is an iterative process with the signals flowing up and down the levels a few times, until convergence happens.
+Each level predicts the activity below according to
 
-**Learning the Model Parameters**
+$$ z^{(l-1)} = f_l(z^{(l)}) + \epsilon_l, $$
 
-The brain encodes parameters $W$ in Predictive Coding by setting the strengths of its synaptic connections, while neuron state $z(l)$ is encoded by the firing rate of the neuron.
-The parameters can be updated while the network is operating, hence it does not require a separate training process and can be learnt using gradient descent. Assume the simple linear model $z(l) = W_l z(l-1) + \epsilon$, where the Gaussian noise process is common to all levels and is given by $N(0,\Sigma)$.
-The gradient ${\partial E\over{\partial W_l}}$ is given by
+and the complete energy becomes
 
-$$ -{\partial E\over{\partial W_l}} = \Pi [z(l-1) - Wz(l)] z(l)^T $$
+$$
+E_{PC} = \sum_l {1\over 2}\epsilon_{l-1}^T\Pi_{l-1}\epsilon_{l-1}. $$
 
-This is a local learning rule of the Hebbian type since the change in synaptic weights depends on the presynaptic latent activity $z(l)$ and the postsynaptic prediction error $z(l-1)-Wz(l)$.
+Every latent representation participates in two prediction relationships: it is predicted by the level above while simultaneously predicting the level below. Consequently, each latent state is updated using both top-down and bottom-up prediction errors until the hierarchy converges to a consistent explanation of the sensory input.
 
-Hence the prediction error can be reduced either by making a better prediction (by changing $z(l))$, or by changing the prediction model itself (by changing $W$). The rate of synaptic
-changes in the brain is lower than the rate with which the brain makes inferences, but if an event happens often enough, it ends up changing the brain's inference model.
+### Learning the Generative Model
 
-### Model for Prediction Using EBM/Diffusions
+Predictive coding performs not only inference but also continual learning.
 
-We now move on to the problem of modeling the prediction module in the ETPC model. If the prediction module is sufficiently sophisticated, then the ETPC model can get by using relatively simple inference-generation modules of the Predictive Coding type discussed in the prior section.
-The prediction module generates a new sample $x_{n+1}$ by stochastically minimizing the energy function $E_W(x;z_n;u_{n+1})$, which is equivalent to sampling from a
-probability distribution $p_W(x|z_n, u_{n+1})$.
-In this expression the vector $x_n=(x_n^1,...,x_n^N)$ represents the internal state of the system at time $n$, such that $x_n^i$ is the state of the $i^{th}$ neuron, $z_n$ is the prior state that reflects the latest sensory data, while $u_{n+1}$ represents actions that the organism is planning to takes.
-$E_W$ has to be a complex multimodal function of the spin glass type if it is to capture the perceptual richness of the world. 
-As we saw in [Part 3](https://subirvarma.github.io/GeneralCognitics/2026/02/13/statmech3.html), EBMs can be implemented using diffusion models and this is the approach that we will pursue. 
+The latent representations correspond to neuronal activity, while the parameters of the generative mappings are encoded in synaptic strengths. During perception the latent representations rapidly change to minimize prediction error. At the same time, synaptic weights evolve more slowly according to local Hebbian-style learning rules. For the linear model the weight update is
 
-The basic premis of EBMs is that given a system of N interacting nodes, the probability $p_W(x^1,...,x^N)$ that the system is in state $(x^1,...,x^N)$ in equilibrium is given by the Boltzmann distribution
+$$ -\frac{\partial E_{PC}}{\partial W_l} = \Pi\left(z^{(l-1)} - W_lz^{(l)}\right)z^{(l)T}.$$
 
-$$ p_W(x^1,...,x^N|x,u) = {\exp^{-E_W (x^1,...,x^N;x,u)}\over Z_W} $$
+The change in each synapse depends only on locally available quantities: presynaptic activity and postsynaptic prediction error. Consequently, inference and learning occur simultaneously during normal operation of the network rather than as separate phases.
 
-where $E_W(x^1,...,x^N)$ is the equilibrium energy for the state, $x$ and $u$ are conditioning variables representing the previous state and action, and $Z_W$ is the partition function (please see [Part 1](https://subirvarma.github.io/GeneralCognitics/2025/11/24/statmech1.html) for a derivation of this equation).
-When the system is initialized from a non-equilibrium state, its nodes interact with one another, and gradually the interactions cause the energy to decrease until equilibrium is reached at which point the probability distribution of the system state is given by this equation. This can serve as a way for sampling from complex probability distributions.
+### Role within LEPP
 
-In the context of using this idea to model the prediction process in brains: 
-I am hypothesizing that there is a set of neurons $(x^1,...,x^N)$ in the brain whose equilibrium state represents what our current perception.
-The state of these neurons is constantly changing in response to new sensory data as well due to predictions that the brain is making.
+Predictive coding therefore provides a biologically plausible implementation of the inference and percept-generation components of the LEPP architecture. Bayesian inference is reformulated as the minimization of a local energy function, allowing latent representations to emerge through recurrent interactions within the cortical hierarchy.
 
-![](https://subirvarma.github.io/GeneralCognitics/images/stat83.png) 
+An important limitation, however, is that predictive coding is fundamentally a model of **state inference**. It explains how the brain estimates the latent state responsible for current sensory observations, but it does not specify how those latent states evolve over time. Within the LEPP architecture this second problem is solved by the temporal prediction module, which we develop in the next section using diffusion-based energy models.
 
-Figure 5: Modeling the Energy Function of a collection of interacting nodes using a Transformer based Artificial Neural Network
+## Temporal Prediction as Energy Minimization
 
-The advantage of modeling the prediction module using EBMs is that we need not worry about the details of how the nodes interact with one another, and instead focus on modeling the energy function $E_W(x^1,...,x^N; x,u)$. If we are able to model the brain's energy function using an artificial neural network based function approximator such as a transformer (see above figure), then this enables us to generate samples from the model that follow the same distribution as samples generated by the brain. This is similar to the idea of using Statistical Mechanics to model  systems containing millions of interacting nodes. In both cases we ignore the details of the microscopic interactions between individual nodes and and focus on the macro behavior of the collection by directly modeling the system energy function.
+The previous section described how predictive coding can be used to infer the latent state $z_n$ responsible for the current sensory observations. The remaining component of the LEPP architecture is the **temporal prediction module**, whose task is to estimate the latent state expected at the next instant.
 
-To summarize, focusing on the energy function as opposed to the micro-architecture of the brain (called the connectome) enables us to bypass the intractable problem to figuring out the connectome topology, with the more tractable one of approximating the brain's energy function using a function approximator.
+Unlike predictive coding, this is fundamentally a problem of **dynamical modeling** rather than state estimation. Given the current latent state $z_n$, together with contextual variables $u_{n+1}$ such as intended actions, the prediction module must learn the conditional probability distribution
 
-![](https://subirvarma.github.io/GeneralCognitics/images/stat122.png) 
+$$ p(x_{n+1}|z_n,u_{n+1}). $$
 
-Figure 6: Modeling Predictive Perception in animal brains by means of minimization of the Energy Function. The minimization is carried out over L stages, with $N_L$ step Langevin Sampling used to do minimization at each stage
+Rather than predicting a single deterministic future state, we propose to represent this conditional distribution using an **Energy-Based Model (EBM)**,
 
-Once we have a good model for the energy function, say $E_W(x^1,...,x^N;x,u)$, the next step is to generate samples from it, and the specific way depends upon the system in question. For example in the brain, energy is minimized by direct interactions between neighboring neurons as in spin glass models (discussed in detail in [Part 1](https://subirvarma.github.io/GeneralCognitics/2025/11/24/statmech1.html)), while modern AI has discovered another way of doing this by way of diffusion models.
-The main idea behind thesez models, shown in figure 6, is basically the same as for the simulated annealing method for finding a good equilibrium state in statistical mechanics (also discussed in  [Part 1](https://subirvarma.github.io/GeneralCognitics/2025/11/24/statmech1.html)). Starting from an initial non-equilibrium state, the algorithm enables us to gradually transition to states of lower energy using a stochastic recursive sampling algorithm called Langevin dynamics. However this cannot be done in a single step, otherwise the iteration will get stuck in non-optimal local minima or saddle points. One way to avoid this is by introducing some noise into the process, starting from a high noise level and then gradually decreasing it (this is similar to starting from a high temperature and gradually decreasing it in simulated annealing). This leads to a multistage optimisation procedure as shown in the above figure with the noise levels decreasing from right to left, as the optimisation proceeds. At each stage of the noise level, Langevin sampling is used to do a few steps of the optimisation. Gradually the system reaches lower and lower energy states, and as a result the generated state moves towards the one with the correct probabilitity distribution. 
+$$ p_W(x|z,u)=\frac{\exp[-E_W(x;z,u)]}{Z_W}, $$
 
-![](https://subirvarma.github.io/GeneralCognitics/images/stat123.png) 
+where $E_W(x;z,u)$ is a learned energy function parameterized by $W$, and
 
-Figure 7: Illustration of a single step of Langevin Sampling 
+$$ Z_W=\int e^{-E_W(x;z,u)}dx $$
 
-A single step of sampling for the $t^{th}$ stage of the optimisation is done using the Langevin equation given below and this also illustrated in the above figure:
+is the partition function.
 
-$$ x(t,k+1) = x(t,k) - \eta[\nabla_X E_W(x(t,k),t,x_n,u_{n+1}) -  {1\over{\sigma^2(t)}} (x(t+1,K)-x_n(t,k))] +\sqrt{2\eta}\epsilon _n,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \  $$
+The energy function defines an effective energy landscape over future latent states. States of low energy correspond to highly probable future predictions, while states of high energy correspond to unlikely futures. Rather than predicting one future explicitly, the model therefore represents an entire probability distribution over possible futures.
 
-In this equation $\sigma(t)$ is the variance of the noise injected into the optimisation, $\eta$ is the step size, $x(t,k)$ is the state of the system at state $t$ of the diffusion process and the $k^{th}$ step of the Langevin iteration, while $x(t+1,K)$ is the final result of the Langevin iteration after $K$ steps at the previous stage $t+1$. The predicted state $x(t,k)$ is allowed to evolve until the energy minimum is reached. 
+This formulation is closely related to the effective-theory viewpoint introduced in the Introduction. The prediction module does not attempt to model the microscopic interactions between neurons. Instead, it learns an effective energy landscape whose minima capture the observable evolution of the brain's latent representations.
 
-The optimisation starts from state of pure noise $x(T,0)$ and proceeds backwards from stages $t = T, T-1,...,1,0$. The iteration requires an additional noise injected into the optimisation at each step, which makes it stochastic, and this is captured by $\epsilon_n$ which is sampled from the Normal distribution $N(0,I)$. This equation is derived and discussed in detail in [Part 3](https://subirvarma.github.io/GeneralCognitics/2026/02/13/statmech3.html).
-The energy function $E_W$ can be modeled by a diffusion transformer or [DiT](https://arxiv.org/abs/2212.09748) model, with cross attention used to take the conditioning into account.
+![](https://subirvarma.github.io/GeneralCognitics/images/stat83.png)
 
-We have approached the process of generation using the language of stochastic energy minimization. However there is an equivalent description of diffusion algorithms which is referred to as de-noising algorithms. The de-noising perspective can be formalized to create an alternative method of sampling from a distribution, called Denoising Diffusion Probabilistic Models or [DDPM](https://arxiv.org/abs/2006.11239). This algorithm is preferred over the stochastic sampling based method, and the reason for that is due to something called the [Hardware Lottery](https://arxiv.org/abs/2009.06489). Simply put, this says that algorithms that are better suited to the dominant von Neuman architecture for digital computers will win out over alternatives, and since DDPM is well matched to GPUs, it can be implemented more cheaply than alternatives. Unfortunately the von Neumann architecture does not work very well for sampling which can only be implemented on a serial node by node basis.
-For sampling based EBM systems to be be more competetive requires a fundamental re-think for the hardware on which it is implemented. The brain shows that if an energy model model is implemented on a biological substrate, then it can be made to work with superior performance and lower power consumption. To imitate this in man-made systems requires that we move away from the von Neumann architecture to one that is optimized for sampling using the properties of the substrate on which it is built. This would be an example of an analog computer, and there are some early efforts underway in this direction, for example see the last section in [Part 3](https://subirvarma.github.io/GeneralCognitics/2026/02/13/statmech3.html).
+**Figure 5:** Learning an effective energy landscape for temporal prediction using a neural network function approximator.
 
-### Training the Prediction Module
+A sufficiently expressive function approximator, such as a Transformer or Diffusion Transformer (DiT), can be trained to approximate the unknown energy function directly from observed latent-state trajectories. In this way, the microscopic details of the underlying neural circuitry are replaced by an effective dynamical description of latent-state evolution.
 
-The prediction module does its job by stochastically minimizing the energy function $E_W(x;z_n,u_{n+1})$ where $W$ are its parameters.
-But how does the module learn these parameters? Note that the prediction module gets access to the ground truth $z_{n+1}$ immediately after it makes its prediction $x_{n+1}$, and this information can be used to learn $W$. We are going to use maximum likelihood or MLE theory to do the estimation, in the following steps.
+This viewpoint closely parallels statistical mechanics. Statistical mechanics does not simulate every molecular interaction individually, but instead models the macroscopic behavior of matter through an effective free-energy landscape. Similarly, the prediction module bypasses the intractable problem of modeling the brain's connectome by directly learning an effective energy function governing latent-state dynamics.
 
-As before, let $p_W(x|z_n,u_{n+1})$ be the probability distribution for the next state as given by the model.
-Since it is an EBM model, we can write $p_W(x|z_n,u_{n+1})$ using the Boltzmann distribution as
+---
 
-$$ p_W(x|z_n,u_{n+1}) = {e^{-E_W(x;z_n,u_{n+1})}\over Z_W} $$
+## Sampling Future Latent States Using Diffusion Models
 
-where $E_W(x;z_n,u_{n+1})$ is computed at the point of minimum energy and  $Z_W = \int e^{-E_W(X)} dX$ is the partition function. 
-Assume we are given $M$ ground truth samples $(x(1),z(1),u(1)),...,(x(M),z(M),u(M))$ drawn from the probability distribution $p(x|z_n,u_{n+1})$.
-We have to maximize the log-likelihood function given by
+Once the energy function has been learned, the remaining problem is to generate samples from the conditional distribution
 
-$$ L(W) = {1\over M}\sum_{i=1}^M \log p_W(x(i)|z(i),u(i))  = E_{p(x|z,u)}[\log p_W(x(i)|z(i),u(i))]  $$
+$$ p_W(x|z,u). $$
 
-Using the Boltzmann distribution, this can be written as
+This is itself an optimization problem. Beginning from an initial state, the system must evolve toward regions of lower energy until a probable future latent state is reached.
 
-$$ L(W) =  -{1\over M}\sum_{i=1}^M E_W(x(i);z(i),u(i))- \log Z_W $$
+In biological systems such optimization may occur through the direct interactions of large populations of neurons. In machine learning, an efficient approximation is provided by **diffusion models**, which implement stochastic energy minimization through Langevin dynamics.
 
-The maximization of $L(W)$ can be done by using the gradient ascent algorithm, 
-$w_i \leftarrow w_i + \eta {\partial L(W)\over{\partial w_i}}, i =1,...,P$, which can be written in vector form as
+![](https://subirvarma.github.io/GeneralCognitics/images/stat122.png)
 
-$$ W\leftarrow W + \eta\nabla_W L(W) $$
+**Figure 6:** Temporal prediction using stochastic energy minimization. Starting from a noisy initial state, Langevin dynamics progressively moves the system toward lower-energy latent states.
 
-In order to do this we need to estimate $\nabla_W L(W)$ which can be shown to be equal to (see [Part 3](https://subirvarma.github.io/GeneralCognitics/2026/02/13/statmech3.html) for details),
+The sampling procedure begins from a high-noise initial condition and gradually reduces the noise level over a sequence of diffusion stages. At each stage several Langevin updates are performed,
 
-$$ \nabla_W L(W) = E_{p(x|z,u)}[\nabla\log p_W(x|z,u)]   = -E_{p(x|z,u)}[\nabla_W E_W(x;z,u)] +  E_{p_W(x|z,u)}[\nabla_W E_W(x;z,u)] $$
+$$ x(t,k+1)=x(t,k)-\eta\nabla_xE_W(x(t,k),t,z_n,u_{n+1})+\sqrt{2\eta}\,\epsilon, $$
 
-The first term in the derivative is evaluated by using samples $(x,z,u)$ from the ground truth dataset which are distributed according to $p(x|z,u)$, while the second term is evaluated by using samples 
-$(x,z,u)$ generated by the model, which are distributed according to $p_W(x|z,u)$. 
+where
 
-The ETPC model has access to both these samples during rhe course of its operation.
-The predictions $x_n$ provide the model generated samples, while the inferences $z_n$ provide the ground truth samples and these can be plugged into the $\nabla E_W$ expression to computethe gradient.
-For the case when $E_W(X)$ is modeled by an artificial neural network such a transformer or a CNN, this derivative can be computed using automatic differentiators. 
+$$ \epsilon\sim\mathcal N(0,I). $$
 
-The [Diffusion Recovery Likelihood](https://arxiv.org/abs/2012.08125) or DRL algorithm is a way to implement learning in the context of diffusion models and this covered in [Part 3](https://subirvarma.github.io/GeneralCognitics/2026/02/13/statmech3.html). Just as for the sampling process, a single step of the DRL algorithm injects noise into the learning process in order to smooth out the minimization.
-But how does the brain learn the strength of its synapses?
-Recall that in Part 2 we showed that for the Boltzmann machine the gradient for the loss function is given by the Hebbian learning rule
+The injected noise prevents the dynamics from becoming trapped in poor local minima while allowing the system to explore multiple possible futures. As the diffusion process proceeds, the noise level is gradually reduced, causing the latent state to settle into progressively lower-energy regions of the learned energy landscape.
 
-$$ {\partial L(W)\over{\partial w_{ij}}}  = \beta (<\sigma_i\sigma_j>_{data} - <\sigma_i\sigma_j>_{model}) $$
+![](https://subirvarma.github.io/GeneralCognitics/images/stat123.png)
 
-where $\sigma_i$ is the state of the $i^{th}$ node.
-This is a special case for the more general equation given above, when the energy function is given by quadratic expression
+**Figure 7:** One Langevin update within a diffusion stage.
 
-$$  E_W = -\sum_{i}\sum_{j\lt i}w_{ij}\sigma_i\sigma_j - \sum_{i}\sigma_{i} b_i $$
+Although diffusion models are often described as denoising algorithms, they may equally be interpreted as stochastic optimization algorithms operating on an energy landscape. Throughout this paper we adopt the latter viewpoint because it connects naturally with predictive coding, where inference likewise proceeds by minimizing an energy function.
 
-where $w_{ij}$ is the strength of the synapse between nodes $i$ and $j$.
-Thus if the brain's micro-architecture were known, its energy function can be expressed using an expression such as above, and the minimization can be carried out by direct interactions between neurons using Hebbian type learning rules.
-On the other hand since we don't have access to the connectome, we approximate the energy function using artificial neural networks, and then estimate its parameters using algorithms such as DRL.
+Notice the close analogy between the two modules of LEPP.
 
-### Biological Plausibility of the ETPC Model
+Predictive coding minimizes an energy function
 
-How biologically plausible is the ETPC model, in other words are their biological mechanisms that can implement the various functions in the model? 
-Recall that the model contains two main structures, namely the inference/generation module and the prediction module.
+$$ E_{PC}, $$
 
-- There is a fair amount of evidence that has been collected for the biological plausibility of the inference/generation module. In fact Rao and Ballard, the originators of the Predictive Coding model, came from the neuroscience communinity. As we saw earlier, both the inference/generation operation as well as the learning of the model parameters (which can be likened to changing the synaptic weights) can be accomplished  by using a minimum energy principle requiring only local communications between nodes.
-- This article proposes an EBM model for the prediction module, which can be implemented using a diffusion model with Langevin sampling. It is quite plausible that the prediction module in the brain also uses minimum energy principles, but since we don't know the brain's connectome architecture, we took the path of modeling the brain's energy function using artificial neural networks. The latter simulate the process of gradual energy minimization that results in a new prediction. The model does Langevin sampling on its state space, while the brain does direct signalling between neurons, but both end up in the same equilibrium state of minimum energy. The EBM/diffusion model gets there by using a model for the brain's energy function, while bypassing the need to model the details of its interconnection architecture.
+whose equilibrium estimates the current latent state responsible for the sensory observations.
 
-It is known that there is a set of neurons in the brain whose state results in visual perceptions. The process by which the state gets translated into the rich multicolor panaroma that we see is still mysterious and is called the [Hard Problem of Consciousness](https://en.wikipedia.org/wiki/Hard_problem_of_consciousness), and the ETPC model does not make any claims that it solves this problem. The perception neurons are connected to each other and to other neurons in other parts brain using circuits whose architecture remains largely unknown. In particular they are connected to neurons that represent prior perceptions, sensory data etc. Lets assume that the perceptions neurons have settled into an equibrium state, and then new sensory data comes in. This causes the neurons to be in a non-equilibrium state, and this results in signals between them which gradually cause them to transition to a new equilibrium state that corresponds to the new perception.  
+The diffusion prediction module minimizes a different energy function
 
-Another aspect on the biological plausibility issue is the learning process for the synaptic connections in the prediction module. In the previous section I showed that the maximum likelihood estimation for the model parameters results in an algorithm that can be implemented using direct signalling between neighboring neurons, for the case when the inter-connection architecture is known.
+$$ E_W, $$
 
-The main lesson to be drawn from the ETPC model for the brain, is that it is possible to create a model for a highly complex system of interacting nodes by modeling at the level of energy functions, which is a trick that physicists discovered more than a hundred years before. In the following section we will follow this line of thinking to the next level by proposing another energy based model for perception, that does not make assumptions about the internal structure of the brain, such as the separation between the inference/generation modules and the prediction module.
+whose equilibrium predicts the latent state expected at the next instant.
 
-## Are Latent States Necessary? An Alternative Model for Perception
+The LEPP architecture therefore decomposes predictive processing into two complementary energy-minimization problems:
 
-![](https://subirvarma.github.io/GeneralCognitics/images/stat127.png) 
+- **State inference:** estimating the current latent state using predictive coding.
+- **State prediction:** estimating the future latent state using diffusion-based stochastic optimization.
 
-Figure 27: The Direct Energy based Predictive Processing (DEPP) Model
+Both modules operate through local energy minimization while solving fundamentally different computational problems.
 
-The ETPC model does prediction in latent space, while the inference/generation modules are used to convert between the latent and sensory spaces. 
-But do we explicitly need to model the inference/generation modules? Why not do prediction in sensory space directly?
-This can certainly be done and the resulting model that I am going to call Direct Energy based Predictive Processing or DEPP is shown in the above figure. The model predicts the next perception $y_{n+1}$ by stochastically minimizing the energy function $E_W(y;y_n.u_{n+1},s_n)$, where $y_n$ was the previous prediction, $u_{n+1}$ is the action that the organism plans to take and $s_n$ is the sensory data at the previous instant. This system can be implemented using a diffusion model just like we did for the prediction module in the ETPC model.
-Note that in this model we are not making any assumtions about the internal operations of the brain, and modeling it purely based on sensory inputs and its perceptual output. 
+### Learning the Prediction Energy
 
-The model parameters $W$ can be learnt in a manner similar to that for the ETPC prediction module, by using maximum likelihood estimation. The signals required for training, namely the model's prediction $y_{n+1}$ and ground truth data $s_{n+1}$, are readiliy available. As for the ETPC model, if the micro-architecture of the system were known, then it reduces to a Hebbian type learning rule. If not known, then we can work at the level of the energy ffunction $E_W$ and use algorithms such Diffusion Recovery Likelihhod or DRL.
+Learning the prediction module consists of estimating the parameters of the conditional energy function
 
-![](https://subirvarma.github.io/GeneralCognitics/images/stat125.png) 
+$$ E_W(x;z,u). $$
 
-Figure 17: Illustrates the Changing Energy Landscape as New Sensory Data Arrives and New Actions are taken
+Unlike predictive coding, which receives the current sensory observations directly, the prediction module learns by comparing its predicted latent state with the latent state inferred after the next sensory observation arrives.
 
-We can get some intuition for how the DEPP model works by investigating changes in the energy landscape with time. Assume that the state of the sytem at instant $n+1$ is given by $y_{n+1}=y'$, then this corresponds to to a minima of the energy landscape given by $E_W(y'; y_n=y, u_{n+1}=u, s_n=s)$ with corresponding probability given by $p_W(y'|y,u,s)$. At the next instant when the system receives new sensory data $s_{n+1}=s'$ and proposes the next action $u_{n+2}=u'$, then its energy landscape transitions to $E(y;y',u',s')$, and the current state $y'$ is no longer at a minima in the new landscape. The system then goes through the process of energy minimization until it arrives at the next minima $y''$ and this becomes the next perception. 
+Suppose that after predicting $x_{n+1}$, the inference module computes the corrected latent state $z_{n+1}$. The pair
 
-This process is illustrated in the above figure, which shows a sequence of energy landscape cross sections. The particular cross section $E(y;y_n,u_{n+1},s_n)$ at instant $n+1$ is a function of the previous state $y_n$, the current perception $s_n$ and the proposed action $u_{n+1}$. 
-Hence the energy landscape of the perception neurons in the brain is constantly changing as new sensory data arrives, which causes the neurons to find themselves in a non optimal energy level, which triggers interactions between them to lower the energy, thus resulting in a new perception.
+$$ (z_n,u_{n+1},z_{n+1}) $$
 
-The DEPP model enable us to model the effective energy landscape of perception without committing to an explicit mechanistic decomposition into latent causes or synaptic interaction terms.
-The energy landscape in this model has to absorb all the explanatory structure directly without the use latent states. Energy models make this possible since they do not require us to hand-specify the connectome interaction terms. Latent states in the ETPC model are one way to factorize complexity, while the DEPP model provides another route. This idea has been implicit in energy based modeling, theough rarely discussed in neuro-scientific terms.
+then provides a supervised training example describing the true temporal dynamics of the latent space.
 
-The mapping becomes:
+The parameters $W$ are learned by maximizing the conditional log-likelihood
 
-| **Brain Concept**           |                 **DEPP Model Analogue**  |
-| ------------------          |                   -----------------------------   |
-| Energy function created due to connectome interactions     |               Unknown microscopic energy terms |
-| Perception  neurons         |                      Observabe state $y_n$|
-| Perceptual dynamics        |         Learnt energy landscape   |
-| Priors/expectations         |         Attractor structure of energy landscape   |
-| Perception update           |        Stochastic de-noising/Langevin-like flow    |
-| Hidden causes               |        Optional emergent interpretation  |
+$$ L(W)=E_{p(x|z,u)}[\log p_W(x|z,u)]. $$
 
-In some sense cortical perceptual dynamics can be understood as stochastic energy minimization over perceptual state space. The neuroscience literature has not yet fully absorbed the conceptual implications of the energy based approach. Most neuroscientists still think interms of Predictive Coding, Bayesian inference, latent causes and generative models, rather than interms of energy landscapes and stochastic flows.
-Existing theories in neuroscience ask: What internal variables is the brain representing? The DEPP model on the other hand asks: Can we bypass the representation question and directly model the observed dynamics of perceptual states? This is analogoues to statistical mechanics, since physicists do not usually model every molecular interaction, instead they model the effective free energy. Likewise in the chain
+Using the Boltzmann representation, the resulting gradient becomes
 
-$$ connectome\ \ \ --> \ \ \ Energy\ \ \ Function\ \ \ \--> \ \ \ Perceptual\ \ \ \ Dynamics\ \ \ $$
+$$ \nabla_WL(W)=-E_{\text{data}}[\nabla_WE_W]+E_{\text{model}}[\nabla_WE_W]. $$
 
-the connectome becomes analogous to microscopic molecular interactions and the gradient of the learnt diffusion energy model becomes analogous to an effective thermodynamic field.
+The first expectation is evaluated using latent-state transitions inferred from sensory experience, while the second is evaluated using samples generated by the prediction model itself. Consequently, the prediction module continuously compares its own imagined futures with the futures subsequently observed, gradually refining its energy landscape through experience.
 
-## Generation Using Auto Regressive Models
+This learning rule is directly analogous to the learning rules used for classical Boltzmann machines. If the microscopic neural interactions were explicitly known, Hebbian learning would emerge as a special case. Since the brain's connectome is unknown, however, the energy function is instead approximated using a neural network function approximator, while modern diffusion-learning algorithms such as Diffusion Recovery Likelihood (DRL) provide efficient procedures for estimating its parameters.
 
-In modern deep learning system there is another way to do generation, namely by using auto regressive systems such as transformers. These systems are based on the Chain Rule in probability, which saya that
+## Biological Interpretation of LEPP
 
-$$ p_W(y^1,...,y^N|x,u,s) = p_W(y^1|y,u,s) p_W(y^2|y^1,x,u,s)...p_W(y^N|y^{N-1}...y^1,x,u,s) $$
+An important question is whether the computations required by the LEPP architecture admit biologically plausible implementations. The answer depends on the level of description at which the model is interpreted. LEPP is not intended as a literal reconstruction of the brain's neuronal circuitry. Rather, it should be viewed as an effective computational model of the dynamical processes underlying perception.
 
-If we have a way of computing the conditional probabilities on the right hand side of the equation, then we can receover the joint probability, and this is precisely what auto regressive models do. They start by sampling at a single node $y^1$ by using $p_W(y^1|x,u,s)$ and follow it up $y^2,...,y^N$. Rather than modeling the energy function $E_W$, this system models the conditional probability $p_W$, but the two are related through the Boltzmann equation
+The LEPP architecture consists of two principal computational components: the latent-state inference module and the temporal prediction module. Both are formulated as energy-minimization processes, but they operate on different aspects of the perceptual computation.
 
-$$  p_W(y^k|y^1...y^{k-1},y,u,s) = {e^{-E_W( y^k;y^1...y^{k-1},y,u,s)}\over Z_W} $$ 
+### Biological Plausibility of Predictive Coding
 
-Auto regressive systems do generation by finding the (discrete) value $y^k$ that maximimizes $p_W(y^k|y^1...y^{k-1},y,u,s)$, and this is equivalent to finding $y^k$ that minimizes the energy
-$E_W(y^k;y^1...y^{k-1},y,u,s)$. Hence they can be regarded as a type of EBM that does sampling on a node by node basis.
-But since all the nodes are inter-connected, won't the sampled value of $y^k$ lead to a change in the value of $y^{k-1}$ and other already samples nodes? That certainly can be the case, and auto regressive models handle this problem by techniques such as beam search. This works by keeping track of two or more possible minima values as the generation progresses, ans the final decision is deferred until the last node is sampled.
+There is considerable evidence supporting the biological plausibility of the predictive-coding component of LEPP. Indeed, predictive coding was originally proposed by Rao and Ballard as a computational model of cortical processing. As shown in the previous section, both inference and learning can be formulated as local energy-minimization processes. Each cortical area communicates only with neighboring levels in the hierarchy through top-down predictions and bottom-up prediction errors, while synaptic plasticity depends only on locally available neuronal activity and prediction errors. Consequently, neither inference nor learning requires global error backpropagation, making predictive coding considerably more compatible with known cortical circuitry than conventional deep-learning algorithms.
 
-Auto regressive systems can also be considered to be a type of Markov Decision Process or MDP, in which the state corresponds to nodes that have already been samples, while the action corresponds to the next generation. In this case the optimal point $(y^1,...,y^N)$ can be obtained by using Reinforcement Learning algorithms, if we can assign a reward number to the output. This creates a machanism by which the generated value of a node is dependent on all the other nodes, both backwards and forward in time, and thus closer to the energy based approach.
+### Biological Interpretation of the Prediction Module
 
-Hence both energy models and auto regressive models work through minimization of energy functions, but they use different sampling techniques.
-This point of view also sheds some light on the success of auto regressive models such as LLMs. They learn the effective energy landscape over the cognitive or thought states of the brain and the attention mechanism can then be viewed as a parametrization of this landscape, not as a literal cortical circuit.
+The temporal prediction module proposed in LEPP is based on an energy-based model whose predictions are generated through stochastic sampling. This should not be interpreted as a claim that the brain literally implements a diffusion model or Langevin dynamics. Rather, the diffusion model provides an effective computational description of a more general physical process.
 
-This is close to how many physicists think, since they are generally comfortable with the idea that many microscopic realizations lead to the same macroscopic dynamics. For example water, liquid nitrogen or liquid helium have very different microscopic constituents, yet their large scale behavior is described by the same equations. Similarly it is concievable that transformers, recurrent networks or cortical circuits all approximate the same cognitive dynamics driven by stochastic energy minimization. If this analogy holds then modern AI architectures may be valuable not because they resemble cortical circuits, but because they provide increasingly powerful parametrizations of effective cognitive dynamics. Viewed this way, a transformer is less like a model neuron and more like an equation in physics; a compact description of large scale behavior that does not reveal the microscopic implementation.
+The brain contains a vast network of recurrently connected neurons whose detailed connectivity remains largely unknown. As sensory information arrives, neuronal activity moves away from its previous equilibrium state and gradually relaxes toward a new stable configuration corresponding to the updated perceptual state. The diffusion model performs an analogous computation by allowing stochastic dynamics to evolve over a learned energy landscape until a low-energy state is reached.
 
-LLMs trained on text are able to infer the energy landscape of thought states, not thought directly. But if the inferred landscape is rich enough, then the model can recover much of the structure of the hidden dynamics, just as one can infer properties of a physical system from its observable outputs.
-This explains why language models can seem to be surprisingly cognitive without having direct access to embodied perceptal states. Their training enables them to recover the energy landscape and thought dynamics of human latent cognition.
+The two systems therefore differ in their microscopic implementation while sharing a common macroscopic objective: both evolve toward equilibrium states determined by an underlying energy function. The diffusion model achieves this through stochastic sampling over a learned energy landscape, whereas the brain presumably achieves it through the collective interactions of large populations of neurons. LEPP makes no claim that these microscopic mechanisms are identical. Rather, it proposes that they may represent different implementations of the same effective dynamical process.
 
-Thus one of the central lessons from the success of modern generative AI is that the operation of a system with a very complex internal structure can be effectively modeled from the output alone.
-The model is able to a recover substantial structure of the hidden system from its observable boundary behavior. In the case of LLMs, training on text does not expose the underlying human cognitive state directly, but it exposes an enormous number of projections from it. With enough diverse projections, and a model such as a transformer that has enough parameters to capture them, the model can infer a usable approximation to the latent geometry of cognition. 
-It is not necessarily a mechanistic replica of the systems it is trying to model, but an effective theory learnt from observable behavior. 
-Thus rich output statistics can identify latent structure, not perfectly, but well enough to support predictions, abstraction, analogy and coherent discourse. 
-This leads to the correspondence
+Learning in the prediction module admits a similar interpretation. When the underlying interaction graph is explicitly known, maximum-likelihood learning reduces to local update rules closely related to Hebbian plasticity. Since the detailed architecture of the brain's connectome is unknown, however, the energy function is instead represented using a neural-network function approximator. The resulting model should therefore be regarded as an effective description of cortical dynamics rather than a mechanistic reconstruction of neuronal circuitry.
 
-| **Brain Concept**           |                 **EBM Model Analogue**  |
-| ------------------          |                   -----------------------------   |
-| Connectome     |               Microscopic implementation |
-| Cognition      |               Latent dynamical manifold    |
-|Speech/text/action   |          Observable projections       |
-|  LLMs               |          Learnt effective model of those projections |
+### LEPP as an Effective Theory
 
-Thus projections contain more recoverable structure than many people expected. 
+The principal lesson of LEPP is methodological rather than architectural. The objective is not to reproduce the detailed structure of the brain's connectome, but to identify the effective dynamical principles governing perceptual evolution. This distinction is familiar throughout physics. Thermodynamics successfully predicts the behavior of macroscopic systems without explicitly modeling every molecular interaction. Likewise, LEPP models the effective energy landscape governing latent perceptual dynamics without requiring an explicit model of the underlying neuronal circuitry.
 
-Another perspective into this can be obtained through the use of the concept of duality from mathematics. Many otherwise intractable problems are solved by translating the statement of the problem into a dual space in which the solution becomes easier to obtain. Given a set of neurons $(x^1,...,x^N)$, an equilibrium state can be obtained by solving the primal problem of minimizing $E_{\theta}(x_1,...,x_N)$ where $\theta$ are the synaptic strengths, or by solving the dual problem of minimizing $E_W(x_1,...,x_N)$ where $W$ are the parameters of the approximating artificial neural network. The primal problem is difficult to solve since we have very little information about the brain's connectome. On the other hand we have discovered several powerful artificial neural networks which closely approximate the brain's energy function, and in this space the problem of finding the equilibrium state becomes much easier.
+Viewed in this way, LEPP demonstrates that predictive processing can be reformulated entirely within an energy-based computational framework while preserving its central latent-state representation. This naturally raises a further question. If the objective is to model the effective dynamics of perception rather than its microscopic implementation, is the explicit latent-state representation itself a necessary component of the theory?
 
-## Planning
+The next section explores this possibility by proposing a second effective model of perception—**Direct Energy-Based Predictive Processing (DEPP)**—which dispenses with an explicitly modeled latent-state architecture and instead describes the observable evolution of perceptual states directly through a learned energy landscape.
 
-During the perception process described in the previous section, the prediction module is constantly getting trained as organisms go about their life, by making use of the ground truth data coming out of the inference module in the ETPC case, or the sensory data directly for DEPP. The prediction module was originally designed to predict the next instant of what the world is going to look like, but in higher animals such as humans, it performs a very important additional function, i.e., that of planning. During perception the brain is running closed loop, since its predictions are contantly being verified by real data. In contrast planning can be considered to be a process during which the prediction module runs open loop. In other words it generates a sequence of predictions, modulated by potential actions that the organism is planning to take. Based on this, the organism can decide whether a particular sequence of actions is good enough to accomplish some task.
-The process by which it arrives at the right action sequence such that it results in success, is called planning. 
+## Direct Energy-Based Predictive Processing (DEPP)
 
-![](https://subirvarma.github.io/GeneralCognitics/images/stat118.png) 
+The LEPP architecture developed in the previous sections demonstrates that classical predictive processing can be reformulated entirely within an energy-based computational framework while preserving its central assumption that perception proceeds through the inference of latent causes.
 
-Figure 10: Using the ETPC framework to do Planning
+This naturally raises a more fundamental question.
 
-The ETPC framework can be used to do planning as shown in the above figure. In this case there is no sensory data coming into the system, hence only the prediction and generation modules
-are active. The prediction process is conditioned on actions, thus allowing the system to plan out a sequence of actions to accomplish a task. For an example of a ETPC type world model that does predictions in latent space, please see [Nilaksh et.al.](https://arxiv.org/abs/2605.06388).
+If the objective is to construct an **effective theory of cognition** rather than a mechanistic reconstruction of neural circuitry, is the explicit latent-state representation itself necessary?
 
-![](https://subirvarma.github.io/GeneralCognitics/images/stat128.png) 
+The **Direct Energy-Based Predictive Processing (DEPP)** model explores this possibility. Rather than explicitly modeling latent-state inference, temporal prediction, and percept generation as separate computational processes, DEPP models the observable dynamics of perceptual states directly through a learned energy landscape.
 
-Figure 11: Using the DEPP framework to do Planning
+It is important to emphasize what DEPP does **not** claim. DEPP does not argue that latent causes do not exist, nor that the brain lacks internal representations. Instead, it asks whether an effective theory of perceptual dynamics must explicitly represent those latent variables, or whether their collective effects can be absorbed into a single learned energy function defined directly over perceptual states.
 
-Alternatively the DEPP framework can be used to do planning, in this case the prediction module also does the generation function as shown above, and an example of a world model that operates along these lines is the [DIAMOND model](https://arxiv.org/abs/2405.12399). Current the AI community has not settled on the question of whether latent shoud be modeled or not for planning purposes. The latent free proponents point out that deciding on actions is easier in pixel space, since the action generation system has access to fine level details which make it easier for it to make decisions.
+![](https://subirvarma.github.io/GeneralCognitics/images/stat127.png)
 
-We will describe an approach to the problem of planning as given by the reinforcement learning or RL framework.
-This framework is based on the idea that there is a reward associated with the completion of tasks, and organisms take the sequence of actions which results in the maximization of the reward. 
-There is an alternative theory of planning due to Karl Friston that is based on the minimization of expected variational free energy.
-The Friston theory, which is part of the Active Inference framework, does not use rewards. Instead it posits that an organism starts with an image of what the completed task looks like, and then decomposes it into a sequence of images that get it to the desired end point. The actions themselves are determined automatically by the predictive processing framework as described in the prior section.
+**Figure 8:** Direct Energy-Based Predictive Processing (DEPP).
 
-### The Reinforcement Learning Framework for Planning
+The DEPP architecture predicts the next perceptual state directly from the current perceptual state, previous sensory observations, and contextual variables such as intended actions. Instead of operating in latent space, prediction occurs directly within perceptual state space.
 
-![](https://subirvarma.github.io/GeneralCognitics/images/stat79.png) 
+The model represents the conditional distribution of future perceptual states using the energy function
 
-Figure 12: The Reinforcement Learning Control Framework: An Agent Acting in the Real World
+$$ p_W(y_{n+1}|y_n,s_n,u_{n+1})=\frac{\exp[-E_W(y_{n+1};y_n,s_n,u_{n+1})]}{Z_W}. $$
 
-We will start with the RL framework for the case when the agent is constantly getting feedback from the environment, and this is shown in part (a) of the above figure. 
-Fundamental to this framework is the concept of the agent state $x_n$, which is defined as the information that an agent needs to take an action.
-Assume that it takes action $u_{n+1}$ at time $n$ based on its current state $x_n$, and the action results in a change to the environment that is recorded by the agent as an observation $s_n$. The observation results in a change in its state to $x_{n+1}$ and also an (optional) reward signal $r_n$. 
-The reward signal tells the agent whether the action resulted in a positive outcome (or not). The agent then takes the next action $u_{n+2}$ taking $x_{n+1}$ into account, and the loop goes through another cycle. RL is focused on choosing the action sequence $u_1,...,u_N$ so as to maximixe the total reward obtained during the completion of the task that the agent set out to do.
+Prediction proceeds by stochastic sampling over this learned energy landscape using the same diffusion-based optimization procedure introduced for the temporal prediction module in LEPP.
 
-The RL framework shown in part (a) leaves open the problem of how the agent figures out what action to take for a given state. But what if the agent posseses a model for the environment that allows it to predict the next  state (and reward), as a function of the prior state and the action it took. This scenario is shown in part (b), in which I have replaced the environment by the agent's model for the environment. This model allows the agent to try out various scenarios and sequences of actions, without actually taking any action in the real world, and this is called planning. 
+Unlike LEPP, the energy function is now required to capture the complete dynamics of perception. The complexity of latent-state inference has not disappeared. Rather, it has been absorbed into the learned energy landscape itself. Latent variables therefore become an implicit property of the energy function rather than an explicit component of the computational architecture.
 
-![](https://subirvarma.github.io/GeneralCognitics/images/stat129.png) 
+### Perceptual Dynamics as Motion on an Energy Landscape
 
-Figure 13: Model Based Control in Reinforcement Learning: An Agent Planning its actions Based on an internal model
+The operation of DEPP may be understood by considering how the effective energy landscape evolves through time.
 
-Part (a) of the above figure shows an example rollout of the perception-action states during planning, starting from some initial state $x_1$. The agent can potentially take one of two actions $u_1$ or $u_2$ from this state, and assuming it takes action $u_1$, it can potentially transition to state $x_2$ or back to state $x_1$. The state that it actually transitions to is controlled by the conditional probabilities $p(x_2|x_1,u_1)$ and $p(x_1|x_1,u_1)$ which constitute the organism's world model.
-Once this transition takes place, the organism then takes its next potential action and the whole process repeats.
+Suppose that at time step $n+1$ the perceptual state is given by
 
-Part (b) of the figure shows a sequence of possible rollouts of the perception-action planning sequence, from a starting state $x_1$. An individual rollout is one path through this graph, and an example is shaded in red. A rollout terminates when the organism reaches the end state labeled T. 
-This kind of decision tree that starts from the current state and then charts out various hypothetical scenarios is a type of tree search.
-Within the RL literature there is a specific algorithm called Monte Carlo Tree Search or MCTS that has been popularized as a result of the [AlphaZero](https://arxiv.org/abs/1712.01815) family of game playing models from DeepMind.
-In games such as chess or Go there can potentially be thousands of possible actions that can be taken from each state of the game board, and as a result MCTS uses a measure of how 'good' a state is in terms of rewards or value that will acrrue over timw. Hence the choice of action boils down to choosing the action that results in a state with a higher value function.
+$$ y_{n+1}=y'. $$
 
-It is unlikely that organisms do an explicit value function calculation when trying to choose between states, however they do have some idea of whether taking a particular action will result success of their longer term goal. This sort of daily planning that we do in our lives is considerably simpler than the sophisticated MCTS type tree searches used in Alpha Zero. Morever we have the addiitonal advantage of knowledge accumulated during the course of our lives that we bring to bear in figuring out what action to take.
+This state corresponds to a local minimum of the energy landscape
 
-This discussion shows the centrality of the conditional distribution $p(x_{n+1}|x_n,u_{n+1})$, or the prediction model, to the RL framework. 
-If the agent learns this world model and captures its within its neural network, then it has the capability to do these rollouts in its mental space without actually taking any action in the real world.
-Both the ETPC and DEPP frameworks allow the agent to train its prediction model by making use of the ground truth data collected during the course of the perception process. Once the model has been trained it can be deployed in open-loop fashion to do planning.
+$$ E_W(y;y_n,u_{n+1},s_n). $$
 
-![](https://subirvarma.github.io/GeneralCognitics/images/stat80.png) 
+When new sensory observations $s_{n+1}$ arrive and the organism selects its next action $u_{n+2}$, the effective energy landscape changes to
 
-Figure 14: Integration of Planning and Acting: Agent used its internal model to take better actions 
+$$ E_W(y;y',u_{n+2},s_{n+1}). $$
 
-There is another framework called Model Predictive Control or MPC that can be used to do planning. In this case, rather than planning a whole sequence of actions and then following it up with implementing them, the agent goes ahead and carries out the first action in the planned sequence. This results in a change in the environemnt, and this new information is then incorporated into the agent state. If it ends up in an undesirable state then it backtracks to the previous state and chooses some other action. Hence as the agent takes actions and encounters new states, it constantly modifies its plans and its world model by taking the new information into account. MPC is illustrated in the above figure, which shows an agent using tree search to plan out a sequence of actions, followed by execution of the first action in the sequence.
+The previous perceptual state $y'$ is no longer, in general, an equilibrium of the new landscape. The system therefore evolves through stochastic energy minimization until it reaches a new low-energy state,
 
-## Implications for the Micro-Architecture of EBM Models
+$$ y_{n+2}=y'', $$
 
-![](https://subirvarma.github.io/GeneralCognitics/images/stat95.png) 
+which becomes the organism's next percept.
 
-Figure 18: Variation of energy functions depending on conditioning
+![](https://subirvarma.github.io/GeneralCognitics/images/stat125.png)
 
-EBM models are based on learning an energy function $E_W(x_1,...,x_N)$ for a system of $N$ nodes. Can we get any insight into the inter-connection micro-architecture associated with this energy function?
-Some insight into the problem can be obtained by looking at the development of Hopfield Networks. As described in [Part 2](https://subirvarma.github.io/GeneralCognitics/2025/11/24/statmech2.html), Hopfield networks were designed to serve as associative memories rather than for capturing the distribution of a training dataset as in Boltzmann machines. However they work using similar principles of minimizing energy functions, so their design is relevant here. The initial design for the Hopfield network involved pairwise interactions between nodes in a fully connected spin glass type network, and is shown on the left hand side of the above figure. This design was biologically plausible since neuron interactions in the brain are known to be of the two-node type.
-However later [Hopfield and Krotov](https://arxiv.org/pdf/2008.06996) came up with a design that was able to store many more memory patterns, that this was done by changing the energy function from the simple two node type to a non-linear function of the node and link weights, as shown on the right hand side. They tried to express the new architecture using inter-node interactions, and discovered that the non-linear nature of the energy function resulted in a design that involved multiple nodes interacting with each other, as shown on the right hand side and this ruled out this system as a model for the brain. 
+**Figure 9:** Evolution of the effective energy landscape as sensory observations and planned actions change through time.
 
-With our EBM/diffusion models we are in a similar situation as the new Hopfield network, since clearly the complex energy functions that emerge from the training process involve interactions between a large number of nodes if laid out in the form of an inter-connection diagram. However Hopfield and Krotov showed that a modified network consisting of a mixture of visible and hidden nodes could be found such that the energy function for the visible part coincided with a complex non-linear function. Moreover, all connections between nodes in this network were of the two-node type, which made it biologically plausible. The power of incorporating hidden nodes into the model also lay behind the power of the Boltzmann machine, as was discovered by Hinton more than a decade earlier. Boltzmann machines also featured hidden nodes, and Hinton et.al. showed that this resulted in an increase in the number of possible data distributions that the visible nodes could represent.
+Each new sensory observation and planned action therefore modifies the energy landscape governing perception. The current perceptual state becomes energetically unstable, triggering interactions that drive the system toward a new equilibrium. In DEPP, perception is interpreted as this continual process of stochastic relaxation over a changing energy landscape.
 
-![](https://subirvarma.github.io/GeneralCognitics/images/stat96.png) 
+### DEPP as an Effective Theory
 
-Figure 19: Variation of energy functions depending on conditioning
+The principal conceptual difference between LEPP and DEPP is not the learning algorithm but the level of scientific description.
 
-Based on this insight, a way to make EBM models that are based on artificial neural networks biologically plausible is by creating an equivalent inter-connection pattern between nodes, which has both visible and hidden nodes and all interactions are of the two node type, such that the energy function of the visible nodes is the same as given by the EBM model. 
-This results in a design of the type shown in the above figure, in which the system has a number of hidden nodes interacting with the visiblenodes. The problem of converting an energy function described by a transformer or a CNN into the equivalent interconenction topology featuring only two node interactions is currently an open one.
-This type of architecture is compatible with what we know of the brain's connectome, since the visible neurons are where conscious processing is done, while a lot of processing happens in hidden neurons to which we don't have any conscious access to,
+LEPP explicitly factorizes perception into three computational stages:
 
-## Appendix A
+- inference of latent causes,
+- temporal prediction of latent states,
+- generation of perceptual experience.
 
-# Equivalence between Models
+DEPP instead absorbs this entire factorization into a single effective energy function defined directly over perceptual states.
 
-One of the mysteries in AI is the ability of auto regressive models such as LLMs to mimic the brain. In order to gain some insight into this problem, we will show that the following three classes of models can all be regarded as EBMs:
+| **LEPP** | **DEPP** |
+|-----------|----------|
+| Explicit latent-state representation | No explicit latent-state representation |
+| Separate inference and prediction modules | Unified energy landscape |
+| Two energy functions ($E_{PC}$ and $E_W$) | Single effective energy function |
+| Decoder required | Decoder unnecessary |
+| Latent causes represented explicitly | Latent causes implicit within the learned energy landscape |
 
-1. EBM Models that operate using latent representations. The ETPC planning model presented in the previous section belongs to this class.
-2. EBM models that operate at the pixel level. such as the DEPP model.
-3. EBM models that operate at the pixel level, and do generation auto regressively one pixel at a time. LLMs are a special case of thus types  model in which the output corresponds to words rather than pixels.
+This does not imply that latent causes are absent. Rather, DEPP proposes that they need not appear explicitly in the effective theory. Their influence is incorporated into the learned energy landscape, which captures the observable dynamics of perception directly.
 
-Both type 1 and type 2 models work using an explicit energy function, while it can be shown that type 3 models can also be regarded as EBMs, but utilizing a different type of sampling methodology.
-Since the brain can be modeled using type 1 (ETPC) or type 2 (DEPP) models, this establishes a connection between the operation of the brain and auto regressive models. This is particularly important for the case of language generation, since LLMs are often portrayed as 'sochastic parrots'. However if they are effectively EBM models, then it follows that they have an internal equivalent of a preeiction module that operates at the level of cognitive thoughts (as in type 1 models such as ETPC), while auto regression is used in the generative part of the model.
+Learning proceeds in essentially the same manner as in the LEPP prediction module. After each prediction, the observed perceptual transition
 
-![](https://subirvarma.github.io/GeneralCognitics/images/stat120.png) 
+$$ (y_n,s_n,u_{n+1},y_{n+1}) $$
 
-Figure 30: Equivalence between a diffusion/EBM based Temporal Predictive Coding and Predictive Processing
+provides a training example for refining the energy function through maximum-likelihood estimation. If the microscopic interaction graph were explicitly known, this learning process would reduce to local Hebbian-style update rules. Since the connectome remains largely unknown, however, the energy landscape is instead approximated using a neural-network function approximator trained using modern energy-based learning algorithms such as Diffusion Recovery Likelihood (DRL).
 
-EBM models of types 1,2 and 3 are illustrated in the above figure (for the simpler case when they are operating in the planning mode). The prediction module in a type 1 model is in latent space, and there is a separate generation module, and this corresponds to the ETPC model. 
-The prediction and generation modules are combined in the DEPP model, and this shown in the middle figure. Both the ETPC and DEPP models do generation an image at atime. 
-The auto regressive model in bottom figure can be considered to be a special case of the DEPP model, which does generation one pixel at a time.
-It turns out that this system works perfectly well and is able to produce perfectly good images. In fact [Imagen-1](https://cdn.openai.com/papers/Generative_Pretraining_from_Pixels_V2.pdf) from OpenAI, which was one of the first widely available image generators, worked in precisely this fashion.
+### Levels of Scientific Description
 
-Recall that the pixels in an image are distributed according to the Boltzmann distribution (at points where the probability is maximized or equivalently the energy is minimized). In the DEPP model for example the probability distribution is given by
+The distinction between LEPP and DEPP closely parallels the distinction between statistical mechanics and thermodynamics.
 
-$$ p_W(y_{n+1}=y|y_n) = {e^{-E_W(y,y_n})}\over {Z}} $$
- 
-For the case when the model generates images one pixel at time, the probability distribution is given by
+LEPP seeks to explain perceptual dynamics by explicitly modeling latent internal variables whose interactions give rise to perception.
 
-$$ p_W(y_{n+1}^{k+1}=y|y_n, y_{n+1}^1,...,y_{n+1}^k) = {e^{-E_W( y,y_n,y_{n+1}^1,...,y_{n+1}^k)}\over {Z}} $$
+DEPP instead models the observable evolution of perceptual states themselves through an effective energy landscape.
 
-where the notation $y^k_n$ denotes the $k^{th}$ pixel in the $n^{th}$ image.
-Auto regressive systems generate pixels by finding the (discrete) pixel value $y$ that maximizes this probability, and this is equivalent to finding $y$ that minimizes the energy $E_W$.
-But note that finding the per-pixel individual maximum probability values and putting the whole image together as $(y_1^{max},...,y_N^{max})$ is not the same as finding the point $(y_1,...,y_N)^{max}$ at which the joint probability $p(y_1,...,y_N)$ is maximized for the image as a whole. Auto regressive model get around this problem by techniques such as beam search. This works by keeping track two or more possible minima values as the generation progresses, and then making the decision which is the best optimum point by computing their joint probabilities.
+Neither description necessarily invalidates the other. Rather, they address different scientific questions.
 
-Hence (B) and (C) models can both be regarded as EBMs, but using different ways of minimizing their energy functions:
+LEPP asks:
 
-- The (B) model finds the minimum energy value by doing a joint minimization over all the nodes using the Langevin sampling method. During this, all the nodes interact with one another and continue to change their values until the minimum is reached.
-- The pixel by pixel model on the other hand samples at a single node a time, while assuming that the values of the already sampled nodes are fixed at their minimum values. Hence once the minimuum for a node is computed, it is fixed at that value and the minimum of the next node is computed next. 
+> *How are latent causes inferred and propagated through time?*
 
-Hence the Langevin sampling based energy minimization descends down the energy landscape until it gets to a minimum, while the pixel by pixel assumes that system is already at a minimum  energy point and then proceeds to find the pixel values auto regressively one at a time. But they work by using the principle of energy minimization.
+DEPP asks:
 
-If we follows the chain of equivalences, then it follows that an auto-regressive pixel by pixel generation is a perfectly good model for the brain as far as generating images (or perception) is concerned.
-This supports my thesis stated at the start of this article, that modern neural networkds such as the transformer don't model the neural circuitry of the brain, instead they are excellent models for the energy function of the brain. Any good function approximator will serve this function, and even though transformers are the best approximators we know of today, better ones will be found in the future.
+> *What effective dynamical law governs the evolution of perceptual states?*
 
-This discussion has been in the context of image generation or perception, what about language generation?  This is discussed in the next section.
+This distinction reflects the central theme developed throughout the paper. Just as thermodynamics successfully predicts macroscopic physical behavior without explicitly modeling every molecular interaction, DEPP proposes that the observable dynamics of perception may admit an effective description that does not require an explicit model of either the brain's connectome or its latent-state representations.
 
-![](https://subirvarma.github.io/GeneralCognitics/images/stat112.png) 
+From this perspective, latent-state models and direct energy-based models should not necessarily be viewed as competing theories. Rather, they represent complementary descriptions of cognition at different levels of abstraction.
 
-Figure 1: Equivalent models for sensory perception in the brain
+## Planning as Open-Loop Prediction
 
-- Part (a) of figure 1 shows the Predictive Processing type model, which uses the three operations of inference, prediction and generation, and these three modules can be modeled using EBMs.
-- Part (b) of the figure another system in which the internal latent state is not explicitly modeled, instead the model converts input pixels directly into output pixels, while also making use of previous predictions. This system can be modeled by a single EBM module which implicitly handles all the three operations of inference, prediction and generation in a way that is not visible externally. From the input-output point of view, models (a) and (b) are equivalent.
-- The EBM in Model (b) use Langevin sampling to do the energy minimization, and this results in a parallel prediction/generation of all pixels. However it turns out that model (b) can also be implemented by doing auto regressive pixel-by-pixel generation and this is shown in part (c). We will show that auto regressive generation also effectively leads to an output whose energy lies at a minimum, so it can also be regarded as an EBM model which is equivalent to model (b).
+The prediction modules developed in the LEPP and DEPP architectures were introduced as mechanisms for predicting the immediate future during perception. Their significance, however, extends far beyond perceptual inference. Once a predictive model of the world has been learned, exactly the same model can be used to simulate hypothetical future scenarios without requiring new sensory input. This process constitutes the basis of planning.
 
-If we follow the chain of models from (a) to (b) to (c), it follows that process of perception in the brain can be modeled using auto-regressive models. However the details of pixel-by-pixel generation in model (c) is very different than the full scale inference/prediction/generation pipeline in model (a). Biological brains probably implement these operations in a way that is modeled in (a), while we have discovered an equivalent way of doing so by using auto regressive transformer models. 
-However we should not be looking for transformer equivalents in the brain. If the correspondence between models (a), (b) and (c) holds, then it follows that the transformer is equivalent to a system of interacting nodes working according to the principle of energy minimization, then this problem becomes moot, and the main purpose of this article is to show that this is indeed the case.
+During normal perception the prediction module operates in **closed loop**. Each prediction is immediately compared with incoming sensory observations, and the resulting prediction error is used to refine both the current perceptual state and the parameters of the prediction model. Through continual interaction with the environment, the model gradually learns the dynamical laws governing perceptual evolution.
 
-In practice for commercial use, auto regressive models of type (c) work better in some cases, such as in language generation, and I will cover this in the next article. For image generation on the other hand, auto regressive generation is at a significant dis-advantage since the model has to be run hundreds of thousands of time to generate a single image, so diffusion models of types (a) or (b) are used instead.
+Planning differs only in how this learned model is used. Instead of receiving continual sensory feedback, the prediction module operates **open loop**, repeatedly generating hypothetical future states conditioned on proposed actions. The resulting sequence of predicted perceptual states allows the organism to evaluate possible courses of action before interacting with the external world.
 
-## Language Generation
+![](https://subirvarma.github.io/GeneralCognitics/images/stat118.png)
 
-Another activity carried out by the brain is language understanding and generation. LLMs that do this are the first AI models that leapt from the lab to the outside world and are currently more or less driving investment activity in the world economy. LLMs work by using a transformer model to generate text on a word-by-word basis, based on their initial prompt. Their output shows human like intelligence and it has been a subject of much speculation whether LLMs are 'stochastic parrots' with no real understanding of the text they are generating, or is their something deeper in their operation. In this section I will tie language generation using LLMs to the type of diffusion/EBM systems that we ecountered for perception which involve inference, prediction and finally generation. If the two types are systems are equivalent, then this provides an explanation for why LLMs work so well, since it implies that LLMs are not just doing word by word generation, but implicitly under the covers they have built up an inference and prediction modules and hence have a good understanding of the text being generated. At a deeper level both types of systems work by iteratively finding the minimum point in energy space for a collection nodes. Language models based on diffusion/EBMS do so by using Langevin sampling, while LLMs work by optimizing the energy of a single node at a time.
+**Figure 10:** Planning in the LEPP framework. During perception the prediction module operates in closed loop using continual sensory feedback. During planning the same prediction module is run open loop, generating hypothetical future trajectories conditioned on candidate actions.
 
-*This field is still in its research phase, though there is a company called [Inception labs](https://www.inceptionlabs.ai/) that was recently founded to commercialize diffusion based LLMs. 
-If successful, diffusion LLMs will have several advantages over the traditional autoregressive LLMs. The latter generate one word at a time which limits their speed of generation and also increases energy consumption. 
-EBM based LLMs on the other hand are able to generate multiple words or even sentences in each step which can speed up generation and at a lower energy costs. This solves another problem that autoregressive models have, which is that a word generated cannot be erased.*
+Within the LEPP architecture, planning begins from the currently inferred latent state $z_n$. Given a candidate action $u_{n+1}$, the prediction module estimates the next latent state
 
-![](https://subirvarma.github.io/GeneralCognitics/images/stat110.png) 
+$$ x_{n+1}\sim p(x_{n+1}|z_n,u_{n+1}). $$
 
-Figure 32: Model for Language generation in the brain using a diffusion model
+The predicted latent state is then converted into the corresponding percept through the generative model. This predicted percept becomes the starting point for the next prediction, allowing the system to simulate an entire sequence of hypothetical future experiences without requiring additional sensory observations.
 
-How can diffusion based EBMs be used to generate language?
-The above figure shows a block diagram for a diffusion based LLM. I am hypothesizing that language is distinct from thought, i.e., animals or even even young children who haven't learnt to speak, have thoughts, and humans use language to convert these thoughts into a form that can be communicated to others. As shown, thoughts serve as a latent state for the model and
-the model itself has the same three basic functions that were part of the perception model, i.e.
+The same principle applies to DEPP.
 
-- An inference module to convert the string of words into a latent vector or thought.
-- A prediction module that combines the new information with a pre-existing though state from the previous instant, and predicts a new thought state.
-- A generation module that converts the new thought state into words.
+![](https://subirvarma.github.io/GeneralCognitics/images/stat128.png)
 
-Recall that for vision we had the Predictive Coding model for inference and generation operations which were biologically plausible. However no such biologically plausible model exists for the corresponding operations in the langauge model. This is an open reserach problem and some of the recent papers in this area include the [LD4LG](https://arxiv.org/abs/2212.09462) model and the [TextLDM](https://arxiv.org/html/2605.07748v1) model. These models use ML encoder decoder designs for inference and generation, but unfortunately these designs, like VAE encoder-decoder, are not biologically plausible. Hence a biologically plausible encoder-decoder module for generating latent thought vectors for language is an open problem for now. But for the purposes of this article we will assume that such a module will eventually be found and we will use ML based encoder-decoders such as the one proposed in LD4LG which do the same functions.
+**Figure 11:** Planning in the DEPP framework.
 
-Once the inference or encoder module has produced a thought vector, this is then fed into the prediction module to predict the next thought. The prediction module combines the new though with the existing thought state to generate the next thought.
-This operation can very well be modeled using a diffusion/EBM of the type we saw for vision. If we denote the inferred thought vector at the $n^{th}$ step as $u_n$, and if the sequence $z_n$ represents the thought states, then the prediction operation boils down to finding the vector $z_{n+1}$ at which the conditional probability $p(z|z_n,u_n)$ is maximized. Using the Boltzmann distribution this equivalent to
-finding $z$ that minimizes the energy function $E_{\theta}(z;z_n,u_n)$ and this can be done with Langevin sampling in diffusion models.
-The prediction operation for language is similar to the one for perception, since both are based on the principle of energy minimization: The set of all possible thought predictions correspond to minima of its energy function $E_{\theta}$ and and language works by choosing a specific minima $z_{n+1}$ as a function of the information $u_n$ coming into the brain ans also the previous state $z_n$.
+Because DEPP predicts perceptual states directly, the prediction module simultaneously performs both prediction and percept generation. Starting from the current perceptual state, successive applications of the learned energy model generate hypothetical future perceptual trajectories conditioned on candidate actions. In this sense, the learned energy landscape functions as a **world model**, allowing the organism to mentally simulate future interactions with its environment.
 
-Once we have a new though state $z_{n+1}$, the generator or decoder module converts back into a sequence of words. In the LD4LG model the generator was implemented using a tradtional transformer architecture. The reader might wonder why the model goes through the trouble of doing this three stage operation if at the end it still relies on the transformer to generate the final output. This goes back to the open problem of discovering a biologically plausible generation module. What this model makes explicit is the important role played by the prediction module and internal thought states in language generation. As we will see later in this section, it is likely that transformer based LLMs also do all of these three operations of inference, prediction and generation, but implicitly in a way that is not visible externally. Some evidence for this was actually presented by the OpenAI team that worked on transformer based image generation (see the paper [Generative pre-traning from pixels](https://cdn.openai.com/papers/Generative_Pretraining_from_Pixels_V2.pdf)). Since the diffusion model explicitly separates the prediction part from the other two parts, it provides us with insights into how modern LLMs work.
+The principal difference between perception and planning is therefore not architectural but operational. Both rely on exactly the same learned predictive model. During perception the model continually incorporates sensory observations, while during planning it evolves autonomously to explore possible future trajectories.
 
-LLMs work by auto-regressively generating one word at a time, and it has been a big mystery whether they are just 'stochastic parrots' or do they have a deep understanding the language they are dealing with.
-If we can show that auto-regressive LLMs are equivalent to the diffusion model in the figure above, then it goes some ways in understanding this issue, since the diffusion model does explicitly model the knowledge base of the brain which does the understanding and figures out what to say next. 
+### Choosing Actions
 
-In contrast to the diffusion model for visual perception, this model does not handle the process by which sound waves impinge on the year drum and get converted into brain states. This part is presumably similar to the Predictive Coding model, with the brain using prediction of expected sound as the perception signal that we hear. There is another part of the brain that converts the sound into discrete words, and this is the level at which our model works. The model starts from the input words, infers their meaning and then generates the next set of words.
+Planning requires more than predicting future states; it also requires selecting actions.
 
-But AR LLMs do generation one word at a time, not a thought at a time. How are they equivalent to EBMs which generate at the level of thoughts. 
-We will try to resolve this conundrum by examining the energy landscape of thought EBMs. The bottom of the valleys in this landscape corresponds to coherent thoughts, just as the bottom of the valleys of image EBMs corresponds to coherent images. 
-When we generate language using thought EBMs we are sampling the system until it settles to a valley bottom and that is the output thought. AR LLMs can also be regarded as seeking an energy configuration that is at the bottom of the valley, but they assume that we are already at a valley bottom, and then generate words that correspond to that bottom.
-They are guided to which particular thought to turn into words by several factors: 1) The prefix that we use. This serves as a conditional probability that shapes the landscape. Moreover in LLMs that do reasoning, the prefix is augmented with already generated words, which changes the energy landscape while the generation is going on. 2) post training based on RL which guides the particular energy bottom that the LLM settles into. Since in general, given a prefix, there are several minima that can be chosen. Schemes such as RLHF guide the generation to a minima that satisfies properties that humans find 
-more acceptable.
+One widely studied approach is **Reinforcement Learning (RL)**, in which the objective is to choose the sequence of actions that maximizes expected cumulative reward. Within this framework, the learned prediction model serves as a world model that allows the agent to evaluate hypothetical future trajectories before committing to an action. Modern model-based reinforcement learning systems make extensive use of this principle.
 
-When we speak we typically don’t generate words one at a time. We have a thought that we then try to express in language and
-EBM based LLMs are closer to this way of operating. This shifts the focus to thinking of EBM based LLMs as thought generators, with language only serving as a way those thoughts are communicated to the outside rites. This also gets around the critique that is leveled at auto regressive LLMs that are like stochastic parrots since they only think one word at a time. 
+An alternative formulation is provided by **Active Inference**, developed by Karl Friston. Rather than maximizing reward, Active Inference proposes that organisms choose actions that minimize expected variational free energy. Although the optimization objective differs from reinforcement learning, both frameworks rely on the existence of an internal predictive model capable of simulating future trajectories.
 
-Hence we can regard thoughts as the fundamental unit just as images are a fundamental unit. Just as a succession of images results in a video scenario, a succession of thoughts results in an argument. This leads the way to models that are able to generate thoughts in an auto regressive manner, with one thought following the other. 
-We will see that the EBM framework that we developed for generating video can also be used to generate a succession of thoughts auto regressively. 
-We can choose the thoughts to lead to some objective and this is the basis of human endeavors such as math, science or even writing or debating  in general. 
-Once again RL can be applied to find the optimal series of thoughts and this is indeed how the latest generation of AR LLMs have achieved their level of intelligence at tasks such as math, game playing and code generation.
+From the perspective developed in this paper, these approaches differ primarily in the objective used to evaluate predicted futures rather than in the mechanism used to generate them. In both cases the essential computational requirement is the same: a learned model capable of predicting how perceptual states evolve under different actions.
 
-![](https://subirvarma.github.io/GeneralCognitics/images/stat108.png) 
+### Planning as a Consequence of Predictive Processing
 
-Figure 33: Equivalence between diffusion language models using continuous latent states and those that generate words without using latent states
+The discussion above suggests that planning is not an independent cognitive process but a natural extension of predictive processing itself.
 
-In the case of perception we noted the equivalence between diffusion/EBM models that use latent representations and those that work without.
-Exactly the same distinction exists in language models as well. The first model that I presented used latent though states, but there is an equivalent diffusion model that works directly from input word prefix to output words, without any intervening latent states. This model is illustrated in part (b) of the above figure: The set of words $y_{n+1}$ are generated based on the history of previous generations $y_{\le n}$, and a new word prefix $x_n$ that came in at this step. These models are referred to as Discrete Diffusion Language Models, and one of the first such model was [D3PM](https://arxiv.org/abs/2107.03006) from Google Deepmind.
+During perception, the prediction module is continually trained using sensory feedback, gradually learning the effective dynamical laws governing the organism's environment. Once this model has been acquired, it can be run in open loop to simulate hypothetical futures, evaluate alternative actions, and guide behavior.
 
-![](https://subirvarma.github.io/GeneralCognitics/images/stat109.png) 
+Viewed in this way, perception and planning become two modes of operation of the same underlying predictive architecture. Perception uses the world model to estimate the present in the presence of continual sensory feedback. Planning uses the same world model to explore possible futures in the absence of sensory input.
 
-Figure 34: Equivalence between the discrete diffusion based language model and auto regressive language models (LLMs)
+This interpretation further reinforces the central theme of the paper. The prediction modules developed in LEPP and DEPP should not be viewed merely as mechanisms for predicting the next perceptual state. They constitute learned **effective models of environmental dynamics**, capable of supporting both perception and planning without requiring an explicit model of the underlying neuronal circuitry.
 
-The image EBM and the thought EBM are connected. For instance we can generate an image that corresponds to a description expressed as a thought. When we read a book or listen to someone speak, the stream of thoughts can lead to a succession of images in our head. Conversely we can generate a thought that corresponds to an image, or to a succession of images, which is something that we humans do all the time when we describe a scene in words. We will see how EBMs can be used to replicate these skills. 
-Thoughts can exist independent of language. Hence people who haven’t learn a language, or infants who haven’t learnt how to speak, can still have thoughts that they can use to go about their lives. Presumably this is true for animals too. 
-The fundamental phenomenon that generates both images and thoughts is the neural configuration. In the case of vision, Our consciousness translates this configuration into images that we see, while in the case of language, our consciousness translates the configuration into words. 
+## Autoregressive Models as Effective Theories of Cognition
 
-The question arises: Why are thoughts expressed on a word by word basis by humans, while images are are perceived as a whole, not on a pixel by pixel basis?
-One would think that it would be much more efficient t grasp the essence of a thought by grasping it as a symbol rather than as a set of words.
-This idea actually has been pursued by science fiction writers: For example the aliens in the move *Arrival* use a language in whch thoughts are expressed as symbols.
-This obvoiusly has a lot of benefits, among them increasing the speed of communication, and graspinga though with both past and future aspects of it simultaneously vs hearng it unfurl
-on a word by word basis. It is not inconcievable that as human evolution progresses, our species will also develop some such language.
+The discussion so far has focused on diffusion models because they provide a natural mechanism for stochastic optimization over learned energy landscapes. Modern generative AI, however, is dominated by a second family of models based on **autoregressive generation**, most notably transformers and Large Language Models (LLMs). Although these systems are usually formulated probabilistically rather than energetically, they admit a closely related interpretation.
 
-Video prediction is also critical to building world models. As the name implies these are internal models of how the world evolves with time, and also how to raects to various events taking place,
-and this includes the actions that we are taking. To understand this we will use the reinforcement learning framework shown in figure 2.
+Autoregressive models are based on the chain rule of probability,
 
-## Appendix A: The Active Inference Framework
+$$ p_W(y^1,\ldots,y^N|x,u,s)=\prod_{k=1}^{N}p_W(y^k|y^1,\ldots,y^{k-1},x,u,s). $$
 
-The best known model in neuroscience that seeks to model the brain's internal states is the [Active Inference](https://www.amazon.com/Active-Inference-Energy-Principle-Behavior/dp/0262553996) model and the
-name most closely associated with the this model is that of the prominent neuroscientist Karl Friston.
-It is also proposes that our perceptions are internally generated, and it seeks to model the distribution of the hidden states in the brain that generates this perception by using Bayes Rule.
+Rather than modeling the complete joint distribution directly, the model predicts one output token at a time by estimating the conditional probability of the next token given all previous ones. Generation therefore proceeds sequentially, sampling
 
-![](https://subirvarma.github.io/GeneralCognitics/images/stat75.png) 
+$$ y^1 \rightarrow y^2 \rightarrow \cdots \rightarrow y^N $$
 
-Figure 7: Inferring a Model for the External World Using Bayesian Statistics
+until the complete sequence has been produced.
 
-Figure 2 shows the mathematical framework used in Active Inference theory. The vector $x^**$ represents the state of the external world, to which the organism does not have direct access. The components of vector $y$ are the sensory neurons in the organism's cortex to which the organism does have access. Hence the external world has an unknown generative model that results in the state $x^*$ and it produce sensation $y$ in the organism. The organism creates an inference about the causes of sensation $y$, and this is summarized by the vector $x$ on the left and is probabilistically captured by the conditional distribution $p(x|y)$. Assuming an inference $x$, also called the hidden state or belief state, the organism internally generates a perception $y$ and this is captured by the conditional distribution $p(y|x)$. If the generated $y$ is different than the original sensation that came in through the senses, then the organism changes its inference $x$ so that the two match. Mathematically this by the accomplished by the minimization of a probabilistic quantity, called the variational free energy or VFE.
+Although autoregressive models are usually expressed in terms of probabilities, every probability distribution defines an equivalent energy through
 
-Lets now get into the nuts and bolts of the Active Inference framework.
-This system can be analyzed using Bayesian statistics as follows: We will refer to the probability $p(x)$ as the prior (or existing) model for internal state of the brain. If the organism is subjected to sensations $y$, then this results in a change in its belief $x$ about what caused the sensation, and is given by the posterior probability $p(x|y)$. The objective of the Bayes Rule is to estimate $p(x|y)$, and this is given by 
+$$ E_W(y^k)=-\log p_W(y^k|y^1,\ldots,y^{k-1},x,u,s)+\text{constant}. $$
 
-$$  p(x|y) = {p(y|x)p(x)\over{p(y)}}   $$
+Consequently,
 
-The problem in applying this formula is that $p(y)$ in general is a highly complex distribution and not known in advance. Fortunately there exists a variational approach to solving this problem which works by reducing the problem to that of minimization, and works as follows: 
+$$ p_W(y^k|y^1,\ldots,y^{k-1},x,u,s)=\frac{\exp[-E_W(y^k)]}{Z_W}, $$
 
-Assume that we can approximate $p(x|y)$ by the distribution $Q_{\theta}(x|y)$, where $\theta$ are the parameters of a model.
-Define the Variational Free Energy (VFE) for the system as
+where $Z_W$ is the corresponding partition function.
 
-$$ VFE(Q,y) = E_{Q_{\theta}(x|y)} \log {Q_{\theta}(x|y)\over{p(x,y)}} $$
+From this perspective, autoregressive generation may be interpreted as a sequence of local energy-minimization decisions. At each step the model chooses a token that lies in a region of relatively low energy conditioned on the previously generated sequence. Unlike diffusion models, which optimize all variables simultaneously through stochastic relaxation, autoregressive models perform this optimization incrementally, one token at a time.
 
-This can be written as
+The two approaches therefore represent different computational strategies for sampling from complex probability distributions rather than fundamentally different probabilistic models.
 
-$$  VFE(Q,y) = E_{Q_{\theta}(x|y)}\log Q_{\theta}(x|y) - E_{Q_{\theta}(x|y)}\log p(x|y) - E_{Q_{\theta}(x|y)} \log p(y) $$
+### Implications for Computational Neuroscience
 
-$$      = E_{Q_{\theta}(x|y)}(\log Q_{\theta}(x|y) - \log p(x|y)) - \log p(y) $$
+This interpretation suggests a different way of viewing the remarkable success of transformer-based language models.
 
-$$      = D_{KL}(Q_{\theta}(x|y)||p(x|y)) - \log p(y) $$
+Their success need not imply that transformer architectures resemble cortical circuits or that attention mechanisms correspond directly to biological neural computations. Instead, transformers may be regarded as highly expressive parameterizations of effective cognitive dynamics. Their parameters encode statistical regularities governing linguistic behavior rather than explicit models of neuronal connectivity.
 
-Here $D_{KL}(Q_{\theta}(x|y)||p(x|y))$ is the Kullback-Liebler divergence between the two distributions, and it functions as measure of how far apart they are.
-Note that $Q_{\theta}(x|y)$ is the organism's belief about the cause for sensation $y$, while $p(x|y)$ is the exact value. If the organism minimizes the VFE, then
-this is the same as minimizing the KL divergence and this results in the organism's belief $x$ being closer to the state of the external world that generated $y$. Hence by minimizing its VFE, the organism is inferring a best estimate for the state of the environment $x^{*}$, while knowing only the sensory data $y$. Once it has an estimate for $x$, it generates a perception $y$ using the distribution $p(y|x)$.
+This viewpoint is closely aligned with the effective-theory perspective developed throughout this paper. Statistical mechanics successfully predicts the behavior of gases, liquids, and solids without explicitly modeling every molecular interaction. Likewise, autoregressive language models successfully reproduce many statistical regularities of human language without explicitly modeling the brain's connectome.
 
-Karl Friston pointed out that there are two ways to minimize the VFE:
+If language is viewed as one observable projection of an underlying cognitive process, then training a language model becomes an inverse problem. Rather than observing internal cognitive states directly, the model observes a vast collection of linguistic projections generated by those states. By learning the statistical structure of these observable outputs, the model is able to construct an effective representation sufficient to predict future linguistic behavior.
 
-- Assuming that the external environment is fixed, i.e., the sensory data $y$ is also fixed, then the VFE can be reduced by getting hold of a better internal model $Q_{\theta}(x|y)$ of the environment.
-- If the external environment is allowed to change, then the organism can reduce its VFE by changing the environment so that $-\log p(y)$ is reduced. The organism does so by taking actions and this accounts for the name **Active Inference**.
+This perspective offers one possible explanation for the surprising capabilities of modern Large Language Models. Although they have no direct access to human thoughts or perceptual representations, they are exposed to an enormous number of observable consequences of those hidden cognitive processes. With sufficiently diverse data and sufficiently expressive function approximators, much of the large-scale structure governing human linguistic behavior can be recovered indirectly.
 
-In the first case the organism changes its internal belief distribution $Q_{\theta}(x|y)$ to reduce the VFE, while in the second case the organism changes its model for the environment $p(y)$ (which changes the perception signals $y$) to reduce the VFE. 
+The resulting representation should therefore not be interpreted as a mechanistic replica of human cognition. Rather, it is an effective theory learned entirely from observable behavior. Like thermodynamics, it does not reveal the microscopic implementation of the system it describes. Instead, it captures those large-scale dynamical regularities that are necessary for accurate prediction.
 
-![](https://subirvarma.github.io/GeneralCognitics/images/stat91.png) 
+### Recovering Hidden Structure from Observable Behavior
 
-Figure 8: Inferring a Model for the External World Using Bayesian Statistics
+The success of modern generative AI suggests a broader methodological principle. Complex systems often reveal far more information about their internal organization through their observable behavior than might initially be expected.
 
-The presence of the hidden state $x$ differentiates the Active Inference framework from the DIrect Predictive Processing or DPP framework described earlier. 
-DPP is able to get by without using hidden states, since it models the time evolution of the perception neurons directly by using the distribution $p_{\theta}(y_{n+1}|y_{\le n},s_n)$, without modeling the internal states that drive this evolution. 
-The modern approach to Active Inference on the other hand uses several models:
+Many problems in physics involve recovering hidden structure from indirect observations. Tomographic reconstruction, inverse scattering, and system identification all infer unobservable internal properties from measurements made at the system's boundaries. Training a generative model may be viewed as a similar inverse problem. Rather than recovering neuronal connectivity directly, the model recovers an effective dynamical law governing the observable behavior produced by that connectivity.
 
-- A model for hidden state inference: $q_{\phi}(x_n|o_{\le n})$
-- A model for the dynamics of the hidden state evolution with time and in reponse to actions: $p_{\theta}(x_{n+1}|x_n,a_{n+1})$
-- A model for generating perceptions from the hidden state: $p_{\psi}(y_n|x_n)$
+From this perspective, the relationship proposed throughout this paper may be summarized as
 
-The first and last of these correspond to the models used in Friston's original framework, while the dynamics model $p_{\theta}$ tells us how the internal belief state evolves with time and in response to actions that the organism is taking. This is equivalent to the world model that was discussed in the prior section. 
+| **Brain** | **Effective Model** |
+|-----------|---------------------|
+| Connectome | Unknown microscopic dynamics |
+| Cognitive dynamics | Effective energy landscape |
+| Speech, text, and behavior | Observable projections |
+| Generative AI model | Learned effective theory |
 
-The perception $y_n$ is a function of the latest state $x_n$, which is in contrast to the DPP model in which it was dependent on the history of $y_{\lt n}$ of prior perceptions. The Active Inference model on the other hand captures the historical dependence by using the state $x_n$ which keeps track of the history.
-The Active Inference model explicitly models the inference and generation process, while the DPP model does so only implicitly.
-From the practical implementation point of view in artificial neural networks, both work perfectly well, so that the choice is governed by computational and implementation simplicity. Since prediction is done done in latent space in the Active Inference model, it requires less computation. 
+The central lesson of modern generative AI is therefore not necessarily that artificial neural networks have discovered the architecture of the brain. Rather, they demonstrate that remarkably accurate models of highly complex systems can be learned directly from observable behavior, without requiring explicit knowledge of the underlying microscopic implementation.
 
-The original Active Inference framework is based on the minimization of a probabilistic quantity, namely the VFE. The question arises if it can be re-cast in the language of EBMs, so that its operation can be understood to be as a result of minimization of the interaction energy between nodes. This is discussed in the following sections, but first we will show how EBMs can be used to model DPP systems.
+Viewed in this way, transformers, diffusion models, and related architectures should be regarded not as competing models of cortical circuitry, but as increasingly powerful parameterizations of effective cognitive dynamics. Their significance lies less in their architectural resemblance to the brain than in their ability to recover the large-scale laws governing perception, language, and thought from observable data alone.
 
-## Appendix B
+Connectome
+      │
+      ▼
+Effective Energy
+      │
+      ▼
+Observable Dynamics
 
-**The Boltzmann Machine**
+## From Effective Energy Functions to Neural Micro-Architecture
 
-![](https://subirvarma.github.io/GeneralCognitics/images/stat32.png) 
+The central thesis of this paper is that modern generative AI models should be interpreted as **effective theories of cognition** rather than mechanistic models of neural circuitry. This naturally raises an interesting question.
 
-Figure 21: Boltzmann machine with hidden nodes
+If a learned energy function provides an accurate effective description of perceptual or cognitive dynamics, does it contain any information about the microscopic neural architecture that generated those dynamics?
 
-The [Boltzmann machine](https://en.wikipedia.org/wiki/Boltzmann_machine) has both visible and hidden nodes as shown in the above figure. Once the model has beeen trained, the hidden nodes serve as a latent representation for the data in the visible nodes. However the process required to do this requires serial node-by-node Gibbs sampling, and the duration of time needed for the network to settle into an equilibrieum state has restricted the size of feasible Boltzmann machines to a few thousand nodes at most. Another problem with the Boltzmann machine is that its node state is restricted to binary values (0 and 1 or +1 and -1), which is a serious limitation when modeling the brain.
+At first sight the answer appears to be negative. One of the central lessons of statistical physics is that many different microscopic systems may exhibit identical macroscopic behavior. Water, liquid helium, and liquid nitrogen possess very different microscopic constituents, yet their large-scale fluid dynamics are described by essentially the same equations. Effective theories therefore do not uniquely determine the microscopic mechanisms that produce them.
 
-**The Helmholtz Machine**
+Nevertheless, effective theories often constrain the class of microscopic systems capable of realizing them. In condensed-matter physics, many different Hamiltonians belong to the same universality class because they produce identical large-scale behavior. Similarly, different neuronal architectures may give rise to equivalent effective energy landscapes even though their microscopic connectivity differs substantially.
 
-![](https://subirvarma.github.io/GeneralCognitics/images/stat97.png) 
+This observation suggests an intriguing research direction. Rather than attempting to recover the brain's connectome uniquely from a learned energy function, it may be possible to characterize the family of neural architectures capable of realizing that energy function.
 
-Figure 22: The Helmholtz Machine
+Some insight into this problem comes from the development of modern Hopfield networks. Classical Hopfield networks employed pairwise interactions between neurons and consequently possessed relatively simple quadratic energy functions. Later work by Hopfield and Krotov demonstrated that much richer energy functions could be constructed by introducing hidden variables, dramatically increasing the representational capacity of the network while retaining biologically plausible pairwise neuronal interactions. The resulting microscopic architecture differed substantially from the original network, yet both implemented energy-minimization dynamics.
 
-In order to overcome the limitations of the Boltzmann machine, [Hinton, Dayan and Neal](https://www.cs.toronto.edu/~fritz/absps/helmholtz.pdf) came up with the Helmholtz machine in 1994 and this launched the current era of auto-encoders. Just like the Boltzmann machine it has visible or feature nodes as well as hidden nodes that can model the latent representation. However unlike the Boltzmann machine, all inter-node connections are uni-directional. Once the network has been trained, it generates latent representations by sending a signal upwards (in the above figure), which passes through one or more layers of nodes, two are shown in the picture. The final layer contains the latent representation. In order to generate new data, we start with a a latent represnetation, and then the signal propagates downwards until it gets to the visible nodes. Since this design does not involve sampling, it can be made much more efficient than the Boltzmann machine. In order to train this system, they replaced maximum likelihood criteria with one based on minimizing the VFE, the math is exactly the same as was described for Friston's Active Inference framework.
-They called the algorithm they came up with to train the system the Wake-Sleep algorithm.
-  
-**The Variational Auto Encoder (VAE)**
+This example illustrates an important general principle. A complicated effective energy function need not imply equally complicated direct interactions between the observable variables. Instead, much of the apparent complexity may be absorbed into hidden variables whose collective interactions generate the effective energy observed at the macroscopic level.
 
-Friston'e work establishes a mathematical framework for the auto-encoder, which is based on minimizing the Variational Free Energy or VFE for the system. There have been several different implementations, among them:
+The same possibility may exist for the energy functions learned by modern generative AI models. A transformer, diffusion model, or other neural-network architecture should not necessarily be interpreted as the microscopic implementation of the computation. Rather, it may represent one member of a much larger family of computational architectures that realize approximately the same effective energy landscape.
 
-![](https://subirvarma.github.io/GeneralCognitics/images/stat98.png) 
+![](https://subirvarma.github.io/GeneralCognitics/images/stat96.png)
 
-Figure 23: The Variation Auto-Encoder (VAE)
+**Figure 18:** Conceptual illustration of one possible realization of a learned effective energy function through a network of visible and hidden units interacting via biologically plausible pairwise connections. The realization is not unique; many different microscopic architectures may produce the same effective energy landscape.
 
-This brings us to the current generation of auto-encoders, and the VAE, which is still state of the art in this area. The VAE uses the same mathematical framework of minimizing the VFE as the Helmholtz machine, however it uses a clever way to use backprop to train the model. This allows the model to scale up and handle inputs consisting of hundreds of thousands of pixels, which has enabled it to serve as a generator for photo-realistic images. The Dreamer V4 model that I mentioned earlier uses a pre-trained VAE to serve as its auto-encoder. The VAE is certainly attractive for generating latent representations for images in machine learning models, however the use of backprop in its training makes it a less likely candidate for how the brain operates. 
-This brings us to the Predictive Coding auto-encoder model, whose operation has been connected to observations in brains, and currently serves as our best model for how the brain does auto-encoding.
-This is described next.
+This viewpoint suggests a new inverse problem for computational neuroscience. Rather than asking whether artificial neural networks resemble cortical circuits, one may instead ask:
 
-![](https://subirvarma.github.io/GeneralCognitics/images/stat90.png) 
+> **Given a learned effective energy function, what classes of microscopic neural architectures are capable of realizing it?**
 
-Figure 20: Illustrating the case in which predictions are done in latent space rather than pixel space. Pixel space to latent space mapping is done using a separate network.
+Unlike the inverse-connectome problem, this question does not seek a unique reconstruction of the brain's circuitry. Instead, it asks what architectural constraints are implied by the observed large-scale dynamics.
 
+At present this problem remains largely unexplored. It lies somewhere between inverse statistical mechanics, realization theory in control systems, and computational neuroscience. Understanding this correspondence may ultimately provide a bridge between effective theories learned by modern AI systems and the biological mechanisms that implement cognition.
 
-## Appendix C: Temporal Predictive Coding
+Whether such a correspondence exists remains an open question. Nevertheless, the effective-theory perspective developed throughout this paper suggests that this may be a more fruitful direction than searching directly for transformer layers, attention mechanisms, or diffusion processes within the brain's anatomical circuitry.
 
-## Models with Inference, Prediction and Generation: Temporal Predictive Coding
+# Conclusions
 
-The Predictive Coding framework takes care of the inference and generation processes,and it does it in a way that is biologically plausible, since these operations can be implemented using only local connections between neurons. However, it does not incorporate temporal prediction, which we saw earlier is an essential ingredient in building a model for the brain. There have been some attempts to add temporal prediction to the model, and a couple of these are the [Temporal Predictive Coding](https://pmc.ncbi.nlm.nih.gov/articles/PMC11008833/pdf/pcbi.1011183.pdf) framework and the work by [Jiang and Rao](https://arxiv.org/pdf/2112.10048). 
+The central question addressed in this paper is how recent advances in generative artificial intelligence should be interpreted within computational neuroscience. Rather than asking whether transformers, diffusion models, or other neural-network architectures resemble the brain's anatomical circuitry, we have argued that these models are more naturally understood as **effective theories of cognition**. Like thermodynamics in physics, their significance lies not in reproducing microscopic mechanisms but in capturing the large-scale dynamical laws governing observable behavior.
 
-![](https://subirvarma.github.io/GeneralCognitics/images/stat100.png) 
+This viewpoint leads naturally to a reformulation of predictive processing within an energy-based framework. We introduced the **Latent Energy-Based Predictive Processing (LEPP)** architecture, which decomposes predictive processing into three computational components: latent-state inference, temporal prediction, and percept generation. The inference module was implemented using predictive coding, while temporal prediction was formulated as stochastic optimization over a learned energy landscape using diffusion-based energy models. Both modules were shown to operate through local energy-minimization dynamics, providing a unified computational interpretation of predictive processing that is more compatible with biological implementation than conventional backpropagation-based learning.
 
-Figure 25: The Temporal Predictive Coding Framework
+Building upon this formulation, we proposed a second model, **Direct Energy-Based Predictive Processing (DEPP)**. Unlike LEPP, DEPP does not explicitly represent latent causes. Instead, it models the observable evolution of perceptual states directly through a learned effective energy landscape. Importantly, DEPP does not deny the existence of latent internal representations. Rather, it asks whether they are required to appear explicitly within an effective computational theory. In this sense, LEPP and DEPP should not be regarded as competing theories, but as descriptions of cognition at different levels of abstraction.
 
-The Temporal Predictive Coding (TPC) framework is shown in the above figure. Recall that in the Predictive Coding model, the latent state of the system was determined solely by how well the generated image matched the sensory signal. In TPC on the other hand, the latent state is determined jointly by the temporal state prediction error and the image generation error. Unlike Predictive Coding, TPC uses only a single stage of the inference/generation pipeline.
-As in Predictive Coding, the model uses simple linear models for both the prediction and generation operations, given by:
+This distinction mirrors the historical relationship between statistical mechanics and thermodynamics. Statistical mechanics explains macroscopic phenomena by modeling microscopic constituents explicitly. Thermodynamics instead characterizes the observable dynamics of macroscopic systems without requiring an explicit representation of their microscopic structure. Likewise, LEPP retains an explicit latent-state representation, whereas DEPP models perceptual dynamics directly through an effective energy function. Both descriptions may be simultaneously valid, depending upon the scientific questions being asked.
 
-$$  x_k = Af(x_{k-1}) + Bu_k +\omega_x  $$
+The effective-theory viewpoint also provides a different perspective on the success of modern generative AI. The remarkable capabilities of diffusion models, transformers, and large language models need not imply that these architectures reproduce the organization of the cerebral cortex. Rather, they suggest that highly expressive function approximators are capable of recovering effective dynamical laws directly from observable behavior. The parameters learned by these models should therefore be interpreted not as models of neuronal circuitry, but as compact representations of the large-scale energy landscapes governing perception, language, and cognition.
 
-$$  y_k = Cf(x_k) + \omega_y $$
+This interpretation has broader implications for computational neuroscience. Much current research seeks direct correspondences between artificial neural-network architectures and biological neural circuits. The perspective developed here suggests an alternative research program. Instead of searching for cortical implementations of transformers, attention mechanisms, or diffusion processes, one may seek the effective dynamical principles that these architectures approximate. Once those principles have been identified, the remaining challenge is to understand the classes of biological mechanisms capable of realizing them.
 
-In the prediction model $x_k$ is the system state at the $k^{th}$ step, $u_k$ is an additional input that influences the next state, such as any action taken and $\omega_x$ is noise distributed accourding $N(0,\Sigma_x)$. Generation of image $y_k$ is done using the second equation with the noise $\omega_y$ distributed as per $N(0,\Sigma_y)$. The system objective is to obtain a good estimate for the state $x_k$, and it does so by minimizing the error function 
+The ideas developed here also suggest several directions for future research. One concerns the relationship between effective energy functions and the microscopic neural architectures capable of implementing them. Another concerns the extent to which cognition, planning, and reasoning can be understood as different modes of operation of a common predictive world model. More generally, the framework proposed here suggests that many questions traditionally formulated in terms of internal representations may admit complementary formulations in terms of effective dynamical laws.
 
-$$ F_k = {1\over 2}(s_k - Cf(x_k))^T \Sigma_y^{-1} (s_k - Cf(x_k)) + {1\over 2}(x_k - Af({\hat x_{k-1}}) - B u_k)\Sigma_x^{-1}(x_k - Af({\hat x_{k-1}}) - B u_k) $$
-
-The first term minimizes the generation error given the sensory signal $s_k$, while the second term minimizes the temporal prediction error. 
-Assume that the best estimate at the $k^{th}$ step is given by ${\hat x_k}$, then the predicted value for the next step is given by ${\hat x_{k+1}} = Af({\hat x_k}) + Bu_{k+1}$ and this serves as the initial value for the prediction. However once the generation error is taken into account, this value is no longer the minimum, and the algorithm iterates a few times using the gradient descent equation
-
-$$  {\hat x_{k+1}} \leftarrow {\hat x_k} - \eta{\partial F_k\over{\partial x_k}} $$
-
-The authors showed that that the gradient descent equation can be implemented using only local connections in a neural network. They also assumed that new sensory data $s_k$ arrives at a lower rate than the time required for the state optmization to settle down to a minimum. The parameters of the matrices A, B and C can also be estmated using gradient descent. Assuming that these matrices are implemented using synaptic strengths which change slowly, while the state variables are mapped to neural firing rates, which change quickly.
-
-The use of diffusion/EBMs in DTPC enables it to generate much more complex latent predictions as compared to the TPC model that uses a simple linear predictor. More complex latent predictions are needed to generate the rich image of the world that we see in front of us. Also unlike the TPC model, the DTPC model allows the use of multiple inference/generation stages which improves the inference/generation quality.
-
-## Appendix D Some Implementation Details for Diffusion/EBM Models
-
-![](https://subirvarma.github.io/GeneralCognitics/images/stat88.png) 
-
-Figure 14: The ViT method of turning an image into a sequence of patches
-
-Various types of artificial neural networks can be used as function approximators for diffusion EBMs and the one that I am going to focus on is called diffusion transformer or DiT. It was proposed by [Peebles and Xie](https://arxiv.org/abs/2212.09748), who later went on to use the system to build the Sora video generating app at OpenAI. Transformers were originally proposed to model sequential data and are commonly used to build LLMs, but later it was discovered that are as good as convolutional neural networks in processing images as well.
-
-The technique used to represent image data in this model goes back to an older model called the vision transformer or [ViT](https://arxiv.org/abs/2010.11929), and is shown in the above figure. The lower part of the figure shows an image with dimensions $l\times l\times c$, which is divided into $p^2$ equal sized patches with dimensions $p^2 c$. These patches are then converted into vectors and fed into the transformer.
-
-![](https://subirvarma.github.io/GeneralCognitics/images/stat87.png) 
-
-Figure 15: Transformer Model for the Energy Function on the left hand side. The three figures on the right illustrate techniques for conditioning the energy computation on other variables.
-
-The above figure shows the DiT, as modified to serve as an approximator for energy functions. As in any transformer, it is composed of multiple identical processing blocks as shown in part (a) of the figure, into which the image is fed after it has been converted into patches. Another input is the optimization stage number $t$, which varies from $T$ down to $0$ as the optimization progresses. The output of the model is the energy function $E(X,t,c)$, which is then differentiated using an automatic differentiator to compute ${\partial E\over{\partial x_i}}$, and this is used in the Langevin equation.
-
-The three figures to the right show different ways in which conditioning can be added to the DiT model. The simplest technique is shown in part (d) of the figure, in this case the conditioning vectors are simply appended to the sequence for the image. The DiT processing block is composed of a self attention module followed by a feedforward module, as is usual in transformers.
-Part (c) shows a popular technique that was actually proposed in the original transformers paper. In this case the conditioning vectors are incorporated into the transformer flow by using a separate cross attention block.
-Part (b) of the figure shows a technique called Adaptive Layer Norm (AdaLN) for doing conditioining. It replaces the standard way of estimating the layer norm parameters $(\gamma,\beta)$ by a modified technique in which they are computed by using a regression on the conditioning vectors.
-
-![](https://subirvarma.github.io/GeneralCognitics/images/stat89.png) 
-
-Figure 16: Attention Mechanisms in Space Time Transformers
-
-Diffusion/EBM models can be designed to generate more than one image frame in a single pass through the model, in other words each pass through the model results in a video clip rather than a single frame. Such a design helps to ensure temporal integrity of the generated video clip, since each image frame directly influences the frame around it. This is in addition to the inter-frame dependency created due to the conditional distribution $(p_{n+1}|y_{\le n}, c)$ which also helps temporal coherence. Image transformer models that take the temporal dependency into account are called [space-time transformers](https://arxiv.org/abs/2001.02908). There are various ways in which the temporal dependency can be implemented, some examples of which are shown in the above figure. The colored rectangles in each row are individual elements of the image latent vector that is fed into the transformer, while a sequence of image frames is captured using the vertical axis.
-The left hand figure shows the usual spatial attention with no temporal attention while the second figure shows only temporal attention with no spatial attention. One popular design is alternating blocks of spatial-only and temporal-only attention blocks in the transformer design.
-
-## Appendix E: Contrasting Diffusion based Predictive Processing (DDPP) and Diffusion based Temporal Predictive Coding (DTPC) Models
-
-![](https://subirvarma.github.io/GeneralCognitics/images/stat115.png) 
-
-Figure 28: The Diffusion based Direct Predictive Processing (DDPP) Framework
-
-The Diffusion based Direct Predictive Processing (DDPP) framework from a few sections earlier is summarized in the figure above. 
-
-Note: The standard nomenclature in this field is somewhat confusing, recall that Predictive Processing is a general framework in neuroscience, while Predictive Coding is a particular algorithm used for inference and generation within the space of latent variable based Predictive Coding models.
-
-There is a single prediction block in DDPP, implemented using a diffusion/EBM, that directly predicts the next sensory perception based on the prior $K$ perceptions as well as action $u_n$ and the latest sensory data $s_n$. The DTPC model on the other hand differs from this in the following respects:
-
-- In DTPC The history of the system is captured using the latent state $x_n$. In contrast, since DDPP does not use latent states, the only way it can capture the historical dependence is by explicitly conditioning the new generation on the past $K$ generations.
-- By avoiding the use of a latent state, the DDPP system is able to avoid the use of explicit inference and generation engines.
-
-Are there any benefits to incorporating a latent state, as in the DTPC model? It enables the model to keep track of the history by using its own internal record keeping, and hence may work better in some cases. However this comes at the cost of having to specify explicit inference and generation modules. 
-Even though DDPP sustem does not have these two modules, however it is implicitly doing these functions internally as alluded to in the above figure. 
-
-Modern generative AI systems use both these types of designs: The DTPC architecture works out to be more efficient from the implementation point of view For the case of image and video generation on digital computers, while for language generation DDPP systems pre-dominate in the form of Large Language Models or LLMs. 
-
-But what about biological systems?
-It is quite likely that they lean towards the DTPC architecture since there is evidence of inference and generation circuits in the brain as pointed out by the Predictive Coding work. Also inference and generation are basic operations that all creatures need, and it is likely that it was implemented first. The prediction module on the other hand varies in sophitication depending upon the animal, and it makes sense for the brain to implement it as a separate module.
-
-## Appendix
-
-It differs from the minimum Variational Free Energy inference made in the VAE model (and the Active Inference framework) in the following respects:
-
-- The VAE model does inference using a single pass of a feed-forward network, whose parameters have been optimized using a training process. The Predictive Coding model does inference in a iterative fashion, where the value of the latents are adjusted over multiple steps until the final prediction is a good match to the observation. This is very much like how an EBM operates since in this case too the nodes in an EBM adjust their values until the energy function is minimized. The predictive coding system uses an error function instead of an energy function, but the idea of multi-step iteration is the same.
-- In Predictive Coding, the network is recurrent. Activity does not simply pass once from input to output. Instead, units keep updating each other until the system reaches a relatively stable state.
-- Unlike the VAE model, all updates in the Predictive Coding model are local in nature, hence more biologically plausible.
-- The VAE model gives a distribution for the latent by minimizing the VFE, while Predictive Coding gives a point estimate for the latent. In practice even for VAE, we usually assume that the distribution is normally distributed, so that the estimate boils down to obtaining the mean and variance.Appendix
-
-![](https://subirvarma.github.io/GeneralCognitics/images/stat105.png) 
-
-Figure 29: Equivalence between a system with complex interconnect toplogy and a diffusion/EBM model
-
-We will start with the equivalence between a system of nodes, such as neurons in the brain, that are directly connected to each other (system A), and diffusion/EBM systems whose inter-connect topology is not known, but whose energy function can be inferred by using the output of system A (system B).
-
-The behavior of the system A is driven by the second law of thermodynamics, i.e., it tries to settle into an equilibrium state with minimum (free) energy (or equivalently maximum entropy), and this process is driven by direct signalling between nodes.
-System B also features a set of nodes whose state is changing in time, but in this case the state changes are driven not by inter-node interactions, but by seeking out states of lower energy, as modeled by the energy function. 
-Essentially system B is mimicing system A by adopting the same energy function, without bothering about the details of how the interconnect topology actually generates the energy function in system A. As long as the energy functions match, the two systems will exhibit the same equilibrium behavior and this is precisely what diffusion/EBM models do. 
-The two energy functions are matched by using the output of system A, in the form of images or text, to train the diffusion/EBM model. The parameters in system A correspond to the interconnect strengths between nodes, while the parameters in system B are the weights of the neural network that is used to model the energy function.
-
-
-
-
-
-
-
-
-
-
+Ultimately, the enduring lesson of modern generative artificial intelligence may be methodological rather than architectural. Complex systems need not always be understood by reconstructing their microscopic mechanisms. Sometimes it is sufficient to discover the effective dynamical laws governing their observable behavior. If this perspective proves fruitful, then the greatest contribution of modern generative AI to neuroscience may not be a new model of the brain's circuitry, but a new way of thinking about cognition itself.
 
 
