@@ -321,11 +321,6 @@ The energy function defines an effective energy landscape over future latent sta
 In this sense, the learned energy landscape serves as the **effective dynamical law** governing latent-state evolution.
 
 Like predictive coding, the temporal prediction module operates entirely at the level of an effective energy landscape. It does not attempt to model the microscopic neuronal interactions responsible for prediction. Instead, it learns the large-scale dynamical laws governing the evolution of latent cognitive states directly from experience.
-
-![](https://subirvarma.github.io/GeneralCognitics/images/stat83.png)
-
-**Figure 5:** Learning an effective energy landscape governing the temporal evolution of latent cognitive states.
-
 A sufficiently expressive function approximator, such as a Transformer or Diffusion Transformer (DiT), can be trained to approximate the unknown energy function directly from observed latent-state trajectories. In this way, the microscopic details of the underlying neural circuitry are replaced by an effective dynamical description of latent-state evolution.
 
 This is precisely the effective-theory viewpoint introduced in the Introduction. Statistical mechanics replaces microscopic molecular interactions with an effective free-energy landscape governing macroscopic behavior. The diffusion prediction module performs an analogous abstraction, replacing unknown neuronal interactions with a learned energy landscape governing latent cognitive dynamics.
@@ -342,7 +337,7 @@ In biological nervous systems this optimization may emerge through the interacti
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat122.png)
 
-**Figure 6:** Temporal prediction by stochastic energy minimization. Starting from a noisy initial condition, Langevin dynamics gradually moves the system toward lower-energy regions of the learned landscape.
+**Figure 5:** Temporal prediction by stochastic energy minimization. Starting from a noisy initial condition, Langevin dynamics gradually moves the system toward lower-energy regions of the learned landscape.
 
 The sampling procedure begins from a high-noise initial state and gradually reduces the noise level over a sequence of diffusion stages. At each stage several Langevin updates are performed,
 
@@ -354,7 +349,7 @@ The injected noise prevents the dynamics from becoming trapped in poor local min
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat123.png)
 
-**Figure 7:** One Langevin update within a diffusion stage.
+**Figure 6:** One Langevin update within a diffusion stage.
 
 Although diffusion models are usually introduced as denoising algorithms, their deeper interpretation is that of **stochastic gradient flows on learned energy landscapes**. This interpretation is particularly natural here because it places diffusion models and predictive coding within the same mathematical framework.
 
@@ -454,7 +449,7 @@ It is important to emphasize what DEPP does **not** claim. DEPP does not argue t
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat127.png)
 
-**Figure 8:** Direct Energy-Based Predictive Processing (DEPP).
+**Figure 7:** Direct Energy-Based Predictive Processing (DEPP).
 
 The DEPP architecture predicts the next perceptual state directly from the current perceptual state, previous sensory observations, and contextual variables such as intended actions. Instead of operating in latent space, prediction occurs directly within perceptual state space.
 
@@ -660,8 +655,9 @@ $$ p_W(y^k|y^1,\ldots,y^{k-1},x,u,s)=\frac{\exp[-E_W(y^k)]}{Z_W}, $$
 where $Z_W$ is the corresponding partition function.
 
 Autoregressive generation may therefore be interpreted as a sequence of local energy-minimization decisions. At each step the model selects a token lying in a relatively low-energy region conditioned on the previously generated sequence.
-
 Unlike diffusion models, which optimize all variables simultaneously through stochastic relaxation, autoregressive models perform this optimization sequentially, one variable at a time. At first sight these approaches appear fundamentally different. Diffusion models optimize an entire state simultaneously, whereas autoregressive models appear to make irrevocable local decisions.
+
+Though auto regressive generation remains the most popular way to implement LLMs, there are efforts underway to use a more explicit energy based approach to generating language. For example an analog to LEPP type generation that models the cognitive state explicitly is the [LD4LG](https://arxiv.org/abs/2212.09462) model. An analog to DEPP type generation in which the cognitive state is modeled implicitly is the work by [Austin et.al.](https://arxiv.org/abs/2107.03006), and more recent [Mercury](https://arxiv.org/html/2506.17298v1) model.
 
 ### Sequential Optimization and Global Coherence
 
