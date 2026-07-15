@@ -101,7 +101,7 @@ The **Latent Energy-Based Predictive Processing (LEPP)** architecture proposed h
 
 Within the hierarchy of effective theories proposed in this paper, LEPP occupies the first level above mechanistic descriptions of neural circuitry. Rather than modeling neurons, synapses, or cortical circuits directly, LEPP models the evolution of **latent cognitive states** through learned energy landscapes. The microscopic biological implementation remains implicit, while the latent cognitive dynamics are represented explicitly.
 
-![](https://subirvarma.github.io/GeneralCognitics/images/stat133.png)
+![](https://subirvarma.github.io/GeneralCognitics/images/stat135.png)
 
 **Figure 3:** The Latent Energy-Based Predictive Processing (LEPP) architecture.
 
@@ -516,11 +516,9 @@ Once again, the emphasis is not on reproducing the microscopic implementation of
 ## Hierarchy of Effective Theories
 
 The principal conceptual distinction between LEPP and DEPP is **not** that one is mechanistic while the other is effective. Both are effective energy-based theories of cognition. Neither attempts to model the brain's connectome or neuronal circuitry directly.
-
 The difference lies instead in the choice of state variables over which the effective energy landscape is defined.
 
 LEPP defines its energy landscape over **latent cognitive states**. It therefore retains an explicit internal representation of the organism's inferred model of the world while abstracting away from the underlying neuronal implementation.
-
 DEPP performs one additional level of abstraction. Rather than explicitly representing latent cognitive states, it defines its energy landscape directly over **observable perceptual states**. The latent dynamics have not disappeared; rather, their collective effects have been absorbed into the learned energy landscape itself.
 
 The relationship between the two models may therefore be summarized as follows.
