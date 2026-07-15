@@ -1,53 +1,58 @@
 ---
 layout: default
-title: " Generative AI as an Effective Theory of Cognitive Dynamics"
+title: " Generative AI as an Effective Theory of Cognition"
 ---
 
-# Generative AI as an Effective Theory of Cognitive Dynamics
+# Generative AI as an Effective Theory of Cognition
 
 **Contents**     
 
 - Introduction
 - The Predictive Processing Framework in Computational Neuroscience
-- Energy based Temporal Predictive Coding (ETPC)
+- Latent Energy based Predictive Processing (LEPP)
   - Implementing the Inference and Generation Modules: Predictive Coding
-  - Implementing the Prediction Module using EBM/Diffusions
-  - Training the Diffusion Model
-  - Biological Plausibility
-- Are Letent States Necessary? An Alternative Model (DEPP)
-- Planning 
-  - The Reinforcement Learning Framework for Planning
-- Micro-architecture of Energy based Models
+  - Temporal Prediction as Energy Minimization
+  - Biological Interpretation of LEPP
+- Direct Energy based Predictive Processing (DEPP)
+  - Perceptual Dynamics as Motion on an Energy Landscape
+  - Hierarchy of Effective Theories
+- Planning as Open Loop Prediction
+- Auto Regressive Models as Effective Theories of Cognition
+- From Effective Energy Functions to Neural Micro-Architecture
+- Conclusions
 
 ## Introduction
 
 Recent advances in generative artificial intelligence have led to remarkable progress in modeling human perception, language, and reasoning. Models such as transformers and diffusion models exhibit behaviors that, while not equivalent to human cognition, increasingly resemble aspects of human thought. This success has naturally prompted attempts to relate these architectures to biological neural circuits. In particular, researchers have sought neural correlates of attention mechanisms, transformer architectures, and diffusion processes within the cortex.
 
-This paper argues that such comparisons may be taking place at the wrong level of description. We hypothesize that modern generative neural networks should be understood not as mechanistic models of neural implementation, but as **effective theories of cognitive dynamics operating at the level of learned energy landscapes**. In this view, cognition is understood as the temporal evolution of perceptual and cognitive states through a learned energy landscape, rather than as the direct consequence of an explicitly modeled neural circuitry.
+This paper proposes that recent advances in generative AI point toward a new style of computational neuroscience: one that seeks effective dynamical laws governing cognition rather than detailed reconstructions of neural circuitry.
+We hypothesize that modern generative neural networks should be understood not as mechanistic models of neural implementation, but as **effective theories of cognitive dynamics operating at the level of learned energy landscapes**. In this view, cognition is understood as the temporal evolution of perceptual and cognitive states through a learned energy landscape, rather than as the direct consequence of an explicitly modeled neural circuitry.
 
-The history of physics provides a useful analogy. Thermodynamics provides an effective description of macroscopic matter without explicitly modeling every molecular interaction. Statistical mechanics explains why such effective descriptions are possible: the collective effects of microscopic molecular interactions can be summarized by a free-energy function that governs the macroscopic dynamics of the system. Thermodynamics is therefore not a model of molecular structure, but an effective theory of its observable behavior. This distinction between mechanistic and effective theories is common throughout physics but has received comparatively little attention in computational neuroscience, where advances in AI are often interpreted in terms of architectural similarities to biological neural circuits.
+The history of physics provides a useful analogy. Statistical mechanics explains why simple effective descriptions of macroscopic matter are possible. Rather than modeling every molecular interaction explicitly, it shows that, in equilibrium and near-equilibrium systems, the collective effects of microscopic interactions can often be summarized by thermodynamic potentials or effective free-energy landscapes defined over macroscopic variables. Thermodynamics therefore emerges as an effective theory of observable behavior rather than a direct description of molecular structure.
+This distinction between mechanistic and effective theories is common throughout physics but has received comparatively little attention in computational neuroscience, where advances in AI are often interpreted in terms of architectural similarities to biological neural circuits.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat134.png)
 
-**Figure 1:** Proposed analogy between statistical mechanics and generative AI. Just as statistical mechanics explains why thermodynamics provides an effective description of macroscopic matter without explicitly modeling every molecular interaction, modern generative neural networks may provide effective descriptions of cognitive dynamics without modeling the underlying neural circuitry.
+**Figure 1:** Proposed analogy between statistical mechanics and generative AI. Just as statistical mechanics explains why thermodynamics provides an effective description of macroscopic matter without explicitly modeling every molecular interaction, modern generative AI may provide effective descriptions of cognitive dynamics without modeling the underlying neural circuitry.
 
-Throughout this paper we distinguish three levels of scientific description. At the microscopic level lies the brain's connectome and neuronal circuitry. At an intermediate level lie the hidden cognitive dynamics responsible for perception and thought. At the macroscopic level lie observable behaviors such as perception, language, and action. The central thesis of this paper is that modern generative AI operates primarily at this highest level, learning effective dynamical laws governing observable cognitive behavior without explicitly modeling the lower levels.
+Throughout this paper we distinguish several complementary levels of scientific description. At the microscopic level lie neuronal circuitry and the connectome. At higher effective levels lie latent cognitive states and modality-specific states such as perception, language, and action. Modern generative models may operate at several of these effective levels, depending on the variables they represent explicitly. What they generally do not provide is a direct mechanistic description of the underlying neuronal circuitry.
 
 We propose that modern generative neural networks should be interpreted in this spirit. Rather than viewing transformers or diffusion models as candidate models of the brain's circuitry, we suggest viewing them as *effective theories of cognitive dynamics*. Their parameters should not be expected to correspond directly to neurons, synapses, or cortical microcircuits. Instead, they may be regarded as learning an effective energy landscape governing the evolution of perceptual and cognitive states. The underlying biological implementation—encoded in the brain's connectome and cellular physiology—remains hidden, just as microscopic molecular interactions remain hidden within thermodynamic descriptions.
 
 This perspective has several consequences. First, it suggests that searching for direct anatomical counterparts of transformer blocks or diffusion networks may be misguided. Different microscopic implementations can generate remarkably similar macroscopic dynamics, a phenomenon familiar throughout statistical physics. Second, it provides a natural explanation for the success of modern generative AI. These models need not recover the brain's internal circuitry in order to reproduce important aspects of cognitive behavior; they need only learn the effective dynamical laws governing its observable outputs.
+Building on predictive processing and predictive coding, we investigate how perceptual dynamics can be formulated in energy-based terms. We first retain explicit latent causes and model their temporal evolution through a learned energy landscape. We then ask whether an effective theory can instead model perceptual dynamics directly, with latent causes absorbed into the effective law.
+In this paper we adopt the energy-based formulation of diffusion models, exemplified by [Diffusion Recovery Likelihood (DRL)](https://arxiv.org/abs/2012.08125), in which diffusion provides an efficient mechanism for learning and sampling from explicit energy-based models.
+They allow effective energy functions to be learned directly from observable behavior without requiring an explicit model of the underlying neuronal interactions.
 
-Building upon the predictive processing framework of Clark and the predictive coding formulations of Rao, Ballard, and Friston, we develop an alternative interpretation of perception based on energy-based dynamics. Rather than treating latent causes as indispensable components of a computational theory, we explore the possibility that perceptual and cognitive states themselves evolve according to a learned energy landscape. Diffusion models provide a natural mathematical framework for describing such dynamics, allowing effective energy functions to be learned directly from observable behavior without requiring an explicit model of the underlying neuronal interactions.
-
-The aim of this paper is not to argue that the brain literally implements a diffusion model or a transformer architecture. Rather, we argue that modern generative neural networks constitute a new class of effective theories for cognition, analogous to the role played by thermodynamics in physics. Viewed from this perspective, recent developments in generative AI suggest a shift in emphasis for computational neuroscience—from searching for detailed mechanistic replicas of neural circuitry toward identifying the effective dynamical principles governing cognition.
+The aim of this paper is not to argue that the brain literally implements a diffusion model or a transformer architecture. Rather, we argue that modern generative neural networks constitute a new class of effective theories for cognition, analogous to the role played by statistical mechanics in physics. Viewed from this perspective, recent developments in generative AI suggest a shift in emphasis for computational neuroscience—from searching for detailed mechanistic replicas of neural circuitry toward identifying the effective dynamical principles governing cognition.
 
 Predictive processing provides the natural computational framework within which this proposal can be formulated. In this view, perception is not a passive reconstruction of sensory input. The brain continuously generates expectations about the state of the world and revises them in response to incoming sensory evidence. Perception therefore reflects an interaction between internally generated predictions and signals produced by the environment.
 
 An important feature of this framework is its temporal character. The organism must not only estimate the present state of its environment, but also anticipate how that state is likely to evolve. Such predictions can guide perception, action, and—when extended over longer horizons—planning. The central question considered here is whether these predictive dynamics can be modeled directly as motion through a learned energy landscape, without requiring an explicit model of the neuronal circuitry that implements them.
 
-To explore this question we develop two complementary energy-based formulations of predictive processing. The first, **Latent Energy-Based Predictive Processing (LEPP)**, retains the latent-state representation of classical predictive processing while reformulating both inference and temporal prediction as processes of energy minimization. The second, **Direct Energy-Based Predictive Processing (DEPP)**, dispenses with an explicitly specified latent-state architecture and instead models the evolution of perceptual states directly through a learned energy function. The comparison between these models allows us to distinguish between mechanistic and effective theories of cognition and to ask whether explicit latent representations are essential components of an effective computational theory.
-
-Recent work by Yann LeCun and colleagues on Joint Embedding Predictive Architectures (JEPAs) and world models similarly emphasizes predictive latent representations and energy-based learning as foundations for intelligent systems. The present work adopts a complementary perspective by asking what such architectures imply for computational theories of cognition.
+To explore this question we develop two complementary energy-based formulations of predictive processing. The first, **Latent Energy-Based Predictive Processing (LEPP)**, retains the latent-state representation of classical predictive processing while reformulating both inference and temporal prediction as processes of energy minimization. The second, **Direct Energy-Based Predictive Processing (DEPP)**, dispenses with an explicitly specified latent-state architecture and instead models the evolution of perceptual states directly through a learned energy function. 
+The comparison between these models allows us to ask how the choice of explicit state variables changes an effective theory of cognition, and whether latent representations must appear explicitly in such a theory.
+Together, LEPP and DEPP form the central constructive proposals of this paper. The remaining sections examine the broader implications of this viewpoint for planning, autoregressive language models, neural realization, and the possibility that cognition admits a hierarchy of effective descriptions connected by renormalization-like transformations.
 
 The next section summarizes the predictive-processing framework and clarifies the distinctions among perceptual inference, temporal prediction, action, and planning that will be used throughout the article.
 
@@ -120,7 +125,7 @@ The inferred latent state is then supplied to the temporal prediction module. Un
 where $u_{n+1}$ denotes contextual variables such as intended actions or other factors influencing the future evolution of the environment. The sampling process converges toward a low-energy region of the learned landscape, yielding the predicted latent state $x_{n+1}$.
 
 The predicted latent state is subsequently transformed into the organism's percept through the generative model
-$y_{n+1}=p_\psi(x_{n+1}),$
+$y_{n+1}=g_\psi(x_{n+1}),$
 where $y_{n+1}$ denotes the predicted percept at the next instant.
 
 When the next sensory observations $s_{n+1}$ become available, the predicted latent state $x_{n+1}$ serves as the initial estimate for the next inference cycle. Predictive coding recursively updates this estimate until it converges to the refined latent state
@@ -145,13 +150,13 @@ Classical presentations of predictive processing often emphasize the overall per
 
 The model assumes that temporal prediction converges within the interval separating successive sensory observations. Consequently, inference, temporal prediction, perception, and learning proceed continuously and in parallel, producing a continually updated estimate of the organism's environment.
 
-An attractive feature of LEPP is that perception and learning occur simultaneously. Each prediction cycle not only generates the organism's current percept but also provides training signals for all three computational modules. The inference model $q_\phi$, the temporal energy model $E_W$, and the generative model $p_\psi$ are therefore continuously refined as new sensory observations arrive. In this respect LEPP more closely resembles the continual online learning performed by biological nervous systems than the separate training and inference phases characteristic of most artificial neural networks.
+An attractive feature of LEPP is that perception and learning occur simultaneously. Each prediction cycle not only generates the organism's current percept but also provides training signals for all three computational modules. The inference model $q_\phi$, the temporal energy model $E_W$, and the generative model $g_\psi$ are therefore continuously refined as new sensory observations arrive. In this respect LEPP more closely resembles the continual online learning performed by biological nervous systems than the separate training and inference phases characteristic of most artificial neural networks.
 
 The remainder of the LEPP framework develops these three computational processes in turn. We first revisit predictive coding as an energy-based implementation of inference and generation before introducing a diffusion-based energy model for temporal prediction. Together these modules provide a complete energy-based realization of predictive processing while retaining the explicit latent-state representation characteristic of classical predictive processing.
 
 ## Implementing the Inference and Generation Modules: Predictive Coding
 
-As discussed in the previous section, the LEPP architecture reformulates predictive processing as **three coupled energy-minimization processes**: latent-state inference, temporal prediction, and percept generation. In this section we consider the first and third of these processes. We show that they can be naturally implemented using **predictive coding**, originally proposed by Rao and Ballard (1999). Viewed from this perspective, predictive coding becomes the inference component of a larger energy-based theory of cognition.
+As discussed in the previous section, LEPP contains two coupled energy-based inference processes—current-state inference and temporal prediction—together with a generative mapping from latent states to perceptual states. In this section we consider the first and third of these processes. We show that they can be naturally implemented using **predictive coding**, originally proposed by Rao and Ballard (1999). Viewed from this perspective, predictive coding becomes the inference component of a larger energy-based theory of cognition.
 
 Predictive coding provides a biologically plausible mechanism for inferring latent causes from sensory observations using only local neural computations. It can itself be viewed as an energy-based model whose objective is to minimize a predictive-coding energy function, which we shall denote by $E_{PC}$.
 
@@ -244,7 +249,7 @@ $$ z\leftarrow z-\eta\frac{\partial E_{PC}}{\partial z}, $$
 
 giving
 
-$$ -\frac{\partial E_{PC}}{\partial z}=\left(\frac{\partial f}{\partial z}\right)^T\Pi_y\epsilon_y+\Pi_z\epsilon_z. $$
+$$ -\frac{\partial E_{PC}}{\partial z}=\left(\frac{\partial f}{\partial z}\right)^T\Pi_y\epsilon_y - \Pi_z\epsilon_z. $$
 
 The first term is driven by bottom-up sensory prediction error and encourages the latent state to better explain the observations. The second term is driven by top-down expectations encoded by the prior.
 
@@ -254,11 +259,11 @@ This locality is one of the principal reasons predictive coding has been regarde
 
 For the linear model originally considered by Rao and Ballard,
 
-$$ y=Wz+\epsilon, $$
+$$ y = Wz+\epsilon, $$
 
 the update simplifies to
 
-$$ -\frac{\partial E_{PC}}{\partial z}=W^T\Pi_y\epsilon_y+\Pi_z\epsilon_z. $$
+$$ -\frac{\partial E_{PC}}{\partial z}=W^T\Pi_y\epsilon_y - \Pi_z\epsilon_z. $$
 
 ---
 
@@ -312,7 +317,7 @@ $$ p_W(x|z,u)=\frac{\exp[-E_W(x;z,u)]}{Z_W}, $$
 
 where $E_W(x;z,u)$ is a learned energy function parameterized by $W$, and
 
-$$ Z_W=\int e^{-E_W(x;z,u)}\,dx $$
+$$ Z_W(z,u)=\int e^{-E_W(x;z,u)}\,dx $$
 
 is the partition function.
 
@@ -329,9 +334,8 @@ This is precisely the effective-theory viewpoint introduced in the Introduction.
 
 ## Sampling Future Latent States Using Diffusion Models
 
-Once the energy function has been learned, the remaining problem is to generate samples from the conditional distribution
-$p_W(x|z,u).$
-This is itself an optimization problem. Beginning from an initial state, the system evolves toward progressively lower-energy regions until a probable future latent state is reached.
+Once the energy function has been learned, the remaining task is to sample probable future states. This involves stochastic relaxation toward regions of low effective energy while retaining sufficient noise to represent the full conditional distribution rather than only its modes.
+Beginning from an initial state, the system evolves toward progressively lower-energy regions until a probable future latent state is reached.
 
 In biological nervous systems this optimization may emerge through the interactions of large populations of neurons. In machine learning, an efficient approximation is provided by **diffusion models**, which implement stochastic energy minimization using Langevin dynamics.
 
@@ -368,21 +372,20 @@ $E_W$
 whose equilibrium predicts the latent state expected at the next instant.
 LEPP therefore unifies state inference and temporal prediction within a common computational language. Both are equilibrium-seeking dynamical systems that differ only in the energy function they minimize and the computational problem they solve.
 
+**A comment on terminology.** Throughout this paper we adopt the conventional terminology of the energy-based modeling literature, in which $E_W(x)$ denotes the learned energy function defining an unnormalized probability distribution. This quantity should not necessarily be interpreted as the microscopic interaction energy of statistical mechanics. 
+Rather, after unresolved degrees of freedom have been marginalized, the negative log probability over retained variables plays a role analogous to a potential of mean force or coarse-grained free energy.
+The use of the symbol $E$ follows established machine-learning convention.
+
 ---
 
 ### Learning the Prediction Energy
 
 Learning the prediction module consists of estimating the parameters of the conditional energy function
-$ E_W(x;z,u)$.
-
+$E_W(x;z,u)$.
 Unlike predictive coding, which receives current sensory observations directly, the prediction module learns by comparing its predicted latent state with the latent state inferred after the next sensory observation becomes available.
 
-Suppose that after predicting $x_{n+1}$, the inference module computes the corrected latent state $z_{n+1}$. The tuple
-
-$$ (z_n,u_{n+1},x_{n+1},z_{n+1}) $$
-
+Suppose that after predicting $x_{n+1}$, the inference module computes the corrected latent state $z_{n+1}$. The tuple $(z_n,u_{n+1},z_{n+1})$
 then provides a supervised training example describing the true temporal evolution of the latent space.
-
 The parameters $W$ are learned by maximizing the conditional log-likelihood
 
 $$ L(W)=E_{p(x|z,u)}[\log p_W(x|z,u)]. $$
@@ -396,8 +399,6 @@ The first expectation is evaluated using latent-state transitions inferred from 
 This learning rule is directly analogous to that used in classical Boltzmann machines. If the underlying neuronal interactions were explicitly known, Hebbian learning would emerge as a special case. Since the brain's connectome is unknown, however, the energy function is instead approximated by a neural network function approximator, while modern diffusion-learning algorithms such as [Diffusion Recovery Likelihood (DRL)](https://arxiv.org/abs/2012.08125) provide efficient procedures for estimating its parameters.
 
 Viewed in this way, the diffusion prediction module occupies the same role within LEPP that predictive coding occupies for inference. Both replace detailed neuronal mechanisms with effective energy-minimization dynamics, differing only in the computational problem they solve. Together they provide a unified energy-based realization of predictive processing.
-
-**A comment on terminology.** Throughout this paper we adopt the conventional terminology of the energy-based modeling literature, in which $E_W(x)$ denotes the learned energy function defining an unnormalized probability distribution. This quantity should not necessarily be interpreted as the microscopic interaction energy of statistical mechanics. Rather, because the underlying neuronal degrees of freedom have already been coarse-grained, it is more closely analogous to an effective free-energy landscape defined over the variables of interest. The use of the symbol $E$ follows established machine-learning convention.
 
 ## Biological Interpretation of LEPP
 
@@ -443,20 +444,20 @@ This naturally raises a more fundamental question.
 
 If the objective is to construct an **effective theory of cognition** rather than a mechanistic reconstruction of neural circuitry, is the explicit latent-state representation itself necessary?
 
-The **Direct Energy-Based Predictive Processing (DEPP)** architecture explores this possibility. Rather than explicitly modeling latent-state inference, temporal prediction, and percept generation as separate computational processes, DEPP models the observable dynamics of perceptual states directly through a learned energy landscape.
+The **Direct Energy-Based Predictive Processing (DEPP)** architecture explores this possibility. Rather than explicitly modeling latent-state inference, temporal prediction, and percept generation as separate computational processes, DEPP models the observable dynamics of perceptual-output states directly through a learned energy landscape.
 
-It is important to emphasize what DEPP does **not** claim. DEPP does not argue that latent causes do not exist, nor that the brain lacks internal representations. Rather, it asks a more modest question: **must an effective computational theory represent those latent variables explicitly, or can their collective influence be absorbed into a learned energy landscape defined directly over perceptual states?**
+It is important to emphasize what DEPP does **not** claim. DEPP does not argue that latent causes do not exist, nor that the brain lacks internal representations. Rather, it asks a more modest question: **must an effective computational theory represent those latent variables explicitly, or can their collective influence be absorbed into a learned energy landscape defined directly over perceptual-output states?**
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat127.png)
 
 **Figure 7:** Direct Energy-Based Predictive Processing (DEPP).
 
-The DEPP architecture predicts the next perceptual state directly from the current perceptual state, previous sensory observations, and contextual variables such as intended actions. Instead of operating in latent space, prediction occurs directly within perceptual state space.
+The DEPP architecture predicts the next perceptual-output state directly from the current perceptual-ouput state, previous sensory observations, and contextual variables such as intended actions. Instead of operating in latent space, prediction occurs directly within perceptual state space.
 
 The conditional distribution over future perceptual states is represented by
 
 $$
-p_W(y_{n+1}|y_n,s_n,u_{n+1}) = \frac{\exp[-E_W(y_{n+1};y_n,s_n,u_{n+1})]}{Z_W}. $$
+p_W(y_{n+1}|y_n,s_n,u_{n+1}) = \frac{\exp[-E_W(y_{n+1};y_n,s_n,u_{n+1})]}{Z_W(y_n,s_n,u_{n+1}}. $$
 
 Prediction proceeds through stochastic sampling over this learned energy landscape using the same diffusion-based optimization procedure introduced for LEPP.
 
@@ -466,31 +467,23 @@ Unlike LEPP, the energy function must now capture the complete observable dynami
 
 ## Perceptual Dynamics as Motion on an Energy Landscape
 
-The operation of DEPP may be understood by considering how the effective energy landscape evolves through time.
+The operation of DEPP may be understood by considering how the effective energy landscape evolves through time (in the rest of this paper when we will abbreviate 'perceptual-output state' to 'perceptual state' or 'percept').
 
 Suppose that at time step $n+1$ the perceptual state is
 
-$$
-y_{n+1}=y'.
-$$
+$$ y_{n+1}=y'. $$
 
 This corresponds to a local minimum of the energy landscape
 
-$$
-E_W(y;y_n,u_{n+1},s_n).
-$$
+$$ E_W(y;y_n,u_{n+1},s_n). $$
 
 When new sensory observations $s_{n+1}$ arrive and the organism selects a new action $u_{n+2}$, the conditioning variables change, producing a new energy landscape
 
-$$
-E_W(y;y',u_{n+2},s_{n+1}).
-$$
+$$ E_W(y;y',u_{n+2},s_{n+1}). $$
 
 The previous perceptual state $y'$ is generally no longer an equilibrium of this new landscape. The system therefore evolves through stochastic energy minimization until it reaches a new low-energy state,
 
-$$
-y_{n+2}=y'',
-$$
+$$ y_{n+2}=y'', $$
 
 which becomes the organism's next percept.
 
@@ -646,32 +639,19 @@ until the complete sequence has been produced.
 
 Although autoregressive models are usually expressed in terms of probabilities, every probability distribution defines an equivalent energy through
 
-$$ E_W(y^k)=-\log p_W(y^k|y^1,\ldots,y^{k-1},x,u,s)+\text{constant}. $$
+$$ E_W(y^k;y^{\lt k})=-\log p_W(y^k|y^1,\ldots,y^{k-1},x,u,s)+\text{constant}. $$
 
-Consequently,
+and for a sequence of predictions
 
-$$ p_W(y^k|y^1,\ldots,y^{k-1},x,u,s)=\frac{\exp[-E_W(y^k)]}{Z_W}, $$
+$$ E_W(y^1,...,y^N) = -\sum_{k=1}^N \log p_W(y^k|y^{\lt k} + \text{constant}  $$
 
-where $Z_W$ is the corresponding partition function.
-
-Autoregressive generation may therefore be interpreted as a sequence of local energy-minimization decisions. At each step the model selects a token lying in a relatively low-energy region conditioned on the previously generated sequence.
+Thus each autoregressive conditional can be represented as a conditional energy distribution and generation proceeds by sequentially sampling from—or, under greedy decoding, approximately minimizing—these conditional energies.
 Unlike diffusion models, which optimize all variables simultaneously through stochastic relaxation, autoregressive models perform this optimization sequentially, one variable at a time. At first sight these approaches appear fundamentally different. Diffusion models optimize an entire state simultaneously, whereas autoregressive models appear to make irrevocable local decisions.
 
-Though auto regressive generation remains the most popular way to implement LLMs, there are efforts underway to use a more explicit energy based approach to generating language. For example an analog to LEPP type generation that models the cognitive state explicitly is the [LD4LG](https://arxiv.org/abs/2212.09462) model. An analog to DEPP type generation in which the cognitive state is modeled implicitly is the work by [Austin et.al.](https://arxiv.org/abs/2107.03006), and more recent [Mercury](https://arxiv.org/html/2506.17298v1) model.
+Though auto regressive generation remains the most popular way to implement LLMs, there are efforts underway to use a more explicit energy based approach to generating language. For example an analog to LEPP type generation that models the cognitive state explicitly is the [LD4LG](https://arxiv.org/abs/2212.09462) model. An analog to DEPP type generation in which the cognitive state is modeled implicitly is the work by [Austin et.al.](https://arxiv.org/abs/2107.03006), and more recent the [Mercury](https://arxiv.org/html/2506.17298v1) model.
 
-### Sequential Optimization and Global Coherence
-
-A natural question therefore arises.
-
-How can a model that commits to one token at a time nevertheless generate globally coherent sequences extending over hundreds or even thousands of tokens?
-
-Recent theoretical work (see [Blondel et.al.](https://arxiv.org/pdf/2512.15605)) has shown that this apparent contradiction is largely illusory. Under appropriate assumptions, autoregressive models and energy-based models constitute mathematically equivalent representations of the same conditional probability distributions. Moreover, the conditional probabilities used for next-token prediction satisfy a recursion closely related to the **soft Bellman equation** from maximum-entropy reinforcement learning.
-
-This provides an important conceptual insight. Each next-token prediction is not merely a locally optimal decision. Rather, the conditional probability of the next token already incorporates the model's expectations about all possible future continuations of the sequence. The autoregressive model therefore performs a form of implicit dynamic programming, where each local decision reflects the expected quality of future completions.
-
-From this viewpoint, diffusion models and autoregressive models should be regarded as two different computational strategies for sampling from learned energy landscapes. Diffusion models perform stochastic optimization over an entire state simultaneously, whereas autoregressive models decompose the same optimization into a sequence of locally conditioned decisions whose probabilities implicitly encode future consequences.
-
-This perspective helps explain why autoregressive language models exhibit remarkably coherent long-range behavior despite generating one token at a time.
+A natural question therefore arises: How can a model that commits to one token at a time nevertheless generate globally coherent sequences extending over hundreds or even thousands of tokens?
+There is recent theoretical work by [Blondel et.al.](https://arxiv.org/pdf/2512.15605) that makes some progress in answering this question.
 
 ---
 
@@ -682,7 +662,6 @@ The interpretation developed throughout this paper suggests a different way of u
 We have argued that **LEPP** and **DEPP** represent two effective descriptions of cognition operating over different state spaces. LEPP models latent cognitive states explicitly, whereas DEPP models the observable evolution of perceptual states directly, absorbing the latent computations into its learned energy landscape.
 
 Autoregressive language models occupy a position closely analogous to DEPP.
-
 Rather than explicitly representing latent cognitive states, transformers learn the observable dynamics of **language states** directly. The hidden cognitive processes responsible for producing language are never modeled explicitly. Instead, their collective influence is absorbed into the learned probability—or equivalently, energy—landscape governing linguistic sequences.
 
 The relationship between these models may therefore be summarized as follows.
@@ -691,9 +670,11 @@ The relationship between these models may therefore be summarized as follows.
 |---------|-------------------------|-----------------------------------------|
 | **LEPP** | Latent cognitive states | Connectome |
 | **DEPP** | Perceptual states | Latent cognition + connectome |
-| **LLMs** | Language states | Thought dynamics + perception + connectome |
+| **LLMs** | Language states | Latent cognitive, social, and biological processes underlying the linguistic corpus |
 
-The important observation is that DEPP and transformer language models occupy **parallel positions** within the hierarchy of effective theories. Both abandon explicit latent-state representations in favor of directly modeling observable dynamics. They differ primarily in the modality over which those dynamics are defined: DEPP models perception, whereas LLMs model language.
+The important observation is that DEPP and transformer language models occupy **parallel positions** within the hierarchy of effective theories. Both abandon explicit latent-state representations in favor of directly modeling observable dynamics. They differ primarily in the modality over which those dynamics are defined: DEPP models perception, whereas LLMs model language. This point of view is also captured in the figure below.
+
+![](https://subirvarma.github.io/GeneralCognitics/images/stat136.png)
 
 Consequently, the success of transformer language models need not imply that transformer architectures resemble cortical circuits or that attention mechanisms correspond directly to biological computations. Their success may instead arise because they learn effective dynamical laws governing the evolution of language, just as DEPP learns effective dynamical laws governing the evolution of perceptual states.
 
@@ -812,7 +793,8 @@ This perspective naturally suggests a different research program for computation
 
 This viewpoint closely parallels David Marr's influential distinction between **computational**, **algorithmic**, and **implementation** levels of analysis. Marr argued that understanding a cognitive system requires answering three separate questions: *What computation is being performed? How is that computation carried out? And how is it physically implemented?* Importantly, the computational and algorithmic levels can often be understood without first identifying the underlying biological hardware. The perspective developed here suggests that modern generative AI provides a new family of computational and algorithmic models for cognition, while leaving open the question of their biological realization. Effective energy landscapes provide one possible mathematical language for expressing these higher levels of description.
 
-An intriguing connection also exists with the renormalization group (RG) methods of statistical physics. Renormalization provides a systematic procedure for constructing successive effective theories by integrating out microscopic degrees of freedom while preserving the large-scale dynamics of the system. Although the present work does not develop such a mathematical framework, the hierarchy of effective models proposed here—ranging from latent cognitive states (LEPP), to perceptual dynamics (DEPP), to language dynamics (LLMs)—suggests that cognition may likewise admit multiple effective descriptions at different levels of abstraction. Whether these descriptions can be related through transformations analogous to renormalization remains an open question.
+An intriguing connection also exists with the renormalization group (RG) methods of statistical physics. Renormalization provides a systematic procedure for constructing successive effective theories by integrating out microscopic degrees of freedom while preserving the large-scale dynamics of the system. Although the present work does not develop such a mathematical framework, the hierarchy of effective models proposed here—ranging from latent cognitive states (LEPP), to perceptual dynamics (DEPP), to language dynamics (LLMs)—suggests that cognition may likewise admit multiple effective descriptions at different levels of abstraction. 
+Whether LEPP, DEPP, and language models are related by mathematically well-defined coarse-graining transformations remains entirely open.
 
 The ideas developed throughout this paper suggest several open problems for future research.
 
@@ -850,4 +832,4 @@ For much of its history, computational neuroscience has attempted to understand 
 
 If this viewpoint proves fruitful, future computational neuroscience may come to resemble statistical mechanics more closely than traditional mechanistic modeling. The primary scientific objective would no longer be the direct reconstruction of the brain's circuitry, but the discovery of the effective dynamical principles that organize cognition across multiple levels of description.
 
-Viewed in this way, the enduring lesson of modern generative artificial intelligence is not that it has discovered the architecture of the brain. Rather, it has demonstrated that highly accurate models of complex cognitive systems can be learned directly from observable behavior. The greatest contribution of generative AI to neuroscience may therefore be not a new model of the brain itself, but a new methodology for understanding cognition.
+Viewed in this way, the enduring lesson of modern generative artificial intelligence is not that it has discovered the architecture of the brain. Rather, it has demonstrated that highly accurate models of complex cognitive systems can be learned directly from observable behavior. The greatest contribution of generative AI to neuroscience may therefore be not a new model of the brain itself, but a new methodology for understanding cognition. The objective of computational neuroscience is therefore shifted from discovering what computation the brain performs to discovering the effective dynamical laws governing cognition.
