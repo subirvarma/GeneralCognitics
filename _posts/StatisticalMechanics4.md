@@ -116,22 +116,15 @@ The operation of LEPP is illustrated in Figure 3.
 
 At time step $n$, a stream of sensory observations $s_n$ is processed by the predictive-coding inference module, producing the latent representation $z_n$. This latent state represents the organism's current estimate of the hidden causes responsible for the incoming sensory data.
 
-The inferred latent state is then supplied to the temporal prediction module. Unlike the inference module, whose task is to explain the current sensory observations, the prediction module estimates how the latent representation is expected to evolve before the next sensory observation arrives. Rather than computing a deterministic prediction, the module performs stochastic sampling over a learned energy function
-
-$$E_W(x;z_n,u_{n+1}),$$
-
+The inferred latent state is then supplied to the temporal prediction module. Unlike the inference module, whose task is to explain the current sensory observations, the prediction module estimates how the latent representation is expected to evolve before the next sensory observation arrives. Rather than computing a deterministic prediction, the module performs stochastic sampling over a learned energy function $E_W(x;z_n,u_{n+1}),$
 where $u_{n+1}$ denotes contextual variables such as intended actions or other factors influencing the future evolution of the environment. The sampling process converges toward a low-energy region of the learned landscape, yielding the predicted latent state $x_{n+1}$.
 
 The predicted latent state is subsequently transformed into the organism's percept through the generative model
-
-$$y_{n+1}=p_\psi(x_{n+1}),$$
-
+$y_{n+1}=p_\psi(x_{n+1}),$
 where $y_{n+1}$ denotes the predicted percept at the next instant.
 
 When the next sensory observations $s_{n+1}$ become available, the predicted latent state $x_{n+1}$ serves as the initial estimate for the next inference cycle. Predictive coding recursively updates this estimate until it converges to the refined latent state
-
-$$z_{n+1}=q_\phi(x_{n+1},s_{n+1}),$$
-
+$z_{n+1}=q_\phi(x_{n+1},s_{n+1}),$
 which then becomes the input to the temporal prediction module for the following prediction cycle.
 
 The complete computational flow may therefore be summarized as
@@ -219,17 +212,11 @@ Then
 $$ -\log p(y|z)=\frac12(y-f(z))^T\Sigma_y^{-1}(y-f(z)). $$
 
 Defining the sensory prediction error
-
-$$ \epsilon_y=y-f(z), $$
-
+$\epsilon_y=y-f(z)$
 the likelihood term becomes
-
-$$ \frac12\epsilon_y^T\Pi_y\epsilon_y, $$
-
+$\frac12\epsilon_y^T\Pi_y\epsilon_y$
 where
-
-$$ \Pi_y=\Sigma_y^{-1} $$
-
+$\Pi_y=\Sigma_y^{-1}$
 is the sensory precision matrix.
 
 Similarly, assuming
@@ -237,12 +224,9 @@ Similarly, assuming
 $$ z\sim\mathcal N(\mu_z,\Sigma_z), $$
 
 the prior contributes
-
-$$ \frac12\epsilon_z^T\Pi_z\epsilon_z, $$
-
+$\frac12\epsilon_z^T\Pi_z\epsilon_z$
 where
-
-$$ \epsilon_z=z-\mu_z. $$
+$\epsilon_z=z-\mu_z$.
 
 The negative log posterior is therefore
 
@@ -351,9 +335,7 @@ This is precisely the effective-theory viewpoint introduced in the Introduction.
 ## Sampling Future Latent States Using Diffusion Models
 
 Once the energy function has been learned, the remaining problem is to generate samples from the conditional distribution
-
-$$ p_W(x|z,u). $$
-
+$p_W(x|z,u).$
 This is itself an optimization problem. Beginning from an initial state, the system evolves toward progressively lower-energy regions until a probable future latent state is reached.
 
 In biological nervous systems this optimization may emerge through the interactions of large populations of neurons. In machine learning, an efficient approximation is provided by **diffusion models**, which implement stochastic energy minimization using Langevin dynamics.
@@ -366,9 +348,7 @@ The sampling procedure begins from a high-noise initial state and gradually redu
 
 $$ x(t,k+1)=x(t,k)-\eta\nabla_xE_W(x(t,k),t,z_n,u_{n+1})+\sqrt{2\eta}\,\epsilon, $$
 
-where
-
-$$ \epsilon\sim\mathcal N(0,I). $$
+where $\epsilon\sim\mathcal N(0,I).$
 
 The injected noise prevents the dynamics from becoming trapped in poor local minima while allowing exploration of multiple possible futures. As the diffusion process proceeds, the noise level is gradually reduced, causing the latent state to settle into progressively lower-energy regions of the learned energy landscape.
 
@@ -386,17 +366,11 @@ Notice the close symmetry between the two principal computational processes with
 | **Temporal prediction** | $E_W$ | Most probable future latent state |
 
 Predictive coding minimizes the energy function
-
-$$ E_{PC}, $$
-
+$E_{PC}$
 whose equilibrium estimates the latent state responsible for the current sensory observations.
-
 The diffusion prediction module minimizes the energy function
-
-$$ E_W, $$
-
+$E_W$
 whose equilibrium predicts the latent state expected at the next instant.
-
 LEPP therefore unifies state inference and temporal prediction within a common computational language. Both are equilibrium-seeking dynamical systems that differ only in the energy function they minimize and the computational problem they solve.
 
 ---
@@ -404,8 +378,7 @@ LEPP therefore unifies state inference and temporal prediction within a common c
 ### Learning the Prediction Energy
 
 Learning the prediction module consists of estimating the parameters of the conditional energy function
-
-$$ E_W(x;z,u). $$
+$ E_W(x;z,u)$.
 
 Unlike predictive coding, which receives current sensory observations directly, the prediction module learns by comparing its predicted latent state with the latent state inferred after the next sensory observation becomes available.
 
