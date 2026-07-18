@@ -7,8 +7,8 @@ title: " Generative AI as an Effective Theory of Cognition"
 
 **Contents**     
 
-- 1. Introduction
-- 2. The Predictive Processing Framework in Computational Neuroscience
+- 1) Introduction
+- 2) The Predictive Processing Framework in Computational Neuroscience
 - 3. Latent Energy based Predictive Processing (LEPP)
   - 3.1 Implementing the Inference and Generation Modules: Predictive Coding
   - 3.2 Temporal Prediction as Energy Minimization
