@@ -70,8 +70,6 @@ Figure 2 illustrates a simplified computational model of this process. The organ
 
 Figure 2: A model for sensory perception generation in the brain
 
-An important implication of predictive processing is that much of what we perceive is generated internally rather than directly specified by sensory input. Sensory signals primarily indicate where the current prediction should be modified, while the detailed percept is constructed from the organism's learned internal model. This offers a natural explanation for the richness and continuity of conscious perception despite the relatively sparse and noisy information available from the sensory organs.
-
 Predictive processing has also been extended beyond perception. The same internal model that predicts future sensory states can be used to evaluate the consequences of potential actions. During planning, the model is effectively run "open loop," allowing future scenarios to be simulated without requiring new sensory input. More generally, actions themselves can be viewed as another mechanism for reducing prediction error, either by changing the organism's internal model or by changing the external world so that it conforms more closely to the organism's predictions.
 
 Although predictive processing has proved remarkably successful as a computational framework, an important modeling question remains. Most existing formulations assume that perception proceeds by inferring latent variables representing the hidden causes responsible for sensory observations. These latent states are updated from sensory evidence, evolved forward in time, and subsequently transformed into perceptual experience.
@@ -403,9 +401,7 @@ An important question is whether the computations required by the LEPP architect
 
 Within the hierarchy of effective theories developed in this paper, LEPP occupies the first level above mechanistic descriptions of the brain. Rather than modeling neurons, synapses, or cortical microcircuits directly, it models the evolution of **latent cognitive states** through learned energy landscapes. The microscopic biological implementation remains implicit, while the latent cognitive dynamics are represented explicitly.
 
-The LEPP architecture consists of two principal computational components: the latent-state inference module and the temporal prediction module. Both are formulated as stochastic energy-minimization processes, but they solve complementary computational problems. Predictive coding infers the organism's current latent state, while the diffusion-based prediction module estimates how that latent state is expected to evolve over time.
-
-### Biological Plausibility of Predictive Coding
+### Biological Plausability of Predictive Coding
 
 There is considerable evidence supporting the biological plausibility of the predictive-coding component of LEPP. Indeed, predictive coding was originally proposed by Rao and Ballard as a computational model of cortical processing. As shown in the previous section, both inference and learning can be formulated as local energy-minimization processes. Each cortical area communicates only with neighboring levels in the hierarchy through top-down predictions and bottom-up prediction errors, while synaptic plasticity depends only on locally available neuronal activity and prediction errors. Consequently, neither inference nor learning requires global error backpropagation, making predictive coding considerably more compatible with known cortical circuitry than conventional deep-learning algorithms.
 
@@ -436,9 +432,7 @@ The next section explores this possibility by proposing a second effective theor
 ## 4. Direct Energy-Based Predictive Processing (DEPP)
 
 The LEPP architecture developed in the previous sections demonstrates that classical predictive processing can be reformulated entirely within an energy-based computational framework while preserving its central assumption that perception proceeds through the inference of latent causes.
-
 This naturally raises a more fundamental question.
-
 If the objective is to construct an **effective theory of cognition** rather than a mechanistic reconstruction of neural circuitry, is the explicit latent-state representation itself necessary?
 
 The **Direct Energy-Based Predictive Processing (DEPP)** architecture explores this possibility. Rather than explicitly modeling latent-state inference, temporal prediction, and percept generation as separate computational processes, DEPP models the observable dynamics of perceptual-output states directly through a learned energy landscape.
@@ -606,25 +600,13 @@ Viewed in this way, perception and planning become two operating modes of the sa
 
 This interpretation further reinforces the central theme of this paper. The prediction modules developed in LEPP and DEPP should not be viewed merely as mechanisms for predicting the next perceptual state. They constitute learned **effective theories of environmental dynamics**. The same learned energy landscape that supports perception also supports imagination, counterfactual reasoning, and planning, without requiring an explicit model of the underlying neuronal circuitry.
 
-## Relationship to LeCun's World Model Program
-
-One of the research programs most closely related to the present work is Yann LeCun's proposal for autonomous machine intelligence. LeCun argues that intelligent systems require predictive world models operating in learned latent representation spaces. His Joint Embedding Predictive Architectures (JEPAs) learn abstract representations of sensory inputs and predict their future evolution, providing the basis for planning and reasoning. Energy-based formulations play a central role in this program.
-
-The LEPP architecture proposed in this paper is closely aligned with this viewpoint. Like JEPA, it separates inference from temporal prediction, performs prediction in latent space, and treats planning as repeated prediction using a learned world model.
-
-The principal difference lies in the interpretation.
-
-Where LeCun's work is primarily concerned with constructing intelligent systems, the present work interprets these architectures as effective theories of cognition. Rather than asking whether a particular architecture reproduces the brain's circuitry, we ask whether it captures the effective dynamical laws governing cognition.
-
-This viewpoint naturally leads to the DEPP architecture, which explores whether latent representations must appear explicitly within the effective theory at all. Whereas JEPA and LEPP formulate prediction over latent cognitive states, DEPP proposes that observable perceptual dynamics may themselves constitute a valid effective level of description. From this perspective, LEPP and DEPP become complementary effective theories defined over different cognitive state spaces.
-
 ## 6. Autoregressive Models as Effective Theories of Cognition
 
 The discussion so far has focused on diffusion models because they provide a natural mechanism for stochastic optimization over learned energy landscapes. Modern generative AI, however, is dominated by a second family of models based on **autoregressive generation**, most notably transformers and Large Language Models (LLMs). Although these systems are usually formulated probabilistically rather than energetically, recent theoretical work has shown that the two viewpoints are much more closely related than previously appreciated.
 
 Autoregressive models are based on the chain rule of probability,
 
-$$ p_W(y^1,\ldots,y^N|x,u,s)=\prod_{k=1}^{N}p_W(y^k|y^1,\ldots,y^{k-1},x,u,s). $$
+$$ p_W(y^1,\ldots,y^N)=\prod_{k=1}^{N}p_W(y^k|y^1,\ldots,y^{k-1}). $$
 
 Rather than modeling the complete joint distribution directly, the model predicts one output token at a time by estimating the conditional probability of the next token given all previous ones. Generation therefore proceeds sequentially,
 
@@ -634,7 +616,7 @@ until the complete sequence has been produced.
 
 Although autoregressive models are usually expressed in terms of probabilities, every probability distribution defines an equivalent energy through
 
-$$ E_W(y^k;y^{\lt k})=-\log p_W(y^k|y^1,\ldots,y^{k-1},x,u,s)+\text{constant}. $$
+$$ E_W(y^k;y^{\lt k})=-\log p_W(y^k|y^1,\ldots,y^{k-1})+\text{constant}. $$
 
 and for a sequence of predictions
 
@@ -650,7 +632,7 @@ There is recent theoretical work by [Blondel et.al.](https://arxiv.org/pdf/2512.
 
 ---
 
-## Implications for Computational Neuroscience
+### Implications for Language Models
 
 The interpretation developed throughout this paper suggests a different way of understanding the remarkable success of transformer-based language models.
 
@@ -665,44 +647,35 @@ The relationship between these models may therefore be summarized as follows.
 |---------|-------------------------|-----------------------------------------|
 | **LEPP** | Latent cognitive states | Connectome |
 | **DEPP** | Perceptual states | Latent cognition + connectome |
-| **LLMs** | Language states | Latent cognitive, social, and biological processes underlying the linguistic corpus |
+| **LLMs** | Language states | Latent cognition + connectome  |
 
 The important observation is that DEPP and transformer language models occupy **parallel positions** within the hierarchy of effective theories. Both abandon explicit latent-state representations in favor of directly modeling observable dynamics. They differ primarily in the modality over which those dynamics are defined: DEPP models perception, whereas LLMs model language. This point of view is also captured in the figure below.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat136.png)
 
-Consequently, the success of transformer language models need not imply that transformer architectures resemble cortical circuits or that attention mechanisms correspond directly to biological computations. Their success may instead arise because they learn effective dynamical laws governing the evolution of language, just as DEPP learns effective dynamical laws governing the evolution of perceptual states.
+If language is viewed as an observable projection of an underlying cognitive process, then training a language
+model becomes an inverse problem. The model never observes internal thought directly. Instead, it observes an
+enormous collection of linguistic projections generated by those hidden cognitive states. Learning therefore
+consists of constructing an effective dynamical model capable of reproducing the observable evolution of language
+without explicitly reconstructing the hidden cognitive variables that generated it.
 
-This viewpoint is closely aligned with the effective-theory perspective developed throughout this paper. Statistical mechanics replaces microscopic molecular interactions with effective energy functions governing progressively more macroscopic variables. Likewise, LEPP, DEPP, and transformer language models replace increasingly detailed cognitive mechanisms with learned dynamical laws defined over different cognitive state spaces.
+This perspective offers one possible explanation for the surprising capabilities of modern Large Language
+Models. Although they have no direct access to human thoughts or perceptual representations, they are exposed to
+an enormous number of observable consequences of those hidden cognitive processes. Given sufficiently diverse
+data and sufficiently expressive function approximators, much of the large-scale structure governing human
+linguistic behavior can be recovered indirectly.
 
----
+The resulting representation should therefore not be interpreted as a mechanistic model of human cognition.
+Rather, it is an effective theory defined over language states. Just as DEPP absorbs latent perceptual dynamics into
+an energy landscape defined over perceptual states, transformer language models absorb latent thought dynamics
+into an effective model defined over linguistic states. More generally, the success of modern generative AI
+suggests that complex systems often reveal considerably more information about their internal organization
+through their observable behavior than might initially be expected.
 
-## Recovering Hidden Structure from Observable Behavior
-
-If language is viewed as an observable projection of an underlying cognitive process, then training a language model becomes an inverse problem. The model never observes internal thought directly. Instead, it observes an enormous collection of linguistic projections generated by those hidden cognitive states.
-
-Learning therefore consists of constructing an effective dynamical model capable of reproducing the observable evolution of language without explicitly reconstructing the hidden cognitive variables that generated it.
-
-This perspective offers one possible explanation for the surprising capabilities of modern Large Language Models. Although they have no direct access to human thoughts or perceptual representations, they are exposed to an enormous number of observable consequences of those hidden cognitive processes. Given sufficiently diverse data and sufficiently expressive function approximators, much of the large-scale structure governing human linguistic behavior can be recovered indirectly.
-
-The resulting representation should therefore not be interpreted as a mechanistic model of human cognition. Rather, it is an effective theory defined over language states. Just as DEPP absorbs latent perceptual dynamics into an energy landscape defined over perceptual states, transformer language models absorb latent thought dynamics into an effective model defined over linguistic states.
-
-More generally, the success of modern generative AI suggests that complex systems often reveal considerably more information about their internal organization through their observable behavior than might initially be expected.
-
-Many problems in physics involve recovering hidden structure from indirect observations. Tomographic reconstruction, inverse scattering, and system identification all infer unobservable internal properties from measurements made at the system's boundaries. Training a generative model may be viewed as a similar inverse problem. Rather than recovering neuronal connectivity directly, the model recovers an effective dynamical law governing the observable behavior produced by that connectivity.
-
-The relationship proposed throughout this paper may therefore be summarized as follows.
-
-| Biological System | Effective Theory |
-|-------------------|------------------|
-| Connectome | Microscopic implementation |
-| Latent cognition | LEPP |
-| Perceptual dynamics | DEPP |
-| Language dynamics | Transformer / LLM |
-
-The central lesson of modern generative AI is therefore not necessarily that artificial neural networks have discovered the architecture of the brain. Rather, they demonstrate that remarkably accurate models of highly complex systems can be learned directly from observable behavior without requiring explicit knowledge of the underlying microscopic implementation.
-
-Viewed in this way, diffusion models, transformers, and related architectures should not be regarded as competing models of cortical circuitry. Instead, they represent complementary effective theories operating over different cognitive state spaces. Their significance lies less in their architectural resemblance to the brain than in their ability to recover the large-scale dynamical laws governing perception, language, and thought from observable behavior alone.
+This viewpoint is closely aligned with the effective-theory perspective developed throughout this paper. Statistical
+mechanics replaces microscopic molecular interactions with effective energy functions governing progressively
+more macroscopic variables. Likewise, LEPP, DEPP, and transformer language models replace increasingly
+detailed cognitive mechanisms with learned dynamical laws defined over different cognitive state spaces.
 
 ## 7. From Effective Energy Functions to Neural Micro-Architecture
 
@@ -797,9 +770,11 @@ The ideas developed throughout this paper suggest several open problems for futu
 
 Given a learned effective energy landscape, what classes of biologically plausible neural architectures are capable of realizing it? Rather than reconstructing the connectome uniquely, the goal is to characterize the equivalence class of neural micro-architectures consistent with the observed cognitive dynamics.
 
-**2. Learning Effective Cognitive Dynamics**
+**2. Learning Effective Cognitive Dynamics from Experimental Data**
 
 Can effective energy landscapes be learned directly from large-scale neural recordings or behavioral data? Such models could provide a complementary alternative to detailed mechanistic simulations by focusing on the dynamical laws governing cognition rather than the underlying circuitry.
+
+A particularly interesting experimental consequence of the present framework concerns the role of neural dynamics. Traditional predictive-processing experiments have primarily focused on the equilibrium states reached by cortical activity—that is, on the final neural representation corresponding to a percept. The energy-based perspective developed here suggests that the transient trajectory leading to that equilibrium may be equally informative. Rather than asking only what representation the cortex converges to, one may ask what dynamical law governs the trajectory by which it converges. If cognition is indeed organized by effective energy landscapes, then the relaxation of neural population activity following sensory perturbations should approximate stochastic energy minimization. Modern recording techniques, including Neuropixels probes, two-photon calcium imaging, MEG, and high-density EEG, increasingly make it possible to measure these transient population dynamics directly. An important experimental challenge is therefore to determine whether effective energy landscapes can be inferred from such neural trajectories, providing a direct bridge between modern generative AI and systems neuroscience. From this perspective, the primary object of investigation shifts from neural representations themselves to the effective dynamical laws that govern their evolution. The goal of computational neuroscience becomes not merely to identify where information is represented in the brain, but to characterize the energy landscapes that organize the flow of neural activity through those representations.
 
 **3. Parallel Effective Theories**
 
@@ -813,11 +788,7 @@ The planning framework developed here suggests that perception, imagination, pla
 
 Modern AI systems are typically compared according to their architectural components—transformers, diffusion models, recurrent networks, and so forth. The effective-theory viewpoint suggests an alternative comparison based on the energy landscapes these models learn. Two architectures with very different internal organizations may nevertheless implement remarkably similar effective cognitive dynamics.
 
-**6. Experimental Tests**
-
-A particularly interesting experimental consequence of the present framework concerns the role of neural dynamics. Traditional predictive-processing experiments have primarily focused on the equilibrium states reached by cortical activity—that is, on the final neural representation corresponding to a percept. The energy-based perspective developed here suggests that the transient trajectory leading to that equilibrium may be equally informative. Rather than asking only what representation the cortex converges to, one may ask what dynamical law governs the trajectory by which it converges. If cognition is indeed organized by effective energy landscapes, then the relaxation of neural population activity following sensory perturbations should approximate stochastic energy minimization. Modern recording techniques, including Neuropixels probes, two-photon calcium imaging, MEG, and high-density EEG, increasingly make it possible to measure these transient population dynamics directly. An important experimental challenge is therefore to determine whether effective energy landscapes can be inferred from such neural trajectories, providing a direct bridge between modern generative AI and systems neuroscience. From this perspective, the primary object of investigation shifts from neural representations themselves to the effective dynamical laws that govern their evolution. The goal of computational neuroscience becomes not merely to identify where information is represented in the brain, but to characterize the energy landscapes that organize the flow of neural activity through those representations.
-
-**7. Renormalization of Cognitive Dynamics**
+**6. Renormalization of Cognitive Dynamics**
 
 Statistical mechanics relates effective theories at different spatial and temporal scales through renormalization-group transformations. An intriguing open question is whether analogous transformations exist between effective cognitive theories defined over different state spaces, such as latent representations, perceptual states, and language states. Developing such a mathematical framework could provide a principled way of relating LEPP, DEPP, and language models within a single hierarchy of effective descriptions.
 
