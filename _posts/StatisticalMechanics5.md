@@ -12,9 +12,11 @@ title: " IM-LEPP: An Integrated Multimodal Energy-Based Predictive Processing Mo
 This paper proposes a computational model for semantic cognition in the brain based on the controlled semantic cognition (CSC) framework originally developed by [Ralph et.al.](https://wiredbrains.org/wp-content/uploads/2023/07/Ralph-2016-Nature-Reviews-Neuroscience.pdf). The model, that we call Integrated Multimodel Latent Energy based Predictive Processing or IM-LEPP
 builds on the previous paper that proposed the LEPP model for perception as a process of flow on an energy landscapes. The IM-LEPP model extends this idea and builds a model for cognition that integrates both perception and language processing. The IM-LEPP architecture allows for additional sensory modalities to be integrated into the model in a straightforward manner. 
 
-The IM-LEPP architecture is based on the Inference-Prediction-Generation framework for cognitive processing that was also used in LEPP. 
-The vision and language parts of the model are integrated together using a central temporal prediction hub, and this results in an internal 'thought' state that evolves as a function of both these modalities as new sensory data is received.
+The IM-LEPP design is based the following core idea that was introduced in the paper [Generative AI as an Effective Theory of Cognition](https://subirvarma.github.io/GeneralCognitics/2026/07/15/statmech4.html):
+Modern generative neural networks should be understood not as mechanistic models of neural implementation, but as effective theories of cognitive dynamics operating at the level of learned energy landscapes. In this view, cognition is understood as the temporal evolution of perceptual and cognitive states through a learned energy landscape, rather than as the direct consequence of an explicitly modeled neural circuitry. Just as statistical mechanics explains why thermodynamics provides an effective description of macroscopic matter without explicitly modeling every molecular interaction, modern generative AI may provide effective descriptions of cognitive dynamics without modeling the underlying neural circuitry. Leveraging this insight, IM-LEPP models the brain at the level of energy landscapes rather than at the circuit level.
 
+The IM-LEPP architecture is also based on the Inference-Prediction-Generation framework for cognitive processing that was also used in previous paper. 
+The vision and language parts of the model are integrated together using a central temporal prediction hub, and this results in an internal 'thought' state that evolves as a function of both these modalities as new sensory data is received.
 Both vision and langauge have their own inference and generation pipelines that operate using the predictive coding model. The inference pipeline results in latent states that reflect the latest vision or language data, and these latent states are in turn integrated into a central latent thought state, once again using predictive coding pipelines. The central thought state constitutes the prediction part of the system and is based on an energy based diffusion model. This provides a rich multi-modal landscape from which successive thought states can be sampled from. 
 The thought state is in turn is fed back into the individual perception or language modules, to generate the next percept or word. It also gets modified into new latent sensory state as new data comes in, and the cycle repeats. 
 
@@ -32,14 +34,11 @@ LLMs on the other hand operate at the level of words without exposing their inte
 - The implicit prediction or world model in LLMs is trained using successive word correlations, which seems to work, but only after consuming huge amounts of data. In IM-LEPP on the other hand the equivalent prediction module is trained using a combination of words, images and other modalities that may be available. This implies that the language generation in IM-LEPP benefits not just from words correlations, but also gets grounded using other modalities of data and all these modalities feed into a common thought state. Thus the thought state model can be trained faster if it able to take advantage of all the modality streams.
 - The prediction part of IM-LEPP operates on the basis of flows on energy landscapes driven by the process of energy minimization. This brings us one step closer to modeling the brain, since it is thought the brain also operates using a similar mechanism, but driven bit its connectome. In addition IM-LEPP is based on the CSC framework for the brain's architecture that was proposed by Ralph et.al. These aspects make IM-LEPP more biologically plausible compared to LLMs.
 
+This paper makes the following contributions:
 
-LLM models
-
-
-
-
-
-
+- We propose a hob and spoke integration architecture for multiple sensory modalities, with modality specific predictive coding pipelines converging on a shared thought state. The sharing between modalities is also mediated through predictive coding.
+- We propose an extension of predictive coding to discrete categorical data for language, and
+- The proposed architecture also takes care of asynchronous multi-rate updating across sensory modalities operating on different timescales.
 
 ## The Hub and Spoke Model for Cognition
 
