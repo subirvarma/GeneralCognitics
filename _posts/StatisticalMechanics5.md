@@ -27,10 +27,10 @@ There are several advantages that the IM-LEPP model has when compared to the cur
 
 - There is a fundamental difference between the IM-LEPP model and modern LLMs. LLMs learn by consuming a huge amount of data in the training stage, which is very different from the way our brains work. The child's brain gets trained on a continuous basis in parallel to its inference operation, and this is also the way that the IM-LEPP model learns. The internal thought state in the IM-LEPP model is grounded by the perceptual data coming in through sensory modules, and this is just like how the brain operates. The equivalent though state in the LLM is solely based on word associations from which the model tries to infer the underlying grounding.
 - Unlike LLM models, the IM-LEPP model allows us to directly access the internal though states which can be very useful to find out whether the model is operating in the 'safe' zone. LLM models on the other hand model the evolution of words directly, similar to the DEPP model discussed in the previous paper. In all likelihood they also possess internal thought like states, but they are not directly accessible. 
-- The implicit prediction or world model in LLMs is trained using successive word correlations, which seems to work, but only after consuming huge amounts of data. Im IM-LEPP on the other hand the equivalent prediction module is trained using a combination of words, images and other modalities that may be available. This implies that the language generation in IM-LEPP benefits not just from words correlations, but also image data. Since all modalities feed into a common thought state. Thus the thought state model can be trained faster if it able to take advantage of all the modality streams.
+- The implicit prediction or world model in LLMs is trained using successive word correlations, which seems to work, but only after consuming huge amounts of data. Im IM-LEPP on the other hand the equivalent prediction module is trained using a combination of words, images and other modalities that may be available. This implies that the language generation in IM-LEPP benefits not just from words correlations, but also gets grounded using other modalities of data and all these modalities feed into a common thought state. Thus the thought state model can be trained faster if it able to take advantage of all the modality streams.
 - Unlike LLM models, IM-LEPP models allow for continual learning and update of parameters as new data comes in.
 - There is stong biological plausibility for the IM-LEPP model, both in terms of its operation using the idea of state evolution based on energy flows, and evidence of a hub and spoke model for cognition in the brain, as described in the CSC paper.
-- There is strong recent experimental evidence that language processing in the brain is more like the language part of the IM-LEPP model, rather than LLM models.
+- There is strong recent experimental evidence that language processing in the brain is more like the language part of the IM-LEPP model, rather than LLM models (Barenholtz).
 - LLM models work by starting from an initial prefix, which can incorporate both images and words, and then it generates outputs, which are also a combination of words and images. However the architecture does not allow for new input data to be incorporated into the model while it is 'thinking' or in the moddle of generation. The IM-LEPP model on the other hand does allow this since its internal thought state can be accessed.
 
 
@@ -47,8 +47,6 @@ LLM models
 Based on the Lambon Ralph paper
 
 
-## Model for Modality Specific Modules
-
 
 
 ## Model for the ATL Hub
@@ -60,6 +58,8 @@ Based on the Lambon Ralph paper
 
 
 ## Inter-Operation between the Vision and Language Modules
+
+Convergence in the hub module PC pipeline if the central z state is simukltaneously being changed by the other modality.
 
 
 
