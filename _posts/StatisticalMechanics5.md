@@ -16,8 +16,7 @@ The IM-LEPP design is based the following core idea that was introduced in the p
 Modern generative neural networks should be understood not as mechanistic models of neural implementation, but as effective theories of cognitive dynamics operating at the level of learned energy landscapes. In this view, cognition is understood as the temporal evolution of perceptual and cognitive states through a learned energy landscape, rather than as the direct consequence of an explicitly modeled neural circuitry. Just as statistical mechanics explains why thermodynamics provides an effective description of macroscopic matter without explicitly modeling every molecular interaction, modern generative AI may provide effective descriptions of cognitive dynamics without modeling the underlying neural circuitry. Leveraging this insight, IM-LEPP models the brain at the level of energy landscapes rather than at the circuit level.
 
 The IM-LEPP architecture is also based on the Inference-Prediction-Generation framework for cognitive processing that was also used in previous paper. 
-The vision and language parts of the model are integrated together using a central temporal prediction hub, and this results in an internal 'thought' state that evolves as a function of both these modalities as new sensory data is received.
-Both vision and langauge have their own inference and generation pipelines that operate using the predictive coding model. The inference pipeline results in latent states that reflect the latest vision or language data, and these latent states are in turn integrated into a central latent thought state, once again using predictive coding pipelines. The central thought state constitutes the prediction part of the system and is based on an energy based diffusion model. This provides a rich multi-modal landscape from which successive thought states can be sampled from. 
+Both vision and langauge have their own inference and generation pipelines that operate using the predictive coding model. The inference pipeline results in latent states that reflect the latest vision or language data, and these latent states are in turn integrated into a central temporal prediction hub, once again using predictive coding pipelines. The central thought state constitutes the prediction part of the system and is based on an energy based diffusion model. This provides a rich multi-modal landscape from which successive thought states can be sampled from. 
 The thought state is in turn is fed back into the individual perception or language modules, to generate the next percept or word. It also gets modified into new latent sensory state as new data comes in, and the cycle repeats. 
 
 This framework allows the vision and language processes to evolve indendently of each other, and operate at different time scales. This aspect is important since vision sensory data is received almost continuously, while language data in the form of words is seprated by a few hundred milliseconds.
@@ -37,13 +36,26 @@ LLMs on the other hand operate at the level of words without exposing their inte
 This paper makes the following contributions:
 
 - We propose a hob and spoke integration architecture for multiple sensory modalities, with modality specific predictive coding pipelines converging on a shared thought state. The sharing between modalities is also mediated through predictive coding.
-- We propose an extension of predictive coding to discrete categorical data for language, and
+- We propose an extension of predictive coding to discrete categorical data needed to model language, and
 - The proposed architecture also takes care of asynchronous multi-rate updating across sensory modalities operating on different timescales.
 
 ## The Hub and Spoke Model for Cognition
 
-Based on the Lambon Ralph paper
+![](https://subirvarma.github.io/GeneralCognitics/images/stat138.png) 
 
+Figure 1: The hub and spoke model for cognition
+
+
+
+![](https://subirvarma.github.io/GeneralCognitics/images/stat139.png) 
+
+Figure 2: (a) The inference prediction generation pipeline for each modality (b) Structure of the central hub that integrates all modalities
+
+## The IM-LEPP Model for Cognition
+
+![](https://subirvarma.github.io/GeneralCognitics/images/stat140.png) 
+
+Figure 3: The IM-LEPP model
 
 
 
@@ -52,6 +64,11 @@ Based on the Lambon Ralph paper
 
 
 ## Model for the Language Module
+
+![](https://subirvarma.github.io/GeneralCognitics/images/stat141.png) 
+
+Figure 3: Predictive Coding based language module
+
 
 
 
