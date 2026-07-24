@@ -65,7 +65,7 @@ Figure 3: The IM-LEPP model
 
 ## Model for the Language Module
 
-![](https://subirvarma.github.io/GeneralCognitics/images/stat141.png) 
+![](https://subirvarma.github.io/GeneralCognitics/images/stat142.png) 
 
 Figure 3: Predictive Coding based language module
 
