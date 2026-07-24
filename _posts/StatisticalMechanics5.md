@@ -55,7 +55,7 @@ Figure 2: (a) The inference prediction generation pipeline for each modality (b)
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat140.png) 
 
-Figure 3: The IM-LEPP model
+Figure 2: The IM-LEPP model
 
 
 
@@ -63,11 +63,35 @@ Figure 3: The IM-LEPP model
 
 
 
-## Model for the Language Module
+## A Predictive Coding model for Language 
 
-![](https://subirvarma.github.io/GeneralCognitics/images/stat142.png) 
+![](https://subirvarma.github.io/GeneralCognitics/images/stat143.png) 
 
 Figure 3: Predictive Coding based language module
+
+The above figure shows a proposed predictive coding model for words. The system processes language one word at a time, and for each word it builds up an internal representation using predictive coding 
+We will assume a simple two level hierarchy, though the model allows for any number of levels. The top level has a latent representation $z^{(2)}$, and this used to generate a representation $z^{(1)}$ at the lower level using a function $f_2(z^{(2)})$ and this representation in turn generates the final representation $t=(t_1,...,t_K)$ where $K$ is the number of words in the library.
+The representations $z^{(1)}$ and $z^{(2)}$ are in continuous space, however $t$ lies in discrete space and is given by $t=(t_1,t_2,...,t_K)$ and uses the 1-hot representation so that individual words $(w_1, w_2,...,w_K$ are represented by $(1,0,...,0), (0,1,...,0),...,(0,0,...,1)$ respectively. The representation $t$ is generated from  $z^{(1)}$ by a process of sampling using the distribution
+
+$$ p(t = (t_1,...,t_K)) = (y_1)^{t_1})(y_2)^{(t_2})...(y_K)^{(t_K)}  $$
+
+where $y_k$ is given by the Boltzmann distribution (also called the softmax function in machine learning) 
+
+$$ y_k = {z_k^{(1)}\over{\sum_i e^{ z_i^{(1)}} } } $$
+
+In this equation $z_i^{(1)}$ is the $i^{th}$ component of the vector $z^{(1)}$. Lets assume that $z^{(1)}$ leads to the probabilities $y=(y_1,y_2,...,y_K)$ while the ground truth is given by
+$T = (T_1,T_2,...,T_K)$ This generates an error $\epsilon^{(1)} = y - T$, which is propagated to the level above.
+Using the Bayesian argument used in predictive coding, it can be shown that optimal $z_i^{(1)}$ is obtained by minimizing the energy function
+
+$$  E_{PC}(1) = -\sum T_i\log y_i + {1\over 2}\epsilon_{z^{(1)}}^T \Pi_1 \epsilon_{z^{(1)}}  $$
+
+where $\epsilon_{z^{(1)}} = z^{(1)} - f_2(z^{(2)})$. Using gradient descent $z_i^{(1)}$ is updated according to 
+
+$$ z_i^{(1)} \leftarrow z_i^{(1)} - \eta \left[(y_i - T_i) + \left(\frac{\partial f}{\partial {z^{(1)}} }\right)^T\Pi_1\epsilon_{ z^{(1)}}\right] $$
+
+Note that all the information required to update $z_i^{(1)}$ is available locally.
+
+The question arises about how does the brain generate the groung truth $s$
 
 
 
