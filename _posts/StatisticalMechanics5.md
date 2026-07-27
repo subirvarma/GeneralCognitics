@@ -50,20 +50,20 @@ Figure 1: The hub and spoke model for cognition. There is a central hub ocated i
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat144.png) 
 
-Figure 1: Hub and Spoke Model for Vision: Integration of Objects into a Scene
+Figure 2: Hub and Spoke Model for Vision: Integration of Objects into a Scene
 
 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat145.png) 
 
-Figure 1: Predictive Processing Pipeline for an Individual Object at Level 1
+Figure 3: Predictive Processing Pipeline for an Individual Object at Level 1
 
 
 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat146.png) 
 
-Figure 1: Integration of Object Pipelines into the Vision Hub at Level 2
+Figure 4: Integration of Multiple Object Level Pipelines into the Vision Hub at Level 2
 
 
 
@@ -71,7 +71,7 @@ Figure 1: Integration of Object Pipelines into the Vision Hub at Level 2
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat146.png) 
 
-Figure 1:Integration of Vision and Language into the Cognition Level Hub at Level 3
+Figure 5:Integration of Vision and Language Hubs into the Cognition Level Hub at Level 3
 
 
 
@@ -81,7 +81,7 @@ Figure 1:Integration of Vision and Language into the Cognition Level Hub at Leve
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat143.png) 
 
-Figure 3: Predictive Coding based language module
+Figure 6: Predictive Coding based language module
 
 The above figure shows a proposed predictive coding model for words. The system processes language one word at a time, and for each word it builds up an internal representation using predictive coding 
 We will assume a simple two level hierarchy, though the model allows for any number of levels. The top level has a latent representation $z^{(2)}$, and this used to generate a representation $z^{(1)}$ at the lower level using a function $f_2(z^{(2)})$ and this representation in turn generates the final representation $t=(t_1,...,t_K)$ where $K$ is the number of words in the library.
