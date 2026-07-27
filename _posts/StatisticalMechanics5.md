@@ -43,23 +43,37 @@ This paper makes the following contributions:
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat138.png) 
 
-Figure 1: The hub and spoke model for cognition
+Figure 1: The hub and spoke model for cognition. There is a central hub ocated in the brain's ATL area, but the individual modlaities acn have their hubs. 
+
+
+## Hub and Spoke Model for Vision
+
+![](https://subirvarma.github.io/GeneralCognitics/images/stat144.png) 
+
+Figure 1: Hub and Spoke Model for Vision: Integration of Objects into a Scene
 
 
 
-![](https://subirvarma.github.io/GeneralCognitics/images/stat139.png) 
+![](https://subirvarma.github.io/GeneralCognitics/images/stat145.png) 
 
-Figure 2: (a) The inference prediction generation pipeline for each modality (b) Structure of the central hub that integrates all modalities
-
-## The IM-LEPP Model for Cognition
-
-![](https://subirvarma.github.io/GeneralCognitics/images/stat140.png) 
-
-Figure 2: The IM-LEPP model
+Figure 1: Predictive Processing Pipeline for an Individual Object at Level 1
 
 
 
-## Model for the ATL Hub
+
+![](https://subirvarma.github.io/GeneralCognitics/images/stat146.png) 
+
+Figure 1: Integration of Object Pipelines into the Vision Hub at Level 2
+
+
+
+
+
+![](https://subirvarma.github.io/GeneralCognitics/images/stat146.png) 
+
+Figure 1:Integration of Vision and Language into the Cognition Level Hub at Level 3
+
+
 
 
 
