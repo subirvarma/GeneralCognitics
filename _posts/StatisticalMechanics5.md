@@ -1,9 +1,9 @@
 ---
 layout: default
-title: " IM-LEPP: An Integrated Multimodal Energy-Based Predictive Processing Model of Cognition"
+title: " A Hierarchical Energy-Based Model for Multimodal Cognition"
 ---
 
-# IM-LEPP: An Integrated Multimodal Energy-Based Predictive Processing Model of Cognition
+# A Hierarchical Energy-Based Model for Multimodal Cognition
 
 **Contents**     
 
@@ -77,7 +77,7 @@ $$ p(t = (t_1,...,t_K)) = (y_1)^{t_1})(y_2)^{(t_2})...(y_K)^{(t_K)}  $$
 
 where $y_k$ is given by the Boltzmann distribution (also called the softmax function in machine learning) 
 
-$$ y_k = {z_k^{(1)}\over{\sum_i e^{ z_i^{(1)}} } } $$
+$$ y_k = { e^{ z_k^{(1)}}\over{\sum_i e^{ z_i^{(1)}} } } $$
 
 In this equation $z_i^{(1)}$ is the $i^{th}$ component of the vector $z^{(1)}$. Lets assume that $z^{(1)}$ leads to the probabilities $y=(y_1,y_2,...,y_K)$ while the ground truth is given by
 $T = (T_1,T_2,...,T_K)$ This generates an error $\epsilon^{(1)} = y - T$, which is propagated to the level above.
@@ -91,7 +91,9 @@ $$ z_i^{(1)} \leftarrow z_i^{(1)} - \eta \left[(y_i - T_i) + \left(\frac{\partia
 
 Note that all the information required to update $z_i^{(1)}$ is available locally.
 
-The question arises about how does the brain generate the groung truth $s$
+### Computation of $y$ and $T$
+
+
 
 
 
