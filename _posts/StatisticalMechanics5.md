@@ -46,6 +46,18 @@ This paper makes the following contributions:
 Figure 1: The hub and spoke model for cognition. There is a central hub ocated in the brain's ATL area, but the individual modlaities acn have their hubs. 
 
 
+![](https://subirvarma.github.io/GeneralCognitics/images/stat148.png) 
+
+Figure 2:
+
+
+## The IM-LEPP Model for Vision and Language Integration
+
+![](https://subirvarma.github.io/GeneralCognitics/images/stat148.png) 
+
+Figure 2:
+
+
 ## Hub and Spoke Model for Vision
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat144.png) 
