@@ -92,17 +92,17 @@ The level 3 predictive processing model for an individual object is shown in the
 Subsequently the prediction module is invoked and this results in a prediction $x_{n+1}$. The prediction process is modeled by using a multi-stage diffusion process that gradually anneals the state of the system until it reaches a state of lower energy. The state $x_{n+1}$ is sent to the level 2 visioon hub and this results in the state $zz_{n+1}$, and this in turn is sent to the multimodal level 1 hub, resulting in the state $zzz_{n+1}$. This state information is then fed back into the level 3 object level pipeline by settting $x_{n+1} = zzz_{n+1}$. Note that as a result of this integration with higher level hubs, the state $x_{n+1}$ incorporates information about other objects in the scene as well other modalities that may be relevant such as sound. The representation $x_{n+1}$ is used to generate the next percept $g_{\phi}(x_{n+1})$, and is also used to kick off the next phase of the predictive coding pipeline by comparing it with the new sensory data $s_{n+1}$. This subsequently results in a new state $z_{n+2}$ and the cycle repeats.
 
 
-![](https://subirvarma.github.io/GeneralCognitics/images/stat146.png) 
+![](https://subirvarma.github.io/GeneralCognitics/images/stat152.png) 
 
-Figure 4: Integration of Multiple Object Level Pipelines into the Vision Hub at Level 2
+Figure 6: Integration of Multiple Object Level Pipelines into the Vision Hub at Level 2
 
+The structure of the level 2 vision hub is shown in the above figure. It shows that the predicted state values $x_{n+1}$ from the object level pipeline is fed into predictive coding pipeline, where $x_{n+1}$ serves as the ground truth value. As a result of predictive coding, ther state of the hub gets modified to $zz_{n+1]$, and this value reflects not just the latest information from the current object level hub, but also information from all the other other object level hubs that are active at the same time. As sson as an object moves out of the field of vision, its level 3 predictive processing model is dis-connected from the level 2 vision hub, and as other objects appear their level 3 pipelines are in turn connected to the hub. If the objects are well known due to frequent appearance, then their prediction models are pre-trained and stored in the brain, while new objects undergo a period of training.
 
-
-
+Note that this design takes into account two objects that are interacting with each other, for example a ball bouncing off a wall. In this case there is a level 3 model for the ball, as well as for the wall, and two get integrated at th level 2 hub, and subsequently this information is fed back into the state $x_{n+1}$ for the ball. Thus if the ball is very close to the wall, then the next prediction will lead to a change in its trajectory. If both the objects are mocing towarsd each other, for example two balls about to collide, 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat151.png) 
 
-Figure 5:Integration of Vision and Language Hubs into the Cognition Level Hub at Level 3
+Figure 7:Integration of Vision and Language Hubs into the Cognition Level Hub at Level 3
 
 
 
