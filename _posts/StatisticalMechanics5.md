@@ -78,15 +78,18 @@ The model leads to a picture in which there are number of distributed level 3 hu
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat150.png) 
 
-Figure 2: Hub and Spoke Model for Vision: Integration of Objects into a Scene
+Figure 4: Hub and Spoke Model for Vision: Integration of Objects into a Scene
 
+This section has a more detailed description of the vision models operating at levels 2 and 3. Modern AI systems process images at the level of pixels, and learn prediction models for how value of these pixels evolves with time, and this is how vision was also modeled in the LEPP paper. The brain on the other hand is thought to decompose a scene at the object level, and then model the evolution of the individual objects with time. For example in a road scene, there would be models for the pedestrians, the trees, the cars as well as a model for the background containing the sky, background landscape etc. Each object is tracked individually, but the brain also integrates the representations of all them to create the scene that we see in front of us. This is the kind of system that we propose to model as shown in the above figure. 
 
+Predictive level 3 models for objects that we encounter in our daily lives don't require much training. HOwever when we encounter an object for the first time then the predictive model undergoes a period of training, after which it gets stored away. At any one time a subset of trhe models are required depending on the scene that is being composed.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat145.png) 
 
-Figure 3: Predictive Processing Pipeline for an Individual Object at Level 3
+Figure 5: Predictive Processing Pipeline for an Individual Object at Level 3
 
-
+The level 3 predictive processing model for an individual object is shown in the above figure, and follows the LEPP design, with inference, prediction and generation modules. As new sensory data $s_n$ for an object comes in, it is integrated into the latent state $z_n$ for the object by using the predictive coding pipeline by using the principle of minimization of the predictive coding energy $E_{PC}$. 
+Subsequently the prediction module is invoked and this results in a prediction $x_{n+1}$. The prediction process is modeled by using a multi-stage diffusion process that gradually anneals the state of the system until it reaches a state of lower energy. The state $x_{n+1}$ is sent to the level 2 visioon hub and this results in the state $zz_{n+1}$, and this in turn is sent to the multimodal level 1 hub, resulting in the state $zzz_{n+1}$. This state information is then fed back into the level 3 object level pipeline by settting $x_n+1} = zzz_{n+1}$. Note that as a result of this integration with higher level hubs, the state $x_{n+1}$ incorporates information about other objects in the scene as well other modalities that may be relevant such as sound. The representation $x_{n+1}$ is used to generate the next percept $g_{\phi}(x_n+1}$, and is also used to kick off the next phase of the predictive coding pipeline by comparing it with the new sensory data $s_{n+1}$. This subsequently results in a new state $z_{n+2}$ and the cycle repeats.
 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat146.png) 
@@ -97,7 +100,7 @@ Figure 4: Integration of Multiple Object Level Pipelines into the Vision Hub at 
 
 
 
-![](https://subirvarma.github.io/GeneralCognitics/images/stat146.png) 
+![](https://subirvarma.github.io/GeneralCognitics/images/stat151.png) 
 
 Figure 5:Integration of Vision and Language Hubs into the Cognition Level Hub at Level 3
 
