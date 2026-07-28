@@ -43,7 +43,12 @@ This paper makes the following contributions:
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat138.png) 
 
-Figure 1: The hub and spoke model for cognition. There is a central hub ocated in the brain's ATL area, but the individual modlaities acn have their hubs. 
+Figure 1: The controlled semantic cognition (CSC) for cognition. 
+
+The controlled semantic cognition (CSC) framework was proposed by Lambon Ralph et.al. in 2017, and it was based on key findings from a decade of research into neurocognitive and neurocomputational underpinnings in the brain's semantic cognition abilities. Based on this, they proposed the 'hub and spoke' theory of semantic representation that is shown in the above figure, which was based on accounting os patterns of impairment that are observed in some semantic disorders. This theory assimilated two important existing ideas: (a) The model assumes that multimodal verbal and non-verbal experiences provide the core ingredients for constructing concepts and these information sources are encoded in modality sepcific cortices distributed across the brain, (b) The model proposes that that cross modal interactions for all modality sepcific sources of information are mediated by a single transmodal hub that is situated bilaterally in the anterior temporal lobe (ATL) area of the brain.
+The hub and spoke model was was suggested by the observation that individuals with semantic dementia (SD) show semantic impairments across all modalities, and SD is characterized by atrophy centered in the ATL.
+
+This model solves the problem of how the information relevant to a given concept is experienced across all different verbal and sensory modalities. For example if see an image of a dog, then we are able to reproduce the sounds, names valence and other types of information that are associated with the animal. This implies that the ATL hub forms generalizable semantic representations for a dog that are shared across all modalities.
 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat148.png) 
@@ -53,7 +58,7 @@ Figure 2:
 
 ## The IM-LEPP Model for Vision and Language Integration
 
-![](https://subirvarma.github.io/GeneralCognitics/images/stat148.png) 
+![](https://subirvarma.github.io/GeneralCognitics/images/stat149.png) 
 
 Figure 2:
 
