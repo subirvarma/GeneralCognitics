@@ -69,13 +69,14 @@ We propose a model for integration of visual and language modalites based on the
 - There is a central ATL type hub at level 1 that integrates representations coming in from the vision and language hubs. Note that the communication between the level 1 central hub and the vision and language hubs is bi-directional, so that not only the spoke hubs influence the representation in the central hub, but they in turn are influenced by the information coming from the central hub.
 - The vision hub itself has a two level structure. There is a central vision hub at level 2 thats integrates information coming from level 3 hubs, with the understanding that the level 2 represents a scene, while there is an idividual level 3 hub to represent each object in the scene. The representation of each of these objects changes asynchronously while the level 2 hub integrates the latest information and sends it up to the central level 1 hub.
 - The object based level 3 vision hubs operate according to the inference-prediction-generation framework that was used for the LEPP model. This results in temporal predictions for the object representation that are sent to the level 2 visionhub for integration with all the other objects in the scene. This representation in turn gets integrated with representations from other modalities in the multimodal level 1 hub. The level 1 representation in turn is fed back to level 3 vision hubs, which then uses it to generate percepts. Note that these percepts take all the other objects that are in the scene into account (as well as other modalities), by virtue of the fact that they are based on representations coming from the level 1 multimodal hub.
+- The language module operates at the word level, and incorporates an inference-prediction-generation pipeline whose job is to predict the next word. The latent representation used to do this generation comes from the central level 1 hub and takes the current visual scene into account. Hence unlike in an LLM, next word prediction is not based solely on word occurence statistics, but on other data that are impinging on the brain.
 
 The model leads to a picture in which there are number of distributed level 3 hubs in the brain, that are individually responsible for predictions in the modality they are tracking. Hence the prediction operations happens in several places in the brain, while central hubs at level 2 and level 1 are responsible for the integration work. We will show that as in the LEPP model, all state level dynamics in the IM-LEPP model are based on flows in energy landscapes
 
 
 ## Hub and Spoke Model for Vision
 
-![](https://subirvarma.github.io/GeneralCognitics/images/stat144.png) 
+![](https://subirvarma.github.io/GeneralCognitics/images/stat150.png) 
 
 Figure 2: Hub and Spoke Model for Vision: Integration of Objects into a Scene
 
@@ -83,7 +84,7 @@ Figure 2: Hub and Spoke Model for Vision: Integration of Objects into a Scene
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat145.png) 
 
-Figure 3: Predictive Processing Pipeline for an Individual Object at Level 1
+Figure 3: Predictive Processing Pipeline for an Individual Object at Level 3
 
 
 
