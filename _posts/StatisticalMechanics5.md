@@ -62,7 +62,13 @@ Based on experimental data, the model also proposed that the semantic representa
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat149.png) 
 
-Figure 2:
+Figure 3: The IM-LEPP model
+
+We propose a model for integration of visual and language modalites based on the hub and spoke model, which we call integrated multimodal latent energy-based predictive processing or IM-LEPP (see above figure). This model extends the LEPP model that was described in the [previous paper](https://subirvarma.github.io/GeneralCognitics/2026/07/15/statmech4.html) in two ways: It extends the vision model to a hierarchical structure, and it introduces a LEPP style model for language, and finally proposes how the two may be integrated together to create a common representation. The IM-LEPP model has the following features:
+
+- There is a central ATL type hub at level 1 that integrates representations coming in from the vision and language hubs. Note that the communication between the level 1 central hub and the vision and language hubs is bi-directional, so that not only the spoke hubs influence the representation in the central hub, but they in turn are influenced by the information coming from the central hub.
+- The vision hub itself has a two level structure. There is a central vision hub at level 2 thats integrates information coming from level 3 hubs, with the understanding that the level 2 represents a scene, while the level 3 hubs represent objects that are in the scene. The representation of each of these objects changes asynchronously while the level 2 hub integrates the latest information and sends it up to the central level 1 hub.
+- The object based level 3 hubs operate according to the inference-prediction-generation framework that was used for the LEPP model. This results in predictions for the object that are used to generate perception, and also sent to the level 2 hub for integration with all the other objects in the scene.
 
 
 ## Hub and Spoke Model for Vision
