@@ -7,7 +7,7 @@ title: " A Hierarchical Energy-Based Model for Multimodal Cognition"
 
 **Contents**     
 
-## Introduction
+## Introduction dddd
 
 This paper proposes a computational model for semantic cognition in the brain based on the controlled semantic cognition (CSC) framework originally developed by [Ralph et.al.](https://wiredbrains.org/wp-content/uploads/2023/07/Ralph-2016-Nature-Reviews-Neuroscience.pdf). The model, that we call Integrated Multimodel Latent Energy based Predictive Processing or IM-LEPP
 builds on the previous paper that proposed the LEPP model for perception as a process of flow on an energy landscapes. The IM-LEPP model extends this idea and builds a model for cognition that integrates both perception and language processing. The IM-LEPP architecture allows for additional sensory modalities to be integrated into the model in a straightforward manner. 
