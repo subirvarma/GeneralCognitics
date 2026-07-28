@@ -50,10 +50,12 @@ The hub and spoke model was was suggested by the observation that individuals wi
 
 This model solves the problem of how the information relevant to a given concept is experienced across all different verbal and sensory modalities. For example if see an image of a dog, then we are able to reproduce the sounds, names valence and other types of information that are associated with the animal. This implies that the ATL hub forms generalizable semantic representations for a dog that are shared across all modalities.
 
-
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat148.png) 
 
 Figure 2:
+
+There is a sub-region within the ATL called the ventral-ventrolateral ATL that serves as the cross modal center point of the hub for multimodal naming and comprehension.
+Based on experimental data, the model also proposed that the semantic representation function varies in a graded manner across the the ATL subregions. The 8x8 unit grid of colored circles in the above figure represents the ATL hub with reciprocal connectivity to the modality specific spokes. The contribution of the hub units to the semantic representation is graded reflecting a varying pattern of connectivity to the spoke layers. At the center point, there is equal weighted connectivity to all inputs, thus resulting in an evenly transmodal representation, as shown by the white color.
 
 
 ## The IM-LEPP Model for Vision and Language Integration
