@@ -116,10 +116,16 @@ After the predictive coding pipeline settles down, the resulting value of the hu
 
 Figure 8: Classification of a continuous sound signal into a discrete phoneme sequence
 
+A continuous sound signal is converted into a discrete phoneme sequence $ph_{n},p_{n+1},...$
+
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat155.png) 
 
 Figure 9: Predictive Processing Pipeline for Next Phoneme Prediction
+
+The discrete phoneme sequence is sent into a predictive processing pipeline for next phoneme prediction.
+The system is able to detect the end of a word tracking the difference between the predicted phoneme latent state $x_n$ and the actual latent state $z_n$. 
+If this difference exceeds some threshold, then the latent state $z_n$ is sent to the word level predictive processing pipeline.
 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat143.png) 
@@ -130,6 +136,8 @@ Figure 10: Predictive Coding Pipeline for Phonemes
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat156.png) 
 
 Figure 11: Predictive Processing Pipeline for Next Word Prediction
+
+The predictive processing pipeline for next word prediction uses the latent state $z_n$ from the phoneme pipeline as the ground truth that represents a word.
 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat157.png) 
