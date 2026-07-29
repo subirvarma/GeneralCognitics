@@ -112,9 +112,29 @@ After the predictive coding pipeline settles down, the resulting value of the hu
 
 ## A Predictive Coding model for Language 
 
+![](https://subirvarma.github.io/GeneralCognitics/images/stat154.png) 
+
+Figure 8: Classification of a continuous sound signal into a discrete phoneme sequence
+
+
+![](https://subirvarma.github.io/GeneralCognitics/images/stat155.png) 
+
+Figure 9: Predictive Processing Pipeline for Next Phoneme Prediction
+
+
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat143.png) 
 
-Figure 8: Predictive Coding based language module
+Figure 10: Predictive Coding Pipeline for Phonemes
+
+
+![](https://subirvarma.github.io/GeneralCognitics/images/stat156.png) 
+
+Figure 11: Predictive Processing Pipeline for Next Word Prediction
+
+
+![](https://subirvarma.github.io/GeneralCognitics/images/stat157.png) 
+
+Figure 12: Integration of vision and language modules
 
 The above figure shows a proposed predictive coding model for words. The system processes language one word at a time, and for each word it builds up an internal representation using predictive coding 
 We will assume a simple two level hierarchy, though the model allows for any number of levels. The top level has a latent representation $z^{(2)}$, and this used to generate a representation $z^{(1)}$ at the lower level using a function $f_2(z^{(2)})$ and this representation in turn generates the final representation $t=(t_1,...,t_K)$ where $K$ is the number of words in the library.
