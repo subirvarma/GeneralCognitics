@@ -96,15 +96,17 @@ Subsequently the prediction module is invoked and this results in a prediction $
 
 Figure 6: Integration of Multiple Object Level Pipelines into the Vision Hub at Level 2
 
-The structure of the level 2 vision hub is shown in the above figure. It shows that the predicted state values $x_{n+1}$ from the object level pipeline is fed into predictive coding pipeline, where $x_{n+1}$ serves as the ground truth value. As a result of predictive coding, ther state of the hub gets modified to $zz_{n+1]$, and this value reflects not just the latest information from the current object level hub, but also information from all the other other object level hubs that are active at the same time. As sson as an object moves out of the field of vision, its level 3 predictive processing model is dis-connected from the level 2 vision hub, and as other objects appear their level 3 pipelines are in turn connected to the hub. If the objects are well known due to frequent appearance, then their prediction models are pre-trained and stored in the brain, while new objects undergo a period of training.
+The structure of the level 2 vision hub is shown in the above figure. It shows that the predicted state values $x_{n+1}$ from the object level pipeline is fed into predictive coding pipeline, where $x_{n+1}$ serves as the ground truth value. As a result of predictive coding, ther state of the hub gets modified to $zz_{n+1}$, and this value reflects not just the latest information from the current object level hub, but also information from all the other other object level hubs that are active at the same time. As sson as an object moves out of the field of vision, its level 3 predictive processing model is dis-connected from the level 2 vision hub, and as other objects appear their level 3 pipelines are in turn connected to the hub. If the objects are well known due to frequent appearance, then their prediction models are pre-trained and stored in the brain, while new objects undergo a period of training.
 
-Note that this design takes into account two objects that are interacting with each other, for example a ball bouncing off a wall. In this case there is a level 3 model for the ball, as well as for the wall, and two get integrated at th level 2 hub, and subsequently this information is fed back into the state $x_{n+1}$ for the ball. Thus if the ball is very close to the wall, then the next prediction will lead to a change in its trajectory. If both the objects are mocing towarsd each other, for example two balls about to collide, 
+Note that this design takes into account two objects that are interacting with each other, for example a ball bouncing off a wall. In this case there is a level 3 model for the ball, as well as for the wall, and two get integrated at th level 2 hub, and subsequently this information is fed back into the state $x_{n+1}$ for the ball. Thus if the ball is very close to the wall, then the next prediction will lead to a change in its trajectory. If both the objects are moving towards each other, for example two balls about to collide, and assume that our attention is focused on one of the balls so that its state is being updated constantly. In this situation if the level 3 predictions for the other ball operate in an open-loop fashion based on its last position and velocity, the the system should be able to predict the collision at the right instant even though attention is focused on ball 1.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat151.png) 
 
 Figure 7:Integration of Vision and Language Hubs into the Cognition Level Hub at Level 3
 
+The above figure shows the structure of the level 1 hub. It is the same as for the level 2 vision hub, however now the signals are coming in from vision as well as language modalities. There is a predictive coding pipeline for vision and another one for language, and this results in a representation $zzz_{n+1}$ that is amodal. Note that the structure of the predictive coding pipeline agrees with what has been observed about the variation in the mode representation shown in figure 2. Specifically the predictive coding states that are closer to the vision (or language signal) would still retain the signatures of that mode, and as we move up the pipeline, the representation turns gradually amodal.
 
+After the predictive coding pipeline sttles down, the resulting value of the hub state state $zzz_{n+1}$ is fed back into the level 3 part of the vision and language pipelines, and serves as the $x_{n+1}$ value for the generation part. Thus the generation takes place at the mode level, but takes into account everything else that is happening by virtue of this architecture.
 
 
 
@@ -112,7 +114,7 @@ Figure 7:Integration of Vision and Language Hubs into the Cognition Level Hub at
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat143.png) 
 
-Figure 6: Predictive Coding based language module
+Figure 8: Predictive Coding based language module
 
 The above figure shows a proposed predictive coding model for words. The system processes language one word at a time, and for each word it builds up an internal representation using predictive coding 
 We will assume a simple two level hierarchy, though the model allows for any number of levels. The top level has a latent representation $z^{(2)}$, and this used to generate a representation $z^{(1)}$ at the lower level using a function $f_2(z^{(2)})$ and this representation in turn generates the final representation $t=(t_1,...,t_K)$ where $K$ is the number of words in the library.
