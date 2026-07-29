@@ -110,7 +110,7 @@ The above figure shows the structure of the level 1 hub located in the ATL. It i
 
 After the predictive coding pipeline settles down, the resulting value of the hub state $zzz_{n+1}$ is fed back into the level 3 part of the vision and language pipelines, and serves as the latent $x_{n+1}$ value that is used for percept generation. Thus the percept generation takes place at the mode level, but takes into account everything else that is happening by virtue of this architecture.
 
-## A Predictive Coding model for Language 
+## A Predictive Processing Model for Language 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat154.png) 
 
