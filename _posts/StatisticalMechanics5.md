@@ -89,12 +89,11 @@ Predictive processing models for objects that we encounter in our daily lives do
 Figure 5: Predictive Processing Pipeline for an Individual Object at Level 3
 
 The level 3 predictive processing pipeline for an individual object is shown in the above figure, and follows the LEPP design, with inference, prediction and generation modules. As new sensory data $s_n$ for an object comes in, it is integrated into the latent state $z_n$ for the object by using predictive coding as described in [Varma](https://subirvarma.github.io/GeneralCognitics/2026/07/15/statmech4.html). Inference operates by using the principle of minimization of predictive coding energy $E_{PC}$. 
-The latent state $z_n$ is sent to the level 2 vision hub and this results in the scene level latent representation $zz_{n+1}$, and this in turn is sent to the multimodal level 1 hub, resulting in the latent representation $zzz_{n+1}$. This state information is then fed back into initial object predictive processing pipeline by setting its latent state to $z_n = zzz_n$. Note that as a result of this integration with higher level hubs, the prediction $z_n$ incorporates information about other objects in the scene as well other modalities that may be relevant such as valence (in addition to the latest input $s_n$). 
+The latent state $z_n$ is fed into the temporal prediction module and this results in a prediction $x_{n+1}$. The prediction process is modeled by using a multi-stage diffusion model that minimizes an energy $E_W(x;z_n,u_{n+1})$ by gradually annealing the state $x$ of the system until it reaches a state $x_{n+1}$ of low energy. 
+The prediction $x_{n+1}$ is sent to the level 2 vision hub and this results in the scene level latent representation $xx_{n+1}$, and this in turn is sent to the multimodal level 1 hub, resulting in the latent representation $xxx_{n+1}$. This state information is then fed back into initial object predictive processing pipeline by setting its latent state to $x_n = xxx_n$. Note that as a result of this integration with higher level hubs, the prediction $x_n$ incorporates information about other objects in the scene as well other modalities that may be relevant such as valence. 
+The modifeid latent representation $x_{n+1}$ is used to generate the next percept $g_{\phi}(x_{n+1})$, and is also used to kick off the inference phase of the predictive processing pipeline by comparing it with the new sensory data $s_{n+1}$. This subsequently results in a new object latent state $z_{n+1}$ and the cycle repeats.
 
-Subsequently the temporal prediction module is invoked and this results in a prediction $x_{n+1}$. The prediction process is modeled by using a multi-stage diffusion model that minimizes an energy $E_W(x;z_n,u_{n+1})$ by gradually annealing the state $x$ of the system until it reaches a state $x_{n+1}$ of low energy. 
-The latent representation $x_{n+1}$ is used to generate the next percept $g_{\phi}(x_{n+1})$, and is also used to kick off the inference phase of the predictive processing pipeline by comparing it with the new sensory data $s_{n+1}$. This subsequently results in a new object latent state $z_{n+1}$ and the cycle repeats.
-
-![](https://subirvarma.github.io/GeneralCognitics/images/stat158.png) 
+![](https://subirvarma.github.io/GeneralCognitics/images/stat161.png) 
 
 Figure 6: Integration of Multiple Object Level Predictive Processing Pipelines into the Vision Hub at Level 2
 
@@ -102,13 +101,14 @@ The structure of the level 2 vision hub is shown in the above figure. It shows t
 
 Note that this design takes into account the predictions that arise when two objects are interacting with each other, for example a ball bouncing off a wall. In this case there is a level 3 model for the ball, as well as for the wall, and two latent states integrated at the level 2 hub, and subsequently this information is used to update the latent state $x_{n+1}$ for the ball. Thus if the ball is very close to the wall, then the next prediction will lead to a change in its trajectory since the ball model knows about the presence of the wall. If both the objects are moving towards each other, for example two balls about to collide, and assume that our attention is focused on one of the balls so that its state is being updated constantly. In this situation if the level 3 predictions for the other ball operate in an open-loop fashion based on its last position and velocity, the the system should be able to predict the collision at the right instant even though attention is focused on ball 1.
 
-![](https://subirvarma.github.io/GeneralCognitics/images/stat159.png) 
+![](https://subirvarma.github.io/GeneralCognitics/images/stat162.png) 
 
 Figure 7: Integration of Vision and Language Hubs into the Cognition Level Hub at Level 1
 
-The above figure shows the structure of the level 1 hub located in the ATL. It is the same as for the level 2 vision hub, however now the signals are coming in from vision as well as language modalities. There is a predictive coding pipeline for vision and another one for language, and this results in a representation $zzz_{n+1}$ that is amodal. Note that the structure of the predictive coding pipeline agrees with what has been observed about the variation in the mode representation shown in figure 2. Specifically the predictive coding states that are closer to the vision (or language signal) would still retain the signatures of that mode, and as we move up the pipeline, the representation turns gradually amodal.
+The above figure shows the structure of the level 1 hub located in the ATL. It is the same as for the level 2 vision hub, however now the signals are coming in from vision as well as language modalities. There is a predictive coding pipeline for vision and another one for language, and this results in a representation $xxx_{n+1}$ that is amodal. Note that the structure of the predictive coding pipeline agrees with what has been observed about the variation in the mode representation shown in figure 2. Specifically the predictive coding states that are closer to the vision (or language signal) would still retain the signatures of that mode, and as we move up the pipeline, the representation turns gradually amodal.
 
-After the predictive coding pipeline settles down, the resulting value of the hub state $zzz_n$ is fed back into the level 3 part of the vision and language pipelines, and serves as the latent $z_n$ value that is used for next state prediction $x_{n+1}$ which results in the next percept $g_{\phi}(x_{n+1})$ . Thus the percept generation takes place at the mode level, but takes into account everything else that is happening by virtue of this architecture.
+After the predictive coding pipeline settles down, the resulting value of the hub state $xxx_n$ is fed back into the level 3 part of the vision and language pipelines, and serves as the latent $x_n$ value that is used to generate the next percept $g_{\phi}(x_n)$. The latent $x_n$ subsequently gets modified by the new sensory data $s_n$, which results in the latent state $z_n$.
+Thus the percept generation takes place at the mode level, but takes into account everything else that is happening by virtue of this architecture.
 
 ## A Predictive Processing Model for Language 
 
@@ -125,16 +125,20 @@ Figure 9: Predictive Processing Pipeline for Next Phoneme Prediction
 
 The discrete phoneme sequence is sent into a predictive processing pipeline for next phoneme prediction.
 The system is able to detect the end of a word tracking the difference between the predicted phoneme latent state $x_n$ and the actual latent state $z_n$. 
-If this difference exceeds some threshold, then the latent state $z_n$ is sent to the word level predictive processing pipeline.
+If this difference exceeds some threshold, then the predicted latent state $x_n$ is sent to the word level predictive processing pipeline.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat156.png) 
 
 Figure 10: Predictive Processing Pipeline for Next Word Prediction
 
-The predictive coding pipeline in the word level module uses the latent state $z_n$ from the phoneme pipeline as the ground truth that represents the latent representation for a word. $zz_n$ is initialized to $xx_n$, and as a result of predictive coding, it gets modified to $q_{phi)(xx_n,z_n)$. Subsequently $zz_n$ is fed into the central ATL hub, where it gets modified to $zzz_n$ as a result of integration with other modes. This $zzz_n$ is fed back to the word model, where we set $zz_n = zzz_n$. Hence we can see that the state $zz_n$ reflects the latest phoneme data (by way of $z_n$) as well as
- the influence of other modes that are active. $zz_n$ is subsequently fed into the prediction module which results in $xx_{n+1}$ and this is used to generate the next word percept $yy_{n+1} = g_{\psi}(xx_{n+1})$. Note that $yy_{n+1}$ is still in the latent representation form, hence needs an additional step to decode it into phonemes.
+The predictive coding pipeline in the word level module uses the latent state $x_n$ from the phoneme pipeline as the ground truth that represents the latent representation for a word. 
+This results in a modification of the word latent state $zz_n$ to $q_{phi}(zz_n,x_n)$.
+The energy based prediction module is invoked next and this results in the prediction $xx_{n+1}$.
 
-![](https://subirvarma.github.io/GeneralCognitics/images/stat160.png) 
+Subsequently $xx_{n+1}$ is fed into the central ATL hub, where it gets modified to $xxx_{n+1}$ as a result of integration with other modes. This $xxx_{n+1}$ is fed back to the word model, where we set $xx_{n+1} = xxx_{n+1}$. Hence we can see that the prediction $xx_{n+1}$ reflects the latest phoneme data (by way of $x_n$) as well as
+ the influence of other modes that are active. $xx_{n+1}$ is subsequently used to generate the next word latent $yy_{n+1}=g_{psi}(xx_{n+1})$, and this value is fed back into the phoneme predictive processing pipeline shown in figure 9, by setting $x_{n+1}=yy_{n+1}$.
+
+![](https://subirvarma.github.io/GeneralCognitics/images/stat163.png) 
 
 Figure 11: Integration of vision and language modules at the central ATL hub
 
