@@ -148,18 +148,20 @@ Figure 9: Predictive Processing Pipeline for Next Phoneme Prediction
 
 The discrete phoneme sequence is sent into a predictive processing pipeline for next phoneme prediction.
 The system is able to detect the end of a word tracking the difference between the predicted phoneme latent state $x_n$ and the actual latent state $z_n$. 
-If this difference exceeds some threshold, then the predicted latent state $x_n$ is sent to the word level predictive processing pipeline.
+If this difference exceeds some threshold, then the latent state $z_n$ is sent to the word level predictive processing pipeline.
 
-![](https://subirvarma.github.io/GeneralCognitics/images/stat156.png) 
+![](https://subirvarma.github.io/GeneralCognitics/images/stat164.png) 
 
 Figure 10: Predictive Processing Pipeline for Next Word Prediction
 
-The predictive coding pipeline in the word level module uses the latent state $x_n$ from the phoneme pipeline as the ground truth that represents the latent representation for a word. 
-This results in a modification of the word latent state $zz_n$ to $q_{phi}(zz_n,x_n)$.
+The predictive coding pipeline in the word level module uses the latent state $z_n$ from the phoneme pipeline as the ground truth that represents the latent representation for a word. 
+This results in a modification of the word latent state $zz_n$ to $q_{phi}(zz_n,z_n)$.
 The energy based prediction module is invoked next and this results in the prediction $xx_{n+1}$.
 
-Subsequently $xx_{n+1}$ is fed into the central ATL hub, where it gets modified to $xxx_{n+1}$ as a result of integration with other modes. This $xxx_{n+1}$ is fed back to the word model, where we set $xx_{n+1} = xxx_{n+1}$. Hence we can see that the prediction $xx_{n+1}$ reflects the latest phoneme data (by way of $x_n$) as well as
- the influence of other modes that are active. $xx_{n+1}$ is subsequently used to generate the next word latent $yy_{n+1}=g_{psi}(xx_{n+1})$, and this value is fed back into the phoneme predictive processing pipeline shown in figure 9, by setting $x_{n+1}=yy_{n+1}$.
+Subsequently $xx_{n+1}$ is fed into the central ATL hub, where it gets modified to $xxx_{n+1}$ as a result of integration with other modes. This $xxx_{n+1}$ is fed back to the word model, where we set $xx_{n+1} = xxx_{n+1}$. Hence we can see that the prediction $xx_{n+1}$ reflects the latest phoneme data (by way of $z_n$) as well as
+the influence of other modes that are active. $xx_{n+1}$ is subsequently used to generate the next word latent $yy_{n+1}=g_{psi}(xx_{n+1})$, and this value is fed back into the phoneme predictive processing pipeline shown in figure 9, by setting $x_{n+1}=yy_{n+1}$.
+
+This design choice — routing the generated word latent $$yy_{n+1}$ back into the phoneme-level pipeline as $x_{n+1}$, rather than through a separate correction mechanism — has direct support in the psycholinguistic literature on speech monitoring. [Levelt (1983)](https://www.mpi.nl/world/materials/publications/Levelt/1983_Levelt.pdf) proposed the perceptual loop theory of self-monitoring: speakers check their own speech using the same comprehension system that processes an interlocutor's speech, via two channels — an internal loop that inspects the planned utterance before articulation, and an external loop based on hearing one's own voice. This account is well supported by the systematic timing and structure of spontaneous self-repairs (e.g., "the horse raced—uh, I mean, the jockey..."), which show the same signatures of error-detection and correction found in comprehension more generally, rather than a mechanism specific to production. The IM-LEPP architecture reproduces this economy directly: the phoneme-level pipeline has no way of distinguishing whether an incoming $phi_n$ originated from an external speaker or from the system's own just-generated output, so self-monitoring falls out of the existing comprehension machinery without requiring any additional, production-specific correction mechanism.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat163.png) 
 
