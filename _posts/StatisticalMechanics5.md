@@ -116,7 +116,7 @@ After the predictive coding pipeline settles down, the resulting value of the hu
 
 Figure 8: Classification of a continuous sound signal into a discrete phoneme sequence
 
-A continuous sound signal is converted into a discrete phoneme sequence $ph_{n},p_{n+1},...$
+A continuous sound signal is converted into a discrete phoneme sequence $ph_{n},ph_{n+1},...$
 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat155.png) 
