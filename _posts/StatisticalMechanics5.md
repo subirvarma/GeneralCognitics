@@ -127,22 +127,22 @@ The discrete phoneme sequence is sent into a predictive processing pipeline for 
 The system is able to detect the end of a word tracking the difference between the predicted phoneme latent state $x_n$ and the actual latent state $z_n$. 
 If this difference exceeds some threshold, then the latent state $z_n$ is sent to the word level predictive processing pipeline.
 
+![](https://subirvarma.github.io/GeneralCognitics/images/stat156.png) 
+
+Figure 10: Predictive Processing Pipeline for Next Word Prediction
+
+The predictive coding pipeline in the word level module uses the latent state $z_n$ from the phoneme pipeline as the ground truth that represents the latent representation for a word. $zz_n$ is initialized to $xx_n$, and as a result of predictive coding, it gets modified to $q_{phi)(xx_n,z_n)$. Subsequently $zz_n$ is fed into the central ATL hub, where it gets modified to $zzz_n$ as a result of integration with other modes. This $zzz_n$ is fed back to the word model, where we set $zz_n = zzz_n$. Hence we can see that the state $zz_n$ reflects the latest phoneme data (by way of $z_n$) as well as
+ the influence of other modes that are active. $zz_n$ is subsequently fed into the prediction module which results in $xx_{n+1}$ and this is used to generate the next word percept $yy_{n+1} = g_{\psi}(xx_{n+1})$. Note that $yy_{n+1}$ is still in the latent representation form, hence needs an additional step to decode it into phonemes.
+
+![](https://subirvarma.github.io/GeneralCognitics/images/stat160.png) 
+
+Figure 11: Integration of vision and language modules at the central ATL hub
+
+The above figure shows the integration of vision and language modules at the central ATL hub. The integrates state $zzz_n$ is fed back into the predictive processing pipelines of the respective hubs. 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat143.png) 
 
-Figure 10: Predictive Coding Pipeline for Phonemes
-
-
-![](https://subirvarma.github.io/GeneralCognitics/images/stat156.png) 
-
-Figure 11: Predictive Processing Pipeline for Next Word Prediction
-
-The predictive processing pipeline for next word prediction uses the latent state $z_n$ from the phoneme pipeline as the ground truth that represents a word.
-
-
-![](https://subirvarma.github.io/GeneralCognitics/images/stat157.png) 
-
-Figure 12: Integration of vision and language modules
+Figure 12: Predictive Coding Pipeline for Phonemes
 
 The above figure shows a proposed predictive coding model for words. The system processes language one word at a time, and for each word it builds up an internal representation using predictive coding 
 We will assume a simple two level hierarchy, though the model allows for any number of levels. The top level has a latent representation $z^{(2)}$, and this used to generate a representation $z^{(1)}$ at the lower level using a function $f_2(z^{(2)})$ and this representation in turn generates the final representation $t=(t_1,...,t_K)$ where $K$ is the number of words in the library.
