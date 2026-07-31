@@ -112,26 +112,30 @@ The above figure shows the structure of the level 1 hub located in the ATL. It i
 After the predictive coding pipeline settles down, the resulting value of the hub state $xxx_n$ is fed back into the level 3 part of the vision and language pipelines, and serves as the latent $x_n$ value that is used to generate the next percept $g_{\phi}(x_n)$. The latent $x_n$ subsequently gets modified by the new sensory data $s_n$, which results in the latent state $z_n$.
 Thus the percept generation takes place at the mode level, but takes into account everything else that is happening by virtue of this architecture.
 
-### The Change Blindness Phenomenon
+Consider the scenario in which we are driving a vehicle and there is another vehicle in front of us, as well as other objects such as pedestrians etc which are visible. As per the model, the system will install models for all objects that we pay attention to during the course of the drive, but there are some objects that we pay more attention to, such as the car in front of us.
+The scenario can evolve into one of the following ways:
 
-**But that's not actually change blindness, and here's where my original framing was wrong**
+- We are paying frequent attention to the car in front of us, so its representation $z_n$ gets updated frequently with new vision data. There is another car behind us that we can see through our rear view mirror, but we play less frequent attention to it. In between the times that we look into the rear view mirror, the representation for that car evolves as expected, so that if that car appears by the side of our vehicle it os something that the system has predicted (i.e., the latest level 1 $xxx_n$ representation and the sensory data $s_n$ at level 3 for the car would agree with each other), so we are not surprised.
+- Consider the same scenario as before, but assume that the car behind us made a turn while we were not paying attention to it. In this case our visual model does not know that the car has disappeared, and the next time we look back we expect to see it, but the sensory data says otherwise. Hence the other car is not behaving in the way that our internal model is expecting it to behave, which causes some surprise. Once we see that the car is not there, its level 3 pipeline is removed from the set of objects that are being tracked at level 2. Another example of this would be if the car in front of us suddenly braked while we were looking at our phone. Agin in this case our internal model for the car is updating in a way that does not agree with reality, until we look up and see it again.
+- There are cases in which the brain actively suppresses the updating of one or more objects whose pipelines are currently active. For example while driving we don't want to get distracted by the image of large billboard by the side of the road. In this case a level 3 pipeline will be installed for the billboard will be installed when we see it for the first time, however we decide not to pay attention to it. This can be done by reducing the value of the precision parameter $\Pi_y$ that is used in the predictive coding pipeline for the billboard at the level 2 vision hub. This mechanism was first described by [Feldman and Friston (2010)](https://www.frontiersin.org/journals/human-neuroscience/articles/10.3389/fnhum.2010.00215/full) in their paper {\it Attention, uncertainty and free energy"}.
+- As the last example, consider the case when a level 3 pipeline for an object that is in the vicinity of our car never gets installed, so that we are complete unaware of its existence. This corresponds to the case when there a car in our blind spot, and we try to make a turn into its lane. In this case there is a much bigger surprise waiting for us when the other car honks, and at that point the system installs a model for it and starts tracking it. Another well known example of this phenomenon is the case of bear costumed person crossing the court in the middle of a basketball game and it fails to get noticed. Again since attention is focussed on the ball on and the players, the level 3 model for the bear never gets installed.
 
-Think through what a standard predictive-coding comparison does when attention returns to an object that changed while unattended: the open-loop-extrapolated $x_n$
- gets compared against the new incoming $s_n$, and if the object genuinely changed, that comparison should produce a large prediction error — which, by ordinary PC logic, is exactly the kind of signal that should register as salient and get noticed. So drift alone doesn't predict change blindness — if anything, taken alone, it predicts the opposite: real change should be caught precisely because the mismatch is large. *Change blindness is the specific, surprising finding that large mismatches to unattended regions routinely don't get registered — which mere accumulating uncertainty in the prediction doesn't explain.*
-
- **What actually would need to be added: attention gating the error term itself, not just the prediction decaying**
-
-This is a real, specific addition, not something already implicit in open-loop extrapolation. The relevant mechanism, well-established in the predictive-coding/active-inference literature, is Feldman and Friston's (2010) account of attention as precision-weighting of prediction error: it's not the prediction that needs to carry explicit uncertainty — it's that the comparison itself ($\Pi_y\epsilon_y$
-for a given channel) needs to be gated by whether attention currently occupies that channel. An unattended object can generate a large raw mismatch when attention returns, but if $\Pi_y$
-for that channel is suppressed while attention is elsewhere, that mismatch simply doesn't propagate into what gets registered or reported — the error exists but isn't weighted into anything downstream. That's a genuinely new mechanism relative to what's in the current draft: right now, nothing ties $\Pi_y\epsilon_y$
- for an object's channel to whether attention is currently allocated there.
-
-So, directly answering your question: It's both, but they're doing different jobs and only one is a real addition:
-
-Drift from open-loop extrapolation is already a consequence of the current design and gives you a clean, no-modification-needed experimental prediction (report error should scale with time unattended).
-Genuine failure-to-notice (actual change blindness) needs attention-gated precision on the error term added explicitly — without it, the model as currently specified would, if anything, predict the opposite of change blindness for the reason above.
-
-I'd suggest stating both in the paper, clearly separated: the drift prediction as a testable consequence of the existing architecture, and attention-gated precision as a specific, named extension needed to actually capture change blindness rather than something the current design already implies.
+The last scenario points to the need for a cheap, always-on detector separate from the pipelines it might spawn since something has to decide when to instantiate a new level-3 pipeline,
+and that decision process itself must be resource-limited. [Itti, Koch and Niebur’s (1998)](https://hasler.ece.gatech.edu/Courses/MachineLearning/FoundationalPapers/Itti_Koch_Neiber1998.pdf)
+saliency-map model is the classic computational proposal: a cheap, bottom-up,
+parallel process computing simple feature contrasts (color, intensity, orientation,
+motion) across the entire visual field continuously, producing a topographical saliency
+map that competes to determine where attention deploys next. 
+A new level-3 pipeline
+gets instantiated only when a region’s saliency signal is large enough and wins the
+competition for currently-available attention. In the bear case, task-absorbed attention
+means the saliency signal from the costumed figure never wins that competition,
+so no pipeline ever gets created — consistent with inattentional-blindness follow-up
+work showing measurable physiological orienting responses to “unnoticed” stimuli
+despite no conscious report.
+This gives a concrete mechanism for the “ background things vs. stuff” distinction — everything starts as coarse “stuff” background by default; a region gets
+promoted to its own individuated “thing” pipeline specifically when its saliency signal
+wins the attention competition.
 
 ## A Predictive Processing Model for Language 
 
