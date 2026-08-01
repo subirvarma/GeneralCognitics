@@ -196,7 +196,7 @@ Note that all the information required to update $z_i^{(1)}$ is available locall
 
 The predictive coding model for level 1 developed above assumes a single flat categorical readout, appropriate when the input alphabet has no independently-motivated internal structure — as is the case for written characters. Auditory input requires a modification, because phonemes are not atomic: articulatory phonology decomposes each phoneme into a small set of independent distinctive features (voicing, place of articulation, manner of articulation, nasality, and a small number of others), and direct intracranial recordings from human superior temporal gyrus confirm that this is the level at which the auditory cortex actually represents speech sound — neural populations are tuned to specific feature values, not to whole phonemes as unitary categories (Mesgarani, Cheung, Johnson, & Chang, 2014).
 
-We accommodate this by replacing the single $K$-way categorical readout with $D$ independent, smaller categorical readouts, one per feature dimension $d = 1,\ldots,D$ (typically $D \approx 6$–$8$; e.g. $K_{\text{voice}}=2$, $K_{\text{place}}\approx 7$–$8$, $K_{\text{manner}}\approx 6$–$7$). The latent $z^{(1)}$ is partitioned into $D$ corresponding slices, $z^{(1)} = (z^{(1,1)},\ldots,z^{(1,D)})$, and the emission energy becomes a sum of independent cross-entropy terms:
+We accommodate this by replacing the single $K$-way categorical readout with $D$ independent, smaller categorical readouts, one per feature dimension $d = 1,\ldots,D$ (typically $D \approx $6$–$8$; e.g. $K_{\text{voice}}=2$, $K_{\text{place}}\approx 7$–$8$, $K_{\text{manner}}\approx $6$–$7$). The latent $z^{(1)}$ is partitioned into $D$ corresponding slices, $z^{(1)} = (z^{(1,1)},\ldots,z^{(1,D)})$, and the emission energy becomes a sum of independent cross-entropy terms:
 
 $$E_{PC}(1) = \sum_{d=1}^{D}\left[-\sum_i T_i^{(d)}\log y_i^{(d)}\right] + \frac{1}{2}\epsilon_{z^{(1)}}^T\Pi_1\epsilon_{z^{(1)}}, \qquad y^{(d)} = \text{softmax}\left(z^{(1,d)}\right)$$
 
@@ -223,29 +223,7 @@ This modification is confined entirely to the level-1 emission layer. The tempor
 
 ## Conclusions
 
-## Appendix A How new level 3 pipelines get installed
 
-Why precision-gating can't cover this case
-
-My previous answer assumed a level-3 pipeline already exists for the object in question and just modulates how much its error term matters once compared against new data. That mechanism presupposes there's already an $x_n/z_n$
- being computed somewhere. In the bear case, there isn't — nothing is running at all, so there's no error term to gate. You've correctly identified that this is a failure at an earlier stage: not "an existing model's output gets ignored," but "no model ever got created."
-
-What's actually needed: a cheap, always-on detector that's separate from the pipelines it might spawn
-
-This points to a real architectural gap: something has to decide when to instantiate a new level-3 pipeline in the first place, and that decision-making process itself has to be resource-limited (otherwise you haven't solved anything — you've just moved the capacity problem one level up, since continuously running full object-recognition checks across the entire visual field would defeat the point of having an attention-gated system at all).
-
-The natural fix has real precedent in vision science, and it's a two-stage architecture, not a one-stage fix. Itti, Koch and Niebur's (1998) saliency-map model is the classic computational proposal here: a cheap, bottom-up, parallel process computes simple, low-level feature contrasts (color, intensity, orientation, motion) across the entire visual field continuously and automatically — not object recognition, just "how conspicuous is this region relative to its surroundings" — producing a single topographical saliency map that competes to determine where attention gets deployed next. This is the computational counterpart to Treisman's Feature Integration Theory (already discussed for the binding problem): a parallel, pre-attentive stage that's cheap and runs everywhere, followed by a serial, attention-dependent stage that does the expensive work — in your architecture's terms, that expensive work is instantiating and running a full level-3 predictive-coding pipeline.
-
-So the mechanism would be: a lightweight saliency signal runs continuously and ungated across the whole field; a new level-3 pipeline only gets instantiated and connected to the level-2 hub when a region's saliency signal is large enough and wins the competition for attentional resources currently available. In the bear/gorilla case, task-absorbed attention means the bottom-up saliency signal from the costumed figure — even if genuinely elevated — simply never wins that competition, so no pipeline ever gets created. This is consistent with real inattentional-blindness follow-up work, incidentally: even "unnoticed" stimuli in these paradigms sometimes show measurable physiological orienting responses or later priming effects despite no conscious report — exactly what you'd expect from a saliency signal registering at the cheap, pre-attentive level without ever escalating to full pipeline instantiation.
-
-This connects two things you've already got in the design, rather than adding something unrelated
-
-Two nice unifications worth stating explicitly, since neither requires a genuinely new kind of mechanism:
-
-This is the same resource-allocation logic as the memory write-gate. A few exchanges ago we used prediction-error/novelty exceeding a threshold as the trigger for writing an episode to long-term memory (the Lisman & Grace hippocampal-VTA analogy). Pipeline instantiation is the same kind of gated decision — a cheap signal crossing a threshold before an expensive resource commitment gets made — just applied to creating an active tracker rather than committing to storage.
-This gives a concrete mechanism for the "things vs. stuff" distinction from before. Rather than "things" and "stuff" being two fixed, pre-declared categories, this reframes it as a dynamic promotion process: everything starts as part of the coarse, low-precision "stuff" background by default; a region gets promoted to its own individuated level-3 "thing" pipeline specifically when its saliency signal is large enough to win attention. That's a more principled account of the things/stuff boundary than treating it as a static labeling scheme — it's actually being decided online, continuously, by the same saliency/attention competition doing the instantiation-gating work.
-
-Worth writing into the paper as a genuinely separate mechanism from precision-gating — the two together give a fuller account: saliency-gated instantiation explains why some objects never get modeled at all, and attention-gated precision explains why already-modeled but currently-unattended objects can still be missed when they change.
 
 ## Appendix B: A memory retrieval system for level 3 models
 
