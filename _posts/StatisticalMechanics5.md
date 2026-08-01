@@ -235,23 +235,23 @@ Levelt’s production model as described in his book [Speaking: From Intention t
 
 ### The Barrenholtz Paper
 
-[Barenholtz (2026)](https://arxiv.org/abs/2606.05346)  introduces trajectory extrapolation error (TEE): at each word, fit a linear trajectory to the preceding 3 hidden states of a transformer
+In lieu of doing experiments on the human brain, [Barenholtz (2026)](https://arxiv.org/abs/2606.05346) probed the internal dynamics of a transformer based LLM to understand how it generates language.
+He introduced a quantity called trajectory extrapolation error (TEE) which is defined as follows: At each word, fit a linear trajectory to the preceding 3 hidden states of a transformer
 (GPT-2/Pythia), extrapolate one step forward, and measure how far the actual next hidden state lands from that extrapolated point. His key finding is that TEE is nearly orthogonal
-to surprisal (𝑟 = .044) and independently predicts reading times, replicating across GPT-2 sizes, across a different positional-encoding architecture (Pythia/RoPE),
+to surprisal (which is defined as the difference between the predicted word and the ground truth word)  with $𝑟 = .044$ and independently predicts reading times, replicating across GPT-2 sizes,
 on both garden-path sentences and thousands of naturalistic word positions (Natural Stories). The displacement control is the sharpest result: raw magnitude of representational
-change and TEE predict reading time in opposite directions — a large change that continues the established direction is facilitative, while a small change that breaks direction is costly.
+change (i.e. surprisal) and TEE predict reading time in opposite directions — a large change that continues the established direction is facilitative, while a small change that breaks direction is costly.
 
-Critically, the GPT2 model itself doesn’t use this trajectory structure in its own processing — direction preservation collapses to near-chance one step ahead at the intermediate layer, so each forward pass is essentially a fresh computation, not a running extrapolation. Trajectory structure in GPT2 is a passive residual of training on human-produced text (which itself has local planning
-momentum), not an active computational strategy that the transformer exploits.
+Critically, the GPT2 model itself doesn’t use this trajectory structure in its own processing — direction preservation collapses to near-chance one step ahead at the intermediate layer, so each forward pass that results in the next word prediction is essentially a fresh computation, not a running extrapolation. Trajectory structure in GPT2 is a passive residual of training on human-produced text (which itself has local planning momentum), not an active computational strategy that the transformer exploits.
 
 The core dissociation — word-level prediction error vs. representational reorientation cost — maps onto the predictive-coding energy in the IM-LEPP model
 
 $$ E_{PC} = {1\over 2}\epsilon_y^T\Pi_y\epsilon_y + {1\over 2}\epsilon_z^T\Pi_z\epsilon_z  $$
 
-Surprisal is the natural analogue of $\epsilon_y$ (bottom-up word-level error); TEE looks like an empirical proxy for $𝜖\epsilon_z$ (top-down: how badly did the state land where its own momentum/prior predicted it should). Barrenholtz finds that these two are independent, additive, and non-interacting is a nontrivial piece of support for keeping $\epsilon_y$ and $\epsilon_z$ as separate energy terms.
+Surprisal is the natural analogue of $\epsilon_y$ (bottom-up word-level error); TEE looks like an empirical proxy for $𝜖\epsilon_z$ (top-down: how badly did the state land where its own momentum/prior predicted it should). Barrenholtz found that these two are independent, additive, and non-interacting is a nontrivial piece of evidence for keeping $\epsilon_y$ and $\epsilon_z$ as separate energy terms in the IM-LEPP model.
 
 The paper explicitly finds that plain autoregressive transformers don’t do what the design assumes — they don’t carry forward a persistent state with real momentum that gets used prospectively; they recompute fresh from context every step, and trajectory structure in their hidden states is an accidental byproduct of training data, not an active mechanism. 
-Barrenholtz himself flag this as the open question (their Section 4.3): is trajectory-sensitivity in humans just a passive correlate of prediction, or is comprehension “fundamentally a dynamical process in which the evolving representational state carries local trajectory continuity that is actively maintained and exploited”? His data is consistent with either. 
+Barrenholtz himself flags this as the open question: Is trajectory-sensitivity in humans just a passive correlate of prediction, or is comprehension “fundamentally a dynamical process in which the evolving representational state carries local trajectory continuity that is actively maintained and exploited”? His data is consistent with either. 
 
 The IM-LEPP model is a specific, falsifiable bet on the second hypothesis — stronger than anything this paper establishes, but a natural sharpening
 of the exact question the paper leaves open. If anything, the paper’s finding that an ordinary transformer’s own dynamics don’t do active momentum-tracking is a
