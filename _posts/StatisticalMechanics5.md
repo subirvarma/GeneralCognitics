@@ -233,7 +233,7 @@ tuned to discrete phonetic features, not raw continuous acoustics.
 Do the latent states $zzz_n$ or $zz_n$ encode 'thought'? 
 Levelt’s production model as described in his book [Speaking: From Intention to Articulation (1989)](https://www.mpi.nl/publications/item67053/speaking-intention-articulation) has a first stage, conceptualization, whose output is a preverbal message — a language-independent conceptual representation of what to say, prior to and dissociable from any particular verbalization (which is why “the same thought” can be expressed in different words or languages). This is a direct architectural instantiation of exactly the proposed role for 𝑧:̄ a persistent, amodal state that the generative pathway then unrolls into a word sequence, with 𝑧 ̄ playing the role of the preverbal message and the language pipeline playing Levelt’s formulation stage.
 
-### The Barrenholtz Paper
+### Comparison of Next Word Prediction Strategies in Transformers vs IM-LEPP
 
 In lieu of doing experiments on the human brain, [Barenholtz (2026)](https://arxiv.org/abs/2606.05346) probed the internal dynamics of a transformer based LLM to understand how it generates language.
 He introduced a quantity called trajectory extrapolation error (TEE) which is defined as follows: At each word, fit a linear trajectory to the preceding 3 hidden states of a transformer
@@ -260,8 +260,18 @@ A concrete follow-up test this suggests: replace the paper’s linear extrapolat
 the crudest possible transition model) with an actual trained, ideally multimodal, next-$𝑧$ predictor, and check whether its residual explains reading times even
 better. That would be direct evidence favoring something like a diffusion-based transition module over simple momentum model.
 
+To summarize: The discussion of the Barrenholtz paper lays bare the fundamantal difference betweeen how LLMs and the IM-LEPP model does language generation:
 
-## Experimental Evidence
+- LLMs sample from the distribution $p(w_{n}|w_{\lt n})$ at each step of the generation. Thus they are able to access all the data in their prefix, as well as everything that they have generates so far, which may run into hundreds of thousands of words for the latest transformer models.
+- The IM-LEPP model generates its next state $zz_n$ by sampling using an energy funciion $E_W$, it does not maintain all the previously data in its memory but instead summarizes its 'gist' in the form of the latent state.
+
+It is quite likely that the brain operates like the IM-LEPP, we don't keep the entirity of what we have read or heard while deciding what word to generate next. This also is a reflection of the difference between RNNs and transformers, since RNNs are a more primitive version of the IM-LEPP model (without the diffusion based prediction step, RNNs have a simpler linear model for doing so). Since transformers replaced RNNs for language generation, the question arises whether their way of generation has a fundamental advantage over the IM-LEPP type generation using latent states.
+Strictly speaking the brain uses another source of information which we haven't put into the IM-LEPP model yet, and this memory. It is thought that some of the prior experiences that the berain has undergone gets stored as a sequence of latent states in the hippocampus, and gets recalled when the brain's language module is deciding on what word to generate next. The specific seuence of states that is recalled depends on the IM-LEPPs current state $zzz_n$ and is done using an associative memory mechanism such as the modern Hopfield network.
+Using a combination of current state $z_n$ and relevant information stored in a memory module, the IM-LEPP model may be be able to replicate the power of transformers.
+The addition of a memory module to IM-LEPP is part of ongoing research currently.
+
+
+
 
 
 
