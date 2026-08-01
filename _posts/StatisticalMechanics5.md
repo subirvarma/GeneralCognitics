@@ -192,9 +192,11 @@ $$ z_i^{(1)} \leftarrow z_i^{(1)} - \eta \left[(y_i - T_i) + \Pi_1\epsilon_{ z^{
 
 Note that all the information required to update $z_i^{(1)}$ is available locally.
 
+### Approximating the Softmax Function in the Brain
+
 ### Extension to Auditory Processing of Language (Phonemes)
 
-The predictive coding model for level 1 developed above assumes a single flat categorical readout, appropriate when the input alphabet has no independently-motivated internal structure — as is the case for written characters. Auditory input requires a modification, because phonemes are not atomic: articulatory phonology decomposes each phoneme into a small set of independent distinctive features (voicing, place of articulation, manner of articulation, nasality, and a small number of others), and direct intracranial recordings from human superior temporal gyrus confirm that this is the level at which the auditory cortex actually represents speech sound — neural populations are tuned to specific feature values, not to whole phonemes as unitary categories (Mesgarani, Cheung, Johnson, & Chang, 2014).
+The predictive coding model for level 1 developed above assumes a single flat categorical readout, appropriate when the input alphabet has no independently-motivated internal structure — as is the case for written characters. Auditory input requires a modification, because phonemes are not atomic: articulatory phonology decomposes each phoneme into a small set of independent distinctive features (voicing, place of articulation, manner of articulation, nasality, and a small number of others), and direct intracranial recordings from human superior temporal gyrus confirm that this is the level at which the auditory cortex actually represents speech sound — neural populations are tuned to specific feature values, not to whole phonemes as unitary categories [Mesgarani, Cheung, Johnson, & Chang, 2014](https://linguistics.berkeley.edu/~kjohnson/papers/Mesgarani_et_al_2014_Science.pdf).
 
 We accommodate this by replacing the single $K$-way categorical readout with $D$ independent, smaller categorical readouts, one per feature dimension $d = 1,\ldots,D$ (typically $D \approx $6$–$8$; e.g. $K_{\text{voice}}=2$, $K_{\text{place}}\approx 7$–$8$, $K_{\text{manner}}\approx $6$–$7$). The latent $z^{(1)}$ is partitioned into $D$ corresponding slices, $z^{(1)} = (z^{(1,1)},\ldots,z^{(1,D)})$, and the emission energy becomes a sum of independent cross-entropy terms:
 
