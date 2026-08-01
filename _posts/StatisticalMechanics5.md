@@ -141,7 +141,7 @@ We will consider the simple case of child reading, in which case he or she reads
 
 Figure 9: Predictive Processing Pipeline for Next Character Prediction
 
-The discrete character sequence is sent into a predictive processing pipeline that creates an internal representation $z_n$ for each character using the predictve coding function $q_{phi}$, followed by prediction of the next character using a energy based diffusion model $E_{CH}$, and then generation of this character using the predictive coding function $g_{psi}$.  The generated character $y_{n+1}=g_{psi}(x_{n+1}$ is compared with the actual next character $ch_{n+1}$, and this information is used to estimate the next representation $z_{n+1]$
+The discrete character sequence is sent into a predictive processing pipeline that creates an internal representation $z_n$ for each character using the predictve coding function $q_{phi}$, followed by prediction of the next character using a energy based diffusion model $E_{CH}$, and then generation of this character using the predictive coding function $g_{psi}$.  The generated character $y_{n+1}=g_{psi}(x_{n+1})$ is compared with the actual next character $ch_{n+1}$, and this information is used to estimate the next representation $z_{n+1}$
 These operations are illustrated in the above figure.
 The system is able to detect the end of a word by tracking the difference between the predicted  latent state $x_{n+1}$ and the actual latent state $z_{n+1}$. 
 If this difference exceeds some threshold, then the model assumes that the previous character $ch_n$ occurred at the end of the word, and its representation $z_n$ is sent over to the word level pipeline as discussed next. We also use the empty space at the end of each word to infer the word ending, however there some languages such as Chinese and Old Latin that don't use spaces, and alternative mechanism described here is more general, and also works for the case of auditory signals.
@@ -155,7 +155,7 @@ This pipeline creates a higher level latent representation $zz_n$ by modifying t
 The energy based prediction module $E_W$  is invoked next and this results in the prediction $xx_{n+1}$.
 
 Subsequently $xx_{n+1}$ is fed into the central ATL hub, where it gets modified to $xxx_{n+1}$ as a result of integration with other sensory modes. $xxx_{n+1}$ is then fed back to the word level pipeline by setting $xx_{n+1} = xxx_{n+1}$. Thus the prediction $xx_{n+1}$ reflects the latest word data (by way of $zz_n$) as well as
-the influence of other modes that are active. $xx_{n+1}$ is subsequently used to generate the next word latent $yy_{n+1}=g_{psi}(xx_{n+1})$, and this value is fed back into the character level predictive processing pipeline shown in figure 9, by setting $x_{n+1}=yy_{n+1}$. This in turn gets modified by the characters in the next word being read, this resulting in a new word level latent representation $z_{n+}$ that is in turn fed back into the word level model to correct the prediction $yy_{n+1]$, and this closes the word level prediction loop.
+the influence of other modes that are active. $xx_{n+1}$ is subsequently used to generate the next word latent $yy_{n+1}=g_{psi}(xx_{n+1})$, and this value is fed back into the character level predictive processing pipeline shown in figure 9, by setting $x_{n+1}=yy_{n+1}$. This in turn gets modified by the characters in the next word being read, this resulting in a new word level latent representation $z_{n+}$ that is in turn fed back into the word level model to correct the prediction $yy_{n+1}$, and this closes the word level prediction loop.
 
 For these case when we are doing the character generation, i.e., writing, this feedback loop between the character level and word level pipelines is still active. In this case it serves as a verfication of whether the word that we wrote down matches the word that our cognitive system meant to generate (at the word level).
 
@@ -192,28 +192,23 @@ $$ z_i^{(1)} \leftarrow z_i^{(1)} - \eta \left[(y_i - T_i) + \Pi_1\epsilon_{ z^{
 
 Note that all the information required to update $z_i^{(1)}$ is available locally.
 
-### Auditory Processing of Language
+### Extension to Auditory Processing of Language (Phonemes)
 
+The predictive coding model for level 1 developed above assumes a single flat categorical readout, appropriate when the input alphabet has no independently-motivated internal structure — as is the case for written characters. Auditory input requires a modification, because phonemes are not atomic: articulatory phonology decomposes each phoneme into a small set of independent distinctive features (voicing, place of articulation, manner of articulation, nasality, and a small number of others), and direct intracranial recordings from human superior temporal gyrus confirm that this is the level at which the auditory cortex actually represents speech sound — neural populations are tuned to specific feature values, not to whole phonemes as unitary categories (Mesgarani, Cheung, Johnson, & Chang, 2014).
 
-The sound wave impinging on our ear drums causes it to vibrate, and these vibrations are picked up the nerve endings that are located there. This followed by a process in which the continuous wave is discretized into sound chunks called phonemes. For the purposes of this paper we will assume that the brain has a system that outputs a discrete phoneme sequence $ph_{n},ph_{n+1},...$ as a results of this process.
+We accommodate this by replacing the single $K$-way categorical readout with $D$ independent, smaller categorical readouts, one per feature dimension $d = 1,\ldots,D$ (typically $D \approx 6$–$8$; e.g. $K_{\text{voice}}=2$, $K_{\text{place}}\approx 7$–$8$, $K_{\text{manner}}\approx 6$–$7$). The latent $z^{(1)}$ is partitioned into $D$ corresponding slices, $z^{(1)} = (z^{(1,1)},\ldots,z^{(1,D)})$, and the emission energy becomes a sum of independent cross-entropy terms:
 
-![](https://subirvarma.github.io/GeneralCognitics/images/stat155.png) 
+$$E_{PC}(1) = \sum_{d=1}^{D}\left[-\sum_i T_i^{(d)}\log y_i^{(d)}\right] + \frac{1}{2}\epsilon_{z^{(1)}}^T\Pi_1\epsilon_{z^{(1)}}, \qquad y^{(d)} = \text{softmax}\left(z^{(1,d)}\right)$$
 
-Figure 9: Predictive Processing Pipeline for Next Phoneme Prediction
+This is justified by treating the $D$ feature-level classifiers as independent experts whose distributions combine multiplicatively (Hinton, 2002); in log space this is exactly a sum of energies, so the joint model remains a single, well-defined energy function despite the factored readout. The resulting gradient update is unchanged in form from the single-category case, and remains fully local: each slice updates using only its own residual and its own portion of the prior term,
 
-The discrete phoneme sequence is sent into a predictive processing pipeline for next phoneme prediction.
-The system is able to detect the end of a word tracking the difference between the predicted phoneme latent state $x_n$ and the actual latent state $z_n$. 
-If this difference exceeds some threshold, then the latent state $z_n$ is sent to the word level predictive processing pipeline.
+$$z^{(1,d)} \leftarrow z^{(1,d)} - \eta\left[(y^{(d)}-T^{(d)}) + \Pi_1^{(d)}\epsilon_{z^{(1,d)}}\right], \qquad d=1,\ldots,D$$
 
+with no cross-feature terms required in the bottom-up direction.
 
-This design choice — routing the generated word latent $$yy_{n+1}$ back into the phoneme-level pipeline as $x_{n+1}$, rather than through a separate correction mechanism — has direct support in the psycholinguistic literature on speech monitoring. [Levelt (1983)](https://www.mpi.nl/world/materials/publications/Levelt/1983_Levelt.pdf) proposed the perceptual loop theory of self-monitoring: speakers check their own speech using the same comprehension system that processes an interlocutor's speech, via two channels — an internal loop that inspects the planned utterance before articulation, and an external loop based on hearing one's own voice. This account is well supported by the systematic timing and structure of spontaneous self-repairs (e.g., "the horse raced—uh, I mean, the jockey..."), which show the same signatures of error-detection and correction found in comprehension more generally, rather than a mechanism specific to production. The IM-LEPP architecture reproduces this economy directly: the phoneme-level pipeline has no way of distinguishing whether an incoming $phi_n$ originated from an external speaker or from the system's own just-generated output, so self-monitoring falls out of the existing comprehension machinery without requiring any additional, production-specific correction mechanism.
+The independence assumption is reasonable for inference — each feature can be estimated from the acoustic signal largely on its own — but does not hold for the top-down prior. Phonemes occupy only a small, structured subset of the full combinatorial space of feature-value combinations; most combinations correspond to no phoneme in any language. The generative map $f_2(z^{(2)})$ must therefore produce a *jointly* consistent prediction across all $D$ slices simultaneously, encoding the correlations between features that define the phoneme inventory, rather than predicting each feature independently. Absent this, the model would treat phonologically illicit feature combinations as being just as expected as licit ones.
 
-![](https://subirvarma.github.io/GeneralCognitics/images/stat163.png) 
-
-Figure 11: Integration of vision and language modules at the central ATL hub
-
-The above figure shows the integration of vision and language modules at the central ATL hub. The integrated state $zzz_n$ is fed back into the predictive processing pipelines of the respective hubs. 
-This allows additional modalities to influence the next generated word, for example the information coming in through the visual system may influence what we say next. Similarly the emotional related information coming in through the valence system (valence) can influence our choice of the next word.
+This modification is confined entirely to the level-1 emission layer. The temporal prediction module is unaffected: it continues to operate on a single continuous latent and to output a continuous prediction $x_{n+1}$ via the diffusion process described above, which is then passed through the factored readout described here rather than through the single flat softmax used for the character case.
 
 
 
