@@ -172,10 +172,16 @@ In order to see the see multi-modal language model in operation, consider the fo
 
 Modern multimodal LLMs can also be used for the scenario described above, but there is an important distinction between the way the model operates compared with the LLM. The LLM presumably has the equivalent of an internal latent representation $z$ that summarizes everything that model has seen, read and generated so far. However this latent state is not directly observable, experiments done by probing the middle layers of the transformer have been shown to have similar characteristics. The latent state in the IM-LEPP model is explicitly made available, at all levels of operation. This allows us to directly probe the 'mind' of the model, and also influence it through the ATL hub modalities. For example one can imagine creating an emotion state for the model by tracking how well its latent state predictions match with sensory data thus simulating the amygdala. The state of the artificial amygdala can in turn be fed back into the ATL hub to influence the model's central latent state, and thus its furure word or image generation. Note that this type of pperation cannot be done with LLMs due to lack to access to its latent state.
 
+There is another point of distinction between the IM-LEPP model and LLMs and this has to do with how the models go about doing the next word generation.
+
+
+### The Predictive Coding Pipeline for Discrete Senesory Data
+
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat143.png) 
 
 Figure 12: Predictive Coding Pipeline for Characters
 
+The traditional predictive coding pipeline was designed for analog sensory data, but it can be extended to the case when the data happens to be discrete, as for the case of characters or phonemes in the level 3 part of the language model.
 The above figure shows the computational details for the predictive coding model at the character level. The system processes characters one at a time, and for each character it builds up an internal representation using predictive coding.
 We will assume a simple two level hierarchy, though the model allows for any number of levels. The top level has a latent representation $z^{(2)}$, and this used to generate a representation $z^{(1)}$ at the lower level using a function $f_2(z^{(2)})$ and this representation in turn generates the final representation $t=(t_1,...,t_K)$ where $K$ is the number of characters being modeled.
 The representations $z^{(1)}$ and $z^{(2)}$ are in continuous space, however $t$ lies in discrete space and is given by $t=(t_1,t_2,...,t_K)$ and uses the 1-hot representation so that individual characters $(ch_1, ch_2,...,ch_K$ are represented by $(1,0,...,0), (0,1,...,0),...,(0,0,...,1)$ respectively. The representation $t$ is generated from  $z^{(1)}$ by a process of sampling using the distribution
@@ -223,6 +229,36 @@ The paper on categorical perception by [Liberman, Harris, Hoffman & Griffith, 19
 [Chang et.al. (2010)](https://www.nature.com/articles/nn.2641) provided direct neurophysiological confirmation by finding categorical speech representations in superior temporal gyrus (STG) area of the brain; [Mesgarani, Cheung, Johnson & Chang (2014, Science)](https://linguistics.berkeley.edu/~kjohnson/papers/Mesgarani_et_al_2014_Science.pdf), using intracranial recordings, found STG populations
 tuned to discrete phonetic features, not raw continuous acoustics.
 [Hickok and Poeppel’s (2007)](https://www.nature.com/articles/nrn2113) dual-stream model locates early phonological processing in STG/STS of the brain with a lexical-interface stage in posterior middle temporal gyrus (pMTG) — mapping cleanly onto the three stages of the model presented here: STG/STS for phonetic features, pMTG for word-level $zz$ representation, and, continuing upward, Lambon Ralph’s ATL hub for integration with other modalities.
+
+Do the latent states $zzz_n$ or $zz_n$ encode 'thought'? 
+Levelt’s production model as described in his book [Speaking: From Intention to Articulation (1989)](https://www.mpi.nl/publications/item67053/speaking-intention-articulation) has a first stage, conceptualization, whose output is a preverbal message — a language-independent conceptual representation of what to say, prior to and dissociable from any particular verbalization (which is why “the same thought” can be expressed in different words or languages). This is a direct architectural instantiation of exactly the proposed role for 𝑧:̄ a persistent, amodal state that the generative pathway then unrolls into a word sequence, with 𝑧 ̄ playing the role of the preverbal message and the language pipeline playing Levelt’s formulation stage.
+
+### The Barrenholtz Paper
+
+[Barenholtz (2026)](https://arxiv.org/abs/2606.05346)  introduces trajectory extrapolation error (TEE): at each word, fit a linear trajectory to the preceding 3 hidden states of a transformer
+(GPT-2/Pythia), extrapolate one step forward, and measure how far the actual next hidden state lands from that extrapolated point. His key finding is that TEE is nearly orthogonal
+to surprisal (𝑟 = .044) and independently predicts reading times, replicating across GPT-2 sizes, across a different positional-encoding architecture (Pythia/RoPE),
+on both garden-path sentences and thousands of naturalistic word positions (Natural Stories). The displacement control is the sharpest result: raw magnitude of representational
+change and TEE predict reading time in opposite directions — a large change that continues the established direction is facilitative, while a small change that breaks direction is costly.
+
+Critically, the GPT2 model itself doesn’t use this trajectory structure in its own processing — direction preservation collapses to near-chance one step ahead at the intermediate layer, so each forward pass is essentially a fresh computation, not a running extrapolation. Trajectory structure in GPT2 is a passive residual of training on human-produced text (which itself has local planning
+momentum), not an active computational strategy that the transformer exploits.
+
+The core dissociation — word-level prediction error vs. representational reorientation cost — maps onto the predictive-coding energy in the IM-LEPP model
+
+$$ E_{PC} = {1\over 2}\epsilon_y^T\Pi_y\epsilon_y + {1\over 2}\epsilon_z^T\Pi_z\epsilon_z  $$
+
+Surprisal is the natural analogue of $\epsilon_y$ (bottom-up word-level error); TEE looks like an empirical proxy for $𝜖\epsilon_z$ (top-down: how badly did the state land where its own momentum/prior predicted it should). Barrenholtz finds that these two are independent, additive, and non-interacting is a nontrivial piece of support for keeping $\epsilon_y$ and $\epsilon_z$ as separate energy terms.
+
+The paper explicitly finds that plain autoregressive transformers don’t do what the design assumes — they don’t carry forward a persistent state with real momentum that gets used prospectively; they recompute fresh from context every step, and trajectory structure in their hidden states is an accidental byproduct of training data, not an active mechanism. 
+Barrenholtz himself flag this as the open question (their Section 4.3): is trajectory-sensitivity in humans just a passive correlate of prediction, or is comprehension “fundamentally a dynamical process in which the evolving representational state carries local trajectory continuity that is actively maintained and exploited”? His data is consistent with either. 
+
+The IM-LEPP model is a specific, falsifiable bet on the second hypothesis — stronger than anything this paper establishes, but a natural sharpening
+of the exact question the paper leaves open. If anything, the paper’s finding that an ordinary transformer’s own dynamics don’t do active momentum-tracking is a
+reason to think an ordinary transformer is the wrong underlying mechanism for what the human data show.
+A concrete follow-up test this suggests: replace the paper’s linear extrapolation for the latent state (deliberately
+the crudest possible transition model) with an actual trained, ideally multimodal, next-$𝑧$ predictor, and check whether its residual explains reading times even
+better. That would be direct evidence favoring something like a diffusion-based transition module over simple momentum model.
 
 
 ## Experimental Evidence
