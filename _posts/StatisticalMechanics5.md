@@ -127,6 +127,8 @@ A new level-3 pipeline gets instantiated only when a region’s saliency signal 
 means the saliency signal from the costumed figure never wins that competition, so no pipeline ever gets created — consistent with inattentional-blindness follow-up
 work showing measurable physiological orienting responses to “unnoticed” stimuli despite no conscious report. This gives a concrete mechanism for the “ background things vs. stuff” distinction — everything starts as coarse “stuff” background by default; a region gets promoted to its own individuated “thing” pipeline specifically when its saliency signal wins the attention competition.
 
+
+
 ## A Predictive Processing Model for Language 
 
 Language shares a number of features in common with the visual system, and both can be modeled as predictive systems, images in one case and words in the other. That said, words are more abstract entity than objects and are discrete in nature, i.e., there are a finite number of them. The problem then is that of translating the sound coming in through our ears into word level latent representations that attach semantic meaning to them and is followed by prediction of the next word. These sounds could be coming from an external source, or it could be just the sound of our voice talking. In the former case, the next word in the sequence can serve as an error connection signal for the brain's prediction for the next word, very much like the error correction that happens in vision, and in the process the brain's model for next word prediction gets trained. For the case when the sound is from our own voice, there is still an error correction  feedback loop in operation, since sometimes we speak out a word, and then hearing the sound makes us realize that we meant to say something else. There is another source for words through our visual system when we read or write and we will consider this simpler case first. 
@@ -212,7 +214,11 @@ The independence assumption is reasonable for inference — each feature can be 
 
 This modification is confined entirely to the level-1 emission layer. The temporal prediction module is unaffected: it continues to operate on a single continuous latent and to output a continuous prediction $x_{n+1}$ via the diffusion process described above, which is then passed through the factored readout described here rather than through the single flat softmax used for the character case.
 
-
+The three level model for language that has been presented here is backed up by some experimental data that has been collected over the years.
+The paper on categorical perception by [Liberman, Harris, Hoffman & Griffith, 1957)](https://philpapers.org/rec/LIBTDO-2) is a classic in this area, they showed that a continuously-varying acoustic parameter (voice onset time) is perceived and discriminated categorically, with a sharp identification boundary. 
+[Chang et.al. (2010)](https://www.nature.com/articles/nn.2641) provided direct neurophysiological confirmation by finding categorical speech representations in superior temporal gyrus (STG) area of the brain; [Mesgarani, Cheung, Johnson & Chang (2014, Science)](https://linguistics.berkeley.edu/~kjohnson/papers/Mesgarani_et_al_2014_Science.pdf), using intracranial recordings, found STG populations
+tuned to discrete phonetic features, not raw continuous acoustics.
+[Hickok and Poeppel’s (2007)](https://www.nature.com/articles/nrn2113) dual-stream model locates early phonological processing in STG/STS of the brain with a lexical-interface stage in posterior middle temporal gyrus (pMTG) — mapping cleanly onto the three stages of the model presented here: STG/STS for phonetic features, pMTG for word-level $zz$ representation, and, continuing upward, Lambon Ralph’s ATL hub for integration with other modalities.
 
 
 ## Experimental Evidence
