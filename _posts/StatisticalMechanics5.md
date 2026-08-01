@@ -270,6 +270,24 @@ Strictly speaking the brain uses another source of information which we haven't 
 Using a combination of current state $z_n$ and relevant information stored in a memory module, the IM-LEPP model may be be able to replicate the power of transformers.
 The addition of a memory module to IM-LEPP is part of ongoing research currently.
 
+## Inclusion of Memory
+
+There are several places in the paper where we pointed out the need for a memory sub-system for the IM-LEPP model. There are two kinds of memory sub-systems that were alluded to:
+
+- Object Model semantic memory: The level 2 vision hub interfaces with predictive processing modules that are instantiated on a per-object basis, depending on the objects that are present in our field of vision, and which we are consciously tracking. Clearly it is not efficient to build up the predictive model for each object (involving the parameters for the energy models $q_{\phi}, g_{\psi}$ and $E_W$) from scratch every time the object appears, and hence points to a system in which the brain stores away object models for later use, perhaps in the brain's cortical columns. These models are recalled and put into the level 2 vision hub when the time arises, and as a result their parameters evolve while they are active, and once they are no longer needed, they are once again stored away with the modified parameters. Hence, as has been pointed out by others, recalling a memory is an active process, in which the contents of the memory changes as a result of the recall.
+This memory is probably organized in an hierarchical fashion, for example there could be model for the generic category of dogs, while under it there could be specific models for various breeds of gods, and at a lower level, a model for my pet dog.
+- Episodic Memory: Each stored element in this system consists of a sequence of latent states $zzz_1,...,zzz_N$ sampled from the central ATL hub. Sampling states from the ATL ensures that these states are multimodal, so that they can be turned into a sequence of images or they can be turned into sound, language or other modalities.
+There is a fair amount of evidence that the seat for episodic memory in the brain lies in the hippocampus.
+
+[Vargha-Khadem, Gadian, Watkins, Connelly, Van Paesschen & Mishkin’s (1997)](https://pubmed.ncbi.nlm.nih.gov/9219696/) classic study of developmental amnesia in which they studied children with early, selective bilateral hippocampal damage, found severely impaired episodic memory alongside broadly age-appropriate semantic/factual knowledge acquisition throughout development. This shows a genuine double dissociation, supporting the need for both object level sematic storage as well as as episodic memory.
+
+There are several questions that needs to be answered in the design of a memory sub-system:
+
+- What is the nature of the memory to be used? In all likelihood an associative memory of the modern Hopfield network type is an appropriate choice.
+- What is the storage criteria? Obviously not all episodes that we come across with need be stored, nor do we need to store models for objects that we almost will never comes across a second time, such as strangers on the street. Some possible storage critirea ideas include: Store episodes whose state prediction $x_n$ differs a lot from the state $z_n$ that results from new ground truth data.
+This corresponds to a state of surprise in human terms, and should result in the storage of $z_n$ and the subsequent states in to episodic memory. This critirea applies equally well to vision or to language data. In the case of language it results in the storage of thoughts that are of significance. The length of the sequence to be stored is governed by when the next surprise state occurs, at which point it is terminated. This is reminiscent of the design used for splitting up a sequence of characters into words in the language model, in this case we are splitting up a sequence of words into thoughts, with the caveat that not all thoughts are stored, only those whose surprise value exceeds some threshold.
+Another storage critera can be developed based on the valence signal coming from the amygdala. It is possible that the amygdala gets activated as a result of the surprise value alluded to earlier, and it generates the valence signal for the ATL hub that leads to the storage of the episode. In this sense the amygdala's signal will not be a separate mechanism but a way in the surprise mechanism is implemented by the system at the ATL hub.
+- Since it is an associative memory, what are query and key values to be used? 
 
 
 
