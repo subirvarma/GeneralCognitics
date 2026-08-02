@@ -114,6 +114,11 @@ The above figure shows the structure of the level 1 hub located in the ATL. It i
 After the predictive coding pipeline settles down, the resulting value of the hub state $xxx_n$ is fed back into the level 3 part of the vision and language pipelines, and serves as the latent $x_n$ value that is used to generate the next percept $g_{\phi}(x_n)$. The latent $x_n$ subsequently gets modified by the new sensory data $s_n$, which results in the latent state $z_n$.
 Thus the percept generation takes place at the mode level, but takes into account everything else that is happening by virtue of this architecture.
 
+Note that the vision updated happen almost continuously, while the language updates in the form of words happen every hundreds of milliseconds. The problem of integrating two streams running on different time scales is called the *multirate sensor fusion problem* in robotics. 
+The proposed solution to this problem as shown in the above figure has empirical support in psycholinguistics. the Visual World Paradigm literature
+[Tanenhaus, Spivey-Knowlton, Eberhard, & Sedivy, 1995](https://sites.socsci.uci.edu/~rfutrell/teaching/lsci159-f2020/readings/tanenhaus1995integration.pdf) showed via eyetracking that visual context influences spoken word recognition and syntactic parsing during the earliest moments of processing.
+We will assume that the update to the shared state $zzz_n$ on the arrival of a new word happens much faster than the interval between successive vision updates, in other words the system does not run into the problem that the target for the word update is continuously changing as a result of the faster vision updates.
+
 Consider the scenario in which we are driving a vehicle and there is another vehicle in front of us, as well as other objects such as pedestrians etc which are visible. As per the model, the system will install models for all objects that we pay attention to during the course of the drive, but there are some objects that we pay more attention to, such as the car in front of us.
 The scenario can evolve into one of the following ways:
 
@@ -130,6 +135,8 @@ means the saliency signal from the costumed figure never wins that competition, 
 work showing measurable physiological orienting responses to “unnoticed” stimuli despite no conscious report. This gives a concrete mechanism for the “ background things vs. stuff” distinction — everything starts as coarse “stuff” background by default; a region gets promoted to its own individuated “thing” pipeline specifically when its saliency signal wins the attention competition.
 
 ## A Predictive Processing Model for Language 
+
+Language comprehension and generation is a relatively late addition to our cognitive system, it happened in the last 50,000 years. By then the brain had already built a rich, grounded, pre-linguistic continuous conceptual state (the $zzz_n$ in the IM-LEPP model), and language was added comparatively effortful, serial auto-regressive-like process that reads from and writes to that substrate rather than buikding another one from scratch. Hence the brain's $zzz_n$ equivalent is grounded in perception, sound, social experience etc and language is another channel feeding into this already existing representation. This points out to a fundamental difference between the brain (and the IM-LEPP model) and modern LLMs, since the latter are not grounded and base their latent representations purely from word co-occurrance statistics and nothing else. There have been some recent efforts to build a predictive processing model for language, for example see the [LD4LG](https://arxiv.org/abs/2212.09462) model. However this and similar models run into the problem of designing a good auto-encoder for language, which hasn't been solved yet. The reason for this is that their latent representations are not grounded with other sensory data, and no amount of auto-encoder engineering can fix lack of grounding.
 
 Language shares a number of features in common with the visual system, and both can be modeled as predictive systems, images in one case and words in the other. That said, words are more abstract entity than objects and are discrete in nature, i.e., there are a finite number of them. The problem then is that of translating the sound coming in through our ears into word level latent representations that attach semantic meaning to them and is followed by prediction of the next word. These sounds could be coming from an external source, or it could be just the sound of our voice talking. In the former case, the next word in the sequence can serve as an error connection signal for the brain's prediction for the next word, very much like the error correction that happens in vision, and in the process the brain's model for next word prediction gets trained. For the case when the sound is from our own voice, there is still an error correction  feedback loop in operation, since sometimes we speak out a word, and then hearing the sound makes us realize that we meant to say something else. There is another source for words through our visual system when we read or write and we will consider this simpler case first. 
 
@@ -174,7 +181,6 @@ Modern multimodal LLMs can also be used for the scenario described above, but th
 
 There is another point of distinction between the IM-LEPP model and LLMs and this has to do with how the models go about doing the next word generation.
 
-
 ### The Predictive Coding Pipeline for Discrete Senesory Data
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat143.png) 
@@ -205,6 +211,47 @@ $$ z_i^{(1)} \leftarrow z_i^{(1)} - \eta \left[(y_i - T_i) + \Pi_1\epsilon_{ z^{
 Note that all the information required to update $z_i^{(1)}$ is available locally.
 
 ### Approximating the Softmax Function in the Brain
+
+### Connection to Surprisal Theory, the N400 Effect and Garden Path Re-analysis
+
+Over the years linguits have discovered a number of patterns in the way the brain goes about processing language, and the three phenomena references in the header are the among the most well known among the. In the following we will investigate the relation between these and predictions from the IM-lEPP model.
+
+**Surprisal Theory**
+
+[Hale (2001)](https://dl.acm.org/doi/10.3115/1073336.1073357) and more influentially [Levy (2008)](https://www.mit.edu/~rplevy/papers/levy-2008-cognition.pdf) proposed that the processing difficulty of a word during real-time comprehension is proportional to its surprisal, which was defined as the negative log probability of that word given its pretceding context:
+
+$$  surprisal(w_i) = -\log p(w_i|w_{\lt i}) $$
+
+This equation says that predictable words (low surprisal) are read quickly while unexpected words (high surprisal) cause measurable slowdowns in reading time and eye-tracking measures. This has been extensively validated, including with surprisal estimates from modern LLMs The IM-LEPP model provides a direct mathematical reason that explains the extra comprehension effort as explained next.
+The IM-LEPP model uses a decomposition of a word $w$ into a sequence of characters $(ch_1,...,ch_k)$, so by applying the cahin rule of probability, the surprisal definition becomes
+
+$$ surprisal(w) = -\log p(w_i|yy) = \sum_{j=1}^k [-\log P(c_j|c_1,...,c_{j-1},yy)]  $$
+
+where the $yy$ is the latent representation of the word as predicted by the level 2 word level pipeline. Hence the generation of the word corresponding to $yy$ is decomposed into a serial generation of the characters for that word. Assuming that the ground truth for the $i^{th}$ character is given in 1-hot form by $t=(t_1,...,t_K)$, the previous section showed that the predictive coding pipeline for the $i^{th}$ character is driven by the minimization of the energy term $-\sum_k t_k\log y_k$ which reduces to the definition of surprisal $-\log y_{true\ character}$. If there is a big difference between the ground truth character $t$ and the predicted character, then the predictive coding energy pipeline will take longer to settle down for each character, and thus for the entire word, which maps naturally onto longer reading times, which is the surprisal effect.
+
+Note that there is an additional error correction happening at level 2, where the  level1 generated ground truth latent representation of the word that actually arrived is compared with the predicted latent $yy$.
+This happens in continuous latent space, not over word identity, so it isn't measuring "how likely was this word" the way the summed level-1 terms do. It's closer to measuring "how well did the higher-level semantic/contextual expectation $yy$ fit what arrived," independent of how surprising the word's bare identity was, which brings us to the N400 effect.
+
+**N400**
+
+[Kutas and Hillyard (1980)](http://kutaslab.ucsd.edu/people/kutas/pdfs/1980.S.203.pdf) found a negative EEG deflection peaking around 400ms after a word was read, and this was larger for semantically unexpected words in the context. Their original example, "He spread the warm bread with socks," showed a large N400 for the anomalous final word.
+There's an active, unresolved debate in the ERP literature about what N400 actually indexes. Some accounts treat it as reflecting ease of lexical access/retrieval (a facilitation account), others as reflecting the difficulty of integrating a word's meaning into the evolving sentence/discourse representation (an integration account). 
+
+This maps remarkably well onto a distinction already built into IM-LEPP's two level structure for language:
+The summed level-1 cross-entropy terms are the natural computational candidate for the lexical-access side of the N400 debate (word-identity predictability, classical surprisal), while level 2's continuous prior-mismatch term is the natural candidate for the integration side (how well the word's meaning fits the evolving discourse representation). These are two terms that correspond to two different, independently-motivated quantities in the psycholinguistic literature, occurring at two different, architecturally-distinct levels.
+There's contemporary work pursuing exactly this kind of decomposition (a recent paper titled ["Decomposition of surprisal: Unified computational model of ERP components in language processing,"](https://arxiv.org/abs/2409.06803) and [Kuperberg, Brothers & Wlotko's](https://www.biorxiv.org/content/10.1101/404780v2) work proposing distinct neural signatures for violated predictions at different levels of representation), so IM-LEPP's energy decomposition is relevant to a current research conversation rather than restating settled science.
+
+[Osterhout and Holcomb (1992)](https://faculty.washington.edu/losterho/Osterhout%26Holcomb1992.pdf) identified a distinct ERP component P600 corresponding to a positive deflection around 600ms which was specifically elicited by syntactic anomaly and distinct from N400's semantic profile. It's since been found to respond to a broader range of syntactic ambiguities and reanalysis demands, not just outright grammatical violations, which brings us to the next topic.
+
+**Garden Path Re-Analysis**
+
+A garden-path sentence is one that's temporarily structurally ambiguous in a way that leads readers to commit to an incorrect initial parse, requiring revision once disambiguating material arrives. The canonical example, from [Bever (1970)](https://dingo.sbs.arizona.edu/~tgb/pdfs/beverpdf_11.pdf): "The horse raced past the barn fell". Readers initially parse "raced" as the main verb, then hit "fell" and must reanalyze "raced past the barn" as a reduced relative clause. [Frazier and Rayner (1982)](https://www.sciencedirect.com/science/article/abs/pii/0010028582900081) established the empirical signature via eye-tracking, which was increased reading times and regressive eye movements specifically at the disambiguating word.
+
+Garden-path reanalysis can be explained using IM-LEPP as follows: On the first reading of the sentence, the diffusion based optimization causes the system latent state $xx_n$ 
+at the output of the prediction module at level 2, to settle into a locally low-energy but incorrect interpretation after the word 'raced' is read, which propagates into a large error several words later when the word 'fell' is read. At this point the attention tracks back to the point of dis-ambiguation 'raced' which is read again and this results in an escape from $xx$ to a new prediction $xx'$ that has a lower prediction error when the word 'fell' is read gain. The large prediction error encountered on the first reading of 'fell' changes the energy landscape and this facilitates the escape using the mechanism that explained in figure 8 in [Varma](https://subirvarma.github.io/GeneralCognitics/2026/07/15/statmech4.html). 
+
+The initial mis-interpretation of 'raced' connects to [Ghio et al.'s (2023)](https://arxiv.org/abs/2308.14085) finding that diffusion-based sampling can get trapped by an emergent competing local maximum along the annealing path, and this maps directly onto "the parser gets trapped in the wrong garden-path interpretation," with P600 as the plausible neural signature of the resulting escape-and-resettle process.
+"Garden-Path Model" is actually the name of a specific theory (Frazier's), proposing the parser commits serially to one analysis at a time. There's a rival, well-established account called the constraint-based/parallel tradition ([MacDonald, Pearlmutter & Seidenberg, 1994](https://psycnet.apa.org/record/1995-08264-001)) which proposes that multiple candidate parses are entertained simultaneously with graded activation, more like a genuine probability distribution than a single serial commitment. IM-LEPP's own architecture, representing a distribution over candidate states via diffusion sampling before settling, is arguably a better structural match to the constraint-based account than to Frazier's original serial model, despite sharing the "garden path" name with the phenomenon both theories are trying to explain.
 
 ### Extension to Auditory Processing of Language (Phonemes)
 
