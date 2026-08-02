@@ -199,7 +199,7 @@ There is another point of distinction between the IM-LEPP model and LLMs and thi
 
 Figure 12: Predictive Coding Pipeline for Characters
 
-The traditional predictive coding pipeline was designed for analog sensory data, but it can be extended to the case when the data happens to be discrete, as for the case of characters or phonemes in the level 3 part of the language model.
+The traditional predictive coding pipeline was designed for analog sensory data, but it can be extended to the case when the data happens to be discrete, as for the case of characters or phonemes in the level 3 part of the language model (see [Whittington and Bogacz](https://www.bndu.ox.ac.uk/sites/default/files/pdf_files/Whittington%20Bogacz%202017_Neural%20Comput.pdf)).
 The above figure shows the computational details for the predictive coding model at the character level. The system processes characters one at a time, and for each character it builds up an internal representation using predictive coding.
 We will assume a simple two level hierarchy, though the model allows for any number of levels. The top level has a latent representation $z^{(2)}$, and this used to generate a representation $z^{(1)}$ at the lower level using a function $f_2(z^{(2)})$ and this representation in turn generates the final representation $t=(t_1,...,t_K)$ where $K$ is the number of characters being modeled.
 The representations $z^{(1)}$ and $z^{(2)}$ are in continuous space, however $t$ lies in discrete space and is given by $t=(t_1,t_2,...,t_K)$ and uses the 1-hot representation so that individual characters $(ch_1, ch_2,...,ch_K$ are represented by $(1,0,...,0), (0,1,...,0),...,(0,0,...,1)$ respectively. The representation $t$ is generated from  $z^{(1)}$ by a process of sampling using the distribution
@@ -222,7 +222,48 @@ $$ z_i^{(1)} \leftarrow z_i^{(1)} - \eta \left[(y_i - T_i) + \Pi_1\epsilon_{ z^{
 
 Note that all the information required to update $z_i^{(1)}$ is available locally.
 
-### Approximating the Softmax Function in the Brain
+### Approximating the Softmax Function in Brain Circuitry
+
+The computations in the predictive coding pipeline described above require the computation of $y_i$ using the softmax function. How can this be accomplished in the brain?
+
+A substantial body of work by Carandini and Heeger identifies **divisive normalization** as what they term a canonical neural computation, i.e., as a a single computational motif recurring, with only minor variation, across an unusually wide range of brain systems and species ([Carandini & Heeger, 2012](https://redwood.berkeley.edu/wp-content/uploads/2018/08/carandini-heeger.pdf)). In its general form, the response of an individual neuron is divided by a term reflecting the pooled, summed activity of a local population of neighboring neurons:
+
+$$ response_i = {R_i^n\over{ \sigma^n + \sum_j R_j^n} }  $$
+
+where $R_i^n$ is neuron $i$'s driven input, $n$ is an exponent emppirically estimated in the range of roughly 2–4, and $\sigma$ is a semi-saturation constant preventing division by zero at low input levels. Since this discovery, this circuit has been found in several other areas in the brain other than vision.
+
+This is directly relevant to the biological plausibility of categorical, competitive readouts of the kind used in this paper's discrete phoneme and character-level predictive coding pipelines. Heeger's own theoretical treatment of cortical function makes the connection explicit, noting that "max pooling (also called softmax) can be approximated by normalization" ([Heeger, 2017](https://www.pnas.org/doi/10.1073/pnas.1619788114)).
+This means that the same divisive circuit already documented for contrast and motion processing is, in principle, capable of implementing the kind of competitive, winner-take-all-like selection among discrete alternatives that a softmax output layer performs in an artificial network. 
+One point worth noting here is that the biologically-supported nonlinearity in this circuit is a power law (i.e, response raised to exponent $n$), not the base $e$
+exponential used in the standard machine-learning softmax function. The two forms are qualitatively similar since both produce graded, saturating competition among a pool of candidates, sharpening toward winner-take-all behavior as the exponent or gain increases, but they are not mathematically identical, and the power-law form is the one with direct physiological support, while literal exponentiation appears in the literature mainly as a convenient link function in statistical (point-process GLM) fits to spike data rather than as an established biophysical mechanism.
+
+### Extension to Auditory Processing of Language (Phonemes)
+
+The predictive coding model for level 1 developed above assumes a single flat categorical readout, appropriate when the input alphabet has no independently-motivated internal structure — as is the case for written characters. Auditory input requires a modification, because phonemes are not atomic: articulatory phonology decomposes each phoneme into a small set of independent distinctive features (voicing, place of articulation, manner of articulation, nasality, and a small number of others), and direct intracranial recordings from human superior temporal gyrus confirm that this is the level at which the auditory cortex actually represents speech sound — neural populations are tuned to specific feature values, not to whole phonemes as unitary categories [Mesgarani, Cheung, Johnson, & Chang, 2014](https://linguistics.berkeley.edu/~kjohnson/papers/Mesgarani_et_al_2014_Science.pdf).
+
+We accommodate this by replacing the single $K$-way categorical readout with $D$ independent, smaller categorical readouts, one per feature dimension $d = 1,\ldots,D$ (typically $D \approx $6$–$8$; e.g. $K_{\text{voice}}=2$, $K_{\text{place}}\approx 7$–$8$, $K_{\text{manner}}\approx $6$–$7$). The latent $z^{(1)}$ is partitioned into $D$ corresponding slices, $z^{(1)} = (z^{(1,1)},\ldots,z^{(1,D)})$, and the emission energy becomes a sum of independent cross-entropy terms:
+
+$$E_{PC}(1) = \sum_{d=1}^{D}\left[-\sum_i T_i^{(d)}\log y_i^{(d)}\right] + \frac{1}{2}\epsilon_{z^{(1)}}^T\Pi_1\epsilon_{z^{(1)}}, \qquad y^{(d)} = \text{softmax}\left(z^{(1,d)}\right)$$
+
+This is justified by treating the $D$ feature-level classifiers as independent experts whose distributions combine multiplicatively (Hinton, 2002); in log space this is exactly a sum of energies, so the joint model remains a single, well-defined energy function despite the factored readout. The resulting gradient update is unchanged in form from the single-category case, and remains fully local: each slice updates using only its own residual and its own portion of the prior term,
+
+$$z^{(1,d)} \leftarrow z^{(1,d)} - \eta\left[(y^{(d)}-T^{(d)}) + \Pi_1^{(d)}\epsilon_{z^{(1,d)}}\right], \qquad d=1,\ldots,D$$
+
+with no cross-feature terms required in the bottom-up direction.
+
+The independence assumption is reasonable for inference — each feature can be estimated from the acoustic signal largely on its own — but does not hold for the top-down prior. Phonemes occupy only a small, structured subset of the full combinatorial space of feature-value combinations; most combinations correspond to no phoneme in any language. The generative map $f_2(z^{(2)})$ must therefore produce a *jointly* consistent prediction across all $D$ slices simultaneously, encoding the correlations between features that define the phoneme inventory, rather than predicting each feature independently. Absent this, the model would treat phonologically illicit feature combinations as being just as expected as licit ones.
+
+This modification is confined entirely to the level-1 emission layer. The temporal prediction module is unaffected: it continues to operate on a single continuous latent and to output a continuous prediction $x_{n+1}$ via the diffusion process described above, which is then passed through the factored readout described here rather than through the single flat softmax used for the character case.
+
+The three level model for language that has been presented here is backed up by some experimental data that has been collected over the years.
+The paper on categorical perception by [Liberman, Harris, Hoffman & Griffith, 1957)](https://philpapers.org/rec/LIBTDO-2) is a classic in this area, they showed that a continuously-varying acoustic parameter (voice onset time) is perceived and discriminated categorically, with a sharp identification boundary. 
+[Chang et.al. (2010)](https://www.nature.com/articles/nn.2641) provided direct neurophysiological confirmation by finding categorical speech representations in superior temporal gyrus (STG) area of the brain; [Mesgarani, Cheung, Johnson & Chang (2014, Science)](https://linguistics.berkeley.edu/~kjohnson/papers/Mesgarani_et_al_2014_Science.pdf), using intracranial recordings, found STG populations
+tuned to discrete phonetic features, not raw continuous acoustics.
+[Hickok and Poeppel’s (2007)](https://www.nature.com/articles/nrn2113) dual-stream model locates early phonological processing in STG/STS of the brain with a lexical-interface stage in posterior middle temporal gyrus (pMTG) — mapping cleanly onto the three stages of the model presented here: STG/STS for phonetic features, pMTG for word-level $zz$ representation, and, continuing upward, Lambon Ralph’s ATL hub for integration with other modalities.
+
+Do the latent states $zzz_n$ or $zz_n$ encode 'thought'? 
+Levelt’s production model as described in his book [Speaking: From Intention to Articulation (1989)](https://www.mpi.nl/publications/item67053/speaking-intention-articulation) has a first stage, conceptualization, whose output is a preverbal message — a language-independent conceptual representation of what to say, prior to and dissociable from any particular verbalization (which is why “the same thought” can be expressed in different words or languages). This is a direct architectural instantiation of exactly the proposed role for 𝑧:̄ a persistent, amodal state that the generative pathway then unrolls into a word sequence, with 𝑧 ̄ playing the role of the preverbal message and the language pipeline playing Levelt’s formulation stage.
+
 
 ### Connection to Surprisal Theory, the N400 Effect and Garden Path Re-analysis
 
@@ -265,32 +306,6 @@ at the output of the prediction module at level 2, to settle into a locally low-
 The initial mis-interpretation of 'raced' connects to [Ghio et al.'s (2023)](https://arxiv.org/abs/2308.14085) finding that diffusion-based sampling can get trapped by an emergent competing local maximum along the annealing path, and this maps directly onto "the parser gets trapped in the wrong garden-path interpretation," with P600 as the plausible neural signature of the resulting escape-and-resettle process.
 "Garden-Path Model" is actually the name of a specific theory (Frazier's), proposing the parser commits serially to one analysis at a time. There's a rival, well-established account called the constraint-based/parallel tradition ([MacDonald, Pearlmutter & Seidenberg, 1994](https://psycnet.apa.org/record/1995-08264-001)) which proposes that multiple candidate parses are entertained simultaneously with graded activation, more like a genuine probability distribution than a single serial commitment. IM-LEPP's own architecture, representing a distribution over candidate states via diffusion sampling before settling, is arguably a better structural match to the constraint-based account than to Frazier's original serial model, despite sharing the "garden path" name with the phenomenon both theories are trying to explain.
 
-### Extension to Auditory Processing of Language (Phonemes)
-
-The predictive coding model for level 1 developed above assumes a single flat categorical readout, appropriate when the input alphabet has no independently-motivated internal structure — as is the case for written characters. Auditory input requires a modification, because phonemes are not atomic: articulatory phonology decomposes each phoneme into a small set of independent distinctive features (voicing, place of articulation, manner of articulation, nasality, and a small number of others), and direct intracranial recordings from human superior temporal gyrus confirm that this is the level at which the auditory cortex actually represents speech sound — neural populations are tuned to specific feature values, not to whole phonemes as unitary categories [Mesgarani, Cheung, Johnson, & Chang, 2014](https://linguistics.berkeley.edu/~kjohnson/papers/Mesgarani_et_al_2014_Science.pdf).
-
-We accommodate this by replacing the single $K$-way categorical readout with $D$ independent, smaller categorical readouts, one per feature dimension $d = 1,\ldots,D$ (typically $D \approx $6$–$8$; e.g. $K_{\text{voice}}=2$, $K_{\text{place}}\approx 7$–$8$, $K_{\text{manner}}\approx $6$–$7$). The latent $z^{(1)}$ is partitioned into $D$ corresponding slices, $z^{(1)} = (z^{(1,1)},\ldots,z^{(1,D)})$, and the emission energy becomes a sum of independent cross-entropy terms:
-
-$$E_{PC}(1) = \sum_{d=1}^{D}\left[-\sum_i T_i^{(d)}\log y_i^{(d)}\right] + \frac{1}{2}\epsilon_{z^{(1)}}^T\Pi_1\epsilon_{z^{(1)}}, \qquad y^{(d)} = \text{softmax}\left(z^{(1,d)}\right)$$
-
-This is justified by treating the $D$ feature-level classifiers as independent experts whose distributions combine multiplicatively (Hinton, 2002); in log space this is exactly a sum of energies, so the joint model remains a single, well-defined energy function despite the factored readout. The resulting gradient update is unchanged in form from the single-category case, and remains fully local: each slice updates using only its own residual and its own portion of the prior term,
-
-$$z^{(1,d)} \leftarrow z^{(1,d)} - \eta\left[(y^{(d)}-T^{(d)}) + \Pi_1^{(d)}\epsilon_{z^{(1,d)}}\right], \qquad d=1,\ldots,D$$
-
-with no cross-feature terms required in the bottom-up direction.
-
-The independence assumption is reasonable for inference — each feature can be estimated from the acoustic signal largely on its own — but does not hold for the top-down prior. Phonemes occupy only a small, structured subset of the full combinatorial space of feature-value combinations; most combinations correspond to no phoneme in any language. The generative map $f_2(z^{(2)})$ must therefore produce a *jointly* consistent prediction across all $D$ slices simultaneously, encoding the correlations between features that define the phoneme inventory, rather than predicting each feature independently. Absent this, the model would treat phonologically illicit feature combinations as being just as expected as licit ones.
-
-This modification is confined entirely to the level-1 emission layer. The temporal prediction module is unaffected: it continues to operate on a single continuous latent and to output a continuous prediction $x_{n+1}$ via the diffusion process described above, which is then passed through the factored readout described here rather than through the single flat softmax used for the character case.
-
-The three level model for language that has been presented here is backed up by some experimental data that has been collected over the years.
-The paper on categorical perception by [Liberman, Harris, Hoffman & Griffith, 1957)](https://philpapers.org/rec/LIBTDO-2) is a classic in this area, they showed that a continuously-varying acoustic parameter (voice onset time) is perceived and discriminated categorically, with a sharp identification boundary. 
-[Chang et.al. (2010)](https://www.nature.com/articles/nn.2641) provided direct neurophysiological confirmation by finding categorical speech representations in superior temporal gyrus (STG) area of the brain; [Mesgarani, Cheung, Johnson & Chang (2014, Science)](https://linguistics.berkeley.edu/~kjohnson/papers/Mesgarani_et_al_2014_Science.pdf), using intracranial recordings, found STG populations
-tuned to discrete phonetic features, not raw continuous acoustics.
-[Hickok and Poeppel’s (2007)](https://www.nature.com/articles/nrn2113) dual-stream model locates early phonological processing in STG/STS of the brain with a lexical-interface stage in posterior middle temporal gyrus (pMTG) — mapping cleanly onto the three stages of the model presented here: STG/STS for phonetic features, pMTG for word-level $zz$ representation, and, continuing upward, Lambon Ralph’s ATL hub for integration with other modalities.
-
-Do the latent states $zzz_n$ or $zz_n$ encode 'thought'? 
-Levelt’s production model as described in his book [Speaking: From Intention to Articulation (1989)](https://www.mpi.nl/publications/item67053/speaking-intention-articulation) has a first stage, conceptualization, whose output is a preverbal message — a language-independent conceptual representation of what to say, prior to and dissociable from any particular verbalization (which is why “the same thought” can be expressed in different words or languages). This is a direct architectural instantiation of exactly the proposed role for 𝑧:̄ a persistent, amodal state that the generative pathway then unrolls into a word sequence, with 𝑧 ̄ playing the role of the preverbal message and the language pipeline playing Levelt’s formulation stage.
 
 ### Comparison of Next Word Prediction Strategies in Transformers vs IM-LEPP
 
