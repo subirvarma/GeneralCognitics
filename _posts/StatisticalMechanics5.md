@@ -264,10 +264,9 @@ tuned to discrete phonetic features, not raw continuous acoustics.
 Do the latent states $zzz_n$ or $zz_n$ encode 'thought'? 
 Levelt’s production model as described in his book [Speaking: From Intention to Articulation (1989)](https://www.mpi.nl/publications/item67053/speaking-intention-articulation) has a first stage, conceptualization, whose output is a preverbal message — a language-independent conceptual representation of what to say, prior to and dissociable from any particular verbalization (which is why “the same thought” can be expressed in different words or languages). This is a direct architectural instantiation of exactly the proposed role for 𝑧:̄ a persistent, amodal state that the generative pathway then unrolls into a word sequence, with 𝑧 ̄ playing the role of the preverbal message and the language pipeline playing Levelt’s formulation stage.
 
-
 ### Connection to Surprisal Theory, the N400 Effect and Garden Path Re-analysis
 
-Over the years linguits have discovered a number of patterns in the way the brain goes about processing language, and the three phenomena references in the header are the among the most well known among the. In the following we will investigate the relation between these and predictions from the IM-lEPP model.
+Over the years neuroscientists have discovered a number of patterns in the way the brain goes about processing language, and the three phenomena references in the header are the among the most well known among the. In the following we will investigate the relation between these and predictions from the IM-LEPP model.
 
 **Surprisal Theory**
 
