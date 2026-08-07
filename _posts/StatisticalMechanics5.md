@@ -7,6 +7,22 @@ title: " A Hierarchical Energy-Based Model for Multimodal Cognition"
 
 **Contents**     
 
+- Introduction
+- The Hub and Spoke Model for Cognition
+- The IM-LEPP Model for Multimodal Integration
+- A Hub and Spoke Model for Vision
+  - Perceptual Multistability: The Necker Cube
+- A Predictive Processing Model for Language
+  - A Predictive Coding Pipeline for Discrete Sensory Data
+  - Approximating the Softamx Function in Brain Circuitry
+  - Extension to Auditory Pressing of Language
+  - Connection to Surprisal Theory, the N400 Effect and Garden Path Re-analysis
+  - Comparison of Next Word Prediction Strategies in Transformers vs IM-LEPP
+- Inclusion of Memory
+- Existing Work
+- Conclusions
+    
+
 ## Introduction 
 
 This paper proposes an hierarchical computational model for semantic cognition in the brain. The model, that we call Integrated Multimodel Latent Energy based Predictive Processing or IM-LEPP
