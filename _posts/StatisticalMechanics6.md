@@ -20,6 +20,9 @@ title: " An Energy based Language Model with Hierarchical Memory"
 - Based on Cowan paper
 
 
+### Parametric Memory
+
+
 ### Object Level Memory
 
 
