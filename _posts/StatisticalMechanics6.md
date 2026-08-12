@@ -41,8 +41,14 @@ title: " An Energy based Language Model with Hierarchical Memory"
 
 ## An Hierchical Model for Memory
 
-- Retrieval from a very large database (google deepmind paper)
+- Retrieval from a very large database (google deepmind paper) at Level 1
+- Attention based retrieval at Level 2 (in ATL)
+- Working Memory in the Prediction Module
 
 
 
 ## An Energy based Language Model
+
+- Universal Transformers
+- MoE design to Boost Parameter Count
+- Variable Number of De-Noising Stages
