@@ -31,9 +31,29 @@ The IM-LEPP language model differs from that of Transformers in the following re
 - IM-LEPP also generates a context vector that it uses for prediction, however this context is created from information that is stored in its long term memory. Hence the prediction model in IM-LEPP is decoupled from memory storage, and the two modules can evolve independently over time, for example new memories can be added using other sensory modalities such as vision or smell, and this is done using a process of continuous learning. In Transformers on the other hand, prediction and parametric memory are coupled in its FFN, and in order to incorporate more memory, the system has to undergo re-training. In other words memory in transformers is frozen at the time of training, while it is de-coupled from the prediction module in IM-LEPP, and can change continuously.
 - IM-LEPP uses an energy based diffusion model to do prediction, as opposed to the FFN used in Transformers. This makes the prediction operation more flexible, and it can be adapted to the level of difficulty involved.
 
+## The IM-LEPP Model
 
+![](https://subirvarma.github.io/GeneralCognitics/images/stat170.png) 
+
+Figure 1: The IM-LEPP Model
+
+
+![](https://subirvarma.github.io/GeneralCognitics/images/stat183.png) 
+
+Figure 2: The IM-LEPP Language Module
+
+
+
+Figure 3: Generating $zzz_n$ at the ATL Hub using kNN and Attention Modules
+
+
+
+Figure 4: Computation of the energy function $E_W$ 
 
 ## Types of Memory in the Brain
+
+
+
 
 
 ### Hierarchical Arrangement of Memory
