@@ -38,15 +38,15 @@ The IM-LEPP language model differs from that of Transformers in the following re
 Figure 1: The IM-LEPP Model
 
 
-![](https://subirvarma.github.io/GeneralCognitics/images/stat183.png) 
+![](https://subirvarma.github.io/GeneralCognitics/images/stat185.png) 
 
 Figure 2: The IM-LEPP Language Module
 
-
+![](https://subirvarma.github.io/GeneralCognitics/images/stat184.png) 
 
 Figure 3: Generating $zzz_n$ at the ATL Hub using kNN and Attention Modules
 
-
+![](https://subirvarma.github.io/GeneralCognitics/images/stat186.png) 
 
 Figure 4: Computation of the energy function $E_W$ 
 
