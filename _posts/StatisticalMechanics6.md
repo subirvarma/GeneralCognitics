@@ -64,6 +64,8 @@ Figure 3: Generating $zzz_n(i)$ at the ATL Hub using kNN based search and attent
 - The short term memory is organized as per Cowan, with contents being flushed out periodically depending on how long they have been in there.
 - Contents of the STM are used to run a traditional attention operation (as per Vaswani et.al), with learnt query, key and value vectors, with $zzz'_n(i)$ used for generating the query.
 
+Note that I haven't used your idea of having a sequence of states stored  as a 'thought' in the memory. This may be more relevant to visual memory, what do you think?
+
 Additional notes are in the figure.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat189.png) 
