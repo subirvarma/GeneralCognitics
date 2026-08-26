@@ -37,10 +37,23 @@ The IM-LEPP language model differs from that of Transformers in the following re
 
 Figure 1: The IM-LEPP Model
 
+Notes for Figure 1:
+
+- This is the figure from the previous paper, no changes.
+
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat185.png) 
 
 Figure 2: The IM-LEPP Language Module
+
+Notes for Figure 2:
+
+- I have added a loop for the prediction module, hence it is invoked K times
+- Before the first invocation $zz_m$ is sent to the ATL hub, where it changes to $zzz_m$. This is then used to invoke items from memory (described in figure 3 below), and this results in a change in $zzz_m$ to $zzz'_m$.
+- $zzz'_m$ is fed back into the prediction module to condition the minimization of $E_W(x;zz_m,zzz'_m)$ which results in  $xx_{m+1}(1)$.
+- $xx_{m+1}(1)$ is then fed back into the ATL hub to undergo another round of memory access etc, which in turn is fed back and results in $xx_{m+1}(2)$. This is repeated $K$ times, and the final value $xx_{m+1}(K)$ is fed into the generation module to generate $yy_{m+1}$.
+- The multiple access has been put in to handle complex queries with intermediate outputs, it serves the same function multiple stages in a Transformer.
+
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat184.png) 
 
