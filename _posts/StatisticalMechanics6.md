@@ -59,9 +59,13 @@ Notes for Figure 2:
 
 Figure 3: Generating $zzz_n$ at the ATL Hub using kNN and Attention Modules
 
-![](https://subirvarma.github.io/GeneralCognitics/images/stat186.png) 
+![](https://subirvarma.github.io/GeneralCognitics/images/stat188.png) 
 
-Figure 4: Computation of the energy function $E_W$ 
+Figure 4: Memory Access + Prediction Stack
+
+![](https://subirvarma.github.io/GeneralCognitics/images/stat187.png) 
+
+Figure 5: Computation of the energy function $E_W$ 
 
 ## Types of Memory in the Brain
 
