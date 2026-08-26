@@ -71,7 +71,11 @@ Additional notes are in the figure.
 Figure 4: Memory Access + Prediction Stack
 
 Shows operation of the prediction module for a two state prediction pipeline, ie.e, the case $K=2$. Has some similarities to the [Full Bandwidth Transformer](https://arxiv.org/abs/2608.08888). 
-Should the different stages in the stack use the same set of parameters or should they be different? I am leaning towards using different set of parameters. If I use the same set of parameters, will this be equivalent to the Loop Transformer, with a loop length of one? Is this preferable?  Also what are the lessons of the Recirculation architecture by [Mozer et.al.](https://arxiv.org/abs/2608.17981)? My current thinking is that the lessons in Re-circulation may not apply here, what do you think?
+Should the different stages in the stack use the same set of parameters or should they be different? I am leaning towards using different set of parameters. If I use the same set of parameters, will this be equivalent to the Loop Transformer, with a loop length of one? Is this preferable?  I guess the benefit of adopting the same set of parameters is that we can make the number of stages $K$ variable as a function of level of difficulty. 
+
+The other variable that can be adjusted is the number of diffusion stages within the prediction module. My current thinking is that the difficulty in language generation lies in getting hold of the right context to base the next word on. From this point of view, making $K$ variable is prefereable to making the number of diffusion stages variable.
+
+Also what are the lessons of the Recirculation architecture by [Mozer et.al.](https://arxiv.org/abs/2608.17981)? My current thinking is that the lessons in Re-circulation may not apply here, what do you think?
 Also is there a need for the residual connection? My intuition tells me that they are needed.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat187.png) 
