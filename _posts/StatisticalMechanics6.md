@@ -68,7 +68,7 @@ Note that I haven't used your idea of having a sequence of states stored  as a '
 
 Additional notes are in the figure.
 
-![](https://subirvarma.github.io/GeneralCognitics/images/stat189.png) 
+![](https://subirvarma.github.io/GeneralCognitics/images/stat191.png) 
 
 Figure 4: Memory Access + Prediction Stack
 
