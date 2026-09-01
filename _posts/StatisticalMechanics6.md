@@ -31,6 +31,7 @@ The proposed IM-LEPP language model differs from that of Transformers in the fol
 - The context vector in Transformers is generated using the input prefix as well as already generated text. IM-LEPP on the other hand summarizes the past in its state vector, hence its operation is closer to a recurrent neural network or RNN. However unlike a traditional RNN, IM-LEPP creates its context from not just its previous state, but also utilizes the entirety of its memory.
 Humans clearly don't hold all of their past generations in their working memory while deciding on the next word, and it is thought that this information is captured in the system state aided by memory, which is closer to how IM-LEPP operates.
 
+
 ## The IM-LEPP Model
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat170.png) 
