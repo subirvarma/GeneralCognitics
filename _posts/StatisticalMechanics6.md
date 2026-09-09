@@ -57,89 +57,28 @@ Figure 2: The IM-LEPP Language Module
 
 Notes for Figure 2:
 
-- I have added a loop for the prediction module, hence it is invoked K times
+- The prediction module is invoked a variable number of times. During inference a constant amount of noise is added for the diffusion step.
 - Before the first invocation $zz_m(1)$ is sent to the ATL hub, where it is changes to $zzz'_m(1)$ using the predictive coding pipeline. This is then used to invoke items from memory (described in figure 3 below), and this results in a change in $zzz'_m(1)$ to $zzz_m(1)$.
-- $zzz_m(1)$ is fed back into the prediction module to condition the minimization of $E_W(x;zz_m(1),zzz_m(1))$ which results in  $zz_m(2)$.
+- $zzz_m(1)$ is fed back into the prediction module to condition the minimization of $E_W(x;zz_m(1),zzz_m(1))$ using L steps of the Langevin iteration, which results in  $zz_m(2)$.
 - $zz_m(2)$ is then fed back into the ATL hub to undergo another round of memory access etc, which in turn is fed back and results in $zz_m(3)$. This is repeated $K$ times, and the final value $zz_m(K) = xx_{m+1}$ is fed into the generation module to generate $yy_{m+1}$.
-- The multiple loops through the prediction module have been put in to handle complex queries with intermediate outputs, it serves the same function multiple stages in a Transformer. It can be considered to be a thinking operation that the model engages in latent space, somewhat like the open loop operation described in the previous paper.
+- The multiple loops through the prediction module have been put in to handle complex queries with intermediate outputs, it serves the same function multiple stages in a Transformer. It can be considered to be a thinking operation that the model engages in latent space.
 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat193.png) 
 
 Figure 3: Generating $zzz_n(i)$ at the ATL Hub using kNN based search and a predictive processing pipeline
 
-- I have used a [Cowan](https://pmc.ncbi.nlm.nih.gov/articles/PMC2657600/) style memory classification for this module. Memories are stored as a pair $(zz_n,zz_{n+1})$, as key-value pair, provided $\vert xx_{n+1} - zz_{n+1}\vert$ exceeds some threshold.The idea here is that the next state $zz_{n+1}$ from the prior state $zz_n$ has a high surprisal value and hence gets stored. If a state similar to $zz_n$ is encountered again, then $zz_{n+1}$ can potentially be used to do prediction (similar to [Borgeaud et.al](https://arxiv.org/abs/2112.04426) or [Khandelwal et.al.](https://arxiv.org/abs/1911.00172)). In IM-LEPP all prediction are done using the $E_W$ module however, but a Khandelwal type prediction mechanism is something to think about.
-- Items in long term memory are matched using L2 distance measure perhaps, with $k$ nearest neighbors sent to the STM.
-- The short term memory is organized as per Cowan, with contents being flushed out periodically depending on how long they have been in there.
-- Contents of the STM are used to run a traditional attention operation (as per Vaswani et.al), with learnt query, key and value vectors, with $zzz'_n(i)$ used for generating the query.
+- All memories are of the episodic kind and get stored in the long term memory. The break up into episodes uses the surprisal based mechanism described in the previous paper.
+- A certain number, say M of these are retrieved after matching using $zzz'_m(i)$ using kNN perhaps. I will get into more details of this mechanism in the detailed write-up.
+- These M episodes are then run through a predictive processing pipeline to generate $zzz_m(i)$. Alternatively an attention based mechanism can be used for this purpose, with $zzz'_m(i)$ serving as the query. The details for this have to be worked out.
 
-Note that I haven't used your idea of having a sequence of states stored  as a 'thought' in the memory. This may be more relevant to visual memory, what do you think?
+![](https://subirvarma.github.io/GeneralCognitics/images/stat194.png) 
 
-Additional notes are in the figure.
+Figure 5: Computation of the energy function $E_W(x;zz_m(k),zzz_m(k))$ 
 
-![](https://subirvarma.github.io/GeneralCognitics/images/stat191.png) 
+![](https://subirvarma.github.io/GeneralCognitics/images/stat194.png) 
 
-Figure 4: Memory Access + Prediction Stack
+Figure 6: A single DiT Block
 
-Shows operation of the prediction module for a two state prediction pipeline, ie.e, the case $K=2$. Has some similarities to the [Full Bandwidth Transformer](https://arxiv.org/abs/2608.08888). 
-Should the different stages in the stack use the same set of parameters or should they be different? I am leaning towards using different set of parameters. If I use the same set of parameters, will this be equivalent to the Loop Transformer, with a loop length of one? Is this preferable?  I guess the benefit of adopting the same set of parameters is that we can make the number of stages $K$ variable as a function of level of difficulty. 
+Figures 5 and 6 show a diffusion Transformer based design for computing the energy function.
 
-The other variable that can be adjusted is the number of diffusion stages within the prediction module. My current thinking is that the difficulty in language generation lies in getting hold of the right context to base the next word on. From this point of view, making $K$ variable is prefereable to making the number of diffusion stages variable.
-
-Also what are the lessons of the Recirculation architecture by [Mozer et.al.](https://arxiv.org/abs/2608.17981)? My current thinking is that the lessons in Re-circulation may not apply here, what do you think?
-Also is there a need for the residual connection? My intuition tells me that they are needed.
-
-![](https://subirvarma.github.io/GeneralCognitics/images/stat187.png) 
-
-Figure 5: Computation of the energy function $E_W$ 
-
-This module can be implemented in one of several ways:
-
-- Use a FFN, as in a Transformer.
-- Use a 1D convolution.
-
-Basically the module should be capable of processing a bunch of vectors as input and produce a scalar output. The FFN option is definitely more parameter rich which may be a plus.
-
-## Types of Memory in the Brain
-
-
-
-
-
-### Hierarchical Arrangement of Memory
-
-- Based on Cowan paper
-
-
-### Parametric Memory
-
-
-### Object Level Memory
-
-
-### Episodic Memory
-
-
-
-## Modern Hopfield Networks for Storage
-
-
-
-## Memory Use in Transformers
-
-
-
-
-## An Hierchical Model for Memory
-
-- Retrieval from a very large database (google deepmind paper) at Level 1
-- Attention based retrieval at Level 2 (in ATL)
-- Working Memory in the Prediction Module
-
-
-
-## An Energy based Language Model
-
-- Universal Transformers
-- MoE design to Boost Parameter Count
-- Variable Number of De-Noising Stages
