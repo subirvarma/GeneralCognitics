@@ -76,6 +76,8 @@ Figure 3: Generating $zzz_n(i)$ at the ATL Hub using kNN based search and a pred
 
 Figure 5: Computation of the energy function $E_W(x;zz_m(k),zzz_m(k))$ 
 
+I have used the cross attention mechanism for doing the conditioning. There are two other ways of doing this described in the DiT paper.
+
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat195.png) 
 
 Figure 6: A single DiT Block
