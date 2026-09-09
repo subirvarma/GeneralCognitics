@@ -76,7 +76,7 @@ Figure 3: Generating $zzz_n(i)$ at the ATL Hub using kNN based search and a pred
 
 Figure 5: Computation of the energy function $E_W(x;zz_m(k),zzz_m(k))$ 
 
-![](https://subirvarma.github.io/GeneralCognitics/images/stat194.png) 
+![](https://subirvarma.github.io/GeneralCognitics/images/stat195.png) 
 
 Figure 6: A single DiT Block
 
