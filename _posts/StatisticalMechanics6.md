@@ -34,14 +34,11 @@ These two operations, self-attention followed by FFN, are repeated multiple time
 
 Even though Transformers and the proposed IM-LEPP language model are both based on the Production System framework, they differ in the following respects:
 
-- IM-LEPP features a system latent state that is subject to modification during the process of prediction just as in Transformers. However unlike Transformers, this latent state also flows across successive word predictions. Transformers on the other hand use the discrete generated word as a bridge between successive predictions. Since the latent state is much more information dense compared to a word, this means that future predictions in IM-LEPP have access to more state information compared to Transformers.
-- The context in IM-LEPP is created from information that is stored in its long term memory, while in a Transformer the context is given by words generated so far. In the latter case since the context grows as the generation proceeds, it can become very large, and since attention has quadratic complexity, it leads to high processing requirements (in practice the context is cut off after some length is reached, which leads to forgetting in Transformers). IM-LEPP on the other hand can handle a much larger memory storage with lower processing complexity by using more efficient algorithms.
-- Instead of using a FFN for prediction, IM-LEPP uses an energy based diffusion model, in which the context serves as a conditioning variable for the generation.
+- IM-LEPP features a system latent state that is subject to modification during the process of prediction just as in Transformers. However unlike Transformers, this latent state also flows across successive word predictions and is recurrent in nature. Transformers on the other hand use the discrete generated word as a bridge between successive predictions and instead of using a recurrent state, they use the entire past history for future predictions. The recurrent state design is more biologically plausible, since for example humans rarely keep for than 4-5 words in working memory when deciding on the next word.
+- The context in IM-LEPP is created from information that is stored in its long term memory, while in a Transformer the context is given by words generated so far. In the latter case since the context grows as the generation proceeds, it can become very large, and since attention has quadratic complexity, it leads to high processing requirements (in practice the context is cut off after some length is reached, which leads to forgetting in Transformers). IM-LEPP on the other hand can handle a much larger memory storage with lower processing complexity by using more efficient search algorithms.
+- Instead of using a FFN for prediction, IM-LEPP uses an energy based diffusion model, in which the context serves as a conditioning variable for the generation. This is again a more biologically plausible prediction mechanism since it is based on the physical principle of energy minimization.
 
-Hence the prediction module in IM-LEPP is decoupled from memory storage, and the two modules can evolve independently over time. For example new memories can be added using other sensory modalities such as vision or smell, and this is done using a process of continuous learning. In Transformers on the other hand, prediction and parametric memory are implemented in a coupled fashion in its FFN, and in order to incorporate more memory, the system has to undergo re-training. In other words memory in transformers is frozen at the time of training, while it is de-coupled from the prediction module in IM-LEPP, and can change continuously.
-- The context vector in Transformers is generated using the input prefix as well as already generated text. IM-LEPP on the other hand summarizes the past in its state vector, hence its operation is closer to a recurrent neural network or RNN. However unlike a traditional RNN, IM-LEPP creates its context from not just its previous state, but also utilizes the entirety of its memory.
-Humans clearly don't hold all of their past generations in their working memory while deciding on the next word, and it is thought that this information is captured in the system state aided by memory, which is closer to how IM-LEPP operates.
-
+There are other differences in language generation in the two models that were pointed out in [A Hierarchical Energy-Based Model for Multimodal Cognition](https://subirvarma.github.io/GeneralCognitics/2026/08/07/statmech5.html) that make the IM-LEPP model more biologically plausible.
 
 ## The IM-LEPP Model
 
@@ -54,7 +51,7 @@ Notes for Figure 1:
 - This is the figure from the previous paper, no changes.
 
 
-![](https://subirvarma.github.io/GeneralCognitics/images/stat185.png) 
+![](https://subirvarma.github.io/GeneralCognitics/images/stat192.png) 
 
 Figure 2: The IM-LEPP Language Module
 
@@ -67,9 +64,9 @@ Notes for Figure 2:
 - The multiple loops through the prediction module have been put in to handle complex queries with intermediate outputs, it serves the same function multiple stages in a Transformer. It can be considered to be a thinking operation that the model engages in latent space, somewhat like the open loop operation described in the previous paper.
 
 
-![](https://subirvarma.github.io/GeneralCognitics/images/stat190.png) 
+![](https://subirvarma.github.io/GeneralCognitics/images/stat193.png) 
 
-Figure 3: Generating $zzz_n(i)$ at the ATL Hub using kNN based search and attention operations
+Figure 3: Generating $zzz_n(i)$ at the ATL Hub using kNN based search and a predictive processing pipeline
 
 - I have used a [Cowan](https://pmc.ncbi.nlm.nih.gov/articles/PMC2657600/) style memory classification for this module. Memories are stored as a pair $(zz_n,zz_{n+1})$, as key-value pair, provided $\vert xx_{n+1} - zz_{n+1}\vert$ exceeds some threshold.The idea here is that the next state $zz_{n+1}$ from the prior state $zz_n$ has a high surprisal value and hence gets stored. If a state similar to $zz_n$ is encountered again, then $zz_{n+1}$ can potentially be used to do prediction (similar to [Borgeaud et.al](https://arxiv.org/abs/2112.04426) or [Khandelwal et.al.](https://arxiv.org/abs/1911.00172)). In IM-LEPP all prediction are done using the $E_W$ module however, but a Khandelwal type prediction mechanism is something to think about.
 - Items in long term memory are matched using L2 distance measure perhaps, with $k$ nearest neighbors sent to the STM.
