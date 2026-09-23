@@ -51,7 +51,7 @@ Notes for Figure 1:
 - This is the figure from the previous paper, no changes.
 
 
-![](https://subirvarma.github.io/GeneralCognitics/images/stat197.png) 
+![](https://subirvarma.github.io/GeneralCognitics/images/stat198.png) 
 
 Figure 2: The IM-LEPP Language Module
 
