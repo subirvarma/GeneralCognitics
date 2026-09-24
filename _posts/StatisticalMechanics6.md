@@ -57,11 +57,14 @@ Figure 2: The IM-LEPP Language Module
 
 Notes for Figure 2:
 
-- The prediction module is invoked a variable number of times. During inference a constant amount of noise is added for the diffusion step.
+- The energy module $E_W$ is invoked a variable number of times using schemes such as in the Du, Li, Tenenbaum, Mordatch paper. I will experiment with either no noise added in each E_W step or a constant amount of noise as in the Gladstone paper.
 - Before the first invocation $zz_m(1)$ is sent to the ATL hub, where it is changes to $zzz'_m(1)$ using the predictive coding pipeline. This is then used to invoke items from memory (described in figure 3 below), and this results in a change in $zzz'_m(1)$ to $zzz_m(1)$.
-- $zzz_m(1)$ is fed back into the prediction module to condition the minimization of $E_W(x;zz_m(1),zzz_m(1))$ using L steps of the Langevin iteration, which results in  $zz_m(2)$.
-- $zz_m(2)$ is then fed back into the ATL hub to undergo another round of memory access etc, which in turn is fed back and results in $zz_m(3)$. This is repeated $K$ times, and the final value $zz_m(K) = xx_{m+1}$ is fed into the generation module to generate $yy_{m+1}$.
-- The multiple loops through the prediction module have been put in to handle complex queries with intermediate outputs, it serves the same function multiple stages in a Transformer. It can be considered to be a thinking operation that the model engages in latent space.
+- $zzz_m(1)$ is fed back into the prediction module to condition the minimization of $E_W(x;zz_m(1),zzz_m(1))$, which results in  $zz_{m+1}$.
+- $zz_{m+1}$ is then fed back into the ATL hub to undergo another round of memory access etc, which in turn is fed back and results in $zz_{m+2}$ etc. Note that memory access is done once per E_W module invocation, so in cases such as the Martha Washington example, either (1) Multi-step reasoning happens to to repeated access to the parametric memory in E_W, and/or (2) Multi-step reasoning ha[[ends over multiple invocations of the E_W module, each time conditioned by a different episodic memory match.
+- Comparison to Transformers: (1) IM-LEPP uses a recursive structure unlike Transformers, (2) Episodic memory in IM-LEPP is selectively chosen depending upon current state, unlike Transformers where the entire past history is used as context, (3) Each invocation of the E_W module is like a Transformer Block in which attention and FFN are invoked a variable number of times while using the same parameters in each invocation.
+- Comparison to the TRM model: The (z,y) variables in TRM area analogous to the (zz,zzz) variables in IM-LEPP.
+- Question: Can RL be done on the IM-LEPP model? Can't think of a way to do it, it would involve changing the parameters of E_W in response to a reward. On the other hand perhaps humans don't learn using RL, rather they memorize algorithms instead.
+
 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat193.png) 
