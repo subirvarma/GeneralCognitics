@@ -17,30 +17,23 @@ The following paper [A Hierarchical Energy-Based Model for Multimodal Cognition]
   (2) A description of the training process for the computation of the energy function parameters.
   (3) Interleaving of energy optimization with episodic memory access which results in a conditional minimization process.
 
-The IM-LEPP language model defines a system latent state, which can be likened to a thought state, and is used to generate the next word. This state gets modified over time as a result of the following events: (1) New sensory input that comes in, either through reading or through sound (also in latent form), (2) Modification of the latent state as a result of episodic memory recall (3) Energy minimization which causes the latent state to descend a variable number number of energy levels until it gets to a minimum, which results in a new latent state from which the next word is generated.
-2. Starting with the system latent state, creation of a context state which serves as a conditional for next word prediction and this may involve long term memory access in order to create a suitable context. Incorporation of the information in the context leads to a modification of the system latent state.
-3. The next state prediction operation, which matches the modified system latent state with information stored in its parametric memory in order to create a new system latent state.
+The IM-LEPP language model defines a system latent state, which can be likened to a thought state, and is used to generate the next word. This state gets modified over time as a result of the following events: 
 
-These two operations may be repeated in sequence several times before the latent state for the next word is predicted, and this corresponds to the 'thinking' process. This model corresponds to the 'Production System' framework used in cognitive science.
+- New language sensory input that comes in, either through reading or through sound (also in latent form),
+- Modification of the latent state as a result of episodic memory recall from the past history of the language agent.
+- Modification of the latent state as a result of other sensory modalities such as vision or sound.
+- The latent state variables can be used to define an energy function. New sensory data or memory access causes the energy level to rise, and it subsequently settles back to a minimum, and this results in a new latent state from which the next word is generated. Energy minimization is done through a variable number number of steps until it gets to a minimum. The number of steps is a function of the amount of thinking involved in generating the next word. The parameters of the energy function are specialized to the task of predicting the next word and are estimated during the training process, 
 
-The Production System framework also applies to Transformer based LMs.
-Even though a Transformers has multiple stages, it uses a single system latent state that is created anew for each column, and it runs across all the stages.
-This state serves as a residual value that gets modified as the data flow progresses across the stages.
-The two Production System operatios in Transformers are as follows:
- 
-1. The context in Transformers corresponds to the initial prefix as well as the words that have been generated. The system latent state serves as a query into this context using the self attention operation. Self attention is engineered to dynamically focus on part of the context that is most relevant to the generation of the next word.
+These operations are repeated in sequence and result in the evolution of the though state as new sensory data comes in memories are accessed.
+Even though Transformers and the proposed IM-LEPP language model are both are both doing language generation, they differ in the following respects:
 
-2. Self attention is followed by next state prediction and this done using a fully connected two-layer feed forward network (FFN). The parameters of this network function as a frozen (key,value) memory storage that are learnt during the training process. The system latent state serves as query into this storage, and the corresponding value is the predicted next state.
-
-These two operations, self-attention followed by FFN, are repeated multiple times and are responsible for properties such as in context learning (ICL) in the Transformer.
-
-Even though Transformers and the proposed IM-LEPP language model are both based on the Production System framework, they differ in the following respects:
-
-- IM-LEPP features a system latent state that is subject to modification during the process of prediction just as in Transformers. However unlike Transformers, this latent state also flows across successive word predictions and is recurrent in nature. Transformers on the other hand use the discrete generated word as a bridge between successive predictions and instead of using a recurrent state, they use the entire past history for future predictions. The recurrent state design is more biologically plausible, since for example humans rarely keep for than 4-5 words in working memory when deciding on the next word.
-- The context in IM-LEPP is created from information that is stored in its long term memory, while in a Transformer the context is given by words generated so far. In the latter case since the context grows as the generation proceeds, it can become very large, and since attention has quadratic complexity, it leads to high processing requirements (in practice the context is cut off after some length is reached, which leads to forgetting in Transformers). IM-LEPP on the other hand can handle a much larger memory storage with lower processing complexity by using more efficient search algorithms.
-- Instead of using a FFN for prediction, IM-LEPP uses an energy based model, in which the context serves as a conditioning variable for the generation. This is again a more biologically plausible prediction mechanism since it is based on the physical principle of energy minimization.
+- IM-LEPP features a system latent state that is subject to modification during the process of prediction. However unlike Transformers, this latent state flows across successive word predictions and is recurrent in nature. Transformers on the other hand use the discrete generated word as a bridge between successive predictions and instead of using a recurrent state, they use the entire past history for future predictions. The latent state in Transformers is localized to the 'column' that is used to generate the next word, and does not cross column boundaries.
+The recurrent state design is more biologically plausible, since clearly human's don't keep the entirety of their past word generations in mind when generating the next word.
+- The context in IM-LEPP is created from information that is stored in its episodic memory, as well an information from other modalities. In a Transformer the context is given by the initial prefix and the entire past history of word generations, which causes the context to grow with time. It can become very large, and since attention has quadratic complexity, it leads to high processing requirements (in practice the context is cut off after some length is reached, which leads to forgetting in Transformers). 
+- Prediction in IM-LEPP is based on a multistep minimization of an energy function, in which the context serves as a conditioning variable. Transformers do prediction using a feed forward network or FFN, and they also carry out multiple passes through the FFN when a predicting the next word. However the number of steps or stages in a Transformer is fixed, while IM-LEPP can adjust the number of steps depending upon the difficulty of the prediction.
 
 There are other differences in language generation in the two models that were pointed out in [A Hierarchical Energy-Based Model for Multimodal Cognition](https://subirvarma.github.io/GeneralCognitics/2026/08/07/statmech5.html) that make the IM-LEPP model more biologically plausible.
+
 
 ## The IM-LEPP Model
 
