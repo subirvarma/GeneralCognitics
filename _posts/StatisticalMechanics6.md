@@ -34,6 +34,13 @@ The recurrent state design is more biologically plausible, since clearly human's
 
 There are other differences in language generation in the two models that were pointed out in [A Hierarchical Energy-Based Model for Multimodal Cognition](https://subirvarma.github.io/GeneralCognitics/2026/08/07/statmech5.html) that make the IM-LEPP model more biologically plausible.
 
+The rest of this paper is organized as follows: Section 2 has a high level description of IM-LEPP language generation, where the main modules, their functions and inter-module dependencies are described. 
+Since language generation is intimately related to memory mechanisms, we start in Section 3 with a description of what is known about how memory works in humans.
+Section 4 compares IM-LEPP with other language models, in particular with the Transformer, along the following axes: (a) Memory mechanisms, (b) Latent State definitions, (c) Prediction techniques. There have been several suggestions for modifications to improve the Transformer design over the years, including, Universal Transformers, Looped Transformers, Full Bandwidth Transformers etc. We will discuss the relationship between these models and IM-LEPP in Section 5.
+Recently there has been a resurgence of interest in updated forms of recurrent neural networks or RNNs for language modeling, these are discussed in Section 6 along with the connections to IM-LEPP.
+In Section 7, we discuss the recent literature on reasoning models, and how the IM-LEPP model fits within this framework.
+In Section 8 we go into details of the specific algorithms used in the IM-LEPP language model for (a) Episodic Memory access, (b) Design of the energy function and its training algorithm, (c) Halting techniques for determining number of steps in energy minimization
+
 
 ## The IM-LEPP Model
 
