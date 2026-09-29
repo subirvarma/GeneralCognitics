@@ -75,7 +75,7 @@ Figure 3: Generating $zzz_n(i)$ at the ATL Hub using kNN based search and a pred
 - A certain number, say M of these are retrieved after matching using $zzz'_m(i)$ using kNN perhaps. I will get into more details of this mechanism in the detailed write-up.
 - These M episodes are then run through a predictive processing pipeline to generate $zzz_m(i)$. Alternatively an attention based mechanism can be used for this purpose, with $zzz'_m(i)$ serving as the query. The details for this have to be worked out.
 
-![](https://subirvarma.github.io/GeneralCognitics/images/stat196.png) 
+![](https://subirvarma.github.io/GeneralCognitics/images/stat199.png) 
 
 Figure 5: Computation of the energy function $E_W(x;zz_m(k),zzz_m(k))$ 
 
