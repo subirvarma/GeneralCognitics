@@ -13,13 +13,13 @@ The following paper [A Hierarchical Energy-Based Model for Multimodal Cognition]
 
 - The prediction modules in IM-LEPP interface with the central ATL hub whose state gets updated with information coming in from sensory modules, the amygdala, as well the main memory storage system. We describe the mechanism by which the contents of the memory storage are accessed and get incorporated into a resulting state that provides context for the prediction modules.
 - The next word prediction module in the IM-LEPP was based on the minimization of an energy function $E_W$. This module is described in greater detail in this paper, and it involves the following:
-   - 
-This process is laid out in more detail in this paper, and it involves an alternating process of memory access followed by energy minimization. We also propose some specific models for $E_W$.
+  (1) Energy minimization through a process of gradient descent.
+  (2) A description of the training process for the computation of the energy function parameters.
+  (3) Interleaving of energy optimization with episodic memory access which results in a conditional minimization process.
 
-All language models involve two basic operations: 
-
-1. Starting with the system latent state, creation of a context state which serves as a conditional for next word prediction and this may involve long term memory access in order to create a suitable context. Incorporation of the information in the context leads to a modification of the system latent state.
-2. The next state prediction operation, which matches the modified system latent state with information stored in its parametric memory in order to create a new system latent state.
+The IM-LEPP language model defines a system latent state, which can be likened to a thought state, and is used to generate the next word. This state gets modified over time as a result of the following events: (1) New sensory input that comes in, either through reading or through sound (also in latent form), (2) Modification of the latent state as a result of episodic memory recall (3) Energy minimization which causes the latent state to descend a variable number number of energy levels until it gets to a minimum, which results in a new latent state from which the next word is generated.
+2. Starting with the system latent state, creation of a context state which serves as a conditional for next word prediction and this may involve long term memory access in order to create a suitable context. Incorporation of the information in the context leads to a modification of the system latent state.
+3. The next state prediction operation, which matches the modified system latent state with information stored in its parametric memory in order to create a new system latent state.
 
 These two operations may be repeated in sequence several times before the latent state for the next word is predicted, and this corresponds to the 'thinking' process. This model corresponds to the 'Production System' framework used in cognitive science.
 
