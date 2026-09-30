@@ -32,7 +32,15 @@ The recurrent state design in IM-LEPP is more biologically plausible, since clea
 Prediction in IM-LEPP is based on a multistep minimization of an energy function, in which the context serves as a conditioning variable. Transformers do prediction using the initial prefix and past word predictions as context, which is acted on by a self-attention operation followed by a feed forward network or FFN, together called a Transformer block, and they carry out multiple passes through these blocks when predicting the next word. It can be shown that each Transformer block is roughly equivalent to a single gradient descent step in the minimization of some implicit energy function. This energy function is made explicit in IM-LEPP and while the number of blocks in a Transformer column is fixed, IM-LEPP can adjust the number of optimization steps depending upon the difficulty of the prediction.
 There are other differences in language generation in the two models that were pointed out in [A Hierarchical Energy-Based Model for Multimodal Cognition](https://subirvarma.github.io/GeneralCognitics/2026/08/07/statmech5.html) that make the IM-LEPP model more biologically plausible. An important difference is whereas the weights in a Transformer are fixed once its is trained, IM-LEPP can change its weights during the course of its operations thus leading to continuous learning.
 
-In the last few years there have been several proposals that have been made to improve upon Transformer models.
+In the last few years there have been several proposals that have been made to improve upon Transformer models. These proposals can be broadly classified into the following categories:
+
+- Loop Transformers and Universal Transformers
+- Techniques to propagate the latent state
+
+Some recent language model proposals are not based on the Transformer design. These include:
+
+- Models featuring a recurrent state
+- Reasoning Models
 
 The rest of this paper is organized as follows: Section 2 has a high level description of IM-LEPP language generation, where the main modules, their functions and inter-module dependencies are described. 
 Since language generation is intimately related to memory mechanisms, we start in Section 3 with a description of what is known about how memory works in humans.
