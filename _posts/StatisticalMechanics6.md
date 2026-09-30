@@ -15,10 +15,11 @@ The next word prediction module in the IM-LEPP was based on the minimization of 
 
 The IM-LEPP language model defines a system latent state, which can be likened to a thought state, and is used to generate the next word. This state evolves with time as a result of the following events: 
 
-- New sensory data in the form of sound (for phonemes) or vision (for characters).
-- Modification of the latent state as a result of episodic memory recall.
-- Modification of the latent state as a result of other sensory modalities such as vision or sound.
-- The latent state variables can be used to compute an energy function. New sensory data or memory access causes the energy level to rise, and it subsequently settles back to a minimum, and this results in a new latent state from which the next word is generated. Energy minimization is done through a variable number number of steps until it gets to a minimum. The number of steps is a function of the amount of thinking involved in generating the next word. The parameters of the energy function are specialized to the task of predicting the next word and are estimated using local operations. 
+- Modification as a result of new language data in the form of phonemes (sound) or characters (vision).
+- Modification as a result of energy minimization: The latent state variables can be used to compute an energy function and new sensory data or memory access causes the energy level to rise. It subsequently settles back to a minimum, and this results in a new latent state from which the next word is generated. 
+Energy minimization is done through a variable number of gradient descent steps, the number of steps is a function of the amount of thinking involved in generating the next word. The parameters of the energy function are specialized to the task of predicting the next word and are estimated using local operations during the learning phase.
+
+The language system state gets integrated with that of other sensory modalities, as well as data coming from the episodic memory module, and acts as a conditioning variable during the energy minimiztion steps.
 
 These operations are repeated in sequence and result in the evolution of the though state as new sensory data comes in and new memories are accessed.
 Even though Transformers and the proposed IM-LEPP language model are both are both doing language generation, they differ in the following respects:
