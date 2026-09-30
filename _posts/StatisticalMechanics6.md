@@ -13,12 +13,12 @@ The following paper [A Hierarchical Energy-Based Model for Multimodal Cognition]
 The next word prediction module in the IM-LEPP was based on the minimization of an energy function $E_W$. This module is described in greater detail in this paper, and it involves energy minimization through a process of multi-step gradient descent. Energy minimization is interleaved with episodic memory access in IM-LEPP and
  We describe the mechanism by which the contents of the memory storage are accessed and get incorporated into a resulting state that provides context for the prediction modules.
 
-The IM-LEPP language model defines a system latent state, which can be likened to a thought state, and is used to generate the next word. This state gets modified over time as a result of the following events: 
+The IM-LEPP language model defines a system latent state, which can be likened to a thought state, and is used to generate the next word. This state evolves with time as a result of the following events: 
 
-- New language sensory input that comes in, either through reading or through sound (also in latent form),
-- Modification of the latent state as a result of episodic memory recall from the past history of the language agent.
+- New sensory data in the form of sound (for phonemes) or vision (for characters).
+- Modification of the latent state as a result of episodic memory recall.
 - Modification of the latent state as a result of other sensory modalities such as vision or sound.
-- The latent state variables can be used to define an energy function. New sensory data or memory access causes the energy level to rise, and it subsequently settles back to a minimum, and this results in a new latent state from which the next word is generated. Energy minimization is done through a variable number number of steps until it gets to a minimum. The number of steps is a function of the amount of thinking involved in generating the next word. The parameters of the energy function are specialized to the task of predicting the next word and are estimated using local operations. 
+- The latent state variables can be used to compute an energy function. New sensory data or memory access causes the energy level to rise, and it subsequently settles back to a minimum, and this results in a new latent state from which the next word is generated. Energy minimization is done through a variable number number of steps until it gets to a minimum. The number of steps is a function of the amount of thinking involved in generating the next word. The parameters of the energy function are specialized to the task of predicting the next word and are estimated using local operations. 
 
 These operations are repeated in sequence and result in the evolution of the though state as new sensory data comes in and new memories are accessed.
 Even though Transformers and the proposed IM-LEPP language model are both are both doing language generation, they differ in the following respects:
