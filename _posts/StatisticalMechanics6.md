@@ -9,10 +9,9 @@ title: " An Energy based Language Model with Hierarchical Memory"
 ## Introduction
 
 This is the third in a series of papers for models of cognition based on the energy minimization principle. The first paper [Generative AI as an Effective Theory of Cognition](https://subirvarma.github.io/GeneralCognitics/2026/07/15/statmech4.html) proposed the Latent Energy based Predictive Processing or LEPP model for perception as a flow process on energy landscapes.
-The following paper [A Hierarchical Energy-Based Model for Multimodal Cognition](https://subirvarma.github.io/GeneralCognitics/2026/08/07/statmech5.html) built on the LEPP model and proposed the Integrated Multimodal LEPP or IM-LEPP as a more detailed model that intergrated perception with language processing. In this paper we build on the IM-LEPP work with further development of the language processing module, in particular:
-
-- The prediction modules in IM-LEPP interface with the central ATL hub whose state gets updated with information coming in from sensory modules, the amygdala, as well the main memory storage system. We describe the mechanism by which the contents of the memory storage are accessed and get incorporated into a resulting state that provides context for the prediction modules.
-- The next word prediction module in the IM-LEPP was based on the minimization of an energy function $E_W$. This module is described in greater detail in this paper, and it involves Energy minimization through a process of multi-step gradient descent. Also energy minimization is interleaved with episodic memory access in IM-LEPP.
+The following paper [A Hierarchical Energy-Based Model for Multimodal Cognition](https://subirvarma.github.io/GeneralCognitics/2026/08/07/statmech5.html) built on the LEPP model and proposed the Integrated Multimodal LEPP or IM-LEPP as a more detailed model that intergrated perception with language processing. In this paper we build on the IM-LEPP work with further development of the language processing module. 
+The next word prediction module in the IM-LEPP was based on the minimization of an energy function $E_W$. This module is described in greater detail in this paper, and it involves Energy minimization through a process of multi-step gradient descent. Also energy minimization is interleaved with episodic memory access in IM-LEPP.
+ We describe the mechanism by which the contents of the memory storage are accessed and get incorporated into a resulting state that provides context for the prediction modules.
 
 The IM-LEPP language model defines a system latent state, which can be likened to a thought state, and is used to generate the next word. This state gets modified over time as a result of the following events: 
 
