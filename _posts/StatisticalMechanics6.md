@@ -16,11 +16,13 @@ The next word prediction module in the IM-LEPP was based on the minimization of 
 The IM-LEPP language module defines a system latent state, which can be likened to a thought state, and is used to generate language percepts. This state evolves with time as a result of the following events: 
 
 - Modification as a result of new sensory data in the form of phonemes (sound) or characters (vision).
-- Modification as a result of energy minimization: The latent state variables can be used to compute an energy function and new sensory data or memory access causes the energy level to rise. It subsequently settles back to a minimum, and this results in a new latent state from which the next word is generated. 
+- Modification as a result of energy minimization: The latent state variables can be used to compute an energy function $E_W$ and new sensory data or memory access causes the energy level to rise. It subsequently settles back to a minimum, and this results in a new latent state from which the next word is generated. 
 Energy minimization is done through a variable number of gradient descent steps, the number of steps is a function of the amount of thinking involved in generating the next word. The parameters of the energy function are specialized to the task of predicting the next word and are estimated using local operations during the learning phase.
 
 The language module thought state gets integrated with that of other sensory modalities, as well as data coming from the episodic memory module, in the central ATL hub, and acts as a conditioning variable during the energy minimization steps.
 These operations are repeated in sequence and result in the evolution of the though state as new sensory data comes in and new memories are accessed.
+
+The description of the IM-LEPP model in the [previous paper](https://subirvarma.github.io/GeneralCognitics/2026/08/07/statmech5.html) left out the following two aspects of how the model works: (1) Computation of the energy function $E_W$ and (2) Operation of the episodic memory storage and its interface with the rest of the model. Our objective in this paper is to supply these details, and in the process we make deep connections between IM-LEPP and Transformer models.
 
 Since IM-LEPP is a new type of language model, how does it compare with other such models that have been proposed over the years? The first language models were based on recurrent neural networks or RNNs, and just like IM-LEPP, they were also based on a system state that updated over time in a recurrent fashion. However RNNs suffered from the problem that recurrent state lost information over time, hence it did not have a stable memory. IM-LEPP gets around this problem by integrating with an external memory storage that is used to refresh its state periodically.
 
