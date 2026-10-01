@@ -71,19 +71,24 @@ All state changes in this model at the various pipelines and hubs are based on t
 
 The [previous paper](https://subirvarma.github.io/GeneralCognitics/2026/08/07/statmech5.html) left several aspects of this model un-specified, in particular details about the operation of the memory module and its interface with the other modules, as well as details of how the energy function $E_W$ is implemented in the prediction module. We will focus on these aspects of the design in this paper.
 
-![](https://subirvarma.github.io/GeneralCognitics/images/stat193.png) 
-
-Figure 2: Generating $zzz_n(i)$ at the ATL Hub using kNN based search and a predictive processing pipeline
-
-- All memories are of the episodic kind and get stored in the long term memory. The break up into episodes uses the surprisal based mechanism described in the previous paper.
-- A certain number, say M of these are retrieved after matching using $zzz'_m(i)$ using kNN perhaps. I will get into more details of this mechanism in the detailed write-up.
-- These M episodes are then run through a predictive processing pipeline to generate $zzz_m(i)$. Alternatively an attention based mechanism can be used for this purpose, with $zzz'_m(i)$ serving as the query. The details for this have to be worked out.
-
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat198.png) 
 
 Figure 3: The IM-LEPP Language Module
 
+The predictive coding pipeline at the word level uses the latent state $z_n$ from the character pipeline as the ground truth that represents the latent representation for for the $m^{th}$ word. Note that the word level subscript $m$ for the current word  is not the same as the character level subscript $n$ for obvious reasons.
+This pipeline creates a higher level latent word representation $zz_m$ by modifying the existing representation $xx_m$ to $q_{\phi}(xx_m,z_n)$.
+$zz_m$ is then sent to the level 1 central ATL hub where it gets modified by the vision data to the latent $zzz_m$. For example if the current image is that of an apple, then this is reflected in $zzz_m$.
 
+The latent $zzz_m$ is then fed back to the level 2 word pipeline where it is used to predict the next word by using the
+the energy based prediction module $E_W(x;zz_m,zzz_m)$ and this results in the prediction $xx_{m+1}$ for the next word latent (see above figure).
+Note that, unlike the vision hub at level 2, which performs integration only, the word-level pipeline includes its own dedicated prediction step. This reflects the fact that phoneme-level prediction serves segmentation, while word-level prediction serves ordinary sentence-level anticipation, a genuinely distinct function operating at a different timescale. This mechanism also illustrates why the IM-LEPP model may be able to learn new words faster, since the predicted word is not only a function of the previous word level context $zz_m$, but is also influenced by the vision modality by means of the latent $zzz_m$. Similarly the emotional related information coming in through the valence system (valence) can influence our choice of the next word.
+
+$xx_{m+1}$ is subsequently used to generate the next word latent $yy_{m+1}=g_{\psi}(xx_{m+1})$, and this value is fed back into the  level 3 character level predictive processing pipeline shown in figure 10, where it influences the prediction of the next character $x_{n+2}$ through the energy function $E_{CH}(x;z_{n+1},yy_{m+1})$. This in turn gets modified by the other characters in the next word being read. When the last character of that word is encountered, then the latent representation at that time $z_{n+k}$ (where $k$ is the number of characters in the word just read) is fed back into the word level model to correct the prediction $yy_{m+1}$, and this closes the word level prediction loop. As pointed out in the introduction, this is also an hierarchical system, but the hierarchy is in time rather than in space, as was the case for the visual system.
+
+For the case when we are doing character generation, i.e., writing, this feedback loop between the character level and word level pipelines is still active. In this case it serves as a verification of whether the word that was generated at level 3 matches the word that the level 2 word level system meant to generate.
+
+Do the latent states $zzz_m$ or $zz_m$ encode 'thought'? 
+Levelt’s production model as described in his book [Speaking: From Intention to Articulation (1989)](https://www.mpi.nl/publications/item67053/speaking-intention-articulation) has a first stage, conceptualization, whose output is a pre-verbal message i.e., a language-independent conceptual representation of what to say, prior to and dissociable from any particular verbalization (which is why “the same thought” can be expressed in different words or languages). This is a direct architectural instantiation of exactly the proposed role for $zzz_m$ as a persistent, amodal state that the generative pathway then unrolls into a word sequence, with $zzz_m$ playing the role of the preverbal message and the language pipeline playing Levelt’s formulation stage.
 
 Notes for Figure 2:
 
@@ -96,7 +101,13 @@ Notes for Figure 2:
 - Question: Can RL be done on the IM-LEPP model? Can't think of a way to do it, it would involve changing the parameters of E_W in response to a reward. On the other hand perhaps humans don't learn using RL, rather they memorize algorithms instead.
 
 
+![](https://subirvarma.github.io/GeneralCognitics/images/stat193.png) 
 
+Figure 2: Generating $zzz_n(i)$ at the ATL Hub using kNN based search and a predictive processing pipeline
+
+- All memories are of the episodic kind and get stored in the long term memory. The break up into episodes uses the surprisal based mechanism described in the previous paper.
+- A certain number, say M of these are retrieved after matching using $zzz'_m(i)$ using kNN perhaps. I will get into more details of this mechanism in the detailed write-up.
+- These M episodes are then run through a predictive processing pipeline to generate $zzz_m(i)$. Alternatively an attention based mechanism can be used for this purpose, with $zzz'_m(i)$ serving as the query. The details for this have to be worked out.
 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat199.png) 
