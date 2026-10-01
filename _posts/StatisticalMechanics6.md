@@ -57,14 +57,32 @@ In Section 8 we go into details of the specific algorithms used in the IM-LEPP l
 
 Figure 1: The IM-LEPP Model
 
-Notes for Figure 1:
+The IM-LEPP model is shown in figure 1. It proposes a hierarchical spatial integration structure for the vision model, it introduces a hierarchical temporal integration structure for language, and finally it proposes how the two may be integrated together to create a common representation. The IM-LEPP model has the following features:
 
-- This is the figure from the previous paper, no changes.
+- There is a central ATL type hub at level 1 that integrates representations coming in from the vision and language hubs. Note that the communication between the central hub and the vision and language hubs is bi-directional, so that not only do the spoke hubs influence the representation in the central hub, but they in turn are influenced by the information coming from the central hub.
+- The vision hub itself has a two level structure. The central vision hub at level 2 integrates information coming from several simultaneously active level 3 predictive processing pipelines. There is a level 3 pipeline for each of the objects in the scene, as well an always-on pipeline for the scene itself, and all these get integrated at the level 2 vision hub. The representation of each of these pipelines evolves asynchronously in time and the level 2 hub integrates the latest information from each individual object and sends it up to the central level 1 hub. Note that the per object pipelines come and go depending on which objects are currently in the field of vision, while the scene level pipeline is always active.
+- The per-object level 3 predictive processing pipelines operate according to the inference-prediction-generation framework that was used for the LEPP model. The system state that results from the inference module in this pipeline is sent to the level 2 vision hub for integration with the states of all the other objects in the scene. This combined representation in turn gets integrated with representations from other modalities in the multimodal level 1 hub. The integrated level 1 representation in turn is fed back to the prediction module in the level 3 object predictive processing pipelines, and the result is used to generate the next percept. Note that these percepts take all the other objects that are in the scene into account (as well as other modalities), by virtue of this architecture.
+- The language sub-system also has a two level hierarchical structure, however the hierarchy is in time rather than in space. At the lower level of the hierarchy at level 3 are predictive processing pipelines that operate at the discrete phoneme level (in the case of spoken language) or at the character level (in the case of reading). This level incorporates an inference-prediction-generation modules whose job is to predict the next phoneme or character. Note that unlike the case for vision, only one of the level 3 pipelines is active at any one time; moreover, within whichever pipeline is active, phonemes or characters necessarily arrive one at a time in sequence rather than simultaneously, unlike the multiple objects that can be concurrently present in a visual scene. Together these account for the temporal, rather than spatial, character of the language hub.
+The latent representation from this level is sampled at certain discrete instants that contain representations for whole words, and these are fed as input into a word level predictive processing pipeline at level 2. The next word latent prediction done at this level is influenced by the state of the central ATL hub and thus gets modified by information from the other modalities, and ultimately gets sent to the level 3 hub to generate percepts. If the phoneme hub is active then it generates percepts in the form of sound or if the character hub is active then it generates percepts in the form of written text.
 
+Thus the IM-LEPP model paints a picture in which there are number of distributed, predictive processing pipeline modules in the brain, that are individually responsible for predictions in the modality they are tracking. Hence the prediction operations happens in a distributed manner, while central hubs at level 1 and level 2 are responsible for integrating the lower level representations, and in turn feeding them back to the predictive processing pipelines.
+All state changes in this model at the various pipelines and hubs are based on the principle of the energy minimization, and thus provide a plausible model for the brain's operation at Marr's level 2.
+
+The [previous paper](https://subirvarma.github.io/GeneralCognitics/2026/08/07/statmech5.html) left several aspects of this model un-specified, in particular details about the operation of the memory module and its interface with the other modules, as well as details of how the energy function $E_W$ is implemented in the prediction module. We will focus on these aspects of the design in this paper.
+
+![](https://subirvarma.github.io/GeneralCognitics/images/stat193.png) 
+
+Figure 2: Generating $zzz_n(i)$ at the ATL Hub using kNN based search and a predictive processing pipeline
+
+- All memories are of the episodic kind and get stored in the long term memory. The break up into episodes uses the surprisal based mechanism described in the previous paper.
+- A certain number, say M of these are retrieved after matching using $zzz'_m(i)$ using kNN perhaps. I will get into more details of this mechanism in the detailed write-up.
+- These M episodes are then run through a predictive processing pipeline to generate $zzz_m(i)$. Alternatively an attention based mechanism can be used for this purpose, with $zzz'_m(i)$ serving as the query. The details for this have to be worked out.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat198.png) 
 
-Figure 2: The IM-LEPP Language Module
+Figure 3: The IM-LEPP Language Module
+
+
 
 Notes for Figure 2:
 
@@ -78,13 +96,7 @@ Notes for Figure 2:
 
 
 
-![](https://subirvarma.github.io/GeneralCognitics/images/stat193.png) 
 
-Figure 3: Generating $zzz_n(i)$ at the ATL Hub using kNN based search and a predictive processing pipeline
-
-- All memories are of the episodic kind and get stored in the long term memory. The break up into episodes uses the surprisal based mechanism described in the previous paper.
-- A certain number, say M of these are retrieved after matching using $zzz'_m(i)$ using kNN perhaps. I will get into more details of this mechanism in the detailed write-up.
-- These M episodes are then run through a predictive processing pipeline to generate $zzz_m(i)$. Alternatively an attention based mechanism can be used for this purpose, with $zzz'_m(i)$ serving as the query. The details for this have to be worked out.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat199.png) 
 
