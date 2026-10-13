@@ -111,9 +111,22 @@ The proposed system models the process of thinking or reasoning at two levels: (
 
 This model does not like the Transformer model at first glance, but as explained in the following sections, it has the two main components of the Transformer within it, with the integration of episodic memory corresponding to the attention operation and each stage of the energy $E_W$ minimization corresponding to the operation of the feed forward network or FFN in Transformers. Hence this model can be likened to a Universal Transformer with a variable number of attention+FFN blocks in some sense. However unlike Transformers, the system uses a recurrent state $zz_n$, which makes it a fundamentally different design, and closer to biological systems.
 
+![](https://subirvarma.github.io/GeneralCognitics/images/stat200.png) 
+
+Figure 4: Energy minimization steps in the prediction module
+
+We will adopt the methodology of directly minimizing the energy function through multiple gradient descent steps, as shown in the above figure. In the previous papers we described an alternative probabilistic algorithm for doing this, using several stages of noise annealing, with multiple Langevin diffusion steps at each stage. This algorithm requires us to use a preset number of annealing stages, since the noise series has to follow a pre-defined schedule. This works well for image prediction systems, however in the case of language it runs into the problem that in the case of reasoning models, the number of stages is a function of the level of difficulty of the problem being solved and hence cannot be set in advance. Working directly with the energy function avoids this problem since we can vary the number of stages as a function of a stopping rule.
+This design also has the benefit that the parameters for $E_W$ can be learnt by focusing on the final stage, thus avoiding the need to back propagate to the earlier stages. This algorithm is described in detail later in the paper.
+
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat193.png) 
 
-Figure 4: Generating $zzz_n(i)$ at the ATL Hub using kNN based search and a predictive processing pipeline
+Figure 5: Generating $zzz_n(i)$ at the ATL Hub using kNN based search and a predictive processing pipeline
+
+The incorporation of memory into the system is a critical aspect of the design. Human memory is of the following types:
+
+- Working memory: This is defined as the information that is available to us at any instant of time through the data coming in though our senses. The sensory data, such as vision or sound, lingers within the brain for a short instant before disappearing, and this allows us to chain together discrete images into a moving picture for example. The same is true for sound, and enables us to remember the last few phonemes and thus put together a word by connecting them.
+- Episodic memory or Fast Memory: This is memory for a sequence of events that play out over time and at a particular place.  The hippocampus plays a critical role in saving episodic memory sequences, and giving them a time stamp and place stamp. Given the right conditions, even a single sequence of events gets stored in episodic memory, thus accounting for the fast memory moniker.
+- Semantic memory or Slow Memory: This is defined as memory
 
 - All memories are of the episodic kind and get stored in the long term memory. The break up into episodes uses the surprisal based mechanism described in the previous paper.
 - A certain number, say M of these are retrieved after matching using $zzz'_m(i)$ using kNN perhaps. I will get into more details of this mechanism in the detailed write-up.
