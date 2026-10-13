@@ -53,6 +53,20 @@ Recently there has been a resurgence of interest in updated forms of recurrent n
 In Section 7, we discuss the recent literature on reasoning models, and how the IM-LEPP model fits within this framework.
 In Section 8 we go into details of the specific algorithms used in the IM-LEPP language model for (a) Episodic Memory access, (b) Design of the energy function and its training algorithm, (c) Halting techniques for determining number of steps in energy minimization
 
+## Organization of Memory in Humans and in Transformers
+
+Memory is integral to cognitive functions in the brain, and in this section we will survey a framework that has been established in the last 50 years on how it is organized, both functionally as well as biologically in the various parts in the brain. This is followed by a discussion of how aspects of biological memory organization are reflected in the architecture of the Transformer.
+
+The following description mostly borrows from the book "Memory" by Baddeley, Eysenck and Anderson. Human memory can be classified into the following types:
+
+- **Short Term Memory or STM:** This involves simple retention of small amounts of information, tested either immediately or after a short delay. When tested using a sequence of digits, it has been shown that STM capacity is limited to about 6 to 7 digits in most people. Later it was suggested that memory capacity is limited not by the number of items to be recalled, but the number of chunks, where a chunk is defined as a sub-sequence within the larger digit sequence. Verbal STM has been modeled using the concept of a phonological loop, which as two sub-components: a short term store and an articulatory rehearsal process. The store is assumed to be limited in capacity and decays within a few seconds, however sound traces can be refreshed by sub-vocal rehearsal (saying the items to yourself). The 6 or 7 limit in STM arises due to the fact that we can say these many digits in sequence before the first digit fades away. Thus this theory posits that STM is based solely on sound, and not on the meaning of the objects being memorized. Long Term Memory or LTM on the other hand is based on semantic content or meaning of the objects being memorized. Visual items can also utilize the phonological loop as long as they are nameable.
+STM also exists visual objects, and has two components, one concerned with spatial memory (where?) and the other concerned with memory for the objects themselves (what?). Spatial location memry shows forgetting over a period of seconds, while object memory is highly accurate to about 4 items, and does not decline. However if we try to remember more than 4 objects, then performance does begin to decline.
+Experiments done on patients with brain related impairments have shown that STM and LTM are supported by different regions of the brain, since there have been people in whom one type of memory is impaired while leaving the other type intact.
+ 
+- **Working Memory:** The Working Memory system not only temporarily store information, but is also able to manipulate it, thus allowing people to perform complex cognitive functions such as reasoning, learning and comprehension. An example in which working memory would be utilized is when we are adding two multi-digit numbers. This requires us to hold the results of addition of the earlier digits in memory while continuing to add the subsequent digits.
+- Semantic Memory
+- Episodic Memory
+
 ## The IM-LEPP Model
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat170.png) 
