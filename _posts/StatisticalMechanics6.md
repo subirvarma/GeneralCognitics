@@ -92,13 +92,15 @@ Semantic memory for objects that can be visualized is stored differently and in 
 
   Patients suffering from semantic dementia have severe problems accessing the meaning of words often retain access to scrip knowledge, which implies that semantic and script information is stored in different parts of the brain, with the former being stored in the anterior temporal region of the brain and the latter in the prefrontal cortex.
 
-- **Memory Recall:** Memories are recalled by means of cues or queries. In the case of episodic memory, these can be in the form of time or place for the event, as well as various retrieval cues that were associated with the event at the time of occurrence (also called keys in machine learning terms). Sometimes the memory is present, but we are not able to access it due to lack of appropriate cues to activate it. In general more cues associated with a memory, the easier it is to recall it. Any aspect of of the content of memory can serve as a reminder that could access the experience, for example the smell of peas at dinner last night, known as content addressability.
+- **Memory Recall:** Memories are recalled by means of cues or queries. In the case of episodic memory, these can be in the form of time or place for the event, as well as various retrieval cues that were associated with the event at the time of occurrence (also called keys in machine learning terms). Sometimes the memory is present, but we are not able to access it due to lack of appropriate cues to activate it. In general more cues associated with a memory, the easier it is to recall it. Any aspect of of the content of memory can serve as a reminder that could access the experience, for example the smell of peas at dinner last night, known as content addressability. The power of a cue depends upon the attention given to it during the retrieval process.
 
- Memories have activation levels, which determines how accessible a trace is in memory. A trace's activation level increases when we perceive something associated with it, or when we think of it directly. The activation persists fror some time even after the attention has been removed. If there are multiple cues present, then the activation levels for particular traces additively increases in proportion to the individual cues. For a cue to be useful, it needs to be present at the encoding, and encoded with the desired trace.
+ Memories have activation levels, which determines how accessible a trace is in memory. 
+ A trace's activation level increases when we perceive something associated with it, or when we think of it directly. The activation persists fror some time even after the attention has been removed. If there are multiple cues present, then the activation levels for particular traces additively increases in proportion to the individual cues. For a cue to be useful, it needs to be present at the encoding, and encoded with the desired trace.
 
-   We are aware of episodic memories while they are being recalled. However there is also the case that memories can influence us without an associated recall, so that we are unaware of the connection.
+ We are not constantly bombarded by memories, we have to be in thr right frame of mind to recollect the past (mediated by the controller?). Pg 171
+   We are aware of episodic memories while they are being recalled. However there is also the case that memories can influence us without an associated recall, so that we are unaware of the connection, this is called implicit memory.
 
-- **Context Dependent Memory**
+- **Context Dependent Memory** How to split events into episodes.
 
 
 - Fast Memory vs Slow Memory (pages 86-87)
