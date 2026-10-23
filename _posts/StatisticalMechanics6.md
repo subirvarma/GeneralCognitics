@@ -114,10 +114,7 @@ At the times when the sensory level predictions differ significantly from the in
 In general there can be several levels in this hierarchy, with the output of the event schemata controlled by its own model operating at higher level, which in turn gets updated with the information coming in through the event sequence. The sequence at all these levels can be segmented into episodes with the segmentation becomes progressively finer as we proceed from higher levels to lower levels.
 Zacks et.al. also proposed that the perceptual information from event boundaries is preferentially accessible in LTM, thus making them an attractive target for the associative recall process.
 
-
-- Fast Memory vs Slow Memory (pages 86-87)
-
-## The IM-LEPP Model
+## The IM-LEPP2 Model
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat170.png) 
 
@@ -156,7 +153,7 @@ If this difference exceeds some threshold, then the model assumes that the previ
 Figure 3: Predictive Processing Pipeline for Next Word Prediction
 
 The predictive coding pipeline at the word level uses the latent state $z_n$ from the character pipeline as the ground truth that represents the latent representation for for the $m^{th}$ word. Note that the word level subscript $m$ for the current word  is not the same as the character level subscript $n$ for obvious reasons.
-This pipeline creates a higher level latent word representation $zz_m$ by modifying the existing representation $xx_m$ to $q_{\phi}(xx_m,z_n)$.
+This pipeline creates a higher level latent word representation $zz_m$ by modifying the existing representation $xx_m$ to $zz_m = q_{\phi}(xx_m,z_n)$.
 $zz_m$ is then sent to the level 1 central ATL hub where it gets modified by the vision data to the latent $zzz'_m$. For example if the current image is that of an apple, then this is reflected in $zzz'_m$. The latent variable is then fed into the episodic memory store, where it is used to match with memory elements using a process that is explained below. This results in the retrieval of one or more memory elemets that modify the latent $zzz'_m$ to $zzz_m$, so that now this latent has information from both other sensory modalities, as well as the memory store.
 
 The latent $zzz_m$ is then fed back to the level 2 word pipeline where it is used to predict the next word by using the
@@ -173,7 +170,7 @@ Levelt’s production model as described in his book [Speaking: From Intention t
 
 The proposed system models the process of thinking or reasoning at two levels: (1) Through the multistage process by which the energy $E_W$ settles to a minimum value (this is explained below), and (2) Through multiple invocations of the prediction module, each time with a new conditioning vector $zzz_m$. This process happens entirely in latent space, in which the representation $zz_m$ changes over time in response to both external and internal influences. 
 
-This model does not like the Transformer model at first glance, but as explained in the following sections, it has the two main components of the Transformer within it, with the integration of episodic memory corresponding to the attention operation and each stage of the energy $E_W$ minimization corresponding to the operation of the feed forward network or FFN in Transformers. Hence this model can be likened to a Universal Transformer with a variable number of attention+FFN blocks in some sense. However unlike Transformers, the system uses a recurrent state $zz_n$, which makes it a fundamentally different design, and closer to biological systems.
+This model does not look like the Transformer model at first glance, but as explained in the following sections, it has the two main components of the Transformer within it, with the integration of episodic memory corresponding to the attention operation and each stage of the energy $E_W$ minimization corresponding to the operation of the feed forward network or FFN in Transformers. Hence this model can be likened to a Universal Transformer with a variable number of attention+FFN blocks in some sense. However unlike Transformers, the system uses a recurrent state $zz_n$, which makes it a fundamentally different design, and closer to biological systems.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat200.png) 
 
