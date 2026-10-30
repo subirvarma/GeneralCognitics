@@ -37,8 +37,7 @@ The IM-LEPP language module that was described in the [previous paper](https://s
 
 We add the following features to this model in the current paper, resulting in a model we call IM-LEPP2:
 
-- A model for episodic memory in the hippocampus, whose output serves can influence the prediction module in the predictive processing pipeline.
-- A model for hierarchical cognitive processing, in which the output from lower levels serves as ground-truth for the higher levels. While the IM-LEPP model had two levels in the cognitive hierarchy (at the phoneme and word level), IM-LEPP2 extends this to higher levels that serve as predictive processing pipelines operating at the thought or event level. The outputs of lower level pipelines serve as ground truth for the predictions in higher level pipelines.
+- A model for episodic memory in the hippocampus, whose output serves can influence the prediction module in the predictive processing pipeline. This model is inspired by what is known from cognitive neuroscience about the organization of memory in the brain.
 - We provide an explicit model for the energy function used in the various prediction modules, and a description of its training and inference process. Energy minimization during inference is done through a variable number of gradient descent steps, the number of steps being a function of the amount of 'thinking' involved in generating the next prediction.
 
 How does the IM-LEPP2 model compare with other models that have been proposed over the years in machine learning literature for cognitive functions in the brain? The first language models were based on recurrent neural networks or RNNs, and just like IM-LEPP2, they used a system latent state that was updated over time in a recurrent fashion. However RNNs suffered from the problem that the recurrent state lost information over time, and hence it did not have a stable long term memory memory. Transformers solved this problem by dispensing with the recurrent state all together and using the entire past history of generations in lieu of episodic memory, but this leads to a quadratic complexity increase in processing requirements with the context length. Clearly the brain does not operate like this, and it has been shown experimentally that it uses a recurrent architecture internally. The IM-LEPP2 model is similar to RNNs since it has a recurrent state, but at the same time it also has access to its past history stored in a non-parameteric store, just like a Transformer. 
@@ -137,7 +136,7 @@ The IM-LEPP2 memory framework is shown in figure 2. It differs from the Baddeley
 
 ## The IM-LEPP2 Model
 
-![](https://subirvarma.github.io/GeneralCognitics/images/stat205.png) 
+![](https://subirvarma.github.io/GeneralCognitics/images/stat208.png) 
 
 Figure 3: The IM-LEPP2 Model
 
@@ -208,10 +207,18 @@ Figure 5: Predictive Processing Pipeline for Next Word Prediction
 
 The predictive coding pipeline at the word level uses the latent state $z_n$ from the character pipeline as the ground truth that represents the latent representation for for the $m^{th}$ word. Note that the word level subscript $m$ for the current word  is not the same as the character level subscript $n$ for obvious reasons.
 This pipeline creates a higher level latent word representation $zz_m$ by modifying the existing representation $xx_m$ to $zz_m = q_{\phi}(xx_m,z_n)$.
-$zz_m$ is then sent to the level 1 central ATL hub where it gets modified by the vision data to the latent $zzz_m$. For example if the current image is that of an apple, then this is reflected in $zzz_m$. The latent variable is then fed into the episodic memory store, where it is used to match with memory elements using a process that is explained below. This results in the retrieval of one or more memory elemets that modify the latent $zzz'_m$ to $zzz_m$, so that now this latent has information from both other sensory modalities, as well as the memory store.
+$zz_m$ is then sent to the level 1 central ATL hub where it gets modified by the vision data to the latent $zzz_m$. For example if the current image is that of an apple, then this is reflected in $zzz_m$. 
 
-The latent $zzz_m$ is then fed back to the level 2 word pipeline where it is used to predict the next word by using the
-the energy based prediction module $E_W(x;zz_m,zzz_m)$ and this results in the prediction $xx_{m+1}$ for the next word latent (see above figure).
+The sequence $\{zzz_m\}$ is split up into episodes using the surprisal signal from the sensory pipelines, i.e., a new episode starts if the surprisal value $||xx_n-zz_n|$ exceeds some threshold. Completed episodes are stored in episodic memory from where it can be recalled using an associative match with the first element in the sequence, under the direction of the executive controller. 
+The current (incomplete episode) is fed into the word pipeline where it is used to predict the next word. Access to the entire sequence allows the prediction module in the word pipeline to focus on parts of the sequence that are relevant given the current state.
+The word prediction module uses the following pieces of information as context:
+
+1. The current state of the pipeline $zz_m$.
+2. The currently episode sequence $(zzz_a,...,zzz_m)$ where $a$ is the sequence number at which the episode started, OR a completed episode that was recalled from episodic memory. The executive controller controls which sequence is used.
+3. Predictions from higher level cognitive pipelines $yyb_p$.
+
+The context information is fed into 
+the energy based prediction module $E_W(x;context)$ and this results in the prediction $xx_{m+1}$ for the next word latent (see above figure).
 Note that, unlike the vision hub at level 2, which performs integration only, the word-level pipeline includes its own dedicated prediction step. This reflects the fact that phoneme-level prediction serves segmentation, while word-level prediction serves ordinary sentence-level anticipation, a genuinely distinct function operating at a different timescale. This mechanism also illustrates why the IM-LEPP model may be able to learn new words faster, since the predicted word is not only a function of the previous word level context $zz_m$, but is also influenced by the vision and modalities by means of the latent $zzz_m$. 
 Similarly the emotional related information coming in through the valence system (valence) can influence our choice of the next word.
 
