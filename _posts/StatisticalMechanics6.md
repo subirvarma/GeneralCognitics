@@ -250,9 +250,9 @@ The incorporation of memory into the system is a critical aspect of the design. 
 - These M episodes are then run through a predictive processing pipeline to generate $zzz_m(i)$. Alternatively an attention based mechanism can be used for this purpose, with $zzz'_m(i)$ serving as the query. The details for this have to be worked out.
 
 
-![](https://subirvarma.github.io/GeneralCognitics/images/stat199.png) 
+![](https://subirvarma.github.io/GeneralCognitics/images/stat209.png) 
 
-Figure 5: Computation of the energy function $E_W(x;zz_m(k),zzz_m(k))$ 
+Figure 5: Computation of the energy function $E_W(x;zz_m(k),CA(zzz_m(k)))$ 
 
 I have used the cross attention mechanism for doing the conditioning. There are two other ways of doing this described in the DiT paper.
 
