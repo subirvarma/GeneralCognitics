@@ -167,24 +167,23 @@ The language hub has been enhanced with the addition of multiple levels of cogni
 - The output of the level 2b word level hub gets sent to the level 2a hub to generate percepts. If the phoneme hub is active then it generates percepts in the form of sound or if the character hub is active then it generates percepts in the form of written text
 - The next word latent prediction done at level 2b is influenced by the contents of the working memory in the ATL hub as well as the output of the thought level pipeline operating at level 2c. This captures the fact that what we are about to say is influenced by three factors: (a) The sensory data from vision and other senses as captured in the working memory sequence that is part of the current episode, (b) The contents of episodic memory which are recalled by the executive controller and become part of a working memory sequence that reflect the memory contents and (c) The thought that we are trying to verbalize as captured by the thought level pipeline at level 2c.
 - Note that there is no direct connection between the episodic memory and the language hub, their interface is mediated through the ATL hub. This captures the fact that all memory recalls are consciously played out in the vision system at the same time that they are influencing the language pipeline.
+- The thought level pipeline at level 2c is influenced by the contents of working memory to take into account the fact that our thinking is influenced by the information from our sensory organs.
 - The word prediction module at level 2b uses a context window that can be either: (a) The events in the current episode, or (b) The events in the recall episodic memory episode.
-- The model assumes that the Executive controller is able to pause the generation of the next word until contents of the episodic memory are played in the vision pieline (which happens at a faster speed compared to when the episode was recorded).
-- 
-- Note that that only one of the language/cognitive pipelines (2a,2b,2c) is active at any one time; moreover, within whichever pipeline is active, phonemes or characters necessarily arrive one at a time in sequence rather than simultaneously, unlike the multiple objects that can be concurrently present in a visual scene. Together these account for the temporal, rather than spatial, character of the language hub.
+- The model assumes that the Executive controller is able to pause the generation of the next word until contents of the episodic memory are played in the vision pipeline (which happens at a faster speed compared to when the episode was recorded).
+- During normal operation the word prediction module at level 2b uses all the events in the current episode to do its computation, using attention to focus on specific parts. During episodic memory recall, the prediction module uses all the events in recalled episode (once again in conjunction with attention).
 
 The episodic memory is a store of sequences coming from the ATL hub. and works as follows:
 
 - Events are sequenced into episodes based on the surprisal value in the predictive processing pipelines in the vision module. Note that this is assuming that the surprisal in the language pipelines does not result in the formation of new episodes (this in line with the model proposed in Zacks et.al.). The hippocampus attaches a time and place stamp to the stored sequences which is not modeled here.
-- Episodes are recalled from the memory by means of an kNN associative match between the current state of the ATL hub and the first event in each stored episode, again using the observation in Zacks et.al. and boundary events receive a higher level of processing and are characteristic of the episode as a whole. The recalled episode is sent to the vision pipeline to generate the corresponding images rather than directly to the ATL hub. This connection can also be used to replay memory episodes during sleep, thus transferring the information to the parametric/semantic memory, thus enabling continuous learning.
-- Note that once an episodic memory is recalled, its representation changes as a result of its journey through the vision and ATL hubs. We propose that the recalled sequence gets written back into the episodic memory (with the original time and place stamp), thus accounting for the observation that memories change as a result of recall.
-
-The ATL hub is enhanced with the addition of up to six episodic buffers, with one of the buffers holding the events in the current episode and the others holding information that has been recalled from episodic memory. The event sequence in either of these two cases is consolidated into a single latent representation by using the attention operation, which allows the system to focus on particular parts of the sequence.
+- Episodes are recalled from the memory by means of an kNN associative match between the current state of the ATL hub (the working memory vector) and the first event in each stored episode, again using the observation in Zacks et.al. that boundary events receive a higher level of processing and are characteristic of the episode as a whole. The recalled episode is sent to the 
+ATL hub as described above, and from there to the vision and language pipelines. 
+- Note that once an episodic memory is recalled, its representation changes as a result of its journey through the ATL hub. We propose that the recalled sequence gets written back into the episodic memory (with the original time and place stamp), thus accounting for the observation that memories change as a result of recall.
 
 The executive controller is one of the new elements in the design, and has the following functions:
 
-- Even though the working memory episodic buffer can hold 6 items, the executive controller forces system is able to focus on only one of the items at a time, either the current episode, or one of the episodes that was retrieved from memory.
+- The executive controller decides when to recall items from episodic memory, and these episodes are recalled one at at a time under its control.
+- The executive controller is able to control the generation of the next word, by delaying the prediction module until the episodic memory information for the entire episode is available from the ATL hub.
 - For the vision sub-system, the executive controller decides which object to focus on at at any one time (so that it receives sensory updates), while the model tracks up to 5-6 objects concurrently.
-- The executive controller is able to control the generation of the next word, by delaying the prediction module until the episodic memory information is available from the ATL hub.
 
 Thus the model proposes several aspects that differentiate the sensory and the language pipelines. The sensory pipelines are responsible for the segmentation of the event sequence into episodes, and also have a direct connection to episodic memory, unlike the language pipelines. The language pipeline has a multilevel temporal hierarchical structure unlike the vision pipeline, and thus is able to formulate higher level abstract thought. 
 
@@ -192,11 +191,11 @@ The IM-LEPP language model consists of a lower level phoneme or character level 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat181.png) 
 
-Figure 2: Predictive Processing Pipeline for Next Character Prediction
+Figure 4: Predictive Processing Pipeline for Next Character Prediction
 
 Consider the simple case of child reading, in which case he or she reads one character at a time. Adults on the other hand use a faster system in which multiple characters are read at time in order to speed up the process, which comes after practice. We will assume that the image of an individual character coming in from the visual system is sent to a classifier, that outputs a discrete number indicating the category. There can be 26-70 different categories depending upon the punctuation. This process results in a discrete sequence $(ch_1,...,ch_N)$ that is fed into a predictive processing pipeline.
 
-The discrete character sequence is sent into a predictive processing pipeline shown in figure 2 that creates an latent representation $z_n$ for each character using the predictive coding function $q_{\phi}$, followed by prediction of the next latent representation $x_{n+1}$ using a energy based model $E_{CH}(x;z_n,u_{n+1}=yy_m)$. 
+The discrete character sequence is sent into a predictive processing pipeline shown in figure 4 that creates an latent representation $z_n$ for each character using the predictive coding function $q_{\phi}$, followed by prediction of the next latent representation $x_{n+1}$ using a energy based model $E_{CH}(x;z_n,u_{n+1}=yy_m)$. 
 Note that this prediction is conditioned on not just the previous character level latent $z_n$, but also on a latent representation $yy_m$ for the $m^{th}$ word (whose characters are being generated), which comes from the level 2 word pipeline. The computation of $yy_m$ is explained below when we discuss the word level pipeline.
 Next $x_{n+1}$ is converted into a character using the predictive coding function $g_{\psi}$. The generated character $y_{n+1}=g_{\psi}(x_{n+1})$ is compared with the actual next character $ch_{n+1}$, and the error generated by this information is used to estimate the next representation $z_{n+1}$. These operations are illustrated in the above figure.
 
@@ -205,11 +204,11 @@ If this difference exceeds some threshold, then the model assumes that the previ
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat198.png) 
 
-Figure 3: Predictive Processing Pipeline for Next Word Prediction
+Figure 5: Predictive Processing Pipeline for Next Word Prediction
 
 The predictive coding pipeline at the word level uses the latent state $z_n$ from the character pipeline as the ground truth that represents the latent representation for for the $m^{th}$ word. Note that the word level subscript $m$ for the current word  is not the same as the character level subscript $n$ for obvious reasons.
 This pipeline creates a higher level latent word representation $zz_m$ by modifying the existing representation $xx_m$ to $zz_m = q_{\phi}(xx_m,z_n)$.
-$zz_m$ is then sent to the level 1 central ATL hub where it gets modified by the vision data to the latent $zzz'_m$. For example if the current image is that of an apple, then this is reflected in $zzz'_m$. The latent variable is then fed into the episodic memory store, where it is used to match with memory elements using a process that is explained below. This results in the retrieval of one or more memory elemets that modify the latent $zzz'_m$ to $zzz_m$, so that now this latent has information from both other sensory modalities, as well as the memory store.
+$zz_m$ is then sent to the level 1 central ATL hub where it gets modified by the vision data to the latent $zzz_m$. For example if the current image is that of an apple, then this is reflected in $zzz_m$. The latent variable is then fed into the episodic memory store, where it is used to match with memory elements using a process that is explained below. This results in the retrieval of one or more memory elemets that modify the latent $zzz'_m$ to $zzz_m$, so that now this latent has information from both other sensory modalities, as well as the memory store.
 
 The latent $zzz_m$ is then fed back to the level 2 word pipeline where it is used to predict the next word by using the
 the energy based prediction module $E_W(x;zz_m,zzz_m)$ and this results in the prediction $xx_{m+1}$ for the next word latent (see above figure).
