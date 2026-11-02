@@ -126,10 +126,10 @@ Figure 2: The IM-LEPP2 Memory Framework
 
 The IM-LEPP2 memory framework is shown in figure 2. It differs from the Baddeley WM framework in the following respects:
 
-- The working memory area in the ATL hub is connected to Episodic Memory using a bi-directional connection. As before, the connection from the working memory to the episodic memory enables the storage of new episodic memory episodes. The connection from the episodic memory to the working memory enables episodes from the episodic memory to be recalled directly without first having to go through the sensory or language pipelines.
+- The working memory area in the ATL hub is connected to Episodic Memory using a bi-directional connection. The connection from the working memory to the episodic memory enables the storage of new episodic memory episodes. The connection from the episodic memory to the working memory enables episodes from the episodic memory to be recalled directly without first having to go through the sensory or language pipelines.
 - The recall process from episodic memory uses a kNN nearest neighbor search using the current working memory content as query.
-- The recalled episodic memory sequence is sent through its own predictive coding pipeline in the ATL hub, and this results in a new sequence that forms the new working memory.
-- The modified episodic memory sequence is stored back in the hippocampus, where it overwrites the old sequence. It is also broadcast to the sensory and language modules.
+- The recalled episodic memory sequence is sent through its own predictive coding pipeline in the ATL hub, and this results in a new sequence that gets stored in the working memory. Up to six episodes can be stored in the working memory (including the current episode), and the Central Executive decides which of these episodes will be used  in the thinking process.
+- The recalled episode is broadcast to the sensory modules. It is also stored back in the hippocampus, where it overwrites the old sequence. This accounts for the fact that process of recall of changes the stored memory.
 - In the sensory modules the recalled episodic memory sequence leads to the effect of re-living through the past memory episode through a process of generation in the respective predictive processing pipelines.
 - In the language module the recalled sequence is subject to the attention operation in order to identify the specific parts that are relevant to the next word generation, and this forms the context that is used to do prediction.
 
@@ -147,10 +147,10 @@ The IM-LEPP2 model has the following features:
 
 - There is a central ATL type hub at level 1 that integrates representations coming in from the vision, language and memory hubs. Note that the communication between the central hub and the three spoke hubs is bi-directional, so that not only do the spoke hubs influence the representation in the central hub, but they in turn are influenced by the information coming from the central hub.
 - Working memory in the sense as described by Baddely is implemented at the central hub and represents the current state of the data coming in from the episodic memory module as well as the vision and language hubs.
-- Memory episodes are created at the ATL hub, and subsequently transferred to the Episodic memory. The episodes are variable in length, and are segmented as the function of the surprisal value at the sensory hubs.
+- Memory episodes are created at the ATL hub, and subsequently transferred to the episodic memory. The episodes are variable in length, and are segmented as the function of the surprisal value at the sensory hubs.
 - Retrieval of past memory sequences from episodic memory is based on a kNN type retrieval using the current working memory state and are processed according to the description in the previous section.
 - Both the vision and language hubs use the the content of the working memory to condition the generation of the next word (or image).  In the normal case the working memory sequence holds the current episode, while in the case of episodic memory recall, it holds the recalled memory.
-- The executive controller decides whether to use the current episode or to use a recalled episode to serve as context for the language pipeline, and only one of them used at any time.
+- The executive controller decides whether to use the current episode or to use a recalled episode to serve as context for the language pipeline, and only one of these used at any time.
 
 The vision hub largely retains the structure described in the previous paper, and works as follows:
 
@@ -207,12 +207,12 @@ This pipeline creates a higher level latent word representation $zz_m$ by modify
 $zz_m$ is then sent to the level 1 central ATL hub where it gets modified by the vision data to the latent $zzz_m$. For example if the current image is that of an apple, then this is reflected in $zzz_m$. 
 
 The sequence $\{zzz_m\}$ is split up into episodes using the surprisal signal from the sensory pipelines, i.e., a new episode starts if the surprisal value $||xx_n-zz_n|$ exceeds some threshold. Completed episodes are stored in episodic memory from where it can be recalled using an associative match with the first element in the sequence, under the direction of the executive controller. 
-The current (incomplete episode) is fed into the word pipeline where it is used to predict the next word. 
-Access to the current episode sequence allows the prediction module in the word pipeline to focus on parts of the sequence that are relevant to next word prediction.
+Either the current or one of the recalled episodes is fed into the language pipeline where it is used to predict the next word. 
+Access to the episode sequence allows the prediction module in the word pipeline to focus on parts of the sequence that are relevant to next word prediction.
 
 The next word prediction module uses the following pieces of information as context:
 
-1. The current state of the pipeline $zz_m$.
+1. The current state of the pipeline $zz_m$ at level 2, and
 2. The current episode sequence $(zzz_a,...,zzz_m)$ where $a$ is the sequence number at which the episode started, OR a completed episode that was recalled from episodic memory. The executive controller controls which sequence is used.
 
 The context information is fed into 
@@ -228,11 +228,37 @@ This model does not look like the Transformer model at first glance, but as expl
 1. Non-parametric memory access to create a context: IM-LEPP2 does this using its working memory or recalled episodes from episodic memory, while Transformers use the entirety of their past generations as memory. Using only specific episodes from memory reduces the amount of processing involved, thus avoiding the quadratic complexity in the Transformer self attention operation.
 2. Predictions using parametric memory: IM-LEPP2 uses an energy based prediction module, while Transformers use a feed-forward network or FFN. The energy based prediction uses gradient optimization to minimize the energy function, and the number of gradient steps can be adjusted depending upon the difficulty of the prediction. The scalar energy also serves as an indication of how close the prediction is to the optimal value.
 
-![](https://subirvarma.github.io/GeneralCognitics/images/stat200.png) 
+![](https://subirvarma.github.io/GeneralCognitics/images/stat209.png) 
 
 Figure 4: Energy minimization steps in the prediction module
 
-We will adopt the methodology of directly minimizing the energy function through multiple gradient descent steps, as shown in the above figure. In the previous papers we described an alternative probabilistic algorithm for doing this, using several stages of noise annealing, with multiple Langevin diffusion steps at each stage. This algorithm requires us to use a preset number of annealing stages, since the noise series has to follow a pre-defined schedule. This works well for image prediction systems, however in the case of language it runs into the problem that in the case of reasoning models, the number of stages is a function of the level of difficulty of the problem being solved and hence cannot be set in advance. Working directly with the energy function avoids this problem since we can vary the number of stages as a function of a stopping rule.
+We will adopt the methodology of directly minimizing the energy function $E_W(x;zz_m,{zzz_m}) through multiple gradient descent steps, which results in an iterative computation with a natural termination criteria. The output of this algorithm $xx_{m+1}$ is obtained by solving the optimization problem
+
+$$ xx_{m+1} = arg\ min_{x}\ E_W(x; zz_m,{zzz_m}) $$
+
+using a variable number of individual gradient descent steps
+
+$$  x^t = x^{t-1} - \lambda\nabla_x E_W(x; zz_m,{zzz_m})  $$
+
+where $\lambda$ is the step size. This iterative computation is repeated until $x^t$ is at a local minima of the energy landscape. Thus finding a local minima provides a natural mechanism to halt the iterative computation. 
+
+**Estimating Model Parameters**
+
+Given $$xx^N_{m+1}$$ which is the result of the gradient descent after N$ steps, and and the corresponding ground truth value $$zz_{m+1}$, 
+the parameters $W$ of the energy landscape can be learnt by solving the minimization problem
+
+$$  L_{MSE}(W) = ||xx^N_{m+1} - zz_{m+1}||^2
+
+Strictly speaking this requires a differentiation through the underlying optimization procedure (see [Finn et.al.](https://arxiv.org/abs/1703.03400)), which involves the computation of second order gradients across optimization steps. However it has been found (see [Du et.al.](https://arxiv.org/abs/2206.15448)) truncating the back-propagation to the last optimization step maintains good performance at faster training speed.
+
+
+
+
+An alternative probabilistic algorithm for doing this is by using several stages of noise annealing, with Langevin diffusion steps at each stage. This algorithm requires us to use a preset number of annealing stages, since the noise series has to follow a pre-defined schedule. This works well for image prediction systems, however in the case of language and reasoning models, the number of stages is a function of the level of difficulty of the problem being solved and hence cannot be set in advance. Working directly with the energy function avoids this problem since we can vary the number of stages as a function of a stopping rule. The direct energy based approach has the following additional benefits:
+
+- Use of an energy function solves the halting problem
+- 
+
 This design also has the benefit that the parameters for $E_W$ can be learnt by focusing on the final stage, thus avoiding the need to back propagate to the earlier stages. This algorithm is described in detail later in the paper.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat193.png) 
