@@ -255,7 +255,7 @@ An alternative probabilistic algorithm for doing EBMs is by using several stages
 
 I have used the cross attention mechanism for doing the conditioning. There are two other ways of doing this described in the DiT paper.
 
-![](https://subirvarma.github.io/GeneralCognitics/images/stat195.png) 
+![](https://subirvarma.github.io/GeneralCognitics/images/stat210.png) 
 
 Figure 6: A single DiT Block
 
