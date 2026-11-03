@@ -244,41 +244,14 @@ where $\lambda$ is the step size. This iterative computation is repeated until $
 
 **Estimating Model Parameters**
 
-Given $$xx^N_{m+1}$$ which is the result of the gradient descent after N$ steps, and and the corresponding ground truth value $$zz_{m+1}$, 
-the parameters $W$ of the energy landscape can be learnt by solving the minimization problem
+Given $$xx^N_{m+1}$$ which is the result of the gradient descent after $N$ steps, and and the corresponding ground truth value $$zz_{m+1}$, 
+the parameters $W$ of the energy landscape can be learnt by solving the minimization problem (The parameter $N$ is kept fixed during training, while during inference it varies depending on the difficulty of the prediction).
 
-$$  L_{MSE}(W) = ||xx^N_{m+1} - zz_{m+1}||^2
+$$  L_{MSE}(W) = ||xx^N_{m+1} - zz_{m+1}||^2 $$
 
 Strictly speaking this requires a differentiation through the underlying optimization procedure (see [Finn et.al.](https://arxiv.org/abs/1703.03400)), which involves the computation of second order gradients across optimization steps. However it has been found (see [Du et.al.](https://arxiv.org/abs/2206.15448)) truncating the back-propagation to the last optimization step maintains good performance at faster training speed.
 
-
-
-
-An alternative probabilistic algorithm for doing this is by using several stages of noise annealing, with Langevin diffusion steps at each stage. This algorithm requires us to use a preset number of annealing stages, since the noise series has to follow a pre-defined schedule. This works well for image prediction systems, however in the case of language and reasoning models, the number of stages is a function of the level of difficulty of the problem being solved and hence cannot be set in advance. Working directly with the energy function avoids this problem since we can vary the number of stages as a function of a stopping rule. The direct energy based approach has the following additional benefits:
-
-- Use of an energy function solves the halting problem
-- 
-
-This design also has the benefit that the parameters for $E_W$ can be learnt by focusing on the final stage, thus avoiding the need to back propagate to the earlier stages. This algorithm is described in detail later in the paper.
-
-![](https://subirvarma.github.io/GeneralCognitics/images/stat193.png) 
-
-Figure 5: Generating $zzz_n(i)$ at the ATL Hub using kNN based search and a predictive processing pipeline
-
-The incorporation of memory into the system is a critical aspect of the design. Human memory is of the following types:
-
-- Working memory: This is defined as the information that is available to us at any instant of time through the data coming in though our senses. The sensory data, such as vision or sound, lingers within the brain for a short instant before disappearing, and this allows us to chain together discrete images into a moving picture for example. The same is true for sound, and enables us to remember the last few phonemes and thus put together a word by connecting them.
-- Episodic memory or Fast Memory: This is memory for a sequence of events that play out over time and at a particular place.  The hippocampus plays a critical role in saving episodic memory sequences, and giving them a time stamp and place stamp. Given the right conditions, even a single sequence of events gets stored in episodic memory, thus accounting for the fast memory moniker.
-- Semantic memory or Slow Memory: This is defined as memory
-
-- All memories are of the episodic kind and get stored in the long term memory. The break up into episodes uses the surprisal based mechanism described in the previous paper.
-- A certain number, say M of these are retrieved after matching using $zzz'_m(i)$ using kNN perhaps. I will get into more details of this mechanism in the detailed write-up.
-- These M episodes are then run through a predictive processing pipeline to generate $zzz_m(i)$. Alternatively an attention based mechanism can be used for this purpose, with $zzz'_m(i)$ serving as the query. The details for this have to be worked out.
-
-
-![](https://subirvarma.github.io/GeneralCognitics/images/stat209.png) 
-
-Figure 5: Computation of the energy function $E_W(x;zz_m(k),CA(zzz_m(k)))$ 
+An alternative probabilistic algorithm for doing EBMs is by using several stages of noise annealing, with Langevin diffusion steps at each stage. This algorithm requires us to use a preset number of annealing stages, since the noise series has to follow a pre-defined schedule. This works well for image prediction systems, however in the case of language and reasoning models, the number of stages is a function of the level of difficulty of the problem being solved and hence cannot be set in advance. Working directly with the energy function avoids this problem since we can vary the number of stages as a function of a stopping rule. The direct energy based approach has the following additional benefits:
 
 I have used the cross attention mechanism for doing the conditioning. There are two other ways of doing this described in the DiT paper.
 
