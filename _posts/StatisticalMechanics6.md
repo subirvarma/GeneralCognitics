@@ -87,28 +87,21 @@ At the times when the sensory level predictions differ significantly from the in
 In general there can be several levels in this hierarchy, with the output of the event schemata controlled by its own model operating at higher level, which in turn gets updated with the information coming in through the event sequence. The latent sequence at all these levels can be segmented into episodes with the segmentation becomes progressively finer as we proceed from higher levels to lower levels.
 Zacks et.al. also proposed that the perceptual information from event boundaries is preferentially accessible in LTM, thus making them an attractive target for the associative recall process.
 
-## The IM-LEPP2 Memory Framework
+### Episodic Memory in the Hippocampus 
 
-![](https://subirvarma.github.io/GeneralCognitics/images/stat207.png) 
+**How the brain stores episodes.** The hippocampus is the main site of fast, one-shot learning in the brain: a single experience is enough to lay down a trace. A long-standing account, the hippocampal indexing theory (Teyler and DiScenna, 1986), holds that the hippocampus does not store the content of an experience itself. It stores an index, a pattern that binds together the distributed neocortical patterns that represent the content (the sights, sounds and meanings), so that reactivating part of the index can reactivate the rest. Summerfield and Stachenfeld (2026) express the same idea in machine-learning terms: the hippocampus holds the keys and the neocortex the values of an associative memory. Retrieval is content-addressable. A partial cue reinstates the full episode by pattern completion, and the more cues that match, the more likely recall succeeds. To keep similar episodes from interfering, the input to the hippocampus is thought to be sparsified, a process known as pattern separation [verify: Yassa and Stark, 2011].
 
-Figure 2: The IM-LEPP2 Memory Framework
-
-The IM-LEPP2 memory framework is shown in figure 2. It differs from the Baddeley WM framework in the following respects:
-
-- The working memory area in the ATL hub is connected to Episodic Memory using a bi-directional connection. The connection from the working memory to the episodic memory enables the storage of new episodic memory episodes. The connection from the episodic memory to the working memory enables episodes from the episodic memory to be recalled directly without first having to go through the sensory or language pipelines.
-- The recall process from episodic memory uses a kNN nearest neighbor search using the current working memory content as query.
-- The recalled episodic memory sequence is sent through its own predictive coding pipeline in the ATL hub, and this results in a new sequence that gets stored in the working memory. Up to six episodes can be stored in the working memory (including the current episode), and the Central Executive decides which of these episodes will be used  in the thinking process.
-- The recalled episode is broadcast to the sensory modules. It is also stored back in the hippocampus, where it overwrites the old sequence. This accounts for the fact that process of recall of changes the stored memory.
-- In the sensory modules the recalled episodic memory sequence leads to the effect of re-living through the past memory episode through a process of generation in the respective predictive processing pipelines.
-- In the language module the recalled sequence is subject to the attention operation in order to identify the specific parts that are relevant to the next word generation, and this forms the context that is used to do prediction.
+The hippocampus does not work alone, and it does not learn structure from scratch each time. The entorhinal cortex supplies grid-like codes that act as a positional scaffold for memories, and the Tolman-Eichenbaum machine (Whittington et al., 2020) shows how such a structural code can be learned separately from sensory content and then bound to it, so that the same structure generalizes across new situations. Broader schematic knowledge, the learned regularities of how events usually unfold, is held in neocortex (Zacks et al., 2007, call these event schemata and place them in semantic memory, implemented by permanent synaptic changes). Prior schemas speed up the learning of consistent new information [verify: Tse et al., 2007; van Kesteren et al., 2012]. Over time, and especially during sleep, episodes are replayed and gradually consolidated into the neocortex, with replay prioritizing memories that are novel, salient or weakly encoded (Summerfield and Stachenfeld, 2026). Finally, the hippocampus attaches a time and place stamp to each episode, which allows recall to be cued by when and where an event happened (Tulving, 1972).
 
 ## The IM-LEPP2 Model
 
-![](https://subirvarma.github.io/GeneralCognitics/images/stat208.png) 
+![](https://subirvarma.github.io/GeneralCognitics/images/stat211.png) 
 
-Figure 3: The IM-LEPP2 Model
+Figure 2: The IM-LEPP2 Model
 
-The IM-LEPP2 model is shown in figure 3. It has three main components, namely a model for the visual system, a model for language and cognition, and a model for episodic memory.
+The IM-LEPP2 model shown in figure 2 adopts Baddeley's memory framework described in the previous section, with its division into working memory, episodic memory and semantic memory, as well as the event segmentation theory due to Zack et.al. 
+
+It has three main components, namely a model for the visual system, a model for language and cognition, and a model for episodic memory.
 The vision system model is largely unchanged from the one described in [paper 2](https://subirvarma.github.io/GeneralCognitics/2026/08/07/statmech5.html) and uses a spatial hierarchical structure.
 The language model uses a temporal hierarchical structure that builds on the one proposed in paper 2 while episodic memory model is new. The executive controller module is also new, though some of its functions were hinted to in the previous paper.
 
