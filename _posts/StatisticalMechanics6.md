@@ -141,11 +141,11 @@ The executive controller is one of the new elements in the design, and has the f
 - The executive controller is able to control the generation of the next word, by delaying the prediction module until the episodic memory information for the entire episode is available from the ATL hub.
 - For the vision sub-system, the executive controller decides which object to focus on at at any one time (so that it receives sensory updates), while the model tracks up to 5-6 objects concurrently.
 
-## The Language Module
+### The Language Module
 
 The IM-LEPP2 language model consists of a lower level phoneme or character level model and a higher word level model. In the following we first describe the predictive processing pipeline for characters, followed by that for words.
 
-![](https://subirvarma.github.io/GeneralCognitics/images/stat181.png) 
+![](https://subirvarma.github.io/GeneralCognitics/images/stat213.png) 
 
 Figure 4: Predictive Processing Pipeline for Next Character Prediction
 
@@ -158,7 +158,7 @@ Next $x_{n+1}$ is converted into a character using the predictive coding functio
 The system is able to detect the end of a word by tracking the difference between the predicted  latent state $x_{n+1}$ and the actual latent state $z_{n+1}$. 
 If this difference exceeds some threshold, then the model assumes that the previous character $ch_n$ occurred at the end of a word (saw the $m^{th}$ word $w_m$), and the representation $z_n$ is sent over to the word level pipeline as discussed next. We also use the empty space at the end of each word to infer the word ending, however there some languages such as Chinese and Old Latin that don't use spaces (see [Saenger 1997](https://www.sup.org/books/literary-studies-and-literature/space-between-words)), and the alternative mechanism described here is more general, and also works for the case of auditory signals.
 
-![](https://subirvarma.github.io/GeneralCognitics/images/stat198.png) 
+![](https://subirvarma.github.io/GeneralCognitics/images/stat214.png) 
 
 Figure 5: Predictive Processing Pipeline for Next Word Prediction
 
@@ -187,6 +187,26 @@ This model does not look like the Transformer model at first glance, but as expl
 
 1. Non-parametric memory access to create a context: IM-LEPP2 does this using its working memory or recalled episodes from episodic memory, while Transformers use the entirety of their past generations as memory. Using only specific episodes from memory reduces the amount of processing involved, thus avoiding the quadratic complexity in the Transformer self attention operation.
 2. Predictions using parametric memory: IM-LEPP2 uses an energy based prediction module, while Transformers use a feed-forward network or FFN. The energy based prediction uses gradient optimization to minimize the energy function, and the number of gradient steps can be adjusted depending upon the difficulty of the prediction. The scalar energy also serves as an indication of how close the prediction is to the optimal value.
+
+### Vision Pipeline
+
+![](https://subirvarma.github.io/GeneralCognitics/images/stat215.png) 
+
+Figure 4: Vision Pipeline with sensory input
+
+![](https://subirvarma.github.io/GeneralCognitics/images/stat216.png) 
+
+Figure 4: Vision Pipeline with Episodic Memory input
+
+
+### Episode Level Model
+
+![](https://subirvarma.github.io/GeneralCognitics/images/stat217.png) 
+
+Figure 4: Episode Level Predictive Model
+
+
+## Energy Minimization
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat209.png) 
 
