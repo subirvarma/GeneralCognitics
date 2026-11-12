@@ -95,7 +95,7 @@ The hippocampus does not work alone, and it does not learn structure from scratc
 
 ## The IM-LEPP2 Model
 
-![](https://subirvarma.github.io/GeneralCognitics/images/stat211.png) 
+![](https://subirvarma.github.io/GeneralCognitics/images/stat212.png) 
 
 Figure 2: The IM-LEPP2 Model
 
@@ -141,7 +141,7 @@ The executive controller is one of the new elements in the design, and has the f
 - The executive controller is able to control the generation of the next word, by delaying the prediction module until the episodic memory information for the entire episode is available from the ATL hub.
 - For the vision sub-system, the executive controller decides which object to focus on at at any one time (so that it receives sensory updates), while the model tracks up to 5-6 objects concurrently.
 
-Thus the model proposes several aspects that differentiate the sensory and the language pipelines. The sensory pipelines are responsible for the segmentation of the event sequence into episodes. and then generating the contents of the memory during recall. The language pipelines on the other hand use the contents of the episodic memory as context for next word prediction.
+## The Language Module
 
 The IM-LEPP2 language model consists of a lower level phoneme or character level model and a higher word level model. In the following we first describe the predictive processing pipeline for characters, followed by that for words.
 
