@@ -95,56 +95,25 @@ The hippocampus does not work alone, and it does not learn structure from scratc
 
 ## The IM-LEPP2 Model
 
+The IM-LEPP2 model adopts Baddeley's memory framework described in the previous section, with its division into working memory, episodic memory and semantic memory, as well as the event segmentation theory due to Zack et.al. It has several sub-components: (1) A module for visual processing, (2) A module for language processing (3) A module for integration of visual/sensory and language signals in the central ATL hub, (4) A  module for episodic memory, (5) A module for higher level cognitive processing, at the episode and higher levels (6) The Executive Controller module. Broadly speaking, the model's functions are divided among the following areas:
+
+- Modules that implement the predictive processing algorithm, involving the inference, prediction and generation functions: In the brain these are thought to reside in the neo-cortical columns of the cortex. These modules have the responsibility of building predictive models for their inputs, which can be sensory data, as for the case of vision, hearing, smell, taste, touch etc. But they can also be arranged in an hierarchical fashion, so that higher levels in the hierarchy models the outputs of the levels below them. We saw one example of this in [paper 2](https://subirvarma.github.io/GeneralCognitics/2026/08/07/statmech5.html) where language was modeled as a word level predictive processing pipeline operating on top of a phoneme level pevel predictive processing pipeline. This idea is extended in this paper to model predictions at even higher levels, resulting in models at the schema level which have been hypothesized by cognitive scientists. The parameters in the predictive processing pipelines serve as the equivalent of semantic memory in Baddeley's framework.
+- Modules that implement multi-sensory integration functions: In the brain these functions are thought to reside in the temporal regions. They receive inputs from multiple sensory and language pipelines and integrate them, resulting in amodal representations that is the counterpart of the working memory in Baddeley's model. This representation is fed back into the sensory and language modules to serve as an influence on their predictions, as well as periodically aggregated into episodes and stored into episodic memory. These episodes are periodically recalled and stored resulting in the equivalent of Baddeley's episodic buffers.
+- Episodic Memory sub-system: Episodic memory constitutes the non-parametric part of the brain's memory architecture, and is capable of quickly storing sequences of working memory representations even after a single exposure to them. In the brain  episodic memory is thought to be implemented using a combination of the hippocampus and the cortex, with the hippocampus storing the keys to episodic sequences and the cortex storing the actual content.
+
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat212.png) 
 
 Figure 2: The IM-LEPP2 Model
+ 
+The IM-LEPP2 model as shown in figure 2, functions as follows:
 
-The IM-LEPP2 model shown in figure 2 adopts Baddeley's memory framework described in the previous section, with its division into working memory, episodic memory and semantic memory, as well as the event segmentation theory due to Zack et.al. It has several sub-components that appeared in the [earlier paper](https://subirvarma.github.io/GeneralCognitics/2026/08/07/statmech5.html): A model for visual processing, a model for language processing and a model for integration of visual and language signals in the central ATL hub. To these IM-LEPP2 adds the following new modules: (1) A  module for episodic memory, (2) A module for higher level cognitive processing, at the episode and higher levels (3) The executive controller module. In addition the ATL hub module has the additional function of storing the episodic buffers (in the sense of Baddeley). 
-
-The IM-LEPP2 model has the following features:
-
-- There is a central ATL type hub at level 1 that integrates signal coming in from the vision and language hubs into an amodal representation (these are the two bi-directional connections labeled 1) in the figure). These two connections are is bi-directional, so that not only do the spoke hubs influence the representation in the central hub, but they in turn are influenced by the information coming from the central hub. The reverse connection enables the language hub state to be influenced by the vision hub state (and vice versa).
-- The new episode level module receives input from the central hub (through the connection marked 2)), and is responsible for building models that operate at the episode or higher levels, and thus represents the part of vision or language evolution that stays stable during the course of a single episode. As an example, when we are in a particular room, it has an episode level reprsentation that changes when we step into the next room. The output of this module serves as an additional conditioning variable that influences the prediction modules in the vision and language hubs (through the two connections marked 3)).
+- There is a central ATL type hub at level 1 that integrates signal coming in from the vision and language hubs into an amodal working memory representation (these are the two connections labeled 1) in the figure). These two connections are is bi-directional, so that not only do the spoke hubs influence the representation in the central hub, but they in turn are influenced by the information coming from the central hub. The reverse connection enables the language hub state to be influenced by the vision hub state (and vice versa).
 - The representation in the central hub gets split into episodes, which are sequences of amodal latent representations, using surprisal information from the prediction modules in the vision and language hubs. These episodes are stored in episodic memory using the connection labeled 4) in the figure.
+- The episode or schema level module receives input from the central hub (through the connection marked 2)), and is responsible for building predictive processing pipelines that operate at the episode or higher levels, and thus represents the part of vision or language evolution that stays stable during the course of a single episode. The output of this module serves as an additional conditioning variable that influences the prediction modules in the vision and language hubs (through the two connections marked 3)).
 - Memory recall from episodic memory is cued by the state of the central hub, using a kNN type retrieval, and results in the transfer of one or more episodes from episodic memory into the vision module using the connection labeled 5), where they get transformed into visual representations. These representations are then routed to the central hub where they occupy one of the episodic buffers. There are upto six episodic buffers in the central hub, one of which contains the current unfinished episode, while the others contain episodes recalled from memory. The language module uses the contents of one or more of these episodic buffers to condition its next word prediction module.
-- The executive controller provides overall supervision of the system. Among other tasks it decides where to focus attention at any one time, and is also able to control attention on gthe recalled memory sequences in the episodic buffer.
+- The executive controller provides overall supervision of the system. Among other tasks it decides where to focus attention at any one time, for example it can focus attention on an object in the visual field, or on the generation of the next word, or on sequences recalled from episodic memory. It has other functions that have to do with planning etc that are not modeled here.
 
-The episodic memory is a store of sequences coming from the ATL hub. and works as follows:
-
-- The event sequence is split into episodes based on the surprisal value in the predictive processing pipelines in the vision module. The hippocampus attaches a time and place stamp to the stored sequences which is not modeled here.
-- Episodes are recalled from memory by means of an kNN associative match between the current state of the ATL hub and the events in the stored episode. The recalled episode is sent to the 
-vision module as described above, where it generates a visual sequence, and this gets sent to the central hub where it gets stored in one of the episodic buffers. The contents of these buffers is used to condition the generation of the next word as described above.
-- Note that once an episodic memory is recalled, its representation changes as a result of its journey through the vision and central hubs, thus accounting for the observation that memories change as a result of recall.
-
-The executive controller is one of the new elements in the design, and has the following functions:
-
-- The executive controller decides when to recall items from episodic memory, and these episodes are recalled one at at a time under its control.
-- The executive controller is able to control the generation of the next word, by delaying the prediction module until the episodic memory information for the entire episode is available from the ATL hub.
-- For the vision sub-system, the executive controller decides which object to focus on at at any one time (so that it receives sensory updates), while the model tracks up to 5-6 objects concurrently.
-
-### The Vision Module
-
-![](https://subirvarma.github.io/GeneralCognitics/images/stat218.png) 
-
-Figure 4: The vision hub with the addition of a pipeline for memory recall
-
-The vision module largely retains the structure described in the previous paper, and is structured around a vision hub as shown in the above figure. 
-The vision hub has a two level structure. The central vision hub at level 2 integrates information coming from several simultaneously active level 3 predictive processing vision pipelines. There is a level 3 pipeline for each of the objects in the scene, as well an always-on pipeline for the scene itself, and all these get integrated at the level 2 vision hub. The representation of each of these pipelines evolves asynchronously in time and the level 2 hub integrates the latest information from each individual object and sends it up to the central level 1 hub. Note that the per object pipelines come and go depending on which objects are currently in the field of vision, while the scene level pipeline is always active.
-
-![](https://subirvarma.github.io/GeneralCognitics/images/stat215.png) 
-
-Figure 4: Vision Pipeline for Object and Scene Inputs
-
-The per-object level 3 predictive processing vision pipelines operate according to the inference-prediction-generation framework that was used for the LEPP model in [paper 1](https://subirvarma.github.io/GeneralCognitics/2026/07/15/statmech4.html). The system state that results from the inference module in this pipeline is sent to the level 2 vision hub for integration with the states of all the other objects in the scene. This combined representation in turn gets integrated with representations from other modalities in the multimodal level 1 hub. The integrated level 1 representation in turn is fed back to the prediction module in the level 3 pipelines, and the result is used to generate the next percept. Note that these percepts take all the other objects that are in the scene into account (as well as other modalities), by virtue of this architecture.
-
-We have added a new conditioning latent vector $yy^{EV}_p$, called the episodic vector, to the scene level pipeline. This represents the predictions coming from the episode level predictive processing pipeline (described below). The value of this variable remains fixed for the duration of an episode, and can be considered to be an implementation of the Event Model as proposed by Zacks et.al. The When we are in a familiar situation, our predictions of what happens next conditioned by what has happened in previous instances, and this regularity is captured by the episodic vector. When the sequence of episodes follow a certain pattern (for example what we expect when we go to a restaurant for example), then this is captured by the predictions from the episode level pipeline.
-
-![](https://subirvarma.github.io/GeneralCognitics/images/stat216.png) 
-
-Figure 4: Vision Pipeline for Episodic Memory Input
-
-We have added a new pipeline to handle input coming from episodic memory recall, where it is used to condition the prediction module. The output of the prediction module is fed into the generation pipeline and this results in the feeling of playing back an event from our memory. Note that since there is no sensory data to compare with, there is no inference pipeline and the predicted output $x_n$ is routed directly to the level 2 vision hub and from there to the central hub, where it combines with data from other modules and then gets stored in one of the episodic buffers. This model for episodic memory recall captures the fact that the process of memory recall changes the contents of the recalled memory. 
-The Executive Controller decides whether to focus attention on the memory recall pipeline, or one of the other pipelines. During memory replay, sensory data is no longer being sent to the other pipelines, which accounts for the fact that when we are deep in thoought, we often loose track of what is happening in our vicinity.
+More detailed descriptions of the various modules follow.+
 
 ### The Language Module
 
@@ -154,7 +123,7 @@ Figure 4: Predictive Processing Pipeline for Next Character Prediction
 
 The IM-LEPP2 language model consists of a lower level phoneme or character level model and a higher word level model. In the following we first describe the predictive processing pipeline for characters, followed by that for words.
 
-The discrete character sequence is sent into a predictive processing pipeline shown in figure 4 that creates an latent representation $z_n$ for each character using the predictive coding function $q_{\phi}$, followed by prediction of the next latent representation $x_{n+1}$ using a energy based model $E_{CH}(x;z_n,u_{n+1}=yy_m)$. 
+The discrete character sequence is sent into a predictive processing pipeline shown in the above figure, that creates an latent representation $z_n$ for each character using the predictive coding function $q_{\phi}$, followed by prediction of the next latent representation $x_{n+1}$ using a energy based model $E_{CH}(x;z_n,u_{n+1}=yy_m)$. 
 Note that this prediction is conditioned on not just the previous character level latent $z_n$, but also on a latent representation $yy_m$ for the $m^{th}$ word (whose characters are being generated), which comes from the level 2 word pipeline. The computation of $yy_m$ is explained below when we discuss the word level pipeline.
 Next $x_{n+1}$ is converted into a character using the predictive coding function $g_{\psi}$. The generated character $y_{n+1}=g_{\psi}(x_{n+1})$ is compared with the actual next character $ch_{n+1}$, and the error generated by this information is used to estimate the next representation $z_{n+1}$. These operations are illustrated in the above figure.
 
@@ -169,19 +138,16 @@ The predictive coding pipeline at the word level uses the latent state $z_n$ fro
 This pipeline creates a higher level latent word representation $zz_m$ by modifying the existing representation $xx_m$ to $zz_m = q_{\phi}(xx_m,z_n)$.
 $zz_m$ is then sent to the level 1 central ATL hub where it gets modified by the vision data to the latent $zzz_m$. For example if the current image is that of an apple, then this is reflected in $zzz_m$. 
 
-The next word latent prediction done at level 2 can be influenced by the following factors (which act as conditioning variables used during prediction): 
+The next word latent prediction done at the word level can be influenced by the following factors (which act as conditioning variables used during prediction): 
 
-1. The current state $zz_m$ of the word pipeline: This captures short term memory of words that were generated in the recent past, and decays fairly quickly.
-2. The current state $zzz_t$ of the central hub: This takes vision and other modalities into account, but is also short term in nature.
-3. The contents $zzz_t,...,zzz_t+q$ of one or more of the episodic buffers from the central hub: The episodic memory information coming to the language module is mediated through the vision pipeline as described above, and this corresponds to conscious memory recall. The prediction module focuses its attention of specific parts of this sequence when computing the energy function value.
+1. The current state $zz_m$ of the word pipeline: This captures the recurrent thought state.
+2. The current state $zzz_t$ of the central hub: This takes vision and other modalities into account and is short term in nature, corresponding to the working memory in Baddeley's model..
+3. The contents $zzz_t,...,zzz_{t+q}$ of one or more of the episodic buffers from the central hub: The episodic memory information coming to the language module is mediated through the vision pipeline as described above, and this corresponds to conscious memory recall. The prediction module focuses its attention of specific parts of this sequence when computing the energy function value.
+Access to the episode sequence allows the prediction module in the word pipeline to focus on parts of the sequence that are relevant to next word prediction.
 There can also be non-conscious memory recall which can be modeled by routing the content of the episodic memory directly to the language module. 
 4. The output $yy^{EV}_p$ of the event level predictive processing pipeline: This variable captures long term regularities in the currently ongoing episode, as captured by the episode level pipeline.
 
-The Executive Controller decides whether the current state, the current episode or one of the recalled episodes, or a combination of these, should be used as context in the language module. In the case of episodic memory recall, the model assumes that the executive controller is able to pause the generation of the next word until contents of the episodic memory are played in the vision pipeline (which happens at a faster speed compared to when the episode was recorded).
-
-The sequence $\{zzz_m\}$ is split up into episodes using the surprisal signal from the sensory pipelines, i.e., a new episode starts if the surprisal value $||xx_n-zz_n|$ exceeds some threshold. Completed episodes are stored in episodic memory from where it can be recalled using an associative match with the first element in the sequence, under the direction of the executive controller. 
-Either the current or one of the recalled episodes is fed into the language pipeline where it is used to predict the next word. 
-Access to the episode sequence allows the prediction module in the word pipeline to focus on parts of the sequence that are relevant to next word prediction.
+The Executive Controller decides whether the current state, the current episode or one of the recalled episodes, or a combination of these, should be used as context in the language module. In the case of memory recall, the model assumes that the executive controller is able to pause the generation of the next word until contents of the episodic memory are played in the vision pipeline (which happens at a faster rate compared to when the episode was recorded).
 
 The context information is fed into 
 the energy based prediction module $E_W(x;context)$ and this results in the prediction $xx_{m+1}$ for the next word latent (see above figure).
@@ -196,7 +162,46 @@ This model does not look like the Transformer model at first glance, but as expl
 1. Non-parametric memory access to create a context: IM-LEPP2 does this using its working memory or recalled episodes from episodic memory, while Transformers use the entirety of their past generations as memory. Using only specific episodes from memory reduces the amount of processing involved, thus avoiding the quadratic complexity in the Transformer self attention operation.
 2. Predictions using parametric memory: IM-LEPP2 uses an energy based prediction module, while Transformers use a feed-forward network or FFN. The energy based prediction uses gradient optimization to minimize the energy function, and the number of gradient steps can be adjusted depending upon the difficulty of the prediction. The scalar energy also serves as an indication of how close the prediction is to the optimal value.
 
+### The Vision Module
 
+![](https://subirvarma.github.io/GeneralCognitics/images/stat218.png) 
+
+Figure 4: The vision hub with the addition of a pipeline for memory recall
+
+The vision module largely retains the structure described in the [previous paper](https://subirvarma.github.io/GeneralCognitics/2026/08/07/statmech5.html)
+and is organized around a vision hub as shown in the above figure. 
+The vision module has a two level structure: The central vision hub at level 2 integrates information coming from several simultaneously active level 3 predictive processing vision pipelines. There is a level 3 pipeline for each of the objects in the scene, as well an always-on pipeline for the scene itself, and all these get integrated at the level 2 vision hub. The representation of each of these pipelines evolves asynchronously in time and the level 2 hub integrates the latest information from each individual object and sends it up to the central level 1 hub.  We have added a new pipeline to handle input coming from episodic memory recall, which gets activated when the executive controller decides to focus on memory. In normal operation the executive controller focuses on one of the objects in the scene, or on the scene itself, which results in the chosen pipeline receiving sensory data.
+Note that the scene level pipeline is always active, while the number of object level and memory pipelines come and go depending upon the objects currently in the field of vision.
+
+![](https://subirvarma.github.io/GeneralCognitics/images/stat215.png) 
+
+Figure 4: Vision Pipeline for Object and Scene Inputs
+
+The per-object level 3 predictive processing vision pipelines operate according to the inference-prediction-generation framework that was used for the LEPP model in [paper 1](https://subirvarma.github.io/GeneralCognitics/2026/07/15/statmech4.html). The system state that results from the inference module in this pipeline is sent to the level 2 vision hub for integration with the other pipelines. This combined representation in turn gets integrated with representations from other sensory modalities and language in the multimodal level 1 hub. The integrated level 1 representation in turn is fed back to the prediction module in the level 3 pipelines, and the result is used to generate the next percept. By virtue of this architecture, these percepts take all the other objects that are in the scene into account as well as memory recall and other modalities.
+
+We have added a new conditioning latent vector $yy^{EV}_p$, called the episodic vector, to the scene level pipeline. This represents the predictions coming from the episode level predictive processing pipeline (described below). The state of this variable remains fixed for the duration of an episode, and can be considered to be an implementation of the event level model as proposed by Zacks et.al. When the sequence of episodes follow a certain pattern (for example the sequences of things that we expect to happen when we go to a restaurant for example), then this is captured by the predictions from the episode level pipeline.
+
+![](https://subirvarma.github.io/GeneralCognitics/images/stat216.png) 
+
+Figure 4: Vision Pipeline for Episodic Memory Input
+
+We have added a new pipeline to handle the output sequence $zzz_t$ coming from episodic memory recall, where it is used to condition the prediction module. The output of the prediction module is fed into the generation pipeline and this results in the phenomenon of playing back an event from our memory. Note that since there is no sensory data to compare with, there is no inference pipeline and the predicted output $x_n$ is routed directly to the level 2 vision hub and from there to the central hub, where it combines with data from other modules and then gets stored in one of the episodic buffers. This model for episodic memory recall captures the fact that the process of memory recall changes the contents of the recalled memory. 
+The Executive Controller decides whether to focus attention on the memory recall pipeline, or one of the other pipelines. During memory replay, sensory data is no longer being sent to the other pipelines, which accounts for the fact that when we are reminiscing, we often loose track of what is happening in our vicinity.
+
+### Episodic Memory
+
+The episodic memory is a store of sequences coming from the ATL hub. and works as follows:
+
+- The event sequence is split into episodes based on the surprisal value in the predictive processing pipelines in the vision module. The hippocampus attaches a time and place stamp to the stored sequences which is not modeled here.
+- Episodes are recalled from memory by means of an kNN associative match between the current state of the ATL hub and the events in the stored episode. The recalled episode is sent to the 
+vision module as described above, where it generates a visual sequence, and this gets sent to the central hub where it gets stored in one of the episodic buffers. The contents of these buffers is used to condition the generation of the next word.
+- Note that once an episodic memory is recalled, its representation changes as a result of its journey through the vision and central hubs, thus accounting for the observation that memories change as a result of recall.
+
+The executive controller is one of the new elements in the design, and has the following functions:
+
+- The executive controller decides when to recall items from episodic memory, and these episodes are recalled one at at a time under its control.
+- The executive controller is able to control the generation of the next word, by delaying the prediction module until the episodic memory information for the entire episode is available from the ATL hub.
+- For the vision sub-system, the executive controller decides which object to focus on at at any one time (so that it receives sensory updates), while the model tracks up to 5-6 objects concurrently.
 
 ### Episode Level Model
 
