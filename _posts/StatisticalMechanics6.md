@@ -190,9 +190,20 @@ The Executive Controller decides whether to focus attention on the memory recall
 
 ### Episode Level Model
 
+The predictive processing model bases its predictions for the next piece of sensory data is dependent on its working memory state as captured by the variables $z_n$ or $zzz_m$. However these variables only reflect immediate history of perhaps the last few inputs and decay rapidly as time goes on. However our cognitive processes are also dependent on inputs that stay present during the course of an episode. For example when we go to a restaurant, we expect certain higher level events (or episodes) to occur in a sequence, such as: Driving to the restaurant, getting seated, ordering food etc. The same goes for other activities such reading a story and expecting things to evolve in a way that is typical of the genre. This aspect of cognition was first pointed out by Bartlett in some pioneering studies from the 1930s, and he referred to expectations at the episodic level as a schema. This idea was used by Zacks et.al. in their event perception model, who proposed that episodes are are hierarchically arranged, with the outputs of higher level episodes used to condition the generation at lower levels.
+
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat219.png) 
 
 Figure 4: Episode Level Predictive Model
+
+We capture these ideas in IM-LEPP2 by proposing a predictive processing model that does predictions at the level of episodes (see above figure). The predictive processing pipelines that work at the sensory level build a predictive model based on real world data, for example for vision it is a model for how the world evolves with time. However the same idea can be carried forward in an hierarchical fashion, so that the next level pipeline tries to model episodes from a lower level model, and in turn the predictions of the higher level model are used to condition the predictions in the lower level model. We actually used this structure in the language model, when modeling predictions at the character/phoneme level and then connecting it to higher level predictions at the word level. We can consider these higher level models as models for levels of 'understanding', so that the system is able to make better predictions at lower levels based on its higher level understanding of the data.
+
+The episode level model is a predictive processing pipeline and works as follows:
+
+- The input into the model is amodal episode level data that is generated in the ATL hub. The sequence $zzz_n$ of working memory representations at the ATL hub is split into episodes based on information coming in from the sensory and language pipelines. Whenever the prediction error in these pipelines exceeds a threshold, it marks the start of a new episode at the ATL level.
+- Assume that an episode is given by the sequence $(zzz_t,...,zzz_{t+k})$. Since information accumulates as the sequence index increases, we can consider that the element $z_{n+k}$ in the sequence contains a snap-shot of the entire episode. This then serves as the ground-truth for the sequence, and is fed as input into the episode level pipeline, as shown in the figure. The predictive coding modules further create a higher level representation $z^{EV}$ of the data, that is sufficient to predict the evolution of the system state.
+- The states $z1^{EV}$ are representations for the entire episode, and the predictions done at this level using the energy function $E_{EV}$, represent expectations about the next episode. These gets checked against new ground truth data, and thus serve as a training signal for $E_{EV]$.
+- The output $yy^{EV}$ of the predictive coding module is used to condition the prediction modules in the sensory and language pipelines. Hence when predicting the next scene in the vision pipeline for example, the predictor has the advantage of knowing how similar episodes evolved in the past.
 
 
 
