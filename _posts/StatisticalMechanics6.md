@@ -130,7 +130,7 @@ Next $x_{n+1}$ is converted into a character using the predictive coding functio
 The system is able to detect the end of a word by tracking the difference between the predicted  latent state $x_{n+1}$ and the actual latent state $z_{n+1}$. 
 If this difference exceeds some threshold, then the model assumes that the previous character $ch_n$ occurred at the end of a word (saw the $m^{th}$ word $w_m$), and the representation $z_n$ is sent over to the word level pipeline as discussed next. 
 
-![](https://subirvarma.github.io/GeneralCognitics/images/stat214.png) 
+![](https://subirvarma.github.io/GeneralCognitics/images/stat226.png) 
 
 Figure 5: Predictive Processing Pipeline for Next Word Prediction
 
@@ -173,7 +173,7 @@ and is organized around a vision hub as shown in the above figure.
 The vision module has a two level structure: The central vision hub at level 2 integrates information coming from several simultaneously active level 3 predictive processing vision pipelines. There is a level 3 pipeline for each of the objects in the scene, as well an always-on pipeline for the scene itself, and all these get integrated at the level 2 vision hub. The representation of each of these pipelines evolves asynchronously in time and the level 2 hub integrates the latest information from each individual object and sends it up to the central level 1 hub.  We have added a new pipeline to handle input coming from episodic memory recall, which gets activated when the executive controller decides to focus on memory. In normal operation the executive controller focuses on one of the objects in the scene, or on the scene itself, which results in the chosen pipeline receiving sensory data.
 Note that the scene level pipeline is always active, while the number of object level and memory pipelines come and go depending upon the objects currently in the field of vision.
 
-![](https://subirvarma.github.io/GeneralCognitics/images/stat215.png) 
+![](https://subirvarma.github.io/GeneralCognitics/images/stat224.png) 
 
 Figure 4: Vision Pipeline for Object and Scene Inputs
 
@@ -181,7 +181,7 @@ The per-object level 3 predictive processing vision pipelines operate according 
 
 We have added a new conditioning latent vector $yy^{EV}_p$, called the episodic vector, to the scene level pipeline. This represents the predictions coming from the episode level predictive processing pipeline (described below). The state of this variable remains fixed for the duration of an episode, and can be considered to be an implementation of the event level model as proposed by Zacks et.al. When the sequence of episodes follow a certain pattern (for example the sequences of things that we expect to happen when we go to a restaurant for example), then this is captured by the predictions from the episode level pipeline.
 
-![](https://subirvarma.github.io/GeneralCognitics/images/stat216.png) 
+![](https://subirvarma.github.io/GeneralCognitics/images/stat225.png) 
 
 Figure 4: Vision Pipeline for Episodic Memory Input
 
@@ -192,7 +192,7 @@ The Executive Controller decides whether to focus attention on the memory recall
 
 The predictive processing model bases its predictions for the next piece of sensory data is dependent on its working memory state as captured by the variables $z_n$ or $zzz_m$. However these variables only reflect immediate history of perhaps the last few inputs and decay rapidly as time goes on. However our cognitive processes are also dependent on inputs that stay present during the course of an episode. For example when we go to a restaurant, we expect certain higher level events (or episodes) to occur in a sequence, such as: Driving to the restaurant, getting seated, ordering food etc. The same goes for other activities such reading a story and expecting things to evolve in a way that is typical of the genre. This aspect of cognition was first pointed out by Bartlett in some pioneering studies from the 1930s, and he referred to expectations at the episodic level as a schema. This idea was used by Zacks et.al. in their event perception model, who proposed that episodes are are hierarchically arranged, with the outputs of higher level episodes used to condition the generation at lower levels.
 
-![](https://subirvarma.github.io/GeneralCognitics/images/stat219.png) 
+![](https://subirvarma.github.io/GeneralCognitics/images/stat222.png) 
 
 Figure 4: Episode Level Predictive Model
 
@@ -202,14 +202,25 @@ The episode level model is a predictive processing pipeline and works as follows
 
 - The input into the model is amodal episode level data that is generated in the ATL hub. The sequence $zzz_n$ of working memory representations at the ATL hub is split into episodes based on information coming in from the sensory and language pipelines. Whenever the prediction error in these pipelines exceeds a threshold, it marks the start of a new episode at the ATL level.
 - Assume that an episode is given by the sequence $(zzz_t,...,zzz_{t+k})$. Since information accumulates as the sequence index increases, we can consider that the element $z_{n+k}$ in the sequence contains a snap-shot of the entire episode. This then serves as the ground-truth for the sequence, and is fed as input into the episode level pipeline, as shown in the figure. The predictive coding modules further create a higher level representation $z^{EV}$ of the data, that is sufficient to predict the evolution of the system state.
-- The states $z1^{EV}$ are representations for the entire episode, and the predictions done at this level using the energy function $E_{EV}$, represent expectations about the next episode. These gets checked against new ground truth data, and thus serve as a training signal for $E_{EV]$.
+- The states $z1^{EV}$ are representations for the entire episode, and the predictions done at this level using the energy function $E_{EV}$, represent expectations about the next episode. These gets checked against new ground truth data, and thus serve as a training signal for $E_{EV}$.
 - The output $yy^{EV}$ of the predictive coding module is used to condition the prediction modules in the sensory and language pipelines. Hence when predicting the next scene in the vision pipeline for example, the predictor has the advantage of knowing how similar episodes evolved in the past.
 
+Teh structure of this model can be extended to higher level predictive processing pipelines in a straightforward manner, with the predictions from pipeline level $N+1$ used to condition the predictions at level $N$, and the episode level information from level $N$ serving as ground truth for level $N+1$.
 
+### Episodic Memory Module
 
-### Episodic Memory
+![](https://subirvarma.github.io/GeneralCognitics/images/stat220.png) 
+
+Figure 4: Organization of 2-level episodic memory
 
 The episodic memory is a store of sequences coming from the ATL hub. and works as follows:
+
+
+![](https://subirvarma.github.io/GeneralCognitics/images/stat221.png) 
+
+Figure 4: Organization of 3-level episodic memory
+
+### Misc
 
 - The event sequence is split into episodes based on the surprisal value in the predictive processing pipelines in the vision module. The hippocampus attaches a time and place stamp to the stored sequences which is not modeled here.
 - Episodes are recalled from memory by means of an kNN associative match between the current state of the ATL hub and the events in the stored episode. The recalled episode is sent to the 
