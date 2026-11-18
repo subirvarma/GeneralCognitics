@@ -188,6 +188,14 @@ Figure 4: Vision Pipeline for Episodic Memory Input
 We have added a new pipeline to handle the output sequence $zzz_t$ coming from episodic memory recall, where it is used to condition the prediction module. The output of the prediction module is fed into the generation pipeline and this results in the phenomenon of playing back an event from our memory. Note that since there is no sensory data to compare with, there is no inference pipeline and the predicted output $x_n$ is routed directly to the level 2 vision hub and from there to the central hub, where it combines with data from other modules and then gets stored in one of the episodic buffers. This model for episodic memory recall captures the fact that the process of memory recall changes the contents of the recalled memory. 
 The Executive Controller decides whether to focus attention on the memory recall pipeline, or one of the other pipelines. During memory replay, sensory data is no longer being sent to the other pipelines, which accounts for the fact that when we are reminiscing, we often loose track of what is happening in our vicinity.
 
+### Episode Level Model
+
+![](https://subirvarma.github.io/GeneralCognitics/images/stat217.png) 
+
+Figure 4: Episode Level Predictive Model
+
+
+
 ### Episodic Memory
 
 The episodic memory is a store of sequences coming from the ATL hub. and works as follows:
@@ -202,13 +210,6 @@ The executive controller is one of the new elements in the design, and has the f
 - The executive controller decides when to recall items from episodic memory, and these episodes are recalled one at at a time under its control.
 - The executive controller is able to control the generation of the next word, by delaying the prediction module until the episodic memory information for the entire episode is available from the ATL hub.
 - For the vision sub-system, the executive controller decides which object to focus on at at any one time (so that it receives sensory updates), while the model tracks up to 5-6 objects concurrently.
-
-### Episode Level Model
-
-![](https://subirvarma.github.io/GeneralCognitics/images/stat217.png) 
-
-Figure 4: Episode Level Predictive Model
-
 
 ## Energy Minimization
 
@@ -315,3 +316,4 @@ In Transformers reasoning requires multiple invocations of the prediction block 
 
 
 
+<img width="468" height="639" alt="image" src="https://github.com/user-attachments/assets/9be5a695-5fb0-4cab-acd7-b397bdee7f70" />
