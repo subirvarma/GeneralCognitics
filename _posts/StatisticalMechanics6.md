@@ -190,7 +190,7 @@ The Executive Controller decides whether to focus attention on the memory recall
 
 ### Episode Level Model
 
-![](https://subirvarma.github.io/GeneralCognitics/images/stat217.png) 
+![](https://subirvarma.github.io/GeneralCognitics/images/stat219.png) 
 
 Figure 4: Episode Level Predictive Model
 
