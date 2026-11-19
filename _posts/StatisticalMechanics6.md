@@ -233,6 +233,43 @@ The executive controller is one of the new elements in the design, and has the f
 - The executive controller is able to control the generation of the next word, by delaying the prediction module until the episodic memory information for the entire episode is available from the ATL hub.
 - For the vision sub-system, the executive controller decides which object to focus on at at any one time (so that it receives sensory updates), while the model tracks up to 5-6 objects concurrently.
 
+## Episodic Memory in the Hippocampus and in IM-LEPP2
+
+**Correspondence with IM-LEPP2.** Table 1 summarizes how the elements of episodic memory map onto the IM-LEPP2 model. The episodic store is a non-parametric memory of segmented sequences. Each episode is the sequence of ATL states $zzz_t$ between two event boundaries, where boundaries are detected by surprisal in the pipelines, following Event Segmentation Theory (Zacks et al., 2007). Writing to the store requires no gradient step, which models one-shot learning.
+
+Each episode is stored with one or more keys. The key is derived from the event-level states of the pipelines above the word level, which are updated at the boundary and so summarize the event. When there are several event levels, each level contributes a key, so that an episode can be retrieved by a coarse cue (the gist) or a fine one. The keys are learned by training the key encoder on partial episodes, so that a mid-episode state, which is what the query will be at recall time, falls near the key of the complete episode. Retrieval is by nearest-neighbor match, which implements pattern completion from a partial cue.
+
+The structural scaffold has no counterpart in the model beyond a positional code applied within each episode. We use relative (rotary) position encodings as a stand-in, and leave learned recurrent position codes of the TEM type as an extension. Schemas correspond to the learned parameters of the prediction modules, in particular the energy function at the event level, which learns the typical sequence of events. They are not stored in the episodic memory. The hippocampal store thus holds specific episodes and their keys, while structural and schematic knowledge resides in the weights.
+
+Recall follows the two routes described in Section 3. The stored sequence either conditions the energy function directly (an implicit route, with no regeneration), or is replayed through the sensory pipelines and integrated in the ATL before being used (an explicit route). The regenerated sequence may differ from the stored one, which reproduces the reconstructive character of human recall. To avoid drift, a modified recall is stored as a copy, not written over the original.
+
+Consolidation is modeled as offline training of the energy function and the pipelines on replayed episodes. The target at each position is the next stored element, with that element and everything after it hidden from the model's conditioning, and the replayed episode excluded from retrieval. Otherwise the model could simply copy the target from memory and nothing would be learned in the weights. Episodes are replayed in priority order of surprisal, interleaved with older material to limit interference.
+
+**Simplifications.** We do not model the time and place stamp, so recall is cued only by content. We do not model pattern separation explicitly. We also do not model the entorhinal scaffold, except through the positional code, and the anatomical division of labor between hippocampal subfields is outside the scope of this paper.
+
+| Brain | IM-LEPP2 |
+|---|---|
+| Hippocampal index (one-shot binding) | Non-parametric store of episodes with keys; write needs no gradient step |
+| Neocortical content (values) | Stored $zzz_t$ sequence (and words, for language) |
+| Pattern completion from a partial cue | kNN retrieval, with keys trained on partial episodes |
+| Entorhinal positional scaffold | Within-episode positional code (rotary); learned recurrent code as extension |
+| Event schemata (neocortex) | Parameters of the energy functions, in particular at the event level |
+| Event boundaries (EST) | Surprisal thresholds at each pipeline level |
+| Reconsolidation | Recall stored as a modified copy |
+| Sleep replay and consolidation | Offline training on replayed episodes with the target masked |
+| Time and place stamp | Not modeled |
+
+*Table 1: Correspondence between the brain's episodic memory system and IM-LEPP2.*
+
+**References for this section**
+
+- Teyler, T. J., and DiScenna, P. (1986). The hippocampal memory indexing theory. *Behavioral Neuroscience*.
+- Whittington, J. C. R., et al. (2020). The Tolman-Eichenbaum machine. *Cell*.
+- Zacks, J. M., et al. (2007). Event perception: a mind/brain perspective. *Psychological Bulletin* 133(2).
+- Summerfield, C., and Stachenfeld, K. (2026). The recipe for intelligence in natural and artificial systems. *Neuron* 114.
+- Tulving, E. (1972). Episodic and semantic memory.
+- [verify] Yassa, M., and Stark, C. (2011), *Trends in Neurosciences*; Tse, D., et al. (2007), *Science*; van Kesteren, M., et al. (2012), *Trends in Neurosciences*.
+
 ## Energy Minimization
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat209.png) 
@@ -273,48 +310,6 @@ It is not clear whether we should follow the same design. For example the energy
 Note 2: We can presumably add a positional encoder to the recalled memory sequences. Do you have any opinion for the best way to do this? Please see [Fountas et.al](https://arxiv.org/abs/2407.09450) for a Transformer architecture which has modified to use episodic memory. They use a fixed positional embedding as in [Raffel et.al](https://arxiv.org/abs/1910.10683). In general I am wondering whether the design can learn anything from design of scaffoldings in the hippocampus (as in the TEM machine).
 If you take a look at [Zacks et al](https://pmc.ncbi.nlm.nih.gov/articles/PMC2852534/) they talk about event models that provide a stable representation of the current event to guide perceptual processing and event schemata that contain previously learned information about sequential structure of activity. I am assuming these have o do with how information is organized in the hippocampus, with positional embeddings being one way to do this. I haven't read the TEM paper in detail, but does it show a way in which these structures can be learnt from data? If so how can we incorporate the ideas from there into IM-LEPP2?
 
-## Episodic Memory in the Hippocampus and in IM-LEPP2
-
-**How the brain stores episodes.** The hippocampus is the main site of fast, one-shot learning in the brain: a single experience is enough to lay down a trace. A long-standing account, the hippocampal indexing theory (Teyler and DiScenna, 1986), holds that the hippocampus does not store the content of an experience itself. It stores an index, a pattern that binds together the distributed neocortical patterns that represent the content (the sights, sounds and meanings), so that reactivating part of the index can reactivate the rest. Summerfield and Stachenfeld (2026) express the same idea in machine-learning terms: the hippocampus holds the keys and the neocortex the values of an associative memory. Retrieval is content-addressable. A partial cue reinstates the full episode by pattern completion, and the more cues that match, the more likely recall succeeds. To keep similar episodes from interfering, the input to the hippocampus is thought to be sparsified, a process known as pattern separation [verify: Yassa and Stark, 2011].
-
-The hippocampus does not work alone, and it does not learn structure from scratch each time. The entorhinal cortex supplies grid-like codes that act as a positional scaffold for memories, and the Tolman-Eichenbaum machine (Whittington et al., 2020) shows how such a structural code can be learned separately from sensory content and then bound to it, so that the same structure generalizes across new situations. Broader schematic knowledge, the learned regularities of how events usually unfold, is held in neocortex (Zacks et al., 2007, call these event schemata and place them in semantic memory, implemented by permanent synaptic changes). Prior schemas speed up the learning of consistent new information [verify: Tse et al., 2007; van Kesteren et al., 2012]. Over time, and especially during sleep, episodes are replayed and gradually consolidated into the neocortex, with replay prioritizing memories that are novel, salient or weakly encoded (Summerfield and Stachenfeld, 2026). Finally, the hippocampus attaches a time and place stamp to each episode, which allows recall to be cued by when and where an event happened (Tulving, 1972).
-
-**Correspondence with IM-LEPP2.** Table 1 summarizes how these elements map onto the model. The episodic store is a non-parametric memory of segmented sequences. Each episode is the sequence of ATL states $zzz_t$ between two event boundaries, where boundaries are detected by surprisal in the pipelines, following Event Segmentation Theory (Zacks et al., 2007). Writing to the store requires no gradient step, which models one-shot learning.
-
-Each episode is stored with one or more keys. The key is derived from the event-level states of the pipelines above the word level, which are updated at the boundary and so summarize the event. When there are several event levels, each level contributes a key, so that an episode can be retrieved by a coarse cue (the gist) or a fine one. The keys are learned by training the key encoder on partial episodes, so that a mid-episode state, which is what the query will be at recall time, falls near the key of the complete episode. Retrieval is by nearest-neighbor match, which implements pattern completion from a partial cue.
-
-The structural scaffold has no counterpart in the model beyond a positional code applied within each episode. We use relative (rotary) position encodings as a stand-in, and leave learned recurrent position codes of the TEM type as an extension. Schemas correspond to the learned parameters of the prediction modules, in particular the energy function at the event level, which learns the typical sequence of events. They are not stored in the episodic memory. The hippocampal store thus holds specific episodes and their keys, while structural and schematic knowledge resides in the weights.
-
-Recall follows the two routes described in Section 3. The stored sequence either conditions the energy function directly (an implicit route, with no regeneration), or is replayed through the sensory pipelines and integrated in the ATL before being used (an explicit route). The regenerated sequence may differ from the stored one, which reproduces the reconstructive character of human recall. To avoid drift, a modified recall is stored as a copy, not written over the original.
-
-Consolidation is modeled as offline training of the energy function and the pipelines on replayed episodes. The target at each position is the next stored element, with that element and everything after it hidden from the model's conditioning, and the replayed episode excluded from retrieval. Otherwise the model could simply copy the target from memory and nothing would be learned in the weights. Episodes are replayed in priority order of surprisal, interleaved with older material to limit interference.
-
-**Simplifications.** We do not model the time and place stamp, so recall is cued only by content. We do not model pattern separation explicitly. We also do not model the entorhinal scaffold, except through the positional code, and the anatomical division of labor between hippocampal subfields is outside the scope of this paper.
-
-| Brain | IM-LEPP2 |
-|---|---|
-| Hippocampal index (one-shot binding) | Non-parametric store of episodes with keys; write needs no gradient step |
-| Neocortical content (values) | Stored $zzz_t$ sequence (and words, for language) |
-| Pattern completion from a partial cue | kNN retrieval, with keys trained on partial episodes |
-| Entorhinal positional scaffold | Within-episode positional code (rotary); learned recurrent code as extension |
-| Event schemata (neocortex) | Parameters of the energy functions, in particular at the event level |
-| Event boundaries (EST) | Surprisal thresholds at each pipeline level |
-| Reconsolidation | Recall stored as a modified copy |
-| Sleep replay and consolidation | Offline training on replayed episodes with the target masked |
-| Time and place stamp | Not modeled |
-
-*Table 1: Correspondence between the brain's episodic memory system and IM-LEPP2.*
-
-**References for this section**
-
-- Teyler, T. J., and DiScenna, P. (1986). The hippocampal memory indexing theory. *Behavioral Neuroscience*.
-- Whittington, J. C. R., et al. (2020). The Tolman-Eichenbaum machine. *Cell*.
-- Zacks, J. M., et al. (2007). Event perception: a mind/brain perspective. *Psychological Bulletin* 133(2).
-- Summerfield, C., and Stachenfeld, K. (2026). The recipe for intelligence in natural and artificial systems. *Neuron* 114.
-- Tulving, E. (1972). Episodic and semantic memory.
-- [verify] Yassa, M., and Stark, C. (2011), *Trends in Neurosciences*; Tse, D., et al. (2007), *Science*; van Kesteren, M., et al. (2012), *Trends in Neurosciences*.
-
-
 
 ## Transformer Models
 
@@ -336,6 +331,3 @@ In Transformers reasoning requires multiple invocations of the prediction block 
 (1) Through the multistep gradient descent based minimzation of the energy function, in which the number of steps is variable, hence can change depending upon the difficulty of the reasoning problem, 
 (2) Since the final latent state is sent to the next prediction module, this avoids the problem that Transformers have of loosing the latent state information. Furthermore the new prediction module utilizes fresh conditioning vectors, which prevent the recurrent state from decaying over time.
 
-
-
-<img width="468" height="639" alt="image" src="https://github.com/user-attachments/assets/9be5a695-5fb0-4cab-acd7-b397bdee7f70" />
