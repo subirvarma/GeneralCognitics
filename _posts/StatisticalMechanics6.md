@@ -101,7 +101,7 @@ The IM-LEPP2 model adopts Baddeley's memory framework described in the previous 
 - Modules that implement multi-sensory integration functions: In the brain these functions are thought to reside in the temporal regions. They receive inputs from multiple sensory and language pipelines and integrate them, resulting in amodal representations that is the counterpart of the working memory in Baddeley's model. This representation is fed back into the sensory and language modules to serve as an influence on their predictions, as well as periodically aggregated into episodes and stored into episodic memory. These episodes are periodically recalled and stored resulting in the equivalent of Baddeley's episodic buffers.
 - Episodic Memory sub-system: Episodic memory constitutes the non-parametric part of the brain's memory architecture, and is capable of quickly storing sequences of working memory representations even after a single exposure to them. In the brain  episodic memory is thought to be implemented using a combination of the hippocampus and the cortex, with the hippocampus storing the keys to episodic sequences and the cortex storing the actual content.
 
-![](https://subirvarma.github.io/GeneralCognitics/images/stat212.png) 
+![](https://subirvarma.github.io/GeneralCognitics/images/stat227.png) 
 
 Figure 2: The IM-LEPP2 Model
  
