@@ -333,3 +333,4 @@ In Transformers reasoning requires multiple invocations of the prediction block 
 (1) Through the multistep gradient descent based minimzation of the energy function, in which the number of steps is variable, hence can change depending upon the difficulty of the reasoning problem, 
 (2) Since the final latent state is sent to the next prediction module, this avoids the problem that Transformers have of loosing the latent state information. Furthermore the new prediction module utilizes fresh conditioning vectors, which prevent the recurrent state from decaying over time.
 
+<img width="468" height="639" alt="image" src="https://github.com/user-attachments/assets/427680d5-1e27-44d3-8348-a4ab1544f5f0" />
