@@ -131,7 +131,7 @@ The IM-LEPP2 language model consists of a lower level pipeline that operates on 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat213.png) 
 
-Figure 4: Predictive Processing Pipeline for Next Character Prediction
+Figure 3: Predictive Processing Pipeline for Next Character Prediction
 
 **The character level pipeline.** We describe the case of characters, as encountered in reading, and the case of phonemes, which arise from audio input, is analogous. The discrete character sequence is sent into the predictive processing pipeline shown in Figure 4 [figure], which creates a latent representation $z_n$ for each character using the predictive coding function $q_\phi$. The next latent representation is then predicted using an energy based model, $x_{n+1} = \arg\min_x E_{CH}(x; z_n, yy_m)$. Note that this prediction is conditioned not just on the previous character level latent $z_n$, but also on a latent representation $yy_m$ for the $m^{th}$ word whose characters are being generated, which comes from the word level pipeline. The computation of $yy_m$ is explained below. Next $x_{n+1}$ is converted into a character by the predictive coding function $g_\psi$, and the generated character $y_{n+1} = g_\psi(x_{n+1})$ is compared with the actual next character $ch_{n+1}$. The error that results from this comparison is used to estimate the next representation $z_{n+1}$.
 
@@ -139,7 +139,7 @@ The system is able to detect the end of a word by tracking the difference betwee
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat226.png) 
 
-Figure 5: Predictive Processing Pipeline for Next Word Prediction
+Figure 4: Predictive Processing Pipeline for Next Word Prediction
 
 **The word level pipeline.** The predictive coding pipeline at the word level, shown in Figure 5 [figure], uses the latent state $z_n$ from the character pipeline as the ground truth that represents the $m^{th}$ word. Note that the word level subscript $m$ is not the same as the character level subscript $n$. In the terminology of the previous section, $z_n$ is the event with which the character pipeline summarizes the characters of the word. The word pipeline creates the latent word representation $zz_m = q_\phi(xx_m, z_n)$ by modifying its predicted representation $xx_m$, and $zz_m$ is then sent to the central ATL hub, where it is modified by the vision data to give the latent $zzz_t$. For example, if the current image is that of an apple, then this is reflected in $zzz_t$.
 
@@ -164,13 +164,13 @@ This model does not look like the Transformer model at first glance, but both ar
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat218.png) 
 
-Figure 4: The vision hub with the addition of a pipeline for memory recall
+Figure 5: The vision hub with the addition of a pipeline for memory recall
 
 The vision module largely retains the structure described in the previous paper and is organized around a vision hub, as shown in the above figure. It has a two level structure. The central vision hub at level 2 integrates information coming from several simultaneously active level 3 predictive processing vision pipelines, which consist of one pipeline for each of the objects in the scene and an always-on pipeline for the scene itself. The representation of each of these pipelines evolves asynchronously in time, and the level 2 hub integrates the latest information from each of them and sends it up to the central level 1 hub. The scene pipeline always receives sensory data, while the executive controller focuses on one of the objects in the scene, so that the pipeline of that object receives the attended sensory data. The object level pipelines come and go depending upon the objects that are currently in the field of vision. We have also added a new pipeline for the input that comes from episodic memory recall, which is described at the end of this section and which is activated when the executive controller decides to focus on memory.
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat224.png) 
 
-Figure 4: Vision Pipeline for Object and Scene Inputs
+Figure 6: Vision Pipeline for Object and Scene Inputs
 
 The per-object level 3 predictive processing vision pipelines operate according to the inference-prediction-generation framework that was used for the LEPP model in paper 1. The system state that results from the inference module in a pipeline is sent to the level 2 vision hub for integration with the states of the other pipelines. This combined representation in turn gets integrated with the representations from the other sensory modalities and language in the multimodal level 1 hub. The integrated level 1 representation is fed back to the prediction module in the level 3 pipelines, and the result is used to generate the next percept. By virtue of this architecture, these percepts take into account all of the other objects that are in the scene, as well as memory recall and the other modalities.
 
@@ -180,7 +180,7 @@ We have also added a new conditioning latent vector $y1^{EV}$, called the episod
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat225.png) 
 
-Figure 4: Vision Pipeline for Episodic Memory Input
+Figure 7: Vision Pipeline for Episodic Memory Input
 
 The new pipeline for episodic memory recall handles the sequence $zzz_t$ that comes from episodic memory, where it is used to condition the prediction module. This replay pipeline is an instance of the vision pipeline, with the same parameters as the object and scene pipelines but with its own recurrent state, so that the replay does not disturb the state of the pipelines that track the current scene. Since there is no sensory data to compare with, there is no inference module, and the predicted output $x_n$ is routed directly to the level 2 vision hub in place of an inferred state, and from there to the central hub, where it combines with data from the other modules and is placed in one of the episodic buffers. The output of the prediction module is also fed into the generation module, and this results in the phenomenon of playing back an event from our memory. The same arrangement applies to any other sensory modality that is modeled. The word level pipeline is not driven by the replay, and the generation of the next word is paused while the replay is running, as described in the section on the language module. The executive controller decides whether to focus attention on the memory pipeline or on one of the other pipelines, and while the replay is running, sensory data is no longer sent to the other pipelines, which accounts for the fact that when we are reminiscing we often lose track of what is happening in our vicinity.
 
@@ -192,7 +192,7 @@ The predictive processing pipelines at the sensory and word levels base their pr
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat222.png) 
 
-Figure 4: Episode Level Predictive Model
+Figure 8: Episode Level Predictive Model
 
 We capture these ideas in IM-LEPP2 by adding a predictive processing pipeline that makes predictions at the level of episodes, as shown in the above figure. The pipelines that work at the sensory level build a predictive model based on real world data, which for vision is a model of how the world evolves with time. The same idea can be carried forward in a hierarchical fashion, so that a higher level pipeline models the episodes of a lower level pipeline, and in turn the predictions of the higher level pipeline are used to condition the predictions of the lower level pipeline. We have already used this structure in the language model, when connecting the predictions at the character or phoneme level to the higher level predictions at the word level. We can consider these higher level models as models for levels of understanding, so that the system is able to make better predictions at the lower levels on the basis of its higher level understanding of the data.
 
@@ -211,14 +211,23 @@ The structure of this model can be extended to higher level pipelines in a strai
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat220.png) 
 
-Figure 4: Organization of 2-level episodic memory
+Figure 9: Organization of 2-level episodic memory
 
 The episodic memory is a store of sequences coming from the ATL hub. and works as follows:
 
 
 ![](https://subirvarma.github.io/GeneralCognitics/images/stat221.png) 
 
-Figure 4: Organization of 3-level episodic memory
+Figure 10: Organization of 3-level episodic memory
+
+Notes:
+
+- The event sequence is split into episodes based on the surprisal value in the predictive processing pipelines in the vision module. The hippocampus attaches a time and place stamp to the stored sequences which is not modeled here.
+- Memories are stored in an hierarchical fashion, as shown in the two figures. For the 2 level case, episode level states $z1^{EV}$ are associated with a sequence of states $(zzz_t, \dots, zzz_{t+k})$ at the event level (we will call these level 1 episodes). For the 3 level case, the episode level sequence $z1^{EV}$ is itself split into episodes (called level 2 episodes) based on surprisal values, resulting in a next level representation $z2^{EV}$ which is associated with a sequence of level 2 states as shown. We will focus on the 2-level case in this section.
+- I am proposing two types of memory recall:
+  (1) Type 1 Recall: This is non-conscious recall, and associated with the arrows marked 5 and 6 in figure 2. This type of recall is triggered at the the end of a level 1 episode and results in the computation of the next states $z_j^{EV}$ and the prediction $x1_{j+1}^[{EV}$ for the next episode. The state $x1_{j+1}^{EV}$, is then used as a query into episodic memory at level 2, with the level 2 stored states $z1^[EV}$ used as keys. The retrieval uses kNN search, and results in M vectors $[z1_{a1}^{EV},...,z1_{AM}^{EV}]$ ordered on decreasing levels of match. I will assume that only the top level match $z1_{a1}^{EV}$ is used, along with its associated level 1 sequence of states. This level 1 sequence is then fed into the language and sensory modules (along with $y1_{j+1}^{EV}$, as a conditioning sequence in the prediction module, using attention. This conditioning sequence is maintained for the entire duration of the next level 1 episode.
+  (2) Type 2 Recall: This is conscious recall, and is associated with the arrow marked 5 in figure 2. The details of how this works was described in the prior sections, the only missing part was identification of the query and keys used. I am proposing that unlike type 1 recalls, type 2 recalls can happen in the middle of an ongoing level 1 episode, with the episode level prediction $y1_j^[EV}$ used as the query and the last element in the stored level 1 episodes $zzz_t$ uased as key. There are other ways of choosing queries and keys. Can you take a look at the literature, perhaps the Fountas and Beauregard papers have relevant ideas.
+
 
 ### Misc
 
